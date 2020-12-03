@@ -18,15 +18,18 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('business_id')->nullable();
             $table->string('designation')->nullable();
             $table->string('name')->nullable();
-            $table->string('registration_type')->nullable();
-            $table->string('profile_approved')->nullable();
-            $table->string('profile_approval_id')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
+            $table->string('registration_type')->nullable();
+            $table->string('profile_approved')->nullable();
+            $table->string('profile_approval_id')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('mobile_verify_token')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
