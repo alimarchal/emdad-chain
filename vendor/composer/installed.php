@@ -1,12 +1,12 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => '50fc301e88e5ff9a02025524dd8d0c724777381d',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -494,12 +494,12 @@
     ),
     'laravel/laravel' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => '50fc301e88e5ff9a02025524dd8d0c724777381d',
     ),
     'laravel/sanctum' => 
     array (
@@ -1049,6 +1049,15 @@
       array (
       ),
       'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
+    ),
+    'spatie/laravel-activitylog' => 
+    array (
+      'pretty_version' => '3.16.1',
+      'version' => '3.16.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'ade270f291f4cb5883b3653919304a0b4e1cc284',
     ),
     'swiftmailer/swiftmailer' => 
     array (
