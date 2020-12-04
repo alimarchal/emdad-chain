@@ -28,7 +28,6 @@ class CreatePurchaseRequestFormsTable extends Migration
             $table->string('brand')->nullable();
             $table->string('last_price')->nullable();
             $table->string('remarks')->nullable();
-            $table->string('description')->nullable();
             $table->string('delivery_period')->nullable();
             $table->string('file_path')->nullable();
             #supervisor

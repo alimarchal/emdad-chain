@@ -38,6 +38,7 @@ class ComposerStaticIniteb8a1a0a4d51e3cafc66ed952cb169d9
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
         '72b1e3f4a2af9b30b3f137b3ec2057fc' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/helpers.php',
+        '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -91,6 +92,7 @@ class ComposerStaticIniteb8a1a0a4d51e3cafc66ed952cb169d9
             'Symfony\\Component\\ErrorHandler\\' => 31,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Spatie\\Permission\\' => 18,
             'Spatie\\Activitylog\\' => 19,
         ),
         'R' => 
@@ -328,6 +330,10 @@ class ComposerStaticIniteb8a1a0a4d51e3cafc66ed952cb169d9
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Spatie\\Permission\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-permission/src',
         ),
         'Spatie\\Activitylog\\' => 
         array (
@@ -583,6 +589,7 @@ class ComposerStaticIniteb8a1a0a4d51e3cafc66ed952cb169d9
         'App\\Http\\Controllers\\BusinessWarehouseController' => __DIR__ . '/../..' . '/app/Http/Controllers/BusinessWarehouseController.php',
         'App\\Http\\Controllers\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoryController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\ItemController' => __DIR__ . '/../..' . '/app/Http/Controllers/ItemController.php',
         'App\\Http\\Controllers\\LogisticDetailController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogisticDetailController.php',
         'App\\Http\\Controllers\\PurchaseRequestFormController' => __DIR__ . '/../..' . '/app/Http/Controllers/PurchaseRequestFormController.php',
         'App\\Http\\Controllers\\QuatationController' => __DIR__ . '/../..' . '/app/Http/Controllers/QuatationController.php',
@@ -802,6 +809,7 @@ class ComposerStaticIniteb8a1a0a4d51e3cafc66ed952cb169d9
         'Database\\Seeders\\BusinessWarehouseSeeder' => __DIR__ . '/../..' . '/database/seeders/BusinessWarehouseSeeder.php',
         'Database\\Seeders\\CategorySeeder' => __DIR__ . '/../..' . '/database/seeders/CategorySeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\ItemSeeder' => __DIR__ . '/../..' . '/database/seeders/ItemSeeder.php',
         'Database\\Seeders\\LogisticDetailSeeder' => __DIR__ . '/../..' . '/database/seeders/LogisticDetailSeeder.php',
         'Database\\Seeders\\PurchaseRequestFormSeeder' => __DIR__ . '/../..' . '/database/seeders/PurchaseRequestFormSeeder.php',
         'Database\\Seeders\\QuatationSeeder' => __DIR__ . '/../..' . '/database/seeders/QuatationSeeder.php',
@@ -4693,6 +4701,32 @@ class ComposerStaticIniteb8a1a0a4d51e3cafc66ed952cb169d9
         'Spatie\\Activitylog\\Traits\\CausesActivity' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Traits/CausesActivity.php',
         'Spatie\\Activitylog\\Traits\\DetectsChanges' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Traits/DetectsChanges.php',
         'Spatie\\Activitylog\\Traits\\LogsActivity' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/Traits/LogsActivity.php',
+        'Spatie\\Permission\\Commands\\CacheReset' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CacheReset.php',
+        'Spatie\\Permission\\Commands\\CreatePermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreatePermission.php',
+        'Spatie\\Permission\\Commands\\CreateRole' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreateRole.php',
+        'Spatie\\Permission\\Commands\\Show' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/Show.php',
+        'Spatie\\Permission\\Contracts\\Permission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Permission.php',
+        'Spatie\\Permission\\Contracts\\Role' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Role.php',
+        'Spatie\\Permission\\Exceptions\\GuardDoesNotMatch' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/GuardDoesNotMatch.php',
+        'Spatie\\Permission\\Exceptions\\PermissionAlreadyExists' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/PermissionAlreadyExists.php',
+        'Spatie\\Permission\\Exceptions\\PermissionDoesNotExist' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/PermissionDoesNotExist.php',
+        'Spatie\\Permission\\Exceptions\\RoleAlreadyExists' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/RoleAlreadyExists.php',
+        'Spatie\\Permission\\Exceptions\\RoleDoesNotExist' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/RoleDoesNotExist.php',
+        'Spatie\\Permission\\Exceptions\\UnauthorizedException' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/UnauthorizedException.php',
+        'Spatie\\Permission\\Exceptions\\WildcardPermissionInvalidArgument' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/WildcardPermissionInvalidArgument.php',
+        'Spatie\\Permission\\Exceptions\\WildcardPermissionNotProperlyFormatted' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/WildcardPermissionNotProperlyFormatted.php',
+        'Spatie\\Permission\\Guard' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Guard.php',
+        'Spatie\\Permission\\Middlewares\\PermissionMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middlewares/PermissionMiddleware.php',
+        'Spatie\\Permission\\Middlewares\\RoleMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middlewares/RoleMiddleware.php',
+        'Spatie\\Permission\\Middlewares\\RoleOrPermissionMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middlewares/RoleOrPermissionMiddleware.php',
+        'Spatie\\Permission\\Models\\Permission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Models/Permission.php',
+        'Spatie\\Permission\\Models\\Role' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Models/Role.php',
+        'Spatie\\Permission\\PermissionRegistrar' => __DIR__ . '/..' . '/spatie/laravel-permission/src/PermissionRegistrar.php',
+        'Spatie\\Permission\\PermissionServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-permission/src/PermissionServiceProvider.php',
+        'Spatie\\Permission\\Traits\\HasPermissions' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasPermissions.php',
+        'Spatie\\Permission\\Traits\\HasRoles' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasRoles.php',
+        'Spatie\\Permission\\Traits\\RefreshesPermissionCache' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/RefreshesPermissionCache.php',
+        'Spatie\\Permission\\WildcardPermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/WildcardPermission.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Color' => __DIR__ . '/..' . '/symfony/console/Color.php',

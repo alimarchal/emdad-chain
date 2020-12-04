@@ -17,7 +17,6 @@ class CreateSubcategoriesTable extends Migration
             $table->id();
             $table->foreignId('category_id')->nullable()->index();
             $table->string('subcategory_name')->nullable();
-            $table->foreignId('subcategory_name')->nullable();
             $table->timestamps();
         });
     }

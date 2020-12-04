@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '50fc301e88e5ff9a02025524dd8d0c724777381d',
+    'reference' => '497a29f15d002cfe6272975debdb91c44559ee15',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -512,7 +512,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '50fc301e88e5ff9a02025524dd8d0c724777381d',
+      'reference' => '497a29f15d002cfe6272975debdb91c44559ee15',
     ),
     'laravel/sanctum' => 
     array (
@@ -1071,6 +1071,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'ade270f291f4cb5883b3653919304a0b4e1cc284',
+    ),
+    'spatie/laravel-permission' => 
+    array (
+      'pretty_version' => '3.18.0',
+      'version' => '3.18.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '1c51a5fa12131565fe3860705163e53d7a26258a',
     ),
     'swiftmailer/swiftmailer' => 
     array (
