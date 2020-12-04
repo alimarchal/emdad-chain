@@ -24,4 +24,14 @@ class Business extends Model
         return $this->hasMany(BusinessFinanceDetail::class);
     }
 
+    public function purchase_request_forms()
+    {
+        return $this->hasMany(PurchaseRequestForm::class);
+    }
+
+    public function quotations()
+    {
+        return $this->hasMany(Quatation::class);
+    }
+
 }

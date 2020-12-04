@@ -63,4 +63,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Business::class);
     }
+
+    public function purchase_request_forms()
+    {
+        return $this->hasMany(PurchaseRequestForm::class);
+    }
+
+    public function quotations()
+    {
+        return $this->hasMany(Quatation::class);
+    }
 }
