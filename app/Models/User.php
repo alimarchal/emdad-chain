@@ -27,6 +27,16 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'business_id',
+        'designation',
+        'email_verified_at',
+        'profile_photo_path',
+        'registration_type',
+        'profile_approved',
+        'profile_approval_id',
+        'mobile',
+        'status',
+        'is_active',
     ];
 
     /**
