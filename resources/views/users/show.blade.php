@@ -26,7 +26,7 @@
                         <p class="text-gray-600">Business Name</p>
 
                         <div class="flex float-right border-red-300">
-                            <img class="h-10 w-10 rounded-full" src="{{ (empty($user->profile_photo_path))?Storage::url("images.jpg"): Storage::url($user->profile_photo_path)}}" alt="Profile Picture">
+                            <img class="h-10 w-10 rounded-full" src="{{ (empty($user->profile_photo_path))?Storage::url("images.png"): Storage::url($user->profile_photo_path)}}" alt="Profile Picture">
                         </div>
                         <select id="business_id" name="business_id" class="border p-2  w-1/2">
                             <option value="{{$user->business_id}}">{{(is_null($user->business_id)?'#N/A':$user->business->business_name)}}</option>
@@ -69,8 +69,8 @@
                                 <option value="0" {{($user->is_active == 0)?'selected':''}}>In-Active</option>
                             </select>
                             <div class="flex float-right border-red-300">
-                                <a href="{{Storage::url($user->profile_photo_path)}}" target="_blank">
-                                    <img class="h-3xl w-24 rounded-full" src="{{ (empty($user->profile_photo_path))?Storage::url("images.jpg"): Storage::url($user->profile_photo_path)}}" alt="Profile Picture">
+                                <a href="{{ (empty($user->profile_photo_path))?Storage::url("images.png"): Storage::url($user->profile_photo_path)}}" target="_blank">
+                                    <img class="h-3xl w-24 rounded-full" src="{{ (empty($user->profile_photo_path))?Storage::url("images.png"): Storage::url($user->profile_photo_path)}}" alt="Profile Picture">
                                 </a>
                             </div>
                         </div>
