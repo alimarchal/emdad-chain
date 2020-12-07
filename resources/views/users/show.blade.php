@@ -55,7 +55,8 @@
                                 <option value="1" {{($user->profile_approved == 1)?'selected':''}}>Yes</option>
                                 <option value="0" {{($user->profile_approved == 0)?'selected':''}}>No</option>
                             </select>
-                            <input type="text" name="profile_approval_id" id="profile_approval_id" placeholder="Profile Approved" class="border p-2 w-1/2" value="{{$user->profile_approval_id}}">
+                            <input type="text" name="profile_approval_id" id="profile_approval_id" class="border p-2 w-1/2"
+                                   value="{{ $user->profile_approval_id}}" readonly>
                             <input type="text" name="mobile" id="mobile" placeholder="Mobile" class="border p-2 w-1/2" value="{{$user->mobile}}">
                         </div>
 
@@ -74,7 +75,9 @@
                                 </a>
                             </div>
                         </div>
-                        <a href="" class="text-white bg-green-500 border-0 py-2 px-6 mt-4 float-right mb-4 focus:outline-none hover:bg-green-600 rounded text-lg mr-2">Back</a>
+                        <a href="{{url('users')}}" class="text-white bg-green-500 border-0 py-2 px-6 mt-4 float-right mb-4
+                        focus:outline-none
+                        hover:bg-green-600 rounded text-lg mr-2">Back</a>
 
                     </form>
                 </div>
