@@ -97,4 +97,11 @@ class UserController extends Controller
         session()->flash('message', 'Profile successfully deleted.');
         return redirect()->route('users.index');
     }
+
+    public function registrationType(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        $user->update($request->all());
+        return redirect()->route('dashboard');
+    }
 }

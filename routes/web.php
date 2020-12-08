@@ -23,3 +23,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('users', \App\Http\Controllers\UserController::class);
+Route::post('/registrationType',[\App\Http\Controllers\UserController::class, 'registrationType']);
