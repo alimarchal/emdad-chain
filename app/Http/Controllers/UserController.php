@@ -102,6 +102,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($request->user_id);
         $user->update($request->all());
-        return redirect()->route('dashboard');
+        return redirect()->route('business.create');
     }
 }

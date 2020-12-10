@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BusinessController extends Controller
@@ -24,24 +25,39 @@ class BusinessController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('business.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+
+        if ($request->has('chamber_reg_path_1')) {
+            $path = $request->file('chamber_reg_path_1')->store('', 'public');
+            $request->merge(['profile_photo_path' => $path]);
+        }
+        if ($request->has('vat_reg_certificate_path_2')) {
+            $path = $request->file('vat_reg_certificate_path_2')->store('', 'public');
+            $request->merge(['profile_photo_path' => $path]);
+        }
+        $business = Business::create($request->all());
+        $user = User::find($business->user_id);
+        $user->business_id = $business->id;
+        $user->save();
+        session()->flash('message', 'Business information successfully saved.');
+        return redirect()->route('businessFinanceDetail.create');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Business  $business
+     * @param \App\Models\Business $business
      * @return \Illuminate\Http\Response
      */
     public function show(Business $business)
@@ -52,7 +68,7 @@ class BusinessController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Business  $business
+     * @param \App\Models\Business $business
      * @return \Illuminate\Http\Response
      */
     public function edit(Business $business)
@@ -63,8 +79,8 @@ class BusinessController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Business  $business
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Business $business
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Business $business)
@@ -75,7 +91,7 @@ class BusinessController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Business  $business
+     * @param \App\Models\Business $business
      * @return \Illuminate\Http\Response
      */
     public function destroy(Business $business)

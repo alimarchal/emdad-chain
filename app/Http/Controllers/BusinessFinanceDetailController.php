@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Business;
 use App\Models\BusinessFinanceDetail;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,13 @@ class BusinessFinanceDetailController extends Controller
      */
     public function create()
     {
-        //
+        if (false)
+            $business = Business::all();
+        else
+        {
+            $business = Business::where('user_id',auth()->id())->get();
+        }
+        return view('businessFinanceDetails.create',compact('business'));
     }
 
     /**
@@ -35,7 +42,17 @@ class BusinessFinanceDetailController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        BusinessFinanceDetail::create([
+            'business_id' => $request->business_id,
+            'designation' => $request->designation,
+            'name' => $request->name,
+            'landline' => $request->landline,
+            'mobile' => $request->mobile,
+            'bank_name' => $request->bank_name,
+            'iban' => $request->iban,
+        ]);
+        session()->flash('message', 'Business finance information successfully saved.');
+        return redirect()->route('businessWarehouse.create');
     }
 
     /**

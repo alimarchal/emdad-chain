@@ -24,7 +24,7 @@ class BusinessWarehouseController extends Controller
      */
     public function create()
     {
-        //
+        return view('businessWarehouse.create');
     }
 
     /**

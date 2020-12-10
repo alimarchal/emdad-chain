@@ -9,6 +9,8 @@ class BusinessFinanceDetail extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'landline', 'mobile', 'bank_name', 'iban','designation', 'business_id'];
+
     public function business()
     {
         return $this->belongsTo(Business::class);

@@ -24,7 +24,7 @@ class LogisticDetailController extends Controller
      */
     public function create()
     {
-        //
+        return view('logisticDetail.create');
     }
 
     /**

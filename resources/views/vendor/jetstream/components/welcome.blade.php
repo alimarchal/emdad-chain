@@ -14,11 +14,6 @@
             <br>Now you need to fill up the registration form, before adding any user/s.
         </div>
 {{--    @endif--}}
-    <livewire:registration-type />
-
-
-
-
 
     @if(is_null(Auth::user()->registration_type))
         <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-1 mt-4">
