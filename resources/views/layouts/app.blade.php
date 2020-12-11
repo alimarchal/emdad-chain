@@ -12,7 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
         @livewireStyles
 
         <!-- Scripts -->
@@ -38,5 +38,7 @@
         @stack('modals')
 
         @livewireScripts
+
+
     </body>
 </html>

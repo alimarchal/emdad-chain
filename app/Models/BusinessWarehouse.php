@@ -9,6 +9,7 @@ class BusinessWarehouse extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id','designation','name','warehouse_email','landline','mobile','country','city','longitude','latitude','warehouse_type','cold_storage','gate_type','fork_lift','total_warehouse_manpower',];
     public function business()
     {
         return $this->belongsTo(Business::class);

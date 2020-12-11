@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BusinessWarehouse;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BusinessWarehouseController extends Controller
@@ -35,7 +36,31 @@ class BusinessWarehouseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::findOrFail($request->user_id[0]);
+        if (isset($request->user_id)) {
+            for($count = 0; $count < count($request->user_id); $count++) {
+                $businessWarehouse = new BusinessWarehouse();
+                $businessWarehouse->user_id = $request->user_id[$count];
+                $businessWarehouse->business_id = $user->business_id;
+                $businessWarehouse->designation = $request->designation[$count];
+                $businessWarehouse->name = $request->name[$count];
+                $businessWarehouse->warehouse_email = $request->warehouse_email[$count];
+                $businessWarehouse->landline = $request->landline[$count];
+                $businessWarehouse->mobile = $request->mobile[$count];
+                $businessWarehouse->country = $request->country[$count];
+                $businessWarehouse->city = $request->city[$count];
+                $businessWarehouse->longitude = $request->longitude[$count];
+                $businessWarehouse->latitude = $request->latitude[$count];
+                $businessWarehouse->warehouse_type = $request->warehouse_type[$count];
+                $businessWarehouse->cold_storage = $request->cold_storage[$count];
+                $businessWarehouse->gate_type = $request->gate_type[$count];
+                $businessWarehouse->fork_lift = $request->fork_lift[$count];
+                $businessWarehouse->total_warehouse_manpower = $request->total_warehouse_manpower[$count];
+                $businessWarehouse->save();
+            }
+        }
+        session()->flash('message', 'Business warehouse information successfully saved.');
+        return redirect()->route('businessWarehouse.create');
     }
 
     /**

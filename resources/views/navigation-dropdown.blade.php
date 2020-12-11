@@ -16,33 +16,37 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
 
-                    @if(Auth::user()->registration_type)
                     <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
                         {{ __('Users') }}
                     </x-jet-nav-link>
-
+                    @if(Auth::user()->registration_type)
                     <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">
                         {{ __('Business') }}
                         @php
                             $isBusinessDataExist = \App\Models\Business::where('user_id',Auth::user()->id)->first();
+                            if ($isBusinessDataExist) {
                             $isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
                             $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id',$isBusinessDataExist->id)->first();
                             $isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
+                            }
                         @endphp
-                        @if($isBusinessDataExist)
+                        @if(isset($isBusinessDataExist))
                             &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
                         @endif
                     </x-jet-nav-link>
 
                     <x-jet-nav-link href="{{ route('businessFinanceDetail.create') }}" :active="request()->routeIs('businessFinanceDetail.*')">
                         {{ __('Finance') }}
-                        @if($isBusinessFinanceDataExist)
+                        @if(isset($isBusinessFinanceDataExist))
                             &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
                         @endif
                     </x-jet-nav-link>
 
                     <x-jet-nav-link href="{{ route('businessWarehouse.create') }}" :active="request()->routeIs('businessWarehouse.*')">
                         {{ __('Warehouse') }}
+                        @if(isset($isBusinessWarehouseDataExist))
+                            &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
+                        @endif
                     </x-jet-nav-link>
 
                     <x-jet-nav-link href="{{ route('logisticDetail.create') }}" :active="request()->routeIs('logisticDetail.*')">

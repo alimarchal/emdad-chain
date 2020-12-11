@@ -38,20 +38,20 @@ class BusinessController extends Controller
     public function store(Request $request)
     {
 
-        if ($request->has('chamber_reg_path_1')) {
-            $path = $request->file('chamber_reg_path_1')->store('', 'public');
-            $request->merge(['profile_photo_path' => $path]);
-        }
-        if ($request->has('vat_reg_certificate_path_2')) {
-            $path = $request->file('vat_reg_certificate_path_2')->store('', 'public');
-            $request->merge(['profile_photo_path' => $path]);
-        }
-        $business = Business::create($request->all());
-        $user = User::find($business->user_id);
-        $user->business_id = $business->id;
-        $user->save();
-        session()->flash('message', 'Business information successfully saved.');
-        return redirect()->route('businessFinanceDetail.create');
+    if ($request->has('chamber_reg_path_1')) {
+        $path = $request->file('chamber_reg_path_1')->store('', 'public');
+        $request->merge(['profile_photo_path' => $path]);
+    }
+    if ($request->has('vat_reg_certificate_path_2')) {
+        $path = $request->file('vat_reg_certificate_path_2')->store('', 'public');
+        $request->merge(['profile_photo_path' => $path]);
+    }
+    $business = Business::create($request->all());
+    $user = User::find($business->user_id);
+    $user->business_id = $business->id;
+    $user->save();
+    session()->flash('message', 'Business information successfully saved.');
+    return redirect()->route('businessFinanceDetail.create');
     }
 
     /**
