@@ -32,6 +32,11 @@ class CreateBusinessWarehousesTable extends Migration
             $table->string('gate_type')->nullable();
             $table->string('fork_lift')->nullable();
             $table->string('total_warehouse_manpower')->nullable();
+            $table->string('number_of_delivery_vehicles')->nullable();
+            $table->string('number_of_drivers')->nullable();
+            $table->string('vehicle_category')->nullable();
+            $table->string('vehicle_type')->nullable();
+            $table->string('working_time')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

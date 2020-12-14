@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Edit User') }} Mr.
+            {{ __('Business Warehouse') }}
         </h2>
     </x-slot>
 
@@ -14,7 +14,7 @@
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
                     <form action="{{route('businessWarehouse.store')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         @csrf
-                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 3: Business Warehouse</h3>
+                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 4: Business Warehouse</h3>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-label class="w-1/2" for="designation">Designation</x-jet-label>
                             <x-jet-label class="w-1/2" for="name">Name</x-jet-label>
@@ -54,15 +54,12 @@
                             <x-jet-input id="latitude" name="latitude[]" type="text" class="border p-2 w-1/2"></x-jet-input>
                             <select name="warehouse_type[]" id="warehouse_type" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
-                                @foreach(\App\Models\User::countries() as $country)
-                                    <option value="{{$country}}">{{$country}}</option>
-                                @endforeach
+                                <option value="example">Example</option>
                             </select>
-                            <select name="cold_storage[]" id="cold_storage" class="form-input rounded-md shadow-sm border p-2 w-1/2">
+                            <select name="cold_storage[]" id="cold_storage" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                 <option value="">None</option>
-                                @foreach(\App\Models\User::countries() as $country)
-                                    <option value="{{$country}}">{{$country}}</option>
-                                @endforeach
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
                             </select>
                         </div>
                         <div class="flex space-x-5 mt-3">
@@ -73,9 +70,7 @@
                         <div class="flex space-x-5 mt-3">
                             <select name="gate_type[]" id="gate_type" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
-                                @foreach(\App\Models\User::countries() as $country)
-                                    <option value="{{$country}}">{{$country}}</option>
-                                @endforeach
+                                <option value="Example">Example</option>
                             </select>
                             <select name="fork_lift[]" id="fork_lift" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
@@ -83,6 +78,46 @@
                                 <option value="0">Not Available</option>
                             </select>
                             <x-jet-input id="total_warehouse_manpower" type="text" name="total_warehouse_manpower[]" class="border p-2 w-1/2"></x-jet-input>
+                        </div>
+                        <div class="flex space-x-5 mt-3">
+
+                            <x-jet-label class="w-1/2" for="number_of_delivery_vehicles">Number of Delivery Vehicles</x-jet-label>
+                            <x-jet-label class="w-1/2" for="number_of_drivers">Number of Drivers</x-jet-label>
+                            <x-jet-label class="w-1/2" for="working_time">Working Time</x-jet-label>
+                        </div>
+                        <div class="flex space-x-5 mt-3">
+                            <select name="number_of_delivery_vehicles[]" id="number_of_delivery_vehicles" class="form-input rounded-md shadow-sm border p-2 w-1/2">
+                                <option value="">None</option>
+                                @for($count = 1; $count <= 100; $count++)
+                                    <option value="{{$count}}">{{$count}}</option>
+                                @endfor
+                            </select>
+                            <select name="number_of_drivers[]" id="number_of_drivers" class="form-input rounded-md shadow-sm border p-2 w-1/2">
+                                <option value="">None</option>
+                                @for($count = 1; $count <= 100; $count++)
+                                    <option value="{{$count}}">{{$count}}</option>
+                                @endfor
+                            </select>
+                            <x-jet-input id="working_time" type="text" name="working_time[]" class="border p-2 w-1/2"></x-jet-input>
+                        </div>
+                        <div class="flex space-x-5 mt-3">
+                            <x-jet-label class="w-1/2" for="vehicle_category">Vehicle Category</x-jet-label>
+                            <x-jet-label class="w-1/2" for="vehicle_type">Vehicle Type</x-jet-label>
+                        </div>
+                        <div class="flex space-x-5 mt-3">
+
+                            <select name="vehicle_category[]" id="vehicle_category" class="js-example-basic-multiple form-input rounded-md shadow-sm border p-2 w-1/2" multiple>
+                                <option value="">None</option>
+                                <option value="Example">Example 0</option>
+                                <option value="Example1">Example 1</option>
+                                <option value="Example2">Example 2</option>
+                                <option value="Example3">Example 3</option>
+                            </select>
+
+                            <select name="vehicle_type[]" id="vehicle_type" class=" js-example-basic-multiple  form-input rounded-md shadow-sm border p-2 w-1/2" multiple>
+                                <option value="">None</option>
+                                <option value="Example">Example</option>
+                            </select>
                         </div>
                         <div class="control-group after-add-more">
 
@@ -103,6 +138,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $('.js-example-basic-multiple').select2();
             $(".add-more").click(function () {
                 var html = $(".copy").html();
                 $(".after-add-more").after(html);

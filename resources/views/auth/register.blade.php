@@ -1,13 +1,24 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <!-- <x-jet-authentication-card-logo /> -->
+
+            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-20 w-auto" />
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
+            <p class="text-center font-bold text-2xl">Step # 1: Registration</p>
+            <div>
+                <x-jet-label for="gender" value="{{ __('Gender') }}" class="mb-2" />
+                <select name="gender" id="gender" class="form-input mb-2 rounded-md shadow-sm block mt-1 w-full" required autofocus autocomplete="name" >
+                    <option value="">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
 
             <div>
                 <x-jet-label for="name" value="{{ __('Name') }}" />
