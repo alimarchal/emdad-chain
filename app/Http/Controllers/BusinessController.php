@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,8 @@ class BusinessController extends Controller
     public function create()
     {
 
-        return view('business.create');
+        $parentCategories = Category::where('parent_id',0)->get();
+        return view('business.create',compact('parentCategories'));
     }
 
     /**

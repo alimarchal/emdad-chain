@@ -16,10 +16,11 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             # need to revisit business_id
-            $table->foreignId('business_id')->nullable()->index();
-            $table->string('title')->nullable();
+            $table->foreignId('parent_id')->default(1)->nullable()->index();
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
             $table->string('unit_of_measurement')->nullable();
-            $table->string('category_description')->nullable();
+            $table->string('image')->nullable();
             $table->string('is_active')->nullable();
             $table->timestamps();
         });

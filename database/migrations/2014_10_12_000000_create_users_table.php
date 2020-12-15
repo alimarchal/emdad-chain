@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->unsignedBigInteger('business_id')->nullable();
             $table->string('designation')->nullable();
             $table->string('name')->nullable();
+            $table->string('gender')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

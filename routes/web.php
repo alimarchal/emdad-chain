@@ -29,3 +29,6 @@ Route::resource('/business', \App\Http\Controllers\BusinessController::class);
 Route::resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
 Route::resource('/businessWarehouse', \App\Http\Controllers\BusinessWarehouseController::class);
 Route::resource('/logisticDetail', \App\Http\Controllers\LogisticDetailController::class);
+//Route::resource('/category', \App\Http\Controllers\CategoryController::class);
+Route::get('/category', [\App\Http\Controllers\CategoryController::class, 'index']);
+
