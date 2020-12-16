@@ -19,7 +19,6 @@
                             <x-jet-label class="w-1/2" for="business_name">Business Name</x-jet-label>
                             <x-jet-label class="w-1/2" for="num_of_warehouse">Number of Warehouse</x-jet-label>
                             <x-jet-label class="w-1/2" for="business_type">Business Type</x-jet-label>
-                            <x-jet-label class="w-1/2" for="business_type">Category</x-jet-label>
                             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                         </div>
                         <div class="flex space-x-5 mt-3">
@@ -35,13 +34,21 @@
                                 <option value="Client-Buyer">Buyer</option>
                                 <option value="Supplier">Supplier</option>
                             </select>
-
-                            <select name="business_type" id="business_type" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
-                                <option value="">None</option>
-                                <option value="Client-Buyer">Buyer</option>
-                                <option value="Supplier">Supplier</option>
-                            </select>
+{{--                            @include('category.index')--}}
                         </div>
+
+
+                        <div class="flex space-x-5 mt-3">
+                            <x-jet-label class="w-1/2" for="business_type">Category</x-jet-label>
+                        </div>
+                        <div class="flex space-x-5 mt-3 mb-4">
+                            @include('category.index')
+                        </div>
+
+
+
+
+
                         <div class="flex space-x-5 mt-3">
                             <x-jet-label class="w-1/2" for="chamber_reg_number">Chamber Registration Number</x-jet-label>
                             <x-jet-label class="w-1/2" for="chamber_reg_path" title="File type: JPEG|PNG|PDF|DOCX => (Filesize: Max 10MB)">Chamber Certificate/File </x-jet-label>
@@ -95,6 +102,8 @@
                             <x-jet-input id="latitude" type="text" name="latitude" class="border p-2 w-1/2"></x-jet-input>
 
                         </div>
+
+
                         <x-jet-button class="float-right mt-4 mb-4">Save & Next</x-jet-button>
 
                     </form>
@@ -106,6 +115,6 @@
 
         </div>
 
-        @include('category.index')
+
     </div>
 </x-app-layout>

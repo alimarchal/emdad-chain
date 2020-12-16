@@ -40,6 +40,11 @@ class BusinessController extends Controller
     public function store(Request $request)
     {
 
+        $exp = explode(', ',$request->category_number);
+        $implode = implode(',',$exp);
+        $request->merge(['category_number' => $implode]);
+        dd($request->all());
+
     if ($request->has('chamber_reg_path_1')) {
         $path = $request->file('chamber_reg_path_1')->store('', 'public');
         $request->merge(['profile_photo_path' => $path]);
