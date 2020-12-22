@@ -15,9 +15,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(50);
-        $business = Business::all();
-        return view('users.index', compact('users','business'));
+        if (auth()->user()->usertype == "superadmin") {
+
+            $users = User::paginate(50);
+            $business = Business::all();
+            return view('users.index', compact('users', 'business'));
+        } else {
+            abort(404);
+        }
     }
 
     /**
@@ -27,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -51,7 +56,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $business = Business::all();
-        return view('users.show', compact('user','business'));
+        return view('users.show', compact('user', 'business'));
     }
 
     /**
@@ -64,7 +69,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $business = Business::all();
-        return view('users.edit', compact('user','business'));
+        return view('users.edit', compact('user', 'business'));
     }
 
     /**

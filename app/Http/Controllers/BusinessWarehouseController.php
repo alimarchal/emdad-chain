@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Business;
 use App\Models\BusinessWarehouse;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,20 +26,52 @@ class BusinessWarehouseController extends Controller
      */
     public function create()
     {
+
         return view('businessWarehouse.create');
+    }
+
+    public function businessWarehouseShow(Request $request, $id)
+    {
+        $business = BusinessWarehouse::where('business_id',$id)->get();
+        return view('businessWarehouse.showAllWareHouse',compact('business'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        $vehicle_category = NULL;
+        $vehicle_type = NULL;
+        if (isset($request->vehicle_category)) {
+            $count = 1;
+            foreach ($request->vehicle_category as $item) {
+                if ($count == 1)
+                    $vehicle_category = $item;
+                else
+                    $vehicle_category = $vehicle_category . ', ' . $item;
+                $count++;
+            }
+        }
+        if (isset($request->vehicle_type)) {
+            $count = 1;
+            foreach ($request->vehicle_type as $item) {
+                if ($count == 1)
+                    $vehicle_type = $item;
+                else
+                    $vehicle_type = $vehicle_type . ', ' . $item;
+                $count++;
+            }
+        }
+        $request->merge(['vehicle_category' => $vehicle_category]);
+        $request->merge(['vehicle_type' => $vehicle_type]);
+//        dd($request->all());
         $user = User::findOrFail($request->user_id[0]);
         if (isset($request->user_id)) {
-            for($count = 0; $count < count($request->user_id); $count++) {
+            for ($count = 0; $count < count($request->user_id); $count++) {
                 $businessWarehouse = new BusinessWarehouse();
                 $businessWarehouse->user_id = $request->user_id[$count];
                 $businessWarehouse->business_id = $user->business_id;
@@ -56,17 +89,21 @@ class BusinessWarehouseController extends Controller
                 $businessWarehouse->gate_type = $request->gate_type[$count];
                 $businessWarehouse->fork_lift = $request->fork_lift[$count];
                 $businessWarehouse->total_warehouse_manpower = $request->total_warehouse_manpower[$count];
+                $businessWarehouse->number_of_delivery_vehicles = $request->number_of_delivery_vehicles[$count];
+                $businessWarehouse->number_of_drivers = $request->number_of_drivers[$count];
+                $businessWarehouse->working_time = $vehicle_category;
+                $businessWarehouse->vehicle_category = $vehicle_type;
                 $businessWarehouse->save();
             }
         }
         session()->flash('message', 'Business warehouse information successfully saved.');
-        return redirect()->route('businessWarehouse.create');
+        return redirect()->route('purchaseOrderInfo.create');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\BusinessWarehouse  $businessWarehouse
+     * @param \App\Models\BusinessWarehouse $businessWarehouse
      * @return \Illuminate\Http\Response
      */
     public function show(BusinessWarehouse $businessWarehouse)
@@ -77,30 +114,57 @@ class BusinessWarehouseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\BusinessWarehouse  $businessWarehouse
+     * @param \App\Models\BusinessWarehouse $businessWarehouse
      * @return \Illuminate\Http\Response
      */
     public function edit(BusinessWarehouse $businessWarehouse)
     {
-        //
+//        dd($businessWarehouse);
+        return view('businessWarehouse.edit',compact('businessWarehouse'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\BusinessWarehouse  $businessWarehouse
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\BusinessWarehouse $businessWarehouse
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, BusinessWarehouse $businessWarehouse)
     {
-        //
+        $vehicle_category = NULL;
+        $vehicle_type = NULL;
+        if (isset($request->vehicle_category)) {
+            $count = 1;
+            foreach ($request->vehicle_category as $item) {
+                if ($count == 1)
+                    $vehicle_category = $item;
+                else
+                    $vehicle_category = $vehicle_category . ', ' . $item;
+                $count++;
+            }
+        }
+        if (isset($request->vehicle_type)) {
+            $count = 1;
+            foreach ($request->vehicle_type as $item) {
+                if ($count == 1)
+                    $vehicle_type = $item;
+                else
+                    $vehicle_type = $vehicle_type . ', ' . $item;
+                $count++;
+            }
+        }
+        $request->merge(['vehicle_category' => $vehicle_category]);
+        $request->merge(['vehicle_type' => $vehicle_type]);
+        $businessWarehouse->update($request->all());
+        session()->flash('message', 'Warehouse information successfully updated.');
+        return redirect()->route('businessWarehouse.edit',$businessWarehouse->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\BusinessWarehouse  $businessWarehouse
+     * @param \App\Models\BusinessWarehouse $businessWarehouse
      * @return \Illuminate\Http\Response
      */
     public function destroy(BusinessWarehouse $businessWarehouse)

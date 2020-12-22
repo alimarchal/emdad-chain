@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('mobile_verify_token')->nullable();
             $table->string('status')->nullable();
             $table->boolean('is_active')->default(0);
+            $table->string('usertype')->nullable();
             $table->timestamps();
         });
     }

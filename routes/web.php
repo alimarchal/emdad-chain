@@ -28,7 +28,12 @@ Route::post('/registrationType', [\App\Http\Controllers\UserController::class, '
 Route::resource('/business', \App\Http\Controllers\BusinessController::class);
 Route::resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
 Route::resource('/businessWarehouse', \App\Http\Controllers\BusinessWarehouseController::class);
-Route::resource('/logisticDetail', \App\Http\Controllers\LogisticDetailController::class);
+Route::get('/businessWarehouse/{id}/show', [\App\Http\Controllers\BusinessWarehouseController::class,'businessWarehouseShow'])->name('businessWarehouseShow');
+Route::resource('/purchaseOrderInfo', \App\Http\Controllers\POInfoController::class);
+//Route::resource('/logisticDetail', \App\Http\Controllers\LogisticDetailController::class);
 //Route::resource('/category', \App\Http\Controllers\CategoryController::class);
 Route::get('/category', [\App\Http\Controllers\CategoryController::class, 'index']);
+Route::post('/test', function(\Illuminate\Http\Request $request){
+    return dd($request->all());
+});
 

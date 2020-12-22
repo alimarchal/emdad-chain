@@ -48,8 +48,8 @@
      <link rel="stylesheet" href="{{url('combotree/style.css')}}">
 
 
- <div class=" rounded-md shadow-sm border p-2 w-1/2" >
-     <input type="text" id="justAnInputBox1" placeholder="Select" autocomplete="off" name="category_number"/>
+ <div class="rounded-md shadow-sm border p-2 w-1/2 ml-0" style="margin-left: 0px;">
+     <input type="text" id="justAnInputBox1" placeholder="Select" autocomplete="off" name="category_number" required />
  </div>
 
  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

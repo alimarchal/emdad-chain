@@ -75,5 +75,27 @@
             </select>
             <x-jet-input id="total_warehouse_manpower" type="text" name="total_warehouse_manpower[]" class="border p-2 w-1/2"></x-jet-input>
         </div>
+
+        <div class="flex space-x-5 mt-3">
+
+            <x-jet-label class="w-1/2" for="number_of_delivery_vehicles">Number of Delivery Vehicles</x-jet-label>
+            <x-jet-label class="w-1/2" for="number_of_drivers">Number of Drivers</x-jet-label>
+            <x-jet-label class="w-1/2" for="working_time">Working Time</x-jet-label>
+        </div>
+        <div class="flex space-x-5 mt-3">
+            <select name="number_of_delivery_vehicles[]" id="number_of_delivery_vehicles" class="form-input rounded-md shadow-sm border p-2 w-1/2">
+                <option value="">None</option>
+                @for($count = 1; $count <= 100; $count++)
+                    <option value="{{$count}}">{{$count}}</option>
+                @endfor
+            </select>
+            <select name="number_of_drivers[]" id="number_of_drivers" class="form-input rounded-md shadow-sm border p-2 w-1/2">
+                <option value="">None</option>
+                @for($count = 1; $count <= 100; $count++)
+                    <option value="{{$count}}">{{$count}}</option>
+                @endfor
+            </select>
+            <x-jet-input id="working_time" type="text" name="working_time[]" class="border p-2 w-1/2"></x-jet-input>
+        </div>
     </div>
 </div>

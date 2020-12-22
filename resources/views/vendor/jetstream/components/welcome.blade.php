@@ -4,16 +4,45 @@
     </div>
     -->
 
-    <div class="text-2xl text-center">
-        Welcome {{ Auth::user()->name }}<br>
-    </div>
 
-{{--    @if(Auth::user()->profile_approved == 0)--}}
+{{-- Message Before and After Resistration --}}
+    @if(Auth::user()->status == 0 || Auth::user()->status == null)
         <div class="mt-6 text-red-500 text-2xl">
             Thank you for signing up! Your email address has been verified.
             <br>Now you need to fill up the registration form, before adding any user/s.
         </div>
-{{--    @endif--}}
+    @elseif(Auth::user()->status == 1 && Auth::user()->registration_type == "Contracts")
+        <div class="mt-6 text-black text-2xl">
+            <div class="text-2xl text-center font-bold">
+                Business: {{ Auth::user()->business->business_name }}<br>
+            </div>
+            <p class="m-2 font-bold">Welcome {{ config('app.name', 'Laravel') }} as our prospective alliance</p>
+            <p class="font-bold m-2 text-justify">Thank you for choosing us to share our experience and expertise in supply chain management platform.</p>
+            <p class="text-blue-900 font-bold m-2 text-justify">At the moment your application is under review. You will receive a reply from us within 10 working days.</p>
+            <p class="m-2">Hopefully, soon we will be sharing with you the power of our platform which could;</p>
+            <ol class="list-decimal ml-12 text-indigo-900 font-bold">
+                <li>Save you a huge amount depending on the size of your purchases.</li>
+                <li>Help to solve the bottlenecks involved in the supply chain.</li>
+                <li>Streamline the return system (for defective or unwanted products).</li>
+            </ol>
+        </div>
+    @elseif(Auth::user()->status == 1 && Auth::user()->registration_type == "Orders")
+        <div class="mt-6 text-black text-2xl">
+            <div class="text-2xl text-center font-bold">
+                Business: {{ Auth::user()->business->business_name }}<br>
+            </div>
+            <p class="m-2 font-bold">Welcome {{ config('app.name', 'Laravel') }} as our prospective alliance</p>
+            <p class="font-bold m-2 text-justify">Thank you for choosing us to share our experience and expertise in supply chain management platform.</p>
+            <p class="text-blue-900 font-bold m-2 text-justify">At the moment your application is under review. You will receive a reply from us within 10 working days.</p>
+            <p class="m-2">Hopefully, soon we will be sharing with you the power of our platform which could;</p>
+            <ol class="list-decimal ml-12 text-indigo-900 font-bold">
+                <li>Bring you more business volume.</li>
+                <li>Streamline your suppliers.</li>
+                <li>Bring down cost of production and time.</li>
+                <li>Help to solve the bottlenecks involved in the supply chain.</li>
+            </ol>
+        </div>
+    @endif
 
     @if(is_null(Auth::user()->registration_type))
         <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-1 mt-4">

@@ -12,6 +12,9 @@
             @include('users.sessionMessage')
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
+
+
+
                     <form action="{{route('businessWarehouse.store')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         @csrf
                         <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 4: Business Warehouse</h3>
@@ -129,7 +132,6 @@
 
                     <livewire:business-warehouse/>
                     <x-jet-button class="float-left add-more mt-4 mb-4 bg-green-500">Add More</x-jet-button>
-
 
                 </div>
             </div>

@@ -28,9 +28,9 @@
                                     <option value="{{$biz->id}}" selected>{{$biz->business_name}}</option>
                                 @endforeach
                             </select>
-                            <x-jet-input id="designation" type="text" min="1" name="designation" class="border p-2 w-1/2"></x-jet-input>
-                            <x-jet-input id="name" type="text" min="1" name="name" class="border p-2 w-1/2"></x-jet-input>
-                            <x-jet-input id="landline" type="text" name="landline" class="border p-2 w-1/2"></x-jet-input>
+                            <x-jet-input id="designation" type="text" min="1" name="designation" class="border p-2 w-1/2" required></x-jet-input>
+                            <x-jet-input id="name" type="text" min="1" name="name" class="border p-2 w-1/2" required></x-jet-input>
+                            <x-jet-input id="landline" type="text" name="landline" class="border p-2 w-1/2" required></x-jet-input>
                         </div>
                         <div class="flex space-x-5 mt-3">
 
@@ -40,11 +40,10 @@
                         </div>
                         <div class="flex space-x-5 mt-3">
 
-                            <x-jet-input id="mobile" type="text" name="mobile" class="border p-2 w-1/2"></x-jet-input>
-                            <x-jet-input id="bank_name" type="text" name="bank_name" class="border p-2 w-1/2"></x-jet-input>
-                            <x-jet-input id="iban" type="text" name="iban" class="border p-2 w-1/2"></x-jet-input>
+                            <x-jet-input id="mobile" type="text" name="mobile" class="border p-2 w-1/2" required></x-jet-input>
+                            <x-jet-input id="bank_name" type="text" name="bank_name" class="border p-2 w-1/2" required></x-jet-input>
+                            <x-jet-input id="iban" type="text" name="iban" class="border p-2 w-1/2" required></x-jet-input>
                         </div>
-                        <x-jet-button class="float-right mt-4 mb-4">Skip</x-jet-button>
                         <x-jet-button class="float-right mt-4 mb-4 mr-4">Save & Next</x-jet-button>
 
                     </form>
