@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Business;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -15,6 +17,29 @@ class UserController extends Controller
      */
     public function index()
     {
+//        $user = User::find(auth()->user()->id);
+//        $user->assignRole('writer');
+//        Role::create(['name' => 'super admin']);
+//        Role::create(['name' => 'admin']);
+//        Role::create(['name' => 'gm']);
+//        Role::create(['name' => 'dh']);
+//        Role::create(['name' => 'sh']);
+//        Role::create(['name' => 'user']);
+//        Permission::create(['name'=>'create user']);
+//        Permission::create(['name'=>'edit user']);
+//        Permission::create(['name'=>'delete user']);
+//        Permission::create(['name'=>'po buyer']);
+//        Permission::create(['name'=>'qo supplier']);
+
+//        $permission = Permission::create(['name'=>'edit post']);
+//        $role = Role::findById(1);
+//        $permission = Permission::findById(3);
+//        $role->givePermissionTo($permission);
+//        $role->revokePermissionTo($permission);
+
+
+
+        // testing end
         if (auth()->user()->usertype == "superadmin") {
 
             $users = User::paginate(50);
@@ -108,5 +133,10 @@ class UserController extends Controller
         $user = User::findOrFail($request->user_id);
         $user->update($request->all());
         return redirect()->route('business.create');
+    }
+
+    public function createUserForCompany(Request $request, Business $business)
+    {
+        dd($request->all());
     }
 }

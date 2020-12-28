@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'c3e69051d9d6018916a8736de1a4353f1860258e',
+    'reference' => 'd5c0b4fef4e812b4a10f51e6c25972be0f8980b9',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -499,7 +499,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'c3e69051d9d6018916a8736de1a4353f1860258e',
+      'reference' => 'd5c0b4fef4e812b4a10f51e6c25972be0f8980b9',
     ),
     'laravel/sanctum' => 
     array (
@@ -850,8 +850,8 @@
     array (
       'provided' => 
       array (
-        0 => '1.0',
-        1 => '1.0.0',
+        0 => '1.0.0',
+        1 => '1.0',
       ),
     ),
     'psr/simple-cache' => 

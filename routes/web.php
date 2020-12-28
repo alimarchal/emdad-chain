@@ -23,6 +23,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('users', \App\Http\Controllers\UserController::class);
+Route::post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class,'createUserForCompany'])->name('createUserForCompany');
 Route::post('/registrationType', [\App\Http\Controllers\UserController::class, 'registrationType']);
 //Route::post('/business',[\App\Http\Controllers\BusinessController::class, 'store']);
 Route::resource('/business', \App\Http\Controllers\BusinessController::class);
@@ -33,7 +34,24 @@ Route::resource('/purchaseOrderInfo', \App\Http\Controllers\POInfoController::cl
 //Route::resource('/logisticDetail', \App\Http\Controllers\LogisticDetailController::class);
 //Route::resource('/category', \App\Http\Controllers\CategoryController::class);
 Route::get('/category', [\App\Http\Controllers\CategoryController::class, 'index']);
-Route::post('/test', function(\Illuminate\Http\Request $request){
+
+Route::get('/test', function(\Illuminate\Http\Request $request){
     return dd($request->all());
 });
+
+// survey buyer
+
+Route::get('/e-buyer/en', function(){
+    return view('eBuyerSurvey.en.eBuyerSurvey');
+});
+
+Route::get('/e-buyer/ar', function(){
+    return view('eBuyerSurvey.ar.eBuyerSurvey');
+});
+
+Route::get('/e-buyer/ur', function(){
+    return view('eBuyerSurvey.ur.eBuyerSurvey');
+});
+
+Route::post('e-buyer', [\App\Http\Controllers\EBuyerSurveyAnswerController::class, 'store'])->name('eBuyerEn');
 

@@ -1,0 +1,18 @@
+Version: 2.0.3
+  - Updated Bootstrap to version 5.0.0-beta1
+  - Updated the PHP Email Form to v2.3
+  - Other small fixes and improvements
+  
+Version: 2.0.2
+  - Updated Bootstrap to version 5.0.0-alpha3
+  - Updated all outdated third party vendor libraries to their latest versions
+
+Version: 2.0.1
+  - Update Bootstrap v5.0 to Alpha 2
+  - Updated all outdated third party vendor libraries to their latest versions
+  
+Version: 2.0.0
+  - Initial release with using the Bootstrap v5.0 (Alpha)
+  
+Version: 1.0.0
+  - Initial Release
