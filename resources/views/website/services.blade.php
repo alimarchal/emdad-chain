@@ -9,6 +9,8 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="57x57" href="ficon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="ficon/apple-icon-60x60.png">
@@ -19,7 +21,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="ficon/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="ficon/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="ficon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="ficon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="ficon/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="ficon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="ficon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="ficon/favicon-16x16.png">
@@ -29,7 +31,9 @@
     <meta name="theme-color" content="#ffffff">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="Presento/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,19 +47,6 @@
     <!-- Template Main CSS File -->
     <link href="Presento/assets/css/style.css" rel="stylesheet">
 
-    <style>
-        .goog-logo-link {
-            display:none !important;
-        }
-        .goog-te-gadget {line-height: 1px !important;color: transparent;}
-        .goog-te-gadget .goog-te-combo {
-            color: black !important;
-        }
-        div.goog-te-gadget {
-            color: transparent !important;
-        }
-
-    </style>
 </head>
 
 <body>
@@ -73,57 +64,61 @@
         <div class="container" style="margin-top: 40px;">
             <ol>
                 <li><a href="{{config('app.url')}}">Home</a></li>
-                <li>Buyer / Supplier</li>
+                <li>Services</li>
             </ol>
-            <a href="{{url('e-buyer/en')}}" class="btn btn-danger">Survey</a>
+            <h2>Services</h2>
         </div>
-    </section><!-- End Breadcrumbs -->
+    </section>
+    <!-- End Breadcrumbs -->
 
-    <section class="inner-page">
-        <div class="container" data-aos="fade-up">
-            <p class="text-center"><strong>For buyers and suppliers survey</strong></p>
-                <p><strong>Introduction</strong><br>
-                Dear owner of the organization:<br>
-                In order for us to provide our service at the best level for you, this questionnaire was conducted to challenge us to raise the level of quality of your supply chains, especially in the current conditions of the COVID 19 pandemic, and in pursuit of us to achieve the vision of the Kingdom of Saudi Arabia 2030</p>
+    <section class="inner-page" style="font-family: tahoma;">
 
-                <p><strong>Definition of the questionnaire</strong><br>
-                This questionnaire is for establishments and companies and cannot be filled out by an individual or person.<br>
-                Answers in this questionnaire will be dealt with for each facility separately to provide the necessary service.<br>
-                The duration of this questionnaire ranges from 8 to 10 minutes.</p>
+        <h1 class="text-center" style="font-weight: bold">Services</h1>
+        <div class="container mt-4" data-aos="zoom-in">
+            <div class="row">
+                <div class="col-sm">
+                        <img src="{{url('webmainimages/1.jpeg')}}" width="100" height="100" class="img-fluid rounded" alt="our services">
+                    <h3>Smart Map</h3>
+                    One of the platform's greatest achievements is the work of the smart map and it is considered the first in its field and pioneering to enable the user to connect to the right
+                    resource with one minute in more than 500 available categories.
+                </div>
+                <div class="col-sm">
+                    <img src="{{url('webmainimages/2.jpeg')}}"  width="100" height="100"  class="img-fluid rounded" alt="our services">
+                    <h3>Safety</h3>
 
-                <p><strong>Short message</strong><br>
-                We are pleased to fill out this questionnaire, which aims to develop and improve the level of your supply chains in the future .. Thank you!</p>
+                    <ul>
+                        <li>All operations are saved in a reference cloud and are never removed
+                        </li>
+                        <li>The latest security technologies are used to ensure that the user account is not tampered with</li>
+                    </ul>
+                </div>
+                <div class="col-sm">
+                    <img src="{{url('webmainimages/3.jpeg')}}" width="100" height="100" class="img-fluid rounded" alt="our services">
+                    <h3>Quality</h3>
+
+                    One of the basic of our work in the platform is to ensure the quality of users' operations.
+                </div>
+                <div class="col-sm">
+                    <img src="{{url('webmainimages/4.jpeg')}}"  width="100" height="100"  class="img-fluid rounded" alt="our services">
+                    <h3>Saving time and effort</h3>
+                    <ul>
+                        <li>It is the primary measure on which the platform is built.
+                        </li>
+                        <li>Fast and easy electronic accreditation.
+                        </li>
+                        <li>Quickly obtaining quotations from several suppliers.
+                        </li>
+                        <li>Quick and easy access to the right resource.</li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-
-        <div class="container " style="direction: rtl;" data-aos="fade-up">
-            <p class="text-center"><strong>استفتاحية الاستبيان</strong></p>
-            <ol>
-                <li>مقدمة</li>
-                <li>تعريف عن الاستبيان</li>
-                <li>رسالة صغيرة</li>
-            </ol>
-            <p><strong>مقدمة</strong><br>عزيزي صاحب المنشأة:</p>
-            <p>
-                حرصاً منا على تقديم خدمتنا بالمستوى الأفضل لكم تم عمل هذا الاستبيان تحدياً منا لرفع مستوى جودة سلاسل الامداد لديكم و خاصتاً في ظل الظروف الحالية لجائحة COVID 19  و سعياً منا لتحقيق رؤية المملكة العربية السعودية 2030
-            </p>
-
-            <p>تعريف عن الاستبيان
-
-            <ul>
-                <li>هذا الاستبيان هو خاص للمنشأت و الشركات ولا يمكن تعبئته من خلال فرد او شخص.</li>
-                <li>الاجابات على هذا الاستبيان سيتم التعامل معها لكل منشأة على حِدة لتقديم الخدمة اللازمة.</li>
-                <li>مدة هذا الاستبيان من 8 الي 10 دقائق.</li>
-            </ul>
-            رسالة قصيرة
-            <br>
-            نسعد بتعبئتكم لهذا الاستبيان الذي يهدف في تطوير و تحسين مستوى سلاسل الامداد لديكم في المستقبل .. شكراً لكم
-            </p>
-        </div>
 
     </section>
 
-</main><!-- End #main -->
+</main>
+<!-- End #main -->
 <!-- End #main -->
 
 <!-- ======= Footer ======= -->

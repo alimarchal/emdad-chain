@@ -576,10 +576,12 @@
             </div>
 
         </div>
-    </section><!-- End Team Section -->
+    </section>
+    <!-- End Team Section -->
 
 
-</main><!-- End #main -->
+</main>
+<!-- End #main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer">

@@ -47,3 +47,12 @@ Route::get('/e-buyer/ur', function(){return view('eBuyerSurvey.ur.eBuyerSurvey')
 Route::post('e-buyer', [\App\Http\Controllers\EBuyerSurveyAnswerController::class, 'store'])->name('eBuyerEn');
 ####################ENG######################
 Route::get('/ar', function () {return view('welcomeAr');});
+
+####################  Website    ###################
+Route::get('/aboutUs', function(){return view('website.aboutUs');})->name('aboutUs');
+Route::get('/services', function(){return view('website.services');})->name('services');
+Route::get('/ourTeam', function(){return view('website.ourTeam');})->name('ourTeam');
+Route::get('/support', function(){return view('website.support');})->name('support');
+#################### End Website ###################
+
+

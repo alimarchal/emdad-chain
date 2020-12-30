@@ -21,11 +21,11 @@
                 <div class="col-lg-4 col-md-6 footer-links ">
                     <h4>Useful Links</h4>
                     <ul style="list-style-type: none; padding: 0px;margin:0px;">
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{config('app.url')}}">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route('aboutUs')}}">About us</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route('services')}}">Services</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route('ourTeam')}}">Our Team</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route('support')}}">Contact</a></li>
                     </ul>
                 </div>
 
