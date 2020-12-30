@@ -39,19 +39,11 @@ Route::get('/test', function(\Illuminate\Http\Request $request){
     return dd($request->all());
 });
 
-// survey buyer
-
-Route::get('/e-buyer/en', function(){
-    return view('eBuyerSurvey.en.eBuyerSurvey');
-});
-
-Route::get('/e-buyer/ar', function(){
-    return view('eBuyerSurvey.ar.eBuyerSurvey');
-});
-
-Route::get('/e-buyer/ur', function(){
-    return view('eBuyerSurvey.ur.eBuyerSurvey');
-});
-
+####################Survey###################
+Route::get('/survey', function(){return view('website.survey');});
+Route::get('/e-buyer/en', function(){return view('eBuyerSurvey.en.eBuyerSurvey');});
+Route::get('/e-buyer/ar', function(){return view('eBuyerSurvey.ar.eBuyerSurvey');});
+Route::get('/e-buyer/ur', function(){return view('eBuyerSurvey.ur.eBuyerSurvey');});
 Route::post('e-buyer', [\App\Http\Controllers\EBuyerSurveyAnswerController::class, 'store'])->name('eBuyerEn');
-
+####################ENG######################
+Route::get('/ar', function () {return view('welcomeAr');});
