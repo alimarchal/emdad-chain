@@ -76,39 +76,46 @@
         <h1 class="text-center" style="font-weight: bold">Services</h1>
         <div class="container mt-4" data-aos="zoom-in">
             <div class="row">
-                <div class="col-sm">
-                        <img src="{{url('webmainimages/1.jpeg')}}" width="100" height="100" class="img-fluid rounded" alt="our services">
-                    <h3>Smart Map</h3>
-                    One of the platform's greatest achievements is the work of the smart map and it is considered the first in its field and pioneering to enable the user to connect to the right
-                    resource with one minute in more than 500 available categories.
-                </div>
-                <div class="col-sm">
-                    <img src="{{url('webmainimages/2.jpeg')}}"  width="100" height="100"  class="img-fluid rounded" alt="our services">
-                    <h3>Safety</h3>
+                {{--                <div class="col-sm">--}}
+                {{--                        <img src="{{url('webmainimages/1.jpeg')}}" width="100" height="100" class="img-fluid rounded" alt="our services">--}}
+                {{--                    <h3>Smart Map</h3>--}}
+                {{--                    One of the platform's greatest achievements is the work of the smart map and it is considered the first in its field and pioneering to enable the user to connect to the right--}}
+                {{--                    resource with one minute in more than 500 available categories.--}}
+                {{--                </div>--}}
+                {{--                <div class="col-sm">--}}
+                {{--                    <img src="{{url('webmainimages/2.jpeg')}}"  width="100" height="100"  class="img-fluid rounded" alt="our services">--}}
+                {{--                    <h3>Safety</h3>--}}
 
+                {{--                    <ul>--}}
+                {{--                        <li>All operations are saved in a reference cloud and are never removed--}}
+                {{--                        </li>--}}
+                {{--                        <li>The latest security technologies are used to ensure that the user account is not tampered with</li>--}}
+                {{--                    </ul>--}}
+                {{--                </div>--}}
+                <div class="col-sm">
+                    {{--                    <img src="{{url('webmainimages/4.jpeg')}}"  width="100" height="100"  class="img-fluid rounded" alt="our services">--}}
+                    <h3>Suppliers</h3>
                     <ul>
-                        <li>All operations are saved in a reference cloud and are never removed
-                        </li>
-                        <li>The latest security technologies are used to ensure that the user account is not tampered with</li>
+                        <li>The ability to request electronic reports at any time.</li>
+                        <li>Save all operations and documents in an electronic cloud as a reference.</li>
+                        <li>Monitor and follow up the authority of the sales team and the existing transactions.</li>
+                        <li>Enhancing and enabling the capabilities and expertise of employees with free training courses.</li>
+                        <li>The ability to approve quotations electronically.</li>
+                        <li>We guarantee you get the money on time</li>
                     </ul>
                 </div>
                 <div class="col-sm">
-                    <img src="{{url('webmainimages/3.jpeg')}}" width="100" height="100" class="img-fluid rounded" alt="our services">
-                    <h3>Quality</h3>
-
-                    One of the basic of our work in the platform is to ensure the quality of users' operations.
-                </div>
-                <div class="col-sm">
-                    <img src="{{url('webmainimages/4.jpeg')}}"  width="100" height="100"  class="img-fluid rounded" alt="our services">
-                    <h3>Saving time and effort</h3>
+                    {{--                    <img src="{{url('webmainimages/4.jpeg')}}"  width="100" height="100"  class="img-fluid rounded" alt="our services">--}}
+                    <h3>Buyers</h3>
                     <ul>
-                        <li>It is the primary measure on which the platform is built.
-                        </li>
-                        <li>Fast and easy electronic accreditation.
-                        </li>
-                        <li>Quickly obtaining quotations from several suppliers.
-                        </li>
-                        <li>Quick and easy access to the right resource.</li>
+                        <li>The possibility of safe payment.</li>
+                        <li>The possibility of tracking shipments.</li>
+                        <li>The possibility of dealing in cash or on credit.</li>
+                        <li>Guarantee of requesting quotations from the correct supplier.</li>
+                        <li>The ability to register suppliers and deal with them directly.</li>
+                        <li>Enhancing the search for an alternative or new product in an easy and fast way.</li>
+                        <li>Prevent financial fraud and secret dealings between seller and buyer.</li>
+                        <li>The ability to approve purchase orders electronically</li>
                     </ul>
                 </div>
             </div>

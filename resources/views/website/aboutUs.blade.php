@@ -72,7 +72,7 @@
     <section class="inner-page" style="font-family: tahoma;">
 
 
-        <div class="container" data-aos="zoom-in">
+        <div class="container" data-aos="fade-in">
             <h1 style="font-weight: bold;">What is Emdad Platform?</h1>
             <p>
                 It is one of the largest electronic platform incorporating high level of experiences and cutting technologies to serve the seller and the buyer in buying, selling, supply and storage
@@ -80,14 +80,14 @@
             </p>
         </div>
         <hr>
-        <div class="container text-center" data-aos="fade-in">
+        <div class="container" data-aos="fade-in">
             <h1 class="" style="font-weight: bold">Vision</h1>
             <p>
                 To be the largest supply chain platform that has the largest number of suppliers and the largest logistical fleet in high quality standards.
             </p>
         </div>
         <hr>
-        <div class="container text-center mt-4" data-aos="fade-in">
+        <div class="container mt-4" data-aos="fade-in">
             <h1 class="" style="font-weight: bold">Mission</h1>
             <p>
                 Our Mission We are able and ready to endure the difficulties of all technical developments in the world and keep abreast of the technical development in order to become the first in
@@ -95,14 +95,14 @@
             </p>
         </div>
         <hr>
-        <div class="container text-center mt-4" data-aos="fade-in">
+        <div class="container mt-4" data-aos="fade-in">
             <h1 class="" style="font-weight: bold">Goal</h1>
             <p>
                 Goal Emdad to be a trustable name as a supply chain platform.
             </p>
         </div>
         <hr>
-        <div class="container mt-4" data-aos="zoom-in">
+        <div class="container mt-4" data-aos="fade-in">
             <h1 class="text-center" style="font-weight: bold">Platform capabilities</h1>
             <p>
                 <img src="{{url('webmainimages/platformCapibalities.png')}}" class="img-fluid rounded " alt="">

@@ -76,6 +76,10 @@
         div.goog-te-gadget {
             color: transparent !important;
         }
+
+        nav, #main, .inner-page {
+            direction: rtl;
+        }
     </style>
 </head>
 
@@ -83,49 +87,33 @@
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto"><a href="{{ config('app.url') }}"><img src="../../logo-full.png"></a></h1>
+        <h1 class="logo me-auto"><a href="{{ url('/ar') }}">
+                <img src="../logo-full.png"></a>
+        </h1>
+
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li class="active"><a href="#header">Home</a></li>
-                <li><a href="#about">How to start</a></li>
-                <li><a href="#services">About Us</a></li>
-                <li><a href="#portfolio">Support</a></li>
-                <li><a href="{{route('login')}}">Login</a></li>
-                <li><a href="{{route('register')}}">Register</a></li>
-                <li class="drop-down"><a href="{{url('survey')}}">Survey</a>
+                <li class=""><a href="{{url('ar')}}">الرئيسية</a></li>
+                <li class="{{(request()->routeIs('aboutUsAr')?'active':'')}}"><a href="{{route('aboutUsAr')}}">من نحن</a></li>
+                <li class="{{(request()->routeIs('servicesAr')?'active':'')}}"><a href="{{route('servicesAr')}}">خدماتنا</a></li>
+                <li class="{{(request()->routeIs('ourTeamAr')?'active':'')}}"><a href="{{route('ourTeamAr')}}">فريق العمل</a></li>
+                <li class="{{(request()->routeIs('supportAr')?'active':'')}}"><a href="{{route('supportAr')}}">الدعم</a></li>
+                <li class="drop-down"><a href="{{url('survey')}}">الاستبيان</a>
                     <ul>
-                        <li><a href="{{url('survey')}}">Buyer</a></li>
-                        <li><a href="#">Supplier</a></li>
-                        <li><a href="#">Other</a></li>
+                        <li><a href="{{url('e-buyer/ar')}}">للمشترين</a></li>
+                        <li><a href="#">للموردين</a></li>
                     </ul>
                 </li>
+                <li><a href="{{route('login')}}">دخول</a></li>
+                <li><a href="{{route('register')}}">دخول</a></li>
 
-                {{--                <li class="drop-down"><a href="">Survey</a>--}}
-                {{--                    <ul>--}}
-                {{--                        <li><a href="#">Drop Down 1</a></li>--}}
-                {{--                        <li class="drop-down"><a href="#">Deep Drop Down</a>--}}
-                {{--                            <ul>--}}
-                {{--                                <li><a href="#">Deep Drop Down 1</a></li>--}}
-                {{--                                <li><a href="#">Deep Drop Down 2</a></li>--}}
-                {{--                                <li><a href="#">Deep Drop Down 3</a></li>--}}
-                {{--                                <li><a href="#">Deep Drop Down 4</a></li>--}}
-                {{--                                <li><a href="#">Deep Drop Down 5</a></li>--}}
-                {{--                            </ul>--}}
-                {{--                        </li>--}}
-                {{--                        <li><a href="#">Drop Down 2</a></li>--}}
-                {{--                        <li><a href="#">Drop Down 3</a></li>--}}
-                {{--                        <li><a href="#">Drop Down 4</a></li>--}}
-                {{--                    </ul>--}}
-                {{--                </li>--}}
+
             </ul>
         </nav><!-- .nav-menu -->
-
-                <a href="{{url('ar')}}" class="get-started-btn scrollto">العربية</a>
+        <a href="{{url('/')}}" class="get-started-btn scrollto"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top:-4px;">English</a>
     </div>
 </header>
-
 <!-- End Header -->
-
 <!-- ======= Hero Section ======= -->
 
 <main id="main" style="background-color: lightgray;">
@@ -145,7 +133,7 @@
         <form method="post" action="{{route('eBuyerEn')}}">
             @csrf
 
-            <div class="container bg-white rounded p-4 mt-4 mb-4 "  >
+            <div class="container bg-white rounded p-4 mt-4 mb-4 ">
 
                 <div>
                     @if (session()->has('message'))
@@ -307,7 +295,7 @@
                 @endforeach
             </div>
 
-            <div class="container bg-white rounded p-4 mt-4 mb-4 float-right"  >
+            <div class="container bg-white rounded p-4 mt-4 mb-4 float-right">
                 <h3 class="text-center">Supply Chain Management</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 7 && $loop->iteration <= 14)
@@ -402,7 +390,7 @@
                                 <input type="text" class="form-control" id="question{{$q->id}}" name="question{{$q->id}}">
                             @elseif($loop->iteration == 11)
                                 <label for="question{{$q->id}}" class="form-label">{{$q->question_ar}}</label>
-                            <br>
+                                <br>
                                 @for($count = 1; $count <= 5; $count++)
                                     <div class="form-check-inline">
                                         <input class="form-check-input" type="radio" name="question{{$q->id}}" id="question{{$q->id}}{{$count}}" value="{{$count}}">
@@ -485,7 +473,7 @@
                 @endforeach
             </div>
 
-            <div class="container bg-white rounded p-4 mt-4 mb-4"  >
+            <div class="container bg-white rounded p-4 mt-4 mb-4">
                 <h3 class="text-center">Warehouse Info.</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 15 && $loop->iteration <= 16)
@@ -559,7 +547,7 @@
                 @endforeach
             </div>
 
-            <div class="container bg-white rounded p-4 mt-4 mb-4"  >
+            <div class="container bg-white rounded p-4 mt-4 mb-4">
                 <h3 class="text-center">Products</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 17 && $loop->iteration <= 22)
@@ -714,7 +702,7 @@
                 @endforeach
             </div>
 
-            <div class="container bg-white rounded p-4 mt-4 mb-4"  >
+            <div class="container bg-white rounded p-4 mt-4 mb-4">
                 <h3 class="text-center">Purchases</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 23 && $loop->iteration <= 30)
@@ -901,7 +889,7 @@
                 @endforeach
             </div>
 
-            <div class="container bg-white rounded p-4 mt-4 mb-4"  >
+            <div class="container bg-white rounded p-4 mt-4 mb-4">
                 <h3 class="text-center">The Market</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 31 && $loop->iteration <= 38)
@@ -1122,7 +1110,80 @@
 <!-- End #main -->
 
 <!-- ======= Footer ======= -->
-@include('webLayout.footer')
+<footer id="footer" style="direction: rtl">
+
+    <div class="footer-top" >
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 footer-contact">
+                    <h3>{{config('app.name')}} <img src="../logo-full.png" style="max-width: 70px;"></h3>
+                    <p>
+                        120 Aban Center, <br>
+                        King Abdul Aziz Road, Exit 5,<br>
+                        Riyadh - 13525, Kingdom of Saudi Arabia (KSA)<br>
+                        <strong>Phone:</strong> <span style="font-family:tahoma;">+966 53 416 8874</span><br>
+                        <strong>Contact:</strong> contact@emdad-chain.com<br>
+                        <strong>Support:</strong> support@emdad-chain.com<br>
+                        <strong>General:</strong> info@emdad-chain.com<br>
+                    </p>
+                </div>
+
+
+                <div class="col-lg-4 col-md-6 footer-links ">
+                    <h4>Useful Links</h4>
+                    <ul style="list-style-type: none; padding: 0px;margin:0px;">
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{config('app.url')}}">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route('aboutUs')}}">About us</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route('services')}}">Services</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route('ourTeam')}}">Our Team</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route('support')}}">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                    </ul>
+                </div>
+
+                {{--                <div class="col-lg-4 col-md-6 footer-newsletter">--}}
+                {{--                    <h4>Join Our Newsletter</h4>--}}
+                {{--                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>--}}
+                {{--                    <form action="" method="post">--}}
+                {{--                        <input type="email" name="email"><input type="submit" value="Subscribe">--}}
+                {{--                    </form>--}}
+                {{--                </div>--}}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container d-md-flex py-4">
+
+        <div class="me-md-auto text-center text-md-left">
+            <div class="copyright">
+                &copy; Copyright {{date('Y')}} - <strong><span>{{config('app.name')}}</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                {{--                Designed by <a href="#">Ali Raza Marchal</a>--}}
+            </div>
+        </div>
+        <div class="social-links text-center text-md-right pt-3 pt-md-0">
+            <a href="https://twitter.com/emdad_chain?s=21" class="twitter"><i class="bx bxl-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="https://instagram.com/emdad_chain?igshid=ok4zahralc2t" class="instagram"><i class="bx bxl-instagram"></i></a>
+            <a href="#" class="google-plus"><i class="bx bxl-pinterest"></i></a>
+            <a href="https://www.linkedin.com/company/emdadchain" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        </div>
+    </div>
+</footer>
+
 <!-- End Footer -->
 
 <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>

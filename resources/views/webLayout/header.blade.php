@@ -4,7 +4,7 @@
 
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li class=""><a href="{{config('app.url')}}">Home</a></li>
+                <li class=""><a href="{{url('/')}}">Home</a></li>
                 <li class="{{(request()->routeIs('aboutUs')?'active':'')}}"><a href="{{route('aboutUs')}}">About Us</a></li>
                 <li class="{{(request()->routeIs('services')?'active':'')}}"><a href="{{route('services')}}">Services</a></li>
                 <li class="{{(request()->routeIs('ourTeam')?'active':'')}}"><a href="{{route('ourTeam')}}">Our Team</a></li>
@@ -13,7 +13,7 @@
                     <ul>
                         <li><a href="{{url('survey')}}">Buyer</a></li>
                         <li><a href="#">Supplier</a></li>
-                        <li><a href="#">Other</a></li>
+{{--                        <li><a href="#">Other</a></li>--}}
                     </ul>
                 </li>
                 <li><a href="{{route('login')}}">Login</a></li>
