@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\EBuyerSurveyAnswer;
 use Illuminate\Http\Request;
+use App\Exports\AnswersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EBuyerSurveyAnswerController extends Controller
 {
@@ -36,7 +38,7 @@ class EBuyerSurveyAnswerController extends Controller
     public function store(Request $request)
     {
 //        dd($request->all());
-        session()->flash('message', 'E-Buyer Survey information successfully submitted.');
+        session()->flash('message', 'Survey information successfully submitted. Thank You!');
         EBuyerSurveyAnswer::create($request->all());
         return redirect()->back();
     }
@@ -84,5 +86,10 @@ class EBuyerSurveyAnswerController extends Controller
     public function destroy(EBuyerSurveyAnswer $eBuyerSurveyAnswer)
     {
         //
+    }
+
+    public function export()
+    {
+        return Excel::download(new AnswersExport, 'answers.xlsx');
     }
 }

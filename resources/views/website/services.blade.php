@@ -54,11 +54,9 @@
 <!-- ======= Header ======= -->
 @include('webLayout.header')
 <!-- End Header -->
-
 <!-- ======= Hero Section ======= -->
 
 <main id="main">
-
     <!-- ======= Breadcrumbs ======= -->
     <section class="breadcrumbs">
         <div class="container" style="margin-top: 40px;">

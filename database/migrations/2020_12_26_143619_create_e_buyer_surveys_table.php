@@ -18,7 +18,11 @@ class CreateEBuyerSurveysTable extends Migration
             $table->string('question',191)->nullable();
             $table->string('question_ar',191)->nullable();
             $table->string('question_ur',191)->nullable();
+            $table->string('question_s_en',191)->nullable();
+            $table->string('question_s_ar',191)->nullable();
+            $table->string('question_s_ur',191)->nullable();
             $table->string('category',50)->nullable();
+            $table->string('category_s',50)->nullable();
             $table->timestamps();
         });
     }

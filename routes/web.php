@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcomeAr');
 });
 
 
@@ -45,7 +45,7 @@ Route::get('/e-buyer/en', function(){return view('eBuyerSurvey.en.eBuyerSurvey')
 Route::get('/e-buyer/ar', function(){return view('eBuyerSurvey.ar.eBuyerSurvey');});
 Route::get('/e-buyer/ur', function(){return view('eBuyerSurvey.ur.eBuyerSurvey');});
 Route::post('e-buyer', [\App\Http\Controllers\EBuyerSurveyAnswerController::class, 'store'])->name('eBuyerEn');
-####################ENG######################
+####################END######################
 
 
 ####################  Website    ###################
@@ -56,9 +56,19 @@ Route::get('/support', function(){return view('website.support');})->name('suppo
 #################### End Website ###################
 
 ####################  Website AR    ###################
-Route::get('/ar', function () {return view('welcomeAr');})->name('ar');
+Route::get('/en', function () {return view('welcome');})->name('ar');
 Route::get('/aboutUsAr', function(){return view('website.aboutUsAr');})->name('aboutUsAr');
 Route::get('/servicesAr', function(){return view('website.servicesAr');})->name('servicesAr');
 Route::get('/ourTeamAr', function(){return view('website.ourTeamAr');})->name('ourTeamAr');
 Route::get('/supportAr', function(){return view('website.supportAr');})->name('supportAr');
 #################### End Website AR ###################
+
+
+####################Survey Supplier###################
+Route::get('/e-supplier/en', function(){return view('eBuyerSurvey.en.eSupplierSurvey');});
+####################END###############################
+
+
+####################Download Answers###################
+Route::get('/download/answers',[\App\Http\Controllers\EBuyerSurveyAnswerController::class,'export'])->name('downloadAnswersExcel');
+####################END###############################

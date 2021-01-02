@@ -87,13 +87,13 @@
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto"><a href="{{ url('/ar') }}">
+        <h1 class="logo me-auto"><a href="{{ url('/') }}">
                 <img src="../logo-full.png"></a>
         </h1>
 
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li class=""><a href="{{url('ar')}}">الرئيسية</a></li>
+                <li class=""><a href="{{url('/')}}">الرئيسية</a></li>
                 <li class="{{(request()->routeIs('aboutUsAr')?'active':'')}}"><a href="{{route('aboutUsAr')}}">من نحن</a></li>
                 <li class="{{(request()->routeIs('servicesAr')?'active':'')}}"><a href="{{route('servicesAr')}}">خدماتنا</a></li>
                 <li class="{{(request()->routeIs('ourTeamAr')?'active':'')}}"><a href="{{route('ourTeamAr')}}">فريق العمل</a></li>
@@ -110,7 +110,7 @@
 
             </ul>
         </nav><!-- .nav-menu -->
-        <a href="{{url('/')}}" class="get-started-btn scrollto"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top:-4px;">English</a>
+        <a href="{{url('/en')}}" class="get-started-btn scrollto"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top:-4px;">English</a>
     </div>
 </header>
 <!-- End Header -->
