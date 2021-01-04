@@ -41,6 +41,7 @@ Route::get('/test', function(\Illuminate\Http\Request $request){
 
 ####################Survey###################
 Route::get('/survey', function(){return view('website.survey');});
+Route::get('/survey/ar', function(){return view('website.surveyAr');});
 Route::get('/e-buyer/en', function(){return view('eBuyerSurvey.en.eBuyerSurvey');});
 Route::get('/e-buyer/ar', function(){return view('eBuyerSurvey.ar.eBuyerSurvey');});
 Route::get('/e-buyer/ur', function(){return view('eBuyerSurvey.ur.eBuyerSurvey');});
@@ -71,4 +72,9 @@ Route::get('/e-supplier/en', function(){return view('eBuyerSurvey.en.eSupplierSu
 
 ####################Download Answers###################
 Route::get('/download/answers',[\App\Http\Controllers\EBuyerSurveyAnswerController::class,'export'])->name('downloadAnswersExcel');
+Route::get('/download/supplier',[\App\Http\Controllers\EBuyerSurveyAnswerController::class,'supplier'])->name('downloadSupplierExcel');
+Route::get('/download/buyer',[\App\Http\Controllers\EBuyerSurveyAnswerController::class,'buyer'])->name('downloadBuyerExcel');
+
+
+Route::get('/downloads', function(){return view('website.downloads');})->name('downloads');
 ####################END###############################

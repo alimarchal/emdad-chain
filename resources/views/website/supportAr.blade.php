@@ -14,7 +14,7 @@
                 <li><a href="{{config('app.url')}}">الرئيسية</a></li>
                 <li>&nbsp;&nbsp; الدعم</li>
             </ol>
-            <h2>الدعم</h2>
+            <h2 class="mainColor">الدعم</h2>
         </div>
     </section>
     <!-- End Breadcrumbs -->
@@ -25,7 +25,7 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>الدعم</h2>
+                <h2 class="mainColor">الدعم</h2>
             </div>
 
             <div class="row" data-aos="fade-up" data-aos-delay="100">
@@ -36,7 +36,7 @@
                         <div class="col-md-12">
                             <div class="info-box">
                                 <i class="bx bx-map"></i>
-                                <h3>عنواننا</h3>
+                                <h3>العنوان</h3>
                                 <p>120 Aban Center,<br>
                                     King Abdul Aziz Road, Exit 5,<br>
                                     Riyadh - 13525, Kingdom of Saudi Arabia (KSA)</p>
@@ -48,14 +48,14 @@
                             <div class="info-box mt-4">
                                 <i class="bx bx-envelope"></i>
                                 <h3>البريد الإلكتروني</h3>
-                                <p>info@emdad-chain.com</p>
+                                <p style="direction: ltr;">info@emdad-chain.com</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="info-box mt-4">
                                 <i class="bx bx-phone-call"></i>
-                                <h3>هاتف</h3>
-                                <p>+966 53 416 8874</p>
+                                <h3>الهاتف</h3>
+                                <p style="direction: ltr;">+966 53 416 8874</p>
                             </div>
                         </div>
                     </div>

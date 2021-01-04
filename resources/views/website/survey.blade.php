@@ -75,7 +75,8 @@
                 <li><a href="{{config('app.url')}}">Home</a></li>
                 <li>Buyer / Supplier</li>
             </ol>
-            <a href="{{url('e-buyer/en')}}" class="btn btn-danger">Survey</a>
+            <a href="{{url('e-buyer/en')}}" class="mainHover mainLink">Buyer</a>
+            <a href="{{url('e-supplier/en')}}" class="mainHover mainLink">Supplier</a>
         </div>
     </section><!-- End Breadcrumbs -->
 
@@ -93,32 +94,6 @@
 
                 <p><strong>Short message</strong><br>
                 We are pleased to fill out this questionnaire, which aims to develop and improve the level of your supply chains in the future .. Thank you!</p>
-        </div>
-
-
-        <div class="container " style="direction: rtl;" data-aos="fade-up">
-            <p class="text-center"><strong>استفتاحية الاستبيان</strong></p>
-            <ol>
-                <li>مقدمة</li>
-                <li>تعريف عن الاستبيان</li>
-                <li>رسالة صغيرة</li>
-            </ol>
-            <p><strong>مقدمة</strong><br>عزيزي صاحب المنشأة:</p>
-            <p>
-                حرصاً منا على تقديم خدمتنا بالمستوى الأفضل لكم تم عمل هذا الاستبيان تحدياً منا لرفع مستوى جودة سلاسل الامداد لديكم و خاصتاً في ظل الظروف الحالية لجائحة COVID 19  و سعياً منا لتحقيق رؤية المملكة العربية السعودية 2030
-            </p>
-
-            <p>تعريف عن الاستبيان
-
-            <ul>
-                <li>هذا الاستبيان هو خاص للمنشأت و الشركات ولا يمكن تعبئته من خلال فرد او شخص.</li>
-                <li>الاجابات على هذا الاستبيان سيتم التعامل معها لكل منشأة على حِدة لتقديم الخدمة اللازمة.</li>
-                <li>مدة هذا الاستبيان من 8 الي 10 دقائق.</li>
-            </ul>
-            رسالة قصيرة
-            <br>
-            نسعد بتعبئتكم لهذا الاستبيان الذي يهدف في تطوير و تحسين مستوى سلاسل الامداد لديكم في المستقبل .. شكراً لكم
-            </p>
         </div>
 
     </section>

@@ -7,7 +7,7 @@
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <!-- <x-jet-application-mark class="block h-9 w-auto"/> -->
-                        <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto" />
+                        <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto"/>
                     </a>
                 </div>
 
@@ -17,106 +17,124 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     @if(Auth::user()->usertype == "superadmin")
-                    <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
-                        {{ __('Users') }}
-                    </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
+                            {{ __('Users') }}
+                        </x-jet-nav-link>
+
+
+
+                        {{--                        <div x-data="{ show: false }"  @click.away="show = false" class="mb-2">--}}
+                        {{--                            <button @click="show = ! show" type="button" class="inline-flex p-4 mt-5 items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">--}}
+                        {{--                                <span class="pr-2">Dropdown Buttons</span>--}}
+                        {{--                                <svg class="fill-current text-gray-200" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>--}}
+                        {{--                            </button>--}}
+                        {{--                            <div x-show="show" class="absolute bg-gray-100 z-10 shadow-md" style="min-width:10rem">--}}
+                        {{--                                <a class="block px-3 py-2" href="#">Link 1</a>--}}
+                        {{--                                <a class="block px-3 py-2" href="#">Link 2</a>--}}
+                        {{--                                <a class="block px-3 py-2" href="#">Link 3</a>--}}
+                        {{--                                <hr class="border-t border-gray-200 my-0">--}}
+                        {{--                                <a class="block px-3 py-2" href="#">Another Link</a>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
+
+
                     @endif
-{{--                    @if(Auth::user()->status == 0 || Auth::user()->status == null)--}}
+                    {{--                    @if(Auth::user()->status == 0 || Auth::user()->status == null)--}}
 
                     @if(Auth::user()->status == 1)
                     @else
-                    @if(Auth::user()->registration_type)
-                        <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">
-                            {{ __('Business') }}
-                            @php
-                                $isBusinessDataExist = \App\Models\Business::where('user_id',Auth::user()->id)->first();
-                                if ($isBusinessDataExist) {
-                                $isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
-                                $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id',$isBusinessDataExist->id)->first();
-                                $isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
-                                $isBusinessPOIExist = \App\Models\POInfo::where('business_id',$isBusinessDataExist->id)->first();
-                                }
-                            @endphp
-                            @if(isset($isBusinessDataExist))
-                                &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
+                        @if(Auth::user()->registration_type)
+                            <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">
+                                {{ __('Business') }}
+                                @php
+                                    $isBusinessDataExist = \App\Models\Business::where('user_id',Auth::user()->id)->first();
+                                    if ($isBusinessDataExist) {
+                                    $isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
+                                    $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id',$isBusinessDataExist->id)->first();
+                                    $isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
+                                    $isBusinessPOIExist = \App\Models\POInfo::where('business_id',$isBusinessDataExist->id)->first();
+                                    }
+                                @endphp
+                                @if(isset($isBusinessDataExist))
+                                    &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
+                                @endif
+                            </x-jet-nav-link>
+
+                            @if(Auth::user()->registration_type == "Contracts")
+                                <x-jet-nav-link href="{{ route('businessFinanceDetail.create') }}" :active="request()->routeIs('businessFinanceDetail.*')">
+                                    {{ __('Finance') }}
+                                    @if(isset($isBusinessFinanceDataExist))
+                                        &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
+                                    @endif
+                                </x-jet-nav-link>
                             @endif
-                        </x-jet-nav-link>
-
-                        @if(Auth::user()->registration_type == "Contracts")
-                        <x-jet-nav-link href="{{ route('businessFinanceDetail.create') }}" :active="request()->routeIs('businessFinanceDetail.*')">
-                            {{ __('Finance') }}
-                            @if(isset($isBusinessFinanceDataExist))
-                                &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
-                            @endif
-                        </x-jet-nav-link>
-                        @endif
 
 
-{{--                        <x-jet-dropdown align="right" width="48">--}}
-{{--                            <x-slot name="trigger">--}}
-{{--                                <div  class="pb-5 mt-4 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">--}}
-{{--                                    Warehouse <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>--}}
-{{--                                </div>--}}
-{{--                            </x-slot>--}}
+                            {{--                        <x-jet-dropdown align="right" width="48">--}}
+                            {{--                            <x-slot name="trigger">--}}
+                            {{--                                <div  class="pb-5 mt-4 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">--}}
+                            {{--                                    Warehouse <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>--}}
+                            {{--                                </div>--}}
+                            {{--                            </x-slot>--}}
 
-{{--                            <x-slot name="content">--}}
-{{--                                <!-- Account Management -->--}}
-{{--                                <div class="block px-4 py-2 text-xs text-gray-400">--}}
-{{--                                    {{ __('Business Warehouse') }}--}}
-{{--                                </div>--}}
-{{--                                <div class="border-t border-gray-100"></div>--}}
-{{--                                <x-jet-dropdown-link href="{{ route('businessWarehouse.create') }}" :active="request()->routeIs('businessWarehouse.*')">--}}
-{{--                                    {{ __('Create Warehouse') }}--}}
-{{--                                    @if(isset($isBusinessWarehouseDataExist))--}}
-{{--                                        &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">--}}
-{{--                                    @endif--}}
-{{--                                </x-jet-dropdown-link>--}}
-{{--                                <div class="border-t border-gray-100"></div>--}}
-{{--                                @if(isset($isBusinessWarehouseDataExist))--}}
-{{--                                <x-jet-dropdown-link href="{{route('businessWarehouseShow',$isBusinessWarehouseDataExist->business_id)}}">--}}
-{{--                                    {{ __('Existing Warehouse') }}--}}
-{{--                                </x-jet-dropdown-link>--}}
-{{--                                @endif--}}
-{{--                            </x-slot>--}}
-{{--                        </x-jet-dropdown>--}}
+                            {{--                            <x-slot name="content">--}}
+                            {{--                                <!-- Account Management -->--}}
+                            {{--                                <div class="block px-4 py-2 text-xs text-gray-400">--}}
+                            {{--                                    {{ __('Business Warehouse') }}--}}
+                            {{--                                </div>--}}
+                            {{--                                <div class="border-t border-gray-100"></div>--}}
+                            {{--                                <x-jet-dropdown-link href="{{ route('businessWarehouse.create') }}" :active="request()->routeIs('businessWarehouse.*')">--}}
+                            {{--                                    {{ __('Create Warehouse') }}--}}
+                            {{--                                    @if(isset($isBusinessWarehouseDataExist))--}}
+                            {{--                                        &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">--}}
+                            {{--                                    @endif--}}
+                            {{--                                </x-jet-dropdown-link>--}}
+                            {{--                                <div class="border-t border-gray-100"></div>--}}
+                            {{--                                @if(isset($isBusinessWarehouseDataExist))--}}
+                            {{--                                <x-jet-dropdown-link href="{{route('businessWarehouseShow',$isBusinessWarehouseDataExist->business_id)}}">--}}
+                            {{--                                    {{ __('Existing Warehouse') }}--}}
+                            {{--                                </x-jet-dropdown-link>--}}
+                            {{--                                @endif--}}
+                            {{--                            </x-slot>--}}
+                            {{--                        </x-jet-dropdown>--}}
 
 
 
-                        @if(isset($isBusinessWarehouseDataExist))
-
-                        <x-jet-nav-link href="{{route('businessWarehouseShow',$isBusinessWarehouseDataExist->business_id)}}" :active="request()->routeIs('businessWarehouse.*')">
-                            {{ __('Warehouse') }}
                             @if(isset($isBusinessWarehouseDataExist))
-                                &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
+
+                                <x-jet-nav-link href="{{route('businessWarehouseShow',$isBusinessWarehouseDataExist->business_id)}}" :active="request()->routeIs('businessWarehouse.*')">
+                                    {{ __('Warehouse') }}
+                                    @if(isset($isBusinessWarehouseDataExist))
+                                        &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
+                                    @endif
+                                </x-jet-nav-link>
+
+                            @else
+                                <x-jet-nav-link href="{{ route('businessWarehouse.create') }}" :active="request()->routeIs('businessWarehouse.*')">
+                                    {{ __('Warehouse') }}
+                                    @if(isset($isBusinessWarehouseDataExist))
+                                        &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
+                                    @endif
+                                </x-jet-nav-link>
                             @endif
-                        </x-jet-nav-link>
 
-                        @else
-                            <x-jet-nav-link href="{{ route('businessWarehouse.create') }}" :active="request()->routeIs('businessWarehouse.*')">
-                                {{ __('Warehouse') }}
-                                @if(isset($isBusinessWarehouseDataExist))
-                                    &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
-                                @endif
-                            </x-jet-nav-link>
-                        @endif
-
-                        @if(isset($isBusinessPOIExist))
-                        <x-jet-nav-link href="{{ route('purchaseOrderInfo.show',$isBusinessPOIExist->id) }}" :active="request()->routeIs('purchaseOrderInfo.*')">
-                            {{ __('P.O. Info') }}
                             @if(isset($isBusinessPOIExist))
-                                &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
+                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.show',$isBusinessPOIExist->id) }}" :active="request()->routeIs('purchaseOrderInfo.*')">
+                                    {{ __('P.O. Info') }}
+                                    @if(isset($isBusinessPOIExist))
+                                        &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
+                                    @endif
+                                </x-jet-nav-link>
+                            @else
+                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.create') }}" :active="request()->routeIs('purchaseOrderInfo.*')">
+                                    {{ __('P.O. Info') }}
+                                    @if(isset($isBusinessPOIExist))
+                                        &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
+                                    @endif
+                                </x-jet-nav-link>
                             @endif
-                        </x-jet-nav-link>
-                        @else
-                            <x-jet-nav-link href="{{ route('purchaseOrderInfo.create') }}" :active="request()->routeIs('purchaseOrderInfo.*')">
-                                {{ __('P.O. Info') }}
-                                @if(isset($isBusinessPOIExist))
-                                    &nbsp;<img src="{{url('complete_check.jpg')}}" class="w-4 inline">
-                                @endif
-                            </x-jet-nav-link>
-                        @endif
 
-                    @endif
+                        @endif
                     @endif
                 </div>
             </div>
@@ -153,6 +171,10 @@
 
                         <x-jet-dropdown-link href="{{ route('profile.show') }}">
                             {{ __('Profile') }}
+                        </x-jet-dropdown-link>
+                        <div class="border-t border-gray-100"></div>
+                        <x-jet-dropdown-link href="{{ route('downloads') }}">
+                            {{ __('Downloads') }}
                         </x-jet-dropdown-link>
 
                         <div class="border-t border-gray-100"></div>

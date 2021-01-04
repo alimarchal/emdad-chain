@@ -1097,7 +1097,7 @@
                             @elseif($loop->iteration == 38)
                                 <label for="question{{$q->id}}" class="form-label">{{$q->question}}</label>
                                 <br>
-                                @for($count = 1; $count <= 10; $count++)
+                                @for($count = 1; $count <= 5; $count++)
                                     <div class="form-check-inline">
                                         <input class="form-check-input" type="radio" name="question{{$q->id}}" id="question{{$q->id}}{{$count}}" value="{{$count}}">
                                         <label class="form-check-label" for="question{{$q->id}}{{$count}}">
@@ -1187,9 +1187,9 @@
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">
             <a href="https://twitter.com/emdad_chain?s=21" class="twitter"><i class="bx bxl-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+{{--            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>--}}
             <a href="https://instagram.com/emdad_chain?igshid=ok4zahralc2t" class="instagram"><i class="bx bxl-instagram"></i></a>
-            <a href="#" class="google-plus"><i class="bx bxl-pinterest"></i></a>
+{{--            <a href="#" class="google-plus"><i class="bx bxl-pinterest"></i></a>--}}
             <a href="https://www.linkedin.com/company/emdadchain" class="linkedin"><i class="bx bxl-linkedin"></i></a>
         </div>
     </div>

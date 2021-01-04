@@ -13,7 +13,7 @@
                 <li><a href="{{url('ar')}}">الرئيسية</a></li>
                 <li>&nbsp;&nbsp;من نحن</li>
             </ol>
-            <h2>من نحن</h2>
+            <h2 class="mainColor">من نحن</h2>
         </div>
     </section>
     <!-- End Breadcrumbs -->
@@ -22,14 +22,14 @@
 
 
         <div class="container" data-aos="zoom-in">
-            <h1 style="font-weight: bold;">ماهي منصة إمداد؟</h1>
+            <h1 style="font-weight: bold;" class="mainColor">ماهي منصة إمداد؟</h1>
             <p class="text-justify">
                 أضخم منصة الكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.
             </p>
         </div>
         <hr>
         <div class="container" data-aos="fade-in">
-            <h1 class="" style="font-weight: bold">الرؤية
+            <h1 style="font-weight: bold" class="mainColor">الرؤية
             </h1>
             <p class="text-justify">
                 أضخم منصة تقنية موثوقة تخدم سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم اسطول لوجستي بأفضل معايير الجودة العالمية.
@@ -38,7 +38,7 @@
         </div>
         <hr>
         <div class="container mt-4" data-aos="fade-in">
-            <h1 class="" style="font-weight: bold">الرسالة</h1>
+            <h1 style="font-weight: bold" class="mainColor">الرسالة</h1>
             <p class="text-justify">
                 نحن قادرين ومستعدين على تحمل صعوبة جميع التطورات التقنية في العالم ومواكبة الأحداث الجديدة حتى نصبح الأسبق في الابتكار والتطور وإذا سنحت لنا الفرصة يوماً في خدمة كواكب خارج الأرض، سنفعل!
 
@@ -46,7 +46,7 @@
         </div>
         <hr>
         <div class="container mt-4" data-aos="fade-in">
-            <h1 class="" style="font-weight: bold">الهدف
+            <h1 style="font-weight: bold" class="mainColor">الهدف
             </h1>
             <p class="text-justify">
                 أن يكون إمداد اسماً موثوقاً به كمنصة لسلاسل الامداد في العالم.
@@ -55,7 +55,7 @@
         </div>
         <hr>
         <div class="container mt-4" data-aos="fade-in">
-            <h1 style="font-weight: bold">إمكانيات المنصة لمستخدميها؟
+            <h1 style="font-weight: bold" class="mainColor">إمكانيات المنصة لمستخدميها؟
             </h1>
             <p class="text-justify">
                 نقوم بتمكين مستخدمينا من خلال خبرتنا في كيفية التعامل مع السوق بكفاءة.

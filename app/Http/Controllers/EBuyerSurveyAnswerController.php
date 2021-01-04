@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BuyerSurveyExport;
+use App\Exports\SupplierSurveyExport;
 use App\Models\EBuyerSurveyAnswer;
 use Illuminate\Http\Request;
 use App\Exports\AnswersExport;
@@ -91,5 +93,15 @@ class EBuyerSurveyAnswerController extends Controller
     public function export()
     {
         return Excel::download(new AnswersExport, 'answers.xlsx');
+    }
+
+    public function supplier()
+    {
+        return Excel::download(new SupplierSurveyExport, 'supplier.xlsx');
+    }
+
+    public function buyer()
+    {
+        return Excel::download(new BuyerSurveyExport, 'buyer.xlsx');
     }
 }

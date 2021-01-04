@@ -14,14 +14,14 @@
                 <li><a href="{{url('ar')}}">الرئيسية</a></li>
                 <li>&nbsp;&nbsp;خدماتنا</li>
             </ol>
-            <h2>خدماتنا</h2>
+            <h2 class="mainColor">خدماتنا</h2>
         </div>
     </section>
     <!-- End Breadcrumbs -->
 
     <section class="inner-page" style="font-family: tahoma;">
 
-        <h1 class="text-center" style="font-weight: bold">خدماتنا</h1>
+        <h1 class="text-center mainColor" style="font-weight: bold">خدماتنا</h1>
         <div class="container mt-4" data-aos="zoom-in">
             <div class="row">
                 <div class="col-sm">

@@ -5,6 +5,7 @@
     -->
 
 
+
 {{-- Message Before and After Resistration --}}
     @if(Auth::user()->status == 0 || Auth::user()->status == null)
         <div class="mt-6 text-red-500 text-2xl">

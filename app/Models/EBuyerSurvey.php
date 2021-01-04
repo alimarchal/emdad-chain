@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class EBuyerSurvey extends Model
 {
     use HasFactory;
-
     public function answers()
     {
         return $this->hasMany(ESupplierAnswer::class);

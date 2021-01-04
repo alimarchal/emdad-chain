@@ -64,7 +64,7 @@
                 <li><a href="{{config('app.url')}}">Home</a></li>
                 <li>Our Team</li>
             </ol>
-            <h2>Our Team</h2>
+            <h2 class="mainColor">Our Team</h2>
         </div>
     </section>
     <!-- End Breadcrumbs -->
@@ -75,7 +75,7 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Meet the Team</h2>
+                <h2 class="mainColor">Our Team</h2>
             </div>
 
             <div class="row">
@@ -83,7 +83,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="100">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="">
+                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -103,49 +103,9 @@
                 </div>
 
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="member" data-aos="fade-up" data-aos-delay="200">
-                        <div class="member-img">
-                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="">
-                            <div class="social">
-                                <a href=""><i class="icofont-twitter"></i></a>
-                                <a href=""><i class="icofont-facebook"></i></a>
-                                <a href=""><i class="icofont-instagram"></i></a>
-                                <a href=""><i class="icofont-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h4>Rayan Al Sinany </h4>
-                            <span>Juniour Accountant</span>
-                            <p>25 years. I study accounting and I love math operations. Innovative person and I love organizing and making plans for every business to start with. I like fishing and
-                                swimming. I hope to make the company very organized and professional.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="member" data-aos="fade-up" data-aos-delay="300">
-                        <div class="member-img">
-                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="">
-                            <div class="social">
-                                <a href=""><i class="icofont-twitter"></i></a>
-                                <a href=""><i class="icofont-facebook"></i></a>
-                                <a href=""><i class="icofont-instagram"></i></a>
-                                <a href=""><i class="icofont-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h4>Muteb Al Buraikan</h4>
-                            <span>Human Resources Specialist</span>
-                            <p>Human resources specialist, lover of reading and art. Lover of horses, where the origin of pleasure and the basis of beauty. One of my most important achievements is
-                                obtaining the Order of the Custodian of the Two Holy Mosques for contributing to the success of 8 consecutive seasons of Hajj.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="400">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="">
+                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -167,6 +127,47 @@
                     </div>
                 </div>
 
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="member" data-aos="fade-up" data-aos-delay="200">
+                        <div class="member-img">
+                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
+                            <div class="social">
+                                <a href=""><i class="icofont-twitter"></i></a>
+                                <a href=""><i class="icofont-facebook"></i></a>
+                                <a href=""><i class="icofont-instagram"></i></a>
+                                <a href=""><i class="icofont-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Rayan Al Sinany </h4>
+                            <span>Juniour Accountant</span>
+                            <p>25 years. I study accounting and I love math operations. Innovative person and I love organizing and making plans for every business to start with. I like fishing and
+                                swimming. I hope to make the company very organized and professional.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="member" data-aos="fade-up" data-aos-delay="300">
+                        <div class="member-img">
+                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
+                            <div class="social">
+                                <a href=""><i class="icofont-twitter"></i></a>
+                                <a href=""><i class="icofont-facebook"></i></a>
+                                <a href=""><i class="icofont-instagram"></i></a>
+                                <a href=""><i class="icofont-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Muteb Al Buraikan</h4>
+                            <span>Human Resources Specialist</span>
+                            <p>Human resources specialist, lover of reading and art. Lover of horses, where the origin of pleasure and the basis of beauty. One of my most important achievements is
+                                obtaining the Order of the Custodian of the Two Holy Mosques for contributing to the success of 8 consecutive seasons of Hajj.</p>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
             <div class="row">
@@ -174,7 +175,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="100">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt="">
+                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -195,7 +196,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt="">
+                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -206,7 +207,7 @@
                         <div class="member-info">
                             <h4>Rawan Al Shahrani</h4>
                             <span>Digital Marketing Specialist</span>
-                            <p>23 years ago, I got interesred in the field of marketing after opening my own website specializing in the manufacture of local handmade accessories in 2014, and one of
+                            <p>23 years ago, I got interested in the field of marketing after opening my own website specializing in the manufacture of local handmade accessories in 2014, and one of
                                 my goals is to open the largest website for handmade accessories. I always aspire for the best, be optimistic, and love to plan and accomplish. </p>
                         </div>
                     </div>
@@ -214,7 +215,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt="">
+                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -225,11 +226,53 @@
                         <div class="member-info">
                             <h4>Sara Al Wallan </h4>
                             <span>Public relations and Marketing Specials </span>
-                            <p>28 years. I'm specializied in Business Administration, I worked in the field of Human Resources and as an Executive Assistant to the Chairman of the Board of Directors.
+                            <p><small>28 years.</small> I'm specialized in Business Administration, I worked in the field of Human Resources and as an Executive Assistant to the Chairman of the Board
+                                of Directors.
                                 I participated in a lot of volunteer fields. One of my future plans is to be successful, have an impact, and achieve achievement that benefits society. </p>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="member" data-aos="fade-up" data-aos-delay="200">
+                        <div class="member-img">
+                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="" width="224" height="224">
+                            <div class="social">
+                                <a href=""><i class="icofont-twitter"></i></a>
+                                <a href=""><i class="icofont-facebook"></i></a>
+                                <a href=""><i class="icofont-instagram"></i></a>
+                                <a href=""><i class="icofont-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Mustahsan Rizvi</h4>
+                            <span>Admin InCharge Pakistan Office</span>
+                            <p>28 years. I'm specialized in Business Administration, I worked in the field of Human Resources and as an Executive Assistant to the Chairman of the Board of Directors.
+                                I participated in a lot of volunteer fields. One of my future plans is to be successful, have an impact, and achieve achievement that benefits society. </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="member" data-aos="fade-up" data-aos-delay="200">
+                        <div class="member-img">
+                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="" width="224" height="224">
+                            <div class="social">
+                                <a href=""><i class="icofont-twitter"></i></a>
+                                <a href=""><i class="icofont-facebook"></i></a>
+                                <a href=""><i class="icofont-instagram"></i></a>
+                                <a href=""><i class="icofont-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>Ali Raza Marchal</h4>
+                            <span>Web Developer</span>
+                            <p>28 years. I'm specialized in Business Administration, I worked in the field of Human Resources and as an Executive Assistant to the Chairman of the Board of Directors.
+                                I participated in a lot of volunteer fields. One of my future plans is to be successful, have an impact, and achieve achievement that benefits society. </p>
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
 

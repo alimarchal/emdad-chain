@@ -341,7 +341,7 @@
                     </div>
                 </div>
                 <div class="col-lg-5"></div>
-                <div class="col-lg-2"><a href="{{route('ourTeamAr')}}" class="btn btn-outline-danger mx-auto d-block">فريق العمل</a></div>
+                <div class="col-lg-2"><a href="{{route('ourTeamAr')}}" id="ourTeam" class="text-center mx-auto d-block mx-auto d-block">فريق العمل</a></div>
                 <div class="col-lg-5"></div>
             </div>
 

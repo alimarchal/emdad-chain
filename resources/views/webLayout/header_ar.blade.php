@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 
 <head>
     <meta charset="utf-8">
@@ -71,7 +71,7 @@
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
         <h1 class="logo me-auto"><a href="{{ url('/') }}">
-                <img src="logo-full.png"></a>
+                <img src="../logo-full.png"></a>
         </h1>
 
         <nav class="nav-menu d-none d-lg-block">
@@ -81,10 +81,10 @@
                 <li class="{{(request()->routeIs('servicesAr')?'active':'')}}"><a href="{{route('servicesAr')}}">خدماتنا</a></li>
                 <li class="{{(request()->routeIs('ourTeamAr')?'active':'')}}"><a href="{{route('ourTeamAr')}}">فريق العمل</a></li>
                 <li class="{{(request()->routeIs('supportAr')?'active':'')}}"><a href="{{route('supportAr')}}">الدعم</a></li>
-                <li class="drop-down"><a href="{{url('survey')}}">الاستبيان</a>
+                <li class="drop-down"><a href="{{url('survey/ar')}}">الاستبيان</a>
                     <ul>
-                        <li><a href="{{url('e-buyer/ar')}}">للمشترين</a></li>
-                        <li><a href="{{url('e-supplier/en')}}">للموردين</a></li>
+                        <li><a href="{{url('survey/ar')}}">للمشتري</a></li>
+                        <li><a href="{{url('e-supplier/en')}}">للمورد</a></li>
                     </ul>
                 </li>
                 <li><a href="{{route('login')}}">دخول</a></li>

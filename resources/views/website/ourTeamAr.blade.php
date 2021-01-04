@@ -25,7 +25,7 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>فريق العمل</h2>
+                <h2 class="mainColor">فريق العمل</h2>
             </div>
 
             <div class="row">
@@ -153,6 +153,43 @@
                             <h4>روان الشهراني</h4>
                             <span>أخصائية تسويق رقمي</span>
                             <p>23 سنة، تعمقت في مجال التسويق بعد افتتاح موقعي الالكتروني المتخصص بصناعة الإكسسوارت اليدوية المحلية في سنة 2014 ومن أهدافي افتتاح اكبر موقع الكتروني للإكسسوارات اليدوية. اطمح دائماً للأفضل، متفائلة وأحب التخطيط والإنجاز.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="member" data-aos="fade-up" data-aos-delay="200">
+                        <div class="member-img">
+                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="icofont-twitter"></i></a>
+                                <a href=""><i class="icofont-facebook"></i></a>
+                                <a href=""><i class="icofont-instagram"></i></a>
+                                <a href=""><i class="icofont-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>مستحسن رضوي</h4>
+                            <span>المسؤول عن مكتب باكستان</span>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="member" data-aos="fade-up" data-aos-delay="200">
+                        <div class="member-img">
+                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="">
+                            <div class="social">
+                                <a href=""><i class="icofont-twitter"></i></a>
+                                <a href=""><i class="icofont-facebook"></i></a>
+                                <a href=""><i class="icofont-instagram"></i></a>
+                                <a href=""><i class="icofont-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>علی رضا مرچال</h4>
+                            <span>مطور ويب</span>
+                            <p>
                             </p>
                         </div>
                     </div>

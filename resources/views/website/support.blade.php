@@ -77,7 +77,7 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Contact</h2>
+                <h2 class="mainColor">Contact</h2>
             </div>
 
             <div class="row" data-aos="fade-up" data-aos-delay="100">
