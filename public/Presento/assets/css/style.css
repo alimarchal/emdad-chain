@@ -13,6 +13,11 @@ body {
     color: #444444;
 }
 
+@font-face {
+    font-family: arabicFont;
+    src: url('http://127.0.0.1:8000/Presento/assets/arabicfont/arabic_regular.ttf');
+}
+
 .mainColor {
     color: #ed8f08;
 }
@@ -2097,7 +2102,7 @@ section {
     display: block;
     width: 20px;
     height: 2px;
-    background: #ed8f08;
+    background: #404045;
     bottom: 0;
     left: 0;
 }
