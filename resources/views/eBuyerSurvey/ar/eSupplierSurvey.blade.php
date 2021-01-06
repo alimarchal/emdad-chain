@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 
 <head>
     <meta charset="utf-8">
@@ -46,6 +46,20 @@
     <link href="../Presento/assets/css/style.css" rel="stylesheet">
 
     <style>
+        .form-check-input[type=radio] {
+            border-radius: 50%;
+            float: right;
+            margin-left: 10px;
+        }
+
+        input[type=text], [type=email] {
+            direction: rtl;
+        }
+
+        .inner-page {
+            direction: rtl;
+        }
+
         .goog-logo-link {
             display: none !important;
         }
@@ -63,6 +77,13 @@
             color: transparent !important;
         }
 
+        nav, #main, .inner-page {
+            direction: rtl;
+        }
+
+        body, #main, div, header, nav, footer, .inner-page, .nav-menu a, h1, h2, h3, h4, h5, h6, p, button {
+            font-family: arabicFont;
+        }
     </style>
 </head>
 
@@ -70,32 +91,33 @@
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto"><a href="{{ url('/en') }}"><img src="../../logo-full.png"></a></h1>
+        <h1 class="logo me-auto"><a href="{{ url('/') }}">
+                <img src="../logo-full.png"></a>
+        </h1>
 
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li class=""><a href="{{url('/en')}}">Home</a></li>
-                <li class="{{(request()->routeIs('aboutUs')?'active':'')}}"><a href="{{route('aboutUs')}}">About Us</a></li>
-                <li class="{{(request()->routeIs('services')?'active':'')}}"><a href="{{route('services')}}">Services</a></li>
-                <li class="{{(request()->routeIs('ourTeam')?'active':'')}}"><a href="{{route('ourTeam')}}">Our Team</a></li>
-                <li class="{{(request()->routeIs('support')?'active':'')}}"><a href="{{route('support')}}">Support</a></li>
-                <li class="drop-down"><a href="{{url('survey')}}">Survey</a>
+                <li class=""><a href="{{url('/')}}">الرئيسية</a></li>
+                <li class="{{(request()->routeIs('aboutUsAr')?'active':'')}}"><a href="{{route('aboutUsAr')}}">من نحن</a></li>
+                <li class="{{(request()->routeIs('servicesAr')?'active':'')}}"><a href="{{route('servicesAr')}}">خدماتنا</a></li>
+                <li class="{{(request()->routeIs('ourTeamAr')?'active':'')}}"><a href="{{route('ourTeamAr')}}">فريق العمل</a></li>
+                <li class="{{(request()->routeIs('supportAr')?'active':'')}}"><a href="{{route('supportAr')}}">الدعم</a></li>
+                <li class="drop-down"><a href="{{url('survey')}}">الاستبيان</a>
                     <ul>
-                        <li><a href="{{url('survey')}}">Buyer</a></li>
-                        <li><a href="{{url('e-supplier/en')}}">Supplier</a></li>
+                        <li><a href="{{url('survey/ar')}}">للمشترين</a></li>
+                        <li><a href="{{url('e-supplier/ar')}}">للمورد</a></li>
                     </ul>
                 </li>
-                <li><a href="{{route('login')}}">Login</a></li>
-                <li><a href="{{route('register')}}">Register</a></li>
+                <li><a href="{{route('login')}}">دخول</a></li>
+                <li><a href="{{route('register')}}">دخول</a></li>
+
 
             </ul>
         </nav><!-- .nav-menu -->
-        <a href="{{url('/')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
+        <a href="{{url('/en')}}" class="get-started-btn scrollto"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top:-4px;">English</a>
     </div>
 </header>
-
 <!-- End Header -->
-
 <!-- ======= Hero Section ======= -->
 
 <main id="main" style="background-color: lightgray;">
@@ -123,12 +145,12 @@
             </div>
             <div class="container bg-white rounded p-4 mb-4">
                 <h3 class="text-center">About your company</h3>
-                <label for="question1212" class="form-label">Email address *</label>
+                <label for="question1212" class="form-label">عنوان البريد الالكترونى *</label>
                 <input type="email" class="form-control" id="question1212" name="question45" required>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration <= 5)
                         <div class="mb-3">
-                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_en}}</label>
+                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_ar}}</label>
                             @foreach($q->answers as $key => $value)
                                 @if($value->type == "text")
                                     <input type="text" class="form-control" id="question{{$value->id}}" name="question{{$q->id}}" required>
@@ -151,7 +173,7 @@
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 6 && $loop->iteration <= 17)
                         <div class="mb-3">
-                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_en}}</label>
+                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_ar}}</label>
                             @foreach($q->answers as $key => $value)
                                 @if($value->type == "text")
                                     <input type="text" class="form-control" id="question{{$value->id}}" name="question{{$q->id}}" required>
@@ -174,7 +196,7 @@
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 18 && $loop->iteration <= 21)
                         <div class="mb-3">
-                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_en}}</label>
+                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_ar}}</label>
                             @foreach($q->answers as $key => $value)
                                 @if($value->type == "text")
                                     <input type="text" class="form-control" id="question{{$value->id}}" name="question{{$q->id}}" required>
@@ -197,7 +219,7 @@
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 22 && $loop->iteration <= 29)
                         <div class="mb-3">
-                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_en}}</label>
+                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_ar}}</label>
                             @foreach($q->answers as $key => $value)
                                 @if($value->type == "text")
                                     <input type="text" class="form-control" id="question{{$value->id}}" name="question{{$q->id}}" required>
@@ -220,7 +242,7 @@
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 30 && $loop->iteration <= 36)
                         <div class="mb-3">
-                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_en}}</label>
+                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_ar}}</label>
                             @foreach($q->answers as $key => $value)
                                 @if($value->type == "text")
                                     <input type="text" class="form-control" id="question{{$value->id}}" name="question{{$q->id}}" required>
@@ -243,7 +265,7 @@
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 37 && $loop->iteration <= 44)
                         <div class="mb-3">
-                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_en}}</label>
+                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_ar}}</label>
                             @foreach($q->answers as $key => $value)
                                 @if($value->type == "text")
                                     <input type="text" class="form-control" id="question{{$value->id}}" name="question{{$q->id}}" required>
@@ -262,6 +284,7 @@
                 @endforeach
 
                 <input type="hidden" name="language" value="en_supplier">
+                <input type="hidden" name="lang_ar" value="ar">
                 <button type="submit" class="btn btn-primary ml-2">Submit</button>
             </div>
 
@@ -272,14 +295,14 @@
 <!-- End #main -->
 
 <!-- ======= Footer ======= -->
-<footer id="footer">
+<footer id="footer" style="direction: rtl">
 
     <div class="footer-top">
         <div class="container">
             <div class="row">
 
-                <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3 class="mainColor" style="font-family: tahoma">{{config('app.name')}} <img src="../../logo-full.png" style="max-width: 70px;"></h3>
+                <div class="col-lg-4 col-md-6 footer-contact">
+                    <h3 class="mainColor" style="font-family: tahoma">{{url('/')}} <img src="../logo-full.png" style="max-width: 70px;"></h3>
                     <p>
                         120 Aban Center, <br>
                         King Abdul Aziz Road, Exit 5,<br>
@@ -291,25 +314,27 @@
                     </p>
                 </div>
 
-                <div class="col-lg-2 col-md-6 footer-links">
-                    <h4 class="mainColor">Useful Links</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+
+                <div class="col-lg-4 col-md-6 footer-links ">
+                    <h4 class="mainColor">روابط مفيدة</h4>
+                    <ul style="list-style-type: none; padding: 0px;margin:0px;">
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{url('/')}}">الرئيسية</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route('aboutUsAr')}}">من نحن</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route('servicesAr')}}">خدماتنا</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route('ourTeamAr')}}">فريق العمل</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="{{route('supportAr')}}">الدعم</a></li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </div>
 
     <div class="container d-md-flex py-4">
 
-        <div class="me-md-auto text-center text-md-left">
+        <div class="    text-md-right" style="margin-left: auto!important;">
             <div class="copyright">
-                &copy; Copyright {{date('Y')}} - <strong><span>{{config('app.name')}}</span></strong>. All Rights Reserved
+                &copy; حقوق الطبع والنشر {{date('Y')}} - <strong><span>منصة إمداد</span></strong> ۔ جميع الحقوق محفوظة
             </div>
             <div class="credits">
                 {{--                Designed by <a href="#">Ali Raza Marchal</a>--}}
@@ -317,9 +342,9 @@
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">
             <a href="https://twitter.com/emdad_chain?s=21" class="twitter"><i class="bx bxl-twitter"></i></a>
-{{--            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>--}}
+            {{--            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>--}}
             <a href="https://instagram.com/emdad_chain?igshid=ok4zahralc2t" class="instagram"><i class="bx bxl-instagram"></i></a>
-{{--            <a href="#" class="google-plus"><i class="bx bxl-pinterest"></i></a>--}}
+            {{--            <a href="#" class="google-plus"><i class="bx bxl-pinterest"></i></a>--}}
             <a href="https://www.linkedin.com/company/emdadchain" class="linkedin"><i class="bx bxl-linkedin"></i></a>
         </div>
     </div>

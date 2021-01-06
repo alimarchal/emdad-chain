@@ -67,7 +67,7 @@
             direction: rtl;
         }
 
-        body, #main, div, header, nav, footer, .inner-page, .nav-menu a {
+        body, #main, div, header, nav, footer, .inner-page, .nav-menu a, h1,h2,h3,h4,h5,h6,p, button {
             font-family: arabicFont;
         }
 
@@ -92,7 +92,7 @@
                 <li class="drop-down"><a href="{{url('survey/ar')}}">الاستبيان</a>
                     <ul>
                         <li><a href="{{url('survey/ar')}}">للمشتري</a></li>
-                        <li><a href="{{url('e-supplier/en')}}">للمورد</a></li>
+                        <li><a href="{{url('e-supplier/ar')}}">للمورد</a></li>
                     </ul>
                 </li>
                 <li><a href="{{route('login')}}">دخول</a></li>
@@ -118,6 +118,6 @@
 
             </ul>
         </nav><!-- .nav-menu -->
-        <a href="{{url('/en')}}" class="get-started-btn scrollto"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top:-4px;">English</a>
+        <a href="{{url('/en')}}" class="get-started-btn scrollto"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top: 4px;">English</a>
     </div>
 </header>

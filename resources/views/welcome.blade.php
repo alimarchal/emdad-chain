@@ -72,10 +72,13 @@
 @include('webLayout.header')
 <!-- End Header -->
 
+
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
 
-
+    @if(Session::has('message'))
+        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+    @endif
     <div class="container" data-aos="zoom-in" data-aos-delay="100">
         <div class="row">
             <div class="col-xl-12">
@@ -159,7 +162,7 @@
         <div class="container" data-aos="fade-up">
 
             <div class="section-title">
-                <h2>Services</h2>
+                <h2>Our Features</h2>
             </div>
 
             <div class="row">

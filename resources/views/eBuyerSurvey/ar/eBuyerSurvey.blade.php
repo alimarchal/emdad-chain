@@ -105,7 +105,7 @@
                 <li class="drop-down"><a href="{{url('survey')}}">الاستبيان</a>
                     <ul>
                         <li><a href="{{url('survey/ar')}}">للمشترين</a></li>
-                        <li><a href="#">للموردين</a></li>
+                        <li><a href="{{url('e-supplier/ar')}}">للمورد</a></li>
                     </ul>
                 </li>
                 <li><a href="{{route('login')}}">دخول</a></li>
@@ -1103,6 +1103,7 @@
                     @endif
                 @endforeach
                 <input type="hidden" name="language" value="ar">
+                <input type="hidden" name="lang_ar" value="ar">
                 <button type="submit" class="btn btn-primary ml-2">إرسال / Submit</button>
             </div>
 
@@ -1121,7 +1122,7 @@
             <div class="row">
 
                 <div class="col-lg-4 col-md-6 footer-contact">
-                    <h3>{{url('/')}} <img src="../logo-full.png" style="max-width: 70px;"></h3>
+                    <h3 class="mainColor" style="font-family: tahoma">{{url('/')}} <img src="../logo-full.png" style="max-width: 70px;"></h3>
                     <p>
                         120 Aban Center, <br>
                         King Abdul Aziz Road, Exit 5,<br>
@@ -1135,7 +1136,7 @@
 
 
                 <div class="col-lg-4 col-md-6 footer-links ">
-                    <h4>روابط مفيدة</h4>
+                    <h4 class="mainColor">روابط مفيدة</h4>
                     <ul style="list-style-type: none; padding: 0px;margin:0px;">
                         <li><i class="bx bx-chevron-right"></i> <a href="{{url('/')}}">الرئيسية</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="{{route('aboutUsAr')}}">من نحن</a></li>

@@ -18,6 +18,8 @@ body {
     src: url('http://127.0.0.1:8000/Presento/assets/arabicfont/arabic_regular.ttf');
 }
 
+
+
 .mainColor {
     color: #ed8f08;
 }
@@ -510,7 +512,7 @@ section {
 
 .section-bg:before {
     content: "";
-    background: #1b1b1b;
+    background: #69696e;
     position: absolute;
     bottom: 60px;
     top: 60px;

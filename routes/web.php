@@ -54,6 +54,7 @@ Route::get('/aboutUs', function(){return view('website.aboutUs');})->name('about
 Route::get('/services', function(){return view('website.services');})->name('services');
 Route::get('/ourTeam', function(){return view('website.ourTeam');})->name('ourTeam');
 Route::get('/support', function(){return view('website.support');})->name('support');
+Route::resource('contact', \App\Http\Controllers\ContactController::class);
 #################### End Website ###################
 
 ####################  Website AR    ###################
@@ -67,6 +68,7 @@ Route::get('/supportAr', function(){return view('website.supportAr');})->name('s
 
 ####################Survey Supplier###################
 Route::get('/e-supplier/en', function(){return view('eBuyerSurvey.en.eSupplierSurvey');});
+Route::get('/e-supplier/ar', function(){return view('eBuyerSurvey.ar.eSupplierSurvey');});
 ####################END###############################
 
 
@@ -74,7 +76,7 @@ Route::get('/e-supplier/en', function(){return view('eBuyerSurvey.en.eSupplierSu
 Route::get('/download/answers',[\App\Http\Controllers\EBuyerSurveyAnswerController::class,'export'])->name('downloadAnswersExcel');
 Route::get('/download/supplier',[\App\Http\Controllers\EBuyerSurveyAnswerController::class,'supplier'])->name('downloadSupplierExcel');
 Route::get('/download/buyer',[\App\Http\Controllers\EBuyerSurveyAnswerController::class,'buyer'])->name('downloadBuyerExcel');
-
-
 Route::get('/downloads', function(){return view('website.downloads');})->name('downloads');
 ####################END###############################
+
+

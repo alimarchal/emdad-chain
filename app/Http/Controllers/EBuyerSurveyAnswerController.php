@@ -34,21 +34,27 @@ class EBuyerSurveyAnswerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-//        dd($request->all());
-        session()->flash('message', 'Survey information successfully submitted. Thank You!');
+
+
         EBuyerSurveyAnswer::create($request->all());
-        return redirect()->back();
+        if ($request->has('lang_ar')) {
+            session()->flash('message', 'Survey information successfully submitted. Thank You!');
+            return redirect('/');
+        } else {
+            session()->flash('message', 'Survey information successfully submitted. Thank You!');
+            return redirect('/en');
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\EBuyerSurveyAnswer  $eBuyerSurveyAnswer
+     * @param \App\Models\EBuyerSurveyAnswer $eBuyerSurveyAnswer
      * @return \Illuminate\Http\Response
      */
     public function show(EBuyerSurveyAnswer $eBuyerSurveyAnswer)
@@ -59,7 +65,7 @@ class EBuyerSurveyAnswerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\EBuyerSurveyAnswer  $eBuyerSurveyAnswer
+     * @param \App\Models\EBuyerSurveyAnswer $eBuyerSurveyAnswer
      * @return \Illuminate\Http\Response
      */
     public function edit(EBuyerSurveyAnswer $eBuyerSurveyAnswer)
@@ -70,8 +76,8 @@ class EBuyerSurveyAnswerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\EBuyerSurveyAnswer  $eBuyerSurveyAnswer
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\EBuyerSurveyAnswer $eBuyerSurveyAnswer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, EBuyerSurveyAnswer $eBuyerSurveyAnswer)
@@ -82,7 +88,7 @@ class EBuyerSurveyAnswerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\EBuyerSurveyAnswer  $eBuyerSurveyAnswer
+     * @param \App\Models\EBuyerSurveyAnswer $eBuyerSurveyAnswer
      * @return \Illuminate\Http\Response
      */
     public function destroy(EBuyerSurveyAnswer $eBuyerSurveyAnswer)

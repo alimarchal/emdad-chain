@@ -159,7 +159,7 @@
                 <li class="drop-down"><a href="{{url('survey/ar')}}">الاستبيان</a>
                     <ul>
                         <li><a href="{{url('survey/ar')}}">للمشتري</a></li>
-                        <li><a href="{{url('e-supplier/en')}}">للمورد</a></li>
+                        <li><a href="{{url('e-supplier/ar')}}">للمورد</a></li>
                     </ul>
                 </li>
                 <li><a href="{{route('login')}}">دخول</a></li>
@@ -184,7 +184,7 @@
                 <a href="{{url('e-buyer/ar')}}" class="get-started-btn" style="margin-left: 0px;">
                     الاستبيان المشتري
                 </a>
-                <a href="{{url('#')}}" class="get-started-btn" style="margin-left: 0px;">
+                <a href="{{url('e-supplier/ar')}}" class="get-started-btn" style="margin-left: 0px;">
                     الاستبيان المورد
                 </a>
             </div>
@@ -226,7 +226,7 @@
             <div class="row">
 
                 <div class="col-lg-4 col-md-6 footer-contact">
-                    <h3>{{config('app.name')}} <img src="../logo-full.png" style="max-width: 70px;"></h3>
+                    <h3 class="mainColor" style="font-family: tahoma">{{config('app.name')}} <img src="../logo-full.png" style="max-width: 70px;"></h3>
                     <p>
                         120 Aban Center, <br>
                         King Abdul Aziz Road, Exit 5,<br>
@@ -240,7 +240,7 @@
 
 
                 <div class="col-lg-4 col-md-6 footer-links ">
-                    <h4>روابط مفيدة</h4>
+                    <h4 class="mainColor">روابط مفيدة</h4>
                     <ul style="list-style-type: none; padding: 0px;margin:0px;">
                         <li><i class="bx bx-chevron-right"></i> <a href="{{url('/')}}">الرئيسية</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="{{route('aboutUsAr')}}">من نحن</a></li>

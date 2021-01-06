@@ -64,14 +64,14 @@
                 <li><a href="{{config('app.url')}}">Home</a></li>
                 <li>Services</li>
             </ol>
-            <h2 class="mainColor">Our Features</h2>
+            <h2 class="mainColor">Services</h2>
         </div>
     </section>
     <!-- End Breadcrumbs -->
 
     <section class="inner-page" style="font-family: tahoma;">
 
-        <h1 class="text-center mainColor" style="font-weight: bold">Our Features</h1>
+        <h1 class="text-center mainColor" style="font-weight: bold">Services</h1>
         <div class="container mt-4" data-aos="zoom-in">
             <div class="row">
                 <div class="col-sm">

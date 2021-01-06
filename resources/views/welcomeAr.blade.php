@@ -7,17 +7,19 @@
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
 
-
+    @if(Session::has('message'))
+        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+    @endif
     <div class="container" data-aos="zoom-in" data-aos-delay="100" style="direction: rtl">
         <div class="row">
             <div class="col-xl-12">
-                <h5 class="text-warning">تعمل منصة إمداد على تسهيل عمليات سلاسل الإمداد المحلية في المملكة العربية السعودية إلى عمليات أكثر ذكاءً واستدامة وفقًا لرؤية  2030.
+                <h5 class="text-warning mainColor">تعمل منصة إمداد على تسهيل عمليات سلاسل الإمداد المحلية في المملكة العربية السعودية إلى عمليات أكثر ذكاءً واستدامة وفقًا لرؤية  2030.
                 </h5>
-                <h5 class="text-warning">فريق إمداد يشكركم لزيارتكم للمنصة, يمكنك اختيارنا لنشاركك قوة منصتنا وخبرتنا في إدارة سلاسل الإمداد
+                <h5 class="text-warning mainColor">فريق إمداد يشكركم لزيارتكم للمنصة, يمكنك اختيارنا لنشاركك قوة منصتنا وخبرتنا في إدارة سلاسل الإمداد
                 </h5>
             </div>
             <div class="col-xl-6 d-none d-lg-block">
-                <p class="text-white font-bold">بصفتك المشتري، نمكنك من تحقيق إستراتيجية عمل المشتريات بطريقة أكثر كفاءة و إحترافية ، ومن الأمثلة على ذلك:
+                <p class="text-white font-bold">بصفتك المشتري، نمكنك من تحقيق إستراتيجية عمل المشتريات بطريقة أكثر كفاءة و إحترافيةومن الأمثلة على ذلك:
                     <br>
                 </p>
                 <ol class="text-white">
@@ -78,7 +80,7 @@
             <div class="row no-gutters">
                 <div class="content col-xl-5 d-flex align-items-stretch">
                     <div class="content">
-                        <h3>ماهي منصة إمداد</h3>
+                        <h3 class="mainColor">ماهي منصة إمداد</h3>
                         <p>
                             هي أضخم منصة الكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.
                         </p>
@@ -124,7 +126,7 @@
                         <h4><a href="#">الخارطة الذكية
                             </a></h4>
                         <p>من أعظم انجازات المنصة هو عمل الخريطة الذكية وتعتبر الأولى في مجالها والرائدة لتمكن المستخدم من الموصول للمورد الصحيح خلال دقيقة واحدة في أكثر من ٥٠٠ فئه متاحة.
-                        </p><br><br>
+                        </p><br>
                     </div>
                 </div>
 
@@ -162,7 +164,9 @@
                         <h4><a href="#">الجودة
                             </a></h4>
                         <p>من أساسيات عملنا في المنصة هي ضمانة جودة عمليات المستخدمين.
-                        </p><br><br>
+                        </p>
+                        <br>
+                        <br>
                     </div>
                 </div>
             </div>
@@ -336,7 +340,7 @@
                 </div>
                 <div class="col-lg-5"></div>
                 <div class="col-lg-2">
-                    <a href="{{route('ourTeamAr')}}"  class="get-started-btn">مزید</a>
+                    <div align="center"><a href="{{route('ourTeamAr')}}"  class="get-started-btn" style="font-family: arabicFont;">مزید</a></div>
                 </div>
                 <div class="col-lg-5"></div>
             </div>

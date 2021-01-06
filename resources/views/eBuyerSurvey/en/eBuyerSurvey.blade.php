@@ -1129,7 +1129,7 @@
             <div class="row">
 
                 <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>{{config('app.name')}} <img src="../../logo-full.png" style="max-width: 70px;"></h3>
+                    <h3 class="mainColor" style="font-family: tahoma">{{config('app.name')}} <img src="../../logo-full.png" style="max-width: 70px;"></h3>
                     <p>
                         120 Aban Center, <br>
                         King Abdul Aziz Road, Exit 5,<br>
@@ -1142,7 +1142,7 @@
                 </div>
 
                 <div class="col-lg-2 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
+                    <h4 class="mainColor">Useful Links</h4>
                     <ul>
                         <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>

@@ -159,6 +159,27 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+                    <div class="member" data-aos="fade-up" data-aos-delay="200">
+                        <div class="member-img">
+                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt="" width="224" height="224">
+                            <div class="social">
+                                <a href=""><i class="icofont-twitter"></i></a>
+                                <a href=""><i class="icofont-facebook"></i></a>
+                                <a href=""><i class="icofont-instagram"></i></a>
+                                <a href=""><i class="icofont-linkedin"></i></a>
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h4>ساره الوعلان</h4>
+                            <span>أخصائية تسويق وعلاقات عامة</span>
+                            <p>28 سنة. حاصلة على بكالوريوس إدارة الأعمال، عملت في مجال الموارد البشرية و كمساعدة تنفيذية لرئيس مجلس الإدارة. شاركت في الكثير من المجالات التطوعية. من خططي المستقبلية أن
+                                أكون ناجحة ولي تأثير وتحقيق انجاز يفيد المجتمع.
+                            </p>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="member-img">
@@ -180,7 +201,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="" width="224" height="224">
+                            <img src="{{Storage::url('profile-photos/M1RziNRNCWPdaqv1KkShIJPvHEz1jioaLgYr1tT7.jpg')}}" class="img-fluid" alt="" width="224" height="224">
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -192,26 +213,6 @@
                             <h4>علی رضا مرچال</h4>
                             <span>مطور ويب</span>
                             <p>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
-                    <div class="member" data-aos="fade-up" data-aos-delay="200">
-                        <div class="member-img">
-                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt="" width="224" height="224">
-                            <div class="social">
-                                <a href=""><i class="icofont-twitter"></i></a>
-                                <a href=""><i class="icofont-facebook"></i></a>
-                                <a href=""><i class="icofont-instagram"></i></a>
-                                <a href=""><i class="icofont-linkedin"></i></a>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h4>ساره الوعلان</h4>
-                            <span>أخصائية تسويق وعلاقات عامة</span>
-                            <p>28 سنة. حاصلة على بكالوريوس إدارة الأعمال، عملت في مجال الموارد البشرية و كمساعدة تنفيذية لرئيس مجلس الإدارة. شاركت في الكثير من المجالات التطوعية. من خططي المستقبلية أن
-                                أكون ناجحة ولي تأثير وتحقيق انجاز يفيد المجتمع.
                             </p>
                         </div>
                     </div>

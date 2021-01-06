@@ -256,7 +256,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="" width="224" height="224">
+                            <img src="{{Storage::url('profile-photos/M1RziNRNCWPdaqv1KkShIJPvHEz1jioaLgYr1tT7.jpg')}}" class="img-fluid" alt="" width="224" height="224">
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
