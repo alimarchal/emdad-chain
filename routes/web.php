@@ -80,3 +80,4 @@ Route::get('/downloads', function(){return view('website.downloads');})->name('d
 ####################END###############################
 
 
+Route::get('/tailwind', function(){return view('index');});

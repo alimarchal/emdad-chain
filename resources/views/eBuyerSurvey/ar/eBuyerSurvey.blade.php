@@ -1122,7 +1122,7 @@
             <div class="row">
 
                 <div class="col-lg-4 col-md-6 footer-contact">
-                    <h3 class="mainColor" style="font-family: tahoma">{{url('/')}} <img src="../logo-full.png" style="max-width: 70px;"></h3>
+                    <h3 class="mainColor" style="font-family: tahoma">{{config('app.name')}}  <img src="../logo-full.png" style="max-width: 70px;"></h3>
                     <p>
                         120 Aban Center, <br>
                         King Abdul Aziz Road, Exit 5,<br>
@@ -1154,7 +1154,7 @@
 
         <div class="    text-md-right" style="margin-left: auto!important;">
             <div class="copyright">
-                &copy; حقوق الطبع والنشر {{date('Y')}} - <strong><span>منصة إمداد</span></strong> ۔ جميع الحقوق محفوظة
+                &copy; حقوق الطبع والنشر {{date('Y')}} - <strong><span>شركة إمداد</span></strong> ۔ جميع الحقوق محفوظة
             </div>
             <div class="credits">
                 {{--                Designed by <a href="#">Ali Raza Marchal</a>--}}

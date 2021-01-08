@@ -83,7 +83,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="100">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
+                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt=""    >
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -105,7 +105,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="400">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
+                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt=""    >
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -130,7 +130,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
+                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt=""    >
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -141,8 +141,8 @@
                         <div class="member-info">
                             <h4>Rayan Al Sinany </h4>
                             <span>Juniour Accountant</span>
-                            <p>25 years. I study accounting and I love math operations. Innovative person and I love organizing and making plans for every business to start with. I like fishing and
-                                swimming. I hope to make the company very organized and professional.</p>
+                            <p>Specialized in financial accounting, my goal is to develop the company and develop it with innovative ideas to facilitate financial transactions and make Emdad confident in the focus of attention of companies who want to deal with us. I joined Emdad because its idea is distinctive, its field of work is wide and can be fully developed.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="300">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
+                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt=""    >
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -161,8 +161,8 @@
                         <div class="member-info">
                             <h4>Muteb Al Buraikan</h4>
                             <span>Human Resources Specialist</span>
-                            <p>Human resources specialist, lover of reading and art. Lover of horses, where the origin of pleasure and the basis of beauty. One of my most important achievements is
-                                obtaining the Order of the Custodian of the Two Holy Mosques for contributing to the success of 8 consecutive seasons of Hajj.</p>
+                            <p>I am seeking an opportunity to lead the business with innovative ideas and being capable of developing the path of Emdad to reach great achievements and to recruit my capabilities to develop human resource strategies in entrepreneurship to keep pace with the speed of development of the modern world. Emdad is a mighty idea that can develop every company’s ambitions to the highest possible limits, Also Emdad is the magic gateway capable of transforming a company from any stage into a great success.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="100">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
+                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt=""    >
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -186,9 +186,9 @@
                         <div class="member-info">
                             <h4>Ala'a Al Hamzy</h4>
                             <span>Administrative Assistant </span>
-                            <p>29 years. I'm specialized in educational curriculum methods, but I discovered that my tendencies are administrative, so I developed myself in this field for more than 5
-                                years, I always make every effort to reach the best positions and the highest levels by operating my skills and energy in my work and to reach my goal and the position
-                                that I aspire to reach. </p>
+                            <p>
+                                I aspire to make the utmost effort to reach the best positions and the highest levels by operating my skills and energy in my work and to reach my goal and the position that I aspire to reach. A new supply direction for me, and also in line with Vision 2030. The platform is based on high technology and I want to develop myself and be part of this development.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -196,7 +196,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
+                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt=""    >
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -207,15 +207,15 @@
                         <div class="member-info">
                             <h4>Rawan Al Shahrani</h4>
                             <span>Digital Marketing Specialist</span>
-                            <p>23 years ago, I got interested in the field of marketing after opening my own website specializing in the manufacture of local handmade accessories in 2014, and one of
-                                my goals is to open the largest website for handmade accessories. I always aspire for the best, be optimistic, and love to plan and accomplish. </p>
+                            <p>One of my biggest ambitions is to gain professional experiences from various fields, especially in the field of technology and development, because this field is the future. I chose Emdad because the vision and goals of the platform are very clear and challenging! Also, the platform uses the highest technologies in its system, I am proud of this Saudi work and I see that it has a very big future.
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt="" height="224" width="224">
+                            <img src="{{url('webmainimages/female.jpeg')}}" class="img-fluid" alt=""    >
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -236,7 +236,7 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="member-img">
-                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt="" width="224" height="224">
+                            <img src="{{url('webmainimages/male.jpeg')}}" class="img-fluid" alt=""    >
                             <div class="social">
                                 <a href=""><i class="icofont-twitter"></i></a>
                                 <a href=""><i class="icofont-facebook"></i></a>
@@ -247,8 +247,7 @@
                         <div class="member-info">
                             <h4>Mustahsan Rizvi</h4>
                             <span>Admin InCharge Pakistan Office</span>
-                            <p>28 years. I'm specialized in Business Administration, I worked in the field of Human Resources and as an Executive Assistant to the Chairman of the Board of Directors.
-                                I participated in a lot of volunteer fields. One of my future plans is to be successful, have an impact, and achieve achievement that benefits society. </p>
+                            <p></p>
                         </div>
                     </div>
                 </div>
@@ -256,19 +255,19 @@
                 <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="member-img">
-                            <img src="{{Storage::url('profile-photos/M1RziNRNCWPdaqv1KkShIJPvHEz1jioaLgYr1tT7.jpg')}}" class="img-fluid" alt="" width="224" height="224">
+                            <img src="{{url('webmainimages/alirazamarchal.jpg')}}" class="img-fluid" alt=""    >
                             <div class="social">
-                                <a href=""><i class="icofont-twitter"></i></a>
-                                <a href=""><i class="icofont-facebook"></i></a>
-                                <a href=""><i class="icofont-instagram"></i></a>
-                                <a href=""><i class="icofont-linkedin"></i></a>
+                                <a href="https://www.twitter.com/alirazamarchal"><i class="icofont-twitter"></i></a>
+                                <a href="https://www.facebook.com/razamarchal"><i class="icofont-facebook"></i></a>
+                                <a href="https://www.instagram.com/alirazamarchal/"><i class="icofont-instagram"></i></a>
+                                <a href="https://www.linkedin.com/in/alirazamarchal"><i class="icofont-linkedin"></i></a>
                             </div>
                         </div>
                         <div class="member-info">
                             <h4>Ali Raza Marchal</h4>
-                            <span>Web Developer</span>
-                            <p>28 years. I'm specialized in Business Administration, I worked in the field of Human Resources and as an Executive Assistant to the Chairman of the Board of Directors.
-                                I participated in a lot of volunteer fields. One of my future plans is to be successful, have an impact, and achieve achievement that benefits society. </p>
+                            <span>Software Developer</span>
+                            <p>Software Developer with over 6 years of experience. I have expertise in web based software, databases driven applications. I have work with different industries Schools, Tourism, Health, Government, and Bank.
+                                Strong experience in developing web-based applications using the Full Stack.</p>
                         </div>
                     </div>
                 </div>
