@@ -16,7 +16,7 @@
                     @endif
                     <form action="{{route('purchaseOrderInfo.store')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         @csrf
-                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 5: Purchase Orders Infomation</h3>
+                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 4: Purchase Orders Information</h3>
                         <div class="flex space-x-5 mt-3">
                             <label class="block font-medium text-sm text-gray-700 w-1/3" for="no_of_drivers">
                                 No of Monthly Orders

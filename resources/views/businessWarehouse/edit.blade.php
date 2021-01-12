@@ -18,7 +18,7 @@
                     <form action="{{route('businessWarehouse.update',$businessWarehouse->id)}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 4: Business Warehouse</h3>
+                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 3: Business Warehouse</h3>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-label class="w-1/2" for="designation">Designation</x-jet-label>
                             <x-jet-label class="w-1/2" for="name">Name</x-jet-label>

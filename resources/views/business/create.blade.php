@@ -12,13 +12,16 @@
             @include('users.sessionMessage')
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
+
                     <form action="{{url('business')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         @csrf
                         <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 2: Business Information</h3>
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-label class="w-1/2" for="business_name">Business Name</x-jet-label>
-                            <x-jet-label class="w-1/2" for="num_of_warehouse">Number of Warehouse</x-jet-label>
-                            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_name">Business Name</label>
+                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="num_of_warehouse">Number of Warehouse</label>
+                            <input type="hidden" name="business_type" value="{{auth()->user()->registration_type}}">
+                            <input type="hidden" name="supplier_client" value="{{auth()->user()->supplier_client}}">
+                            <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2" required></x-jet-input>
@@ -28,23 +31,23 @@
                                     <option value="{{$count}}">{{$count}}</option>
                                 @endfor
                             </select>
-                            {{--                            @include('category.index')--}}
                         </div>
 
 
                         <div class="flex space-x-5 mt-3">
                             <x-jet-label class="w-1/2" for="business_type">Category</x-jet-label>
                         </div>
-                        <div class="flex space-x-5 mt-3 mb-4">
-                            @include('category.index')
+                        <div class="flex mt-3 ">
+                            @include('category.category.index')
                         </div>
 
 
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-label class="w-1/2" for="chamber_reg_number">Chamber Registration Number</x-jet-label>
-                            <x-jet-label class="w-1/2" for="chamber_reg_path" title="File type: JPEG|PNG|PDF|DOCX => (Filesize: Max 10MB)">Chamber Certificate/File</x-jet-label>
-                            <x-jet-label class="w-1/2" for="vat_reg_certificate_number">VAT Number</x-jet-label>
-                            <x-jet-label class="w-1/2" for="vat_reg_certificate_path">VAT Certificate (If available)</x-jet-label>
+                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_number">Chamber Registration Number</label>
+                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_path" title="File type: JPEG|PNG|PDF|DOCX => (Filesize: Max 10MB)">Chamber Certificate/File</label>
+                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="vat_reg_certificate_number">VAT Number</label>
+                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="vat_reg_certificate_path">VAT Certificate (If available)</label>
+
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-input id="chamber_reg_number" type="text" name="chamber_reg_number" class="border p-2 w-1/2"></x-jet-input>
@@ -79,19 +82,27 @@
                             </select>
                             <x-jet-input id="city" type="text" name="city" class="border p-2 w-1/2" required></x-jet-input>
                         </div>
-
+                        <div class="flex space-x-5 mt-3">
+                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="bank_name">Bank Name</label>
+                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="iban">IBAN</label>
+                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="longitude">Longitude</label>
+                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="latitude">Latitude</label>
+                        </div>
 
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-label class="w-1/2" for="address">Address</x-jet-label>
-                            <x-jet-label class="w-1/2" for="longitude">Longitude</x-jet-label>
-                            <x-jet-label class="w-1/2" for="latitude">Latitude</x-jet-label>
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="bank_name" type="text" name="bank_name" required="required">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="iban" type="text" name="iban" required="required">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="longitude" type="text" name="longitude">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="latitude" type="text" name="latitude">
+                        </div>
+
+                        <div class="flex space-x-5 mt-3">
+                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="address">
+                                Address
+                            </label>
                         </div>
                         <div class="flex space-x-5 mt-3">
-
-                            <textarea id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required></textarea>
-                            <x-jet-input id="longitude" type="text" name="longitude" class="border p-2 w-1/2"></x-jet-input>
-                            <x-jet-input id="latitude" type="text" name="latitude" class="border p-2 w-1/2"></x-jet-input>
-
+                            <textarea id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required=""></textarea>
                         </div>
 
 

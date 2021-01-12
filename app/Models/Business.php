@@ -9,13 +9,18 @@ class Business extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'business_name', 'num_of_warehouse', 'category_number', 'business_type', 'chamber_reg_number', 'chamber_reg_path', 'vat_reg_certificate_number', 'vat_reg_certificate_path', 'country', 'city', 'address', 'website', 'business_email', 'phone', 'mobile', 'longitude', 'latitude', 'supplier_client', 'status'];
+    protected $fillable = ['user_id', 'business_name', 'num_of_warehouse', 'category_number', 'business_type', 'chamber_reg_number', 'chamber_reg_path', 'vat_reg_certificate_number', 'vat_reg_certificate_path', 'country', 'city', 'address', 'website', 'business_email', 'phone', 'mobile', 'longitude', 'latitude', 'supplier_client', 'status','iban','bank_name'];
 
     public function users()
     {
         return $this->hasMany(User::class);
     }
 
+
+    public function categories(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(BusinessCategory::class);
+    }
 
     public function departments()
     {

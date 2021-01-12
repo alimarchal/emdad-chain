@@ -31,6 +31,8 @@ class CreateBusinessesTable extends Migration
             $table->string('business_email')->nullable();
             $table->string('phone')->nullable();
             $table->string('mobile')->nullable();
+            $table->string('bank_name')->nullable();
+            $table->string('iban')->nullable();
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
             # supplier or client category of client

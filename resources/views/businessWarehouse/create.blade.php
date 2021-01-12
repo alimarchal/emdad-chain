@@ -13,20 +13,34 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
 
-
-
                     <form action="{{route('businessWarehouse.store')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         @csrf
-                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 4: Business Warehouse</h3>
+                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 3: Business Warehouse </h3>
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-label class="w-1/2" for="designation">Designation</x-jet-label>
                             <x-jet-label class="w-1/2" for="name">Name</x-jet-label>
+                            <x-jet-label class="w-1/2" for="designation">Designation</x-jet-label>
                             <x-jet-label class="w-1/2" for="warehouse_email">Warehouse Email</x-jet-label>
                             <input type="hidden" name="user_id[]" value="{{Auth::user()->id}}">
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="designation" type="text" name="designation[]" class="border p-2 w-1/2"></x-jet-input>
-                            <x-jet-input id="name" name="name[]" class="border p-2 w-1/2"></x-jet-input>
+
+                            <select id="name" name="name[]" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
+                                <option value="">None</option>
+                                @foreach(\App\Models\User::where('business_id',auth()->user()->business_id)->get() as $user)
+                                    @if($user->id != auth()->user()->id)
+                                    <option value="1">{{$user->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+
+                            <select id="designation" name="designation[]" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
+                                <option value="">None</option>
+                                @foreach(\App\Models\User::where('business_id',auth()->user()->business_id)->get() as $user)
+                                    @if($user->id != auth()->user()->id)
+                                        <option value="1">{{$user->designation}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                             <x-jet-input id="warehouse_email" type="email" name="warehouse_email[]" class="border p-2 w-1/2"></x-jet-input>
                         </div>
                         <div class="flex space-x-5 mt-3">

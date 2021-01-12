@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +26,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('users', \App\Http\Controllers\UserController::class);
+
 Route::post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class,'createUserForCompany'])->name('createUserForCompany');
+
 Route::post('/registrationType', [\App\Http\Controllers\UserController::class, 'registrationType']);
 //Route::post('/business',[\App\Http\Controllers\BusinessController::class, 'store']);
 Route::resource('/business', \App\Http\Controllers\BusinessController::class);
@@ -34,10 +39,6 @@ Route::resource('/purchaseOrderInfo', \App\Http\Controllers\POInfoController::cl
 //Route::resource('/logisticDetail', \App\Http\Controllers\LogisticDetailController::class);
 //Route::resource('/category', \App\Http\Controllers\CategoryController::class);
 Route::get('/category', [\App\Http\Controllers\CategoryController::class, 'index']);
-
-Route::get('/test', function(\Illuminate\Http\Request $request){
-    return dd($request->all());
-});
 
 ####################Survey###################
 Route::get('/survey', function(){return view('website.survey');});
@@ -80,4 +81,42 @@ Route::get('/downloads', function(){return view('website.downloads');})->name('d
 ####################END###############################
 
 
-Route::get('/tailwind', function(){return view('index');});
+Route::get('/role', function(){
+
+//    $role = Role::create(['name' => 'CEO']);
+//    $role = Role::create(['name' => 'User']);
+//    $permission = Permission::create(['name' => 'all']);
+//    $permission = Permission::create(['name' => 'delete user']);
+//    $permission = Permission::create(['name' => 'create user']);
+//    $permission = Permission::create(['name' => 'read user']);
+//    $permission = Permission::create(['name' => 'PoBuyer']);
+//    $permission = Permission::create(['name' => 'QoSupplier']);
+
+//    $role = Role::findByName('User');
+    $user = \App\Models\User::find(5);
+//    $permissions = $user->getDirectPermissions();
+//    $permissions = $user->getPermissionsViaRoles();
+////    $permissions = $user->getRoleNames();
+//    return $permissions;
+
+    $role = Role::findByName('SuperAdmin');
+//    $role1->givePermissionTo('delete user');
+//    $role1->givePermissionTo('create user');
+//    $role = Role::findByName('User');
+//    $role->revokePermissionTo(['PoBuyer','QoSupplier']);
+//      $role->givePermissionTo('PoBuyer');
+//      $role->givePermissionTo('QoSupplier');
+//    $role1->givePermissionTo('read user');
+//    $user = \App\Models\User::findOrFail(5);
+//    $permission = Permission::findByName('delete user');
+//    dd($role1);
+//    $role->givePermissionTo($permission);
+//    $user = \App\Models\User::find(5);
+//    $role = Role::findByName('SuperAdmin');
+//    $user->assignRole($role);
+});
+
+
+Route::post('/test', function(\Illuminate\Http\Request $request){
+    return dd($request->all());
+});

@@ -33,10 +33,16 @@
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-label class="w-1/2" for="business_type">Category (Select If you want to change)</x-jet-label>
-                            <x-jet-label class="w-1/2" for="business_type">Existing Category No: {{$business->category_number}}</x-jet-label>
+                            <x-jet-label class="w-1/2" for="business_type">Existing Category:</x-jet-label>
                         </div>
-                        <div class="flex space-x-5 mt-3 mb-4">
-                            @include('category.index')
+                        <div class="flex mt-3 mb-4">
+                            @include('category.category.index')
+
+                            <ol class="pl-3">
+                            @foreach($business->categories as $key)
+                                <li>{{$loop->iteration}} - {{\App\Models\Category::find($key->category_number)->name}}</li>
+                            @endforeach
+                            </ol>
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-label class="w-1/2" for="chamber_reg_number">Chamber Registration Number</x-jet-label>
@@ -67,8 +73,9 @@
                             <x-jet-label class="w-1/2" for="city">City</x-jet-label>
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="phone" type="tel" name="phone" class="border p-2 w-1/2" value="{{$business->phone}}"></x-jet-input>
-                            <x-jet-input id="mobile" type="number" name="mobile" class="border p-2 w-1/2" value="{{$business->mobile}}"></x-jet-input>
+                            <x-jet-input id="phone" type="text" name="phone" class="border p-2 w-1/2" value="{{$business->phone}}"></x-jet-input>
+                            <x-jet-input id="mobile" type="text" name="mobile" class="border p-2 w-1/2" value="{{$business->mobile}}"></x-jet-input>
+
                             <select name="country" id="country" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
                                 @foreach(\App\Models\User::countries() as $country)
@@ -81,11 +88,16 @@
                             <x-jet-label class="w-1/2" for="address">Address</x-jet-label>
                             <x-jet-label class="w-1/2" for="longitude">Longitude</x-jet-label>
                             <x-jet-label class="w-1/2" for="latitude">Latitude</x-jet-label>
+                            <x-jet-label class="w-1/2" for="iban">IBAN#</x-jet-label>
+                            <x-jet-label class="w-1/2" for="bank_name">Bank Name</x-jet-label>
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <textarea id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2">{{$business->address}}</textarea>
+                            <x-jet-input id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2">{{$business->address}}</x-jet-input>
                             <x-jet-input id="longitude" type="text" name="longitude" class="border p-2 w-1/2" value="{{$business->longitude}}"></x-jet-input>
                             <x-jet-input id="latitude" type="text" name="latitude" class="border p-2 w-1/2" value="{{$business->latitude}}"></x-jet-input>
+
+                            <x-jet-input id="phone" type="tel" name="iban" class="border p-2 w-1/2" value="{{$business->iban}}"></x-jet-input>
+                            <x-jet-input id="mobile" type="number" name="bank_name" class="border p-2 w-1/2" value="{{$business->bank_name}}"></x-jet-input>
 
                         </div>
                         <x-jet-button class="float-right mt-4 mb-4">Update</x-jet-button>

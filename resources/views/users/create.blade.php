@@ -7,24 +7,14 @@
 
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-
-            <div class="md:grid md:grid-cols-3 md:gap-6">
-                <div class="md:col-span-1">
-                    <div class="px-4 sm:px-0">
-                        <h3 class="text-lg font-medium text-gray-900">Create New User</h3>
-                        <p class="mt-1 text-sm text-gray-600">
-                            Add new account's profile information and email address.
-                        </p>
-                    </div>
-                </div>
-
+            @include('users.sessionMessage')
                 <div class="mt-5 md:mt-0 md:col-span-2">
                     <form method="post" action="{{route('createUserForCompany',auth()->user()->business->id)}}">
                         @csrf
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
-                                <h3 class="text-2xl text-center mb-2">{{\App\Models\Business::find(auth()->user()->id)->first()->business_name}}</h3>
-                                <div class="grid grid-cols-6 gap-6">
+                                <h3 class="text-2xl text-center mb-2">{{\App\Models\Business::find(auth()->user()->business_id)->business_name}}</h3>
+                                <div class="grid grid-cols-8 gap-6">
                                     <!-- Gender -->
                                     <div class="col-span-6 sm:col-span-2">
                                         <label class="block font-medium text-sm text-gray-700" for="gender">
@@ -35,6 +25,8 @@
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </select>
+                                        <input type="hidden" name="business_id" value="{{auth()->user()->business_id}}">
+                                        <input type="hidden" name="usertype" value="company_user_{{auth()->user()->business_id}}">
                                     </div>
                                     <!-- Name -->
                                     <div class="col-span-6 sm:col-span-2">
@@ -59,6 +51,12 @@
                                         <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="password" type="password" name="password" required>
                                     </div>
 
+                                    <div class="col-span-6 sm:col-span-2">
+                                        <label class="block font-medium text-sm text-gray-700" for="Mobile">
+                                            Mobile
+                                        </label>
+                                        <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="Mobile" type="tel" name="mobile" required>
+                                    </div>
                                     <!-- Designation -->
                                     <div class="col-span-6 sm:col-span-2">
                                         <label class="block font-medium text-sm text-gray-700" for="designation">
@@ -69,6 +67,7 @@
                                             <option value="General Manager">General Manager</option>
                                             <option value="Department Head">Department Head</option>
                                             <option value="Section Head">Section Head</option>
+                                            <option value="Warehouse Manager">Warehouse Manager</option>
                                         </select>
                                     </div>
 
@@ -80,10 +79,15 @@
                                         <select name="role" id="role" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
                                             <option value="">Select</option>
                                             @foreach(Spatie\Permission\Models\Role::all() as $role)
-                                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                                @if($role->name == "SuperAdmin" || $role->name == "CEO")
+                                                @else
+                                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                                @endif
+
                                             @endforeach
                                         </select>
                                     </div>
+
 
                                     <div class="col-span-6">
                                         <label class="block font-medium text-sm text-gray-700" for="permissions">
@@ -92,15 +96,18 @@
                                         <div class="mt-2 grid grid-cols-1 md:grid-cols-3 gap-4">
 
                                             @foreach(\Spatie\Permission\Models\Permission::all() as $permission)
-                                                <label class="flex items-center">
-                                                    <input type="checkbox" class="form-checkbox" value="{{$permission->id}}" name="permission[]">
+
+                                                    @if($permission->name == "PoBuyer" || $permission->name == "QoSupplier" )
+                                                    <label class="flex items-center">
+                                                    <input type="checkbox" class="form-checkbox" value="{{$permission->name}}" name="permission[]">
                                                     <span class="ml-2 text-sm text-gray-600">{{$permission->name}}</span>
-                                                </label>
+                                                    </label>
+                                                    @endif
+
                                             @endforeach
 
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
 

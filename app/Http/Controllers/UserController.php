@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Business;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -36,7 +38,6 @@ class UserController extends Controller
 //        $permission = Permission::findById(3);
 //        $role->givePermissionTo($permission);
 //        $role->revokePermissionTo($permission);
-
 
 
         // testing end
@@ -137,6 +138,39 @@ class UserController extends Controller
 
     public function createUserForCompany(Request $request, Business $business)
     {
-        dd($request->all());
+        $input = $request->all();
+
+//        dd($input);
+        Validator::make($input, [
+            'gender' => ['required', 'string', 'max:191'],
+            'name' => ['required', 'string', 'max:191'],
+            'designation' => ['required'],
+            'business_id' => ['required'],
+            'usertype' => ['required'],
+            'role' => ['required'],
+            'mobile' => ['required', 'string', 'max:191'],
+            'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
+            'password' => ['required', 'string', 'max:191'],
+        ])->validate();
+
+        $user = User::create([
+            'gender' => $input['gender'],
+            'name' => $input['name'],
+            'designation' => $input['designation'],
+            'business_id' => $input['business_id'],
+            'usertype' => $input['usertype'],
+            'mobile' => $input['mobile'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']),
+        ]);
+        $role = Role::findById($input['role']);
+        $user->assignRole($role);
+        session()->flash('message', 'User has been successfully created.');
+        if (isset($input['permission'])) {
+            foreach ($input['permission'] as $permission) {
+                $user->givePermissionTo($permission);
+            }
+        }
+        return redirect()->route('users.create');
     }
 }

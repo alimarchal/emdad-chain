@@ -9,7 +9,7 @@
         </h2>
     </x-slot>
 
-
+<!--
     <div class="mt-4">
         <div class="flex flex-wrap -mx-6">
             <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
@@ -66,7 +66,7 @@
             </div>
         </div>
     </div>
-
+-->
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

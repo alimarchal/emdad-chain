@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'a5d05b7bf222b694d2d064a0115510c84b78faee',
+    'reference' => '5f8c6eaeff119e6336ff0fddf919c73e6e94d728',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -521,7 +521,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'a5d05b7bf222b694d2d064a0115510c84b78faee',
+      'reference' => '5f8c6eaeff119e6336ff0fddf919c73e6e94d728',
     ),
     'laravel/sanctum' => 
     array (
@@ -570,12 +570,12 @@ private static $installed = array (
     ),
     'livewire/livewire' => 
     array (
-      'pretty_version' => 'v2.3.5',
-      'version' => '2.3.5.0',
+      'pretty_version' => 'v2.3.6',
+      'version' => '2.3.6.0',
       'aliases' => 
       array (
       ),
-      'reference' => '781a1250dc8eab9121fd856ff0b6efca8c32756f',
+      'reference' => '8663232c198ef12964b62559e9bb2023eb86701d',
     ),
     'maatwebsite/excel' => 
     array (
@@ -1155,12 +1155,12 @@ private static $installed = array (
     ),
     'swiftmailer/swiftmailer' => 
     array (
-      'pretty_version' => 'v6.2.4',
-      'version' => '6.2.4.0',
+      'pretty_version' => 'v6.2.5',
+      'version' => '6.2.5.0',
       'aliases' => 
       array (
       ),
-      'reference' => '56f0ab23f54c4ccbb0d5dcc67ff8552e0c98d59e',
+      'reference' => '698a6a9f54d7eb321274de3ad19863802c879fb7',
     ),
     'symfony/console' => 
     array (
