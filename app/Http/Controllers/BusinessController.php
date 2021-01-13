@@ -30,7 +30,7 @@ class BusinessController extends Controller
         $business = Business::where('user_id', auth()->user()->id)->first();
 //        dd($business);
         if ($business === null) {
-            $parentCategories = Category::where('parent_id', 0)->get();
+            $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
             return view('business.create', compact('parentCategories'));
         } else {
             return redirect()->route('business.show', $business->id);
@@ -92,7 +92,7 @@ class BusinessController extends Controller
      */
     public function edit(Business $business)
     {
-        $parentCategories = Category::where('parent_id', 0)->get();
+        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
         return view('business.edit', compact('parentCategories', 'business'));
     }
 

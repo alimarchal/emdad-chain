@@ -96,10 +96,10 @@ Route::get('/role', function(){
     $user = \App\Models\User::find(5);
 //    $permissions = $user->getDirectPermissions();
 //    $permissions = $user->getPermissionsViaRoles();
-////    $permissions = $user->getRoleNames();
-//    return $permissions;
+    $permissions = $user->getRoleNames();
+    return $permissions;
 
-    $role = Role::findByName('SuperAdmin');
+//    $role = Role::findByName('SuperAdmin');
 //    $role1->givePermissionTo('delete user');
 //    $role1->givePermissionTo('create user');
 //    $role = Role::findByName('User');
@@ -117,6 +117,6 @@ Route::get('/role', function(){
 });
 
 
-Route::post('/test', function(\Illuminate\Http\Request $request){
-    return dd($request->all());
+Route::get('/test', function(){
+    return view('index');
 });

@@ -39,6 +39,7 @@ class CreateNewUser implements CreatesNewUsers
             'mobile' => $input['mobile'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'usertype' => 'CEO',
         ]);
         $role = Role::findByName('CEO');
         $user->assignRole($role);

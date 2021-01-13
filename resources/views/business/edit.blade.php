@@ -96,8 +96,8 @@
                             <x-jet-input id="longitude" type="text" name="longitude" class="border p-2 w-1/2" value="{{$business->longitude}}"></x-jet-input>
                             <x-jet-input id="latitude" type="text" name="latitude" class="border p-2 w-1/2" value="{{$business->latitude}}"></x-jet-input>
 
-                            <x-jet-input id="phone" type="tel" name="iban" class="border p-2 w-1/2" value="{{$business->iban}}"></x-jet-input>
-                            <x-jet-input id="mobile" type="number" name="bank_name" class="border p-2 w-1/2" value="{{$business->bank_name}}"></x-jet-input>
+                            <x-jet-input id="phone" type="text" name="iban" class="border p-2 w-1/2" value="{{$business->iban}}"></x-jet-input>
+                            <x-jet-input id="mobile" type="text" name="bank_name" class="border p-2 w-1/2" value="{{$business->bank_name}}"></x-jet-input>
 
                         </div>
                         <x-jet-button class="float-right mt-4 mb-4">Update</x-jet-button>
