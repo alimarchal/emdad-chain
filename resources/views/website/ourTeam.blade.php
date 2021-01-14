@@ -246,8 +246,15 @@
                         </div>
                         <div class="member-info">
                             <h4>Mustahsan Rizvi</h4>
-                            <span>Admin InCharge Pakistan Office</span>
-                            <p></p>
+                            <span>Office Administrator (Pakistan)</span>
+                            <p>
+                                Educational background<br>
+                                1 - Master in Business Administration With specialization in Management and Finance<br>
+                                2 - Masters in Economics with major in Econometrics and International trade<br>
+                                3 - Post graduate diploma in IT<br>
+                                Over 20 years experience in office administration and business management
+                                Now committed to put best efforts to achieve organizational goals.
+                            </p>
                         </div>
                     </div>
                 </div>

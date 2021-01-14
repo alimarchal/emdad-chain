@@ -26,14 +26,7 @@ class PurchaseRequestFormController extends Controller
      */
     public function create()
     {
-        $business = Business::where('user_id', auth()->id())->get();
-        if ($business->isEmpty()) {
-            session()->flash('message', 'Please enter business information first.');
-            return redirect()->route('business.create');
-        } else {
-
-            return view('purchaseOrderInfo.create', compact('business'));
-        }
+        return view('RFP.create');
     }
 
     /**

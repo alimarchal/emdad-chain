@@ -44,7 +44,8 @@
 
                         <div class="flex space-x-5 mt-3">
                             <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_number">Chamber Registration Number</label>
-                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_path" title="File type: JPEG|PNG|PDF|DOCX => (Filesize: Max 10MB)">Chamber Certificate/File</label>
+                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_path" title="File type: JPEG|PNG|PDF|DOCX => (Filesize: Max 10MB)">Chamber
+                                Certificate/File</label>
                             <label class="block font-medium text-sm text-gray-700 w-1/2" for="vat_reg_certificate_number">VAT Number</label>
                             <label class="block font-medium text-sm text-gray-700 w-1/2" for="vat_reg_certificate_path">VAT Certificate (If available)</label>
 

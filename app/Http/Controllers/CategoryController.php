@@ -14,8 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
-        $parentCategories = Category::where('parent_id',0)->get();
+        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
         return view('category.category.index', compact('parentCategories'));
     }
 
@@ -26,24 +25,28 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+        return view('category.create', compact('parentCategories'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $created_category = Category::create($request->all());
+        session()->flash('message', $created_category->name  . ' category successfully created.');
+        return redirect()->route('category.create');
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
@@ -54,7 +57,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
@@ -65,8 +68,8 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Category $category)
@@ -77,7 +80,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
