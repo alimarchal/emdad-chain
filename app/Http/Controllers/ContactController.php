@@ -14,7 +14,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        $requests = Contact::orderBy('created_at', 'DESC')->paginate(2);
+        return view('contact.index',compact('requests'));
     }
 
     /**
@@ -42,6 +43,8 @@ class ContactController extends Controller
             'subject' => 'required|max:60',
             'message' => 'required',
         ]);
+
+        $request->merge(['status'=> 'pending']);
         Contact::create($request->all());
         session()->flash('message', 'Your message successfully received. We will let you know.');
         return redirect()->back();

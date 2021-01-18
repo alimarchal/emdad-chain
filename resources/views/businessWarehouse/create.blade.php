@@ -27,17 +27,16 @@
                             <select id="name" name="name[]" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                 <option value="">None</option>
                                 @foreach(\App\Models\User::where('business_id',auth()->user()->business_id)->get() as $user)
-                                    @if($user->id != auth()->user()->id)
-                                    <option value="1">{{$user->name}}</option>
-                                    @endif
+                                    <option value="{{$user->name . ':' . $user->id}}">{{$user->name}}</option>
                                 @endforeach
                             </select>
 
                             <select id="designation" name="designation[]" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                 <option value="">None</option>
+                                <option value="CEO">CEO</option>
                                 @foreach(\App\Models\User::where('business_id',auth()->user()->business_id)->get() as $user)
                                     @if($user->id != auth()->user()->id)
-                                        <option value="1">{{$user->designation}}</option>
+                                        <option value="{{$user->designation}}">{{$user->designation}}</option>
                                     @endif
                                 @endforeach
                             </select>

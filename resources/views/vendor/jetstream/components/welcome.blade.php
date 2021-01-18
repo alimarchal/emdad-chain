@@ -3,11 +3,11 @@
 
     {{-- Message Before and After Resistration --}}
     @if(Auth::user()->status == 0 || Auth::user()->status == null)
-        <div class="mt-6 text-red-500 text-2xl">
+        <div class="text-black text-2xl">
             Thank you for signing up! Your email address has been verified.
-            <br>Now you need to fill up the registration form, before adding any user/s.
+            <br>Now you need to fill up the business registration form  before adding any user/s.
         </div>
-    @elseif(Auth::user()->status == 1 && Auth::user()->registration_type == "Contracts")
+    @elseif(Auth::user()->status == 1 && Auth::user()->registration_type == "Buyer")
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Welcome {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
 
@@ -29,7 +29,7 @@
                 <li>Streamline the return system (for defective or unwanted products).</li>
             </ol>
         </div>
-    @elseif(Auth::user()->status == 1 && Auth::user()->registration_type == "Orders")
+    @elseif(Auth::user()->status == 1 && Auth::user()->registration_type == "Supplier")
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Welcome {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
 
@@ -70,8 +70,8 @@
                                 @csrf
                                 <select id="registration_type" name="registration_type" class="border p-2 w-full" required>
                                     <option value="">None</option>
-                                    <option value="Contracts">Contracts</option>
-                                    <option value="Orders">Orders</option>
+                                    <option value="Buyer">Buyer</option>
+                                    <option value="Supplier">Supplier</option>
                                 </select>
                                 <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
                                 <input type="submit" value="Proceed" class="text-white p-2 float-right rounded mt-4"

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use App\Models\Category;
 use App\Models\POInfo;
 use App\Models\PurchaseRequestForm;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseRequestFormController extends Controller
 {
@@ -16,7 +19,8 @@ class PurchaseRequestFormController extends Controller
      */
     public function index()
     {
-        //
+        $rfq = PurchaseRequestForm::where('business_id', Auth::user()->business_id)->get();
+        return view('RFQ.index', compact('rfq'));
     }
 
     /**
@@ -26,7 +30,10 @@ class PurchaseRequestFormController extends Controller
      */
     public function create()
     {
-        return view('RFP.create');
+        $user = User::findOrFail(auth()->user()->id);
+        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+        $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+        return view('RFQ.create', compact('parentCategories', 'childs', 'user'));
     }
 
     /**
@@ -37,7 +44,15 @@ class PurchaseRequestFormController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request->has('file_path_1')) {
+            $path = $request->file('file_path_1')->store('', 'public');
+            $request->merge(['file_path' => $path]);
+        }
+        $request->merge(['item_code' => $request->item_name]);
+        $request->merge(['item_name' => Category::find($request->item_name)->first()->name]);
+        $rfq = PurchaseRequestForm::create($request->all());
+        session()->flash('message', 'RFP successfully created.');
+        return redirect()->route('RFQ.index');
     }
 
     /**

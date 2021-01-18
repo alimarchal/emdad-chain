@@ -117,7 +117,7 @@
                             <h4>Ahsan Raza </h4>
                             <span>Business Development Manager </span>
                             <p>
-                                Educational background in IT Over 32 years of experience the related field.<br>
+                                Educational background in IT Over 32 years of experience in the related field.<br>
                                 1 - Software development<br>
                                 2 - Training<br>
                                 3 - System analysis & design<br>
@@ -273,7 +273,7 @@
                         <div class="member-info">
                             <h4>Ali Raza Marchal</h4>
                             <span>Software Developer</span>
-                            <p>Software Developer with over 6 years of experience. I have expertise in web based software, databases driven applications. I have work with different industries Schools, Tourism, Health, Government, and Bank.
+                            <p>Software Developer with over 6 years of experience. I have expertise in web based software, database driven applications. I have worked with different industries Schools, Tourism, Health, Government, and Banks.
                                 Strong experience in developing web-based applications using the Full Stack.</p>
                         </div>
                     </div>

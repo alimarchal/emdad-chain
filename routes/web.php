@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 use Spatie\Permission\Models\Role;
@@ -113,12 +114,13 @@ Route::get('/downloads', function () {
 ####################END###############################
 
 ####################Category##########################
+Route::get('category/show', [CategoryController::class, 'showAllCategories'])->name('showAllCategories');
 Route::resource('category', CategoryController::class);
 ####################END###############################
 
 
 #################### RFP Purchase Request Form ##########################
-Route::resource('RFP', PurchaseRequestFormController::class);
+Route::resource('RFQ', PurchaseRequestFormController::class);
 #########################################################################
 
 Route::get('/role', function () {
@@ -158,5 +160,9 @@ Route::get('/role', function () {
 
 //
 Route::get('/test', function () {
-    return view('index');
+
+//    $categories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+//    return view('manageChild',compact('categories'));
+    return view('test');
 });
+

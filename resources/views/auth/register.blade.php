@@ -17,7 +17,7 @@
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <x-jet-label for="gender" value="{{ __('Gender') }}" class="mb-2" />
-                    <select name="gender" id="gender" class="form-input mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name" >
+                    <select name="gender" id="gender" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name" >
                         <option value="">Select</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -47,12 +47,14 @@
 
             </div>
 
-            <div class="mt-4">
-                <x-jet-label for="mobile" value="{{ __('Mobile Number') }}" />
+
+            <div class="mt-2">
+                <x-jet-label for="mobile" value="{{ __('Mobile Number') }}"  class="mb-2"  />
                 <x-jet-input id="mobile" class="block mt-1 w-full" type="tel" name="mobile" :value="old('mobile')"  />
             </div>
 
-            <div class="mt-4">
+
+            <div class="mt-2">
                 <x-jet-label for="email" value="{{ __('Email') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>

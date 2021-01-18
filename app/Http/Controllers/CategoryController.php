@@ -87,4 +87,10 @@ class CategoryController extends Controller
     {
         //
     }
+
+    public function showAllCategories()
+    {
+        $category = Category::all();
+        return view('category.show',compact('category'));
+    }
 }

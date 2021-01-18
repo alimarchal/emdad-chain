@@ -10,7 +10,7 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [
-        'parent_id', 'name',  'description', 'unit_of_measurement', 'image', 'is_active'
+        'parent_id', 'name', 'description', 'unit_of_measurement', 'image', 'is_active','name_ar'
     ];
 
 
@@ -19,10 +19,10 @@ class Category extends Model
         return $this->belongsTo(Category::class, 'parent_id');
     }
 //
-//    public function children()
-//    {
-//        return $this->hasMany(Category::class, 'parent_id');
-//    }
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
 
 
     public function subcategory()
@@ -30,5 +30,11 @@ class Category extends Model
         return $this->hasMany(Category::class, 'parent_id');
     }
 
+
+    public function childs() {
+        return $this->hasMany(Category::class,'parent_id') ;
+    }
+
+    ####################
 
 }

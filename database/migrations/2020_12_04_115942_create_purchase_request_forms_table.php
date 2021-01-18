@@ -22,7 +22,7 @@ class CreatePurchaseRequestFormsTable extends Migration
             $table->string('item_code')->nullable();
             $table->string('item_name')->nullable();
             $table->string('description')->nullable();
-            $table->string('unit_of_measure_measurement')->nullable();
+            $table->string('unit_of_measurement')->nullable();
             $table->string('size')->nullable();
             $table->string('quantity')->nullable();
             $table->string('brand')->nullable();

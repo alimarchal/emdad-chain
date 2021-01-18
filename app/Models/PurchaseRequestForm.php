@@ -9,6 +9,11 @@ class PurchaseRequestForm extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['item_code', 'item_name', 'user_id', 'business_id'
+        , 'description', 'unit_of_measurement', 'size', 'quantity', 'brand', 'last_price', 'delivery_period'
+        , 'remarks','file_path'
+    ];
+
     public function business()
     {
         return $this->belongsTo(Business::class);
