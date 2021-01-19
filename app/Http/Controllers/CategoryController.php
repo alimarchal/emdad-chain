@@ -85,7 +85,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        session()->flash('message', 'Category successfully deleted.');
+        return redirect('category/show');
     }
 
     public function showAllCategories()

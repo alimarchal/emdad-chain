@@ -114,7 +114,7 @@ Route::get('/downloads', function () {
 ####################END###############################
 
 ####################Category##########################
-Route::get('category/show', [CategoryController::class, 'showAllCategories'])->name('showAllCategories');
+Route::get('category/show', [CategoryController::class, 'showAllCategories'])->name('showAllCategory');
 Route::resource('category', CategoryController::class);
 ####################END###############################
 

@@ -1,15 +1,13 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet">
 <link href="{{url('select2/src/select2totree.css')}}" rel="stylesheet">
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script src="{{url('select2/src/select2totree.js')}}"></script>
 {{--<form method="post" action="test">--}}
 {{--    @csrf--}}
-<select id="sel_1" class="form-input rounded-md shadow-sm border p-2 w-1/2" multiple name="category[]">
+<select id="sel_1" class="form-input rounded-md shadow-sm border p-2 w-1/2" style="width: 100%;" multiple name="category[]">
 
 </select>
-{{--    <input type="submit">--}}
-{{--    </form>--}}
 <script>
     var mydata = [
 
