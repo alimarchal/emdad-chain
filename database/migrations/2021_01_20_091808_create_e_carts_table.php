@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePurchaseRequestFormsTable extends Migration
+class CreateECartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePurchaseRequestFormsTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchase_request_forms', function (Blueprint $table) {
+        Schema::create('e_carts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('business_id')->nullable()->index();
             $table->foreignId('user_id')->nullable()->index();
@@ -48,6 +48,6 @@ class CreatePurchaseRequestFormsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchase_request_forms');
+        Schema::dropIfExists('e_carts');
     }
 }

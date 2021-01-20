@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Business;
 use App\Models\Category;
+use App\Models\ECart;
 use App\Models\POInfo;
 use App\Models\PurchaseRequestForm;
 use App\Models\User;
@@ -33,7 +34,8 @@ class PurchaseRequestFormController extends Controller
         $user = User::findOrFail(auth()->user()->id);
         $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
         $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-        return view('RFQ.create', compact('parentCategories', 'childs', 'user'));
+        $eCart = ECart::where('user_id',auth()->user()->id)->where('business_id',auth()->user()->business_id)->get();
+        return view('RFQ.create', compact('parentCategories', 'childs', 'user','eCart'));
     }
 
     /**
@@ -51,8 +53,13 @@ class PurchaseRequestFormController extends Controller
         $request->merge(['item_code' => $request->item_name]);
         $request->merge(['item_name' => Category::find($request->item_name)->first()->name]);
         $rfq = PurchaseRequestForm::create($request->all());
-        session()->flash('message', 'RFP successfully created.');
-        return redirect()->route('RFQ.index');
+        session()->flash('message', 'Item added successfully.');
+
+
+        $user = User::findOrFail(auth()->user()->id);
+        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+        $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+        return redirect('RFQ/create',compact('parentCategories', 'childs', 'user'));
     }
 
     /**

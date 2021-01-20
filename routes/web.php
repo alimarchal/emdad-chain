@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use \App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ECartController;
 use \App\Http\Controllers\PurchaseRequestFormController;
+use App\Models\ECart;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,48 +123,48 @@ Route::resource('category', CategoryController::class);
 
 #################### RFP Purchase Request Form ##########################
 Route::resource('RFQ', PurchaseRequestFormController::class);
+Route::resource('RFQCart', ECartController::class);
 #########################################################################
 
 Route::get('/role', function () {
 
-//    $role = Role::create(['name' => 'CEO']);
-//    $role = Role::create(['name' => 'User']);
-//    $permission = Permission::create(['name' => 'all']);
-//    $permission = Permission::create(['name' => 'delete user']);
-//    $permission = Permission::create(['name' => 'create user']);
-//    $permission = Permission::create(['name' => 'read user']);
-//    $permission = Permission::create(['name' => 'PoBuyer']);
-//    $permission = Permission::create(['name' => 'QoSupplier']);
+    //    $role = Role::create(['name' => 'CEO']);
+    //    $role = Role::create(['name' => 'User']);
+    //    $permission = Permission::create(['name' => 'all']);
+    //    $permission = Permission::create(['name' => 'delete user']);
+    //    $permission = Permission::create(['name' => 'create user']);
+    //    $permission = Permission::create(['name' => 'read user']);
+    //    $permission = Permission::create(['name' => 'PoBuyer']);
+    //    $permission = Permission::create(['name' => 'QoSupplier']);
 
-//    $role = Role::findByName('User');
-//    $user = \App\Models\User::find(5);
-//    $permissions = $user->getDirectPermissions();
-//    $permissions = $user->getPermissionsViaRoles();
-//    $permissions = $user->getRoleNames();
-//    return $permissions;
+    //    $role = Role::findByName('User');
+    //    $user = \App\Models\User::find(5);
+    //    $permissions = $user->getDirectPermissions();
+    //    $permissions = $user->getPermissionsViaRoles();
+    //    $permissions = $user->getRoleNames();
+    //    return $permissions;
 
-//    $role = Role::findByName('SuperAdmin');
-//    $role1->givePermissionTo('delete user');
-//    $role1->givePermissionTo('create user');
-//    $role = Role::findByName('User');
-//    $role->revokePermissionTo(['PoBuyer','QoSupplier']);
-//      $role->givePermissionTo('PoBuyer');
-//      $role->givePermissionTo('QoSupplier');
-//    $role1->givePermissionTo('read user');
-//    $user = \App\Models\User::findOrFail(5);
-//    $permission = Permission::findByName('delete user');
-//    dd($role1);
-//    $role->givePermissionTo($permission);
-//    $user = \App\Models\User::find(5);
-//    $role = Role::findByName('SuperAdmin');
-//    $user->assignRole($role);
+    //    $role = Role::findByName('SuperAdmin');
+    //    $role1->givePermissionTo('delete user');
+    //    $role1->givePermissionTo('create user');
+    //    $role = Role::findByName('User');
+    //    $role->revokePermissionTo(['PoBuyer','QoSupplier']);
+    //      $role->givePermissionTo('PoBuyer');
+    //      $role->givePermissionTo('QoSupplier');
+    //    $role1->givePermissionTo('read user');
+    //    $user = \App\Models\User::findOrFail(5);
+    //    $permission = Permission::findByName('delete user');
+    //    dd($role1);
+    //    $role->givePermissionTo($permission);
+    //    $user = \App\Models\User::find(5);
+    //    $role = Role::findByName('SuperAdmin');
+    //    $user->assignRole($role);
 });
 
 //
 Route::get('/test', function () {
 
-//    $categories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-//    return view('manageChild',compact('categories'));
+    //    $categories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+    //    return view('manageChild',compact('categories'));
     return view('test');
 });
-

@@ -30,6 +30,8 @@
     <meta name="msapplication-TileImage" content="{{url('ficon/ms-icon-144x144.png')}}">
     <meta name="theme-color" content="#ffffff">
 
+    <script src="https://cdn.tiny.cloud/1/izbyerk8x92uls8z2ulnezm5uaudhf41lw0lebop5ba724o5/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>

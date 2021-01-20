@@ -1,0 +1,4 @@
+{
+    "bladeFormatter.format.wrapLineLength": 300,
+    "editor.wordWrapColumn": 300
+}

@@ -13,22 +13,22 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
 
-                    <form action="{{url('business')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
+                    <form action="{{ url('business') }}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         @csrf
                         <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 2: Business Information</h3>
                         <div class="flex space-x-5 mt-3">
                             <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_name">Business Name</label>
                             <label class="block font-medium text-sm text-gray-700 w-1/2" for="num_of_warehouse">Number of Warehouse</label>
-                            <input type="hidden" name="business_type" value="{{auth()->user()->registration_type}}">
-                            <input type="hidden" name="supplier_client" value="{{auth()->user()->supplier_client}}">
-                            <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+                            <input type="hidden" name="business_type" value="{{ auth()->user()->registration_type }}">
+                            <input type="hidden" name="supplier_client" value="{{ auth()->user()->supplier_client }}">
+                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2" required></x-jet-input>
                             <select name="num_of_warehouse" id="num_of_warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                 <option value="">None</option>
-                                @for($count = 1; $count <= 100; $count++)
-                                    <option value="{{$count}}">{{$count}}</option>
+                                @for ($count = 1; $count <= 100; $count++)
+                                    <option value="{{ $count }}">{{ $count }}</option>
                                 @endfor
                             </select>
                         </div>
@@ -77,8 +77,8 @@
                             <x-jet-input id="mobile" type="number" name="mobile" class="border p-2 w-1/2" required></x-jet-input>
                             <select name="country" id="country" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                 <option value="">None</option>
-                                @foreach(\App\Models\User::countries() as $country)
-                                    <option value="{{$country}}">{{$country}}</option>
+                                @foreach (\App\Models\User::countries() as $country)
+                                    <option value="{{ $country }}">{{ $country }}</option>
                                 @endforeach
                             </select>
                             <x-jet-input id="city" type="text" name="city" class="border p-2 w-1/2" required></x-jet-input>
