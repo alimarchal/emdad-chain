@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ECart;
+use App\Models\EOrderItems;
 use App\Models\EOrders;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class EOrdersController extends Controller
@@ -35,7 +38,38 @@ class EOrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->merge(['status' => 'RFQPlace']);
+        $eOrders = EOrders::create($request->all());
+        $eCartItems = ECart::findMany($request->item_number);
+        foreach ($eCartItems as $item) {
+            $eOrderItem = new EOrderItems;
+            $eOrderItem->id = $item->id;
+            $eOrderItem->order_id = $eOrders->id;
+            $eOrderItem->business_id = $item->business_id;
+            $eOrderItem->user_id = $item->user_id;
+            $eOrderItem->item_code = $item->item_code;
+            $eOrderItem->item_name = $item->item_name;
+            $eOrderItem->description = $item->description;
+            $eOrderItem->unit_of_measurement = $item->unit_of_measurement;
+            $eOrderItem->size = $item->size;
+            $eOrderItem->quantity = $item->quantity;
+            $eOrderItem->brand = $item->brand;
+            $eOrderItem->last_price = $item->last_price;
+            $eOrderItem->remarks = $item->remarks;
+            $eOrderItem->delivery_period = $item->delivery_period;
+            $eOrderItem->file_path = $item->file_path;
+            $eOrderItem->payment_mode = $item->payment_mode;
+            $eOrderItem->required_sample = $item->required_sample;
+            $eOrderItem->status = $item->status;
+            $eOrderItem->save();
+        }
+
+        foreach ($eCartItems as $item) {
+            $item->delete();
+        }
+        
+        return redirect()->route('PlacedRFQ.index');
     }
 
     /**

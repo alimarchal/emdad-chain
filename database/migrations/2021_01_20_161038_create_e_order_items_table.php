@@ -15,6 +15,25 @@ class CreateEOrderItemsTable extends Migration
     {
         Schema::create('e_order_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_id')->nullable()->index();
+            $table->foreignId('business_id')->nullable()->index();
+            $table->foreignId('user_id')->nullable()->index();
+            #for tracking one form
+            $table->string('item_code')->nullable();
+            $table->string('item_name')->nullable();
+            $table->string('description')->nullable();
+            $table->string('unit_of_measurement')->nullable();
+            $table->string('size')->nullable();
+            $table->string('quantity')->nullable();
+            $table->string('brand')->nullable();
+            $table->string('last_price')->nullable();
+            $table->string('remarks')->nullable();
+            $table->string('delivery_period')->nullable();
+            $table->string('file_path')->nullable();
+            #final authority
+            $table->string('payment_mode')->nullable();
+            $table->string('required_sample')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

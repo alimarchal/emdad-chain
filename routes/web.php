@@ -7,8 +7,12 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use \App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ECartController;
+use App\Http\Controllers\EOrdersController;
+use App\Http\Controllers\PlacedRFQController;
 use \App\Http\Controllers\PurchaseRequestFormController;
 use App\Models\ECart;
+use App\Models\EOrders;
+use App\Models\PlacedRFQ;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +31,7 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    
     return view('dashboard');
 })->name('dashboard');
 
@@ -116,17 +121,19 @@ Route::get('/downloads', function () {
 ####################END###############################
 
 ####################Category##########################
-Route::get('category/show', [CategoryController::class, 'showAllCategories'])->name('showAllCategory');
-Route::resource('category', CategoryController::class);
+Route::middleware(['auth:sanctum'])->get('category/show', [CategoryController::class, 'showAllCategories'])->name('showAllCategory');
+Route::middleware(['auth:sanctum'])->resource('category', CategoryController::class);
 ####################END###############################
 
 
 #################### RFP Purchase Request Form ##########################
-Route::resource('RFQ', PurchaseRequestFormController::class);
-Route::resource('RFQCart', ECartController::class);
+Route::middleware(['auth:sanctum'])->resource('RFQ', PurchaseRequestFormController::class);
+Route::middleware(['auth:sanctum'])->resource('RFQCart', ECartController::class);
+Route::middleware(['auth:sanctum'])->resource('EOrders', EOrdersController::class);
+Route::middleware(['auth:sanctum'])->resource('PlacedRFQ', PlacedRFQController::class);
 #########################################################################
 
-Route::get('/role', function () {
+Route::middleware(['auth:sanctum'])->get('/role', function () {
 
     //    $role = Role::create(['name' => 'CEO']);
     //    $role = Role::create(['name' => 'User']);

@@ -40,7 +40,6 @@ class CategoryController extends Controller
         $created_category = Category::create($request->all());
         session()->flash('message', $created_category->name  . ' category successfully created.');
         return redirect()->route('category.create');
-
     }
 
     /**
@@ -62,7 +61,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+        return view('category.edit', compact('category', 'parentCategories'));
     }
 
     /**
@@ -74,7 +74,23 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+
+        if (empty($request->parent_id)) {
+            
+            if ($request->parent_id == null) {
+                $request->merge(['parent_id' => $category->parent_id]);
+            }
+
+            // dd($request->all());
+            $updated = $category->update($request->all());
+            session()->flash('message', 'Category updated successfully created.');
+            return redirect()->route('showAllCategory');
+        } else {
+            // dd($request->all());
+            $updated = $category->update($request->all());
+            session()->flash('message', 'Category updated successfully created.');
+            return redirect()->route('showAllCategory');
+        }
     }
 
     /**
@@ -92,7 +108,7 @@ class CategoryController extends Controller
 
     public function showAllCategories()
     {
-        $category = Category::all();
-        return view('category.show',compact('category'));
+        $category = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();;
+        return view('category.show', compact('category'));
     }
 }

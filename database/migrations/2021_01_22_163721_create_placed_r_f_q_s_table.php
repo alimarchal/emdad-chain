@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEOrdersTable extends Migration
+class CreatePlacedRFQSTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateEOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('e_orders', function (Blueprint $table) {
+        Schema::create('placed_r_f_q_s', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('business_id')->nullable()->index();
-            $table->foreignId('user_id')->nullable()->index();
-            $table->string('status',191)->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class CreateEOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('e_orders');
+        Schema::dropIfExists('placed_r_f_q_s');
     }
 }
