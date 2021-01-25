@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BusinessCategory;
+use App\Models\EOrderItems;
+use App\Models\EOrders;
 use App\Models\PlacedRFQ;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PlacedRFQController extends Controller
 {
@@ -14,7 +18,8 @@ class PlacedRFQController extends Controller
      */
     public function index()
     {
-        return view('RFQPlaced.index');
+        $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->get();
+        return view('RFQPlaced.index', compact('PlacedRFQ'));
     }
 
     /**
@@ -81,5 +86,41 @@ class PlacedRFQController extends Controller
     public function destroy(PlacedRFQ $placedRFQ)
     {
         //
+    }
+
+    public function RFQItems(Request $request, $EOrderItems)
+    {
+        $collection = EOrderItems::where('e_order_id', $EOrderItems)->get();
+        return view('RFQPlaced.show', compact('collection'));
+    }
+
+
+    public function viewRFQs()
+    {
+        $user_business_id = Auth::user()->business_id;
+        $business_categories = [];
+        $business_cate = BusinessCategory::where('business_id', $user_business_id)->get();
+        if ($business_cate->isNotEmpty()) {
+            foreach ($business_cate as $item) {
+                $business_categories[] = (int)$item->category_number;
+            }
+        }
+        sort($business_categories);
+        // $business_categories = implode(",", $business_categories);
+        $collection = EOrderItems::where('status', 'pending')->whereIn('item_code', $business_categories)->get();
+
+        return view('supplier.index', compact('collection'));
+    }
+
+
+    public function viewRFQsID(EOrderItems $eOrderItems)
+    {
+        return view('supplier.supplier-qoute', compact('eOrderItems'));
+    }
+
+    public function RFQsQouted()
+    {
+        $collection = EOrderItems::where('e_orders_id', $EOrderItems)->get();
+        return view('RFQPlaced.show', compact('collection'));
     }
 }

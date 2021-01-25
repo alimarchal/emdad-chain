@@ -11,8 +11,8 @@ class EOrders extends Model
 
     protected $fillable  = ['business_id', 'user_id', 'status'];
 
-    public function order_items()
+    public function OrderItems()
     {
-        return $this->hasMany(EOrderItems::class);
+        return $this->hasMany(EOrderItems::class,'e_order_id');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlacedRFQSTable extends Migration
+class CreateBrandsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreatePlacedRFQSTable extends Migration
      */
     public function up()
     {
-        Schema::create('placed_r_f_q_s', function (Blueprint $table) {
+        Schema::create('brands', function (Blueprint $table) {
             $table->id();
+            $table->string('name_en',191)->nullable();
+            $table->string('brand_ar',191)->nullable();
+            $table->string('active',10)->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreatePlacedRFQSTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('placed_r_f_q_s');
+        Schema::dropIfExists('brands');
     }
 }

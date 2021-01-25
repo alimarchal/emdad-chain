@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use \App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ECartController;
 use App\Http\Controllers\EOrdersController;
 use App\Http\Controllers\PlacedRFQController;
@@ -13,6 +14,7 @@ use \App\Http\Controllers\PurchaseRequestFormController;
 use App\Models\ECart;
 use App\Models\EOrders;
 use App\Models\PlacedRFQ;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +32,7 @@ Route::get('/', function () {
 });
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class,'index'])->name('dashboard');
 
 Route::resource('users', \App\Http\Controllers\UserController::class);
 
@@ -132,6 +131,10 @@ Route::middleware(['auth:sanctum'])->resource('RFQCart', ECartController::class)
 Route::middleware(['auth:sanctum'])->resource('EOrders', EOrdersController::class);
 Route::middleware(['auth:sanctum'])->resource('PlacedRFQ', PlacedRFQController::class);
 #########################################################################
+Route::middleware(['auth:sanctum'])->get('/RFQPlacedItems/{EOrderItems}', [\App\Http\Controllers\PlacedRFQController::class, 'RFQItems'])->name('RFQItemsByID');
+Route::middleware(['auth:sanctum'])->get('/viewRFQs', [\App\Http\Controllers\PlacedRFQController::class, 'viewRFQs'])->name('viewRFQs');
+Route::middleware(['auth:sanctum'])->get('/viewRFQs/{eOrderItems}', [\App\Http\Controllers\PlacedRFQController::class, 'viewRFQsID'])->name('viewRFQsID');
+Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [\App\Http\Controllers\PlacedRFQController::class, 'RFQsQouted'])->name('RFQsQouted');
 
 Route::middleware(['auth:sanctum'])->get('/role', function () {
 

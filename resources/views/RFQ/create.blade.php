@@ -84,7 +84,7 @@
                                         Last Price
                                     </th>
 
-                                   
+
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                         Delivery Period
                                     </th>
@@ -113,7 +113,7 @@
                                         </svg>
                                     </th>
 
-                                    
+
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -198,7 +198,7 @@
         <br>
         <div class="p-4">
 
-      
+
             <hr>
 
             <form method="POST" action="{{ route('RFQCart.store') }}" enctype="multipart/form-data" class="p-4 rounded bg-white">
@@ -226,9 +226,9 @@
 
                         <select name="unit_of_measurement" id="unit_of_measurement" class="form-select shadow-sm block w-full" required>
                             <option value="">None</option>
-                            <option value="30 Days">30 Days</option>
-                            <option value="60 Days">60 Days</option>
-                            <option value="90 Days">90 Days</option>
+                            @foreach (\App\Models\UnitMeasurement::all() as $item)
+                                <option value="{{$item->uom_en}}">{{$item->uom_en}}</option>
+                            @endforeach
                             <option value="Standard Order">Standard Order</option>
                         </select>
                     </div>
@@ -335,5 +335,11 @@
             </form>
         </div>
     </div>
-
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+            toolbar_mode: 'floating',
+        });
+    </script>
 </x-app-layout>
