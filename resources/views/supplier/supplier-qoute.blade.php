@@ -4,7 +4,6 @@
             {{ __('User List') }}
         </h2>
     </x-slot>
-
     @if (session()->has('message'))
         <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
             <strong class="mr-1">{{ session('message') }}</strong>
@@ -13,116 +12,124 @@
             </button>
         </div>
     @endif
-
-
-
-
-
-    <div class="flex flex-col bg-white rounded ">
+    <div class="flex flex-col bg-white rounded mt-4">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg p-4">
-                    <h2 class="text-2xl font-bold py-2 text-center m-15">Send Quote Request</h2>
+                    <h2 class="text-2xl font-bold py-2 text-center m-15">RFQ</h2>
+                    <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded shadow-md">
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Quote Request #: {{ $eOrderItems->id }}</strong>
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Client Name: {{ $eOrderItems->business->business_name }}</strong>
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Qoute User:</strong> {{ $eOrderItems->user->name }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Item Code:</strong> {{ $eOrderItems->item_code }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Item Name:</strong> {{ $eOrderItems->item_name }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Unit of Measurement:</strong> {{ $eOrderItems->unit_of_measurement }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Size:</strong> {{ $eOrderItems->size }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Quantity:</strong> {{ $eOrderItems->quantity }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Brand:</strong> {{ $eOrderItems->brand }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Remarks:</strong> {{ $eOrderItems->remarks }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Delivery Period:</strong> {{ $eOrderItems->delivery_period }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Required Sample:</strong> {{ $eOrderItems->required_sample }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Required Sample:</strong> {{ $eOrderItems->required_sample }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Payment Mode:</strong> {{ $eOrderItems->payment_mode }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Description:</strong> {{ strip_tags($eOrderItems->description) }}
+                        </div>
+                    </div>
                     <hr>
-                    
-                    <p class="p-4">
-                        <strong>Quote Request #: {{ $eOrderItems->id }}</strong><br>
-                        <strong>Client Name: {{ $eOrderItems->business->business_name }}</strong><br>
-                        <strong>Description:</strong> {{ strip_tags($eOrderItems->description) }}<br>
-                        <strong>Qoute User:</strong> {{ $eOrderItems->user->name }}<br>
-                        <strong>Item Code:</strong> {{ $eOrderItems->item_code }}<br>
-                        <strong>Item Name:</strong> {{ $eOrderItems->item_name }}<br>
-                        <strong>Unit of Measurement:</strong> {{ $eOrderItems->unit_of_measurement }}<br>
-                        <strong>Size:</strong> {{ $eOrderItems->size }}<br>
-                        <strong>Quantity:</strong> {{ $eOrderItems->quantity }}<br>
-                        <strong>Brand:</strong> {{ $eOrderItems->brand }}<br>
-                        <strong>Remarks:</strong> {{ $eOrderItems->remarks }}<br>
-                        <strong>Delivery Period:</strong> {{ $eOrderItems->delivery_period }}<br>
-                        <strong>Required Sample:</strong> {{ $eOrderItems->required_sample }}<br>
-                        <strong>Required Sample:</strong> {{ $eOrderItems->required_sample }}<br>
-                        <strong>Payment Mode:</strong> {{ $eOrderItems->payment_mode }}<br>
-                    </p>
                     <hr>
-                    <p class="pt-6 pb-3 font-bold text-2xl text-center">Quote Information</p>
-                    <hr>
-
-                    <form method="POST" action="#" enctype="multipart/form-data" class="rounded bg-white">
+                    <form method="POST" action="{{route('qoute.store')}}" enctype="multipart/form-data" class="rounded bg-white">
                         @csrf
-
-
-                        <div class="w-full overflow-hidden  p-2">
-                            <label class="block font-medium text-sm text-gray-700 mb-1" for="unit_of_measurement">
-                                Quote Quantity
-                            </label>
-                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="size" min="0" autocomplete="size" required>
+                        <p class="pt-6 pb-3 font-bold text-2xl text-center">Quote Information</p>
+                        <div class="flex flex-wrap overflow-hidden xl:-mx-1">
+                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                <label class="block font-medium text-sm text-gray-700 mb-1" for="unit_of_measurement">
+                                    Quantity
+                                </label>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="quote_quantity" min="0" autocomplete="size" required>
+                                <input type="hidden" name="e_order_item_id" value="{{$eOrderItems->id}}">
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                    Price per unit
+                                </label>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="quote_price_per_quantity" min="0" autocomplete="size" required>
+                            </div>
                         </div>
-
-                        <div class="w-full overflow-hidden  p-2">
-                            <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                Quote Price Per Quantity
-                            </label>
-                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="size" min="0" autocomplete="size" required>
+                        <p class="py-2 font-bold text-center  text-2xl">Sample Information</p>
+                        <div class="flex flex-wrap overflow-hidden xl:-mx-1">
+                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                    Samples
+                                </label>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="sample_information" min="0" autocomplete="size" required>
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                    Sample Unit
+                                </label>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_unit" min="0" autocomplete="size" required>
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                    Sample Charges 
+                                </label>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_security_charges" min="0" autocomplete="size" required>
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                    Sample Charges Per Unit
+                                </label>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_charges_per_unit" min="0" autocomplete="size" required>
+                            </div>
                         </div>
-
-                        <p class="py-2 font-bold text-center  text-2xl">Sample Information:</p>
-
-
-                        <div class="w-full overflow-hidden p-2">
-                            <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                Samples 
-
-                            </label>
-                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="size" min="0" autocomplete="size" required>
+                        <p class="py-2 font-bold text-center  text-2xl">Shipping Information</p>
+                        <div class="flex flex-wrap -mx-1 overflow-hidden sm:-mx-1 md:-mx-1 lg:-mx-1 xl:-mx-1">
+                            <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
+                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                    Shipping Time (In Days)
+                                </label>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="shipping_time_in_days" name="size" min="0" autocomplete="size" required>
+                            </div>
+                            <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
+                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                    Note For Customer
+                                </label>
+                                <textarea name="note_for_customer" id="description"></textarea>
+                            </div>
                         </div>
-
-                        <div class="w-full overflow-hidden p-2">
-                            <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                Sample Unit 
-                            </label>
-                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="size" min="0" autocomplete="size" required>
-                        </div>
-
-                        <div class="w-full overflow-hidden p-2">
-                            <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                Sample Security Charges 
-
-                            </label>
-                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="size" min="0" autocomplete="size" required>
-                        </div>
-
-
-                        <div class="w-full overflow-hidden p-2">
-                            <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                Sample Charges Per Unit 
-
-                            </label>
-                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="size" min="0" autocomplete="size" required>
-                        </div>
-
-                        <p class="py-2 font-bold text-center  text-2xl">Shipping Information:</p>
-
-                        <div class="w-full overflow-hidden p-2">
-                            <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                Shipping Time (In Days) 
-
-                            </label>
-                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="size" min="0" autocomplete="size" required>
-                        </div>
-
-
-                        <div class="w-full overflow-hidden p-2">
-                            <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                Note For Customer 
-                            </label>
-                            <textarea name="description" id="description"></textarea>
-                        </div>
-
                         <button href="#"
-                        class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
-                        Send Quote
-                    </button>
-                      
-                      
+                            class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                            Send Quote
+                        </button>
                         <a href="{{ route('dashboard') }}"
                             class="inline-flex items-center px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                             Cancel</a>
@@ -137,9 +144,6 @@
             Back
         </a>
     </div>
-
-
-
     <script>
         tinymce.init({
             selector: 'textarea',
@@ -148,5 +152,4 @@
         });
 
     </script>
-
 </x-app-layout>

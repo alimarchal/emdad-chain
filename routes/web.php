@@ -11,6 +11,7 @@ use App\Http\Controllers\ECartController;
 use App\Http\Controllers\EOrdersController;
 use App\Http\Controllers\PlacedRFQController;
 use \App\Http\Controllers\PurchaseRequestFormController;
+use App\Http\Controllers\QouteController;
 use App\Models\ECart;
 use App\Models\EOrders;
 use App\Models\PlacedRFQ;
@@ -135,41 +136,48 @@ Route::middleware(['auth:sanctum'])->get('/RFQPlacedItems/{EOrderItems}', [\App\
 Route::middleware(['auth:sanctum'])->get('/viewRFQs', [\App\Http\Controllers\PlacedRFQController::class, 'viewRFQs'])->name('viewRFQs');
 Route::middleware(['auth:sanctum'])->get('/viewRFQs/{eOrderItems}', [\App\Http\Controllers\PlacedRFQController::class, 'viewRFQsID'])->name('viewRFQsID');
 Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [\App\Http\Controllers\PlacedRFQController::class, 'RFQsQouted'])->name('RFQsQouted');
+Route::middleware(['auth:sanctum'])->resource('qoute', QouteController::class);
 
-Route::middleware(['auth:sanctum'])->get('/role', function () {
 
-    //    $role = Role::create(['name' => 'CEO']);
-    //    $role = Role::create(['name' => 'User']);
-    //    $permission = Permission::create(['name' => 'all']);
-    //    $permission = Permission::create(['name' => 'delete user']);
-    //    $permission = Permission::create(['name' => 'create user']);
-    //    $permission = Permission::create(['name' => 'read user']);
-    //    $permission = Permission::create(['name' => 'PoBuyer']);
-    //    $permission = Permission::create(['name' => 'QoSupplier']);
+// Route::middleware(['auth:sanctum'])->get('/role', function () {
 
-    //    $role = Role::findByName('User');
-    //    $user = \App\Models\User::find(5);
-    //    $permissions = $user->getDirectPermissions();
-    //    $permissions = $user->getPermissionsViaRoles();
-    //    $permissions = $user->getRoleNames();
-    //    return $permissions;
+//     //    $role = Role::create(['name' => 'CEO']);
+//     //    $role = Role::create(['name' => 'User']);
+//     //    $permission = Permission::create(['name' => 'all']);
+//     //    $permission = Permission::create(['name' => 'delete user']);
+//     //    $permission = Permission::create(['name' => 'create user']);
+//     //    $permission = Permission::create(['name' => 'read user']);
+//     //    $permission = Permission::create(['name' => 'PoBuyer']);
+//     //    $permission = Permission::create(['name' => 'QoSupplier']);
 
-    //    $role = Role::findByName('SuperAdmin');
-    //    $role1->givePermissionTo('delete user');
-    //    $role1->givePermissionTo('create user');
-    //    $role = Role::findByName('User');
-    //    $role->revokePermissionTo(['PoBuyer','QoSupplier']);
-    //      $role->givePermissionTo('PoBuyer');
-    //      $role->givePermissionTo('QoSupplier');
-    //    $role1->givePermissionTo('read user');
-    //    $user = \App\Models\User::findOrFail(5);
-    //    $permission = Permission::findByName('delete user');
-    //    dd($role1);
-    //    $role->givePermissionTo($permission);
-    //    $user = \App\Models\User::find(5);
-    //    $role = Role::findByName('SuperAdmin');
-    //    $user->assignRole($role);
-});
+//     //    $role = Role::findByName('User');
+//     //    $user = \App\Models\User::find(5);
+//     //    $permissions = $user->getDirectPermissions();
+//     //    $permissions = $user->getPermissionsViaRoles();
+//     //    $permissions = $user->getRoleNames();
+//     //    return $permissions;
+
+//     //    $role = Role::findByName('SuperAdmin');
+//     //    $role1->givePermissionTo('delete user');
+//     //    $role1->givePermissionTo('create user');
+//     //    $role = Role::findByName('User');
+//     //    $role->revokePermissionTo(['PoBuyer','QoSupplier']);
+//     //      $role->givePermissionTo('PoBuyer');
+//     //      $role->givePermissionTo('QoSupplier');
+//     //    $role1->givePermissionTo('read user');
+//     //    $user = \App\Models\User::findOrFail(5);
+//     //    $permission = Permission::findByName('delete user');
+//     //    dd($role1);
+//     //    $role->givePermissionTo($permission);
+//     //    $user = \App\Models\User::find(5);
+//     //    $role = Role::findByName('SuperAdmin');
+//     //    $user->assignRole($role);
+
+
+//     $roles = Role::all();
+//     dd($role);
+//     return view('role.index');
+// });
 
 //
 Route::get('/test', function () {

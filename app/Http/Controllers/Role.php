@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Qoute;
 use Illuminate\Http\Request;
 
-class QouteController extends Controller
+
+class Role extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,21 +35,16 @@ class QouteController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['user_id' => auth()->user()->id]);
-        $request->merge(['qoute_status' =>'processing']);
-        $request->merge(['status' =>'pending']);
-        Qoute::create($request->all());
-        session()->flash('message', 'Business information successfully saved.');
-        return redirect()->route('businessWarehouse.create');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Qoute  $qoute
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Qoute $qoute)
+    public function show($id)
     {
         //
     }
@@ -57,10 +52,10 @@ class QouteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Qoute  $qoute
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Qoute $qoute)
+    public function edit($id)
     {
         //
     }
@@ -69,10 +64,10 @@ class QouteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Qoute  $qoute
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Qoute $qoute)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -80,10 +75,10 @@ class QouteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Qoute  $qoute
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Qoute $qoute)
+    public function destroy($id)
     {
         //
     }

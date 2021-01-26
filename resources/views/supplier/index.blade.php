@@ -23,17 +23,18 @@
             <a href="{{ route('viewRFQs') }}" class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500">
                 New
             </a>
+
             <button class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
-                Pending
-            </button>
-            <button class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
-                Answered
-            </button>
-            <button class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
-                Confirmed
+                Qouted
             </button>
             <button class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
                 Rejected
+            </button>
+            <button class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
+                Modification needed
+            </button>
+            <button class="text-gray-600 py-4 px-6 block hover:text-blue-500 focus:outline-none">
+                Pending Confirmation
             </button>
         </nav>
     </div>
@@ -108,7 +109,7 @@
                                             {{ $rfp->quantity }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ number_format($rfp->last_price, 2) }} <br>
+                                            {{ $rfp->created_at->format('d-m-Y') }} <br>
                                         </td>
 
 
