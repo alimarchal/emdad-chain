@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
-class RoleController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,9 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        // dd('ssdsdsd');
-        $roles=Role::all();
-        return view('role.index',compact('roles'));
+    {
+        $permissions=Permission::all();
+        return view('permission.index',compact('permissions'));
     }
 
     /**
@@ -28,7 +27,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-       return view('role.createrole');
+         return view('permission.createpermission');
     }
 
     /**
@@ -45,16 +44,8 @@ class RoleController extends Controller
            
         ]);
 
-$role = Role::create(['name' => $request->name]);
-
-
-        // $role = new Role([
-        //     'name' => $request->get('name'),
-        //     'guard_name' => $request->get('guard_name'),
-         
-        // ]);
-        // $role->save();
-        return redirect('/role')->with('success','Role created successfully!');
+$role = Permission::create(['name' => $request->name]);
+return redirect()->route('permission.index')->with('success','Permission created successfully!');
     }
 
     /**
@@ -75,8 +66,9 @@ $role = Role::create(['name' => $request->name]);
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   $role = Role::find($id);
-       return view('role.edit',compact('role'));
+    {
+       $permission = Permission::find($id);
+       return view('permission.editpermission',compact('permission'));
     }
 
     /**
@@ -88,15 +80,13 @@ $role = Role::create(['name' => $request->name]);
      */
     public function update(Request $request, $id)
     {
-       $role = Role::find($id);
-        $role->name =  $request->get('name');
+        $permission = Permission::find($id);
+        $permission->name =  $request->get('name');
         
-        $role->guard_name = $request->get('guard_name');
-        $role->save();
+        $permission->guard_name = $request->get('guard_name');
+        $permission->save();
 
-        return redirect('/role')->with('success','Role Updated successfully!');
-
-
+        return redirect()->route('permission.index')->with('success','Permission Updated successfully!');
     }
 
     /**
@@ -105,9 +95,9 @@ $role = Role::create(['name' => $request->name]);
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Permission $permission)
     {
-        $role->delete();
-        return back()->with('success','Role deleted successfully');
+         $permission->delete();
+        return back()->with('success','Permission deleted successfully');
     }
 }

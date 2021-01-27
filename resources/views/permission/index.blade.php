@@ -26,16 +26,19 @@
     });
 
     </script>
+ {{--    <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$collection->count()) seems empty @endif
+    </h2> --}}
 
 
-    <div class="mt-5" style="text-align: center;">
-        <a href="/dashboard" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+ <div class="mt-5" style="text-align: center;">
+        <a href="{{route('dashboard')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
             Back
         </a>
-         <a href="{{route('role.create')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-            Add new Role
+         <a href="{{route('permission.create')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+            Add new Permission
         </a>
     </div>
+
 
 
      <!-- This example requires Tailwind CSS v2.0+ -->
@@ -52,7 +55,7 @@
                                     #
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                    Role Name
+                                    Permission Name
                                 </th>
 
                              
@@ -60,24 +63,32 @@
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                               @foreach($roles as $role)                                    </td>
+                               @foreach($permissions as $permission)                                    </td>
                                <td class="px-6 py-4 whitespace-nowrap">
                                        {{$loop->iteration}}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                       <a href="{{route('role.edit',$role->id)}}" class="hover:text-blue-900 hover:underline text-blue-900">{{$role->name}}</a>
+                                       <a href="{{route('permission.edit',$permission->id)}}" class="hover:text-blue-900 hover:underline text-blue-900">{{$permission->name}}</a>
                                     </td>
 
-                                <td class="px-1 py-2 whitespace-nowrap">
+                     <td class="px-1 py-2 whitespace-nowrap">
 
-                     <form action="{{route('role.destroy',$role->id)}} " method="POST">
+    <form action="{{route('permission.destroy',$permission->id)}} " method="POST">
 
-                         @csrf
-                         @method('DELETE')
-                <input type="submit" name="submit" value="Delete" class="inline-block p-3 text-center text-white transition bg-red-500 rounded-full shadow ripple hover:shadow-lg hover:bg-red-600 focus:outline-none">
-                     </form>
+            @csrf
+            @method('DELETE')
+            <input type="submit" name="submit" value="Delete" class="inline-block p-3 text-center text-white transition bg-red-500 rounded-full shadow ripple hover:shadow-lg hover:bg-red-600 focus:outline-none">
+        </form>
+          
+                    </td>
 
-                            </td>
+
+                                  {{--  <td>
+                
+                            <a href="{{route('edit',$role->id)}} ">Edit</a>
+             <i class="fas fa-user-edit">    </i>
+                                   </td> --}}
+
 
                                 </tr>
 
@@ -91,6 +102,7 @@
 
 
 
+   
 
     <div class="mt-5">
        

@@ -17,19 +17,19 @@
     </h2> --}}
 
 <div class="flex flex-col bg-white rounded mt-8">
-  <form action="{{route('role.update',$role->id)}}"  method="post" class="form bg-white p-6" enctype="multipart/form-data" class="mt-5">
+  <form action="{{route('permission.update',$permission->id)}}"  method="post" class="form bg-white p-6" enctype="multipart/form-data" >
                         @csrf
                         @method('PUT')
                          @method('PATCH') 
-                        <h3 class="text-2xl text-gray-900 font-semibold text-center"> Add a Role</h3>
+                        <h3 class="text-2xl text-gray-900 font-semibold text-center"> Add a permission</h3>
                         <p class="text-gray-600">Business Name</p>
 
                       
                     
                         
-                        <div class="flex space-x-5 mt-3">
-                            <input type="text" name="name" id=""  class="border p-2 w-1/2" value="{{$role->name}}">
-                            <input type="text" name="guard_name" id=""  class="border p-2 w-1/2" value="{{$role->guard_name}}">
+                        <div class="flex space-x-5 mt-3" >
+                            <input type="text" name="name" id=""  class="border p-2 w-1/2" value="{{$permission->name}}">
+                            <input type="text" name="guard_name" id=""  class="border p-2 w-1/2 select-none" value="{{$permission->guard_name}}" readonly>
                            
                         </div>
                      
@@ -42,11 +42,11 @@
 
 </div>
     <div class="mt-5">
-        <a href="{{route('role.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+        <a href="{{route('permission.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
             Back
         </a>
-         <a href="{{route('role.create')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-            Add new Role
+         <a href="{{route('permission.create')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+            Add new Permission
         </a>
     </div>
 

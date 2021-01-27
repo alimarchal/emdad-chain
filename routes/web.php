@@ -171,7 +171,7 @@ Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [\App\Http\Controllers\P
 
 
 Route::resource('/role',\App\Http\Controllers\RoleController::class);
-
+Route::resource('/permission',\App\Http\Controllers\PermissionController::class);
 
 
 // Route::middleware(['auth:sanctum'])->get('/role', function () {
