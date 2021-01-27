@@ -5,19 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64c69728-0452-4a94-b9a8-4b2e346cb301" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/emdad-chain.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/emdad-chain.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EOrdersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EOrdersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlacedRFQController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlacedRFQController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/EOrders.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/EOrders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_22_163721_create_placed_r_f_q_s_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/RFQ/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/RFQ/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/RFQPlaced/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/RFQPlaced/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/_layouts/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/_layouts/sidebar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,6 +181,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -207,6 +202,8 @@
       <updated>1611212750753</updated>
       <workItem from="1611212780432" duration="25000" />
       <workItem from="1611475506211" duration="14747000" />
+      <workItem from="1611643041702" duration="366000" />
+      <workItem from="1611720329319" duration="717000" />
     </task>
     <servers />
   </component>
@@ -223,6 +220,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
