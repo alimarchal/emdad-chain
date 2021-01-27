@@ -64,13 +64,111 @@
                             <strong>Description:</strong> {{ strip_tags($eOrderItems->description) }}
                         </div>
                     </div>
+
+
+
+                    @if ($collection->count())
+                        <br>
+                        <br>
+                        <hr>
+
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        #
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        Item Name
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        {{ ucwords(str_replace('_', ' ', 'quantity')) }}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        {{ ucwords(str_replace('_', ' ', 'price_per_quantity')) }}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        {{ ucwords(str_replace('_', ' ', 'sample_information')) }}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        {{ ucwords(str_replace('_', ' ', 'sample_unit')) }}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        {{ ucwords(str_replace('_', ' ', 'sample_security_charges')) }}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        {{ ucwords(str_replace('_', ' ', 'sample_charges_per_unit')) }}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        {{ ucwords(str_replace('_', ' ', 'shipping_time_in_days')) }}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        {{ ucwords(str_replace('_', ' ', 'note_for_customer')) }}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                @foreach ($collection as $rfp)
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $loop->iteration }}
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $rfp->orderItem->item_name }}
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $rfp->quote_quantity }}
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $rfp->quote_price_per_quantity }}
+                                        </td>
+
+
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $rfp->sample_information }}
+                                        </td>
+
+
+
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $rfp->sample_unit }}
+                                        </td>
+
+
+
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $rfp->sample_security_charges }}
+                                        </td>
+
+
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $rfp->sample_charges_per_unit }}
+                                        </td>
+
+
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $rfp->shipping_time_in_days }}
+                                        </td>
+
+
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ strip_tags($rfp->note_for_customer) }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+
+
+                    @endif
+
+                    <br>
                     <hr>
-
-                    
-
-
-                    <hr>
-                    <form method="POST" action="{{route('qoute.store')}}" enctype="multipart/form-data" class="rounded bg-white">
+                    <form method="POST" action="{{ route('qoute.store') }}" enctype="multipart/form-data" class="rounded bg-white">
                         @csrf
                         <p class="pt-6 pb-3 font-bold text-2xl text-center">Quote Information</p>
                         <div class="flex flex-wrap overflow-hidden xl:-mx-1">
@@ -79,7 +177,7 @@
                                     Quantity
                                 </label>
                                 <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="quote_quantity" min="0" autocomplete="size" required>
-                                <input type="hidden" name="e_order_items_id" value="{{$eOrderItems->id}}">
+                                <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
@@ -104,7 +202,7 @@
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                    Sample Charges 
+                                    Sample Charges
                                 </label>
                                 <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_security_charges" min="0" autocomplete="size" required>
                             </div>

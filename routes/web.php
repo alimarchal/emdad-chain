@@ -183,11 +183,3 @@ Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/PendingConfirmation', [\App
 //     dd($role);
 //     return view('role.index');
 // });
-
-//
-Route::get('/test', function () {
-
-    //    $categories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-    //    return view('manageChild',compact('categories'));
-    return view('test');
-});

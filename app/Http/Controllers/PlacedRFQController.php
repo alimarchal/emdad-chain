@@ -118,7 +118,7 @@ class PlacedRFQController extends Controller
     public function viewRFQsID(EOrderItems $eOrderItems)
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('user_id',$user_id)->where('qoute_status','Qouted')->get();
+        $collection = Qoute::where('e_order_items_id',$eOrderItems->id)->get();
 
         return view('supplier.supplier-qoute', compact('eOrderItems','collection'));
     }
