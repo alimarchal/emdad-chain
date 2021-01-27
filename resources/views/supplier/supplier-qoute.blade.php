@@ -65,6 +65,10 @@
                         </div>
                     </div>
                     <hr>
+
+                    
+
+
                     <hr>
                     <form method="POST" action="{{route('qoute.store')}}" enctype="multipart/form-data" class="rounded bg-white">
                         @csrf
@@ -75,7 +79,7 @@
                                     Quantity
                                 </label>
                                 <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="quote_quantity" min="0" autocomplete="size" required>
-                                <input type="hidden" name="e_order_item_id" value="{{$eOrderItems->id}}">
+                                <input type="hidden" name="e_order_items_id" value="{{$eOrderItems->id}}">
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
@@ -117,7 +121,7 @@
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
                                     Shipping Time (In Days)
                                 </label>
-                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="shipping_time_in_days" name="size" min="0" autocomplete="size" required>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="shipping_time_in_days" min="0" autocomplete="size" required>
                             </div>
                             <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="size">

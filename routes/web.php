@@ -33,7 +33,7 @@ Route::get('/', function () {
 });
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class,'index'])->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::middleware(['auth:sanctum'])->resource('users', \App\Http\Controllers\UserController::class);
 
@@ -136,7 +136,12 @@ Route::middleware(['auth:sanctum'])->get('/RFQPlacedItems/{EOrderItems}', [\App\
 Route::middleware(['auth:sanctum'])->get('/viewRFQs', [\App\Http\Controllers\PlacedRFQController::class, 'viewRFQs'])->name('viewRFQs');
 Route::middleware(['auth:sanctum'])->get('/viewRFQs/{eOrderItems}', [\App\Http\Controllers\PlacedRFQController::class, 'viewRFQsID'])->name('viewRFQsID');
 Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [\App\Http\Controllers\PlacedRFQController::class, 'RFQsQouted'])->name('RFQsQouted');
+
 Route::middleware(['auth:sanctum'])->resource('qoute', QouteController::class);
+Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Qouted', [\App\Http\Controllers\QouteController::class, 'QoutedRFQQouted'])->name('QoutedRFQQouted');
+Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Rejected', [\App\Http\Controllers\QouteController::class, 'QoutedRFQRejected'])->name('QoutedRFQRejected');
+Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/ModificationNeeded', [\App\Http\Controllers\QouteController::class, 'QoutedRFQModificationNeeded'])->name('QoutedRFQModificationNeeded');
+Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/PendingConfirmation', [\App\Http\Controllers\QouteController::class, 'QoutedRFQQoutedRFQPendingConfirmation'])->name('QoutedRFQPendingConfirmation');
 
 
 // Route::middleware(['auth:sanctum'])->get('/role', function () {

@@ -6,6 +6,7 @@ use App\Models\BusinessCategory;
 use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\PlacedRFQ;
+use App\Models\Qoute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -109,16 +110,21 @@ class PlacedRFQController extends Controller
         // $business_categories = implode(",", $business_categories);
         $collection = EOrderItems::where('status', 'pending')->whereIn('item_code', $business_categories)->get();
 
+
         return view('supplier.index', compact('collection'));
     }
 
 
     public function viewRFQsID(EOrderItems $eOrderItems)
     {
-        return view('supplier.supplier-qoute', compact('eOrderItems'));
+        $user_id = auth()->user()->id;
+        $collection = Qoute::where('user_id',$user_id)->where('qoute_status','Qouted')->get();
+
+        return view('supplier.supplier-qoute', compact('eOrderItems','collection'));
     }
 
-    public function RFQsQouted()
+
+    public function RFQsQouted($EOrderItems)
     {
         $collection = EOrderItems::where('e_orders_id', $EOrderItems)->get();
         return view('RFQPlaced.show', compact('collection'));
