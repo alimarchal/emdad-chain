@@ -169,9 +169,26 @@ Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [\App\Http\Controllers\P
 // Route::get('/roles/create', [\App\Http\Controllers\RoleController::class,'create'])->name('role.create');
 
 
-
+//>>>>>>>>>>>>>>>This is Role Route<<<<<<<<<<<<<<<<<<<<<<<
 Route::resource('/role',\App\Http\Controllers\RoleController::class);
+
+//>>>>>>>>>>>>>>>This is Permission Route<<<<<<<<<<<<<<<<<<<<<<<
 Route::resource('/permission',\App\Http\Controllers\PermissionController::class);
+
+
+
+//>>>>>>This is Business informtion rout to check tatus of business <<<<<<<<<<<<<<<<
+
+Route::get('/business/WaitingFor/Approval', [\App\Http\Controllers\BusinessController::class,'businessDetail'])->name('business.detail');
+
+Route::get('business/Approval/Update/{id}', [\App\Http\Controllers\BusinessController::class,'businessApprovalUpdate'])->name('businessApprovalUpdate');
+
+Route::get('business/Approval/Rejected/{id}', [\App\Http\Controllers\BusinessController::class,'businessApprovalRejected'])->name('businessApprovalRejected');
+// Route::get('/business/update', [\App\Http\Controllers\BusinessController::class,'updatestatus'])->name('status.update');
+
+
+
+
 
 
 // Route::middleware(['auth:sanctum'])->get('/role', function () {

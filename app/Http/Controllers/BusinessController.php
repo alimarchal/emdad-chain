@@ -166,4 +166,29 @@ class BusinessController extends Controller
         //
     }
 
+
+    public function businessDetail()
+    {
+        $businesses=Business::where('status','1')->get();
+        return view('businessPendingApprovel.index',compact('businesses'));
+    }
+
+   public function businessApprovalUpdate($id)
+    {
+     
+         // $id=Business::where('id',$id)->get();
+         Business::where('id', $id)->update(array('status' => 'Approved'));
+         return redirect()->back();
+        
+    }
+
+public function businessApprovalRejected($id)
+    {
+     
+         // $id=Business::where('id',$id)->get();
+         Business::where('id', $id)->update(array('status' => 'Rejected'));
+         return redirect()->back();
+        
+    }
+
 }
