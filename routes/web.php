@@ -35,16 +35,16 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class,'index'])->name('dashboard');
 
-Route::resource('users', \App\Http\Controllers\UserController::class);
+Route::middleware(['auth:sanctum'])->resource('users', \App\Http\Controllers\UserController::class);
 
-Route::post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
+Route::middleware(['auth:sanctum'])->post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
 
-Route::post('/registrationType', [\App\Http\Controllers\UserController::class, 'registrationType']);
-Route::resource('/business', \App\Http\Controllers\BusinessController::class);
-Route::resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
-Route::resource('/businessWarehouse', \App\Http\Controllers\BusinessWarehouseController::class);
-Route::get('/businessWarehouse/{id}/show', [\App\Http\Controllers\BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
-Route::resource('/purchaseOrderInfo', \App\Http\Controllers\POInfoController::class);
+Route::middleware(['auth:sanctum'])->post('/registrationType', [\App\Http\Controllers\UserController::class, 'registrationType']);
+Route::middleware(['auth:sanctum'])->resource('/business', \App\Http\Controllers\BusinessController::class);
+Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
+Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', \App\Http\Controllers\BusinessWarehouseController::class);
+Route::middleware(['auth:sanctum'])->get('/businessWarehouse/{id}/show', [\App\Http\Controllers\BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
+Route::middleware(['auth:sanctum'])->resource('/purchaseOrderInfo', \App\Http\Controllers\POInfoController::class);
 
 ####################Survey###################
 Route::get('/survey', function () {
