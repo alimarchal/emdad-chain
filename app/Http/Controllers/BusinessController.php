@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Business;
 use App\Models\BusinessCategory;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use App\Models\Auth;
 class BusinessController extends Controller
 {
     /**
@@ -15,10 +15,26 @@ class BusinessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
+        if($request->has('status')) { 
+            // dd($request->all());
+            $businesss = new Business();
+            if ($request->input('status')) {
+                $businesss = $businesss->where('status',$request->status);
+         
+            }
+            $businesses = $businesss->get();
+            return view('business.index',compact('businesses'));
+        }   
+
+        else {
+          $businesses = Business::all();
+
+          return view('business.index',compact('businesses'));
+      }
+
+  }
 
     /**
      * Show the form for creating a new resource.
@@ -80,9 +96,16 @@ class BusinessController extends Controller
      */
     public function show(Business $business)
     {
-        $cats = explode(',', $business->category_number);
-        return view('business.show', compact('business'));
-    }
+
+    // $business = User::where('registration_type', '!=', '');
+
+      $cats = explode(',', $business->category_number);
+      return view('business.show', compact('business'));
+
+
+
+      
+  }
 
     /**
      * Show the form for editing the specified resource.
@@ -167,28 +190,31 @@ class BusinessController extends Controller
     }
 
 
-    public function businessDetail()
-    {
-        $businesses=Business::where('status','1')->get();
-        return view('businessPendingApprovel.index',compact('businesses'));
-    }
+    // public function businessDetail()
+    // {
+    //     $businesses=Business::where('status','1')->orWhere('status','Approved')->orWhere('status','Rejected')->get();
+    //     return view('businessPendingApprovel.index',compact('businesses'));
+    // }
 
-   public function businessApprovalUpdate($id)
+    public function businessApprovalUpdate($id)
     {
-     
-         // $id=Business::where('id',$id)->get();
-         Business::where('id', $id)->update(array('status' => 'Approved'));
-         return redirect()->back();
-        
-    }
 
-public function businessApprovalRejected($id)
-    {
-     
          // $id=Business::where('id',$id)->get();
-         Business::where('id', $id)->update(array('status' => 'Rejected'));
-         return redirect()->back();
-        
-    }
+     Business::where('id', $id)->update(array('status' => 'Approved'));
+     session()->flash('message', 'Business approved successfully.');
+     return redirect()->route('business.index',['status'=>'Approved']);
+
+ }
+
+ public function businessApprovalRejected($id)
+ {
+
+         // $id=Business::where('id',$id)->get();
+     Business::where('id', $id)->update(array('status' => 'Rejected'));
+     session()->flash('message', 'Business rejected successfully..');
+     return redirect()->route('business.index',['status'=>'Rejected']);
+
+ }
+
 
 }
