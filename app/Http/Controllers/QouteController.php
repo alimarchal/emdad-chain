@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EOrderItems;
+use App\Models\EOrders;
 use App\Models\Qoute;
 use Illuminate\Http\Request;
 
@@ -41,8 +43,8 @@ class QouteController extends Controller
 
         // dd($request->all());
         Qoute::create($request->all());
-        session()->flash('message', 'Qoute information successfully saved.');
-        return redirect()->route('QoutedRFQQouted');
+        session()->flash('message', 'You have successfully qouted.');
+        return redirect()->back();
     }
 
     /**
@@ -76,7 +78,7 @@ class QouteController extends Controller
      */
     public function update(Request $request, Qoute $qoute)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -119,6 +121,14 @@ class QouteController extends Controller
         $user_id = auth()->user()->id;
         $collection = Qoute::where('user_id',$user_id)->where('qoute_status','RFQPendingConfirmation')->get();
         return view('supplier.supplier-qouted-PendingConfirmation',compact('collection'));
+    }
+
+
+    public function QoutationsBuyerReceived(Request $request)
+    {
+        
+        $collection = Qoute::where('business_id', auth()->user()->business_id)->where('qoute_status','Qouted')->get();
+        return view('buyer.receivedQoutations',compact('collection'));
     }
 
 }
