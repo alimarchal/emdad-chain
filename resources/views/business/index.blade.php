@@ -101,8 +101,8 @@
                             </a> --}}
 
                             <div class="flex justify-center rounded-lg text-lg mb-3" role="group">
-    <a href="{{ route('businessApprovalUpdate', $business->id) }}" class="bg-blue-500 text-white hover:bg-blue-400 rounded-l-lg px-4 py-2 mx-0 outline-none focus:shadow-outline">Approve</a>
-    <a href="{{ route('businessApprovalRejected', $business->id) }}" class="bg-red-500 text-white hover:bg-blue-400  px-4 py-2 mx-0 outline-none focus:shadow-outline">Reject</a>
+    <a href="{{ route('business.index','changestatus'.'='. $business->id) }}" class="bg-blue-500 text-white hover:bg-blue-400 rounded-l-lg px-4 py-2 mx-0 outline-none focus:shadow-outline">Approve</a>
+    <a href="{{ route('business.index','rejectstatus'.'='. $business->id) }}" class="bg-red-500 text-white hover:bg-blue-400  px-4 py-2 mx-0 outline-none focus:shadow-outline">Reject</a>
     
   </div>
 

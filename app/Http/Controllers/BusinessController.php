@@ -27,6 +27,21 @@ class BusinessController extends Controller
             $businesses = $businesss->get();
             return view('business.index',compact('businesses'));
         }   
+        if($request->has('changestatus')) { 
+            $businesss = new Business();
+            if ($request->input('changestatus')) {
+                $businesss = Business::where('id', $request->changestatus)->update(array('status' => 'Approved'));                
+            }
+            return redirect()->route('business.index','status=Approved');
+        } 
+        if($request->has('rejectstatus')) { 
+            $businesss = new Business();
+            if ($request->input('rejectstatus')) {
+                $businesss = Business::where('id', $request->rejectstatus)->update(array('status' => 'Rejected'));                
+            }
+            return redirect()->route('business.index','status=Rejected');
+
+        } 
 
         else {
           $businesses = Business::all();
@@ -188,33 +203,6 @@ class BusinessController extends Controller
     {
         //
     }
-
-
-    // public function businessDetail()
-    // {
-    //     $businesses=Business::where('status','1')->orWhere('status','Approved')->orWhere('status','Rejected')->get();
-    //     return view('businessPendingApprovel.index',compact('businesses'));
-    // }
-
-    public function businessApprovalUpdate($id)
-    {
-
-         // $id=Business::where('id',$id)->get();
-     Business::where('id', $id)->update(array('status' => 'Approved'));
-     session()->flash('message', 'Business approved successfully.');
-     return redirect()->route('business.index',['status'=>'Approved']);
-
- }
-
- public function businessApprovalRejected($id)
- {
-
-         // $id=Business::where('id',$id)->get();
-     Business::where('id', $id)->update(array('status' => 'Rejected'));
-     session()->flash('message', 'Business rejected successfully..');
-     return redirect()->route('business.index',['status'=>'Rejected']);
-
- }
 
 
 }
