@@ -35,7 +35,14 @@ class QouteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->merge(['user_id' => auth()->user()->id]);
+        $request->merge(['qoute_status' =>'Qouted']);
+        $request->merge(['status' =>'pending']);
+
+        // dd($request->all());
+        Qoute::create($request->all());
+        session()->flash('message', 'Qoute information successfully saved.');
+        return redirect()->route('QoutedRFQQouted');
     }
 
     /**
@@ -82,4 +89,36 @@ class QouteController extends Controller
     {
         //
     }
+
+    public function QoutedRFQQouted()
+    {
+        $user_id = auth()->user()->id;
+        $collection = Qoute::where('user_id',$user_id)->where('qoute_status','Qouted')->get();
+        return view('supplier.supplier-qouted',compact('collection'));
+    }
+
+
+    public function QoutedRFQRejected()
+    {
+        $user_id = auth()->user()->id;
+        $collection = Qoute::where('user_id',$user_id)->where('qoute_status','Rejected')->get();
+        return view('supplier.supplier-qouted-Rejected',compact('collection'));
+    }
+
+
+    public function QoutedRFQModificationNeeded()
+    {
+        $user_id = auth()->user()->id;
+        $collection = Qoute::where('user_id',$user_id)->where('qoute_status','ModificationNeeded')->get();
+        return view('supplier.supplier-qouted-ModificationNeeded',compact('collection'));
+    }
+
+
+    public function QoutedRFQQoutedRFQPendingConfirmation()
+    {
+        $user_id = auth()->user()->id;
+        $collection = Qoute::where('user_id',$user_id)->where('qoute_status','RFQPendingConfirmation')->get();
+        return view('supplier.supplier-qouted-PendingConfirmation',compact('collection'));
+    }
+
 }
