@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Business;
 use App\Models\BusinessCategory;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use App\Models\Auth;
 class BusinessController extends Controller
 {
     /**
@@ -17,18 +17,39 @@ class BusinessController extends Controller
      */
     public function index(Request $request)
     {
-        $businesss = new Business();
+        if($request->has('status')) { 
+            // dd($request->all());
+            $businesss = new Business();
+            if ($request->input('status')) {
+                $businesss = $businesss->where('status',$request->status);
+         
+            }
+            $businesses = $businesss->get();
+            return view('business.index',compact('businesses'));
+        }   
+        if($request->has('changestatus')) { 
+            $businesss = new Business();
+            if ($request->input('changestatus')) {
+                $businesss = Business::where('id', $request->changestatus)->update(array('status' => 'Approved'));                
+            }
+            return redirect()->route('business.index','status=Approved');
+        } 
+        if($request->has('rejectstatus')) { 
+            $businesss = new Business();
+            if ($request->input('rejectstatus')) {
+                $businesss = Business::where('id', $request->rejectstatus)->update(array('status' => 'Rejected'));                
+            }
+            return redirect()->route('business.index','status=Rejected');
 
-        if ($request->input('status')) {
-            $businesss = $businesss->where('status', 'like', "%$request->business_status%")
-                ->orWhere('status', 'like', "%$request->business_status%")
-                ->orWhere('status', 'like', "%$request->business_status%");
-        }
+        } 
 
+        else {
+          $businesses = Business::all();
 
-        $businesss = new Business();
-        $users = $businesss->paginate(10);
-    }
+          return view('business.index',compact('businesses'));
+      }
+
+  }
 
     /**
      * Show the form for creating a new resource.
@@ -89,9 +110,16 @@ class BusinessController extends Controller
      */
     public function show(Business $business)
     {
-        $cats = explode(',', $business->category_number);
-        return view('business.show', compact('business'));
-    }
+
+    // $business = User::where('registration_type', '!=', '');
+
+      $cats = explode(',', $business->category_number);
+      return view('business.show', compact('business'));
+
+
+
+      
+  }
 
     /**
      * Show the form for editing the specified resource.
@@ -174,6 +202,7 @@ class BusinessController extends Controller
     }
 
 
+<<<<<<< HEAD
     public function businessDetail()
     {
         $businesses = Business::where('status', '1')->get();
@@ -195,4 +224,6 @@ class BusinessController extends Controller
         Business::where('id', $id)->update(array('status' => 'Rejected'));
         return redirect()->back();
     }
+=======
+>>>>>>> dfd45444220213d87656f952b803a9c770af1620
 }

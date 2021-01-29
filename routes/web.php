@@ -162,31 +162,15 @@ Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [\App\Http\Controllers\P
 // })->name('edit');
 
 
-// // Route::resource('/role',Role::class)
-// Route::get('/roles', [\App\Http\Controllers\RoleController::class,'index'])->name('role.index');
-// Route::post('/roles/{$id}/edit', [\App\Http\Controllers\RoleController::class,'edit'])->name('role.edit');
-// // Route::post('/roles/update/{$id}', [\App\Http\Controllers\RoleController::class,'update'])->name('role.update');
-// Route::get('/roles/create', [\App\Http\Controllers\RoleController::class,'create'])->name('role.create');
 
-
-//>>>>>>>>>>>>>>>This is Role Route<<<<<<<<<<<<<<<<<<<<<<<
+#################### Roles display and update ##########################
 Route::resource('/role',\App\Http\Controllers\RoleController::class);
-
 //>>>>>>>>>>>>>>>This is Permission Route<<<<<<<<<<<<<<<<<<<<<<<
 Route::resource('/permission',\App\Http\Controllers\PermissionController::class);
-
-
-
+#################### END ##########################
 //>>>>>>This is Business informtion rout to check tatus of business <<<<<<<<<<<<<<<<
-
-Route::get('/business/WaitingFor/Approval', [\App\Http\Controllers\BusinessController::class,'businessDetail'])->name('business.detail');
-
 Route::get('business/Approval/Update/{id}', [\App\Http\Controllers\BusinessController::class,'businessApprovalUpdate'])->name('businessApprovalUpdate');
-
 Route::get('business/Approval/Rejected/{id}', [\App\Http\Controllers\BusinessController::class,'businessApprovalRejected'])->name('businessApprovalRejected');
-// Route::get('/business/update', [\App\Http\Controllers\BusinessController::class,'updatestatus'])->name('status.update');
-
-
 
 
 
