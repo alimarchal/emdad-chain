@@ -38,8 +38,8 @@ class QouteController extends Controller
     public function store(Request $request)
     {
         $request->merge(['user_id' => auth()->user()->id]);
-        $request->merge(['qoute_status' =>'Qouted']);
-        $request->merge(['status' =>'pending']);
+        $request->merge(['qoute_status' => 'Qouted']);
+        $request->merge(['status' => 'pending']);
 
         // dd($request->all());
         Qoute::create($request->all());
@@ -95,40 +95,57 @@ class QouteController extends Controller
     public function QoutedRFQQouted()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('user_id',$user_id)->where('qoute_status','Qouted')->get();
-        return view('supplier.supplier-qouted',compact('collection'));
+        $collection = Qoute::where('user_id', $user_id)->where('qoute_status', 'Qouted')->get();
+        return view('supplier.supplier-qouted', compact('collection'));
     }
 
 
     public function QoutedRFQRejected()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('user_id',$user_id)->where('qoute_status','Rejected')->get();
-        return view('supplier.supplier-qouted-Rejected',compact('collection'));
+        $collection = Qoute::where('user_id', $user_id)->where('qoute_status', 'Rejected')->get();
+        return view('supplier.supplier-qouted-Rejected', compact('collection'));
     }
 
 
     public function QoutedRFQModificationNeeded()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('user_id',$user_id)->where('qoute_status','ModificationNeeded')->get();
-        return view('supplier.supplier-qouted-ModificationNeeded',compact('collection'));
+        $collection = Qoute::where('user_id', $user_id)->where('qoute_status', 'ModificationNeeded')->get();
+        return view('supplier.supplier-qouted-ModificationNeeded', compact('collection'));
     }
 
 
     public function QoutedRFQQoutedRFQPendingConfirmation()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('user_id',$user_id)->where('qoute_status','RFQPendingConfirmation')->get();
-        return view('supplier.supplier-qouted-PendingConfirmation',compact('collection'));
+        $collection = Qoute::where('user_id', $user_id)->where('qoute_status', 'RFQPendingConfirmation')->get();
+        return view('supplier.supplier-qouted-PendingConfirmation', compact('collection'));
     }
 
 
     public function QoutationsBuyerReceived(Request $request)
     {
-        
-        $collection = Qoute::where('business_id', auth()->user()->business_id)->where('qoute_status','Qouted')->get();
-        return view('buyer.receivedQoutations',compact('collection'));
+
+        $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        return view('buyer.receivedQoutations', compact('PlacedRFQ'));
     }
 
+    public function QoutationsBuyerReceivedRFQItemsByID(Request $request, $EOrderItems)
+    {
+        $collection = EOrderItems::where('e_order_id', $EOrderItems)->orderBy('created_at', 'desc')->get();
+        return view('buyer.byerItemsShow', compact('collection','EOrderItems'));
+    }
+
+    public function QoutationsBuyerReceivedQoutes(Request $request, $EOrderID, $EOrderItemID)
+    {
+        $collection = EOrderItems::where('id',$EOrderItemID)->orderBy('created_at', 'desc')->first();
+        return view('buyer.qoutes',compact('collection','EOrderID','EOrderItemID'));
+    }
+
+    public function QoutationsBuyerReceivedQouteID(Request $request, Qoute $QouteItem)
+    {
+        // dd($QouteItem);
+        return view('buyer.qoutesrespond', compact('QouteItem'));
+    }
 }
