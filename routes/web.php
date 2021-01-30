@@ -143,6 +143,7 @@ Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Qouted', [\App\Http\Control
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Rejected', [\App\Http\Controllers\QouteController::class, 'QoutedRFQRejected'])->name('QoutedRFQRejected');
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/ModificationNeeded', [\App\Http\Controllers\QouteController::class, 'QoutedRFQModificationNeeded'])->name('QoutedRFQModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/PendingConfirmation', [\App\Http\Controllers\QouteController::class, 'QoutedRFQQoutedRFQPendingConfirmation'])->name('QoutedRFQPendingConfirmation');
+Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceived'])->name('QoutationsBuyerReceived');
 
 
 // Route::middleware(['auth:sanctum'])->get('/role', function () {
