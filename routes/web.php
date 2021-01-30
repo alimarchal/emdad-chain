@@ -158,13 +158,13 @@ Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [\App\Http\Controllers\P
 
 
 #################### Roles display and update ##########################
-Route::resource('/role',\App\Http\Controllers\RoleController::class);
+Route::resource('/role', \App\Http\Controllers\RoleController::class);
 //>>>>>>>>>>>>>>>This is Permission Route<<<<<<<<<<<<<<<<<<<<<<<
-Route::resource('/permission',\App\Http\Controllers\PermissionController::class);
+Route::resource('/permission', \App\Http\Controllers\PermissionController::class);
 #################### END ##########################
 //>>>>>>This is Business informtion rout to check tatus of business <<<<<<<<<<<<<<<<
-Route::get('business/Approval/Update/{id}', [\App\Http\Controllers\BusinessController::class,'businessApprovalUpdate'])->name('businessApprovalUpdate');
-Route::get('business/Approval/Rejected/{id}', [\App\Http\Controllers\BusinessController::class,'businessApprovalRejected'])->name('businessApprovalRejected');
+Route::get('business/Approval/Update/{id}', [\App\Http\Controllers\BusinessController::class, 'businessApprovalUpdate'])->name('businessApprovalUpdate');
+Route::get('business/Approval/Rejected/{id}', [\App\Http\Controllers\BusinessController::class, 'businessApprovalRejected'])->name('businessApprovalRejected');
 
 
 Route::middleware(['auth:sanctum'])->resource('qoute', QouteController::class);

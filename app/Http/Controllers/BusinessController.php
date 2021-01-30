@@ -218,7 +218,6 @@ class BusinessController extends Controller
     }
 
 
-<<<<<<< HEAD
     public function businessDetail()
     {
         $businesses = Business::where('status', '1')->get();
@@ -240,6 +239,4 @@ class BusinessController extends Controller
         Business::where('id', $id)->update(array('status' => 'Rejected'));
         return redirect()->back();
     }
-=======
->>>>>>> dfd45444220213d87656f952b803a9c770af1620
 }
