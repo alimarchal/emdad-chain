@@ -30,7 +30,7 @@ class EOrderItems extends Model
 
     public function qoutes()
     {
-        return $this->hasMany(Qoute::class);
+        return $this->hasMany(Qoute::class,'e_order_items_id','id');
     }
 
     public function category()

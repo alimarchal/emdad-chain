@@ -11,6 +11,7 @@ use App\Http\Controllers\ECartController;
 use App\Http\Controllers\EOrdersController;
 use App\Http\Controllers\PlacedRFQController;
 use \App\Http\Controllers\PurchaseRequestFormController;
+use App\Http\Controllers\QouteController;
 use App\Models\ECart;
 use App\Models\EOrders;
 use App\Models\PlacedRFQ;
@@ -31,18 +32,19 @@ Route::get('/', function () {
     return view('welcomeAr');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class,'index'])->name('dashboard');
 
-Route::resource('users', \App\Http\Controllers\UserController::class);
+Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
+Route::middleware(['auth:sanctum'])->resource('users', \App\Http\Controllers\UserController::class);
 
-Route::post('/registrationType', [\App\Http\Controllers\UserController::class, 'registrationType']);
-Route::resource('/business', \App\Http\Controllers\BusinessController::class);
-Route::resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
-Route::resource('/businessWarehouse', \App\Http\Controllers\BusinessWarehouseController::class);
-Route::get('/businessWarehouse/{id}/show', [\App\Http\Controllers\BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
-Route::resource('/purchaseOrderInfo', \App\Http\Controllers\POInfoController::class);
+Route::middleware(['auth:sanctum'])->post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
+
+Route::middleware(['auth:sanctum'])->post('/registrationType', [\App\Http\Controllers\UserController::class, 'registrationType']);
+Route::middleware(['auth:sanctum'])->resource('/business', \App\Http\Controllers\BusinessController::class);
+Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
+Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', \App\Http\Controllers\BusinessWarehouseController::class);
+Route::middleware(['auth:sanctum'])->get('/businessWarehouse/{id}/show', [\App\Http\Controllers\BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
+Route::middleware(['auth:sanctum'])->resource('/purchaseOrderInfo', \App\Http\Controllers\POInfoController::class);
 
 ####################Survey###################
 Route::get('/survey', function () {
@@ -136,14 +138,6 @@ Route::middleware(['auth:sanctum'])->get('/viewRFQs/{eOrderItems}', [\App\Http\C
 Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [\App\Http\Controllers\PlacedRFQController::class, 'RFQsQouted'])->name('RFQsQouted');
 
 
-
-
-
-
-
-
-
-
 // Route::middleware(['auth:sanctum','verified'])->group(function(){
 
 // Route::resource('/roles',Role::Class);
@@ -173,10 +167,18 @@ Route::get('business/Approval/Update/{id}', [\App\Http\Controllers\BusinessContr
 Route::get('business/Approval/Rejected/{id}', [\App\Http\Controllers\BusinessController::class,'businessApprovalRejected'])->name('businessApprovalRejected');
 
 
+Route::middleware(['auth:sanctum'])->resource('qoute', QouteController::class);
+Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Qouted', [\App\Http\Controllers\QouteController::class, 'QoutedRFQQouted'])->name('QoutedRFQQouted');
+Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Rejected', [\App\Http\Controllers\QouteController::class, 'QoutedRFQRejected'])->name('QoutedRFQRejected');
+Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/ModificationNeeded', [\App\Http\Controllers\QouteController::class, 'QoutedRFQModificationNeeded'])->name('QoutedRFQModificationNeeded');
+Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/PendingConfirmation', [\App\Http\Controllers\QouteController::class, 'QoutedRFQQoutedRFQPendingConfirmation'])->name('QoutedRFQPendingConfirmation');
+Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceived'])->name('QoutationsBuyerReceived');
+Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/{QouteItem}', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceivedQouteID'])->name('QoutationsBuyerReceivedQouteID');
+Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderItems}', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceivedRFQItemsByID'])->name('QoutationsBuyerReceivedRFQItemsByID');
+Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/qoutes/{EOrderItemID}', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceivedQoutes'])->name('QoutationsBuyerReceivedQoutes');
 
 
 // Route::middleware(['auth:sanctum'])->get('/role', function () {
-
 
 //     //    $role = Role::create(['name' => 'CEO']);
 //     //    $role = Role::create(['name' => 'User']);
@@ -217,4 +219,10 @@ Route::get('business/Approval/Rejected/{id}', [\App\Http\Controllers\BusinessCon
 //     //    $categories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
 //     //    return view('manageChild',compact('categories'));
 //     return view('test');
+// });
+
+
+//     $roles = Role::all();
+//     dd($role);
+//     return view('role.index');
 // });
