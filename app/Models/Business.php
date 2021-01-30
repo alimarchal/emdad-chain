@@ -19,7 +19,7 @@ class Business extends Model
 
     public function categories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(BusinessCategory::class);
+        return $this->hasMany(BusinessCategory::class)->withDefault();
     }
 
     public function departments()

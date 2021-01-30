@@ -39,7 +39,7 @@
                         
                         <div class="flex space-x-5 mt-3">
                             <input type="text" name="name" id=""  class="border p-2 w-1/2" >
-                            <input type="text" placeholder="Guard Name, Web" name="guard_name" id=""  class="border p-2 w-1/2" value="web" readonly>
+                            <input type="text" placeholder="Guard Name, Web" name="guard_name" id=""  class="border p-2 w-1/2" value="web" hidden>
                            
                         </div>
                      

@@ -82,7 +82,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function business()
     {
-        return $this->belongsTo(Business::class);
+        return $this->belongsTo(Business::class)->withDefault();
     }
 
     public function purchase_request_forms()

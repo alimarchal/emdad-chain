@@ -70,12 +70,12 @@
 
                                 <td class="px-1 py-2 whitespace-nowrap">
 
-                     <form action="{{route('role.destroy',$role->id)}} " method="POST">
+                     {{-- <form action="{{route('role.destroy',$role->id)}} " method="POST">
 
                          @csrf
                          @method('DELETE')
                 <input type="submit" name="submit" value="Delete" class="inline-block p-3 text-center text-white transition bg-red-500 rounded-full shadow ripple hover:shadow-lg hover:bg-red-600 focus:outline-none">
-                     </form>
+                     </form> --}}
 
                             </td>
 

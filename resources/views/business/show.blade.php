@@ -78,18 +78,25 @@
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <p><strong>Supplier/Client:</strong> {{$business->user->registration_type}}</p>
+                                <p><strong>Supplier/Client:</strong> {{$business->user->registration_type ?? ''}}</p>
                             </div>
 
                             <div class="w-full lg:w-1/3 xl:w-1/2 h-auto text-lg text-black">
                                 <p><strong>Category Deals With:</strong><br>
                                 @php $cat = explode(',',$business->category_number); @endphp
+                             
                                 @foreach($cat as $c)
                                     @php
                                         $catg = \App\Models\Category::find($c);
                                     @endphp
-                                    {{$loop->iteration . ': ' . $catg->name}} <br>
+                                       @if ($catg != '')
+                                    {{$loop->iteration . ': ' . $catg->name }} <br>
+                                    @else
+                                    {{ "There is no category yet !" }}
+                                    @endif
                                 @endforeach
+                                
+                              
                                 </p>
                             </div>
 

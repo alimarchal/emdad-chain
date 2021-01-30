@@ -2,12 +2,14 @@
 <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
 
     {{-- Message Before and After Resistration --}}
-    @if(Auth::user()->status == 0 || Auth::user()->status == null)
+    @if(Auth::user()->status == 0 || Auth::user()->status == null )
         <div class="text-black text-2xl">
             Thank you for signing up! Your email address has been verified.
             <br>Now you need to fill up the business registration form  before adding any user/s.
         </div>
+            
     @elseif(Auth::user()->status == 1 && Auth::user()->registration_type == "Buyer")
+               
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Welcome {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
 
@@ -16,6 +18,7 @@
 
         </h2>
         <div class="mt-6 text-black text-2xl">
+            
             <div class="text-2xl text-center font-bold">
                 Business: {{ Auth::user()->business->business_name }}<br>
             </div>
@@ -29,6 +32,11 @@
                 <li>Streamline the return system (for defective or unwanted products).</li>
             </ol>
         </div>
+
+      
+
+
+
     @elseif(Auth::user()->status == 1 && Auth::user()->registration_type == "Supplier")
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Welcome {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
@@ -52,6 +60,10 @@
                 <li>Help to solve the bottlenecks involved in the supply chain.</li>
             </ol>
         </div>
+        @elseif (Auth::user()->status == 'Approved')
+        <h1>Business is Approved</h1> 
+        @elseif (Auth::user()->status == 'Rejected')
+        <h1>Your Business is rejected</h1>
     @endif
 
     @if(is_null(Auth::user()->registration_type))

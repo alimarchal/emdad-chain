@@ -10,14 +10,25 @@
 @include('users.sessionMessage')
 
   <div class="mt-5" style="text-align: center;">
-        <a href="{{route('business.index')}} " class="inline-flex items-center justify-center px-4 py-2 bg-gray-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150" name="pproved">
-           All businesses
+        <a href="{{route('business.index','status=1')}} " class="inline-flex items-center justify-center px-4 py-2 bg-gray-500 border border-transparent rounded-md font-semibold text-xs text-white 
+        uppercase tracking-widest hover:bg-pink-200 focus:outline-none focus:border-red-700 
+        focus:shadow-outline-red active:bg-pink-600 transition ease-in-out duration-150" 
+        name="pproved">
+           Pending businesses
         </a>
-        <a href="{{route('business.index','status=Approved')}} " class="inline-flex items-center justify-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150" name="pproved">
-            Show all approved business
+        <a href="{{route('business.index','status=Approved')}} " class="inline-flex items-center 
+        justify-center px-4 py-2 bg-yellow-400 bg-opacity-75 border border-transparent rounded-md font-semibold 
+        text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none 
+        focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out 
+        duration-150" name="pproved">
+            Approved business
         </a>
-         <a href="{{route('business.index','status=Rejected')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-            Show all rejected business
+         <a href="{{route('business.index','status=Rejected')}}" class="inline-flex items-center 
+         justify-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold
+          text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none 
+          focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out 
+          duration-150">
+           Rejected business
         </a>
     </div>
 
@@ -67,7 +78,7 @@
 
                                         <td class="px-6 py-4 whitespace-nowrap ">
                               
-      <a href="{{route('business.index',$business->id)}}" class="text-white hover:text-red-700  md:text-blue-600" name="name"> {{ $business->business_name }}
+      <a href="{{route('business.show',$business->id)}}" class="text-white hover:text-red-700  md:text-blue-600" name="name"> {{ $business->business_name }}
                              </a>
     
 

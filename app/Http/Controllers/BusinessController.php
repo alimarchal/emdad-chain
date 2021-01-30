@@ -30,11 +30,26 @@ class BusinessController extends Controller
         if($request->has('changestatus')) { 
             $businesss = new Business();
             if ($request->input('changestatus')) {
-                $businesss = Business::where('id', $request->changestatus)->update(array('status' => 'Approved'));                
+                $businesss = Business::where('id', $request->changestatus)->update(array('status' => 'Approved'));
+                $usid = Business::find($request->changestatus)->user_id;
+                $businesss = User::where('id', $usid)->update(array('status' => 'Approved'));
+
+
             }
             return redirect()->route('business.index','status=Approved');
         } 
+
         if($request->has('rejectstatus')) { 
+            $businesss = new Business();
+            if ($request->input('rejectstatus')) {
+                $businesss = Business::where('id', $request->rejectstatus)->update(array('status' => 'Rejected')); 
+                $usid = Business::find($request->rejectstatus)->user_id;
+                $businesss = User::where('id', $usid)->update(array('status' => 'Rejected'));               
+            }
+            return redirect()->route('business.index','status=Rejected');
+
+        } 
+        if($request->has('/')) { 
             $businesss = new Business();
             if ($request->input('rejectstatus')) {
                 $businesss = Business::where('id', $request->rejectstatus)->update(array('status' => 'Rejected'));                
@@ -56,6 +71,7 @@ class BusinessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function create()
     {
         $business = Business::where('user_id', auth()->user()->id)->first();
