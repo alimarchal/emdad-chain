@@ -56,6 +56,7 @@ class BusinessController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function create()
     {
         $business = Business::where('user_id', auth()->user()->id)->first();
