@@ -29,7 +29,7 @@
                         
                         <div class="flex space-x-5 mt-3" >
                             <input type="text" name="name" id=""  class="border p-2 w-1/2" value="{{$permission->name}}">
-                            <input type="text" name="guard_name" id=""  class="border p-2 w-1/2 select-none" value="{{$permission->guard_name}}" readonly>
+                            <input type="text" name="guard_name" id=""  class="border p-2 w-1/2 select-none" value="{{$permission->guard_name}}" hidden>
                            
                         </div>
                      

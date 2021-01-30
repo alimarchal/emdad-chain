@@ -42,6 +42,14 @@ class BusinessController extends Controller
             return redirect()->route('business.index','status=Rejected');
 
         } 
+        if($request->has('/')) { 
+            $businesss = new Business();
+            if ($request->input('rejectstatus')) {
+                $businesss = Business::where('id', $request->rejectstatus)->update(array('status' => 'Rejected'));                
+            }
+            return redirect()->route('business.index','status=Rejected');
+
+        } 
 
         else {
           $businesses = Business::all();
