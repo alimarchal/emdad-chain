@@ -81,7 +81,9 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        $contact->update($request->all());
+        session()->flash('message', 'Status updated....');
+        return redirect()->back();
     }
 
     /**
