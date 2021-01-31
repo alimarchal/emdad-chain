@@ -16,8 +16,6 @@ class ComposerStaticIniteb8a1a0a4d51e3cafc66ed952cb169d9
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
-        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
-        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
@@ -92,12 +90,14 @@ class ComposerStaticIniteb8a1a0a4d51e3cafc66ed952cb169d9
         '8d37dad4703fab45bfec9dd0bbf3278e' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operations/multiply.php',
         '4888a6f58c08148ebe17682f9ce9b2a8' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operations/divideby.php',
         'eef6fa3879d3efa347cd24d5eb348f85' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operations/divideinto.php',
+        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        '72b1e3f4a2af9b30b3f137b3ec2057fc' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/helpers.php',
-        '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
+        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
+        '72b1e3f4a2af9b30b3f137b3ec2057fc' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/helpers.php',
+        '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -204,6 +204,7 @@ class ComposerStaticIniteb8a1a0a4d51e3cafc66ed952cb169d9
             'Laravel\\Sanctum\\' => 16,
             'Laravel\\Jetstream\\' => 18,
             'Laravel\\Fortify\\' => 16,
+            'Label84\\LogViewer\\' => 18,
         ),
         'J' => 
         array (
@@ -527,6 +528,10 @@ class ComposerStaticIniteb8a1a0a4d51e3cafc66ed952cb169d9
         'Laravel\\Fortify\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/fortify/src',
+        ),
+        'Label84\\LogViewer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/label84/laravel-logviewer/src',
         ),
         'Jenssegers\\Agent\\' => 
         array (
@@ -3090,6 +3095,16 @@ class ComposerStaticIniteb8a1a0a4d51e3cafc66ed952cb169d9
         'Jenssegers\\Agent\\AgentServiceProvider' => __DIR__ . '/..' . '/jenssegers/agent/src/AgentServiceProvider.php',
         'Jenssegers\\Agent\\Facades\\Agent' => __DIR__ . '/..' . '/jenssegers/agent/src/Facades/Agent.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
+        'Label84\\LogViewer\\Console\\Commands\\InstallLogViewer' => __DIR__ . '/..' . '/label84/laravel-logviewer/src/Console/Commands/InstallLogViewer.php',
+        'Label84\\LogViewer\\Exceptions\\LogChannelException' => __DIR__ . '/..' . '/label84/laravel-logviewer/src/Exceptions/LogChannelException.php',
+        'Label84\\LogViewer\\Exceptions\\LogFileException' => __DIR__ . '/..' . '/label84/laravel-logviewer/src/Exceptions/LogFileException.php',
+        'Label84\\LogViewer\\Facades\\LogViewer' => __DIR__ . '/..' . '/label84/laravel-logviewer/src/Facades/LogViewer.php',
+        'Label84\\LogViewer\\Http\\Controllers\\LogViewerController' => __DIR__ . '/..' . '/label84/laravel-logviewer/src/Http/Controllers/LogViewerController.php',
+        'Label84\\LogViewer\\LogViewer' => __DIR__ . '/..' . '/label84/laravel-logviewer/src/LogViewer.php',
+        'Label84\\LogViewer\\LogViewerServiceProvider' => __DIR__ . '/..' . '/label84/laravel-logviewer/src/LogViewerServiceProvider.php',
+        'Label84\\LogViewer\\Prototypes\\Log' => __DIR__ . '/..' . '/label84/laravel-logviewer/src/Prototypes/Log.php',
+        'Label84\\LogViewer\\Support\\LogViewerCollection' => __DIR__ . '/..' . '/label84/laravel-logviewer/src/Support/LogViewerCollection.php',
+        'Label84\\LogViewer\\Support\\LogViewerLevel' => __DIR__ . '/..' . '/label84/laravel-logviewer/src/Support/LogViewerLevel.php',
         'Laravel\\Fortify\\Actions\\AttemptToAuthenticate' => __DIR__ . '/..' . '/laravel/fortify/src/Actions/AttemptToAuthenticate.php',
         'Laravel\\Fortify\\Actions\\CompletePasswordReset' => __DIR__ . '/..' . '/laravel/fortify/src/Actions/CompletePasswordReset.php',
         'Laravel\\Fortify\\Actions\\ConfirmPassword' => __DIR__ . '/..' . '/laravel/fortify/src/Actions/ConfirmPassword.php',
