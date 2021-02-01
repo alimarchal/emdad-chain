@@ -79,7 +79,7 @@ class POInfoController extends Controller
      */
     public function show(POInfo $purchaseOrderInfo)
     {
-        $business = Business::find($purchaseOrderInfo->business_id)->first();
+        $business = Business::find($purchaseOrderInfo->business_id);
         return view('purchaseOrderInfo.show', compact('purchaseOrderInfo', 'business'));
     }
 
