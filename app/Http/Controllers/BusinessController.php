@@ -30,11 +30,26 @@ class BusinessController extends Controller
         if($request->has('changestatus')) { 
             $businesss = new Business();
             if ($request->input('changestatus')) {
-                $businesss = Business::where('id', $request->changestatus)->update(array('status' => 'Approved'));                
+                $businesss = Business::where('id', $request->changestatus)->update(array('status' => 'Approved'));
+                $usid = Business::find($request->changestatus)->user_id;
+                $businesss = User::where('id', $usid)->update(array('status' => 'Approved'));
+
+
             }
             return redirect()->route('business.index','status=Approved');
         } 
+
         if($request->has('rejectstatus')) { 
+            $businesss = new Business();
+            if ($request->input('rejectstatus')) {
+                $businesss = Business::where('id', $request->rejectstatus)->update(array('status' => 'Rejected')); 
+                $usid = Business::find($request->rejectstatus)->user_id;
+                $businesss = User::where('id', $usid)->update(array('status' => 'Rejected'));               
+            }
+            return redirect()->route('business.index','status=Rejected');
+
+        } 
+        if($request->has('/')) { 
             $businesss = new Business();
             if ($request->input('rejectstatus')) {
                 $businesss = Business::where('id', $request->rejectstatus)->update(array('status' => 'Rejected'));                
@@ -47,7 +62,8 @@ class BusinessController extends Controller
           $businesses = Business::all();
 
           return view('business.index',compact('businesses'));
-      
+      }
+
   }
 
     /**
@@ -59,13 +75,14 @@ class BusinessController extends Controller
     public function create()
     {
         $business = Business::where('user_id', auth()->user()->id)->first();
-        //        dd($business);
+//        dd($business);
         if ($business === null) {
             $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
             return view('business.create', compact('parentCategories'));
         } else {
             return redirect()->route('business.show', $business->id);
         }
+
     }
 
     /**
@@ -188,6 +205,8 @@ class BusinessController extends Controller
             session()->flash('message', 'Business information successfully updated.');
             return redirect()->route('business.edit', $business->id);
         }
+
+
     }
 
     /**
