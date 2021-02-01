@@ -14,7 +14,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $requests = Contact::orderBy('created_at', 'DESC')->paginate(10);
+        $requests = Contact::orderBy('status', 'DESC')->paginate(10);
         return view('contact.index',compact('requests'));
     }
 
