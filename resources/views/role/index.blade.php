@@ -56,23 +56,46 @@
                                     Role Name
                                 </th>
 
-
+                             
 
                             </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ($roles as $role)
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ $loop->iteration }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{ route('role.edit', $role->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $role->name }}</a>
-                                </td>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                               @foreach($roles as $role)                                    </td>
+                               <td class="px-6 py-4 whitespace-nowrap">
+                                       {{$loop->iteration}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                       <a href="{{route('role.edit',$role->id)}}" class="hover:text-blue-900 hover:underline text-blue-900">{{$role->name}}</a>
+                                    </td>
 
-                                <td class="px-1 py-2 whitespace-nowrap">
+                                  {{--  <td>
+                
+                            <a href="{{route('edit',$role->id)}} ">Edit</a>
+             <i class="fas fa-user-edit">    </i>
+                                   </td> --}}
 
-                                    {{-- <form action="{{ route('role.destroy', $role->id) }} " method="POST">
+
+                                </tr>
+
+                               @endforeach 
+                            </tbody>
+                        </table>
+        <div class="flex flex-col bg-white rounded ">
+            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="mt-5">
+        <a href="{{route('PlacedRFQ.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+            Back
+        </a>
+    </div>
 
                                         @csrf
                                         @method('DELETE')
@@ -81,7 +104,10 @@
 
                                 </td>
 
+<<<<<<< HEAD
                                 </tr>
+=======
+>>>>>>> master
 
                             @endforeach
                         </tbody>

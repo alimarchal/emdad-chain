@@ -30,26 +30,11 @@ class BusinessController extends Controller
         if($request->has('changestatus')) { 
             $businesss = new Business();
             if ($request->input('changestatus')) {
-                $businesss = Business::where('id', $request->changestatus)->update(array('status' => 'Approved'));
-                $usid = Business::find($request->changestatus)->user_id;
-                $businesss = User::where('id', $usid)->update(array('status' => 'Approved'));
-
-
+                $businesss = Business::where('id', $request->changestatus)->update(array('status' => 'Approved'));                
             }
             return redirect()->route('business.index','status=Approved');
         } 
-
         if($request->has('rejectstatus')) { 
-            $businesss = new Business();
-            if ($request->input('rejectstatus')) {
-                $businesss = Business::where('id', $request->rejectstatus)->update(array('status' => 'Rejected')); 
-                $usid = Business::find($request->rejectstatus)->user_id;
-                $businesss = User::where('id', $usid)->update(array('status' => 'Rejected'));               
-            }
-            return redirect()->route('business.index','status=Rejected');
-
-        } 
-        if($request->has('/')) { 
             $businesss = new Business();
             if ($request->input('rejectstatus')) {
                 $businesss = Business::where('id', $request->rejectstatus)->update(array('status' => 'Rejected'));                
@@ -62,8 +47,7 @@ class BusinessController extends Controller
           $businesses = Business::all();
 
           return view('business.index',compact('businesses'));
-      }
-
+      
   }
 
     /**
@@ -218,25 +202,4 @@ class BusinessController extends Controller
     }
 
 
-    public function businessDetail()
-    {
-        $businesses = Business::where('status', '1')->get();
-        return view('businessPendingApprovel.index', compact('businesses'));
-    }
-
-    public function businessApprovalUpdate($id)
-    {
-
-        // $id=Business::where('id',$id)->get();
-        Business::where('id', $id)->update(array('status' => 'Approved'));
-        return redirect()->back();
-    }
-
-    public function businessApprovalRejected($id)
-    {
-
-        // $id=Business::where('id',$id)->get();
-        Business::where('id', $id)->update(array('status' => 'Rejected'));
-        return redirect()->back();
-    }
 }
