@@ -9,5 +9,9 @@ class POInfo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['business_id','user_id','type','volume','no_of_monthly_orders','order_info'];
+    protected $fillable = ['business_id', 'user_id', 'type', 'volume', 'no_of_monthly_orders', 'order_info'];
+    public function business()
+    {
+        return $this->belongsTo(Business::class)->withDefault();
+    }
 }

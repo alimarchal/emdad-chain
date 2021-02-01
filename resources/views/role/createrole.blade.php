@@ -13,57 +13,58 @@
             </button>
         </div>
     @endif
- {{--    <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$collection->count()) seems empty @endif
+    {{-- <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$collection->count()) seems empty @endif
     </h2> --}}
-      <div class="flex space-x-5 mt-3">
-@if ($errors->any())
-    <div class="alert alert-danger" >
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+    <div class="flex space-x-5 mt-3">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
-@endif
-</div>  
 
-  <form action="{{route('role.store')}}"  method="post" class="form bg-white p-6" enctype="multipart/form-data">
-                        @csrf
-                        {{-- @method('PUT') --}}
-                          
-                        <h3 class="text-2xl text-gray-900 font-semibold text-center"> Add a Role</h3>
-                        <p class="text-gray-600">Role name</p>
+    <form action="{{ route('role.store') }}" method="post" class="form bg-white p-6" enctype="multipart/form-data">
+        @csrf
+        {{-- @method('PUT') --}}
 
-                      
-                    
-                        
-                        <div class="flex space-x-5 mt-3">
-                            <input type="text" name="name" id=""  class="border p-2 w-1/2" >
-                            
-                            <input type="text" placeholder="Guard Name, Web" name="guard_name" id=""  class="border p-2 w-1/2" value="web" hidden>
-                        </div>
-                     
-                        <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150" style="margin-top: 15px;">Create new role</button>
-                      
-                    
-                      
-
-                    </form>
+        <h3 class="text-2xl text-gray-900 font-semibold text-center"> Add a Role</h3>
+        <p class="text-gray-600">Role name</p>
 
 
-    <div class="mt-5">
-        <a href="{{route('role.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+
+
+        <div class="flex space-x-5 mt-3">
+            <input type="text" name="name" id="" class="border p-2 w-full">
+
+            <input type="text" placeholder="Guard Name, Web" name="guard_name" id="" class="border p-2 w-1/2" value="web" hidden>
+        </div>
+
+        <button type="submit"
+            class="inline-flex items-center  justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150"
+            style="margin-top: 15px;">Create new role</button>
+
+    </form>
+
+
+    <div class="mt-5 float-right">
+        <a href="{{ route('role.index') }}"
+            class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
             Back
         </a>
-         <a href="{{route('role.create')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+        <a href="{{ route('role.create') }}"
+            class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
             Add new Role
         </a>
     </div>
 
     <div class="mt-5">
-       
+
     </div>
-   
+
 
 
 </x-app-layout>

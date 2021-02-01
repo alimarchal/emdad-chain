@@ -14,9 +14,25 @@ class BusinessWarehouseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->has('status')) { 
+            // dd($request->all());
+            $warehouses = new Business();
+            if ($request->input('status')) {
+                $warehouses = $warehouses->where('status',$request->status);
+         
+            }
+            $warehouses = $warehouses->get();
+            return view('business.index',compact('warehouses'));
+            
+        }  
+       
+        else {
+            $warehouses = BusinessWarehouse::all();
+  
+            return view('businessWarehouse.index',compact('warehouses'));
+        }
     }
 
     /**

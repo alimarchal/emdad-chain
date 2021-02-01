@@ -30,23 +30,22 @@ class BusinessController extends Controller
         if($request->has('changestatus')) { 
             $businesss = new Business();
             if ($request->input('changestatus')) {
-                $businesss = Business::where('id', $request->changestatus)->update(array('status' => 'Approved'));
+                $businesss = Business::where('id', $request->changestatus)->update(array('status' => 3)); 
                 $usid = Business::find($request->changestatus)->user_id;
-                $businesss = User::where('id', $usid)->update(array('status' => 'Approved'));
-
-
+                $businesss = User::where('id', $usid)->update(array('status' => 3));               
             }
-            return redirect()->route('business.index','status=Approved');
+            return redirect()->route('business.index','status=3');
+
         } 
 
         if($request->has('rejectstatus')) { 
             $businesss = new Business();
             if ($request->input('rejectstatus')) {
-                $businesss = Business::where('id', $request->rejectstatus)->update(array('status' => 'Rejected')); 
+                $businesss = Business::where('id', $request->rejectstatus)->update(array('status' => 4)); 
                 $usid = Business::find($request->rejectstatus)->user_id;
-                $businesss = User::where('id', $usid)->update(array('status' => 'Rejected'));               
+                $businesss = User::where('id', $usid)->update(array('status' => 4));               
             }
-            return redirect()->route('business.index','status=Rejected');
+            return redirect()->route('business.index','status=4');
 
         } 
         if($request->has('/')) { 
@@ -220,5 +219,5 @@ class BusinessController extends Controller
         //
     }
 
-
+ 
 }

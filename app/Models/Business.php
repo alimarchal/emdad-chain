@@ -51,5 +51,9 @@ class Business extends Model
     {
         return $this->hasMany(Quatation::class);
     }
+    public function poinfo()
+    {
+        return $this->hasMany(POInfo::class);
+    }
 
 }
