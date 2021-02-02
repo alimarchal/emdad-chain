@@ -226,3 +226,5 @@ Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOr
 //     dd($role);
 //     return view('role.index');
 // });
+Route::get('user/role', [\App\Http\Controllers\UserController::class, 'role'])->name('roleGet');
+Route::post('user/role', [\App\Http\Controllers\UserController::class, 'rolePermision'])->name('rolePost');

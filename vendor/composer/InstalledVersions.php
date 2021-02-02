@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '74abb04fd8d6ddf40a2feee5b52348a3dd443824',
+    'reference' => '9cccc0261737df2b90959fcf4d0d7faa4fcdcbf6',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -148,12 +148,12 @@ private static $installed = array (
     ),
     'facade/ignition' => 
     array (
-      'pretty_version' => '2.5.9',
-      'version' => '2.5.9.0',
+      'pretty_version' => '2.5.10',
+      'version' => '2.5.10.0',
       'aliases' => 
       array (
       ),
-      'reference' => '66b3138ecce38024723fb3bfc66ef8852a779ea9',
+      'reference' => '98154e8b991fb616304c213cd405299ffedc26f5',
     ),
     'facade/ignition-contracts' => 
     array (
@@ -530,7 +530,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '74abb04fd8d6ddf40a2feee5b52348a3dd443824',
+      'reference' => '9cccc0261737df2b90959fcf4d0d7faa4fcdcbf6',
     ),
     'laravel/sanctum' => 
     array (
