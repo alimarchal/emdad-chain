@@ -173,4 +173,17 @@ class UserController extends Controller
         }
         return redirect()->route('users.create');
     }
+
+    public function roleGet()
+    {
+        return view('users.role');
+    }
+
+    public function rolesPost(Request $request)
+    {
+        $role = Role::findById($request->role);
+        $permissions = $request->permission;
+        $role->syncPermissions($permissions);
+        return redirect()->back();
+    }
 }
