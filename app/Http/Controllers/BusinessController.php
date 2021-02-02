@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
 use App\Models\Business;
 use App\Models\BusinessCategory;
@@ -8,6 +9,7 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Auth;
+
 class BusinessController extends Controller
 {
     /**
@@ -17,71 +19,33 @@ class BusinessController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('status')) { 
-            // dd($request->all());
+        if ($request->has('status') || $request->has('changestatus') || $request->has('rejectstatus')) {
             $businesss = new Business();
             if ($request->input('status')) {
-                $businesss = $businesss->where('status',$request->status);
-         
+                $businesss = $businesss->where('status', $request->status);
             }
-            $businesses = $businesss->get();
-            return view('business.index',compact('businesses'));
-        }   
-        if($request->has('changestatus')) { 
-            $businesss = new Business();
-            if ($request->input('changestatus')) {
-                $businesss = Business::where('id', $request->changestatus)->update(array('status' => 3)); 
-                $usid = Business::find($request->changestatus)->user_id;
-                $businesss = User::where('id', $usid)->update(array('status' => 3));               
-            }
-            return redirect()->route('business.index','status=3');
-
-        } 
-
-        if($request->has('rejectstatus')) { 
-            $businesss = new Business();
-            if ($request->input('rejectstatus')) {
-                $businesss = Business::where('id', $request->rejectstatus)->update(array('status' => 4)); 
-                $usid = Business::find($request->rejectstatus)->user_id;
-                $businesss = User::where('id', $usid)->update(array('status' => 4));               
-            }
-            return redirect()->route('business.index','status=4');
-
-        } 
-        if($request->has('/')) { 
-            $businesss = new Business();
-            if ($request->input('rejectstatus')) {
-                $businesss = Business::where('id', $request->rejectstatus)->update(array('status' => 'Rejected'));                
-            }
-            return redirect()->route('business.index','status=Rejected');
-
-        } 
-
-        else {
-          $businesses = Business::all();
-
-          return view('business.index',compact('businesses'));
-      }
-
-  }
+        } else {
+            $businesses = Business::paginate(10);
+            return view('business.index', compact('businesses'));
+        }
+    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function create()
     {
         $business = Business::where('user_id', auth()->user()->id)->first();
-//        dd($business);
+        //        dd($business);
         if ($business === null) {
             $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
             return view('business.create', compact('parentCategories'));
         } else {
             return redirect()->route('business.show', $business->id);
         }
-
     }
 
     /**
@@ -94,8 +58,6 @@ class BusinessController extends Controller
     {
         $comma_separated = implode(",", $request->category);
         $request->merge(['category_number' => $comma_separated]);
-
-
         if ($request->has('chamber_reg_path_1')) {
             $path = $request->file('chamber_reg_path_1')->store('', 'public');
             $request->merge(['profile_photo_path' => $path]);
@@ -126,16 +88,9 @@ class BusinessController extends Controller
      */
     public function show(Business $business)
     {
-
-    // $business = User::where('registration_type', '!=', '');
-
-      $cats = explode(',', $business->category_number);
-      return view('business.show', compact('business'));
-
-
-
-      
-  }
+        $cats = explode(',', $business->category_number);
+        return view('business.show', compact('business'));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -200,12 +155,9 @@ class BusinessController extends Controller
                     'category_number' => $category,
                 ]);
             }
-
             session()->flash('message', 'Business information successfully updated.');
             return redirect()->route('business.edit', $business->id);
         }
-
-
     }
 
     /**
@@ -218,6 +170,4 @@ class BusinessController extends Controller
     {
         //
     }
-
- 
 }

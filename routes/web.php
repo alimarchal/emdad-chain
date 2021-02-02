@@ -31,14 +31,9 @@ use App\Models\PlacedRFQ;
 Route::get('/', function () {
     return view('welcomeAr');
 });
-
-
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
 Route::middleware(['auth:sanctum'])->resource('users', \App\Http\Controllers\UserController::class);
-
 Route::middleware(['auth:sanctum'])->post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
-
 Route::middleware(['auth:sanctum'])->post('/registrationType', [\App\Http\Controllers\UserController::class, 'registrationType']);
 Route::middleware(['auth:sanctum'])->resource('/business', \App\Http\Controllers\BusinessController::class);
 Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
@@ -99,8 +94,6 @@ Route::get('/supportAr', function () {
     return view('website.supportAr');
 })->name('supportAr');
 #################### End Website AR ###################
-
-
 ####################Survey Supplier###################
 Route::get('/e-supplier/en', function () {
     return view('eBuyerSurvey.en.eSupplierSurvey');
@@ -109,8 +102,6 @@ Route::get('/e-supplier/ar', function () {
     return view('eBuyerSurvey.ar.eSupplierSurvey');
 });
 ####################END###############################
-
-
 ####################Download Answers###################
 Route::get('/download/answers', [\App\Http\Controllers\EBuyerSurveyAnswerController::class, 'export'])->name('downloadAnswersExcel');
 Route::get('/download/supplier', [\App\Http\Controllers\EBuyerSurveyAnswerController::class, 'supplier'])->name('downloadSupplierExcel');
@@ -124,8 +115,6 @@ Route::get('/downloads', function () {
 Route::middleware(['auth:sanctum'])->get('category/show', [CategoryController::class, 'showAllCategories'])->name('showAllCategory');
 Route::middleware(['auth:sanctum'])->resource('category', CategoryController::class);
 ####################END###############################
-
-
 #################### RFP Purchase Request Form ##########################
 Route::middleware(['auth:sanctum'])->resource('RFQ', PurchaseRequestFormController::class);
 Route::middleware(['auth:sanctum'])->resource('RFQCart', ECartController::class);
@@ -137,26 +126,6 @@ Route::middleware(['auth:sanctum'])->get('/viewRFQs', [\App\Http\Controllers\Pla
 Route::middleware(['auth:sanctum'])->get('/viewRFQs/{eOrderItems}', [\App\Http\Controllers\PlacedRFQController::class, 'viewRFQsID'])->name('viewRFQsID');
 Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [\App\Http\Controllers\PlacedRFQController::class, 'RFQsQouted'])->name('RFQsQouted');
 
-
-// Route::middleware(['auth:sanctum','verified'])->group(function(){
-
-// Route::resource('/roles',Role::Class);
-//     })
-
-
-
-// Route::middleware(['auth:sanctum'])->get('/roles', function () {
-//     $role=Role::all();
-//      return view('Role/index',compact('role'));
-// })->name('roles');
-
-// Route::middleware(['auth:sanctum'])->get('/edit/{id}', function () {
-//     $role=Role::findOrFail($id);
-//      return view('Role/edit',compact('role'));
-// })->name('edit');
-
-
-
 #################### Roles display and update ##########################
 Route::resource('/role', \App\Http\Controllers\RoleController::class);
 //>>>>>>>>>>>>>>>This is Permission Route<<<<<<<<<<<<<<<<<<<<<<<
@@ -165,8 +134,6 @@ Route::resource('/permission', \App\Http\Controllers\PermissionController::class
 //>>>>>>This is Business informtion rout to check tatus of business <<<<<<<<<<<<<<<<
 Route::get('business/Approval/Update/{id}', [\App\Http\Controllers\BusinessController::class, 'businessApprovalUpdate'])->name('businessApprovalUpdate');
 Route::get('business/Approval/Rejected/{id}', [\App\Http\Controllers\BusinessController::class, 'businessApprovalRejected'])->name('businessApprovalRejected');
-
-
 Route::middleware(['auth:sanctum'])->resource('qoute', QouteController::class);
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Qouted', [\App\Http\Controllers\QouteController::class, 'QoutedRFQQouted'])->name('QoutedRFQQouted');
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Rejected', [\App\Http\Controllers\QouteController::class, 'QoutedRFQRejected'])->name('QoutedRFQRejected');
