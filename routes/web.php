@@ -178,9 +178,7 @@ Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOr
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/qoutes/{EOrderItemID}', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceivedQoutes'])->name('QoutationsBuyerReceivedQoutes');
 
 
-// Route::middleware(['auth:sanctum'])->get('/role', function () {
-
-//     //    $role = Role::create(['name' => 'CEO']);
+// Route::get('/role', function () {
 //     //    $role = Role::create(['name' => 'User']);
 //     //    $permission = Permission::create(['name' => 'all']);
 //     //    $permission = Permission::create(['name' => 'delete user']);
@@ -226,5 +224,6 @@ Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOr
 //     dd($role);
 //     return view('role.index');
 // });
-Route::get('user/role', [\App\Http\Controllers\UserController::class, 'role'])->name('roleGet');
-Route::post('user/role', [\App\Http\Controllers\UserController::class, 'rolePermision'])->name('rolePost');
+
+// Route::get('/role', [\App\Http\Controllers\UserController::class, 'roleGet'])->name('roleGet');
+// Route::post('/role', [\App\Http\Controllers\UserController::class, 'rolesPost'])->name('rolesPost');

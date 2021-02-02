@@ -174,16 +174,16 @@ class UserController extends Controller
         return redirect()->route('users.create');
     }
 
-    public function role()
+    public function roleGet()
     {
         return view('users.role');
     }
 
-    public function rolePermision(Request $request)
+    public function rolesPost(Request $request)
     {
-
         $role = Role::findById($request->role);
-
-        dd($role);
+        $permissions = $request->permission;
+        $role->syncPermissions($permissions);
+        return redirect()->back();
     }
 }
