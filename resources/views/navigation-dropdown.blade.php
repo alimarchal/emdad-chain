@@ -23,11 +23,13 @@
                     @endrole
                     @can('PoBuyer')
                         <x-jet-nav-link href="{{ route('RFQCart.index') }}" :active="request()->routeIs('RFQCart.index')">
-                            @include('RFQ.RFQICON') &nbsp;RFQ Items 
-                            @if (\App\Models\ECart::where('user_id',auth()->user()->id)->where('business_id',auth()->user()->business_id)->count())
-                            ({{ \App\Models\ECart::where('user_id',auth()->user()->id)->where('business_id',auth()->user()->business_id)->count() }})
+                            @include('RFQ.RFQICON') &nbsp;RFQ Items
+                            @if (\App\Models\ECart::where('user_id', auth()->user()->id)
+            ->where('business_id', auth()->user()->business_id)
+            ->count())
+                                ({{ \App\Models\ECart::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->count() }})
                             @endif
-                            
+
                         </x-jet-nav-link>
                     @endcan
 
@@ -38,13 +40,13 @@
                             <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">
                                 {{ __('Business') }}
                                 @php
-                                $isBusinessDataExist = \App\Models\Business::where('user_id',Auth::user()->id)->first();
-                                if ($isBusinessDataExist) {
-                                //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
-                                $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id',$isBusinessDataExist->id)->first();
-                                //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
-                                $isBusinessPOIExist = \App\Models\POInfo::where('business_id',$isBusinessDataExist->id)->first();
-                                }
+                                    $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
+                                    if ($isBusinessDataExist) {
+                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
+                                        $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
+                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
+                                        $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
+                                    }
                                 @endphp
                                 @if (isset($isBusinessDataExist))
                                     &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
@@ -171,10 +173,13 @@
                         @endcan
 
                         @can('create user')
-                            <div class="border-t border-gray-100"></div>
-                            <x-jet-dropdown-link href="{{ route('users.create') }}">
-                                {{ __('Add User') }}
-                            </x-jet-dropdown-link>
+
+                            @if (auth()->user()->business_id)
+                                <div class="border-t border-gray-100"></div>
+                                <x-jet-dropdown-link href="{{ route('users.create') }}">
+                                    {{ __('Add User') }}
+                                </x-jet-dropdown-link>
+                            @endif
                         @endcan
                         @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                             <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">

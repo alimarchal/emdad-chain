@@ -19,25 +19,25 @@ class UserController extends Controller
      */
     public function index()
     {
-//        $user = User::find(auth()->user()->id);
-//        $user->assignRole('writer');
-//        Role::create(['name' => 'super admin']);
-//        Role::create(['name' => 'admin']);
-//        Role::create(['name' => 'gm']);
-//        Role::create(['name' => 'dh']);
-//        Role::create(['name' => 'sh']);
-//        Role::create(['name' => 'user']);
-//        Permission::create(['name'=>'create user']);
-//        Permission::create(['name'=>'edit user']);
-//        Permission::create(['name'=>'delete user']);
-//        Permission::create(['name'=>'po buyer']);
-//        Permission::create(['name'=>'qo supplier']);
+        //        $user = User::find(auth()->user()->id);
+        //        $user->assignRole('writer');
+        //        Role::create(['name' => 'super admin']);
+        //        Role::create(['name' => 'admin']);
+        //        Role::create(['name' => 'gm']);
+        //        Role::create(['name' => 'dh']);
+        //        Role::create(['name' => 'sh']);
+        //        Role::create(['name' => 'user']);
+        //        Permission::create(['name'=>'create user']);
+        //        Permission::create(['name'=>'edit user']);
+        //        Permission::create(['name'=>'delete user']);
+        //        Permission::create(['name'=>'po buyer']);
+        //        Permission::create(['name'=>'qo supplier']);
 
-//        $permission = Permission::create(['name'=>'edit post']);
-//        $role = Role::findById(1);
-//        $permission = Permission::findById(3);
-//        $role->givePermissionTo($permission);
-//        $role->revokePermissionTo($permission);
+        //        $permission = Permission::create(['name'=>'edit post']);
+        //        $role = Role::findById(1);
+        //        $permission = Permission::findById(3);
+        //        $role->givePermissionTo($permission);
+        //        $role->revokePermissionTo($permission);
 
 
         // testing end
@@ -138,9 +138,9 @@ class UserController extends Controller
 
     public function createUserForCompany(Request $request, Business $business)
     {
+        $role = Role::all();
         $input = $request->all();
 
-//        dd($input);
         Validator::make($input, [
             'gender' => ['required', 'string', 'max:191'],
             'name' => ['required', 'string', 'max:191'],
@@ -153,6 +153,7 @@ class UserController extends Controller
             'password' => ['required', 'string', 'max:191'],
         ])->validate();
 
+        $role = $role->where('id',$input['role'])->first();
         $user = User::create([
             'gender' => $input['gender'],
             'name' => $input['name'],
@@ -160,30 +161,33 @@ class UserController extends Controller
             'business_id' => $input['business_id'],
             'usertype' => $input['usertype'],
             'mobile' => $input['mobile'],
+            'registration_type' => $business->business_type,
+            'status' => 3,
+            'is_active' => 1,
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
         ]);
-        $role = Role::findById($input['role']);
+        $role = $role->find($input['role']);
         $user->assignRole($role);
         session()->flash('message', 'User has been successfully created.');
-        if (isset($input['permission'])) {
-            foreach ($input['permission'] as $permission) {
-                $user->givePermissionTo($permission);
-            }
-        }
+        //        if (isset($input['permission'])) {
+        //            foreach ($input['permission'] as $permission) {
+        //                $user->givePermissionTo($permission);
+        //            }
+        //        }
         return redirect()->route('users.create');
     }
 
-    public function roleGet()
-    {
-        return view('users.role');
-    }
+    // public function roleGet()
+    // {
+    //     return view('users.role');
+    // }
 
-    public function rolesPost(Request $request)
-    {
-        $role = Role::findById($request->role);
-        $permissions = $request->permission;
-        $role->syncPermissions($permissions);
-        return redirect()->back();
-    }
+    // public function rolesPost(Request $request)
+    // {
+    //     $role = Role::findById($request->role);
+    //     $permissions = $request->permission;
+    //     $role->syncPermissions($permissions);
+    //     return redirect()->back();
+    // }
 }

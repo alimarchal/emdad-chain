@@ -6,22 +6,22 @@
     </x-slot>
     @include('users.sessionMessage')
     <div class="mt-5" style="text-align: center;">
-        <a href="{{ route('business.index', 'status=1') }} " class="inline-flex items-center justify-center px-4 py-2 bg-gray-500 border border-transparent rounded-md font-semibold text-xs text-white 
-        uppercase tracking-widest hover:bg-pink-200 focus:outline-none focus:border-red-700 
+        <a href="{{ route('business.index', 'status=1') }} " class="inline-flex items-center justify-center px-4 py-2 bg-gray-500 border border-transparent rounded-md font-semibold text-xs text-white
+        uppercase tracking-widest hover:bg-pink-200 focus:outline-none focus:border-red-700
         focus:shadow-outline-red active:bg-pink-600 transition ease-in-out duration-150" name="pproved">
             Pending
         </a>
-        <a href="{{ route('business.index', 'status=3') }} " class="inline-flex items-center 
-        justify-center px-4 py-2 bg-yellow-400 bg-opacity-75 border border-transparent rounded-md font-semibold 
-        text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none 
-        focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out 
+        <a href="{{ route('business.index', 'status=3') }} " class="inline-flex items-center
+        justify-center px-4 py-2 bg-yellow-400 bg-opacity-75 border border-transparent rounded-md font-semibold
+        text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none
+        focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out
         duration-150" name="pproved">
             Approved
         </a>
-        <a href="{{ route('business.index', 'status=4') }}" class="inline-flex items-center 
+        <a href="{{ route('business.index', 'status=4') }}" class="inline-flex items-center
          justify-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold
-          text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none 
-          focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out 
+          text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none
+          focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out
           duration-150">
             Rejected
         </a>
@@ -72,7 +72,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                        {{ $business->warehouse->count() }}
+                                        <a href="{{url('businessWarehouse/'. $business->id .'/show')}}" class="hover:underline text-blue-900 ">{{ $business->warehouse->count() }}</a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900 text-center">
                                         @if ($business->status == '1')
@@ -93,7 +93,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
 
-                                        
+
                                         <a class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1" href="#" style="transition: all .15s ease">
                                             Accept
                                         </a>

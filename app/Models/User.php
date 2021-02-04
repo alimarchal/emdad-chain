@@ -44,6 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_approved',
         'profile_approval_id',
         'mobile',
+        'usertype',
         'nid_num',
         'nid_exp_date',
         'status',
