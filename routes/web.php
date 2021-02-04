@@ -1,21 +1,13 @@
 <?php
 
-use App\Models\Category;
-use Illuminate\Support\Facades\Route;
-
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
-use \App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ECartController;
 use App\Http\Controllers\EOrdersController;
 use App\Http\Controllers\PlacedRFQController;
-use \App\Http\Controllers\PurchaseRequestFormController;
+use App\Http\Controllers\PurchaseRequestFormController;
 use App\Http\Controllers\QouteController;
-use App\Models\ECart;
-use App\Models\EOrders;
-use App\Models\PlacedRFQ;
-use App\Models\User;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,6 +127,7 @@ Route::resource('/permission', \App\Http\Controllers\PermissionController::class
 Route::get('business/Approval/Update/{id}', [\App\Http\Controllers\BusinessController::class, 'businessApprovalUpdate'])->name('businessApprovalUpdate');
 Route::get('business/Approval/Rejected/{id}', [\App\Http\Controllers\BusinessController::class, 'businessApprovalRejected'])->name('businessApprovalRejected');
 Route::middleware(['auth:sanctum'])->resource('qoute', QouteController::class);
+
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Qouted', [\App\Http\Controllers\QouteController::class, 'QoutedRFQQouted'])->name('QoutedRFQQouted');
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Rejected', [\App\Http\Controllers\QouteController::class, 'QoutedRFQRejected'])->name('QoutedRFQRejected');
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/ModificationNeeded', [\App\Http\Controllers\QouteController::class, 'QoutedRFQModificationNeeded'])->name('QoutedRFQModificationNeeded');
@@ -143,39 +136,41 @@ Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived', [\App\Http\
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/{QouteItem}', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceivedQouteID'])->name('QoutationsBuyerReceivedQouteID');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderItems}', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceivedRFQItemsByID'])->name('QoutationsBuyerReceivedRFQItemsByID');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/qoutes/{EOrderItemID}', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceivedQoutes'])->name('QoutationsBuyerReceivedQoutes');
-
+Route::middleware(['auth:sanctum'])->resource('QuotationMessage', \App\Http\Controllers\QouteMessageController::class);
+Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/ModificationNeeded', [QouteController::class, 'updateModificationNeeded'])->name('updateQoute');
+Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/Rejected', [QouteController::class, 'updateRejected'])->name('updateRejected');
 
 // Route::get('/role', function () {
 
-    //     //    $permission = Permission::create(['name' => 'all']);
-    //     //    $permission = Permission::create(['name' => 'delete user']);
-    //     //    $permission = Permission::create(['name' => 'create user']);
-    //     //    $permission = Permission::create(['name' => 'read user']);
-    //     //    $permission = Permission::create(['name' => 'PoBuyer']);
-    //     //    $permission = Permission::create(['name' => 'QoSupplier']);
+//     //    $permission = Permission::create(['name' => 'all']);
+//     //    $permission = Permission::create(['name' => 'delete user']);
+//     //    $permission = Permission::create(['name' => 'create user']);
+//     //    $permission = Permission::create(['name' => 'read user']);
+//     //    $permission = Permission::create(['name' => 'PoBuyer']);
+//     //    $permission = Permission::create(['name' => 'QoSupplier']);
 
-    //     //    $role = Role::findByName('User');
-    //     //    $user = \App\Models\User::find(5);
-    //     //    $permissions = $user->getDirectPermissions();
-    //     //    $permissions = $user->getPermissionsViaRoles();
-    //     //    $permissions = $user->getRoleNames();
-    //     //    return $permissions;
+//     //    $role = Role::findByName('User');
+//     //    $user = \App\Models\User::find(5);
+//     //    $permissions = $user->getDirectPermissions();
+//     //    $permissions = $user->getPermissionsViaRoles();
+//     //    $permissions = $user->getRoleNames();
+//     //    return $permissions;
 
-    //     //    $role = Role::findByName('SuperAdmin');
-    //     //    $role1->givePermissionTo('delete user');
-    //     //    $role1->givePermissionTo('create user');
-    //     //    $role = Role::findByName('User');
-    //     //    $role->revokePermissionTo(['PoBuyer','QoSupplier']);
-    //     //      $role->givePermissionTo('PoBuyer');
-    //     //      $role->givePermissionTo('QoSupplier');
-    //     //    $role1->givePermissionTo('read user');
-    //     //    $user = \App\Models\User::findOrFail(5);
-    //     //    $permission = Permission::findByName('delete user');
-    //     //    dd($role1);
-    //     //    $role->givePermissionTo($permission);
-    //     //    $user = \App\Models\User::find(5);
-    //     //    $role = Role::findByName('SuperAdmin');
-    //     //    $user->assignRole($role);
+//     //    $role = Role::findByName('SuperAdmin');
+//     //    $role1->givePermissionTo('delete user');
+//     //    $role1->givePermissionTo('create user');
+//     //    $role = Role::findByName('User');
+//     //    $role->revokePermissionTo(['PoBuyer','QoSupplier']);
+//     //      $role->givePermissionTo('PoBuyer');
+//     //      $role->givePermissionTo('QoSupplier');
+//     //    $role1->givePermissionTo('read user');
+//     //    $user = \App\Models\User::findOrFail(5);
+//     //    $permission = Permission::findByName('delete user');
+//     //    dd($role1);
+//     //    $role->givePermissionTo($permission);
+//     //    $user = \App\Models\User::find(5);
+//     //    $role = Role::findByName('SuperAdmin');
+//     //    $user->assignRole($role);
 // });
 
 // //

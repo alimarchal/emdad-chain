@@ -78,6 +78,7 @@ class QouteController extends Controller
      */
     public function update(Request $request, Qoute $qoute)
     {
+
         dd($request->all());
     }
 
@@ -145,7 +146,29 @@ class QouteController extends Controller
 
     public function QoutationsBuyerReceivedQouteID(Request $request, Qoute $QouteItem)
     {
-        // dd($QouteItem);
+
         return view('buyer.qoutesrespond', compact('QouteItem'));
+    }
+
+    public function updateModificationNeeded(Request $request, Qoute $qoute)
+    {
+        $qoute_status = 'ModificationNeeded';
+        $qoute->update([
+            'qoute_status' => $qoute_status,
+            'qoute_updated_user_id' => auth()->user()->id,
+        ]);
+        session()->flash('message', 'Qoute status changes to ' . $qoute_status);
+        return redirect()->back();
+    }
+
+    public function updateRejected(Request $request, Qoute $qoute)
+    {
+        $qoute_status = 'Rejected';
+        $qoute->update([
+            'qoute_status' => $qoute_status,
+            'qoute_updated_user_id' => auth()->user()->id,
+        ]);
+        session()->flash('message', 'Qoute status changes to ' . $qoute_status);
+        return redirect()->back();
     }
 }

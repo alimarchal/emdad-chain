@@ -17,6 +17,7 @@ class CreateQouteMessagesTable extends Migration
             $table->id();
             $table->foreignId('qoute_id')->nullable()->index();
             $table->foreignId('user_id')->nullable()->index();
+            $table->text('message')->nullable();
             $table->timestamps();
         });
     }
