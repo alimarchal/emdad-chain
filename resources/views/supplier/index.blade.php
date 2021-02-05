@@ -13,7 +13,7 @@
             </button>
         </div>
     @endif
-    <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$collection->count()) seems empty @endif
+    <h2 class="text-2xl font-bold py-2 text-center m-2">Items List @if (!$collection->count()) seems empty @endif
     </h2>
 
     <!-- This example requires Tailwind CSS v2.0+ -->
@@ -80,45 +80,48 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($collection as $rfp)
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->id }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            @if ($rfp->file_path)
-                                                <a href="{{ Storage::url($rfp->file_path) }}">
-                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
-                                                        </path>
-                                                    </svg>
-                                                </a>
-                                            @else
-                                                #N/A
-                                            @endif
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->item_name }}
-                                        </td>
-
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->business->business_name }}
-                                        </td>
-
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->quantity }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->created_at->format('d-m-Y') }} <br>
-                                        </td>
-
-
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="{{ url('viewRFQs/'.$rfp->id) }}" class=" px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                Response
+                                @if ($rfp->qoutes->isEmpty())
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->id }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        @if ($rfp->file_path)
+                                            <a href="{{ Storage::url($rfp->file_path) }}">
+                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
+                                                    </path>
+                                                </svg>
                                             </a>
-                                        </td>
+                                        @else
+                                            #N/A
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->item_name }}
+                                    </td>
 
-                                    </tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->business->business_name }}
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->quantity }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->created_at->format('d-m-Y') }} <br>
+                                    </td>
+
+
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <a href="{{ url('viewRFQs/'.$rfp->id) }}" class=" px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                            Response
+                                        </a>
+                                    </td>
+
+                                </tr>
+                                @endif
+                                    
                                 @endforeach
                             </tbody>
                         </table>

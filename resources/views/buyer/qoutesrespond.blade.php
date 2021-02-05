@@ -12,7 +12,7 @@
             </button>
         </div>
     @endif
-    <div class="flex flex-col bg-white rounded mt-8">
+    <div class="flex flex-col bg-white rounded mt-2">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg p-4">
@@ -58,18 +58,18 @@
                     </div>
 
                     <div class="border-2 p-2 m-2">
-                        @foreach($QouteItem->messages as $msg)
-                            Message from {{$msg->usertype}} : {{strip_tags($msg->message)}} <br>
+                        @foreach ($QouteItem->messages as $msg)
+                            Message from {{ $msg->usertype }} : {{ strip_tags($msg->message) }} <br>
                         @endforeach
                     </div>
 
                     <hr>
-                    <form action="{{route('QuotationMessage.store')}}" method="post">
+                    <form action="{{ route('QuotationMessage.store') }}" method="post">
                         @csrf
                         <h1 class="text-center text-2xl mt-4">Message to Buyer</h1>
                         <textarea name="message" id="message" cols="30" rows="10" class="form-input rounded-md shadow-sm mt-1 block w-full" autocomplete="name"></textarea>
-                        <x-jet-input-error for="message" class="mt-2"/>
-                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                        <x-jet-input-error for="message" class="mt-2" />
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="qoute_id" value="{{ $QouteItem->id }}">
                         <input type="hidden" name="usertype" value="{{ $QouteItem->business->business_type }}">
 
@@ -83,7 +83,7 @@
                     <br>
                     <hr>
                     <h2 class="text-center text-2xl">
-                        @if($QouteItem->qoute_status == 'ModificationNeeded')
+                        @if ($QouteItem->qoute_status == 'ModificationNeeded')
                             You have choose for modification needed for this quote
                         @elseif($QouteItem->qoute_status == 'Qouted')
                             You have not quoted...
@@ -95,12 +95,18 @@
                     <br>
                     <div class="flex justify-between p-2 m-2">
 
-                        <a href="{{route('updateQoute',$QouteItem->id)}}"
-                           class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
+                        <a href="{{ route('updateQoute', $QouteItem->id) }}"
+                            class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
                             Qoute Again
                         </a>
-                        <a href="{{route('updateRejected',$QouteItem->id)}}"
-                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-blue-800 transition ease-in-out duration-150">Reject
+
+                        <a href="{{ route('updateQoute', $QouteItem->id) }}"
+                            class="inline-flex items-center justify-center px-4 py-2 bg-green-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
+                            Accept
+                        </a>
+
+                        <a href="{{ route('updateRejected', $QouteItem->id) }}"
+                            class="inline-flex items-center justify-center px-4 py-2 bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-blue-800 transition ease-in-out duration-150">Reject
                             Request</a>
                     </div>
                 </div>
@@ -109,7 +115,7 @@
     </div>
     <div class="mt-5">
         <a href="{{ url()->previous() }}"
-           class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+            class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
             Back
         </a>
     </div>
@@ -119,5 +125,6 @@
             plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
             toolbar_mode: 'floating',
         });
+
     </script>
 </x-app-layout>

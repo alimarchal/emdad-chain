@@ -5,30 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64c69728-0452-4a94-b9a8-4b2e346cb301" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/emdad-chain.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/emdad-chain.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/QouteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/QouteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/QouteMessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/QouteMessageController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Qoute.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Qoute.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/QouteMessage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/QouteMessage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_30_145814_create_qoute_messages_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_30_145814_create_qoute_messages_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/_layouts/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/_layouts/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/buyer/qoutesrespond.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/buyer/qoutesrespond.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/navigation-dropdown.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/navigation-dropdown.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/buyer/qoutes.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/buyer/qoutes.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,6 +226,8 @@
       <workItem from="1612419611268" duration="3117000" />
       <workItem from="1612425695494" duration="1474000" />
       <workItem from="1612427183898" duration="15649000" />
+      <workItem from="1612530500159" duration="592000" />
+      <workItem from="1612533415863" duration="1804000" />
     </task>
     <servers />
   </component>

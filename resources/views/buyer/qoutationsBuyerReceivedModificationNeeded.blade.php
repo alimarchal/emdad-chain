@@ -61,7 +61,7 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($collection->qoutes->where('qoute_status', 'Qouted') as $rfp)
+                                @foreach ($collection->qoutes->where('qoute_status', 'ModificationNeeded') as $rfp)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $loop->iteration }}

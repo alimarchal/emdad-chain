@@ -13,7 +13,8 @@
             </button>
         </div>
     @endif
-    <h2 class="text-2xl font-bold py-2 text-center m-2">Qoute List @if (!$collection->qoutes->count()) seems empty @endif
+    <h2 class="text-2xl font-bold py-2 text-center m-2">Qoute List @if (!$collection->qoutes->count()) seems empty
+        @endif
     </h2>
 
     <!-- This example requires Tailwind CSS v2.0+ -->
@@ -61,7 +62,7 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($collection->qoutes->where('qoute_status', 'Qouted') as $rfp)
+                                @foreach ($collection->qoutes->where('qoute_status', 'Accepted') as $rfp)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $loop->iteration }}

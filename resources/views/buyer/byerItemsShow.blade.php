@@ -13,7 +13,7 @@
             </button>
         </div>
     @endif
-    <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$collection->count()) seems empty @endif
+    <h2 class="text-2xl font-bold py-2 text-center m-2">Items List @if (!$collection->count()) seems empty @endif
     </h2>
 
     <!-- This example requires Tailwind CSS v2.0+ -->

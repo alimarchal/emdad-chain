@@ -144,9 +144,26 @@ class QouteController extends Controller
         return view('buyer.qoutes',compact('collection','EOrderID','EOrderItemID'));
     }
 
+    public function QoutationsBuyerReceivedRejected(Request $request, $EOrderID, $EOrderItemID)
+    {
+        $collection = EOrderItems::where('id',$EOrderItemID)->orderBy('created_at', 'desc')->first();
+        return view('buyer.qoutedRejected',compact('collection','EOrderID','EOrderItemID'));
+    }
+
+    public function QoutationsBuyerReceivedModificationNeeded(Request $request, $EOrderID, $EOrderItemID)
+    {
+        $collection = EOrderItems::where('id',$EOrderItemID)->orderBy('created_at', 'desc')->first();
+        return view('buyer.qoutationsBuyerReceivedModificationNeeded',compact('collection','EOrderID','EOrderItemID'));
+    }
+
+    public function QoutationsBuyerReceivedAccepted(Request $request, $EOrderID, $EOrderItemID)
+    {
+        $collection = EOrderItems::where('id',$EOrderItemID)->orderBy('created_at', 'desc')->first();
+        return view('buyer.QoutationsBuyerReceivedAccepted',compact('collection','EOrderID','EOrderItemID'));
+    }
+
     public function QoutationsBuyerReceivedQouteID(Request $request, Qoute $QouteItem)
     {
-
         return view('buyer.qoutesrespond', compact('QouteItem'));
     }
 
@@ -156,6 +173,7 @@ class QouteController extends Controller
         $qoute->update([
             'qoute_status' => $qoute_status,
             'qoute_updated_user_id' => auth()->user()->id,
+            'qoute_status_updated' => $qoute_status,
         ]);
         session()->flash('message', 'Qoute status changes to ' . $qoute_status);
         return redirect()->back();

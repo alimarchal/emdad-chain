@@ -12,7 +12,7 @@
             </button>
         </div>
     @endif
-    <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$collection->count()) seems empty @endif
+    <h2 class="text-2xl font-bold py-2 text-center m-2">Items List @if (!$collection->count()) seems empty @endif
     </h2>
     <!-- This example requires Tailwind CSS v2.0+ -->
     <!-- component -->
@@ -76,6 +76,9 @@
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                          {{ ucwords(str_replace("_", " ", "qoute_status")) }}
                                     </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        Action
+                                   </th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -131,6 +134,12 @@
 
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $rfp->qoute_status }}
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <a href="{{ route('viewRFQsID', $rfp->orderItem->id) }}" class=" px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                Response
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
