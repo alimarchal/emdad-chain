@@ -71,6 +71,7 @@ return array(
     'App\\Models\\Contact' => $baseDir . '/app/Models/Contact.php',
     'App\\Models\\Dashboard' => $baseDir . '/app/Models/Dashboard.php',
     'App\\Models\\Department' => $baseDir . '/app/Models/Department.php',
+    'App\\Models\\DraftPurchaseOrder' => $baseDir . '/app/Models/DraftPurchaseOrder.php',
     'App\\Models\\EBuyerSurvey' => $baseDir . '/app/Models/EBuyerSurvey.php',
     'App\\Models\\EBuyerSurveyAnswer' => $baseDir . '/app/Models/EBuyerSurveyAnswer.php',
     'App\\Models\\ECart' => $baseDir . '/app/Models/ECart.php',

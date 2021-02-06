@@ -174,6 +174,7 @@ class QouteController extends Controller
             'qoute_status' => $qoute_status,
             'qoute_updated_user_id' => auth()->user()->id,
             'qoute_status_updated' => $qoute_status,
+            'status' => 'pending',
         ]);
         session()->flash('message', 'Qoute status changes to ' . $qoute_status);
         return redirect()->back();
@@ -185,6 +186,22 @@ class QouteController extends Controller
         $qoute->update([
             'qoute_status' => $qoute_status,
             'qoute_updated_user_id' => auth()->user()->id,
+            'qoute_status_updated' => $qoute_status,
+            'status' => 'expired',
+        ]);
+        session()->flash('message', 'Qoute status changes to ' . $qoute_status);
+        return redirect()->back();
+    }
+
+    public function qouteAccepted(Request $request, Qoute $qoute)
+    {
+        dd($request->all());
+        $qoute_status = 'accepted';
+        $qoute->update([
+            'qoute_status' => $qoute_status,
+            'qoute_updated_user_id' => auth()->user()->id,
+            'qoute_status_updated' => $qoute_status,
+            'status' => 'completed',
         ]);
         session()->flash('message', 'Qoute status changes to ' . $qoute_status);
         return redirect()->back();

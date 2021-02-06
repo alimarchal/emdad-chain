@@ -100,10 +100,33 @@
                             Qoute Again
                         </a>
 
-                        <a href="{{ route('updateQoute', $QouteItem->id) }}"
-                            class="inline-flex items-center justify-center px-4 py-2 bg-green-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
-                            Accept
-                        </a>
+                        <form action="{{ route('qouteAccepted', $QouteItem->id) }}" method="post">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                            <input type="hidden" name="business_id" value="{{ auth()->user()->business_id }}">
+
+                            <input type="hidden" name="supplier_user_id" value="{{ $QouteItem->supplier_user_id }}">
+                            <input type="hidden" name="supplier_business_id" value="{{ $QouteItem->supplier_business_id }}">
+
+                            <input type="hidden" name="rfq_no" value="{{ $QouteItem->e_order_id }}">
+                            <input type="hidden" name="rfq_item_no" value="{{ $QouteItem->e_order_items_id }}">
+
+                            <input type="hidden" name="item_code" value="{{ $QouteItem->orderItem->item_code }}">
+                            <input type="hidden" name="item_name" value="{{ $QouteItem->orderItem->item_name }}">
+
+                            <input type="hidden" name="uom" value="{{ $QouteItem->orderItem->unit_of_measurement }}">
+                            <input type="hidden" name="brand" value="{{ $QouteItem->orderItem->brand }}">
+
+                            <input type="hidden" name="quantity" value="{{ $QouteItem->quote_quantity }}">
+                            <input type="hidden" name="unit_price" value="{{ $QouteItem->quote_price_per_quantity }}">
+
+
+
+
+                            <input type="hidden" name="payment_term" value="{{ $QouteItem->e_order_items_id }}">
+
+                            <input type="submit" value="Accept" class="inline-flex items-center justify-center px-4 py-2 bg-green-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
+                        </form>
 
                         <a href="{{ route('updateRejected', $QouteItem->id) }}"
                             class="inline-flex items-center justify-center px-4 py-2 bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-blue-800 transition ease-in-out duration-150">Reject

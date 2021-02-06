@@ -185,7 +185,8 @@
                                     <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
                                     <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
                                     <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
-                                    <input type="hidden" name="business_id_buyer" value="{{ $user_business_id }}">
+                                    <input type="hidden" name="supplier_business_id" value="{{ $user_business_id }}">
+                                    <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
@@ -260,7 +261,8 @@
                                     <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
                                     <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
                                     <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
-                                    <input type="hidden" name="business_id_buyer" value="{{ $user_business_id }}">
+                                    <input type="hidden" name="supplier_business_id" value="{{ $user_business_id }}">
+                                    <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="size">

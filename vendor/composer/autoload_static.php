@@ -829,6 +829,7 @@ class ComposerStaticInit07f7cd2550a3a7fe927afb836b636136
         'App\\Models\\Contact' => __DIR__ . '/../..' . '/app/Models/Contact.php',
         'App\\Models\\Dashboard' => __DIR__ . '/../..' . '/app/Models/Dashboard.php',
         'App\\Models\\Department' => __DIR__ . '/../..' . '/app/Models/Department.php',
+        'App\\Models\\DraftPurchaseOrder' => __DIR__ . '/../..' . '/app/Models/DraftPurchaseOrder.php',
         'App\\Models\\EBuyerSurvey' => __DIR__ . '/../..' . '/app/Models/EBuyerSurvey.php',
         'App\\Models\\EBuyerSurveyAnswer' => __DIR__ . '/../..' . '/app/Models/EBuyerSurveyAnswer.php',
         'App\\Models\\ECart' => __DIR__ . '/../..' . '/app/Models/ECart.php',
