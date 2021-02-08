@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DraftPurchaseOrderController;
 use App\Http\Controllers\ECartController;
 use App\Http\Controllers\EOrdersController;
 use App\Http\Controllers\PlacedRFQController;
 use App\Http\Controllers\PurchaseRequestFormController;
 use App\Http\Controllers\QouteController;
+use App\Models\DraftPurchaseOrder;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -144,6 +146,7 @@ Route::middleware(['auth:sanctum'])->resource('QuotationMessage', \App\Http\Cont
 Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/ModificationNeeded', [QouteController::class, 'updateModificationNeeded'])->name('updateQoute');
 Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/Rejected', [QouteController::class, 'updateRejected'])->name('updateRejected');
 Route::middleware(['auth:sanctum'])->post('qoute/{qoute}/Accepted', [QouteController::class, 'qouteAccepted'])->name('qouteAccepted');
+Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'show'])->name('dpo.show');
 
 // Route::get('/role', function () {
 

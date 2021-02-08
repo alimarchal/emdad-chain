@@ -100,41 +100,64 @@
                             Qoute Again
                         </a>
 
-                        <form action="{{ route('qouteAccepted', $QouteItem->id) }}" method="post">
-                            @csrf
-                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                            <input type="hidden" name="business_id" value="{{ auth()->user()->business_id }}">
-
-                            <input type="hidden" name="supplier_user_id" value="{{ $QouteItem->supplier_user_id }}">
-                            <input type="hidden" name="supplier_business_id" value="{{ $QouteItem->supplier_business_id }}">
-
-                            <input type="hidden" name="rfq_no" value="{{ $QouteItem->e_order_id }}">
-                            <input type="hidden" name="rfq_item_no" value="{{ $QouteItem->e_order_items_id }}">
-
-                            <input type="hidden" name="item_code" value="{{ $QouteItem->orderItem->item_code }}">
-                            <input type="hidden" name="item_name" value="{{ $QouteItem->orderItem->item_name }}">
-
-                            <input type="hidden" name="uom" value="{{ $QouteItem->orderItem->unit_of_measurement }}">
-                            <input type="hidden" name="brand" value="{{ $QouteItem->orderItem->brand }}">
-
-                            <input type="hidden" name="quantity" value="{{ $QouteItem->quote_quantity }}">
-                            <input type="hidden" name="unit_price" value="{{ $QouteItem->quote_price_per_quantity }}">
-
-
-
-
-                            <input type="hidden" name="payment_term" value="{{ $QouteItem->e_order_items_id }}">
-
-                            <input type="submit" value="Accept" class="inline-flex items-center justify-center px-4 py-2 bg-green-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
-                        </form>
-
                         <a href="{{ route('updateRejected', $QouteItem->id) }}"
                             class="inline-flex items-center justify-center px-4 py-2 bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-blue-800 transition ease-in-out duration-150">Reject
                             Request</a>
                     </div>
+
+                    <br>
+                    <hr>
+                    <br>
+                    <form action="{{ route('qouteAccepted', $QouteItem->id) }}" method="post">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                        <input type="hidden" name="business_id" value="{{ auth()->user()->business_id }}">
+
+                        <input type="hidden" name="supplier_user_id" value="{{ $QouteItem->supplier_user_id }}">
+                        <input type="hidden" name="supplier_business_id" value="{{ $QouteItem->supplier_business_id }}">
+
+                        <input type="hidden" name="rfq_no" value="{{ $QouteItem->e_order_id }}">
+                        <input type="hidden" name="rfq_item_no" value="{{ $QouteItem->e_order_items_id }}">
+
+                        <input type="hidden" name="item_code" value="{{ $QouteItem->orderItem->item_code }}">
+                        <input type="hidden" name="item_name" value="{{ $QouteItem->orderItem->item_name }}">
+
+                        <input type="hidden" name="uom" value="{{ $QouteItem->orderItem->unit_of_measurement }}">
+                        <input type="hidden" name="brand" value="{{ $QouteItem->orderItem->brand }}">
+
+                        <input type="hidden" name="quantity" value="{{ $QouteItem->quote_quantity }}">
+                        <input type="hidden" name="unit_price" value="{{ $QouteItem->quote_price_per_quantity }}">
+
+                        <input type="hidden" name="sub_total" value="{{ ($QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity) }}">
+                        <input type="hidden" name="delivery_time" value="{{ $QouteItem->shipping_time_in_days }}">
+                        <input type="hidden" name="qoute_no" value="{{ $QouteItem->id }}">
+
+
+                        <x-jet-label for="delivery_city" value="{{ __('Delivery City') }}" />
+                        <x-jet-input id="delivery_city" class="block mt-1 w-full" type="input" name="delivery_city" :value="old('delivery_city')" required autofocus />
+
+                        <x-jet-label for="address" class="my-2" value="{{ __('Address') }}" />
+                        
+                        <textarea name="address" id="address"></textarea>
+
+                        <x-jet-label for="Remarks" value="{{ __('Remarks') }}" />
+                        <textarea name="remarks" id="remarks"></textarea>
+
+                        <x-jet-label for="payment_term" class="my-2" value="{{ __('Payment Term') }}" />
+                        <select name="payment_term" id="payment_term" class="form-input rounded-md shadow-sm border p-2 w-full" required>
+                            <option value="">--Select--</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Credit">Credit</option>
+                            <option value="Online">Online</option>
+                        </select>
+
+                        <input type="submit" value="Accept"
+                            class="inline-flex items-center justify-center px-4 my-5 py-2 bg-green-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
+
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <div class="mt-5">
         <a href="{{ url()->previous() }}"

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DraftPurchaseOrder;
 use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Qoute;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QouteController extends Controller
 {
@@ -135,31 +137,31 @@ class QouteController extends Controller
     public function QoutationsBuyerReceivedRFQItemsByID(Request $request, $EOrderItems)
     {
         $collection = EOrderItems::where('e_order_id', $EOrderItems)->orderBy('created_at', 'desc')->get();
-        return view('buyer.byerItemsShow', compact('collection','EOrderItems'));
+        return view('buyer.byerItemsShow', compact('collection', 'EOrderItems'));
     }
 
     public function QoutationsBuyerReceivedQoutes(Request $request, $EOrderID, $EOrderItemID)
     {
-        $collection = EOrderItems::where('id',$EOrderItemID)->orderBy('created_at', 'desc')->first();
-        return view('buyer.qoutes',compact('collection','EOrderID','EOrderItemID'));
+        $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
+        return view('buyer.qoutes', compact('collection', 'EOrderID', 'EOrderItemID'));
     }
 
     public function QoutationsBuyerReceivedRejected(Request $request, $EOrderID, $EOrderItemID)
     {
-        $collection = EOrderItems::where('id',$EOrderItemID)->orderBy('created_at', 'desc')->first();
-        return view('buyer.qoutedRejected',compact('collection','EOrderID','EOrderItemID'));
+        $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
+        return view('buyer.qoutedRejected', compact('collection', 'EOrderID', 'EOrderItemID'));
     }
 
     public function QoutationsBuyerReceivedModificationNeeded(Request $request, $EOrderID, $EOrderItemID)
     {
-        $collection = EOrderItems::where('id',$EOrderItemID)->orderBy('created_at', 'desc')->first();
-        return view('buyer.qoutationsBuyerReceivedModificationNeeded',compact('collection','EOrderID','EOrderItemID'));
+        $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
+        return view('buyer.qoutationsBuyerReceivedModificationNeeded', compact('collection', 'EOrderID', 'EOrderItemID'));
     }
 
     public function QoutationsBuyerReceivedAccepted(Request $request, $EOrderID, $EOrderItemID)
     {
-        $collection = EOrderItems::where('id',$EOrderItemID)->orderBy('created_at', 'desc')->first();
-        return view('buyer.QoutationsBuyerReceivedAccepted',compact('collection','EOrderID','EOrderItemID'));
+        $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
+        return view('buyer.QoutationsBuyerReceivedAccepted', compact('collection', 'EOrderID', 'EOrderItemID'));
     }
 
     public function QoutationsBuyerReceivedQouteID(Request $request, Qoute $QouteItem)
@@ -195,15 +197,31 @@ class QouteController extends Controller
 
     public function qouteAccepted(Request $request, Qoute $qoute)
     {
-        dd($request->all());
-        $qoute_status = 'accepted';
-        $qoute->update([
-            'qoute_status' => $qoute_status,
-            'qoute_updated_user_id' => auth()->user()->id,
-            'qoute_status_updated' => $qoute_status,
-            'status' => 'completed',
-        ]);
-        session()->flash('message', 'Qoute status changes to ' . $qoute_status);
-        return redirect()->back();
+        // dd($request->all());
+        $request->merge(['po_date' => date('Y-m-d')]);
+        $request->merge(['po_status' => 'pending']);
+        $request->merge(['status' => 'pending']);
+        $dpo = null;
+        try {
+            DB::beginTransaction();
+            $dpo = DraftPurchaseOrder::create($request->all());
+            $qoute_status = 'accepted';
+            $qoute->update([
+                'qoute_status' => $qoute_status,
+                'qoute_updated_user_id' => auth()->user()->id,
+                'qoute_status_updated' => $qoute_status,
+                'status' => 'completed',
+                'dpo' => $dpo->id,
+            ]);
+            DB::commit();
+            /* Transaction successful. */
+        } catch (\Exception $e) {
+
+            DB::rollback();
+            /* Transaction failed. */
+        }
+
+        session()->flash('message', 'Draft purchase order has been generated');
+        return redirect()->route('dpo.show', $dpo->id);
     }
 }
