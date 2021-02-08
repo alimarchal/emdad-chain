@@ -80,8 +80,13 @@ class QouteController extends Controller
      */
     public function update(Request $request, Qoute $qoute)
     {
-
-        dd($request->all());
+        $request->merge(['user_id' => auth()->user()->id]);
+        $request->merge(['qoute_status' => 'Qouted']);
+        $request->merge(['status' => 'pending']);
+        $request->merge(['qoute_status_updated' => 'Qouted']);
+        session()->flash('message', 'You have update qoute.');
+        $qoute->update($request->all());
+        return redirect()->back();
     }
 
     /**
@@ -197,7 +202,6 @@ class QouteController extends Controller
 
     public function qouteAccepted(Request $request, Qoute $qoute)
     {
-        // dd($request->all());
         $request->merge(['po_date' => date('Y-m-d')]);
         $request->merge(['po_status' => 'pending']);
         $request->merge(['status' => 'pending']);

@@ -109,8 +109,6 @@ class PlacedRFQController extends Controller
         sort($business_categories);
         // $business_categories = implode(",", $business_categories);
         $collection = EOrderItems::where('status', 'pending')->whereIn('item_code', $business_categories)->get();
-
-
         return view('supplier.index', compact('collection'));
     }
 
@@ -119,9 +117,9 @@ class PlacedRFQController extends Controller
     {
         $user_id = auth()->user()->id;
         $user_business_id = auth()->user()->business_id;
-        $collection = Qoute::where('e_order_items_id',$eOrderItems->id)->where('user_id',$user_id)->first();
+        $collection = Qoute::where('e_order_items_id', $eOrderItems->id)->where('user_id', $user_id)->first();
 
-        return view('supplier.supplier-qoute', compact('eOrderItems','collection','user_business_id'));
+        return view('supplier.supplier-qoute', compact('eOrderItems', 'collection', 'user_business_id'));
     }
 
 

@@ -171,6 +171,7 @@
                     @elseif($collection && $collection->qoute_status == 'ModificationNeeded')
                         <form method="POST" action="{{ route('qoute.update', $collection->id) }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
+                            @method('PUT')
                             <p class="pt-6 pb-3 font-bold text-2xl text-center">
                                 @if ($collection->qoute_status == 'ModificationNeeded')
                                     <span class="text-red-900">Modification Needed</span>

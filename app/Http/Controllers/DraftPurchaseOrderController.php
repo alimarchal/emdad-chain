@@ -14,7 +14,9 @@ class DraftPurchaseOrderController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user()->id;
+        $dpos = DraftPurchaseOrder::where('user_id', $user)->get();
+        return view('draftPurchaseOrder.index', compact('dpos'));
     }
 
     /**
@@ -46,7 +48,8 @@ class DraftPurchaseOrderController extends Controller
      */
     public function show(DraftPurchaseOrder $draftPurchaseOrder)
     {
-        return view('purchaseOrderInfo.dpo');
+
+        return view('draftPurchaseOrder.show', compact('draftPurchaseOrder'));
     }
 
     /**
