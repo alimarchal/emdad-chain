@@ -1,3 +1,8 @@
+@section('headerScripts')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@endsection
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -13,6 +18,11 @@
             </button>
         </div>
     @endif
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
     {{-- <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$collection->count()) seems empty @endif
     </h2> --}}
 
@@ -29,16 +39,23 @@
 
             <div class="flex space-x-5 mt-3">
                 <input type="text" name="name" id="" class="border p-2 w-full" value="{{ $role->name }}">
-                <input type="text" name="guard_name" id="" class="border p-2 w-1/2" value="{{ $role->guard_name }}" hidden>
+{{--                <input type="text" name="guard_name" id="" class="border p-2 w-1/2" value="{{ $role->guard_name }}" hidden>--}}
 
+            </div>
+
+            <p class="text-gray-600" style="margin-top:10px">Permissons</p>
+
+            <div class="flex space-x-5 mt-3">
+                <select class="w-full inline js-example-basic-multiple" multiple="multiple" name="permissions[]" required>
+                    @foreach($permissions as $id => $permission)
+                        <option value="{{ $id }}" {{ (in_array($id, old('permissions', [])) || isset($role) && $role->permissions()->pluck('name', 'id')->contains($id)) ? 'selected' : '' }}>{{ $permission }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <button type="submit"
                 class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150"
                 style="margin-top: 15px;">Update</button>
-
-
-
 
         </form>
 

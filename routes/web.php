@@ -27,7 +27,7 @@ Route::get('/', function () {
 });
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::middleware(['auth:sanctum'])->resource('users', \App\Http\Controllers\UserController::class);
-Route::middleware(['auth:sanctum'])->post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
+//Route::middleware(['auth:sanctum'])->post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
 Route::middleware(['auth:sanctum'])->post('/registrationType', [\App\Http\Controllers\UserController::class, 'registrationType']);
 Route::middleware(['auth:sanctum'])->resource('/business', \App\Http\Controllers\BusinessController::class);
 Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
@@ -122,6 +122,7 @@ Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [\App\Http\Controllers\P
 
 #################### Roles display and update ##########################
 Route::resource('/role', \App\Http\Controllers\RoleController::class);
+Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'show'])->name('roles');
 //>>>>>>>>>>>>>>>This is Permission Route<<<<<<<<<<<<<<<<<<<<<<<
 Route::resource('/permission', \App\Http\Controllers\PermissionController::class);
 #################### END ##########################

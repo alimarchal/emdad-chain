@@ -58,42 +58,48 @@
                                 <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider">
                                     Permession Name
                                 </th>
-
-
+                                <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    Action
+                                </th>
 
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 ">
                             @foreach ($permissions as $permission)
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap ml-10">
-                                    {{ $loop->iteration }}
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap ml-10">
-                                    <a href="{{ route('permission.edit', $permission->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $permission->name }}</a>
-                                </td>
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap ml-10">
+                                        {{ $loop->iteration }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap ml-10">
+                                        <a href="{{ route('permission.edit', $permission->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $permission->name }}</a>
+                                    </td>
 
-                                <td class="whitespace-nowrap ml-10">
+                                    <td class="whitespace-nowrap ml-10">
 
-                                    {{-- <form action="{{route('permission.destroy',$permission->id)}} " method="POST">
+                                        <a href="{{ route('permission.show', $permission->id) }}" class="text-indigo-600 inline-block hover:text-indigo-900" title="VIEW">
+                                            <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="blue">
+                                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                                            </svg>
+                                        </a>
+                                        <a href="{{ route('permission.edit', $permission->id) }}" class="text-indigo-600 inline-block hover:text-indigo-900" title="EDIT">
+                                            <svg width="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                            </svg>
+                                        </a>
+                                        <form action="{{ route('permission.destroy', $permission->id) }}" method="post" class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE" onsubmit="alert('Are you sure')">
+                                                <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red">
+                                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                                                    <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                                </svg>
+                                            </button>
+                                        </form>
 
-            @csrf
-            @method('DELETE')
-            <input type="submit" name="submit" value="Delete" class="inline-block p-3 text-center text-white transition bg-red-500 rounded-full shadow ripple hover:shadow-lg hover:bg-red-600 focus:outline-none">
-        </form> --}}
-
-                                </td>
-
-
-                                {{-- <td>
-                
-                            <a href="{{route('edit',$role->id)}} ">Edit</a>
-             <i class="fas fa-user-edit">    </i>
-                                   </td> --}}
-
-
+                                    </td>
                                 </tr>
-
                             @endforeach
                         </tbody>
                     </table>

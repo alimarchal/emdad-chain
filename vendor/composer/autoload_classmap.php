@@ -27,6 +27,7 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DashboardController' => $baseDir . '/app/Http/Controllers/DashboardController.php',
     'App\\Http\\Controllers\\DepartmentController' => $baseDir . '/app/Http/Controllers/DepartmentController.php',
+    'App\\Http\\Controllers\\DraftPurchaseOrderController' => $baseDir . '/app/Http/Controllers/DraftPurchaseOrderController.php',
     'App\\Http\\Controllers\\EBuyerSurveyAnswerController' => $baseDir . '/app/Http/Controllers/EBuyerSurveyAnswerController.php',
     'App\\Http\\Controllers\\EBuyerSurveyController' => $baseDir . '/app/Http/Controllers/EBuyerSurveyController.php',
     'App\\Http\\Controllers\\ECartController' => $baseDir . '/app/Http/Controllers/ECartController.php',

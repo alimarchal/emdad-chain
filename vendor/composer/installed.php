@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '0fceaeb6db02082427107623467bcda48d4c14de',
+    'reference' => '0a92b42fa4f4c58a118ae067563c0897129e24ea',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -234,12 +234,12 @@
     ),
     'facade/ignition' => 
     array (
-      'pretty_version' => '2.5.10',
-      'version' => '2.5.10.0',
+      'pretty_version' => '2.5.11',
+      'version' => '2.5.11.0',
       'aliases' => 
       array (
       ),
-      'reference' => '98154e8b991fb616304c213cd405299ffedc26f5',
+      'reference' => 'e91d67353054bf827c64687fcac5ea44e4dcec54',
     ),
     'facade/ignition-contracts' => 
     array (
@@ -625,7 +625,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '0fceaeb6db02082427107623467bcda48d4c14de',
+      'reference' => '0a92b42fa4f4c58a118ae067563c0897129e24ea',
     ),
     'laravel/sanctum' => 
     array (
@@ -674,12 +674,12 @@
     ),
     'livewire/livewire' => 
     array (
-      'pretty_version' => 'v2.3.14',
-      'version' => '2.3.14.0',
+      'pretty_version' => 'v2.3.16',
+      'version' => '2.3.16.0',
       'aliases' => 
       array (
       ),
-      'reference' => '3ead3ff1342d9b17c7fd3559fd1a5f880cf78f28',
+      'reference' => '8f027e9bc5ad1f08f0c900244e6fdb9966f7a287',
     ),
     'maatwebsite/excel' => 
     array (
@@ -775,12 +775,12 @@
     ),
     'nesbot/carbon' => 
     array (
-      'pretty_version' => '2.44.0',
-      'version' => '2.44.0.0',
+      'pretty_version' => '2.45.0',
+      'version' => '2.45.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e6ef33cb1f67a4bed831ed6d0f7e156739a5d8cd',
+      'reference' => 'e2ba3174ce869da1713c38340dbb36572dfacd5a',
     ),
     'nikic/php-parser' => 
     array (
