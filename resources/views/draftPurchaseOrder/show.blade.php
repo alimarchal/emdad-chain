@@ -169,20 +169,26 @@
 
 
                     <div class="flex justify-between mt-4 mb-4">
-                        <button
-                            class="inline-flex mx-4 items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">Cancel
-                            P.O</button>
-                        <button
-                            class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Reject
-                            to Edit</button>
-                        <button
-                            class="inline-flex  mx-4  items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">DPO
-                            Approved</button>
+
+
+        @if ($draftPurchaseOrder->status == 'approved')
+            <span class="px-3 py-3 bg-green-800 text-white rounded">APPROVED D.P.O</span>
+        @elseif ($draftPurchaseOrder->status == 'cancel')
+            <span class="px-3 py-3 bg-red-800 text-white rounded">Caneled P.O</span>
+        @elseif ($draftPurchaseOrder->status == 'rejectToEdit')
+            <span class="px-3 py-3 bg-red-600 text-white rounded uppercase">Rejected for Edit</span>
+        @else
+            <a href="{{ route('dpo.approved', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">DPO Approved</a>
+            <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Cancel P.O</a>
+            <a href="{{ route('dpo.rejected', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Reject to Edit</a>
+    
+        @endif
+
+
+                        
+
                     </div>
 
-
-
-                   
                     <div class="flex justify-between px-2 py-2 mt-2 h-15">
                         <div></div>
                         <div class="mt-3">Thanks for your Business</div>

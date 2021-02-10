@@ -148,6 +148,9 @@ Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/Rejected', [QouteControl
 Route::middleware(['auth:sanctum'])->post('qoute/{qoute}/Accepted', [QouteController::class, 'qouteAccepted'])->name('qouteAccepted');
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'show'])->name('dpo.show');
 Route::middleware(['auth:sanctum'])->get('dpo', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'index'])->name('dpo.index');
+Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/approved', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'approved'])->name('dpo.approved');
+Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/rejected', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'rejected'])->name('dpo.rejected');
+Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/cancel', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'cancel'])->name('dpo.cancel');
 
 // Route::get('/role', function () {
 

@@ -43,6 +43,8 @@ class CreateDraftPurchaseOrdersTable extends Migration
             $table->string('po_status')->nullable();
             $table->date('po_date')->nullable();
             $table->string('remarks')->nullable();
+            $table->string('approval_details')->nullable();
+            $table->string('remarks')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

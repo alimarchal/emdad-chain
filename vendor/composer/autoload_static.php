@@ -785,6 +785,7 @@ class ComposerStaticInit07f7cd2550a3a7fe927afb836b636136
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\DepartmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/DepartmentController.php',
+        'App\\Http\\Controllers\\DraftPurchaseOrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/DraftPurchaseOrderController.php',
         'App\\Http\\Controllers\\EBuyerSurveyAnswerController' => __DIR__ . '/../..' . '/app/Http/Controllers/EBuyerSurveyAnswerController.php',
         'App\\Http\\Controllers\\EBuyerSurveyController' => __DIR__ . '/../..' . '/app/Http/Controllers/EBuyerSurveyController.php',
         'App\\Http\\Controllers\\ECartController' => __DIR__ . '/../..' . '/app/Http/Controllers/ECartController.php',
