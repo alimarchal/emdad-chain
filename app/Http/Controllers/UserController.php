@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Business;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Permission;
@@ -44,6 +45,8 @@ class UserController extends Controller
         if (auth()->user()->usertype == "superadmin") {
 
             $users = User::paginate(50);
+//            $users = User::with('roles')->get();
+//            dd($users);
             $business = Business::all();
             return view('users.index', compact('users', 'business'));
         } else {
@@ -58,7 +61,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles  = Role::all();
+        $permissions  = Permission::all();
+        return view('users.create', compact('roles','permissions'));
     }
 
     /**
@@ -69,7 +74,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (! Gate::allows('create user')) {
+            return abort(401);
+        }
+        $user = User::create($request->all());
+        $role = $request->input('role') ? $request->input('role') : [];
+        $permissions = $request->input('permissions') ? $request->input('permissions') : [];
+        $user->assignRole($role);
+        $user->syncPermissions($permissions);
+
+        return redirect()->route('users.index');
     }
 
     /**
@@ -91,11 +105,15 @@ class UserController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
-        $business = Business::all();
-        return view('users.edit', compact('user', 'business'));
+//        $user = User::findOrFail($id);
+//        $roles  = Role::all();
+//        $permissions  = Permission::all();
+        $roles = Role::get()->pluck('name', 'name');
+        $permissions = Permission::get()->pluck('name', 'name');
+//        $userRole =  $user->roles->pluck('id');
+        return view('users.edit', compact('user', 'roles','permissions'));
     }
 
     /**
@@ -107,13 +125,17 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if ($request->has('img')) {
-            $path = $request->file('img')->store('', 'public');
-            $request->merge(['profile_photo_path' => $path]);
-        }
+        if (! Gate::allows('edit user')) {
+        return abort(401);
+          }
         $user->update($request->all());
-        session()->flash('message', 'Profile successfully updated.');
-        return redirect()->route('users.edit', $user->id);
+        $roles = $request->input('role') ? $request->input('role') : [];
+        $permissions = $request->input('permissions') ? $request->input('permissions') : [];
+        $user->syncRoles($roles);
+        $user->syncPermissions($permissions);
+
+        session()->flash('message', 'User successfully updated.');
+        return redirect()->route('users.index');
     }
 
     /**

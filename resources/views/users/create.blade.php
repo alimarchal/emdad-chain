@@ -1,34 +1,33 @@
+@section('headerScripts')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@endsection
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Add New User') }}
         </h2>
     </x-slot>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+            $('.js-example-basic-single').select2();
+        });
+    </script>
 
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             @include('users.sessionMessage')
             <div class="mt-5 md:mt-0 md:col-span-2">
-                <form method="post" action="{{route('createUserForCompany',auth()->user()->business->id)}}">
+{{--                <form method="post" action="{{route('createUserForCompany',auth()->user()->business->id)}}">--}}
+                <form method="post" action="{{route('users.store')}}">
                     @csrf
                     <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
 
-                            <h3 class="text-2xl text-center mb-2">{{\App\Models\Business::find(auth()->user()->business_id)->business_name}}</h3>
+                            <h3 class="text-2xl text-center mb-2">Add User</h3>
                             <div class="grid grid-cols-8 gap-6">
-                                <!-- Gender -->
-                                <div class="col-span-6 sm:col-span-2">
-                                    <label class="block font-medium text-sm text-gray-700" for="gender">
-                                        Gender
-                                    </label>
-                                    <select name="gender" id="gender" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
-                                        <option value="">Select</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                    <input type="hidden" name="business_id" value="{{auth()->user()->business_id}}">
-                                    <input type="hidden" name="usertype" value="company_user_{{auth()->user()->business_id}}">
-                                </div>
                                 <!-- Name -->
                                 <div class="col-span-6 sm:col-span-2">
                                     <label class="block font-medium text-sm text-gray-700" for="name">
@@ -53,23 +52,6 @@
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-2">
-                                    <label class="block font-medium text-sm text-gray-700" for="Mobile">
-                                        Mobile
-                                    </label>
-                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="Mobile" type="tel" name="mobile" required>
-                                </div>
-                                <!-- Designation -->
-                                <div class="col-span-6 sm:col-span-2">
-                                    <label class="block font-medium text-sm text-gray-700" for="designation">
-                                        Designation
-                                    </label>
-                                    <select name="designation" id="designation" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
-                                        <option value="">Select</option>
-                                        <option value="General Manager">General Manager</option>
-                                        <option value="Department Head">Department Head</option>
-                                        <option value="Section Head">Section Head</option>
-                                        <option value="Warehouse Manager">Warehouse Manager</option>
-                                    </select>
                                 </div>
 
                                 <!-- Roles -->
@@ -77,44 +59,26 @@
                                     <label class="block font-medium text-sm text-gray-700" for="role">
                                         Role
                                     </label>
-                                    <select name="role" id="role" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
-                                        <option value="">Select</option>
-                                        @if(auth()->user()->registration_type == "Buyer")
-                                            @foreach(Spatie\Permission\Models\Role::all() as $role)
-                                                @if($role->id >= 11 && $role->id <= 18)
-                                                    <option value="{{$role->id}}">{{str_replace('Buyer','',$role->name)}}</option>
-                                                @endif
-                                            @endforeach
-                                        @elseif(auth()->user()->registration_type == "Supplier")
-                                            @foreach(Spatie\Permission\Models\Role::all() as $role)
-                                                @if($role->id >= 5 && $role->id <= 10)
-                                                    <option value="{{$role->id}}">{{$role->name}}</option>
-                                                @endif
-                                            @endforeach
-                                        @endif
+                                    <select name="role" id="role" class="form-input rounded-md shadow-sm mt-1 block w-full js-example-basic-single" required>
+                                        <option disabled selected value="">Select</option>
+                                        @foreach($roles as $role)
+                                            <option value="{{$role->id}}">{{$role->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
+                                <!-- Permissions -->
+                                <div class="col-span-12 sm:col-span-9">
+                                    <label class="block font-medium text-sm text-gray-700" for="designation">
+                                        Permissions
+                                    </label>
+                                    <select multiple="multiple" name="permissions[]" id="designation" class="form-input rounded-md shadow-sm mt-1 block w-full js-example-basic-multiple" required>
+                                        @foreach($permissions as $permission)
+                                            <option value="{{$permission->id}}">{{$permission->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-{{--                                <div class="col-span-6">--}}
-{{--                                    <label class="block font-medium text-sm text-gray-700" for="permissions">--}}
-{{--                                        Permissions--}}
-{{--                                    </label>--}}
-{{--                                    <div class="mt-2 grid grid-cols-1 md:grid-cols-3 gap-4">--}}
-
-{{--                                        @foreach(\Spatie\Permission\Models\Permission::all() as $permission)--}}
-
-{{--                                            @if($permission->name == "PoBuyer" || $permission->name == "QoSupplier" )--}}
-{{--                                                <label class="flex items-center">--}}
-{{--                                                    <input type="checkbox" class="form-checkbox" value="{{$permission->name}}" name="permission[]">--}}
-{{--                                                    <span class="ml-2 text-sm text-gray-600">{{$permission->name}}</span>--}}
-{{--                                                </label>--}}
-{{--                                            @endif--}}
-
-{{--                                        @endforeach--}}
-
-{{--                                    </div>--}}
-{{--                                </div>--}}
                             </div>
                         </div>
 

@@ -1,3 +1,9 @@
+@section('headerScripts')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@endsection
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -13,6 +19,11 @@
             </button>
         </div>
     @endif
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
     {{-- <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$collection->count()) seems empty @endif
     </h2> --}}
     <div class="flex space-x-5 mt-3">
@@ -34,13 +45,20 @@
         <h3 class="text-2xl text-gray-900 font-semibold text-center"> Add a Role</h3>
         <p class="text-gray-600">Role name</p>
 
-
-
-
         <div class="flex space-x-5 mt-3">
             <input type="text" name="name" id="" class="border p-2 w-full">
 
-            <input type="text" placeholder="Guard Name, Web" name="guard_name" id="" class="border p-2 w-1/2" value="web" hidden>
+{{--            <input type="text" placeholder="Guard Name, Web" name="guard_name" id="" class="border p-2 w-1/2" value="web" hidden>--}}
+        </div>
+
+        <p class="text-gray-600" style="margin-top:10px">Permissons</p>
+
+        <div class="flex space-x-5 mt-3">
+            <select class="w-full inline js-example-basic-multiple" multiple="multiple" name="permissions[]" required>
+                @foreach($permissions as $permission)
+                    <option value="{{$permission->id}}">{{$permission->name}}</option>
+                @endforeach
+            </select>
         </div>
 
         <button type="submit"
