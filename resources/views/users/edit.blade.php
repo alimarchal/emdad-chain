@@ -50,7 +50,7 @@
                                     <label class="block font-medium text-sm text-gray-700" for="password">
                                         Password
                                     </label>
-                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="password" type="password" name="password" required>
+                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="password" type="password" name="password">
                                 </div>
 
                                 <!-- Empty -->
@@ -82,7 +82,8 @@
 {{--                                            <option value="{{ $id }}" {{ (in_array($id, old('permissions', [])) || isset($userRole) && $userRole->pluck('name', 'id')->contains($id)) ? 'selected' : '' }}>{{ $permission->name }}</option>--}}
 {{--                                        @endforeach--}}
                                             @foreach($permissions as $id => $permissions)
-                                                <option value="{{ $id }}" {{ (in_array($id, old('permissions', [])) || isset($user) && $user->permissions()->pluck('name', 'id')->contains($id)) ? 'selected' : '' }}>{{ $permissions }}</option>
+{{--                                                <option value="{{ $id }}" {{ (in_array($id, old('permissions', [])) || isset($user) && $user->permissions()->pluck('name', 'id')->contains($id)) ? 'selected' : '' }}>{{ $permissions }}</option>--}}
+                                                <option value="{{ $id }}" {{ (in_array($id, old('permissions', [])) || isset($user) && $user->getAllPermissions()->pluck('name', 'id')->contains($id)) ? 'selected' : '' }}>{{ $permissions }}</option>
                                             @endforeach
                                     </select>
                                 </div>

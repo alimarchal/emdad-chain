@@ -28,7 +28,7 @@
                         <div class="flex float-right border-red-300">
                             <img class="h-10 w-10 rounded-full" src="{{ (empty($user->profile_photo_path))?Storage::url("images.png"): Storage::url($user->profile_photo_path)}}" alt="Profile Picture">
                         </div>
-                        <select id="business_id" name="business_id" class="border p-2  w-1/2">
+                        <select id="business_id" name="business_id" disabled class="border p-2  w-1/2">
                             <option value="{{$user->business_id}}">{{(is_null($user->business_id)?'#N/A':$user->business->business_name)}}</option>
                         </select>
                         <div class="flex space-x-5 mt-3">
@@ -51,7 +51,7 @@
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <input type="text" name="registration_type" id="" placeholder="Registration Type" class="border p-2 w-1/2" value="{{$user->registration_type}}" readonly>
-                            <select id="profile_approved" name="profile_approved" class="border p-2  w-1/2">
+                            <select id="profile_approved" disabled name="profile_approved" class="border p-2  w-1/2">
                                 <option value="1" {{($user->profile_approved == 1)?'selected':''}}>Yes</option>
                                 <option value="0" {{($user->profile_approved == 0)?'selected':''}}>No</option>
                             </select>
@@ -65,7 +65,7 @@
                             <label class="w-1/2">Profile Picture</label>
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <select id="is_active" name="is_active" class="border p-2  w-1/2">
+                            <select id="is_active" name="is_active" disabled class="border p-2  w-1/2">
                                 <option value="1" {{($user->is_active == 1)?'selected':''}}>Active</option>
                                 <option value="0" {{($user->is_active == 0)?'selected':''}}>In-Active</option>
                             </select>
@@ -74,6 +74,18 @@
                                     <img class="h-3xl w-24 rounded-full" src="{{ (empty($user->profile_photo_path))?Storage::url("images.png"): Storage::url($user->profile_photo_path)}}" alt="Profile Picture">
                                 </a>
                             </div>
+                        </div>
+                        <div class="flex space-x-5 mt-4">
+                            <label class="w-1/2">Role</label>
+                        </div>
+                        <div class="flex space-x-5 mt-3">
+                            <input type="text" name="name" id="" placeholder="Name" class="border p-2 w-1/2" value="@foreach($user->roles()->pluck('name') as $role) {{$role}} @endforeach" readonly>
+                        </div>
+                        <div class="flex space-x-5 mt-4">
+                            <label class="w-1/2">Permissions</label>
+                        </div>
+                        <div class="flex space-x-5 mt-3">
+                            <textarea type="text" name="name" id="" placeholder="Name" class="border p-2 w-1/2" readonly>@foreach($user->permissions()->pluck('name') as $role) {{$role}} @if(!$loop->last) / @else @endif @endforeach</textarea>
                         </div>
                         <a href="{{url('users')}}" class="text-white bg-green-500 border-0 py-2 px-6 mt-4 float-right mb-4
                         focus:outline-none

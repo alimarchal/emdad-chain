@@ -49,9 +49,9 @@
                             </a>
                         </div>
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                            {{--                            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">--}}
-                            {{--                                <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">--}}
-                            <h2 class="text-2xl font-bold text-center">Roles List</h2>
+{{--                            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">--}}
+{{--                                <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">--}}
+                            <h2 class="text-2xl font-bold text-center">Users List</h2>
                                 @if ($users->count())
                                     <!-- This example requires Tailwind CSS v2.0+ -->
                                     <div class="flex flex-col">
@@ -62,25 +62,16 @@
                                                         <thead>
                                                             <tr>
                                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                                    Name
-                                                                </th>
-                                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                                    Title
-                                                                </th>
-                                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                                    Status
-                                                                </th>
-                                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                                    Approved
-                                                                </th>
-                                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                                    Email Verified
+                                                                    User
                                                                 </th>
                                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                                     Role
                                                                 </th>
-                                                                <th scope="col" class="px-6 py-3 bg-gray-50">
-                                                                    <span class="sr-only">Edit</span>
+                                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                                    Permissions
+                                                                </th>
+                                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                                    Action
                                                                 </th>
                                                             </tr>
                                                         </thead>
@@ -103,30 +94,19 @@
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td class="px-6 py-4 whitespace-nowrap">
-                                                                        <div class="text-sm text-gray-900">{{ $user->designation }}</div>
-                                                                        @if ($user->designation)
-                                                                            <div class="text-sm text-gray-500">Designation: {{ $user->designation }}</div>
-                                                                        @endif
-                                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $user->is_active == 1 ? 'bg-green-100' : 'bg-red-100' }}  text-green-800">
-                                                                            {{ $user->is_active == 1 ? 'Active' : 'In-Active' }}
-                                                                        </span>
-                                                                    </td>
-                                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $user->profile_approved == 1 ? 'bg-green-100' : 'bg-red-100' }}  text-black-800">
-                                                                            {{ $user->profile_approved == 1 ? 'Yes' : 'No' }}
-                                                                        </span>
-                                                                    </td>
-                                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ !is_null($user->email_verified_at) ? 'bg-green-100' : 'bg-red-100' }}  text-green-800">
-                                                                            {{ !is_null($user->email_verified_at) ? 'Verified' : 'Not-Verified' }}
-                                                                        </span>
-                                                                    </td>
                                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                                         @foreach($user->roles()->pluck('name') as $role)
                                                                             <span class="badge badge-info">{{ $role }}</span>
                                                                         @endforeach
+                                                                    </td>
+                                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                                        @if(!empty($user->getAllPermissions()))
+                                                                            @foreach($user->getAllPermissions() as $v)
+                                                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100  text-green-800">
+                                                                        {{$v->name }}
+                                                                    </span>
+                                                                            @endforeach
+                                                                        @endif
                                                                     </td>
                                                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
 
@@ -172,6 +152,8 @@
                                         </button>
                                     </div>
                                 @endif
+{{--                                    </div>--}}
+{{--                                </div>--}}
                         </div>
                     </div>
 

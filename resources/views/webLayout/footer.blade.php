@@ -56,7 +56,7 @@
 
         <div class="me-md-auto text-center text-md-left">
             <div class="copyright">
-                &copy; Copyright {{date('Y')}} - <strong><span>{{config('app.name')}}</span></strong>. All Rights Reserved
+                &copy; Copyright {{date('Y')}} - <strong><span>{{config('app.name')}}</span></strong>. All Rights Reserved. Powered by: <strong>Websoft</strong>
             </div>
             <div class="credits">
                 {{--                Designed by <a href="#">Ali Raza Marchal</a>--}}
