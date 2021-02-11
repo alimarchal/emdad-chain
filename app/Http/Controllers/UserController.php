@@ -43,10 +43,9 @@ class UserController extends Controller
 
         // testing end
         if (auth()->user()->usertype == "superadmin") {
-
             $users = User::paginate(50);
-//            $users = User::with('roles')->get();
-//            dd($users);
+            //            $users = User::with('roles')->get();
+            //            dd($users);
             $business = Business::all();
             return view('users.index', compact('users', 'business'));
         } else {
@@ -63,7 +62,7 @@ class UserController extends Controller
     {
         $roles  = Role::all();
         $permissions  = Permission::all();
-        return view('users.create', compact('roles','permissions'));
+        return view('users.create', compact('roles', 'permissions'));
     }
 
     /**
@@ -74,7 +73,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if (! Gate::allows('create user')) {
+        if (!Gate::allows('create user')) {
             return abort(401);
         }
         $user = User::create($request->all());
@@ -107,13 +106,13 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-//        $user = User::findOrFail($id);
-//        $roles  = Role::all();
-//        $permissions  = Permission::all();
+        //        $user = User::findOrFail($id);
+        //        $roles  = Role::all();
+        //        $permissions  = Permission::all();
         $roles = Role::get()->pluck('name', 'name');
         $permissions = Permission::get()->pluck('name', 'name');
-//        $userRole =  $user->roles->pluck('id');
-        return view('users.edit', compact('user', 'roles','permissions'));
+        //        $userRole =  $user->roles->pluck('id');
+        return view('users.edit', compact('user', 'roles', 'permissions'));
     }
 
     /**
@@ -125,9 +124,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if (! Gate::allows('edit user')) {
-        return abort(401);
-          }
+        if (!Gate::allows('edit user')) {
+            return abort(401);
+        }
         $user->update($request->all());
         $roles = $request->input('role') ? $request->input('role') : [];
         $permissions = $request->input('permissions') ? $request->input('permissions') : [];
@@ -175,7 +174,7 @@ class UserController extends Controller
             'password' => ['required', 'string', 'max:191'],
         ])->validate();
 
-        $role = $role->where('id',$input['role'])->first();
+        $role = $role->where('id', $input['role'])->first();
         $user = User::create([
             'gender' => $input['gender'],
             'name' => $input['name'],

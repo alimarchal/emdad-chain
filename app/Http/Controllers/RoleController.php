@@ -18,9 +18,9 @@ class RoleController extends Controller
     public function index()
     {
         // dd('ssdsdsd');
-        $roles=Role::all();
+        $roles = Role::all();
 
-        return view('role.index',compact('roles'));
+        return view('role.index', compact('roles'));
     }
 
     /**
@@ -32,7 +32,7 @@ class RoleController extends Controller
     {
         $permissions = Permission::all();
 
-       return view('role.createrole', compact('permissions'));
+        return view('role.createrole', compact('permissions'));
     }
 
     /**
@@ -43,9 +43,9 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-         $request->validate([
-            'name'=>'required',
-            'permissions'=>'required',
+        $request->validate([
+            'name' => 'required',
+            'permissions' => 'required',
         ]);
 
 
@@ -53,7 +53,7 @@ class RoleController extends Controller
         $permissions = $request->input('permissions') ? $request->input('permissions') : [];
         $role->givePermissionTo($permissions);
 
-        return redirect('/role')->with('success','Role created successfully!');
+        return redirect('/role')->with('success', 'Role created successfully!');
     }
 
     /**
@@ -64,8 +64,8 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-//        $roles = Role::all();
-//        return view('role.show', compact('roles'));
+        //        $roles = Role::all();
+        //        return view('role.show', compact('roles'));
     }
 
     /**
@@ -79,7 +79,7 @@ class RoleController extends Controller
         $role = Role::find($id);
         $permissions = Permission::get()->pluck('name', 'name');
 
-       return view('role.edit',compact('role', 'permissions'));
+        return view('role.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -98,8 +98,7 @@ class RoleController extends Controller
         $permissions = $request->input('permissions') ? $request->input('permissions') : [];
         $role->syncPermissions($permissions);
 
-        return redirect('/role')->with('success','Role Updated successfully!');
-
+        return redirect('/role')->with('success', 'Role Updated successfully!');
     }
 
     /**
@@ -111,6 +110,6 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return back()->with('success','Role deleted successfully');
+        return back()->with('success', 'Role deleted successfully');
     }
 }
