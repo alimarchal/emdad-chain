@@ -6,11 +6,7 @@
     'aliases' => 
     array (
     ),
-<<<<<<< HEAD
-    'reference' => 'aae262c944696e8da6e21c3cddf6b061401d42fe',
-=======
-    'reference' => '0a92b42fa4f4c58a118ae067563c0897129e24ea',
->>>>>>> umair
+    'reference' => '0e22e4bc37ad037cff857e48e5c08b916c34deff',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -629,11 +625,7 @@
       'aliases' => 
       array (
       ),
-<<<<<<< HEAD
-      'reference' => 'aae262c944696e8da6e21c3cddf6b061401d42fe',
-=======
-      'reference' => '0a92b42fa4f4c58a118ae067563c0897129e24ea',
->>>>>>> umair
+      'reference' => '0e22e4bc37ad037cff857e48e5c08b916c34deff',
     ),
     'laravel/sanctum' => 
     array (
@@ -682,21 +674,12 @@
     ),
     'livewire/livewire' => 
     array (
-<<<<<<< HEAD
       'pretty_version' => 'v2.3.17',
       'version' => '2.3.17.0',
       'aliases' => 
       array (
       ),
       'reference' => '1a1d43ff365301ae99ed7f0ccf02c553d4eeba03',
-=======
-      'pretty_version' => 'v2.3.16',
-      'version' => '2.3.16.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '8f027e9bc5ad1f08f0c900244e6fdb9966f7a287',
->>>>>>> umair
     ),
     'maatwebsite/excel' => 
     array (
