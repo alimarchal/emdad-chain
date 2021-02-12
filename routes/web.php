@@ -122,7 +122,7 @@ Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [\App\Http\Controllers\P
 
 #################### Roles display and update ##########################
 Route::resource('/role', \App\Http\Controllers\RoleController::class);
-Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'show'])->name('roles');
+//Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'show'])->name('roles');
 //>>>>>>>>>>>>>>>This is Permission Route<<<<<<<<<<<<<<<<<<<<<<<
 Route::resource('/permission', \App\Http\Controllers\PermissionController::class);
 #################### END ##########################
@@ -149,6 +149,10 @@ Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/Rejected', [QouteControl
 Route::middleware(['auth:sanctum'])->post('qoute/{qoute}/Accepted', [QouteController::class, 'qouteAccepted'])->name('qouteAccepted');
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'show'])->name('dpo.show');
 Route::middleware(['auth:sanctum'])->get('dpo', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'index'])->name('dpo.index');
+
+
+#################### PDF generate Routes ##########################
+Route::middleware(['auth:sanctum'])->get('/generate-PO-pdf,{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'generatePDF'])->name('generatePDF');
 
 // Route::get('/role', function () {
 

@@ -36,7 +36,7 @@
 
         <div class="    text-md-right" style="margin-left: auto!important;">
             <div class="copyright" >
-                &copy; حقوق الطبع والنشر {{date('Y')}} - <strong><span>شركة إمداد</span></strong> ۔ جميع الحقوق محفوظة
+                    &copy; حقوق الطبع والنشر {{date('Y')}} - <strong><span>شركة إمداد</span></strong> ۔ جميع الحقوق محفوظة ۔ مدعوم من  <strong><span>الويب ناعم </span></strong>
             </div>
             <div class="credits">
                 {{--                Designed by <a href="#">Ali Raza Marchal</a>--}}

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\DraftPurchaseOrder;
+//use Barryvdh\DomPDF\PDF as PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class DraftPurchaseOrderController extends Controller
@@ -84,5 +86,18 @@ class DraftPurchaseOrderController extends Controller
     public function destroy(DraftPurchaseOrder $draftPurchaseOrder)
     {
         //
+    }
+
+    public function generatePDF(DraftPurchaseOrder $draftPurchaseOrder)
+    {
+//        $data = DraftPurchaseOrder::where('user_id', auth()->user()->id)->get();
+//        $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('data'))->setOptions(['defaultFont' => 'sans-serif']);
+//        $pdf = PDF::loadView('draftPurchaseOrder.PDF', $data);
+//
+//        $data = DraftPurchaseOrder::where('user_id', auth()->user()->id)->get();
+        $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'))->setOptions(['defaultFont' => 'sans-serif']);
+//        $pdf = PDF::loadView('draftPurchaseOrder.PDF', $data);
+
+        return $pdf->download('POs.pdf');
     }
 }
