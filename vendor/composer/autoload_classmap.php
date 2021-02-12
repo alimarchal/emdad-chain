@@ -45,7 +45,6 @@ return array(
     'App\\Http\\Controllers\\QouteController' => $baseDir . '/app/Http/Controllers/QouteController.php',
     'App\\Http\\Controllers\\QouteMessageController' => $baseDir . '/app/Http/Controllers/QouteMessageController.php',
     'App\\Http\\Controllers\\QuatationController' => $baseDir . '/app/Http/Controllers/QuatationController.php',
-    'App\\Http\\Controllers\\Role' => $baseDir . '/app/Http/Controllers/Role.php',
     'App\\Http\\Controllers\\RoleController' => $baseDir . '/app/Http/Controllers/RoleController.php',
     'App\\Http\\Controllers\\SubcategoryController' => $baseDir . '/app/Http/Controllers/SubcategoryController.php',
     'App\\Http\\Controllers\\UnitMeasurementController' => $baseDir . '/app/Http/Controllers/UnitMeasurementController.php',

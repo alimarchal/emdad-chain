@@ -803,7 +803,6 @@ class ComposerStaticInit07f7cd2550a3a7fe927afb836b636136
         'App\\Http\\Controllers\\QouteController' => __DIR__ . '/../..' . '/app/Http/Controllers/QouteController.php',
         'App\\Http\\Controllers\\QouteMessageController' => __DIR__ . '/../..' . '/app/Http/Controllers/QouteMessageController.php',
         'App\\Http\\Controllers\\QuatationController' => __DIR__ . '/../..' . '/app/Http/Controllers/QuatationController.php',
-        'App\\Http\\Controllers\\Role' => __DIR__ . '/../..' . '/app/Http/Controllers/Role.php',
         'App\\Http\\Controllers\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/RoleController.php',
         'App\\Http\\Controllers\\SubcategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/SubcategoryController.php',
         'App\\Http\\Controllers\\UnitMeasurementController' => __DIR__ . '/../..' . '/app/Http/Controllers/UnitMeasurementController.php',
