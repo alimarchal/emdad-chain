@@ -78,9 +78,7 @@ class UserController extends Controller
         }
         $user = User::create($request->all());
         $role = $request->input('role') ? $request->input('role') : [];
-        $permissions = $request->input('permissions') ? $request->input('permissions') : [];
         $user->assignRole($role);
-        $user->syncPermissions($permissions);
 
         return redirect()->route('users.index');
     }
@@ -95,6 +93,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $business = Business::all();
+
         return view('users.show', compact('user', 'business'));
     }
 

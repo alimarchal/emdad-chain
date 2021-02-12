@@ -68,16 +68,16 @@
                                 </div>
 
                                 <!-- Permissions -->
-                                <div class="col-span-12 sm:col-span-9">
-                                    <label class="block font-medium text-sm text-gray-700" for="designation">
-                                        Permissions
-                                    </label>
-                                    <select multiple="multiple" name="permissions[]" id="designation" class="form-input rounded-md shadow-sm mt-1 block w-full js-example-basic-multiple" required>
-                                        @foreach($permissions as $permission)
-                                            <option value="{{$permission->id}}">{{$permission->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+{{--                                <div class="col-span-12 sm:col-span-9">--}}
+{{--                                    <label class="block font-medium text-sm text-gray-700" for="designation">--}}
+{{--                                        Permissions--}}
+{{--                                    </label>--}}
+{{--                                    <select multiple="multiple" name="permissions[]" id="designation" class="form-input rounded-md shadow-sm mt-1 block w-full js-example-basic-multiple" required>--}}
+{{--                                        @foreach($permissions as $permission)--}}
+{{--                                            <option value="{{$permission->id}}">{{$permission->name}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </select>--}}
+{{--                                </div>--}}
 
                             </div>
                         </div>

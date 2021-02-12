@@ -2,8 +2,13 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-2 lg:2x-8">
             <div class="bg-white overflow-hidden shadow-xl ">
+                <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
+                    <a href="{{route('generatePDF', $draftPurchaseOrder)}}"
+                       class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                        Generate PDF
+                    </a>
+                </div>
                 <div class="px-4 py-5 sm:p-6 bg-white shadow ">
-
                     <div class="flex flex-wrap overflow-hidden bg-gray-300 p-4">
                         <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                             <img class="h-20 w-20 rounded-full object-cover" src="{{ $draftPurchaseOrder->buyer_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->buyer_business->business_name }}" />

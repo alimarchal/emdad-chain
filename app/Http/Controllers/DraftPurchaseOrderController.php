@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\DraftPurchaseOrder;
+//use Barryvdh\DomPDF\PDF as PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class DraftPurchaseOrderController extends Controller
@@ -102,7 +104,6 @@ class DraftPurchaseOrderController extends Controller
         return redirect()->route('dpo.show', $draftPurchaseOrder->id);
     }
 
-
     public function rejected(DraftPurchaseOrder $draftPurchaseOrder)
     {
         $user_type = auth()->user()->registration_type;
@@ -134,5 +135,10 @@ class DraftPurchaseOrderController extends Controller
         session()->flash('message', 'Business information successfully updated.');
         return redirect()->route('dpo.show', $draftPurchaseOrder->id);
     }
-    
+
+    public function generatePDF(DraftPurchaseOrder $draftPurchaseOrder)
+    {
+        $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('POs.pdf');
+    }
 }
