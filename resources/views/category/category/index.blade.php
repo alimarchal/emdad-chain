@@ -5,6 +5,12 @@
 <script src="{{url('select2/src/select2totree.js')}}"></script>
 {{--<form method="post" action="test">--}}
 {{--    @csrf--}}
+<style>
+    .select2-container--default .select2-results>.select2-results__options {
+        max-height: 350px;
+        overflow-y: auto;
+    }
+</style>
 <select id="sel_1" class="form-input rounded-md shadow-sm border p-2 w-1/2" style="width: 100%;" multiple name="category[]">
 
 </select>
