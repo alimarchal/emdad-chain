@@ -52,9 +52,9 @@
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-input id="chamber_reg_number" type="text" name="chamber_reg_number" class="border p-2 w-1/2"></x-jet-input>
-                            <x-jet-input id="chamber_reg_path" type="file" name="chamber_reg_path_1" class="border p-2 w-1/2"></x-jet-input>
+                            <x-jet-input id="chamber_reg_path" type="file" name="chamber_reg_path" class="border p-2 w-1/2"></x-jet-input>
                             <x-jet-input id="vat_reg_certificate_number" type="text" name="vat_reg_certificate_number" class="border p-2 w-1/2"></x-jet-input>
-                            <x-jet-input id="vat_reg_certificate_path" type="file" name="vat_reg_certificate_path_2" class="border p-2 w-1/2"></x-jet-input>
+                            <x-jet-input id="vat_reg_certificate_path" type="file" name="vat_reg_certificate_path" class="border p-2 w-1/2"></x-jet-input>
                         </div>
                         <div class="flex space-x-5 mt-3">
 
@@ -104,6 +104,13 @@
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <textarea id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required=""></textarea>
+                        </div>
+
+                        <div class="flex space-x-5 mt-3">
+                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_photo_url">Company logo</label>
+                        </div>
+                        <div class="flex space-x-5 mt-3">
+                            <x-jet-input id="business_photo_url" type="file" name="business_photo_url" class="border p-2 w-1/2"></x-jet-input>
                         </div>
 
 

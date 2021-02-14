@@ -17,6 +17,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+//        dd(Auth::user()->usertype);
         $user_business_id = Auth::user()->business_id;
         $business_categories = [];
         $business_cate = BusinessCategory::where('business_id', $user_business_id)->get();

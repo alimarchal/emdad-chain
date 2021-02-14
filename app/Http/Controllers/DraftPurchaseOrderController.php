@@ -88,6 +88,11 @@ class DraftPurchaseOrderController extends Controller
         //
     }
 
+
+    /**
+     * Generating PDF file for POs.
+     *
+     */
     public function generatePDF(DraftPurchaseOrder $draftPurchaseOrder)
     {
 //        $data = DraftPurchaseOrder::where('user_id', auth()->user()->id)->get();
@@ -97,7 +102,6 @@ class DraftPurchaseOrderController extends Controller
 //        $data = DraftPurchaseOrder::where('user_id', auth()->user()->id)->get();
         $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'))->setOptions(['defaultFont' => 'sans-serif']);
 //        $pdf = PDF::loadView('draftPurchaseOrder.PDF', $data);
-
         return $pdf->download('POs.pdf');
     }
 }
