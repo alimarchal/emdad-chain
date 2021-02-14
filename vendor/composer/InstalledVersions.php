@@ -30,11 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-<<<<<<< HEAD
-    'reference' => '83db66b3a0305aeda1de46155d448bed38b8a5b6',
-=======
-    'reference' => '2734f0e5c632d861902cf8daea466a22d159627b',
->>>>>>> umair
+    'reference' => '070a6c954995e567ea2cac3be4bf5d4b879389d9',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -671,11 +667,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-<<<<<<< HEAD
-      'reference' => '83db66b3a0305aeda1de46155d448bed38b8a5b6',
-=======
-      'reference' => '2734f0e5c632d861902cf8daea466a22d159627b',
->>>>>>> umair
+      'reference' => '070a6c954995e567ea2cac3be4bf5d4b879389d9',
     ),
     'laravel/sanctum' => 
     array (
@@ -769,12 +761,12 @@ private static $installed = array (
     ),
     'mobiledetect/mobiledetectlib' => 
     array (
-      'pretty_version' => '2.8.35',
-      'version' => '2.8.35.0',
+      'pretty_version' => '2.8.36',
+      'version' => '2.8.36.0',
       'aliases' => 
       array (
       ),
-      'reference' => '68a35170fdf36e7b35f9c125e5102338dbc3ff65',
+      'reference' => 'e55c155f4d1ab299a0cfca8ec29a0154918c9e3d',
     ),
     'mockery/mockery' => 
     array (

@@ -28,70 +28,70 @@
 
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    #
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Item Name
-                                </th>
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        #
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        Item Name
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Unit
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Size
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Quantity
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        Unit
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        Size
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        Quantity
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Last Price
-                                </th>
-
-                                
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                   Qoutes Received 
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        Last Price
+                                    </th>
 
 
-                            </tr>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        Qoutes Received
+                                    </th>
+
+
+                                </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ($collection as $rfp)
-                                <tr>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        {{ $loop->iteration }}
-                                    </td>
+                                @foreach ($collection as $rfp)
+                                    <tr>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            {{ $loop->iteration }}
+                                        </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        {{ $rfp->item_name }}
-                                    </td>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            {{ $rfp->item_name }}
+                                        </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        {{ $rfp->unit_of_measurement }}
-                                    </td>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            {{ $rfp->unit_of_measurement }}
+                                        </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        {{ $rfp->size }}
-                                    </td>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        {{ $rfp->quantity }}
-                                    </td>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        {{ number_format($rfp->last_price, 2) }} <br>
-                                    </td>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            {{ $rfp->size }}
+                                        </td>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            {{ $rfp->quantity }}
+                                        </td>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            {{ number_format($rfp->last_price, 2) }} <br>
+                                        </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        <a href="{{ route('QoutationsBuyerReceivedQoutes',['EOrderID' => $EOrderItems, 'EOrderItemID' => $rfp->id]) }}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                            Qoutes({{ $rfp->qoutes->count() }})
-                                        </a>
-                                        
-                                    </td>
-                                   
-                                </tr>
-                            @endforeach
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $EOrderItems, 'EOrderItemID' => $rfp->id]) }}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                Qoutes({{ $rfp->qoutes->count() }})
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -100,7 +100,7 @@
         </div>
     @endif
     <div class="mt-5">
-        <a href="{{route('QoutationsBuyerReceived')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+        <a href="{{ route('QoutationsBuyerReceived') }}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
             Back
         </a>
     </div>

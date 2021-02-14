@@ -16,7 +16,7 @@ return [
      * View settings
      */
     'view' => [
-        'title' => 'LogViewer',
+        'title' => 'LogViewer ' . config('app.name') ,
         'items_per_page' => 50,
         'show_logger' => true,
     ],

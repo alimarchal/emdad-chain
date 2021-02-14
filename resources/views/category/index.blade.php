@@ -10,6 +10,7 @@
         max-height: 350px;
         overflow-y: auto;
     }
+
 </style>
 
 <select id="sel_1" class="w-full inline" name="parent_id" required>
