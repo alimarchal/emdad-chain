@@ -136,9 +136,15 @@ class DraftPurchaseOrderController extends Controller
         return redirect()->route('dpo.show', $draftPurchaseOrder->id);
     }
 
+
+    /**
+     * Generating PDF file for POs.
+     *
+     */
     public function generatePDF(DraftPurchaseOrder $draftPurchaseOrder)
     {
         $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'))->setOptions(['defaultFont' => 'sans-serif']);
+//        $pdf = PDF::loadView('draftPurchaseOrder.PDF', $data);
         return $pdf->download('POs.pdf');
     }
 }

@@ -180,7 +180,8 @@
                             </x-jet-dropdown-link>
                         @endcan
 
-                        @can('create user')
+{{--                        @can('create user' && Auth::user()->status == 3)--}}
+                            @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
 
                             @if (auth()->user()->business_id)
                                 <div class="border-t border-gray-100"></div>
@@ -188,7 +189,9 @@
                                     {{ __('Add User') }}
                                 </x-jet-dropdown-link>
                             @endif
-                        @endcan
+                            @endif
+{{--                        @endcan--}}
+
                         @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                             <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
                                 {{ __('API Tokens') }}

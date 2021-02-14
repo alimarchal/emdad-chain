@@ -84,7 +84,7 @@
                             <div class="w-full lg:w-1/3 xl:w-1/2 h-auto text-lg text-black">
                                 <p><strong>Category Deals With:</strong><br>
                                 @php $cat = explode(',',$business->category_number); @endphp
-                             
+
                                 @foreach($cat as $c)
                                     @php
                                         $catg = \App\Models\Category::find($c);
@@ -95,8 +95,8 @@
                                     {{ "There is no category yet !" }}
                                     @endif
                                 @endforeach
-                                
-                              
+
+
                                 </p>
                             </div>
 
@@ -113,6 +113,10 @@
 
                                 <a href="#" onclick="window.print();" class="mr-3 float-right inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                     Print
+                                </a>
+
+                                <a href="{{url()->previous()}}" class="mr-3 float-right inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                    Back
                                 </a>
                             </div>
                         </div>

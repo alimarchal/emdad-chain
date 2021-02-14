@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum'])->resource('users', \App\Http\Controllers\Use
 //Route::middleware(['auth:sanctum'])->post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
 Route::middleware(['auth:sanctum'])->post('/registrationType', [\App\Http\Controllers\UserController::class, 'registrationType']);
 Route::middleware(['auth:sanctum'])->resource('/business', \App\Http\Controllers\BusinessController::class);
+Route::middleware(['auth:sanctum'])->get('/business-status/', [\App\Http\Controllers\BusinessController::class , 'accountStatus'])->name('accountStatus');
 Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
 Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', \App\Http\Controllers\BusinessWarehouseController::class);
 Route::middleware(['auth:sanctum'])->get('/businessWarehouse/{id}/show', [\App\Http\Controllers\BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
