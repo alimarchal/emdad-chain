@@ -19,15 +19,25 @@ class BusinessController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('status') || $request->has('changestatus') || $request->has('rejectstatus')) {
-            $businesss = new Business();
-            if ($request->input('status')) {
-                $businesss = $businesss->where('status', $request->status);
-            }
-        } else {
+//        if ($request->has('status') || $request->has('changestatus') || $request->has('rejectstatus')) {
+//            $businesss = new Business();
+//            if ($request->input('status')) {
+//                $businesss = $businesss->where('status', $request->status);
+//            }
+//        } else {
+//            $businesses = Business::paginate(10);
+//            return view('business.index', compact('businesses'));
+//        }
+        if(\auth()->user()->hasRole('SuperAdmin'))
+        {
             $businesses = Business::paginate(10);
             return view('business.index', compact('businesses'));
         }
+        else
+            {
+                $businesses = Business::where('user_id', auth()->user()->id)->paginate(10);
+                return view('business.index', compact('businesses'));
+            }
     }
 
     /**
@@ -58,13 +68,17 @@ class BusinessController extends Controller
     {
         $comma_separated = implode(",", $request->category);
         $request->merge(['category_number' => $comma_separated]);
-        if ($request->has('chamber_reg_path_1')) {
-            $path = $request->file('chamber_reg_path_1')->store('', 'public');
-            $request->merge(['profile_photo_path' => $path]);
+        if ($request->has('chamber_reg_path')) {
+            $path = $request->file('chamber_reg_path')->store('', 'public');
+            $request->merge(['chamber_reg_path' => $path]);
         }
-        if ($request->has('vat_reg_certificate_path_2')) {
-            $path = $request->file('vat_reg_certificate_path_2')->store('', 'public');
-            $request->merge(['profile_photo_path' => $path]);
+        if ($request->has('vat_reg_certificate_path')) {
+            $path = $request->file('vat_reg_certificate_path')->store('', 'public');
+            $request->merge(['vat_reg_certificate_path' => $path]);
+        }
+        if ($request->has('business_photo_url')) {
+            $path = $request->file('business_photo_url')->store('', 'public');
+            $request->merge(['business_photo_url' => $path]);
         }
         $business = Business::create($request->all());
         foreach ($request->category as $category) {
@@ -117,13 +131,17 @@ class BusinessController extends Controller
         if ($request->category === null) {
             $array = $request->all();
             unset($array["category_number"]);
-            if ($request->has('chamber_reg_path_1')) {
-                $path = $request->file('chamber_reg_path_1')->store('', 'public');
-                $request->merge(['profile_photo_path' => $path]);
+            if ($request->has('chamber_reg_path')) {
+                $path = $request->file('chamber_reg_path')->store('', 'public');
+                $request->merge(['chamber_reg_path' => $path]);
             }
-            if ($request->has('vat_reg_certificate_path_2')) {
-                $path = $request->file('vat_reg_certificate_path_2')->store('', 'public');
-                $request->merge(['profile_photo_path' => $path]);
+            if ($request->has('vat_reg_certificate_path')) {
+                $path = $request->file('vat_reg_certificate_path')->store('', 'public');
+                $request->merge(['vat_reg_certificate_path' => $path]);
+            }
+            if ($request->has('business_photo_url')) {
+                $path = $request->file('business_photo_url')->store('', 'public');
+                $request->merge(['business_photo_url' => $path]);
             }
             $business->update($array);
             session()->flash('message', 'Business information successfully updated.');
@@ -133,13 +151,17 @@ class BusinessController extends Controller
             $comma_separated = implode(",", $request->category);
             $request->merge(['category_number' => $comma_separated]);
 
-            if ($request->has('chamber_reg_path_1')) {
-                $path = $request->file('chamber_reg_path_1')->store('', 'public');
-                $request->merge(['profile_photo_path' => $path]);
+            if ($request->has('chamber_reg_path')) {
+                $path = $request->file('chamber_reg_path')->store('', 'public');
+                $request->merge(['chamber_reg_path' => $path]);
             }
-            if ($request->has('vat_reg_certificate_path_2')) {
-                $path = $request->file('vat_reg_certificate_path_2')->store('', 'public');
-                $request->merge(['profile_photo_path' => $path]);
+            if ($request->has('vat_reg_certificate_path')) {
+                $path = $request->file('vat_reg_certificate_path')->store('', 'public');
+                $request->merge(['vat_reg_certificate_path' => $path]);
+            }
+            if ($request->has('business_photo_url')) {
+                $path = $request->file('business_photo_url')->store('', 'public');
+                $request->merge(['business_photo_url' => $path]);
             }
             $business->update($request->all());
 
@@ -169,5 +191,39 @@ class BusinessController extends Controller
     public function destroy(Business $business)
     {
         //
+    }
+
+    public function accountStatus(Request $request)
+    {
+//        dd($request->business_id.' '. $request->status_id);
+//        dd(Business::where('id', $request->business_id)->first());
+        $business = Business::where('id', $request->business_id)->first();
+        $user = User::where('id', $business->user_id)->first();
+        if ($request->status_id == 3)
+        {
+            $business->update([
+                'status' => 3,
+        ]);
+            $user->update([
+                'status' => 3,
+                'is_active' => 1,
+        ]);
+        }
+        elseif($request->status_id == 4)
+            {
+                $business->update([
+                    'status' => 4,
+                ]);
+                $user->update([
+                    'status' => 4,
+                    'is_active' => 1,
+                ]);
+            }
+        else{
+            return redirect()->back()->with('message', 'Something went wrong');
+        }
+
+        return redirect()->back()->with('message', 'Update Status');
+
     }
 }

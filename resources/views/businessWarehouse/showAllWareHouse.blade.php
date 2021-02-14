@@ -7,6 +7,12 @@
 
 
     <div class="py-12">
+        <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
+            <a href="{{ url()->previous() }}"
+               class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                Back
+            </a>
+        </div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- component -->
             @include('users.sessionMessage')

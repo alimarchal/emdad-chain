@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Business;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -43,12 +44,18 @@ class UserController extends Controller
 
         // testing end
         if (auth()->user()->usertype == "superadmin") {
-            $users = User::paginate(50);
-            //            $users = User::with('roles')->get();
-            //            dd($users);
+
+            $users = User::where('id', '!=', Auth::user()->id)->paginate(50);
+//            $users = User::with('roles')->get();
+//            dd($users);
             $business = Business::all();
             return view('users.index', compact('users', 'business'));
-        } else {
+        }
+        elseif(auth()->user()->usertype == "CEO") {
+            $users = User::where('business_id', auth()->user()->business_id)->where('id', '!=', Auth::user()->id)->paginate(50);
+            return view('users.index', compact('users'));
+        }
+        else {
             abort(404);
         }
     }
@@ -60,9 +67,22 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles  = Role::all();
-        $permissions  = Permission::all();
-        return view('users.create', compact('roles', 'permissions'));
+        if (auth()->user()->usertype == "superadmin") {
+
+            $roles  = Role::all();
+//            $permissions  = Permission::all();
+            return view('users.create', compact('roles'));
+        }
+        elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Buyer') {
+
+            $roles  = Role::where('id' , '>', 10)->get();
+            return view('users.create', compact('roles'));
+        }
+        elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Supplier') {
+
+            $roles  = Role::where('id' , '>=', 5)->where('id', '<=', 10 )->get();
+            return view('users.create', compact('roles'));
+        }
     }
 
     /**
@@ -76,7 +96,19 @@ class UserController extends Controller
         if (!Gate::allows('create user')) {
             return abort(401);
         }
-        $user = User::create($request->all());
+//        $user = User::create($request->all());
+//        $data = array();
+        $roleName  = Role::where('id' , $request->input('role'))->first();
+
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'business_id' => auth()->user()->business_id,
+            'usertype' => $roleName->name,
+            'status' => 1,
+        ];
+        $user = User::create($data);
         $role = $request->input('role') ? $request->input('role') : [];
         $user->assignRole($role);
 
@@ -105,13 +137,30 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //        $user = User::findOrFail($id);
-        //        $roles  = Role::all();
-        //        $permissions  = Permission::all();
-        $roles = Role::get()->pluck('name', 'name');
-        $permissions = Permission::get()->pluck('name', 'name');
-        //        $userRole =  $user->roles->pluck('id');
-        return view('users.edit', compact('user', 'roles', 'permissions'));
+        if (auth()->user()->usertype == "superadmin") {
+
+            $roles  = Role::get()->pluck('name', 'name');
+            $permissions = Permission::get()->pluck('name', 'name');
+//            $permissions  = Permission::all();
+            return view('users.edit', compact('user', 'roles','permissions'));
+        }
+        elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Buyer') {
+            $roles  = Role::where('id' , '>', 10)->get()->pluck('name', 'name');
+            $permissions = Permission::where('id' , '>=', 41)->where('id' , '<=', 65)->get()->pluck('name', 'name');
+            return view('users.edit', compact('user', 'roles','permissions'));
+        }
+        elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Supplier') {
+            $roles  = Role::where('id' , '>=', 5)->where('id', '<=', 10 )->get()->pluck('name', 'name');
+            $permissions = Permission::where('id' , '>=', 8)->where('id' , '<=', 40)->get()->pluck('name', 'name');
+            return view('users.edit', compact('user', 'roles','permissions'));
+        }
+//        $user = User::findOrFail($id);
+//        $roles  = Role::all();
+//        $permissions  = Permission::all();
+//        $roles = Role::get()->pluck('name', 'name');
+//        $permissions = Permission::get()->pluck('name', 'name');
+//        $userRole =  $user->roles->pluck('id');
+        return view('users.edit', compact('user', 'roles','permissions'));
     }
 
     /**
