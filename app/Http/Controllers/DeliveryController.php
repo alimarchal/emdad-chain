@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Delivery;
 use Illuminate\Http\Request;
 
-
-class Role extends Controller
+class DeliveryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class Role extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Delivery  $delivery
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Delivery $delivery)
     {
         //
     }
@@ -52,10 +52,10 @@ class Role extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Delivery  $delivery
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Delivery $delivery)
     {
         //
     }
@@ -64,10 +64,10 @@ class Role extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Delivery  $delivery
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Delivery $delivery)
     {
         //
     }
@@ -75,10 +75,10 @@ class Role extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Delivery  $delivery
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Delivery $delivery)
     {
         //
     }

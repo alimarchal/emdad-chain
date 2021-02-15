@@ -17,7 +17,7 @@ class DraftPurchaseOrderController extends Controller
     public function index()
     {
         $user = auth()->user()->id;
-        $dpos = DraftPurchaseOrder::where('user_id', $user)->get();
+        $dpos = DraftPurchaseOrder::where('user_id', $user)->where('business_id', auth()->user()->business_id)->get();
         return view('draftPurchaseOrder.index', compact('dpos'));
     }
 
@@ -88,6 +88,54 @@ class DraftPurchaseOrderController extends Controller
         //
     }
 
+    public function approved(DraftPurchaseOrder $draftPurchaseOrder)
+    {
+        $user_type = auth()->user()->registration_type;
+        $user_type_id = auth()->user()->id;
+        $user_business_type = auth()->user()->business->business_type;
+        $user_business_type_id = auth()->user()->business->id;
+        $status = "approved";
+        $draftPurchaseOrder->update([
+            'status' => $status,
+            'po_status' => $status,
+            'approval_details' => 'User_TYPE_' . $user_type . '_' . $user_type_id . '_Business_TYPE_' . $user_business_type . '_' . $user_business_type_id . '_' . date('Y-m-d h:m'),
+        ]);
+        session()->flash('message', 'Business information successfully updated.');
+        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
+    }
+
+    public function rejected(DraftPurchaseOrder $draftPurchaseOrder)
+    {
+        $user_type = auth()->user()->registration_type;
+        $user_type_id = auth()->user()->id;
+        $user_business_type = auth()->user()->business->business_type;
+        $user_business_type_id = auth()->user()->business->id;
+        $status = "rejectToEdit";
+        $draftPurchaseOrder->update([
+            'status' => $status,
+            'po_status' => $status,
+            'approval_details' => 'User_TYPE_' . $user_type . '_' . $user_type_id . '_Business_TYPE_' . $user_business_type . '_' . $user_business_type_id . '_' . date('Y-m-d h:m'),
+        ]);
+        session()->flash('message', 'Business information successfully updated.');
+        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
+    }
+
+    public function cancel(DraftPurchaseOrder $draftPurchaseOrder)
+    {
+        $user_type = auth()->user()->registration_type;
+        $user_type_id = auth()->user()->id;
+        $user_business_type = auth()->user()->business->business_type;
+        $user_business_type_id = auth()->user()->business->id;
+        $status = "cancel";
+        $draftPurchaseOrder->update([
+            'status' => $status,
+            'po_status' => $status,
+            'approval_details' => 'User_TYPE_' . $user_type . '_' . $user_type_id . '_Business_TYPE_' . $user_business_type . '_' . $user_business_type_id . '_' . date('Y-m-d h:m'),
+        ]);
+        session()->flash('message', 'Business information successfully updated.');
+        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
+    }
+
 
     /**
      * Generating PDF file for POs.
@@ -95,11 +143,6 @@ class DraftPurchaseOrderController extends Controller
      */
     public function generatePDF(DraftPurchaseOrder $draftPurchaseOrder)
     {
-//        $data = DraftPurchaseOrder::where('user_id', auth()->user()->id)->get();
-//        $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('data'))->setOptions(['defaultFont' => 'sans-serif']);
-//        $pdf = PDF::loadView('draftPurchaseOrder.PDF', $data);
-//
-//        $data = DraftPurchaseOrder::where('user_id', auth()->user()->id)->get();
         $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'))->setOptions(['defaultFont' => 'sans-serif']);
 //        $pdf = PDF::loadView('draftPurchaseOrder.PDF', $data);
         return $pdf->download('POs.pdf');

@@ -150,57 +150,22 @@ Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/Rejected', [QouteControl
 Route::middleware(['auth:sanctum'])->post('qoute/{qoute}/Accepted', [QouteController::class, 'qouteAccepted'])->name('qouteAccepted');
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'show'])->name('dpo.show');
 Route::middleware(['auth:sanctum'])->get('dpo', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'index'])->name('dpo.index');
+Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/approved', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'approved'])->name('dpo.approved');
+Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/rejected', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'rejected'])->name('dpo.rejected');
+Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/cancel', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'cancel'])->name('dpo.cancel');
 
 
 #################### PDF generate Routes ##########################
-Route::middleware(['auth:sanctum'])->get('/generate-PO-pdf,{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'generatePDF'])->name('generatePDF');
+Route::middleware(['auth:sanctum'])->get('/generate-PO-pdf/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'generatePDF'])->name('generatePDF');
+#################### END ##########################################
 
-// Route::get('/role', function () {
+#################### PDF generate Routes ##########################
+Route::middleware(['auth:sanctum'])->get('/logviewer', function () {
+    return redirect('admin/logviewer');
+})->name('log.viewer');
+#################### END ##########################################
 
-//     //    $permission = Permission::create(['name' => 'all']);
-//     //    $permission = Permission::create(['name' => 'delete user']);
-//     //    $permission = Permission::create(['name' => 'create user']);
-//     //    $permission = Permission::create(['name' => 'read user']);
-//     //    $permission = Permission::create(['name' => 'PoBuyer']);
-//     //    $permission = Permission::create(['name' => 'QoSupplier']);
-
-//     //    $role = Role::findByName('User');
-//     //    $user = \App\Models\User::find(5);
-//     //    $permissions = $user->getDirectPermissions();
-//     //    $permissions = $user->getPermissionsViaRoles();
-//     //    $permissions = $user->getRoleNames();
-//     //    return $permissions;
-
-//     //    $role = Role::findByName('SuperAdmin');
-//     //    $role1->givePermissionTo('delete user');
-//     //    $role1->givePermissionTo('create user');
-//     //    $role = Role::findByName('User');
-//     //    $role->revokePermissionTo(['PoBuyer','QoSupplier']);
-//     //      $role->givePermissionTo('PoBuyer');
-//     //      $role->givePermissionTo('QoSupplier');
-//     //    $role1->givePermissionTo('read user');
-//     //    $user = \App\Models\User::findOrFail(5);
-//     //    $permission = Permission::findByName('delete user');
-//     //    dd($role1);
-//     //    $role->givePermissionTo($permission);
-//     //    $user = \App\Models\User::find(5);
-//     //    $role = Role::findByName('SuperAdmin');
-//     //    $user->assignRole($role);
-// });
-
-// //
-// Route::get('/test', function () {
-
-//     //    $categories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-//     //    return view('manageChild',compact('categories'));
-//     return view('test');
-// });
-
-
-//     $roles = Role::all();
-//     dd($role);
-//     return view('role.index');
-// });
-
-// Route::get('/role', [\App\Http\Controllers\UserController::class, 'roleGet'])->name('roleGet');
-// Route::post('/role', [\App\Http\Controllers\UserController::class, 'rolesPost'])->name('rolesPost');
+#################### Delivery and Delivery Note ##########################
+Route::middleware(['auth:sanctum'])->resource('delivery', \App\Http\Controllers\DeliveryController::class);
+Route::middleware(['auth:sanctum'])->resource('deliveryNote', \App\Http\Controllers\DeliveryNoteController::class);
+#################### END ##################################################

@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Hash;
 
-class PermissionController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $permissions = Permission::all();
-        return view('permission.index', compact('permissions'));
+        // 
     }
 
     /**
@@ -27,7 +26,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('permission.createpermission');
+        //
     }
 
     /**
@@ -38,14 +37,7 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'guard_name' => 'required',
-
-        ]);
-
-        $role = Permission::create(['name' => $request->name]);
-        return redirect()->route('permission.index')->with('success', 'Permission created successfully!');
+        //
     }
 
     /**
@@ -67,8 +59,7 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        $permission = Permission::find($id);
-        return view('permission.editpermission', compact('permission'));
+        //
     }
 
     /**
@@ -80,13 +71,7 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $permission = Permission::find($id);
-        $permission->name =  $request->get('name');
-
-        $permission->guard_name = $request->get('guard_name');
-        $permission->save();
-
-        return redirect()->route('permission.index')->with('success', 'Permission Updated successfully!');
+        //
     }
 
     /**
@@ -95,9 +80,29 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Permission $permission)
+    public function destroy($id)
     {
-        $permission->delete();
-        return back()->with('success', 'Permission deleted successfully');
+        //
+    }
+
+    public function login(Request $request)
+    {
+        return 'sss';
+        $data = $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $user = User::whereEmail($request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response([
+                'email' => ['The provided credentials are incorrect.'],
+            ], 404);
+        }
+        
+        $user = User::where('email', $request->email)->first();
+
+        return $user;
     }
 }

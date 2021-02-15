@@ -93,7 +93,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if (! Gate::allows('create user')) {
+        if (!Gate::allows('create user')) {
             return abort(401);
         }
 //        $user = User::create($request->all());
@@ -186,9 +186,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        if (! Gate::allows('edit user')) {
-        return abort(401);
-          }
+        if (!Gate::allows('edit user')) {
+            return abort(401);
+        }
         $user->update($request->all());
         $roles = $request->input('role') ? $request->input('role') : [];
         $permissions = $request->input('permissions') ? $request->input('permissions') : [];
@@ -236,7 +236,7 @@ class UserController extends Controller
             'password' => ['required', 'string', 'max:191'],
         ])->validate();
 
-        $role = $role->where('id',$input['role'])->first();
+        $role = $role->where('id', $input['role'])->first();
         $user = User::create([
             'gender' => $input['gender'],
             'name' => $input['name'],

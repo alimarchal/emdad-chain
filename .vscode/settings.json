@@ -1,4 +1,4 @@
 {
-    "bladeFormatter.format.wrapLineLength": 300,
-    "editor.wordWrapColumn": 300
+    "bladeFormatter.format.wrapLineLength": 500,
+    "editor.wordWrapColumn": 500
 }
