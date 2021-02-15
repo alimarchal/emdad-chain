@@ -67,8 +67,6 @@
                             </div>
 
 
-
-
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
                                 <p><strong>Longitude:</strong> {{$business->longitude}}</p>
                             </div>
@@ -99,12 +97,6 @@
 
                                 </p>
                             </div>
-
-
-
-
-
-
 
                             <div class="w-full overflow-hidden">
                                 <a href="{{route('business.edit',$business->id)}}" class="float-right inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">

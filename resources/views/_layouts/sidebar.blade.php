@@ -9,7 +9,14 @@
                 <img src="{{ url('logo.png') }}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto"/>
             </a>
             <a href="{{ route('dashboard') }}">
-                <span class="text-white text-2xl mx-2 font-semibold">Dashboard</span>
+{{--                <span class="text-white text-2xl mx-2 font-semibold">Dashboard </span>--}}
+                <span class="text-white text-2xl mx-2 font-semibold">
+                    @if(auth()->user()->hasRole('SuperAdmin')) Super Admin
+                    @elseif(auth()->user()->registration_type == 'Buyer') Buyer
+                    @elseif(auth()->user()->registration_type == 'Supplier') Supplier
+                    @endif
+{{--                    <span class="text-white text-base mx-1 font-semibold">Dashboard</span>--}}
+                </span>
             </a>
         </div>
     </div>
@@ -139,7 +146,7 @@
         @endif
 
 {{--        @can('PoBuyer')--}}
-            @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && Auth::user()->status == 3)
+        @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && Auth::user()->status == 3)
 
             {{-- View RFQs (Supplier) link --}}
             <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('viewRFQs') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
@@ -156,7 +163,7 @@
         {{--        @endcan--}}
         {{--        @if(auth()->user()->registration_type == "Buyer")--}}
 {{--        @can('PoBuyer')--}}
-            @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+        @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
 
             {{-- Qoutations (Buyer) link --}}
             <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('QoutationsBuyerReceived') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
