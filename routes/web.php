@@ -155,6 +155,7 @@ Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/rejected', [\
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/cancel', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'cancel'])->name('dpo.cancel');
 
 
+
 #################### PDF generate Routes ##########################
 Route::middleware(['auth:sanctum'])->get('/generate-PO-pdf/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'generatePDF'])->name('generatePDF');
 #################### END ##########################################
@@ -169,3 +170,6 @@ Route::middleware(['auth:sanctum'])->get('/logviewer', function () {
 Route::middleware(['auth:sanctum'])->resource('delivery', \App\Http\Controllers\DeliveryController::class);
 Route::middleware(['auth:sanctum'])->resource('deliveryNote', \App\Http\Controllers\DeliveryNoteController::class);
 #################### END ##################################################
+
+Route::middleware(['auth:sanctum'])->get('/po', [DraftPurchaseOrderController::class, 'po'])->name('po.po');
+Route::middleware(['auth:sanctum'])->get('/po/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'poShow'])->name('po.show');

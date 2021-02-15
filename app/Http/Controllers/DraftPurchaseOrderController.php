@@ -17,7 +17,7 @@ class DraftPurchaseOrderController extends Controller
     public function index()
     {
         $user = auth()->user()->id;
-        $dpos = DraftPurchaseOrder::where('user_id', $user)->where('business_id', auth()->user()->business_id)->get();
+        $dpos = DraftPurchaseOrder::where('user_id', $user)->where('business_id', auth()->user()->business_id)->where('status','pending')->get();
         return view('draftPurchaseOrder.index', compact('dpos'));
     }
 
@@ -146,5 +146,18 @@ class DraftPurchaseOrderController extends Controller
         $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'))->setOptions(['defaultFont' => 'sans-serif']);
 //        $pdf = PDF::loadView('draftPurchaseOrder.PDF', $data);
         return $pdf->download('POs.pdf');
+    }
+
+
+    public function po()
+    {
+        $user = auth()->user()->id;
+        $dpos = DraftPurchaseOrder::where('user_id', $user)->where('business_id', auth()->user()->business_id)->where('status','approved')->get();
+        return view('draftPurchaseOrder.po', compact('dpos'));
+    }
+
+    public function poShow(DraftPurchaseOrder $draftPurchaseOrder)
+    {
+        return view('draftPurchaseOrder.poShow', compact('draftPurchaseOrder'));
     }
 }

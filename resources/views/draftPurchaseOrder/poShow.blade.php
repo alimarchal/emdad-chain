@@ -38,7 +38,7 @@
                             <strong>City: </strong>{{ $draftPurchaseOrder->supplier_business->city }}<br>
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                            <h3 class="text-2xl text-center"><strong>Draft P.O</strong></h3>
+                            <h3 class="text-2xl text-center"><strong>Purchase Order</strong></h3>
                             <strong>D..P. O. No#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->id }}<br>
                             <strong>Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
                             <strong>RFQ#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->rfq_no }}<br>
@@ -71,14 +71,6 @@
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                     Brand
                                 </th>
-
-                                <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    Unit Price
-                                </th>
-
-                                <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    Amount
-                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-black border-1 border-black">
@@ -104,47 +96,8 @@
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                     {{ $draftPurchaseOrder->brand }}
                                 </td>
-                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                    {{ $draftPurchaseOrder->unit_price }}
-                                </td>
-                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                    {{ number_format($draftPurchaseOrder->sub_total, 2) }}
-                                </td>
                             </tr>
-                            <tr>
-                                <td colspan="7" rowspan="4">
-                                </td>
-                                <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                    Sub Total
-                                </td>
-                                <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                    {{ number_format($draftPurchaseOrder->sub_total, 2) }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                    VAT 15%
-                                </td>
-                                <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                    {{ number_format($draftPurchaseOrder->sub_total * 0.15, 2) }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                    Shipment
-                                </td>
-                                <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                    {{ number_format(0, 2) }}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                    P.O Total
-                                </td>
-                                <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                    {{ number_format($draftPurchaseOrder->sub_total * 0.15 + $draftPurchaseOrder->sub_total, 2) }}
-                                </td>
-                            </tr>
+
                         </tbody>
                     </table>
 
@@ -169,16 +122,13 @@
                     <div class="flex justify-center">
                         <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>
                     </div>
-
-
-
                     <div class="flex justify-between mt-4 mb-4">
 
 
                         @if ($draftPurchaseOrder->status == 'approved')
-                            <span class="px-3 py-3 bg-green-800 text-white rounded">Approve</span>
+                            <span class="px-3 py-3 bg-green-800 text-white rounded">APPROVED P.O</span>
                         @elseif ($draftPurchaseOrder->status == 'cancel')
-                            <span class="px-3 py-3 bg-red-800 text-white rounded">Cancel DPO</span>
+                            <span class="px-3 py-3 bg-red-800 text-white rounded">Caneled P.O</span>
                         @elseif ($draftPurchaseOrder->status == 'rejectToEdit')
                             <span class="px-3 py-3 bg-red-600 text-white rounded uppercase">Rejected for Edit</span>
                         @else
