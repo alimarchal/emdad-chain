@@ -15,7 +15,12 @@ class CreateDeliveryNotesTable extends Migration
     {
         Schema::create('delivery_notes', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id')->nullable();
             $table->string('business_id')->nullable();
+            // supplier
+            $table->string('supplier_user_id')->nullable();
+            $table->string('supplier_business_id')->nullable();
+            
             $table->string('item_code')->nullable();
             $table->string('item_name')->nullable();
             $table->string('uom')->nullable();
