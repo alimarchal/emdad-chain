@@ -86,7 +86,6 @@ class CategoryController extends Controller
             session()->flash('message', 'Category updated successfully created.');
             return redirect()->route('showAllCategory');
         } else {
-            // dd($request->all());
             $updated = $category->update($request->all());
             session()->flash('message', 'Category updated successfully created.');
             return redirect()->route('showAllCategory');

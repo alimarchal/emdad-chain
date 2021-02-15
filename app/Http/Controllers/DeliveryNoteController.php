@@ -14,7 +14,7 @@ class DeliveryNoteController extends Controller
      */
     public function index()
     {
-        //
+        dd('DS');
     }
 
     /**
