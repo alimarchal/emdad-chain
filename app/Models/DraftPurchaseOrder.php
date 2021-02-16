@@ -20,4 +20,6 @@ class DraftPurchaseOrder extends Model
     {
         return $this->belongsTo(Business::class, 'supplier_business_id', 'id');
     }
+
+
 }

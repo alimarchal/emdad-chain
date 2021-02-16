@@ -2,43 +2,26 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-2 lg:2x-8">
             <div class="bg-white overflow-hidden shadow-xl ">
-                <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
-                    <a href="{{ route('generatePDF', $draftPurchaseOrder) }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                        Generate PDF
-                    </a>
-                </div>
                 <div class="px-4 py-5 sm:p-6 bg-white shadow ">
-                    <div class="flex flex-wrap overflow-hidden bg-gray-300 p-4">
-                        <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                            <img class="h-20 w-20 rounded-full object-cover" src="{{ $draftPurchaseOrder->buyer_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->buyer_business->business_name }}" />
-                            <h1 class="text-center text-2xl">{{ $draftPurchaseOrder->buyer_business->business_name }}</h1>
-                        </div>
-                        <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                            <h1 class="text-center text-2xl">Draft Purchase Order</h1>
-                        </div>
-                        <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                            <img class="h-20 w-20 rounded-full object-cover" src="{{ $draftPurchaseOrder->supplier_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->supplier_business->business_name }}" />
-                            <h1 class="text-center text-2xl">{{ $draftPurchaseOrder->supplier_business->business_name }}</h1>
-                        </div>
-                    </div>
+
 
 
                     <div class="flex flex-wrap overflow-hidden bg-white p-4">
                         <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                            <strong>Purchase From: </strong><br>
-                            <p>{{ $draftPurchaseOrder->buyer_business->business_name }}</p><br>
-                            <strong>ID: </strong> {{ $draftPurchaseOrder->buyer_business->user_id }}<br>
-                            <strong>City: </strong>{{ $draftPurchaseOrder->buyer_business->city }}<br>
+{{--                            <strong>Purchase From: </strong><br>--}}
+{{--                            <p>{{ $draftPurchaseOrder->buyer_business->business_name }}</p><br>--}}
+{{--                            <strong>ID: </strong> {{ $draftPurchaseOrder->buyer_business->user_id }}<br>--}}
+{{--                            <strong>City: </strong>{{ $draftPurchaseOrder->buyer_business->city }}<br>--}}
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                            <strong>Deliver From: </strong><br>
-                            <p>{{ $draftPurchaseOrder->supplier_business->business_name }}</p><br>
+{{--                            <strong>Deliver From: </strong><br>--}}
+{{--                            <p>{{ $draftPurchaseOrder->supplier_business->business_name }}</p><br>--}}
 
-                            <strong>ID: </strong>{{ $draftPurchaseOrder->supplier_business->user_id }}<br>
-                            <strong>City: </strong>{{ $draftPurchaseOrder->supplier_business->city }}<br>
+{{--                            <strong>ID: </strong>{{ $draftPurchaseOrder->supplier_business->user_id }}<br>--}}
+{{--                            <strong>City: </strong>{{ $draftPurchaseOrder->supplier_business->city }}<br>--}}
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                            <h3 class="text-2xl text-center"><strong>Purchase Order</strong></h3>
+                            <h3 class="text-2xl text-center"><strong>Delivery Note</strong></h3>
                             <strong>D..P. O. No#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->id }}<br>
                             <strong>Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
                             <strong>RFQ#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->rfq_no }}<br>
@@ -148,36 +131,58 @@
                         </tbody>
                     </table>
 
-                    <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
-                        <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
-                            <strong>Remarks: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br>
-                            <strong>Warranty: </strong> {{ $draftPurchaseOrder->warranty }} <br>
-                        </div>
-                    </div>
 
+<br>
+<br>
+                    <h2 class="text-2xl text-center font-bold">Prepare Delivery Note</h2>
+                    <form action="{{ route('deliveryNote.store') }}" method="post">
+                        @csrf
+                        <div class="grid grid-cols-12 gap-6">
+
+                            <div class="col-span-12">
+                                <label class="block font-medium text-sm text-gray-700 mt-4" for="delivery_address">
+                                    Delivery Address
+                                </label>
+                                <textarea name="delivery_address" id="delivery_address" class="form-textarea w-full">{{strip_tags($draftPurchaseOrder->buyer_business->address) . ' - City: ' . $draftPurchaseOrder->buyer_business->city  . ' - Phone #: ' .  $draftPurchaseOrder->buyer_business->phone}}</textarea>
+
+                                <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
+                                    City
+                                </label>
+                                <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city"  type="text" name="city" value="{{$draftPurchaseOrder->buyer_business->city}}" required>
+
+
+                                <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
+                                    Warranty
+                                </label>
+                                <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city"  type="text" name="warranty" required>
+
+                                <label class="block font-medium text-sm text-gray-700 mt-4" for="delivery_address">
+                                    Terms and Conditions
+                                </label>
+                                <textarea name="terms_and_conditions" id="terms_and_conditions" class="form-textarea w-full"></textarea>
+                                <input type="hidden" value="{{auth()->user()->id}}" name="update_user_id">
+                                <input type="hidden" value="{{$draftPurchaseOrder->id}}" name="draft_purchase_order_id">
+                                <input type="hidden" value="{{$draftPurchaseOrder->id}}" name="draft_purchase_order_id">
+                                <input type="hidden" value="{{$draftPurchaseOrder->supplier_user_id}}" name="supplier_user_id">
+                                <input type="hidden" value="{{$draftPurchaseOrder->supplier_business_id}}" name="supplier_business_id">
+                                <input type="hidden" value="{{$draftPurchaseOrder->user_id}}" name="user_id">
+                                <input type="hidden" value="{{$draftPurchaseOrder->business_id}}" name="business_id">
+                            </div>
+                        </div>
+
+                        <div class="mt-5">
+                            <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                Create Delivery Note & Generate Invoice
+                            </button>
+                        </div>
+                    </form>
 
                     <div class="flex justify-center">
                         <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>
                     </div>
-                    <div class="flex justify-between mt-4 mb-4">
-
-
-                        @if ($draftPurchaseOrder->status == 'approved')
-                            <span class="px-3 py-3 bg-green-800 text-white rounded">APPROVED P.O</span>
-                        @elseif ($draftPurchaseOrder->status == 'cancel')
-                            <span class="px-3 py-3 bg-red-800 text-white rounded">Caneled P.O</span>
-                        @elseif ($draftPurchaseOrder->status == 'rejectToEdit')
-                            <span class="px-3 py-3 bg-red-600 text-white rounded uppercase">Rejected for Edit</span>
-                        @else
-                            <a href="{{ route('dpo.approved', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">DPO Approved</a>
-                            <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Cancel P.O</a>
-                            <a href="{{ route('dpo.rejected', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Reject to Edit</a>
-                        @endif
 
 
 
-
-                    </div>
 
                     <div class="flex justify-between px-2 py-2 mt-2 h-15">
                         <div></div>
@@ -189,4 +194,5 @@
             </div>
         </div>
     </div>
+
 </x-app-layout>

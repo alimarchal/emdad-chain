@@ -21,6 +21,12 @@ class CreateDeliveryNotesTable extends Migration
             // suppliers
             $table->string('supplier_user_id')->nullable();
             $table->string('supplier_business_id')->nullable();
+            $table->string('delivery_address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('warranty')->nullable();
+            $table->string('terms_and_conditions')->nullable();
+            $table->string('update_user_id')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Delivery;
 use App\Models\DeliveryNote;
+use App\Models\DraftPurchaseOrder;
 use Illuminate\Http\Request;
 
 class DeliveryNoteController extends Controller
@@ -14,7 +16,10 @@ class DeliveryNoteController extends Controller
      */
     public function index()
     {
-        dd('DS');
+
+        $user = auth()->user()->id;
+        $dpos = DraftPurchaseOrder::where('supplier_user_id', $user)->where('supplier_business_id', auth()->user()->business_id)->where('status','approved')->get();
+        return view('deliveryNote.index', compact('dpos'));
     }
 
     /**
@@ -35,7 +40,11 @@ class DeliveryNoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->merge(['status' => 'processing']);
+//        dd($request->all());
+        $delivery = DeliveryNote::create($request->all());
+        session()->flash('message', 'Delivery note has been successfully created.');
+        return redirect('deliveryNote');
     }
 
     /**
@@ -81,5 +90,12 @@ class DeliveryNoteController extends Controller
     public function destroy(DeliveryNote $deliveryNote)
     {
         //
+    }
+
+    public function deliveryNoteView(DraftPurchaseOrder $draftPurchaseOrder)
+    {
+
+        return view('deliveryNote.show', compact('draftPurchaseOrder'));
+
     }
 }

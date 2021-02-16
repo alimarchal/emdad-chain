@@ -168,6 +168,7 @@ Route::middleware(['auth:sanctum'])->get('/logviewer', function () {
 
 #################### Delivery and Delivery Note ##########################
 Route::middleware(['auth:sanctum'])->resource('delivery', \App\Http\Controllers\DeliveryController::class);
+Route::middleware(['auth:sanctum'])->get('/deliveryNote/{draftPurchaseOrder}/view', [\App\Http\Controllers\DeliveryNoteController::class, 'deliveryNoteView'])->name('deliveryNoteView');
 Route::middleware(['auth:sanctum'])->resource('deliveryNote', \App\Http\Controllers\DeliveryNoteController::class);
 #################### END ##################################################
 
