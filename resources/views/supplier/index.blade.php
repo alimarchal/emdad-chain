@@ -37,7 +37,6 @@
             </a>
         </nav>
     </div>
-
     @if ($collection->count())
         <div class="flex flex-col bg-white rounded ">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -80,7 +79,12 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($collection as $rfp)
-                                @if ($rfp->qoutes->isEmpty())
+                                    @php
+                                    $getQoutes = $rfp->qoutes;
+                                    $user_id = auth()->user()->id;
+                                    $qoute = $getQoutes->where('supplier_user_id',$user_id);
+                                    @endphp
+                                @if ($qoute->isEmpty())
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $rfp->id }}
@@ -121,7 +125,7 @@
 
                                 </tr>
                                 @endif
-                                    
+
                                 @endforeach
                             </tbody>
                         </table>

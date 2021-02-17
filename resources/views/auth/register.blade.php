@@ -19,8 +19,8 @@
                     <x-jet-label for="gender" value="{{ __('Gender') }}" class="mb-2" />
                     <select name="gender" id="gender" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name" >
                         <option value="">Select</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
+                        <option value="Male">Mr.</option>
+                        <option value="Female">Mrs.</option>
                     </select>
                 </div>
 

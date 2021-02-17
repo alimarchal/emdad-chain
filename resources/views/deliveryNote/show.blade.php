@@ -59,9 +59,6 @@
                                 Unit Price
                             </th>
 
-                            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                Amount
-                            </th>
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-black border-1 border-black">
@@ -90,44 +87,8 @@
                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                 {{ $draftPurchaseOrder->unit_price }}
                             </td>
-                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                {{ number_format($draftPurchaseOrder->sub_total, 2) }}
-                            </td>
                         </tr>
-                        <tr>
-                            <td colspan="7" rowspan="4">
-                            </td>
-                            <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                Sub Total
-                            </td>
-                            <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                {{ number_format($draftPurchaseOrder->sub_total, 2) }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                VAT 15%
-                            </td>
-                            <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                {{ number_format($draftPurchaseOrder->sub_total * 0.15, 2) }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                Shipment
-                            </td>
-                            <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                {{ number_format(0, 2) }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                P.O Total
-                            </td>
-                            <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                {{ number_format($draftPurchaseOrder->sub_total * 0.15 + $draftPurchaseOrder->sub_total, 2) }}
-                            </td>
-                        </tr>
+
                         </tbody>
                     </table>
 

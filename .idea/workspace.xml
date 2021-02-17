@@ -7,36 +7,10 @@
     <list default="true" id="64c69728-0452-4a94-b9a8-4b2e346cb301" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DeliveryNoteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DeliveryNoteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/DeliveryNote.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/DeliveryNote.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/DraftPurchaseOrder.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/DraftPurchaseOrder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_14_104953_create_delivery_notes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_14_104953_create_delivery_notes_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/deliveryNote/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/deliveryNote/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/draftPurchaseOrder/po.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/draftPurchaseOrder/po.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/draftPurchaseOrder/poShow.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/draftPurchaseOrder/poShow.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/facade/flare-client-php/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/facade/flare-client-php/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/facade/flare-client-php/src/Enums/GroupingTypes.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/facade/flare-client-php/src/Enums/GroupingTypes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/facade/flare-client-php/src/Flare.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/facade/flare-client-php/src/Flare.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/facade/flare-client-php/src/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/facade/flare-client-php/src/Report.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/facade/ignition/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/facade/ignition/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/facade/ignition/src/IgnitionServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/facade/ignition/src/IgnitionServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/facade/ignition/src/Middleware/CustomizeGrouping.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/myclabs/php-enum/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/myclabs/php-enum/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/myclabs/php-enum/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/myclabs/php-enum/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/myclabs/php-enum/psalm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/myclabs/php-enum/psalm.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/myclabs/php-enum/src/Enum.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/myclabs/php-enum/src/Enum.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/polyfill-iconv/bootstrap80.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-iconv/bootstrap80.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme/bootstrap80.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme/bootstrap80.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/bootstrap80.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn/bootstrap80.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer/bootstrap80.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer/bootstrap80.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring/bootstrap80.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring/bootstrap80.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlacedRFQController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlacedRFQController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/deliveryNote/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/deliveryNote/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/supplier/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/supplier/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,7 +252,8 @@
       <workItem from="1613023883836" duration="15787000" />
       <workItem from="1613108380836" duration="19750000" />
       <workItem from="1613280098767" duration="19932000" />
-      <workItem from="1613483719806" duration="8068000" />
+      <workItem from="1613483719806" duration="8697000" />
+      <workItem from="1613570781641" duration="5703000" />
     </task>
     <servers />
   </component>

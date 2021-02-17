@@ -41,7 +41,6 @@ class DeliveryNoteController extends Controller
     public function store(Request $request)
     {
         $request->merge(['status' => 'processing']);
-//        dd($request->all());
         $delivery = DeliveryNote::create($request->all());
         session()->flash('message', 'Delivery note has been successfully created.');
         return redirect('deliveryNote');
