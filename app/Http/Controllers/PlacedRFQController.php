@@ -19,7 +19,15 @@ class PlacedRFQController extends Controller
      */
     public function index()
     {
-        $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->get();
+        if (\auth()->user()->hasRole('SuperAdmin'))
+        {
+//            $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->get();
+            $PlacedRFQ = EOrders::all();
+        }
+        else{
+            $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->get();
+        }
+
         return view('RFQPlaced.index', compact('PlacedRFQ'));
     }
 
@@ -98,17 +106,34 @@ class PlacedRFQController extends Controller
 
     public function viewRFQs()
     {
-        $user_business_id = Auth::user()->business_id;
-        $business_categories = [];
-        $business_cate = BusinessCategory::where('business_id', $user_business_id)->get();
-        if ($business_cate->isNotEmpty()) {
-            foreach ($business_cate as $item) {
-                $business_categories[] = (int)$item->category_number;
+        if (\auth()->user()->hasRole('SuperAdmin'))
+        {
+            $business_categories = [];
+            $business_cate = BusinessCategory::all();
+            if ($business_cate->isNotEmpty()) {
+                foreach ($business_cate as $item) {
+                    $business_categories[] = (int)$item->category_number;
+                }
             }
+            sort($business_categories);
+            // $business_categories = implode(",", $business_categories);
+            $collection = EOrderItems::where('status', 'pending')->whereIn('item_code', $business_categories)->get();
         }
-        sort($business_categories);
-        // $business_categories = implode(",", $business_categories);
-        $collection = EOrderItems::where('status', 'pending')->whereIn('item_code', $business_categories)->get();
+        else
+            {
+                $user_business_id = Auth::user()->business_id;
+                $business_categories = [];
+                $business_cate = BusinessCategory::where('business_id', $user_business_id)->get();
+                if ($business_cate->isNotEmpty()) {
+                    foreach ($business_cate as $item) {
+                        $business_categories[] = (int)$item->category_number;
+                    }
+                }
+                sort($business_categories);
+                // $business_categories = implode(",", $business_categories);
+                $collection = EOrderItems::where('status', 'pending')->whereIn('item_code', $business_categories)->get();
+            }
+
         return view('supplier.index', compact('collection'));
     }
 
