@@ -30,6 +30,26 @@ class BusinessController extends Controller
 //        }
         if(\auth()->user()->hasRole('SuperAdmin'))
         {
+            if($request->has('status'))
+            {
+                if($request->status == 1)
+                {
+                    $businesses = Business::where('status', 1)->paginate(10);
+                    return view('business.index', compact('businesses'));
+                }
+                elseif($request->status == 3)
+                {
+                    $businesses = Business::where('status', 3)->paginate(10);
+                    return view('business.index', compact('businesses'));
+                }
+                elseif($request->status == 4)
+                {
+                    $businesses = Business::where('status', 4)->paginate(10);
+                    return view('business.index', compact('businesses'));
+                }
+
+            }
+
             $businesses = Business::paginate(10);
             return view('business.index', compact('businesses'));
         }

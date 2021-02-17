@@ -16,81 +16,109 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
 
-                    @role('SuperAdmin')
+                    @role('SuperAdmin|CEO')
                     <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
-                        {{ __('Users') }}
+                        <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                            <path d="M16 11l2 2l4 -4" />
+                        </svg>
+                        &nbsp;
+                        @if(auth()->user()->hasRole('SuperAdmin'))
+                            {{ __('Users Admin') }}
+                        @else
+                            {{ __('Users') }}
+                        @endif
                     </x-jet-nav-link>
                     @endrole
-                    @can('PoBuyer')
-                        <x-jet-nav-link href="{{ route('RFQCart.index') }}" :active="request()->routeIs('RFQCart.index')">
-                            @include('RFQ.RFQICON') &nbsp;RFQ Items
-                            @if (\App\Models\ECart::where('user_id', auth()->user()->id)
-            ->where('business_id', auth()->user()->business_id)
-            ->count())
-                                ({{ \App\Models\ECart::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->count() }})
-                            @endif
+                    @role('SuperAdmin')
+                    <x-jet-nav-link href="{{ route('category.create') }}" :active="request()->routeIs('category.*')">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        &nbsp;
+                        {{ __('Categories Admin') }}
+                    </x-jet-nav-link>
 
-                        </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('contact.index') }}" :active="request()->routeIs('contact.*')">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+                        </svg>
+                        &nbsp;
+                        {{ __('Support Requests') }}
+                    </x-jet-nav-link>
+                     @endrole
+                    @can('PoBuyer')
+{{--                        <x-jet-nav-link href="{{ route('RFQCart.index') }}" :active="request()->routeIs('RFQCart.index')">--}}
+{{--                            @include('RFQ.RFQICON') &nbsp;RFQ Items--}}
+{{--                            @if (\App\Models\ECart::where('user_id', auth()->user()->id)--}}
+{{--                                ->where('business_id', auth()->user()->business_id)--}}
+{{--                                ->count())--}}
+{{--                                ({{ \App\Models\ECart::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->count() }})--}}
+{{--                            @endif--}}
+
+{{--                        </x-jet-nav-link>--}}
                     @endcan
 
 
-                    @if (Auth::user()->status == 1)
-                    @else
-                        @if (Auth::user()->registration_type)
-                            <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">
-                                {{ __('Business') }}
-                                @php
-                                    $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
-                                    if ($isBusinessDataExist) {
-                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
-                                        $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
-                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
-                                        $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
-                                    }
-                                @endphp
-                                @if (isset($isBusinessDataExist))
-                                    &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
-                                @endif
-                            </x-jet-nav-link>
+{{--                    @if (Auth::user()->status == 1)--}}
+{{--                    @else--}}
+{{--                        @if (Auth::user()->registration_type)--}}
+{{--                            <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">--}}
+{{--                                {{ __('Business') }}--}}
+{{--                                @php--}}
+{{--                                    $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();--}}
+{{--                                    if ($isBusinessDataExist) {--}}
+{{--                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();--}}
+{{--                                        $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();--}}
+{{--                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();--}}
+{{--                                        $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();--}}
+{{--                                    }--}}
+{{--                                @endphp--}}
+{{--                                @if (isset($isBusinessDataExist))--}}
+{{--                                    &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
+{{--                                @endif--}}
+{{--                            </x-jet-nav-link>--}}
 
 
 
-                            @if (isset($isBusinessWarehouseDataExist))
+{{--                            @if (isset($isBusinessWarehouseDataExist))--}}
 
-                                <x-jet-nav-link href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}" :active="request()->routeIs('businessWarehouse.*')">
-                                    {{ __('Warehouse') }}
-                                    @if (isset($isBusinessWarehouseDataExist))
-                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
-                                    @endif
-                                </x-jet-nav-link>
+{{--                                <x-jet-nav-link href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}" :active="request()->routeIs('businessWarehouse.*')">--}}
+{{--                                    {{ __('Warehouse') }}--}}
+{{--                                    @if (isset($isBusinessWarehouseDataExist))--}}
+{{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
+{{--                                    @endif--}}
+{{--                                </x-jet-nav-link>--}}
 
-                            @else
-                                <x-jet-nav-link href="{{ route('businessWarehouse.create') }}" :active="request()->routeIs('businessWarehouse.*')">
-                                    {{ __('Warehouse') }}
-                                    @if (isset($isBusinessWarehouseDataExist))
-                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
-                                    @endif
-                                </x-jet-nav-link>
-                            @endif
+{{--                            @else--}}
+{{--                                <x-jet-nav-link href="{{ route('businessWarehouse.create') }}" :active="request()->routeIs('businessWarehouse.*')">--}}
+{{--                                    {{ __('Warehouse') }}--}}
+{{--                                    @if (isset($isBusinessWarehouseDataExist))--}}
+{{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
+{{--                                    @endif--}}
+{{--                                </x-jet-nav-link>--}}
+{{--                            @endif--}}
 
-                            @if (isset($isBusinessPOIExist))
-                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}" :active="request()->routeIs('purchaseOrderInfo.*')">
-                                    {{ __('P.O. Info') }}
-                                    @if (isset($isBusinessPOIExist))
-                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
-                                    @endif
-                                </x-jet-nav-link>
-                            @else
-                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.create') }}" :active="request()->routeIs('purchaseOrderInfo.*')">
-                                    {{ __('P.O. Info') }}
-                                    @if (isset($isBusinessPOIExist))
-                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
-                                    @endif
-                                </x-jet-nav-link>
-                            @endif
+{{--                            @if (isset($isBusinessPOIExist))--}}
+{{--                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}" :active="request()->routeIs('purchaseOrderInfo.*')">--}}
+{{--                                    {{ __('P.O. Info') }}--}}
+{{--                                    @if (isset($isBusinessPOIExist))--}}
+{{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
+{{--                                    @endif--}}
+{{--                                </x-jet-nav-link>--}}
+{{--                            @else--}}
+{{--                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.create') }}" :active="request()->routeIs('purchaseOrderInfo.*')">--}}
+{{--                                    {{ __('P.O. Info') }}--}}
+{{--                                    @if (isset($isBusinessPOIExist))--}}
+{{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
+{{--                                    @endif--}}
+{{--                                </x-jet-nav-link>--}}
+{{--                            @endif--}}
 
-                        @endif
-                    @endif
+{{--                        @endif--}}
+{{--                    @endif--}}
                 </div>
             </div>
 
@@ -171,7 +199,7 @@
                         <x-jet-responsive-nav-link href="{{ route('log.viewer') }}" :active="request()->routeIs('log.viewer')">
                             {{ __('Log Viewer') }}
                         </x-jet-responsive-nav-link>
-                    @endcan
+                         @endcan
 
                         @can('all')
                             <div class="border-t border-gray-100"></div>

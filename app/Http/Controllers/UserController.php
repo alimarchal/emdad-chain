@@ -100,14 +100,28 @@ class UserController extends Controller
 //        $data = array();
         $roleName  = Role::where('id' , $request->input('role'))->first();
 
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'business_id' => auth()->user()->business_id,
-            'usertype' => $roleName->name,
-            'status' => 1,
-        ];
+        if($request->role == 1)
+        {
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'business_id' => auth()->user()->business_id,
+                'usertype' => $roleName->name,
+                'status' => 3,
+            ];
+        }
+        else{
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'business_id' => auth()->user()->business_id,
+                'usertype' => $roleName->name,
+                'status' => 1,
+            ];
+        }
+
         $user = User::create($data);
         $role = $request->input('role') ? $request->input('role') : [];
         $user->assignRole($role);

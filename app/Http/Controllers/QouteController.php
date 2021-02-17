@@ -134,8 +134,15 @@ class QouteController extends Controller
 
     public function QoutationsBuyerReceived(Request $request)
     {
+        if (auth()->user()->hasRole('SuperAdmin'))
+        {
+            $PlacedRFQ = EOrders::orderBy('created_at', 'desc')->get();
+        }
+        else
+            {
+                $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+            }
 
-        $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
         return view('buyer.receivedQoutations', compact('PlacedRFQ'));
     }
 
