@@ -133,7 +133,6 @@ class PlacedRFQController extends Controller
                 // $business_categories = implode(",", $business_categories);
                 $collection = EOrderItems::where('status', 'pending')->whereIn('item_code', $business_categories)->get();
             }
-
         return view('supplier.index', compact('collection'));
     }
 

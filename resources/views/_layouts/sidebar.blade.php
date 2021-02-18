@@ -8,11 +8,9 @@
     <div class="flex items-center justify-center mt-8">
         <div class="flex items-center">
             <a href="{{ route('dashboard') }}">
-                <!-- <x-jet-application-mark class="block h-9 w-auto"/> -->
                 <img src="{{ url('logo.png') }}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto"/>
             </a>
             <a href="{{ route('dashboard') }}">
-{{--                <span class="text-white text-2xl mx-2 font-semibold">Dashboard </span>--}}
                 <span class="text-white text-2xl mx-2 font-semibold">
                     @if(auth()->user()->hasRole('SuperAdmin')) Super Admin
                     @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer') Buyer
@@ -20,7 +18,6 @@
                     @elseif(auth()->user()->hasRole('Buyer Warehouse Admin')) Warehouse Admin
                     @elseif(auth()->user()->hasRole('Supplier Sales')) Supplier Sales
                     @endif
-{{--                    <span class="text-white text-base mx-1 font-semibold">Dashboard</span>--}}
                 </span>
             </a>
         </div>
@@ -38,7 +35,7 @@
 
         @if(auth()->user()->can('all'))
         {{-- Roles --}}
-{{--            <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('roles') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('roles') }}">--}}
+
         <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('role.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('role.index') }}">
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM17.707 5.293L14 1.586v12.828l2.293 2.293A1 1 0 0018 16V6a1 1 0 00-.293-.707z" clip-rule="evenodd"></path>
@@ -66,7 +63,7 @@
                 </svg>
                 <span class="mx-3">B & S Info</span>
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-{{--                    <path d="M13.962,8.885l-3.736,3.739c-0.086,0.086-0.201,0.13-0.314,0.13S9.686,12.71,9.6,12.624l-3.562-3.56C5.863,8.892,5.863,8.611,6.036,8.438c0.175-0.173,0.454-0.173,0.626,0l3.25,3.247l3.426-3.424c0.173-0.172,0.451-0.172,0.624,0C14.137,8.434,14.137,8.712,13.962,8.885 M18.406,10c0,4.644-3.763,8.406-8.406,8.406S1.594,14.644,1.594,10S5.356,1.594,10,1.594S18.406,5.356,18.406,10 M17.521,10c0-4.148-3.373-7.521-7.521-7.521c-4.148,0-7.521,3.374-7.521,7.521c0,4.147,3.374,7.521,7.521,7.521C14.148,17.521,17.521,14.147,17.521,10"></path>--}}
+
                 </svg>
             </a>
 
@@ -140,7 +137,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0
                     0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                <span class="mx-3">Business</span>
+                <span class="mx-3">Businesses</span>
             </a>
 
             {{-- <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('businessWarehouse.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}
@@ -226,7 +223,7 @@
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
                         </svg>
-                        <a href="{{ route('PlacedRFQ.index') }}"><span class="mx-3 ">Placed RFQs</span>
+                        <a href="{{ route('PlacedRFQ.index') }}"><span class="mx-3 ">RFQ History</span>
                         </a>
                     </li>
 
@@ -267,12 +264,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                         {{--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>--}}
                     </svg>
-                    <span class="mx-3">Quote</span>
+                    <span class="mx-3">Quotation</span>
                 </a>
-                <ul
-                    x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                    @click.away="open = false"
-                >
+                <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @click.away="open = false">
                     <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('viewRFQs') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
@@ -348,7 +342,15 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                 </svg>
-                <span class="mx-3 ">Delivery Note</span>
+                <span class="mx-3 ">Generate Delivery Note</span>
+            </a>
+
+            <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('notes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('notes') }}">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                </svg>
+                <span class="mx-3 ">Delivery Notes</span>
             </a>
         @endif
 

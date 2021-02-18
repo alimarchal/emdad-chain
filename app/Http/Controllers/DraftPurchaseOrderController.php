@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeliveryNote;
 use App\Models\DraftPurchaseOrder;
 //use Barryvdh\DomPDF\PDF as PDF;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -17,7 +18,7 @@ class DraftPurchaseOrderController extends Controller
     public function index()
     {
         $user = auth()->user()->id;
-        $dpos = DraftPurchaseOrder::where('user_id', $user)->where('business_id', auth()->user()->business_id)->where('status','pending')->get();
+        $dpos = DraftPurchaseOrder::where('user_id', $user)->where('business_id', auth()->user()->business_id)->where('status', 'pending')->get();
         return view('draftPurchaseOrder.index', compact('dpos'));
     }
 
@@ -144,7 +145,7 @@ class DraftPurchaseOrderController extends Controller
     public function generatePDF(DraftPurchaseOrder $draftPurchaseOrder)
     {
         $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'))->setOptions(['defaultFont' => 'sans-serif']);
-//        $pdf = PDF::loadView('draftPurchaseOrder.PDF', $data);
+        //        $pdf = PDF::loadView('draftPurchaseOrder.PDF', $data);
         return $pdf->download('POs.pdf');
     }
 
@@ -152,12 +153,24 @@ class DraftPurchaseOrderController extends Controller
     public function po()
     {
         $user = auth()->user()->id;
-        $dpos = DraftPurchaseOrder::where('user_id', $user)->where('business_id', auth()->user()->business_id)->where('status','approved')->get();
+        $business_type = auth()->user()->business->business_type;
+        if ($business_type == "Buyer") {
+            $dpos = DraftPurchaseOrder::where('user_id',auth()->user()->id)->where('business_id', auth()->user()->business_id)->where('status','approved')->orWhere('status','prepareDelivery')->get(); //->where('status','approved')
+        } else {
+            $dpos = DraftPurchaseOrder::where('supplier_business_id', auth()->user()->business_id)->where('status','approved')->orWhere('status','prepareDelivery')->get(); //
+        }
+
         return view('draftPurchaseOrder.po', compact('dpos'));
     }
 
     public function poShow(DraftPurchaseOrder $draftPurchaseOrder)
     {
         return view('draftPurchaseOrder.poShow', compact('draftPurchaseOrder'));
+    }
+
+    public function notes(Request $request)
+    {
+        $collection = DeliveryNote::where('supplier_business_id', auth()->user()->business->id)->get();
+        return view('supplier.deliveryNotes', compact('collection'));
     }
 }

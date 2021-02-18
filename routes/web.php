@@ -174,3 +174,5 @@ Route::middleware(['auth:sanctum'])->resource('deliveryNote', \App\Http\Controll
 
 Route::middleware(['auth:sanctum'])->get('/po', [DraftPurchaseOrderController::class, 'po'])->name('po.po');
 Route::middleware(['auth:sanctum'])->get('/po/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'poShow'])->name('po.show');
+
+Route::middleware(['auth:sanctum'])->get('/notes', [DraftPurchaseOrderController::class, 'notes'])->name('notes');

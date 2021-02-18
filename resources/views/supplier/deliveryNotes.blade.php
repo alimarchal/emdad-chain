@@ -15,13 +15,7 @@
                         </button>
                     </div>
                 @endif
-                {{-- <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px "> --}}
-                {{-- <a href="{{route('generatePDF')}}" --}}
-                {{-- class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150"> --}}
-                {{-- Generate PDF --}}
-                {{-- </a> --}}
-                {{-- </div> --}}
-                @if ($dpos->count())
+                @if ($collection->count())
                     <!-- This example requires Tailwind CSS v2.0+ -->
                     <div class="flex flex-col">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -34,10 +28,10 @@
                                                     #
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    DPO Number
+                                                    Delivery Note
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Item Name
+                                                    Purchase Order
                                                 </th>
 
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -50,29 +44,29 @@
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
-                                            @foreach ($dpos as $dpo)
+                                            @foreach ($collection as $dn)
                                                 <tr>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                                         {{ $loop->iteration }}
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        EMDAD-{{ $dpo->id }}
+                                                        EMDAD-{{ $dn->id }}
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        <a href="{{ route('po.show', $dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dpo->item_name }}</a>
+                                                        <a href="{{ route('po.show', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dn->item_name }}</a>
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        {{ $dpo->po_date }}
+                                                        {{ $dn->po_date }}
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        @if ($dpo->status == 'prepareDelivery')
+                                                        @if ($dn->status == 'prepareDelivery')
                                                             Preparing Delivery
                                                         @else
-                                                            {{ $dpo->status }}
+                                                            {{ $dn->status }}
                                                         @endif
 
                                                     </td>

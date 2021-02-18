@@ -41,7 +41,14 @@ class DeliveryNoteController extends Controller
     public function store(Request $request)
     {
         $request->merge(['status' => 'processing']);
+        $po_no = $request->draft_purchase_order_id;
         $delivery = DeliveryNote::create($request->all());
+        if($delivery)
+        {
+            $po = DraftPurchaseOrder::where('id', $po_no)->first();
+            $po->status = 'prepareDelivery';
+            $po->save();
+        }
         session()->flash('message', 'Delivery note has been successfully created.');
         return redirect('deliveryNote');
     }
