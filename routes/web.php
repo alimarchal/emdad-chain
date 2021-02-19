@@ -174,3 +174,18 @@ Route::middleware(['auth:sanctum'])->resource('deliveryNote', \App\Http\Controll
 
 Route::middleware(['auth:sanctum'])->get('/po', [DraftPurchaseOrderController::class, 'po'])->name('po.po');
 Route::middleware(['auth:sanctum'])->get('/po/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'poShow'])->name('po.show');
+
+##################### Shipment routes ####################################
+//Route::get('/shipment', function () {
+//    return view('shipment.create');
+//})->name('shipment');
+Route::middleware(['auth:sanctum'])->resource('shipment', \App\Http\Controllers\ShipmentController::class);
+Route::middleware(['auth:sanctum'])->resource('shipmentCart', \App\Http\Controllers\ShipmentCartController::class);
+Route::middleware(['auth:sanctum'])->resource('shipmentItem', \App\Http\Controllers\ShipmentItemController::class);
+
+#################### END ##################################################
+
+
+###################### Vehicle routes ####################################
+Route::middleware(['auth:sanctum'])->resource('vehicle', \App\Http\Controllers\VehicleController::class);
+#################### END ##################################################
