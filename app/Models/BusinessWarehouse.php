@@ -24,4 +24,9 @@ class BusinessWarehouse extends Model
         return $this->hasOne(BusinessWarehouse::class);
     }
 
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
+    }
+
 }

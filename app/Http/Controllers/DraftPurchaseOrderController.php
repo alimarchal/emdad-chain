@@ -167,10 +167,4 @@ class DraftPurchaseOrderController extends Controller
     {
         return view('draftPurchaseOrder.poShow', compact('draftPurchaseOrder'));
     }
-
-    public function notes(Request $request)
-    {
-        $collection = DeliveryNote::where('supplier_business_id', auth()->user()->business->id)->get();
-        return view('supplier.deliveryNotes', compact('collection'));
-    }
 }

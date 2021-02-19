@@ -50,7 +50,7 @@ class DeliveryNoteController extends Controller
             $po->save();
         }
         session()->flash('message', 'Delivery note has been successfully created.');
-        return redirect('deliveryNote');
+        return redirect('notes');
     }
 
     /**
@@ -103,5 +103,17 @@ class DeliveryNoteController extends Controller
 
         return view('deliveryNote.show', compact('draftPurchaseOrder'));
 
+    }
+
+    public function notes(Request $request)
+    {
+        $collection = DeliveryNote::where('supplier_business_id', auth()->user()->business->id)->get();
+        return view('supplier.deliveryNotes', compact('collection'));
+    }
+
+    public function viewNote(DeliveryNote $deliveryNote)
+    {
+
+        return view('deliveryNote.viewNote',compact('deliveryNote'));
     }
 }
