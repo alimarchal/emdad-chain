@@ -169,3 +169,19 @@ Route::middleware(['auth:sanctum'])->get('/logviewer', function () {
 Route::middleware(['auth:sanctum'])->resource('delivery', \App\Http\Controllers\DeliveryController::class);
 Route::middleware(['auth:sanctum'])->resource('deliveryNote', \App\Http\Controllers\DeliveryNoteController::class);
 #################### END ##################################################
+
+
+##################### Shipment routes ####################################
+//Route::get('/shipment', function () {
+//    return view('shipment.create');
+//})->name('shipment');
+Route::middleware(['auth:sanctum'])->resource('shipment', \App\Http\Controllers\ShipmentController::class);
+Route::middleware(['auth:sanctum'])->resource('shipmentCart', \App\Http\Controllers\ShipmentCartController::class);
+Route::middleware(['auth:sanctum'])->resource('shipmentItem', \App\Http\Controllers\ShipmentItemController::class);
+
+#################### END ##################################################
+
+
+###################### Vehicle routes ####################################
+Route::middleware(['auth:sanctum'])->resource('vehicle', \App\Http\Controllers\VehicleController::class);
+#################### END ##################################################

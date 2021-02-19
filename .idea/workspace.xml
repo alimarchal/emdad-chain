@@ -13,6 +13,9 @@
       <executable />
     </execution>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/vendor/laravel/jetstream/stubs/public/css/app.css" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/livewire/livewire" />
@@ -160,6 +163,7 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1obKVMWkYjKW5h2QnUr575bZokP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -193,27 +197,53 @@
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state x="-1368" y="178" key="#Composer/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613550030552" />
-    <state x="-1264" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1613626546898">
+    <state x="-1230" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1613734174386">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="-1264" y="344" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613626546898" />
-    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1613563505534">
+    <state x="-1230" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613734174386" />
+    <state x="-1190" y="334" key="NewPhpClassDialog" timestamp="1613730695090">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613563505534" />
+    <state x="-1190" y="334" key="NewPhpClassDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613730695090" />
+    <state x="-1126" y="443" key="NewPhpFileDialog" timestamp="1613734259493">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1126" y="443" key="NewPhpFileDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613734259493" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1613734730675">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613734730675" />
+    <state x="-1264" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1613713701602">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1264" y="344" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613713701602" />
+    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1613734154818">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613734154818" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/_layouts/sidebar.blade.php</url>
-          <line>291</line>
-          <option name="timeStamp" value="3" />
+          <line>333</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/shipment/generated.blade.php</url>
+          <line>99</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/_layouts/sidebar.blade.php</url>
-          <line>307</line>
-          <option name="timeStamp" value="4" />
+          <line>189</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/resources/views/_layouts/sidebar.blade.php</url>
+          <line>362</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
