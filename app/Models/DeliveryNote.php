@@ -18,4 +18,9 @@ class DeliveryNote extends Model
     {
         return $this->belongsTo(DraftPurchaseOrder::class, 'draft_purchase_order_id', 'id');
     }
+
+    public function delivery()
+    {
+        return $this->hasOne(Delivery::class);
+    }
 }

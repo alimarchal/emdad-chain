@@ -45,6 +45,11 @@
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                     Brand
                                 </th>
+                                @if ($deliveryNote->status == 'completed')
+                                <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                    Invoice ID
+                                </th>
+                                @endif
 
                             </tr>
                         </thead>
@@ -71,6 +76,12 @@
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                     {{ $deliveryNote->purchase_order->brand }}
                                 </td>
+                                
+                                @if ($deliveryNote->status == 'completed')
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                    {{ $deliveryNote->delivery->id }}
+                                </td>
+                                @endif
                             </tr>
 
                         </tbody>
@@ -79,6 +90,7 @@
 
                     <br>
                     <br>
+                    @if ($deliveryNote->status == 'processing')
                     <h2 class="text-2xl text-center font-bold">Invoice Generate</h2>
                     <p>
                         Delivery Address: {{ $deliveryNote->delivery_address }}<br>
@@ -86,6 +98,7 @@
                         Terms and Conditions: {{ $deliveryNote->terms_and_conditions }}<br>
                         Warranty: {{ $deliveryNote->warranty }}<br>
                     </p>
+                    
                     <form action="{{ route('invoice.generate') }}" method="post">
                         @csrf
                         <div class="mt-5">
@@ -96,6 +109,7 @@
                             </button>
                         </div>
                     </form>
+                    @endif
 
                     <div class="flex justify-center">
                         <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>

@@ -155,9 +155,9 @@ class DraftPurchaseOrderController extends Controller
         $user = auth()->user()->id;
         $business_type = auth()->user()->business->business_type;
         if ($business_type == "Buyer") {
-            $dpos = DraftPurchaseOrder::where('user_id',auth()->user()->id)->where('business_id', auth()->user()->business_id)->where('status','approved')->orWhere('status','prepareDelivery')->get(); //->where('status','approved')
+            $dpos = DraftPurchaseOrder::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->where('status', 'approved')->orWhere('status', 'prepareDelivery')->orWhere('status', 'completed')->get(); //->where('status','approved')
         } else {
-            $dpos = DraftPurchaseOrder::where('supplier_business_id', auth()->user()->business_id)->where('status','approved')->orWhere('status','prepareDelivery')->get(); //
+            $dpos = DraftPurchaseOrder::where('supplier_business_id', auth()->user()->business_id)->where('status', 'approved')->orWhere('status', 'prepareDelivery')->orWhere('status', 'completed')->get(); //
         }
 
         return view('draftPurchaseOrder.po', compact('dpos'));
