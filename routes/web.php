@@ -6,6 +6,7 @@ use App\Http\Controllers\DeliveryNoteController;
 use App\Http\Controllers\DraftPurchaseOrderController;
 use App\Http\Controllers\ECartController;
 use App\Http\Controllers\EOrdersController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PlacedRFQController;
 use App\Http\Controllers\PurchaseRequestFormController;
 use App\Http\Controllers\QouteController;
@@ -192,3 +193,8 @@ Route::middleware(['auth:sanctum'])->resource('shipmentItem', \App\Http\Controll
 ###################### Vehicle routes ####################################
 Route::middleware(['auth:sanctum'])->resource('vehicle', \App\Http\Controllers\VehicleController::class);
 #################### END ##################################################
+
+
+###################### Generate Invoice & Delivery ####################################
+Route::middleware(['auth:sanctum'])->post('/invoice/generate', [InvoiceController::class, 'invoiceGenerate'])->name('invoice.generate');
+#################### END ##############################################################
