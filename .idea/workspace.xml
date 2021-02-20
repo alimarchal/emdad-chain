@@ -209,14 +209,14 @@
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state x="-1126" y="443" key="NewPhpFileDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613734259493" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1613734730675">
+    <state width="498" height="446" key="SwitcherDM" timestamp="1613741601983">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613734730675" />
-    <state x="-1264" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1613713701602">
+    <state width="498" height="446" key="SwitcherDM/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613741601983" />
+    <state x="-1264" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1613799507568">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="-1264" y="344" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613713701602" />
+    <state x="-1264" y="344" key="com.intellij.ide.util.TipDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1613799507568" />
     <state x="-1297" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1613734154818">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
@@ -229,11 +229,6 @@
           <url>file://$PROJECT_DIR$/resources/views/_layouts/sidebar.blade.php</url>
           <line>333</line>
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/resources/views/shipment/generated.blade.php</url>
-          <line>99</line>
-          <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/resources/views/_layouts/sidebar.blade.php</url>
