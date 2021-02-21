@@ -49,7 +49,10 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        //
+        $draftPurchaseOrder = DraftPurchaseOrder::where('id',$invoice->draft_purchase_order_id)->first();
+        $delivery = Delivery::where('id',$invoice->delivery_id)->first();
+
+        return view('invoice.show', compact('draftPurchaseOrder','delivery','invoice'));    
     }
 
     /**

@@ -197,5 +197,5 @@ Route::middleware(['auth:sanctum'])->resource('vehicle', \App\Http\Controllers\V
 
 ###################### Generate Invoice & Delivery ####################################
 Route::middleware(['auth:sanctum'])->post('/invoice/generate', [InvoiceController::class, 'invoiceGenerate'])->name('invoice.generate');
-Route::middleware(['auth:sanctum'])->post('/invoice/{invoice}', [InvoiceController::class, 'show'])->name('invoice.show');
+Route::middleware(['auth:sanctum'])->get('/invoice/{invoice}', [InvoiceController::class, 'show'])->name('invoice.show');
 #################### END ##############################################################
