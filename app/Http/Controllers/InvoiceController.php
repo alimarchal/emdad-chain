@@ -52,7 +52,7 @@ class InvoiceController extends Controller
         $draftPurchaseOrder = DraftPurchaseOrder::where('id',$invoice->draft_purchase_order_id)->first();
         $delivery = Delivery::where('id',$invoice->delivery_id)->first();
 
-        return view('invoice.show', compact('draftPurchaseOrder','delivery','invoice'));    
+        return view('invoice.show', compact('draftPurchaseOrder','delivery','invoice'));
     }
 
     /**
@@ -98,6 +98,8 @@ class InvoiceController extends Controller
             'user_id' => $delivery_note->user_id,
             'delivery_note_id' => $delivery_note->id,
             'business_id' => $delivery_note->business_id,
+            'supplier_user_id' => $delivery_note->supplier_user_id,
+            'supplier_business_id' => $delivery_note->supplier_business_id,
             'item_code' => $purchase_order->item_code,
             'item_name' => $purchase_order->item_name,
             'uom' => $purchase_order->uom,
@@ -127,7 +129,7 @@ class InvoiceController extends Controller
             'payment_method' => $del->payment_method,
             'ship_to_address' => $del->ship_to_address,
         ];
-        
+
         $inv = Invoice::create($invoice);
         $delivery_update =  Delivery::where('id', $del->id);
         $updated_delivery = $delivery_update->update([

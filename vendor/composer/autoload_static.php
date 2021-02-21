@@ -823,6 +823,7 @@ class ComposerStaticInit07f7cd2550a3a7fe927afb836b636136
         'App\\Http\\Controllers\\EOrdersController' => __DIR__ . '/../..' . '/app/Http/Controllers/EOrdersController.php',
         'App\\Http\\Controllers\\ESupplierAnswerController' => __DIR__ . '/../..' . '/app/Http/Controllers/ESupplierAnswerController.php',
         'App\\Http\\Controllers\\FAQsController' => __DIR__ . '/../..' . '/app/Http/Controllers/FAQsController.php',
+        'App\\Http\\Controllers\\InvoiceController' => __DIR__ . '/../..' . '/app/Http/Controllers/InvoiceController.php',
         'App\\Http\\Controllers\\ItemController' => __DIR__ . '/../..' . '/app/Http/Controllers/ItemController.php',
         'App\\Http\\Controllers\\LogisticDetailController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogisticDetailController.php',
         'App\\Http\\Controllers\\POInfoController' => __DIR__ . '/../..' . '/app/Http/Controllers/POInfoController.php',

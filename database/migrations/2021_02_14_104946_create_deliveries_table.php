@@ -19,6 +19,8 @@ class CreateDeliveriesTable extends Migration
             $table->string('user_id')->nullable();
             $table->string('captain_id')->nullable();
             $table->string('business_id')->nullable();
+            $table->string('supplier_user_id')->nullable();
+            $table->string('supplier_business_id')->nullable();
             $table->string('item_code')->nullable();
             $table->string('item_name')->nullable();
             $table->string('uom')->nullable();

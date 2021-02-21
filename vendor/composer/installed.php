@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '12bc06f180d9188ec30af0690679c0d9dc057a1a',
+    'reference' => 'c5e71bd42d470f0ad187a90b6cd5511f372ad10c',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -643,7 +643,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '12bc06f180d9188ec30af0690679c0d9dc057a1a',
+      'reference' => 'c5e71bd42d470f0ad187a90b6cd5511f372ad10c',
     ),
     'laravel/sanctum' => 
     array (
@@ -737,12 +737,12 @@
     ),
     'mobiledetect/mobiledetectlib' => 
     array (
-      'pretty_version' => '2.8.36',
-      'version' => '2.8.36.0',
+      'pretty_version' => '2.8.37',
+      'version' => '2.8.37.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e55c155f4d1ab299a0cfca8ec29a0154918c9e3d',
+      'reference' => '9841e3c46f5bd0739b53aed8ac677fa712943df7',
     ),
     'mockery/mockery' => 
     array (
