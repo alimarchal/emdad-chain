@@ -15,7 +15,11 @@ class CreateTrackingDeliveriesTable extends Migration
     {
         Schema::create('tracking_deliveries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('delivery_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('delivery_id')->nullable()->index();
+            $table->timestamp('timestamp')->nullable();
+            $table->string('coordinates', 80)->nullable();
+            $table->string('vehicle_id', 10)->nullable();
+            $table->string('driver_id', 10)->nullable();
             $table->timestamps();
         });
     }

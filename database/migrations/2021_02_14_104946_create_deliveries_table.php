@@ -15,7 +15,7 @@ class CreateDeliveriesTable extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('draft_purchase_order_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('draft_purchase_order_id')->nullable()->index();;
             $table->string('user_id')->nullable();
             $table->string('captain_id')->nullable();
             $table->string('business_id')->nullable();
