@@ -113,9 +113,9 @@ class ShipmentCartController extends Controller
      */
     public function destroy(ShipmentCart $shipmentCart)
     {
-        session()->flash('message', 'Item successfully deleted.');
         Delivery::where('id', $shipmentCart->delivery_id)->update(['shipment_status' => 0]);
         $shipmentCart->delete();
+        session()->flash('message', 'Item successfully deleted.');
 
         return back();
     }

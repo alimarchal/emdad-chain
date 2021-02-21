@@ -38,6 +38,7 @@ return array(
     'App\\Http\\Controllers\\EOrdersController' => $baseDir . '/app/Http/Controllers/EOrdersController.php',
     'App\\Http\\Controllers\\ESupplierAnswerController' => $baseDir . '/app/Http/Controllers/ESupplierAnswerController.php',
     'App\\Http\\Controllers\\FAQsController' => $baseDir . '/app/Http/Controllers/FAQsController.php',
+    'App\\Http\\Controllers\\InvoiceController' => $baseDir . '/app/Http/Controllers/InvoiceController.php',
     'App\\Http\\Controllers\\ItemController' => $baseDir . '/app/Http/Controllers/ItemController.php',
     'App\\Http\\Controllers\\LogisticDetailController' => $baseDir . '/app/Http/Controllers/LogisticDetailController.php',
     'App\\Http\\Controllers\\POInfoController' => $baseDir . '/app/Http/Controllers/POInfoController.php',

@@ -174,7 +174,7 @@
                         </label>
                         <select name="delivery_id" id="delivery_id" class="form-select shadow-sm block w-full" required>
                             <option value="">None</option>
-                            @foreach(\App\Models\Delivery::where(['business_id' =>  auth()->user()->business_id, 'shipment_status' => 0])->get() as $delivery)
+                            @foreach(\App\Models\Delivery::where(['supplier_business_id' =>  auth()->user()->business_id, 'shipment_status' => 0])->get() as $delivery)
                                 <option value="{{$delivery->id}}">{{$delivery->item_name}}</option>
                             @endforeach
                         </select>
