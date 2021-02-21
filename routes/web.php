@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DeliveryNoteController;
 use App\Http\Controllers\DraftPurchaseOrderController;
 use App\Http\Controllers\ECartController;
 use App\Http\Controllers\EOrdersController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PlacedRFQController;
 use App\Http\Controllers\PurchaseRequestFormController;
 use App\Http\Controllers\QouteController;
@@ -175,6 +177,8 @@ Route::middleware(['auth:sanctum'])->resource('deliveryNote', \App\Http\Controll
 Route::middleware(['auth:sanctum'])->get('/po', [DraftPurchaseOrderController::class, 'po'])->name('po.po');
 Route::middleware(['auth:sanctum'])->get('/po/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'poShow'])->name('po.show');
 
+Route::middleware(['auth:sanctum'])->get('/notes', [DeliveryNoteController::class, 'notes'])->name('notes');
+Route::middleware(['auth:sanctum'])->get('/notes/{deliveryNote}', [DeliveryNoteController::class, 'viewNote'])->name('viewNote');
 ##################### Shipment routes ####################################
 //Route::get('/shipment', function () {
 //    return view('shipment.create');
@@ -189,3 +193,9 @@ Route::middleware(['auth:sanctum'])->resource('shipmentItem', \App\Http\Controll
 ###################### Vehicle routes ####################################
 Route::middleware(['auth:sanctum'])->resource('vehicle', \App\Http\Controllers\VehicleController::class);
 #################### END ##################################################
+
+
+###################### Generate Invoice & Delivery ####################################
+Route::middleware(['auth:sanctum'])->post('/invoice/generate', [InvoiceController::class, 'invoiceGenerate'])->name('invoice.generate');
+Route::middleware(['auth:sanctum'])->get('/invoice/{invoice}', [InvoiceController::class, 'show'])->name('invoice.show');
+#################### END ##############################################################

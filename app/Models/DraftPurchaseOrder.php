@@ -21,5 +21,8 @@ class DraftPurchaseOrder extends Model
         return $this->belongsTo(Business::class, 'supplier_business_id', 'id');
     }
 
-
+    public function delivery_note()
+    {
+        return $this->hasOne(DeliveryNote::class);
+    }
 }

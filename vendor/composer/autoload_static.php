@@ -92,13 +92,13 @@ class ComposerStaticInit07f7cd2550a3a7fe927afb836b636136
         '4888a6f58c08148ebe17682f9ce9b2a8' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operations/divideby.php',
         'eef6fa3879d3efa347cd24d5eb348f85' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operations/divideinto.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
+        '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
-        '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
-        '72b1e3f4a2af9b30b3f137b3ec2057fc' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/helpers.php',
-        '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
+        '72b1e3f4a2af9b30b3f137b3ec2057fc' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/helpers.php',
+        '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -876,6 +876,7 @@ class ComposerStaticInit07f7cd2550a3a7fe927afb836b636136
         'App\\Models\\EOrders' => __DIR__ . '/../..' . '/app/Models/EOrders.php',
         'App\\Models\\ESupplierAnswer' => __DIR__ . '/../..' . '/app/Models/ESupplierAnswer.php',
         'App\\Models\\FAQs' => __DIR__ . '/../..' . '/app/Models/FAQs.php',
+        'App\\Models\\Invoice' => __DIR__ . '/../..' . '/app/Models/Invoice.php',
         'App\\Models\\Item' => __DIR__ . '/../..' . '/app/Models/Item.php',
         'App\\Models\\LogisticDetail' => __DIR__ . '/../..' . '/app/Models/LogisticDetail.php',
         'App\\Models\\POInfo' => __DIR__ . '/../..' . '/app/Models/POInfo.php',
