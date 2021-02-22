@@ -157,10 +157,8 @@
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
                             <strong>Delivery Information</strong><br>
-                            <strong>City: </strong><br>
-                            <strong>Warehouse:</strong><br>
-                            <strong>Delivery Status: </strong><br>
-                            <strong>Delivery Time: </strong><br>
+                            @php $warehouseName =  \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse)->first(); @endphp
+                            <strong>Warehouse: @if(isset($warehouseName)){{$warehouseName->name}} @endif</strong><br>
 
                         </div>
                     </div>

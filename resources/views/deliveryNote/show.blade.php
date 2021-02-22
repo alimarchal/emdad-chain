@@ -98,12 +98,15 @@
                                 <label class="block font-medium text-sm text-gray-700 mt-4" for="delivery_address">
                                     Delivery Address
                                 </label>
-                                <textarea name="delivery_address" id="delivery_address" class="form-textarea w-full">{{ strip_tags($draftPurchaseOrder->buyer_business->address) . ' - City: ' . $draftPurchaseOrder->buyer_business->city . ' - Phone #: ' . $draftPurchaseOrder->buyer_business->phone }}</textarea>
+{{--                                <textarea name="delivery_address" id="delivery_address" class="form-textarea w-full">{{ strip_tags($draftPurchaseOrder->buyer_business->address) . ' - City: ' . $draftPurchaseOrder->buyer_business->city . ' - Phone #: ' . $draftPurchaseOrder->buyer_business->phone }}</textarea>--}}
+                                @php $delivery = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse)->first(); @endphp
+                                <textarea class="form-textarea w-full" disabled>{{$delivery->address}}</textarea>
+{{--                                <textarea class="form-textarea w-full" disabled>{{$draftPurchaseOrder->buyer_business->address}}</textarea>--}}
 
                                 <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
                                     City
                                 </label>
-                                <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" name="city" value="{{ $draftPurchaseOrder->buyer_business->city }}" required>
+                                <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" value="{{ $delivery->city }}" disabled="disabled">
 
 
                                 <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
@@ -122,6 +125,8 @@
                                 <input type="hidden" value="{{ $draftPurchaseOrder->supplier_business_id }}" name="supplier_business_id">
                                 <input type="hidden" value="{{ $draftPurchaseOrder->user_id }}" name="user_id">
                                 <input type="hidden" value="{{ $draftPurchaseOrder->business_id }}" name="business_id">
+                                <input type="hidden" value="{{ $delivery->address }}" name="delivery_address">
+                                <input type="hidden" value="{{ $delivery->city }}" name="city">
                             </div>
                         </div>
 

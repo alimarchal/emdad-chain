@@ -17,6 +17,7 @@ class CreateQoutesTable extends Migration
             $table->id();
             $table->string('user_id')->nullable();
             $table->string('e_order_item_id')->nullable();
+            $table->string('warehouse_id')->nullable();
             $table->string('quote_quantity')->nullable();
             $table->string('quote_price_per_quantity')->nullable();
             $table->string('sample_information')->nullable();

@@ -16,21 +16,21 @@ class BusinessWarehouseController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('status')) { 
+        if($request->has('status')) {
             // dd($request->all());
             $warehouses = new Business();
             if ($request->input('status')) {
                 $warehouses = $warehouses->where('status',$request->status);
-         
+
             }
             $warehouses = $warehouses->get();
             return view('business.index',compact('warehouses'));
-            
-        }  
-       
+
+        }
+
         else {
             $warehouses = BusinessWarehouse::all();
-  
+
             return view('businessWarehouse.index',compact('warehouses'));
         }
     }
@@ -97,6 +97,7 @@ class BusinessWarehouseController extends Controller
                 $businessWarehouse->landline = $request->landline[$count];
                 $businessWarehouse->mobile = $request->mobile[$count];
                 $businessWarehouse->country = $request->country[$count];
+                $businessWarehouse->address = $request->address;
                 $businessWarehouse->city = $request->city[$count];
                 $businessWarehouse->longitude = $request->longitude[$count];
                 $businessWarehouse->latitude = $request->latitude[$count];

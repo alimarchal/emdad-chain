@@ -10,7 +10,7 @@ class EOrderItems extends Model
     use HasFactory;
 
     protected $fillable =  [
-        'item_code', 'item_name', 'user_id', 'business_id', 'description', 'unit_of_measurement', 'size', 'quantity', 'brand', 'last_price', 'delivery_period', 'remarks', 'file_path', 'required_sample', 'payment_mode', 'order_id', 'status'
+        'item_code', 'item_name', 'user_id', 'warehouse_id', 'business_id', 'description', 'unit_of_measurement', 'size', 'quantity', 'brand', 'last_price', 'delivery_period', 'remarks', 'file_path', 'required_sample', 'payment_mode', 'order_id', 'status'
     ];
 
     public function business()
@@ -36,5 +36,10 @@ class EOrderItems extends Model
     public function category()
     {
         return $this->belongsTo(Category::class,'item_code');
+    }
+
+    public function warehouse()
+    {
+        return $this->hasOne(BusinessWarehouse::class,'id', 'warehouse_id');
     }
 }

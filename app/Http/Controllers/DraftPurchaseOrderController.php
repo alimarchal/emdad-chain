@@ -159,7 +159,6 @@ class DraftPurchaseOrderController extends Controller
 
     public function po()
     {
-        $user = auth()->user()->id;
         $business_type = auth()->user()->business->business_type;
         if ($business_type == "Buyer") {
             $dpos = DraftPurchaseOrder::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->where('status', 'approved')->orWhere('status', 'prepareDelivery')->orWhere('status', 'completed')->get(); //->where('status','approved')

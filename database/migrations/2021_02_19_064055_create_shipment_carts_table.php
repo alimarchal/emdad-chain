@@ -17,7 +17,7 @@ class CreateShipmentCartsTable extends Migration
             $table->id();
             $table->unsignedInteger('driver_id')->index();
             $table->unsignedInteger('vehicle_type')->index();
-            $table->unsignedInteger('business_id')->index();
+            $table->unsignedInteger('supplier_business_id')->index();
             $table->unsignedInteger('delivery_id')->index();
             $table->timestamps();
         });

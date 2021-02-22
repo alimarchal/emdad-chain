@@ -306,12 +306,23 @@
                         </select>
                     </div>
 
-
                     <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                         <label class="block font-medium text-sm text-gray-700 mb-1" for="file">
                             Attachment (any picture)
                         </label>
                         <input class="form-input rounded-md shadow-sm block w-full" id="file" type="file" name="file_path_1" autocomplete="name">
+                    </div>
+
+                    <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                        <label class="block font-medium text-sm text-gray-700 mb-1" for="warehouse_id">
+                            Warehouse receiving delivery
+                        </label>
+                        <select name="warehouse_id" id="warehouse_id" class="form-select shadow-sm block w-full" required>
+                            <option value=" ">Select Warehouse</option>
+                            @foreach(\App\Models\BusinessWarehouse::where('user_id', auth()->user()->id)->get() as $warehouse)
+                                <option value="{{$warehouse->id}}">{{$warehouse->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">

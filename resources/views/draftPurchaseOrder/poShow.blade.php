@@ -153,6 +153,12 @@
                             <strong>Remarks: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br>
                             <strong>Warranty: </strong> {{ $draftPurchaseOrder->warranty }} <br>
                         </div>
+                        <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
+                            <strong>Delivery Information</strong><br>
+                            @php $warehouseName =  \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse)->first(); @endphp
+                            <strong>Warehouse: @if(isset($warehouseName)){{$warehouseName->name}}@endif</strong><br>
+
+                        </div>
                     </div>
 
 

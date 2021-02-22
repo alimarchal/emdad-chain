@@ -15,7 +15,7 @@ class CreateVehiclesTable extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('business_id')->nullable()->index();
+            $table->foreignId('supplier_business_id')->nullable()->index();
             $table->foreignId('warehouse_id')->nullable()->index();
             $table->string('type');
             $table->string('licence_plate_No');

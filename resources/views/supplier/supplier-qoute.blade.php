@@ -63,6 +63,9 @@
                             <strong>Payment Mode:</strong> {{ $eOrderItems->payment_mode }}
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Delivery Address:</strong> {{ $eOrderItems->warehouse->address }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                             <strong>Description:</strong> {{ strip_tags($eOrderItems->description) }}
                         </div>
                     </div>
@@ -251,7 +254,7 @@
                         <form method="POST" action="{{ route('qoute.store') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
                             <p class="pt-6 pb-3 font-bold text-2xl text-center">
-                            
+
                                 Quote Information</p>
                             <div class="flex flex-wrap overflow-hidden xl:-mx-1">
                                 <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
@@ -264,6 +267,7 @@
                                     <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
                                     <input type="hidden" name="supplier_business_id" value="{{ $user_business_id }}">
                                     <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
+                                    <input type="hidden" name="warehouse_id" value="{{ $eOrderItems->warehouse->id }}">
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
