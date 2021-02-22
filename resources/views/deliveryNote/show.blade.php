@@ -99,7 +99,7 @@
                                     Delivery Address
                                 </label>
 {{--                                <textarea name="delivery_address" id="delivery_address" class="form-textarea w-full">{{ strip_tags($draftPurchaseOrder->buyer_business->address) . ' - City: ' . $draftPurchaseOrder->buyer_business->city . ' - Phone #: ' . $draftPurchaseOrder->buyer_business->phone }}</textarea>--}}
-                                @php $delivery = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse)->first(); @endphp
+                                @php $delivery = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse_id)->first(); @endphp
                                 <textarea class="form-textarea w-full" disabled>{{$delivery->address}}</textarea>
 {{--                                <textarea class="form-textarea w-full" disabled>{{$draftPurchaseOrder->buyer_business->address}}</textarea>--}}
 
