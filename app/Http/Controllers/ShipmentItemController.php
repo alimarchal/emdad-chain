@@ -42,17 +42,17 @@ class ShipmentItemController extends Controller
         DB::transaction(function () use ($request) {
             $shipmentId = Shipment::insertGetId([
                 'supplier_id' => auth()->user()->id,
-                'business_id' => auth()->user()->business_id,
+                'supplier_business_id' => auth()->user()->business_id,
             ]);
 //            $eCartItems = ECart::findMany($request->item_number);
-            $shipmentCart = ShipmentCart::where('business_id', auth()->user()->business_id)->get();
+            $shipmentCart = ShipmentCart::where('supplier_business_id', auth()->user()->business_id)->get();
 //            Vehicle::whereIn('id', $shipmentCart['vehicle_type'])->update(['status' => 0]);
             foreach ($shipmentCart as $item) {
                 $shipmentItem = new ShipmentItem;
                 $shipmentItem->shipment_id = $shipmentId;
                 $shipmentItem->driver_id = $item->driver_id;
                 $shipmentItem->vehicle_type = $item->vehicle_type;
-                $shipmentItem->business_id = $item->business_id;
+                $shipmentItem->supplier_business_id = $item->supplier_business_id;
                 $shipmentItem->delivery_id = $item->delivery_id;
                 $shipmentItem->save();
             }

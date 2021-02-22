@@ -46,6 +46,7 @@
                             <x-jet-label class="w-1/2" for="landline">Landline</x-jet-label>
                             <x-jet-label class="w-1/2" for="mobile">Mobile</x-jet-label>
                             <x-jet-label class="w-1/2" for="country">Country</x-jet-label>
+                            <x-jet-label class="w-1/2" for="address">Address</x-jet-label>
                             <x-jet-label class="w-1/2" for="city">City</x-jet-label>
                         </div>
                         <div class="flex space-x-5 mt-3">
@@ -57,6 +58,7 @@
                                     <option value="{{$country}}">{{$country}}</option>
                                 @endforeach
                             </select>
+                            <x-jet-input id="address" type="text" name="address" class="border p-2 w-1/2"></x-jet-input>
                             <x-jet-input id="city" type="text" name="city[]" class="border p-2 w-1/2"></x-jet-input>
                         </div>
                         <div class="flex space-x-5 mt-3">

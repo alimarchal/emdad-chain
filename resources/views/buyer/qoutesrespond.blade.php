@@ -28,7 +28,7 @@
                         @endif
                     </h2>
                     <hr>
-                    
+
                     <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded shadow-md ">
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                             <strong>Quote Request #: {{ $QouteItem->id }}</strong>
@@ -67,7 +67,7 @@
                         </div>
                     </div>
 
-                    
+
 
                     @if($QouteItem->messages->isNotEmpty())
                     <div class="border-2 p-2 m-2">
@@ -132,16 +132,21 @@
 
                         <input type="hidden" name="sub_total" value="{{ $QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity }}">
                         <input type="hidden" name="delivery_time" value="{{ $QouteItem->shipping_time_in_days }}">
-                        
+
                         <input type="hidden" name="qoute_no" value="{{ $QouteItem->id }}">
 
 
-                        <x-jet-label for="delivery_city" value="{{ __('Delivery City') }}" class="text-black" />
-                        <x-jet-input id="delivery_city" class="block mt-1 w-full" type="input" name="delivery_city" :value="old('delivery_city')" required autofocus />
+{{--                        <x-jet-label for="address" value="{{ __('Delivery Address') }}" class="text-black" />--}}
+{{--                        <x-jet-input id="address" class="block mt-1 w-full" type="input" name="address" :value="old('address')" required autofocus />--}}
 
-                        <x-jet-label for="address" class="my-2" value="{{ __('Address') }}" class="text-black"  />
+                        <x-jet-label for="warehouse" class="my-2" value="{{ __('Select warehouse where you want your delivery') }}" class="text-black"  />
 
-                        <textarea name="address" id="address"></textarea>
+                        <select name="warehouse" id="warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2">
+                            <option value="">None</option>
+                            @foreach(\App\Models\BusinessWarehouse::where('user_id', auth()->user()->id)->get() as $warehouse)
+                                <option value="{{$warehouse->id}}" {{($warehouse->id == old('warehouse')) ?'selected':''}}>{{$warehouse->name}}</option>
+                            @endforeach
+                        </select>
 
                         <x-jet-label for="Remarks" value="{{ __('Remarks') }}" class="text-black"  />
                         <textarea name="remarks" id="remarks"></textarea>
