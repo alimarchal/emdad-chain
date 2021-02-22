@@ -162,7 +162,7 @@
                         </label>
                         <select name="vehicle_type" id="vehicle_type" class="form-select shadow-sm block w-full" @if ($shipmentCarts->count() > 0) disabled @endif @if ($shipmentCarts->count() <= 0) required @endif>
                             <option value="">None</option>
-                            @foreach (\App\Models\Vehicle::where(['business_id' =>  auth()->user()->business_id, 'availability_status' => 1])->get() as $vehicle)
+                            @foreach (\App\Models\Vehicle::where(['supplier_business_id' =>  auth()->user()->business_id, 'availability_status' => 1])->get() as $vehicle)
                                 <option @if ($shipmentCarts->count() > 0) selected @endif value="{{$vehicle->id}}">{{$vehicle->type}}</option>
                             @endforeach
                         </select>

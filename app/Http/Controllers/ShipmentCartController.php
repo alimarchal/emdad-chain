@@ -16,7 +16,7 @@ class ShipmentCartController extends Controller
      */
     public function index()
     {
-        $shipmentCarts = ShipmentCart::where('business_id', auth()->user()->business_id)->get();
+        $shipmentCarts = ShipmentCart::where('supplier_business_id', auth()->user()->business_id)->get();
         return view('shipment.generated', compact(  'shipmentCarts'));
     }
 

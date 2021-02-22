@@ -29,7 +29,7 @@ class ShipmentController extends Controller
      */
     public function create()
     {
-        $shipmentCarts = ShipmentCart::where('business_id', auth()->user()->business_id)->get();
+        $shipmentCarts = ShipmentCart::where('supplier_business_id', auth()->user()->business_id)->get();
         return view('shipment.create', compact('shipmentCarts'));
     }
 

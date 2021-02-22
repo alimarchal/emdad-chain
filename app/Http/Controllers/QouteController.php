@@ -43,7 +43,6 @@ class QouteController extends Controller
         $request->merge(['qoute_status' => 'Qouted']);
         $request->merge(['status' => 'pending']);
 
-        // dd($request->all());
         Qoute::create($request->all());
         session()->flash('message', 'You have successfully qouted.');
         return redirect()->back();

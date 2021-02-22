@@ -50,6 +50,7 @@ class EOrdersController extends Controller
                 $eOrderItem->e_order_id = $eOrders->id;
                 $eOrderItem->business_id = $item->business_id;
                 $eOrderItem->user_id = $item->user_id;
+                $eOrderItem->warehouse_id = $item->warehouse_id;
                 $eOrderItem->item_code = $item->item_code;
                 $eOrderItem->item_name = $item->item_name;
                 $eOrderItem->description = $item->description;

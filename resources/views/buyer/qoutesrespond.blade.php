@@ -135,18 +135,25 @@
 
                         <input type="hidden" name="qoute_no" value="{{ $QouteItem->id }}">
 
+                        <input type="hidden" name="warehouse" value="{{ $QouteItem->warehouse_id }}">
+
 
 {{--                        <x-jet-label for="address" value="{{ __('Delivery Address') }}" class="text-black" />--}}
 {{--                        <x-jet-input id="address" class="block mt-1 w-full" type="input" name="address" :value="old('address')" required autofocus />--}}
 
-                        <x-jet-label for="warehouse" class="my-2" value="{{ __('Select warehouse where you want your delivery') }}" class="text-black"  />
+                        <x-jet-label for="warehouse" class="my-2" value="{{ __('Warehouse delivery address') }}" class="text-black"  />
 
-                        <select name="warehouse" id="warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2">
-                            <option value="">None</option>
-                            @foreach(\App\Models\BusinessWarehouse::where('user_id', auth()->user()->id)->get() as $warehouse)
-                                <option value="{{$warehouse->id}}" {{($warehouse->id == old('warehouse')) ?'selected':''}}>{{$warehouse->name}}</option>
-                            @endforeach
-                        </select>
+{{--                        <select name="warehouse" id="warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2">--}}
+{{--                            <option value="">None</option>--}}
+{{--                            @foreach(\App\Models\BusinessWarehouse::where('user_id', auth()->user()->id)->get() as $warehouse)--}}
+{{--                                <option value="{{$warehouse->id}}" {{($warehouse->id == old('warehouse')) ?'selected':''}}>{{$warehouse->name}}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+                        @php
+                            $orderItemID =  \App\Models\EOrderItems::where('id', $QouteItem->e_order_items_id)->first();
+                            $warehouseAddress = \App\Models\BusinessWarehouse::where('id', $orderItemID->warehouse_id)->first();
+                        @endphp
+                        <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" disabled="disabled" value="{{$warehouseAddress->address}}">
 
                         <x-jet-label for="Remarks" value="{{ __('Remarks') }}" class="text-black"  />
                         <textarea name="remarks" id="remarks"></textarea>

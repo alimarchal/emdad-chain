@@ -49,7 +49,7 @@ class ECartController extends Controller
         $request->merge(['item_code' => $request->item_name]);
         $request->merge(['status' => 'pending']);
         $request->merge(['item_name' => Category::where('id', $request->item_code)->first()->name]);
-        $eCart = ECart::create($request->all());
+        ECart::create($request->all());
         session()->flash('message', 'RFP successfully created.');
 
         return redirect('RFQ/create');
