@@ -264,7 +264,6 @@
                             <option value="">None</option>
                             <option value="Credit">Cash</option>
                             <option value="Cash">Credit</option>
-                            <option value="Online">Online</option>
                         </select>
                     </div>
 
