@@ -135,7 +135,7 @@
 
                         <input type="hidden" name="qoute_no" value="{{ $QouteItem->id }}">
 
-                        <input type="hidden" name="warehouse" value="{{ $QouteItem->warehouse_id }}">
+                        <input type="hidden" name="warehouse_id" value="{{ $QouteItem->warehouse_id }}">
 
 
 {{--                        <x-jet-label for="address" value="{{ __('Delivery Address') }}" class="text-black" />--}}

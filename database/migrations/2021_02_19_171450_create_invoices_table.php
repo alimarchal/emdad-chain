@@ -15,15 +15,15 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('delivery_id');
-            $table->string('rfq_no');
-            $table->string('rfq_item_no');
-            $table->string('qoute_no');
-            $table->string('draft_purchase_order_id');
-            $table->string('buyer_user_id');
-            $table->string('buyer_business_id');
-            $table->string('supplier_user_id');
-            $table->string('supplier_business_id');
+            $table->string('delivery_id')->nullable()->index();;
+            $table->string('rfq_no')->nullable()->index();;
+            $table->string('rfq_item_no')->nullable()->index();;
+            $table->string('qoute_no')->nullable()->index();;
+            $table->string('draft_purchase_order_id')->nullable()->index();;
+            $table->string('buyer_user_id')->nullable()->index();;
+            $table->string('buyer_business_id')->nullable()->index();;
+            $table->string('supplier_user_id')->nullable()->index();;
+            $table->string('supplier_business_id')->nullable()->index();;
             $table->string('payment_method');
             $table->string('ship_to_address');
             $table->timestamps();

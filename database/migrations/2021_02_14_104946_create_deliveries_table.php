@@ -15,15 +15,13 @@ class CreateDeliveriesTable extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('draft_purchase_order_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('draft_purchase_order_id')->nullable()->index();
+            $table->string('delivery_note_id')->nullable();
             $table->string('user_id')->nullable();
-            $table->string('captain_id')->nullable();
+            $table->string('invoice_id')->nullable();
             $table->string('business_id')->nullable();
-            $table->string('supplier_user_id')->nullable();
-            $table->string('supplier_business_id')->nullable();
             $table->string('item_code')->nullable();
             $table->string('item_name')->nullable();
-            $table->string('uom')->nullable();
             $table->string('packing')->nullable();
             $table->string('brand')->nullable();
             $table->string('quantity')->nullable();
@@ -32,6 +30,13 @@ class CreateDeliveriesTable extends Migration
             $table->string('rfq_item_no')->nullable();
             $table->string('qoute_no')->nullable();
             $table->string('payment_term')->nullable();
+            $table->string('supplier_user_id')->nullable();
+            $table->string('supplier_business_id')->nullable();
+            $table->string('otp')->nullable();
+            $table->string('warehouse_coordinates')->nullable();
+            $table->string('destination_coordinates')->nullable();
+            $table->string('delivery_return')->nullable();
+            $table->text('shipment_status')->nullable();
             $table->string('delivery_address')->nullable();
             $table->timestamps();
         });
