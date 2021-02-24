@@ -118,25 +118,6 @@
                             </select>
                             <x-jet-input id="working_time" type="text" name="working_time[]" class="border p-2 w-1/2"></x-jet-input>
                         </div>
-                        <div class="flex space-x-5 mt-3">
-                            <x-jet-label class="w-1/2" for="vehicle_category">Vehicle Category</x-jet-label>
-                            <x-jet-label class="w-1/2" for="vehicle_type">Vehicle Type</x-jet-label>
-                        </div>
-                        <div class="flex space-x-5 mt-3">
-
-                            <select name="vehicle_category[]" id="vehicle_category" class="js-example-basic-multiple form-input rounded-md shadow-sm border p-2 w-1/2" multiple>
-                                <option value="">None</option>
-                                <option value="Example">Example 0</option>
-                                <option value="Example1">Example 1</option>
-                                <option value="Example2">Example 2</option>
-                                <option value="Example3">Example 3</option>
-                            </select>
-
-                            <select name="vehicle_type[]" id="vehicle_type" class=" js-example-basic-multiple  form-input rounded-md shadow-sm border p-2 w-1/2" multiple>
-                                <option value="">None</option>
-                                <option value="Example">Example</option>
-                            </select>
-                        </div>
                         <div class="control-group after-add-more">
 
                         </div>

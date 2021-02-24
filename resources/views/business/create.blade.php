@@ -113,6 +113,14 @@
                             <x-jet-input id="business_photo_url" type="file" name="business_photo_url" class="border p-2 w-1/2"></x-jet-input>
                         </div>
 
+                        <br>
+
+                        @if (auth()->user()->registration_type == 'Buyer')
+                            @include('business.buyerPolicy')
+                        @else
+                            @include('business.supplierPolicy')
+                        @endif
+
 
                         <x-jet-button class="float-right mt-4 mb-4">Save & Next</x-jet-button>
 
