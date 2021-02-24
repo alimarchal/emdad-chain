@@ -80,7 +80,7 @@
                     <hr>
                     <form action="{{ route('QuotationMessage.store') }}" method="post">
                         @csrf
-                        <h1 class="text-center text-2xl mt-4">Message to Buyer</h1>
+                        <h1 class="text-center text-2xl mt-4">Message to Supplier</h1>
                         <textarea name="message" id="message" cols="30" rows="10" class="form-input rounded-md shadow-sm mt-1 block w-full" autocomplete="name"></textarea>
                         <x-jet-input-error for="message" class="mt-2" />
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -163,7 +163,6 @@
                             <option value="">--Select--</option>
                             <option value="Cash">Cash</option>
                             <option value="Credit">Credit</option>
-                            <option value="Online">Online</option>
                         </select>
 
                         <input type="submit" value="Accept"

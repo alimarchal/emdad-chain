@@ -12,6 +12,7 @@ use App\Http\Controllers\EBuyerSurveyAnswerController;
 use App\Http\Controllers\ECartController;
 use App\Http\Controllers\EOrdersController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PlacedRFQController;
 use App\Http\Controllers\POInfoController;
@@ -193,10 +194,9 @@ Route::middleware(['auth:sanctum'])->get('/po/{draftPurchaseOrder}', [DraftPurch
 
 Route::middleware(['auth:sanctum'])->get('/notes', [DeliveryNoteController::class, 'notes'])->name('notes');
 Route::middleware(['auth:sanctum'])->get('/notes/{deliveryNote}', [DeliveryNoteController::class, 'viewNote'])->name('viewNote');
+
+
 ##################### Shipment routes ####################################
-//Route::get('/shipment', function () {
-//    return view('shipment.create');
-//})->name('shipment');
 Route::middleware(['auth:sanctum'])->resource('shipment', ShipmentController::class);
 Route::middleware(['auth:sanctum'])->resource('shipmentCart', ShipmentCartController::class);
 Route::middleware(['auth:sanctum'])->resource('shipmentItem', ShipmentItemController::class);
@@ -212,4 +212,8 @@ Route::middleware(['auth:sanctum'])->resource('vehicle', VehicleController::clas
 ###################### Generate Invoice & Delivery ####################################
 Route::middleware(['auth:sanctum'])->post('/invoice/generate', [InvoiceController::class, 'invoiceGenerate'])->name('invoice.generate');
 Route::middleware(['auth:sanctum'])->get('/invoice/{invoice}', [InvoiceController::class, 'show'])->name('invoice.show');
+#################### END ##############################################################
+#
+####################### Payment routes ####################################
+Route::middleware(['auth:sanctum'])->resource('payment', PaymentController::class);
 #################### END ##############################################################
