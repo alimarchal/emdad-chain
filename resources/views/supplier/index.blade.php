@@ -106,7 +106,8 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ $rfp->business->business_name }}
+{{--                                        {{ $rfp->business->business_name }}--}}
+{{--                                        {{ $rfp->business }}--}}
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">

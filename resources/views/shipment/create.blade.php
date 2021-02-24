@@ -93,15 +93,15 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ $shipmentCart->driver_id }}
+                                        {{ $shipmentCart->driver->name }}
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ $shipmentCart->vehicle_type }}
+                                        {{ $shipmentCart->vehicle->type }}
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ $shipmentCart->delivery_id }}
+                                        {{ $shipmentCart->delivery->item_name }}
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">

@@ -216,4 +216,7 @@ Route::middleware(['auth:sanctum'])->get('/invoice/{invoice}', [InvoiceControlle
 #
 ####################### Payment routes ####################################
 Route::middleware(['auth:sanctum'])->resource('payment', PaymentController::class);
+Route::middleware(['auth:sanctum'])->get('generate-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoiceView'])->name('generateProformaView');
+Route::middleware(['auth:sanctum'])->get('create-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoice'])->name('generateProforma');
+Route::middleware(['auth:sanctum'])->get('invoices-history', [PaymentController::class, 'invoices'])->name('invoices');
 #################### END ##############################################################

@@ -113,7 +113,6 @@ class DeliveryNoteController extends Controller
 
     public function viewNote(DeliveryNote $deliveryNote)
     {
-
         return view('deliveryNote.viewNote',compact('deliveryNote'));
     }
 }

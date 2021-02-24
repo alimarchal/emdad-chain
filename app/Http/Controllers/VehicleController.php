@@ -21,7 +21,7 @@ class VehicleController extends Controller
         }
         else
             {
-                $vehicles = Vehicle::where('business_id', auth()->user()->business_id)->get();
+                $vehicles = Vehicle::where('supplier_business_id', auth()->user()->business_id)->get();
             }
 
         return view('vehicle.index', compact('vehicles'));
@@ -47,7 +47,7 @@ class VehicleController extends Controller
     {
         $vehicle = new Vehicle();
 
-        $vehicle->business_id = auth()->user()->business_id;
+        $vehicle->supplier_business_id = auth()->user()->business_id;
         $vehicle->warehouse_id = $request->warehouse_id;
         $vehicle->type = $request->type;
         $vehicle->licence_plate_No = $request->licence_plate_No;

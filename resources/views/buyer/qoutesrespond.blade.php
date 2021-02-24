@@ -136,6 +136,7 @@
                         <input type="hidden" name="qoute_no" value="{{ $QouteItem->id }}">
 
                         <input type="hidden" name="warehouse_id" value="{{ $QouteItem->warehouse_id }}">
+{{--                        <input type="hidden" name="payment_term" value="{{ $QouteItem->orderItem->payment_mode }}">--}}
 
 
 {{--                        <x-jet-label for="address" value="{{ __('Delivery Address') }}" class="text-black" />--}}
@@ -159,10 +160,12 @@
                         <textarea name="remarks" id="remarks"></textarea>
 
                         <x-jet-label for="payment_term" class="my-2" value="{{ __('Payment Term') }}" class="text-black"  />
-                        <select name="payment_term" id="payment_term" class="form-input rounded-md shadow-sm border p-2 w-full" required>
-                            <option value="">--Select--</option>
-                            <option value="Cash">Cash</option>
-                            <option value="Credit">Credit</option>
+                        <select name="payment_term" id="payment_term" class="form-input rounded-md shadow-sm border p-2 w-full" readonly>
+                            @if ($QouteItem->orderItem->payment_mode == 'Cash')
+                            <option selected value="Cash">Cash</option>
+                                @else
+                                <option selected value="Credit">Credit</option>
+                            @endif
                         </select>
 
                         <input type="submit" value="Accept"

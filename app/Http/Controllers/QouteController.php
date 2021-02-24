@@ -213,6 +213,7 @@ class QouteController extends Controller
         $request->merge(['po_status' => 'pending']);
         $request->merge(['status' => 'pending']);
         $dpo = null;
+
         try {
             DB::beginTransaction();
             $dpo = DraftPurchaseOrder::create($request->all());
