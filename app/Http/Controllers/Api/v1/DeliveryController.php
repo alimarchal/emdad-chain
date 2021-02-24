@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Delivery;
 use Illuminate\Http\Request;
 
-class TrackingDeliveryControllerController extends Controller
+class DeliveryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class TrackingDeliveryControllerController extends Controller
      */
     public function index()
     {
-        //
+        return Delivery::paginate(10);
     }
 
     /**
@@ -46,7 +47,12 @@ class TrackingDeliveryControllerController extends Controller
      */
     public function show($id)
     {
-        //
+        $delivery = Delivery::find($id);
+        if (!empty($delivery)) {
+            return $delivery;
+        } else {
+            return response()->json(['message' => 'Not Found!'], 404);
+        }
     }
 
     /**
@@ -69,7 +75,19 @@ class TrackingDeliveryControllerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $token = $request->code;
+        if ($token == "RRNirxFh4j9Ftd") {
+            $delivery = Delivery::find($id);
+            if (!empty($delivery)) {
+                $updated = $delivery->update($request->all());
+                return $delivery;
+            } else {
+                return response()->json(['message' => 'Not Found!'], 404);
+            }
+        } else {
+            return response()->json(['message' => 'Not Found!'], 404);
+        }
     }
 
     /**

@@ -24,6 +24,7 @@ use App\Http\Controllers\ShipmentItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Models\DraftPurchaseOrder;
+use App\Models\TrackingDelivery;
 use Illuminate\Support\Facades\Route;
 
 /*
