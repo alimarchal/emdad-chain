@@ -252,7 +252,7 @@
                             <option value="30 Days">30 Days</option>
                             <option value="60 Days">60 Days</option>
                             <option value="90 Days">90 Days</option>
-                            <option value="Standard Order">Standard Order</option>
+                            <option value="Standard Order">Standing Order</option>
                         </select>
                     </div>
 
@@ -262,14 +262,14 @@
                         </label>
                         <select name="payment_mode" id="payment_mode" class="form-select shadow-sm block w-full" required>
                             <option value="">None</option>
-                            <option value="Credit">Cash</option>
-                            <option value="Cash">Credit</option>
+                            <option value="Cash">Cash</option>
+                            <option value="Credit">Credit</option>
                         </select>
                     </div>
 
                     <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                         <label class="block font-medium text-sm text-gray-700 mb-1" for="file">
-                            Attachment (any picture)
+                            Attachment (if any)
                         </label>
                         <input class="form-input rounded-md shadow-sm block w-full" id="file" type="file" name="file_path_1" autocomplete="name">
                     </div>

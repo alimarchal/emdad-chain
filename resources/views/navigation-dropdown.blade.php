@@ -49,17 +49,18 @@
                         {{ __('Support Requests') }}
                     </x-jet-nav-link>
                      @endrole
-                    @can('PoBuyer')
-{{--                        <x-jet-nav-link href="{{ route('RFQCart.index') }}" :active="request()->routeIs('RFQCart.index')">--}}
-{{--                            @include('RFQ.RFQICON') &nbsp;RFQ Items--}}
-{{--                            @if (\App\Models\ECart::where('user_id', auth()->user()->id)--}}
-{{--                                ->where('business_id', auth()->user()->business_id)--}}
-{{--                                ->count())--}}
-{{--                                ({{ \App\Models\ECart::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->count() }})--}}
-{{--                            @endif--}}
 
-{{--                        </x-jet-nav-link>--}}
-                    @endcan
+                    @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
+                        <x-jet-nav-link href="{{ route('RFQCart.index') }}" :active="request()->routeIs('RFQCart.index')">
+                            @include('RFQ.RFQICON') &nbsp;RFQ Items
+                            @if (\App\Models\ECart::where('user_id', auth()->user()->id)
+                                ->where('business_id', auth()->user()->business_id)
+                                ->count())
+                                ({{ \App\Models\ECart::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->count() }})
+                            @endif
+
+                        </x-jet-nav-link>
+                    @endif
 
 
 {{--                    @if (Auth::user()->status == 1)--}}

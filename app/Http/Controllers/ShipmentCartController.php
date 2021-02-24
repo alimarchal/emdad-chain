@@ -60,8 +60,8 @@ class ShipmentCartController extends Controller
         else
             {
                 $request->merge(['driver_id' => $request->driver_id]);
-                $request->merge(['supplier_business_id' => auth()->user()->business_id]);
                 $request->merge(['vehicle_type' => $request->vehicle_type]);
+                $request->merge(['supplier_business_id' => auth()->user()->business_id]);
                 $request->merge(['delivery_id' => $request->delivery_id]);
                 $shipmentCarts = ShipmentCart::create($request->all());
                 Delivery::where('id', $request->delivery_id)->update(['shipment_status' => 1]);

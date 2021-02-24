@@ -208,11 +208,12 @@ class QouteController extends Controller
 
     public function qouteAccepted(Request $request, Qoute $qoute)
     {
-        
+
         $request->merge(['po_date' => date('Y-m-d')]);
         $request->merge(['po_status' => 'pending']);
         $request->merge(['status' => 'pending']);
         $dpo = null;
+
         try {
             DB::beginTransaction();
             $dpo = DraftPurchaseOrder::create($request->all());

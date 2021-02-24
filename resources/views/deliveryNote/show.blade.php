@@ -89,53 +89,117 @@
 
                     <br>
                     <br>
-                    <h2 class="text-2xl text-center font-bold">Prepare Delivery Note</h2>
-                    <form action="{{ route('deliveryNote.store') }}" method="post">
-                        @csrf
-                        <div class="grid grid-cols-12 gap-6">
+                    @if ($draftPurchaseOrder->payment_term == 'Cash')
+                        @php $proformaPresent = \App\Models\ProformaInvoice::where('draft_purchase_order_id',$draftPurchaseOrder->id)->first(); @endphp
+                        @if (isset($proformaPresent))
+                            <h2 class="text-2xl text-center font-bold">Proforma invoice Generated</h2>
 
-                            <div class="col-span-12">
-                                <label class="block font-medium text-sm text-gray-700 mt-4" for="delivery_address">
-                                    Delivery Address
-                                </label>
-{{--                                <textarea name="delivery_address" id="delivery_address" class="form-textarea w-full">{{ strip_tags($draftPurchaseOrder->buyer_business->address) . ' - City: ' . $draftPurchaseOrder->buyer_business->city . ' - Phone #: ' . $draftPurchaseOrder->buyer_business->phone }}</textarea>--}}
-                                @php $delivery = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse_id)->first(); @endphp
-                                <textarea class="form-textarea w-full" disabled>{{$delivery->address}}</textarea>
-{{--                                <textarea class="form-textarea w-full" disabled>{{$draftPurchaseOrder->buyer_business->address}}</textarea>--}}
+                            <a  class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                Waiting for payment from buyer
+                            </a>
+                        @elseif(isset($proformaPresent) && $proformaPresent->status == 1)
+                            <h2 class="text-2xl text-center font-bold">Prepare Delivery Note</h2>
+                            <form action="{{ route('deliveryNote.store') }}" method="post">
+                                @csrf
+                                <div class="grid grid-cols-12 gap-6">
 
-                                <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
-                                    City
-                                </label>
-                                <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" value="{{ $delivery->city }}" disabled="disabled">
+                                    <div class="col-span-12">
+                                        <label class="block font-medium text-sm text-gray-700 mt-4" for="delivery_address">
+                                            Delivery Address
+                                        </label>
+                                        {{--                                <textarea name="delivery_address" id="delivery_address" class="form-textarea w-full">{{ strip_tags($draftPurchaseOrder->buyer_business->address) . ' - City: ' . $draftPurchaseOrder->buyer_business->city . ' - Phone #: ' . $draftPurchaseOrder->buyer_business->phone }}</textarea>--}}
+                                        @php $delivery = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse_id)->first(); @endphp
+                                        <textarea class="form-textarea w-full" disabled>{{$delivery->address}}</textarea>
+                                        {{--                                <textarea class="form-textarea w-full" disabled>{{$draftPurchaseOrder->buyer_business->address}}</textarea>--}}
+
+                                        <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
+                                            City
+                                        </label>
+                                        <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" value="{{ $delivery->city }}" disabled="disabled">
 
 
-                                <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
-                                    Warranty
-                                </label>
-                                <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" name="warranty" required>
+                                        <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
+                                            Warranty
+                                        </label>
+                                        <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" name="warranty" required>
 
-                                <label class="block font-medium text-sm text-gray-700 mt-4" for="delivery_address">
-                                    Terms and Conditions
-                                </label>
-                                <textarea name="terms_and_conditions" id="terms_and_conditions" class="form-textarea w-full"></textarea>
-                                <input type="hidden" value="{{ auth()->user()->id }}" name="update_user_id">
-                                <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
-                                <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
-                                <input type="hidden" value="{{ $draftPurchaseOrder->supplier_user_id }}" name="supplier_user_id">
-                                <input type="hidden" value="{{ $draftPurchaseOrder->supplier_business_id }}" name="supplier_business_id">
-                                <input type="hidden" value="{{ $draftPurchaseOrder->user_id }}" name="user_id">
-                                <input type="hidden" value="{{ $draftPurchaseOrder->business_id }}" name="business_id">
-                                <input type="hidden" value="{{ $delivery->address }}" name="delivery_address">
-                                <input type="hidden" value="{{ $delivery->city }}" name="city">
+                                        <label class="block font-medium text-sm text-gray-700 mt-4" for="delivery_address">
+                                            Terms and Conditions
+                                        </label>
+                                        <textarea name="terms_and_conditions" id="terms_and_conditions" class="form-textarea w-full"></textarea>
+                                        <input type="hidden" value="{{ auth()->user()->id }}" name="update_user_id">
+                                        <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
+                                        <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
+                                        <input type="hidden" value="{{ $draftPurchaseOrder->supplier_user_id }}" name="supplier_user_id">
+                                        <input type="hidden" value="{{ $draftPurchaseOrder->supplier_business_id }}" name="supplier_business_id">
+                                        <input type="hidden" value="{{ $draftPurchaseOrder->user_id }}" name="user_id">
+                                        <input type="hidden" value="{{ $draftPurchaseOrder->business_id }}" name="business_id">
+                                        <input type="hidden" value="{{ $delivery->address }}" name="delivery_address">
+                                        <input type="hidden" value="{{ $delivery->city }}" name="city">
+                                    </div>
+                                </div>
+
+                                <div class="mt-5">
+                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                        Create Delivery Note
+                                    </button>
+                                </div>
+                            </form>
+                        @else
+                            <a href="{{route('generateProforma', $draftPurchaseOrder->id)}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                Click here to generate proforma invoice
+                            </a>
+
+                        @endif
+                     @else
+                        <h2 class="text-2xl text-center font-bold">Prepare Delivery Note</h2>
+                        <form action="{{ route('deliveryNote.store') }}" method="post">
+                            @csrf
+                            <div class="grid grid-cols-12 gap-6">
+
+                                <div class="col-span-12">
+                                    <label class="block font-medium text-sm text-gray-700 mt-4" for="delivery_address">
+                                        Delivery Address
+                                    </label>
+                                    {{--                                <textarea name="delivery_address" id="delivery_address" class="form-textarea w-full">{{ strip_tags($draftPurchaseOrder->buyer_business->address) . ' - City: ' . $draftPurchaseOrder->buyer_business->city . ' - Phone #: ' . $draftPurchaseOrder->buyer_business->phone }}</textarea>--}}
+                                    @php $delivery = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse_id)->first(); @endphp
+                                    <textarea class="form-textarea w-full" disabled>{{$delivery->address}}</textarea>
+                                    {{--                                <textarea class="form-textarea w-full" disabled>{{$draftPurchaseOrder->buyer_business->address}}</textarea>--}}
+
+                                    <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
+                                        City
+                                    </label>
+                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" value="{{ $delivery->city }}" disabled="disabled">
+
+
+                                    <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
+                                        Warranty
+                                    </label>
+                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" name="warranty" required>
+
+                                    <label class="block font-medium text-sm text-gray-700 mt-4" for="delivery_address">
+                                        Terms and Conditions
+                                    </label>
+                                    <textarea name="terms_and_conditions" id="terms_and_conditions" class="form-textarea w-full"></textarea>
+                                    <input type="hidden" value="{{ auth()->user()->id }}" name="update_user_id">
+                                    <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
+                                    <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
+                                    <input type="hidden" value="{{ $draftPurchaseOrder->supplier_user_id }}" name="supplier_user_id">
+                                    <input type="hidden" value="{{ $draftPurchaseOrder->supplier_business_id }}" name="supplier_business_id">
+                                    <input type="hidden" value="{{ $draftPurchaseOrder->user_id }}" name="user_id">
+                                    <input type="hidden" value="{{ $draftPurchaseOrder->business_id }}" name="business_id">
+                                    <input type="hidden" value="{{ $delivery->address }}" name="delivery_address">
+                                    <input type="hidden" value="{{ $delivery->city }}" name="city">
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="mt-5">
-                            <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                Create Delivery Note
-                            </button>
-                        </div>
-                    </form>
+                            <div class="mt-5">
+                                <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                    Create Delivery Note
+                                </button>
+                            </div>
+                        </form>
+                    @endif
 
                     <div class="flex justify-center">
                         <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>

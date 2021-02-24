@@ -80,7 +80,7 @@
                     <hr>
                     <form action="{{ route('QuotationMessage.store') }}" method="post">
                         @csrf
-                        <h1 class="text-center text-2xl mt-4">Message to Buyer</h1>
+                        <h1 class="text-center text-2xl mt-4">Message to Supplier</h1>
                         <textarea name="message" id="message" cols="30" rows="10" class="form-input rounded-md shadow-sm mt-1 block w-full" autocomplete="name"></textarea>
                         <x-jet-input-error for="message" class="mt-2" />
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -136,6 +136,7 @@
                         <input type="hidden" name="qoute_no" value="{{ $QouteItem->id }}">
 
                         <input type="hidden" name="warehouse_id" value="{{ $QouteItem->warehouse_id }}">
+{{--                        <input type="hidden" name="payment_term" value="{{ $QouteItem->orderItem->payment_mode }}">--}}
 
 
 {{--                        <x-jet-label for="address" value="{{ __('Delivery Address') }}" class="text-black" />--}}
@@ -159,11 +160,12 @@
                         <textarea name="remarks" id="remarks"></textarea>
 
                         <x-jet-label for="payment_term" class="my-2" value="{{ __('Payment Term') }}" class="text-black"  />
-                        <select name="payment_term" id="payment_term" class="form-input rounded-md shadow-sm border p-2 w-full" required>
-                            <option value="">--Select--</option>
-                            <option value="Cash">Cash</option>
-                            <option value="Credit">Credit</option>
-                            <option value="Online">Online</option>
+                        <select name="payment_term" id="payment_term" class="form-input rounded-md shadow-sm border p-2 w-full" readonly>
+                            @if ($QouteItem->orderItem->payment_mode == 'Cash')
+                            <option selected value="Cash">Cash</option>
+                                @else
+                                <option selected value="Credit">Credit</option>
+                            @endif
                         </select>
 
                         <input type="submit" value="Accept"
