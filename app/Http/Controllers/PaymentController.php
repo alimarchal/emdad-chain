@@ -138,4 +138,10 @@ class PaymentController extends Controller
         $proformaInvoices = ProformaInvoice::where('supplier_user_id', auth()->user()->id)->orWhere('user_id', auth()->user()->id)->get();
         return view('payment.invoice', compact('proformaInvoices'));
     }
+
+    public function proforma_invoices()
+    {
+        $dpos = DraftPurchaseOrder::where('supplier_user_id', auth()->user()->id)->where('payment_term', 'Cash')->get();
+        return view('payment.proformaInvoices', compact('dpos'));
+    }
 }

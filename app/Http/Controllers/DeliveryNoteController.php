@@ -16,7 +16,6 @@ class DeliveryNoteController extends Controller
      */
     public function index()
     {
-
         $user = auth()->user()->id;
         $dpos = DraftPurchaseOrder::where('supplier_user_id', $user)->where('supplier_business_id', auth()->user()->business_id)->where('status','approved')->get();
         return view('deliveryNote.index', compact('dpos'));
