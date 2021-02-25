@@ -1,8 +1,7 @@
 @component('mail::message')
-# User Registration
+# Dear User
 
-Your new Username is: {{ $user->email }}. <br>
-Password: {{ $pass }}
+You have received quote again your RFQ Item please login to view your quote.
 
 @component('mail::button', ['url' => config('app.url') . '/login'])
 Sign In

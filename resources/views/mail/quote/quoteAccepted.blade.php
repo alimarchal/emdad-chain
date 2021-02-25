@@ -1,8 +1,7 @@
 @component('mail::message')
-# User Registration
+# Congratulations
 
-Your new Username is: {{ $user->email }}. <br>
-Password: {{ $pass }}
+Your quote {{ $item->name }} has been accepted please login to proceed futher.
 
 @component('mail::button', ['url' => config('app.url') . '/login'])
 Sign In

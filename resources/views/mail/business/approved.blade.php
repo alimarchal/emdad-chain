@@ -3,7 +3,7 @@
 
 Your business has been approved pelase login to view.
 
-@component('mail::button', ['url' => config('app.url')])
+@component('mail::button', ['url' => config('app.url') . '/login'])
 Login
 @endcomponent
 

@@ -6,6 +6,7 @@ use App\Models\DraftPurchaseOrder;
 use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Qoute;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -44,8 +45,11 @@ class QouteController extends Controller
         $request->merge(['status' => 'pending']);
 
         $quote = Qoute::create($request->all());
-
-        // php artisan make:notification QuoteSend --markdown=mail.quote.send
+        // sending mail for confirmation
+        $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
+        $buyer_user_id = $quote->RFQ->user_id;
+        // send mail to buyer also for receiving email
+        $buyer_user = User::find($buyer_user_id)->notify(new \App\Notifications\QuoteReceivedBuyer());
         session()->flash('message', 'You have successfully qouted.');
         return redirect()->back();
     }
@@ -87,6 +91,8 @@ class QouteController extends Controller
         $request->merge(['qoute_status_updated' => 'Qouted']);
         session()->flash('message', 'You have update qoute.');
         $qoute->update($request->all());
+        $quote = $qoute;
+        $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
         return redirect()->back();
     }
 
@@ -135,14 +141,11 @@ class QouteController extends Controller
 
     public function QoutationsBuyerReceived(Request $request)
     {
-        if (auth()->user()->hasRole('SuperAdmin'))
-        {
+        if (auth()->user()->hasRole('SuperAdmin')) {
             $PlacedRFQ = EOrders::orderBy('created_at', 'desc')->get();
+        } else {
+            $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
         }
-        else
-            {
-                $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
-            }
 
         return view('buyer.receivedQoutations', compact('PlacedRFQ'));
     }
@@ -191,6 +194,9 @@ class QouteController extends Controller
             'qoute_status_updated' => $qoute_status,
             'status' => 'pending',
         ]);
+
+        // inform supplier user 
+        $supplier_user = User::find($qoute->supplier_user_id)->notify(new \App\Notifications\QuoteAgain($qoute));
         session()->flash('message', 'Qoute status changes to ' . $qoute_status);
         return redirect()->back();
     }
@@ -204,6 +210,9 @@ class QouteController extends Controller
             'qoute_status_updated' => $qoute_status,
             'status' => 'expired',
         ]);
+
+        $quote = $qoute;
+        $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteRejected($quote));
         session()->flash('message', 'Qoute status changes to ' . $qoute_status);
         return redirect()->back();
     }
@@ -227,6 +236,8 @@ class QouteController extends Controller
                 'status' => 'completed',
                 'dpo' => $dpo->id,
             ]);
+            $quote = $qoute;
+            $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteAccepted($quote));
             DB::commit();
             /* Transaction successful. */
         } catch (\Exception $e) {

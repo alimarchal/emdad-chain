@@ -1,7 +1,7 @@
 @component('mail::message')
-# Quote Send
+# Dear User
 
-You have successfully send quote please login to view your quote.
+Your quote {{ $item->item_name }} has been rejected by the buyer.
 
 Thanks,<br>
 {{ config('app.name') }}

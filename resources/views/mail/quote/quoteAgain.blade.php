@@ -1,8 +1,7 @@
 @component('mail::message')
-# User Registration
+# Modification Required
 
-Your new Username is: {{ $user->email }}. <br>
-Password: {{ $pass }}
+Your qoutation {{ $item->item_name }} required modification please login to quote again.
 
 @component('mail::button', ['url' => config('app.url') . '/login'])
 Sign In
