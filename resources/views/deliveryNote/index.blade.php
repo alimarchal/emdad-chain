@@ -54,6 +54,10 @@
                                             </th>
 
                                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Status
+                                            </th>
+
+                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
                                                     </path>
@@ -99,6 +103,10 @@
                                                     @else
                                                         {{--                                                            <a>Completed</a>--}}
                                                     @endif
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                    <a class="hover:text-blue-900 hover:underline text-blue-900">{{$dpo->status}}</a>
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-black">

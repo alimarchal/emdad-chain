@@ -150,7 +150,7 @@
                         <select name="driver_id" id="driver_id" class="form-select shadow-sm block w-full" @if ($shipmentCarts->count() > 0) disabled @endif @if ($shipmentCarts->count() <= 0) required @endif>
                             <option value="">None</option>
 {{--                            @foreach (\App\Models\User::where('usertype', '=', 'Supplier Driver')->where('business_id', auth()->user()->business_id)->get() as $item)--}}
-                            @foreach (\App\Models\User::where(['usertype' =>  'Supplier Driver', 'business_id' => auth()->user()->business_id])->get() as $driver)
+                            @foreach (\App\Models\User::where(['usertype' =>  'Supplier Driver', 'business_id' => auth()->user()->business_id, 'driver_status' => 1])->get() as $driver)
                                 <option @if ($shipmentCarts->count() > 0) selected @endif value="{{$driver->id}}">{{$driver->name}}</option>
                             @endforeach
                         </select>

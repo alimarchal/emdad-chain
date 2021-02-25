@@ -221,3 +221,7 @@ Route::middleware(['auth:sanctum'])->get('generate-proforma-invoice/{id}', [Paym
 Route::middleware(['auth:sanctum'])->get('create-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoice'])->name('generateProforma');
 Route::middleware(['auth:sanctum'])->get('invoices-history', [PaymentController::class, 'invoices'])->name('invoices');
 #################### END ##############################################################
+
+Route::get('check', function (){
+    return view('business.buyerPolicy');
+});

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Shipment;
 use App\Models\ShipmentCart;
 use App\Models\ShipmentItem;
+use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -62,6 +63,7 @@ class ShipmentItemController extends Controller
             foreach ($shipmentCart as $item)
             {
                 Vehicle::where('id', $item->vehicle_type)->update(['availability_status' => 0]);
+                User::where('id', $item->driver_id)->update(['driver_status' => 0]);
             }
         });
 

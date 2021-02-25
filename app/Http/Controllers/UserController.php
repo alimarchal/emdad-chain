@@ -112,6 +112,7 @@ class UserController extends Controller
             ];
         }
         else{
+
             $data = [
                 'name' => $request->name,
                 'email' => $request->email,
