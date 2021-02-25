@@ -123,6 +123,8 @@ class UserController extends Controller
         }
 
         $user = User::create($data);
+        $password = $request->password;
+        $user->notify(new \App\Notifications\UserCreate($password));
         $role = $request->input('role') ? $request->input('role') : [];
         $user->assignRole($role);
 

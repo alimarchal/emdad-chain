@@ -6,6 +6,7 @@ use App\Models\ECart;
 use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -72,7 +73,8 @@ class EOrdersController extends Controller
             }
         });
 
-
+        $user = User::find(auth()->user()->id);
+        $user->notify(new \App\Notifications\RfqCreated());
         return redirect()->route('PlacedRFQ.index');
     }
 

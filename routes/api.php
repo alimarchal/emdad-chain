@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\v1\UserController;
 use App\Http\Controllers\Api\v1\TrackingDeliveryController;
-use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\Api\v1\DeliveryController;
 use App\Models\Delivery;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,32 +26,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('v1')->group(function () {
+    Route::post('/login', [UserController::class, 'login']);
     Route::apiResource('TrackingDelivery', TrackingDeliveryController::class);
     Route::apiResource('Delivery', DeliveryController::class);
 });
-
-/* 
-Route::prefix('v1')->group(function () {
-    Route::post('/login', function (Request $request) {
-        $data = $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-        $user = User::whereEmail($request->email)->first();
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response([
-                'email' => ['The provided credentials are incorrect.'],
-            ], 404);
-        }
-        $user = User::where('email', $request->email)->first();
-        return $user;
-    });
-    
-    // Route::post('/login', [\App\Http\Controllers\Api\v1\UserController::class, 'login'])->middleware('auth:sanctum');
-    // Route::apiResource('/users', \App\Http\Controllers\Api\v1\UserController::class)->middleware('auth:sanctum');
-});
-
-*/
 
 
 /* Token API

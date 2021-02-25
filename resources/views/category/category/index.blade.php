@@ -33,6 +33,9 @@
         // {id:2, text:"India"},
         // {id:3, text:"中国"}
     ];
+
+
+    // console.log(mydata);
     $("#sel_1").select2ToTree({
         treeData: {
             dataArr: mydata

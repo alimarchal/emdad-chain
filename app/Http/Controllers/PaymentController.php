@@ -136,7 +136,6 @@ class PaymentController extends Controller
     public function invoices()
     {
         $proformaInvoices = ProformaInvoice::where('supplier_user_id', auth()->user()->id)->orWhere('user_id', auth()->user()->id)->get();
-
         return view('payment.invoice', compact('proformaInvoices'));
     }
 }

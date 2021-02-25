@@ -43,7 +43,9 @@ class QouteController extends Controller
         $request->merge(['qoute_status' => 'Qouted']);
         $request->merge(['status' => 'pending']);
 
-        Qoute::create($request->all());
+        $quote = Qoute::create($request->all());
+
+        // php artisan make:notification QuoteSend --markdown=mail.quote.send
         session()->flash('message', 'You have successfully qouted.');
         return redirect()->back();
     }

@@ -19,45 +19,35 @@ class BusinessController extends Controller
      */
     public function index(Request $request)
     {
-//        if ($request->has('status') || $request->has('changestatus') || $request->has('rejectstatus')) {
-//            $businesss = new Business();
-//            if ($request->input('status')) {
-//                $businesss = $businesss->where('status', $request->status);
-//            }
-//        } else {
-//            $businesses = Business::paginate(10);
-//            return view('business.index', compact('businesses'));
-//        }
-        if(\auth()->user()->hasRole('SuperAdmin'))
-        {
-            if($request->has('status'))
-            {
-                if($request->status == 1)
-                {
+        //        if ($request->has('status') || $request->has('changestatus') || $request->has('rejectstatus')) {
+        //            $businesss = new Business();
+        //            if ($request->input('status')) {
+        //                $businesss = $businesss->where('status', $request->status);
+        //            }
+        //        } else {
+        //            $businesses = Business::paginate(10);
+        //            return view('business.index', compact('businesses'));
+        //        }
+        if (\auth()->user()->hasRole('SuperAdmin')) {
+            if ($request->has('status')) {
+                if ($request->status == 1) {
                     $businesses = Business::where('status', 1)->paginate(10);
                     return view('business.index', compact('businesses'));
-                }
-                elseif($request->status == 3)
-                {
+                } elseif ($request->status == 3) {
                     $businesses = Business::where('status', 3)->paginate(10);
                     return view('business.index', compact('businesses'));
-                }
-                elseif($request->status == 4)
-                {
+                } elseif ($request->status == 4) {
                     $businesses = Business::where('status', 4)->paginate(10);
                     return view('business.index', compact('businesses'));
                 }
-
             }
 
             $businesses = Business::paginate(10);
             return view('business.index', compact('businesses'));
+        } else {
+            $businesses = Business::where('user_id', auth()->user()->id)->paginate(10);
+            return view('business.index', compact('businesses'));
         }
-        else
-            {
-                $businesses = Business::where('user_id', auth()->user()->id)->paginate(10);
-                return view('business.index', compact('businesses'));
-            }
     }
 
     /**
@@ -215,35 +205,33 @@ class BusinessController extends Controller
 
     public function accountStatus(Request $request)
     {
-//        dd($request->business_id.' '. $request->status_id);
-//        dd(Business::where('id', $request->business_id)->first());
+        //        dd($request->business_id.' '. $request->status_id);
+        //        dd(Business::where('id', $request->business_id)->first());
         $business = Business::where('id', $request->business_id)->first();
         $user = User::where('id', $business->user_id)->first();
-        if ($request->status_id == 3)
-        {
+        $user->notify(new \App\Notifications\BusinessApproved());
+        if ($request->status_id == 3) {
             $business->update([
                 'status' => 3,
-        ]);
+            ]);
             $user->update([
                 'status' => 3,
                 'is_active' => 1,
-        ]);
-        }
-        elseif($request->status_id == 4)
-            {
-                $business->update([
-                    'status' => 4,
-                ]);
-                $user->update([
-                    'status' => 4,
-                    'is_active' => 1,
-                ]);
-            }
-        else{
+            ]);
+            $user->notify(new \App\Notifications\BusinessApproved());
+        } elseif ($request->status_id == 4) {
+            $business->update([
+                'status' => 4,
+            ]);
+            $user->update([
+                'status' => 4,
+                'is_active' => 1,
+            ]);
+            $user->notify(new \App\Notifications\BusinessRejected());
+        } else {
             return redirect()->back()->with('message', 'Something went wrong');
         }
 
         return redirect()->back()->with('message', 'Update Status');
-
     }
 }

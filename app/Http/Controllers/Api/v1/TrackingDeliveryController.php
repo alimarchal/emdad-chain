@@ -16,7 +16,7 @@ class TrackingDeliveryController extends Controller
      */
     public function index()
     {
-        //
+        return TrackingDelivery::paginate(10);
     }
 
     /**
@@ -37,8 +37,13 @@ class TrackingDeliveryController extends Controller
      */
     public function store(Request $request)
     {
-        $td = TrackingDelivery::create($request->all());
-        return $td;
+        $token = $request->code;
+        if ($token == "RRNirxFh4j9Ftd") {
+            $td = TrackingDelivery::create($request->all());
+            return $td;
+        } else {
+            return response()->json(['message' => 'Not Found!'], 404);
+        }
     }
 
     /**
@@ -51,7 +56,7 @@ class TrackingDeliveryController extends Controller
     {
         $td = TrackingDelivery::find($id);
         if (empty($td)) {
-            return response('NotFound', 404);
+            return response()->json(['message' => 'Not Found!'], 404);
         } else {
             return $td;
         }
@@ -77,7 +82,14 @@ class TrackingDeliveryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $token = $request->code;
+        if ($token == "RRNirxFh4j9Ftd") {
+            $trackingDelivery = TrackingDelivery::find($id);
+            $updated = $trackingDelivery->update($request->all());
+            return $trackingDelivery;
+        } else {
+            return response()->json(['message' => 'Not Found!'], 404);
+        }
     }
 
     /**
