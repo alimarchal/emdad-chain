@@ -106,7 +106,7 @@ class QouteController extends Controller
     public function QoutedRFQQouted()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('user_id', $user_id)->where('qoute_status', 'Qouted')->get();
+        $collection = Qoute::where('supplier_user_id', $user_id)->where('qoute_status', 'Qouted')->get();
         return view('supplier.supplier-qouted', compact('collection'));
     }
 
@@ -114,7 +114,7 @@ class QouteController extends Controller
     public function QoutedRFQRejected()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('user_id', $user_id)->where('qoute_status', 'Rejected')->get();
+        $collection = Qoute::where('supplier_user_id', $user_id)->where('qoute_status', 'Rejected')->get();
         return view('supplier.supplier-qouted-Rejected', compact('collection'));
     }
 
@@ -122,7 +122,7 @@ class QouteController extends Controller
     public function QoutedRFQModificationNeeded()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('user_id', $user_id)->where('qoute_status', 'ModificationNeeded')->get();
+        $collection = Qoute::where('supplier_user_id', $user_id)->where('qoute_status', 'ModificationNeeded')->get();
         return view('supplier.supplier-qouted-ModificationNeeded', compact('collection'));
     }
 
@@ -130,7 +130,7 @@ class QouteController extends Controller
     public function QoutedRFQQoutedRFQPendingConfirmation()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('user_id', $user_id)->where('qoute_status', 'RFQPendingConfirmation')->get();
+        $collection = Qoute::where('supplier_user_id', $user_id)->where('qoute_status', 'RFQPendingConfirmation')->get();
         return view('supplier.supplier-qouted-PendingConfirmation', compact('collection'));
     }
 
