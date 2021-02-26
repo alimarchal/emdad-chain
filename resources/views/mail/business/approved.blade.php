@@ -1,9 +1,9 @@
 @component('mail::message')
 # Congratulation
 
-Your business has been approved pelase login to view.
+Your business has been approved pelase login to proceed.
 
-@component('mail::button', ['url' => config('app.url') . '/login'])
+@component('mail::button', ['url' => config('app.url')])
 Login
 @endcomponent
 

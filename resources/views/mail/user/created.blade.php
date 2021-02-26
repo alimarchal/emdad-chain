@@ -4,7 +4,7 @@
 Your new Username is: {{ $user->email }}. <br>
 Password: {{ $pass }}
 
-@component('mail::button', ['url' => config('app.url') . '/login'])
+@component('mail::button', ['url' => config('app.name') . '/login'])
 Sign In
 @endcomponent
 

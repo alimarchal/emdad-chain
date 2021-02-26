@@ -179,9 +179,7 @@ Route::middleware(['auth:sanctum'])->get('/generate-PO-pdf/{draftPurchaseOrder}'
 #################### END ##########################################
 
 #################### PDF generate Routes ##########################
-Route::middleware(['auth:sanctum'])->get('/logviewer', function () {
-    return redirect('admin/logviewer');
-})->name('log.viewer');
+Route::middleware(['auth:sanctum'])->get('/logviewer', function () {return redirect('admin/logviewer');})->name('log.viewer');
 #################### END ##########################################
 
 #################### Delivery and Delivery Note ##########################
@@ -190,18 +188,17 @@ Route::middleware(['auth:sanctum'])->get('/deliveryNote/{draftPurchaseOrder}/vie
 Route::middleware(['auth:sanctum'])->resource('deliveryNote', DeliveryNoteController::class);
 #################### END ##################################################
 
+##################### Draft purchase order routes ####################################
 Route::middleware(['auth:sanctum'])->get('/po', [DraftPurchaseOrderController::class, 'po'])->name('po.po');
 Route::middleware(['auth:sanctum'])->get('/po/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'poShow'])->name('po.show');
-
 Route::middleware(['auth:sanctum'])->get('/notes', [DeliveryNoteController::class, 'notes'])->name('notes');
 Route::middleware(['auth:sanctum'])->get('/notes/{deliveryNote}', [DeliveryNoteController::class, 'viewNote'])->name('viewNote');
-
+#################### END ##################################################
 
 ##################### Shipment routes ####################################
 Route::middleware(['auth:sanctum'])->resource('shipment', ShipmentController::class);
 Route::middleware(['auth:sanctum'])->resource('shipmentCart', ShipmentCartController::class);
 Route::middleware(['auth:sanctum'])->resource('shipmentItem', ShipmentItemController::class);
-
 #################### END ##################################################
 
 

@@ -1,7 +1,7 @@
 @component('mail::message')
 # Unfortunatly
 
-Your business has been rejected.
+Your business registration is not approved. Please contact Customer Support.
 
 
 Thanks,<br>

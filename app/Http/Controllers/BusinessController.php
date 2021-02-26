@@ -76,20 +76,22 @@ class BusinessController extends Controller
      */
     public function store(Request $request)
     {
+
         $comma_separated = implode(",", $request->category);
         $request->merge(['category_number' => $comma_separated]);
-        if ($request->has('chamber_reg_path')) {
-            $path = $request->file('chamber_reg_path')->store('', 'public');
+        if ($request->has('chamber_reg_path_1')) {
+            $path = $request->file('chamber_reg_path_1')->store('', 'public');
             $request->merge(['chamber_reg_path' => $path]);
         }
-        if ($request->has('vat_reg_certificate_path')) {
-            $path = $request->file('vat_reg_certificate_path')->store('', 'public');
+        if ($request->has('vat_reg_certificate_path_1')) {
+            $path = $request->file('vat_reg_certificate_path_1')->store('', 'public');
             $request->merge(['vat_reg_certificate_path' => $path]);
         }
-        if ($request->has('business_photo_url')) {
-            $path = $request->file('business_photo_url')->store('', 'public');
+        if ($request->has('business_photo_url_1')) {
+            $path = $request->file('business_photo_url_1')->store('', 'public');
             $request->merge(['business_photo_url' => $path]);
         }
+
         $business = Business::create($request->all());
         foreach ($request->category as $category) {
             BusinessCategory::create([
@@ -161,16 +163,16 @@ class BusinessController extends Controller
             $comma_separated = implode(",", $request->category);
             $request->merge(['category_number' => $comma_separated]);
 
-            if ($request->has('chamber_reg_path')) {
-                $path = $request->file('chamber_reg_path')->store('', 'public');
+            if ($request->has('chamber_reg_path_1')) {
+                $path = $request->file('chamber_reg_path_1')->store('', 'public');
                 $request->merge(['chamber_reg_path' => $path]);
             }
-            if ($request->has('vat_reg_certificate_path')) {
-                $path = $request->file('vat_reg_certificate_path')->store('', 'public');
+            if ($request->has('vat_reg_certificate_path_1')) {
+                $path = $request->file('vat_reg_certificate_path_1')->store('', 'public');
                 $request->merge(['vat_reg_certificate_path' => $path]);
             }
-            if ($request->has('business_photo_url')) {
-                $path = $request->file('business_photo_url')->store('', 'public');
+            if ($request->has('business_photo_url_1')) {
+                $path = $request->file('business_photo_url_1')->store('', 'public');
                 $request->merge(['business_photo_url' => $path]);
             }
             $business->update($request->all());
