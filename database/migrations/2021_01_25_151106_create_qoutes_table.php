@@ -25,6 +25,9 @@ class CreateQoutesTable extends Migration
             $table->string('sample_security_charges')->nullable();
             $table->string('sample_charges_per_unit')->nullable();
             $table->string('shipping_time_in_days')->nullable();
+            $table->string('shipment_cost')->nullable();
+            $table->string('VAT')->nullable();
+            $table->string('total_cost')->nullable();
             $table->text('note_for_customer')->nullable();
             $table->string('qoute_status')->nullable();
             $table->string('status')->nullable();

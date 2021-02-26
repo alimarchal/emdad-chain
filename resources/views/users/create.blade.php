@@ -62,7 +62,13 @@
                                     <select name="role" id="role" class="form-input rounded-md shadow-sm mt-1 block w-full js-example-basic-single" required>
                                         <option disabled selected value="">Select</option>
                                         @foreach($roles as $role)
-                                            <option value="{{$role->id}}">{{$role->name}}</option>
+                                            @if (auth()->user()->registration_type == 'Buyer')
+                                                <option value="{{$role->id}}">{{str_replace('Buyer', '', $role->name)}}</option>
+                                            @elseif (auth()->user()->registration_type == 'Supplier')
+                                                <option value="{{$role->id}}">{{str_replace('Supplier', '', $role->name)}}</option>
+                                            @else
+                                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>

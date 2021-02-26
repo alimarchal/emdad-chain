@@ -103,6 +103,8 @@ class PaymentController extends Controller
             'business_id' => $draftPurchaseOrder->business_id,
             'supplier_user_id' => $draftPurchaseOrder->supplier_user_id,
             'supplier_business_id' => $draftPurchaseOrder->supplier_business_id,
+            'shipment_cost' => $draftPurchaseOrder->shipment_cost,
+            'total_cost' => $draftPurchaseOrder->total_cost,
             'rfq_no' => $draftPurchaseOrder->rfq_no,
             'rfq_item_no' => $draftPurchaseOrder->rfq_item_no,
             'qoute_no' => $draftPurchaseOrder->qoute_no,

@@ -75,7 +75,7 @@ class UserController extends Controller
         }
         elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Buyer') {
 
-            $roles  = Role::where('id' , '>', 10)->get();
+            $roles  = Role::where('id' , '>', 10)->where('id', '!=', 18)->get();
             return view('users.create', compact('roles'));
         }
         elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Supplier') {

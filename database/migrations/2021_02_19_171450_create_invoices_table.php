@@ -24,6 +24,9 @@ class CreateInvoicesTable extends Migration
             $table->string('buyer_business_id')->nullable()->index();;
             $table->string('supplier_user_id')->nullable()->index();;
             $table->string('supplier_business_id')->nullable()->index();;
+            $table->string('shipment_cost')->nullable()->index();;
+            $table->string('total_cost')->nullable()->index();;
+            $table->string('vat')->nullable()->index();;
             $table->string('payment_method');
             $table->string('ship_to_address');
             $table->timestamps();

@@ -6,6 +6,7 @@ use App\Models\DraftPurchaseOrder;
 use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Qoute;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -39,7 +40,8 @@ class QouteController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['user_id' => auth()->user()->id]);
+        $buyer_id = User::where('business_id', $request->business_id)->first();
+        $request->merge(['user_id' => $buyer_id->id]);
         $request->merge(['qoute_status' => 'Qouted']);
         $request->merge(['status' => 'pending']);
 
