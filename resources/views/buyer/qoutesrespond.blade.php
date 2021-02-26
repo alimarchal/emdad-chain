@@ -65,6 +65,15 @@
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                             <strong>Note:</strong> {{ strip_tags($QouteItem->note_for_customer) }}
                         </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Shipment Cost:</strong> {{ $QouteItem->shipment_cost }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Vat (%):</strong> {{ $QouteItem->VAT }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Total Cost:</strong> {{ $QouteItem->total_cost }}
+                        </div>
                     </div>
 
 
@@ -136,6 +145,9 @@
                         <input type="hidden" name="qoute_no" value="{{ $QouteItem->id }}">
 
                         <input type="hidden" name="warehouse_id" value="{{ $QouteItem->warehouse_id }}">
+                        <input type="hidden" name="shipment_cost" value="{{ $QouteItem->shipment_cost }}">
+                        <input type="hidden" name="vat" value="{{ $QouteItem->VAT }}">
+                        <input type="hidden" name="total_cost" value="{{ $QouteItem->total_cost }}">
 {{--                        <input type="hidden" name="payment_term" value="{{ $QouteItem->orderItem->payment_mode }}">--}}
 
 

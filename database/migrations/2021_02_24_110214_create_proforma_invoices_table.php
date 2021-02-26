@@ -22,6 +22,8 @@ class CreateProformaInvoicesTable extends Migration
             // supplier
             $table->string('supplier_user_id')->nullable();
             $table->string('supplier_business_id')->nullable();
+            $table->string('shipment_cost')->nullable();
+            $table->string('total_cost')->nullable();
             $table->string('rfq_no')->nullable();
             $table->string('rfq_item_no')->nullable();
             $table->string('qoute_no')->nullable();

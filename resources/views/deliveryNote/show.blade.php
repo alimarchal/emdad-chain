@@ -134,6 +134,9 @@
                                         <input type="hidden" value="{{ $draftPurchaseOrder->supplier_business_id }}" name="supplier_business_id">
                                         <input type="hidden" value="{{ $draftPurchaseOrder->user_id }}" name="user_id">
                                         <input type="hidden" value="{{ $draftPurchaseOrder->business_id }}" name="business_id">
+                                        <input type="hidden" value="{{ $draftPurchaseOrder->shipment_cost }}" name="shipment_cost">
+                                        <input type="hidden" value="{{ $draftPurchaseOrder->total_cost }}" name="total_cost">
+                                        <input type="hidden" value="{{ $draftPurchaseOrder->vat }}" name="vat">
                                         <input type="hidden" value="{{ $delivery->address }}" name="delivery_address">
                                         <input type="hidden" value="{{ $delivery->city }}" name="city">
                                     </div>

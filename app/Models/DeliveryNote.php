@@ -10,7 +10,7 @@ class DeliveryNote extends Model
     use HasFactory;
 
     protected $fillable = [
-        'draft_purchase_order_id', 'user_id', 'business_id', 'supplier_user_id', 'supplier_business_id',
+        'draft_purchase_order_id', 'user_id', 'business_id', 'supplier_user_id', 'supplier_business_id', 'shipment_cost', 'total_cost', 'vat',
         'delivery_address', 'city', 'warranty', 'terms_and_conditions', 'update_user_id', 'status'
     ];
 

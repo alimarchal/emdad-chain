@@ -24,6 +24,8 @@ class CreateDraftPurchaseOrdersTable extends Migration
             $table->string('rfq_no')->nullable();
             $table->string('rfq_item_no')->nullable();
             $table->string('qoute_no')->nullable();
+            $table->string('shipment_cost')->nullable();
+            $table->string('total_cost')->nullable();
             $table->string('payment_term')->nullable();
             $table->string('item_code')->nullable();
             $table->string('item_name')->nullable();

@@ -32,6 +32,9 @@ class CreateDeliveriesTable extends Migration
             $table->string('payment_term')->nullable();
             $table->string('supplier_user_id')->nullable();
             $table->string('supplier_business_id')->nullable();
+            $table->string('shipment_cost')->nullable();
+            $table->string('total_cost')->nullable();
+            $table->string('vat')->nullable();
             $table->string('otp')->nullable();
             $table->string('warehouse_coordinates')->nullable();
             $table->string('destination_coordinates')->nullable();

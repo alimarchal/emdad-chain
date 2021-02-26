@@ -40,7 +40,8 @@ class QouteController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['user_id' => auth()->user()->id]);
+        $buyer_id = User::where('business_id', $request->business_id)->first();
+        $request->merge(['user_id' => $buyer_id->id]);
         $request->merge(['qoute_status' => 'Qouted']);
         $request->merge(['status' => 'pending']);
 
