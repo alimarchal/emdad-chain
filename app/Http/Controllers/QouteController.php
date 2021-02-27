@@ -52,7 +52,7 @@ class QouteController extends Controller
         // send mail to buyer also for receiving email
         $buyer_user = User::find($buyer_user_id)->notify(new \App\Notifications\QuoteReceivedBuyer());
         session()->flash('message', 'You have successfully qouted.');
-        return redirect()->back();
+        return redirect()->route('QoutedRFQQouted');
     }
 
     /**
@@ -111,34 +111,30 @@ class QouteController extends Controller
     public function QoutedRFQQouted()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('user_id', $user_id)->where('qoute_status', 'Qouted')->get();
+        $collection = Qoute::where('supplier_user_id', $user_id)->where('qoute_status', 'Qouted')->get();
         return view('supplier.supplier-qouted', compact('collection'));
     }
-
 
     public function QoutedRFQRejected()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('user_id', $user_id)->where('qoute_status', 'Rejected')->get();
+        $collection = Qoute::where('supplier_user_id', $user_id)->where('qoute_status', 'Rejected')->get();
         return view('supplier.supplier-qouted-Rejected', compact('collection'));
     }
-
 
     public function QoutedRFQModificationNeeded()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('user_id', $user_id)->where('qoute_status', 'ModificationNeeded')->get();
+        $collection = Qoute::where('supplier_user_id', $user_id)->where('qoute_status', 'ModificationNeeded')->get();
         return view('supplier.supplier-qouted-ModificationNeeded', compact('collection'));
     }
-
 
     public function QoutedRFQQoutedRFQPendingConfirmation()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('user_id', $user_id)->where('qoute_status', 'RFQPendingConfirmation')->get();
+        $collection = Qoute::where('supplier_user_id', $user_id)->where('qoute_status', 'RFQPendingConfirmation')->get();
         return view('supplier.supplier-qouted-PendingConfirmation', compact('collection'));
     }
-
 
     public function QoutationsBuyerReceived(Request $request)
     {
@@ -196,10 +192,10 @@ class QouteController extends Controller
             'status' => 'pending',
         ]);
 
-        // inform supplier user 
+        // inform supplier user
         $supplier_user = User::find($qoute->supplier_user_id)->notify(new \App\Notifications\QuoteAgain($qoute));
         session()->flash('message', 'Qoute status changes to ' . $qoute_status);
-        return redirect()->back();
+        return redirect()->route('QoutationsBuyerReceivedModificationNeeded', [$qoute->e_order_id, $qoute->e_order_items_id]);
     }
 
     public function updateRejected(Request $request, Qoute $qoute)
@@ -220,7 +216,6 @@ class QouteController extends Controller
 
     public function qouteAccepted(Request $request, Qoute $qoute)
     {
-
         $request->merge(['po_date' => date('Y-m-d')]);
         $request->merge(['po_status' => 'pending']);
         $request->merge(['status' => 'pending']);
@@ -237,11 +232,10 @@ class QouteController extends Controller
                 'status' => 'completed',
                 'dpo' => $dpo->id,
             ]);
-            $quote = $qoute;
-            $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteAccepted($quote));
+            // $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteAccepted($qoute));
             DB::commit();
             /* Transaction successful. */
-        } catch (\Exception $e) {
+        } catch (\Exception$e) {
 
             DB::rollback();
             /* Transaction failed. */

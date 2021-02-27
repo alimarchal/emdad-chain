@@ -11,6 +11,7 @@
             <!-- component -->
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
+                    <x-jet-validation-errors class="mb-4" />
                     @if($po->isNotEmpty())
                         <h2 class="text-2xl text-gray-900 font-semibold text-center">Existing P.O. Info</h2>
                     @endif
@@ -21,13 +22,13 @@
                             <label class="block font-medium text-sm text-gray-700 w-1/3" for="no_of_drivers">
                                 No of Monthly Orders
                             </label>
-                            <label class="block font-medium text-sm text-gray-700 w-1/3" for="no_of_drivers">
+                            <label class="block font-medium text-sm text-gray-700 w-1/3" for="volum">
                                 Volume
                             </label>
-                            <label class="block font-medium text-sm text-gray-700 w-1/3" for="no_of_drivers">
+                            <label class="block font-medium text-sm text-gray-700 w-1/3" for="type">
                                 Type
                             </label>
-                            <label class="block font-medium text-sm text-gray-700 w-1/3" for="no_of_drivers">
+                            <label class="block font-medium text-sm text-gray-700 w-1/3" for="order_info_1">
                                 Proof (Old Orders...any file)
                             </label>
                         </div>
@@ -51,7 +52,7 @@
                         </button>
 
                         <div class="flex space-x-2 mt-4">
-                            <div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-sm px-3 bg-pink-200 text-pink-800 rounded-full">Please review all your information is correct after submision you will not able to edit any information.</div>
+                            <div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-sm px-3 bg-pink-200 text-pink-800 rounded-full">Please review all your information is correct after submision you will not be able to edit any information.</div>
                         </div>
                     </form>
 

@@ -21,7 +21,7 @@
 <script>
     var mydata = [
 
-        @include('category.category.sub_category_list', ['categories' => $parentCategories])
+        @include('category.adminCategory', ['categories' => $parentCategories])
     ];
     $("#sel_1").select2ToTree({
         treeData: {

@@ -182,7 +182,7 @@
                         @else
                             <a href="{{ route('dpo.approved', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">DPO Approved</a>
                             <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Cancel P.O</a>
-                            <a href="{{ route('dpo.rejected', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Reject to Edit</a>
+                            {{-- <a href="{{ route('dpo.rejected', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Reject to Edit</a> --}}
 
                         @endif
 

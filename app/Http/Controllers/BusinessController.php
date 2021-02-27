@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\Auth;
 use App\Models\Business;
 use App\Models\BusinessCategory;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Auth;
 
 class BusinessController extends Controller
 {
@@ -77,6 +76,27 @@ class BusinessController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate([
+            'user_id' => 'required',
+            'business_name' => 'required',
+            'num_of_warehouse' => 'required',
+            'business_photo_url_1' => 'required|mimes:jpeg,jpg,png,gif,csv,txt,pdf',
+            'category' => 'required',
+            'business_type' => 'required',
+            'chamber_reg_number' => 'required',
+            'chamber_reg_path_1' => 'required|mimes:jpeg,jpg,png,gif,csv,txt,pdf',
+            'vat_reg_certificate_number' => 'required',
+            'vat_reg_certificate_path_1' => 'required|mimes:jpeg,jpg,png,gif,csv,txt,pdf',
+            'country' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'business_email' => 'required',
+            'phone' => 'required',
+            'mobile' => 'required',
+            'iban' => 'required',
+            'bank_name' => 'required',
+            'address' => 'required',
+        ]);
         $comma_separated = implode(",", $request->category);
         $request->merge(['category_number' => $comma_separated]);
         if ($request->has('chamber_reg_path_1')) {
@@ -207,11 +227,8 @@ class BusinessController extends Controller
 
     public function accountStatus(Request $request)
     {
-        //        dd($request->business_id.' '. $request->status_id);
-        //        dd(Business::where('id', $request->business_id)->first());
         $business = Business::where('id', $request->business_id)->first();
         $user = User::where('id', $business->user_id)->first();
-        $user->notify(new \App\Notifications\BusinessApproved());
         if ($request->status_id == 3) {
             $business->update([
                 'status' => 3,

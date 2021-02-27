@@ -13,7 +13,7 @@
     </div>
     <p class="m-2 font-bold">Welcome {{ config('app.name', 'Laravel') }} as our prospective alliance</p>
     <p class="font-bold m-2 text-justify">Thank you for choosing us to share our experience and expertise in supply chain management platform.</p>
-    <p class="text-blue-900 font-bold m-2 text-justify">At the moment your application is under review. You will receive a reply from us within 10 working days.</p>
+    <p class="text-blue-900 font-bold m-2 text-justify">At the moment your application is under review. You will receive a reply from us.</p>
     <p class="m-2">Hopefully, soon we will be sharing with you the power of our platform which could;</p>
     <ol class="list-decimal ml-12 text-indigo-900 font-bold">
         <li>Save you a huge amount depending on the size of your purchases.</li>

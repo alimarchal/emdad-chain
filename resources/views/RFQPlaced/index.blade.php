@@ -43,18 +43,8 @@
                                 Client Name
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                Who Place
-                            </th>
-
                             <th scope="col" class="px-6 py-3 text-left text-center text-xs font-medium text-gray-500 tracking-wider" width="120">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                    </path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                    </path>
-                                </svg>
+                                Action
                             </th>
 
 
@@ -63,15 +53,15 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($PlacedRFQ as $item)
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap" width="30">
+                                <td class="px-6 py-4 whitespace-nowrap">
                                     {{$loop->iteration}}
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap" width="140">
+                                <td class="px-6 py-4 whitespace-nowrap" >
                                     {{$item->created_at->format('d-m-Y')}}
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap" width="140">
+                                <td class="px-6 py-4 whitespace-nowrap" >
                                     {{$item->status}}
                                 </td>
 
@@ -96,22 +86,9 @@
                                     @endif
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    @if (\App\Models\User::find($item->user_id))
-                                        {{\App\Models\User::find($item->user_id)->first()->name}}
-                                    @endif
-                                </td>
-
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="{{route('RFQItemsByID',$item->id)}}" >
-                                        <svg class="w-6 h-6 inline" fill="none" stroke="red"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                            </path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                            </path>
-                                        </svg>
-                                        <span class="inline">View</span>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <a href="{{route('RFQItemsByID',$item->id)}}" class="text-blue-600 hover:underline" >
+                                        VIEW
                                     </a>
                                 </td>
 

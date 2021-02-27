@@ -2,26 +2,23 @@
 
 namespace App\Notifications;
 
-use App\Models\EOrderItems;
-use App\Models\Qoute;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class QuoteAccepted extends Notification
+class PreparingDelivery extends Notification
 {
     use Queueable;
-    private $item;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Qoute $qoute)
+    public function __construct()
     {
-        
-        $this->item = EOrderItems::find($qoute->e_order_items_id);
+        //
     }
 
     /**
@@ -43,7 +40,7 @@ class QuoteAccepted extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.quote.quoteAccepted', ['item' => $this->item]);
+        return (new MailMessage)->markdown('mail.delivery.preparing');
     }
 
     /**
