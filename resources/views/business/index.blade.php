@@ -107,10 +107,10 @@
                                         </td>
                                     @else
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                        <a class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1" href="{{route('accountStatus', ['business_id' => $business->id, 'status_id' => 3])}}" style="transition: all .15s ease">
+                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150" href="{{route('accountStatus', ['business_id' => $business->id, 'status_id' => 3])}}" style="transition: all .15s ease">
                                             Accept
                                         </a>
-                                        <a class="bg-purple-500 text-white active:bg-purple-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1" href="{{route('accountStatus', ['business_id' => $business->id, 'status_id' => 4])}}" style="transition: all .15s ease">
+                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150" href="{{route('accountStatus', ['business_id' => $business->id, 'status_id' => 4])}}" style="transition: all .15s ease">
                                             Reject
                                         </a>
                                     </td>

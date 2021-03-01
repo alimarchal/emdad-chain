@@ -63,7 +63,8 @@
 
                         
                     @endif
-                    @if (auth()->user()->hasRole('CEO') && (auth()->user()->registration_type == "Buyer" ||  auth()->user()->registration_type == "Buyer"))
+                    
+                    @if (auth()->user()->hasRole('CEO') && (auth()->user()->registration_type == "Buyer" ||  auth()->user()->registration_type == "Supplier"))
                     <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">
                         {{ __('Business') }} &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
                     </x-jet-nav-link>
