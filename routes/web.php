@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BankPaymentController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\BusinessWarehouseController;
 use App\Http\Controllers\CategoryController;
@@ -218,6 +219,8 @@ Route::middleware(['auth:sanctum'])->get('generate-proforma-invoice/{id}', [Paym
 Route::middleware(['auth:sanctum'])->get('create-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoice'])->name('generateProforma');
 Route::middleware(['auth:sanctum'])->get('invoices-history', [PaymentController::class, 'invoices'])->name('invoices');
 Route::middleware(['auth:sanctum'])->get('proforma-invoices', [PaymentController::class, 'proforma_invoices'])->name('proforma_invoices');
+Route::middleware(['auth:sanctum'])->resource('bank-payments', BankPaymentController::class)->names('bank-payments');
+Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/create', [BankPaymentController::class, 'create'])->name('bank-payments.create');
 #################### END ##############################################################
 
 Route::get('check', function (){

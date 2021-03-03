@@ -134,7 +134,7 @@
                                     Shipment
                                 </td>
                                 <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                    {{ number_format(0, 2) }}
+                                    {{ number_format($draftPurchaseOrder->shipment_cost, 2) }}
                                 </td>
                             </tr>
                             <tr>
@@ -142,7 +142,7 @@
                                     P.O Total
                                 </td>
                                 <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                    {{ number_format($draftPurchaseOrder->sub_total * 0.15 + $draftPurchaseOrder->sub_total, 2) }}
+                                    {{ number_format((($draftPurchaseOrder->sub_total * 0.15) + $draftPurchaseOrder->shipment_cost) + $draftPurchaseOrder->sub_total, 2) }}
                                 </td>
                             </tr>
                         </tbody>
@@ -151,14 +151,14 @@
 
                     <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
                         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
-                            <strong>Remarks: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br>
-                            <strong>Warranty: </strong> {{ $draftPurchaseOrder->warranty }} <br>
-                            <strong>Terms & Conditions: </strong> None <br>
+                            {{-- <strong>Remarks: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br> --}}
+                            {{-- <strong>Warranty: </strong> {{ $draftPurchaseOrder->warranty }} <br> --}}
+                            {{-- <strong>Terms & Conditions: </strong> None <br> --}}
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
-                            <strong>Delivery Information</strong><br>
+                            {{-- <strong>Delivery Information</strong><br>
                             @php $warehouseName =  \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse)->first(); @endphp
-                            <strong>Warehouse: @if(isset($warehouseName)){{$warehouseName->name}} @endif</strong><br>
+                            <strong>Warehouse: @if(isset($warehouseName)){{$warehouseName->name}} @endif</strong><br> --}}
 
                         </div>
                     </div>
@@ -180,8 +180,8 @@
                         @elseif ($draftPurchaseOrder->status == 'rejectToEdit')
                             <span class="px-3 py-3 bg-red-600 text-white rounded uppercase">Rejected for Edit</span>
                         @else
-                            <a href="{{ route('dpo.approved', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">DPO Approved</a>
-                            <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Cancel P.O</a>
+                            <a href="{{ route('dpo.approved', $draftPurchaseOrder->id) }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">DPO Approved</a>
+                            <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">Cancel P.O</a>
                             {{-- <a href="{{ route('dpo.rejected', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Reject to Edit</a> --}}
 
                         @endif

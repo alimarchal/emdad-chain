@@ -76,10 +76,13 @@ class BusinessWarehouseController extends Controller
             'gate_type' => 'required',
             'fork_lift' => 'required',
             'total_warehouse_manpower' => 'required',
-            'number_of_delivery_vehicles' => 'required',
-            'number_of_drivers' => 'required',
             'working_time' => 'required',
         ]);
+
+        $merge_time = $request->working_time . " - " . $request->working_time_1;
+        $request->merge(['working_time' => $merge_time]);
+        
+
         /*
         $validated = $request->validate([
             'title' => 'required|unique:posts|max:255',

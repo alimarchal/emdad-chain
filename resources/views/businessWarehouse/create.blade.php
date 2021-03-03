@@ -73,7 +73,9 @@
                             <x-jet-input id="latitude" name="latitude" type="text" class="border p-2 w-1/2"></x-jet-input>
                             <select name="warehouse_type" id="warehouse_type" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
-                                <option value="example">Example</option>
+                                <option value="Powered">Powered</option>
+                                <option value="Off Grid">Off Grid</option>
+                                <option value="Non-Powered">Non-Powered</option>
                             </select>
                             <select name="cold_storage" id="cold_storage" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                 <option value="">None</option>
@@ -89,7 +91,8 @@
                         <div class="flex space-x-5 mt-3">
                             <select name="gate_type" id="gate_type" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
-                                <option value="Example">Example</option>
+                                <option value="Automatic">Automatic</option>
+                                <option value="Manual">Manual</option>
                             </select>
                             <select name="fork_lift" id="fork_lift" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
@@ -99,12 +102,17 @@
                             <x-jet-input id="total_warehouse_manpower" type="text" name="total_warehouse_manpower" class="border p-2 w-1/2"></x-jet-input>
                         </div>
                         <div class="flex space-x-5 mt-3">
-
+                            @if(auth()->user()->registration_type == 'Supplier')
                             <x-jet-label class="w-1/2" for="number_of_delivery_vehicles">Number of Delivery Vehicles @include('misc.required')</x-jet-label>
                             <x-jet-label class="w-1/2" for="number_of_drivers">Number of Drivers @include('misc.required')</x-jet-label>
-                            <x-jet-label class="w-1/2" for="working_time">Working Time @include('misc.required')</x-jet-label>
+                            @endif
+                            <x-jet-label class="w-1/4" for="working_time">From (Delivery Receiving Time) @include('misc.required')</x-jet-label>
+                            <x-jet-label class="w-1/4" for="working_time">To (Delivery Receiving Time) @include('misc.required')</x-jet-label>
                         </div>
+
+                        
                         <div class="flex space-x-5 mt-3">
+                            @if(auth()->user()->registration_type == 'Supplier')
                             <select name="number_of_delivery_vehicles" id="number_of_delivery_vehicles" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
                                 @for($count = 1; $count <= 100; $count++)
@@ -117,8 +125,23 @@
                                     <option value="{{$count}}">{{$count}}</option>
                                 @endfor
                             </select>
-                            <x-jet-input id="working_time" type="text" name="working_time" class="border p-2 w-1/2"></x-jet-input>
+                            @endif
+
+                            <select name="working_time" id="working_time" class="form-select rounded-md shadow-sm border p-2 w-1/4" required>
+                                <option value="">None</option>
+                                @for($count = 0; $count <= 23; $count++)
+                                    <option value="{{$count}}:00">{{$count}}:00</option>
+                                @endfor
+                            </select>
+
+                            <select name="working_time_1" id="working_time_1" class="form-select rounded-md shadow-sm border p-2 w-1/4" required>
+                                <option value="">None</option>
+                                @for($count = 0; $count <= 23; $count++)
+                                    <option value="{{$count}}:00">{{$count}}:00</option>
+                                @endfor
+                            </select>
                         </div>
+                       
                         <div class="control-group after-add-more">
 
                         </div>

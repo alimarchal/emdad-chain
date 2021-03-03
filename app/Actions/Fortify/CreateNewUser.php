@@ -24,7 +24,9 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'gender' => ['required', 'string', 'max:10'],
             'name' => ['required', 'string', 'max:55'],
-            'nid_num' => ['required', 'string', 'max:50'],
+            'middle_initial' => ['required', 'string', 'max:3'],
+            'family_name' => ['required', 'string', 'max:55'],
+            'nid_num' => ['required', 'string', 'max:10'],
             'nid_exp_date' => ['required', 'date'],
             'mobile' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -34,6 +36,8 @@ class CreateNewUser implements CreatesNewUsers
         $user = User::create([
             'gender' => $input['gender'],
             'name' => $input['name'],
+            'middle_initial' => $input['middle_initial'],
+            'family_name' => $input['family_name'],
             'nid_num' => $input['nid_num'],
             'nid_exp_date' => $input['nid_exp_date'],
             'mobile' => $input['mobile'],
