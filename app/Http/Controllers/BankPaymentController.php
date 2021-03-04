@@ -17,7 +17,11 @@ class BankPaymentController extends Controller
      */
     public function index()
     {
-        $collection = Invoice::where('buyer_business_id', auth()->user()->business_id)->get();
+        if (auth()->user()->registration_type == 'Buyer') {
+            $collection = BankPayment::where('buyer_business_id', auth()->user()->business_id)->get();
+        } elseif (auth()->user()->registration_type == 'Supplier') {
+            $collection = BankPayment::where('supplier_business_id', auth()->user()->business_id)->get();
+        }
         return view('manual-payments.index', compact('collection'));
     }
 
@@ -61,7 +65,7 @@ class BankPaymentController extends Controller
      */
     public function show(BankPayment $bankPayment)
     {
-        //
+        return view('manual-payments.show', compact('bankPayment'));
     }
 
     /**
@@ -84,7 +88,9 @@ class BankPaymentController extends Controller
      */
     public function update(Request $request, BankPayment $bankPayment)
     {
-        //
+        $updated = $bankPayment->update($request->all());
+
+        return redirect()->route('bank-payments.index');
     }
 
     /**
