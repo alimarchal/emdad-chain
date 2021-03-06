@@ -242,15 +242,15 @@
                                 </div>
                                 <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                        Shipment Cost
-                                    </label>
-                                    <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="size" type="number" name="shipment_cost" value="{{$collection->shipment_cost}}" min="0" step="any" autocomplete="size" required>
-                                </div>
-                                <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
-                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
                                         VAT(%)
                                     </label>
                                     <input class="form-input rounded-md shadow-sm block w-full VAT" id="size" type="number" name="VAT" min="0" step="any" value="{{$collection->VAT}}" autocomplete="size" required>
+                                </div>
+                                <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
+                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                        Shipment Cost
+                                    </label>
+                                    <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="size" type="number" name="shipment_cost" value="{{$collection->shipment_cost}}" min="0" step="any" autocomplete="size" required>
                                 </div>
                                 <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
@@ -338,15 +338,15 @@
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                            Shipment Cost
-                                        </label>
-                                        <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="size" type="number" name="shipment_cost" min="0" step="any" autocomplete="size" required>
-                                    </div>
-                                    <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
-                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
                                             VAT(%)
                                         </label>
                                         <input class="form-input rounded-md shadow-sm block w-full VAT" id="size" type="number" name="VAT" min="0" step="any" autocomplete="size" required>
+                                    </div>
+                                    <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                            Shipment Cost
+                                        </label>
+                                        <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="size" type="number" name="shipment_cost" min="0" step="any" autocomplete="size" required>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
@@ -386,7 +386,7 @@
             toolbar_mode: 'floating',
         });
 
-        $(document).on('change', '.quantity, .price_per_unit, .VAT, .shipment_cost', function(){
+        $(document).on('keypress keydown keyup', '.quantity, .price_per_unit, .VAT, .shipment_cost', function(){
 
             // var total = 0;
             var quantity = $('.quantity').val();
@@ -400,6 +400,22 @@
             // alert(total);
             $('#total_cost').val(parseInt(quantity) * parseFloat(unitPrice)* parseFloat(VAT_value)+ parseFloat(shipmentCost));
             // $('#total_cost').val(total + parseFloat(shipmentCost));
+
+            // var total = 0;
+            // var quantity = $('.quantity').val();
+            // var unitPrice = $('.price_per_unit').val();
+            // var VAT_value = $('.VAT').val() * 0.01;
+            // var shipmentCost = $('.shipment_cost').val();
+            // var VAT = $('.VAT').val();
+            // // console.log(VAT_value);
+            // total += parseInt(quantity) * parseFloat(unitPrice)* parseFloat(VAT_value);
+            // // total += (parseInt(quantity) * parseFloat(unitPrice)) * parseFloat(VAT_value);
+            // // total += parseInt(shipmentCost);
+            // // alert(total);
+            // // console.log(total);
+            // $('#total_cost').val(total + parseFloat(shipmentCost));
+            // $('#total_cost').val((parseInt(quantity) * parseFloat(unitPrice)* parseFloat(VAT_value) )+ parseFloat(shipmentCost));
+            // $('#total_cost').val(total * parseFloat(VAT_value));
         });
 
     </script>

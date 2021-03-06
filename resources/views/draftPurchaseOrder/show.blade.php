@@ -123,10 +123,10 @@
                             </tr>
                             <tr>
                                 <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                    VAT 15%
+                                    VAT {{$draftPurchaseOrder->vat}}%
                                 </td>
                                 <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                    {{ number_format($draftPurchaseOrder->sub_total * 0.15, 2) }}
+                                    {{ number_format($draftPurchaseOrder->sub_total * ($draftPurchaseOrder->vat/100), 2) }}
                                 </td>
                             </tr>
                             <tr>
@@ -134,7 +134,9 @@
                                     Shipment
                                 </td>
                                 <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
+
                                     {{ number_format($draftPurchaseOrder->shipment_cost, 2) }}
+
                                 </td>
                             </tr>
                             <tr>
@@ -142,7 +144,9 @@
                                     P.O Total
                                 </td>
                                 <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
+
                                     {{ number_format((($draftPurchaseOrder->sub_total * 0.15) + $draftPurchaseOrder->shipment_cost) + $draftPurchaseOrder->sub_total, 2) }}
+
                                 </td>
                             </tr>
                         </tbody>

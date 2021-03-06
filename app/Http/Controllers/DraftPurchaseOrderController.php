@@ -63,7 +63,6 @@ class DraftPurchaseOrderController extends Controller
      */
     public function show(DraftPurchaseOrder $draftPurchaseOrder)
     {
-
         return view('draftPurchaseOrder.show', compact('draftPurchaseOrder'));
     }
 

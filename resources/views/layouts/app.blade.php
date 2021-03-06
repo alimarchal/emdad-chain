@@ -39,6 +39,22 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     @livewireStyles
 
+    @if (auth()->user()->rtl == 1)
+
+        <!-- Template Main CSS File -->
+        <link href="Presento/assets/css/style.css" rel="stylesheet">
+        <style>
+            nav, #side-bar, #main, .inner-page {
+                direction: rtl;
+            }
+
+            body, #main, div, header, nav, footer, .inner-page, .nav-menu a, h1,h2,h3,h4,h5,h6,p, button {
+                font-family: arabicFont;
+            }
+
+        </style>
+    @endif
+
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
     @yield('headerScripts')
@@ -55,7 +71,7 @@
         {{--                </div>--}}
         {{--            </header>--}}
 
-        <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200 font-roboto">
+        <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200 font-roboto" id="side-bar">
             @include('_layouts.sidebar')
 
             <div class="flex-1 flex flex-col overflow-hidden">
