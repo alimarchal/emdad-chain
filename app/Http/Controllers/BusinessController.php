@@ -234,4 +234,11 @@ class BusinessController extends Controller
 
         return redirect()->back()->with('message', 'Update Status');
     }
+
+    public function incomplete()
+    {
+        $incompleteBusiness = User::where('email_verified_at', null)->where('usertype', 'CEO')->where('business_id', null)->paginate(10);
+
+        return view('business.incomplete', compact('incompleteBusiness'));
+    }
 }

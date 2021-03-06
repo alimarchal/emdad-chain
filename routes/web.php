@@ -43,10 +43,12 @@ Route::get('/', function () {
     return view('welcomeAr');
 });
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [DashboardController::class, 'languageChange'])->name('languageChange');
 Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
 //Route::middleware(['auth:sanctum'])->post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
 Route::middleware(['auth:sanctum'])->post('/registrationType', [UserController::class, 'registrationType']);
 Route::middleware(['auth:sanctum'])->resource('/business', BusinessController::class);
+Route::middleware(['auth:sanctum'])->get('/incomplete-business-registration/', [BusinessController::class , 'incomplete'])->name('incompleteBusiness');
 Route::middleware(['auth:sanctum'])->get('/business-status/', [BusinessController::class , 'accountStatus'])->name('accountStatus');
 Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
 Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', BusinessWarehouseController::class);
@@ -93,6 +95,18 @@ Route::resource('contact', ContactController::class);
 Route::get('/en', function () {
     return view('welcome');
 })->name('ar');
+Route::get('/registerAr', function () {
+    return view('auth.registerAr');
+})->name('registerAr');
+Route::get('/loginAr', function () {
+    return view('auth.loginAr');
+})->name('loginAr');
+//Route::get('/dashboard_ar', function () {
+//    return view('_layouts.sidebarAr');
+//})->name('sidebarAr');
+
+
+
 Route::get('/aboutUsAr', function () {
     return view('website.aboutUsAr');
 })->name('aboutUsAr');
@@ -223,6 +237,6 @@ Route::middleware(['auth:sanctum'])->get('invoices-history', [PaymentController:
 Route::middleware(['auth:sanctum'])->get('proforma-invoices', [PaymentController::class, 'proforma_invoices'])->name('proforma_invoices');
 #################### END ##############################################################
 
-Route::get('check', function (){
-    return view('business.buyerPolicy');
-});
+//Route::get('check', function (){
+//    return view('business.buyerPolicy');
+//});
