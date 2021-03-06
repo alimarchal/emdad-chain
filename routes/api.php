@@ -3,6 +3,8 @@
 use App\Http\Controllers\Api\v1\UserController;
 use App\Http\Controllers\Api\v1\TrackingDeliveryController;
 use App\Http\Controllers\Api\v1\DeliveryController;
+use App\Http\Controllers\Api\v1\ShipmentItemController;
+use App\Http\Controllers\Api\v1\ShipmentController;
 use App\Models\Delivery;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,6 +31,8 @@ Route::prefix('v1')->group(function () {
     Route::post('/login', [UserController::class, 'login']);
     Route::apiResource('TrackingDelivery', TrackingDeliveryController::class);
     Route::apiResource('Delivery', DeliveryController::class);
+    Route::apiResource('ShipmentItems', ShipmentItemController::class);
+    Route::apiResource('Shipment', ShipmentController::class);
 });
 
 

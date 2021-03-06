@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DeliveryNote;
 use App\Models\DraftPurchaseOrder;
+use App\Models\Invoice;
 use App\Models\Payment;
 use App\Models\ProformaInvoice;
 use Illuminate\Http\Request;
@@ -39,7 +40,7 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

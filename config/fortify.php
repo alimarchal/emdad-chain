@@ -139,6 +139,7 @@ return [
         Features::twoFactorAuthentication([
             'confirmPassword' => true,
         ]),
+        
     ],
 
 ];

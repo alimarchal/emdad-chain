@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BankPaymentController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\BusinessWarehouseController;
 use App\Http\Controllers\CategoryController;
@@ -48,8 +49,10 @@ Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
 //Route::middleware(['auth:sanctum'])->post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
 Route::middleware(['auth:sanctum'])->post('/registrationType', [UserController::class, 'registrationType']);
 Route::middleware(['auth:sanctum'])->resource('/business', BusinessController::class);
+
 Route::middleware(['auth:sanctum'])->get('/incomplete-business-registration/', [BusinessController::class , 'incomplete'])->name('incompleteBusiness');
 Route::middleware(['auth:sanctum'])->get('/business-status/', [BusinessController::class , 'accountStatus'])->name('accountStatus');
+
 Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
 Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', BusinessWarehouseController::class);
 Route::middleware(['auth:sanctum'])->get('/businessWarehouse/{id}/show', [BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
@@ -193,9 +196,7 @@ Route::middleware(['auth:sanctum'])->get('/generate-PO-pdf/{draftPurchaseOrder}'
 #################### END ##########################################
 
 #################### PDF generate Routes ##########################
-Route::middleware(['auth:sanctum'])->get('/logviewer', function () {
-    return redirect('admin/logviewer');
-})->name('log.viewer');
+Route::middleware(['auth:sanctum'])->get('/logviewer', function () {return redirect('admin/logviewer');})->name('log.viewer');
 #################### END ##########################################
 
 #################### Delivery and Delivery Note ##########################
@@ -204,18 +205,17 @@ Route::middleware(['auth:sanctum'])->get('/deliveryNote/{draftPurchaseOrder}/vie
 Route::middleware(['auth:sanctum'])->resource('deliveryNote', DeliveryNoteController::class);
 #################### END ##################################################
 
+##################### Draft purchase order routes ####################################
 Route::middleware(['auth:sanctum'])->get('/po', [DraftPurchaseOrderController::class, 'po'])->name('po.po');
 Route::middleware(['auth:sanctum'])->get('/po/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'poShow'])->name('po.show');
-
 Route::middleware(['auth:sanctum'])->get('/notes', [DeliveryNoteController::class, 'notes'])->name('notes');
 Route::middleware(['auth:sanctum'])->get('/notes/{deliveryNote}', [DeliveryNoteController::class, 'viewNote'])->name('viewNote');
-
+#################### END ##################################################
 
 ##################### Shipment routes ####################################
 Route::middleware(['auth:sanctum'])->resource('shipment', ShipmentController::class);
 Route::middleware(['auth:sanctum'])->resource('shipmentCart', ShipmentCartController::class);
 Route::middleware(['auth:sanctum'])->resource('shipmentItem', ShipmentItemController::class);
-
 #################### END ##################################################
 
 
@@ -235,6 +235,8 @@ Route::middleware(['auth:sanctum'])->get('generate-proforma-invoice/{id}', [Paym
 Route::middleware(['auth:sanctum'])->get('create-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoice'])->name('generateProforma');
 Route::middleware(['auth:sanctum'])->get('invoices-history', [PaymentController::class, 'invoices'])->name('invoices');
 Route::middleware(['auth:sanctum'])->get('proforma-invoices', [PaymentController::class, 'proforma_invoices'])->name('proforma_invoices');
+Route::middleware(['auth:sanctum'])->resource('bank-payments', BankPaymentController::class)->names('bank-payments');
+Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/create', [BankPaymentController::class, 'create'])->name('bank-payments.create');
 #################### END ##############################################################
 
 //Route::get('check', function (){

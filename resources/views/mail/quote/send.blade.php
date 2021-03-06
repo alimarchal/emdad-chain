@@ -1,11 +1,7 @@
 @component('mail::message')
-# Introduction
+# Quote Send
 
-The body of your message.
-
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+You have successfully sent a quotation. Please login to view your quote.
 
 Thanks,<br>
 {{ config('app.name') }}

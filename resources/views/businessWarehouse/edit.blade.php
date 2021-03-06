@@ -60,7 +60,9 @@
                             <x-jet-input id="latitude" name="latitude" type="text" class="border p-2 w-1/2" value="{{$businessWarehouse->latitude}}"></x-jet-input>
                             <select name="warehouse_type" id="warehouse_type" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
-                                <option value="example" {{($businessWarehouse->warehouse_type == "example")?'selected':''}}>Example</option>
+                                <option value="Powered" {{($businessWarehouse->warehouse_type == "Powered")?'selected':''}}>Powered</option>
+                                <option value="Off Grid" {{($businessWarehouse->warehouse_type == "Off Grid")?'selected':''}}>Off Grid</option>
+                                <option value="Non-Powered" {{($businessWarehouse->warehouse_type == "Non-Powered")?'selected':''}}>Non-Powered</option>
                             </select>
                             <select name="cold_storage" id="cold_storage" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                 <option value="">None</option>
@@ -76,7 +78,8 @@
                         <div class="flex space-x-5 mt-3">
                             <select name="gate_type" id="gate_type" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
-                                <option value="Example" {{($businessWarehouse->gate_type == "Example")?'selected':''}} >Example</option>
+                                <option value="Automatic" {{($businessWarehouse->gate_type == "Automatic")?'selected':''}} >Automatic</option>
+                                <option value="Manual" {{($businessWarehouse->gate_type == "Manual")?'selected':''}} >Manual</option>
                             </select>
                             <select name="fork_lift" id="fork_lift" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>

@@ -12,7 +12,7 @@
     }
 
 </style>
-<select id="sel_1" class="form-input rounded-md shadow-sm border p-2 w-1/2" style="width: 100%;" multiple name="category[]">
+<select id="sel_1" class="form-input rounded-md shadow-sm border p-2 w-1/2" style="width: 100%;" multiple name="category[]" required>
 
 </select>
 <script>
@@ -40,7 +40,7 @@
         treeData: {
             dataArr: mydata
         },
-        maximumSelectionLength: 100
+        maximumSelectionLength: 25
     });
 
 </script>

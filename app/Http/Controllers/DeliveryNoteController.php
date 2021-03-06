@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Delivery;
 use App\Models\DeliveryNote;
 use App\Models\DraftPurchaseOrder;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DeliveryNoteController extends Controller
@@ -48,6 +49,7 @@ class DeliveryNoteController extends Controller
             $po->status = 'prepareDelivery';
             $po->save();
         }
+        $buyer_user = User::find($delivery->user_id)->notify(new \App\Notifications\PreparingDelivery());
         session()->flash('message', 'Delivery note has been successfully created.');
         return redirect('notes');
     }

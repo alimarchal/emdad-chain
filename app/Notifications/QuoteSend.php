@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Qoute;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -11,14 +12,16 @@ class QuoteSend extends Notification
 {
     use Queueable;
 
+    private $quote;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Qoute $qoute)
     {
-        //
+        $this->quote = $qoute;
     }
 
     /**
@@ -40,7 +43,7 @@ class QuoteSend extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.quote.send');
+        return (new MailMessage)->markdown('mail.quote.send', ['quote' => $this->quote]);
     }
 
     /**

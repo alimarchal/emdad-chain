@@ -60,6 +60,34 @@ class BusinessWarehouseController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'user_id' => 'required',
+            'business_id' => 'required',
+            'name' => 'required',
+            'designation' => 'required',
+            'warehouse_email' => 'required',
+            'landline' => 'required',
+            'mobile' => 'required',
+            'country' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'warehouse_type' => 'required',
+            'cold_storage' => 'required',
+            'gate_type' => 'required',
+            'fork_lift' => 'required',
+            'total_warehouse_manpower' => 'required',
+            'working_time' => 'required',
+        ]);
+
+        $merge_time = $request->working_time . " - " . $request->working_time_1;
+        $request->merge(['working_time' => $merge_time]);
+        
+
+        /*
+        $validated = $request->validate([
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
+        ]);
         $vehicle_category = NULL;
         $vehicle_type = NULL;
         if (isset($request->vehicle_category)) {
@@ -113,6 +141,8 @@ class BusinessWarehouseController extends Controller
                 $businessWarehouse->save();
             }
         }
+        */
+        $bw = BusinessWarehouse::create($request->all());
         session()->flash('message', 'Business warehouse information successfully saved.');
         return redirect()->route('purchaseOrderInfo.create');
     }
@@ -149,6 +179,28 @@ class BusinessWarehouseController extends Controller
      */
     public function update(Request $request, BusinessWarehouse $businessWarehouse)
     {
+
+        $request->validate([
+            'user_id' => 'required',
+            'business_id' => 'required',
+            'name' => 'required',
+            'designation' => 'required',
+            'warehouse_email' => 'required',
+            'landline' => 'required',
+            'mobile' => 'required',
+            'country' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'warehouse_type' => 'required',
+            'cold_storage' => 'required',
+            'gate_type' => 'required',
+            'fork_lift' => 'required',
+            'total_warehouse_manpower' => 'required',
+            'number_of_delivery_vehicles' => 'required',
+            'number_of_drivers' => 'required',
+            'working_time' => 'required',
+        ]);
+        /*
         $vehicle_category = NULL;
         $vehicle_type = NULL;
         if (isset($request->vehicle_category)) {
@@ -173,6 +225,7 @@ class BusinessWarehouseController extends Controller
         }
         $request->merge(['vehicle_category' => $vehicle_category]);
         $request->merge(['vehicle_type' => $vehicle_type]);
+        */
         $businessWarehouse->update($request->all());
         session()->flash('message', 'Warehouse information successfully updated.');
         return redirect()->route('businessWarehouse.edit',$businessWarehouse->id);

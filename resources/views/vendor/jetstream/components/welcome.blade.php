@@ -4,19 +4,25 @@
     {{-- Message Before and After Resistration --}}
     @if(Auth::user()->status == 0 || Auth::user()->status == null )
         <div class="text-black text-2xl">
+
             @if (auth()->user()->rtl == 0)
                 Thank you for signing up! Your email address has been verified.
                 <br>Now you need to fill up the business registration form  before adding any user/s.
+            @if (auth()->user()->hasRole('CEO') && (auth()->user()->registration_type == "Buyer" ||  auth()->user()->registration_type == "Buyer"))
+                <x-jet-nav-link href="{{ route('business.create') }}" class="text-red-600" :active="request()->routeIs('business.*')">
+                    {{ __('Business') }}
+                </x-jet-nav-link>
+            @endif
             @else
                 نشكر لك تسجيلك! تم تفعيل بريدك الإلكتروني بنجاح. <br>
                 بإمكانك الآن تعبئة بيانات استمارة نشاطك التجاري قبل إضافة أي من المستخدمين.
             @endif
-
         </div>
 
     @elseif(Auth::user()->status == 1 && Auth::user()->registration_type == "Buyer")
 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+
             @if (auth()->user()->rtl == 0)
                 Welcome {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
 
@@ -79,7 +85,7 @@
             </div>
             <p class="m-2 font-bold">Welcome {{ config('app.name', 'Laravel') }} as our prospective alliance</p>
             <p class="font-bold m-2 text-justify">Thank you for choosing us to share our experience and expertise in supply chain management platform.</p>
-            <p class="text-blue-900 font-bold m-2 text-justify">At the moment your application is under review. You will receive a reply from us within 10 working days.</p>
+            <p class="text-blue-900 font-bold m-2 text-justify">At the moment your application is under review. You will receive a reply from us.</p>
             <p class="m-2">Hopefully, soon we will be sharing with you the power of our platform which could;</p>
             <ol class="list-decimal ml-12 text-indigo-900 font-bold">
                 <li>Bring you more business volume.</li>

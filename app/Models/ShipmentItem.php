@@ -10,7 +10,7 @@ class ShipmentItem extends Model
     use HasFactory;
 
     protected $fillable = [
-        'driver_id', 'vehicle_type', 'supplier_business_id', 'delivery_id',
+        'driver_id', 'vehicle_type', 'supplier_business_id', 'delivery_id','status',
     ];
 
     public function shipment()

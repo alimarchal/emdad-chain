@@ -45,14 +45,24 @@ class DeliveryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $delivery = Delivery::find($id);
-        if (!empty($delivery)) {
-            return $delivery;
-        } else {
-            return response()->json(['message' => 'Not Found!'], 404);
+        $token = $request->code;
+        if ($token == "RRNirxFh4j9Ftd") {
+            if (!empty($delivery)) {
+                $delivery = Delivery::find($id);
+                return $delivery;
+            } else {
+                return response()->json(['message' => 'Not Found!'], 404);
+            }
         }
+
+        // $delivery = Delivery::find($id);
+        // if (!empty($delivery)) {
+        //     return $delivery;
+        // } else {
+        //     return response()->json(['message' => 'Not Found!'], 404);
+        // }
     }
 
     /**
@@ -75,7 +85,7 @@ class DeliveryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $token = $request->code;
         if ($token == "RRNirxFh4j9Ftd") {
             $delivery = Delivery::find($id);

@@ -1,3 +1,4 @@
+
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
@@ -59,6 +60,7 @@
                                 </th>
 
 
+
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -114,6 +116,7 @@
                                             </svg>
                                             <span class="inline">View</span>
                                         </a>
+
                                     </td>
 
                                 </tr>
@@ -185,7 +188,6 @@
                                         </path>
                                     </svg>
                                 </th>
-
 
                             </tr>
                             </thead>

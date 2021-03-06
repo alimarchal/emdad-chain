@@ -47,7 +47,11 @@
                                                     P.O Date
                                                 </th>
 
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    VIEW
+                                                </th>
 
+                     
                                             </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
@@ -67,6 +71,10 @@
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                                         {{ $dpo->po_date }}
+                                                    </td>
+
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                        <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-600 hover:underline text-blue-600">VIEW</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

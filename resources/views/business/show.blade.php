@@ -28,7 +28,15 @@
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <a href="{{(isset($business->chamber_reg_path)?url():'')}}" class="text-blue-600 visited:text-purple-600">Registration Certificate (Click to view)</a>
+                                <a href="{{(isset($business->chamber_reg_path)?Storage::url($business->chamber_reg_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->chamber_reg_path)?'Chamber Registration Certificate':'Not Uploaded')}}</a>
+                            </div>
+
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
+                                <a href="{{(isset($business->vat_reg_certificate_path)?Storage::url($business->vat_reg_certificate_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->vat_reg_certificate_path)?'VAT Certificate':'Not Uploaded')}}</a>
+                            </div>
+
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
+                                <a href="{{(isset($business->business_photo_url)?Storage::url($business->business_photo_url):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->business_photo_url)?'Business Logo':'Not Uploaded')}}</a>
                             </div>
 
 

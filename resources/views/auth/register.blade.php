@@ -20,19 +20,31 @@
             <div class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-1 lg:-mx-3 xl:-mx-2">
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <x-jet-label for="gender" value="{{ __('') }}" class="mb-2" />&nbsp;
+                    <x-jet-label for="gender" value="{{ __('Mr/Ms/Mrs') }}" class="mb-2" />
                     <select name="gender" id="gender" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name" >
                         <option value="">Select</option>
                         <option value="Male">Mr.</option>
-                        <option value="Male">Ms.</option>
+                        <option value="Female">Ms.</option>
                         <option value="Female">Mrs.</option>
                     </select>
                 </div>
 
-                <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
+                <div class="my-0 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <!-- Column Content -->
-                    <x-jet-label for="name" value="{{ __('Name') }}" />
+                    <x-jet-label for="name" value="{{ __('First Name') }}" />
                     <x-jet-input id="name" class="block mt-2 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                </div>
+
+                <div class="my-0 px-2 w-full overflow-hidden pb-2 sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
+                    <!-- Column Content -->
+                    <x-jet-label for="middle_initial" value="{{ __('Middle Initial') }}" />
+                    <x-jet-input id="middle_initial" class="block mt-2 w-full" type="text" maxlength="3" name="middle_initial" :value="old('middle_initial')" required autofocus autocomplete="middle_initial" />
+                </div>
+
+                <div class="my-0  px-2 w-full overflow-hidden  pb-2 sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
+                    <!-- Column Content -->
+                    <x-jet-label for="family_name" value="{{ __('Family Name') }}" />
+                    <x-jet-input id="family_name" class="block  mt-2 w-full" type="text" name="family_name" :value="old('family_name')" required autofocus autocomplete="family_name" />
                 </div>
 
             </div>
@@ -41,7 +53,7 @@
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <x-jet-label for="nid_num" value="{{ __('National ID Number') }}" />
-                    <x-jet-input id="nid_num" class="block mt-1 w-full" type="text" name="nid_num" :value="old('nid_num')" required />
+                    <x-jet-input id="nid_num" class="block mt-1 w-full" type="text" maxlength="10" name="nid_num" :value="old('nid_num')" required />
                 </div>
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">

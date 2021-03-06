@@ -10,7 +10,7 @@ class Shipment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'supplier_id', 'supplier_business_id'
+        'supplier_id', 'supplier_business_id','status','shipment_cost'
     ];
 
     public function shipmentItems()
