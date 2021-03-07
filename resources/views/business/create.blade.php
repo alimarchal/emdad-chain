@@ -9,12 +9,13 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- component -->
+
             @include('users.sessionMessage')
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                
+
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
                     <form action="{{ url('business') }}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
-                        <x-jet-validation-errors class="mb-4" />
+                        <x-jet-validation-errors class="mb-4"/>
                         @csrf
                         <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 2: Business Information</h3>
                         <div class="flex space-x-5 mt-3">
@@ -72,17 +73,8 @@
                             <x-jet-label class="w-1/2" for="country">Country @include('misc.required')</x-jet-label>
                             <x-jet-label class="w-1/2" for="city">City @include('misc.required')</x-jet-label>
                         </div>
-                        <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="phone" type="tel" name="phone" class="border p-2 w-1/2" required></x-jet-input>
-                            <x-jet-input id="mobile" type="number" name="mobile" class="border p-2 w-1/2" required></x-jet-input>
-                            <select name="country" id="country" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
-                                <option value="">None</option>
-                                @foreach (\App\Models\User::countries() as $country)
-                                    <option value="{{ $country }}">{{ $country }}</option>
-                                @endforeach
-                            </select>
-                            <x-jet-input id="city" type="text" name="city" class="border p-2 w-1/2" required></x-jet-input>
-                        </div>
+
+                        <livewire:country />
                         <div class="flex space-x-5 mt-3">
                             <label class="block font-medium text-sm text-gray-700 w-1/2" for="bank_name">Bank Name @include('misc.required')</label>
                             <label class="block font-medium text-sm text-gray-700 w-1/2" for="iban">IBAN @include('misc.required')</label>
