@@ -52,9 +52,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'nid_exp_date',
         'status',
         'is_active',
-        'usertype',
-        'driver_status',
-        'rtl',
     ];
 
     /**

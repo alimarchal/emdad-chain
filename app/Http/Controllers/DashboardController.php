@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\BusinessCategory;
 use App\Models\Dashboard;
 use App\Models\EOrderItems;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,16 +32,6 @@ class DashboardController extends Controller
 
         return view('dashboard',compact($pending_orders));
     }
-
-    public function languageChange(Request $request)
-    {
-        User::where('id', \auth()->user()->id)->update([
-            'rtl' => $request->rtl_value,
-        ]);
-
-        return response()->json(['success']);
-    }
-
 
     /**
      * Show the form for creating a new resource.
