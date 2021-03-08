@@ -95,7 +95,7 @@ class BusinessController extends Controller
             'mobile' => 'required',
             'iban' => 'required',
             'bank_name' => 'required',
-            'address' => 'required',
+//            'address' => 'required',
         ]);
         $comma_separated = implode(",", $request->category);
         $request->merge(['category_number' => $comma_separated]);
