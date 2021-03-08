@@ -52,7 +52,7 @@
                         </button>
 
                         <div class="flex space-x-2 mt-4">
-                            <div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-sm px-3 bg-pink-200 text-pink-800 rounded-full">Please review all your information is correct after submision you will not be able to edit any information.</div>
+                            <div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-sm px-3 bg-pink-200 text-pink-800 rounded-full">Please review all your information is correct after submision you will not able to edit any information.</div>
                         </div>
                     </form>
 

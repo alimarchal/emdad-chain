@@ -20,7 +20,7 @@ class BankPaymentController extends Controller
         if (auth()->user()->registration_type == 'Buyer') {
             $collection = BankPayment::where('buyer_business_id', auth()->user()->business_id)->get();
         } elseif (auth()->user()->registration_type == 'Supplier') {
-            $collection = BankPayment::where('supplier_business_id', auth()->user()->business_id)->get();
+            $collection = BankPayment::where('supplier_business_id', auth()->user()->business_id)->where('status', '!=' ,0)->get();
         }
         return view('manual-payments.index', compact('collection'));
     }
