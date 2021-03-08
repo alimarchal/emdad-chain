@@ -18,7 +18,8 @@ class BankPaymentController extends Controller
     public function index()
     {
         if (auth()->user()->registration_type == 'Buyer') {
-            $collection = BankPayment::where('buyer_business_id', auth()->user()->business_id)->get();
+//            $collection = BankPayment::where('buyer_business_id', auth()->user()->business_id)->get();
+            $collection = Invoice::where('buyer_business_id', auth()->user()->business_id)->where('invoice_status', 0)->get();
         } elseif (auth()->user()->registration_type == 'Supplier') {
             $collection = BankPayment::where('supplier_business_id', auth()->user()->business_id)->get();
         }
@@ -32,7 +33,10 @@ class BankPaymentController extends Controller
      */
     public function create(Invoice $invoice)
     {
-        $delivery = Delivery::where('id', $invoice->id)->first();
+//        dd($invoice);
+//        $delivery = Delivery::where('id', $invoice->id)->first();
+        $delivery = Delivery::where('invoice_id', $invoice->id)->first();
+//        dd($delivery);
         return view('manual-payments.create', compact('invoice', 'delivery'));
     }
 

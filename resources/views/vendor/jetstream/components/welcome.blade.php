@@ -8,11 +8,11 @@
             @if (auth()->user()->rtl == 0)
                 Thank you for signing up! Your email address has been verified.
                 <br>Now you need to fill up the business registration form  before adding any user/s.
-            @if (auth()->user()->hasRole('CEO') && (auth()->user()->registration_type == "Buyer" ||  auth()->user()->registration_type == "Buyer"))
-                <x-jet-nav-link href="{{ route('business.create') }}" class="text-red-600" :active="request()->routeIs('business.*')">
-                    {{ __('Business') }}
-                </x-jet-nav-link>
-            @endif
+{{--            @if (auth()->user()->hasRole('CEO') && (auth()->user()->registration_type == "Buyer" ||  auth()->user()->registration_type == "Buyer"))--}}
+{{--                <x-jet-nav-link href="{{ route('business.create') }}" class="text-red-600" :active="request()->routeIs('business.*')">--}}
+{{--                    {{ __('Business') }}--}}
+{{--                </x-jet-nav-link>--}}
+{{--            @endif--}}
             @else
                 نشكر لك تسجيلك! تم تفعيل بريدك الإلكتروني بنجاح. <br>
                 بإمكانك الآن تعبئة بيانات استمارة نشاطك التجاري قبل إضافة أي من المستخدمين.
