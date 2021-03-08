@@ -46,16 +46,15 @@
                         </div>
                         <div class="control-group after-add-more">
 
-                            </div>
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
-                                Submit for Approval
-                            </button>
+                        </div>
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
+                            Submit for Approval
+                        </button>
 
-
-                            <div class="flex space-x-2 mt-4">
-                                <div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-sm px-3 bg-pink-200 text-pink-800 rounded-full">Please review all your information is correct after submision you will not able to edit any information.</div>
-                            </div>
-                        </form>
+                        <div class="flex space-x-2 mt-4">
+                            <div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-sm px-3 bg-pink-200 text-pink-800 rounded-full">Please review all your information is correct after submision you will not able to edit any information.</div>
+                        </div>
+                    </form>
 
                     </div>
                 </div>
