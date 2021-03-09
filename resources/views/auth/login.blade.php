@@ -22,8 +22,10 @@
             </div>
 
             <div class="mt-4">
+
                 <div class="py-2" x-data="{ show: true }">
-                    <x-jet-label for="password" value="{{ __('Password') }}"/>
+                    <x-jet-label for="password" value="{{ __('Password') }}" />
+
                     <div class="relative">
                         <input id="password" name="password" required autocomplete="current-password" :type="show ? 'password' : 'text'" class="form-input rounded-md shadow-sm block mt-1 w-full">
                         <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mr-2">

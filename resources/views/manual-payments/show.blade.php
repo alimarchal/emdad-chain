@@ -25,7 +25,7 @@
                             <p><strong>Purchase Order:</strong> {{ $bankPayment->draft_purchase_order_id }} </p>
                         </div>
                         <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <p><strong>Bank Name:</strong> {{ $bankPayment->bank_name }} </p>
+                            <p><strong>Bank Name:</strong> {{ $bankPayment->draft_purchase_order_id }} </p>
                         </div>
 
                         <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">

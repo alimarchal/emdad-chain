@@ -121,10 +121,7 @@
                         </form>
 
 
-                    </div>
                 </div>
-
-
             </div>
 
 
@@ -239,34 +236,7 @@
                                 <textarea id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required=""></textarea>
                             </div>
 
-                            <div class="flex space-x-5 mt-3">
-                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_photo_url">رمز الشركة</label>
-                            </div>
-                            <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="business_photo_url" type="file" name="business_photo_url" class="border p-2 w-1/2"></x-jet-input>
-                            </div>
 
-                            <br>
-
-{{--                            @if (auth()->user()->registration_type == 'Buyer')--}}
-{{--                                @include('business.buyerPolicy')--}}
-{{--                            @else--}}
-{{--                                @include('business.supplierPolicy')--}}
-{{--                            @endif--}}
-
-
-                            <x-jet-button class="float-right mt-4 mb-4">حفظ، التالي</x-jet-button>
-
-                        </form>
-
-
-                    </div>
-                </div>
-
-
-            </div>
-
-
-        </div>
-    </x-app-layout>
+    </div>
+</x-app-layout>
 @endif

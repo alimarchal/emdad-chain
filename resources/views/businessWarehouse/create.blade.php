@@ -158,17 +158,14 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('.js-example-basic-multiple').select2();
-                $(".add-more").click(function () {
-                    var html = $(".copy").html();
-                    $(".after-add-more").after(html);
-                });
-                $("body").on("click", ".remove", function () {
-                    $(this).parents(".control-group").remove();
-                });
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.js-example-basic-multiple').select2();
+            $(".add-more").click(function () {
+                var html = $(".copy").html();
+                $(".after-add-more").after(html);
             });
         </script>
 
@@ -337,7 +334,8 @@
                     $(this).parents(".control-group").remove();
                 });
             });
-        </script>
+        });
+    </script>
 
-    </x-app-layout>
+</x-app-layout>
 @endif
