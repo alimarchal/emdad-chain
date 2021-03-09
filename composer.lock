@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d668fb6a104f88ad0389e99d56885818",
+    "content-hash": "6b4e2829b15cce8b11488d95a494851d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2612,6 +2612,92 @@
                 }
             ],
             "time": "2020-12-14T13:15:25+00:00"
+        },
+        {
+            "name": "moyasar/moyasar",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moyasar/moyasar-php.git",
+                "reference": "8bf9459401968526e3c970a212d85337ea73bc01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moyasar/moyasar-php/zipball/8bf9459401968526e3c970a212d85337ea73bc01",
+                "reference": "8bf9459401968526e3c970a212d85337ea73bc01",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.3|^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "1.2.4",
+                "phpunit/phpunit": "5.7.27"
+            },
+            "suggest": {
+                "laravel/framework": "Allows Moyasar payment services to be auto injected into current app container"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Payment": "Moyasar\\Facades\\Payment",
+                        "Invoice": "Moyasar\\Facades\\Invoice"
+                    },
+                    "providers": [
+                        "Moyasar\\Providers\\LaravelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Moyasar\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ali Alhoshaiyan",
+                    "email": "alialhoshaiyan@gmail.com"
+                },
+                {
+                    "name": "Sohib H Algotimel",
+                    "email": "s@sgh.sa",
+                    "homepage": "https://sgh.sa"
+                },
+                {
+                    "name": "Moyasar Development Team",
+                    "email": "developers@moyasar.com",
+                    "homepage": "https://moyasar.com/"
+                }
+            ],
+            "description": "PHP/Laravel wrapper library for Moyasar payment services",
+            "keywords": [
+                "Moyasar",
+                "apple",
+                "capture",
+                "card",
+                "credit",
+                "invoice",
+                "laravel",
+                "mada",
+                "master",
+                "pay",
+                "payment",
+                "refund",
+                "sadad",
+                "visa",
+                "void"
+            ],
+            "support": {
+                "issues": "https://github.com/moyasar/moyasar-php/issues",
+                "source": "https://github.com/moyasar/moyasar-php/tree/v1.0.2"
+            },
+            "time": "2020-12-28T09:18:38+00:00"
         },
         {
             "name": "myclabs/php-enum",

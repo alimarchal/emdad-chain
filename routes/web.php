@@ -242,3 +242,10 @@ Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/create', [Bank
 //Route::get('check', function (){
 //    return view('business.buyerPolicy');
 //});
+
+
+
+/* do not delete
+//$paymentService = new \Moyasar\Providers\PaymentService();
+// https://github.com/moyasar/moyasar-php
+*/
