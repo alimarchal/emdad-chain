@@ -239,6 +239,16 @@ Route::middleware(['auth:sanctum'])->resource('bank-payments', BankPaymentContro
 Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/create', [BankPaymentController::class, 'create'])->name('bank-payments.create');
 #################### END ##############################################################
 
+
+####################### Subscription routes ####################################
+Route::middleware(['auth:sanctum'])->get('sub', function (){
+    return view('subscription.index');
+})->name('subscription');
+#################### END ##############################################################
+
+
+
+
 //Route::get('check', function (){
 //    return view('business.buyerPolicy');
 //});

@@ -67,20 +67,26 @@
 
                         </x-jet-nav-link>
 
-                        
+
                     @endif
-                    
+
                     @if (auth()->user()->hasRole('CEO') && (auth()->user()->registration_type == "Buyer" ||  auth()->user()->registration_type == "Supplier"))
                     <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">
                         {{ __('Business') }} &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
                     </x-jet-nav-link>
 
                     @endif
-                   
+
+
+                    <x-jet-nav-link href="{{ route('subscription') }}" :active="request()->routeIs('subscription')">
+                        {{ __('Subscription') }}
+                    </x-jet-nav-link>
+
+
 {{--                    @if (Auth::user()->status == 1)--}}
 {{--                    @else--}}
 {{--                        @if (Auth::user()->registration_type)--}}
-{{--                           
+{{--
 {{--                                @php--}}
 {{--                                    $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();--}}
 {{--                                    if ($isBusinessDataExist) {--}}
@@ -93,7 +99,7 @@
 {{--                                @if (isset($isBusinessDataExist))--}}
 {{--                                    &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
 {{--                                @endif--}}
-{{--                            
+{{--
 
 
 
