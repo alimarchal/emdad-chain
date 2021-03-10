@@ -49,6 +49,7 @@ class DeliveryController extends Controller
     {
         $token = $request->code;
         if ($token == "RRNirxFh4j9Ftd") {
+            $delivery = Delivery::find($id);
             if (!empty($delivery)) {
                 $delivery = Delivery::find($id);
                 return $delivery;
