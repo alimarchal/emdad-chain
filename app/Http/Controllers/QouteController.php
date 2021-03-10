@@ -44,7 +44,11 @@ class QouteController extends Controller
         $request->merge(['user_id' => $buyer_id->id]);
         $request->merge(['qoute_status' => 'Qouted']);
         $request->merge(['status' => 'pending']);
-
+        $total_cost = ($request->quote_quantity * $request->quote_price_per_quantity);
+        $total_vat = ($total_cost * ($request->VAT / 100));
+        $total_shipment = $request->shipment_cost;
+        $sum = ($total_cost + $total_vat + $total_shipment);
+        $request->merge(['total_cost' => $sum]);
         $quote = Qoute::create($request->all());
         // sending mail for confirmation
         $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));

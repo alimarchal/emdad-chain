@@ -45,9 +45,6 @@
                                     Client Name
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                    Who Place
-                                </th>
 
                                 <th scope="col" class="px-6 py-3 text-left text-center text-xs font-medium text-gray-500 tracking-wider" width="120">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -66,15 +63,15 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($PlacedRFQ as $item)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap" width="30">
+                                    <td class="px-6 py-4 whitespace-nowrap" >
                                         {{$loop->iteration}}
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-nowrap" width="140">
+                                    <td class="px-6 py-4 whitespace-nowrap" >
                                         {{$item->created_at->format('d-m-Y')}}
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-nowrap" width="140">
+                                    <td class="px-6 py-4 whitespace-nowrap" >
                                         {{$item->status}}
                                     </td>
 
@@ -99,11 +96,7 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        @if (\App\Models\User::find($item->user_id))
-                                            {{\App\Models\User::find($item->user_id)->first()->name}}
-                                        @endif
-                                    </td>
+
 
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a href="{{route('RFQItemsByID',$item->id)}}" >
