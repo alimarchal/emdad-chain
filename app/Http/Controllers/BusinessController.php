@@ -88,7 +88,6 @@ class BusinessController extends Controller
             'vat_reg_certificate_number' => 'required',
             'vat_reg_certificate_path_1' => 'required|mimes:jpeg,jpg,png,gif,csv,txt,pdf',
             'country' => 'required',
-            'city' => 'required',
             'address' => 'required',
             'business_email' => 'required',
             'phone' => 'required',
