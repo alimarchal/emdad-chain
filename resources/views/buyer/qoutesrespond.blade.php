@@ -148,26 +148,20 @@
                         <input type="hidden" name="shipment_cost" value="{{ $QouteItem->shipment_cost }}">
                         <input type="hidden" name="vat" value="{{ $QouteItem->VAT }}">
                         <input type="hidden" name="total_cost" value="{{ $QouteItem->total_cost }}">
-{{--                        <input type="hidden" name="payment_term" value="{{ $QouteItem->orderItem->payment_mode }}">--}}
-
-
-{{--                        <x-jet-label for="address" value="{{ __('Delivery Address') }}" class="text-black" />--}}
-{{--                        <x-jet-input id="address" class="block mt-1 w-full" type="input" name="address" :value="old('address')" required autofocus />--}}
 
                         <x-jet-label for="warehouse" class="my-2" value="{{ __('Warehouse delivery address') }}" class="text-black"  />
 
-{{--                        <select name="warehouse" id="warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2">--}}
-{{--                            <option value="">None</option>--}}
-{{--                            @foreach(\App\Models\BusinessWarehouse::where('user_id', auth()->user()->id)->get() as $warehouse)--}}
-{{--                                <option value="{{$warehouse->id}}" {{($warehouse->id == old('warehouse')) ?'selected':''}}>{{$warehouse->name}}</option>--}}
-{{--                            @endforeach--}}
-{{--                        </select>--}}
                         @php
                             $orderItemID =  \App\Models\EOrderItems::where('id', $QouteItem->e_order_items_id)->first();
                             $warehouseAddress = \App\Models\BusinessWarehouse::where('id', $orderItemID->warehouse_id)->first();
                         @endphp
-                        <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" disabled="disabled" value="{{$warehouseAddress->address}}">
-
+                        <input type="text" name="delivery_address" class="form-input rounded-md shadow-sm border p-2 w-full" readonly value="{{$warehouseAddress->address}}">
+                        <br>
+                        <br>
+                        <x-jet-label for="Remarks" value="{{ __('OTP FOR Receiving Delivery (We will send One Time Password when you receive delivery)') }}" class="text-center text-black font-bold text-red-600"  />
+                        <input type="text" name="otp_mobile_number" class="form-input rounded-md shadow-sm border p-2 w-full" value="{{$warehouseAddress->mobile}}">
+                        <br>
+                        <br>
                         <x-jet-label for="Remarks" value="{{ __('Remarks') }}" class="text-black"  />
                         <textarea name="remarks" id="remarks"></textarea>
 

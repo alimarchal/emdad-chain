@@ -49,7 +49,14 @@ class DeliveryController extends Controller
     {
         $token = $request->code;
         if ($token == "RRNirxFh4j9Ftd") {
+            $delivery = Delivery::find($id);
             if (!empty($delivery)) {
+                if ($request->input('otp') == 'generate')
+                {
+                    $string = rand(1000,9999);
+                    $otp = $delivery->otp = $string;
+                    $delivery->save();
+                }
                 $delivery = Delivery::find($id);
                 return $delivery;
             } else {

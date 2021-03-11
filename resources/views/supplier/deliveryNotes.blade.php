@@ -60,7 +60,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        Note-{{ $dn->id }}
+                                                        Delivery Note-{{ $dn->id }}
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">

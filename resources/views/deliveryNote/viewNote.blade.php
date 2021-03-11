@@ -105,6 +105,7 @@
                                 <div class="mt-5">
                                     <input type="hidden" name="delivery_note" value="{{ $deliveryNote->id }}">
                                     <input type="hidden" name="draft_purchase_order_id" value="{{ $deliveryNote->purchase_order->id }}">
+                                    <input type="hidden" name="otp_mobile_number" value="{{ $deliveryNote->otp_mobile_number }}">
                                     <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                         Generate Final Invoice
                                     </button>

@@ -40,6 +40,8 @@ class DeliveryNoteController extends Controller
      */
     public function store(Request $request)
     {
+
+//        dd($request->all());
         $request->merge(['status' => 'processing']);
         $po_no = $request->draft_purchase_order_id;
         $delivery = DeliveryNote::create($request->all());

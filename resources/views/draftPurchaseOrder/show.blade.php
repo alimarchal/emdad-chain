@@ -8,16 +8,16 @@
                     </a>
                 </div>
                 <div class="px-4 py-5 sm:p-6 bg-white shadow ">
-                    <div class="flex flex-wrap overflow-hidden bg-gray-300 p-4">
+                    <div class="flex flex-wrap overflow-hidden bg-gray-100 p-4">
                         <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                            <img class="h-20 w-20 rounded-full object-cover" src="{{ $draftPurchaseOrder->buyer_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->buyer_business->business_name }}" />
+                            <img class="h-20 w-20 rounded-full object-cover" src="{{ Storage::url($draftPurchaseOrder->buyer_business->business_photo_url) }}" alt="{{ $draftPurchaseOrder->buyer_business->business_name }}" />
                             <h1 class="text-center text-2xl">{{ $draftPurchaseOrder->buyer_business->business_name }}</h1>
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                             <h1 class="text-center text-2xl">Draft Purchase Order</h1>
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                            <img class="h-20 w-20 rounded-full object-cover" src="{{ $draftPurchaseOrder->supplier_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->supplier_business->business_name }}" />
+                            <img class="h-20 w-20 rounded-full object-cover" src="{{ Storage::url($draftPurchaseOrder->supplier_business->business_photo_url) }}" alt="{{ $draftPurchaseOrder->supplier_business->business_name }}" />
                             <h1 class="text-center text-2xl">{{ $draftPurchaseOrder->supplier_business->business_name }}</h1>
                         </div>
                     </div>
@@ -155,9 +155,9 @@
 
                     <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
                         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
-                            {{-- <strong>Remarks: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br> --}}
-                            {{-- <strong>Warranty: </strong> {{ $draftPurchaseOrder->warranty }} <br> --}}
-                            {{-- <strong>Terms & Conditions: </strong> None <br> --}}
+                             <strong>Remarks: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br>
+                             <strong>Mobile Number for OTP: </strong> {{ $draftPurchaseOrder->otp_mobile_number }} <br>
+                             <strong>Delivery Address: </strong> {{ strip_tags($draftPurchaseOrder->delivery_address) }} <br>
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
                             {{-- <strong>Delivery Information</strong><br>
@@ -187,7 +187,6 @@
                             <a href="{{ route('dpo.approved', $draftPurchaseOrder->id) }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">DPO Approved</a>
                             <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">Cancel P.O</a>
                             {{-- <a href="{{ route('dpo.rejected', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Reject to Edit</a> --}}
-
                         @endif
 
 

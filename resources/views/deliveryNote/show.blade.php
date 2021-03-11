@@ -110,14 +110,10 @@
                                         {{--                                <textarea name="delivery_address" id="delivery_address" class="form-textarea w-full">{{ strip_tags($draftPurchaseOrder->buyer_business->address) . ' - City: ' . $draftPurchaseOrder->buyer_business->city . ' - Phone #: ' . $draftPurchaseOrder->buyer_business->phone }}</textarea>--}}
                                         @php $delivery = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse_id)->first(); @endphp
                                         <textarea class="form-textarea w-full" disabled>{{$delivery->address}}</textarea>
-                                        {{--                                <textarea class="form-textarea w-full" disabled>{{$draftPurchaseOrder->buyer_business->address}}</textarea>--}}
-
                                         <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
                                             City
                                         </label>
                                         <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" value="{{ $delivery->city }}" disabled="disabled">
-
-
                                         <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
                                             Warranty
                                         </label>
@@ -135,6 +131,9 @@
                                         <input type="hidden" value="{{ $draftPurchaseOrder->supplier_business_id }}" name="supplier_business_id">
                                         <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
                                         <input type="hidden" value="{{ $draftPurchaseOrder->shipment_cost }}" name="shipment_cost">
+                                        <input type="hidden" value="{{ $draftPurchaseOrder->quantity }}" name="quantity">
+                                        <input type="hidden" value="{{ $draftPurchaseOrder->unit_price }}" name="unit_price">
+                                        <input type="hidden" value="{{ $draftPurchaseOrder->otp_mobile_number }}" name="otp_mobile_number">
                                         <input type="hidden" value="{{ $draftPurchaseOrder->vat }}" name="vat">
                                         <input type="hidden" value="{{ $draftPurchaseOrder->total_cost }}" name="total_cost">
                                         <input type="hidden" value="{{ $delivery->address }}" name="delivery_address">
@@ -192,6 +191,9 @@
                                     <input type="hidden" value="{{ $draftPurchaseOrder->supplier_business_id }}" name="supplier_business_id">
                                     <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
                                     <input type="hidden" value="{{ $draftPurchaseOrder->shipment_cost }}" name="shipment_cost">
+                                    <input type="hidden" value="{{ $draftPurchaseOrder->quantity }}" name="quantity">
+                                    <input type="hidden" value="{{ $draftPurchaseOrder->unit_price }}" name="unit_price">
+                                    <input type="hidden" value="{{ $draftPurchaseOrder->otp_mobile_number }}" name="otp_mobile_number">
                                     <input type="hidden" value="{{ $draftPurchaseOrder->vat }}" name="vat">
                                     <input type="hidden" value="{{ $draftPurchaseOrder->total_cost }}" name="total_cost">
                                     <input type="hidden" value="{{ $delivery->address }}" name="delivery_address">

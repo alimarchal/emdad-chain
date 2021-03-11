@@ -116,13 +116,13 @@ class DraftPurchaseOrderController extends Controller
                 'po_status' => $status,
                 'approval_details' => 'User_TYPE_' . $user_type . '_' . $user_type_id . '_Business_TYPE_' . $user_business_type . '_' . $user_business_type_id . '_' . date('Y-m-d h:m'),
             ]);
-    
+
             $qoute = Qoute::find($draftPurchaseOrder->qoute_no);
             $order_items = EOrderItems::find($draftPurchaseOrder->rfq_item_no);
             $order_items->status = 'accepted';
             $order_items->save();
-    
-            $affected = DB::table('qoutes')->where('e_order_items_id', $draftPurchaseOrder->rfq_item_no)->where('id', '<>', $draftPurchaseOrder->qoute_no)->update(['qoute_status' => 'Rejected', 'qoute_status_updated' => 'Rejected', 'status' => 'expired']);    
+
+            $affected = DB::table('qoutes')->where('e_order_items_id', $draftPurchaseOrder->rfq_item_no)->where('id', '<>', $draftPurchaseOrder->qoute_no)->update(['qoute_status' => 'Rejected', 'qoute_status_updated' => 'Rejected', 'status' => 'expired']);
             DB::commit();
             /* Transaction successful. */
         } catch (\Exception$e) {

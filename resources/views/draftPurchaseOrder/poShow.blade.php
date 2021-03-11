@@ -151,13 +151,13 @@
                     <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
                         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
                             <strong>Remarks: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br>
-                            <strong>Warranty: </strong> {{ $draftPurchaseOrder->warranty }} <br>
+                            <strong>Mobile Number for OTP: </strong> {{ strip_tags($draftPurchaseOrder->otp_mobile_number) }} <br>
+                            <strong>Delivery Address: </strong> {{ strip_tags($draftPurchaseOrder->delivery_address) }} <br>
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
-                            <strong>Delivery Information</strong><br>
-                            @php $warehouseName =  \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse)->first(); @endphp
-                            <strong>Warehouse: @if(isset($warehouseName)){{$warehouseName->name}}@endif</strong><br>
-
+{{--                            <strong>Delivery Information:</strong><br>--}}
+{{--                            @php $warehouseName =  \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse)->first(); @endphp--}}
+{{--                            <strong>Warehouse: @if(isset($warehouseName)){{$warehouseName->name}}@endif</strong><br>--}}
                         </div>
                     </div>
 

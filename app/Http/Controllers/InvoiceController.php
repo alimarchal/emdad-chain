@@ -91,6 +91,7 @@ class InvoiceController extends Controller
 
     public function invoiceGenerate(Request $request)
     {
+//        dd($request->all());
         $delivery_note = DeliveryNote::where('id', $request->delivery_note)->first();
         $purchase_order = DraftPurchaseOrder::where('id', $request->draft_purchase_order_id)->first();
         $delivery = [
@@ -103,10 +104,10 @@ class InvoiceController extends Controller
             'shipment_cost' => $delivery_note->shipment_cost,
             'total_cost' => $delivery_note->total_cost,
             'vat' => $delivery_note->vat,
+            'otp_mobile_number' => $delivery_note->otp_mobile_number,
             'item_code' => $purchase_order->item_code,
             'item_name' => $purchase_order->item_name,
             'uom' => $purchase_order->uom,
-            'packing' => $purchase_order->packing,
             'brand' => $purchase_order->brand,
             'quantity' => $purchase_order->quantity,
             'unit_price' => $purchase_order->unit_price,
@@ -132,8 +133,8 @@ class InvoiceController extends Controller
             'shipment_cost' => $purchase_order->shipment_cost,
             'total_cost' => $purchase_order->total_cost,
             'vat' => $purchase_order->vat,
-            'payment_method' => $del->payment_method,
-            'ship_to_address' => $del->ship_to_address,
+            'payment_method' => $del->payment_term,
+            'ship_to_address' => $del->delivery_address,
         ];
 
         $inv = Invoice::create($invoice);

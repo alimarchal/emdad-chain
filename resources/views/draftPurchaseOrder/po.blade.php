@@ -55,6 +55,9 @@
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     Proceed Status
                                                 </th>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    View
+                                                </th>
                                             </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
@@ -87,6 +90,7 @@
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                                         {{$dpo->payment_term}}
                                                     </td>
+
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                                         @if($dpo->payment_term == 'Cash' || auth()->user()->can('all') && auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
                                                             @php $proformaInvoice = \App\Models\ProformaInvoice::where('draft_purchase_order_id', $dpo->id)->first(); @endphp
@@ -99,6 +103,16 @@
                                                             {{--                                                            <a>Completed</a>--}}
                                                         @endif
                                                     </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                        <a href="{{ route('po.show', $dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">View</a>
+                                                        <br>
+                                                        @if(auth()->user()->registration_type == 'Supplier')
+                                                        @if($dpo->payment_term == 'Credit')
+                                                            <a href="{{ url('deliveryNote') }}" class="hover:text-blue-900 hover:underline text-blue-900"> Generate delivery note </a>
+                                                        @endif
+                                                            @endif
+                                                    </td>
+
                                                 </tr>
                                             @endforeach
                                             <!-- More rows... -->
