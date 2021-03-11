@@ -37,6 +37,12 @@
                                 </label>
                                 <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name_ar" style="direction: rtl;" type="text" name="name_ar" required value="{{ $category->name_ar }}">
 
+
+                                <label class="block font-medium text-sm text-gray-700 mt-4" style="direction: rtl;" for="name_ur">
+                                    قسم کا نام (اردو) 
+                                </label>
+                                <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name_ur" style="direction: rtl;" type="text" name="name_ur" required value="{{ $category->name_ur }}">
+
                             </div>
                         </div>
 

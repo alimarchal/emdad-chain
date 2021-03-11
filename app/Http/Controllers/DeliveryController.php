@@ -46,7 +46,8 @@ class DeliveryController extends Controller
      */
     public function show(Delivery $delivery)
     {
-        //
+        return 'ss';
+        return $delivery;
     }
 
     /**

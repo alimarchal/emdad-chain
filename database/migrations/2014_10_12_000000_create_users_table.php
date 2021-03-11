@@ -33,6 +33,8 @@ class CreateUsersTable extends Migration
             $table->string('status')->nullable();
             $table->boolean('is_active')->default(0);
             $table->string('usertype')->nullable();
+            $table->string('driver_status')->default(1);
+            $table->bigInteger('rtl')->default(0);
             $table->timestamps();
         });
     }

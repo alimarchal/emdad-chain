@@ -35,6 +35,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'gender',
         'name',
+        'middle_initial',
+        'family_name',
         'email',
         'password',
         'business_id',
@@ -50,6 +52,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'nid_exp_date',
         'status',
         'is_active',
+        'usertype',
+        'driver_status',
+        'rtl',
     ];
 
     /**
@@ -116,5 +121,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
     }
 }

@@ -9,8 +9,8 @@ class BusinessWarehouse extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'designation', 'name', 'warehouse_email', 'landline',
-        'mobile', 'country', 'city', 'longitude', 'latitude', 'warehouse_type', 'cold_storage',
+    protected $fillable = ['user_id', 'business_id', 'designation', 'name', 'warehouse_email', 'landline',
+        'mobile', 'country', 'address', 'city', 'longitude', 'latitude', 'warehouse_type', 'cold_storage',
         'gate_type', 'fork_lift', 'total_warehouse_manpower', 'number_of_delivery_vehicles',
         'number_of_drivers', 'vehicle_category', 'vehicle_type', 'working_time',];
 
@@ -22,6 +22,11 @@ class BusinessWarehouse extends Model
     public function logistic_detail()
     {
         return $this->hasOne(BusinessWarehouse::class);
+    }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
     }
 
 }

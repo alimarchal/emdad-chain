@@ -34,6 +34,7 @@
                             <x-jet-label class="w-1/2" for="landline">Landline</x-jet-label>
                             <x-jet-label class="w-1/2" for="mobile">Mobile</x-jet-label>
                             <x-jet-label class="w-1/2" for="country">Country</x-jet-label>
+                            <x-jet-label class="w-1/2" for="address">Address</x-jet-label>
                             <x-jet-label class="w-1/2" for="city">City</x-jet-label>
                         </div>
                         <div class="flex space-x-5 mt-3">
@@ -45,7 +46,8 @@
                                     <option value="{{$country}}" {{($businessWarehouse->country == $country)?'selected':''}}>{{$country}}</option>
                                 @endforeach
                             </select>
-                            <x-jet-input id="city" type="text" name="city" class="border p-2 w-1/2"></x-jet-input>
+                            <x-jet-input id="city" type="text" name="address" class="border p-2 w-1/2" value="{{$businessWarehouse->address}}"></x-jet-input>
+                            <x-jet-input id="city" type="text" name="city" class="border p-2 w-1/2" value="{{$businessWarehouse->city}}"></x-jet-input>
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-label class="w-1/2" for="longitude">Longitude</x-jet-label>
@@ -58,7 +60,9 @@
                             <x-jet-input id="latitude" name="latitude" type="text" class="border p-2 w-1/2" value="{{$businessWarehouse->latitude}}"></x-jet-input>
                             <select name="warehouse_type" id="warehouse_type" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
-                                <option value="example" {{($businessWarehouse->warehouse_type == "example")?'selected':''}}>Example</option>
+                                <option value="Powered" {{($businessWarehouse->warehouse_type == "Powered")?'selected':''}}>Powered</option>
+                                <option value="Off Grid" {{($businessWarehouse->warehouse_type == "Off Grid")?'selected':''}}>Off Grid</option>
+                                <option value="Non-Powered" {{($businessWarehouse->warehouse_type == "Non-Powered")?'selected':''}}>Non-Powered</option>
                             </select>
                             <select name="cold_storage" id="cold_storage" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                 <option value="">None</option>
@@ -74,7 +78,8 @@
                         <div class="flex space-x-5 mt-3">
                             <select name="gate_type" id="gate_type" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
-                                <option value="Example" {{($businessWarehouse->gate_type == "Example")?'selected':''}} >Example</option>
+                                <option value="Automatic" {{($businessWarehouse->gate_type == "Automatic")?'selected':''}} >Automatic</option>
+                                <option value="Manual" {{($businessWarehouse->gate_type == "Manual")?'selected':''}} >Manual</option>
                             </select>
                             <select name="fork_lift" id="fork_lift" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
@@ -103,35 +108,6 @@
                                 @endfor
                             </select>
                             <x-jet-input id="working_time" type="text" name="working_time" value="{{$businessWarehouse->working_time}}" class="border p-2 w-1/2"></x-jet-input>
-                        </div>
-                        <div class="flex space-x-5 mt-3">
-                            <x-jet-label class="w-1/2" for="vehicle_category">Vehicle Category</x-jet-label>
-                            <x-jet-label class="w-1/2" for="vehicle_type">Vehicle Type</x-jet-label>
-                        </div>
-                        <div class="flex space-x-5 mt-3">
-
-                            @php
-                                $vc = explode(', ', $businessWarehouse->vehicle_category);
-                                $vt = explode(', ', $businessWarehouse->vehicle_type);
-
-                            @endphp
-                            <select name="vehicle_category[]" id="vehicle_category" class="js-example-basic-multiple form-input rounded-md shadow-sm border p-2 w-1/2" multiple>
-                                <option value="">None</option>
-                                @foreach($vc as $c)
-                                    <option value="{{$c}}" selected>{{$c}}</option>
-                                @endforeach
-                                <option value="Example1">Example 1</option>
-                                <option value="Example2">Example 2</option>
-                                <option value="Example3">Example 3</option>
-                            </select>
-
-                            <select name="vehicle_type[]" id="vehicle_type" class=" js-example-basic-multiple  form-input rounded-md shadow-sm border p-2 w-1/2" multiple>
-                                <option value="">None</option>
-                                @foreach($vt as $c)
-                                    <option value="{{(empty($c)?'None':$c)}}" selected>{{(empty($c)?'None':$c)}}</option>
-                                @endforeach
-                                <option value="Example">Example</option>
-                            </select>
                         </div>
                         <div class="control-group after-add-more">
 

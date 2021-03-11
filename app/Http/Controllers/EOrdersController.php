@@ -6,6 +6,7 @@ use App\Models\ECart;
 use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -50,6 +51,7 @@ class EOrdersController extends Controller
                 $eOrderItem->e_order_id = $eOrders->id;
                 $eOrderItem->business_id = $item->business_id;
                 $eOrderItem->user_id = $item->user_id;
+                $eOrderItem->warehouse_id = $item->warehouse_id;
                 $eOrderItem->item_code = $item->item_code;
                 $eOrderItem->item_name = $item->item_name;
                 $eOrderItem->description = $item->description;
@@ -71,7 +73,8 @@ class EOrdersController extends Controller
             }
         });
 
-
+        $user = User::find(auth()->user()->id);
+        $user->notify(new \App\Notifications\RfqCreated());
         return redirect()->route('PlacedRFQ.index');
     }
 

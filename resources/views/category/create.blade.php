@@ -29,7 +29,7 @@
                                 <label class="block font-medium text-sm text-gray-700 mb-3" for="parent_category">
                                     Select Parent Category
                                 </label>
-                                @include('category.index')
+                                @include('category.adminCategoryIndex')
 
                                 <label class="block font-medium text-sm text-gray-700 mt-4" for="name">
                                     Category Name English

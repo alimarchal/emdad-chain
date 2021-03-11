@@ -63,6 +63,9 @@
                             <strong>Payment Mode:</strong> {{ $eOrderItems->payment_mode }}
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Delivery Address:</strong> {{ $eOrderItems->warehouse->address }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                             <strong>Description:</strong> {{ strip_tags($eOrderItems->description) }}
                         </div>
                     </div>
@@ -182,7 +185,7 @@
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="unit_of_measurement">
                                         Quantity
                                     </label>
-                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="quote_quantity" value="{{ $collection->quote_quantity }}" min="0" autocomplete="size" required>
+                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="quote_quantity" value="{{ $collection->quote_quantity }}" min="0" step="any" autocomplete="size" required>
                                     <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
                                     <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
                                     <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
@@ -193,7 +196,7 @@
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
                                         Price per unit
                                     </label>
-                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0" autocomplete="size" required>
+                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0" step="any" autocomplete="size" required>
                                 </div>
                             </div>
                             <p class="py-2 font-bold text-center  text-2xl">Sample Information</p>
@@ -202,7 +205,7 @@
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
                                         Samples
                                     </label>
-                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="sample_information" value="{{ $collection->sample_information }}" min="0" autocomplete="size" required>
+                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="sample_information" value="{{ $collection->sample_information }}" min="0" step="any" autocomplete="size" required>
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
@@ -212,7 +215,7 @@
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                        Sample Charges
+                                        Quantity
                                     </label>
                                     <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_security_charges" value="{{ $collection->sample_security_charges }}" min="0" autocomplete="size" required>
                                 </div>
@@ -237,6 +240,24 @@
                                     </label>
                                     <textarea name="note_for_customer" id="description">{{ $collection->note_for_customer }}</textarea>
                                 </div>
+                                <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
+                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                        VAT(%)
+                                    </label>
+                                    <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="5" value="{{$collection->VAT}}" autocomplete="size" required>
+                                </div>
+                                <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
+                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                        Shipment Cost
+                                    </label>
+                                    <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="shipment_cost" type="number" name="shipment_cost" value="{{$collection->shipment_cost}}" min="0" step="any" autocomplete="size" required>
+                                </div>
+                                <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
+                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                        Total Cost
+                                    </label>
+                                    <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="text" name="total_cost" value="{{$collection->total_cost}}" autocomplete="size" readonly>
+                                </div>
                             </div>
                             <button href="#"
                                 class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
@@ -250,78 +271,100 @@
                     @else
                         <form method="POST" action="{{ route('qoute.store') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
-                            <p class="pt-6 pb-3 font-bold text-2xl text-center">
-                            
-                                Quote Information</p>
-                            <div class="flex flex-wrap overflow-hidden xl:-mx-1">
-                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
-                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="unit_of_measurement">
-                                        Quantity
-                                    </label>
-                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="quote_quantity" min="0" autocomplete="size" required>
-                                    <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
-                                    <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
-                                    <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
-                                    <input type="hidden" name="supplier_business_id" value="{{ $user_business_id }}">
-                                    <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
+                            <div class="calculate">
+                                <p class="pt-6 pb-3 font-bold text-2xl text-center">
+
+                                    Quote Information</p>
+                                <div class="flex flex-wrap overflow-hidden xl:-mx-1">
+                                    <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="unit_of_measurement">
+                                            Quantity
+                                        </label>
+                                        <input class="form-input rounded-md shadow-sm block w-full quantity" id="size" type="number" name="quote_quantity" min="0" step="any" autocomplete="size" required>
+                                        <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
+                                        <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
+                                        <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
+                                        <input type="hidden" name="supplier_business_id" value="{{ $user_business_id }}">
+                                        <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
+                                        <input type="hidden" name="warehouse_id" value="{{ $eOrderItems->warehouse->id }}">
+                                    </div>
+                                    <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                            Price per unit
+                                        </label>
+                                        <input class="form-input rounded-md shadow-sm block w-full price_per_unit" id="size" type="number" name="quote_price_per_quantity" min="0" step="any" autocomplete="size" required>
+                                    </div>
                                 </div>
-                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
-                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                        Price per unit
-                                    </label>
-                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="quote_price_per_quantity" min="0" autocomplete="size" required>
+                                <p class="py-2 font-bold text-center  text-2xl">Sample Information</p>
+                                <div class="flex flex-wrap overflow-hidden xl:-mx-1">
+                                    <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                            Samples
+                                        </label>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="sample_information" min="0" step="any" autocomplete="size" required>
+                                    </div>
+                                    <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                            Quantity
+                                        </label>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_unit" min="0" autocomplete="size" required>
+                                    </div>
+                                    <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                            Sample Charges
+                                        </label>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_security_charges" min="0" autocomplete="size" required>
+                                    </div>
+                                    <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                            Sample Charges Per Unit
+                                        </label>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_charges_per_unit" min="0" autocomplete="size" required>
+                                    </div>
                                 </div>
+                                <p class="py-2 font-bold text-center  text-2xl">Shipping Information</p>
+                                <div class="flex flex-wrap -mx-1 overflow-hidden sm:-mx-1 md:-mx-1 lg:-mx-1 xl:-mx-1">
+                                    <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                            Shipping Time (In Days)
+                                        </label>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="shipping_time_in_days" min="0" autocomplete="size" required>
+                                    </div>
+                                    <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                            Note For Customer
+                                        </label>
+                                        <textarea name="note_for_customer" id="description"></textarea>
+                                    </div>
+                                    <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                            VAT(%)
+                                        </label>
+                                        <input class="form-input rounded-md shadow-sm block w-full VAT" id="size" type="number" name="VAT" min="0" step="any" autocomplete="size" required>
+                                    </div>
+                                    <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="shipment_cost">
+                                            Shipment Cost
+                                        </label>
+
+                                        <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="shipment_cost" type="number" name="shipment_cost" min="0" autocomplete="shipment_cost" required>
+                                    </div>
+                                    <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                            Total Cost
+                                        </label>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="text" name="total_cost" autocomplete="size" readonly>
+                                    </div>
+                                </div>
+                                <button href="#"
+                                    class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                    Send Quote
+                                </button>
+                                <br>
+                                <a href="{{ route('dashboard') }}"
+                                    class="inline-flex items-center px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                    Cancel</a>
                             </div>
-                            <p class="py-2 font-bold text-center  text-2xl">Sample Information</p>
-                            <div class="flex flex-wrap overflow-hidden xl:-mx-1">
-                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
-                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                        Samples
-                                    </label>
-                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="sample_information" min="0" autocomplete="size" required>
-                                </div>
-                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
-                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                        Sample Unit
-                                    </label>
-                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_unit" min="0" autocomplete="size" required>
-                                </div>
-                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
-                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                        Sample Charges
-                                    </label>
-                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_security_charges" min="0" autocomplete="size" required>
-                                </div>
-                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
-                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                        Sample Charges Per Unit
-                                    </label>
-                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_charges_per_unit" min="0" autocomplete="size" required>
-                                </div>
-                            </div>
-                            <p class="py-2 font-bold text-center  text-2xl">Shipping Information</p>
-                            <div class="flex flex-wrap -mx-1 overflow-hidden sm:-mx-1 md:-mx-1 lg:-mx-1 xl:-mx-1">
-                                <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
-                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                        Shipping Time (In Days)
-                                    </label>
-                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="shipping_time_in_days" min="0" autocomplete="size" required>
-                                </div>
-                                <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
-                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                        Note For Customer
-                                    </label>
-                                    <textarea name="note_for_customer" id="description"></textarea>
-                                </div>
-                            </div>
-                            <button href="#"
-                                class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
-                                Send Quote
-                            </button>
-                            <br>
-                            <a href="{{ route('dashboard') }}"
-                                class="inline-flex items-center px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                                Cancel</a>
                         </form>
 
                         <br>
@@ -336,11 +379,27 @@
             Back
         </a>
     </div>
+
     <script>
         tinymce.init({
             selector: 'textarea',
             plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
             toolbar_mode: 'floating',
+        });
+
+        $(document).on('change', '.quantity, .price_per_unit, .VAT, .shipment_cost', function(){
+
+            // var total = 0;
+            var quantity = $('.quantity').val(); // 10
+            var unitPrice = $('.price_per_unit').val(); // 10
+            var shipment_cost = $('.shipment_cost').val(); // 10
+            var VAT = $('.VAT').val(); // 10
+
+            var totalCost = (quantity * unitPrice) // 100
+            var VAT_value = (totalCost) * (VAT / 100); // 10
+
+            var totalSumCost = (totalCost + VAT_value);
+            $('#total_cost').val(totalSumCost);
         });
 
     </script>

@@ -62,29 +62,24 @@
                                     <select name="role" id="role" class="form-input rounded-md shadow-sm mt-1 block w-full js-example-basic-single" required>
                                         <option disabled selected value="">Select</option>
                                         @foreach($roles as $role)
-                                            <option value="{{$role->id}}">{{$role->name}}</option>
+                                            @if (auth()->user()->registration_type == 'Buyer')
+                                                @if ($role->name == 'Buyer Driver')
+                                                @else
+                                                    <option value="{{$role->id}}">{{str_replace('Buyer', '', $role->name)}}</option>
+                                                @endif
+                                            @elseif (auth()->user()->registration_type == 'Supplier')
+                                                <option value="{{$role->id}}">{{str_replace('Supplier', '', $role->name)}}</option>
+                                            @else
+                                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
-
-                                <!-- Permissions -->
-{{--                                <div class="col-span-12 sm:col-span-9">--}}
-{{--                                    <label class="block font-medium text-sm text-gray-700" for="designation">--}}
-{{--                                        Permissions--}}
-{{--                                    </label>--}}
-{{--                                    <select multiple="multiple" name="permissions[]" id="designation" class="form-input rounded-md shadow-sm mt-1 block w-full js-example-basic-multiple" required>--}}
-{{--                                        @foreach($permissions as $permission)--}}
-{{--                                            <option value="{{$permission->id}}">{{$permission->name}}</option>--}}
-{{--                                        @endforeach--}}
-{{--                                    </select>--}}
-{{--                                </div>--}}
-
                             </div>
                         </div>
 
                         <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button type="submit"
-                                    class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                 Create
                             </button>
                         </div>

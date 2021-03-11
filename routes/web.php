@@ -1,14 +1,32 @@
 <?php
 
+use App\Http\Controllers\BankPaymentController;
+use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\BusinessWarehouseController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\DeliveryNoteController;
 use App\Http\Controllers\DraftPurchaseOrderController;
+use App\Http\Controllers\EBuyerSurveyAnswerController;
 use App\Http\Controllers\ECartController;
 use App\Http\Controllers\EOrdersController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PlacedRFQController;
+use App\Http\Controllers\POInfoController;
 use App\Http\Controllers\PurchaseRequestFormController;
 use App\Http\Controllers\QouteController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ShipmentCartController;
+use App\Http\Controllers\ShipmentController;
+use App\Http\Controllers\ShipmentItemController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VehicleController;
 use App\Models\DraftPurchaseOrder;
+use App\Models\TrackingDelivery;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,15 +44,19 @@ Route::get('/', function () {
     return view('welcomeAr');
 });
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::middleware(['auth:sanctum'])->resource('users', \App\Http\Controllers\UserController::class);
+Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [DashboardController::class, 'languageChange'])->name('languageChange');
+Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
 //Route::middleware(['auth:sanctum'])->post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
-Route::middleware(['auth:sanctum'])->post('/registrationType', [\App\Http\Controllers\UserController::class, 'registrationType']);
-Route::middleware(['auth:sanctum'])->resource('/business', \App\Http\Controllers\BusinessController::class);
-Route::middleware(['auth:sanctum'])->get('/business-status/', [\App\Http\Controllers\BusinessController::class , 'accountStatus'])->name('accountStatus');
+Route::middleware(['auth:sanctum'])->post('/registrationType', [UserController::class, 'registrationType']);
+Route::middleware(['auth:sanctum'])->resource('/business', BusinessController::class);
+
+Route::middleware(['auth:sanctum'])->get('/incomplete-business-registration/', [BusinessController::class , 'incomplete'])->name('incompleteBusiness');
+Route::middleware(['auth:sanctum'])->get('/business-status/', [BusinessController::class , 'accountStatus'])->name('accountStatus');
+
 Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
-Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', \App\Http\Controllers\BusinessWarehouseController::class);
-Route::middleware(['auth:sanctum'])->get('/businessWarehouse/{id}/show', [\App\Http\Controllers\BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
-Route::middleware(['auth:sanctum'])->resource('/purchaseOrderInfo', \App\Http\Controllers\POInfoController::class);
+Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', BusinessWarehouseController::class);
+Route::middleware(['auth:sanctum'])->get('/businessWarehouse/{id}/show', [BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
+Route::middleware(['auth:sanctum'])->resource('/purchaseOrderInfo', POInfoController::class);
 
 ####################Survey###################
 Route::get('/survey', function () {
@@ -52,7 +74,7 @@ Route::get('/e-buyer/ar', function () {
 Route::get('/e-buyer/ur', function () {
     return view('eBuyerSurvey.ur.eBuyerSurvey');
 });
-Route::post('e-buyer', [\App\Http\Controllers\EBuyerSurveyAnswerController::class, 'store'])->name('eBuyerEn');
+Route::post('e-buyer', [EBuyerSurveyAnswerController::class, 'store'])->name('eBuyerEn');
 ####################END######################
 
 
@@ -69,13 +91,25 @@ Route::get('/ourTeam', function () {
 Route::get('/support', function () {
     return view('website.support');
 })->name('support');
-Route::resource('contact', \App\Http\Controllers\ContactController::class);
+Route::resource('contact', ContactController::class);
 #################### End Website ###################
 
 ####################  Website AR    ###################
 Route::get('/en', function () {
     return view('welcome');
 })->name('ar');
+Route::get('/registerAr', function () {
+    return view('auth.registerAr');
+})->name('registerAr');
+Route::get('/loginAr', function () {
+    return view('auth.loginAr');
+})->name('loginAr');
+//Route::get('/dashboard_ar', function () {
+//    return view('_layouts.sidebarAr');
+//})->name('sidebarAr');
+
+
+
 Route::get('/aboutUsAr', function () {
     return view('website.aboutUsAr');
 })->name('aboutUsAr');
@@ -98,9 +132,10 @@ Route::get('/e-supplier/ar', function () {
 });
 ####################END###############################
 ####################Download Answers###################
-Route::get('/download/answers', [\App\Http\Controllers\EBuyerSurveyAnswerController::class, 'export'])->name('downloadAnswersExcel');
-Route::get('/download/supplier', [\App\Http\Controllers\EBuyerSurveyAnswerController::class, 'supplier'])->name('downloadSupplierExcel');
-Route::get('/download/buyer', [\App\Http\Controllers\EBuyerSurveyAnswerController::class, 'buyer'])->name('downloadBuyerExcel');
+Route::get('/download/answers', [ EBuyerSurveyAnswerController::class, 'export'])->name('downloadAnswersExcel');
+
+Route::get('/download/supplier', [EBuyerSurveyAnswerController::class, 'supplier'])->name('downloadSupplierExcel');
+Route::get('/download/buyer', [EBuyerSurveyAnswerController::class, 'buyer'])->name('downloadBuyerExcel');
 Route::get('/downloads', function () {
     return view('website.downloads');
 })->name('downloads');
@@ -116,43 +151,44 @@ Route::middleware(['auth:sanctum'])->resource('RFQCart', ECartController::class)
 Route::middleware(['auth:sanctum'])->resource('EOrders', EOrdersController::class);
 Route::middleware(['auth:sanctum'])->resource('PlacedRFQ', PlacedRFQController::class);
 #########################################################################
-Route::middleware(['auth:sanctum'])->get('/RFQPlacedItems/{EOrderItems}', [\App\Http\Controllers\PlacedRFQController::class, 'RFQItems'])->name('RFQItemsByID');
-Route::middleware(['auth:sanctum'])->get('/viewRFQs', [\App\Http\Controllers\PlacedRFQController::class, 'viewRFQs'])->name('viewRFQs');
-Route::middleware(['auth:sanctum'])->get('/viewRFQs/{eOrderItems}', [\App\Http\Controllers\PlacedRFQController::class, 'viewRFQsID'])->name('viewRFQsID');
-Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [\App\Http\Controllers\PlacedRFQController::class, 'RFQsQouted'])->name('RFQsQouted');
+Route::middleware(['auth:sanctum'])->get('/RFQPlacedItems/{EOrderItems}', [PlacedRFQController::class, 'RFQItems'])->name('RFQItemsByID');
+Route::middleware(['auth:sanctum'])->get('/viewRFQs', [PlacedRFQController::class, 'viewRFQs'])->name('viewRFQs');
+Route::middleware(['auth:sanctum'])->get('/viewRFQs/{eOrderItems}', [PlacedRFQController::class, 'viewRFQsID'])->name('viewRFQsID');
+Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [PlacedRFQController::class, 'RFQsQouted'])->name('RFQsQouted');
 
 #################### Roles display and update ##########################
-Route::resource('/role', \App\Http\Controllers\RoleController::class);
+Route::resource('/role', RoleController::class);
 //Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'show'])->name('roles');
 //>>>>>>>>>>>>>>>This is Permission Route<<<<<<<<<<<<<<<<<<<<<<<
-Route::resource('/permission', \App\Http\Controllers\PermissionController::class);
+Route::resource('/permission', PermissionController::class);
 #################### END ##########################
 //>>>>>>This is Business informtion rout to check tatus of business <<<<<<<<<<<<<<<<
-Route::get('business/Approval/Update/{id}', [\App\Http\Controllers\BusinessController::class, 'businessApprovalUpdate'])->name('businessApprovalUpdate');
-Route::get('business/Approval/Rejected/{id}', [\App\Http\Controllers\BusinessController::class, 'businessApprovalRejected'])->name('businessApprovalRejected');
+Route::get('business/Approval/Update/{id}', [BusinessController::class, 'businessApprovalUpdate'])->name('businessApprovalUpdate');
+Route::get('business/Approval/Rejected/{id}', [BusinessController::class, 'businessApprovalRejected'])->name('businessApprovalRejected');
 Route::middleware(['auth:sanctum'])->resource('qoute', QouteController::class);
 
-Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Qouted', [\App\Http\Controllers\QouteController::class, 'QoutedRFQQouted'])->name('QoutedRFQQouted');
-Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Rejected', [\App\Http\Controllers\QouteController::class, 'QoutedRFQRejected'])->name('QoutedRFQRejected');
-Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/ModificationNeeded', [\App\Http\Controllers\QouteController::class, 'QoutedRFQModificationNeeded'])->name('QoutedRFQModificationNeeded');
-Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/PendingConfirmation', [\App\Http\Controllers\QouteController::class, 'QoutedRFQQoutedRFQPendingConfirmation'])->name('QoutedRFQPendingConfirmation');
-Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceived'])->name('QoutationsBuyerReceived');
-Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/{QouteItem}', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceivedQouteID'])->name('QoutationsBuyerReceivedQouteID');
-Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderItems}', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceivedRFQItemsByID'])->name('QoutationsBuyerReceivedRFQItemsByID');
-Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/qoutes/{EOrderItemID}', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceivedQoutes'])->name('QoutationsBuyerReceivedQoutes');
-Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/rejected/{EOrderItemID}', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceivedRejected'])->name('QoutationsBuyerReceivedRejected');
-Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/modification/{EOrderItemID}', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceivedModificationNeeded'])->name('QoutationsBuyerReceivedModificationNeeded');
-Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/accepted/{EOrderItemID}', [\App\Http\Controllers\QouteController::class, 'QoutationsBuyerReceivedAccepted'])->name('QoutationsBuyerReceivedAccepted');
+Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Qouted', [QouteController::class, 'QoutedRFQQouted'])->name('QoutedRFQQouted');
+Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Rejected', [QouteController::class, 'QoutedRFQRejected'])->name('QoutedRFQRejected');
+Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/ModificationNeeded', [QouteController::class, 'QoutedRFQModificationNeeded'])->name('QoutedRFQModificationNeeded');
+Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/PendingConfirmation', [QouteController::class, 'QoutedRFQQoutedRFQPendingConfirmation'])->name('QoutedRFQPendingConfirmation');
+Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived', [QouteController::class, 'QoutationsBuyerReceived'])->name('QoutationsBuyerReceived');
+Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/{QouteItem}', [QouteController::class, 'QoutationsBuyerReceivedQouteID'])->name('QoutationsBuyerReceivedQouteID');
+Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderItems}', [QouteController::class, 'QoutationsBuyerReceivedRFQItemsByID'])->name('QoutationsBuyerReceivedRFQItemsByID');
+Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/qoutes/{EOrderItemID}', [QouteController::class, 'QoutationsBuyerReceivedQoutes'])->name('QoutationsBuyerReceivedQoutes');
+Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/rejected/{EOrderItemID}', [QouteController::class, 'QoutationsBuyerReceivedRejected'])->name('QoutationsBuyerReceivedRejected');
+Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/modification/{EOrderItemID}', [QouteController::class, 'QoutationsBuyerReceivedModificationNeeded'])->name('QoutationsBuyerReceivedModificationNeeded');
+Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/accepted/{EOrderItemID}', [QouteController::class, 'QoutationsBuyerReceivedAccepted'])->name('QoutationsBuyerReceivedAccepted');
 
 Route::middleware(['auth:sanctum'])->resource('QuotationMessage', \App\Http\Controllers\QouteMessageController::class);
 Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/ModificationNeeded', [QouteController::class, 'updateModificationNeeded'])->name('updateQoute');
 Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/Rejected', [QouteController::class, 'updateRejected'])->name('updateRejected');
 Route::middleware(['auth:sanctum'])->post('qoute/{qoute}/Accepted', [QouteController::class, 'qouteAccepted'])->name('qouteAccepted');
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'show'])->name('dpo.show');
-Route::middleware(['auth:sanctum'])->get('dpo', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'index'])->name('dpo.index');
-Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/approved', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'approved'])->name('dpo.approved');
-Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/rejected', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'rejected'])->name('dpo.rejected');
-Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/cancel', [\App\Http\Controllers\DraftPurchaseOrderController::class, 'cancel'])->name('dpo.cancel');
+Route::middleware(['auth:sanctum'])->get('dpo', [DraftPurchaseOrderController::class, 'index'])->name('dpo.index');
+Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/approved', [DraftPurchaseOrderController::class, 'approved'])->name('dpo.approved');
+Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/rejected', [DraftPurchaseOrderController::class, 'rejected'])->name('dpo.rejected');
+Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/cancel', [DraftPurchaseOrderController::class, 'cancel'])->name('dpo.cancel');
+
 
 
 #################### PDF generate Routes ##########################
@@ -160,12 +196,59 @@ Route::middleware(['auth:sanctum'])->get('/generate-PO-pdf/{draftPurchaseOrder}'
 #################### END ##########################################
 
 #################### PDF generate Routes ##########################
-Route::middleware(['auth:sanctum'])->get('/logviewer', function () {
-    return redirect('admin/logviewer');
-})->name('log.viewer');
+Route::middleware(['auth:sanctum'])->get('/logviewer', function () {return redirect('admin/logviewer');})->name('log.viewer');
 #################### END ##########################################
 
 #################### Delivery and Delivery Note ##########################
-Route::middleware(['auth:sanctum'])->resource('delivery', \App\Http\Controllers\DeliveryController::class);
-Route::middleware(['auth:sanctum'])->resource('deliveryNote', \App\Http\Controllers\DeliveryNoteController::class);
+Route::middleware(['auth:sanctum'])->resource('delivery', DeliveryController::class);
+Route::middleware(['auth:sanctum'])->get('/deliveryNote/{draftPurchaseOrder}/view', [DeliveryNoteController::class, 'deliveryNoteView'])->name('deliveryNoteView');
+Route::middleware(['auth:sanctum'])->resource('deliveryNote', DeliveryNoteController::class);
 #################### END ##################################################
+
+##################### Draft purchase order routes ####################################
+Route::middleware(['auth:sanctum'])->get('/po', [DraftPurchaseOrderController::class, 'po'])->name('po.po');
+Route::middleware(['auth:sanctum'])->get('/po/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'poShow'])->name('po.show');
+Route::middleware(['auth:sanctum'])->get('/notes', [DeliveryNoteController::class, 'notes'])->name('notes');
+Route::middleware(['auth:sanctum'])->get('/notes/{deliveryNote}', [DeliveryNoteController::class, 'viewNote'])->name('viewNote');
+#################### END ##################################################
+
+##################### Shipment routes ####################################
+Route::middleware(['auth:sanctum'])->resource('shipment', ShipmentController::class);
+Route::middleware(['auth:sanctum'])->resource('shipmentCart', ShipmentCartController::class);
+Route::middleware(['auth:sanctum'])->resource('shipmentItem', ShipmentItemController::class);
+#################### END ##################################################
+
+
+###################### Vehicle routes ####################################
+Route::middleware(['auth:sanctum'])->resource('vehicle', VehicleController::class);
+#################### END ##################################################
+
+
+###################### Generate Invoice & Delivery ####################################
+Route::middleware(['auth:sanctum'])->post('/invoice/generate', [InvoiceController::class, 'invoiceGenerate'])->name('invoice.generate');
+Route::middleware(['auth:sanctum'])->get('/invoice/{invoice}', [InvoiceController::class, 'show'])->name('invoice.show');
+#################### END ##############################################################
+#
+####################### Payment routes ####################################
+Route::middleware(['auth:sanctum'])->resource('payment', PaymentController::class);
+Route::middleware(['auth:sanctum'])->get('generate-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoiceView'])->name('generateProformaView');
+Route::middleware(['auth:sanctum'])->get('create-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoice'])->name('generateProforma');
+Route::middleware(['auth:sanctum'])->get('invoices-history', [PaymentController::class, 'invoices'])->name('invoices');
+Route::middleware(['auth:sanctum'])->get('proforma-invoices', [PaymentController::class, 'proforma_invoices'])->name('proforma_invoices');
+Route::middleware(['auth:sanctum'])->resource('bank-payments', BankPaymentController::class)->names('bank-payments');
+Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/create', [BankPaymentController::class, 'create'])->name('bank-payments.create');
+#################### END ##############################################################
+
+
+####################### Subscription routes ####################################
+Route::middleware(['auth:sanctum'])->get('sub', function (){
+    return view('subscription.index');
+})->name('subscription');
+#################### END ##############################################################
+
+
+
+
+//Route::get('check', function (){
+//    return view('business.buyerPolicy');
+//});

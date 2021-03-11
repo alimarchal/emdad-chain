@@ -12,4 +12,7 @@ class BusinessCategory extends Model
     protected static $logAttributes = ['*'];
 
     protected $fillable = ['business_id','category_number'];
+
+
+    
 }

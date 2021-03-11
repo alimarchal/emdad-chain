@@ -75,7 +75,7 @@ class UserController extends Controller
         }
         elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Buyer') {
 
-            $roles  = Role::where('id' , '>', 10)->get();
+            $roles  = Role::where('id' , '>', 10)->where('id', '!=', 18)->get();
             return view('users.create', compact('roles'));
         }
         elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Supplier') {
@@ -100,15 +100,32 @@ class UserController extends Controller
 //        $data = array();
         $roleName  = Role::where('id' , $request->input('role'))->first();
 
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'business_id' => auth()->user()->business_id,
-            'usertype' => $roleName->name,
-            'status' => 1,
-        ];
+        if($request->role == 1)
+        {
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'business_id' => auth()->user()->business_id,
+                'usertype' => $roleName->name,
+                'status' => 3,
+            ];
+        }
+        else{
+
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'business_id' => auth()->user()->business_id,
+                'usertype' => $roleName->name,
+                'status' => 1,
+            ];
+        }
+
         $user = User::create($data);
+        $password = $request->password;
+        $user->notify(new \App\Notifications\UserCreate($password));
         $role = $request->input('role') ? $request->input('role') : [];
         $user->assignRole($role);
 

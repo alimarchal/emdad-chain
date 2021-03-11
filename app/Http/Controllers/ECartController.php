@@ -41,7 +41,6 @@ class ECartController extends Controller
      */
     public function store(Request $request)
     {
-
         if ($request->has('file_path_1')) {
             $path = $request->file('file_path_1')->store('', 'public');
             $request->merge(['file_path' => $path]);
@@ -49,8 +48,8 @@ class ECartController extends Controller
         $request->merge(['item_code' => $request->item_name]);
         $request->merge(['status' => 'pending']);
         $request->merge(['item_name' => Category::where('id', $request->item_code)->first()->name]);
-        $eCart = ECart::create($request->all());
-        session()->flash('message', 'RFP successfully created.');
+        ECart::create($request->all());
+        session()->flash('message', 'RFQ successfully created.');
 
         return redirect('RFQ/create');
     }

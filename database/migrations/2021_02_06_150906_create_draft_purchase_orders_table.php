@@ -23,6 +23,9 @@ class CreateDraftPurchaseOrdersTable extends Migration
             $table->string('supplier_business_id')->nullable();
             $table->string('rfq_no')->nullable();
             $table->string('rfq_item_no')->nullable();
+            $table->string('qoute_no')->nullable();
+            $table->string('shipment_cost')->nullable();
+            $table->string('total_cost')->nullable();
             $table->string('payment_term')->nullable();
             $table->string('item_code')->nullable();
             $table->string('item_name')->nullable();
@@ -34,6 +37,7 @@ class CreateDraftPurchaseOrdersTable extends Migration
             $table->string('warranty')->nullable();
             $table->string('contract')->nullable();
             $table->string('delivery_city')->nullable();
+            $table->string('address')->nullable();
             $table->string('warehouse')->nullable();
             $table->string('delivery_status')->nullable();
             $table->string('delivery_time')->nullable();
@@ -44,7 +48,6 @@ class CreateDraftPurchaseOrdersTable extends Migration
             $table->date('po_date')->nullable();
             $table->string('remarks')->nullable();
             $table->string('approval_details')->nullable();
-            $table->string('remarks')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

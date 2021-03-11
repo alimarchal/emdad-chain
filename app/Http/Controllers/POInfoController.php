@@ -47,6 +47,15 @@ class POInfoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'no_of_monthly_orders' => 'required',
+            'volume' => 'required',
+            'type' => 'required',
+            'user_id' => 'required',
+            'business_id' => 'required',
+            'order_info_1.*' => 'required|mimes:jpeg,jpg,png,gif,csv,txt,pdf',
+        ]);
+        // dd($request->all());
         $files = $request->file('order_info_1');
         $order_info = [];
         if ($request->has('order_info_1')) {

@@ -28,7 +28,7 @@
                         @endif
                     </h2>
                     <hr>
-                    
+
                     <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded shadow-md ">
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                             <strong>Quote Request #: {{ $QouteItem->id }}</strong>
@@ -65,9 +65,18 @@
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                             <strong>Note:</strong> {{ strip_tags($QouteItem->note_for_customer) }}
                         </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Shipment Cost:</strong> {{ $QouteItem->shipment_cost }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Vat (%):</strong> {{ $QouteItem->VAT }}
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <strong>Total Cost:</strong> {{ $QouteItem->total_cost }}
+                        </div>
                     </div>
 
-                    
+
 
                     @if($QouteItem->messages->isNotEmpty())
                     <div class="border-2 p-2 m-2">
@@ -80,7 +89,7 @@
                     <hr>
                     <form action="{{ route('QuotationMessage.store') }}" method="post">
                         @csrf
-                        <h1 class="text-center text-2xl mt-4">Message to Buyer</h1>
+                        <h1 class="text-center text-2xl mt-4">Message to Supplier</h1>
                         <textarea name="message" id="message" cols="30" rows="10" class="form-input rounded-md shadow-sm mt-1 block w-full" autocomplete="name"></textarea>
                         <x-jet-input-error for="message" class="mt-2" />
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -132,26 +141,43 @@
 
                         <input type="hidden" name="sub_total" value="{{ $QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity }}">
                         <input type="hidden" name="delivery_time" value="{{ $QouteItem->shipping_time_in_days }}">
-                        
+
                         <input type="hidden" name="qoute_no" value="{{ $QouteItem->id }}">
 
+                        <input type="hidden" name="warehouse_id" value="{{ $QouteItem->warehouse_id }}">
+                        <input type="hidden" name="shipment_cost" value="{{ $QouteItem->shipment_cost }}">
+                        <input type="hidden" name="vat" value="{{ $QouteItem->VAT }}">
+                        <input type="hidden" name="total_cost" value="{{ $QouteItem->total_cost }}">
+{{--                        <input type="hidden" name="payment_term" value="{{ $QouteItem->orderItem->payment_mode }}">--}}
 
-                        <x-jet-label for="delivery_city" value="{{ __('Delivery City') }}" class="text-black" />
-                        <x-jet-input id="delivery_city" class="block mt-1 w-full" type="input" name="delivery_city" :value="old('delivery_city')" required autofocus />
 
-                        <x-jet-label for="address" class="my-2" value="{{ __('Address') }}" class="text-black"  />
+{{--                        <x-jet-label for="address" value="{{ __('Delivery Address') }}" class="text-black" />--}}
+{{--                        <x-jet-input id="address" class="block mt-1 w-full" type="input" name="address" :value="old('address')" required autofocus />--}}
 
-                        <textarea name="address" id="address"></textarea>
+                        <x-jet-label for="warehouse" class="my-2" value="{{ __('Warehouse delivery address') }}" class="text-black"  />
+
+{{--                        <select name="warehouse" id="warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2">--}}
+{{--                            <option value="">None</option>--}}
+{{--                            @foreach(\App\Models\BusinessWarehouse::where('user_id', auth()->user()->id)->get() as $warehouse)--}}
+{{--                                <option value="{{$warehouse->id}}" {{($warehouse->id == old('warehouse')) ?'selected':''}}>{{$warehouse->name}}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+                        @php
+                            $orderItemID =  \App\Models\EOrderItems::where('id', $QouteItem->e_order_items_id)->first();
+                            $warehouseAddress = \App\Models\BusinessWarehouse::where('id', $orderItemID->warehouse_id)->first();
+                        @endphp
+                        <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" disabled="disabled" value="{{$warehouseAddress->address}}">
 
                         <x-jet-label for="Remarks" value="{{ __('Remarks') }}" class="text-black"  />
                         <textarea name="remarks" id="remarks"></textarea>
 
                         <x-jet-label for="payment_term" class="my-2" value="{{ __('Payment Term') }}" class="text-black"  />
-                        <select name="payment_term" id="payment_term" class="form-input rounded-md shadow-sm border p-2 w-full" required>
-                            <option value="">--Select--</option>
-                            <option value="Cash">Cash</option>
-                            <option value="Credit">Credit</option>
-                            <option value="Online">Online</option>
+                        <select name="payment_term" id="payment_term" class="form-input rounded-md shadow-sm border p-2 w-full" readonly>
+                            @if ($QouteItem->orderItem->payment_mode == 'Cash')
+                            <option selected value="Cash">Cash</option>
+                                @else
+                                <option selected value="Credit">Credit</option>
+                            @endif
                         </select>
 
                         <input type="submit" value="Accept"

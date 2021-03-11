@@ -27,7 +27,7 @@
         treeData: {
             dataArr: mydata
         },
-        maximumSelectionLength: 100
+        maximumSelectionLength: 25
     });
 
 </script>
