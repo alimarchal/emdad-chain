@@ -80,7 +80,7 @@ class BankPaymentController extends Controller
      */
     public function edit(BankPayment $bankPayment)
     {
-        //
+        return view('manual-payments.edit', compact('bankPayment'));
     }
 
     /**
@@ -93,6 +93,9 @@ class BankPaymentController extends Controller
     public function update(Request $request, BankPayment $bankPayment)
     {
         $updated = $bankPayment->update($request->all());
+        Invoice::where('id', $request->invoice_id)->update([
+            'invoice_status' => $request->status
+        ]);
 
         return redirect()->route('bank-payments.index');
     }
@@ -106,5 +109,27 @@ class BankPaymentController extends Controller
     public function destroy(BankPayment $bankPayment)
     {
         //
+    }
+
+    public function update_payment(Request $request)
+    {
+
+        $path = null;
+        if ($request->has('file_path_1')) {
+            $path = $request->file('file_path_1')->store('', 'public');
+            $request->merge(['file_path' => $path]);
+        }
+        $bankPayment = BankPayment::where('id', $request->bank_payment_id)->update([
+                    'bank_name' => $request->bank_name,
+                    'amount_received' => $request->amount_received,
+                    'account_number' => $request->account_number,
+                    'amount_date' => $request->amount_date,
+                    'file_path' => $path,
+                    'status' => 1,
+                ]);
+        $Invoice = Invoice::where('id', $request->bank_payment_invoice_id)->first();
+        $Invoice->invoice_status = 1;
+        $Invoice->save();
+        return redirect()->route('bank-payments.index');
     }
 }

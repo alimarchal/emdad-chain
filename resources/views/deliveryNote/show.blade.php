@@ -90,14 +90,9 @@
                     <br>
                     <br>
                     @if ($draftPurchaseOrder->payment_term == 'Cash')
-                        @php $proformaPresent = \App\Models\ProformaInvoice::where('draft_purchase_order_id',$draftPurchaseOrder->id)->first(); @endphp
-                        @if (isset($proformaPresent))
-                            <h2 class="text-2xl text-center font-bold">Proforma invoice Generated</h2>
-
-                            <a  class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                Waiting for payment from buyer
-                            </a>
-                        @elseif(isset($proformaPresent) && $proformaPresent->status == 1)
+{{--                        @php $proformaPresent = \App\Models\ProformaInvoice::where('draft_purchase_order_id',$draftPurchaseOrder->id)->first(); @endphp--}}
+                        @php $proforma = \App\Models\Invoice::where('draft_purchase_order_id',$draftPurchaseOrder->id)->where('invoice_type', 1)->first();@endphp
+                        @if (isset($proforma) && $proforma->invoice_status == 3)
                             <h2 class="text-2xl text-center font-bold">Prepare Delivery Note</h2>
                             <form action="{{ route('deliveryNote.store') }}" method="post">
                                 @csrf
@@ -147,6 +142,12 @@
                                     </button>
                                 </div>
                             </form>
+                        @elseif(isset($proforma))
+                            <h2 class="text-2xl text-center font-bold">Proforma invoice Generated</h2>
+
+                            <a  class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                Waiting for payment by buyer
+                            </a>
                         @else
                             <a href="{{route('generateProforma', $draftPurchaseOrder->id)}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                 Click here to generate proforma invoice

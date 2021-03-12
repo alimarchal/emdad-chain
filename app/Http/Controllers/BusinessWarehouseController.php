@@ -16,22 +16,20 @@ class BusinessWarehouseController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->has('status')) {
+        if ($request->has('status')) {
             // dd($request->all());
             $warehouses = new Business();
             if ($request->input('status')) {
-                $warehouses = $warehouses->where('status',$request->status);
+                $warehouses = $warehouses->where('status', $request->status);
 
             }
             $warehouses = $warehouses->get();
-            return view('business.index',compact('warehouses'));
+            return view('business.index', compact('warehouses'));
 
-        }
-
-        else {
+        } else {
             $warehouses = BusinessWarehouse::all();
 
-            return view('businessWarehouse.index',compact('warehouses'));
+            return view('businessWarehouse.index', compact('warehouses'));
         }
     }
 
@@ -48,8 +46,8 @@ class BusinessWarehouseController extends Controller
 
     public function businessWarehouseShow(Request $request, $id)
     {
-        $business = BusinessWarehouse::where('business_id',$id)->get();
-        return view('businessWarehouse.showAllWareHouse',compact('business'));
+        $business = BusinessWarehouse::where('business_id', $id)->get();
+        return view('businessWarehouse.showAllWareHouse', compact('business'));
     }
 
     /**
@@ -81,7 +79,7 @@ class BusinessWarehouseController extends Controller
 
         $merge_time = $request->working_time . " - " . $request->working_time_1;
         $request->merge(['working_time' => $merge_time]);
-        
+
 
         /*
         $validated = $request->validate([
@@ -167,7 +165,7 @@ class BusinessWarehouseController extends Controller
     public function edit(BusinessWarehouse $businessWarehouse)
     {
 //        dd($businessWarehouse);
-        return view('businessWarehouse.edit',compact('businessWarehouse'));
+        return view('businessWarehouse.edit', compact('businessWarehouse'));
     }
 
     /**
@@ -182,7 +180,6 @@ class BusinessWarehouseController extends Controller
 
         $request->validate([
             'user_id' => 'required',
-            'business_id' => 'required',
             'name' => 'required',
             'designation' => 'required',
             'warehouse_email' => 'required',
@@ -196,39 +193,12 @@ class BusinessWarehouseController extends Controller
             'gate_type' => 'required',
             'fork_lift' => 'required',
             'total_warehouse_manpower' => 'required',
-            'number_of_delivery_vehicles' => 'required',
             'number_of_drivers' => 'required',
             'working_time' => 'required',
         ]);
-        /*
-        $vehicle_category = NULL;
-        $vehicle_type = NULL;
-        if (isset($request->vehicle_category)) {
-            $count = 1;
-            foreach ($request->vehicle_category as $item) {
-                if ($count == 1)
-                    $vehicle_category = $item;
-                else
-                    $vehicle_category = $vehicle_category . ', ' . $item;
-                $count++;
-            }
-        }
-        if (isset($request->vehicle_type)) {
-            $count = 1;
-            foreach ($request->vehicle_type as $item) {
-                if ($count == 1)
-                    $vehicle_type = $item;
-                else
-                    $vehicle_type = $vehicle_type . ', ' . $item;
-                $count++;
-            }
-        }
-        $request->merge(['vehicle_category' => $vehicle_category]);
-        $request->merge(['vehicle_type' => $vehicle_type]);
-        */
         $businessWarehouse->update($request->all());
         session()->flash('message', 'Warehouse information successfully updated.');
-        return redirect()->route('businessWarehouse.edit',$businessWarehouse->id);
+        return redirect()->route('businessWarehouse.edit', $businessWarehouse->id);
     }
 
     /**

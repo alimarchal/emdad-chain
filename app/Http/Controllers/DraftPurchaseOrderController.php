@@ -125,7 +125,7 @@ class DraftPurchaseOrderController extends Controller
             $affected = DB::table('qoutes')->where('e_order_items_id', $draftPurchaseOrder->rfq_item_no)->where('id', '<>', $draftPurchaseOrder->qoute_no)->update(['qoute_status' => 'Rejected', 'qoute_status_updated' => 'Rejected', 'status' => 'expired']);
             DB::commit();
             /* Transaction successful. */
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
 
             DB::rollback();
             session()->flash('message', 'Due to some internal problem of server your quotation is not accepted please retry.');

@@ -220,6 +220,7 @@ class QouteController extends Controller
 
     public function qouteAccepted(Request $request, Qoute $qoute)
     {
+
         $request->merge(['po_date' => date('Y-m-d')]);
         $request->merge(['po_status' => 'pending']);
         $request->merge(['status' => 'pending']);
@@ -239,12 +240,11 @@ class QouteController extends Controller
             // $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteAccepted($qoute));
             DB::commit();
             /* Transaction successful. */
-        } catch (\Exception$e) {
+        } catch (\Exception $e) {
 
             DB::rollback();
             /* Transaction failed. */
         }
-
         session()->flash('message', 'Draft purchase order has been generated');
         return redirect()->route('dpo.show', $dpo->id);
     }

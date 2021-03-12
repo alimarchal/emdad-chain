@@ -162,6 +162,8 @@
                         <input type="text" name="otp_mobile_number" class="form-input rounded-md shadow-sm border p-2 w-full" value="{{$warehouseAddress->mobile}}">
                         <br>
                         <br>
+                        <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" name="address" value="{{$warehouseAddress->address}}" readonly>
+
                         <x-jet-label for="Remarks" value="{{ __('Remarks') }}" class="text-black"  />
                         <textarea name="remarks" id="remarks"></textarea>
 

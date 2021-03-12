@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BankPayment;
 use App\Models\Delivery;
 use App\Models\DeliveryNote;
 use App\Models\DraftPurchaseOrder;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 {
@@ -120,34 +122,57 @@ class InvoiceController extends Controller
         ];
 
         $del = Delivery::create($delivery);
-        $invoice = [
-            'delivery_id' => $del->id,
-            'rfq_no' => $del->rfq_no,
-            'rfq_item_no' => $del->rfq_item_no,
-            'qoute_no' => $del->qoute_no,
-            'draft_purchase_order_id' => $del->draft_purchase_order_id,
-            'buyer_user_id' => $purchase_order->user_id,
-            'buyer_business_id' => $purchase_order->business_id,
-            'supplier_user_id' => $purchase_order->supplier_user_id,
-            'supplier_business_id' => $purchase_order->supplier_business_id,
-            'shipment_cost' => $purchase_order->shipment_cost,
-            'total_cost' => $purchase_order->total_cost,
-            'vat' => $purchase_order->vat,
-            'payment_method' => $del->payment_term,
-            'ship_to_address' => $del->delivery_address,
-        ];
 
-        $inv = Invoice::create($invoice);
-        $delivery_update =  Delivery::where('id', $del->id);
-        $updated_delivery = $delivery_update->update([
-            'invoice_id' => $inv->id,
-        ]);
+        if($del->payment_term == "Credit")
+        {
+            $invoice = [
+                'delivery_id' => $del->id,
+                'rfq_no' => $del->rfq_no,
+                'rfq_item_no' => $del->rfq_item_no,
+                'qoute_no' => $del->qoute_no,
+                'draft_purchase_order_id' => $del->draft_purchase_order_id,
+                'buyer_user_id' => $purchase_order->user_id,
+                'buyer_business_id' => $purchase_order->business_id,
+                'supplier_user_id' => $purchase_order->supplier_user_id,
+                'supplier_business_id' => $purchase_order->supplier_business_id,
+                'payment_method' => $del->payment_term,
+                'shipment_cost' => $purchase_order->shipment_cost,
+                'total_cost' => $purchase_order->total_cost,
+                'vat' => $purchase_order->vat,
+                'ship_to_address' => $del->ship_to_address,
+            ];
 
-        $delivery_note->status = 'completed';
-        $delivery_note->save();
-        $purchase_order->status = 'completed';
-        $purchase_order->save();
+            $inv = Invoice::create($invoice);
+            $delivery_update =  Delivery::where('id', $del->id);
+            $delivery_update->update([
+                'invoice_id' => $inv->id,
+            ]);
 
-        return redirect()->route('invoice.show',$inv->id);
+            $delivery_note->status = 'completed';
+            $delivery_note->save();
+            $purchase_order->status = 'completed';
+            $purchase_order->save();
+            return redirect()->route('invoice.show',$inv->id);
+        }
+        elseif($del->payment_term == "Cash"){
+
+            $invoice = Invoice::where('draft_purchase_order_id', $del->draft_purchase_order_id)->first();
+            $invoice->update(['delivery_id' => $del->id]);
+
+            $delivery_update =  Delivery::where('id', $del->id)->first();
+            $delivery_update->update([
+                'invoice_id' => $invoice->id,
+            ]);
+
+            $bankPayment = BankPayment::where('invoice_id', $invoice->id)->first();
+            $bankPayment->delivery_id = $del->id;
+            $bankPayment->save();
+
+            $delivery_note->status = 'completed';
+            $delivery_note->save();
+            $purchase_order->status = 'completed';
+            $purchase_order->save();
+            return redirect()->route('invoice.show',$invoice->id);
+        }
     }
 }

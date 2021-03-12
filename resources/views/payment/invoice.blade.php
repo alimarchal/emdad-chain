@@ -49,6 +49,14 @@
                                                 </th>
 
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    @if (auth()->user()->registration_type == 'Buyer')
+                                                        Claim manual payment
+                                                    @elseif(auth()->user()->registration_type == 'Supplier')
+                                                        Payment Status
+                                                    @endif
+                                                </th>
+
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     View
                                                 </th>
                                             </tr>
@@ -65,25 +73,82 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        PO-{{ $dn->purchase_order->id }}
+                                                      PO-{{ $dn->purchase_order->id }}
                                                     </td>
 
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        {{ $dn->purchase_order->item_name }}
+                                                       {{ $dn->purchase_order->item_name }}
                                                         {{-- <a href="{{ route('po.show', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dn->item_name }}</a> --}}
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        {{ Carbon\Carbon::parse($dn->purchase_order->po_date)->format('d-m-Y') }}
+                                                       {{ Carbon\Carbon::parse($dn->purchase_order->po_date)->format('d-m-Y') }}
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        @if ($dn->status == 0)
-                                                            Waiting for payment
+                                                        @if (auth()->user()->registration_type == 'Buyer')
+                                                            @if ($dn->invoice_status == 0)
+                                                                Waiting for payment
+                                                            @elseif($dn->invoice_status == 1)
+                                                                Waiting for supplier confirmation
+                                                            @elseif($dn->invoice_status == 3)
+                                                                Manual payment Confirmed
+                                                            @else
+                                                                Payment rejected
+                                                            @endif
+                                                        @elseif(auth()->user()->registration_type == 'Supplier')
+                                                            @if ($dn->invoice_status == 0)
+                                                                Waiting for payment
+                                                            @elseif($dn->invoice_status == 1)
+                                                                Waiting for confirmation
+                                                            @elseif($dn->invoice_status == 3)
+                                                                Create Delivery Note
+                                                            @else
+                                                                Payment rejected
+                                                            @endif
                                                         @else
-                                                            Create Delivery Note
+                                                            N/A
                                                         @endif
+
+                                                    </td>
+
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+
+                                                    @if (auth()->user()->registration_type == 'Buyer')
+                                                        @if($dn->invoice_status == '0' || $dn->invoice_status == '2')
+                                                            @if($dn->invoice_status == '0')
+                                                                <a href=" {{ route('bank-payments.create', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                                    Proceed
+                                                                </a>
+                                                                @elseif($dn->invoice_status == '2')
+                                                                <a href=" {{ route('bank-payments.edit', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                                    Proceed
+                                                                </a>
+                                                                @endif
+                                                        @elseif($dn->invoice_status == '1')
+                                                            Supplier verification pending
+                                                        @elseif($dn->invoice_status == '2')
+                                                            Supplier rejected manual payment
+                                                        @elseif($dn->invoice_status == '3')
+                                                            Supplier confirmed manual payment
+                                                        @endif
+
+                                                    @elseif(auth()->user()->registration_type == 'Supplier')
+                                                        @if($dn->invoice_status == '0')
+                                                            Waiting for payment
+                                                        @elseif($dn->invoice_status == '1')
+                                                        @php $bankPaymentId = \App\Models\BankPayment::where('invoice_id', $dn->id)->first(); @endphp
+                                                        <a href="{{ route('bank-payments.show', $bankPaymentId->id) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                            View Payment
+                                                        </a>
+                                                        @elseif($dn->invoice_status == '2')
+                                                            Rejected manual payment
+                                                        @elseif($dn->invoice_status == '3')
+                                                            Confirmed manual payment
+                                                        @endif
+                                                    @endif
+
 
                                                     </td>
 

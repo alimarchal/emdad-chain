@@ -62,8 +62,7 @@
                                     @elseif(auth()->user()->registration_type == 'Supplier')
                                          @php $invoiceDate = \App\Models\Invoice::where('id', $item->invoice_id)->first(); @endphp
                                     @endif
-
-                                    {{\Carbon\Carbon::parse($invoiceDate->created_at)->format('d-M-Y')}}
+                                    {{\Carbon\Carbon::parse($item->created_at)->format('d-M-Y')}}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-black text-center">
                                     @if(auth()->user()->registration_type == 'Buyer')
@@ -89,11 +88,11 @@
                                         @if ($item->status == '0')
                                             Un-Paid
                                         @elseif ($item->status == '1')
-                                            Supplier Verification Pending
+                                            Verification Pending
                                         @elseif ($item->status == '2')
-                                            Supplier Rejected
+                                            Rejected
                                         @elseif ($item->status == '3')
-                                            Supplier Confirmed
+                                            Confirmed
                                         @endif
                                     @endif
 
@@ -107,8 +106,8 @@
 {{--                                        <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->invoice_id) }} @endif" class="text-blue-600 hover:underline" target="_blank">--}}
 {{--                                    @endif--}}
                                         <a href="@if($item->invoice_status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
-                                      Proceed
-                                    </a>
+                                         Proceed
+                                        </a>
                                 </td>
                                 @endif
 
