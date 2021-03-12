@@ -89,11 +89,11 @@
                                         @if ($item->status == '0')
                                             Un-Paid
                                         @elseif ($item->status == '1')
-                                            Supplier Verification Pending
+                                            Verification Pending
                                         @elseif ($item->status == '2')
-                                            Supplier Rejected
+                                            Rejected
                                         @elseif ($item->status == '3')
-                                            Supplier Confirmed
+                                            Confirmed
                                         @endif
                                     @endif
 
@@ -107,8 +107,8 @@
 {{--                                        <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->invoice_id) }} @endif" class="text-blue-600 hover:underline" target="_blank">--}}
 {{--                                    @endif--}}
                                         <a href="@if($item->invoice_status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
-                                      Proceed
-                                    </a>
+                                         Proceed
+                                        </a>
                                 </td>
                                 @endif
 

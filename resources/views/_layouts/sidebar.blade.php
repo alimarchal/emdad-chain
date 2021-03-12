@@ -345,7 +345,7 @@
             @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO')  && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
-                    <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('viewRFQs') || request()->routeIs('QoutationsBuyerReceived')|| request()->routeIs('deliveryNote.index')|| request()->routeIs('notes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
+                    <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('QoutationsBuyerReceived')|| request()->routeIs('deliveryNote.index')|| request()->routeIs('notes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                             {{--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>--}}
@@ -418,7 +418,7 @@
             {{-- Payments link --}}
             @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
             <div x-data="{ open: false } ">
-                <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('payment.index') || request()->routeIs('proforma_invoices')|| request()->routeIs('bank-payments.index')|| request()->routeIs('invoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
+                <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('payment.index') || request()->routeIs('generate_proforma_invoices')|| request()->routeIs('bank-payments.index')|| request()->routeIs('invoices')|| request()->routeIs('proforma_invoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                     </svg>
@@ -434,11 +434,11 @@
                         <a href="{{ route('payment.index') }}"><span class="mx-3 ">Generate Invoice</span></a>
                     </li>
 
-                    <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('proforma_invoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                    <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('generate_proforma_invoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
                         </svg>
-                        <a href="{{ route('proforma_invoices') }}"><span class="mx-3 ">Generate Proforma Invoice (For Supplier)</span>
+                        <a href="{{ route('generate_proforma_invoices') }}"><span class="mx-3 ">Generate Proforma Invoice (For Supplier)</span>
                         </a>
                     </li>
 
@@ -468,19 +468,11 @@
                     {{-- for buyer --}}
                     @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Buyer" && Auth::user()->status == 3)
 
-                    <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                    <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('proforma_invoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
                         </svg>
-                        <a href="javascript:void(0)"><span class="mx-3 ">Invoices (For Buyer)</span>
-                        </a>
-                    </li>
-
-                    <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('invoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                        </svg>
-                        <a href="{{ route('invoices') }}"><span class="mx-3 ">Proforma Invoices (For Buyer)</span>
+                        <a href="{{ route('proforma_invoices') }}"><span class="mx-3 ">Proforma Invoices (For Buyer)</span>
                         </a>
                     </li>
 
@@ -846,7 +838,7 @@
             @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO')  && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
-                    <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('viewRFQs') || request()->routeIs('QoutationsBuyerReceived')|| request()->routeIs('deliveryNote.index')|| request()->routeIs('notes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
+                    <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('QoutationsBuyerReceived')|| request()->routeIs('deliveryNote.index')|| request()->routeIs('notes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                             {{--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>--}}
@@ -919,7 +911,7 @@
             {{-- Patments link --}}
             @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
                 <div x-data="{ open: false } ">
-                    <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('payment.index') || request()->routeIs('proforma_invoices')|| request()->routeIs('invoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
+                    <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('payment.index') || request()->routeIs('generate_proforma_invoices')|| request()->routeIs('invoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                         </svg>
@@ -935,11 +927,11 @@
                                 <a href="{{ route('payment.index') }}"><span class="mx-3 ">إنشاء فاتورة</span></a>
                             </li>
 
-                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('proforma_invoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('generate_proforma_invoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
                                 </svg>
-                                <a href="{{ route('proforma_invoices') }}"><span class="mx-3 ">إنشاء فاتورة أولية (For Supplier)</span>
+                                <a href="{{ route('generate_proforma_invoices') }}"><span class="mx-3 ">إنشاء فاتورة أولية (For Supplier)</span>
                                 </a>
                             </li>
 
@@ -961,19 +953,11 @@
                         {{-- for buyer --}}
                         @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Buyer" && Auth::user()->status == 3)
 
-                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('proforma_invoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
                                 </svg>
-                                <a href="javascript:void(0)"><span class="mx-3 ">Invoices (For Buyer)</span>
-                                </a>
-                            </li>
-
-                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('invoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
-                                </svg>
-                                <a href="{{ route('invoices') }}"><span class="mx-3 ">الفواتير الأولية (For Buyer)</span>
+                                <a href="{{ route('proforma_invoices') }}"><span class="mx-3 ">الفواتير الأولية (For Buyer)</span>
                                 </a>
                             </li>
 

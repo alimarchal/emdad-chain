@@ -55,6 +55,9 @@
                                         Note
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        Created At
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                         Action
                                     </th>
 
@@ -73,6 +76,10 @@
 
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $rfp->quote_price_per_quantity }}
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $rfp->sample_information }}
                                         </td>
 
 

@@ -235,8 +235,11 @@ Route::middleware(['auth:sanctum'])->get('generate-proforma-invoice/{id}', [Paym
 Route::middleware(['auth:sanctum'])->get('create-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoice'])->name('generateProforma');
 Route::middleware(['auth:sanctum'])->get('invoices-history', [PaymentController::class, 'invoices'])->name('invoices');
 Route::middleware(['auth:sanctum'])->get('proforma-invoices', [PaymentController::class, 'proforma_invoices'])->name('proforma_invoices');
+Route::middleware(['auth:sanctum'])->get('generate-proforma-invoice', [PaymentController::class, 'generate_proforma_invoice'])->name('generate_proforma_invoices');
 Route::middleware(['auth:sanctum'])->resource('bank-payments', BankPaymentController::class)->names('bank-payments');
 Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/create', [BankPaymentController::class, 'create'])->name('bank-payments.create');
+Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/edit', [BankPaymentController::class, 'edit'])->name('bank-payments.edit');
+Route::middleware(['auth:sanctum'])->post('bank-payments/update', [BankPaymentController::class, 'update_payment'])->name('bank-payments.update');
 #################### END ##############################################################
 
 

@@ -95,8 +95,10 @@
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                                         @if($dpo->payment_term == 'Cash' || auth()->user()->can('all') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
-                                                            @php $proformaInvoice = \App\Models\ProformaInvoice::where('draft_purchase_order_id', $dpo->id)->first(); @endphp
-                                                            @if (isset($proformaInvoice))
+                                                            @php $proformaInvoice = \App\Models\Invoice::where('draft_purchase_order_id', $dpo->id)->where('invoice_type', 1)->first(); @endphp
+                                                            @if (isset($proformaInvoice) && $proformaInvoice->invoice_status == 3)
+                                                                <a>Create delivery Note</a>
+                                                            @elseif(isset($proformaInvoice))
                                                                 <a>Proforma invoice generated</a>
                                                             @else
                                                                 <a href="{{route('generateProforma', $dpo->id)}}" class="text-blue-900 hover:underline">Generate proforma invoice</a>

@@ -166,7 +166,7 @@
                             $orderItemID =  \App\Models\EOrderItems::where('id', $QouteItem->e_order_items_id)->first();
                             $warehouseAddress = \App\Models\BusinessWarehouse::where('id', $orderItemID->warehouse_id)->first();
                         @endphp
-                        <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" disabled="disabled" value="{{$warehouseAddress->address}}">
+                        <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" name="address" value="{{$warehouseAddress->address}}" readonly>
 
                         <x-jet-label for="Remarks" value="{{ __('Remarks') }}" class="text-black"  />
                         <textarea name="remarks" id="remarks"></textarea>
