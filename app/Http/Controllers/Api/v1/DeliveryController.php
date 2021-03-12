@@ -3,8 +3,16 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Livewire\BusinessWarehouse;
+use App\Models\Business;
 use App\Models\Delivery;
+use App\Models\DraftPurchaseOrder;
+use App\Models\EOrderItems;
+use App\Notifications\OTP;
+use App\Notifications\OtpSend;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+
 
 class DeliveryController extends Controller
 {
@@ -31,7 +39,7 @@ class DeliveryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,7 +50,7 @@ class DeliveryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, $id)
@@ -51,11 +59,20 @@ class DeliveryController extends Controller
         if ($token == "RRNirxFh4j9Ftd") {
             $delivery = Delivery::find($id);
             if (!empty($delivery)) {
-                if ($request->input('otp') == 'generate')
-                {
-                    $string = rand(1000,9999);
+                if ($request->input('otp') == 'generate') {
+                    $string = rand(1000, 9999);
                     $otp = $delivery->otp = $string;
-                    $delivery->save();
+                    $rfq_item_no = $delivery->rfq_item_no;
+
+                    $wh_id = EOrderItems::where('id', $rfq_item_no)->first()->warehouse_id;
+                    if (!empty($wh_id)) {
+                        $wh_email = \App\Models\BusinessWarehouse::find($wh_id)->first()->warehouse_email;
+                    }
+                    if (!empty($wh_email)) {
+                        Notification::route('mail', $wh_email)
+                            ->notify(new OTP($otp));
+                        $delivery->save();
+                    }
                 }
                 $delivery = Delivery::find($id);
                 return $delivery;
@@ -75,7 +92,7 @@ class DeliveryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -86,8 +103,8 @@ class DeliveryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -110,7 +127,7 @@ class DeliveryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

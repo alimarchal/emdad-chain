@@ -158,7 +158,7 @@
                         <input type="text" name="delivery_address" class="form-input rounded-md shadow-sm border p-2 w-full" readonly value="{{$warehouseAddress->address}}">
                         <br>
                         <br>
-                        <x-jet-label for="Remarks" value="{{ __('OTP FOR Receiving Delivery (We will send One Time Password when you receive delivery)') }}" class="text-center text-black font-bold text-red-600"  />
+                        <x-jet-label for="Remarks" value="{{ __('OTP FOR Receiving Delivery Mobile Number (We will send One Time Password when you receive delivery)') }}" class="text-center text-black font-bold text-red-600"  />
                         <input type="text" name="otp_mobile_number" class="form-input rounded-md shadow-sm border p-2 w-full" value="{{$warehouseAddress->mobile}}">
                         <br>
                         <br>
