@@ -251,7 +251,7 @@ Route::middleware(['auth:sanctum'])->get('sub', function (){
 
 
 Route::get('apiSms', function () {
-    $msg = "Your delivery is here. \n\nPlease share the OTP code: " . "8546" . " with the driver after unloading the delivery. \n\nThanks you for using EMDAD Platform.\n";
+    $msg = "Your delivery is here. \n\nPlease share the OTP code: " . "8546" . " with the driver after unloading the delivery. \n\nThank you for using EMDAD Platform.\n";
     $url = "http://mshastra.com/sendurlcomma.aspx?user=20098211&pwd=EmdadCode@123&senderid=EmdadChain&CountryCode=966&mobileno=593388833&msgtext=" . urlencode($msg);
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

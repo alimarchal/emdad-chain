@@ -60,6 +60,7 @@ class DeliveryController extends Controller
             $delivery = Delivery::find($id);
             if (!empty($delivery)) {
                 if ($request->input('otp') == 'generate') {
+
                     $string = rand(1000, 9999);
                     $otp = $delivery->otp = $string;
                     $rfq_item_no = $delivery->rfq_item_no;
@@ -71,6 +72,15 @@ class DeliveryController extends Controller
                     if (!empty($wh_email)) {
                         Notification::route('mail', $wh_email)
                             ->notify(new OTP($otp));
+
+                        $mobile_no = trim($delivery->otp_mobile_number);
+                        $msg = "Your delivery is here. \n\nPlease share the OTP code: " . $otp . " with the driver after unloading the delivery. \n\nThank you for using EMDAD Platform.\n";
+                        $url = "http://mshastra.com/sendurlcomma.aspx?user=20098211&pwd=EmdadCode@123&senderid=EmdadChain&CountryCode=966&mobileno=.$mobile_no.&msgtext=" . urlencode($msg);
+                        $ch = curl_init($url);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        $curl_scraped_page = curl_exec($ch);
+                        curl_close($ch);
+
                         $delivery->save();
                     }
                 }
@@ -109,7 +119,6 @@ class DeliveryController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $token = $request->code;
         if ($token == "RRNirxFh4j9Ftd") {
             $delivery = Delivery::find($id);
