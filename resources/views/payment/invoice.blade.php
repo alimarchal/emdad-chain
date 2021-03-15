@@ -125,7 +125,7 @@
                                                                 <a href=" {{ route('bank-payments.edit', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
                                                                     Proceed
                                                                 </a>
-                                                                @endif
+                                                            @endif
                                                         @elseif($dn->invoice_status == '1')
                                                             Supplier verification pending
                                                         @elseif($dn->invoice_status == '2')

@@ -78,8 +78,10 @@ class BankPaymentController extends Controller
      * @param  \App\Models\BankPayment  $bankPayment
      * @return \Illuminate\Http\Response
      */
-    public function edit(BankPayment $bankPayment)
+//    public function edit(BankPayment $bankPayment)
+    public function edit($id)
     {
+        $bankPayment = BankPayment::where('invoice_id', $id)->first();
         return view('manual-payments.edit', compact('bankPayment'));
     }
 
@@ -127,7 +129,7 @@ class BankPaymentController extends Controller
                     'file_path' => $path,
                     'status' => 1,
                 ]);
-        $Invoice = Invoice::where('id', $request->bank_payment_invoice_id)->first();
+        $Invoice = Invoice::where('id', $request->invoice_id)->first();
         $Invoice->invoice_status = 1;
         $Invoice->save();
         return redirect()->route('bank-payments.index');

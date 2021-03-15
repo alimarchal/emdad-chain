@@ -12,7 +12,7 @@
         <!-- component -->
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
-                        <form action="{{ route('bank-payments.update') }}" method="post" class="form bg-white p-6 mb-4" enctype="multipart/form-data">
+                        <form action="{{ route('bank_payments_update') }}" method="post" class="form bg-white p-6 mb-4" enctype="multipart/form-data">
                             @csrf
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">Manual Payment Information</h3>
                             <div class="flex space-x-5 mt-3">
@@ -52,7 +52,6 @@
                             <input type="hidden" name="buyer_user_id"  value="{{ $invoice->buyer_user_id }}">
                             <input type="hidden" name="buyer_business_id"   value="{{ $invoice->buyer_business_id }}">
                             <input type="hidden" name="bank_payment_id"   value="{{ $bankPayment->id }}">
-                            <input type="hidden" name="bank_payment_invoice_id"   value="{{ $bankPayment->invoice_id }}">
 
                             <x-jet-button class="float-right mt-4 mb-4 mr-4">Update</x-jet-button>
                         </form>
