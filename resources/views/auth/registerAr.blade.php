@@ -8,6 +8,12 @@
 
         <x-jet-validation-errors class="mb-4" />
 
+        <div style="direction: rtl">
+            <x-jet-button>
+                <a href="{{route('register')}}" class="get-started-btn scrollto"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top: -4px;">English</a>
+            </x-jet-button>
+        </div>
+
         <form method="POST" action="{{ route('register') }}" style="direction: rtl">
             @csrf
             <p class="text-center font-bold text-2xl">الخطوة الأولى: التسجيل</p>
@@ -30,13 +36,25 @@
                     <x-jet-input id="name" class="block mt-2 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                 </div>
 
+                <div class="my-0 px-2 w-full overflow-hidden pb-2 sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
+                    <!-- Column Content -->
+                    <x-jet-label for="middle_initial" value="{{ __('Middle Initial') }}" />
+                    <x-jet-input id="middle_initial" class="block mt-2 w-full" type="text" maxlength="3" name="middle_initial" :value="old('middle_initial')" required autofocus autocomplete="middle_initial" />
+                </div>
+
+                <div class="my-0  px-2 w-full overflow-hidden  pb-2 sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
+                    <!-- Column Content -->
+                    <x-jet-label for="family_name" value="{{ __('العائلة') }}" />
+                    <x-jet-input id="family_name" class="block  mt-2 w-full" type="text" name="family_name" :value="old('family_name')" required autofocus autocomplete="family_name" />
+                </div>
+
             </div>
 
             <div class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-1 lg:-mx-3 xl:-mx-2">
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <x-jet-label for="nid_num" value="{{ __('رقم الهوية الوطنية') }}" />
-                    <x-jet-input id="nid_num" class="block mt-1 w-full" type="text" name="nid_num" :value="old('nid_num')" required />
+                    <x-jet-input id="nid_num" class="block mt-1 w-full" type="text" pattern="\d*"  maxlength="10" name="nid_num" :value="old('nid_num')" required />
                 </div>
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
@@ -70,7 +88,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('loginAr') }}">
                     {{ __('هل سبق لك التسجيل؟') }}
                 </a>
 
