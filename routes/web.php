@@ -13,6 +13,7 @@ use App\Http\Controllers\EBuyerSurveyAnswerController;
 use App\Http\Controllers\ECartController;
 use App\Http\Controllers\EOrdersController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PlacedRFQController;
@@ -244,8 +245,18 @@ Route::middleware(['auth:sanctum'])->post('bank-payments/update', [BankPaymentCo
 
 
 ####################### Subscription routes ####################################
-Route::middleware(['auth:sanctum'])->get('sub', function (){
-    return view('subscription.index');
-})->name('subscription');
+Route::middleware(['auth:sanctum'])->resource('packages', PackageController::class);
+
+//Route::middleware(['auth:sanctum'])->get('sub', function (){
+//    return view('packageBuyer.index');
+//})->name('packageBuyer');
 #################### END ##############################################################
 
+Route::middleware(['auth:sanctum'])->get('cat', function (){
+    $parentCategories = \App\Models\Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+    return view('category.show.categories', compact('parentCategories'));
+})->name('cat');
+Route::middleware(['auth:sanctum'])->get('cats', function (){
+    $category = \App\Models\Category::where('parent_id', 0)->orderBy('name', 'asc')->get();;
+    return view('category.show.subCategories', compact('category'));
+})->name('cats');

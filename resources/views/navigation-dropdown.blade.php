@@ -78,7 +78,7 @@
                     @endif
 
 
-                    <x-jet-nav-link href="{{ route('subscription') }}" :active="request()->routeIs('subscription')">
+                    <x-jet-nav-link href="{{ route('packages.index') }}" :active="request()->routeIs('subscription')">
                         {{ __('Subscription') }}
                     </x-jet-nav-link>
 

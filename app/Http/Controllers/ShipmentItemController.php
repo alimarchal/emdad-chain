@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Delivery;
 use App\Models\Shipment;
 use App\Models\ShipmentCart;
 use App\Models\ShipmentItem;
@@ -64,6 +65,7 @@ class ShipmentItemController extends Controller
             {
                 Vehicle::where('id', $item->vehicle_type)->update(['availability_status' => 0]);
                 User::where('id', $item->driver_id)->update(['driver_status' => 0]);
+                Delivery::where('id', $item->delivery_id)->update(['status' => 2]);
             }
         });
 

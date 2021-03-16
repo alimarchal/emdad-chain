@@ -53,7 +53,7 @@
 {{--                        </h1>--}}
                         <span class="font-bold text-2xl">Free</span>
                         <span class="text-lg ml-1 font-normal text-black">If purchases more than 5 million/month</span>
-                        <button class="flex items-center mt-auto text-white bg-gray-600 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-700 rounded">Subscribe</button>
+                        <button class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded">Subscribe</button>
                     </div>
                 </div>
             </div>
@@ -89,10 +89,24 @@
                         <td class="border-t-2 text-center border-gray-200 px-4 py-3">Free</td>
                     </tr>
                     <tr>
-                        <td class="border-t-2 border-gray-200 px-4 py-3">Quotations</td>
+                        <td class="border-t-2 border-gray-200 px-4 py-3">Category</td>
+                        <td class="border-t-2 text-center border-gray-200 px-4 py-3">1</td>
+                        <td class="border-t-2 text-center border-gray-200 px-4 py-3">2</td>
+                        <td class="border-t-2 text-center border-gray-200 px-4 py-3">3</td>
                         <td class="border-t-2 text-center border-gray-200 px-4 py-3">5</td>
+                    </tr>
+                    <tr>
+                        <td class="border-t-2 border-gray-200 px-4 py-3">RFQs / Day</td>
+                        <td class="border-t-2 text-center border-gray-200 px-4 py-3">3</td>
                         <td class="border-t-2 text-center border-gray-200 px-4 py-3">10</td>
                         <td class="border-t-2 text-center border-gray-200 px-4 py-3">Unlimited</td>
+                        <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
+                    </tr>
+                    <tr>
+                        <td class="border-t-2 border-gray-200 px-4 py-3">No. Quots. Per 1 RFQ</td>
+                        <td class="border-t-2 text-center border-gray-200 px-4 py-3">2</td>
+                        <td class="border-t-2 text-center border-gray-200 px-4 py-3">3</td>
+                        <td class="border-t-2 text-center border-gray-200 px-4 py-3">5</td>
                         <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
                     </tr>
                     <tr>
@@ -106,7 +120,7 @@
                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Super Admin (CEO role)</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">1</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">2</td>
-                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">10</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">20</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3"></td>
                     </tr>
                     <tr>
@@ -117,16 +131,16 @@
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3"></td>
                     </tr>
                     <tr>
-                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Truck</td>
-                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">5</td>
-                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">20</td>
-                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">Unlimited</td>
+                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Payment</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">Cash</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">Cash/Credit</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">Cash/Credit</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3"></td>
                     </tr>
                     <tr>
-                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Driver</td>
-                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">5</td>
-                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">20</td>
+                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Trainings</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">Unlimited</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">Unlimited</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">Unlimited</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3"></td>
                     </tr>
@@ -195,7 +209,7 @@
                                 <span>Free</span>
                                 <span class="text-lg ml-1 font-normal text-gray-500">مجاني (5 ملايين عملية شراء في الشهر)</span>
                             </h1>
-                            <button class="flex items-center mt-auto text-white bg-gray-600 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-700 rounded">Subscribe</button>
+                            <button class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-700 rounded">Subscribe</button>
                         </div>
                     </div>
                 </div>
@@ -229,6 +243,13 @@
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">مجاني</td>
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">مجاني</td>
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">مجاني</td>
+                        </tr>
+                        <tr>
+                            <td class="border-t-2 border-gray-200 px-4 py-3 text-right">Category</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">1</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">2</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">3</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">5</td>
                         </tr>
                         <tr>
                             <td class="border-t-2 border-gray-200 px-4 py-3 text-right">عروض الأسعار</td>
