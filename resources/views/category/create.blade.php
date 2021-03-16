@@ -61,7 +61,7 @@
 
                     <div class="flex justify-end">
                         <a href="{{ url('category/show') }}" class="inline-flex px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                            show all Categoriess
+                            show all Categories
                         </a>
                     </div>
                 </div>
