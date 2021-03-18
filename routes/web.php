@@ -50,8 +50,8 @@ Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
 Route::middleware(['auth:sanctum'])->post('/registrationType', [UserController::class, 'registrationType']);
 Route::middleware(['auth:sanctum'])->resource('/business', BusinessController::class);
 
-Route::middleware(['auth:sanctum'])->get('/incomplete-business-registration/', [BusinessController::class , 'incomplete'])->name('incompleteBusiness');
-Route::middleware(['auth:sanctum'])->get('/business-status/', [BusinessController::class , 'accountStatus'])->name('accountStatus');
+Route::middleware(['auth:sanctum'])->get('/incomplete-business-registration/', [BusinessController::class, 'incomplete'])->name('incompleteBusiness');
+Route::middleware(['auth:sanctum'])->get('/business-status/', [BusinessController::class, 'accountStatus'])->name('accountStatus');
 
 Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
 Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', BusinessWarehouseController::class);
@@ -109,7 +109,6 @@ Route::get('/loginAr', function () {
 //})->name('sidebarAr');
 
 
-
 Route::get('/aboutUsAr', function () {
     return view('website.aboutUsAr');
 })->name('aboutUsAr');
@@ -132,7 +131,7 @@ Route::get('/e-supplier/ar', function () {
 });
 ####################END###############################
 ####################Download Answers###################
-Route::get('/download/answers', [ EBuyerSurveyAnswerController::class, 'export'])->name('downloadAnswersExcel');
+Route::get('/download/answers', [EBuyerSurveyAnswerController::class, 'export'])->name('downloadAnswersExcel');
 
 Route::get('/download/supplier', [EBuyerSurveyAnswerController::class, 'supplier'])->name('downloadSupplierExcel');
 Route::get('/download/buyer', [EBuyerSurveyAnswerController::class, 'buyer'])->name('downloadBuyerExcel');
@@ -190,13 +189,14 @@ Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/rejected', [D
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/cancel', [DraftPurchaseOrderController::class, 'cancel'])->name('dpo.cancel');
 
 
-
 #################### PDF generate Routes ##########################
 Route::middleware(['auth:sanctum'])->get('/generate-PO-pdf/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'generatePDF'])->name('generatePDF');
 #################### END ##########################################
 
 #################### PDF generate Routes ##########################
-Route::middleware(['auth:sanctum'])->get('/logviewer', function () {return redirect('admin/logviewer');})->name('log.viewer');
+Route::middleware(['auth:sanctum'])->get('/logviewer', function () {
+    return redirect('admin/logviewer');
+})->name('log.viewer');
 #################### END ##########################################
 
 #################### Delivery and Delivery Note ##########################
@@ -240,12 +240,19 @@ Route::middleware(['auth:sanctum'])->resource('bank-payments', BankPaymentContro
 Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/create', [BankPaymentController::class, 'create'])->name('bank-payments.create');
 Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/edit', [BankPaymentController::class, 'edit'])->name('bank-payments.edit');
 Route::middleware(['auth:sanctum'])->post('bank-payments/update', [BankPaymentController::class, 'update_payment'])->name('bank_payments_update');
+Route::middleware(['auth:sanctum'])->resource('moyasar-payment', Moyas::class)->names('mps');
 #################### END ##############################################################
 
 
 ####################### Subscription routes ####################################
-Route::middleware(['auth:sanctum'])->get('sub', function (){
+Route::middleware(['auth:sanctum'])->get('sub', function () {
     return view('subscription.index');
 })->name('subscription');
 #################### END ##############################################################
+
+Route::post('/make-payment',[\App\Http\Controllers\MakePaymentController::class, 'makePayment'])->name('make.payment');
+Route::get('/payment-status',[\App\Http\Controllers\MakePaymentController::class, 'paymentStatus'])->name('payment.status');
+    //return view('moyasar_payment.payment');
+
+
 
