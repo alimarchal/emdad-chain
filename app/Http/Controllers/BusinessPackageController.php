@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\BusinessPackage;
+use App\Models\Package;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BusinessPackageController extends Controller
@@ -35,7 +37,34 @@ class BusinessPackageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $package = Package::where('id', $request->package_id)->first();
+//        dd($package);
+        $subscription_end_date = Carbon::now()->addYear();
+//        dd(Carbon::parse($subscription_end_date)->format('d-m-y'));
+        if (auth()->user()->registration_type == 'Buyer')
+        {
+            BusinessPackage::create([
+                'business_type' => 1,
+                'package_id' => $package->id,
+                'user_id' => auth()->id(),
+                'subscription_start_date' => Carbon::now(),
+                'subscription_end_date' => $subscription_end_date,
+            ]);
+
+            return redirect()->route('parentCategories');
+        }
+        elseif(auth()->user()->registration_type == 'Supplier')
+        {
+            BusinessPackage::create([
+                'business_type' => 2,
+                'package_id' => $package->id,
+                'user_id' => auth()->id(),
+                'subscription_start_date' => Carbon::now(),
+                'subscription_end_date' => $subscription_end_date,
+            ]);
+            return redirect()->route('parentCategories');
+        }
+
     }
 
     /**
@@ -81,5 +110,16 @@ class BusinessPackageController extends Controller
     public function destroy(BusinessPackage $businessPackage)
     {
         //
+    }
+
+    public function updateCategories(Request $request)
+    {
+        $categories = implode(',', $request->category_id);
+
+        $businessPackage = BusinessPackage::where('id', $request->business_id)->first();
+        $businessPackage->update([
+            'categories' => $categories,
+        ]);
+        return redirect()->route('business.create');
     }
 }

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use App\Models\BusinessPackage;
 use App\Models\Category;
 use App\Models\ECart;
+use App\Models\EOrders;
+use App\Models\Package;
 use App\Models\POInfo;
 use App\Models\PurchaseRequestForm;
 use App\Models\User;
@@ -32,10 +35,31 @@ class PurchaseRequestFormController extends Controller
     public function create()
     {
         $user = User::findOrFail(auth()->user()->id);
-        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+        $businessPackage = BusinessPackage::where('user_id', \auth()->id())->first();
+        if (isset($businessPackage))
+        {
+            $categories = explode(',', $businessPackage->categories);
+            $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
+        }
+        else{
+            $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+        }
         $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
         $eCart = ECart::where('user_id',auth()->user()->id)->where('business_id',auth()->user()->business_id)->get();
-        return view('RFQ.create', compact('parentCategories', 'childs', 'user','eCart'));
+
+        // Remaining RFQ count
+        $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
+        $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+        $package = Package::where('id', $business_package->package_id)->first();
+        if ($business_package->package_id == 1 || $business_package->package_id == 2)
+        {
+            $rfqCount = $package->rfq_per_day - $rfq;
+        }
+        else{
+            $rfqCount = null;
+        }
+
+        return view('RFQ.create', compact('parentCategories', 'childs', 'user','eCart','rfqCount'));
     }
 
     /**

@@ -16,8 +16,10 @@ class CreateBusinessPackagesTable extends Migration
         Schema::create('business_packages', function (Blueprint $table) {
             $table->id();
             $table->integer('business_type');
-            $table->integer('business_id');
+            $table->integer('business_id')->nullable();
             $table->integer('package_id');
+            $table->integer('user_id');
+            $table->string('categories')->nullable();
             $table->dateTime('subscription_start_date');
             $table->dateTime('subscription_end_date');
             $table->string('last_promocode')->nullable();

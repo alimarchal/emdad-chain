@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BusinessPackage;
 use App\Models\Package;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class PackageController extends Controller
         }
         elseif(auth()->user()->registration_type == 'Supplier')
         {
-            $packages = Package::where('user_type', 2);
+            $packages = Package::where('user_type', 2)->get();
             return view('packageSupplier.index', compact('packages'));
         }
         else

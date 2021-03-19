@@ -10,6 +10,6 @@ class BusinessPackage extends Model
     use HasFactory;
 
     protected $fillable = [
-        'business_type','business_id','package_id','subscription_start_date','subscription_end_date','last_promocode',
+        'business_type','business_id','package_id','user_id','categories','subscription_start_date','subscription_end_date','last_promocode',
         'promocode_given_count','promocode_used_count','status'];
 }

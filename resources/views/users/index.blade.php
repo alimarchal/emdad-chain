@@ -41,13 +41,56 @@
 
                     </script>
 
-                    <div class="py-3">
-                        <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
-                            <a href="{{ route('users.create') }}"
-                               class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                Add User
-                            </a>
+                    @if(auth()->user()->registration_type == 'Supplier')
+                    <!-- Remaining User and Driver count for respective packages -->
+                        @php
+                            $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+                            $package = \App\Models\Package::where('id', $business_package->package_id)->first();
+                            $userRemaining = $package->users - $userCount;
+                            $driverRemaining = $package->driver - $driverCount;
+                        @endphp
+                        @if($business_package->package_id == 5 || $business_package->package_id == 6 )
+                            <div class="flex flex-wrap" style="justify-content: flex-start">
+                                <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Users you can add: </h1>
+                                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userRemaining}} &nbsp;</h1>
+                                <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Drivers you can add: </h1>
+                                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$driverRemaining}} </h1>
+                            </div>
+                        @endif
+                        <hr>
+                    @elseif(auth()->user()->registration_type == 'Buyer')
+                    <!-- Remaining User count for respective packages -->
+                        @php
+                            $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+                            $package = \App\Models\Package::where('id', $business_package->package_id)->first();
+                            $userRemaining = $package->users - $userCount;
+                        @endphp
+                        <div class="flex flex-wrap" style="justify-content: flex-start">
+                            <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Users you can add: </h1>
+                            <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userCount}} </h1>
                         </div>
+                        <hr>
+                    @endif
+                    <div class="py-3">
+                        @if(auth()->user()->registration_type == 'Supplier')
+                            @if($userRemaining != 0 || $driverRemaining != 0)
+                                <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
+                                    <a href="{{ route('users.create') }}"
+                                       class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                        Add User
+                                    </a>
+                                </div>
+                            @endif
+                        @elseif(auth()->user()->registration_type == 'Buyer')
+                            @if($userRemaining != 0)
+                            <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
+                                <a href="{{ route('users.create') }}"
+                                   class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                    Add User
+                                </a>
+                            </div>
+                            @endif
+                        @endif
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 {{--                            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">--}}
 {{--                                <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">--}}

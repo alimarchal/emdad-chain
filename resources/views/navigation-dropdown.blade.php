@@ -56,7 +56,7 @@
                     </x-jet-nav-link>
                      @endrole
 
-                    @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
+                    @if(auth()->user()->can('all') || auth()->user()->registration_type == "Buyer" && auth()->user()->status == 3)
                         <x-jet-nav-link href="{{ route('RFQCart.index') }}" :active="request()->routeIs('RFQCart.index')">
                             @include('RFQ.RFQICON') &nbsp;RFQ Items
                             @if (\App\Models\ECart::where('user_id', auth()->user()->id)
@@ -77,13 +77,14 @@
 
                     @endif
 
-
+                    @if (auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
                     <x-jet-nav-link href="{{ route('packages.index') }}" :active="request()->routeIs('subscription')">
                         {{ __('Subscription') }}
                     </x-jet-nav-link>
+                    @endif
 
 
-{{--                    @if (Auth::user()->status == 1)--}}
+                    {{--                    @if (Auth::user()->status == 1)--}}
 {{--                    @else--}}
 {{--                        @if (Auth::user()->registration_type)--}}
 {{--

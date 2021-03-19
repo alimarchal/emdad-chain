@@ -45,6 +45,19 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
+        $vehicleCount = Vehicle::where('supplier_business_id', auth()->id())->count();
+
+        if (\auth()->user()->business_package->package_id == 5 && $vehicleCount == 5 )
+        {
+            session()->flash('message', 'Cannot Add because Add Vehicles limit has reached');
+            return redirect()->back();
+        }
+        elseif (\auth()->user()->business_package->package_id == 6 && $vehicleCount == 20 )
+        {
+            session()->flash('message', 'Cannot Add because Add Vehicles limit has reached');
+            return redirect()->back();
+        }
+
         $vehicle = new Vehicle();
 
         $vehicle->supplier_business_id = auth()->user()->business_id;
