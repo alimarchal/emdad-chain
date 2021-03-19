@@ -50,7 +50,7 @@
                 <span class="ml-2 text-sm text-gray-600">{{ __('ألست عضواً؟') }}</span>
                 &nbsp;
                 <a class="underline text-sm text-blue-500 hover:text-gray-900" href="{{ route('registerAr') }}">
-                    {{ __('Register') }}
+                    {{ __('تسجيل') }}
                 </a>
             </div>
         </form>

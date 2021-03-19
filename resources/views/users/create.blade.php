@@ -19,6 +19,38 @@
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             @include('users.sessionMessage')
+                @if(auth()->user()->registration_type == 'Supplier')
+                    <!-- Remaining User and Driver count for respective packages -->
+                        @php
+                            $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+                            $package = \App\Models\Package::where('id', $business_package->package_id)->first();
+                            $userRemaining = $package->users - $userCount;
+                            $driverRemaining = $package->driver - $driverCount;
+                        @endphp
+                        @if($business_package->package_id == 5 || $business_package->package_id == 6 )
+                            <div class="flex flex-wrap" style="justify-content: flex-start">
+                                <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Users you can add: </h1>
+                                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userRemaining}} &nbsp;</h1>
+                                <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Drivers you can add: </h1>
+                                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$driverRemaining}} </h1>
+                            </div>
+                        @endif
+                        <hr>
+                @elseif(auth()->user()->registration_type == 'Buyer')
+                    <!-- Remaining User count for respective packages -->
+                        @php
+                            $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+                            $package = \App\Models\Package::where('id', $business_package->package_id)->first();
+                            $userRemaining = $package->users - $userCount;
+                        @endphp
+{{--                        @if($business_package->package_id == 1 || $business_package->package_id == 2 )--}}
+                            <div class="flex flex-wrap" style="justify-content: flex-start">
+                                <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Users you can add: </h1>
+                                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userCount}} </h1>
+                            </div>
+{{--                        @endif--}}
+                        <hr>
+                @endif
             <div class="mt-5 md:mt-0 md:col-span-2">
 {{--                <form method="post" action="{{route('createUserForCompany',auth()->user()->business->id)}}">--}}
                 <form method="post" action="{{route('users.store')}}">

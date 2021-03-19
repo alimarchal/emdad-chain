@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Auth;
 use App\Models\Business;
 use App\Models\BusinessCategory;
+use App\Models\BusinessPackage;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -60,7 +61,9 @@ class BusinessController extends Controller
         $business = Business::where('user_id', auth()->user()->id)->first();
         //        dd($business);
         if ($business === null) {
-            $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+            $businessPackage = BusinessPackage::where('user_id', \auth()->id())->first();
+            $categories = explode(',',$businessPackage->categories);
+            $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
             return view('business.create', compact('parentCategories'));
         } else {
             return redirect()->route('business.show', $business->id);
@@ -122,6 +125,11 @@ class BusinessController extends Controller
         $user = User::find($business->user_id);
         $user->business_id = $business->id;
         $user->save();
+
+        $businessPackage = BusinessPackage::where('user_id', $business->user_id)->first();
+        $businessPackage->business_id = $business->id;
+        $businessPackage->save();
+
         session()->flash('message', 'Business information successfully saved.');
         return redirect()->route('businessWarehouse.create');
     }

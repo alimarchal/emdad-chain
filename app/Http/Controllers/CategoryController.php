@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BusinessPackage;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -76,7 +77,7 @@ class CategoryController extends Controller
     {
 
         if (empty($request->parent_id)) {
-            
+
             if ($request->parent_id == null) {
                 $request->merge(['parent_id' => $category->parent_id]);
             }
@@ -109,5 +110,19 @@ class CategoryController extends Controller
     {
         $category = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();;
         return view('category.show', compact('category'));
+    }
+
+    public function parentCategories()
+    {
+        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+        $businessPackage = BusinessPackage::where('user_id', auth()->id())->first();
+
+        return view('category.show.categories', compact('parentCategories', 'businessPackage'));
+    }
+
+    public function subCategories()
+    {
+        $category = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();;
+        return view('category.show.subCategories', compact('category'));
     }
 }

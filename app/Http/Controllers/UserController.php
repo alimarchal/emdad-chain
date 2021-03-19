@@ -52,8 +52,11 @@ class UserController extends Controller
             return view('users.index', compact('users', 'business'));
         }
         elseif(auth()->user()->usertype == "CEO") {
+            //Checking users & driver count for related packages
+            $userCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', '!=','Supplier Driver'], ['id', '!=', \auth()->id()]])->count();
+            $driverCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', 'Supplier Driver'],['id', '!=', \auth()->id()]])->count();
             $users = User::where('business_id', auth()->user()->business_id)->where('id', '!=', Auth::user()->id)->paginate(50);
-            return view('users.index', compact('users'));
+            return view('users.index', compact('users', 'userCount', 'driverCount'));
         }
         else {
             abort(404);
@@ -73,15 +76,90 @@ class UserController extends Controller
 //            $permissions  = Permission::all();
             return view('users.create', compact('roles'));
         }
-        elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Buyer') {
+        elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Buyer')
+        {
+            //Checking users count for related packages
+            $userCount = User::where([['business_id', \auth()->user()->business_id], ['id', '!=', \auth()->id()]])->count();
+            if (\auth()->user()->business_package->package_id == 1 && $userCount == 2 )
+            {
+                session()->flash('message', 'Add Users limit reached');
+                return redirect()->back();
+            }
+            elseif (\auth()->user()->business_package->package_id == 2 && $userCount == 5 )
+            {
+                session()->flash('message', 'Add Users limit reached');
+                return redirect()->back();
+            }
+            elseif (\auth()->user()->business_package->package_id == 3 || \auth()->user()->business_package->package_id == 4 && $userCount == 100 )
+            {
+                session()->flash('message', 'Add Users limit reached');
+                return redirect()->back();
+            }
 
             $roles  = Role::where('id' , '>', 10)->where('id', '!=', 18)->get();
-            return view('users.create', compact('roles'));
+            return view('users.create', compact('roles', 'userCount'));
         }
-        elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Supplier') {
+        elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Supplier')
+        {
+            //Checking users & driver count for related packages
+            $userCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', '!=','Supplier Driver'], ['id', '!=', \auth()->id()]])->count();
+            $driverCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', 'Supplier Driver'],['id', '!=', \auth()->id()]])->count();
+//            dd($driverCount);
+            if (\auth()->user()->business_package->package_id == 5 && $userCount == 2 && $driverCount == 5 )
+            {
+                session()->flash('message', 'Add Users and Driver limit reached');
+                return redirect()->back();
+            }
+            elseif (\auth()->user()->business_package->package_id == 6 && $userCount == 10 && $driverCount == 20 )
+            {
+                session()->flash('message', 'Add Users and Driver limit reached');
+                return redirect()->back();
+            }
+//            elseif (\auth()->user()->business_package->package_id == 7  && $userCount == 100 )
+//            {
+//                session()->flash('message', 'Add Users limit reached');
+//                return redirect()->back();
+//            }
+            //Checking users count for free package
+            elseif (\auth()->user()->business_package->package_id == 5 && $userCount != 2 && $driverCount == 5 )
+            {
+                $roles  = Role::where('id' , '>=', 5)->where('id', '<', 10 )->get();
+                return view('users.create', compact('roles','userCount','driverCount'));
+            }
+            //Checking drivers count for free package
+            elseif (\auth()->user()->business_package->package_id == 5 && $userCount == 2 && $driverCount != 5 )
+            {
+                $roles  = Role::where('id', '=', 10 )->get();
+                return view('users.create', compact('roles','userCount','driverCount'));
+            }
+
+            //Checking users count for gold package
+            elseif (\auth()->user()->business_package->package_id == 6 && $userCount != 10 && $driverCount == 20 )
+            {
+                $roles  = Role::where('id' , '>=', 5)->where('id', '<', 10 )->get();
+                return view('users.create', compact('roles','userCount','driverCount'));
+            }
+            //Checking drivers count for gold package
+            elseif (\auth()->user()->business_package->package_id == 6 && $userCount == 10 && $driverCount != 20 )
+            {
+                $roles  = Role::where('id', '=', 10 )->get();
+                return view('users.create', compact('roles','userCount','driverCount'));
+            }
+            //Checking users count for platinum package
+            elseif (\auth()->user()->business_package->package_id == 7 && $userCount != 100)
+            {
+                $roles  = Role::where('id' , '>=', 5)->where('id', '<=', 10 )->get();
+                return view('users.create', compact('roles','userCount','driverCount'));
+            }
+            //Checking users count for platinum package
+            elseif (\auth()->user()->business_package->package_id == 7 && $userCount == 100)
+            {
+                $roles  = Role::where('id', '=', 10 )->get();
+                return view('users.create', compact('roles','userCount','driverCount'));
+            }
 
             $roles  = Role::where('id' , '>=', 5)->where('id', '<=', 10 )->get();
-            return view('users.create', compact('roles'));
+            return view('users.create', compact('roles','userCount','driverCount'));
         }
     }
 
@@ -219,7 +297,8 @@ class UserController extends Controller
     {
         $user = User::findOrFail($request->user_id);
         $user->update($request->all());
-        return redirect()->route('business.create');
+//        return redirect()->route('business.create');
+        return redirect()->route('packages.index');
     }
 
     public function createUserForCompany(Request $request, Business $business)

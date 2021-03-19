@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BankPaymentController;
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\BusinessPackageController;
 use App\Http\Controllers\BusinessWarehouseController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\EBuyerSurveyAnswerController;
 use App\Http\Controllers\ECartController;
 use App\Http\Controllers\EOrdersController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PlacedRFQController;
@@ -245,9 +247,9 @@ Route::middleware(['auth:sanctum'])->resource('moyasar-payment', Moyas::class)->
 
 
 ####################### Subscription routes ####################################
-Route::middleware(['auth:sanctum'])->get('sub', function () {
-    return view('subscription.index');
-})->name('subscription');
+// Route::middleware(['auth:sanctum'])->get('sub', function () {
+//     return view('subscription.index');
+// })->name('subscription');
 #################### END ##############################################################
 
 Route::post('/make-payment',[\App\Http\Controllers\MakePaymentController::class, 'makePayment'])->name('make.payment');
@@ -255,4 +257,22 @@ Route::get('/payment-status',[\App\Http\Controllers\MakePaymentController::class
     //return view('moyasar_payment.payment');
 
 
+Route::middleware(['auth:sanctum'])->resource('packages', PackageController::class);
+Route::middleware(['auth:sanctum'])->resource('business-packages', BusinessPackageController::class);
+Route::middleware(['auth:sanctum'])->post('updateCategories', [BusinessPackageController::class, 'updateCategories'])->name('updatePackageCategories');
+Route::middleware(['auth:sanctum'])->post('business-package-store/{id}', [BusinessPackageController::class, 'store'])->name('business-package.store');
+
+#################### END ##############################################################
+
+Route::middleware(['auth:sanctum'])->get('select-category', function (){
+    $parentCategories = \App\Models\Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+    return view('category.show.categories', compact('parentCategories'));
+})->name('cat');
+//Route::middleware(['auth:sanctum'])->get('sub-categories', function (){
+//    $category = \App\Models\Category::where('parent_id', 0)->orderBy('name', 'asc')->get();;
+//    return view('category.show.subCategories', compact('category'));
+//})->name('cats');
+
+Route::middleware(['auth:sanctum'])->get('select-category', [CategoryController::class, 'parentCategories'])->name('parentCategories');
+Route::middleware(['auth:sanctum'])->get('sub-categories', [CategoryController::class, 'subCategories'])->name('subCategories');
 
