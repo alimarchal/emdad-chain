@@ -12,6 +12,7 @@ use App\Notifications\OTP;
 use App\Notifications\OtpSend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
+use Moyasar\Providers\PaymentService;
 
 
 class DeliveryController extends Controller
@@ -21,9 +22,21 @@ class DeliveryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Delivery::paginate(10);
+        $token = $request->code;
+        if ($token == "RRNirxFh4j9Ftd") {
+            if ($request->has('status')) {
+                $collection = Delivery::where('status', $request->status)->get();
+                if ($collection->isEmpty()) {
+                    return response()->json(['message' => 'Not Found!'], 404);
+                } else {
+                    return $collection;
+                }
+            }
+        } else {
+            return response()->json(['message' => 'Not Found!'], 404);
+        }
     }
 
     /**

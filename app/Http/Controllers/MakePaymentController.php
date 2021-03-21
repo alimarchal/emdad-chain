@@ -105,7 +105,6 @@ class MakePaymentController extends Controller
         {
             $invoice = Invoice::where('id', $payment->description)->first();
             $invoice->invoice_status = 3;
-            $invoice->invoice_type = 11;
             $invoice->save();
             session()->flash('message', 'You have successfully paid the amount.');
             return redirect('bank-payments');
