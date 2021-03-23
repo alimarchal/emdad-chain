@@ -119,7 +119,7 @@
                                                         @if($dn->invoice_status == '0' || $dn->invoice_status == '2')
                                                             @if($dn->invoice_status == '0')
                                                                 <a href=" {{ route('bank-payments.create', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
-                                                                    Proceed
+                                                                    Manual Payment
                                                                 </a>
                                                                 @elseif($dn->invoice_status == '2')
                                                                 <a href=" {{ route('bank-payments.edit', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">

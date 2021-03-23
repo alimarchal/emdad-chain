@@ -242,7 +242,7 @@ Route::middleware(['auth:sanctum'])->resource('bank-payments', BankPaymentContro
 Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/create', [BankPaymentController::class, 'create'])->name('bank-payments.create');
 Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/edit', [BankPaymentController::class, 'edit'])->name('bank-payments.edit');
 Route::middleware(['auth:sanctum'])->post('bank-payments/update', [BankPaymentController::class, 'update_payment'])->name('bank_payments_update');
-Route::middleware(['auth:sanctum'])->resource('moyasar-payment', Moyas::class)->names('mps');
+//Route::middleware(['auth:sanctum'])->resource('moyasar-payment', Moyas::class)->names('mps');
 #################### END ##############################################################
 
 
@@ -276,3 +276,6 @@ Route::middleware(['auth:sanctum'])->get('select-category', function (){
 Route::middleware(['auth:sanctum'])->get('select-category', [CategoryController::class, 'parentCategories'])->name('parentCategories');
 Route::middleware(['auth:sanctum'])->get('sub-categories', [CategoryController::class, 'subCategories'])->name('subCategories');
 
+Route::get('/testOne', function () {
+    return \App\Models\User::waitingTime();
+});

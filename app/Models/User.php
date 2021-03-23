@@ -97,6 +97,13 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
+    public static function waitingTime()
+    {
+        // time in minutes
+        $time_in_minute = 30;
+        return $time_in_minute;
+    }
+
     public function business()
     {
         return $this->belongsTo(Business::class)->withDefault();

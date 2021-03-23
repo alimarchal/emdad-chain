@@ -119,6 +119,7 @@ class InvoiceController extends Controller
             'payment_term' => $purchase_order->payment_term,
             'shipment_status' => 0,
             'delivery_address' => $delivery_note->delivery_address,
+            'waiting_time' => \App\Models\User::waitingTime(),
         ];
 
         $del = Delivery::create($delivery);
