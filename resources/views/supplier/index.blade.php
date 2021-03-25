@@ -17,6 +17,22 @@
         <h2 class="text-2xl font-bold py-2 text-center m-2">Items List @if (!$collection->count()) seems empty @endif
         </h2>
 
+        <!-- Remaining Quotation count for Basic and Silver Business Packages -->
+        @php
+            $quotations = \App\Models\Qoute::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
+
+            $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+            $package = \App\Models\Package::where('id', $business_package->package_id)->first();
+            $count = $package->quotations - $quotations;
+        @endphp
+        @if($business_package->package_id == 5 || $business_package->package_id == 6 )
+            <div class="flex flex-wrap" style="justify-content: flex-start">
+                <h1 class="text-1xl mt-0 pb-0 text-center"> New Quotation(s) response remaining for the day: </h1>
+                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$count}} </h1>
+            </div>
+        @endif
+        <hr>
+
         <!-- This example requires Tailwind CSS v2.0+ -->
         <!-- component -->
         <div class="bg-white">
@@ -86,46 +102,101 @@
                                         $qoute = $getQoutes->where('supplier_user_id',$user_id);
                                     @endphp
                                     @if ($qoute->isEmpty())
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $rfp->id }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                @if ($rfp->file_path)
-                                                    <a href="{{ Storage::url($rfp->file_path) }}">
-                                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
-                                                            </path>
-                                                        </svg>
+                                        @if(isset($quotationCount) && $quotationCount != 0 && $quotationCount != null)
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ $rfp->id }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    @if ($rfp->file_path)
+                                                        <a href="{{ Storage::url($rfp->file_path) }}">
+                                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
+                                                                </path>
+                                                            </svg>
+                                                        </a>
+                                                    @else
+                                                        #N/A
+                                                    @endif
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ $rfp->item_name }}
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ $rfp->business->business_name }}
+    {{--                                            {{ $rfp->business }}--}}
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ $rfp->quantity }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ $rfp->created_at->format('d-m-Y') }} <br>
+                                                </td>
+
+
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <a href="{{ url('viewRFQs/'.$rfp->id) }}" class=" px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                        Response
                                                     </a>
-                                                @else
-                                                    #N/A
-                                                @endif
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $rfp->item_name }}
-                                            </td>
+                                                </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $rfp->business->business_name }}
-{{--                                            {{ $rfp->business }}--}}
-                                            </td>
+                                            </tr>
+                                        @elseif($quotationCount == null)
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ $rfp->id }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    @if ($rfp->file_path)
+                                                        <a href="{{ Storage::url($rfp->file_path) }}">
+                                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
+                                                                </path>
+                                                            </svg>
+                                                        </a>
+                                                    @else
+                                                        #N/A
+                                                    @endif
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ $rfp->item_name }}
+                                                </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $rfp->quantity }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $rfp->created_at->format('d-m-Y') }} <br>
-                                            </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ $rfp->business->business_name }}
+                                                    {{--                                            {{ $rfp->business }}--}}
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ $rfp->quantity }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ $rfp->created_at->format('d-m-Y') }} <br>
+                                                </td>
 
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <a href="{{ url('viewRFQs/'.$rfp->id) }}" class=" px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                    Response
-                                                </a>
-                                            </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <a href="{{ url('viewRFQs/'.$rfp->id) }}" class=" px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                        Response
+                                                    </a>
+                                                </td>
 
-                                        </tr>
+                                            </tr>
+                                        @else
+                                            <div class="py-12">
+                                                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                                                        <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                                                            <div class="text-black text-2xl" style="text-align: center">
+                                                                Your have reached daily generate quotation limit.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
                                     @endif
 
                                 @endforeach

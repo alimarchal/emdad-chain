@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\BusinessCategory;
+use App\Models\BusinessPackage;
 use App\Models\EOrderItems;
 use App\Models\EOrders;
+use App\Models\Package;
 use App\Models\PlacedRFQ;
 use App\Models\Qoute;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -118,6 +121,9 @@ class PlacedRFQController extends Controller
             sort($business_categories);
             // $business_categories = implode(",", $business_categories);
             $collection = EOrderItems::where('status', 'pending')->whereIn('item_code', $business_categories)->get();
+
+            $quotationCount = null;
+            return view('supplier.index', compact('collection','quotationCount'));
         }
         else
             {
@@ -131,9 +137,21 @@ class PlacedRFQController extends Controller
                 }
                 sort($business_categories);
                 // $business_categories = implode(",", $business_categories);
-                $collection = EOrderItems::where('status', 'pending')->whereIn('item_code', $business_categories)->get();
+                $collection = EOrderItems::where('status', 'pending')->where('bypass', 0)->whereDate('quotation_time', '>=', Carbon::now())->whereIn('item_code', $business_categories)->get();
+
+                // Remaining Quotations count
+                $quotations = Qoute::where('supplier_business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
+                $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+                $package = Package::where('id', $business_package->package_id)->first();
+                if ($business_package->package_id == 5 || $business_package->package_id == 6)
+                {
+                    $quotationCount = $package->quotations - $quotations;
+                }
+                else{
+                    $quotationCount = null;
+                }
+                return view('supplier.index', compact('collection','quotationCount'));
             }
-        return view('supplier.index', compact('collection'));
     }
 
 

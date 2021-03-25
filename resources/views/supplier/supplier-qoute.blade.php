@@ -244,7 +244,7 @@
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
                                         VAT(%)
                                     </label>
-                                    <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="5" value="{{$collection->VAT}}" autocomplete="size" required>
+                                    <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15" value="{{$collection->VAT}}" autocomplete="size" required>
                                 </div>
                                 <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
@@ -259,7 +259,7 @@
                                     <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="text" name="total_cost" value="{{$collection->total_cost}}" autocomplete="size" readonly>
                                 </div>
                             </div>
-                            <button href="#"
+                            <button
                                 class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
                                 Update Send Quote
                             </button>
@@ -340,7 +340,7 @@
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
                                             VAT(%)
                                         </label>
-                                        <input class="form-input rounded-md shadow-sm block w-full VAT" id="size" type="number" name="VAT" min="0" step="any" autocomplete="size" required>
+                                        <input class="form-input rounded-md shadow-sm block w-full VAT" id="size" type="number" name="VAT" min="0" max="15" step="any" autocomplete="size" required>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="shipment_cost">
@@ -356,7 +356,7 @@
                                         <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="text" name="total_cost" autocomplete="size" readonly>
                                     </div>
                                 </div>
-                                <button href="#"
+                                <button
                                     class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
                                     Send Quote
                                 </button>
@@ -366,7 +366,6 @@
                                     Cancel</a>
                             </div>
                         </form>
-
                         <br>
                     @endif
                 </div>

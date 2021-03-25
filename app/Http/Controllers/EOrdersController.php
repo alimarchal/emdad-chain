@@ -79,6 +79,7 @@ class EOrdersController extends Controller
                         $eOrderItem->payment_mode = $item->payment_mode;
                         $eOrderItem->required_sample = $item->required_sample;
                         $eOrderItem->status = $item->status;
+                        $eOrderItem->quotation_time = Carbon::now()->addDays(3);
                         $eOrderItem->save();
                     }
                     foreach ($eCartItems as $item) {
@@ -125,6 +126,7 @@ class EOrdersController extends Controller
                         $eOrderItem->payment_mode = $item->payment_mode;
                         $eOrderItem->required_sample = $item->required_sample;
                         $eOrderItem->status = $item->status;
+                        $eOrderItem->quotation_time = Carbon::now()->addDays(3);
                         $eOrderItem->save();
                     }
                     foreach ($eCartItems as $item) {
@@ -165,6 +167,7 @@ class EOrdersController extends Controller
                     $eOrderItem->payment_mode = $item->payment_mode;
                     $eOrderItem->required_sample = $item->required_sample;
                     $eOrderItem->status = $item->status;
+                    $eOrderItem->quotation_time = Carbon::now()->addDays(3);
                     $eOrderItem->save();
                 }
                 foreach ($eCartItems as $item) {

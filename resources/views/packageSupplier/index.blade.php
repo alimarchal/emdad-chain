@@ -99,7 +99,12 @@
                     <tr>
                         <td class="border-t-2 border-gray-200 px-4 py-3">Category</td>
                         @foreach($packages as $package)
-                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->category}}</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">
+                                @if($package->category == 1)  ({{$package->category}} main) 5
+                                @elseif($package->category == 2)  ({{$package->category}} main) 15
+                                @elseif($package->category == 3)  ({{$package->category}} main) 50
+                                @endif
+                            </td>
                         @endforeach
                     </tr>
                     <tr>

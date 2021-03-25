@@ -68,9 +68,16 @@
                                     Last Price
                                 </th>
 
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    Time left
+                                </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Qoutations
+                                    Quotations
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    Override
                                 </th>
 
 
@@ -83,7 +90,7 @@
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $rfp->id }}
                                         </td>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-7 py-4 text-center whitespace-nowrap">
                                             {{ $rfp->created_at->format('d-m-Y') }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -104,12 +111,58 @@
                                             {{ number_format($rfp->last_price, 2) }} <br>
                                         </td>
 
+                                        @php
+                                            $created = $rfp->quotation_time;
+                                            $now = \Carbon\Carbon::now();
+                                            $diffInHrs = $now->diffInHours($created);
+                                            $diffInMins = $now->diffInMinutes($created);
+                                            // checking previous dpo if any
+                                            $dpo = \App\Models\DraftPurchaseOrder::where('rfq_item_no', $rfp->id)->where('po_status' , 'pending')->where('status' , 'pending')->first();
+                                        @endphp
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id]) }}"
-                                               class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                Qoutes({{ $rfp->qoutes->count() }})
-                                            </a>
+                                            @if($rfp->status == 'accepted')
+                                                N/A
+                                            @else
+                                                {{ $diffInHrs }} hours @if($diffInHrs == 0) and {{ $diffInMins }} minutes @endif <br>
+                                            @endif
+                                        </td>
 
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            @if(isset($dpo))
+                                                <a class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
+                                                    DPO generated
+                                                </a>
+                                            @elseif($rfp->bypass == 1 && $rfp->quotation_time >= \Carbon\Carbon::now() && $rfp->status == 'pending')
+                                                <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
+                                                   class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                   See Quotes
+                                                </a>
+                                            @elseif($rfp->bypass == 0 && $rfp->quotation_time <= \Carbon\Carbon::now() && $rfp->status == 'pending')
+                                                <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
+                                                   class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                    See Quotes
+                                                </a>
+                                            @elseif($rfp->status == 'accepted')
+                                                <a class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
+                                                    Completed
+                                                </a>
+                                            @else
+                                                {{ $rfp->qoutes->count() }}
+                                            @endif
+
+                                        </td>
+
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            @if($rfp->qoutes->count() > 0 && $rfp->quotation_time >= \Carbon\Carbon::now() && $rfp->bypass == 0)
+                                                <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 1]) }}"
+                                                   class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                    Override
+                                                </a>
+                                            @elseif($rfp->quotation_time >= \Carbon\Carbon::now() && $rfp->bypass == 1)
+                                                Overrode
+                                            @else
+                                                N/A
+                                            @endif
                                         </td>
 
                                     </tr>

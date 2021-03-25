@@ -178,7 +178,12 @@
                     <tr>
                         <td class="border-t-2 border-gray-200 px-4 py-3">No. of quotations / RFQ</td>
                         @foreach($packages as $package)
-                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->quotations_per_rfq}}</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">
+                               @if($package->quotations_per_rfq == 2) 1-{{$package->quotations_per_rfq}} @include('misc.required')
+                               @elseif($package->quotations_per_rfq == 3) 1-{{$package->quotations_per_rfq}} @include('misc.required')
+                               @elseif($package->quotations_per_rfq == 5) 1-{{$package->quotations_per_rfq}} @include('misc.required')
+                               @endif
+                            </td>
                         @endforeach
                     </tr>
                     <tr>

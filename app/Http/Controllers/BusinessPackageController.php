@@ -37,6 +37,7 @@ class BusinessPackageController extends Controller
      */
     public function store(Request $request)
     {
+        //after payment add payment details to payment table after that insert that payment id to BusinessPackage table
         $package = Package::where('id', $request->package_id)->first();
 //        dd($package);
         $subscription_end_date = Carbon::now()->addYear();

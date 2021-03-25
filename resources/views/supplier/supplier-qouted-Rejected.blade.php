@@ -88,7 +88,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $rfp->orderItem->item_name }}
                                         </td>
-                                      
+
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $rfp->quote_quantity }}
                                         </td>
@@ -130,7 +130,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->qoute_status }}
+                                            {{ $rfp->qoute_status_updated }}
                                         </td>
                                     </tr>
                                 @endforeach
