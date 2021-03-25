@@ -5,7 +5,7 @@
 
     <div class="mt-4">
         <h4 class="text-gray-600">Simple Table</h4>
-        
+
         <div class="mt-6">
             <div class="bg-white shadow rounded-md overflow-hidden my-6">
                 <table class="text-left w-full border-collapse">
@@ -40,7 +40,7 @@
 
     <div class="mt-8">
         <h4 class="text-gray-600">Table with pagination</h4>
-        
+
         <div class="mt-6">
             <h2 class="text-xl font-semibold text-gray-700 leading-tight">Users</h2>
 
@@ -212,7 +212,7 @@
 
     <div class="mt-8">
         <h4 class="text-gray-600">Wide Table</h4>
-        
+
         <div class="flex flex-col mt-6">
             <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                 <div class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
@@ -241,7 +241,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                
+
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
                                     <div class="text-sm leading-5 text-gray-500">Web dev</div>
@@ -270,7 +270,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                
+
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
                                     <div class="text-sm leading-5 text-gray-500">Web dev</div>
@@ -299,7 +299,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                
+
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
                                     <div class="text-sm leading-5 text-gray-500">Web dev</div>
@@ -328,7 +328,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                
+
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
                                     <div class="text-sm leading-5 text-gray-500">Web dev</div>
@@ -357,7 +357,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                
+
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
                                     <div class="text-sm leading-5 text-gray-500">Web dev</div>
@@ -386,7 +386,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                
+
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
                                     <div class="text-sm leading-5 text-gray-500">Web dev</div>
@@ -415,7 +415,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                
+
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
                                     <div class="text-sm leading-5 text-gray-500">Web dev</div>
@@ -444,7 +444,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                
+
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="text-sm leading-5 text-gray-900">Software Engineer</div>
                                     <div class="text-sm leading-5 text-gray-500">Web dev</div>

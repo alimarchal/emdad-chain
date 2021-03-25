@@ -61,7 +61,7 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($collection->qoutes->where('qoute_status', 'Rejected') as $rfp)
+                                @foreach ($collection->qoutes->where('qoute_status_updated', 'Rejected') as $rfp)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $loop->iteration }}
@@ -89,9 +89,8 @@
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="{{ route('QoutationsBuyerReceivedQouteID', $rfp->id) }}"
-                                                class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                Respond
+                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                Rejected
                                             </a>
                                         </td>
 

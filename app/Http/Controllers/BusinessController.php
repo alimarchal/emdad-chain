@@ -64,7 +64,7 @@ class BusinessController extends Controller
             $businessPackage = BusinessPackage::where('user_id', \auth()->id())->first();
             $categories = explode(',',$businessPackage->categories);
             $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
-            return view('business.create', compact('parentCategories'));
+            return view('business.create', compact('parentCategories', 'categories'));
         } else {
             return redirect()->route('business.show', $business->id);
         }

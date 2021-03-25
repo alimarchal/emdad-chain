@@ -170,7 +170,7 @@ class DraftPurchaseOrderController extends Controller
 
         $quotation = Qoute::find($draftPurchaseOrder->qoute_no);
         $quotation->status = 'pending';
-        $quotation->qoute_status_updated = 'Qouted';
+        $quotation->qoute_status_updated = 'Rejected';
         $quotation->qoute_status = 'Qouted';
         $quotation->save();
         session()->flash('message', 'Business information successfully updated.');

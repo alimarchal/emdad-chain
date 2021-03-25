@@ -158,6 +158,16 @@
                              <strong>Remarks: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br>
                              <strong>Mobile Number for OTP: </strong> {{ $draftPurchaseOrder->otp_mobile_number }} <br>
                              <strong>Delivery Address: </strong> {{ strip_tags($draftPurchaseOrder->delivery_address) }} <br>
+                             <strong class="text-red-900">Note: </strong> <span class="text-red-700">
+                                We acknowledge that {{$draftPurchaseOrder->buyer_business->user->name. ' ' .$draftPurchaseOrder->buyer_business->user->middle_initial}}
+                                agrees to deal with {{$draftPurchaseOrder->supplier_business->user->name. ' ' .$draftPurchaseOrder->supplier_business->user->middle_initial}}. <br>
+                                Emdad has no responsibility with the kind of delivery and the source of finance for this delivery.</span> <br>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" name="note" id="flexCheckDefault" required>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Please Check to acknowledge
+                                </label>
+                            </div>
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
                             {{-- <strong>Delivery Information</strong><br>
@@ -169,7 +179,7 @@
 
 
                     <div class="flex justify-center">
-                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>
+                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block" style="height: 104px" /></div>
                     </div>
 
 
@@ -197,7 +207,7 @@
                     <div class="flex justify-between px-2 py-2 mt-2 h-15">
                         <div></div>
                         <div class="mt-3">Thanks for your Business</div>
-                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>
+                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block" style="height: 60px" /></div>
                     </div>
 
                 </div>
