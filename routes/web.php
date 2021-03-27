@@ -258,6 +258,7 @@ Route::get('/payment-status',[\App\Http\Controllers\MakePaymentController::class
 
 
 Route::middleware(['auth:sanctum'])->resource('packages', PackageController::class);
+Route::middleware(['auth:sanctum'])->get('business-packages/status', [\App\Http\Controllers\BusinessPackageController::class, 'businessPackagePaymentStatus'])->name('businessPackage.paymentStatus');
 Route::middleware(['auth:sanctum'])->resource('business-packages', BusinessPackageController::class);
 Route::middleware(['auth:sanctum'])->post('updateCategories', [BusinessPackageController::class, 'updateCategories'])->name('updatePackageCategories');
 Route::middleware(['auth:sanctum'])->post('business-package-store/{id}', [BusinessPackageController::class, 'store'])->name('business-package.store');
