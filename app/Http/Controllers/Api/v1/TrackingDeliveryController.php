@@ -61,6 +61,17 @@ class TrackingDeliveryController extends Controller
             return $td;
         }
     }
+    
+    
+    public function getAllDelivery($id)
+    {
+        $td = TrackingDelivery::where('delivery_id', $id)->get();
+        if (empty($td)) {
+            return response()->json(['message' => 'Not Found!'], 404);
+        } else {
+            return $td;
+        }
+    }
 
     /**
      * Show the form for editing the specified resource.

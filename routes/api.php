@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     Route::post('/login', [UserController::class, 'login']);
+    Route::get('TrackingDelivery/DeliveryID/{id}', [TrackingDeliveryController::class, 'getAllDelivery']);
     Route::apiResource('TrackingDelivery', TrackingDeliveryController::class);
     Route::apiResource('Delivery', DeliveryController::class);
     Route::apiResource('ShipmentItems', ShipmentItemController::class);
