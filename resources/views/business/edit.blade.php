@@ -36,7 +36,6 @@
                         </div>
                         <div class="flex mt-3 mb-4">
                             @include('category.category.index')
-
                             {{-- <ol class="pl-3">
                                 @foreach ($business->categories as $key)
                                     <li>{{ $loop->iteration }} - {{ \App\Models\Category::find($key->category_number)->name }}</li>

@@ -155,7 +155,8 @@ class BusinessController extends Controller
     public function edit(Business $business)
     {
         $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-        return view('business.edit', compact('parentCategories', 'business'));
+        $categories = explode(',', auth()->user()->business_package->categories);
+        return view('business.edit', compact('parentCategories', 'business','categories'));
     }
 
     /**

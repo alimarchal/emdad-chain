@@ -8,17 +8,11 @@
             @if (auth()->user()->rtl == 0)
                 Thank you for signing up! Your email address has been verified.
                 <br>Now you need to fill up the business registration form  before adding any user/s.
-{{--            @if (auth()->user()->hasRole('CEO') && (auth()->user()->registration_type == "Buyer" ||  auth()->user()->registration_type == "Buyer"))--}}
-{{--                <x-jet-nav-link href="{{ route('business.create') }}" class="text-red-600" :active="request()->routeIs('business.*')">--}}
-{{--                    {{ __('Business') }}--}}
-{{--                </x-jet-nav-link>--}}
-{{--            @endif--}}
             @else
                 نشكر لك تسجيلك! تم تفعيل بريدك الإلكتروني بنجاح. <br>
                 بإمكانك الآن تعبئة بيانات استمارة نشاطك التجاري قبل إضافة أي من المستخدمين.
             @endif
         </div>
-
     @elseif(Auth::user()->status == 1 && Auth::user()->registration_type == "Buyer")
 
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -94,9 +88,9 @@
                 <li>Help to solve the bottlenecks involved in the supply chain.</li>
             </ol>
         </div>
-        @elseif (Auth::user()->status == 'Approved')
+    @elseif (Auth::user()->status == 'Approved')
         <h1>Business is Approved</h1>
-        @elseif (Auth::user()->status == 'Rejected')
+    @elseif (Auth::user()->status == 'Rejected')
         <h1>Your Business is rejected</h1>
     @endif
 

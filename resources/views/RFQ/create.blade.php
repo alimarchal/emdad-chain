@@ -191,7 +191,7 @@
                             <label class="block font-medium text-sm text-gray-700 mb-1" for="description">
                                 Description
                             </label>
-                            <textarea name="description" id="description"></textarea>
+                            <textarea name="description" id="description" maxlength="255"></textarea>
                             <input type="hidden" value="{{ $user->business_id }}" name="business_id">
                             <input type="hidden" value="{{ $user->id }}" name="user_id">
                         </div>
@@ -200,7 +200,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="unit_of_measurement">
-                                    Unit of Measurement
+                                    Unit of Measurement <span class="text-red-600">*</span>
                                 </label>
 
                                 <select name="unit_of_measurement" id="unit_of_measurement" class="form-select shadow-sm block w-full" required>
@@ -214,14 +214,14 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                    Size
+                                    Size<span class="text-red-600">*</span>
                                 </label>
-                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="size" min="0" autocomplete="size" required>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="size" min="0" autocomplete="size" required>
                             </div>
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="quantity">
-                                    Quantity (Units)
+                                    Quantity (Units)<span class="text-red-600">*</span>
                                 </label>
                                 <input class="form-input rounded-md shadow-sm block w-full" id="quantity" type="number" name="quantity" min="0" autocomplete="quantity" required>
                             </div>
@@ -235,7 +235,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="last_price">
-                                    Last Price
+                                    Last Price<span class="text-red-600">*</span>
                                 </label>
                                 <input class="form-input rounded-md shadow-sm block w-full" id="last_price" type="number" name="last_price" min="0" autocomplete="last_price" required>
                             </div>
@@ -260,20 +260,20 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="delivery_period">
-                                    Delivery Period
+                                    Delivery Period<span class="text-red-600">*</span>
                                 </label>
                                 <select name="delivery_period" id="delivery_period" class="form-select shadow-sm block w-full" required>
                                     <option value="">None</option>
-                                    <option value="30 Days">30 Days</option>
-                                    <option value="60 Days">60 Days</option>
-                                    <option value="90 Days">90 Days</option>
-                                    <option value="Standard Order">Standing Order</option>
+                                    <option value="With in 30 Days">30 Days</option>
+                                    <option value="With in 60 Days">60 Days</option>
+                                    <option value="With in 90 Days">90 Days</option>
+                                    <option value="Immediately">Immediately</option>
                                 </select>
                             </div>
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="payment_mode">
-                                    Payment Mode
+                                    Payment Mode<span class="text-red-600">*</span>
                                 </label>
                                 <select name="payment_mode" id="payment_mode" class="form-select shadow-sm block w-full" required>
                                     <option value="">None</option>
@@ -293,7 +293,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="warehouse_id">
-                                    Delivery Location (Warehouse)
+                                    Delivery Location (Warehouse)<span class="text-red-600">*</span>
                                 </label>
                                 <select name="warehouse_id" id="warehouse_id" class="form-select shadow-sm block w-full" required>
                                     <option value="">Select Warehouse</option>

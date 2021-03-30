@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Business;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -195,6 +196,7 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => $request->password,
+                'email_verified_at' => Carbon::now(),
                 'business_id' => auth()->user()->business_id,
                 'usertype' => $roleName->name,
                 'status' => 1,
@@ -297,7 +299,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($request->user_id);
         $user->update($request->all());
-//        return redirect()->route('business.create');
         return redirect()->route('packages.index');
     }
 
