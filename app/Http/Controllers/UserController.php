@@ -71,7 +71,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        if (auth()->user()->usertype == "superadmin") {
+        if (auth()->user()->hasRole('SuperAdmin')) {
 
             $roles  = Role::all();
 //            $permissions  = Permission::all();
@@ -179,7 +179,7 @@ class UserController extends Controller
 //        $data = array();
         $roleName  = Role::where('id' , $request->input('role'))->first();
 
-        if($request->role == 1)
+        if($request->role == 1 || auth()->user()->hasRole('SuperAdmin'))
         {
             $data = [
                 'name' => $request->name,
