@@ -19,7 +19,11 @@
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             @include('users.sessionMessage')
-                @if(auth()->user()->registration_type == 'Supplier')
+                @if(auth()->user()->hasRole('SuperAdmin'))
+
+                    {{-- @endif--}}
+                    <hr>
+                @elseif(auth()->user()->registration_type == 'Supplier')
                     <!-- Remaining User and Driver count for respective packages -->
                         @php
                             $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
