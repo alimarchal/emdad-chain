@@ -1,4 +1,7 @@
-
+@section('headerScripts')
+{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js" integrity="sha512-lteuRD+aUENrZPTXWFRPTBcDDxIGWe5uu0apPEn+3ZKYDwDaEErIK9rvR0QzUGmUQ55KFE2RqGTVoZsKctGMVw==" crossorigin="anonymous"></script>
+@endsection
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
@@ -113,17 +116,23 @@
 
                                         @php
                                             $created = $rfp->quotation_time;
+                                            $time = \Carbon\Carbon::parse($created)->format('Y-m-d');
                                             $now = \Carbon\Carbon::now();
                                             $diffInHrs = $now->diffInHours($created);
                                             $diffInMins = $now->diffInMinutes($created);
                                             // checking previous dpo if any
                                             $dpo = \App\Models\DraftPurchaseOrder::where('rfq_item_no', $rfp->id)->where('po_status' , 'pending')->where('status' , 'pending')->first();
                                         @endphp
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td
+                                          @if($rfp->status == 'accepted')  class="px-6 py-4 text-center whitespace-nowrap" @else
+                                              class="px-6 py-4 text-center whitespace-nowrap"  data-countdown="{{$time}}"
+                                          @endif
+                                        >
                                             @if($rfp->status == 'accepted')
                                                 N/A
                                             @else
-                                                {{ $diffInHrs }} hours @if($diffInHrs == 0) and {{ $diffInMins }} minutes @endif <br>
+{{--                                                {{ $diffInHrs }} hours @if($diffInHrs == 0) and {{ $diffInMins }} minutes @endif --}}
+                                                <br>
                                             @endif
                                         </td>
 
@@ -132,12 +141,17 @@
                                                 <a class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
                                                     DPO generated
                                                 </a>
-                                            @elseif($rfp->bypass == 1 && $rfp->quotation_time >= \Carbon\Carbon::now() && $rfp->status == 'pending')
+                                            @elseif($rfp->bypass == 1 && $rfp->quotation_time > \Carbon\Carbon::now() && $rfp->status == 'pending')
                                                 <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
                                                    class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                    See Quotes
                                                 </a>
-                                            @elseif($rfp->bypass == 0 && $rfp->quotation_time <= \Carbon\Carbon::now() && $rfp->status == 'pending')
+                                            @elseif($rfp->bypass == 1 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
+                                                <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
+                                                   class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                    See Quotes
+                                                </a>
+                                            @elseif($rfp->bypass == 0 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
                                                 <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
                                                    class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                     See Quotes
@@ -353,3 +367,11 @@
     </x-app-layout>
 @endif
 
+<script>
+    $('[data-countdown]').each(function() {
+        var $this = $(this), finalDate = $(this).data('countdown');
+        $this.countdown(finalDate, function(event) {
+            $this.html(event.strftime('%D day(s) %H:%M:%S'));
+        });
+    });
+</script>
