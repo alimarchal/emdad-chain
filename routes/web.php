@@ -80,6 +80,26 @@ Route::post('e-buyer', [EBuyerSurveyAnswerController::class, 'store'])->name('eB
 ####################END######################
 
 
+####################  Shipter Website Template   ###################
+####################     WebsiteEnglish          ###################
+Route::get('/english', [\App\Http\Controllers\WebsiteEnglishController::class, 'index'])->name('english.index');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+####################  END   ###################
+####################  Website    ######################################
+
 ####################  Website    ###################
 Route::get('/aboutUs', function () {
     return view('website.aboutUs');
@@ -252,9 +272,9 @@ Route::middleware(['auth:sanctum'])->post('bank-payments/update', [BankPaymentCo
 // })->name('subscription');
 #################### END ##############################################################
 
-Route::post('/make-payment',[\App\Http\Controllers\MakePaymentController::class, 'makePayment'])->name('make.payment');
-Route::get('/payment-status',[\App\Http\Controllers\MakePaymentController::class, 'paymentStatus'])->name('payment.status');
-    //return view('moyasar_payment.payment');
+Route::post('/make-payment', [\App\Http\Controllers\MakePaymentController::class, 'makePayment'])->name('make.payment');
+Route::get('/payment-status', [\App\Http\Controllers\MakePaymentController::class, 'paymentStatus'])->name('payment.status');
+//return view('moyasar_payment.payment');
 
 
 Route::middleware(['auth:sanctum'])->resource('packages', PackageController::class);
