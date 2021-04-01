@@ -79,6 +79,8 @@
 <script src="{{url('Shipter/assets/js/jquery.slicknav.min.js')}}"></script>
 <!-- Custom script for this template -->
 <script src="{{url('Shipter/assets/js/script.js')}}"></script>
+
+@yield('custom-footer')
 </body>
 
 </html>

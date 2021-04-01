@@ -96,7 +96,6 @@ Route::get('/english', [\App\Http\Controllers\WebsiteEnglishController::class, '
 
 
 
-
 ####################  END   ###################
 ####################  Website    ######################################
 
