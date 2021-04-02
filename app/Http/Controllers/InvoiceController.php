@@ -158,7 +158,10 @@ class InvoiceController extends Controller
         elseif($del->payment_term == "Cash"){
 
             $invoice = Invoice::where('draft_purchase_order_id', $del->draft_purchase_order_id)->first();
-            $invoice->update(['delivery_id' => $del->id]);
+            $invoice->update([
+                'delivery_id' => $del->id,
+                'invoice_type' => 0
+            ]);
 
             $delivery_update =  Delivery::where('id', $del->id)->first();
             $delivery_update->update([
