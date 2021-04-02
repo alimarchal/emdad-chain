@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="{{url('Shipter/assets/images/icon.png')}}">
+    <link rel="shortcut icon" type="image/png" href="{{url('ficon/apple-icon-180x180.png')}}">
     <!-- Page Title -->
     <title> @yield('title',config('app.name'))</title>
     <!-- Icon fonts -->
@@ -42,8 +42,8 @@
     </div>
 </div>
 <!-- end page-loader -->
-<!-- header-area start -->
-@if(Request::is('shipment.index'))
+
+@if(!request()->routeIs('english.index'))
     <header>
         <div class="header-top">
             <div class="container">
@@ -58,116 +58,15 @@
                             <div class="col-lg-7 col-md-6">
                                 <ul class="d-flex header-social">
                                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://instagram.com/emdad_chain?igshid=ok4zahralc2t"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://twitter.com/emdad_chain?s=21"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.linkedin.com/company/emdadchain"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
                             <div class="col-lg-5 col-md-6">
                                 <ul class="login-r">
-                                    <li><a href="#">Login</a></li>
-                                    <li><a href="#">Register</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="header-area" id="sticky-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-9 col-sm-9 col-9">
-                        <div class="logo">
-                            <a href="index.html"><img src="{{url('Shipter/assets/images/logo/logo.png')}}" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-8 d-none d-lg-block">
-                        <div class="main-menu">
-                            <nav class="nav_mobile_menu">
-                                <ul>
-                                    <li class="active"><a href="#">Home</a>
-                                        <ul class="submenu">
-                                            <li class="active"><a href="index.html">Home One</a></li>
-                                            <li><a href="index-2.html">Home Two</a></li>
-                                            <li><a href="index-3.html">Home Three</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="#">Services</a>
-                                        <ul class="submenu">
-                                            <li><a href="service.html">service single</a></li>
-                                            <li><a href="Freight.html">Air Freight</a></li>
-                                            <li><a href="road.html">Road Freight</a></li>
-                                            <li><a href="ocean.html">Ocean Freight</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="case.html">Pages</a>
-                                        <ul class="submenu">
-                                            <li><a href="pricing.html">pricing table</a></li>
-                                            <li><a href="team.html">Team</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                    <li><a href="#">Blog</a>
-                                        <ul class="submenu">
-                                            <li><a href="blog.html">Blog with right sidebar</a></li>
-                                            <li><a href="blog-right.html">Blog with Left sidebar</a></li>
-                                            <li><a href="blog-fullwidth.html">Blog full width</a></li>
-                                            <li><a href="blog-details.html">Blog single right sidebar</a></li>
-                                            <li><a href="blog-details-right.html">Blog single left sidebar</a></li>
-                                            <li><a href="blog-details-fullwidth.html">Blog single fullwidth</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 col-md-3 col-sm-3 col-3 search">
-                        <ul>
-                            <li><a href="javascript:void(0);"><i class="fa fa-search"></i></a>
-                                <ul>
-                                    <li>
-                                        <form action="search">
-                                            <input type="text" placeholder="search here..">
-                                            <button><i class="fa fa-search"></i></button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-12 d-block d-lg-none">
-                        <div class="mobile_menu"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-@else
-    <header>
-        <div class="header-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12 col-12 col-lg-6">
-                        <ul class="d-flex account_login-area">
-                            <li><i class="fa fa-clock-o" aria-hidden="true"></i></i>Mon - Tues : 6.00 am - 10.00 pm, Sunday Closed</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-12 col-lg-6">
-                        <div class="row">
-                            <div class="col-lg-7 col-md-6">
-                                <ul class="d-flex header-social">
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-5 col-md-6">
-                                <ul class="login-r">
-                                    <li><a href="#">Login</a></li>
-                                    <li><a href="#">Register</a></li>
+                                    <li><a href="{{route('login')}}">Login</a></li>
+                                    <li><a href="{{route('register')}}">Register</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -180,22 +79,22 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-12 col-12">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo-2.png" alt=""></a>
+                            <a href="{{route('english.index')}}"><img src="{{url('logo-full.png')}}" alt="" style="max-height: 60px"></a>
                         </div>
                     </div>
                     <div class="col-md-9 col-sm-12 col-12 col-lg-9">
                         <ul class="d-flex account_login-area">
                             <li class="account-item">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
-                                <h5><span>Call Us Now</span>Tel: +555 965 325</h5>
+                                <h5><span>Call Us Now</span>Tel: +966 53 416 8874</h5>
                             </li>
                             <li class="account-item account-item-2">
                                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                <h5><span>Mail Us Today</span>youremail@gmail.com</h5>
+                                <h5><span>Mail Us Today</span>info@emdad-chain.com<br>support@emdad-chain.com</h5>
                             </li>
                             <li class="account-item">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                <h5><span>Company Location</span>1230 Banena Street, London</h5>
+                                <h5><span>Company Location</span>King Abdul Aziz Road, Exit 5, <br>Riyadh - 13525, KSA</h5>
                             </li>
                         </ul>
                     </div>
@@ -210,70 +109,52 @@
                             <div class="main-menu">
                                 <nav class="nav_mobile_menu">
                                     <ul>
-                                        <li><a href="#">Home</a>
+                                        <li><a href="{{(request()->routeIs('english.index')?'active':'')}}">Home</a></li>
+                                        <li class="{{(request()->routeIs('aboutUs')?'active':'')}}"><a href="about.html">About Us</a></li>
+                                        <li class="{{(request()->routeIs('services')?'active':'')}}"><a href="contact.html">Services</a></li>
+                                        <li class="{{(request()->routeIs('ourTeam')?'active':'')}}"><a href="contact.html">Our Team</a></li>
+                                        <li class="{{(request()->routeIs('support')?'active':'')}}"><a href="contact.html">Support</a></li>
+                                        <li class=""><a href="#">Survey</a>
                                             <ul class="submenu">
-                                                <li class="active"><a href="index.html">Home One</a></li>
-                                                <li><a href="index-2.html">Home Two</a></li>
-                                                <li><a href="index-3.html">Home Three</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="#">Services</a>
-                                            <ul class="submenu">
-                                                <li><a href="service.html">service single</a></li>
-                                                <li><a href="Freight.html">Air Freight</a></li>
-                                                <li><a href="road.html">Road Freight</a></li>
-                                                <li><a href="ocean.html">Ocean Freight</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="case.html">Pages</a>
-                                            <ul class="submenu">
-                                                <li><a href="pricing.html">pricing table</a></li>
-                                                <li><a href="team.html">Team</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="active"><a href="contact.html">Contact</a></li>
-                                        <li><a href="#">Blog</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog with right sidebar</a></li>
-                                                <li><a href="blog-right.html">Blog with Left sidebar</a></li>
-                                                <li><a href="blog-fullwidth.html">Blog full width</a></li>
-                                                <li><a href="blog-details.html">Blog single right sidebar</a></li>
-                                                <li><a href="blog-details-right.html">Blog single left sidebar</a></li>
-                                                <li><a href="blog-details-fullwidth.html">Blog single fullwidth</a></li>
+                                                <li><a href="blog.html">Buyer</a></li>
+                                                <li><a href="blog-right.html">Supplier</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-4 col-5 search">
-                            <ul>
-                                <li><a href="javascript:void(0);"><i class="fa fa-search"></i></a>
-                                    <ul>
-                                        <li>
-                                            <form action="search">
-                                                <input type="text" placeholder="search here..">
-                                                <button><i class="fa fa-search"></i></button>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6 col-6">
-                            <div class="btn-style btn-style2"><a href="#">Request a Quote</a></div>
-                        </div>
-                        <div class="col-12 col-sm-11 col-md-9 d-block d-lg-none">
-                            <div class="mobile_menu"></div>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    <!-- header-area end -->
+    <!-- .breadcumb-area start -->
+    <div class="breadcumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcumb-wrap text-center">
+                        <h2>@yield('breadcumb-title','')</h2>
+                        <ul>
+                            <li><a href="{{route('english.index')}}">Home</a></li>
+                            <li><span>@yield('breadcumb-text','')</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .breadcumb-area end -->
+
+    <!-- section-section start -->
+    <div class="contact-page-area section-padding">
+        <div class="container">
+            @yield('main')
+        </div>
+    </div>
+    <!--section-section end -->
 @endif
 
-
-
-<!-- header-area end -->

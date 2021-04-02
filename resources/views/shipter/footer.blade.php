@@ -1,3 +1,38 @@
+<!-- start track-section -->
+<section class="newsletter-section newsletter-section-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Subscribe Our Newsletter</h2>
+                <p>Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
+            </div>
+            <div class="col-lg-8">
+                <div class="newsletter">
+                    <div class="newsletter-form">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <form>
+                                    <input type="text" class="form-control" placeholder="Email">
+                                </form>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <form>
+                                    <input type="text" class="form-control" placeholder="Tracking Number">
+                                </form>
+                            </div>
+
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <button type="submit">Subscribe</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end container -->
+</section>
+<!-- end track-section -->
 <!-- .footer-area start -->
 <div class="footer-area">
     <div class="footer-top">
@@ -5,15 +40,17 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 footer-t">
                     <div class="footer-logo">
-                        <img src="{{url('Shipter/assets/images/logo/logo.png')}}" alt="">
+                        <img src="{{url('logo-full.png')}}" alt="" style="max-width: 70px">
                     </div>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority</p>
-                    <p>By injected humour, or randomised words</p>
+                    <p>120 Aban Center, King Abdul Aziz Road, Exit 5, Riyadh - 13525, Kingdom of Saudi Arabia (KSA)
+                    </p>
+                    <p></p>
                     <div class="social">
                         <ul class="d-flex">
                             <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="https://instagram.com/emdad_chain?igshid=ok4zahralc2t"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="https://twitter.com/emdad_chain?s=21"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.linkedin.com/company/emdadchain"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -21,12 +58,11 @@
                     <div class="footer-link">
                         <h3>Quick Link</h3>
                         <ul>
+                            <li><a href="#">Home</a></li>
                             <li><a href="#">About Us</a></li>
-                            <li><a href="#">Service</a></li>
-                            <li><a href="#">Location</a></li>
-                            <li><a href="#">Testimonial</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Our Team</a></li>
+                            <li><a href="#">Support </a></li>
                         </ul>
                     </div>
                 </div>
@@ -62,7 +98,7 @@
             <div class="footer-bottom-content">
                 <div class="row">
                     <div class="col-12">
-                        <span>© Copyrights 2018. All Rights Reserved.</span>
+                        <span>© Copyright {{date('Y')}} - {{config('app.name')}}. All Rights Reserved. Powered by: Websoft</span>
                     </div>
                 </div>
             </div>

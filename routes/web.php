@@ -83,6 +83,7 @@ Route::post('e-buyer', [EBuyerSurveyAnswerController::class, 'store'])->name('eB
 ####################  Shipter Website Template   ###################
 ####################     WebsiteEnglish          ###################
 Route::get('/english', [\App\Http\Controllers\WebsiteEnglishController::class, 'index'])->name('english.index');
+Route::get('/en-about', [\App\Http\Controllers\WebsiteEnglishController::class, 'about'])->name('english.about');
 
 
 

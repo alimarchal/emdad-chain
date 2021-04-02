@@ -14,7 +14,13 @@ class WebsiteEnglishController extends Controller
      */
     public function index()
     {
-        return view('shipter.sample-page');
+        return view('shipter_theme.home');
+    }
+
+
+    public function about()
+    {
+        return view('shipter_theme.about');
     }
 
     /**
