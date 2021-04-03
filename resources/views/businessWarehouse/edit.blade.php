@@ -1,3 +1,7 @@
+@section('headerScripts')
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
+    <script src="{{url('js/mapInput.js')}}"></script>
+@endsection
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -12,8 +16,6 @@
             @include('users.sessionMessage')
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
-
-
 
                     <form action="{{route('businessWarehouse.update',$businessWarehouse->id)}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         @csrf
@@ -56,8 +58,8 @@
                             <x-jet-label class="w-1/2" for="cold_storage">Cold Storage</x-jet-label>
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="longitude" type="text" name="longitude" class="border p-2 w-1/2" value="{{$businessWarehouse->longitude}}"></x-jet-input>
-                            <x-jet-input id="latitude" name="latitude" type="text" class="border p-2 w-1/2" value="{{$businessWarehouse->latitude}}"></x-jet-input>
+                            <x-jet-input id="longitude" type="text" readonly name="longitude" class="border p-2 w-1/2" value="{{$businessWarehouse->longitude}}"></x-jet-input>
+                            <x-jet-input id="latitude" name="latitude" readonly type="text" class="border p-2 w-1/2" value="{{$businessWarehouse->latitude}}"></x-jet-input>
                             <select name="warehouse_type" id="warehouse_type" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">None</option>
                                 <option value="Powered" {{($businessWarehouse->warehouse_type == "Powered")?'selected':''}}>Powered</option>
@@ -70,6 +72,14 @@
                                 <option value="0"  {{($businessWarehouse->cold_storage == "0")?'selected':''}} >No</option>
                             </select>
                         </div>
+
+                        <br>
+                        <p>Please use the map marker for your warehouse location.</p>
+                        <br>
+                        <div id="map" style="width:100%;height:400px; ">
+                            <div style="width: 100%; height: 100%" id="address-map"></div>
+                        </div>
+                        <br>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-label class="w-1/2" for="gate_type">Gate Type</x-jet-label>
                             <x-jet-label class="w-1/2" for="fork_lift">Fork Lift</x-jet-label>

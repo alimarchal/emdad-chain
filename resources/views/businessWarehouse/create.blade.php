@@ -1,3 +1,7 @@
+@section('headerScripts')
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
+    <script src="{{url('js/mapInput.js')}}"></script>
+@endsection
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
@@ -63,15 +67,18 @@
                                 <x-jet-input id="address" type="text" name="address" class="border p-2 w-1/2"></x-jet-input>
                                 <x-jet-input id="city" type="text" name="city" class="border p-2 w-1/2"></x-jet-input>
                             </div>
+
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="longitude">Longitude</x-jet-label>
-                                <x-jet-label class="w-1/2" for="latitude">Latitude</x-jet-label>
+                                <x-jet-label class="w-1/2" for="longitude">Longitude  @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="latitude">Latitude  @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="warehouse_type">Warehouse Type @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="cold_storage">Cold Storage @include('misc.required')</x-jet-label>
                             </div>
+
+
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="longitude" type="text" name="longitude" class="border p-2 w-1/2"></x-jet-input>
-                                <x-jet-input id="latitude" name="latitude" type="text" class="border p-2 w-1/2"></x-jet-input>
+                                <x-jet-input id="longitude" required readonly  type="text" name="longitude" class="border p-2 w-1/2"></x-jet-input>
+                                <x-jet-input id="latitude"  required readonly name="latitude" type="text" class="border p-2 w-1/2"></x-jet-input>
                                 <select name="warehouse_type" id="warehouse_type" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                     <option value="">None</option>
                                     <option value="Powered">Powered</option>
@@ -84,6 +91,13 @@
                                     <option value="0">No</option>
                                 </select>
                             </div>
+                            <br>
+                            <p>Please use the map marker for your warehouse location.</p>
+                            <br>
+                            <div id="map" style="width:100%;height:400px; ">
+                                <div style="width: 100%; height: 100%" id="address-map"></div>
+                            </div>
+                            <br>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="gate_type">Gate Type @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="fork_lift">Fork Lift @include('misc.required')</x-jet-label>
@@ -147,8 +161,10 @@
 
                             </div>
 
+
                             <x-jet-button class="float-right mt-4 mb-4">Save & Next</x-jet-button>
                         </form>
+
 
 
                         {{-- <livewire:business-warehouse/> --}}
@@ -244,8 +260,8 @@
                                 <x-jet-label class="w-1/2" for="cold_storage">تخزين مبرّ@include('misc.required')د</x-jet-label>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="longitude" type="text" name="longitude[]" class="border p-2 w-1/2"></x-jet-input>
-                                <x-jet-input id="latitude" name="latitude[]" type="text" class="border p-2 w-1/2"></x-jet-input>
+                                <x-jet-input id="longitude" required readonly type="text" name="longitude[]" class="border p-2 w-1/2"></x-jet-input>
+                                <x-jet-input id="latitude" required readonly name="latitude[]" type="text" class="border p-2 w-1/2"></x-jet-input>
                                 <select name="warehouse_type[]" id="warehouse_type" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                     <option value="">None</option>
                                     <option value="example">Example</option>
@@ -312,6 +328,11 @@
                             </div>
                             <div class="control-group after-add-more">
 
+                            </div>
+
+                            <br>
+                            <div id="map" style="width:100%;height:400px; ">
+                                <div style="width: 100%; height: 100%" id="address-map"></div>
                             </div>
 
                             <x-jet-button class="float-right mt-4 mb-4">حفظ، التالي</x-jet-button>

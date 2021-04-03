@@ -298,5 +298,5 @@ Route::middleware(['auth:sanctum'])->get('select-category', [CategoryController:
 Route::middleware(['auth:sanctum'])->get('sub-categories', [CategoryController::class, 'subCategories'])->name('subCategories');
 
 Route::get('/testOne', function () {
-    return \App\Models\User::waitingTime();
+    return view('test');
 });

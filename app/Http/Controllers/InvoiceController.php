@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Livewire\BusinessWarehouse;
 use App\Models\BankPayment;
 use App\Models\Delivery;
 use App\Models\DeliveryNote;
 use App\Models\DraftPurchaseOrder;
+use App\Models\EOrderItems;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -93,9 +95,11 @@ class InvoiceController extends Controller
 
     public function invoiceGenerate(Request $request)
     {
-//        dd($request->all());
+//
         $delivery_note = DeliveryNote::where('id', $request->delivery_note)->first();
         $purchase_order = DraftPurchaseOrder::where('id', $request->draft_purchase_order_id)->first();
+        $rfq_item = EOrderItems::where('id',$purchase_order->rfq_item_no)->first('warehouse_id');
+        $business_warehouse = \App\Models\BusinessWarehouse::where('id',$rfq_item->warehouse_id)->first();
         $delivery = [
             'draft_purchase_order_id' => $delivery_note->draft_purchase_order_id,
             'user_id' => $delivery_note->user_id,
@@ -119,6 +123,7 @@ class InvoiceController extends Controller
             'payment_term' => $purchase_order->payment_term,
             'shipment_status' => 0,
             'delivery_address' => $delivery_note->delivery_address,
+            'destination_coordinates' => $business_warehouse->longitude . ',' . $business_warehouse->latitude,
             'waiting_time' => \App\Models\User::waitingTime(),
         ];
 
@@ -165,7 +170,9 @@ class InvoiceController extends Controller
                 'invoice_id' => $invoice->id,
             ]);
 
+
             $bankPayment = BankPayment::where('invoice_id', $invoice->id)->first();
+
             $bankPayment->delivery_id = $del->id;
             $bankPayment->save();
 

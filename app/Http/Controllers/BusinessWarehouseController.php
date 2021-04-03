@@ -187,7 +187,6 @@ class BusinessWarehouseController extends Controller
             'mobile' => 'required',
             'country' => 'required',
             'address' => 'required',
-            'city' => 'required',
             'warehouse_type' => 'required',
             'cold_storage' => 'required',
             'gate_type' => 'required',
