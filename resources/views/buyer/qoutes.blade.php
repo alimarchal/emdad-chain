@@ -174,7 +174,7 @@
 
                                 @elseif($packageType->package_id == 2)
                                     @php
-                                        $modified = $collection->qoutes->where('qoute_status', 'ModificationNeeded')->orWhere('qoute_status', 'Modified')->first();
+                                        $modified = $collection->qoutes()->where('qoute_status', 'ModificationNeeded')->orWhere('qoute_status', 'Modified')->first();
                                     @endphp
                                     @if(isset($modified))
                                         <div class="text-center"> <span class="py-4 px-6 block hover:text-red-500 focus:outline-none 'text-blue-500 border-b-2 font-medium border-blue-500' text-center text-bold text-red-700"> See Modification needed tab</span></div>
@@ -232,7 +232,7 @@
                                     @endif
                                 @elseif($packageType->package_id == 3 || $packageType->package_id == 4)
                                     @php
-                                        $modified = $collection->qoutes->where('qoute_status', 'ModificationNeeded')->orWhere('qoute_status', 'Modified')->first();
+                                        $modified = $collection->qoutes()->where('qoute_status', 'ModificationNeeded')->orWhere('qoute_status', 'Modified')->first();
                                     @endphp
                                     @if(isset($modified))
                                         <div class="text-center"> <span class="py-4 px-6 block hover:text-red-500 focus:outline-none 'text-blue-500 border-b-2 font-medium border-blue-500' text-center text-bold text-red-700"> See Modification needed tab</span></div>

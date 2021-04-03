@@ -12,6 +12,7 @@ use App\Http\Controllers\DeliveryNoteController;
 use App\Http\Controllers\DraftPurchaseOrderController;
 use App\Http\Controllers\EBuyerSurveyAnswerController;
 use App\Http\Controllers\ECartController;
+use App\Http\Controllers\EmdadInvoiceController;
 use App\Http\Controllers\EOrdersController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\PackageController;
@@ -249,6 +250,9 @@ Route::middleware(['auth:sanctum'])->resource('vehicle', VehicleController::clas
 ###################### Generate Invoice & Delivery ####################################
 Route::middleware(['auth:sanctum'])->post('/invoice/generate', [InvoiceController::class, 'invoiceGenerate'])->name('invoice.generate');
 Route::middleware(['auth:sanctum'])->get('/invoice/{invoice}', [InvoiceController::class, 'show'])->name('invoice.show');
+Route::middleware(['auth:sanctum'])->get('/emdad-invoices/', [EmdadInvoiceController::class, 'index'])->name('emdadInvoices');
+Route::middleware(['auth:sanctum'])->get('/emdad-invoice/{id}', [EmdadInvoiceController::class, 'view'])->name('emdadInvoiceView');
+Route::middleware(['auth:sanctum'])->get('/generate-emdad-invoice/{id}', [EmdadInvoiceController::class, 'generateInvoice'])->name('emdadGenerateInvoice');
 #################### END ##############################################################
 #
 ####################### Payment routes ####################################

@@ -17,4 +17,9 @@ class Invoice extends Model
     {
         return $this->belongsTo(DraftPurchaseOrder::class, 'draft_purchase_order_id', 'id');
     }
+
+    public function quote()
+    {
+        return $this->belongsTo(Qoute::class, 'qoute_no', 'id');
+    }
 }

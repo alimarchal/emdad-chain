@@ -8,7 +8,9 @@ use App\Models\Delivery;
 use App\Models\DeliveryNote;
 use App\Models\DraftPurchaseOrder;
 use App\Models\EOrderItems;
+use App\Models\EmdadInvoice;
 use App\Models\Invoice;
+use App\Models\Qoute;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -145,7 +147,7 @@ class InvoiceController extends Controller
                 'shipment_cost' => $purchase_order->shipment_cost,
                 'total_cost' => $purchase_order->total_cost,
                 'vat' => $purchase_order->vat,
-                'ship_to_address' => $del->ship_to_address,
+                'ship_to_address' => $del->delivery_address,
             ];
 
             $inv = Invoice::create($invoice);
@@ -158,12 +160,27 @@ class InvoiceController extends Controller
             $delivery_note->save();
             $purchase_order->status = 'completed';
             $purchase_order->save();
+
+    //      Calculating total cost w/o VAT
+            $quote = Qoute::where('id', $inv->quote->id)->first();
+            $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
+            $totalEmdadCharges =  $totalCost * (1.5 / 100) ;
+            $totalCharges =  $totalCost + $totalEmdadCharges ;
+
+            EmdadInvoice::create([
+                'invoice_id' => $inv->id,
+                'supplier_business_id' => $inv->supplier_business_id,
+                'charges' => $totalCharges,
+            ]);
             return redirect()->route('invoice.show',$inv->id);
         }
         elseif($del->payment_term == "Cash"){
 
             $invoice = Invoice::where('draft_purchase_order_id', $del->draft_purchase_order_id)->first();
-            $invoice->update(['delivery_id' => $del->id]);
+            $invoice->update([
+                'delivery_id' => $del->id,
+                'invoice_type' => 0
+            ]);
 
             $delivery_update =  Delivery::where('id', $del->id)->first();
             $delivery_update->update([
