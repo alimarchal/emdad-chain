@@ -35,6 +35,8 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('ShipmentItems', ShipmentItemController::class);
     Route::apiResource('Shipment', ShipmentController::class);
     Route::apiResource('DeliveryNote', \App\Http\Controllers\Api\v1\DeliveryNoteController::class);
+    Route::apiResource('User', \App\Http\Controllers\Api\v1\UserController::class);
+    Route::apiResource('Vehicle', \App\Http\Controllers\Api\v1\VehicleController::class);
 });
 
 

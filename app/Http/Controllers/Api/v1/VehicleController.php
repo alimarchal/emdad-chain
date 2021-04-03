@@ -3,20 +3,19 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class VehicleController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        return User::paginate(10);
+        return Vehicle::paginate(10);
     }
 
     /**
@@ -48,11 +47,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        if (empty($user)) {
+         $vehicle = Vehicle::find($id);
+        if (empty($vehicle)) {
             return response()->json(['message' => 'Not Found!'], 404);
         } else {
-            return $user;
+            return $vehicle;
         }
     }
 
@@ -76,12 +75,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $token = $request->code;
+         $token = $request->code;
         if ($token == "RRNirxFh4j9Ftd") {
-            $user = User::find($id);
-            $user->driver_status = $request->driver_status;
-            $user->save();
-            return $user;
+            $vehicle = Vehicle::find($id);
+            $vehicle->availability_status = $request->availability_status;
+            $vehicle->status = $request->status;
+            $vehicle->save();
+            return $vehicle;
         } else {
             return response()->json(['message' => 'Not Found!'], 404);
         }
@@ -96,25 +96,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function login(Request $request)
-    {
-        $data = $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
-        $user = User::whereEmail($request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response([
-                'email' => ['The provided credentials are incorrect.'],
-            ], 404);
-        }
-
-        $user = User::where('email', $request->email)->first();
-
-        return $user;
     }
 }
