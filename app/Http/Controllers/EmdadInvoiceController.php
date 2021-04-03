@@ -19,7 +19,7 @@ class EmdadInvoiceController extends Controller
         }
         elseif(auth()->user()->registration_type == "Supplier")
         {
-            $emdadInvoices = EmdadInvoice::where([['supplier_business_id', auth()->user()->business_id],['send_status', 1],['status', 0]])->get();
+            $emdadInvoices = EmdadInvoice::where([['supplier_business_id', auth()->user()->business_id],['send_status', 1]])->get();
 
             return view('invoice.supplier_emdad_invoices', compact('emdadInvoices'))->with('invoice');
         }
@@ -30,5 +30,15 @@ class EmdadInvoiceController extends Controller
         $emdadInvoice = EmdadInvoice::where('id', $id)->first();
 
         return view('invoice.supplier_emdad-invoice_view', compact('emdadInvoice'));
+    }
+
+    public function generateInvoice($id)
+    {
+        EmdadInvoice::where('id', $id)->update([
+            'send_status' => 1
+        ]);
+
+        session()->flash('message', 'Invoice send successfully');
+        return redirect()->route('emdadInvoices');
     }
 }

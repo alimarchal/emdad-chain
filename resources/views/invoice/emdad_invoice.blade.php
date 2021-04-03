@@ -111,11 +111,11 @@
                                                             </span>
                                                         </td>
                                                         <td class="whitespace-nowrap ml-10" style="text-align:center;">
-                                                            <span>@if($emdadInvoice->invoice->invoice_type == 1) Paid @else Un-paid @endif</span>
+                                                            <span>@if($emdadInvoice->status == 1) Paid @else Un-paid @endif</span>
                                                         </td>
                                                         <td class="whitespace-nowrap ml-10" style="text-align:center;">
                                                             @if($emdadInvoice->invoice->invoice_status == 3 && $emdadInvoice->invoice->invoice_type == 0 && $emdadInvoice->send_status == 0)
-                                                                <a class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
+                                                                <a href="{{route('emdadGenerateInvoice', $emdadInvoice->id)}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
                                                                     Send Emdad Invoice
                                                                 </a>
                                                             @elseif($emdadInvoice->invoice->invoice_status != 3 && $emdadInvoice->invoice->invoice_type == 0 && $emdadInvoice->send_status == 0)

@@ -27,14 +27,27 @@
 
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Invoice #
+                                    Emdad Invoice #
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Charges
+                                    {{auth()->user()->business->business_name}} Invoice #
                                 </th>
+
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Item Name
+                                    Amount w/o VAT
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    Emdad invoice amount (1.5 %)
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    Status
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    Action
                                 </th>
 
 
@@ -46,8 +59,24 @@
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $emdadInvoice->id }}
                                         </td>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            {{ $emdadInvoice->invoice->id }}
+                                        </td>
+                                        {{-- calculating total cost without VAT--}}
+                                        @php
+                                            $quote = \App\Models\Qoute::where('id', $emdadInvoice->invoice->quote->id)->first();
+                                            $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
+                                            $totalEmdadCharges = $totalCost * (1.5 / 100);
+                                        @endphp
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            {{$totalCost}}
+                                        </td>
                                         <td class="px-7 py-4 text-center whitespace-nowrap">
-                                            {{ $emdadInvoice->charges }}
+                                            {{ $totalEmdadCharges }}
+                                        </td>
+
+                                        <td class="px-7 py-4 text-center whitespace-nowrap">
+                                            @if($emdadInvoice->status == 0)  Un-paid @elseif($emdadInvoice->status == 1) Paid @endif
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">

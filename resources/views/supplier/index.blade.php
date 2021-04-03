@@ -19,7 +19,7 @@
 
         <!-- Remaining Quotation count for Basic and Silver Business Packages -->
         @php
-            $quotations = \App\Models\Qoute::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
+            $quotations = \App\Models\Qoute::where('supplier_business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
 
             $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
             $package = \App\Models\Package::where('id', $business_package->package_id)->first();

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\DeliveryNote;
 use App\Models\DraftPurchaseOrder;
+use App\Models\EmdadInvoice;
 use App\Models\Invoice;
 use App\Models\Payment;
 use App\Models\ProformaInvoice;
+use App\Models\Qoute;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -148,7 +150,19 @@ class PaymentController extends Controller
             'ship_to_address' => $draftPurchaseOrder->address,
             'invoice_type' => 1,
         ];
-        Invoice::create($proformaInvoice);
+        $invoiceProforma = Invoice::create($proformaInvoice);
+
+//      Calculating total cost w/o VAT
+        $quote = Qoute::where('id', $invoiceProforma->quote->id)->first();
+        $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
+        $totalEmdadCharges = ($totalCost * (1.5 / 100));    // Total emdad charges applicable
+        $totalCharges =  $totalCost + $totalEmdadCharges ;  // Total emdad charges
+
+        EmdadInvoice::create([
+            'invoice_id' => $invoiceProforma->id,
+            'supplier_business_id' => $invoiceProforma->supplier_business_id,
+            'charges' => $totalCharges,
+        ]);
 
         return redirect()->route('generate_proforma_invoices');
     }

@@ -25,6 +25,12 @@
                             <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                 Payment Tpye
                             </th>
+                            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                Amount w/o VAT
+                            </th>
+                            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                Emdad invoice amount (1.5 %)
+                            </th>
                         </tr>
                         </thead>
                         @php $deliveryItem = \App\Models\Delivery::where('draft_purchase_order_id', $emdadInvoice->invoice->purchase_order->id)->first(); @endphp
@@ -39,6 +45,19 @@
                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                 {{ $deliveryItem->payment_term }}
                             </td>
+                            {{-- calculating total cost without VAT--}}
+                            @php
+                                $quote = \App\Models\Qoute::where('id', $emdadInvoice->invoice->quote->id)->first();
+                                $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
+                                $totalEmdadCharges = $totalCost * (1.5 / 100);
+                            @endphp
+                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                {{ $totalCost }}
+                            </td>
+                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                {{ $totalEmdadCharges }}
+                            </td>
+
                         </tr>
                         </tbody>
                     </table>

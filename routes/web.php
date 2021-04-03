@@ -232,6 +232,7 @@ Route::middleware(['auth:sanctum'])->post('/invoice/generate', [InvoiceControlle
 Route::middleware(['auth:sanctum'])->get('/invoice/{invoice}', [InvoiceController::class, 'show'])->name('invoice.show');
 Route::middleware(['auth:sanctum'])->get('/emdad-invoices/', [EmdadInvoiceController::class, 'index'])->name('emdadInvoices');
 Route::middleware(['auth:sanctum'])->get('/emdad-invoice/{id}', [EmdadInvoiceController::class, 'view'])->name('emdadInvoiceView');
+Route::middleware(['auth:sanctum'])->get('/generate-emdad-invoice/{id}', [EmdadInvoiceController::class, 'generateInvoice'])->name('emdadGenerateInvoice');
 #################### END ##############################################################
 #
 ####################### Payment routes ####################################

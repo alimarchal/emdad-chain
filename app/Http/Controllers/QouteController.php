@@ -231,10 +231,11 @@ class QouteController extends Controller
         $request->merge(['po_date' => date('Y-m-d')]);
         $request->merge(['po_status' => 'pending']);
         $request->merge(['status' => 'pending']);
-        $dpo = null;
+//        $dpo = null;
 
         try {
             DB::beginTransaction();
+            $dpo = null;
             $dpoCheck = DraftPurchaseOrder::where('qoute_no',$request->qoute_no)->first();
             if (isset($dpoCheck))
             {
@@ -252,6 +253,7 @@ class QouteController extends Controller
             }
             else
             {
+                $dpo = null;
                 $dpo = DraftPurchaseOrder::create($request->all());
                 $qoute_status = 'accepted';
                 $qoute->update([
