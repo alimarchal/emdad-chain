@@ -23,6 +23,21 @@ class WebsiteEnglishController extends Controller
         return view('shipter_theme.about');
     }
 
+    public function service()
+    {
+        return view('shipter_theme.service');
+    }
+
+    public function team()
+    {
+        return view('shipter_theme.team');
+    }
+
+    public function contact()
+    {
+        return view('shipter_theme.contact');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

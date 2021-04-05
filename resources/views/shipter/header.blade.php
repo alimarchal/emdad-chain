@@ -50,7 +50,7 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-12 col-lg-6">
                         <ul class="d-flex account_login-area">
-                            <li><i class="fa fa-clock-o" aria-hidden="true"></i></i>Mon - Tues : 6.00 am - 10.00 pm, Sunday Closed</li>
+                            <li><i class="fa fa-clock-o" aria-hidden="true"></i></i>Sunday to Thursday : 9.00 am - 05.00 pm, Friday, Saturday Closed</li>
                         </ul>
                     </div>
                     <div class="col-md-6 col-sm-12 col-12 col-lg-6">
@@ -66,7 +66,6 @@
                             <div class="col-lg-5 col-md-6">
                                 <ul class="login-r">
                                     <li><a href="{{route('login')}}">Login</a></li>
-                                    <li><a href="{{route('register')}}">Register</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -77,27 +76,7 @@
         <div class="header-top header-top-2">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-12 col-12">
-                        <div class="logo">
-                            <a href="{{route('english.index')}}"><img src="{{url('logo-full.png')}}" alt="" style="max-height: 60px"></a>
-                        </div>
-                    </div>
-                    <div class="col-md-9 col-sm-12 col-12 col-lg-9">
-                        <ul class="d-flex account_login-area">
-                            <li class="account-item">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                                <h5><span>Call Us Now</span>Tel: +966 53 416 8874</h5>
-                            </li>
-                            <li class="account-item account-item-2">
-                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                <h5><span>Mail Us Today</span>info@emdad-chain.com<br>support@emdad-chain.com</h5>
-                            </li>
-                            <li class="account-item">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                <h5><span>Company Location</span>King Abdul Aziz Road, Exit 5, <br>Riyadh - 13525, KSA</h5>
-                            </li>
-                        </ul>
-                    </div>
+                   @include('shipter.header-container')
                 </div>
             </div>
         </div>
@@ -107,21 +86,7 @@
                     <div class="row">
                         <div class="col-lg-8 d-none d-lg-block">
                             <div class="main-menu">
-                                <nav class="nav_mobile_menu">
-                                    <ul>
-                                        <li><a href="{{(request()->routeIs('english.index')?'active':'')}}">Home</a></li>
-                                        <li class="{{(request()->routeIs('aboutUs')?'active':'')}}"><a href="about.html">About Us</a></li>
-                                        <li class="{{(request()->routeIs('services')?'active':'')}}"><a href="contact.html">Services</a></li>
-                                        <li class="{{(request()->routeIs('ourTeam')?'active':'')}}"><a href="contact.html">Our Team</a></li>
-                                        <li class="{{(request()->routeIs('support')?'active':'')}}"><a href="contact.html">Support</a></li>
-                                        <li class=""><a href="#">Survey</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Buyer</a></li>
-                                                <li><a href="blog-right.html">Supplier</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                @include('shipter.menu')
                             </div>
                         </div>
 
@@ -150,11 +115,11 @@
     <!-- .breadcumb-area end -->
 
     <!-- section-section start -->
-    <div class="contact-page-area section-padding">
-        <div class="container">
+{{--    <div class="contact-page-area section-padding">--}}
+{{--        <div class="container">--}}
             @yield('main')
-        </div>
-    </div>
+{{--        </div>--}}
+{{--    </div>--}}
     <!--section-section end -->
 @endif
 

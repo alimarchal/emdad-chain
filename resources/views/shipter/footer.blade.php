@@ -1,37 +1,37 @@
 <!-- start track-section -->
-<section class="newsletter-section newsletter-section-2">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Subscribe Our Newsletter</h2>
-                <p>Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
-            </div>
-            <div class="col-lg-8">
-                <div class="newsletter">
-                    <div class="newsletter-form">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <form>
-                                    <input type="text" class="form-control" placeholder="Email">
-                                </form>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <form>
-                                    <input type="text" class="form-control" placeholder="Tracking Number">
-                                </form>
-                            </div>
+{{--<section class="newsletter-section newsletter-section-2">--}}
+{{--    <div class="container">--}}
+{{--        <div class="row">--}}
+{{--            <div class="col-lg-4">--}}
+{{--                <h2>Subscribe Our Newsletter</h2>--}}
+{{--                <p>Contrary to popular belief, Lorem Ipsum is not simply random text.</p>--}}
+{{--            </div>--}}
+{{--            <div class="col-lg-8">--}}
+{{--                <div class="newsletter">--}}
+{{--                    <div class="newsletter-form">--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col-lg-4 col-md-4 col-sm-6">--}}
+{{--                                <form>--}}
+{{--                                    <input type="text" class="form-control" placeholder="Email">--}}
+{{--                                </form>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-lg-4 col-md-4 col-sm-6">--}}
+{{--                                <form>--}}
+{{--                                    <input type="text" class="form-control" placeholder="Tracking Number">--}}
+{{--                                </form>--}}
+{{--                            </div>--}}
 
-                            <div class="col-lg-4 col-md-4 col-sm-6">
-                                <button type="submit">Subscribe</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end container -->
-</section>
+{{--                            <div class="col-lg-4 col-md-4 col-sm-6">--}}
+{{--                                <button type="submit">Subscribe</button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--    <!-- end container -->--}}
+{{--</section>--}}
 <!-- end track-section -->
 <!-- .footer-area start -->
 <div class="footer-area">
