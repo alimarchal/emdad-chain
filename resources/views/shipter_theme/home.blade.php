@@ -71,15 +71,20 @@
                             <div class="main-menu">
                                 <nav class="nav_mobile_menu">
                                     <ul>
-                                        <li><a href="{{(request()->routeIs('english.index')?'active':'')}}">Home</a></li>
-                                        <li class="{{(request()->routeIs('aboutUs')?'active':'')}}"><a href="about.html">About Us</a></li>
-                                        <li class="{{(request()->routeIs('services')?'active':'')}}"><a href="contact.html">Services</a></li>
-                                        <li class="{{(request()->routeIs('ourTeam')?'active':'')}}"><a href="contact.html">Our Team</a></li>
-                                        <li class="{{(request()->routeIs('support')?'active':'')}}"><a href="contact.html">Support</a></li>
-                                        <li class=""><a href="#">Survey</a>
+                                        <li class="{{(request()->routeIs('english.index')?'active':'')}}"><a href="{{route('english.index')}}">Home</a></li>
+                                        <li class="{{(request()->routeIs('english.about')?'active':'')}}"><a href="{{route('english.about')}}">About Us</a></li>
+                                        <li class="{{(request()->routeIs('english.buyerService') || request()->routeIs('english.supplierService')?'active':'')}}"><a href="javascript:void(0)">Services</a>
                                             <ul class="submenu">
-                                                <li><a href="blog.html">Buyer</a></li>
-                                                <li><a href="blog-right.html">Supplier</a></li>
+                                                <li class="{{(request()->routeIs('english.buyerService') ?'active':'')}}"><a href="{{route('english.buyerService')}}">Buyer</a></li>
+                                                <li class="{{(request()->routeIs('english.supplierService') ?'active':'')}}"><a href="{{route('english.supplierService')}}">Supplier</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="{{(request()->routeIs('english.team')?'active':'')}}"><a href="{{route('english.team')}}">Our Team</a></li>
+                                        <li class="{{(request()->routeIs('english.support')?'active':'')}}"><a href="{{route('english.support')}}">Support</a></li>
+                                        <li class=""><a href="javascript:void(0)">Survey</a>
+                                            <ul class="submenu">
+                                                <li><a href="{{route('english.buyerSurvey')}}">Buyer</a></li>
+                                                <li><a href="{{route('english.supplierSurvey')}}">Supplier</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -101,10 +106,15 @@
                 <img src="{{url('images/hero-bg.jpg')}}" alt class="slider-bg">
                 <div class="container">
                     <div class="row">
-                        <div class="col col-lg-9 slide-caption">
-                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>
+                        <div class="col-xl-12 slide-caption">
+{{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
+                            <h3 class="text-warning">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
+                                , selling, supplying and warehousing process. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
+                            <h3 class="text-warning">Our vision: <br>
+                                To become the largest, reliable, online platform specialized in supply chains,
+                                and to gain the biggest number of suppliers and the largest logistical fleet while assuring the best international quality standards.</h3>
                             <div class="btns">
-                                <div class="btn-style"><a href="#">Contact us now</a></div>
+                                <div class="btn-style"><a href="{{route('english.about')}}">About us</a></div>
                             </div>
                         </div>
                     </div>
@@ -114,23 +124,14 @@
                 <img src="{{url('images/1.jpg')}}" alt class="slider-bg">
                 <div class="container">
                     <div class="row">
-                        <div class="col col-lg-9 slide-caption">
-                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>
+                        <div class="col-xl-12 slide-caption">
+                            <h3 class="text-warning">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
+                                , selling, supplying and warehousing process. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
+                            <h3 class="text-warning">Our vision: <br>
+                                To become the largest, reliable, online platform specialized in supply chains,
+                                and to gain the biggest number of suppliers and the largest logistical fleet while assuring the best international quality standards.</h3>
                             <div class="btns">
-                                <div class="btn-style"><a href="#">Contact us now</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slide">
-                <img src="{{url('Shipter/assets/images/slider/3.jpg')}}" alt class="slider-bg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col col-lg-9 slide-caption">
-                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>
-                            <div class="btns">
-                                <div class="btn-style"><a href="#">Contact us now</a></div>
+                                <div class="btn-style"><a href="{{route('english.about')}}">About us</a></div>
                             </div>
                         </div>
                     </div>
@@ -143,36 +144,51 @@
     <div class="section-area section-style-2">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 col-d">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
                             <i class="fi flaticon-ship"></i>
                         </div>
                         <div class="section-content">
-                            <p><a href="ocean.html">Ocean Freight</a></p>
-                            <span>There are many variations of passages of Lorem Ipsum</span>
+                            <p><a href="javascript:void(0)">Smart Map</a></p>
+                            <span>One of Emdad’s great features is the smart map which is considered the first in its field.
+                            It allows the user to be connected to the right resource within one minute in more than 500 available categories.</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-d">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
                             <i class="fi flaticon-truck"></i>
                         </div>
                         <div class="section-content">
-                            <p> <a href="road.html">Road Freight</a></p>
-                            <span>There are many variations of passages of Lorem Ipsum</span>
+                            <p> <a href="javascript:void(0)">Saving Time and Effort</a></p>
+                            <span>It is fundamental gauge the platform was built upon.Fast and smooth elictronic authorizations.
+                            Quick quotations recieving from multible suppliers.
+                            Easy access to the suitable supplier.</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-d">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
                             <i class="fi flaticon-plane"></i>
                         </div>
                         <div class="section-content">
-                            <p> <a href="Freight.html">Air Freight</a></p>
-                            <span>There are many variations of passages of Lorem Ipsum</span>
+                            <p> <a href="javascript:void(0)">Privacy and Safety</a></p>
+                            <span>All the transactions are saved in a cloud storage that cannot be removed.
+                                The latest security technologies are applied to ensure that the user account is not tampered with.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-d">
+                    <div class="section-item-2">
+                        <div class="section-icon">
+                            <i class="fi flaticon-plane"></i>
+                        </div>
+                        <div class="section-content">
+                            <p> <a href="javascript:void(0)">Quality and Performance</a></p>
+                            <span>Umong the basic standards Emdad cares to provide its partners with, and we guarantee you that.</span>
                         </div>
                     </div>
                 </div>
@@ -189,19 +205,18 @@
                         <div class="about-icon">
                             <i class="fi flaticon-travel"></i>
                         </div>
-                        <h2>Who We Are?</h2>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less</p>
-                        <p>content here', making it look like readable English. Many desktop publishing packages and web page</p>
-                        <span>Long established fact that a reader</span>
-                        <span>We making it look like readable English.</span>
-                        <span>Long established fact that a reader</span>
+                        <h2>What is Emdad Platform?</h2>
+                        <p>Is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing, selling, supplying and warehousing process.</p>
+                        <p>Emdad can provide the lowest costs yet the best technical and logistical standards.</p>
+                        <span><strong>Our Vision:</strong> To become the largest, reliable online platform specialized in supply chains, and to gain the biggest
+                            number of suppliers and the largest logistical fleet while assuring the best international quality standards.</span>
                     </div>
                     <div class="signature-section">
                         <div class="si-text">
-                            <p>Ketty Raigott</p>
-                            <span>Chairman & Chief Executive Officer</span>
+                            <p>Abdulaziz AlSinany</p>
+                            <span>Founder and CEO</span>
                         </div>
-                        <img src="{{url('Shipter/assets/images/about/2.png')}}" alt="">
+{{--                        <img src="{{url('Shipter/assets/images/about/2.png')}}" alt="">--}}
                     </div>
                 </div>
             </div>
@@ -354,8 +369,9 @@
                                     <i class="fi flaticon-plane"></i>
                                 </div>
                                 <div class="features-text">
-                                    <h3>First Air Freight</h3>
-                                    <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text,</p>
+                                    <h3>Smart Map</h3>
+                                    <p>One of Emdad’s great features is the smart map which is considered the first in its field.
+                                        It allows the user to be connected to the right resource within one minute in more than 500 available categories.</p>
                                 </div>
                             </div>
                         </div>
@@ -365,8 +381,9 @@
                                     <i class="fi flaticon-truck"></i>
                                 </div>
                                 <div class="features-text">
-                                    <h3>First Ground Shipping</h3>
-                                    <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text,</p>
+                                    <h3>Privacy and Safety</h3>
+                                    <p>All the transactions are saved in a cloud storage that cannot be removed.
+                                        The latest security technologies are applied to ensure that the user account is not tampered with.</p>
                                 </div>
                             </div>
                         </div>
@@ -387,8 +404,9 @@
                                     <i class="fi flaticon-ship"></i>
                                 </div>
                                 <div class="features-text">
-                                    <h3>Quickest Cargo</h3>
-                                    <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text,</p>
+                                    <h3>Saving Time and Effort</h3>
+                                    <p>It is fundamental gauge the platform was built upon.Fast and smooth elictronic authorizations.
+                                        Quick quotations recieving from multible suppliers. Easy access to the suitable supplier.</p>
                                 </div>
                             </div>
                         </div>
@@ -398,8 +416,8 @@
                                     <i class="fi flaticon-truck-1"></i>
                                 </div>
                                 <div class="features-text">
-                                    <h3>Timely Delivery</h3>
-                                    <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text,</p>
+                                    <h3>Quality and Performance</h3>
+                                    <p>Umong the basic standards Emdad cares to provide its partners with, and we guarantee you that.</p>
                                 </div>
                             </div>
                         </div>
@@ -615,8 +633,7 @@
         <div class="container">
             <div class="col-l2">
                 <div class="section-title text-center">
-                    <span>We Are With You</span>
-                    <h2>Our Team Members</h2>
+                    <h2>Meet the Team</h2>
                 </div>
             </div>
             <div class="row">
@@ -633,8 +650,8 @@
                             </div>
                         </div>
                         <div class="team-content">
-                            <h4>Elizabeth Bannet</h4>
-                            <span>Logistic Maneger</span>
+                            <h4>Abdulaziz AlSinany</h4>
+                            <span>Founder and CEO</span>
                         </div>
                     </div>
                 </div>
@@ -651,8 +668,8 @@
                             </div>
                         </div>
                         <div class="team-content">
-                            <h4>Johnthan Rok</h4>
-                            <span>Packeging Maneger</span>
+                            <h4>Ahsan Raza</h4>
+                            <span>Business Development Manager</span>
                         </div>
                     </div>
                 </div>
@@ -669,8 +686,8 @@
                             </div>
                         </div>
                         <div class="team-content">
-                            <h4>Simon D’soza</h4>
-                            <span>Logistic Maneger</span>
+                            <h4>Rayan Al Sinany</h4>
+                            <span>Junior Accountant</span>
                         </div>
                     </div>
                 </div>
@@ -687,8 +704,8 @@
                             </div>
                         </div>
                         <div class="team-content">
-                            <h4>Nancy Jimac</h4>
-                            <span>Logistic Maneger</span>
+                            <h4>Muteb Al Buraikan</h4>
+                            <span>Human Resources Specialist</span>
                         </div>
                     </div>
                 </div>

@@ -236,7 +236,7 @@ a:focus {
   position: absolute;
     z-index: 99;
     background-color: rgba(255, 255, 255, 0.10);
-    border-bottom:1px solid rgba(255, 255, 255, 0.30); 
+    border-bottom:1px solid rgba(255, 255, 255, 0.30);
   }
   .account_login-area li:first-child{
     padding-left: 0;
@@ -280,7 +280,7 @@ a:focus {
 .account_login-area .account-item:first-child {
     padding-left: 40px;
 }
- 
+
 .header-top.header-top-2 {
     background: #fff;
     padding: 18px 0;
@@ -499,7 +499,7 @@ mobile menu
     border-radius:5px;
 }
 .btn-style a:hover{
-  background:#31b5e1; 
+  background:#31b5e1;
 }
 .search {
     text-align: right;
@@ -806,7 +806,7 @@ mobile menu
   bottom: 0;
   width: 50px;
   height:5px;
-  background:#34ccff; 
+  background:#34ccff;
 }
 .sec-p{
   padding-left: 30px;
@@ -830,7 +830,7 @@ mobile menu
   top: 5px;
   width: 15px;
   height:15px;
-  background:#34ccff; 
+  background:#34ccff;
 }
 .about-content .about-icon i:before{
   font-size: 60px;
@@ -1043,7 +1043,7 @@ mobile menu
   padding-top: 10px;
 }
 .features-item .fi{
-  color:#34ccff; 
+  color:#34ccff;
 }
 .features-icon2 {
     transform: rotate(45deg);
@@ -1192,14 +1192,14 @@ mobile menu
 }
 .price-sub-header h4{
   font-size: 36px;
-  color:#34ccff; 
+  color:#34ccff;
 }
 .pricing-table {
     padding-bottom: 30px;
 }
 .pricing-table li{
     padding: 5px;
-    border-top:1px solid #eeeeee; 
+    border-top:1px solid #eeeeee;
 }
 .col-l{
   padding: 10px;
@@ -1607,7 +1607,7 @@ mobile menu
     height: 50px;
     padding: 0px 35px;
     transition: all .3s;
-} 
+}
 .newsletter-section .newsletter button:hover{
   background:#31b5e1;
 }
@@ -1667,7 +1667,7 @@ mobile menu
   margin-bottom: 10px;
 }
 .Recent-News-area span{
-  color:#bbb; 
+  color:#bbb;
 }
 .Recent-News-area span i{
   padding-right: 10px;
@@ -1769,7 +1769,7 @@ mobile menu
     border:6px solid #d4f1fa;
 }
 .about-area.about-style-2{
-  background: url(../images/about/2.jpg) no-repeat center top / cover;
+  background: url(../images/about/4.jpg) no-repeat center top / cover;
 
 }
 
@@ -1836,7 +1836,7 @@ mobile menu
     text-align: center;
 }
 .counter-area.counter-style-2 .counter-content {
-    margin-bottom:0px; 
+    margin-bottom:0px;
 }
 .counter-area.counter-style-2 {
      padding: 0;
@@ -1928,19 +1928,19 @@ mobile menu
 }
 
 .blog-area.blog-style-2 .blog-content {
-    background:none; 
+    background:none;
 }
 .blog-item:hover .blog-s-text .blog-content{
   opacity: 0;
 }
 .blog-text .blog-content h3 a {
-    color: #333; 
+    color: #333;
 }
 .blog-text .blog-content h3 a:hover {
-    color:#34ccff; 
+    color:#34ccff;
 }
 .blog-text .blog-content a {
-    color: #34ccff; 
+    color: #34ccff;
 }
 .blog-text .blog-content-sub ul li a {
     color: #34ccff;
@@ -1981,7 +1981,7 @@ mobile menu
 }
 
 .header-top.header-top-2 .account_login-area li:first-child:before{
-  display: none; 
+  display: none;
 }
 .header-area.header-style-2 .main-menu nav ul {
     text-align: left;
@@ -2000,11 +2000,11 @@ mobile menu
     position: relative;
     z-index: 9999;
 }
-.header-area.header-style-2 .main-menu nav ul li:hover>a, 
+.header-area.header-style-2 .main-menu nav ul li:hover>a,
 .header-area.header-style-2 .main-menu nav ul li.active>a {
     color: #fff;
 }
-.header-area.header-style-2 .main-menu nav ul li ul li:hover>a, 
+.header-area.header-style-2 .main-menu nav ul li ul li:hover>a,
 .header-area.header-style-2 .main-menu nav ul li ul li.active>a {
     color: #34ccff;
 }
@@ -2073,7 +2073,7 @@ mobile menu
     font-size: 25px;
 }
 .service-area.service-style-3{
-    background: url(../images/service/bg.jpg) no-repeat center center / cover; 
+    background: url(../images/service/bg.jpg) no-repeat center center / cover;
     position: relative;
 }
 .service-area.service-style-3:before{
@@ -3055,9 +3055,9 @@ mobile menu
     box-shadow: none;
     border: 1px solid rgba(192, 181, 150, .5);
     position: relative;
-    -webkit-appearance:none;   
-    -ms-appearance:none;      
-    -o-appearance:none;                 
+    -webkit-appearance:none;
+    -ms-appearance:none;
+    -o-appearance:none;
     appearance:none;
     -moz-appearance: none;
 }
@@ -3221,7 +3221,7 @@ mobile menu
   bottom:0;
   width: 30px;
   height: 5px;
-  background:#34ccff; 
+  background:#34ccff;
 }
 .contact-s span{
   color:#fff;
@@ -3229,7 +3229,7 @@ mobile menu
 }
 .contact-s span i{
   padding-right:5px;
-  color: #34ccff; 
+  color: #34ccff;
 }
 .contact-s p{
   color:#fff;

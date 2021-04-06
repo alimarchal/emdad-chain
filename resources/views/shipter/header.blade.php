@@ -109,15 +109,20 @@
                             <div class="main-menu">
                                 <nav class="nav_mobile_menu">
                                     <ul>
-                                        <li><a href="{{(request()->routeIs('english.index')?'active':'')}}">Home</a></li>
-                                        <li class="{{(request()->routeIs('aboutUs')?'active':'')}}"><a href="about.html">About Us</a></li>
-                                        <li class="{{(request()->routeIs('services')?'active':'')}}"><a href="contact.html">Services</a></li>
-                                        <li class="{{(request()->routeIs('ourTeam')?'active':'')}}"><a href="contact.html">Our Team</a></li>
-                                        <li class="{{(request()->routeIs('support')?'active':'')}}"><a href="contact.html">Support</a></li>
-                                        <li class=""><a href="#">Survey</a>
+                                        <li class="{{(request()->routeIs('english.index')?'active':'')}}"><a href="{{route('english.index')}}">Home</a></li>
+                                        <li class="{{(request()->routeIs('english.about')?'active':'')}}"><a href="{{route('english.about')}}">About Us</a></li>
+                                        <li class="{{(request()->routeIs('english.buyerService') || request()->routeIs('english.supplierService')?'active':'')}}"><a href="javascript:void(0)">Services</a>
                                             <ul class="submenu">
-                                                <li><a href="blog.html">Buyer</a></li>
-                                                <li><a href="blog-right.html">Supplier</a></li>
+                                                <li class="{{(request()->routeIs('english.buyerService') ?'active':'')}}"><a href="{{route('english.buyerService')}}">Buyer</a></li>
+                                                <li class="{{(request()->routeIs('english.supplierService') ?'active':'')}}"><a href="{{route('english.supplierService')}}">Supplier</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="{{(request()->routeIs('english.team')?'active':'')}}"><a href="{{route('english.team')}}">Our Team</a></li>
+                                        <li class="{{(request()->routeIs('english.support')?'active':'')}}"><a href="{{route('english.support')}}">Support</a></li>
+                                        <li class="{{(request()->routeIs('english.buyerSurvey') || request()->routeIs('english.supplierSurvey') ?'active':'')}}"><a href="javascript:void(0)">Survey</a>
+                                            <ul class="submenu">
+                                                <li class="{{(request()->routeIs('english.buyerSurvey') ?'active':'')}}"><a href="{{route('english.buyerSurvey')}}">Buyer</a></li>
+                                                <li class="{{(request()->routeIs('english.supplierSurvey') ?'active':'')}}"><a href="{{route('english.supplierSurvey')}}">Supplier</a></li>
                                             </ul>
                                         </li>
                                     </ul>
