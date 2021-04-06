@@ -136,7 +136,7 @@ a:focus {
 }
 /*** back to top **/
 .back-to-top {
-  background-color: #34ccff;
+  background-color: #D67A00;
   width: 45px;
   height: 45px;
   line-height: 45px;
@@ -167,7 +167,7 @@ a:focus {
 }
 
 .back-to-top:hover {
-  background-color: #31b5e1;
+  background-color: #B4B4B5;
 }
 
 .back-to-top i {
@@ -188,7 +188,7 @@ a:focus {
 ====================================*/
 
 .header-top{
-  background: #142440;
+  background: #515151;
 }
 .header-top ul.header-contact {
     text-align: right;
@@ -242,7 +242,7 @@ a:focus {
     padding-left: 0;
   }
   .account_login-area li i{
-    color:#31b5e1;
+    color:#D67A00;
   }
 
 .account_login-area .account-item {
@@ -398,7 +398,7 @@ display: none;
     left: 0;
     top: 0;
     width: 100%;
-    background:#142440;
+    background:#515151;
     z-index: 1200;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, .1);
     -moz-box-shadow: 0px 1px 5px rgba(0, 0, 0, .1);
@@ -859,7 +859,7 @@ mobile menu
 }
 .section-title span{
     font-size: 16px;
-    color: #34ccff;
+    color: #D67A00;
 }
 .section-title h2{
     font-size: 36px;
@@ -1631,7 +1631,7 @@ mobile menu
 1.6 footer-area start
 =========================================*/
 .footer-area{
-  background: #142440;
+  background: #515151;
 }
 .footer-top{
   padding: 60px 0;
@@ -1710,7 +1710,7 @@ mobile menu
 }
 
 .footer-bottom{
-  background: #101e35;
+  background: #B4B4B5;
   padding: 30px 0;
 
 }
@@ -1996,7 +1996,7 @@ mobile menu
     text-transform: lowercase;
 }
 .header-area.header-style-2 {
-    background: #34ccff;
+    background: #D67A00;
     position: relative;
     z-index: 9999;
 }
@@ -2185,7 +2185,7 @@ mobile menu
 }
 
 .breadcumb-wrap ul li:last-child {
-    color: #34ccff;
+    color: #D67A00;
 }
 
 .breadcumb-wrap ul li:after {
@@ -2951,7 +2951,7 @@ mobile menu
 
 .contact-page-area .contact-map {
     height: 450px;
-    margin-top: 100px;
+    margin-top: 50px;
     cursor: pointer;
 }
 
@@ -3282,7 +3282,7 @@ mobile menu
 page loader
 ============================*/
 .page-loader {
-  background-color: #272727;
+  background-color: #515151;
   width: 100%;
   height: 100%;
   position: fixed;
@@ -3294,7 +3294,7 @@ page loader
   width: 50px;
   height: 50px;
   position: relative;
-  border: 4px solid #34ccff;
+  border: 4px solid #D67A00;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
@@ -3310,7 +3310,7 @@ page loader
   vertical-align: top;
   display: inline-block;
   width: 100%;
-  background-color: #34ccff;
+  background-color: #D67A00;
   -webkit-animation: loader-inner 2s infinite ease-in;
   animation: loader-inner 2s infinite ease-in;
 }

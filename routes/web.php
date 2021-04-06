@@ -85,12 +85,9 @@ Route::post('e-buyer', [EBuyerSurveyAnswerController::class, 'store'])->name('eB
 ####################     WebsiteEnglish          ###################
 Route::get('/english', [\App\Http\Controllers\WebsiteEnglishController::class, 'index'])->name('english.index');
 Route::get('/en-about', [\App\Http\Controllers\WebsiteEnglishController::class, 'about'])->name('english.about');
-Route::get('/en-buyer-service', [\App\Http\Controllers\WebsiteEnglishController::class, 'buyerService'])->name('english.buyerService');
-Route::get('/en-supplier-service', [\App\Http\Controllers\WebsiteEnglishController::class, 'supplierService'])->name('english.supplierService');
+Route::get('/en-service', [\App\Http\Controllers\WebsiteEnglishController::class, 'service'])->name('english.service');
 Route::get('/en-team', [\App\Http\Controllers\WebsiteEnglishController::class, 'team'])->name('english.team');
-Route::get('/en-support', [\App\Http\Controllers\WebsiteEnglishController::class, 'support'])->name('english.support');
-Route::get('/en-buyer-survey', [\App\Http\Controllers\WebsiteEnglishController::class, 'buyerSurvey'])->name('english.buyerSurvey');
-Route::get('/en-supplier-survey', [\App\Http\Controllers\WebsiteEnglishController::class, 'supplierSurvey'])->name('english.supplierSurvey');
+Route::get('/en-contact', [\App\Http\Controllers\WebsiteEnglishController::class, 'contact'])->name('english.contact');
 
 
 

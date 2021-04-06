@@ -10,56 +10,14 @@
         <div class="header-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-sm-12 col-12 col-lg-6">
-                        <ul class="d-flex account_login-area">
-                            <li><i class="fa fa-clock-o" aria-hidden="true"></i></i>Mon - Tues : 6.00 am - 10.00 pm, Sunday Closed</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-12 col-lg-6">
-                        <div class="row">
-                            <div class="col-lg-7 col-md-6">
-                                <ul class="d-flex header-social">
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://instagram.com/emdad_chain?igshid=ok4zahralc2t"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://twitter.com/emdad_chain?s=21"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://www.linkedin.com/company/emdadchain"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-5 col-md-6">
-                                <ul class="login-r">
-                                    <li><a href="{{route('login')}}">Login</a></li>
-                                    <li><a href="{{route('register')}}">Register</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    @include('shipter.top-header')
                 </div>
             </div>
         </div>
         <div class="header-top header-top-2">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-12 col-12">
-                        <div class="logo">
-                            <a href="{{route('english.index')}}"><img src="{{url('logo-full.png')}}" alt="" style="max-height: 60px"></a>
-                        </div>
-                    </div>
-                    <div class="col-md-9 col-sm-12 col-12 col-lg-9">
-                        <ul class="d-flex account_login-area">
-                            <li class="account-item">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                                <h5><span>Call Us Now</span>Tel: +966 53 416 8874</h5>
-                            </li>
-                            <li class="account-item account-item-2">
-                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                <h5><span>Mail Us Today</span>info@emdad-chain.com<br>support@emdad-chain.com</h5>
-                            </li>
-                            <li class="account-item">
-                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                <h5><span>Company Location</span>King Abdul Aziz Road, Exit 5, <br>Riyadh - 13525, KSA</h5>
-                            </li>
-                        </ul>
-                    </div>
+                    @include('shipter.header-container')
                 </div>
             </div>
         </div>
@@ -69,26 +27,7 @@
                     <div class="row">
                         <div class="col-lg-8 d-none d-lg-block">
                             <div class="main-menu">
-                                <nav class="nav_mobile_menu">
-                                    <ul>
-                                        <li class="{{(request()->routeIs('english.index')?'active':'')}}"><a href="{{route('english.index')}}">Home</a></li>
-                                        <li class="{{(request()->routeIs('english.about')?'active':'')}}"><a href="{{route('english.about')}}">About Us</a></li>
-                                        <li class="{{(request()->routeIs('english.buyerService') || request()->routeIs('english.supplierService')?'active':'')}}"><a href="javascript:void(0)">Services</a>
-                                            <ul class="submenu">
-                                                <li class="{{(request()->routeIs('english.buyerService') ?'active':'')}}"><a href="{{route('english.buyerService')}}">Buyer</a></li>
-                                                <li class="{{(request()->routeIs('english.supplierService') ?'active':'')}}"><a href="{{route('english.supplierService')}}">Supplier</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="{{(request()->routeIs('english.team')?'active':'')}}"><a href="{{route('english.team')}}">Our Team</a></li>
-                                        <li class="{{(request()->routeIs('english.support')?'active':'')}}"><a href="{{route('english.support')}}">Support</a></li>
-                                        <li class=""><a href="javascript:void(0)">Survey</a>
-                                            <ul class="submenu">
-                                                <li><a href="{{route('english.buyerSurvey')}}">Buyer</a></li>
-                                                <li><a href="{{route('english.supplierSurvey')}}">Supplier</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
+                               @include('shipter.menu')
                             </div>
                         </div>
 

@@ -23,34 +23,19 @@ class WebsiteEnglishController extends Controller
         return view('shipter_theme.about');
     }
 
-    public function buyerService()
+    public function service()
     {
-        return view('shipter_theme.service.buyer');
-    }
-
-    public function supplierService()
-    {
-        return view('shipter_theme.service.supplier');
+        return view('shipter_theme.service');
     }
 
     public function team()
     {
-        return view('shipter_theme.ourTeam');
+        return view('shipter_theme.team');
     }
 
-    public function support()
+    public function contact()
     {
-        return view('shipter_theme.support');
-    }
-
-    public function buyerSurvey()
-    {
-        return view('shipter_theme.survey.buyer');
-    }
-
-    public function supplierSurvey()
-    {
-        return view('shipter_theme.survey.supplier');
+        return view('shipter_theme.contact');
     }
 
     /**
