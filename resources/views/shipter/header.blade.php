@@ -66,6 +66,7 @@
                             <div class="col-lg-5 col-md-6">
                                 <ul class="login-r">
                                     <li><a href="{{route('login')}}">Login</a></li>
+                                    <li><a href="{{route('register')}}">Register</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -96,23 +97,6 @@
         </div>
     </header>
     <!-- header-area end -->
-    <!-- .breadcumb-area start -->
-    <div class="breadcumb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcumb-wrap text-center">
-                        <h2>@yield('breadcumb-title','')</h2>
-                        <ul>
-                            <li><a href="{{route('english.index')}}">Home</a></li>
-                            <li><span>@yield('breadcumb-text','')</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- .breadcumb-area end -->
 
     <!-- section-section start -->
 {{--    <div class="contact-page-area section-padding">--}}

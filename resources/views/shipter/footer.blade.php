@@ -58,23 +58,24 @@
                     <div class="footer-link">
                         <h3>Quick Link</h3>
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Our Team</a></li>
-                            <li><a href="#">Support </a></li>
+                            <li><a href="{{route('english.index')}}">Home</a></li>
+                            <li><a href="{{route('english.about')}}">About Us</a></li>
+                            <li><a href="{{route('english.service')}}">Services</a></li>
+                            <li><a href="{{route('english.team')}}">Our Team</a></li>
+                            <li><a href="{{route('english.contact')}}">Support </a></li>
+                            <li><a href="{{route('english.survey')}}">Survey </a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 footer-b">
                     <div class="Recent-News-area">
-                        <h3>Recent News</h3>
-                        <div class="resent-sub">
-                            <p>There are many variations of passages of Lorem</p>
-                            <span><i class="fa fa-clock-o" aria-hidden="true"></i> Octobor 10, 2018</span>
-                        </div>
-                        <p>There are many variations of passages of Lorem</p>
-                        <span><i class="fa fa-clock-o" aria-hidden="true"></i> Octobor 10, 2018</span>
+{{--                        <h3>Recent News</h3>--}}
+{{--                        <div class="resent-sub">--}}
+{{--                            <p>There are many variations of passages of Lorem</p>--}}
+{{--                            <span><i class="fa fa-clock-o" aria-hidden="true"></i> Octobor 10, 2018</span>--}}
+{{--                        </div>--}}
+{{--                        <p>There are many variations of passages of Lorem</p>--}}
+{{--                        <span><i class="fa fa-clock-o" aria-hidden="true"></i> Octobor 10, 2018</span>--}}
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 col-12">
@@ -98,7 +99,7 @@
             <div class="footer-bottom-content">
                 <div class="row">
                     <div class="col-12">
-                        <span>© Copyright {{date('Y')}} - {{config('app.name')}}. All Rights Reserved. Powered by: Websoft</span>
+                        <span>© Copyright {{date('Y')}} - <strong>{{config('app.name')}}</strong>. All Rights Reserved. Powered by: <strong>Websoft</strong></span>
                     </div>
                 </div>
             </div>
@@ -116,7 +117,7 @@
 <!-- Custom script for this template -->
 <script src="{{url('Shipter/assets/js/script.js')}}"></script>
 
-@yield('custom-footer')
-</body>
+{{--@yield('custom-footer')--}}
+{{--</body>--}}
 
-</html>
+{{--</html>--}}

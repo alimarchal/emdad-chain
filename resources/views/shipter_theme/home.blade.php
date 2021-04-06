@@ -53,7 +53,7 @@
                                 To become the largest, reliable, online platform specialized in supply chains,
                                 and to gain the biggest number of suppliers and the largest logistical fleet while assuring the best international quality standards.</h3>
                             <div class="btns">
-                                <div class="btn-style"><a href="{{route('english.about')}}">About us</a></div>
+                                <div class="btn-style"><a href="{{route('english.about')}}" style="background: #fd7e14">About us</a></div>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                                 To become the largest, reliable, online platform specialized in supply chains,
                                 and to gain the biggest number of suppliers and the largest logistical fleet while assuring the best international quality standards.</h3>
                             <div class="btns">
-                                <div class="btn-style"><a href="{{route('english.about')}}">About us</a></div>
+                                <div class="btn-style"><a href="{{route('english.about')}}" style="background: #fd7e14">About us</a></div>
                             </div>
                         </div>
                     </div>
@@ -179,9 +179,9 @@
                                 <img src="{{url('Shipter/assets/images/service/1.jpg')}}" alt="">
                             </div>
                             <div class="service-content">
-                                <h3>Land Transport</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority , </p>
-                                <a href="">See More...</a>
+                                <h3>Logistics Department</h3>
+                                <p>More control over inventory management.Precise orders tracking.</p>
+                                <a href="{{route('english.service')}}">See More...</a>
                             </div>
                         </div>
                     </div>
@@ -193,51 +193,9 @@
                                 <img src="{{url('Shipter/assets/images/service/2.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content2">
-                                <h3>Sea Freight</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority , </p>
-                                <a href="">See More...</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item">
-                        <div class="service-single">
-                            <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/3.jpg')}}" alt="">
-                            </div>
-                            <div class="service-content service-content3">
-                                <h3>Air Freight</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority , </p>
-                                <a href="">See More...</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item">
-                        <div class="service-single">
-                            <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/4.jpg')}}" alt="">
-                            </div>
-                            <div class="service-content service-content4">
-                                <h3>Logistic Solutions</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority , </p>
-                                <a href="">See More...</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item">
-                        <div class="service-single">
-                            <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/5.jpg')}}" alt="">
-                            </div>
-                            <div class="service-content service-content5">
-                                <h3>Packaging and Store</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority , </p>
-                                <a href="">See More...</a>
+                                <h3>Sales Department</h3>
+                                <p>Easy increase for average sales percentage.Follow up with sales officers regularly.</p>
+                                <a href="{{route('english.service')}}">See More...</a>
                             </div>
                         </div>
                     </div>
@@ -249,9 +207,51 @@
                                 <img src="{{url('Shipter/assets/images/service/6.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content6">
-                                <h3>Warehousing</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority , </p>
-                                <a href="">See More...</a>
+                                <h3>Financial Department</h3>
+                                <p>Prevention of misappropriation of funds.</p>
+                                <a href="{{route('english.service')}}">See More...</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="service-item">
+                        <div class="service-single">
+                            <div class="service-img">
+                                <img src="{{url('Shipter/assets/images/service/3.jpg')}}" alt="">
+                            </div>
+                            <div class="service-content service-content3">
+                                <h3>Logistics Department</h3>
+                                <p>A continuous stock of the required items.</p>
+                                <a href="{{route('english.service')}}">See More...</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="service-item">
+                        <div class="service-single">
+                            <div class="service-img">
+                                <img src="{{url('Shipter/assets/images/service/4.jpg')}}" alt="">
+                            </div>
+                            <div class="service-content service-content4">
+                                <h3>Purchases Department</h3>
+                                <p>Online purchase orders approval.Available online reports around the clock.</p>
+                                <a href="{{route('english.service')}}">See More...</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="service-item">
+                        <div class="service-single">
+                            <div class="service-img">
+                                <img src="{{url('Shipter/assets/images/service/5.jpg')}}" alt="">
+                            </div>
+                            <div class="service-content service-content5">
+                                <h3>Financial Department</h3>
+                                <p>Quotations received from reliable suppliers.</p>
+                                <a href="{{route('english.service')}}">See More...</a>
                             </div>
                         </div>
                     </div>

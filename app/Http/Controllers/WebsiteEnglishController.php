@@ -38,6 +38,21 @@ class WebsiteEnglishController extends Controller
         return view('shipter_theme.contact');
     }
 
+    public function survey()
+    {
+        return view('shipter_theme.survey.index');
+    }
+
+    public function buyerSurvey()
+    {
+        return view('shipter_theme.survey.buyer');
+    }
+
+    public function supplierSurvey()
+    {
+        return view('shipter_theme.survey.supplier');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

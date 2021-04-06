@@ -1,6 +1,6 @@
 <div class="col-md-6 col-sm-12 col-12 col-lg-6">
     <ul class="d-flex account_login-area">
-        <li><i class="fa fa-clock-o" aria-hidden="true"></i></i>Mon - Tues : 6.00 am - 10.00 pm, Sunday Closed</li>
+        <li><i class="fa fa-clock-o" aria-hidden="true"></i></i>Sunday to Thursday : 9.00 am - 05.00 pm, Friday, Saturday Closed</li>
     </ul>
 </div>
 <div class="col-md-6 col-sm-12 col-12 col-lg-6">

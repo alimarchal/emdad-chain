@@ -231,7 +231,8 @@
             </ul>
 
         </div>
-    </section><!-- End Frequently Asked Questions Section -->
+    </section>
+    <!-- End Frequently Asked Questions Section -->
 
     <!-- ======= Team Section ======= -->
     <section id="team" class="team">

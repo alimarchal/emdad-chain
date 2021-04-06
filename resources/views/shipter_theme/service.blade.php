@@ -9,6 +9,7 @@
 @section('breadcumb-text','Services')
 @section('main')
 
+    @include('shipter.breadcumb-area')
     <!-- section-section start -->
     <div class="section-area section-style-2 section-style-3">
         <div class="container">
@@ -20,8 +21,9 @@
                                 <i class="fi flaticon-ship"></i>
                             </div>
                             <div class="section-content">
-                                <p><a href="ocean.html">Ocean Freight</a></p>
-                                <span>There are many variations of passages of Lorem Ipsum</span>
+                                <p><a>Logistics Department</a></p>
+                                <span>More control over inventory management.Precise orders tracking.
+                                      Benefiting from the storage service.</span>
                             </div>
                         </div>
                         <div class="section-item-2">
@@ -29,8 +31,9 @@
                                 <i class="fi flaticon-truck"></i>
                             </div>
                             <div class="section-content">
-                                <p><a href="road.html">Road Freight</a></p>
-                                <span>There are many variations of passages of Lorem Ipsum</span>
+                                <p><a>Sales Department</a></p>
+                                <span>Easy increase for average sales percentage.Follow up with sales officers regularly.
+                                      Quotations generating and approving online.</span>
                             </div>
                         </div>
                         <div class="section-item-2">
@@ -38,8 +41,9 @@
                                 <i class="fi flaticon-plane"></i>
                             </div>
                             <div class="section-content">
-                                <p><a href="Freight.html">Air Freight</a></p>
-                                <span>There are many variations of passages of Lorem Ipsum</span>
+                                <p><a>Financial Department</a></p>
+                                <span>Prevention of misappropriation of funds.Financial analysis of the accounts at the end of each financial period.
+                                      Punctual funds collections.</span>
                             </div>
                         </div>
                     </div>
@@ -48,7 +52,6 @@
                     <div class="tr-wrap">
                         <div class="t-text">
                             <h2>Suppliers</h2>
-                            <p>We Provide you the best service in the world.It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
                         </div>
                         <div class="tr-s">
                             <span>The ability to request electronic reports at any time.</span>
@@ -71,8 +74,8 @@
                                 <i class="fi flaticon-ship"></i>
                             </div>
                             <div class="section-content">
-                                <p><a href="ocean.html">Ocean Freight</a></p>
-                                <span>There are many variations of passages of Lorem Ipsum</span>
+                                <p><a>Logistics Department</a></p>
+                                <span>A continuous stock of the required items.Precise orders tracking.Orders scheduling.</span>
                             </div>
                         </div>
                         <div class="section-item-2">
@@ -80,8 +83,9 @@
                                 <i class="fi flaticon-truck"></i>
                             </div>
                             <div class="section-content">
-                                <p><a href="road.html">Road Freight</a></p>
-                                <span>There are many variations of passages of Lorem Ipsum</span>
+                                <p><a>Purchases Department</a></p>
+                                <span>Online purchase orders approval.Available online reports around the clock.
+                                      Online requests for orders or services at any time.</span>
                             </div>
                         </div>
                         <div class="section-item-2">
@@ -89,8 +93,9 @@
                                 <i class="fi flaticon-plane"></i>
                             </div>
                             <div class="section-content">
-                                <p><a href="Freight.html">Air Freight</a></p>
-                                <span>There are many variations of passages of Lorem Ipsum</span>
+                                <p><a>Financial Department</a></p>
+                                <span>Quotations received from reliable suppliers.Credit or cash payments are available for every bank account.
+                                      Decrease costs.</span>
                             </div>
                         </div>
                     </div>
@@ -100,7 +105,6 @@
                     <div class="tr-wrap">
                         <div class="t-text">
                             <h2>Buyers</h2>
-                            <p>We Provide you the best service in the world.It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
                         </div>
                         <div class="tr-s">
                             <span>The possibility of safe payment.</span>
@@ -135,9 +139,8 @@
                                 <img src="{{url('Shipter/assets/images/service/1.jpg')}}" alt="">
                             </div>
                             <div class="service-content">
-                                <h3>Land Transport</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority , </p>
-                                <a href="">See More...</a>
+                                <h3>Logistics Department</h3>
+                                <p>More control over inventory management.Precise orders tracking.</p>
                             </div>
                         </div>
                     </div>
@@ -149,51 +152,8 @@
                                 <img src="{{url('Shipter/assets/images/service/2.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content2">
-                                <h3>Sea Freight</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority , </p>
-                                <a href="">See More...</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item">
-                        <div class="service-single">
-                            <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/3.jpg')}}" alt="">
-                            </div>
-                            <div class="service-content service-content3">
-                                <h3>Air Freight</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority , </p>
-                                <a href="">See More...</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item">
-                        <div class="service-single">
-                            <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/4.jpg')}}" alt="">
-                            </div>
-                            <div class="service-content service-content4">
-                                <h3>Logistic Solutions</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority , </p>
-                                <a href="">See More...</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item">
-                        <div class="service-single">
-                            <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/5.jpg')}}" alt="">
-                            </div>
-                            <div class="service-content service-content5">
-                                <h3>Packaging and Store</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority , </p>
-                                <a href="">See More...</a>
+                                <h3>Sales Department</h3>
+                                <p>Easy increase for average sales percentage.Follow up with sales officers regularly.</p>
                             </div>
                         </div>
                     </div>
@@ -205,9 +165,47 @@
                                 <img src="{{url('Shipter/assets/images/service/6.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content6">
-                                <h3>Warehousing</h3>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority , </p>
-                                <a href="">See More...</a>
+                                <h3>Financial Department</h3>
+                                <p>Prevention of misappropriation of funds.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="service-item">
+                        <div class="service-single">
+                            <div class="service-img">
+                                <img src="{{url('Shipter/assets/images/service/3.jpg')}}" alt="">
+                            </div>
+                            <div class="service-content service-content3">
+                                <h3>Logistics Department</h3>
+                                <p>A continuous stock of the required items.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="service-item">
+                        <div class="service-single">
+                            <div class="service-img">
+                                <img src="{{url('Shipter/assets/images/service/4.jpg')}}" alt="">
+                            </div>
+                            <div class="service-content service-content4">
+                                <h3>Purchases Department</h3>
+                                <p>Online purchase orders approval.Available online reports around the clock.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="service-item">
+                        <div class="service-single">
+                            <div class="service-img">
+                                <img src="{{url('Shipter/assets/images/service/5.jpg')}}" alt="">
+                            </div>
+                            <div class="service-content service-content5">
+                                <h3>Financial Department</h3>
+                                <p>Quotations received from reliable suppliers.</p>
                             </div>
                         </div>
                     </div>

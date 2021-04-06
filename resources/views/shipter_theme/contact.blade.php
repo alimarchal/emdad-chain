@@ -9,6 +9,7 @@
 @section('breadcumb-text','Contact Us')
 @section('main')
 
+    @include('shipter.breadcumb-area')
     <!-- .contact-page-area start -->
 
         <div class="contact-page-area section-padding">

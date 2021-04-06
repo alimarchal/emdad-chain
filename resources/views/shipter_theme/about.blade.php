@@ -29,7 +29,7 @@
                             <p>Abdulaziz AlSinany</p>
                             <span>Founder and CEO</span>
                         </div>
-                        {{--                        <img src="{{url('Shipter/assets/images/about/2.png')}}" alt="">--}}
+{{--                        <img src="{{url('Shipter/assets/images/about/2.png')}}" alt="">--}}
                     </div>
                 </div>
             </div>
