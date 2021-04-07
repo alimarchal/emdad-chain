@@ -1,4 +1,8 @@
 @extends('shipter.layout')
+
+@section('custom_header_image')
+
+@endsection
 @section('title','Services')
 @section('custom-header')
 @endsection

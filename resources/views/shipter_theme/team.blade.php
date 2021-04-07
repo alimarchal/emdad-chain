@@ -23,7 +23,7 @@
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/1.jpg')}}" alt="">
+                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                         <div class="social-1st">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -34,14 +34,14 @@
                     </div>
                     <div class="team-content">
                         <h4>Abdulaziz AlSinany</h4>
-                        <span>Founder and CEO</span>
+                        <span>Founder and CEO/SCM </span>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/2.jpg')}}" alt="">
+                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                         <div class="social-1st">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -52,14 +52,14 @@
                     </div>
                     <div class="team-content">
                         <h4>Ahsan Raza</h4>
-                        <span>Business Development Manager</span>
+                        <span>BD/Sales Manager</span>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/3.jpg')}}" alt="">
+                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                         <div class="social-1st">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -77,7 +77,7 @@
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/4.jpg')}}" alt="">
+                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                         <div class="social-1st">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -97,7 +97,7 @@
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/1.jpg')}}" alt="">
+                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
                         <div class="social-1st">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -108,14 +108,14 @@
                     </div>
                     <div class="team-content">
                         <h4>Ala'a Al Hamzy</h4>
-                        <span>Administrative Assistant</span>
+                        <span>Sales Supervisor</span>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/2.jpg')}}" alt="">
+                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
                         <div class="social-1st">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -133,7 +133,7 @@
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/3.jpg')}}" alt="">
+                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
                         <div class="social-1st">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -148,10 +148,48 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/4.jpg')}}" alt="">
+                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
+                        <div class="social-1st">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4>Amjaad Shahri</h4>
+                        <span>Supply Chain Specialist</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="team-single">
+                    <div class="team-img">
+                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
+                        <div class="social-1st">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4>Maryam Al Hajji</h4>
+                        <span>Graphic Designer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="team-single">
+                    <div class="team-img">
+                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                         <div class="social-1st">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -171,7 +209,7 @@
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/1.jpg')}}" alt="">
+                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                         <div class="social-1st">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -189,7 +227,7 @@
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/3.jpg')}}" alt="">
+                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                         <div class="social-1st">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>

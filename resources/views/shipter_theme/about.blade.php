@@ -23,22 +23,71 @@
                         <p>Emdad can provide the lowest costs yet the best technical and logistical standards.</p>
                         <span><strong>Our Vision:</strong> To become the largest, reliable online platform specialized in supply chains, and to gain the biggest
                             number of suppliers and the largest logistical fleet while assuring the best international quality standards.</span>
+
+                        <span><strong>Our Message for The Future:</strong> We are capable and even ready to endure all difficulties  in technology development and to keep up with the modern world in order to become the pioneer in innovation and development. And if we ever have the chance to serve in other planets, we would!</span>
+                        <span><strong>Our Goal:</strong> To remove all of the logistical obstacles and upgrade the service level of supply chain for all of Emdad's partners, and we will!</span>
                     </div>
                     <div class="signature-section">
                         <div class="si-text">
                             <p>Abdulaziz AlSinany</p>
                             <span>Founder and CEO</span>
                         </div>
-{{--                        <img src="{{url('Shipter/assets/images/about/2.png')}}" alt="">--}}
+                        <img src="{{url('Shipter/assets/images/about/ceo_sign.png')}}" style="width: 200px;" alt="">
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- team-area end -->
+    <div class="section-area section-style-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12 col-d">
+                    <div class="section-item-2">
+                        <div class="section-icon">
+                            <i class="fi flaticon-ship"></i>
+                        </div>
+                        <div class="section-content">
+                            <span>Provides safe payments</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 col-d">
+                    <div class="section-item-2">
+                        <div class="section-icon">
+                            <i class="fi flaticon-truck"></i>
+                        </div>
+                        <div class="section-content">
+                            <span>Assures an organised and fast process</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 col-d">
+                    <div class="section-item-2">
+                        <div class="section-icon">
+                            <i class="fi flaticon-travel"></i>
+                        </div>
+                        <div class="section-content">
+                            <span>Offers  the lowest costs</span>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-lg-3 col-md-6 col-sm-12 col-d">
+                    <div class="section-item-2">
+                        <div class="section-icon">
+                            <i class="fi flaticon-delivery"></i>
+                        </div>
+                        <div class="section-content">
+                            <span>Removes the logistical obstacles</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- team-area start -->
-    <div class="team-area team-area-3">
+    <div class="team-area team-area-3" style="padding-top: 0px;">
         <div class="container">
             <div class="col-l2">
                 <div class="section-title text-center">
@@ -49,7 +98,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="team-single">
                         <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/1.jpg')}}" alt="">
+                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                             <div class="social-1st">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -67,7 +116,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="team-single">
                         <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/2.jpg')}}" alt="">
+                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                             <div class="social-1st">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -85,7 +134,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="team-single">
                         <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/3.jpg')}}" alt="">
+                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                             <div class="social-1st">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -103,7 +152,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="team-single">
                         <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/4.jpg')}}" alt="">
+                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                             <div class="social-1st">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -121,6 +170,7 @@
             </div>
         </div>
     </div>
+
     <!-- team-area end -->
 
 @endsection

@@ -1,5 +1,5 @@
 <!-- .breadcumb-area start -->
-<div class="breadcumb-area">
+<div class="breadcumb-area" style="@yield('custom_header_image','')">
     <div class="container">
         <div class="row">
             <div class="col-12">

@@ -155,7 +155,7 @@
                             <p>Abdulaziz AlSinany</p>
                             <span>Founder and CEO</span>
                         </div>
-{{--                        <img src="{{url('Shipter/assets/images/about/2.png')}}" alt="">--}}
+                        <img src="{{url('Shipter/assets/images/about/ceo_sign.png')}}" style="width: 200px;" alt="">
                     </div>
                 </div>
             </div>
@@ -261,36 +261,36 @@
     </div>
     <!-- service-area end-->
     <!-- start track-section -->
-    <section class="track-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-9">
-                    <div class="track">
-                        <h3>Enter Your Email and Track Your Cargo</h3>
-                        <div class="tracking-form">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-6">
-                                    <form>
-                                        <input type="text" class="form-control" placeholder="Email">
-                                    </form>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-6">
-                                    <form>
-                                        <input type="text" class="form-control" placeholder="Tracking Number">
-                                    </form>
-                                </div>
+{{--    <section class="track-section">--}}
+{{--        <div class="container">--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-lg-9">--}}
+{{--                    <div class="track">--}}
+{{--                        <h3>Enter Your Email and Track Your Cargo</h3>--}}
+{{--                        <div class="tracking-form">--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-lg-4 col-md-4 col-sm-6">--}}
+{{--                                    <form>--}}
+{{--                                        <input type="text" class="form-control" placeholder="Email">--}}
+{{--                                    </form>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-lg-4 col-md-4 col-sm-6">--}}
+{{--                                    <form>--}}
+{{--                                        <input type="text" class="form-control" placeholder="Tracking Number">--}}
+{{--                                    </form>--}}
+{{--                                </div>--}}
 
-                                <div class="col-lg-3 col-md-4 col-sm-6">
-                                    <button type="submit">Track Your Cargo</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end container -->
-    </section>
+{{--                                <div class="col-lg-3 col-md-4 col-sm-6">--}}
+{{--                                    <button type="submit">Track Your Cargo</button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <!-- end container -->--}}
+{{--    </section>--}}
     <!-- end track-section -->
     <!-- feature-area start -->
     <div class="features-area features-style-2">
@@ -367,49 +367,49 @@
     </div>
     <!-- feature-area start -->
     <!-- counter-area start -->
-    <div class="counter-area counter-style-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-md-6 col-sm-12">
-                    <div class="counter-content">
-                        <h2>Our Some Important Things That will Satisfite You...</h2>
-                        <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.Many desktop publishing packages and web page editors now</p>
-                        <div class="btns">
-                            <div class="btn-style btn-style-3"><a href="#">Learn More About Us...</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-6 col-sm-12">
-                    <div class="counter-grids">
-                        <div class="grid">
-                            <div>
-                                <h2><span class="odometer" data-count="4,012">00</span></h2>
-                            </div>
-                            <p>Delivered Packages</p>
-                        </div>
-                        <div class="grid">
-                            <div>
-                                <h2><span class="odometer" data-count="605">00</span></h2>
-                            </div>
-                            <p>Countries Covered</p>
-                        </div>
-                        <div class="grid">
-                            <div>
-                                <h2><span class="odometer" data-count="920">00</span></h2>
-                            </div>
-                            <p>Satisfied Clients</p>
-                        </div>
-                        <div class="grid">
-                            <div>
-                                <h2><span class="odometer" data-count="3,592">00</span></h2>
-                            </div>
-                            <p>Tons of Goods</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{{--    <div class="counter-area counter-style-2">--}}
+{{--        <div class="container">--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-lg-7 col-md-6 col-sm-12">--}}
+{{--                    <div class="counter-content">--}}
+{{--                        <h2>Our Some Important Things That will Satisfite You...</h2>--}}
+{{--                        <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.Many desktop publishing packages and web page editors now</p>--}}
+{{--                        <div class="btns">--}}
+{{--                            <div class="btn-style btn-style-3"><a href="#">Learn More About Us...</a></div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-5 col-md-6 col-sm-12">--}}
+{{--                    <div class="counter-grids">--}}
+{{--                        <div class="grid">--}}
+{{--                            <div>--}}
+{{--                                <h2><span class="odometer" data-count="4,012">00</span></h2>--}}
+{{--                            </div>--}}
+{{--                            <p>Delivered Packages</p>--}}
+{{--                        </div>--}}
+{{--                        <div class="grid">--}}
+{{--                            <div>--}}
+{{--                                <h2><span class="odometer" data-count="605">00</span></h2>--}}
+{{--                            </div>--}}
+{{--                            <p>Countries Covered</p>--}}
+{{--                        </div>--}}
+{{--                        <div class="grid">--}}
+{{--                            <div>--}}
+{{--                                <h2><span class="odometer" data-count="920">00</span></h2>--}}
+{{--                            </div>--}}
+{{--                            <p>Satisfied Clients</p>--}}
+{{--                        </div>--}}
+{{--                        <div class="grid">--}}
+{{--                            <div>--}}
+{{--                                <h2><span class="odometer" data-count="3,592">00</span></h2>--}}
+{{--                            </div>--}}
+{{--                            <p>Tons of Goods</p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
     <!-- counter-area end -->
     <!-- pice-area start -->
     <div class="pricing-area pricing-area-2">
@@ -579,7 +579,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="team-single">
                         <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/1.jpg')}}" alt="">
+                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                             <div class="social-1st">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -597,7 +597,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="team-single">
                         <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/2.jpg')}}" alt="">
+                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                             <div class="social-1st">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -615,7 +615,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="team-single">
                         <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/3.jpg')}}" alt="">
+                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                             <div class="social-1st">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -633,7 +633,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                     <div class="team-single">
                         <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/4.jpg')}}" alt="">
+                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
                             <div class="social-1st">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -653,111 +653,111 @@
     </div>
     <!-- populer-area end -->
     <!-- blog-area start -->
-    <div class="blog-area blog-style-2">
-        <div class="container">
-            <div class="col-l2">
-                <div class="section-title section-title-3 text-center">
-                    <span>Stay With Our Blog</span>
-                    <h2>Our Latest News</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="blog-item">
-                        <div class="blog-img">
-                            <img src="{{url('Shipter/assets/images/blog/4.jpg')}}" alt="">
-                            <div class="blog-s-text">
-                                <div class="blog-content">
-                                    <h3>We can ensure you about the safe delevery</h3>
-                                </div>
-                                <div class="blog-content-sub blog-content-sub-2">
-                                    <ul>
-                                        <li><a href="#">Business</a></li>
-                                        <li>October 13, 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="blog-text">
-                                <div class="blog-content blog-content2">
-                                    <h3><a href="blog-details.html">We can ensure you about the safe delevery</a></h3>
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration</p>
-                                    <a href="blog-details.html">Read more...</a>
-                                </div>
-                                <div class="blog-content-sub blog-content-sub-2">
-                                    <ul>
-                                        <li><a href="#">Business</a></li>
-                                        <li>October 13, 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="blog-item">
-                        <div class="blog-img">
-                            <img src="{{url('Shipter/assets/images/blog/5.jpg')}}" alt="">
-                            <div class="blog-s-text">
-                                <div class="blog-content">
-                                    <h3>We can ensure you about the safe delevery</h3>
-                                </div>
-                                <div class="blog-content-sub blog-content-sub-2">
-                                    <ul>
-                                        <li><a href="#">Business</a></li>
-                                        <li>October 13, 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="blog-text">
-                                <div class="blog-content blog-content2">
-                                    <h3><a href="blog-details.html">We can ensure you about the safe delevery</a></h3>
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration</p>
-                                    <a href="blog-details.html">Read more...</a>
-                                </div>
-                                <div class="blog-content-sub blog-content-sub-2">
-                                    <ul>
-                                        <li><a href="#">Business</a></li>
-                                        <li>October 13, 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="blog-item">
-                        <div class="blog-img">
-                            <img src="{{url('Shipter/assets/images/blog/6.jpg')}}" alt="">
-                            <div class="blog-s-text">
-                                <div class="blog-content">
-                                    <h3>We can ensure you about the safe delevery</h3>
-                                </div>
-                                <div class="blog-content-sub blog-content-sub-2">
-                                    <ul>
-                                        <li><a href="#">Business</a></li>
-                                        <li>October 13, 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="blog-text">
-                                <div class="blog-content blog-content2">
-                                    <h3><a href="blog-details.html">We can ensure you about the safe delevery</a></h3>
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration</p>
-                                    <a href="blog-details.html">Read more...</a>
-                                </div>
-                                <div class="blog-content-sub blog-content-sub-2">
-                                    <ul>
-                                        <li><a href="#">Business</a></li>
-                                        <li>October 13, 2018</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{{--    <div class="blog-area blog-style-2">--}}
+{{--        <div class="container">--}}
+{{--            <div class="col-l2">--}}
+{{--                <div class="section-title section-title-3 text-center">--}}
+{{--                    <span>Stay With Our Blog</span>--}}
+{{--                    <h2>Our Latest News</h2>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-lg-4 col-md-6 col-12">--}}
+{{--                    <div class="blog-item">--}}
+{{--                        <div class="blog-img">--}}
+{{--                            <img src="{{url('Shipter/assets/images/blog/4.jpg')}}" alt="">--}}
+{{--                            <div class="blog-s-text">--}}
+{{--                                <div class="blog-content">--}}
+{{--                                    <h3>We can ensure you about the safe delevery</h3>--}}
+{{--                                </div>--}}
+{{--                                <div class="blog-content-sub blog-content-sub-2">--}}
+{{--                                    <ul>--}}
+{{--                                        <li><a href="#">Business</a></li>--}}
+{{--                                        <li>October 13, 2018</li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="blog-text">--}}
+{{--                                <div class="blog-content blog-content2">--}}
+{{--                                    <h3><a href="blog-details.html">We can ensure you about the safe delevery</a></h3>--}}
+{{--                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration</p>--}}
+{{--                                    <a href="blog-details.html">Read more...</a>--}}
+{{--                                </div>--}}
+{{--                                <div class="blog-content-sub blog-content-sub-2">--}}
+{{--                                    <ul>--}}
+{{--                                        <li><a href="#">Business</a></li>--}}
+{{--                                        <li>October 13, 2018</li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-4 col-md-6 col-12">--}}
+{{--                    <div class="blog-item">--}}
+{{--                        <div class="blog-img">--}}
+{{--                            <img src="{{url('Shipter/assets/images/blog/5.jpg')}}" alt="">--}}
+{{--                            <div class="blog-s-text">--}}
+{{--                                <div class="blog-content">--}}
+{{--                                    <h3>We can ensure you about the safe delevery</h3>--}}
+{{--                                </div>--}}
+{{--                                <div class="blog-content-sub blog-content-sub-2">--}}
+{{--                                    <ul>--}}
+{{--                                        <li><a href="#">Business</a></li>--}}
+{{--                                        <li>October 13, 2018</li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="blog-text">--}}
+{{--                                <div class="blog-content blog-content2">--}}
+{{--                                    <h3><a href="blog-details.html">We can ensure you about the safe delevery</a></h3>--}}
+{{--                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration</p>--}}
+{{--                                    <a href="blog-details.html">Read more...</a>--}}
+{{--                                </div>--}}
+{{--                                <div class="blog-content-sub blog-content-sub-2">--}}
+{{--                                    <ul>--}}
+{{--                                        <li><a href="#">Business</a></li>--}}
+{{--                                        <li>October 13, 2018</li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-4 col-md-6 col-12">--}}
+{{--                    <div class="blog-item">--}}
+{{--                        <div class="blog-img">--}}
+{{--                            <img src="{{url('Shipter/assets/images/blog/6.jpg')}}" alt="">--}}
+{{--                            <div class="blog-s-text">--}}
+{{--                                <div class="blog-content">--}}
+{{--                                    <h3>We can ensure you about the safe delevery</h3>--}}
+{{--                                </div>--}}
+{{--                                <div class="blog-content-sub blog-content-sub-2">--}}
+{{--                                    <ul>--}}
+{{--                                        <li><a href="#">Business</a></li>--}}
+{{--                                        <li>October 13, 2018</li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="blog-text">--}}
+{{--                                <div class="blog-content blog-content2">--}}
+{{--                                    <h3><a href="blog-details.html">We can ensure you about the safe delevery</a></h3>--}}
+{{--                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration</p>--}}
+{{--                                    <a href="blog-details.html">Read more...</a>--}}
+{{--                                </div>--}}
+{{--                                <div class="blog-content-sub blog-content-sub-2">--}}
+{{--                                    <ul>--}}
+{{--                                        <li><a href="#">Business</a></li>--}}
+{{--                                        <li>October 13, 2018</li>--}}
+{{--                                    </ul>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
     <!-- .footer-area start -->
 @endsection

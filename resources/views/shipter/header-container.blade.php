@@ -1,6 +1,6 @@
 <div class="col-lg-3 col-md-3 col-sm-12 col-12">
-    <div class="logo">
-        <a href="{{route('english.index')}}"><img src="{{url('Shipter/assets/images/colord Logo-01.png')}}" alt="" style="max-height: 60px"></a>
+    <div class="logo" style="margin-top: 0px;">
+        <a href="{{route('english.index')}}"><img src="{{url('Shipter/assets/images/colord Logo-01.png')}}" alt="" style="max-height: 90px"></a>
     </div>
 </div>
 <div class="col-md-9 col-sm-12 col-12 col-lg-9">
