@@ -63,11 +63,16 @@ TABLE OF CONTENTS:
 --------------------------------------------------------------*/
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   color:#333;
+}
+
+@font-face {
+    font-family: arabicFont;
+    src: url('http://127.0.0.1:8000/Presento/assets/arabicfont/arabic_regular.ttf');
 }
 
 @media (max-width: 767px) {
@@ -88,7 +93,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Raleway", sans-serif;;
   color: #282e3f;
 }
 
@@ -269,13 +274,13 @@ a:focus {
 }
 .account_login-area .account-item h5 {
  font-size: 16px;
- font-family: 'Roboto', sans-serif;
+ font-family: "Raleway", sans-serif;
  margin-bottom: 0;
 }
 .account_login-area .account-item h5 span {
  font-size: 18px;
  margin-bottom: 10px;
- font-family: 'Oswald', sans-serif;
+ font-family: "Raleway", sans-serif;
 }
 .account_login-area .account-item:first-child {
     padding-left: 40px;
@@ -925,7 +930,7 @@ mobile menu
 }
 .service-content h3{
   font-size:20px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Raleway", sans-serif;
   position: relative;
   color:#fff;
 }
@@ -1131,7 +1136,7 @@ mobile menu
     line-height: 10px;
     padding-bottom: 10px;
     position: relative;
-    font-family: 'Oswald', sans-serif;
+    font-family: "Raleway", sans-serif;
 }
 .counter-area .counter-grids .grid h2:before{
     content: "";
@@ -1164,7 +1169,7 @@ mobile menu
 }
 .pricing-header h3{
   color: #fff;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 500;
   font-size: 30px;
 }
@@ -1302,7 +1307,7 @@ mobile menu
     font-size: 30px;
 }
 .testimonial-item h4{
-  font-family: 'Roboto', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 500;
   font-size: 18px;
   color:#eb8e23;
@@ -1454,7 +1459,7 @@ mobile menu
 }
 .team-content h4{
   font-size: 18px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: 500;
   cursor: pointer;
   transition: all .3s;

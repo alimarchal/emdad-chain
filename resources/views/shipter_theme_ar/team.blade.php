@@ -3,6 +3,7 @@
 @section('custom-header')
 @endsection
 @section('custom-body-style')
+    style="font-family: arabicFont;"
 @endsection
 @section('inside-body')
 @section('breadcumb-title','الفريق')

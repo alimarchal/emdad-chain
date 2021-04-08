@@ -3,6 +3,7 @@
 @section('custom-header')
 @endsection
 @section('custom-body-style')
+    style="font-family: arabicFont;"
 @endsection
 @section('inside-body')
     <!-- header-area start -->
@@ -45,10 +46,10 @@
                 <img src="{{url('images/hero-bg.jpg')}}" alt class="slider-bg">
                 <div class="container">
                     <div class="row">
-                        <div class="col-xl-12 slide-caption">
+                        <div class="col-xl-12 slide-caption" >
 {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
-                            <h3 class="text-warning">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
-                            <h3 class="text-warning">ؤيتنا لمستقبلنا:<br>
+                            <h3 class="text-warning" style="font-family: arabicFont;direction: rtl;">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
+                            <h3 class="text-warning" style="font-family: arabicFont;direction: rtl;">ؤيتنا لمستقبلنا:<br>
                                 أضخم منصة تقنية موثوقة تخدم سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم اسطول لوجستي بأفضل معايير الجودة العالمية.</h3>
                             <div class="btns">
                                 <div class="btn-style"><a href="{{route('arabic.about')}}" style="background: #fd7e14">من إمداد</a></div>
@@ -63,10 +64,10 @@
                     <div class="row">
                         <div class="col-xl-12 slide-caption">
                             {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
-                            <h3 class="text-warning">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
-                            <h3 class="text-warning">ؤيتنا لمستقبلنا:<br>
+                            <h3 class="text-warning" style="font-family: arabicFont;direction: rtl;">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
+                            <h3 class="text-warning" style="font-family: arabicFont;direction: rtl;">ؤيتنا لمستقبلنا:<br>
                                 أضخم منصة تقنية موثوقة تخدم سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم اسطول لوجستي بأفضل معايير الجودة العالمية.</h3>
-                            <div class="btns">
+                            <div class="btns" style="font-family: arabicFont;direction: rtl;">
                                 <div class="btn-style"><a href="{{route('arabic.about')}}" style="background: #fd7e14">من إمداد</a></div>
                             </div>
                         </div>

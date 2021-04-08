@@ -3,6 +3,7 @@
 @section('custom-header')
 @endsection
 @section('custom-body-style')
+    style="direction:rtl;"
 @endsection
 @section('main')
 

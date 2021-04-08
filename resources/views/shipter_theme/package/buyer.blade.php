@@ -103,7 +103,7 @@
                                 <table class="table-auto bg-white overflow-hidden w-full text-left whitespace-no-wrap">
                                     <thead>
                                     <tr>
-                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500 rounded-tl rounded-bl">Functions</th>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500 rounded-tl rounded-bl">Features/Package</th>
                                         @foreach($packages as $package)
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500">
                                                 {{$package->package_type}}</th>

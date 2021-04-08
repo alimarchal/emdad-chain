@@ -1,9 +1,9 @@
-<div class="col-md-6 col-sm-12 col-12 col-lg-6">
+<div class="col-md-8 col-sm-12 col-12 col-lg-8">
     <ul class="d-flex account_login-area">
         <li><i class="fa fa-clock-o" aria-hidden="true"></i></i>Sunday to Thursday : 9.00 am - 05.00 pm, Friday, Saturday Closed</li>
     </ul>
 </div>
-<div class="col-md-6 col-sm-12 col-12 col-lg-6">
+<div class="col-md-3 col-sm-12 col-12 col-lg-3">
     <div class="row">
         <div class="col-lg-9 col-md-6">
             <ul class="d-flex header-social">
@@ -13,9 +13,9 @@
                 <li><a href="https://www.linkedin.com/company/emdadchain"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
             </ul>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-1 col-md-6">
             <ul class="login-r">
-                <li><a href="{{route('login')}}">Login</a></li>
+                <li><a style="color: white;" href="{{route('login')}}">Login</a></li>
 {{--                <li><a href="{{route('register')}}">Register</a></li>--}}
             </ul>
         </div>

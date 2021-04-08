@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 footer-t">
                     <div class="footer-logo">
-                        <img src="{{url('logo-full.png')}}" alt="" style="max-width: 70px">
+                        <img src="{{url('footer-logo.png')}}" alt="" style="max-width: 70px">
                     </div>
                     <p>مركز ابان ١٢٠،
                         طريق الملك عبد العزيز، مخرج ٥

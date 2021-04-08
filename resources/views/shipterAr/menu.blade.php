@@ -1,4 +1,4 @@
-<nav class="nav_mobile_menu">
+<nav class="nav_mobile_menu" >
     <ul>
         <li class="{{(request()->routeIs('arabic.index')?'active':'')}}"><a href="{{route('arabic.index')}}">الرئيسية</a></li>
         <li class="{{(request()->routeIs('arabic.about')?'active':'')}}"><a href="{{route('arabic.about')}}">من إمداد</a></li>

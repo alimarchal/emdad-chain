@@ -17,6 +17,7 @@
     </style>
 @endsection
 @section('custom-body-style')
+    style="direction:rtl;"
 @endsection
 
 @section('main')
