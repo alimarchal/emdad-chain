@@ -1,5 +1,5 @@
-@extends('shipter.layout')
-@section('title','Home')
+@extends('shipterAr.layout')
+@section('title','الرئيسية')
 @section('custom-header')
 @endsection
 @section('custom-body-style')
@@ -10,24 +10,24 @@
         <div class="header-top">
             <div class="container">
                 <div class="row">
-                    @include('shipter.top-header')
+                    @include('shipterAr.top-header')
                 </div>
             </div>
         </div>
         <div class="header-top header-top-2">
             <div class="container">
                 <div class="row">
-                    @include('shipter.header-container')
+                    @include('shipterAr.header-container')
                 </div>
             </div>
         </div>
-        <div class="header-area header-style-2">
+        <div class="header-area header-style-2" style="direction: rtl">
             <div class="header-sub" id="sticky-header">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 d-none d-lg-block">
                             <div class="main-menu">
-                               @include('shipter.menu')
+                               @include('shipterAr.menu')
                             </div>
                         </div>
 
@@ -47,13 +47,11 @@
                     <div class="row">
                         <div class="col-xl-12 slide-caption">
 {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
-                            <h3 class="text-warning">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
-                                , selling, supplying and warehousing process. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
-                            <h3 class="text-warning">Our vision: <br>
-                                To become the largest, reliable, online platform specialized in supply chains,
-                                and to gain the biggest number of suppliers and the largest logistical fleet while assuring the best international quality standards.</h3>
+                            <h3 class="text-warning">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
+                            <h3 class="text-warning">ؤيتنا لمستقبلنا:<br>
+                                أضخم منصة تقنية موثوقة تخدم سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم اسطول لوجستي بأفضل معايير الجودة العالمية.</h3>
                             <div class="btns">
-                                <div class="btn-style"><a href="{{route('english.about')}}" style="background: #fd7e14">About us</a></div>
+                                <div class="btn-style"><a href="{{route('arabic.about')}}" style="background: #fd7e14">من إمداد</a></div>
                             </div>
                         </div>
                     </div>
@@ -64,13 +62,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12 slide-caption">
-                            <h3 class="text-warning">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
-                                , selling, supplying and warehousing process. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
-                            <h3 class="text-warning">Our vision: <br>
-                                To become the largest, reliable, online platform specialized in supply chains,
-                                and to gain the biggest number of suppliers and the largest logistical fleet while assuring the best international quality standards.</h3>
+                            {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
+                            <h3 class="text-warning">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
+                            <h3 class="text-warning">ؤيتنا لمستقبلنا:<br>
+                                أضخم منصة تقنية موثوقة تخدم سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم اسطول لوجستي بأفضل معايير الجودة العالمية.</h3>
                             <div class="btns">
-                                <div class="btn-style"><a href="{{route('english.about')}}" style="background: #fd7e14">About us</a></div>
+                                <div class="btn-style"><a href="{{route('arabic.about')}}" style="background: #fd7e14">من إمداد</a></div>
                             </div>
                         </div>
                     </div>
@@ -80,7 +77,7 @@
     </section>
     <!-- end of hero slider -->
     <!-- section-section start -->
-    <div class="section-area section-style-2">
+    <div class="section-area section-style-2" style="direction: rtl">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-d">
@@ -89,9 +86,8 @@
                             <i class="fi flaticon-ship"></i>
                         </div>
                         <div class="section-content">
-                            <p><a href="javascript:void(0)">Smart Map</a></p>
-                            <span>One of Emdad’s great features is the smart map which is considered the first in its field.
-                            It allows the user to be connected to the right resource within one minute in more than 500 available categories.</span>
+                            <p><a href="javascript:void(0)">الخارطة الذكية:</a></p>
+                            <span>من أعظم انجازات إمداد هو عمل الخريطة الذكية وتعتبر الأولى في مجالها والرائدة لتمكن المستخدم من الوصول للمورد الصحيح خلال دقيقة واحدة في أكثر من ٥٠٠ فئه متاحة.</span>
                         </div>
                     </div>
                 </div>
@@ -101,10 +97,11 @@
                             <i class="fi flaticon-truck"></i>
                         </div>
                         <div class="section-content">
-                            <p> <a href="javascript:void(0)">Saving Time and Effort</a></p>
-                            <span>It is fundamental gauge the platform was built upon.Fast and smooth elictronic authorizations.
-                            Quick quotations recieving from multible suppliers.
-                            Easy access to the suitable supplier.</span>
+                            <p> <a href="javascript:void(0)">توفير الوقت والجهد:</a></p>
+                            <span>هو المقياس الأساسي الذي بنيت عليه المنصة.
+                                    سرعة وسهولة الاعتمادات الإلكترونية.
+                                    سرعة الحصول على عروض اسعار من عدة موردين.
+                                    سرعة وسهولة الوصول للمورد الصحيح.</span>
                         </div>
                     </div>
                 </div>
@@ -114,9 +111,9 @@
                             <i class="fi flaticon-plane"></i>
                         </div>
                         <div class="section-content">
-                            <p> <a href="javascript:void(0)">Privacy and Safety</a></p>
-                            <span>All the transactions are saved in a cloud storage that cannot be removed.
-                                The latest security technologies are applied to ensure that the user account is not tampered with.</span>
+                            <p> <a href="javascript:void(0)">الحماية والأمان:</a></p>
+                            <span>جميع العمليات محفوظة في سحابة مرجعية ولا يتم إزالتها بتاتاً.
+تم استخدام أحدث تِقنيات الأمان لضمانة عدم التلاعب او العبث بحساب المستخدم.                                </span>
                         </div>
                     </div>
                 </div>
@@ -126,8 +123,8 @@
                             <i class="fi flaticon-plane"></i>
                         </div>
                         <div class="section-content">
-                            <p> <a href="javascript:void(0)">Quality and Performance</a></p>
-                            <span>Umong the basic standards Emdad cares to provide its partners with, and we guarantee you that.</span>
+                            <p> <a href="javascript:void(0)">الجودة والأداء:</a></p>
+                            <span>من المعايير الأساسية التي تهتم إمداد بتقديمها لمستخدميها، ونضمن لكم ذلك.</span>
                         </div>
                     </div>
                 </div>
@@ -144,17 +141,15 @@
                         <div class="about-icon">
                             <i class="fi flaticon-travel"></i>
                         </div>
-                        <h2>What is Emdad Platform?</h2>
-                        <p>Is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing, selling, supplying and warehousing process.</p>
-                        <p>Emdad can provide the lowest costs yet the best technical and logistical standards.</p>
-                        <span><strong>Our Vision:</strong> To become the largest, reliable online platform specialized in supply chains, and to gain the biggest
-                            number of suppliers and the largest logistical fleet while assuring the best international quality standards.</span>
-                        <span><strong>Our Goal:</strong> To remove all of the logistical obstacles and upgrade the service level of supply chain for all of Emdad's partners, and we will!</span>
+                        <h2>ماهي منصة إمداد؟</h2>
+                        <p>هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين،</p>
+                        <p>بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</p>
+                        <span><strong>رؤيتنا لمستقبلنا:</strong> أضخم منصة تقنية موثوقة تخدم سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم اسطول لوجستي بأفضل معايير الجودة العالمية.</span>
                     </div>
                     <div class="signature-section">
                         <div class="si-text">
-                            <p>Abdulaziz AlSinany</p>
-                            <span>Founder and CEO</span>
+                            <p>عبدالعزيز السناني</p>
+                            <span>مؤسس ومدير مجلس الإدارة</span>
                         </div>
                         <img src="{{url('Shipter/assets/images/about/ceo_sign.png')}}" style="width: 200px;" alt="">
                     </div>
@@ -261,38 +256,6 @@
         </div>
     </div>
     <!-- service-area end-->
-    <!-- start track-section -->
-{{--    <section class="track-section">--}}
-{{--        <div class="container">--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-lg-9">--}}
-{{--                    <div class="track">--}}
-{{--                        <h3>Enter Your Email and Track Your Cargo</h3>--}}
-{{--                        <div class="tracking-form">--}}
-{{--                            <div class="row">--}}
-{{--                                <div class="col-lg-4 col-md-4 col-sm-6">--}}
-{{--                                    <form>--}}
-{{--                                        <input type="text" class="form-control" placeholder="Email">--}}
-{{--                                    </form>--}}
-{{--                                </div>--}}
-{{--                                <div class="col-lg-4 col-md-4 col-sm-6">--}}
-{{--                                    <form>--}}
-{{--                                        <input type="text" class="form-control" placeholder="Tracking Number">--}}
-{{--                                    </form>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="col-lg-3 col-md-4 col-sm-6">--}}
-{{--                                    <button type="submit">Track Your Cargo</button>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <!-- end container -->--}}
-{{--    </section>--}}
-    <!-- end track-section -->
     <!-- feature-area start -->
     <div class="features-area features-style-2">
         <div class="container">
@@ -309,9 +272,8 @@
                                     <i class="fi flaticon-plane"></i>
                                 </div>
                                 <div class="features-text">
-                                    <h3>Smart Map</h3>
-                                    <p>One of Emdad’s great features is the smart map which is considered the first in its field.
-                                        It allows the user to be connected to the right resource within one minute in more than 500 available categories.</p>
+                                    <h3>الخارطة الذكية:</h3>
+                                    <p>من أعظم انجازات إمداد هو عمل الخريطة الذكية وتعتبر الأولى في مجالها والرائدة لتمكن المستخدم من الوصول للمورد الصحيح خلال دقيقة واحدة في أكثر من ٥٠٠ فئه متاحة.</p>
                                 </div>
                             </div>
                         </div>
@@ -321,9 +283,9 @@
                                     <i class="fi flaticon-truck"></i>
                                 </div>
                                 <div class="features-text">
-                                    <h3>Privacy and Safety</h3>
-                                    <p>All the transactions are saved in a cloud storage that cannot be removed.
-                                        The latest security technologies are applied to ensure that the user account is not tampered with.</p>
+                                    <h3>الحماية والأمان:</h3>
+                                    <p>جميع العمليات محفوظة في سحابة مرجعية ولا يتم إزالتها بتاتاً.
+                                        تم استخدام أحدث تِقنيات الأمان لضمانة عدم التلاعب او العبث بحساب المستخدم.</p>
                                 </div>
                             </div>
                         </div>
@@ -344,9 +306,11 @@
                                     <i class="fi flaticon-ship"></i>
                                 </div>
                                 <div class="features-text">
-                                    <h3>Saving Time and Effort</h3>
-                                    <p>It is fundamental gauge the platform was built upon.Fast and smooth elictronic authorizations.
-                                        Quick quotations recieving from multible suppliers. Easy access to the suitable supplier.</p>
+                                    <h3>توفير الوقت والجهد:</h3>
+                                    <p>هو المقياس الأساسي الذي بنيت عليه المنصة.
+                                        سرعة وسهولة الاعتمادات الإلكترونية.
+                                        سرعة الحصول على عروض اسعار من عدة موردين.
+                                        سرعة وسهولة الوصول للمورد الصحيح.</p>
                                 </div>
                             </div>
                         </div>
@@ -356,8 +320,8 @@
                                     <i class="fi flaticon-truck-1"></i>
                                 </div>
                                 <div class="features-text">
-                                    <h3>Quality and Performance</h3>
-                                    <p>Umong the basic standards Emdad cares to provide its partners with, and we guarantee you that.</p>
+                                    <h3>الجودة والأداء:</h3>
+                                    <p>من المعايير الأساسية التي تهتم إمداد بتقديمها لمستخدميها، ونضمن لكم ذلك.</p>
                                 </div>
                             </div>
                         </div>
@@ -367,52 +331,7 @@
         </div>
     </div>
     <!-- feature-area start -->
-    <!-- counter-area start -->
-{{--    <div class="counter-area counter-style-2">--}}
-{{--        <div class="container">--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-lg-7 col-md-6 col-sm-12">--}}
-{{--                    <div class="counter-content">--}}
-{{--                        <h2>Our Some Important Things That will Satisfite You...</h2>--}}
-{{--                        <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.Many desktop publishing packages and web page editors now</p>--}}
-{{--                        <div class="btns">--}}
-{{--                            <div class="btn-style btn-style-3"><a href="#">Learn More About Us...</a></div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-5 col-md-6 col-sm-12">--}}
-{{--                    <div class="counter-grids">--}}
-{{--                        <div class="grid">--}}
-{{--                            <div>--}}
-{{--                                <h2><span class="odometer" data-count="4,012">00</span></h2>--}}
-{{--                            </div>--}}
-{{--                            <p>Delivered Packages</p>--}}
-{{--                        </div>--}}
-{{--                        <div class="grid">--}}
-{{--                            <div>--}}
-{{--                                <h2><span class="odometer" data-count="605">00</span></h2>--}}
-{{--                            </div>--}}
-{{--                            <p>Countries Covered</p>--}}
-{{--                        </div>--}}
-{{--                        <div class="grid">--}}
-{{--                            <div>--}}
-{{--                                <h2><span class="odometer" data-count="920">00</span></h2>--}}
-{{--                            </div>--}}
-{{--                            <p>Satisfied Clients</p>--}}
-{{--                        </div>--}}
-{{--                        <div class="grid">--}}
-{{--                            <div>--}}
-{{--                                <h2><span class="odometer" data-count="3,592">00</span></h2>--}}
-{{--                            </div>--}}
-{{--                            <p>Tons of Goods</p>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-    <!-- counter-area end -->
-    <!-- pice-area start -->
+    <!-- price-area start -->
     <div class="pricing-area pricing-area-2">
         <div class="container">
             <div class="section-title text-center">
@@ -569,7 +488,7 @@
             </div>
         </div>
     </div>
-    <!-- pice-area end -->
+    <!-- price-area end -->
     <!-- testimonial-area start -->
     <div class="testimonial-area">
         <div class="container">
@@ -615,7 +534,7 @@
         <div class="container">
             <div class="col-l2">
                 <div class="section-title text-center">
-                    <h2>Meet the Team</h2>
+                    <h2>فريق العمل</h2>
                 </div>
             </div>
             <div class="row">
@@ -632,8 +551,8 @@
                             </div>
                         </div>
                         <div class="team-content">
-                            <h4>Abdulaziz AlSinany</h4>
-                            <span>Founder and CEO</span>
+                            <h4>عبد العزيز السناني</h4>
+                            <span>مؤسس ومدير مجلس الإدارة</span>
                         </div>
                     </div>
                 </div>
@@ -650,8 +569,8 @@
                             </div>
                         </div>
                         <div class="team-content">
-                            <h4>Ahsan Raza</h4>
-                            <span>Business Development Manager</span>
+                            <h4>أحسن رضا</h4>
+                            <span>مدير تطوير الأعمال</span>
                         </div>
                     </div>
                 </div>
@@ -668,8 +587,8 @@
                             </div>
                         </div>
                         <div class="team-content">
-                            <h4>Rayan Al Sinany</h4>
-                            <span>Junior Accountant</span>
+                            <h4>ريان السناني</h4>
+                            <span>محاسب إداري</span>
                         </div>
                     </div>
                 </div>
@@ -686,123 +605,15 @@
                             </div>
                         </div>
                         <div class="team-content">
-                            <h4>Muteb Al Buraikan</h4>
-                            <span>Human Resources Specialist</span>
+                            <h4>متعب البريكان</h4>
+                            <span>مسؤول الموارد البشرية</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- populer-area end -->
-    <!-- blog-area start -->
-{{--    <div class="blog-area blog-style-2">--}}
-{{--        <div class="container">--}}
-{{--            <div class="col-l2">--}}
-{{--                <div class="section-title section-title-3 text-center">--}}
-{{--                    <span>Stay With Our Blog</span>--}}
-{{--                    <h2>Our Latest News</h2>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-lg-4 col-md-6 col-12">--}}
-{{--                    <div class="blog-item">--}}
-{{--                        <div class="blog-img">--}}
-{{--                            <img src="{{url('Shipter/assets/images/blog/4.jpg')}}" alt="">--}}
-{{--                            <div class="blog-s-text">--}}
-{{--                                <div class="blog-content">--}}
-{{--                                    <h3>We can ensure you about the safe delevery</h3>--}}
-{{--                                </div>--}}
-{{--                                <div class="blog-content-sub blog-content-sub-2">--}}
-{{--                                    <ul>--}}
-{{--                                        <li><a href="#">Business</a></li>--}}
-{{--                                        <li>October 13, 2018</li>--}}
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="blog-text">--}}
-{{--                                <div class="blog-content blog-content2">--}}
-{{--                                    <h3><a href="blog-details.html">We can ensure you about the safe delevery</a></h3>--}}
-{{--                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration</p>--}}
-{{--                                    <a href="blog-details.html">Read more...</a>--}}
-{{--                                </div>--}}
-{{--                                <div class="blog-content-sub blog-content-sub-2">--}}
-{{--                                    <ul>--}}
-{{--                                        <li><a href="#">Business</a></li>--}}
-{{--                                        <li>October 13, 2018</li>--}}
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-4 col-md-6 col-12">--}}
-{{--                    <div class="blog-item">--}}
-{{--                        <div class="blog-img">--}}
-{{--                            <img src="{{url('Shipter/assets/images/blog/5.jpg')}}" alt="">--}}
-{{--                            <div class="blog-s-text">--}}
-{{--                                <div class="blog-content">--}}
-{{--                                    <h3>We can ensure you about the safe delevery</h3>--}}
-{{--                                </div>--}}
-{{--                                <div class="blog-content-sub blog-content-sub-2">--}}
-{{--                                    <ul>--}}
-{{--                                        <li><a href="#">Business</a></li>--}}
-{{--                                        <li>October 13, 2018</li>--}}
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="blog-text">--}}
-{{--                                <div class="blog-content blog-content2">--}}
-{{--                                    <h3><a href="blog-details.html">We can ensure you about the safe delevery</a></h3>--}}
-{{--                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration</p>--}}
-{{--                                    <a href="blog-details.html">Read more...</a>--}}
-{{--                                </div>--}}
-{{--                                <div class="blog-content-sub blog-content-sub-2">--}}
-{{--                                    <ul>--}}
-{{--                                        <li><a href="#">Business</a></li>--}}
-{{--                                        <li>October 13, 2018</li>--}}
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="col-lg-4 col-md-6 col-12">--}}
-{{--                    <div class="blog-item">--}}
-{{--                        <div class="blog-img">--}}
-{{--                            <img src="{{url('Shipter/assets/images/blog/6.jpg')}}" alt="">--}}
-{{--                            <div class="blog-s-text">--}}
-{{--                                <div class="blog-content">--}}
-{{--                                    <h3>We can ensure you about the safe delevery</h3>--}}
-{{--                                </div>--}}
-{{--                                <div class="blog-content-sub blog-content-sub-2">--}}
-{{--                                    <ul>--}}
-{{--                                        <li><a href="#">Business</a></li>--}}
-{{--                                        <li>October 13, 2018</li>--}}
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="blog-text">--}}
-{{--                                <div class="blog-content blog-content2">--}}
-{{--                                    <h3><a href="blog-details.html">We can ensure you about the safe delevery</a></h3>--}}
-{{--                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration</p>--}}
-{{--                                    <a href="blog-details.html">Read more...</a>--}}
-{{--                                </div>--}}
-{{--                                <div class="blog-content-sub blog-content-sub-2">--}}
-{{--                                    <ul>--}}
-{{--                                        <li><a href="#">Business</a></li>--}}
-{{--                                        <li>October 13, 2018</li>--}}
-{{--                                    </ul>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
-    <!-- .footer-area start -->
+    <!-- team-area end -->
 @endsection
 @section('custom-footer')
 @endsection

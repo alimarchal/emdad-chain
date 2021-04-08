@@ -1,5 +1,5 @@
 @component('mail::message')
-# Unfortunatly
+# Unfortunately
 
 Your business registration is not approved. Please contact Customer Support.
 

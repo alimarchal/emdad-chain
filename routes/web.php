@@ -28,6 +28,7 @@ use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ShipmentItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\WebsiteArabicController;
 use App\Models\DraftPurchaseOrder;
 use App\Models\TrackingDelivery;
 use Illuminate\Support\Facades\Route;
@@ -91,9 +92,20 @@ Route::get('/en-contact', [\App\Http\Controllers\WebsiteEnglishController::class
 Route::get('/en-survey', [\App\Http\Controllers\WebsiteEnglishController::class, 'survey'])->name('english.survey');
 Route::get('/en-buyer-survey', [\App\Http\Controllers\WebsiteEnglishController::class, 'buyerSurvey'])->name('english.buyerSurvey');
 Route::get('/en-supplier-survey', [\App\Http\Controllers\WebsiteEnglishController::class, 'supplierSurvey'])->name('english.supplierSurvey');
+Route::get('/en-buyer-package', [\App\Http\Controllers\WebsiteEnglishController::class, 'buyerPackage'])->name('english.buyerPackage');
+Route::get('/en-supplier-package', [\App\Http\Controllers\WebsiteEnglishController::class, 'supplierPackage'])->name('english.supplierPackage');
 
-
-
+####################     WebsiteArabic          ###################
+Route::get('/arabic', [WebsiteArabicController::class, 'index'])->name('arabic.index');
+Route::get('/ar-about', [WebsiteArabicController::class, 'about'])->name('arabic.about');
+Route::get('/ar-service', [WebsiteArabicController::class, 'service'])->name('arabic.service');
+Route::get('/ar-team', [WebsiteArabicController::class, 'team'])->name('arabic.team');
+Route::get('/ar-contact', [WebsiteArabicController::class, 'contact'])->name('arabic.contact');
+Route::get('/ar-survey', [WebsiteArabicController::class, 'survey'])->name('arabic.survey');
+Route::get('/ar-buyerSurvey', [WebsiteArabicController::class, 'buyerSurvey'])->name('arabic.buyerSurvey');
+Route::get('/ar-supplierSurvey', [WebsiteArabicController::class, 'supplierSurvey'])->name('arabic.supplierSurvey');
+Route::get('/ar-buyerPackage', [WebsiteArabicController::class, 'buyerPackage'])->name('arabic.buyerPackage');
+Route::get('/ar-supplierPackage', [WebsiteArabicController::class, 'supplierPackage'])->name('arabic.supplierPackage');
 
 
 

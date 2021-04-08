@@ -1,7 +1,7 @@
 @component('mail::message')
 # Congratulation
 
-Your business has been approved pelase login to proceed.
+Your business has been approved please login to proceed.
 
 @component('mail::button', ['url' => config('app.url')])
 Login

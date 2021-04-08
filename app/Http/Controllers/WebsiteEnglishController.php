@@ -53,6 +53,16 @@ class WebsiteEnglishController extends Controller
         return view('shipter_theme.survey.supplier');
     }
 
+    public function buyerPackage()
+    {
+        return view('shipter_theme.package.buyer');
+    }
+
+    public function supplierPackage()
+    {
+        return view('shipter_theme.package.supplier');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
