@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Shipment;
 use App\Models\ShipmentItem;
 use Illuminate\Http\Request;
 
@@ -48,7 +49,7 @@ class ShipmentItemController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -59,18 +60,28 @@ class ShipmentItemController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //
+        $token = $request->code;
+        if ($token == "RRNirxFh4j9Ftd") {
+            $shipment_item = ShipmentItem::find($id);
+            if (empty($shipment_item)) {
+                return response()->json(['message' => 'Not Found!'], 404);
+            } else {
+                return $shipment_item;
+            }
+        } else {
+            return response()->json(['message' => 'UnAuthorized Access!'], 404);
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -81,8 +92,8 @@ class ShipmentItemController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -104,7 +115,7 @@ class ShipmentItemController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
