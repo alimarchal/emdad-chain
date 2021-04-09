@@ -487,7 +487,7 @@
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
-                                        <h5 style="color: #eb8e23">Free (5 million purchases/month)</h5>
+                                        <h5 style="color: #eb8e23">Free (if the user reaches 5 million RS)</h5>
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">

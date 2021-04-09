@@ -17,34 +17,36 @@
     </style>
 @endsection
 @section('custom-body-style')
+    style="font-family: arabicFont;"
     style="direction:rtl;"
 @endsection
 
 @section('main')
     <!-- ======= Buttons ======= -->
-    <section class="breadcrumbs">
+    <section class="breadcrumbs" style="direction: rtl">
         <div class="container" style="margin-top: 40px;" >
             <div class="btns mx-auto" align="center">
-                <a class="btn-style survey col-lg-3 col-md-3" href="{{route('english.buyerSurvey')}}">Survey for Buyer</a> &nbsp;
-                <a class="btn-style survey col-lg-3 col-md-6" href="{{route('english.supplierSurvey')}}">Survey for Supplier</a>
+                <a class="btn-style survey col-lg-3 col-md-3" href="{{route('arabic.buyerSurvey')}}">Survey for Buyer</a> &nbsp;
+                <a class="btn-style survey col-lg-3 col-md-6" href="{{route('arabic.supplierSurvey')}}">Survey for Supplier</a>
             </div>
         </div>
     </section><!-- End Buttons --><br>
 
-    <section class="inner-page">
+    <section class="inner-page" style="direction: rtl">
         <div class="container" data-aos="fade-up">
-            <p class="text-center"><strong>For buyers and suppliers survey</strong></p>
-            <p><strong>Introduction</strong><br>
-                Dear owner of the organization:<br>
-                In order for us to provide our service at the best level for you, this questionnaire was conducted to challenge us to raise the level of quality of your supply chains, especially in the current conditions with the COVID 19 pandemic, and in pursuit of us to achieve the vision of the Kingdom of Saudi Arabia 2030</p>
+            <p class="text-center"><strong>هدف الاستبيان</strong></p>
+            <p><strong>عزيزي صاحب المنشأة:</strong><br>
+                حرصاً منا على تقديم خدمتنا بالمستوى الأفضل لكم تم عمل هذا الاستبيان تحدياً منا لرفع مستوى جودة سلاسل الامداد لديكم و خاصتاً في ظل الظروف الحالية لجائحة COVID 19 و سعياً منا لتحقيق رؤية المملكة العربية السعودية 2030</p>
 
-            <p><strong>Definition of the questionnaire</strong><br>
-                This questionnaire is for establishments and companies and cannot be filled out by an individual or person.<br>
-                Answers in this questionnaire will be dealt with for each facility separately to provide the required service.<br>
-                The duration of this questionnaire is from 8 to 10 minutes.</p>
+            <p><strong>تعريف عن الاستبيان</strong><br>
+                هذا الاستبيان هو خاص للمنشأت و الشركات ولا يمكن تعبئته من خلال فرد او شخص.
+                الاجابات على هذا الاستبيان سيتم التعامل معها لكل منشأة على حِدة لتقديم الخدمة اللازمة.
+                مدة هذا الاستبيان من 8 الي 10 دقائق.
+                رسالة قصيرة
+                نسعد بتعبئتكم لهذا الاستبيان الذي يهدف في تطوير و تحسين مستوى سلاسل الامداد لديكم في المستقبل .. شكراً لكم.</p>
 
-            <p><strong>Short message</strong><br>
-                We appreciate the time you spent on filling out this questionnaire, which aims to develop and improve the level of your supply chains in the future. Thank you!</p>
+            <p><strong>رسالة قصيرة</strong><br>
+                نسعد بتعبئتكم لهذا الاستبيان الذي يهدف في تطوير و تحسين مستوى سلاسل الامداد لديكم في المستقبل .. شكراً لكم.</p>
         </div>
 
     </section> <br>

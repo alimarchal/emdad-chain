@@ -11,7 +11,7 @@
 @section('main')
 
     <!-- team-area start -->
-    <div class="about-area about-style-2">
+    <div class="about-area about-style-2" style="direction: rtl">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6  offset-lg-6 about-wrap">

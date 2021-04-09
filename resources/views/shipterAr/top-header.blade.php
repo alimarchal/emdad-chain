@@ -15,7 +15,7 @@
         </div>
         <div class="col-lg-1 col-md-6">
             <ul class="login-r">
-                <li><a style="color: white;" href="{{route('login')}}">Login</a></li>
+                <li><a style="color: white;" href="{{route('login')}}">دخول</a></li>
 {{--                <li><a href="{{route('register')}}">Register</a></li>--}}
             </ul>
         </div>

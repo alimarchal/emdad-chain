@@ -102,10 +102,10 @@ Route::get('/ar-service', [WebsiteArabicController::class, 'service'])->name('ar
 Route::get('/ar-team', [WebsiteArabicController::class, 'team'])->name('arabic.team');
 Route::get('/ar-contact', [WebsiteArabicController::class, 'contact'])->name('arabic.contact');
 Route::get('/ar-survey', [WebsiteArabicController::class, 'survey'])->name('arabic.survey');
-Route::get('/ar-buyerSurvey', [WebsiteArabicController::class, 'buyerSurvey'])->name('arabic.buyerSurvey');
-Route::get('/ar-supplierSurvey', [WebsiteArabicController::class, 'supplierSurvey'])->name('arabic.supplierSurvey');
-Route::get('/ar-buyerPackage', [WebsiteArabicController::class, 'buyerPackage'])->name('arabic.buyerPackage');
-Route::get('/ar-supplierPackage', [WebsiteArabicController::class, 'supplierPackage'])->name('arabic.supplierPackage');
+Route::get('/ar-buyer-survey', [WebsiteArabicController::class, 'buyerSurvey'])->name('arabic.buyerSurvey');
+Route::get('/ar-supplier-survey', [WebsiteArabicController::class, 'supplierSurvey'])->name('arabic.supplierSurvey');
+Route::get('/ar-buyer-package', [WebsiteArabicController::class, 'buyerPackage'])->name('arabic.buyerPackage');
+Route::get('/ar-supplier-package', [WebsiteArabicController::class, 'supplierPackage'])->name('arabic.supplierPackage');
 
 
 

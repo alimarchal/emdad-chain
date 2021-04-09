@@ -25,12 +25,12 @@
                     <div class="footer-link">
                         <h3>Quick Link</h3>
                         <ul>
-                            <li><a href="{{route('english.index')}}">الرئيسية</a></li>
-                            <li><a href="{{route('english.about')}}">من إمداد</a></li>
-                            <li><a href="{{route('english.service')}}">ماذا تقدم</a></li>
-                            <li><a href="{{route('english.team')}}">الفريق</a></li>
-                            <li><a href="{{route('english.contact')}}">دعمكم هنا </a></li>
-                            <li><a href="{{route('english.survey')}}">الاستبيان </a></li>
+                            <li><a href="{{route('arabic.index')}}">الرئيسية</a></li>
+                            <li><a href="{{route('arabic.about')}}">من إمداد</a></li>
+                            <li><a href="{{route('arabic.service')}}">ماذا تقدم</a></li>
+                            <li><a href="{{route('arabic.team')}}">الفريق</a></li>
+                            <li><a href="{{route('arabic.contact')}}">دعمكم هنا </a></li>
+                            <li><a href="{{route('arabic.survey')}}">الاستبيان </a></li>
                         </ul>
                     </div>
                 </div>

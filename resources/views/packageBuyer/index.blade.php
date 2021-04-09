@@ -63,7 +63,7 @@
                                 <h1 class="text-4xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
                                     <span class="font-bold text-2xl">Free</span>
 {{--                                    <span>{{$package->charges}}</span>--}}
-                                    <span class="text-lg ml-1 font-normal text-gray-500">(5 million purchases/month)</span>
+                                    <span class="text-lg ml-1 font-normal text-gray-500">{{$package->charges}}</span>
                                 </h1>
                                 @if(isset($businessPackage) && $businessPackage->package_id == 4)
                                     <span class="text-lg ml-1 font-normal text-gray-500">{{auth()->user()->business_id}}</span>

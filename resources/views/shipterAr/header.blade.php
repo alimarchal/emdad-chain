@@ -13,7 +13,8 @@
     <link href="{{url('Shipter/assets/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{url('Shipter/assets/css/flaticon.css')}}" rel="stylesheet">
     <!-- Bootstrap core CSS -->
-    <link href="{{url('Shipter/assets/css/bootstrap.min.css')}}" rel="stylesheet">
+{{--    <link href="{{url('Shipter/assets/css/bootstrap.min.css')}}" rel="stylesheet">--}}
+    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
     <!-- Plugins for this template -->
     <link href="{{url('Shipter/assets/css/animate.css')}}" rel="stylesheet">
     <link href="{{url('Shipter/assets/css/owl.carousel.css')}}" rel="stylesheet">
@@ -46,7 +47,7 @@
 @if(!request()->routeIs('arabic.index'))
     <header>
         <div class="header-top">
-            <div class="container">
+            <div class="container" style="direction: rtl">
                 <div class="row">
                     <div class="col-md-8 col-sm-12 col-12 col-lg-8">
                         <ul class="d-flex account_login-area">
@@ -65,7 +66,7 @@
                             </div>
                             <div class="col-lg-2 col-md-6">
                                 <ul class="login-r">
-                                    <li><a style="color: white;" href="{{route('login')}}">Login</a></li>
+                                    <li><a style="color: white;" href="{{route('login')}}">دخول</a></li>
 {{--                                    <li><a href="{{route('register')}}">Register</a></li>--}}
                                 </ul>
                             </div>

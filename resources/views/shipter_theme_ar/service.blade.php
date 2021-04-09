@@ -16,7 +16,7 @@
 
     @include('shipterAr.breadcumb-area')
     <!-- section-section start -->
-    <div class="section-area section-style-2 section-style-3">
+    <div class="section-area section-style-2 section-style-3" style="direction: rtl">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-9 col-sm-12 col-d c-pd">
@@ -26,9 +26,10 @@
                                 <i class="fi flaticon-ship"></i>
                             </div>
                             <div class="section-content">
-                                <p><a>Logistics Department</a></p>
-                                <span>More control over inventory management.Precise orders tracking.
-                                      Benefiting from the storage service.</span>
+                                <p><a>القسم اللوجستي</a></p>
+                                <span>التحكم بشكل أكبر في إدارة المخزون.
+                                    إمكانية تتبع الطلب بشكل دقيق جدا.
+                                    إمكانية الاستفادة من خدمة التخزين.</span>
                             </div>
                         </div>
                         <div class="section-item-2">
@@ -36,9 +37,10 @@
                                 <i class="fi flaticon-truck"></i>
                             </div>
                             <div class="section-content">
-                                <p><a>Sales Department</a></p>
-                                <span>Easy increase for average sales percentage.Follow up with sales officers regularly.
-                                      Quotations generating and approving online.</span>
+                                <p><a>المبيعات</a></p>
+                                <span>سهولة إمكانية رفع معدل نسبة المبيعات.
+                                    متابعة موظفين المبيعات بشكل دوري مباشر.
+                                    إنشاء واعتماد عروض الأسعار إلكترونياً.</span>
                             </div>
                         </div>
                         <div class="section-item-2">
@@ -46,9 +48,10 @@
                                 <i class="fi flaticon-plane"></i>
                             </div>
                             <div class="section-content">
-                                <p><a>Financial Department</a></p>
-                                <span>Prevention of misappropriation of funds.Financial analysis of the accounts at the end of each financial period.
-                                      Punctual funds collections.</span>
+                                <p><a>المالية</a></p>
+                                <span>منع الاختلاسات المالية.
+                                    إمكانية الاستفادة من التحليل المالي للحسابات في نهاية كل فترة مالية.
+                                    ضمان تحصيل الأموال في الوقت المحدد.</span>
                             </div>
                         </div>
                     </div>
@@ -56,7 +59,7 @@
                 <div class="col-lg-8 col-md-12 col-sm-12">
                     <div class="tr-wrap">
                         <div class="t-text">
-                            <h2>Suppliers</h2>
+                            <h2>للموردين</h2>
                         </div>
                         <div class="tr-s">
                             <span>The ability to request electronic reports at any time.</span>
@@ -79,8 +82,10 @@
                                 <i class="fi flaticon-ship"></i>
                             </div>
                             <div class="section-content">
-                                <p><a>Logistics Department</a></p>
-                                <span>A continuous stock of the required items.Precise orders tracking.Orders scheduling.</span>
+                                <p><a>القسم اللوجستي</a></p>
+                                <span>توفير مخزون للمنتجات المطلوبة بشكل مستمر ودوري
+                                        إمكانية تتبع الطلب بشكل دقيق جدا
+                                        إمكانية جدولة الطلبات </span>
                             </div>
                         </div>
                         <div class="section-item-2">
@@ -88,9 +93,10 @@
                                 <i class="fi flaticon-truck"></i>
                             </div>
                             <div class="section-content">
-                                <p><a>Purchases Department</a></p>
-                                <span>Online purchase orders approval.Available online reports around the clock.
-                                      Online requests for orders or services at any time.</span>
+                                <p><a>المشتريات</a></p>
+                                <span>إمكانية اعتماد أوامر الشراء إلكترونيا
+                                        إمكانية طلب التقارير الإلكترونية في أي وقت
+                                        إمكانية طلب أي منتج أو خدمة في أي وقت</span>
                             </div>
                         </div>
                         <div class="section-item-2">
@@ -98,9 +104,10 @@
                                 <i class="fi flaticon-plane"></i>
                             </div>
                             <div class="section-content">
-                                <p><a>Financial Department</a></p>
-                                <span>Quotations received from reliable suppliers.Credit or cash payments are available for every bank account.
-                                      Decrease costs.</span>
+                                <p><a>المالية/التكاليف</a></p>
+                                <span>ضمان طلب عروض الأسعار من المورّد الموثوق
+                                    إمكانية الدفع المقدم بالنقد أو الاجل لحساب بنكي واحد
+                                    تقليل التكلفة الشرائية</span>
                             </div>
                         </div>
                     </div>
@@ -109,7 +116,7 @@
                 <div class="col-lg-8 col-md-12 col-sm-12">
                     <div class="tr-wrap">
                         <div class="t-text">
-                            <h2>Buyers</h2>
+                            <h2>للمشترين</h2>
                         </div>
                         <div class="tr-s">
                             <span>The possibility of safe payment.</span>
@@ -128,7 +135,7 @@
     </div>
     <!--section-section end -->
     <!-- service-area start-->
-    <div class="service-area">
+    <div class="service-area" style="direction: rtl">
         <div class="container">
             <div class="col-l2">
                 <div class="section-title text-center">
@@ -144,7 +151,7 @@
                                 <img src="{{url('Shipter/assets/images/service/1.jpg')}}" alt="">
                             </div>
                             <div class="service-content">
-                                <h3>Logistics Department</h3>
+                                <h3>القسم اللوجستي</h3>
                                 <p>More control over inventory management.Precise orders tracking.</p>
                             </div>
                         </div>
@@ -157,7 +164,7 @@
                                 <img src="{{url('Shipter/assets/images/service/2.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content2">
-                                <h3>Sales Department</h3>
+                                <h3>المبيعات</h3>
                                 <p>Easy increase for average sales percentage.Follow up with sales officers regularly.</p>
                             </div>
                         </div>
@@ -170,7 +177,7 @@
                                 <img src="{{url('Shipter/assets/images/service/6.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content6">
-                                <h3>Financial Department</h3>
+                                <h3>المالية</h3>
                                 <p>Prevention of misappropriation of funds.</p>
                             </div>
                         </div>
@@ -183,7 +190,7 @@
                                 <img src="{{url('Shipter/assets/images/service/3.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content3">
-                                <h3>Logistics Department</h3>
+                                <h3>القسم اللوجستي</h3>
                                 <p>A continuous stock of the required items.</p>
                             </div>
                         </div>
@@ -196,7 +203,7 @@
                                 <img src="{{url('Shipter/assets/images/service/4.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content4">
-                                <h3>Purchases Department</h3>
+                                <h3>المشتريات</h3>
                                 <p>Online purchase orders approval.Available online reports around the clock.</p>
                             </div>
                         </div>
@@ -209,7 +216,7 @@
                                 <img src="{{url('Shipter/assets/images/service/5.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content5">
-                                <h3>Financial Department</h3>
+                                <h3>المالية/التكاليف</h3>
                                 <p>Quotations received from reliable suppliers.</p>
                             </div>
                         </div>

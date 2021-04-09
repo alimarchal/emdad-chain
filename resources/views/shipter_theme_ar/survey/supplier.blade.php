@@ -1,13 +1,14 @@
 @extends('shipterAr.layout')
-@section('title','Supplier Survey')
+@section('title','الاستبيان')
 @section('custom-header')
 @endsection
 @section('custom-body-style')
+    style="font-family: arabicFont;"
     style="direction:rtl;"
 @endsection
 @section('main')
 
-    <section class="inner-page" style="background-color: lightgray; padding-top: 30px;" >
+    <section class="inner-page" style="background-color: lightgray; padding-top: 30px; padding-bottom: 30px;" >
 
         <form method="post" action="{{route('eBuyerEn')}}">
             @csrf
@@ -19,13 +20,13 @@
                 @endif
             </div>
             <div class="container bg-white rounded p-4 mb-4">
-                <h3 class="text-center">About your company</h3>
-                <label for="question1212" class="form-label">Email address *</label>
+                <h3 class="text-center">عن منشأتك</h3>
+                <label for="question1212" class="form-label">عنوان البريد الالكترونى *</label>
                 <input type="email" class="form-control" id="question1212" name="question45" required>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration <= 5)
                         <div class="mb-3">
-                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_en}}</label>
+                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_ar}}</label>
                             @foreach($q->answers as $key => $value)
                                 @if($value->type == "text")
                                     <input type="text" class="form-control" id="question{{$value->id}}" name="question{{$q->id}}" required>
@@ -34,7 +35,7 @@
                                         <input class="form-check-input" type="radio" required name="question{{$q->id}}" id="question{{$value->id}}" value="{{$value->option}}"
                                                name="question{{$q->id}}">
                                         <label class="form-check-label" for="question{{$value->id}}">
-                                            {{$value->option}}
+                                            {{$value->option_ar}}
                                         </label>
                                     </div>
                                 @endif
@@ -48,7 +49,7 @@
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 6 && $loop->iteration <= 17)
                         <div class="mb-3">
-                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_en}}</label>
+                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_ar}}</label>
                             @foreach($q->answers as $key => $value)
                                 @if($value->type == "text")
                                     <input type="text" class="form-control" id="question{{$value->id}}" name="question{{$q->id}}" required>
@@ -57,7 +58,7 @@
                                         <input class="form-check-input" type="radio" required name="question{{$q->id}}" id="question{{$value->id}}" value="{{$value->option}}"
                                                name="question{{$q->id}}">
                                         <label class="form-check-label" for="question{{$value->id}}">
-                                            {{$value->option}}
+                                            {{$value->option_ar}}
                                         </label>
                                     </div>
                                 @endif
@@ -71,7 +72,7 @@
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 18 && $loop->iteration <= 21)
                         <div class="mb-3">
-                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_en}}</label>
+                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_ar}}</label>
                             @foreach($q->answers as $key => $value)
                                 @if($value->type == "text")
                                     <input type="text" class="form-control" id="question{{$value->id}}" name="question{{$q->id}}" required>
@@ -80,7 +81,7 @@
                                         <input class="form-check-input" type="radio" required name="question{{$q->id}}" id="question{{$value->id}}" value="{{$value->option}}"
                                                name="question{{$q->id}}">
                                         <label class="form-check-label" for="question{{$value->id}}">
-                                            {{$value->option}}
+                                            {{$value->option_ar}}
                                         </label>
                                     </div>
                                 @endif
@@ -94,7 +95,7 @@
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 22 && $loop->iteration <= 29)
                         <div class="mb-3">
-                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_en}}</label>
+                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_ar}}</label>
                             @foreach($q->answers as $key => $value)
                                 @if($value->type == "text")
                                     <input type="text" class="form-control" id="question{{$value->id}}" name="question{{$q->id}}" required>
@@ -103,7 +104,7 @@
                                         <input class="form-check-input" type="radio" required name="question{{$q->id}}" id="question{{$value->id}}" value="{{$value->option}}"
                                                name="question{{$q->id}}">
                                         <label class="form-check-label" for="question{{$value->id}}">
-                                            {{$value->option}}
+                                            {{$value->option_ar}}
                                         </label>
                                     </div>
                                 @endif
@@ -117,7 +118,7 @@
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 30 && $loop->iteration <= 36)
                         <div class="mb-3">
-                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_en}}</label>
+                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_ar}}</label>
                             @foreach($q->answers as $key => $value)
                                 @if($value->type == "text")
                                     <input type="text" class="form-control" id="question{{$value->id}}" name="question{{$q->id}}" required>
@@ -126,7 +127,7 @@
                                         <input class="form-check-input" type="radio" required name="question{{$q->id}}" id="question{{$value->id}}" value="{{$value->option}}"
                                                name="question{{$q->id}}">
                                         <label class="form-check-label" for="question{{$value->id}}">
-                                            {{$value->option}}
+                                            {{$value->option_ar}}
                                         </label>
                                     </div>
                                 @endif
@@ -140,7 +141,7 @@
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 37 && $loop->iteration <= 44)
                         <div class="mb-3">
-                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_en}}</label>
+                            <label for="question{{$q->id}}" class="form-label">{{$q->question_s_ar}}</label>
                             @foreach($q->answers as $key => $value)
                                 @if($value->type == "text")
                                     <input type="text" class="form-control" id="question{{$value->id}}" name="question{{$q->id}}" required>
@@ -149,7 +150,7 @@
                                         <input class="form-check-input" type="radio" required name="question{{$q->id}}" id="question{{$value->id}}" value="{{$value->option}}"
                                                name="question{{$q->id}}">
                                         <label class="form-check-label" for="question{{$value->id}}">
-                                            {{$value->option}}
+                                            {{$value->option_ar}}
                                         </label>
                                     </div>
                                 @endif

@@ -9,7 +9,7 @@
     <!-- header-area start -->
     <header>
         <div class="header-top">
-            <div class="container">
+            <div class="container" style="direction: rtl">
                 <div class="row">
                     @include('shipterAr.top-header')
                 </div>
@@ -87,7 +87,7 @@
                             <i class="fi flaticon-ship"></i>
                         </div>
                         <div class="section-content">
-                            <p><a href="javascript:void(0)">الخارطة الذكية:</a></p>
+                            <p><a href="javascript:void(0)">الخارطة الذكية</a></p>
                             <span>من أعظم انجازات إمداد هو عمل الخريطة الذكية وتعتبر الأولى في مجالها والرائدة لتمكن المستخدم من الوصول للمورد الصحيح خلال دقيقة واحدة في أكثر من ٥٠٠ فئه متاحة.</span>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                             <i class="fi flaticon-truck"></i>
                         </div>
                         <div class="section-content">
-                            <p> <a href="javascript:void(0)">توفير الوقت والجهد:</a></p>
+                            <p> <a href="javascript:void(0)">توفير الوقت والجهد</a></p>
                             <span>هو المقياس الأساسي الذي بنيت عليه المنصة.
                                     سرعة وسهولة الاعتمادات الإلكترونية.
                                     سرعة الحصول على عروض اسعار من عدة موردين.
@@ -112,7 +112,7 @@
                             <i class="fi flaticon-plane"></i>
                         </div>
                         <div class="section-content">
-                            <p> <a href="javascript:void(0)">الحماية والأمان:</a></p>
+                            <p> <a href="javascript:void(0)">الحماية والأمان</a></p>
                             <span>جميع العمليات محفوظة في سحابة مرجعية ولا يتم إزالتها بتاتاً.
 تم استخدام أحدث تِقنيات الأمان لضمانة عدم التلاعب او العبث بحساب المستخدم.                                </span>
                         </div>
@@ -124,7 +124,7 @@
                             <i class="fi flaticon-plane"></i>
                         </div>
                         <div class="section-content">
-                            <p> <a href="javascript:void(0)">الجودة والأداء:</a></p>
+                            <p> <a href="javascript:void(0)">الجودة والأداء</a></p>
                             <span>من المعايير الأساسية التي تهتم إمداد بتقديمها لمستخدميها، ونضمن لكم ذلك.</span>
                         </div>
                     </div>
@@ -134,7 +134,7 @@
     </div>
     <!--section-section end -->
     <!-- .about-area start -->
-    <div class="about-area about-style-2">
+    <div class="about-area about-style-2" style="direction: rtl">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6  offset-lg-6 about-wrap">
@@ -176,7 +176,7 @@
                                 <img src="{{url('Shipter/assets/images/service/1.jpg')}}" alt="">
                             </div>
                             <div class="service-content">
-                                <h3>Logistics Department</h3>
+                                <h3>القسم اللوجستي</h3>
                                 <p>More control over inventory management.Precise orders tracking.</p>
                                 <a href="{{route('english.service')}}">See More...</a>
                             </div>
@@ -190,7 +190,7 @@
                                 <img src="{{url('Shipter/assets/images/service/2.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content2">
-                                <h3>Sales Department</h3>
+                                <h3>المبيعات</h3>
                                 <p>Easy increase for average sales percentage.Follow up with sales officers regularly.</p>
                                 <a href="{{route('english.service')}}">See More...</a>
                             </div>
@@ -204,7 +204,7 @@
                                 <img src="{{url('Shipter/assets/images/service/6.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content6">
-                                <h3>Financial Department</h3>
+                                <h3>المالية</h3>
                                 <p>Prevention of misappropriation of funds.</p>
                                 <a href="{{route('english.service')}}">See More...</a>
                             </div>
@@ -218,7 +218,7 @@
                                 <img src="{{url('Shipter/assets/images/service/3.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content3">
-                                <h3>Logistics Department</h3>
+                                <h3>القسم اللوجستي</h3>
                                 <p>A continuous stock of the required items.</p>
                                 <a href="{{route('english.service')}}">See More...</a>
                             </div>
@@ -232,7 +232,7 @@
                                 <img src="{{url('Shipter/assets/images/service/4.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content4">
-                                <h3>Purchases Department</h3>
+                                <h3>المشتريات</h3>
                                 <p>Online purchase orders approval.Available online reports around the clock.</p>
                                 <a href="{{route('english.service')}}">See More...</a>
                             </div>
@@ -246,7 +246,7 @@
                                 <img src="{{url('Shipter/assets/images/service/5.jpg')}}" alt="">
                             </div>
                             <div class="service-content service-content5">
-                                <h3>Financial Department</h3>
+                                <h3>المالية/التكاليف</h3>
                                 <p>Quotations received from reliable suppliers.</p>
                                 <a href="{{route('english.service')}}">See More...</a>
                             </div>
@@ -258,7 +258,7 @@
     </div>
     <!-- service-area end-->
     <!-- feature-area start -->
-    <div class="features-area features-style-2">
+    <div class="features-area features-style-2" style="direction: rtl">
         <div class="container">
             <div class="section-title text-center">
                 <span>We Provide the Best</span>
@@ -267,24 +267,24 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="features-item features-item-2">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: left">
                             <div class="feature-wrap">
                                 <div class="features-icon features-icon2">
                                     <i class="fi flaticon-plane"></i>
                                 </div>
                                 <div class="features-text">
-                                    <h3>الخارطة الذكية:</h3>
+                                    <h3>الخارطة الذكية</h3>
                                     <p>من أعظم انجازات إمداد هو عمل الخريطة الذكية وتعتبر الأولى في مجالها والرائدة لتمكن المستخدم من الوصول للمورد الصحيح خلال دقيقة واحدة في أكثر من ٥٠٠ فئه متاحة.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: left">
                             <div class="feature-wrap">
                                 <div class="features-icon feature-icon3">
                                     <i class="fi flaticon-truck"></i>
                                 </div>
                                 <div class="features-text">
-                                    <h3>الحماية والأمان:</h3>
+                                    <h3>الحماية والأمان</h3>
                                     <p>جميع العمليات محفوظة في سحابة مرجعية ولا يتم إزالتها بتاتاً.
                                         تم استخدام أحدث تِقنيات الأمان لضمانة عدم التلاعب او العبث بحساب المستخدم.</p>
                                 </div>
@@ -307,7 +307,7 @@
                                     <i class="fi flaticon-ship"></i>
                                 </div>
                                 <div class="features-text">
-                                    <h3>توفير الوقت والجهد:</h3>
+                                    <h3>توفير الوقت والجهد</h3>
                                     <p>هو المقياس الأساسي الذي بنيت عليه المنصة.
                                         سرعة وسهولة الاعتمادات الإلكترونية.
                                         سرعة الحصول على عروض اسعار من عدة موردين.
@@ -321,7 +321,7 @@
                                     <i class="fi flaticon-truck-1"></i>
                                 </div>
                                 <div class="features-text">
-                                    <h3>الجودة والأداء:</h3>
+                                    <h3>الجودة والأداء</h3>
                                     <p>من المعايير الأساسية التي تهتم إمداد بتقديمها لمستخدميها، ونضمن لكم ذلك.</p>
                                 </div>
                             </div>
@@ -333,14 +333,14 @@
     </div>
     <!-- feature-area start -->
     <!-- price-area start -->
-    <div class="pricing-area pricing-area-2">
+    <div class="pricing-area pricing-area-2" style="direction: rtl">
         <div class="container">
             <div class="section-title text-center">
                 <span>We Give You The Best</span>
                 <h2>Our Pricing Plan For Buyer</h2>
             </div>
             <div class="btns">
-                <div class="btn-style"><a href="{{route('english.buyerPackage')}}" target="_blank" style="background: #fd7e14">Details</a></div>
+                <div class="btn-style"><a href="{{route('arabic.buyerPackage')}}" target="_blank" style="background: #fd7e14">Details</a></div>
             </div>
             <div class="row" style="padding-top: 20px;">
                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -348,12 +348,12 @@
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
                                 <div class="pricing-header">
-                                    <h3>Basic</h3>
-                                    <span>Buyer</span>
+                                    <h3>عادي</h3>
+                                    <span>مشتري</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
-                                        <h4>Free</h4>
+                                        <h4>مجاني</h4>
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
@@ -366,8 +366,8 @@
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
                                 <div class="pricing-header">
-                                    <h3>Silver</h3>
-                                    <span>Buyer</span>
+                                    <h3>فضي</h3>
+                                    <span>مشتري</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -384,8 +384,8 @@
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
                                 <div class="pricing-header">
-                                    <h3>Gold</h3>
-                                    <span>Buyer</span>
+                                    <h3>ذهبي</h3>
+                                    <span>مشتري</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -402,12 +402,12 @@
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
                                 <div class="pricing-header">
-                                    <h3>Platinum</h3>
-                                    <span>Buyer</span>
+                                    <h3>بلاتيني</h3>
+                                    <span>مشتري</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
-                                        <h5 style="color: #eb8e23">Free (5 million purchases/month)</h5>
+                                        <h5 style="color: #eb8e23">Free (if the user reaches 5 million RS)</h5>
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
@@ -425,7 +425,7 @@
                 <h2>Our Pricing Plan For Supplier</h2>
             </div>
             <div class="btns">
-                <div class="btn-style"><a href="{{route('english.supplierPackage')}}" target="_blank" style="background: #fd7e14">Details</a></div>
+                <div class="btn-style"><a href="{{route('arabic.supplierPackage')}}" target="_blank" style="background: #fd7e14">Details</a></div>
             </div>
             <div class="row" style="padding-top: 20px;">
                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -433,12 +433,12 @@
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
                                 <div class="pricing-header">
-                                    <h3>Basic</h3>
-                                    <span>Supplier</span>
+                                    <h3>عادي</h3>
+                                    <span>مورّد</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
-                                        <h4>Free</h4>
+                                        <h4>مجاني</h4>
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
@@ -451,8 +451,8 @@
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
                                 <div class="pricing-header">
-                                    <h3>Silver</h3>
-                                    <span>Supplier</span>
+                                    <h3>فضي</h3>
+                                    <span>مورّد</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -469,8 +469,8 @@
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
                                 <div class="pricing-header">
-                                    <h3>Gold</h3>
-                                    <span>Supplier</span>
+                                    <h3>ذهبي</h3>
+                                    <span>مورّد</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -531,7 +531,7 @@
     </div>
     <!-- testimonial-area end -->
     <!-- team-area start -->
-    <div class="team-area team-area-2">
+    <div class="team-area team-area-2" style="direction: rtl">
         <div class="container">
             <div class="col-l2">
                 <div class="section-title text-center">

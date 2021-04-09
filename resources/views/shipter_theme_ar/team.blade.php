@@ -12,7 +12,7 @@
 
 @include('shipterAr.breadcumb-area')
 <!-- team-area start -->
-<div class="team-area team-area-2">
+<div class="team-area team-area-2" style="direction: rtl">
     <div class="container">
         <div class="col-l2">
             <div class="section-title text-center">
