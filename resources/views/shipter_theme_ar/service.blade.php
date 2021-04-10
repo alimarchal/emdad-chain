@@ -10,8 +10,8 @@
     style="font-family: arabicFont;"
 @endsection
 @section('inside-body')
-@section('breadcumb-title','Services')
-@section('breadcumb-text','Services')
+@section('breadcumb-title','What does it provide')
+@section('breadcumb-text','What does it provide')
 @section('main')
 
     @include('shipterAr.breadcumb-area')
@@ -205,19 +205,6 @@
                             <div class="service-content service-content4">
                                 <h3>المشتريات</h3>
                                 <p>Online purchase orders approval.Available online reports around the clock.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item">
-                        <div class="service-single">
-                            <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/5.jpg')}}" alt="">
-                            </div>
-                            <div class="service-content service-content5">
-                                <h3>المالية/التكاليف</h3>
-                                <p>Quotations received from reliable suppliers.</p>
                             </div>
                         </div>
                     </div>

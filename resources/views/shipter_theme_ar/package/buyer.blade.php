@@ -52,7 +52,7 @@
         <div class="flex-1 flex flex-col overflow-hidden">
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
                 <div class="container mx-auto px-6 pb-8">
-                    <section class="text-gray-600 body-font overflow-hidden">
+                    <section class="text-gray-600 body-font overflow-hidden" style="direction: rtl">
                         <div class="container px-5 py-15 mx-auto">
                             <div class="flex flex-wrap -m-4">
                                 @php $packages = \App\Models\Package::all()->take(4); @endphp
@@ -60,35 +60,35 @@
                                     <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
                                         <div class="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative bg-white overflow-hidden" style="border: 2px solid #c3c3c3">
                                             @if($package->package_type == 'Basic')
-                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">{{$package->package_type}}</h2>
-                                                <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
-                                                <h1 class="text-4xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{{$package->charges}}</h1>
-                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">Subscribe</a>
+                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">عادي</h2>
+                                                <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
+                                                <h1 class="text-4xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">مجاني</h1>
+                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">Subscribe</a>
                                             @elseif($package->package_type == 'Silver')
-                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">{{$package->package_type}}</h2>
-                                                <span class="bg-blue-600 text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl">POPULAR</span>
-                                                <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
+                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">فضي</h2>
+                                                <span class="bg-blue-600 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl">POPULAR</span>
+                                                <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
                                                 <h1 class="text-4xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
                                                     <span>{{$package->charges}} SAR</span>
-                                                    <span class="text-lg ml-1 font-normal text-gray-500">/year</span>
+                                                    <span class="text-lg ml-1 font-normal text-gray-500">/السنة</span>
                                                 </h1>
-                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">Subscribe</a>
+                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">Subscribe</a>
                                             @elseif($package->package_type == 'Gold')
-                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">{{$package->package_type}}</h2>
-                                                <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
+                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">ذهبي</h2>
+                                                <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
                                                 <h1 class="text-4xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
                                                     <span>{{$package->charges}} SAR</span>
-                                                    <span class="text-lg ml-1 font-normal text-gray-500">/year</span>
+                                                    <span class="text-lg ml-1 font-normal text-gray-500">/السنة</span>
                                                 </h1>
-                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded">Subscribe</a>
+                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">Subscribe</a>
                                             @elseif($package->package_type == 'Platinum')
-                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">{{$package->package_type}}</h2>
-                                                <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
+                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">بلاتيني</h2>
+                                                <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
                                                 <h1 class="text-4xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                                    <span class="font-bold text-2xl">Free</span>
+                                                    <span class="font-bold text-2xl">مجاني</span>
                                                     <span class="text-lg ml-1 font-normal text-gray-500">{{$package->charges}}</span>
                                                 </h1>
-                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded">Subscribe</a>
+                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded" style="justify-content: center">Subscribe</a>
                                             @endif
                                         </div>
                                     </div>
@@ -97,48 +97,53 @@
                         </div>
                     </section>
 
-                    <section class="text-gray-600 body-font">
+                    <section class="text-gray-600 body-font" style="direction: rtl">
                         <div class="container mx-auto">
                             <div class="lg:w-2/9 w-full mx-auto overflow-auto">
                                 <table class="table-auto bg-white overflow-hidden w-full text-left whitespace-no-wrap">
                                     <thead>
                                     <tr>
-                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500 rounded-tl rounded-bl">Functions</th>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500">المهام</th>
                                         @foreach($packages as $package)
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500">
-                                                {{$package->package_type}}</th>
+                                              @if($package->id == 1) عادي
+                                              @elseif($package->id == 2)فضي
+                                              @elseif($package->id == 3)ذهبي
+                                              @elseif($package->id == 4)بلاتيني
+                                              @endif
+                                            </th>
                                         @endforeach
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td class="px-4 py-3">Subscription For 1 year</td>
+                                        <td class="px-4 py-3 text-right">اشتراك لمدة سنة</td>
                                         @foreach($packages as $package)
-                                            <td class="px-4 py-3 text-center">{{$package->charges}}</td>
+                                            <td class="px-4 py-3 text-center">@if($package->id == 1) مجاني @else {{$package->charges}}@endif</td>
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">Registeration</td>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">التسجيل</td>
                                         @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->registeration}}</td>
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3"> مجاني</td>
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">Category</td>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">Category</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->category}}</td>
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">RFQs / Day</td>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">RFQs / Day</td>
                                         @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->rfq_per_day}}</td>
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">@if($package->id == 3 || $package->id == 4) غير محدود @else {{$package->rfq_per_day}} @endif</td>
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">No. of quotations / RFQ</td>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">No. of quotations / RFQ</td>
                                         @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3" style="direction: rtl">
                                                 @if($package->quotations_per_rfq == 2) 1-{{$package->quotations_per_rfq}} @include('misc.required')
                                                 @elseif($package->quotations_per_rfq == 3) 1-{{$package->quotations_per_rfq}} @include('misc.required')
                                                 @elseif($package->quotations_per_rfq == 5) 1-{{$package->quotations_per_rfq}} @include('misc.required')
@@ -147,46 +152,46 @@
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">EmdadTools</td>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">أدوات إمداد</td>
                                         @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->emdad_tools}}</td>
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">مجاني</td>
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Super Admin (CEO role)</td>
+                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">وظيفة المشرف الرئيسي (المدير التنفيذي)</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->super_admin_count}}</td>
                                         @endforeach
                                     </tr>
 
                                     <tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Sub Admin</td>
+                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">Sub Admin</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->sub_admin_count}}</td>
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Users</td>
+                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">المستخدمين</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->users}}</td>
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Payment</td>
+                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">Payment</td>
                                         @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->payment_type}}</td>
+                                            <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">@if($package->payment_type == 'Cash')  @endif {{$package->payment_type}}</td>
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Trainings</td>
+                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">Trainings</td>
                                         @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->training}}</td>
+                                            <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">غير محدود</td>
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Discount code</td>
+                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">كود الخصم</td>
                                         @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->discount_code}}</td>
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">@if($package->discount_code != null ) ملائم @endif</td>
                                         @endforeach
                                     </tr>
                                     </tbody>

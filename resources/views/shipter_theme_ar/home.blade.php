@@ -26,7 +26,7 @@
             <div class="header-sub" id="sticky-header">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-8 d-none d-lg-block">
+                        <div class="col-lg-12 d-none d-lg-block">
                             <div class="main-menu">
                                @include('shipterAr.menu')
                             </div>
@@ -48,9 +48,7 @@
                     <div class="row">
                         <div class="col-xl-12 slide-caption" >
 {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
-                            <h3 class="text-warning" style="font-family: arabicFont;direction: rtl;">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
-                            <h3 class="text-warning" style="font-family: arabicFont;direction: rtl;">ؤيتنا لمستقبلنا:<br>
-                                أضخم منصة تقنية موثوقة تخدم سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم اسطول لوجستي بأفضل معايير الجودة العالمية.</h3>
+                            <h3 class="text-white" style="font-family: arabicFont;direction: rtl;">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
                             <div class="btns">
                                 <div class="btn-style"><a href="{{route('arabic.about')}}" style="background: #fd7e14">من إمداد</a></div>
                             </div>
@@ -64,9 +62,7 @@
                     <div class="row">
                         <div class="col-xl-12 slide-caption">
                             {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
-                            <h3 class="text-warning" style="font-family: arabicFont;direction: rtl;">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
-                            <h3 class="text-warning" style="font-family: arabicFont;direction: rtl;">ؤيتنا لمستقبلنا:<br>
-                                أضخم منصة تقنية موثوقة تخدم سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم اسطول لوجستي بأفضل معايير الجودة العالمية.</h3>
+                            <h3 class="text-white" style="font-family: arabicFont;direction: rtl;">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
                             <div class="btns" style="font-family: arabicFont;direction: rtl;">
                                 <div class="btn-style"><a href="{{route('arabic.about')}}" style="background: #fd7e14">من إمداد</a></div>
                             </div>
@@ -77,62 +73,81 @@
         </div>
     </section>
     <!-- end of hero slider -->
-    <!-- section-section start -->
-    <div class="section-area section-style-2" style="direction: rtl">
+    <!-- feature-area start -->
+    <div class="features-area features-style-2" style="direction: rtl">
         <div class="container">
+            <div class="section-title text-center">
+                <span>We Provide the Best</span>
+                <h2>Our Awesome Features</h2>
+            </div>
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-d">
-                    <div class="section-item-2">
-                        <div class="section-icon">
-                            <i class="fi flaticon-ship"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="features-item features-item-2">
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: left">
+                            <div class="feature-wrap">
+                                <div class="features-icon features-icon2">
+                                    <i class="fi flaticon-plane"></i>
+                                </div>
+                                <div class="features-text">
+                                    <h3>الخارطة الذكية</h3>
+                                    <p>من أعظم انجازات إمداد هو عمل الخريطة الذكية وتعتبر الأولى في مجالها والرائدة لتمكن المستخدم من الوصول للمورد الصحيح خلال دقيقة واحدة في أكثر من ٥٠٠ فئه متاحة.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="section-content">
-                            <p><a href="javascript:void(0)">الخارطة الذكية</a></p>
-                            <span>من أعظم انجازات إمداد هو عمل الخريطة الذكية وتعتبر الأولى في مجالها والرائدة لتمكن المستخدم من الوصول للمورد الصحيح خلال دقيقة واحدة في أكثر من ٥٠٠ فئه متاحة.</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-d">
-                    <div class="section-item-2">
-                        <div class="section-icon">
-                            <i class="fi flaticon-truck"></i>
-                        </div>
-                        <div class="section-content">
-                            <p> <a href="javascript:void(0)">توفير الوقت والجهد</a></p>
-                            <span>هو المقياس الأساسي الذي بنيت عليه المنصة.
-                                    سرعة وسهولة الاعتمادات الإلكترونية.
-                                    سرعة الحصول على عروض اسعار من عدة موردين.
-                                    سرعة وسهولة الوصول للمورد الصحيح.</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-d">
-                    <div class="section-item-2">
-                        <div class="section-icon">
-                            <i class="fi flaticon-plane"></i>
-                        </div>
-                        <div class="section-content">
-                            <p> <a href="javascript:void(0)">الحماية والأمان</a></p>
-                            <span>جميع العمليات محفوظة في سحابة مرجعية ولا يتم إزالتها بتاتاً.
-تم استخدام أحدث تِقنيات الأمان لضمانة عدم التلاعب او العبث بحساب المستخدم.                                </span>
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: left">
+                            <div class="feature-wrap">
+                                <div class="features-icon feature-icon3">
+                                    <i class="fi flaticon-truck"></i>
+                                </div>
+                                <div class="features-text">
+                                    <h3>الحماية والأمان</h3>
+                                    <p>جميع العمليات محفوظة في سحابة مرجعية ولا يتم إزالتها بتاتاً.
+                                        تم استخدام أحدث تِقنيات الأمان لضمانة عدم التلاعب او العبث بحساب المستخدم.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-d">
-                    <div class="section-item-2">
-                        <div class="section-icon">
-                            <i class="fi flaticon-plane"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="features-item">
+                        <div class="feature-img">
+                            <img src="{{url('Shipter/assets/images/features/1.png')}}" alt="">
                         </div>
-                        <div class="section-content">
-                            <p> <a href="javascript:void(0)">الجودة والأداء</a></p>
-                            <span>من المعايير الأساسية التي تهتم إمداد بتقديمها لمستخدميها، ونضمن لكم ذلك.</span>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="features-item">
+                        <div class="col-lg-12 col-md-6 col-sm-12">
+                            <div class="feature-wrap">
+                                <div class="features-icon">
+                                    <i class="fi flaticon-ship"></i>
+                                </div>
+                                <div class="features-text">
+                                    <h3>توفير الوقت والجهد</h3>
+                                    <p>هو المقياس الأساسي الذي بنيت عليه المنصة.
+                                        سرعة وسهولة الاعتمادات الإلكترونية.
+                                        سرعة الحصول على عروض اسعار من عدة موردين.
+                                        سرعة وسهولة الوصول للمورد الصحيح.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-6 col-sm-12">
+                            <div class="feature-wrap">
+                                <div class="features-icon">
+                                    <i class="fi flaticon-truck-1"></i>
+                                </div>
+                                <div class="features-text">
+                                    <h3>الجودة والأداء</h3>
+                                    <p>من المعايير الأساسية التي تهتم إمداد بتقديمها لمستخدميها، ونضمن لكم ذلك.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--section-section end -->
+    <!-- feature-area start -->
     <!-- .about-area start -->
     <div class="about-area about-style-2" style="direction: rtl">
         <div class="container">
@@ -239,99 +254,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item">
-                        <div class="service-single">
-                            <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/5.jpg')}}" alt="">
-                            </div>
-                            <div class="service-content service-content5">
-                                <h3>المالية/التكاليف</h3>
-                                <p>Quotations received from reliable suppliers.</p>
-                                <a href="{{route('english.service')}}">See More...</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     <!-- service-area end-->
-    <!-- feature-area start -->
-    <div class="features-area features-style-2" style="direction: rtl">
-        <div class="container">
-            <div class="section-title text-center">
-                <span>We Provide the Best</span>
-                <h2>Our Awesome Features</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="features-item features-item-2">
-                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: left">
-                            <div class="feature-wrap">
-                                <div class="features-icon features-icon2">
-                                    <i class="fi flaticon-plane"></i>
-                                </div>
-                                <div class="features-text">
-                                    <h3>الخارطة الذكية</h3>
-                                    <p>من أعظم انجازات إمداد هو عمل الخريطة الذكية وتعتبر الأولى في مجالها والرائدة لتمكن المستخدم من الوصول للمورد الصحيح خلال دقيقة واحدة في أكثر من ٥٠٠ فئه متاحة.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: left">
-                            <div class="feature-wrap">
-                                <div class="features-icon feature-icon3">
-                                    <i class="fi flaticon-truck"></i>
-                                </div>
-                                <div class="features-text">
-                                    <h3>الحماية والأمان</h3>
-                                    <p>جميع العمليات محفوظة في سحابة مرجعية ولا يتم إزالتها بتاتاً.
-                                        تم استخدام أحدث تِقنيات الأمان لضمانة عدم التلاعب او العبث بحساب المستخدم.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="features-item">
-                        <div class="feature-img">
-                            <img src="{{url('Shipter/assets/images/features/1.png')}}" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="features-item">
-                        <div class="col-lg-12 col-md-6 col-sm-12">
-                            <div class="feature-wrap">
-                                <div class="features-icon">
-                                    <i class="fi flaticon-ship"></i>
-                                </div>
-                                <div class="features-text">
-                                    <h3>توفير الوقت والجهد</h3>
-                                    <p>هو المقياس الأساسي الذي بنيت عليه المنصة.
-                                        سرعة وسهولة الاعتمادات الإلكترونية.
-                                        سرعة الحصول على عروض اسعار من عدة موردين.
-                                        سرعة وسهولة الوصول للمورد الصحيح.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-md-6 col-sm-12">
-                            <div class="feature-wrap">
-                                <div class="features-icon">
-                                    <i class="fi flaticon-truck-1"></i>
-                                </div>
-                                <div class="features-text">
-                                    <h3>الجودة والأداء</h3>
-                                    <p>من المعايير الأساسية التي تهتم إمداد بتقديمها لمستخدميها، ونضمن لكم ذلك.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- feature-area start -->
     <!-- price-area start -->
     <div class="pricing-area pricing-area-2" style="direction: rtl">
         <div class="container">
@@ -490,48 +416,8 @@
         </div>
     </div>
     <!-- price-area end -->
-    <!-- testimonial-area start -->
-    <div class="testimonial-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="testimonial-active owl-carousel">
-                        <div class="testimonial-wrap">
-                            <div class="testimonial-img">
-                                <img src="{{url('Shipter/assets/images/testimonial/2.jpg')}}" alt="">
-                            </div>
-                            <div class="testimonial-item">
-                                <div class="testimonial-content">
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some</p>
-                                    <h4>Manela Watson</h4>
-                                    <span>Derector of ATV</span>
-                                </div>
-                            </div>
-                            <div class="test-c d-none d-lg-block"></div>
-                            <div class="test-b d-none d-lg-block"></div>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <div class="testimonial-img">
-                                <img src="{{url('Shipter/assets/images/testimonial/2.jpg')}}" alt="">
-                            </div>
-                            <div class="testimonial-item">
-                                <div class="testimonial-content">
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some</p>
-                                    <h4>Manela Watson</h4>
-                                    <span>Derector of ATV</span>
-                                </div>
-                            </div>
-                            <div class="test-c d-none d-lg-block"></div>
-                            <div class="test-b d-none d-lg-block"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- testimonial-area end -->
 
-
+    <!-- FAQs-area start -->
     <div class="section-area section-style-2">
         <div class="container mt-5 mb-5">
             <h3 class="text-center mb-4">أسئلة مكررة</h3>
@@ -569,7 +455,7 @@
 
         </div>
     </div>
-
+    <!-- FAQs-area end -->
 
     <!-- team-area start -->
     <div class="team-area team-area-2" style="direction: rtl">

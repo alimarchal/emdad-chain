@@ -25,7 +25,7 @@
             <div class="header-sub" id="sticky-header">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-8 d-none d-lg-block">
+                        <div class="col-lg-12 d-none d-lg-block">
                             <div class="main-menu">
                                 @include('shipter.menu')
                             </div>
@@ -47,11 +47,8 @@
                     <div class="row">
                         <div class="col-xl-12 slide-caption">
                             {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
-                            <h3 class="text-warning">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
+                            <h3 class="text-white">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
                                 , selling, supplying and warehousing process. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
-                            <h3 class="text-warning">Our vision: <br>
-                                To become the largest, reliable, online platform specialized in supply chains,
-                                and to gain the biggest number of suppliers and the largest logistical fleet while assuring the best international quality standards.</h3>
                             <div class="btns">
                                 <div class="btn-style"><a href="{{route('english.about')}}" style="background: #fd7e14">About us</a></div>
                             </div>
@@ -64,11 +61,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12 slide-caption">
-                            <h3 class="text-warning">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
+                            <h3 class="text-white">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
                                 , selling, supplying and warehousing process. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
-                            <h3 class="text-warning">Our vision: <br>
-                                To become the largest, reliable, online platform specialized in supply chains,
-                                and to gain the biggest number of suppliers and the largest logistical fleet while assuring the best international quality standards.</h3>
                             <div class="btns">
                                 <div class="btn-style"><a href="{{route('english.about')}}" style="background: #fd7e14">About us</a></div>
                             </div>
@@ -79,62 +73,80 @@
         </div>
     </section>
     <!-- end of hero slider -->
-    <!-- section-section start -->
-    <div class="section-area section-style-2">
+    <!-- feature-area start -->
+    <div class="features-area features-style-2">
         <div class="container">
+            <div class="section-title text-center">
+                <span>We Provide the Best</span>
+                <h2>Our Awesome Features</h2>
+            </div>
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-d">
-                    <div class="section-item-2">
-                        <div class="section-icon">
-                            <i class="fi flaticon-ship"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="features-item features-item-2">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="feature-wrap">
+                                <div class="features-icon features-icon2">
+                                    <i class="fi flaticon-plane"></i>
+                                </div>
+                                <div class="features-text">
+                                    <h3>Smart Map</h3>
+                                    <p>One of Emdad’s great features is the smart map which is considered the first in its field.
+                                        It allows the user to be connected to the right resource within one minute in more than 500 available categories.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="section-content">
-                            <p><a href="javascript:void(0)">Smart Map</a></p>
-                            <span>One of Emdad’s great features is the smart map which is considered the first in its field.
-                            It allows the user to be connected to the right resource within one minute in more than 500 available categories.</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-d">
-                    <div class="section-item-2">
-                        <div class="section-icon">
-                            <i class="fi flaticon-truck"></i>
-                        </div>
-                        <div class="section-content">
-                            <p><a href="javascript:void(0)">Saving Time and Effort</a></p>
-                            <span>It is fundamental gauge the platform was built upon.Fast and smooth elictronic authorizations.
-                            Quick quotations recieving from multible suppliers.
-                            Easy access to the suitable supplier.</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-d">
-                    <div class="section-item-2">
-                        <div class="section-icon">
-                            <i class="fi flaticon-plane"></i>
-                        </div>
-                        <div class="section-content">
-                            <p><a href="javascript:void(0)">Privacy and Safety</a></p>
-                            <span>All the transactions are saved in a cloud storage that cannot be removed.
-                                The latest security technologies are applied to ensure that the user account is not tampered with.</span>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="feature-wrap">
+                                <div class="features-icon feature-icon3">
+                                    <i class="fi flaticon-truck"></i>
+                                </div>
+                                <div class="features-text">
+                                    <h3>Privacy and Safety</h3>
+                                    <p>All the transactions are saved in a cloud storage that cannot be removed.
+                                        The latest security technologies are applied to ensure that the user account is not tampered with.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-d">
-                    <div class="section-item-2">
-                        <div class="section-icon">
-                            <i class="fi flaticon-plane"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="features-item">
+                        <div class="feature-img">
+                            <img src="{{url('Shipter/assets/images/features/1.png')}}" alt="">
                         </div>
-                        <div class="section-content">
-                            <p><a href="javascript:void(0)">Quality and Performance</a></p>
-                            <span>Umong the basic standards Emdad cares to provide its partners with, and we guarantee you that.</span>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="features-item">
+                        <div class="col-lg-12 col-md-6 col-sm-12">
+                            <div class="feature-wrap">
+                                <div class="features-icon">
+                                    <i class="fi flaticon-ship"></i>
+                                </div>
+                                <div class="features-text">
+                                    <h3>Saving Time and Effort</h3>
+                                    <p>It is fundamental gauge the platform was built upon.Fast and smooth elictronic authorizations.
+                                        Quick quotations recieving from multible suppliers. Easy access to the suitable supplier.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-6 col-sm-12">
+                            <div class="feature-wrap">
+                                <div class="features-icon">
+                                    <i class="fi flaticon-truck-1"></i>
+                                </div>
+                                <div class="features-text">
+                                    <h3>Quality and Performance</h3>
+                                    <p>Umong the basic standards Emdad cares to provide its partners with, and we guarantee you that.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--section-section end -->
+    <!-- feature-area start -->
     <!-- .about-area start -->
     <div class="about-area about-style-2">
         <div class="container">
@@ -154,7 +166,7 @@
                     <div class="signature-section">
                         <div class="si-text">
                             <p>Abdulaziz AlSinany</p>
-                            <span>Founder and CEO</span>
+                            <span>Founder, CEO and SCM</span>
                         </div>
                         <img src="{{url('Shipter/assets/images/about/ceo_sign.png')}}" style="width: 200px;" alt="">
                     </div>
@@ -243,20 +255,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
-                    <div class="service-item">
-                        <div class="service-single">
-                            <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/5.jpg')}}" alt="">
-                            </div>
-                            <div class="service-content service-content5">
-                                <h3>Financial Department</h3>
-                                <p>Quotations received from reliable suppliers.</p>
-                                <a href="{{route('english.service')}}">See More...</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -293,80 +291,6 @@
     {{--        <!-- end container -->--}}
     {{--    </section>--}}
     <!-- end track-section -->
-    <!-- feature-area start -->
-    <div class="features-area features-style-2">
-        <div class="container">
-            <div class="section-title text-center">
-                <span>We Provide the Best</span>
-                <h2>Our Awesome Features</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="features-item features-item-2">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div class="feature-wrap">
-                                <div class="features-icon features-icon2">
-                                    <i class="fi flaticon-plane"></i>
-                                </div>
-                                <div class="features-text">
-                                    <h3>Smart Map</h3>
-                                    <p>One of Emdad’s great features is the smart map which is considered the first in its field.
-                                        It allows the user to be connected to the right resource within one minute in more than 500 available categories.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div class="feature-wrap">
-                                <div class="features-icon feature-icon3">
-                                    <i class="fi flaticon-truck"></i>
-                                </div>
-                                <div class="features-text">
-                                    <h3>Privacy and Safety</h3>
-                                    <p>All the transactions are saved in a cloud storage that cannot be removed.
-                                        The latest security technologies are applied to ensure that the user account is not tampered with.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="features-item">
-                        <div class="feature-img">
-                            <img src="{{url('Shipter/assets/images/features/1.png')}}" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="features-item">
-                        <div class="col-lg-12 col-md-6 col-sm-12">
-                            <div class="feature-wrap">
-                                <div class="features-icon">
-                                    <i class="fi flaticon-ship"></i>
-                                </div>
-                                <div class="features-text">
-                                    <h3>Saving Time and Effort</h3>
-                                    <p>It is fundamental gauge the platform was built upon.Fast and smooth elictronic authorizations.
-                                        Quick quotations recieving from multible suppliers. Easy access to the suitable supplier.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 col-md-6 col-sm-12">
-                            <div class="feature-wrap">
-                                <div class="features-icon">
-                                    <i class="fi flaticon-truck-1"></i>
-                                </div>
-                                <div class="features-text">
-                                    <h3>Quality and Performance</h3>
-                                    <p>Umong the basic standards Emdad cares to provide its partners with, and we guarantee you that.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- feature-area start -->
 
     <!-- counter-area start -->
     {{--    <div class="counter-area counter-style-2">--}}
@@ -571,46 +495,6 @@
         </div>
     </div>
     <!-- pice-area end -->
-    <!-- testimonial-area start -->
-    <div class="testimonial-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="testimonial-active owl-carousel">
-                        <div class="testimonial-wrap">
-                            <div class="testimonial-img">
-                                <img src="{{url('Shipter/assets/images/testimonial/2.jpg')}}" alt="">
-                            </div>
-                            <div class="testimonial-item">
-                                <div class="testimonial-content">
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some</p>
-                                    <h4>Manela Watson</h4>
-                                    <span>Derector of ATV</span>
-                                </div>
-                            </div>
-                            <div class="test-c d-none d-lg-block"></div>
-                            <div class="test-b d-none d-lg-block"></div>
-                        </div>
-                        <div class="testimonial-wrap">
-                            <div class="testimonial-img">
-                                <img src="{{url('Shipter/assets/images/testimonial/2.jpg')}}" alt="">
-                            </div>
-                            <div class="testimonial-item">
-                                <div class="testimonial-content">
-                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some</p>
-                                    <h4>Manela Watson</h4>
-                                    <span>Derector of ATV</span>
-                                </div>
-                            </div>
-                            <div class="test-c d-none d-lg-block"></div>
-                            <div class="test-b d-none d-lg-block"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- testimonial-area end -->
 
     <div class="section-area section-style-2">
         <div class="container mt-5 mb-5">

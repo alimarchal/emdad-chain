@@ -8,7 +8,7 @@
 @endsection
 @section('main')
 
-    <section class="inner-page" style="background-color: lightgray; padding-top: 30px; padding-bottom: 30px;" >
+    <section class="inner-page" style="background-color: lightgray; padding-top: 30px; padding-bottom: 30px; direction: rtl" >
 
         <form method="post" action="{{route('eBuyerEn')}}">
             @csrf
