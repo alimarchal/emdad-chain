@@ -50,7 +50,7 @@
 {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
                             <h3 class="text-white" style="font-family: arabicFont;direction: rtl;">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
                             <div class="btns">
-                                <div class="btn-style"><a href="{{route('arabic.about')}}" style="background: #fd7e14">من إمداد</a></div>
+                                <div class="btn-style"><a href="{{route('arabic.about')}}">من إمداد</a></div>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                             {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
                             <h3 class="text-white" style="font-family: arabicFont;direction: rtl;">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
                             <div class="btns" style="font-family: arabicFont;direction: rtl;">
-                                <div class="btn-style"><a href="{{route('arabic.about')}}" style="background: #fd7e14">من إمداد</a></div>
+                                <div class="btn-style"><a href="{{route('arabic.about')}}">من إمداد</a></div>
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: left">
                             <div class="feature-wrap">
                                 <div class="features-icon features-icon2">
-                                    <i class="fi flaticon-plane"></i>
+                                    <i><img src="{{url('Shipter/assets/images/icon/1.png')}}" alt="" style="height: 50px;width: 60px; transform: rotate(-45deg);"></i>
                                 </div>
                                 <div class="features-text">
                                     <h3>الخارطة الذكية</h3>
@@ -97,7 +97,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: left">
                             <div class="feature-wrap">
                                 <div class="features-icon feature-icon3">
-                                    <i class="fi flaticon-truck"></i>
+                                    <i><img src="{{url('Shipter/assets/images/icon/2.png')}}" alt="" style="height: 50px;width: 60px;"></i>
                                 </div>
                                 <div class="features-text">
                                     <h3>الحماية والأمان</h3>
@@ -111,7 +111,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="features-item">
                         <div class="feature-img">
-                            <img src="{{url('Shipter/assets/images/features/1.png')}}" alt="">
+                            <img src="{{url('Shipter/assets/images/features/3.png')}}" alt="">
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
                         <div class="col-lg-12 col-md-6 col-sm-12">
                             <div class="feature-wrap">
                                 <div class="features-icon">
-                                    <i class="fi flaticon-ship"></i>
+                                    <i><img src="{{url('Shipter/assets/images/icon/3.png')}}" alt="" style="height: 50px;width: 60px;"></i>
                                 </div>
                                 <div class="features-text">
                                     <h3>توفير الوقت والجهد</h3>
@@ -134,7 +134,7 @@
                         <div class="col-lg-12 col-md-6 col-sm-12">
                             <div class="feature-wrap">
                                 <div class="features-icon">
-                                    <i class="fi flaticon-truck-1"></i>
+                                    <i><img src="{{url('Shipter/assets/images/icon/4.png')}}" alt="" style="height: 50px;width: 60px;"></i>
                                 </div>
                                 <div class="features-text">
                                     <h3>الجودة والأداء</h3>
@@ -165,7 +165,7 @@
                     <div class="signature-section">
                         <div class="si-text">
                             <p>عبدالعزيز السناني</p>
-                            <span>مؤسس ومدير مجلس الإدارة</span>
+                            <span>المؤسس والرئيس التنفيذي و  <br>مدير سلسلة التوريد</span>
                         </div>
                         <img src="{{url('Shipter/assets/images/about/ceo_sign.png')}}" style="width: 200px;" alt="">
                     </div>
@@ -263,19 +263,19 @@
         <div class="container">
             <div class="section-title text-center">
                 <span>We Give You The Best</span>
-                <h2>Our Pricing Plan For Buyer</h2>
+                <h2>Our Buyer's Pricing Plan</h2>
             </div>
             <div class="btns">
-                <div class="btn-style"><a href="{{route('arabic.buyerPackage')}}" target="_blank" style="background: #fd7e14">Details</a></div>
+                <div class="btn-style"><a href="{{route('arabic.buyerPackage')}}" target="_blank">Details</a></div>
             </div>
             <div class="row" style="padding-top: 20px;">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="row">
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
-                                    <h3>عادي</h3>
-                                    <span>مشتري</span>
+                                <div class="pricing-header" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                    <h3 style="color: white;">عادي</h3>
+                                    <span style="color: black;">EB-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -291,9 +291,9 @@
                         </div>
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
-                                    <h3>فضي</h3>
-                                    <span>مشتري</span>
+                                <div class="pricing-header1" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                    <h3 style="color: white;">فضي</h3>
+                                    <span style="color: black;">EB-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -309,9 +309,9 @@
                         </div>
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
-                                    <h3>ذهبي</h3>
-                                    <span>مشتري</span>
+                                <div class="pricing-header2" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                    <h3 style="color: white;">ذهبي</h3>
+                                    <span style="color: black;">EB-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -327,13 +327,13 @@
                         </div>
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
-                                    <h3>بلاتيني</h3>
-                                    <span>مشتري</span>
+                                <div class="pricing-header3" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                    <h3 style="color: white;">بلاتيني</h3>
+                                    <span style="color: black;">EB-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
-                                        <h5 style="color: #eb8e23">Free (if the user reaches 5 million RS)</h5>
+                                        <h5 style="color: #eb8e23">Free (Purchases above SR 5 million/month)</h5>
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
@@ -348,19 +348,19 @@
             </div>
             <div class="section-title text-center">
                 <span>We Give You The Best</span>
-                <h2>Our Pricing Plan For Supplier</h2>
+                <h2>Our Supplier's Pricing Plan</h2>
             </div>
             <div class="btns">
-                <div class="btn-style"><a href="{{route('arabic.supplierPackage')}}" target="_blank" style="background: #fd7e14">Details</a></div>
+                <div class="btn-style"><a href="{{route('arabic.supplierPackage')}}" target="_blank">Details</a></div>
             </div>
             <div class="row" style="padding-top: 20px;">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="row">
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
-                                    <h3>عادي</h3>
-                                    <span>مورّد</span>
+                                <div class="pricing-header" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                    <h3 style="color: white;">عادي</h3>
+                                    <span style="color: black;">ES-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -376,9 +376,9 @@
                         </div>
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
-                                    <h3>فضي</h3>
-                                    <span>مورّد</span>
+                                <div class="pricing-header1" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                    <h3 style="color: white;">فضي</h3>
+                                    <span style="color: black;">ES-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -394,9 +394,9 @@
                         </div>
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
-                                    <h3>ذهبي</h3>
-                                    <span>مورّد</span>
+                                <div class="pricing-header2" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                    <h3 style="color: white;">ذهبي</h3>
+                                    <span style="color: black;">ES-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">

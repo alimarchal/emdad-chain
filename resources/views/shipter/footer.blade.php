@@ -80,7 +80,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6 col-12">
                     <div class="footer-widget instagram">
-                        <h3>Instagram</h3>
+                        <h3>Our Categories</h3>
                         <ul class="d-flex">
                             <li><a href="#"><img src="{{url('Shipter/assets/images/instragram/1.jpg')}}" alt=""></a></li>
                             <li><a href="#"><img src="{{url('Shipter/assets/images/instragram/2.jpg')}}" alt=""></a></li>

@@ -135,6 +135,12 @@
                                         @endforeach
                                     </tr>
                                     <tr>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">Sub Category</td>
+                                        @foreach($packages as $package)
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->sub_category}}</td>
+                                        @endforeach
+                                    </tr>
+                                    <tr>
                                         <td class="border-t-2 border-gray-200 px-4 py-3 text-right">RFQs / Day</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">@if($package->id == 3 || $package->id == 4) غير محدود @else {{$package->rfq_per_day}} @endif</td>

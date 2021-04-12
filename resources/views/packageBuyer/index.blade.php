@@ -170,6 +170,12 @@
                         @endforeach
                     </tr>
                     <tr>
+                        <td class="border-t-2 border-gray-200 px-4 py-3">Sub Categories</td>
+                        @foreach($packages as $package)
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->sub_category}}</td>
+                        @endforeach
+                    </tr>
+                    <tr>
                         <td class="border-t-2 border-gray-200 px-4 py-3">RFQs / Day</td>
                         @foreach($packages as $package)
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->rfq_per_day}}</td>
@@ -321,6 +327,13 @@
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">2</td>
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">3</td>
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">5</td>
+                        </tr>
+                        <tr>
+                            <td class="border-t-2 border-gray-200 px-4 py-3 text-right">Sub Category</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">5</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">15</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">50</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">50</td>
                         </tr>
                         <tr>
                             <td class="border-t-2 border-gray-200 px-4 py-3 text-right">عروض الأسعار</td>

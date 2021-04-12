@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="col-lg-3 col-md-6">
-                                <li><img src="{{url('v2030.jpeg')}}" alt="Vision 2030" style="height: 30px; width: 50px;"></li>
+                                <li><img src="{{url('Shipter/assets/images/logo/emdad-2.png')}}" alt="Vision 2030" style="height: 30px; width: 50px;"></li>
                             </div>
                         </div>
                     </div>

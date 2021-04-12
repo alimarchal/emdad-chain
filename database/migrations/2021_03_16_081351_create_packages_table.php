@@ -20,6 +20,7 @@ class CreatePackagesTable extends Migration
             $table->string('charges');
             $table->string('registeration');
             $table->integer('category');
+            $table->integer('sub_category');
             $table->string('quotations')->nullable();
             $table->string('emdad_tools');
             $table->integer('super_admin_count')->nullable();

@@ -7,11 +7,11 @@
     <ul class="d-flex account_login-area">
         <li class="account-item">
             <i class="fa fa-phone" aria-hidden="true"></i>
-            <h5><span>Call Us Now</span>Tel: +966 53 416 8874</h5>
+            <h5><span>Call Us</span>Tel: +966 53 416 8874</h5>
         </li>
         <li class="account-item account-item-2">
             <i class="fa fa-envelope-o" aria-hidden="true"></i>
-            <h5><span>Mail Us Today</span>info@emdad-chain.com</h5>
+            <h5><span>Mail Us</span>info@emdad-chain.com</h5>
         </li>
         <li class="account-item">
             <i class="fa fa-map-marker" aria-hidden="true"></i>

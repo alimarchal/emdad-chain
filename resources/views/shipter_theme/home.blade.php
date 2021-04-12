@@ -50,7 +50,7 @@
                             <h3 class="text-white">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
                                 , selling, supplying and warehousing process. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
                             <div class="btns">
-                                <div class="btn-style"><a href="{{route('english.about')}}" style="background: #fd7e14">About us</a></div>
+                                <div class="btn-style"><a href="{{route('english.about')}}">About us</a></div>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                             <h3 class="text-white">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
                                 , selling, supplying and warehousing process. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
                             <div class="btns">
-                                <div class="btn-style"><a href="{{route('english.about')}}" style="background: #fd7e14">About us</a></div>
+                                <div class="btn-style"><a href="{{route('english.about')}}">About us</a></div>
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="feature-wrap">
                                 <div class="features-icon features-icon2">
-                                    <i class="fi flaticon-plane"></i>
+                                    <i><img src="{{url('Shipter/assets/images/icon/1.png')}}" alt="" style="height: 50px;width: 60px; transform: rotate(-45deg);"></i>
                                 </div>
                                 <div class="features-text">
                                     <h3>Smart Map</h3>
@@ -98,7 +98,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="feature-wrap">
                                 <div class="features-icon feature-icon3">
-                                    <i class="fi flaticon-truck"></i>
+                                    <i><img src="{{url('Shipter/assets/images/icon/2.png')}}" alt="" style="height: 50px;width: 60px;"></i>
                                 </div>
                                 <div class="features-text">
                                     <h3>Privacy and Safety</h3>
@@ -112,7 +112,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="features-item">
                         <div class="feature-img">
-                            <img src="{{url('Shipter/assets/images/features/1.png')}}" alt="">
+                            <img src="{{url('Shipter/assets/images/features/3.png')}}" alt="">
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
                         <div class="col-lg-12 col-md-6 col-sm-12">
                             <div class="feature-wrap">
                                 <div class="features-icon">
-                                    <i class="fi flaticon-ship"></i>
+                                    <i><img src="{{url('Shipter/assets/images/icon/3.png')}}" alt="" style="height: 50px;width: 60px;"></i>
                                 </div>
                                 <div class="features-text">
                                     <h3>Saving Time and Effort</h3>
@@ -133,7 +133,7 @@
                         <div class="col-lg-12 col-md-6 col-sm-12">
                             <div class="feature-wrap">
                                 <div class="features-icon">
-                                    <i class="fi flaticon-truck-1"></i>
+                                    <i><img src="{{url('Shipter/assets/images/icon/4.png')}}" alt="" style="height: 50px;width: 60px;"></i>
                                 </div>
                                 <div class="features-text">
                                     <h3>Quality and Performance</h3>
@@ -342,19 +342,19 @@
         <div class="container">
             <div class="section-title text-center">
                 <span>We Give You The Best</span>
-                <h2>Our Pricing Plan For Buyer</h2>
+                <h2>Our Buyer's Pricing Plan</h2>
             </div>
             <div class="btns">
-                <div class="btn-style"><a href="{{route('english.buyerPackage')}}" target="_blank" style="background: #fd7e14">Details</a></div>
+                <div class="btn-style"><a href="{{route('english.buyerPackage')}}" target="_blank">Details</a></div>
             </div>
             <div class="row" style="padding-top: 20px;">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="row">
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
+                                <div class="pricing-header" style="border-color: #023989; border-style: groove; border-width: thin;">
                                     <h3>Basic</h3>
-                                    <span>Buyer</span>
+                                    <span style="color: black;">EB-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -370,9 +370,9 @@
                         </div>
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
-                                    <h3>Silver</h3>
-                                    <span>Buyer</span>
+                                <div class="pricing-header1" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                    <h3 style="color: white;">Silver</h3>
+                                    <span style="color: black;">EB-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -388,9 +388,9 @@
                         </div>
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
-                                    <h3>Gold</h3>
-                                    <span>Buyer</span>
+                                <div class="pricing-header2" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                    <h3 style="color: white;">Gold</h3>
+                                    <span style="color: black;">EB-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -406,13 +406,13 @@
                         </div>
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
-                                    <h3>Platinum</h3>
-                                    <span>Buyer</span>
+                                <div class="pricing-header3" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                    <h3 style="color: white;">Platinum</h3>
+                                    <span style="color: black;">EB-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
-                                        <h5 style="color: #eb8e23">Free (if the user reaches 5 million RS)</h5>
+                                        <h5 style="color: #eb8e23">Free (Purchases above SR 5 million/month)</h5>
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
@@ -427,19 +427,19 @@
             </div>
             <div class="section-title text-center">
                 <span>We Give You The Best</span>
-                <h2>Our Pricing Plan For Supplier</h2>
+                <h2>Our Supplier's Pricing Plan</h2>
             </div>
             <div class="btns">
-                <div class="btn-style"><a href="{{route('english.supplierPackage')}}" target="_blank" style="background: #fd7e14">Details</a></div>
+                <div class="btn-style"><a href="{{route('english.supplierPackage')}}" target="_blank">Details</a></div>
             </div>
             <div class="row" style="padding-top: 20px;">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="row">
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
-                                    <h3>Basic</h3>
-                                    <span>Supplier</span>
+                                <div class="pricing-header" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                    <h3 style="color: white;">Basic</h3>
+                                    <span style="color: black;">ES-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -455,9 +455,9 @@
                         </div>
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
-                                    <h3>Silver</h3>
-                                    <span>Supplier</span>
+                                <div class="pricing-header1" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                    <h3 style="color: white;">Silver</h3>
+                                    <span style="color: black;">ES-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -473,9 +473,9 @@
                         </div>
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
-                                <div class="pricing-header">
-                                    <h3>Gold</h3>
-                                    <span>Supplier</span>
+                                <div class="pricing-header2" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                    <h3 style="color: white;">Gold</h3>
+                                    <span style="color: black;">ES-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
@@ -534,8 +534,6 @@
 
         </div>
     </div>
-
-
 
     <!-- team-area start -->
     <div class="team-area team-area-2">

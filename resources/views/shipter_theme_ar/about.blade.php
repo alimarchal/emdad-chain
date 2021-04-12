@@ -30,7 +30,7 @@
                     <div class="signature-section">
                         <div class="si-text">
                             <p>عبد العزيز السناني</p>
-                            <span>مؤسس ومدير مجلس الإدارة</span>
+                            <span>المؤسس والرئيس التنفيذي و<br>مدير سلسلة التوريد</span>
                         </div>
                         <img src="{{url('Shipter/assets/images/about/ceo_sign.png')}}" style="width: 200px;" alt="">
                     </div>

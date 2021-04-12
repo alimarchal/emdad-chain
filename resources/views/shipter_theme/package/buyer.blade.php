@@ -86,7 +86,7 @@
                                                 <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
                                                 <h1 class="text-4xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
                                                     <span class="font-bold text-2xl">Free</span>
-                                                    <span class="text-lg ml-1 font-normal text-gray-500">(if the user reaches 5 million RS)</span>
+                                                    <span class="text-lg ml-1 font-normal text-gray-500">(Purchases above SR 5 million/month)</span>
                                                 </h1>
                                                 <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded" style="justify-content: center">Subscribe</a>
                                             @endif
@@ -127,6 +127,12 @@
                                         <td class="border-t-2 border-gray-200 px-4 py-3">Category</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->category}}</td>
+                                        @endforeach
+                                    </tr>
+                                    <tr>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3">Sub Categories</td>
+                                        @foreach($packages as $package)
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->sub_category}}</td>
                                         @endforeach
                                     </tr>
                                     <tr>

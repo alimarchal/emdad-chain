@@ -304,7 +304,7 @@ a:focus {
 }
 .main-menu .submenu li a {
     padding: 10px 15px 10px 0px;
-    color: :#fff;
+    color: #fff;
     font-size: 14px;
 }
 
@@ -1175,7 +1175,37 @@ mobile menu
 }
 .pricing-header {
     padding: 25px 0 13px;
-    background: #eb8e23;
+    background: #E0E0E0;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: relative;
+    z-index: 11;
+}
+
+.pricing-header1 {
+    padding: 25px 0 13px;
+    background: #B4B4B5;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: relative;
+    z-index: 11;
+}
+
+.pricing-header2 {
+    padding: 25px 0 13px;
+    background: #FABA00;
+    color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: relative;
+    z-index: 11;
+}
+
+.pricing-header3 {
+    padding: 25px 0 13px;
+    background: #515151;
     color: #fff;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -1189,7 +1219,38 @@ mobile menu
     top: 33px;
     width: 100%;
     height: 68%;
-    background: url(../images/pricing/2.png) no-repeat center center / cover;
+    background: url(../images/pricing/4.png) no-repeat center center / cover;
+    z-index: -1;
+}
+
+.pricing-header1:before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 33px;
+    width: 100%;
+    height: 68%;
+    background: url(../images/pricing/4.png) no-repeat center center / cover;
+    z-index: -1;
+}
+.pricing-header2:before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 33px;
+    width: 100%;
+    height: 68%;
+    background: url(../images/pricing/4.png) no-repeat center center / cover;
+    z-index: -1;
+}
+.pricing-header3:before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 33px;
+    width: 100%;
+    height: 68%;
+    background: url(../images/pricing/4.png) no-repeat center center / cover;
     z-index: -1;
 }
 .price-sub-header {
@@ -1774,8 +1835,7 @@ mobile menu
     border:6px solid #B4B4B5;
 }
 .about-area.about-style-2{
-  background: url(../images/about/4.jpg) no-repeat center top / cover;
-
+  background: url(../images/homepage/3.jpg) no-repeat center top / cover;
 }
 
 .about-area.about-style-2 .about-wrap{

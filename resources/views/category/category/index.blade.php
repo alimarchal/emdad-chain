@@ -37,35 +37,36 @@
 
     // console.log(mydata);
     @if(auth()->user()->registration_type == 'Buyer')
+        @if(count($categories) == 1)
         $("#sel_1").select2ToTree({
             treeData: {
                 dataArr: mydata
             },
-            maximumSelectionLength: 25
+            maximumSelectionLength: 5
         });
-    @elseif(auth()->user()->registration_type == 'Supplier')
-        @if(count($categories) == 1)
-            $("#sel_1").select2ToTree({
-                treeData: {
-                    dataArr: mydata
-                },
-                maximumSelectionLength: 5
-            });
-        @elseif(count($categories) == 2)
-            $("#sel_1").select2ToTree({
-                treeData: {
-                    dataArr: mydata
-                },
-                maximumSelectionLength: 15
-            });
-        @elseif(count($categories) == 3)
-            $("#sel_1").select2ToTree({
-                treeData: {
-                    dataArr: mydata
-                },
-                maximumSelectionLength: 50
-            });
+        @elseif(count($categories) > 1 || count($categories) <= 3)
+        $("#sel_1").select2ToTree({
+            treeData: {
+                dataArr: mydata
+            },
+            maximumSelectionLength: 15
+        });
+        @elseif(count($categories) > 3 || count($categories) <= 5)
+        $("#sel_1").select2ToTree({
+            treeData: {
+                dataArr: mydata
+            },
+            maximumSelectionLength: 50
+        });
         @endif
+
+    @elseif(auth()->user()->registration_type == 'Supplier')
+        $("#sel_1").select2ToTree({
+            treeData: {
+                dataArr: mydata
+            },
+            // maximumSelectionLength: 25
+        });
     @endif
 
 </script>
