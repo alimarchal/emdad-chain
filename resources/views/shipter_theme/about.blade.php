@@ -19,18 +19,17 @@
                             <i class="fi flaticon-travel"></i>
                         </div>
                         <h2>What is Emdad Platform?</h2>
-                        <p>Is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing, selling, supplying and warehousing process.</p>
-                        <p>Emdad can provide the lowest costs yet the best technical and logistical standards.</p>
-                        <span><strong>Our Vision:</strong> To become the largest, reliable online platform specialized in supply chains, and to gain the biggest
-                            number of suppliers and the largest logistical fleet while assuring the best international quality standards.</span>
+                        <p>It is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing, selling, supplying and warehousing processes. Emdad can provide the lowest costs yet the best technical and logistical standards.</p>
+                        <span><strong>Our vision for the future:</strong> To become the largest, reliable online platform specialized in supply chains,
+                            to gain the biggest number of suppliers and the largest logistical fleet while assuring the best international quality standards.</span>
 
                         <span><strong>Our Message for The Future:</strong> We are capable and even ready to endure all difficulties  in technology development and to keep up with the modern world in order to become the pioneer in innovation and development. And if we ever have the chance to serve in other planets, we would!</span>
-                        <span><strong>Our Goal:</strong> To remove all of the logistical obstacles and upgrade the service level of supply chain for all of Emdad's partners, and we will!</span>
+                        <span><strong>Our Goal:</strong> To remove all of the logestical obsticales and upgrade the service level of supply chain for all of Emdad's partners, and we will!</span>
                     </div>
                     <div class="signature-section">
                         <div class="si-text">
                             <p>Abdulaziz AlSinany</p>
-                            <span>Founder and CEO</span>
+                            <span>Founder, CEO and SCM</span>
                         </div>
                         <img src="{{url('Shipter/assets/images/about/ceo_sign.png')}}" style="width: 200px;" alt="">
                     </div>
@@ -45,7 +44,9 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                            <i class="fi flaticon-ship"></i>
+                            <i class="fi">
+                                <img src="{{url('images/11.png')}}" style="height: 40px; width: 40px">
+                            </i>
                         </div>
                         <div class="section-content">
                             <span>Provides safe payments</span>
@@ -55,7 +56,9 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                            <i class="fi flaticon-truck"></i>
+                            <i class="fi">
+                                <img src="{{url('images/12.png')}}" style="height: 40px; width: 40px">
+                            </i>
                         </div>
                         <div class="section-content">
                             <span>Assures an organised and fast process</span>
@@ -65,7 +68,9 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                            <i class="fi flaticon-travel"></i>
+                            <i class="fi">
+                                <img src="{{url('images/13.png')}}" style="height: 40px; width: 40px">
+                            </i>
                         </div>
                         <div class="section-content">
                             <span>Offers  the lowest costs</span>
@@ -76,7 +81,9 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                            <i class="fi flaticon-delivery"></i>
+                            <i class="fi">
+                                <img src="{{url('images/14.png')}}" style="height: 40px; width: 40px">
+                            </i>
                         </div>
                         <div class="section-content">
                             <span>Removes the logistical obstacles</span>

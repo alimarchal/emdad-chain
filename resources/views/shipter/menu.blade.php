@@ -3,7 +3,7 @@
         <li class="{{(request()->routeIs('english.index')?'active':'')}}"><a href="{{route('english.index')}}">Home</a></li>
         <li class="{{(request()->routeIs('english.about')?'active':'')}}"><a href="{{route('english.about')}}">About Us</a></li>
         <li class="{{(request()->routeIs('english.service')?'active':'')}}"><a href="{{route('english.service')}}">Emdad's Benefits</a></li>
-        <li class="{{(request()->routeIs('english.team')?'active':'')}}"><a href="{{route('english.team')}}">Emdad's Team</a></li>
+        <li class="{{(request()->routeIs('english.team')?'active':'')}}"><a href="{{route('english.team')}}">Emdad Team</a></li>
         <li class="{{(request()->routeIs('english.contact')?'active':'')}}"><a href="{{route('english.contact')}}">Support</a></li>
         <li class="{{(request()->routeIs('english.survey') || request()->routeIs('english.buyerSurvey')|| request()->routeIs('english.supplierSurvey')?'active':'')}}">
             <a href="{{route('english.survey')}}">Survey</a>

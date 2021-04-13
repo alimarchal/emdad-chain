@@ -7,7 +7,7 @@
     <ul class="d-flex account_login-area">
         <li class="account-item">
             <i class="fa fa-phone" aria-hidden="true"></i>
-            <h5><span>Call Us</span>Tel: +966 53 416 8874</h5>
+            <h5><span>Call Us</span>Tel: +9200 12057</h5>
         </li>
         <li class="account-item account-item-2">
             <i class="fa fa-envelope-o" aria-hidden="true"></i>

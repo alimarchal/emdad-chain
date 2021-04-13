@@ -1,17 +1,17 @@
 @extends('shipterAr.layout')
 
 @section('custom_header_image')
-
+    background-image: url('images/Photo no.4.jpg');
 @endsection
-@section('title','Services')
+@section('title','مميزات إمداد')
 @section('custom-header')
 @endsection
 @section('custom-body-style')
     style="font-family: arabicFont;"
 @endsection
 @section('inside-body')
-@section('breadcumb-title','What does it provide')
-@section('breadcumb-text','What does it provide')
+@section('breadcumb-title','مميزات إمداد')
+@section('breadcumb-text','مميزات إمداد')
 @section('main')
 
     @include('shipterAr.breadcumb-area')
@@ -23,7 +23,9 @@
                     <div class="section-wrap">
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi flaticon-ship"></i>
+                               <i class="fi">
+                                    <img src="{{url('images/15.png')}}" style="width: 40px; height: 40px;" alt="">
+                                </i>
                             </div>
                             <div class="section-content">
                                 <p><a>القسم اللوجستي</a></p>
@@ -34,24 +36,35 @@
                         </div>
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi flaticon-truck"></i>
+                                <i class="fi">
+                                    <img src="{{url('images/16.png')}}" style="width: 40px; height: 40px;" alt="">
+                                </i>
                             </div>
                             <div class="section-content">
                                 <p><a>المبيعات</a></p>
-                                <span>سهولة إمكانية رفع معدل نسبة المبيعات.
-                                    متابعة موظفين المبيعات بشكل دوري مباشر.
-                                    إنشاء واعتماد عروض الأسعار إلكترونياً.</span>
+                                <span>
+
+سهولة زيادة متوسط نسبة المبيعات.
+متابعة موظفين المبيعات بشكل دوري .
+إنشاء واعتماد عروض الأسعار إلكترونياً
+
+                                </span>
                             </div>
                         </div>
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi flaticon-plane"></i>
+                                <i class="fi">
+                                    <img src="{{url('images/17.png')}}" style="width: 40px; height: 40px;" alt="">
+                                </i>
                             </div>
                             <div class="section-content">
                                 <p><a>المالية</a></p>
-                                <span>منع الاختلاسات المالية.
-                                    إمكانية الاستفادة من التحليل المالي للحسابات في نهاية كل فترة مالية.
-                                    ضمان تحصيل الأموال في الوقت المحدد.</span>
+                                <span>
+
+                                    منع الاختلاسات المالية.
+إمكانية الاستفادة من التحليل المالي للحسابات في نهاية كل فترة مالية.
+ضمان تحصيل الأموال في الوقت المحدد
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -79,35 +92,49 @@
                     <div class="section-wrap">
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi flaticon-ship"></i>
+                                <i class="fi">
+                                    <img src="{{url('images/18.png')}}" style="width: 40px; height: 40px;" alt="">
+                                </i>
                             </div>
                             <div class="section-content">
-                                <p><a>القسم اللوجستي</a></p>
-                                <span>توفير مخزون للمنتجات المطلوبة بشكل مستمر ودوري
-                                        إمكانية تتبع الطلب بشكل دقيق جدا
-                                        إمكانية جدولة الطلبات </span>
+                                <p><a>التخزين</a></p>
+                                <span>
+                                توفير مخزون للمنتجات المطلوبة بشكل مستمر ودوري
+إمكانية تتبع الطلب بشكل دقيق جدا
+إمكانية جدولة الطلبات
+
+                                </span>
                             </div>
                         </div>
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi flaticon-truck"></i>
+                                <i class="fi">
+                                    <img src="{{url('images/19.png')}}" style="width: 40px; height: 40px;" alt="">
+                                </i>
                             </div>
                             <div class="section-content">
                                 <p><a>المشتريات</a></p>
-                                <span>إمكانية اعتماد أوامر الشراء إلكترونيا
-                                        إمكانية طلب التقارير الإلكترونية في أي وقت
-                                        إمكانية طلب أي منتج أو خدمة في أي وقت</span>
+                                <span>
+                                    إمكانية اعتماد أوامر الشراء إلكترونيا
+إمكانية طلب التقارير الإلكترونية في أي وقت
+إمكانية طلب أي منتج أو خدمة في أي وقت
+
+                                </span>
                             </div>
                         </div>
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi flaticon-plane"></i>
+                                 <i class="fi">
+                                    <img src="{{url('images/20.png')}}" style="width: 40px; height: 40px;" alt="">
+                                </i>
                             </div>
                             <div class="section-content">
-                                <p><a>المالية/التكاليف</a></p>
-                                <span>ضمان طلب عروض الأسعار من المورّد الموثوق
-                                    إمكانية الدفع المقدم بالنقد أو الاجل لحساب بنكي واحد
-                                    تقليل التكلفة الشرائية</span>
+                                <p><a>المالية </a></p>
+                                <span>
+                                    ضمان طلب عروض الأسعار من المورّد الموثوق
+إمكانية الدفع المقدم بالنقد أو الاجل لحساب بنكي واحد
+تقليل التكلفة الشرائية
+                                </span>
                             </div>
                         </div>
                     </div>

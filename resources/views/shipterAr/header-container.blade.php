@@ -7,15 +7,15 @@
     <ul class="d-flex account_login-area">
         <li class="account-item">
             <i class="fa fa-phone" aria-hidden="true"></i>
-            <h5><span>Call Us</span>Tel: +966 53 416 8874</h5>
+            <h5><span>الهاتف</span>+9200 12057</h5>
         </li>
         <li class="account-item account-item-2">
             <i class="fa fa-envelope-o" aria-hidden="true"></i>
-            <h5><span>Mail Us</span>info@emdad-chain.com</h5>
+            <h5><span>البريد الإلكتروني</span>info@emdad-chain.com</h5>
         </li>
         <li class="account-item">
             <i class="fa fa-map-marker" aria-hidden="true"></i>
-            <h5><span>Company Location</span>King Abdul Aziz Road, Exit 5, <br>Riyadh - 13525, KSA</h5>
+            <h5><span>العنوان</span>مركز ابان ١٢٠،<br>طريق الملك عبد العزيز، مخرج ٥ <br>المملكة العربية السعودية، الرياض - ١٣٥٢٥</h5>
         </li>
     </ul>
 </div>

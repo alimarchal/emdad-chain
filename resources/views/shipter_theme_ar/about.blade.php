@@ -45,7 +45,9 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                            <i class="fi flaticon-ship"></i>
+                           <i class="fi">
+                                <img src="{{url('images/11.png')}}" style="height: 40px; width: 40px">
+                            </i>
                         </div>
                         <div class="section-content">
                             <span>Provides safe payments</span>
@@ -55,7 +57,9 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                            <i class="fi flaticon-truck"></i>
+                            <i class="fi">
+                                <img src="{{url('images/12.png')}}" style="height: 40px; width: 40px">
+                            </i>
                         </div>
                         <div class="section-content">
                             <span>Assures an organised and fast process</span>
@@ -65,7 +69,9 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                            <i class="fi flaticon-travel"></i>
+                             <i class="fi">
+                                <img src="{{url('images/13.png')}}" style="height: 40px; width: 40px">
+                            </i>
                         </div>
                         <div class="section-content">
                             <span>Offers  the lowest costs</span>
@@ -76,7 +82,9 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                            <i class="fi flaticon-delivery"></i>
+                             <i class="fi">
+                                <img src="{{url('images/14.png')}}" style="height: 40px; width: 40px">
+                            </i>
                         </div>
                         <div class="section-content">
                             <span>Removes the logistical obstacles</span>

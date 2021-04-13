@@ -1,4 +1,7 @@
 @extends('shipterAr.layout')
+@section('custom_header_image')
+    background-image: url('images/Photo no.6.jpg');
+@endsection
 @section('title','الفريق')
 @section('custom-header')
 @endsection
@@ -6,8 +9,8 @@
     style="font-family: arabicFont;"
 @endsection
 @section('inside-body')
-@section('breadcumb-title','Emdad\'s Team')
-@section('breadcumb-text','Emdad\'s Team')
+@section('breadcumb-title','فريق إمداد')
+@section('breadcumb-text','فريق إمداد')
 @section('main')
 
 @include('shipterAr.breadcumb-area')
@@ -16,8 +19,8 @@
     <div class="container">
         <div class="col-l2">
             <div class="section-title text-center">
-                <span>We Are With You</span>
-                <h2>Our Team Members</h2>
+                <span></span>
+                <h2>فريق إمداد</h2>
             </div>
         </div>
         <div class="row">
@@ -164,8 +167,8 @@
                         </div>
                     </div>
                     <div class="team-content">
-                        <h4>Maryam Al Hajji</h4>
-                        <span>Graphic Designer</span>
+                        <h4>مريم الحاجي</h4>
+                        <span>مصممة جرافيك</span>
                     </div>
                 </div>
             </div>
@@ -182,8 +185,8 @@
                         </div>
                     </div>
                     <div class="team-content">
-                        <h4>Mustahsan Rizvi</h4>
-                        <span>Office Administrator (Pakistan)</span>
+                        <h4>مستحسن ريزفي</h4>
+                        <span>مدير مكتب (باكستان)</span>
                     </div>
                 </div>
             </div>
@@ -202,8 +205,8 @@
                         </div>
                     </div>
                     <div class="team-content">
-                        <h4>Ali Raza Marchal</h4>
-                        <span>Software Developer</span>
+                        <h4>علي رضا مارشال</h4>
+                        <span>مطور برمجيات</span>
                     </div>
                 </div>
             </div>
@@ -220,8 +223,8 @@
                         </div>
                     </div>
                     <div class="team-content">
-                        <h4>Umair Pervaiz Butt</h4>
-                        <span>Software Engineer</span>
+                        <h4>أمير بيرفايز بوت</h4>
+                        <span>مهندس برمجيات</span>
                     </div>
                 </div>
             </div>

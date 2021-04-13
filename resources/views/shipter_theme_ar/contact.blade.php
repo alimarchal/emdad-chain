@@ -6,8 +6,8 @@
     style="font-family: arabicFont;"
 @endsection
 @section('inside-body')
-@section('breadcumb-title','Contact Us')
-@section('breadcumb-text','Contact Us')
+@section('breadcumb-title','دعمكم هنا')
+@section('breadcumb-text','دعمكم هنا')
 @section('main')
 
     @include('shipterAr.breadcumb-area')

@@ -1,7 +1,7 @@
 @extends('shipter.layout')
 
 @section('custom_header_image')
-
+background-image: url('images/Photo no.4.jpg');
 @endsection
 @section('title','Services')
 @section('custom-header')
@@ -22,7 +22,9 @@
                     <div class="section-wrap">
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi flaticon-ship"></i>
+                                <i class="fi">
+                                    <img src="{{url('images/15.png')}}" style="width: 40px; height: 40px;" alt="">
+                                </i>
                             </div>
                             <div class="section-content">
                                 <p><a>Logistics Department</a></p>
@@ -32,20 +34,24 @@
                         </div>
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi flaticon-truck"></i>
+                                <i class="fi">
+                                    <img src="{{url('images/16.png')}}" style="width: 40px; height: 40px;" alt="">
+                                </i>
                             </div>
                             <div class="section-content">
-                                <p><a>Sales Department</a></p>
-                                <span>Easy increase for average sales percentage.Follow up with sales officers regularly.
-                                      Quotations generating and approving online.</span>
+                                <p><a>Sales</a></p>
+                                <span>Easy increase for average sales percentage. Follow up with sales officers regularly. Quotations generating and approving online.
+</span>
                             </div>
                         </div>
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi flaticon-plane"></i>
+                                <i class="fi">
+                                    <img src="{{url('images/17.png')}}" style="width: 40px; height: 40px;" alt="">
+                                </i>
                             </div>
                             <div class="section-content">
-                                <p><a>Financial Department</a></p>
+                                <p><a>Finance</a></p>
                                 <span>Prevention of misappropriation of funds.Financial analysis of the accounts at the end of each financial period.
                                       Punctual funds collections.</span>
                             </div>
@@ -75,7 +81,9 @@
                     <div class="section-wrap">
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi flaticon-ship"></i>
+                                <i class="fi">
+                                    <img src="{{url('images/18.png')}}" style="width: 40px; height: 40px;" alt="">
+                                </i>
                             </div>
                             <div class="section-content">
                                 <p><a>Logistics Department</a></p>
@@ -84,7 +92,9 @@
                         </div>
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi flaticon-truck"></i>
+                                <i class="fi">
+                                    <img src="{{url('images/19.png')}}" style="width: 40px; height: 40px;" alt="">
+                                </i>
                             </div>
                             <div class="section-content">
                                 <p><a>Purchases Department</a></p>
@@ -94,7 +104,9 @@
                         </div>
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi flaticon-plane"></i>
+                                <i class="fi">
+                                    <img src="{{url('images/20.png')}}" style="width: 40px; height: 40px;" alt="">
+                                </i>
                             </div>
                             <div class="section-content">
                                 <p><a>Financial Department</a></p>

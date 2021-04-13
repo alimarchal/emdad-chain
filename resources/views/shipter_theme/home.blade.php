@@ -48,7 +48,7 @@
                         <div class="col-xl-12 slide-caption">
                             {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
                             <h3 class="text-white">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
-                                , selling, supplying and warehousing process. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
+                                , selling, supplying and warehousing processes. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
                             <div class="btns">
                                 <div class="btn-style"><a href="{{route('english.about')}}">About us</a></div>
                             </div>
@@ -78,7 +78,7 @@
         <div class="container">
             <div class="section-title text-center">
                 <span>We Provide the Best</span>
-                <h2>Our Awesome Features</h2>
+                <h2>Emdad Benefits</h2>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6">
@@ -159,7 +159,7 @@
                         <h2>What is Emdad Platform?</h2>
                         <p>Is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing, selling, supplying and warehousing process.</p>
                         <p>Emdad can provide the lowest costs yet the best technical and logistical standards.</p>
-                        <span><strong>Our Vision:</strong> To become the largest, reliable online platform specialized in supply chains, and to gain the biggest
+                        <span><strong>Our Vision:</strong> To become the largest, reliable online platform specialized in supply chains, to gain the biggest
                             number of suppliers and the largest logistical fleet while assuring the best international quality standards.</span>
                         <span><strong>Our Goal:</strong> To remove all of the logistical obstacles and upgrade the service level of supply chain for all of Emdad's partners, and we will!</span>
                     </div>
@@ -189,7 +189,7 @@
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/1.jpg')}}" alt="">
+                                <img src="{{url('Shipter/assets/images/icon/cust-icon/24.png')}}" style="width: 350px; height: 236px;" alt="">
                             </div>
                             <div class="service-content">
                                 <h3>Logistics Department</h3>
@@ -203,7 +203,7 @@
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/2.jpg')}}" alt="">
+                                <img src="{{url('Shipter/assets/images/icon/cust-icon/25.png')}}" style="width: 350px; height: 236px;" alt="">
                             </div>
                             <div class="service-content service-content2">
                                 <h3>Sales Department</h3>
@@ -217,7 +217,7 @@
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/6.jpg')}}" alt="">
+                                <img src="{{url('Shipter/assets/images/icon/cust-icon/26.png')}}" style="width: 350px; height: 236px;" alt="">
                             </div>
                             <div class="service-content service-content6">
                                 <h3>Financial Department</h3>
@@ -231,7 +231,7 @@
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/3.jpg')}}" alt="">
+                                <img src="{{url('Shipter/assets/images/icon/cust-icon/27.png')}}" style="width: 350px; height: 236px;" alt="">
                             </div>
                             <div class="service-content service-content3">
                                 <h3>Logistics Department</h3>
@@ -245,7 +245,7 @@
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/4.jpg')}}" alt="">
+                                <img src="{{url('Shipter/assets/images/icon/cust-icon/28.png')}}" style="width: 350px; height: 236px;" alt="">
                             </div>
                             <div class="service-content service-content4">
                                 <h3>Purchases Department</h3>

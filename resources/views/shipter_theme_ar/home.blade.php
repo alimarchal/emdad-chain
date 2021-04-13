@@ -78,7 +78,7 @@
         <div class="container">
             <div class="section-title text-center">
                 <span>We Provide the Best</span>
-                <h2>Our Awesome Features</h2>
+                <h2>مميزات إمداد</h2>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6">
@@ -480,7 +480,9 @@
                         </div>
                         <div class="team-content">
                             <h4>عبد العزيز السناني</h4>
-                            <span>مؤسس ومدير مجلس الإدارة</span>
+                            <span>
+                                المؤسس والمدير التنفيذي ومدير سلسلة التوريد
+                            </span>
                         </div>
                     </div>
                 </div>
