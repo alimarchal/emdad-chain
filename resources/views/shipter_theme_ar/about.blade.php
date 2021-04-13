@@ -135,7 +135,7 @@
                         </div>
                         <div class="team-content">
                             <h4>أحسن رضا</h4>
-                            <span>مدير تطوير الأعمال</span>
+                            <span>Business Development & Sales Manager</span>
                         </div>
                     </div>
                 </div>

@@ -134,7 +134,7 @@
                         </div>
                         <div class="team-content">
                             <h4>Ahsan Raza</h4>
-                            <span>Business Development Manager</span>
+                            <span>Business Development & Sales Manager</span>
                         </div>
                     </div>
                 </div>

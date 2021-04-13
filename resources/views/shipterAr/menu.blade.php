@@ -12,6 +12,6 @@
                 <li class="{{(request()->routeIs('arabic.supplierSurvey')?'active':'')}}"><a href="{{route('arabic.supplierSurvey')}}">للموردين</a></li>
             </ul>
         </li>
-        <li><a href="javascript:void(0)">Training Center</a></li>
+        <li><a href="javascript:void(0)">مركز التدريب</a></li>
     </ul>
 </nav>
