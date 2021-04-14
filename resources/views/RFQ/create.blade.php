@@ -208,15 +208,14 @@
                                     @foreach (\App\Models\UnitMeasurement::all() as $item)
                                         <option value="{{$item->uom_en}}">{{$item->uom_en}}</option>
                                     @endforeach
-                                    <option value="Standard Order">Standard Order</option>
                                 </select>
                             </div>
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                    Size<span class="text-red-600">*</span>
+                                    Size
                                 </label>
-                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="size" min="0" autocomplete="size" required>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="size" min="0">
                             </div>
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
@@ -230,14 +229,14 @@
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="brand">
                                     Brand
                                 </label>
-                                <input class="form-input rounded-md shadow-sm block w-full" id="brand" type="text" name="brand" min="0" autocomplete="brand" required>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="brand" type="text" name="brand" min="0" autocomplete="brand">
                             </div>
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="last_price">
-                                    Last Price<span class="text-red-600">*</span>
+                                    Last Price
                                 </label>
-                                <input class="form-input rounded-md shadow-sm block w-full" id="last_price" type="number" name="last_price" min="0" autocomplete="last_price" required>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="last_price" type="number" name="last_price" min="0" autocomplete="last_price">
                             </div>
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
@@ -264,10 +263,10 @@
                                 </label>
                                 <select name="delivery_period" id="delivery_period" class="form-select shadow-sm block w-full" required>
                                     <option value="">None</option>
+                                    <option value="Immediately">Immediately</option>
                                     <option value="With in 30 Days">30 Days</option>
                                     <option value="With in 60 Days">60 Days</option>
                                     <option value="With in 90 Days">90 Days</option>
-                                    <option value="Immediately">Immediately</option>
                                 </select>
                             </div>
 
@@ -516,7 +515,7 @@
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
                                     Size
                                 </label>
-                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="size" min="0" autocomplete="size" required>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="size" min="0" autocomplete="size">
                             </div>
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
@@ -537,7 +536,7 @@
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="last_price">
                                     Last Price
                                 </label>
-                                <input class="form-input rounded-md shadow-sm block w-full" id="last_price" type="number" name="last_price" min="0" autocomplete="last_price" required>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="last_price" type="number" name="last_price" min="0" autocomplete="last_price">
                             </div>
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
@@ -846,7 +845,7 @@
                             <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
                                 مقاس
                             </label>
-                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="size" min="0" autocomplete="size" required>
+                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="size" min="0" autocomplete="size">
                         </div>
 
                         <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">

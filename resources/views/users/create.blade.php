@@ -80,6 +80,14 @@
                                     <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="email" type="email" name="email" required>
                                 </div>
 
+
+                                <div class="col-span-6 sm:col-span-2">
+                                    <label class="block font-medium text-sm text-gray-700" for="name">
+                                        Designation
+                                    </label>
+                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="designation" type="text" name="designation" required>
+                                </div>
+
                                 <div class="col-span-6 sm:col-span-2">
                                     <label class="block font-medium text-sm text-gray-700" for="password">
                                         Password
@@ -87,10 +95,9 @@
                                     <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="password" type="password" name="password" required>
                                 </div>
 
-                                <div class="col-span-6 sm:col-span-2">
-                                </div>
 
                                 <!-- Roles -->
+
                                 <div class="col-span-6 sm:col-span-2">
                                     <label class="block font-medium text-sm text-gray-700" for="role">
                                         Role
