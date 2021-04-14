@@ -1,7 +1,7 @@
 <nav class="nav_mobile_menu">
     <ul style="text-align: right">
         <li class="{{(request()->routeIs('arabic.index')?'active':'')}}"><a href="{{route('arabic.index')}}">الرئيسية</a></li>
-        <li class="{{(request()->routeIs('arabic.about')?'active':'')}}"><a href="{{route('arabic.about')}}">من إمداد</a></li>
+        <li class="{{(request()->routeIs('arabic.about')?'active':'')}}"><a href="{{route('arabic.about')}}">ما هي إمداد</a></li>
         <li class="{{(request()->routeIs('arabic.service')?'active':'')}}"><a href="{{route('arabic.service')}}">مميزات إمداد</a></li>
         <li class="{{(request()->routeIs('arabic.team')?'active':'')}}"><a href="{{route('arabic.team')}}">فريق إمداد</a></li>
         <li class="{{(request()->routeIs('arabic.contact')?'active':'')}}"><a href="{{route('arabic.contact')}}">دعمكم هنا</a></li>

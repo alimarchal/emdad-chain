@@ -56,7 +56,7 @@
                     </div>
                     <div class="team-content">
                         <h4>أحسن رضا</h4>
-                        <span>مدير تطوير الأعمال</span>
+                        <span>مدير مبيعات و تطوير أعمال</span>
                     </div>
                 </div>
             </div>
@@ -172,6 +172,25 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="team-single">
+                    <div class="team-img">
+                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
+                        <div class="social-1st">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4>غادة النجيدي</h4>
+                        <span>مساعدة المدير التنفيذي</span>
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
@@ -187,6 +206,25 @@
                     <div class="team-content">
                         <h4>مستحسن ريزفي</h4>
                         <span>مدير مكتب (باكستان)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="team-single">
+                    <div class="team-img">
+                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
+                        <div class="social-1st">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4>شهد الشهراني</h4>
+                        <span>أخصائية مبيعات</span>
                     </div>
                 </div>
             </div>

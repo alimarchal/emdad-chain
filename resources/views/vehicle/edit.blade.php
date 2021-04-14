@@ -25,7 +25,7 @@
                         </label>
                         <select name="type" id="type" class="form-select shadow-sm block w-full" required>
                             <option value="">None</option>
-                            <option @if($vehicle->type == 'Truck') selected @endif value="Truck">Truck</option>
+                            <option @if($vehicle->type == 'truck') selected @endif value="Truck">Truck</option>
                         </select>
                     </div>
                     <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">

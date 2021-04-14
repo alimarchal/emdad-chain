@@ -45,7 +45,7 @@
                 @endforeach
             </div>
             <div class="container bg-white rounded p-4 mb-4">
-                <h3 class="text-center">Sales</h3>
+                <h3 class="text-center">المبيعات</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 6 && $loop->iteration <= 17)
                         <div class="mb-3">
@@ -68,7 +68,7 @@
                 @endforeach
             </div>
             <div class="container bg-white rounded p-4 mb-4">
-                <h3 class="text-center">Storage</h3>
+                <h3 class="text-center">المخزن</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 18 && $loop->iteration <= 21)
                         <div class="mb-3">
@@ -91,7 +91,7 @@
                 @endforeach
             </div>
             <div class="container bg-white rounded p-4 mb-4">
-                <h3 class="text-center">Logistics</h3>
+                <h3 class="text-center">القسم اللوجستي</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 22 && $loop->iteration <= 29)
                         <div class="mb-3">
@@ -114,7 +114,7 @@
                 @endforeach
             </div>
             <div class="container bg-white rounded p-4 mb-4">
-                <h3 class="text-center">Products</h3>
+                <h3 class="text-center">المنتجات</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 30 && $loop->iteration <= 36)
                         <div class="mb-3">
@@ -137,7 +137,7 @@
                 @endforeach
             </div>
             <div class="container bg-white rounded p-4 mb-4">
-                <h3 class="text-center">Finance</h3>
+                <h3 class="text-center">المالية</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 37 && $loop->iteration <= 44)
                         <div class="mb-3">
@@ -160,7 +160,7 @@
                 @endforeach
 
                 <input type="hidden" name="language" value="en_supplier">
-                <button type="submit" class="btn btn-primary ml-2">Submit</button>
+                <button type="submit" class="btn btn-primary ml-2">إرسال</button>
             </div>
 
         </form>

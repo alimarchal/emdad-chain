@@ -171,7 +171,7 @@
             </div>
 
             <div class="container bg-white rounded p-4 mt-4 mb-4">
-                <h3 class="text-center">Supply Chain Management</h3>
+                <h3 class="text-center">إدارة سلسلة الإمداد</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 7 && $loop->iteration <= 14)
                         <div class="mb-3">
@@ -399,7 +399,7 @@
             </div>
 
             <div class="container bg-white rounded p-4 mt-4 mb-4">
-                <h3 class="text-center">Warehouse Info.</h3>
+                <h3 class="text-center">معلومات المستودع</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 15 && $loop->iteration <= 16)
                         <div class="mb-3">
@@ -471,7 +471,7 @@
             </div>
 
             <div class="container bg-white rounded p-4 mt-4 mb-4">
-                <h3 class="text-center">Products</h3>
+                <h3 class="text-center">المنتجات</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 17 && $loop->iteration <= 22)
                         <div class="mb-3">
@@ -614,7 +614,7 @@
             </div>
 
             <div class="container bg-white rounded p-4 mt-4 mb-4">
-                <h3 class="text-center">Purchases</h3>
+                <h3 class="text-center">المشتريات</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 23 && $loop->iteration <= 30)
                         <div class="mb-3">
@@ -816,7 +816,7 @@
             </div>
 
             <div class="container bg-white rounded p-4 mt-4 mb-4">
-                <h3 class="text-center">The Market</h3>
+                <h3 class="text-center">السوق</h3>
                 @foreach(\App\Models\EBuyerSurvey::all() as $q)
                     @if($loop->iteration >= 31 && $loop->iteration <= 38)
                         <div class="mb-3">
@@ -1010,7 +1010,7 @@
                     @endif
                 @endforeach
                 <input type="hidden" name="language" value="en">
-                <button type="submit" class="btn btn-primary ml-2">Submit</button>
+                <button type="submit" class="btn btn-primary ml-2">إرسال</button>
             </div>
 
         </form>

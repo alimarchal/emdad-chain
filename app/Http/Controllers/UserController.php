@@ -106,7 +106,7 @@ class UserController extends Controller
             $userCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', '!=','Supplier Driver'], ['id', '!=', \auth()->id()]])->count();
             $driverCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', 'Supplier Driver'],['id', '!=', \auth()->id()]])->count();
 //            dd($driverCount);
-            if (\auth()->user()->business_package->package_id == 5 && $userCount == 2 && $driverCount == 5 )
+            if (\auth()->user()->business_package->package_id == 5 && $userCount == 2 && $driverCount == 2 )
             {
                 session()->flash('message', 'Add Users and Driver limit reached');
                 return redirect()->back();
@@ -122,13 +122,13 @@ class UserController extends Controller
 //                return redirect()->back();
 //            }
             //Checking users count for free package
-            elseif (\auth()->user()->business_package->package_id == 5 && $userCount != 2 && $driverCount == 5 )
+            elseif (\auth()->user()->business_package->package_id == 5 && $userCount != 2 && $driverCount == 2 )
             {
                 $roles  = Role::where('id' , '>=', 5)->where('id', '<', 10 )->get();
                 return view('users.create', compact('roles','userCount','driverCount'));
             }
             //Checking drivers count for free package
-            elseif (\auth()->user()->business_package->package_id == 5 && $userCount == 2 && $driverCount != 5 )
+            elseif (\auth()->user()->business_package->package_id == 5 && $userCount == 2 && $driverCount != 2 )
             {
                 $roles  = Role::where('id', '=', 10 )->get();
                 return view('users.create', compact('roles','userCount','driverCount'));

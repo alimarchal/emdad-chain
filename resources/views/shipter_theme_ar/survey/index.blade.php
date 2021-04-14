@@ -1,5 +1,5 @@
 @extends('shipterAr.layout')
-@section('title','الاستبيان')
+@section('title','هدف الاستبيان')
 @section('custom-header')
     <style>
         .survey {
@@ -26,8 +26,8 @@
     <section class="breadcrumbs" style="direction: rtl">
         <div class="container" style="margin-top: 40px;" >
             <div class="btns mx-auto" align="center">
-                <a class="btn-style survey col-lg-3 col-md-3" href="{{route('arabic.buyerSurvey')}}">Survey for Buyer</a> &nbsp;
-                <a class="btn-style survey col-lg-3 col-md-6" href="{{route('arabic.supplierSurvey')}}">Survey for Supplier</a>
+                <a class="btn-style survey col-lg-3 col-md-3" href="{{route('arabic.buyerSurvey')}}">استطلاع بياني للمشتري</a> &nbsp;
+                <a class="btn-style survey col-lg-3 col-md-6" href="{{route('arabic.supplierSurvey')}}">استطلاع بياني للمورد</a>
             </div>
         </div>
     </section><!-- End Buttons --><br>

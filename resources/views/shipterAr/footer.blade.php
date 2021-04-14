@@ -23,7 +23,10 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 footer-t">
                     <div class="footer-link">
-                        <h3>Quick Link</h3>
+                        <h3>
+                            الروابط السريعة
+
+                        </h3>
                         <ul>
                             <li><a href="{{route('arabic.index')}}">الرئيسية</a></li>
                             <li><a href="{{route('arabic.about')}}">من إمداد</a></li>
@@ -40,14 +43,17 @@
                 </div>
                 <div class="col-lg-3 col-sm-6 col-12">
                     <div class="footer-widget instagram">
-                        <h3>Instagram</h3>
+                        <h3>
+                            الفئات
+
+                        </h3>
                         <ul class="d-flex">
-                            <li><a href="#"><img src="{{url('Shipter/assets/images/instragram/1.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{url('Shipter/assets/images/instragram/2.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{url('Shipter/assets/images/instragram/3.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{url('Shipter/assets/images/instragram/4.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{url('Shipter/assets/images/instragram/5.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{url('Shipter/assets/images/instragram/6.jpg')}}" alt=""></a></li>
+                            <li><a href="#"><img src="{{url('Shipter/assets/images/footerimages/1.jpg')}}" alt=""></a></li>
+                            <li><a href="#"><img src="{{url('Shipter/assets/images/footerimages/2.jpg')}}" alt=""></a></li>
+                            <li><a href="#"><img src="{{url('Shipter/assets/images/footerimages/3.jpg')}}" alt=""></a></li>
+                            <li><a href="#"><img src="{{url('Shipter/assets/images/footerimages/4.jpg')}}" alt=""></a></li>
+                            <li><a href="#"><img src="{{url('Shipter/assets/images/footerimages/5.jpg')}}" alt=""></a></li>
+                            <li><a href="#"><img src="{{url('Shipter/assets/images/footerimages/6.jpg')}}" alt=""></a></li>
                         </ul>
                     </div>
                 </div>
@@ -59,7 +65,7 @@
             <div class="footer-bottom-content">
                 <div class="row">
                     <div class="col-12">
-                        &copy; حقوق الطبع والنشر {{date('Y')}} - <strong><span>شركة إمداد</span></strong> ۔ جميع الحقوق محفوظة ۔ مدعوم من  <strong><span>الويب ناعم </span></strong>
+                        &copy; حقوق الطبع والنشر {{date('Y')}} - <strong><span>شركة إمداد</span></strong> ۔ جميع الحقوق محفوظة ۔ مدعوم من  <strong><span>ویب سوفت </span></strong>
                     </div>
                 </div>
             </div>

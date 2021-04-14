@@ -1,6 +1,11 @@
 @extends('shipterAr.layout')
-@section('title','من إمداد')
+@section('title','ما هي إمداد')
 @section('custom-header')
+    <style>
+        #about-h2:before {
+            right: 0;
+        }
+    </style>
 @endsection
 @section('custom-body-style')
     style="font-family: arabicFont;"
@@ -14,25 +19,31 @@
     <div class="about-area about-style-2" style="direction: rtl">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6  offset-lg-6 about-wrap">
+                <div class="col-lg-6   about-wrap">
                     <div class="about-content">
                         <div class="about-icon">
                             <i class="fi flaticon-travel"></i>
                         </div>
-                        <h2>من إمداد؟</h2>
+                        <h2 id="about-h2">من إمداد؟</h2>
                         <p>منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين،</p>
                         <p> بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</p>
-                        <span><strong>رؤيتنا لمستقبلنا:</strong> أضخم منصة إلكترونية موثوقة تقدم خدمات سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم أسطول لوجستي بأفضل معايير الجودة العالمية.</span>
+                        <p><strong>رؤيتنا لمستقبلنا:</strong> أضخم منصة إلكترونية موثوقة تقدم خدمات سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم أسطول لوجستي بأفضل معايير الجودة العالمية.</p>
 
-                        <span><strong>رسالتنا للمستقبل:</strong> نحن قادرون بل ومستعدون على تحمل صعوبة جميع التطورات التقنية في العالم ومواكبة الأحداث الجديدة حتى نصبح الأسبق في الابتكار والتطور وإذا سنحت لنا الفرصة يوماً في خدمة كواكب خارج الأرض، سنفعل!</span>
-                        <span><strong>هدفنا:</strong> إزالة جميع المعوقات اللوجستية ورفع مستوى خدمة سلاسل الإمداد لجميع شركاء إمداد، وسنفعل!</span>
+                        <p><strong>رسالتنا للمستقبل:</strong> نحن قادرون بل ومستعدون على تحمل صعوبة جميع التطورات التقنية في العالم ومواكبة الأحداث الجديدة حتى نصبح الأسبق في الابتكار والتطور وإذا سنحت لنا الفرصة يوماً في خدمة كواكب خارج الأرض، سنفعل!</p>
+                        <p><strong>هدفنا:</strong> إزالة جميع المعوقات اللوجستية ورفع مستوى خدمة سلاسل الإمداد لجميع شركاء إمداد، وسنفعل!</p>
                     </div>
                     <div class="signature-section">
-                        <div class="si-text">
-                            <p>عبد العزيز السناني</p>
-                            <span>المؤسس والرئيس التنفيذي و<br>مدير سلسلة التوريد</span>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="si-text">
+                                    <p>عبد العزيز السناني</p>
+                                    <span>المؤسس والرئيس التنفيذي و<br>مدير سلسلة التوريد</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6"><img src="{{url('Shipter/assets/images/about/ceo_sign.png')}}" style="width: 200px;" alt=""></div>
                         </div>
-                        <img src="{{url('Shipter/assets/images/about/ceo_sign.png')}}" style="width: 200px;" alt="">
+
+
                     </div>
                 </div>
             </div>
@@ -45,12 +56,12 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                           <i class="fi">
-                                <img src="{{url('images/11.png')}}" style="height: 40px; width: 40px">
+                            <i class="fi">
+                                <img src="{{url('images/11.png')}}" style=" width: 40px">
                             </i>
                         </div>
                         <div class="section-content">
-                            <span>Provides safe payments</span>
+                            <span>إمداد تقدم دفعاً آمناً</span>
                         </div>
                     </div>
                 </div>
@@ -58,23 +69,23 @@
                     <div class="section-item-2">
                         <div class="section-icon">
                             <i class="fi">
-                                <img src="{{url('images/12.png')}}" style="height: 40px; width: 40px">
+                                <img src="{{url('images/12.png')}}" style="width: 40px">
                             </i>
                         </div>
                         <div class="section-content">
-                            <span>Assures an organised and fast process</span>
+                            <span>تضمن لكم عمليات سريعة ومنظمة</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                             <i class="fi">
-                                <img src="{{url('images/13.png')}}" style="height: 40px; width: 40px">
+                            <i class="fi">
+                                <img src="{{url('images/13.png')}}" style=" width: 40px">
                             </i>
                         </div>
                         <div class="section-content">
-                            <span>Offers  the lowest costs</span>
+                            <span>توفر لكم أقل الأسعار</span>
                         </div>
                     </div>
                 </div>
@@ -82,12 +93,12 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                             <i class="fi">
-                                <img src="{{url('images/14.png')}}" style="height: 40px; width: 40px">
+                            <i class="fi">
+                                <img src="{{url('images/14.png')}}" style=" width: 40px">
                             </i>
                         </div>
                         <div class="section-content">
-                            <span>Removes the logistical obstacles</span>
+                            <span>إزالة المعوقات اللوجستية</span>
                         </div>
                     </div>
                 </div>

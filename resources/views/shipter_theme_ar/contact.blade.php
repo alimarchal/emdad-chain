@@ -1,4 +1,7 @@
 @extends('shipterAr.layout')
+@section('custom_header_image')
+    background-image: url('photo6.jpg');
+@endsection
 @section('title','دعمكم هنا')
 @section('custom-header')
 @endsection
@@ -18,8 +21,14 @@
                 <div class="row">
                     <div class="col-lg-5 col-md-12">
                         <div class="contact-page-item">
-                            <h2>CONTACT DETAILS</h2>
-                            <p>Give us a call or drop by anytime, we endeavour to answer all enquiries within 24 hours on business days. We will be happy to answer your questions.</p>
+                            <h2>
+                                بيانات جهة الاتصال
+
+                            </h2>
+                            <p>
+                                اتصل بنا أو زرنا في أي وقت، نسعى جاهدين للرد على جميع الاستفسارات على مدى ٢٤ ساعة خلال أيام العمل. نسعد بالإجابة على أسئلتكم.
+
+                            </p>
                             <div class="adress">
                                 <h3>العنوان</h3>
                                 <span>مركز ابان ١٢٠،
@@ -27,8 +36,8 @@
 المملكة العربية السعودية، الرياض - ١٣٥٢٥</span>
                             </div>
                             <div class="phone">
-                                <h3>Phone</h3>
-                                <span>+966 53 416 8874</span>
+                                <h3>الهاتف</h3>
+                                <span style="direction: ltr;">+9200 12057</span>
                             </div>
                             <div class="email">
                                 <h3>البريد الإلكتروني:</h3>
@@ -38,8 +47,11 @@
                     </div>
                     <div class="col-lg-7 col-md-12">
                         <div class="contact-area">
-                            <h2>Ready to Get Started?</h2>
-                            <p>Your email address will not be published. Required fields are marked *</p>
+{{--                            <h2>Ready to Get Started?</h2>--}}
+                            <p>
+                                لن يتم نشر بريدك الإلكتروني. الحقول المطلوبة مُعلَّم عليها
+
+                                *</p>
 
                             @if ($errors->any())
                                 <div class="alert alert-danger">
