@@ -97,7 +97,7 @@
                         @endforeach
                     </tr>
                     <tr>
-                        <td class="border-t-2 border-gray-200 px-4 py-3">Category</td>
+                        <td class="border-t-2 border-gray-200 px-4 py-3">Main Categories</td>
                         @foreach($packages as $package)
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">
                                 {{$package->category}}
@@ -111,15 +111,21 @@
                         @endforeach
                     </tr>
                     <tr>
-                        <td class="border-t-2 border-gray-200 px-4 py-3">EmdadTools</td>
+                        <td class="border-t-2 border-gray-200 px-4 py-3">Emdad Tools App</td>
                         @foreach($packages as $package)
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->emdad_tools}}</td>
                         @endforeach
                     </tr>
                     <tr>
-                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Super Admin (CEO role)</td>
+                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Main User (Admin)</td>
                         @foreach($packages as $package)
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->super_admin_count}}</td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Sub Admin</td>
+                        @foreach($packages as $package)
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->sub_admin_count}}</td>
                         @endforeach
                     </tr>
                     <tr>
@@ -147,10 +153,10 @@
                         @endforeach
                     </tr>
                     <tr>
-                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Discount code</td>
-                        @foreach($packages as $package)
-                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->discount_code}}</td>
-                        @endforeach
+                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">You can use a discount code if found</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
                     </tr>
                     </tbody>
                 </table>
@@ -170,7 +176,7 @@
                         <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
                         <h1 class="text-4xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">مجاني</h1>
 
-                        <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center" disabled>Subscribe
+                        <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center" disabled>اشترك
                             {{--                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">--}}
                                 {{--                                <path d="M5 12h14M12 5l7 7-7 7"></path>--}}
                                 {{--                            </svg>--}}
@@ -187,7 +193,7 @@
                             <span class="text-lg ml-1 font-normal text-gray-500">/السنة</span>
                         </h1>
 
-                        <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">Subscribe</button>
+                        <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">اشترك</button>
                     </div>
                 </div>
                 <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
@@ -199,7 +205,7 @@
                             <span class="text-lg ml-1 font-normal text-gray-500">/السنة</span>
                         </h1>
 
-                        <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">Subscribe</button>
+                        <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">اشترك</button>
                     </div>
                 </div>
             </div>
@@ -232,13 +238,13 @@
                         <td class="border-t-2 text-center border-gray-200 px-4 py-3">مجاني</td>
                     </tr>
                     <tr>
-                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">Category</td>
+                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">الفئات الرئيسية</td>
                         <td class="border-t-2 text-center border-gray-200 px-4 py-3">1</td>
                         <td class="border-t-2 text-center border-gray-200 px-4 py-3">2</td>
                         <td class="border-t-2 text-center border-gray-200 px-4 py-3">3</td>
                     </tr>
                     <tr>
-                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">عروض الأسعار</td>
+                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">عدد الطلبات اليومية المستلمة</td>
                         <td class="border-t-2 text-center border-gray-200 px-4 py-3">5</td>
                         <td class="border-t-2 text-center border-gray-200 px-4 py-3">10</td>
                         <td class="border-t-2 text-center border-gray-200 px-4 py-3">غير محدود</td>
@@ -253,37 +259,43 @@
                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">وظيفة المشرف الرئيسي (المدير التنفيذي)</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">1</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">2</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">3</td>
+                    </tr>
+                    <tr>
+                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">اضافة مدير فرعي</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">1</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">5</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">10</td>
                     </tr>
                     <tr>
-                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">المستخدمين</td>
+                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">إضافة مستخدمين</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">2</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">10</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">100</td>
                     </tr>
                     <tr>
-                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">الشاحنات</td>
+                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">إضافة شاحنة</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">2</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">20</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">غير محدود</td>
+                    </tr>
+                    <tr>
+                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">إضافة سائق</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">5</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">20</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">غير محدود</td>
                     </tr>
                     <tr>
-                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">السائقين</td>
-                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">5</td>
-                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">20</td>
-                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">غير محدود</td>
-                    </tr>
-                    <tr>
-                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">Trainings</td>
+                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">الدعم والتدريب</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">غير محدود</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">غير محدود</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">غير محدود</td>
                     </tr>
                     <tr>
-                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">كود الخصم</td>
+                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">يمكنك استخدام رمز الخصم إن وجد</td>
                         <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3"></td>
-                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">ملائم</td>
-                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">ملائم</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">رمز الخصم</td>
+                        <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">رمز الخصم</td>
                     </tr>
                     </tbody>
                 </table>

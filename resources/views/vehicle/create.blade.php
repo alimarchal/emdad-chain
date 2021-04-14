@@ -10,6 +10,22 @@
     <x-app-layout>
         <h2 class="text-2xl font-bold py-2 text-center">
         </h2>
+        <!-- Remaining User and Driver count for respective packages -->
+        @php
+            $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+            $package = \App\Models\Package::where('id', $business_package->package_id)->first();
+            if(auth()->user()->usertype != 'superadmin')
+            {
+                $vehiclesRemaining = $package->truck - $vehiclesCount;
+            }
+        @endphp
+        @if($business_package->package_id == 5 || $business_package->package_id == 6 )
+            <div class="flex flex-wrap" style="justify-content: flex-start">
+                <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Vehicles you can add: </h1>
+                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$vehiclesRemaining}} &nbsp;</h1>
+            </div>
+        @endif
+        <hr>
 
         <div class="flex flex-col bg-white rounded">
             <div class="p-4">

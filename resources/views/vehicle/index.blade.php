@@ -21,6 +21,21 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <!-- Remaining User and Driver count for respective packages -->
+                @php
+                    $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+                    $package = \App\Models\Package::where('id', $business_package->package_id)->first();
+                    if(auth()->user()->usertype != 'superadmin')
+                    {
+                        $vehiclesRemaining = $package->truck - $vehiclesCount;
+                    }
+                @endphp
+                @if($business_package->package_id == 5 || $business_package->package_id == 6 )
+                    <div class="flex flex-wrap" style="justify-content: flex-start">
+                        <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Vehicles you can add: </h1>
+                        <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$vehiclesRemaining}} &nbsp;</h1>
+                    </div>
+                @endif
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     @if (session()->has('message'))
                         <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
@@ -61,7 +76,7 @@
                             </a>
                         </div>
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                            <h2 class="text-2xl font-bold text-center">Vehicle List</h2>
+                            <h2 class="text-2xl font-bold text-center">Vehicles List</h2>
                             <x-jet-validation-errors class="mb-4" />
                         @if ($vehicles->count())
                             <!-- This example requires Tailwind CSS v2.0+ -->
@@ -73,13 +88,16 @@
                                                 <table class="min-w-full divide-y divide-gray-200 " id="roles-table">
                                                     <thead class="bg-gray-50">
                                                     <tr>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                             #
                                                         </th>
-                                                        <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                        <th scope="col" class="px-6 py-30 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                             Vehicle Type
                                                         </th>
-                                                        <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                        <th scope="col" class="px-6 py-30 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                                            Licence #
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-30 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                             Action
                                                         </th>
 
@@ -88,14 +106,17 @@
                                                     <tbody class="bg-white divide-y divide-gray-200 ">
                                                     @foreach ($vehicles as $vehicle)
                                                         <tr>
-                                                            <td class="px-6 py-4 whitespace-nowrap ml-10">
+                                                            <td class="px-6 py-4 whitespace-nowrap ml-10 text-center">
                                                                 {{ $loop->iteration }}
                                                             </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap ml-10">
+                                                            <td class="px-6 py-4 whitespace-nowrap ml-10 text-center">
                                                                 <a href="{{ route('vehicle.edit', $vehicle) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{$vehicle->type}}</a>
                                                             </td>
+                                                            <td class="px-6 py-4 whitespace-nowrap ml-10 text-center">
+                                                                <a href="{{ route('vehicle.edit', $vehicle) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{$vehicle->licence_plate_No}}</a>
+                                                            </td>
 
-                                                            <td class="whitespace-nowrap ml-10">
+                                                            <td class="whitespace-nowrap ml-10 text-center">
                                                                 <a href="{{ route('vehicle.edit', $vehicle) }}" class="text-indigo-600 inline-block hover:text-indigo-900" title="EDIT">
                                                                     <svg width="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

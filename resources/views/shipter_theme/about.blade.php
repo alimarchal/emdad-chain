@@ -1,5 +1,5 @@
 @extends('shipter.layout')
-@section('title','About us')
+@section('title','About Emdad')
 @section('custom-header')
 @endsection
 @section('custom-body-style')

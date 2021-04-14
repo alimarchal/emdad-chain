@@ -1,5 +1,5 @@
 @extends('shipter.layout')
-@section('title','Survey')
+@section('title','Survey Aim')
 @section('custom-header')
     <style>
         .survey {

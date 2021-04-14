@@ -124,7 +124,7 @@
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">Category</td>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3">Main Categories</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->category}}</td>
                                         @endforeach
@@ -136,24 +136,24 @@
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">RFQs / Day</td>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3">No. of available RFQs per Day</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->rfq_per_day}}</td>
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">No. of quotations / RFQ</td>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3">No. Quots. Per 1 RFQ</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">
-                                                @if($package->quotations_per_rfq == 2) 1-{{$package->quotations_per_rfq}} @include('misc.required')
-                                                @elseif($package->quotations_per_rfq == 3) 1-{{$package->quotations_per_rfq}} @include('misc.required')
-                                                @elseif($package->quotations_per_rfq == 5) 1-{{$package->quotations_per_rfq}} @include('misc.required')
+                                                @if($package->quotations_per_rfq == 2) from 1-{{$package->quotations_per_rfq}}
+                                                @elseif($package->quotations_per_rfq == 3) from 1-{{$package->quotations_per_rfq}}
+                                                @elseif($package->quotations_per_rfq == 5) from 1-{{$package->quotations_per_rfq}}
                                                 @endif
                                             </td>
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">EmdadTools</td>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3">Emdad Tools App</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->emdad_tools}}</td>
                                         @endforeach
@@ -180,7 +180,7 @@
                                     <tr>
                                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Payment</td>
                                         @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->payment_type}}</td>
+                                            <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">@if($package->payment_type == 'Cash') {{$package->payment_type}} only @else {{$package->payment_type}} @endif</td>
                                         @endforeach
                                     </tr>
                                     <tr>
@@ -190,14 +190,17 @@
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Discount code</td>
-                                        @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->discount_code}}</td>
-                                        @endforeach
+                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3"></td>
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
+                            <br>
+                            <span>@include('misc.required') <strong>Note:</strong> Minimum 1 quotation received, in case of Branded item</span>
                         </div>
                     </section>
                 </div>

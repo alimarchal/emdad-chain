@@ -122,7 +122,7 @@
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">Category</td>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3">Main Categories</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">
                                                   {{$package->category}}
@@ -136,13 +136,13 @@
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">EmdadTools</td>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3">Emdad Tools App</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->emdad_tools}}</td>
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Super Admin (CEO role)</td>
+                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Main User (Admin)</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->super_admin_count}}</td>
                                         @endforeach
@@ -179,10 +179,10 @@
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Discount code</td>
-                                        @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->discount_code}}</td>
-                                        @endforeach
+                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">You can use a discount code if found</td>
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
+                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
                                     </tr>
                                     </tbody>
                                 </table>

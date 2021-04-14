@@ -1,8 +1,8 @@
 @extends('shipterAr.layout')
-@section('title','من إمداد')
+@section('title','ما هي إمداد')
 @section('custom-header')
     <style>
-        h2:before {
+        #about-h2:before {
             right: 0;
         }
     </style>
@@ -24,7 +24,7 @@
                         <div class="about-icon">
                             <i class="fi flaticon-travel"></i>
                         </div>
-                        <h2>من إمداد؟</h2>
+                        <h2 id="about-h2">من إمداد؟</h2>
                         <p>منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين،</p>
                         <p> بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</p>
                         <p><strong>رؤيتنا لمستقبلنا:</strong> أضخم منصة إلكترونية موثوقة تقدم خدمات سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم أسطول لوجستي بأفضل معايير الجودة العالمية.</p>
@@ -61,7 +61,7 @@
                             </i>
                         </div>
                         <div class="section-content">
-                            <span>Provides safe payments</span>
+                            <span>إمداد تقدم دفعاً آمناً</span>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                             </i>
                         </div>
                         <div class="section-content">
-                            <span>Assures an organised and fast process</span>
+                            <span>تضمن لكم عمليات سريعة ومنظمة</span>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                             </i>
                         </div>
                         <div class="section-content">
-                            <span>Offers  the lowest costs</span>
+                            <span>توفر لكم أقل الأسعار</span>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                             </i>
                         </div>
                         <div class="section-content">
-                            <span>Removes the logistical obstacles</span>
+                            <span>إزالة المعوقات اللوجستية</span>
                         </div>
                     </div>
                 </div>

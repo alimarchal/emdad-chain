@@ -88,7 +88,7 @@
 
     <script>
     $("#sel_1").select2ToTree({
-        maximumSelectionLength: 2
+        maximumSelectionLength: 3
     });
     </script>
 
@@ -96,7 +96,7 @@
 
     <script>
     $("#sel_1").select2ToTree({
-        maximumSelectionLength: 3
+        maximumSelectionLength: 5
     });
     </script>
 

@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="col-xl-12 slide-caption">
                             <h3 class="text-white">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
-                                , selling, supplying and warehousing process. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
+                                , selling, supplying and warehousing processes. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
                             <div class="btns">
                                 <div class="btn-style"><a href="{{route('english.about')}}">About us</a></div>
                             </div>
@@ -121,7 +121,7 @@
                         <div class="col-lg-12 col-md-6 col-sm-12">
                             <div class="feature-wrap">
                                 <div class="features-icon">
-                                    <i><img src="{{url('Shipter/assets/images/icon/1.png')}}" alt="" style="width: 40px;"></i>
+                                    <i><img src="{{url('Shipter/assets/images/icon/3.png')}}" alt="" style="width: 40px;"></i>
                                 </div>
                                 <div class="features-text">
                                     <h3>Saving Time and Effort</h3>
@@ -257,7 +257,7 @@
                                         <g transform="">
                                             <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path>
                                                 <g fill="#eb8e23"><path d="M154.8,6.88c-3.80281,0 -6.88,3.07719 -6.88,6.88c0,1.00781 0.25531,1.935 0.645,2.795l-27.52,38.485c-0.215,-0.01344 -0.43,0 -0.645,0c-1.37062,0 -2.6875,0.37625 -3.7625,1.075l-23.7575,-11.825c-0.22844,-3.60125 -3.225,-6.45 -6.88,-6.45c-3.80281,0 -6.88,3.07719 -6.88,6.88c0,0.36281 0.05375,0.72563 0.1075,1.075l-25.155,19.995c-0.76594,-0.29562 -1.59906,-0.43 -2.4725,-0.43c-3.44,0 -6.26187,2.51281 -6.7725,5.805l-23.435,9.46c-1.16906,-0.91375 -2.60687,-1.505 -4.1925,-1.505c-3.80281,0 -6.88,3.07719 -6.88,6.88c0,3.80281 3.07719,6.88 6.88,6.88c3.46688,0 6.30219,-2.56656 6.7725,-5.9125l23.435,-9.3525c1.16906,0.91375 2.60688,1.505 4.1925,1.505c3.80281,0 6.88,-3.07719 6.88,-6.88c0,-0.36281 -0.05375,-0.72562 -0.1075,-1.075l25.155,-19.995c0.76594,0.29563 1.59906,0.43 2.4725,0.43c1.37063,0 2.6875,-0.37625 3.7625,-1.075l23.7575,11.825c0.22844,3.60125 3.225,6.45 6.88,6.45c3.80281,0 6.88,-3.07719 6.88,-6.88c0,-1.00781 -0.25531,-1.935 -0.645,-2.795l27.52,-38.485c0.215,0.01344 0.43,0 0.645,0c3.80281,0 6.88,-3.07719 6.88,-6.88c0,-3.80281 -3.07719,-6.88 -6.88,-6.88zM141.04,51.6v120.4h27.52v-120.4zM147.92,58.48h13.76v106.64h-13.76zM72.24,82.56v89.44h27.52v-89.44zM79.12,89.44h13.76v75.68h-13.76zM106.64,99.76v72.24h27.52v-72.24zM113.52,106.64h13.76v58.48h-13.76zM37.84,110.08v61.92h27.52v-61.92zM44.72,116.96h13.76v48.16h-13.76zM3.44,123.84v48.16h27.52v-48.16zM10.32,130.72h13.76v34.4h-13.76z"></path></g><path d="" fill="none"></path><path d="" fill="none"></path></g></g></svg>
-                                    Financial Department</h3>
+                                    Finance</h3>
                                 <p>Prevention of misappropriation of funds.</p>
                                 <a href="{{route('english.service')}}">See More...</a>
                             </div>
@@ -282,7 +282,7 @@
                                         block-size: 65px;">
                                         <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path>
                                             <g fill="#eb8e23"><path d="M92.77922,3.44c-0.31468,0.00885 -0.62665,0.06084 -0.92719,0.15453l-55.04,17.2c-1.43602,0.44979 -2.41308,1.78066 -2.41203,3.28547v127.28c-0.00062,1.57953 1.0744,2.95656 2.60687,3.33922l55.04,13.76c1.02781,0.25642 2.11645,0.02505 2.95114,-0.62721c0.83469,-0.65226 1.32235,-1.65269 1.32199,-2.71201v-158.24c0.0003,-0.93005 -0.37596,-1.8206 -1.04302,-2.46868c-0.66707,-0.64808 -1.56811,-0.99848 -2.49776,-0.97132zM89.44,11.56297v149.14953l-48.16,-12.04v-122.06625zM103.2,17.2v6.88h27.52v68.8h6.88v-72.24c-0.00019,-1.89978 -1.54022,-3.43981 -3.44,-3.44zM82.56,82.56c-1.89986,0 -3.44,2.31021 -3.44,5.16c0,2.84979 1.54014,5.16 3.44,5.16c1.89986,0 3.44,-2.31021 3.44,-5.16c0,-2.84979 -1.54014,-5.16 -3.44,-5.16zM106.64,99.76c-1.89978,0.00019 -3.43981,1.54022 -3.44,3.44v48.16c0.00019,1.89978 1.54022,3.43981 3.44,3.44h55.04c1.89978,-0.00019 3.43981,-1.54022 3.44,-3.44v-48.16c-0.00019,-1.89978 -1.54022,-3.43981 -3.44,-3.44zM110.08,106.64h48.16v41.28h-48.16zM127.28,113.52c-1.24059,-0.01754 -2.39452,0.63425 -3.01993,1.7058c-0.62541,1.07155 -0.62541,2.39684 0,3.46839c0.62541,1.07155 1.77935,1.72335 3.01993,1.7058h13.76c1.24059,0.01754 2.39452,-0.63425 3.01993,-1.7058c0.62541,-1.07155 0.62541,-2.39684 0,-3.46839c-0.62541,-1.07155 -1.77935,-1.72335 -3.01993,-1.7058z"></path></g></g></svg>
-                                    Logistics Department</h3>
+                                    Storage</h3>
                                 <p>A continuous stock of the required items.</p>
                                 <a href="{{route('english.service')}}">See More...</a>
                             </div>

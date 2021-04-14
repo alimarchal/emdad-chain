@@ -20,11 +20,14 @@ class VehicleController extends Controller
             $vehicles = Vehicle::all();
         }
         else
-            {
-                $vehicles = Vehicle::where('supplier_business_id', auth()->user()->business_id)->get();
-            }
+        {
+            //Checking vehicles count for related packages
+            $vehiclesCount = Vehicle::where([['supplier_business_id', \auth()->user()->business_id]])->count();
 
-        return view('vehicle.index', compact('vehicles'));
+            $vehicles = Vehicle::where('supplier_business_id', auth()->user()->business_id)->get();
+        }
+
+        return view('vehicle.index', compact('vehicles', 'vehiclesCount'));
     }
 
     /**
@@ -34,7 +37,22 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        return view('vehicle.create');
+        //Checking vehicles count for related packages
+        $vehiclesCount = Vehicle::where([['supplier_business_id', \auth()->user()->business_id]])->count();
+
+        if (\auth()->user()->business_package->package_id == 5 && $vehiclesCount == 2 )
+        {
+            session()->flash('message', 'Add Vehicles limit reached');
+            return redirect()->back();
+        }
+
+        elseif (\auth()->user()->business_package->package_id == 6 && $vehiclesCount == 20 )
+        {
+            session()->flash('message', 'Add Vehicles limit reached');
+            return redirect()->back();
+        }
+
+        return view('vehicle.create', compact('vehiclesCount'));
     }
 
     /**
