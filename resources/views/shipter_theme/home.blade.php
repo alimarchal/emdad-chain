@@ -78,7 +78,8 @@
         <div class="container">
             <div class="section-title text-center">
                 <span>We Provide the Best</span>
-                <h2>Emdad Benefits</h2>
+                <h2 style="margin-bottom: 0px">Emdad Benefits</h2>
+                <p style="padding-top: 15px; padding-bottom: 15px;color: red; font-weight: bold;font-size: 24px;">Ramadan Offer: subscribe now and get 50% off your first subscription price.</p>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6">

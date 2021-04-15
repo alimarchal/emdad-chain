@@ -82,12 +82,12 @@
                     <div class="footer-widget instagram">
                         <h3>Our Categories</h3>
                         <ul class="d-flex">
-                            <li><a href="#"><img src="{{url('Shipter/assets/images/footerimages/1.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{url('Shipter/assets/images/footerimages/2.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{url('Shipter/assets/images/footerimages/3.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{url('Shipter/assets/images/footerimages/4.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{url('Shipter/assets/images/footerimages/5.jpg')}}" alt=""></a></li>
-                            <li><a href="#"><img src="{{url('Shipter/assets/images/footerimages/6.jpg')}}" alt=""></a></li>
+                            <li><a href="#"><img src="{{url('images/5.png')}}" alt=""></a></li>
+                            <li><a href="#"><img src="{{url('images/6.png')}}" alt=""></a></li>
+                            <li><a href="#"><img src="{{url('images/7.png')}}" alt=""></a></li>
+                            <li><a href="#"><img src="{{url('images/8.png')}}" alt=""></a></li>
+                            <li><a href="#"><img src="{{url('images/9.png')}}" alt=""></a></li>
+                            <li><a href="#"><img src="{{url('images/10.png')}}" alt=""></a></li>
                         </ul>
                     </div>
                 </div>

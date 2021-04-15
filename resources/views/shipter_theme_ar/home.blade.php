@@ -83,7 +83,10 @@
         <div class="container">
             <div class="section-title text-center">
                 <span>نقدم لكم الأفصل</span>
-                <h2>مميزات إمداد</h2>
+                <h2 style="margin-bottom: 0px">مميزات إمداد</h2>
+                <p style="padding-top: 15px; padding-bottom: 15px;color: red; font-weight: bold;font-size: 24px;">
+                    عرض رمضان: اشترك الآن واحصل على خصم ٥٠٪ من سعر الاشتراك الأول لمنشأتك
+                </p>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6">
