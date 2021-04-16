@@ -421,7 +421,8 @@
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
-                                        <h5 style="color: #eb8e23">(إذا بلغ المشتري حد خمسة ملايين ريال سعودي)</h5>
+                                        <h5 style="color: #eb8e23">هذا الاشتراك ( مجاني ) في حال كانت قيمة المشتريات الشهرية ٥ ميلون ريال وأعلى.
+                                        </h5>
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">

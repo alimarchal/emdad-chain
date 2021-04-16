@@ -52,7 +52,7 @@
 @slot('subcopy')
 @lang(
     "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser:',
+    'into your web browser: إذا واجهت مشكلة في الضغط على زر التفعيل قم بنسخ الرابط أدناه وألصقه في خانة البحث',
     [
         'actionText' => $actionText,
     ]

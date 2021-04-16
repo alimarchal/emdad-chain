@@ -31,7 +31,10 @@
                             <li><a href="{{route('arabic.index')}}">الرئيسية</a></li>
                             <li><a href="{{route('arabic.about')}}">من إمداد</a></li>
                             <li><a href="{{route('arabic.service')}}">ماذا تقدم</a></li>
-                            <li><a href="{{route('arabic.team')}}">الفريق</a></li>
+                            <li><a href="{{route('arabic.team')}}">
+                                    فريق إمداد
+                                </a>
+                            </li>
                             <li><a href="{{route('arabic.contact')}}">دعمكم هنا </a></li>
                             <li><a href="{{route('arabic.survey')}}">الاستبيان </a></li>
                         </ul>
@@ -65,7 +68,10 @@
             <div class="footer-bottom-content">
                 <div class="row">
                     <div class="col-12">
-                        &copy; حقوق الطبع والنشر {{date('Y')}} - <strong><span>شركة إمداد</span></strong> ۔ جميع الحقوق محفوظة ۔ مدعوم من  <strong><span>ویب سوفت </span></strong>
+                        &copy; حقوق الطبع والنشر {{date('Y')}} - <strong><span>
+                                شركة منصة الإمداد التقنية
+
+                            </span></strong> ۔ جميع الحقوق محفوظة ۔ مدعوم من  <strong><span>ویب سوفت </span></strong>
                     </div>
                 </div>
             </div>

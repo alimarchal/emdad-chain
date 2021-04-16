@@ -13,13 +13,31 @@
     </div>
     <p class="m-2 font-bold">Welcome {{ config('app.name', 'Laravel') }} as our prospective alliance</p>
     <p class="font-bold m-2 text-justify">Thank you for choosing us to share our experience and expertise in supply chain management platform.</p>
+    <p class="font-bold m-2 text-justify">
+        شريكنا العزيز، نرحب بك في منصة إمداد
+
+    </p>
+    <p class="font-bold m-2 text-justify">
+        نشكر لك اختيارنا لنشاركك خبرتنا في مجال إدارة  سلاسل الإمداد.
+    </p>
     <p class="text-blue-900 font-bold m-2 text-justify">At the moment your application is under review. You will receive a reply from us.</p>
+    <p class="text-blue-900 font-bold m-2 text-justify">
+        حتى اللحظة، لا يزال طلبك تحت المراجعة وستتلقى رداً منا فور انتهائه.
+
+    </p>
     <p class="m-2">Hopefully, soon we will be sharing with you the power of our platform which could;</p>
     <ol class="list-decimal ml-12 text-indigo-900 font-bold">
         <li>Bring you more business volume.</li>
         <li>Streamline your suppliers.</li>
         <li>Bring down cost of production and time.</li>
         <li>Help to solve the bottlenecks involved in the supply chain.</li>
+    </ol>
+
+    <ol class="list-decimal ml-12 text-indigo-900 font-bold">
+        <li> استقطاب المزيد من.</li>
+        <li> تواصل انسيابي مع المورّدين.</li>
+        <li>تقليل التكاليف الانتاجية والوقت المهدر.</li>
+        <li>مساعدتك في حل الأزمات المتعلقة بسلاسل الإمداد.</li>
     </ol>
 </div>
 
