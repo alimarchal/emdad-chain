@@ -41,6 +41,12 @@ return [
             'provider' => 'users',
         ],
 
+        'seller' => [
+            'redirectTo' => 'seller-dashboard',
+            'driver' => 'session',
+            'provider' => 'sellers',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -71,10 +77,11 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+         'sellers' => [
+             'driver' => 'database',
+             'model' => App\Models\Seller::class,
+             'table' => 'sellers',
+         ],
     ],
 
     /*

@@ -213,7 +213,7 @@
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
+                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
                         <div class="social-1st">
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
