@@ -8,8 +8,8 @@
         <li class="{{(request()->routeIs('arabic.survey') || request()->routeIs('arabic.buyerSurvey')|| request()->routeIs('arabic.supplierSurvey')?'active':'')}}">
             <a href="{{route('arabic.survey')}}">الاستبيان</a>
             <ul class="submenu">
-                <li class="{{(request()->routeIs('arabic.buyerSurvey')?'active':'')}}"><a href="{{route('arabic.buyerSurvey')}}">للمشترين</a></li>
-                <li class="{{(request()->routeIs('arabic.supplierSurvey')?'active':'')}}"><a href="{{route('arabic.supplierSurvey')}}">للموردين</a></li>
+                <li class="{{(request()->routeIs('arabic.buyerSurvey')?'active':'')}}"><a href="{{route('arabic.buyerSurvey')}}">للمشتري</a></li>
+                <li class="{{(request()->routeIs('arabic.supplierSurvey')?'active':'')}}"><a href="{{route('arabic.supplierSurvey')}}">للمورّد</a></li>
             </ul>
         </li>
         <li><a href="javascript:void(0)">مركز التدريب</a></li>

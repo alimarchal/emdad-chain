@@ -23,6 +23,8 @@ use App\Http\Controllers\POInfoController;
 use App\Http\Controllers\PurchaseRequestFormController;
 use App\Http\Controllers\QouteController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SellerController;
+use App\Http\Controllers\SellerLoginController;
 use App\Http\Controllers\ShipmentCartController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ShipmentItemController;
@@ -322,3 +324,16 @@ Route::middleware(['auth:sanctum'])->get('sub-categories', [CategoryController::
 Route::get('/testOne', function () {
     return view('test');
 });
+
+####################### Sales routes ####################################
+Route::get('seller-register', [SellerController::class, 'register_view'])->name('sellerRegister');
+Route::post('seller-register', [SellerController::class, 'seller_create']);
+Route::get('ar-seller-register', [SellerController::class, 'register_arabic_view'])->name('sellerRegisterArabic');
+
+Route::get('seller-login', [SellerLoginController::class, 'login_view'])->name('sellerLogin');
+Route::post('seller-login', [SellerLoginController::class, 'login']);
+Route::get('ar-seller-login', [SellerLoginController::class, 'arabic_login_view'])->name('sellerLoginArabic');
+
+Route::get('seller-dashboard', [SellerController::class, 'dashboard'])->name('sellerDashboard')->middleware('seller');
+#################### END ##################################################
+
