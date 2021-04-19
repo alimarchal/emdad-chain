@@ -38,7 +38,7 @@
 
                 <div class="my-0 px-2 w-full overflow-hidden pb-2 sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <!-- Column Content -->
-                    <x-jet-label for="middle_initial" value="{{ __('Middle Initial') }}" />
+                    <x-jet-label for="middle_initial" value="{{ __('أول حرف من اسم الأب') }}" />
                     <x-jet-input id="middle_initial" class="block mt-2 w-full" type="text" maxlength="3" name="middle_initial" :value="old('middle_initial')" required autofocus autocomplete="middle_initial" />
                 </div>
 
@@ -60,7 +60,7 @@
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <!-- Column Content -->
                     <x-jet-label for="nid_exp_date" value="{{ __('تاريخ انتهاء الهوية الوطنية') }}" />
-                    <x-jet-input id="nid_exp_date" class="block mt-1 w-full" type="date" name="nid_exp_date" :value="old('nid_exp_date')" required min="{{date('Y-m-d')}}" />
+                    <x-jet-input id="nid_exp_date" id="datepicker" class="block mt-1 w-full" type="text" name="nid_exp_date" :value="old('nid_exp_date')" required min="{{date('Y-m-d')}}" />
                 </div>
 
             </div>

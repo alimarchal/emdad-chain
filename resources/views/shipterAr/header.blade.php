@@ -59,6 +59,7 @@
                             <div class="col-lg-6 col-md-6">
                                 <ul class="login-r">
                                     <li><a style="color: white;" href="{{route('login')}}">دخول</a></li>
+                                    <li><a style="color: white;" href="{{route('login')}}">دخول</a></li>
                                 </ul>
                             </div>
 

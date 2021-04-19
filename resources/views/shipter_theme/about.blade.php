@@ -19,12 +19,11 @@
                             <i class="fi flaticon-travel"></i>
                         </div>
                         <h2>What is Emdad Platform?</h2>
-                        <p>It is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing, selling, supplying and warehousing processes. Emdad can provide the lowest costs yet the best technical and logistical standards.</p>
-                        <span><strong>Our vision for the future:</strong> To become the largest, reliable online platform specialized in supply chains,
-                            to gain the biggest number of suppliers and the largest logistical fleet while assuring the best international quality standards.</span>
-
-                        <span><strong>Our Message for The Future:</strong> We are capable and even ready to endure all difficulties  in technology development and to keep up with the modern world in order to become the pioneer in innovation and development. And if we ever have the chance to serve in other planets, we would!</span>
-                        <span><strong>Our Goal:</strong> To remove all of the logestical obsticales and upgrade the service level of supply chain for all of Emdad's partners, and we will!</span>
+                        <p>Is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing, selling, supplying and warehousing process.</p>
+                        <p>Emdad can provide the lowest costs yet the best technical and logistical standards.</p>
+                        <span><strong>Our Vision:</strong> To become the largest, reliable online platform specialized in supply chains, to gain the biggest
+                            number of suppliers and the largest logistical fleet while assuring the best international quality standards.</span>
+                        <span><strong>Our Goal:</strong> To remove all of the logistical obstacles and upgrade the service level of supply chain for all of Emdad's partners, and we will!</span>
                     </div>
                     <div class="signature-section">
                         <div class="si-text">

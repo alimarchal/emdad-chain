@@ -79,7 +79,9 @@
             <div class="section-title text-center">
                 <span>We Provide the Best</span>
                 <h2 style="margin-bottom: 0px">Emdad Benefits</h2>
-                <p style="padding-top: 15px; padding-bottom: 15px;color: red; font-weight: bold;font-size: 24px;">Ramadan Offer: subscribe now and get 50% off your first subscription price.</p>
+                <p style="padding-top: 15px; padding-bottom: 15px;color: red; font-weight: bold;font-size: 24px;">
+                    Ramadan Offer: Subscribe now and get 50% off, on your subscription.
+                </p>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6">
@@ -92,7 +94,7 @@
                                 <div class="features-text">
                                     <h3>Smart Map</h3>
                                     <p>One of Emdad’s great features is the smart map which is considered the first in its field.
-                                        It allows the user to be connected to the right resource within one minute in more than 500 available categories.</p>
+                                        It allows the <u></u>ser to be connected to the right resource within one minute in more than 500 available categories.</p>
                                 </div>
                             </div>
                         </div>

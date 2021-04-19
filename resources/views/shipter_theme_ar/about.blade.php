@@ -42,8 +42,6 @@
                             </div>
                             <div class="col-md-6"><img src="{{url('Shipter/assets/images/about/ceo_sign.png')}}" style="width: 200px;" alt=""></div>
                         </div>
-
-
                     </div>
                 </div>
             </div>

@@ -46,9 +46,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcomeAr');
-});
+//Route::get('/', function () {
+//    return view('welcomeAr');
+//});
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [DashboardController::class, 'languageChange'])->name('languageChange');
 Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
@@ -98,7 +98,7 @@ Route::get('/en-buyer-package', [\App\Http\Controllers\WebsiteEnglishController:
 Route::get('/en-supplier-package', [\App\Http\Controllers\WebsiteEnglishController::class, 'supplierPackage'])->name('english.supplierPackage');
 
 ####################     WebsiteArabic          ###################
-Route::get('/arabic', [WebsiteArabicController::class, 'index'])->name('arabic.index');
+Route::get('/', [WebsiteArabicController::class, 'index'])->name('arabic.index');
 Route::get('/ar-about', [WebsiteArabicController::class, 'about'])->name('arabic.about');
 Route::get('/ar-service', [WebsiteArabicController::class, 'service'])->name('arabic.service');
 Route::get('/ar-team', [WebsiteArabicController::class, 'team'])->name('arabic.team');
@@ -108,15 +108,6 @@ Route::get('/ar-buyer-survey', [WebsiteArabicController::class, 'buyerSurvey'])-
 Route::get('/ar-supplier-survey', [WebsiteArabicController::class, 'supplierSurvey'])->name('arabic.supplierSurvey');
 Route::get('/ar-buyer-package', [WebsiteArabicController::class, 'buyerPackage'])->name('arabic.buyerPackage');
 Route::get('/ar-supplier-package', [WebsiteArabicController::class, 'supplierPackage'])->name('arabic.supplierPackage');
-
-
-
-
-
-
-
-
-
 
 ####################  END   ###################
 ####################  Website    ######################################

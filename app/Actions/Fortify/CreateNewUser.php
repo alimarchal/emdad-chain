@@ -21,6 +21,9 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
+        $time = strtotime($input['nid_exp_date']);
+        $newformat = date('Y-m-d',$time);
+        $input['nid_exp_date'] = $newformat;
         Validator::make($input, [
             'gender' => ['required', 'string', 'max:10'],
             'name' => ['required', 'string', 'max:55'],
