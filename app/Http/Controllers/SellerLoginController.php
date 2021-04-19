@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Seller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,26 @@ class SellerLoginController extends Controller
     protected function guard()
     {
         return Auth::guard('seller');
+    }
+
+    public function search_seller(Request $request)
+    {
+        $seller = Seller::where('seller_no', $request->referred_no)->first();
+//dd($seller->name);
+        if (!$seller)
+        {
+//            $data = array([
+//                'status' => 'error',
+//                'message' => 'No record found',
+//            ]);
+//            return response()->json( 'No record found');
+            return response()->json( ['status' => 0]);
+        }
+//        $data = array([
+//            'status' => 'success',
+//            'message' => 'Found: '.$seller->name,
+//        ]);
+        return response()->json(['data' => 'Reference Found: '.$seller->name]);
     }
 
     public function login_view()

@@ -1,7 +1,7 @@
 @extends('sales.english.layout.app')
 
 @section('body')
-<h2 class="font-semibold text-xl text-gray-800 leading-tight" name="header">
+<h2 class="font-semibold text-center text-xl text-gray-800 leading-tight" name="header" style="padding-top: 20px;">
 {{--                {{ __('Dashboard') }} - Welcome {{ auth()->user()->gender == "0" ?'Mr. ' . Auth::user()->name: auth()->user()->gender == "1" ? 'Mrs.'. Auth::user()->name}}--}}
                 {{ __('Dashboard') }} - Welcome {{auth()->guard('seller')->user()->name}}
 
@@ -17,25 +17,27 @@
 
                 <div class="mx-5">
                     <h4 class="text-2xl font-semibold text-gray-700"><a href="{{route('users.index')}}"></a></h4>
-                    <div class="text-gray-500">Total User</div>
+                    <div class="text-gray-500"><a href="{{route('sellerReference')}}">Total User References</a></div>
+                    @php $sellersCount = \App\Models\Seller::where('referred_no', auth()->guard('seller')->user()->seller_no)->count(); @endphp
+                    <div class="text-gray-500">{{$sellersCount}}</div>
                 </div>
             </div>
         </div>
 
 
 
-        <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
-            <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
-                <div class="p-3 rounded-full bg-orange-600 bg-opacity-75">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                </div>
+{{--        <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 sm:mt-0">--}}
+{{--            <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">--}}
+{{--                <div class="p-3 rounded-full bg-orange-600 bg-opacity-75">--}}
+{{--                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>--}}
+{{--                </div>--}}
 
-                <div class="mx-5">
-                    <h4 class="text-2xl font-semibold text-gray-700"></h4>
-                    <div class="text-gray-500">Total Business</div>
-                </div>
-            </div>
-        </div>
+{{--                <div class="mx-5">--}}
+{{--                    <h4 class="text-2xl font-semibold text-gray-700"></h4>--}}
+{{--                    <div class="text-gray-500">Total Businesses references</div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
 
         <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
@@ -46,7 +48,7 @@
 
                 <div class="mx-5">
                     <h4 class="text-2xl font-semibold text-gray-700">  </h4>
-                    <div class="text-gray-500">Received RFQ</div>
+                    <div class="text-gray-500"><a href="{{route('sellerPayment')}}">Payments</a></div>
                 </div>
             </div>
         </div>
