@@ -1,3 +1,6 @@
+{{--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">--}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
@@ -16,6 +19,12 @@
             @csrf
             <p class="text-center font-bold text-2xl">Registration</p>
 
+            <div class="mt-2">
+                <x-jet-label for="referred_no" value="{{ __('Referred Seller #') }}"  class="mb-2"  />
+                <x-jet-input id="referred_no" class="block mt-1 w-full" type="tel" name="referred_no" :value="old('referred_no')" autofocus  />
+                <x-jet-label for="referred_no_response_found" id="referred_no_response" value=""  class="mb-2" style="color: green" />
+                <x-jet-label for="referred_no_response_not_found" id="referred_no_response_not_found" value="" class="mb-2 text-danger" style="color: red" />
+            </div>
 
             <div class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-1 lg:-mx-3 xl:-mx-2">
 
@@ -58,10 +67,10 @@
                     </select>
                 </div>
 
-                <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <x-jet-label for="referred_no" value="{{ __('Referred Seller #') }}" />
-                    <x-jet-input id="referred_no" class="block mt-1 w-full" type="text" maxlength="10" name="referred_no" :value="old('referred_no')"/>
-                </div>
+{{--                <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">--}}
+{{--                    <x-jet-label for="referred_no" value="{{ __('Referred Seller #') }}" />--}}
+{{--                    <x-jet-input id="referred_no" class="block mt-1 w-full" type="text" maxlength="10" name="referred_no" :value="old('referred_no')"/>--}}
+{{--                </div>--}}
 
             </div>
 
@@ -132,3 +141,29 @@
 <div class="flex items-center justify-end mt-4">
 
 </div>
+
+<script type="text/javascript">
+
+    $('#referred_no').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url:"{{ route('search_seller') }}",
+            data:{'referred_no':$value},
+            // success:function(data){
+            //         $('#referred_no_response').html(data.message);
+            // },
+            success: function (response) {
+                if(response.status === 0){
+                    // $('#referred_no_response').hide();
+                    $('#referred_no_response_not_found').html('Not record found');
+                }
+                else {
+                    $('#referred_no_response_not_found').hide();
+                    $('#referred_no_response').html(response.data);
+                }
+            }
+        });
+    })
+
+</script>

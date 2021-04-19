@@ -334,6 +334,14 @@ Route::get('seller-login', [SellerLoginController::class, 'login_view'])->name('
 Route::post('seller-login', [SellerLoginController::class, 'login']);
 Route::get('ar-seller-login', [SellerLoginController::class, 'arabic_login_view'])->name('sellerLoginArabic');
 
-Route::get('seller-dashboard', [SellerController::class, 'dashboard'])->name('sellerDashboard')->middleware('seller');
+Route::get('/search', [SellerLoginController::class, 'search_seller'])->name('search_seller');
+
+Route::middleware(['seller'])->group(function () {
+    Route::get('seller-dashboard', [SellerController::class, 'dashboard'])->name('sellerDashboard');
+    Route::get('seller-references', [SellerController::class, 'reference'])->name('sellerReference');
+    Route::get('seller-payments', [SellerController::class, 'payment'])->name('sellerPayment');
+
+//    Route::post('sellerLanguageChange', [SellerController::class, 'languageChange'])->name('sellerLanguageChange');
+});
 #################### END ##################################################
 

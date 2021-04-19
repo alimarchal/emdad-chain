@@ -53,7 +53,7 @@ class SellerController extends Controller
                 ]);
 
         Seller::where('id', $seller->id)->update([
-            'seller_no' => 'SR00'.$seller->id
+            'seller_no' => 'IRE'.$seller->id
         ]);
 
         if ($request->referred_no != null || $request->referred_no != ' ')
@@ -71,4 +71,27 @@ class SellerController extends Controller
     {
         return view('sales.english.dashborad');
     }
+
+    public function reference()
+    {
+        $sellers = Seller::where('referred_no', \auth()->guard('seller')->user()->seller_no)->where('id', '!=' , \auth()->guard('seller')->user()->id)->get();
+
+        return view('sales.english.reference', compact('sellers'));
+    }
+
+    public function payment()
+    {
+        $sellerCommissions = SellerCommission::where('seller_no', \auth()->guard('seller')->user()->seller_no)->get();
+
+        return view('sales.english.payment', compact('sellerCommissions'));
+    }
+
+//    public function languageChange(Request $request)
+//    {
+//        Seller::where('id', \auth()->guard('seller')->user()->id)->update([
+//            'rtl' => $request->rtl_value,
+//        ]);
+//
+//        return response()->json(['success']);
+//    }
 }
