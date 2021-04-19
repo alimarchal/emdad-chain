@@ -11,9 +11,9 @@ class SellerCommission extends Model
 
     protected $fillable = ['seller_no', 'user_id', 'payment_status'];
 
-    public function seller()
+    public function sellerReference()
     {
-        return $this->belongsTo(Seller::class);
+        return $this->belongsTo(Seller::class, 'user_id','id');
     }
 
 }
