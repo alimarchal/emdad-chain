@@ -300,15 +300,6 @@ Route::middleware(['auth:sanctum'])->post('business-package-store/{id}', [Busine
 
 #################### END ##############################################################
 
-//Route::middleware(['auth:sanctum'])->get('select-category', function (){
-//    $parentCategories = \App\Models\Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-//    return view('category.show.categories', compact('parentCategories'));
-//})->name('cat');
-//Route::middleware(['auth:sanctum'])->get('sub-categories', function (){
-//    $category = \App\Models\Category::where('parent_id', 0)->orderBy('name', 'asc')->get();;
-//    return view('category.show.subCategories', compact('category'));
-//})->name('cats');
-
 Route::middleware(['auth:sanctum'])->get('select-category', [CategoryController::class, 'parentCategories'])->name('parentCategories');
 Route::middleware(['auth:sanctum'])->get('sub-categories', [CategoryController::class, 'subCategories'])->name('subCategories');
 

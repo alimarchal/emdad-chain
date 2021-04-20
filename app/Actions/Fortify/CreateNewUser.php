@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\SellerCommission;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -48,6 +49,15 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'usertype' => 'CEO',
         ]);
+
+        if (isset($input['seller_no']))
+        {
+            SellerCommission::create([
+                'seller_no' => $input['seller_no'],
+                'user_id' => $user->id,
+            ]);
+        }
+
         $role = Role::findByName('CEO');
         $user->assignRole($role);
         return $user;

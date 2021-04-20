@@ -14,8 +14,11 @@
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
+
             <p class="text-center font-bold text-2xl">Step # 1: Registration</p>
 
+
+            <livewire:reference />
 
             <div class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-1 lg:-mx-3 xl:-mx-2">
 
