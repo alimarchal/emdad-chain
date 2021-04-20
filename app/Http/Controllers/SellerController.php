@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Fortify\PasswordValidationRules;
+use App\Models\Bank;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Fortify;
@@ -18,12 +19,16 @@ class SellerController extends Controller
 
     public function register_view()
     {
-        return view('sales.english.register');
+        $banks = Bank::all();
+
+        return view('sales.english.register', compact('banks'));
     }
 
     public function register_arabic_view()
     {
-        return view('sales.arabic.register');
+        $banks = Bank::all();
+
+        return view('sales.arabic.register',compact('banks'));
     }
 
     public function seller_create(Request $request)
@@ -34,6 +39,8 @@ class SellerController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'gender' => ['required'],
+            'bank' => ['required'],
+            'iban' => ['required'],
             'nid_num' => ['required', 'string', 'max:10'],
             'referred_no' => ['string', 'nullable'],
             'type' => ['required'],
@@ -46,6 +53,8 @@ class SellerController extends Controller
                     'email' => $request['email'],
                     'password' => Hash::make($request['password']),
                     'gender' => $request['gender'],
+                    'bank' => $request['bank'],
+                    'iban' => $request['iban'],
                     'nid_num' => $request['nid_num'],
                     'referred_no' => $request['referred_no'],
                     'type' => $request['type'],
@@ -56,15 +65,27 @@ class SellerController extends Controller
             'seller_no' => 'IRE'.$seller->id
         ]);
 
-        if ($request->referred_no != null || $request->referred_no != ' ')
+        if ($request->referred_no == null || $request->referred_no == ' ')
         {
-            SellerCommission::create([
-                'seller_no' => $request->referred_no,
-                'user_id' => $seller->id,
-            ]);
+            session()->flash('status', 'Registered Successfully, Login to start');
+            return redirect()->route('sellerLogin');
+        }
+        else
+        {
+            $seller = Seller::where('seller_no', $request->referred_no)->first();
+
+            if (isset($seller))
+            {
+                SellerCommission::create([
+                    'seller_no' => $request->referred_no,
+                    'user_id' => $seller->id,
+                ]);
+            }
         }
 
-        return redirect()->route('sellerDashboard');
+//        return redirect()->route('sellerDashboard');
+        session()->flash('status', 'Registered Successfully, Login to start');
+        return redirect()->route('sellerLogin');
     }
 
     public function dashboard()

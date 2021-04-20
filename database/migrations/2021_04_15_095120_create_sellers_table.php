@@ -20,6 +20,8 @@ class CreateSellersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('gender');
+            $table->bigInteger('bank');
+            $table->string('iban');
             $table->string('nid_num');
             $table->string('referred_no')->nullable();
             $table->bigInteger('type');
