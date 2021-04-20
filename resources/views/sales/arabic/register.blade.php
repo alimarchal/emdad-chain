@@ -18,6 +18,15 @@
             @csrf
             <p class="text-center font-bold text-2xl">الخطوة الأولى: التسجيل</p>
 
+            <div class="mt-2">
+                <x-jet-label for="referred_no" value="{{ __('المرجع(لو اي)') }}"  class="mb-2"  />
+                <x-jet-input id="referred_no" class="block mt-1 w-full" type="tel" name="referred_no" :value="old('referred_no')" autofocus  />
+
+                <x-jet-label for="referred_no_response_found" id="referred_no_response" value=""  class="mb-2" style="color: green" />
+                <x-jet-label for="referred_no_response_not_found" id="referred_no_response_not_found" value="" class="mb-2 text-danger" style="color: red" />
+            </div>
+
+
             <div class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-1 lg:-mx-3 xl:-mx-2">
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
@@ -28,7 +37,7 @@
 
                 <div class="my-0 px-2 w-full overflow-hidden pb-2 sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <!-- Column Content -->
-                    <x-jet-label for="lastName" value="{{ __('Last Name') }}" />
+                    <x-jet-label for="lastName" value="{{ __('العائلة') }}" />
                     <x-jet-input id="lastName" class="block mt-2 w-full" type="text" name="lastName" :value="old('lastName')" required autofocus autocomplete="lastName" />
                 </div>
 
@@ -37,11 +46,12 @@
             <div class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-1 lg:-mx-3 xl:-mx-2">
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <x-jet-label for="gender" value="{{ __('Gender') }}" class="mb-1" />&nbsp;
-                    <select name="gender" id="gender" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name" >
+                    <x-jet-label for="gender" value="{{ __('سيد/آنسة/سيدة') }}" class="mb-1" />
+                    <select name="gender" id="gender" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="gender">
                         <option disabled selected value="">اختر</option>
-                        <option {{ old('gender') == 0 ? "selected" : "" }} value="0">Male</option>
-                        <option {{ old('gender') == 1 ? "selected" : "" }} value="1">Female</option>
+                        <option {{ old('gender') == 0 ? 'selected' : '' }} value="0">سيد</option>
+                        <option {{ old('gender') == 1 ? 'selected' : '' }} value="1">آنسة</option>
+                        <option {{ old('gender') == 2 ? 'selected' : '' }} value="1">سيدة</option>
                     </select>
                 </div>
 
@@ -51,7 +61,7 @@
                 </div>
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <x-jet-label for="type" value="{{ __('Employee') }}" class="mb-1" />
+                    <x-jet-label for="type" value="{{ __('موظف') }}" class="mb-1" />
                     <select name="type" id="type" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="type" >
                         <option disabled selected value="">اختر</option>
                         <option {{ old('type') == 0 ? "selected" : "" }} value="0">لا</option>
@@ -60,10 +70,20 @@
                 </div>
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <x-jet-label for="referred_no" value="{{ __('Referred Seller #') }}" />
-                    <x-jet-input id="referred_no" class="block mt-1 w-full" type="text" maxlength="10" name="referred_no" :value="old('referred_no')"/>
+                    <x-jet-label for="bank" value="{{ __('بنك') }}" class="mb-1" />
+                    <select name="bank" id="bank" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="bank">
+                        <option disabled selected value="">اختر</option>
+                        @foreach($banks as $bank)
+                            <option {{ old('bank') == $bank->id ? 'selected' : '' }} value="{{$bank->id}}">{{$bank->ar_name}}</option>
+                        @endforeach
+                    </select>
                 </div>
 
+            </div>
+
+            <div class="mt-2">
+                <x-jet-label for="iban" value="{{ __('IBAN') }}" />
+                <x-jet-input id="iban" class="block mt-1 w-full" type="text" maxlength="24" name="iban" :value="old('iban')" required />
             </div>
 
 
@@ -104,3 +124,30 @@
 <div class="flex items-center justify-end mt-4">
 
 </div>
+
+
+<script type="text/javascript">
+
+    $('#referred_no').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url:"{{ route('search_seller') }}",
+            data:{'referred_no':$value},
+            // success:function(data){
+            //         $('#referred_no_response').html(data.message);
+            // },
+            success: function (response) {
+                if(response.status === 0){
+                    $('#referred_no_response').empty();
+                    $('#referred_no_response_not_found').html('Not record found');
+                }
+                else {
+                    $('#referred_no_response_not_found').empty();
+                    $('#referred_no_response').html(response.data);
+                }
+            }
+        });
+    })
+
+</script>

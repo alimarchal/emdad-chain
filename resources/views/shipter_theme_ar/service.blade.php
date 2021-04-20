@@ -216,7 +216,7 @@
                                     </svg>
                                     القسم اللوجستي</h3>
                                 <p>تحكم أكبر بإدارة المخزون. تتبع دقيق للطلبات.</p>
-                                <a href="{{route('english.service')}}">المزيد...</a>
+                                <a href="{{route('arabic.service')}}">المزيد...</a>
                             </div>
                         </div>
                     </div>
@@ -243,7 +243,7 @@
                                     </svg>
                                     المبيعات</h3>
                                 <p>سهولة زيادة متوسط نسبة المبيعات.</p>
-                                <a href="{{route('english.service')}}">المزيد...</a>
+                                <a href="{{route('arabic.service')}}">المزيد...</a>
                             </div>
                         </div>
                     </div>
@@ -270,7 +270,7 @@
                                     </svg>
                                     المالية</h3>
                                 <p>منع الاختلاسات المالية.</p>
-                                <a href="{{route('english.service')}}">المزيد...</a>
+                                <a href="{{route('arabic.service')}}">المزيد...</a>
                             </div>
                         </div>
                     </div>
@@ -296,7 +296,7 @@
                                     </svg>
                                     التخزين</h3>
                                 <p>توفير مستمر للمنتجات المطلوبة.</p>
-                                <a href="{{route('english.service')}}">المزيد...</a>
+                                <a href="{{route('arabic.service')}}">المزيد...</a>
                             </div>
                         </div>
                     </div>
@@ -322,7 +322,7 @@
                                     </svg>
                                     المشتريات</h3>
                                 <p>إمكانية اعتماد أوامر الشراء إلكترونيا.</p>
-                                <a href="{{route('english.service')}}">المزيد...</a>
+                                <a href="{{route('arabic.service')}}">المزيد...</a>
                             </div>
                         </div>
                     </div>
