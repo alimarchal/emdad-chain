@@ -9,7 +9,7 @@ class Seller extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['seller_no', 'name', 'email', 'password','gender','nid_num','referred_no','type','mobile_number','status','rtl' ];
+    protected $fillable = ['seller_no', 'name', 'email', 'password','gender','bank','iban','nid_num','referred_no','type','mobile_number','status','rtl' ];
 
     /**
      * The attributes that should be hidden for arrays.

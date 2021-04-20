@@ -1,3 +1,19 @@
+<style>
+    #datepicker {
+        width: 100%;
+        padding: 10px;
+        cursor: default;
+        /*text-transform: uppercase;*/
+        font-size: 13px;
+        background: #FFFFFF;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        border: solid 1px #d2d6dc;
+        box-shadow: none;
+    }
+</style>
+
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
@@ -58,8 +74,11 @@
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <!-- Column Content -->
+{{--                    <x-jet-label for="nid_exp_date" value="{{ __('National ID Expiry Date') }}" />--}}
+{{--                    <x-jet-input id="nid_exp_date" class="block mt-1 w-full" type="date" name="nid_exp_date" :value="old('nid_exp_date')" required min="{{date('Y-m-d')}}" />--}}
+
                     <x-jet-label for="nid_exp_date" value="{{ __('National ID Expiry Date') }}" />
-                    <x-jet-input id="nid_exp_date" class="block mt-1 w-full" type="date" name="nid_exp_date" :value="old('nid_exp_date')" required min="{{date('Y-m-d')}}" />
+                    <input type="text" id="datepicker" class="block mt-1 w-full" name="nid_exp_date" placeholder="Choose Date (mm/dd/yy)">
                 </div>
 
             </div>
@@ -128,3 +147,17 @@
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
+
+<script>
+    $(function() {
+        $( "#datepicker" ).datepicker({
+            dateFormat : 'mm/dd/yy',
+            changeMonth : true,
+            changeYear : true,
+            yearRange: '-100y:c+nn',
+            // maxDate: '-1d'
+            clear: true,
+        });
+    });
+
+</script>

@@ -31,7 +31,12 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
         <!-- Scripts -->
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
     </head>
     <body>

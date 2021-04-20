@@ -28,21 +28,12 @@ class SellerLoginController extends Controller
     public function search_seller(Request $request)
     {
         $seller = Seller::where('seller_no', $request->referred_no)->first();
-//dd($seller->name);
+
         if (!$seller)
         {
-//            $data = array([
-//                'status' => 'error',
-//                'message' => 'No record found',
-//            ]);
-//            return response()->json( 'No record found');
             return response()->json( ['status' => 0]);
         }
-//        $data = array([
-//            'status' => 'success',
-//            'message' => 'Found: '.$seller->name,
-//        ]);
-        return response()->json(['data' => 'Reference Found: '.$seller->name]);
+        return response()->json(['data' => 'Reference Verified: '.$seller->name]);
     }
 
     public function login_view()
@@ -61,7 +52,7 @@ class SellerLoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('seller')->attempt($credentials)) {
-            // validation successful
+            // validation successfull
             return redirect()->route('sellerDashboard');
         }
         else
