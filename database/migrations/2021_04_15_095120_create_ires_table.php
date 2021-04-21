@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSellersTable extends Migration
+class CreateIresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateSellersTable extends Migration
      */
     public function up()
     {
-        Schema::create('sellers', function (Blueprint $table) {
+        Schema::create('ires', function (Blueprint $table) {
             $table->id();
-            $table->string('seller_no')->unique()->nullable();
+            $table->string('ire_no')->unique()->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
@@ -40,6 +40,6 @@ class CreateSellersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sellers');
+        Schema::dropIfExists('ires');
     }
 }

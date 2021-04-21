@@ -34,7 +34,14 @@
             <p class="text-center font-bold text-2xl">Step # 1: Registration</p>
 
 
-            <livewire:reference />
+{{--            <livewire:reference />--}}
+            <div class="mt-2">
+                <x-jet-label for="referred_no" value="{{ __('Reference (If any)') }}"  class="mb-2"  />
+                <x-jet-input id="referred_no" class="block mt-1 w-full" type="tel" name="referred_no" :value="old('referred_no')" autofocus  />
+
+                <x-jet-label for="referred_no_response_found" id="referred_no_response" value=""  class="mb-2" style="color: green" />
+                <x-jet-label for="referred_no_response_not_found" id="referred_no_response_not_found" value="" class="mb-2 text-danger" style="color: red" />
+            </div>
 
             <div class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-1 lg:-mx-3 xl:-mx-2">
 
@@ -162,5 +169,24 @@
             clear: true,
         });
     });
+
+    $('#referred_no').on('keyup',function(){
+        $value=$(this).val();
+        $.ajax({
+            type : 'get',
+            url:"{{ route('search_ire') }}",
+            data:{'referred_no':$value},
+            success: function (response) {
+                if(response.status === 0){
+                    $('#referred_no_response').empty();
+                    $('#referred_no_response_not_found').html('Not record found');
+                }
+                else {
+                    $('#referred_no_response_not_found').empty();
+                    $('#referred_no_response').html(response.data);
+                }
+            }
+        });
+    })
 
 </script>

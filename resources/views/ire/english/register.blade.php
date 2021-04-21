@@ -12,10 +12,10 @@
         <x-jet-validation-errors class="mb-4" />
 
         <x-jet-button>
-            <a href="{{route('sellerRegisterArabic')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
+            <a href="{{route('ireRegisterArabic')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
         </x-jet-button>
 
-        <form method="POST" action="{{route('sellerRegister')}}">
+        <form method="POST" action="{{route('ireRegister')}}">
             @csrf
             <p class="text-center font-bold text-2xl">Registration</p>
 
@@ -139,7 +139,7 @@
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{route('sellerLogin')}}">
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{route('ireLogin')}}">
                             {{ __('Already registered?') }}
                         </a>
 
@@ -160,7 +160,7 @@
         $value=$(this).val();
         $.ajax({
             type : 'get',
-            url:"{{ route('search_seller') }}",
+            url:"{{ route('search_ire') }}",
             data:{'referred_no':$value},
             success: function (response) {
                 if(response.status === 0){

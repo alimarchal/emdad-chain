@@ -23,8 +23,8 @@ use App\Http\Controllers\POInfoController;
 use App\Http\Controllers\PurchaseRequestFormController;
 use App\Http\Controllers\QouteController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\SellerController;
-use App\Http\Controllers\SellerLoginController;
+use App\Http\Controllers\IreController;
+use App\Http\Controllers\IreLoginController;
 use App\Http\Controllers\ShipmentCartController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ShipmentItemController;
@@ -307,23 +307,31 @@ Route::get('/testOne', function () {
     return view('test');
 });
 
-####################### Sales routes ####################################
-Route::get('seller-register', [SellerController::class, 'register_view'])->name('sellerRegister');
-Route::post('seller-register', [SellerController::class, 'seller_create']);
-Route::get('ar-seller-register', [SellerController::class, 'register_arabic_view'])->name('sellerRegisterArabic');
+####################### IREs routes ####################################
+Route::middleware(['ireAuthentication'])->group(function () {
+Route::get('ire-register', [IreController::class, 'register_view'])->name('ireRegister');
+Route::post('ire-register', [IreController::class, 'ire_create']);
+Route::get('ar-ire-register', [IreController::class, 'register_arabic_view'])->name('ireRegisterArabic');
 
-Route::get('seller-login', [SellerLoginController::class, 'login_view'])->name('sellerLogin');
-Route::post('seller-login', [SellerLoginController::class, 'login']);
-Route::get('ar-seller-login', [SellerLoginController::class, 'arabic_login_view'])->name('sellerLoginArabic');
+Route::get('ire-login', [IreLoginController::class, 'login_view'])->name('ireLogin');
+Route::post('ire-login', [IreLoginController::class, 'login']);
+Route::get('ar-ire-login', [IreLoginController::class, 'arabic_login_view'])->name('ireLoginArabic');
+});
+Route::get('/search', [IreLoginController::class, 'search_ire'])->name('search_ire');
+Route::post('ireLanguageChange', [IreController::class, 'languageChange'])->name('ireLanguageChange');
 
-Route::get('/search', [SellerLoginController::class, 'search_seller'])->name('search_seller');
+Route::middleware(['ire'])->group(function () {
+#################### IREs English Routes ###########################
+    Route::get('ire-dashboard', [IreController::class, 'dashboard'])->name('ireDashboard');
+    Route::get('ire-references', [IreController::class, 'reference'])->name('ireReference');
+    Route::get('ire-incomplete-references', [IreController::class, 'incomplete_reference'])->name('ireIncompleteReference');
+    Route::get('ire-payments', [IreController::class, 'payment'])->name('irePayment');
 
-Route::middleware(['seller'])->group(function () {
-    Route::get('seller-dashboard', [SellerController::class, 'dashboard'])->name('sellerDashboard');
-    Route::get('seller-references', [SellerController::class, 'reference'])->name('sellerReference');
-    Route::get('seller-payments', [SellerController::class, 'payment'])->name('sellerPayment');
-
-//    Route::post('sellerLanguageChange', [SellerController::class, 'languageChange'])->name('sellerLanguageChange');
+#################### IREs Arabic Routes ###########################
+    Route::get('ar-ire-dashboard', [IreController::class, 'arabic_dashboard'])->name('ireArabicDashboard');
+    Route::get('ar-ire-references', [IreController::class, 'arabic_reference'])->name('ireArabicReference');
+    Route::get('ar-ire-incomplete-references', [IreController::class, 'arabic_incomplete_reference'])->name('ireArabicIncompleteReference');
+    Route::get('ar-ire-payments', [IreController::class, 'arabic_payment'])->name('ireArabicPayment');
 });
 #################### END ##################################################
 

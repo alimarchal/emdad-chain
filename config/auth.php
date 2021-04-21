@@ -41,10 +41,10 @@ return [
             'provider' => 'users',
         ],
 
-        'seller' => [
+        'ire' => [
             'redirectTo' => 'seller-dashboard',
             'driver' => 'session',
-            'provider' => 'sellers',
+            'provider' => 'ires',
         ],
 
         'api' => [
@@ -77,10 +77,10 @@ return [
             'model' => App\Models\User::class,
         ],
 
-         'sellers' => [
+         'ires' => [
              'driver' => 'database',
-             'model' => App\Models\Seller::class,
-             'table' => 'sellers',
+             'model' => App\Models\Ire::class,
+             'table' => 'ires',
          ],
     ],
 

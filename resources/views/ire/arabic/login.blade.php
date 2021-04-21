@@ -13,7 +13,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('sellerLogin') }}" style="direction: rtl">
+        <form method="POST" action="{{ route('ireLogin') }}" style="direction: rtl">
             @csrf
 
             <div>
@@ -49,7 +49,7 @@
             <div class="flex items-center mt-4" style="margin: auto;width: 50%; padding: 10px;">
                 <span class="ml-2 text-sm text-gray-600">{{ __('ألست عضواً؟') }}</span>
                 &nbsp;
-                <a class="underline text-sm text-blue-500 hover:text-gray-900" href="{{ route('sellerRegisterArabic') }}">
+                <a class="underline text-sm text-blue-500 hover:text-gray-900" href="{{ route('ireRegisterArabic') }}">
                     {{ __('تسجيل') }}
                 </a>
             </div>
