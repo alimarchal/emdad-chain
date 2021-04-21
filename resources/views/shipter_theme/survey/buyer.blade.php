@@ -1,6 +1,12 @@
 @extends('shipter.layout')
 @section('title','Buyer Survey')
 @section('custom-header')
+    <style>
+        .header-area.header-style-2 .slicknav_btn
+        {
+            margin-top: 0px!important;
+        }
+    </style>
 @endsection
 @section('custom-body-style')
 @endsection

@@ -4,17 +4,29 @@
     <style>
         .survey {
             background-color: black;
-            color: white; !important;
-            padding: 14px 25px; !important;
-            text-align: center; !important;
-            text-decoration: none; !important;
-            display: inline-block; !important;
+            color: white;
+        !important;
+            padding: 14px 25px;
+        !important;
+            text-align: center;
+        !important;
+            text-decoration: none;
+        !important;
+            display: inline-block;
+        !important;
         }
+
         .survey:hover {
             background-color: #fd7e14;
             color: white;
         }
+
+        .header-area.header-style-2 .slicknav_btn {
+            margin-top: 0px !important;
+        }
     </style>
+
+
 @endsection
 @section('custom-body-style')
     style="font-family: arabicFont;"
@@ -24,7 +36,7 @@
 @section('main')
     <!-- ======= Buttons ======= -->
     <section class="breadcrumbs" style="direction: rtl">
-        <div class="container" style="margin-top: 40px;" >
+        <div class="container" style="margin-top: 40px;">
             <div class="btns mx-auto" align="center">
                 <a class="btn-style survey col-lg-3 col-md-3" href="{{route('arabic.buyerSurvey')}}">استطلاع بياني للمشتري</a> &nbsp;
                 <a class="btn-style survey col-lg-3 col-md-6" href="{{route('arabic.supplierSurvey')}}">استطلاع بياني للمورد</a>

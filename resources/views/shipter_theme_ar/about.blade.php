@@ -5,6 +5,10 @@
         #about-h2:before {
             right: 0;
         }
+        .header-area.header-style-2 .slicknav_btn
+        {
+            margin-top: 0px!important;
+        }
     </style>
 @endsection
 @section('custom-body-style')

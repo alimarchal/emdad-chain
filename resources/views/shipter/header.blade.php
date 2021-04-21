@@ -87,6 +87,9 @@
                                 @include('shipter.menu')
                             </div>
                         </div>
+                        <div class="col-12 col-sm-11 col-md-9 d-block d-lg-none">
+                            <div class="mobile_menu"></div>
+                        </div>
 
                     </div>
                 </div>

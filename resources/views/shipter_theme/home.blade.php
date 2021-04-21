@@ -1,6 +1,12 @@
 @extends('shipter.layout')
 @section('title','Home')
 @section('custom-header')
+    <style>
+        .header-area.header-style-2 .slicknav_btn
+        {
+            margin-top: 0px!important;
+        }
+    </style>
 @endsection
 @section('custom-body-style')
 @endsection
@@ -30,6 +36,11 @@
                                 @include('shipter.menu')
                             </div>
                         </div>
+
+                        <div class="col-12 col-sm-11 col-md-9 d-block d-lg-none">
+                            <div class="mobile_menu"></div>
+                        </div>
+
 
                     </div>
                 </div>

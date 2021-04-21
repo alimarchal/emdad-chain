@@ -14,7 +14,12 @@
             background-color: #fd7e14;
             color: white;
         }
+        .header-area.header-style-2 .slicknav_btn
+          {
+              margin-top: 0px!important;
+          }
     </style>
+\\
 @endsection
 @section('custom-body-style')
 @endsection

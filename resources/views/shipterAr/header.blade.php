@@ -13,7 +13,7 @@
     <link href="{{url('Shipter/assets/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{url('Shipter/assets/css/flaticon.css')}}" rel="stylesheet">
     <!-- Bootstrap core CSS -->
-{{--    <link href="{{url('Shipter/assets/css/bootstrap.min.css')}}" rel="stylesheet">--}}
+    {{--    <link href="{{url('Shipter/assets/css/bootstrap.min.css')}}" rel="stylesheet">--}}
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
     <!-- Plugins for this template -->
     <link href="{{url('Shipter/assets/css/animate.css')}}" rel="stylesheet">
@@ -32,7 +32,6 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     @yield('custom-header')
-
 </head>
 
 <body @yield('custom-body-style','')>
@@ -77,7 +76,7 @@
         <div class="header-top header-top-2">
             <div class="container">
                 <div class="row">
-                   @include('shipterAr.header-container')
+                    @include('shipterAr.header-container')
                 </div>
             </div>
         </div>
@@ -91,6 +90,10 @@
                             </div>
                         </div>
 
+                        <div class="col-12 col-sm-11 col-md-9 d-block d-lg-none">
+                            <div class="mobile_menu"></div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -99,11 +102,11 @@
     <!-- header-area end -->
 
     <!-- section-section start -->
-{{--    <div class="contact-page-area section-padding">--}}
-{{--        <div class="container">--}}
-            @yield('main')
-{{--        </div>--}}
-{{--    </div>--}}
+    {{--    <div class="contact-page-area section-padding">--}}
+    {{--        <div class="container">--}}
+    @yield('main')
+    {{--        </div>--}}
+    {{--    </div>--}}
     <!--section-section end -->
 @endif
 
