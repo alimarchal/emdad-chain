@@ -64,10 +64,10 @@
     <div class="min-h-screen bg-gray-100">
 
         <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200 font-roboto" id="side-bar">
-            @include('sales.english.layout.sidebar')
+            @include('ire.english.layout.sidebar')
 
             <div class="flex-1 flex flex-col overflow-hidden">
-                @include('sales.english.layout.navigation-dropdown')
+                @include('ire.english.layout.navigation-dropdown')
                 <!-- Page Heading -->
                 {{--            <div class="bg-white shadow">--}}
                 {{--                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 ">--}}

@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Seller;
+use App\Models\Ire;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SellerLoginController extends Controller
+class IreLoginController extends Controller
 {
 
     protected $redirectTo = 'seller-dashboard';
 
     public function __construct()
     {
-        $this->middleware('guest:seller')->except('logout');
+        $this->middleware('guest:ire')->except('logout');
     }
 
     public function username()
@@ -22,12 +22,12 @@ class SellerLoginController extends Controller
     }
     protected function guard()
     {
-        return Auth::guard('seller');
+        return Auth::guard('ire');
     }
 
-    public function search_seller(Request $request)
+    public function search_ire(Request $request)
     {
-        $seller = Seller::where('seller_no', $request->referred_no)->first();
+        $seller = Ire::where('ire_no', $request->referred_no)->first();
 
         if (!$seller)
         {
@@ -38,12 +38,12 @@ class SellerLoginController extends Controller
 
     public function login_view()
     {
-        return view('sales.english.login');
+        return view('ire.english.login');
     }
 
     public function arabic_login_view()
     {
-        return view('sales.arabic.login');
+        return view('ire.arabic.login');
     }
 
     public function login(Request $request)
@@ -51,14 +51,14 @@ class SellerLoginController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('seller')->attempt($credentials)) {
+        if (Auth::guard('ire')->attempt($credentials)) {
             // validation successfull
-            return redirect()->route('sellerDashboard');
+            return redirect()->route('ireDashboard');
         }
         else
         {
             // validation not successful, send back to form
-            return redirect()->route('sellerLogin')->with('status', 'Invalid credentials');
+            return redirect()->route('ireLogin')->with('status', 'Invalid credentials');
         }
 
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Seller;
+use App\Models\Ire;
 use Livewire\Component;
 
 class Reference extends Component
@@ -13,7 +13,7 @@ class Reference extends Component
 
     public function increment()
     {
-        $this->user = Seller::where('seller_no', $this->reference)->first();
+        $this->user = Ire::where('seller_no', $this->reference)->first();
         $this->count++;
     }
 

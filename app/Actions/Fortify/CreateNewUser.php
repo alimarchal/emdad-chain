@@ -2,7 +2,8 @@
 
 namespace App\Actions\Fortify;
 
-use App\Models\SellerCommission;
+use App\Models\Ire;
+use App\Models\IreCommission;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -50,12 +51,24 @@ class CreateNewUser implements CreatesNewUsers
             'usertype' => 'CEO',
         ]);
 
-        if (isset($input['seller_no']))
+        if ($input['referred_no'] == null || $input['referred_no'] == ' ')
         {
-            SellerCommission::create([
-                'seller_no' => $input['seller_no'],
-                'user_id' => $user->id,
-            ]);
+            $role = Role::findByName('CEO');
+            $user->assignRole($role);
+            return $user;
+        }
+        else
+        {
+            $ireReferred = Ire::where('ire_no', $input['referred_no'])->first();
+
+            if (isset($ireReferred))
+            {
+                IreCommission::create([
+                    'ire_no' => $input['referred_no'],
+                    'user_id' => $user->id,
+                    'type' => 3,
+                ]);
+            }
         }
 
         $role = Role::findByName('CEO');

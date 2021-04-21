@@ -7,6 +7,7 @@ use App\Models\Business;
 use App\Models\BusinessCategory;
 use App\Models\BusinessPackage;
 use App\Models\Category;
+use App\Models\IreCommission;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -238,6 +239,7 @@ class BusinessController extends Controller
     {
         $business = Business::where('id', $request->business_id)->first();
         $user = User::where('id', $business->user_id)->first();
+        $ireCommission = IreCommission::where('user_id', $user->id)->first();
         if ($request->status_id == 3) {
             $business->update([
                 'status' => 3,
@@ -246,6 +248,20 @@ class BusinessController extends Controller
                 'status' => 3,
                 'is_active' => 1,
             ]);
+            if($user->registration_type == 'Buyer')
+            {
+                $ireCommission->update([
+                    'type' => 1,
+                    'status' => 1,
+                ]);
+            }
+            elseif($user->registration_type == 'Supplier')
+            {
+                $ireCommission->update([
+                    'type' => 2,
+                    'status' => 1,
+                ]);
+            }
             $user->notify(new \App\Notifications\BusinessApproved());
         } elseif ($request->status_id == 4) {
             $business->update([
@@ -254,6 +270,9 @@ class BusinessController extends Controller
             $user->update([
                 'status' => 4,
                 'is_active' => 1,
+            ]);
+            $ireCommission->update([
+                'status' => 2,
             ]);
             $user->notify(new \App\Notifications\BusinessRejected());
         } else {

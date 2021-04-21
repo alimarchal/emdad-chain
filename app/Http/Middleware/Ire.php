@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Seller
+class Ire
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class Seller
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Auth::guard('seller')->check()) {
+        if (!Auth::guard('ire')->check()) {
             return redirect()->back();
         }
         return $next($request);

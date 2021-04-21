@@ -10,11 +10,11 @@
 
         <div style="direction: rtl">
             <x-jet-button>
-                <a href="{{route('sellerRegister')}}" class="get-started-btn scrollto"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top: -4px;">English</a>
+                <a href="{{route('ireRegister')}}" class="get-started-btn scrollto"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top: -4px;">English</a>
             </x-jet-button>
         </div>
 
-        <form method="POST" action="{{ route('sellerRegister') }}" style="direction: rtl">
+        <form method="POST" action="{{ route('ireRegister') }}" style="direction: rtl">
             @csrf
             <p class="text-center font-bold text-2xl">الخطوة الأولى: التسجيل</p>
 
@@ -109,7 +109,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{route('sellerLoginArabic')}}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{route('ireLoginArabic')}}">
                     {{ __('هل سبق لك التسجيل؟') }}
                 </a>
 
@@ -132,7 +132,7 @@
         $value=$(this).val();
         $.ajax({
             type : 'get',
-            url:"{{ route('search_seller') }}",
+            url:"{{ route('search_ire') }}",
             data:{'referred_no':$value},
             // success:function(data){
             //         $('#referred_no_response').html(data.message);
