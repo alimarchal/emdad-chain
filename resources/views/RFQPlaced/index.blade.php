@@ -41,9 +41,9 @@
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                     RFQ #
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                    Client Name
-                                </th>
+{{--                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">--}}
+{{--                                    Client Name--}}
+{{--                                </th>--}}
 
 
                                 <th scope="col" class="px-6 py-3 text-left text-center text-xs font-medium text-gray-500 tracking-wider" width="120">
@@ -88,13 +88,13 @@
 
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        @if (\App\Models\Business::find($item->business_id))
-                                            <a href="{{url('business/'.$item->business_id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                {{\App\Models\Business::find($item->business_id)->first()->business_name}}
-                                            </a>
-                                        @endif
-                                    </td>
+{{--                                    <td class="px-6 py-4 whitespace-nowrap">--}}
+{{--                                        @if (\App\Models\Business::find($item->business_id))--}}
+{{--                                            <a href="{{url('business/'.$item->business_id)}}" class="hover:underline hover:text-blue-900 text-blue-900">--}}
+{{--                                                {{\App\Models\Business::find($item->business_id)->first()->business_name}}--}}
+{{--                                            </a>--}}
+{{--                                        @endif--}}
+{{--                                    </td>--}}
 
 
 

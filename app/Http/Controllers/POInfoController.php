@@ -53,7 +53,7 @@ class POInfoController extends Controller
             'type' => 'required',
             'user_id' => 'required',
             'business_id' => 'required',
-            'order_info_1.*' => 'required|mimes:jpeg,jpg,png,gif,csv,txt,pdf',
+            'order_info_1.*' => 'required|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,xlsx,doc,xls',
         ]);
         // dd($request->all());
         $files = $request->file('order_info_1');

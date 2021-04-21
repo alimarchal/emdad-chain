@@ -1,4 +1,7 @@
-
+@section('headerScripts')
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
+    <script src="{{url('js/mapInput.js')}}"></script>
+@endsection
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
@@ -84,12 +87,30 @@
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="latitude">Latitude</label>
                             </div>
 
+
+
                             <div class="flex space-x-5 mt-3">
-                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="bank_name" type="text" name="bank_name" required="required">
+
+                                <select id="bank_name" name="bank_name" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
+                                    <option value="">None</option>
+                                    @foreach(\App\Models\Bank::all() as $bank_name)
+                                        <option value="{{ $bank_name->name }}">{{ $bank_name->name }}</option>
+                                    @endforeach
+                                </select>
+
                                 <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="iban" type="text" name="iban" required="required">
-                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="longitude" type="text" name="longitude">
-                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="latitude" type="text" name="latitude">
+                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="longitude" required readonly  type="text" name="longitude">
+                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="latitude" required readonly type="text" name="latitude">
                             </div>
+
+
+                            <br>
+                            <p>Please use the map marker for your warehouse location.</p>
+                            <br>
+                            <div id="map" style="width:100%;height:400px; ">
+                                <div style="width: 100%; height: 100%" id="address-map"></div>
+                            </div>
+                            <br>
 
                             <div class="flex space-x-5 mt-3">
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="address">
@@ -226,9 +247,18 @@
                             <div class="flex space-x-5 mt-3">
                                 <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="bank_name" type="text" name="bank_name" required="required">
                                 <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="iban" type="text" name="iban" required="required">
-                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="longitude" type="text" name="longitude">
-                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="latitude" type="text" name="latitude">
+                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="longitude" required readonly type="text" name="longitude">
+                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="latitude" required readonly type="text" name="latitude">
                             </div>
+
+
+                            <br>
+                            <p>Please use the map marker for your warehouse location.</p>
+                            <br>
+                            <div id="map" style="width:100%;height:400px; ">
+                                <div style="width: 100%; height: 100%" id="address-map"></div>
+                            </div>
+                            <br>
 
                             <div class="flex space-x-5 mt-3">
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="address">

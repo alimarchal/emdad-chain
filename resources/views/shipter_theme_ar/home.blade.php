@@ -374,7 +374,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">أطلب الآن</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr')}}">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -392,7 +392,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">أطلب الآن</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr')}}">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -410,7 +410,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">أطلب الآن</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr')}}">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -429,7 +429,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">أطلب الآن</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr')}}">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -466,7 +466,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">أطلب الآن</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr')}}">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -484,7 +484,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">أطلب الآن</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr')}}">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -502,7 +502,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">أطلب الآن</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr')}}">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
