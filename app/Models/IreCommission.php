@@ -11,7 +11,7 @@ class IreCommission extends Model
 
     protected $fillable = ['ire_no', 'user_id', 'type', 'status', 'payment_status'];
 
-    public function sellerReference()
+    public function ireReference()
     {
         return $this->belongsTo(Ire::class, 'user_id','id');
     }

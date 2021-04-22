@@ -5,7 +5,7 @@
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
 @endsection
-@extends('ire.english.layout.app')
+@extends('ire.arabic.layout.app')
 
 @section('body')
     {{--        <h2 class="font-semibold text-center text-xl text-gray-800 leading-tight" style="padding-top: 10px;">--}}
@@ -37,7 +37,7 @@
                 </script>
                 <div class="py-3">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <h2 class="text-2xl font-bold text-center">References List</h2>
+                        <h2 class="text-2xl font-bold text-center">List of References</h2>
                         <x-jet-validation-errors class="mb-4" />
                     @if ($incompleteReferences->count())
                         <!-- This example requires Tailwind CSS v2.0+ -->
@@ -52,7 +52,7 @@
                                                         #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        Name
+                                                        NAME/S OF REFERENCES
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                         Email

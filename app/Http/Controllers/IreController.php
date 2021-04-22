@@ -80,6 +80,7 @@ class IreController extends Controller
                     'ire_no' => $request->referred_no,
                     'user_id' => $ire->id,
                     'type' => 0,
+                    'status' => 1,
                 ]);
             }
         }
@@ -106,7 +107,8 @@ class IreController extends Controller
             return redirect()->route('ireArabicReference');
         }
 
-        $ires = Ire::where('referred_no', \auth()->guard('ire')->user()->ire_no)->where('id', '!=' , \auth()->guard('ire')->user()->id)->get();
+//        $ires = Ire::where('referred_no', \auth()->guard('ire')->user()->ire_no)->where('id', '!=' , \auth()->guard('ire')->user()->id)->get();
+        $ires = IreCommission::with('ireReference')->where('ire_no', \auth()->guard('ire')->user()->ire_no)->where(['status' => 1])->get();
 
         return view('ire.english.reference', compact('ires'));
     }
@@ -130,7 +132,7 @@ class IreController extends Controller
             return redirect()->route('ireArabicPayment');
         }
 
-        $ireCommissions = IreCommission::where('ire_no', \auth()->guard('ire')->user()->ire_no)->get();
+        $ireCommissions = IreCommission::where('ire_no', \auth()->guard('ire')->user()->ire_no)->where('status', 1)->get();
 
         return view('ire.english.payment', compact('ireCommissions'));
     }
@@ -163,14 +165,15 @@ class IreController extends Controller
             return redirect()->route('ireReference');
         }
 
-        $ires = Ire::where('referred_no', \auth()->guard('ire')->user()->ire_no)->where('id', '!=' , \auth()->guard('ire')->user()->id)->get();
+        $ires = IreCommission::with('ireReference')->where('ire_no', \auth()->guard('ire')->user()->ire_no)->where(['status' => 1])->get();
+
 
         return view('ire.arabic.reference', compact('ires'));
     }
 
     public function arabic_incomplete_reference()
     {
-        if (\auth()->guard('ire')->user()->rtl == 1)
+        if (\auth()->guard('ire')->user()->rtl == 0)
         {
             return redirect()->route('ireIncompleteReference');
         }
@@ -187,7 +190,7 @@ class IreController extends Controller
             return redirect()->route('irePayment');
         }
 
-        $ireCommissions = IreCommission::where('ire_no', \auth()->guard('ire')->user()->ire_no)->get();
+        $ireCommissions = IreCommission::where('ire_no', \auth()->guard('ire')->user()->ire_no)->where('status', 1)->get();
 
         return view('ire.arabic.payment', compact('ireCommissions'));
     }

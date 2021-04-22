@@ -60,7 +60,7 @@
                         <div class="section-item-2">
                             <div class="section-icon">
                                 <i class="fi">
-                                    <img src="{{url('images/17.png')}}" style="width: 40px; height: 40px;" alt="">
+                                    <img src="{{url('images/20.png')}}" style="width: 40px; height: 40px;" alt="">
                                 </i>
                             </div>
                             <div class="section-content">

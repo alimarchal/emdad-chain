@@ -59,7 +59,7 @@
             @endif
 
             {{-- B & S Info link --}}
-           @if(auth()->user()->can('all') || auth()->user()->can('edit user') && Auth::user()->status == 3)
+           @if(auth()->user()->hasRole('CEO') && Auth::user()->status == 3)
             <div x-data="{ open: false } ">
                 <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('business.*') || request()->routeIs('businessWarehouseShow')|| request()->routeIs('businessWarehouse.create')|| request()->routeIs('purchaseOrderInfo.*')|| request()->routeIs('vehicle.create')|| request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -135,7 +135,7 @@
                             @endif
                         @endif
                     </li>
-                    @if (auth()->user()->hasRole('SuperAdmin') || auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
+                    @if (auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
                     <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('vehicle.create') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
@@ -202,8 +202,20 @@
 
             @endcan
 
-            {{-- RFQs link --}}
-            @if(auth()->user()->can('all')||auth()->user()->can('PoBuyer')|| auth()->user()->can('Buyer Create New Draft RFQ') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+            {{-- RFQs link for SuperAdmin --}}
+            @if(auth()->user()->hasRole('SuperAdmin'))
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('#') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="javascript:void(0)">
+
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="mx-3">RFQs</span>
+                </a>
+            @endif
+
+            {{-- RFQs link for Buyer --}}
+            @if(auth()->user()->can('Buyer Create New Draft RFQ') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('RFQ.create') || request()->routeIs('RFQCart.index')|| request()->routeIs('PlacedRFQ.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
@@ -268,42 +280,53 @@
             {{--        @endif--}}
             @endif
 
-            @if(auth()->user()->hasRole('SuperAdmin'))
-                <div x-data="{ open: false } ">
-                    <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('viewRFQs') || request()->routeIs('QoutationsBuyerReceived') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
-                            {{--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>--}}
-                        </svg>
-                        <span class="mx-3">Quotation</span>
-                    <span x-show="open == false">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"  style="margin-left: 4em;"   viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </span>
-                        <span x-show="open == true">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4"  style="margin-left: 4em;"  viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </span>
-                    </a>
-                    <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @click.away="open = false">
-                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('viewRFQs') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                            </svg>
-                            <a href="{{ route('viewRFQs') }}"><span class="mx-3 ">Quotation (Supplier)</span></a>
-                        </li>
-                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('QoutationsBuyerReceived') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                            </svg>
-                            <a href="{{ route('QoutationsBuyerReceived') }}"><span class="mx-3 ">Quotation (Buyer)</span>
-                            </a>
-                        </li>
+{{--            @if(auth()->user()->hasRole('SuperAdmin'))--}}
+{{--                <div x-data="{ open: false } ">--}}
+{{--                    <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('viewRFQs') || request()->routeIs('QoutationsBuyerReceived') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">--}}
+{{--                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>--}}
+{{--                            --}}{{--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>--}}
+{{--                        </svg>--}}
+{{--                        <span class="mx-3">Quotation</span>--}}
+{{--                    <span x-show="open == false">--}}
+{{--                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"  style="margin-left: 4em;"   viewBox="0 0 20 20" fill="currentColor">--}}
+{{--                          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />--}}
+{{--                        </svg>--}}
+{{--                    </span>--}}
+{{--                        <span x-show="open == true">--}}
+{{--                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4"  style="margin-left: 4em;"  viewBox="0 0 20 20" fill="currentColor">--}}
+{{--                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />--}}
+{{--                        </svg>--}}
+{{--                    </span>--}}
+{{--                    </a>--}}
+{{--                    <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @click.away="open = false">--}}
+{{--                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('viewRFQs') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">--}}
+{{--                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>--}}
+{{--                            </svg>--}}
+{{--                            <a href="{{ route('viewRFQs') }}"><span class="mx-3 ">Quotation (Supplier)</span></a>--}}
+{{--                        </li>--}}
+{{--                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('QoutationsBuyerReceived') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">--}}
+{{--                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>--}}
+{{--                            </svg>--}}
+{{--                            <a href="{{ route('QoutationsBuyerReceived') }}"><span class="mx-3 ">Quotation (Buyer)</span>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
 
-                    </ul>
-                </div>
+{{--                    </ul>--}}
+{{--                </div>--}}
+{{--            @endif--}}
+            {{-- Qoutations link for SuperAdmin --}}
+            @if(auth()->user()->hasRole('SuperAdmin'))
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('#') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="javascript:void(0)">
+
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="mx-3">Qoutations</span>
+                </a>
             @endif
 
             {{-- Qoutations (Supplier) link --}}
@@ -342,8 +365,20 @@
                 </a>
                 @endif
 
+            {{-- Purchase Order for SuperAdmin --}}
+            @if(auth()->user()->hasRole('SuperAdmin'))
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('#') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="javascript:void(0)">
+
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="mx-3">Purchase Order</span>
+                </a>
+            @endif
+
             {{-- Purchase Order link --}}
-            @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('dpo.index') || request()->routeIs('po.po') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
@@ -385,8 +420,20 @@
                 </div>
             @endif
 
+            {{-- Delivery link for SuperAdmin --}}
+            @if(auth()->user()->hasRole('SuperAdmin'))
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('#') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="javascript:void(0)">
+
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="mx-3">Delivery</span>
+                </a>
+            @endif
+
             {{-- Delivery link --}}
-            @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO')  && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO')  && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('QoutationsBuyerReceived')|| request()->routeIs('deliveryNote.index')|| request()->routeIs('notes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
@@ -425,8 +472,20 @@
                 </div>
             @endif
 
+            {{-- Shipments link for SuperAdmin --}}
+            @if(auth()->user()->hasRole('SuperAdmin'))
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('#') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="javascript:void(0)">
+
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="mx-3">Shipments</span>
+                </a>
+            @endif
+
             {{-- Shipments link --}}
-            @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('shipment.create') || request()->routeIs('shipment.index')|| request()->routeIs('shipmentCart.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
@@ -479,8 +538,20 @@
                 </div>
             @endif
 
+            {{-- Payments link for SuperAdmin --}}
+            @if(auth()->user()->hasRole('SuperAdmin'))
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('#') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="javascript:void(0)">
+
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="mx-3">Payments</span>
+                </a>
+            @endif
+
             {{-- Payments link --}}
-            @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
             <div x-data="{ open: false } ">
                 <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('payment.index') || request()->routeIs('generate_proforma_invoices')|| request()->routeIs('bank-payments.index')|| request()->routeIs('invoices')|| request()->routeIs('proforma_invoices')|| request()->routeIs('emdadInvoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -638,7 +709,7 @@
             @endif
 
             {{-- B & S Info link --}}
-            @if(auth()->user()->can('all') || auth()->user()->can('edit user') && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO') && Auth::user()->status == 3)
                 <div x-data="{ open: false } ">
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('business.*') || request()->routeIs('businessWarehouseShow')|| request()->routeIs('businessWarehouse.create')|| request()->routeIs('purchaseOrderInfo.*')|| request()->routeIs('vehicle.create')|| request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
                         <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -707,7 +778,7 @@
                                 @endif
                             @endif
                         </li>
-                        @if (auth()->user()->hasRole('SuperAdmin') || auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
+                        @if (auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
                             <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('vehicle.create') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
@@ -774,8 +845,20 @@
 
             @endcan
 
+            {{-- RFQs link for SuperAdmin --}}
+            @if(auth()->user()->hasRole('SuperAdmin'))
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('#') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="javascript:void(0)">
+
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="mx-3">RFQs</span>
+                </a>
+            @endif
+
             {{-- RFQs link --}}
-            @if(auth()->user()->can('all')||auth()->user()->can('PoBuyer')|| auth()->user()->can('Buyer Create New Draft RFQ') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('RFQ.create') || request()->routeIs('RFQCart.index')|| request()->routeIs('PlacedRFQ.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
@@ -861,6 +944,18 @@
                 </div>
             @endif
 
+            {{-- Qoutations link for SuperAdmin --}}
+            @if(auth()->user()->hasRole('SuperAdmin'))
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('#') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="javascript:void(0)">
+
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="mx-3">Qoutations</span>
+                </a>
+            @endif
+
             {{-- Qoutations (Supplier) link --}}
             @if(auth()->user()->can('Supplier View New RFQs')|| auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && Auth::user()->status == 3)
 
@@ -887,8 +982,20 @@
                 </a>
             @endif
 
+            {{-- Purchase Order for SuperAdmin --}}
+            @if(auth()->user()->hasRole('SuperAdmin'))
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('#') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="javascript:void(0)">
+
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="mx-3">أمر شراء</span>
+                </a>
+            @endif
+
             {{-- Purchase Order link --}}
-            @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('dpo.index') || request()->routeIs('po.po') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
@@ -932,8 +1039,20 @@
                 </div>
             @endif
 
+            {{-- Delivery link for SuperAdmin --}}
+            @if(auth()->user()->hasRole('SuperAdmin'))
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('#') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="javascript:void(0)">
+
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="mx-3">التوصيل</span>
+                </a>
+            @endif
+
             {{-- Delivery link --}}
-            @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO')  && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO')  && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('QoutationsBuyerReceived')|| request()->routeIs('deliveryNote.index')|| request()->routeIs('notes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
@@ -962,8 +1081,20 @@
                 </div>
             @endif
 
+            {{-- Shipments link for SuperAdmin --}}
+            @if(auth()->user()->hasRole('SuperAdmin'))
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('#') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="javascript:void(0)">
+
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="mx-3">الشحنات</span>
+                </a>
+            @endif
+
             {{-- Shipments link --}}
-            @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('shipment.create') || request()->routeIs('shipment.index')|| request()->routeIs('shipmentCart.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
@@ -1006,8 +1137,20 @@
                 </div>
             @endif
 
+            {{-- Payments link for SuperAdmin --}}
+            @if(auth()->user()->hasRole('SuperAdmin'))
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('#') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="javascript:void(0)">
+
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="mx-3">المدفوعات</span>
+                </a>
+            @endif
+
             {{-- Patments link --}}
-            @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
                 <div x-data="{ open: false } ">
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('payment.index') || request()->routeIs('generate_proforma_invoices')|| request()->routeIs('invoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

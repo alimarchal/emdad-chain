@@ -40,17 +40,17 @@
 
     <div class="header">
         <div class="center">
-            <img src="{{ $draftPurchaseOrder->buyer_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->buyer_business->business_name }}" />
-            <h5 style="text-align: center; margin:0px;">{{ $draftPurchaseOrder->buyer_business->business_name }}</h1>
+{{--            <img src="{{ $draftPurchaseOrder->buyer_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->buyer_business->business_name }}" />--}}
+            <h5 style="text-align: center; margin:0px;">{{ $draftPurchaseOrder->buyer_business->business_name }}</h5>
         </div>
 
         <div class="center">
-            <h3 style="text-align: center; margin:0px;">Draft Purchase Order</h1>
+            <h3 style="text-align: center; margin:0px;">Draft Purchase Order</h3>
         </div>
 
         <div class="center">
             <img src="{{ $draftPurchaseOrder->supplier_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->supplier_business->business_name }}" />
-            <h5 style="text-align: center; margin:0px;">{{ $draftPurchaseOrder->supplier_business->business_name }}</h1>
+            <h5 style="text-align: center; margin:0px;">{{ $draftPurchaseOrder->supplier_business->business_name }}</h5>
         </div>
 
 
@@ -229,14 +229,14 @@
     <br>
 
     <div class="flex justify-center">
-        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>
+{{--        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>--}}
     </div>
 
     <br>
     <br>
     <div class="flex justify-between px-2 py-2 mt-2 h-15">
         <div class="mt-3">Thanks for your Business</div><br><br>
-        <img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" />
+{{--        <img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" />--}}
     </div>
 
 </body>

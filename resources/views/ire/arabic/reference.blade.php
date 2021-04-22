@@ -34,7 +34,7 @@
                 </script>
                 <div class="py-3">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <h2 class="text-2xl font-bold text-center">References List</h2>
+                        <h2 class="text-2xl font-bold text-center">List of References</h2>
                         <x-jet-validation-errors class="mb-4" />
                     @if ($ires->count())
                         <!-- This example requires Tailwind CSS v2.0+ -->
@@ -49,13 +49,16 @@
                                                         #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        اسم
+                                                        NAME/S OF REFERENCES
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                         البريد الإلكتروني
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                         رقم الجوال #
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                        Type
                                                     </th>
                                                 </tr>
                                                 </thead>
@@ -67,13 +70,42 @@
                                                             <div class="text-sm text-center text-gray-900">{{ $loop->iteration }}</div>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap">
-                                                            <div class="text-sm text-center text-gray-900">{{ $ire->name }}</div>
+                                                            <div class="text-sm text-center text-gray-900">
+                                                                @if($ire->type == 0)
+                                                                    {{ $ire->ireReference->name }}
+                                                                @else
+                                                                    {{ $ire->nonIreReference->name }}
+                                                                @endif
+                                                            </div>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap">
-                                                            <div class="text-sm text-center text-gray-900">{{ $ire->email }}</div>
+                                                            <div class="text-sm text-center text-gray-900">
+                                                                @if($ire->type == 0)
+                                                                    {{ $ire->ireReference->email }}
+                                                                @else
+                                                                    {{ $ire->nonIreReference->email }}
+                                                                @endif
+                                                            </div>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                                            <div class="text-sm text-center text-gray-900">{{ $ire->mobile_number }}</div>
+                                                            <div class="text-sm text-center text-gray-900">
+                                                                @if($ire->type == 0)
+                                                                    {{ $ire->ireReference->mobile_number }}
+                                                                @else
+                                                                    {{ $ire->nonIreReference->mobile }}
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                                            <div class="text-sm text-center text-gray-900">
+                                                                @if($ire->type == 0)
+                                                                    IRE
+                                                                @elseif($ire->type == 1)
+                                                                    مشتري
+                                                                @elseif($ire->type == 2)
+                                                                    مورّد
+                                                                @endif
+                                                            </div>
                                                         </td>
                                                     </tr>
 
