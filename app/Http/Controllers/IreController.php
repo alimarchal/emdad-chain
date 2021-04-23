@@ -137,6 +137,16 @@ class IreController extends Controller
         return view('ire.english.payment', compact('ireCommissions'));
     }
 
+    public function profile()
+    {
+        if (\auth()->guard('ire')->user()->rtl == 1)
+        {
+            return redirect()->route('ireArabicProfile');
+        }
+
+        return view('ire.english.profile');
+    }
+
     public function languageChange(Request $request)
     {
         Ire::where('id', \auth()->guard('ire')->user()->id)->update([
@@ -193,5 +203,15 @@ class IreController extends Controller
         $ireCommissions = IreCommission::where('ire_no', \auth()->guard('ire')->user()->ire_no)->where('status', 1)->get();
 
         return view('ire.arabic.payment', compact('ireCommissions'));
+    }
+
+    public function arabic_profile()
+    {
+        if (\auth()->guard('ire')->user()->rtl == 0)
+        {
+            return redirect()->route('ireProfile');
+        }
+
+        return view('ire.arabic.profile');
     }
 }

@@ -323,12 +323,14 @@ Route::post('ireLanguageChange', [IreController::class, 'languageChange'])->name
 Route::middleware(['ire'])->group(function () {
 #################### IREs English Routes ###########################
     Route::get('ire-dashboard', [IreController::class, 'dashboard'])->name('ireDashboard');
+    Route::get('ire-profile', [IreController::class, 'profile'])->name('ireProfile');
     Route::get('ire-references', [IreController::class, 'reference'])->name('ireReference');
     Route::get('ire-incomplete-references', [IreController::class, 'incomplete_reference'])->name('ireIncompleteReference');
     Route::get('ire-payments', [IreController::class, 'payment'])->name('irePayment');
 
 #################### IREs Arabic Routes ###########################
     Route::get('ar-ire-dashboard', [IreController::class, 'arabic_dashboard'])->name('ireArabicDashboard');
+    Route::get('ar-ire-profile', [IreController::class, 'arabic_profile'])->name('ireArabicProfile');
     Route::get('ar-ire-references', [IreController::class, 'arabic_reference'])->name('ireArabicReference');
     Route::get('ar-ire-incomplete-references', [IreController::class, 'arabic_incomplete_reference'])->name('ireArabicIncompleteReference');
     Route::get('ar-ire-payments', [IreController::class, 'arabic_payment'])->name('ireArabicPayment');

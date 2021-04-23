@@ -28,8 +28,13 @@ class Ire extends Model
         return $this->password;
     }
 
-    public function sellerCommission()
+    public function ireCommission()
     {
         return $this->belongsTo(IreCommission::class)->withDefault();
+    }
+
+    public function bank()
+    {
+        return $this->belongsTo(Bank::class, 'bank', 'id')->withDefault();
     }
 }

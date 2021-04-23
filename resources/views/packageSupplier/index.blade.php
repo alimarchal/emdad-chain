@@ -15,7 +15,7 @@
                                 <h1 class="text-4xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{{$package->charges}}</h1>
 
                                 @if(isset($businessPackage) && $businessPackage->package_id == 5)
-                                    <span class="text-lg ml-1 font-normal text-gray-500">{{auth()->user()->business_id}}</span>
+                                    <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
                                     <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center" disabled>Purchased</button>
                                 @else
                                     <form action="{{route('business-packages.store')}}" method="POST">
@@ -34,7 +34,7 @@
                                     <span class="text-lg ml-1 font-normal text-gray-500">/year</span>
                                 </h1>
                                 @if(isset($businessPackage) && $businessPackage->package_id == 6)
-                                    <span class="text-lg ml-1 font-normal text-gray-500">{{auth()->user()->business_id}}</span>
+                                    <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
                                     <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center" disabled>Purchased</button>
                                 @else
                                     <form action="{{route('business-packages.store')}}" method="POST">
@@ -52,7 +52,7 @@
                                     <span class="text-lg ml-1 font-normal text-gray-500">/year</span>
                                 </h1>
                                 @if(isset($businessPackage) && $businessPackage->package_id == 7)
-                                    <span class="text-lg ml-1 font-normal text-gray-500">{{auth()->user()->business_id}}</span>
+                                    <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
                                     <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center" disabled>Purchased</button>
                                 @else
                                     <form action="{{route('business-packages.store')}}" method="POST">

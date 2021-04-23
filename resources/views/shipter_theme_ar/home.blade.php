@@ -182,7 +182,7 @@
                             <div class="col-md-6">
                                 <div class="si-text">
                                     <p>عبد العزيز السناني</p>
-                                    <span>المؤسس والرئيس التنفيذي و<br>مدير سلسلة التوريد</span>
+                                    <span>المؤسس والرئيس التنفيذي و<br>مدير سلاسل الإمداد</span>
                                 </div>
                             </div>
                             <div class="col-md-6"><img src="{{url('Shipter/assets/images/about/ceo_sign.png')}}" style="width: 200px;" alt=""></div>
