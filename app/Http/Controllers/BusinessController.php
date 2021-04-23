@@ -20,15 +20,7 @@ class BusinessController extends Controller
      */
     public function index(Request $request)
     {
-        //        if ($request->has('status') || $request->has('changestatus') || $request->has('rejectstatus')) {
-        //            $businesss = new Business();
-        //            if ($request->input('status')) {
-        //                $businesss = $businesss->where('status', $request->status);
-        //            }
-        //        } else {
-        //            $businesses = Business::paginate(10);
-        //            return view('business.index', compact('businesses'));
-        //        }
+
         if (\auth()->user()->hasRole('SuperAdmin')) {
             if ($request->has('status')) {
                 if ($request->status == 1) {
@@ -248,20 +240,25 @@ class BusinessController extends Controller
                 'status' => 3,
                 'is_active' => 1,
             ]);
-            if($user->registration_type == 'Buyer')
-            {
-                $ireCommission->update([
-                    'type' => 1,
-                    'status' => 1,
-                ]);
+
+            if (!empty($ireCommission)){
+                if($user->registration_type == 'Buyer')
+                {
+                    $ireCommission->update([
+                        'type' => 1,
+                        'status' => 1,
+                    ]);
+                }
+                elseif($user->registration_type == 'Supplier')
+                {
+                    $ireCommission->update([
+                        'type' => 2,
+                        'status' => 1,
+                    ]);
+                }
             }
-            elseif($user->registration_type == 'Supplier')
-            {
-                $ireCommission->update([
-                    'type' => 2,
-                    'status' => 1,
-                ]);
-            }
+
+
             $user->notify(new \App\Notifications\BusinessApproved());
         } elseif ($request->status_id == 4) {
             $business->update([
@@ -279,7 +276,7 @@ class BusinessController extends Controller
             return redirect()->back()->with('message', 'Something went wrong');
         }
 
-        return redirect()->back()->with('message', 'Update Status');
+        return redirect()->back()->with('message', 'Business status updated...');
     }
 
     public function incomplete()

@@ -48,6 +48,12 @@ class BankPaymentController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        $time = strtotime($request->amount_date);
+        $newformat = date('Y-m-d',$time);
+        $request->merge(['amount_date'=> $newformat]);
+
         if ($request->has('file_path_1')) {
             $path = $request->file('file_path_1')->store('', 'public');
             $request->merge(['file_path' => $path]);
@@ -58,7 +64,7 @@ class BankPaymentController extends Controller
         $invoice->invoice_status = 1;
         $invoice->save();
         session()->flash('message', 'You have successfully updated payment details');
-        return redirect('bank-payments');
+        return redirect('proforma-invoices');
     }
 
     /**

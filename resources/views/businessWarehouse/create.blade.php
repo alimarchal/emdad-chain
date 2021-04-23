@@ -52,8 +52,8 @@
                                 <x-jet-label class="w-1/2" for="landline">Landline @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="mobile">Mobile @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="country">Country @include('misc.required')</x-jet-label>
-                                <x-jet-label class="w-1/2" for="address">Address @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="city">City @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="address">Address @include('misc.required')</x-jet-label>
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-input id="chamber_reg_number" type="text" name="landline" class="border p-2 w-1/2"></x-jet-input>
@@ -64,8 +64,8 @@
                                         <option value="{{$country}}">{{$country}}</option>
                                     @endforeach
                                 </select>
-                                <x-jet-input id="address" type="text" name="address" class="border p-2 w-1/2"></x-jet-input>
                                 <x-jet-input id="city" type="text" name="city" class="border p-2 w-1/2"></x-jet-input>
+                                <x-jet-input id="address" type="text" name="address" class="border p-2 w-1/2"></x-jet-input>
                             </div>
 
                             <div class="flex space-x-5 mt-3">
