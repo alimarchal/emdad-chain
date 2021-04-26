@@ -112,6 +112,19 @@ Route::get('/ar-supplier-package', [WebsiteArabicController::class, 'supplierPac
 ####################  END   ###################
 ####################  Website    ######################################
 
+#####################  Policy And Procedure   ###################
+//Route::get('/policy-procedure', view('policyProcedure.english.eula'))->name('policyProcedure.eula');
+Route::view('/policy-procedure','policyProcedure.english.eula')->name('policyProcedure.eula');
+Route::view('/ire-policy-procedure','policyProcedure.english.ire_pp')->name('policyProcedure.ire');
+Route::view('/buyer-policy-procedure','policyProcedure.english.buyer_pp')->name('policyProcedure.buyer');
+Route::view('/supplier-policy-procedure','policyProcedure.english.supplier_pp')->name('policyProcedure.supplier');
+
+Route::view('/ar-policy-procedure','policyProcedure.arabic.eula')->name('arabic.policyProcedure.eula');
+Route::view('/ar-ire-policy-procedure','policyProcedure.arabic.ire_pp')->name('arabic.policyProcedure.ire');
+Route::view('/ar-buyer-policy-procedure','policyProcedure.arabic.buyer_pp')->name('arabic.policyProcedure.buyer');
+Route::view('/ar-supplier-policy-procedure','policyProcedure.arabic.supplier_pp')->name('arabic.policyProcedure.supplier');
+####################  End Policy And Procedure    ######################################
+
 ####################  Website    ###################
 Route::get('/aboutUs', function () {
     return view('website.aboutUs');

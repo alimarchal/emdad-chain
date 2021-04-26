@@ -83,6 +83,24 @@
                     </x-jet-nav-link>
                     @endif
 
+                    @if (auth()->user()->usertype != 'CEO')
+                    <x-jet-nav-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                        {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                    </x-jet-nav-link>
+                    @endif
+
+                    @if (auth()->user()->usertype == 'CEO')
+                        @if(auth()->user()->registration_type == 'Buyer')
+                        <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                            {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                        </x-jet-nav-link>
+                        @elseif(auth()->user()->registration_type == 'Supplier')
+                            <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                                {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                            </x-jet-nav-link>
+                        @endif
+                    @endif
+
 
                     {{--                    @if (Auth::user()->status == 1)--}}
 {{--                    @else--}}
@@ -453,6 +471,24 @@
                                 @endif
 
                             </x-jet-nav-link>
+                        @endif
+
+                        @if (auth()->user()->usertype != 'CEO')
+                            <x-jet-nav-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                                {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                            </x-jet-nav-link>
+                        @endif
+
+                        @if (auth()->user()->usertype == 'CEO')
+                            @if(auth()->user()->registration_type == 'Buyer')
+                                <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                                    {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                                </x-jet-nav-link>
+                            @elseif(auth()->user()->registration_type == 'Supplier')
+                                <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                                    {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                                </x-jet-nav-link>
+                            @endif
                         @endif
 
 

@@ -88,7 +88,7 @@
     <div class="features-area features-style-2" style="direction: rtl">
         <div class="container">
             <div class="section-title text-center">
-                <span>نقدم لكم الأفصل</span>
+                <span>نقدم لكم الأفضل</span>
                 <h2 style="margin-bottom: 0px">مميزات إمداد</h2>
                 <p style="padding-top: 15px; padding-bottom: 15px;color: red; font-weight: bold;font-size: 24px;">
                     عرض رمضان: اشترك الآن واحصل على خصم ٥٠٪ من سعر الاشتراك
@@ -349,7 +349,7 @@
         <div class="container">
             <div class="section-title text-center">
                 <span>
-                    نقدم لكم الأفصل
+                    نقدم لكم الأفضل
 
                 </span>
                 <h2>
@@ -440,7 +440,7 @@
             </div>
             <div class="section-title text-center">
                 <span>
-                    نقدم لكم الأفصل
+                    نقدم لكم الأفضل
 
                 </span>
                 <h2>

@@ -45,6 +45,7 @@ class IreController extends Controller
             'referred_no' => ['string', 'nullable'],
             'type' => ['required'],
             'mobile_number' => ['required', 'string', 'max:20'],
+            'policy_procedure' => ['required'],
 
         ])->validate();
 

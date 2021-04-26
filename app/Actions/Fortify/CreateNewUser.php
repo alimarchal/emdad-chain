@@ -28,6 +28,7 @@ class CreateNewUser implements CreatesNewUsers
         $input['nid_exp_date'] = $newformat;
         Validator::make($input, [
             'gender' => ['required', 'string', 'max:10'],
+            'policy_procedure' => ['required'],
             'name' => ['required', 'string', 'max:55'],
             'middle_initial' => ['required', 'string', 'max:3'],
             'family_name' => ['required', 'string', 'max:55'],

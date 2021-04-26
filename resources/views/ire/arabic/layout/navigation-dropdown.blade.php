@@ -16,7 +16,9 @@
 
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-
+                        <x-jet-nav-link href="{{ route('policyProcedure.ire') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                            {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                        </x-jet-nav-link>
                     </div>
                 </div>
 

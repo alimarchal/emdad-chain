@@ -91,6 +91,7 @@ class BusinessController extends Controller
             'mobile' => 'required',
             'iban' => 'required',
             'bank_name' => 'required',
+            'policy_procedure' => 'required',
 //            'address' => 'required',
         ]);
         $comma_separated = implode(",", $request->category);

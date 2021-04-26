@@ -114,6 +114,13 @@
                 <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
+            <div class="block mt-4">
+                <label for="policy_procedure" class="flex items-center">
+                    <input id="policy_procedure" type="checkbox" class="form-checkbox" name="policy_procedure" required>
+                    <span class="ml-2 text-sm text-gray-600">I agree</span> <a href="{{route('arabic.policyProcedure.eula')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('Policy and Procedures') }}</u></a>
+                </label>
+            </div>
+
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('loginAr') }}">
                     {{ __('هل سبق لك التسجيل؟') }}
