@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'ire' => \App\Http\Middleware\Ire::class,
         'ireAuthentication' => \App\Http\Middleware\IREAuthentication::class,
+        'ireEmailVerify' => \App\Http\Middleware\IREemailVerification::class,
     ];
 }
