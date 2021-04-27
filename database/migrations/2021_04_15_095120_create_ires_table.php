@@ -19,10 +19,13 @@ class CreateIresTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->dateTime('email_verified_at')->nullable();
+            $table->string('remember_token')->nullable();
             $table->string('gender');
             $table->bigInteger('bank');
             $table->string('iban');
             $table->string('nid_num');
+            $table->string('nid_image')->nullable();
             $table->string('referred_no')->nullable();
             $table->bigInteger('type');
             $table->string('mobile_number');

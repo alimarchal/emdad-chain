@@ -19,9 +19,7 @@ class IreController extends Controller
 
     public function register_view()
     {
-        $banks = Bank::all();
-
-        return view('ire.english.register', compact('banks'));
+        return view('ire.english.register');
     }
 
     public function register_arabic_view()
@@ -31,45 +29,69 @@ class IreController extends Controller
         return view('ire.arabic.register',compact('banks'));
     }
 
-    public function ire_create(Request $request)
+    public function ire_register(Request $request)
     {
         Validator::make($request->all(), [
             'firstName' => ['required', 'string', 'max:55'],
             'lastName' => ['required', 'string'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => $this->passwordRules(),
-            'gender' => ['required'],
-            'bank' => ['required'],
-            'iban' => ['required'],
-            'nid_num' => ['required', 'string', 'max:10'],
-            'referred_no' => ['string', 'nullable'],
-            'type' => ['required'],
             'mobile_number' => ['required', 'string', 'max:20'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:ires'],
+            'password' => $this->passwordRules(),
             'policy_procedure' => ['required'],
 
         ])->validate();
 
         $ire = Ire::create([
                     'name' => $request['firstName'].' '.$request['lastName'],
+                    'mobile_number' => $request['mobile_number'],
                     'email' => $request['email'],
                     'password' => Hash::make($request['password']),
-                    'gender' => $request['gender'],
-                    'bank' => $request['bank'],
-                    'iban' => $request['iban'],
-                    'nid_num' => $request['nid_num'],
-                    'referred_no' => $request['referred_no'],
-                    'type' => $request['type'],
-                    'mobile_number' => $request['mobile_number'],
                 ]);
 
         Ire::where('id', $ire->id)->update([
             'ire_no' => 'IRE00000'.$ire->id
         ]);
 
+
+        session()->flash('status', 'Registered Successfully, Add details to start');
+        return redirect()->route('ireRegisterDetails');
+    }
+
+    public function ire_register_details_view()
+    {
+        $banks = Bank::all();
+
+        return view('ire.english.registerDetails', compact('banks'));
+    }
+
+    public function ire_register_details(Request $request)
+    {
+        Validator::make($request->all(), [
+            'referred_no' => ['string', 'nullable'],
+            'gender' => ['required'],
+            'nid_num' => ['required', 'string', 'max:10'],
+            'nid_image' => ['required', 'image'],
+            'type' => ['required'],
+            'bank' => ['required'],
+            'iban' => ['required'],
+            'policy_procedure' => ['required'],
+
+        ])->validate();
+
+        $ire = Ire::where('id', \auth()->guard('ire')->user()->id)->update([
+            'referred_no' => $request['referred_no'],
+            'gender' => $request['gender'],
+            'nid_num' => $request['nid_num'],
+            'nid_image' => $request['nid_image'],
+            'type' => $request['type'],
+            'bank' => $request['bank'],
+            'iban' => $request['iban'],
+                ]);
+
         if ($request->referred_no == null || $request->referred_no == ' ')
         {
-            session()->flash('status', 'Registered Successfully, Login to start');
-            return redirect()->route('ireLogin');
+//            session()->flash('status', 'Registered Successfully, Login to start');
+            return redirect()->route('ireDashboard');
         }
         else
         {
@@ -86,9 +108,7 @@ class IreController extends Controller
             }
         }
 
-//        return redirect()->route('ireDashboard');
-        session()->flash('status', 'Registered Successfully, Login to start');
-        return redirect()->route('ireLogin');
+        return redirect()->route('ireDashboard');
     }
 
     public function dashboard()

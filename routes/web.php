@@ -323,7 +323,7 @@ Route::get('/testOne', function () {
 ####################### IREs routes ####################################
 Route::middleware(['ireAuthentication'])->group(function () {
 Route::get('ire-register', [IreController::class, 'register_view'])->name('ireRegister');
-Route::post('ire-register', [IreController::class, 'ire_create']);
+Route::post('ire-register', [IreController::class, 'ire_register']);
 Route::get('ar-ire-register', [IreController::class, 'register_arabic_view'])->name('ireRegisterArabic');
 
 Route::get('ire-login', [IreLoginController::class, 'login_view'])->name('ireLogin');
@@ -333,8 +333,10 @@ Route::get('ar-ire-login', [IreLoginController::class, 'arabic_login_view'])->na
 Route::get('/search', [IreLoginController::class, 'search_ire'])->name('search_ire');
 Route::post('ireLanguageChange', [IreController::class, 'languageChange'])->name('ireLanguageChange');
 
-Route::middleware(['ire'])->group(function () {
+Route::middleware(['ire','ireEmailVerify'])->group(function () {
 #################### IREs English Routes ###########################
+    Route::get('ire-registration-details', [IreController::class, 'ire_register_details_view'])->name('ireRegisterDetails');
+    Route::post('ire-registration-details', [IreController::class, 'ire_register_details']);
     Route::get('ire-dashboard', [IreController::class, 'dashboard'])->name('ireDashboard');
     Route::get('ire-profile', [IreController::class, 'profile'])->name('ireProfile');
     Route::get('ire-references', [IreController::class, 'reference'])->name('ireReference');

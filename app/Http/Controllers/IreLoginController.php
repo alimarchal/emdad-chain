@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ire;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,6 +26,7 @@ class IreLoginController extends Controller
         return Auth::guard('ire');
     }
 
+    // used for ire search for reference
     public function search_ire(Request $request)
     {
         $seller = Ire::where('ire_no', $request->referred_no)->first();
