@@ -15,6 +15,7 @@ use App\Http\Controllers\ECartController;
 use App\Http\Controllers\EmdadInvoiceController;
 use App\Http\Controllers\EOrdersController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\IreRegisterController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PermissionController;
@@ -322,9 +323,9 @@ Route::get('/testOne', function () {
 
 ####################### IREs routes ####################################
 Route::middleware(['ireAuthentication'])->group(function () {
-Route::get('ire-register', [IreController::class, 'register_view'])->name('ireRegister');
-Route::post('ire-register', [IreController::class, 'ire_register']);
-Route::get('ar-ire-register', [IreController::class, 'register_arabic_view'])->name('ireRegisterArabic');
+Route::get('ire-register', [IreRegisterController::class, 'register_view'])->name('ireRegister');
+Route::post('ire-register', [IreRegisterController::class, 'ire_register']);
+Route::get('ar-ire-register', [IreRegisterController::class, 'register_arabic_view'])->name('ireRegisterArabic');
 
 Route::get('ire-login', [IreLoginController::class, 'login_view'])->name('ireLogin');
 Route::post('ire-login', [IreLoginController::class, 'login']);
@@ -333,22 +334,33 @@ Route::get('ar-ire-login', [IreLoginController::class, 'arabic_login_view'])->na
 Route::get('/search', [IreLoginController::class, 'search_ire'])->name('search_ire');
 Route::post('ireLanguageChange', [IreController::class, 'languageChange'])->name('ireLanguageChange');
 
-Route::middleware(['ire','ireEmailVerify'])->group(function () {
-#################### IREs English Routes ###########################
-    Route::get('ire-registration-details', [IreController::class, 'ire_register_details_view'])->name('ireRegisterDetails');
-    Route::post('ire-registration-details', [IreController::class, 'ire_register_details']);
-    Route::get('ire-dashboard', [IreController::class, 'dashboard'])->name('ireDashboard');
-    Route::get('ire-profile', [IreController::class, 'profile'])->name('ireProfile');
-    Route::get('ire-references', [IreController::class, 'reference'])->name('ireReference');
-    Route::get('ire-incomplete-references', [IreController::class, 'incomplete_reference'])->name('ireIncompleteReference');
-    Route::get('ire-payments', [IreController::class, 'payment'])->name('irePayment');
+Route::middleware(['ire'])->group(function () {
+    Route::get('email-verify', [IreRegisterController::class, 'email_verify'])->name('ireEmailVerify');
+    Route::post('resend-email-verify', [IreRegisterController::class, 'resend_email_verification'])->name('ireResendEmailVerification');
+    Route::get('email-verify-check/{token}', [IreRegisterController::class, 'email_verify_check'])->name('ireEmailVerifyCheck');
 
-#################### IREs Arabic Routes ###########################
-    Route::get('ar-ire-dashboard', [IreController::class, 'arabic_dashboard'])->name('ireArabicDashboard');
-    Route::get('ar-ire-profile', [IreController::class, 'arabic_profile'])->name('ireArabicProfile');
-    Route::get('ar-ire-references', [IreController::class, 'arabic_reference'])->name('ireArabicReference');
-    Route::get('ar-ire-incomplete-references', [IreController::class, 'arabic_incomplete_reference'])->name('ireArabicIncompleteReference');
-    Route::get('ar-ire-payments', [IreController::class, 'arabic_payment'])->name('ireArabicPayment');
+    Route::middleware(['ireEmailVerify'])->group(function () {
+
+#################### IREs English Routes ###########################
+    Route::get('ire-registration-details', [IreRegisterController::class, 'ire_register_details_view'])->name('ireRegisterDetails');
+        Route::post('ire-registration-details', [IreRegisterController::class, 'ire_register_details']);
+        Route::get('ar-ire-registration-details', [IreRegisterController::class, 'ire_register_details_arabic_view'])->name('ireRegisterDetailsArabic');
+
+        Route::middleware(['ireRegisterDetails'])->group(function () {
+            Route::get('ire-dashboard', [IreController::class, 'dashboard'])->name('ireDashboard');
+            Route::get('ire-profile', [IreController::class, 'profile'])->name('ireProfile');
+            Route::get('ire-references', [IreController::class, 'reference'])->name('ireReference');
+            Route::get('ire-incomplete-references', [IreController::class, 'incomplete_reference'])->name('ireIncompleteReference');
+            Route::get('ire-payments', [IreController::class, 'payment'])->name('irePayment');
+
+        #################### IREs Arabic Routes ###########################
+            Route::get('ar-ire-dashboard', [IreController::class, 'arabic_dashboard'])->name('ireArabicDashboard');
+            Route::get('ar-ire-profile', [IreController::class, 'arabic_profile'])->name('ireArabicProfile');
+            Route::get('ar-ire-references', [IreController::class, 'arabic_reference'])->name('ireArabicReference');
+            Route::get('ar-ire-incomplete-references', [IreController::class, 'arabic_incomplete_reference'])->name('ireArabicIncompleteReference');
+            Route::get('ar-ire-payments', [IreController::class, 'arabic_payment'])->name('ireArabicPayment');
+        });
+    });
 });
 #################### END ##################################################
 
