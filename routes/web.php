@@ -316,10 +316,6 @@ Route::middleware(['auth:sanctum'])->post('business-package-store/{id}', [Busine
 Route::middleware(['auth:sanctum'])->get('select-category', [CategoryController::class, 'parentCategories'])->name('parentCategories');
 Route::middleware(['auth:sanctum'])->get('sub-categories', [CategoryController::class, 'subCategories'])->name('subCategories');
 
-Route::get('/testOne', function () {
-    return view('test');
-});
-
 ####################### IREs routes ####################################
 Route::middleware(['ireAuthentication'])->group(function () {
 Route::get('ire-register', [IreController::class, 'register_view'])->name('ireRegister');
@@ -352,3 +348,22 @@ Route::middleware(['ire','ireEmailVerify'])->group(function () {
 });
 #################### END ##################################################
 
+
+Route::get('/testOne', function () {
+//    $user = \App\Models\User::find(5);
+    $business = \App\Models\Business::find(1);
+
+//    $rating = $business->rating([
+//        'title' => 'This is a test title',
+//        'body' => 'And we will add some shit here',
+//        'customer_service_rating' => 0,
+//        'quality_rating' => 0,
+//        'friendly_rating' => 0,
+//        'pricing_rating' => 0,
+//        'rating' => 1,
+//        'recommend' => 'Yes',
+//        'approved' => true, // This is optional and defaults to false
+//    ], $business);
+//    $ratings = $business->getAllRatings($business->id, 'desc');
+    dd($business->averageRating());
+});
