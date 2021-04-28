@@ -3,11 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class IREemailVerification
+class IreRegisterDetails
 {
     /**
      * Handle an incoming request.
@@ -18,10 +17,9 @@ class IREemailVerification
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::guard('ire')->user()->email_verified_at == null && Auth::guard('ire')->user()->verified == 0) {
-            return redirect()->route('ireEmailVerify');
+        if (Auth::guard('ire')->user()->nid_num == null || Auth::guard('ire')->user()->nid_image == null || Auth::guard('ire')->user()->bank == null) {
+            return redirect()->route('ireRegisterDetails');
         }
-
 
         return $next($request);
     }

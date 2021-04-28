@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'ire' => \App\Http\Middleware\Ire::class,
         'ireAuthentication' => \App\Http\Middleware\IREAuthentication::class,
         'ireEmailVerify' => \App\Http\Middleware\IREemailVerification::class,
+        'ireRegisterDetails' => \App\Http\Middleware\IreRegisterDetails::class,
     ];
 }

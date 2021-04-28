@@ -13,6 +13,12 @@
             </div>
         @endif
 
+        @if (session('login'))
+            <div class="mb-4 text-center font-medium text-sm text-green-600">
+                {{ session('login') }}
+            </div>
+        @endif
+
         <form method="POST" action="{{route('ireLogin')}}">
             @csrf
 
