@@ -58,9 +58,9 @@
             </div>
 
             <div class="flex items-center mt-4" style="margin: auto;width: 50%; padding: 10px;">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Not a member?') }}</span>
+                <span class="ml-2 text-lg text-gray-600">{{ __('Not a member?') }}</span>
                 &nbsp;
-                <a class="underline text-sm text-blue-500 hover:text-gray-900" href="{{ route('register') }}">
+                <a class="underline text-lg text-blue-500 hover:text-gray-900" href="{{ route('register') }}">
                         {{ __('Register') }}
                 </a>
             </div>
