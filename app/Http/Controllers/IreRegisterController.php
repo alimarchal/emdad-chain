@@ -114,7 +114,7 @@ class IreRegisterController extends Controller
                 {
                     foreach ($businessCount as $business)
                     {
-                        $this->userPoCount = DraftPurchaseOrder::where('user_id' , $business->user_id)->where('status' ,'!=', 'cancel')->first();
+                        $this->userPoCount = DraftPurchaseOrder::where(['user_id' => $business->user_id],['status' => 'approved'])->first();
 
                         if (isset($this->userPoCount))
                         {

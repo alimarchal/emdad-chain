@@ -15,7 +15,7 @@
                 @endif
                 <div class="py-3">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <h2 class="text-2xl font-bold text-center">Profile details</h2>
+                        <h2 class="text-2xl font-bold text-center">تفاصيل الملف الشخصي</h2>
                         <x-jet-validation-errors class="mb-4" />
                         <!-- This example requires Tailwind CSS v2.0+ -->
                             <div class="flex flex-col">
@@ -26,20 +26,20 @@
                                                 <thead>
                                                 <tr>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        NAME
+                                                        الاسم
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        Email
+                                                        البريد الإلكتروني
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        Mobile #
+                                                        رقم الجوال #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        Bank
+                                                        بنك
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        National Id number
+                                                        رقم الهوية الوطنية
                                                     </th>
 
 {{--                                                    @if(isset(auth()->guard('ire')->user()->referred_no))--}}

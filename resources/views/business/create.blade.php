@@ -25,7 +25,7 @@
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 2: Business Information</h3>
                             <div class="flex space-x-5 mt-3">
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_name">Business Name @include('misc.required')</label>
-                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="num_of_warehouse">Number of Warehouse @include('misc.required')</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="num_of_warehouse">Select the numbers of Warehouses @include('misc.required')</label>
                                 <input type="hidden" name="business_type" value="{{ auth()->user()->registration_type }}">
                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                             </div>
@@ -41,7 +41,7 @@
 
 
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="business_type">Category @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="business_type">Select the Sub-Categories @include('misc.required')</x-jet-label>
                             </div>
                             <div class="flex mt-3 ">
                                 @include('category.category.index')
@@ -65,7 +65,7 @@
                             <div class="flex space-x-5 mt-3">
 
                                 <x-jet-label class="w-1/2" for="website">Website</x-jet-label>
-                                <x-jet-label class="w-1/2" for="business_email">Business Email @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="business_email">Company Email @include('misc.required')</x-jet-label>
                             </div>
                             <div class="flex space-x-5 mt-3">
 
@@ -182,7 +182,7 @@
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">الخطوة الثانية: معلومات النشاط التجاري</h3>
                             <div class="flex space-x-5 mt-3">
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_name">مسمى النشاط التجاري  @include('misc.required')</label>
-                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="num_of_warehouse">عدد المستودعات@include('misc.required')</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="num_of_warehouse">قم باختيار عدد المستودعات@include('misc.required')</label>
                                 <input type="hidden" name="business_type" value="{{ auth()->user()->registration_type }}">
                                 <input type="hidden" name="supplier_client" value="{{ auth()->user()->supplier_client }}">
                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
@@ -199,7 +199,7 @@
 
 
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="business_type">الفئة@include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="business_type"> قم بتحديد الفئات الفرعية@include('misc.required')</x-jet-label>
                             </div>
                             <div class="flex mt-3 ">
                                 @include('category.category.index')
@@ -207,11 +207,10 @@
 
 
                             <div class="flex space-x-5 mt-3">
-                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_number">Chamber Registration Number@include('misc.required')</label>
-                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_path" title="File type: JPEG|PNG|PDF|DOCX => (Filesize: Max 10MB)">Chamber
-                                    Certificate/File @include('misc.required')</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_number"> رقم السجل التجاري @include('misc.required')</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_path" title="File type: JPEG|PNG|PDF|DOCX => (Filesize: Max 10MB)"> صورة من السجل التجاري @include('misc.required')</label>
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="vat_reg_certificate_number">الرقم الضريبي@include('misc.required')</label>
-                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="vat_reg_certificate_path">الشهادة الضريبية (إن وجدت)@include('misc.required')</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="vat_reg_certificate_path"> صورة من الشهادة الضريبية@include('misc.required')</label>
 
                             </div>
                             <div class="flex space-x-5 mt-3">
@@ -223,7 +222,7 @@
                             <div class="flex space-x-5 mt-3">
 
                                 <x-jet-label class="w-1/2" for="website">الموقع الإلكتروني</x-jet-label>
-                                <x-jet-label class="w-1/2" for="business_email">البريد الإلكتروني@include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="business_email">البريد الالكتروني للمنشأة@include('misc.required')</x-jet-label>
                             </div>
                             <div class="flex space-x-5 mt-3">
 
@@ -231,7 +230,7 @@
                                 <x-jet-input id="business_email" type="email" name="business_email" class="border p-2 w-1/2"></x-jet-input>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="phone">رقم الجوال@include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="phone">رقم الهاتف@include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="mobile">رقم الجوال@include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="country">الدولة@include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="city">المدينة@include('misc.required')</x-jet-label>
@@ -255,7 +254,12 @@
                             </div>
 
                             <div class="flex space-x-5 mt-3">
-                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="bank_name" type="text" name="bank_name" required="required">
+                                <select id="bank_name" name="bank_name" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
+                                    <option value="">None</option>
+                                    @foreach(\App\Models\Bank::all() as $bank_name)
+                                        <option value="{{ $bank_name->name }}">{{ $bank_name->ar_name }}</option>
+                                    @endforeach
+                                </select>
                                 <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="iban" type="text" name="iban" required="required">
                                 <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="longitude" required readonly type="text" name="longitude">
                                 <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="latitude" required readonly type="text" name="latitude">
@@ -263,7 +267,7 @@
 
 
                             <br>
-                            <p>Please use the map marker for your warehouse location.</p>
+                            <p>الرجاء تحديد موقع المنشأة من الخارطة في الأسفل</p>
                             <br>
                             <div id="map" style="width:100%;height:400px; ">
                                 <div style="width: 100%; height: 100%" id="address-map"></div>
@@ -280,7 +284,7 @@
                             </div>
 
                             <div class="flex space-x-5 mt-3">
-                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_photo_url">رمز الشركة</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_photo_url">صورة شعار المنشأة</label>
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-input id="business_photo_url" type="file" name="business_photo_url" class="border p-2 w-1/2"></x-jet-input>
@@ -298,9 +302,9 @@
                                 <label for="policy_procedure" class="flex items-center">
                                     <input id="policy_procedure" type="checkbox" class="form-checkbox" name="policy_procedure" required>
                                     @if(auth()->user()->registration_type == 'Buyer')
-                                        <span class="ml-2 text-sm text-gray-600">I agree</span> <a href="{{route('arabic.policyProcedure.buyer')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('Policy and Procedures') }}</u></a>
+                                        <span class="ml-2 text-sm text-gray-600">أقبل</span> <a href="{{route('arabic.policyProcedure.buyer')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('الشروط والأحكام') }}</u></a>
                                     @elseif(auth()->user()->registration_type == 'Supplier')
-                                        <span class="ml-2 text-sm text-gray-600">I agree</span> <a href="{{route('arabic.policyProcedure.supplier')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('Policy and Procedures') }}</u></a>
+                                        <span class="ml-2 text-sm text-gray-600">أقبل</span> <a href="{{route('arabic.policyProcedure.supplier')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('الشروط والأحكام') }}</u></a>
                                     @endif
                                 </label>
                             </div>

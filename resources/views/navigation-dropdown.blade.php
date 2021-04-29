@@ -91,11 +91,11 @@
 
                     @if (auth()->user()->usertype == 'CEO')
                         @if(auth()->user()->registration_type == 'Buyer')
-                        <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                        <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
                             {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
                         </x-jet-nav-link>
                         @elseif(auth()->user()->registration_type == 'Supplier')
-                            <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                            <x-jet-nav-link href="{{ route('policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
                                 {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
                             </x-jet-nav-link>
                         @endif
@@ -428,20 +428,22 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" style="direction: rtl">
 
                         @role('SuperAdmin|CEO')
-                        <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
-                            <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" />
-                                <circle cx="9" cy="7" r="4" />
-                                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                                <path d="M16 11l2 2l4 -4" />
-                            </svg>
-                            &nbsp;
-                            @if(auth()->user()->hasRole('SuperAdmin'))
-                                {{ __('مشرف المستخدمين') }}
-                            @else
-                                {{ __('المستخدمين') }}
-                            @endif
-                        </x-jet-nav-link>
+                        @if (auth()->user()->status == 3)
+                            <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
+                                <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                    <path d="M16 11l2 2l4 -4" />
+                                </svg>
+                                &nbsp;
+                                @if(auth()->user()->hasRole('SuperAdmin'))
+                                    {{ __('مشرف المستخدمين') }}
+                                @else
+                                    {{ __('المستخدمين') }}
+                                @endif
+                            </x-jet-nav-link>
+                        @endif
                         @endrole
                         @role('SuperAdmin')
                         <x-jet-nav-link href="{{ route('category.create') }}" :active="request()->routeIs('category.*')">
@@ -481,11 +483,11 @@
 
                         @if (auth()->user()->usertype == 'CEO')
                             @if(auth()->user()->registration_type == 'Buyer')
-                                <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                                <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
                                     {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
                                 </x-jet-nav-link>
                             @elseif(auth()->user()->registration_type == 'Supplier')
-                                <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                                <x-jet-nav-link href="{{ route('policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
                                     {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
                                 </x-jet-nav-link>
                             @endif

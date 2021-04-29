@@ -35,7 +35,7 @@
 {{--            <livewire:reference />--}}
 
             <div class="mt-2">
-                <x-jet-label for="referred_no" value="{{ __('الخطوة الأولى: التسجيل') }}"  class="mb-2"  />
+                <x-jet-label for="referred_no" value="{{ __('المرجع (ان وجد)') }}"  class="mb-2"  />
                 <x-jet-input id="referred_no" class="block mt-1 w-full" type="text" name="referred_no" :value="old('referred_no')" autofocus  />
 
                 <x-jet-label for="referred_no_response_found" id="referred_no_response" value=""  class="mb-2" style="color: green" />

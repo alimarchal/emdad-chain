@@ -55,7 +55,10 @@ Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [Dashboa
 Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
 //Route::middleware(['auth:sanctum'])->post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
 Route::middleware(['auth:sanctum'])->post('/registrationType', [UserController::class, 'registrationType']);
-Route::middleware(['auth:sanctum'])->resource('/business', BusinessController::class);
+
+Route::middleware(['packageCheck', 'categoryCheck'])->group(function () {
+    Route::middleware(['auth:sanctum'])->resource('/business', BusinessController::class);
+});
 
 Route::middleware(['auth:sanctum'])->get('/incomplete-business-registration/', [BusinessController::class, 'incomplete'])->name('incompleteBusiness');
 Route::middleware(['auth:sanctum'])->get('/business-status/', [BusinessController::class, 'accountStatus'])->name('accountStatus');
