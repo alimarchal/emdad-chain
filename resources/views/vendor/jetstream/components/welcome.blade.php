@@ -9,7 +9,9 @@
                 Thank you for signing up! Your email address has been verified.
                 <br>Now you need to fill up the business registration form  before adding any user/s.
             @else
-                نشكر لك تسجيلك! تم تفعيل بريدك الإلكتروني بنجاح. <br>
+                نشكرك لتسجيلك معنا
+                !
+                تم تفعيل بريدك الإلكتروني بنجاح. <br>
                 بإمكانك الآن تعبئة بيانات استمارة نشاطك التجاري قبل إضافة أي من المستخدمين.
             @endif
         </div>
@@ -115,7 +117,11 @@
                             <form action="{{url('registrationType')}}" method="post">
                                 @csrf
                                 <select id="registration_type" name="registration_type" class="border p-2 w-full" required>
-                                    <option value="">None</option>
+                                    @if (auth()->user()->rtl == 0)
+                                        <option value="">None</option>
+                                    @else
+                                        <option value="">لم يتم التحديد</option>
+                                    @endif
                                     @if (auth()->user()->rtl == 0)
                                         <option value="Buyer">Buyer</option>
                                         <option value="Supplier">Supplier</option>

@@ -40,7 +40,11 @@
 
                             <div class="col-span-12">
                                 <label class="block font-medium text-sm text-gray-700 mb-3" for="parent_category">
+                                    @if(auth()->user()->rtl == 0)
                                     Select Category
+                                    @else
+                                        قم بإختيار الفئة الرئيسية
+                                    @endif
                                 </label>
                                 <select id="sel_1" class="w-full inline" name="category_id[]" multiple required>
                                     @foreach ($parentCategories as $cate)
@@ -53,7 +57,12 @@
                         &nbsp;
                         <div class="flex justify-end">
                             <button type="submit" class="inline-flex px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-Blue-600 transition ease-in-out duration-150">
-                                Submit
+                                @if(auth()->user()->rtl == 0)
+                                    Submit
+                                @else
+                                    التالي
+                                @endif
+
                             </button>
                         </div>
                     </form>
@@ -63,7 +72,12 @@
 
                     <div class="flex justify-start">
                         <a href="{{ route('subCategories') }}" target="_blank" class="inline-flex px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                            show all Categories
+                            @if(auth()->user()->rtl == 0)
+                                Show all Categories
+                            @else
+                                مشاهدة جميع الفئات
+                            @endif
+
                         </a>
                     </div>
                 </div>

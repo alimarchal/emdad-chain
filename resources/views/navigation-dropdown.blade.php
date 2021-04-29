@@ -439,7 +439,7 @@
                             @if(auth()->user()->hasRole('SuperAdmin'))
                                 {{ __('مشرف المستخدمين') }}
                             @else
-                                {{ __('المستخدمين') }}
+                                {{ __('إدارة المستخدمين') }}
                             @endif
                         </x-jet-nav-link>
                         @endrole
