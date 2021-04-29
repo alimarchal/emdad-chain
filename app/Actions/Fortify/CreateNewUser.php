@@ -23,6 +23,7 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
+//        dd($input);
         $time = strtotime($input['nid_exp_date']);
         $newformat = date('Y-m-d',$time);
         $input['nid_exp_date'] = $newformat;
