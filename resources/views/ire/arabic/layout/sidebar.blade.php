@@ -8,12 +8,12 @@
      class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0" style="direction: rtl">
     <div class="flex items-center justify-center mt-8" style="direction: rtl">
         <div class="flex items-center">
-            <a href="{{ route('ireArabicDashboard') }}">
+            <a href="{{ route('ireArabicDashboard') }}" style="direction: rtl">
                 <img src="{{ url('logo.png') }}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto"/>
             </a>
-            <a href="{{ route('ireArabicDashboard') }}">
-                <span class="text-white text-2xl mx-2 font-semibold" style="font-family: Nunito,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;">
-                    IRE
+            <a href="{{ route('ireArabicDashboard') }}" style="direction: rtl">
+                <span class="text-white text-2xl mx-6 font-semibold" style="font-family: Nunito,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;">
+                    رقم الممثل المستقل
                 </span>
             </a>
         </div>
@@ -45,7 +45,7 @@
                       clip-rule="evenodd"></path>
                 <path fill-rule="evenodd" d="M10 10a1 1 0 011 1c0 2.236-.46 4.368-1.29 6.304a1 1 0 01-1.838-.789A13.952 13.952 0 009 11a1 1 0 011-1z" clip-rule="evenodd"></path>
             </svg>
-            <span class="mx-3">Incomplete References</span>
+            <span class="mx-3">التوصيات غير المكتملة</span>
         </a>
 
             {{-- Payments --}}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\Bank;
+use App\Models\DraftPurchaseOrder;
 use App\Models\Ire;
 use App\Models\IreCommission;
 use App\Notifications\verifyEmail;
@@ -99,19 +100,33 @@ class IreRegisterController extends Controller
         }
         else
         {
+            $poCount = 0;
+
             $ireReferred = Ire::where('ire_no', $request->referred_no)->first();
 
             if (isset($ireReferred))
             {
-                $businessCount = IreCommission::where('type', '!=', 0)->where(['ire_no' => $request->referred_no],['status' => 1])->count();
+                $businessCount = IreCommission::where('type', '!=', 0)->where(['ire_no' => $request->referred_no],['status' => 1])->get();
                 $current = Carbon::now();
                 $days = $current->diffInDays($ireReferred->created_at);
 
-                if ($days >= 30 && $businessCount >= 5)
+                if (isset($businessCount) && count($businessCount) > 0 )
+                {
+                    foreach ($businessCount as $business)
+                    {
+                        $this->userPoCount = DraftPurchaseOrder::where('user_id' , $business->user_id)->where('status' ,'!=', 'cancel')->first();
+
+                        if (isset($this->userPoCount))
+                        {
+                            $poCount += 1;
+                        }
+                    }
+                }
+                if ($days >= 30 && $poCount >= 5)
                 {
                     IreCommission::create([
                         'ire_no' => $request->referred_no,
-                        'user_id' => $ire->id,
+                        'user_id' => \auth()->guard('ire')->user()->id,
                         'type' => 0,
                         'status' => 1,
                     ]);
