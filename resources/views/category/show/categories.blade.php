@@ -25,7 +25,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
-                    <h2 class="text-2xl font-bold text-center">Categories</h2>
+                    @if(auth()->user()->rtl == 0)
+                        <h2 class="text-2xl font-bold text-center">Categories</h2>
+                    @else
+                        <h2 class="text-2xl font-bold text-center">الفئات المتاحة</h2>
+                    @endif
+
                     <x-jet-validation-errors class="mb-4" />
 
                     @if (session('message'))
