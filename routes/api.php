@@ -38,6 +38,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('DeliveryNote', \App\Http\Controllers\Api\v1\DeliveryNoteController::class);
     Route::apiResource('User', \App\Http\Controllers\Api\v1\UserController::class);
     Route::apiResource('Vehicle', \App\Http\Controllers\Api\v1\VehicleController::class);
+    Route::apiResource('RatingReview', \App\Http\Controllers\Api\v1\ReviewRatingController::class);
 });
 
 

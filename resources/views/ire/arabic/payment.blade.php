@@ -34,7 +34,7 @@
                 </script>
                 <div class="py-3">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <h2 class="text-2xl font-bold text-center">List ofPayments</h2>
+                        <h2 class="text-2xl font-bold text-center">قائمة المدفوعات</h2>
                         <x-jet-validation-errors class="mb-4" />
                     @if ($ireCommissions->count())
                         <!-- This example requires Tailwind CSS v2.0+ -->
@@ -49,19 +49,19 @@
                                                         #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        NAME/S OF REFERENCES
+                                                        اسم/أسماء المرجع
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        Email
+                                                        البريد الإلكتروني
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        Mobile #
+                                                        رقم الجوال #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        Type
+                                                        النوع
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        Payment Status
+                                                        حالة الدفع
                                                     </th>
                                                 </tr>
                                                 </thead>

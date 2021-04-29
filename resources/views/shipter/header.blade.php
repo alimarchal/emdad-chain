@@ -59,7 +59,8 @@
                         <div class="row">
                             <div class="col-lg-9 col-md-6">
                                 <ul class="login-r">
-                                    <li><a style="color: white" href="{{route('login')}}">Login</a></li>
+                                    <li><a style="color: white" href="{{route('login')}}">Enter to Platform
+                                        </a></li>
                                 </ul>
                             </div>
 
@@ -74,7 +75,7 @@
         <div class="header-top header-top-2">
             <div class="container">
                 <div class="row">
-                   @include('shipter.header-container')
+                    @include('shipter.header-container')
                 </div>
             </div>
         </div>
@@ -99,11 +100,11 @@
     <!-- header-area end -->
 
     <!-- section-section start -->
-{{--    <div class="contact-page-area section-padding">--}}
-{{--        <div class="container">--}}
-            @yield('main')
-{{--        </div>--}}
-{{--    </div>--}}
+    {{--    <div class="contact-page-area section-padding">--}}
+    {{--        <div class="container">--}}
+    @yield('main')
+    {{--        </div>--}}
+    {{--    </div>--}}
     <!--section-section end -->
 @endif
 

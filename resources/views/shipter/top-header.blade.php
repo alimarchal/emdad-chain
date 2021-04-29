@@ -13,7 +13,9 @@
 {{--        </div>--}}
         <div class="col-lg-9 col-md-6">
             <ul class="login-r">
-                <li><a style="color: white" href="{{route('login')}}">Login</a></li>
+                <li><a style="color: white" href="{{route('login')}}">
+                        Enter to Platform
+                    </a></li>
             </ul>
         </div>
 

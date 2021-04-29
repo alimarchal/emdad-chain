@@ -55,7 +55,10 @@ Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [Dashboa
 Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
 //Route::middleware(['auth:sanctum'])->post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
 Route::middleware(['auth:sanctum'])->post('/registrationType', [UserController::class, 'registrationType']);
-Route::middleware(['auth:sanctum'])->resource('/business', BusinessController::class);
+
+Route::middleware(['packageCheck', 'categoryCheck'])->group(function () {
+    Route::middleware(['auth:sanctum'])->resource('/business', BusinessController::class);
+});
 
 Route::middleware(['auth:sanctum'])->get('/incomplete-business-registration/', [BusinessController::class, 'incomplete'])->name('incompleteBusiness');
 Route::middleware(['auth:sanctum'])->get('/business-status/', [BusinessController::class, 'accountStatus'])->name('accountStatus');
@@ -317,11 +320,8 @@ Route::middleware(['auth:sanctum'])->post('business-package-store/{id}', [Busine
 Route::middleware(['auth:sanctum'])->get('select-category', [CategoryController::class, 'parentCategories'])->name('parentCategories');
 Route::middleware(['auth:sanctum'])->get('sub-categories', [CategoryController::class, 'subCategories'])->name('subCategories');
 
-Route::get('/testOne', function () {
-    return view('test');
-});
+############################################### IREs routes ########################################################
 
-####################### IREs routes ####################################
 Route::middleware(['ireAuthentication'])->group(function () {
 Route::get('ire-register', [IreRegisterController::class, 'register_view'])->name('ireRegister');
 Route::post('ire-register', [IreRegisterController::class, 'ire_register']);
@@ -340,27 +340,45 @@ Route::middleware(['ire'])->group(function () {
     Route::get('email-verify-check/{token}', [IreRegisterController::class, 'email_verify_check'])->name('ireEmailVerifyCheck');
 
     Route::middleware(['ireEmailVerify'])->group(function () {
-
-#################### IREs English Routes ###########################
-    Route::get('ire-registration-details', [IreRegisterController::class, 'ire_register_details_view'])->name('ireRegisterDetails');
+                    ############################### IREs English Routes ###################################
+        Route::get('ire-registration-details', [IreRegisterController::class, 'ire_register_details_view'])->name('ireRegisterDetails');
         Route::post('ire-registration-details', [IreRegisterController::class, 'ire_register_details']);
         Route::get('ar-ire-registration-details', [IreRegisterController::class, 'ire_register_details_arabic_view'])->name('ireRegisterDetailsArabic');
 
-        Route::middleware(['ireRegisterDetails'])->group(function () {
-            Route::get('ire-dashboard', [IreController::class, 'dashboard'])->name('ireDashboard');
-            Route::get('ire-profile', [IreController::class, 'profile'])->name('ireProfile');
-            Route::get('ire-references', [IreController::class, 'reference'])->name('ireReference');
-            Route::get('ire-incomplete-references', [IreController::class, 'incomplete_reference'])->name('ireIncompleteReference');
-            Route::get('ire-payments', [IreController::class, 'payment'])->name('irePayment');
+            Route::middleware(['ireRegisterDetails'])->group(function () {
+                Route::get('ire-dashboard', [IreController::class, 'dashboard'])->name('ireDashboard');
+                Route::get('ire-profile', [IreController::class, 'profile'])->name('ireProfile');
+                Route::get('ire-references', [IreController::class, 'reference'])->name('ireReference');
+                Route::get('ire-incomplete-references', [IreController::class, 'incomplete_reference'])->name('ireIncompleteReference');
+                Route::get('ire-payments', [IreController::class, 'payment'])->name('irePayment');
 
-        #################### IREs Arabic Routes ###########################
-            Route::get('ar-ire-dashboard', [IreController::class, 'arabic_dashboard'])->name('ireArabicDashboard');
-            Route::get('ar-ire-profile', [IreController::class, 'arabic_profile'])->name('ireArabicProfile');
-            Route::get('ar-ire-references', [IreController::class, 'arabic_reference'])->name('ireArabicReference');
-            Route::get('ar-ire-incomplete-references', [IreController::class, 'arabic_incomplete_reference'])->name('ireArabicIncompleteReference');
-            Route::get('ar-ire-payments', [IreController::class, 'arabic_payment'])->name('ireArabicPayment');
-        });
+                        ########################### IREs Arabic Routes #######################################
+                Route::get('ar-ire-dashboard', [IreController::class, 'arabic_dashboard'])->name('ireArabicDashboard');
+                Route::get('ar-ire-profile', [IreController::class, 'arabic_profile'])->name('ireArabicProfile');
+                Route::get('ar-ire-references', [IreController::class, 'arabic_reference'])->name('ireArabicReference');
+                Route::get('ar-ire-incomplete-references', [IreController::class, 'arabic_incomplete_reference'])->name('ireArabicIncompleteReference');
+                Route::get('ar-ire-payments', [IreController::class, 'arabic_payment'])->name('ireArabicPayment');
+            });
     });
 });
-#################### END ##################################################
+############################################################## END ##########################################################################
 
+
+Route::get('/testOne', function () {
+//    $user = \App\Models\User::find(5);
+    $business = \App\Models\Business::find(1);
+
+//    $rating = $business->rating([
+//        'title' => 'This is a test title',
+//        'body' => 'And we will add some shit here',
+//        'customer_service_rating' => 0,
+//        'quality_rating' => 0,
+//        'friendly_rating' => 0,
+//        'pricing_rating' => 0,
+//        'rating' => 1,
+//        'recommend' => 'Yes',
+//        'approved' => true, // This is optional and defaults to false
+//    ], $business);
+//    $ratings = $business->getAllRatings($business->id, 'desc');
+    dd($business->averageRating());
+});

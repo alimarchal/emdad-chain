@@ -35,8 +35,8 @@
 {{--            <livewire:reference />--}}
 
             <div class="mt-2">
-                <x-jet-label for="referred_no" value="{{ __('الخطوة الأولى: التسجيل') }}"  class="mb-2"  />
-                <x-jet-input id="referred_no" class="block mt-1 w-full" type="tel" name="referred_no" :value="old('referred_no')" autofocus  />
+                <x-jet-label for="referred_no" value="{{ __('المرجع (ان وجد)') }}"  class="mb-2"  />
+                <x-jet-input id="referred_no" class="block mt-1 w-full" type="text" name="referred_no" :value="old('referred_no')" autofocus  />
 
                 <x-jet-label for="referred_no_response_found" id="referred_no_response" value=""  class="mb-2" style="color: green" />
                 <x-jet-label for="referred_no_response_not_found" id="referred_no_response_not_found" value="" class="mb-2 text-danger" style="color: red" />
@@ -45,7 +45,7 @@
             <div class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-1 lg:-mx-3 xl:-mx-2">
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <x-jet-label for="gender" value="{{ __('سيد/آنسة/سيدة') }}" class="mb-2" />
+                    <x-jet-label for="gender" value="{{ __('اللقب') }}" class="mb-2" />
                     <select name="gender" id="gender" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name" >
                         <option value="">اختر</option>
                         <option value="Male">سيد</option>
@@ -56,7 +56,7 @@
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <!-- Column Content -->
-                    <x-jet-label for="name" value="{{ __('الاسم') }}" />
+                    <x-jet-label for="name" value="{{ __('الاسم الأول') }}" />
                     <x-jet-input id="name" class="block mt-2 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                 </div>
 
@@ -78,7 +78,7 @@
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <x-jet-label for="nid_num" value="{{ __('رقم الهوية الوطنية') }}" />
-                    <x-jet-input id="nid_num" class="block mt-1 w-full" type="text" pattern="\d*"  maxlength="10" name="nid_num" :value="old('nid_num')" required />
+                    <x-jet-input id="nid_num" class="block mt-1 w-full" type="number" pattern="\d*"  maxlength="10" name="nid_num" :value="old('nid_num')" required />
                 </div>
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
@@ -93,9 +93,10 @@
             </div>
 
 
-            <div class="mt-2">
-                <x-jet-label for="mobile" value="{{ __('رقم الجوال') }}"  class="mb-2"  />
-                <x-jet-input id="mobile" class="block mt-1 w-full" type="tel" name="mobile" :value="old('mobile')"  />
+            <div class="mt-2" style="direction: ltr;">
+                <x-jet-label for="mobile" value="{{ __('رقم الجوال') }}"  class="mb-2 float-right" style="direction: rtl;"  />
+                <input id="phone" name="mobile" type="tel" class="form-input rounded-md shadow-sm block mt-1 w-full" >
+{{--                <x-jet-input id="mobile" class="block mt-1 w-full" type="tel" name="mobile" :value="old('mobile')"  />--}}
             </div>
 
 

@@ -53,7 +53,7 @@
             </div>
 
             <div class="mt-2">
-                <x-jet-label for="nid_image" value="{{ __('Upload National ID (max. 5 MB image)') }}" />
+                <x-jet-label for="nid_image" value="{{ __('تحميل الهوية الوطنية (أقصى حجم للصورة ٥ميغابايت)') }}" />
                 <x-jet-input id="nid_image" type="file" name="nid_image" class="block mt-1 w-full" :value="old('nid_image')" required />
             </div>
 
@@ -82,7 +82,7 @@
 
 
             <div class="mt-2">
-                <x-jet-label for="iban" value="{{ __('IBAN') }}" />
+                <x-jet-label for="iban" value="{{ __('رقم الايبان') }}" />
                 <x-jet-input id="iban" class="block mt-1 w-full" type="text" maxlength="24" name="iban" :value="old('iban')" required />
             </div>
 

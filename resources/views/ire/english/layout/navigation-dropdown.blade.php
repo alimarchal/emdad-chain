@@ -61,7 +61,7 @@
                                     {{ __('Manage Account') }}
                                 </div>
                                 <div class="border-t border-gray-100"></div>
-                                <x-jet-dropdown-link href="{{route(('ireProfile'))}}">
+                                <x-jet-dropdown-link href="{{route('ireProfile')}}">
                                     {{ __('Profile') }}
                                 </x-jet-dropdown-link>
 

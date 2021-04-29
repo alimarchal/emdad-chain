@@ -110,7 +110,7 @@
             <div class="block mt-4">
                 <label for="policy_procedure" class="flex items-center">
                     <input id="policy_procedure" type="checkbox" class="form-checkbox" name="policy_procedure" required>
-                    <span class="ml-2 text-sm text-gray-600">I agree</span> <a href="{{route('arabic.policyProcedure.ire')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('Policy and Procedures') }}</u></a>
+                    <span class="ml-2 text-sm text-gray-600" style="padding-right: 10px;">أقبل</span> <a href="{{route('arabic.policyProcedure.ire')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('الشروط والأحكام') }}</u></a>
                 </label>
             </div>
 
