@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\Contracts;
 use App\Mail\Orders;
 use App\Models\Business;
+use App\Models\BusinessWarehouse;
 use App\Models\POInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,10 +31,16 @@ class POInfoController extends Controller
     public function create()
     {
         $business = Business::where('user_id', auth()->id())->get();
+        $businessWarehouse = BusinessWarehouse::where('user_id', auth()->id())->get();
         if ($business->isEmpty()) {
             session()->flash('message', 'Please enter business information first.');
             return redirect()->route('business.create');
-        } else {
+        }
+        elseif ($businessWarehouse->isEmpty()) {
+            session()->flash('message', 'Please enter warehouse information first.');
+            return redirect()->route('businessWarehouse.create');
+        }
+        else {
             $po = POInfo::where('business_id', auth()->user()->business->id)->get();
             return view('purchaseOrderInfo.create', compact('business', 'po'));
         }

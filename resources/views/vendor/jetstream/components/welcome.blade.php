@@ -7,7 +7,22 @@
 
             @if (auth()->user()->rtl == 0)
                 Thank you for signing up! Your email address has been verified.
-                <br>Now you need to fill up the business registration form  before adding any user/s.
+            @php
+                $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
+                if ($isBusinessDataExist) {
+                    $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
+                    $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
+                }
+            @endphp
+                <br>Now you need to fill up the
+                @if(is_null($isBusinessDataExist))
+                    business
+                @elseif(is_null($isBusinessWarehouseDataExist))
+                    warehouse
+                @elseif(is_null($isBusinessPOIExist))
+                    P.O. Info
+                @endif
+                registration form  before adding any user/s.
             @else
                 نشكرك لتسجيلك معنا
                 !

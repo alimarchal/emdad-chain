@@ -9,8 +9,8 @@
     </select>
 
     <select name="city" id="city" class="form-select select2 rounded-md shadow-sm border p-2 w-1/2" required>
-        <option value="Other" selected>Other</option>
-        @foreach ($list as $city)
+{{--        <option value="Other" selected>Other</option>--}}
+        @foreach (\App\Models\City::all() as $city)
             <option value="{{ $city->name_en }}">{{ $city->name_en . ' - ' . $city->name_ar }}</option>
         @endforeach
     </select>

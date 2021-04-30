@@ -148,8 +148,11 @@ class BusinessController extends Controller
      */
     public function edit(Business $business)
     {
-        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-        $categories = explode(',', auth()->user()->business_package->categories);
+//        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+//        $categories = explode(',', auth()->user()->business_package->categories);
+        $businessPackage = BusinessPackage::where('user_id', \auth()->id())->first();
+        $categories = explode(',',$businessPackage->categories);
+        $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
         return view('business.edit', compact('parentCategories', 'business','categories'));
     }
 

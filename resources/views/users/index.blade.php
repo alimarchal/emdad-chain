@@ -74,7 +74,13 @@
                     @if(auth()->user()->usertype != 'superadmin')
                     <div class="flex flex-wrap" style="justify-content: flex-start">
 
-                        <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Users you can add: </h1>
+                        <h1 class="text-1xl mt-0 pb-0 text-center">
+                            @if(auth()->user()->rtl == 0)
+                            Remaining Users you can add:
+                            @elseif(auth()->user()->rtl == 1)
+                                عدد المستخدمين المتاح اضافتهم:
+                            @endif
+                        </h1>
 
                         <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userRemaining}} </h1>
                     </div>

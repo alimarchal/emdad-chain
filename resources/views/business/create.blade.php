@@ -244,7 +244,12 @@
                                         <option value="{{ $country }}">{{ $country }}</option>
                                     @endforeach
                                 </select>
-                                <x-jet-input id="city" type="text" name="city" class="border p-2 w-1/2" required></x-jet-input>
+                                <select name="city" id="city" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
+                                    <option value="">None</option>
+                                    @foreach (\App\Models\City::all() as $city)
+                                        <option value="{{ $city }}">{{ $city->name_ar }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="bank_name">اسم البنك@include('misc.required')</label>

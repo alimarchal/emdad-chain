@@ -40,8 +40,15 @@ class BusinessWarehouseController extends Controller
      */
     public function create()
     {
-
+        $business = Business::where('user_id', auth()->id())->get();
+        if ($business->isEmpty()) {
+            session()->flash('message', 'Please enter business information first.');
+            return redirect()->route('business.create');
+        }
+        else {
         return view('businessWarehouse.create');
+        }
+
     }
 
     public function businessWarehouseShow(Request $request, $id)

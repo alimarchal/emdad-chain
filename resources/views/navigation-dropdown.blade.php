@@ -70,10 +70,33 @@
 
                     @endif
 
-                    @if (auth()->user()->hasRole('CEO') && (auth()->user()->registration_type == "Buyer" ||  auth()->user()->registration_type == "Supplier"))
-                    <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">
-                        {{ __('Business') }} &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
-                    </x-jet-nav-link>
+                    @if (auth()->user()->hasRole('CEO') && (auth()->user()->registration_type == "Buyer" ||  auth()->user()->registration_type == "Supplier") && auth()->user()->status == 1)
+                        @php
+                            $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
+                            $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
+                            $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
+                        @endphp
+
+                        <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">
+                            {{ __('Business') }} &nbsp;
+                            @if (isset($isBusinessDataExist))
+                            <img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                            @endif
+                        </x-jet-nav-link>
+
+                        <x-jet-nav-link href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}" :active="request()->routeIs('businessWarehouseShow')">
+                            {{ __('Warehouse') }}
+                            @if (isset($isBusinessWarehouseDataExist))
+                                &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                            @endif
+                        </x-jet-nav-link>
+
+                        <x-jet-nav-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}" :active="request()->routeIs('purchaseOrderInfo.*')">
+                            {{ __('P.O. Info') }}
+                            @if (isset($isBusinessPOIExist))
+                                &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                            @endif
+                        </x-jet-nav-link>
 
                     @endif
 
@@ -83,89 +106,105 @@
                     </x-jet-nav-link>
                     @endif
 
+
+                    @if (Auth::user()->status == 1)
+                    @else
+                        @if (Auth::user()->registration_type)
+
+                                @php
+                                    $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
+                                    if ($isBusinessDataExist) {
+                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
+                                        $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
+                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
+                                        $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
+                                    }
+                                @endphp
+
+                            @if (isset($isBusinessDataExist))
+
+                                <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">
+                                    {{ __('Business') }} &nbsp;
+                                    @if (isset($isBusinessDataExist))
+                                        <img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                                    @endif
+                                </x-jet-nav-link>
+
+                            @else
+                                <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">
+                                    {{ __('Business') }} &nbsp;
+                                    @if (isset($isBusinessDataExist))
+                                        <img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                                    @endif
+                                </x-jet-nav-link>
+                            @endif
+
+                            @if (isset($isBusinessWarehouseDataExist))
+
+                                <x-jet-nav-link href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}" :active="request()->routeIs('businessWarehouseShow')">
+                                    {{ __('Warehouse') }}
+                                    @if (isset($isBusinessWarehouseDataExist))
+                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                                    @endif
+                                </x-jet-nav-link>
+
+                            @else
+                                <x-jet-nav-link href="{{ route('businessWarehouse.create') }}" :active="request()->routeIs('businessWarehouse.*')">
+                                    {{ __('Warehouse') }}
+                                    @if (isset($isBusinessWarehouseDataExist))
+                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                                    @endif
+                                </x-jet-nav-link>
+                            @endif
+
+                            @if (isset($isBusinessPOIExist))
+                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}" :active="request()->routeIs('purchaseOrderInfo.*')">
+                                    {{ __('P.O. Info') }}
+                                    @if (isset($isBusinessPOIExist))
+                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                                    @endif
+                                </x-jet-nav-link>
+                            @else
+                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.create') }}" :active="request()->routeIs('purchaseOrderInfo.*')">
+                                    {{ __('P.O. Info') }}
+                                    @if (isset($isBusinessPOIExist))
+                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                                    @endif
+                                </x-jet-nav-link>
+                            @endif
+
+                        @endif
+                    @endif
+
+
                     @if (auth()->user()->usertype != 'CEO')
-                    <x-jet-nav-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
-                        {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
-                    </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                            {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                        </x-jet-nav-link>
                     @endif
 
                     @if (auth()->user()->usertype == 'CEO')
                         @if(auth()->user()->registration_type == 'Buyer')
-                        <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
-                            {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
-                        </x-jet-nav-link>
+                            <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
+                                {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                            </x-jet-nav-link>
                         @elseif(auth()->user()->registration_type == 'Supplier')
                             <x-jet-nav-link href="{{ route('policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
                                 {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
                             </x-jet-nav-link>
                         @endif
                     @endif
-
-
-                    {{--                    @if (Auth::user()->status == 1)--}}
-{{--                    @else--}}
-{{--                        @if (Auth::user()->registration_type)--}}
-{{--
-{{--                                @php--}}
-{{--                                    $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();--}}
-{{--                                    if ($isBusinessDataExist) {--}}
-{{--                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();--}}
-{{--                                        $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();--}}
-{{--                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();--}}
-{{--                                        $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();--}}
-{{--                                    }--}}
-{{--                                @endphp--}}
-{{--                                @if (isset($isBusinessDataExist))--}}
-{{--                                    &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                                @endif--}}
-{{--
-
-
-
-{{--                            @if (isset($isBusinessWarehouseDataExist))--}}
-
-{{--                                <x-jet-nav-link href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}" :active="request()->routeIs('businessWarehouse.*')">--}}
-{{--                                    {{ __('Warehouse') }}--}}
-{{--                                    @if (isset($isBusinessWarehouseDataExist))--}}
-{{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                                    @endif--}}
-{{--                                </x-jet-nav-link>--}}
-
-{{--                            @else--}}
-{{--                                <x-jet-nav-link href="{{ route('businessWarehouse.create') }}" :active="request()->routeIs('businessWarehouse.*')">--}}
-{{--                                    {{ __('Warehouse') }}--}}
-{{--                                    @if (isset($isBusinessWarehouseDataExist))--}}
-{{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                                    @endif--}}
-{{--                                </x-jet-nav-link>--}}
-{{--                            @endif--}}
-
-{{--                            @if (isset($isBusinessPOIExist))--}}
-{{--                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}" :active="request()->routeIs('purchaseOrderInfo.*')">--}}
-{{--                                    {{ __('P.O. Info') }}--}}
-{{--                                    @if (isset($isBusinessPOIExist))--}}
-{{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                                    @endif--}}
-{{--                                </x-jet-nav-link>--}}
-{{--                            @else--}}
-{{--                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.create') }}" :active="request()->routeIs('purchaseOrderInfo.*')">--}}
-{{--                                    {{ __('P.O. Info') }}--}}
-{{--                                    @if (isset($isBusinessPOIExist))--}}
-{{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                                    @endif--}}
-{{--                                </x-jet-nav-link>--}}
-{{--                            @endif--}}
-
-{{--                        @endif--}}
-{{--                    @endif--}}
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @cannot('all')
-                <x-jet-button onclick="language(1)">
-                    <a onclick="language(1)" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;" id="lan">العربية</a>
+{{--                    Uncomment below line when arabic version is ready and delete comming soon line--}}
+{{--                <x-jet-button onclick="language(1)">--}}
+                <x-jet-button>
+{{--                <a onclick="language(1)" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;" id="lan">العربية</a>--}}
+                    <a class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">قريباً</a>
                 </x-jet-button>
                 @endcannot
 
