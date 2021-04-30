@@ -13,8 +13,9 @@
     <link href="{{url('Shipter/assets/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{url('Shipter/assets/css/flaticon.css')}}" rel="stylesheet">
     <!-- Bootstrap core CSS -->
-    {{--    <link href="{{url('Shipter/assets/css/bootstrap.min.css')}}" rel="stylesheet">--}}
-    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
+    <link href="{{url('Shipter/assets/css/bootstrap.min.css')}}" rel="stylesheet">
+{{--    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" >--}}
+{{--    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">--}}
     <!-- Plugins for this template -->
     <link href="{{url('Shipter/assets/css/animate.css')}}" rel="stylesheet">
     <link href="{{url('Shipter/assets/css/owl.carousel.css')}}" rel="stylesheet">
@@ -51,7 +52,7 @@
                     <div class="col-md-6 col-sm-12 col-12 col-lg-6">
                         <ul class="d-flex account_login-area">
                             <li>باستطاعتك الآن التسجيل في منصة إمداد مجاناً
-                                <a href="{{route('english.index')}}" class="btn btn-warning"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top: 4px;">&nbsp;English</a>
+                                <a href="{{route('english.index')}}" class="btn btn-warning"><img alt="" src="{{url('us.png')}}" style="font-family: 'Raleway', sans-serif;margin-right: 2px;margin-top: 4px;">&nbsp;English</a>
                             </li>
                         </ul>
                     </div>

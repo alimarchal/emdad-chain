@@ -3,7 +3,7 @@
         <li>
             باستطاعتك الآن التسجيل في منصة إمداد مجانا ً
 
-            <a href="{{route('english.index')}}" class="btn btn-warning"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top: 4px;">&nbsp;English</a>
+            <a href="{{route('english.index')}}" class="btn btn-warning"><img alt="" src="{{url('us.png')}}" style="font-family: 'Raleway', sans-serif;margin-right: 2px;margin-top: 4px;">&nbsp;English</a>
         </li>
 
 

@@ -1,4 +1,7 @@
 @extends('shipter.layout')
+@section('custom_header_image')
+    background-image: url('photo6.jpg');
+@endsection
 @section('title','Contact Us')
 @section('custom-header')
     <style>

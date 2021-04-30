@@ -19,7 +19,6 @@
               margin-top: 0px!important;
           }
     </style>
-\\
 @endsection
 @section('custom-body-style')
 @endsection

@@ -233,7 +233,7 @@ a:focus {
     top: 30%;
     width: 1px;
     height: 25px;
-    background: #016a8d;
+    background: #eb8e23;
     opacity: .5;
 }
 .header-area {
@@ -2169,7 +2169,7 @@ mobile menu
   line-height: 140px;
   text-align: center;
   color:#ddd;
-  background: rgba(52,204,255,.5);
+  background: #eb8e23;
 }
 .service-area.service-style-3 .service-item .service-text {
     overflow: hidden;
