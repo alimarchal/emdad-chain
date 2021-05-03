@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="header-top header-top-2">
-            <div class="container">
+            <div class="container" style="text-align: right; direction: ltr;">
                 <div class="row">
                     @include('shipterAr.header-container')
                 </div>
@@ -51,7 +51,7 @@
     <!-- header-area end -->
 
     <!-- start of hero -->
-    <section class="hero hero-slider-wrapper hero-style-1 hero-style-2">
+    <section class="hero hero-slider-wrapper hero-style-1 hero-style-2" style="direction: ltr; text-align: right">
         <div class="hero-slider">
             <div class="slide">
                 <img src="{{url('images/hero-bg.jpg')}}" alt class="slider-bg">
@@ -85,7 +85,7 @@
     </section>
     <!-- end of hero slider -->
     <!-- feature-area start -->
-    <div class="features-area features-style-2" style="direction: rtl">
+    <div class="features-area features-style-2" style="direction: rtl; text-align: right;">
         <div class="container">
             <div class="section-title text-center">
                 <span>نقدم لكم الأفضل</span>
@@ -97,7 +97,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="features-item features-item-2">
-                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: left">
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: right;direction: rtl;">
                             <div class="feature-wrap">
                                 <div class="features-icon features-icon2">
                                     <i><img src="{{url('Shipter/assets/images/icon/1.png')}}" alt="" style="width: 40px; transform: rotate(-45deg);"></i>
@@ -108,7 +108,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: left">
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: right;direction: rtl;">
                             <div class="feature-wrap">
                                 <div class="features-icon feature-icon3">
                                     <i><img src="{{url('Shipter/assets/images/icon/2.png')}}" alt="" style="width: 40px;"></i>
@@ -163,7 +163,7 @@
     </div>
     <!-- feature-area start -->
     <!-- .about-area start -->
-    <div class="about-area about-style-2" style="direction: rtl">
+    <div class="about-area about-style-2" style="direction: rtl; text-align: right;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6   about-wrap">
@@ -198,7 +198,7 @@
     </div>
     <!-- about-area end -->
     <!-- service-area start-->
-    <div class="service-area" style="direction: rtl">
+    <div class="service-area" style="direction: rtl; text-align: right;">
         <div class="container">
             <div class="col-l2">
                 <div class="section-title text-center">
