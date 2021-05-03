@@ -1,5 +1,7 @@
 @extends('ire.english.layout.app')
-
+@section('headerScripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js" integrity="sha512-lteuRD+aUENrZPTXWFRPTBcDDxIGWe5uu0apPEn+3ZKYDwDaEErIK9rvR0QzUGmUQ55KFE2RqGTVoZsKctGMVw==" crossorigin="anonymous"></script>
+@endsection
 @section('body')
 {{--<h2 class="font-semibold text-center text-xl text-gray-800 leading-tight" name="header" style="padding-top: 20px;">--}}
 {{--                {{ __('Dashboard') }} - Welcome {{ auth()->user()->gender == "0" ?'Mr. ' . Auth::user()->name: auth()->user()->gender == "1" ? 'Mrs.'. Auth::user()->name}}--}}
@@ -57,6 +59,24 @@
             </div>
         </div>
 
+        <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0" style="padding-top: 15px;">
+            <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+                <div class="p-3 rounded-full bg-pink-600 bg-opacity-75">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </div>
+
+                <div class="mx-5">
+                    @php
+                       $userCreatedAt = \Carbon\Carbon::parse(auth()->guard('ire')->user()->created_at);
+                       $remainingDays = $userCreatedAt->addDays(30);
+                    @endphp
+                    <h4 class="text-2xl font-semibold text-gray-700"></h4>
+                    <div class="text-gray-500"><a>Days remaining</a></div>
+                    <div class="text-gray-500" data-countdown="{{$remainingDays}}"></div>
+                </div>
+            </div>
+        </div>
+
 {{--        <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0" style="padding-top: 15px;">--}}
 {{--            <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">--}}
 {{--                <div class="p-3 rounded-full bg-pink-600 bg-opacity-75">--}}
@@ -73,4 +93,13 @@
 {{--        </div>--}}
     </div>
 </div>
+
+<script>
+    $('[data-countdown]').each(function() {
+        var $this = $(this), finalDate = $(this).data('countdown');
+        $this.countdown(finalDate, function(event) {
+            $this.html(event.strftime('%D day(s) %H:%M:%S'));
+        });
+    });
+</script>
 @endsection
