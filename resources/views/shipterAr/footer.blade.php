@@ -72,6 +72,7 @@
                                 شركة منصة الإمداد التقنية
 
                             </span></strong> ۔ جميع الحقوق محفوظة ۔ مدعوم من  <strong><span>ویب سوفت </span></strong>
+                            @include('shipter.counter')
                     </div>
                 </div>
             </div>

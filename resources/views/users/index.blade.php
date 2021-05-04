@@ -46,7 +46,7 @@
                     @php
                         $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
                         $package = \App\Models\Package::where('id', $business_package->package_id)->first();
-                        if(auth()->user()->usertype != 'superadmin')
+                        if(auth()->user()->usertype != 'SuperAdmin')
                         {
                             $userRemaining = $package->users - $userCount;
                             $driverRemaining = $package->driver - $driverCount;
@@ -66,12 +66,12 @@
                     @php
                         $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
                         $package = \App\Models\Package::where('id', $business_package->package_id)->first();
-                        if(auth()->user()->usertype != 'superadmin')
+                        if(auth()->user()->usertype != 'SuperAdmin')
                         {
                             $userRemaining = $package->users - $userCount;
                         }
                     @endphp
-                    @if(auth()->user()->usertype != 'superadmin')
+                    @if(auth()->user()->usertype != 'SuperAdmin')
                     <div class="flex flex-wrap" style="justify-content: flex-start">
 
                         <h1 class="text-1xl mt-0 pb-0 text-center">
@@ -98,7 +98,7 @@
                             </div>
                         @endif
                     @elseif(auth()->user()->registration_type == 'Buyer')
-                        @if(auth()->user()->usertype != 'superadmin')
+                        @if(auth()->user()->usertype != 'SuperAdmin')
                             @if($userRemaining != 0)
                                 <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
                                     <a href="{{ route('users.create') }}"

@@ -69,13 +69,13 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-6 footer-b">
                     <div class="Recent-News-area">
-{{--                        <h3>Recent News</h3>--}}
-{{--                        <div class="resent-sub">--}}
-{{--                            <p>There are many variations of passages of Lorem</p>--}}
-{{--                            <span><i class="fa fa-clock-o" aria-hidden="true"></i> Octobor 10, 2018</span>--}}
-{{--                        </div>--}}
-{{--                        <p>There are many variations of passages of Lorem</p>--}}
-{{--                        <span><i class="fa fa-clock-o" aria-hidden="true"></i> Octobor 10, 2018</span>--}}
+                        {{--                        <h3>Recent News</h3>--}}
+                        {{--                        <div class="resent-sub">--}}
+                        {{--                            <p>There are many variations of passages of Lorem</p>--}}
+                        {{--                            <span><i class="fa fa-clock-o" aria-hidden="true"></i> Octobor 10, 2018</span>--}}
+                        {{--                        </div>--}}
+                        {{--                        <p>There are many variations of passages of Lorem</p>--}}
+                        {{--                        <span><i class="fa fa-clock-o" aria-hidden="true"></i> Octobor 10, 2018</span>--}}
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 col-12">
@@ -100,6 +100,7 @@
                 <div class="row">
                     <div class="col-12">
                         <span>© Copyright {{date('Y')}} - <strong>{{config('app.name')}}</strong>. All Rights Reserved. Powered by: <strong>Websoft</strong></span>
+                            @include('shipter.counter')
                     </div>
                 </div>
             </div>
