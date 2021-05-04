@@ -2,7 +2,24 @@
 
     <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
         <!-- Primary Navigation Menu -->
+        @php
+            $poCount = 0;
 
+                $businessCount = \App\Models\IreCommission::where('type', '!=', 0)->where(['ire_no' => \auth()->guard('ire')->user()->ire_no],['status' => 1])->get();
+
+                if (isset($businessCount) && count($businessCount) > 0 )
+                {
+                    foreach ($businessCount as $business)
+                    {
+                        $userPoCount = \App\Models\DraftPurchaseOrder::where(['user_id' => $business->user_id],['status' => 'approved'])->first();
+
+                        if (isset($userPoCount))
+                        {
+                            $poCount += 1;
+                        }
+                    }
+                }
+        @endphp
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex">
@@ -12,6 +29,35 @@
                             <!-- <x-jet-application-mark class="block h-9 w-auto"/> -->
                             <img src="{{ url('logo.png') }}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto" />
                         </a>
+                    </div>
+
+                    @if(auth()->guard('ire')->user()->type == 0)
+                    <!-- Days Remaining -->
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            @php
+                                $userCreatedAt = \Carbon\Carbon::parse(auth()->guard('ire')->user()->created_at);
+                                $remainingDays = $userCreatedAt->addDays(30);
+                            @endphp
+                            <x-jet-nav-link href="javascript:void(0)">
+                                Days remaining:   &nbsp;<div class="text-gray-500" data-countdown="{{$remainingDays}}"></div>
+                            </x-jet-nav-link>
+                        </div>
+                    @endif
+
+                    <!-- Remaining Business -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        @php
+                            if ($poCount >= 0 && $poCount <=5)
+                            {
+                                $remainingBusiness = 5 - $poCount;
+                            }
+                            else{
+                                $remainingBusiness = 0;
+                            }
+                        @endphp
+                        <x-jet-nav-link href="javascript:void(0)">
+                            {{ __('Remaining Business') }}  &nbsp;{{$remainingBusiness}}
+                        </x-jet-nav-link>
                     </div>
 
                     <!-- Navigation Links -->
@@ -135,6 +181,13 @@
     </nav>
 
 <script>
+    $('[data-countdown]').each(function () {
+        var $this = $(this), finalDate = $(this).data('countdown');
+        $this.countdown(finalDate, function (event) {
+            $this.html(event.strftime('%D'));
+        });
+    });
+
     function language(rtl_value) {
         $.ajax({
             url: "{{route('ireLanguageChange')}}",

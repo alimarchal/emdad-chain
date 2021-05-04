@@ -109,7 +109,7 @@
 
                     @if (Auth::user()->status == 1)
                     @else
-                        @if (Auth::user()->registration_type)
+                        @if (Auth::user()->registration_type && ! auth()->user()->hasRole('SuperAdmin') )
 
                                 @php
                                     $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();

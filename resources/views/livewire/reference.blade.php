@@ -23,25 +23,47 @@
             </a>
             <br>
             @if(empty(!$reference))
-                @if($user && $days < 30 && $poCount < 5 )
-                    <h1 class="mt-3 text-green-600 ml-3">{{$user->name}}</h1>
-                    <h1 class="mt-3 text-red-600 ml-3" id="days">This reference can't be used at this time</h1>
-                @elseif($user && $days < 30)
-                    <h1 class="mt-3 text-green-600 ml-3">{{$user->name}}</h1>
-                    <h1 class="mt-3 text-red-600 ml-3" id="days">This reference can't be used at this time</h1>
-                @elseif($user && $poCount < 5)
-                    <h1 class="mt-3 text-green-600 ml-3">{{$user->name}}</h1>
-                    <h1 class="mt-3 text-red-600 ml-3" id="days">This reference can't be used at this time</h1>
-                @elseif($user)
-                    <h1 class="mt-3 text-green-600 ml-3">{{$user->name}}</h1>
-                @else
-                    @if(request()->routeIs('ireRegisterDetailsArabic'))
-                        <h1 class="mt-3 ml-3">رقم مرجعي غير صحيح</h1>
+
+                @if($reference->type == 0) {{-- type == 0 => for non-employee  --}}
+
+                    @if($user && $days < 30 && $poCount < 5 )
+                        <h1 class="mt-3 text-green-600 ml-3">{{$user->name}}</h1>
+                        <h1 class="mt-3 text-red-600 ml-3" id="days">This reference can't be used at this time</h1>
+                    @elseif($user && $days < 30)
+                        <h1 class="mt-3 text-green-600 ml-3">{{$user->name}}</h1>
+                        <h1 class="mt-3 text-red-600 ml-3" id="days">This reference can't be used at this time</h1>
+                    @elseif($user && $poCount < 5)
+                        <h1 class="mt-3 text-green-600 ml-3">{{$user->name}}</h1>
+                        <h1 class="mt-3 text-red-600 ml-3" id="days">This reference can't be used at this time</h1>
+                    @elseif($user)
+                        <h1 class="mt-3 text-green-600 ml-3">{{$user->name}}</h1>
                     @else
-                        <h1 class="mt-3 ml-3">Invalid Reference Number</h1>
+                        @if(request()->routeIs('ireRegisterDetailsArabic'))
+                            <h1 class="mt-3 ml-3">رقم مرجعي غير صحيح</h1>
+                        @else
+                            <h1 class="mt-3 ml-3">Invalid Reference Number</h1>
+                        @endif
+
+                    @endif
+
+                @elseif($reference->type == 1) {{-- type == 1 => for employee  --}}
+
+                    @if($user && $poCount < 5 )
+                        <h1 class="mt-3 text-green-600 ml-3">{{$user->name}}</h1>
+                        <h1 class="mt-3 text-red-600 ml-3" id="days">This reference can't be used at this time</h1>
+                    @elseif($user)
+                        <h1 class="mt-3 text-green-600 ml-3">{{$user->name}}</h1>
+                    @else
+                        @if(request()->routeIs('ireRegisterDetailsArabic'))
+                            <h1 class="mt-3 ml-3">رقم مرجعي غير صحيح</h1>
+                        @else
+                            <h1 class="mt-3 ml-3">Invalid Reference Number</h1>
+                        @endif
+
                     @endif
 
                 @endif
+
             @endif
 
         </div>
