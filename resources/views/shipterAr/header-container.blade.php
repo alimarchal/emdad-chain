@@ -13,7 +13,7 @@
             <i class="fa fa-envelope-o" aria-hidden="true"></i>
             <h5><span>البريد الإلكتروني</span>info@emdad-chain.com</h5>
         </li>
-        <li class="account-item">
+        <li class="account-item" style="direction: rtl; text-align: right;">
             <i class="fa fa-map-marker" aria-hidden="true"></i>
             <h5><span>العنوان</span>مركز ابان ١٢٠،<br>طريق الملك عبد العزيز، مخرج ٥ <br>المملكة العربية السعودية، الرياض - ١٣٥٢٥</h5>
         </li>
