@@ -123,13 +123,13 @@
             <div class="mb-3">
                 <label class="font-bold text-sm mb-2 ml-1">Name on card</label>
                 <div>
-                    <input name="source[name]" value="Ali Raza Marchal" class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="John Smith" type="text"/>
+                    <input name="source[name]" value="" class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="John Smith" type="text"/>
                 </div>
             </div>
             <div class="mb-3">
                 <label class="font-bold text-sm mb-2 ml-1">Card number</label>
                 <div>
-                    <input name="source[number]" value="4111111111111111" class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="0000 0000 0000 0000" maxlength="16" minlength="16" type="text"/>
+                    <input name="source[number]" value="" class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="0000 0000 0000 0000" maxlength="16" minlength="16" type="text"/>
                 </div>
             </div>
             <div class="mb-3 -mx-2 flex items-end">
@@ -141,7 +141,7 @@
                             <option value="02">02 - February</option>
                             <option value="03">03 - March</option>
                             <option value="04">04 - April</option>
-                            <option value="05" selected>05 - May</option>
+                            <option value="05">05 - May</option>
                             <option value="06">06 - June</option>
                             <option value="07">07 - July</option>
                             <option value="08">08 - August</option>
@@ -155,8 +155,7 @@
                 <div class="px-2 w-1/2">
                     <label class="font-bold text-sm mb-2 ml-1">Expiration Year</label>
                     <select name="source[year]" class="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer" required>
-                        <option value="2020">2020</option>
-                        <option value="2021" selected>2021</option>
+                        <option value="2021">2021</option>
                         <option value="2022">2022</option>
                         <option value="2023">2023</option>
                         <option value="2024">2024</option>
@@ -171,7 +170,7 @@
             <div class="mb-10">
                 <label class="font-bold text-sm mb-2 ml-1">Security code</label>
                 <div>
-                    <input  name="source[cvc]" value="111"  maxlength="3" minlength="3" class="w-32 px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="000" type="text"/>
+                    <input  name="source[cvc]" value=""  maxlength="3" minlength="3" class="w-32 px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="000" type="text"/>
                 </div>
             </div>
             <div>

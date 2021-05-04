@@ -46,7 +46,6 @@ class BusinessPackageController extends Controller
             return view('subscribePackageView.payment', compact('package'));
         } else {
             $subscription_end_date = Carbon::now()->addYear();
-
             if (auth()->user()->registration_type == 'Buyer') {
                 BusinessPackage::create([
                     'business_type' => 1,

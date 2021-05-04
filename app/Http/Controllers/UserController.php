@@ -22,33 +22,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //        $user = User::find(auth()->user()->id);
-        //        $user->assignRole('writer');
-        //        Role::create(['name' => 'super admin']);
-        //        Role::create(['name' => 'admin']);
-        //        Role::create(['name' => 'gm']);
-        //        Role::create(['name' => 'dh']);
-        //        Role::create(['name' => 'sh']);
-        //        Role::create(['name' => 'user']);
-        //        Permission::create(['name'=>'create user']);
-        //        Permission::create(['name'=>'edit user']);
-        //        Permission::create(['name'=>'delete user']);
-        //        Permission::create(['name'=>'po buyer']);
-        //        Permission::create(['name'=>'qo supplier']);
-
-        //        $permission = Permission::create(['name'=>'edit post']);
-        //        $role = Role::findById(1);
-        //        $permission = Permission::findById(3);
-        //        $role->givePermissionTo($permission);
-        //        $role->revokePermissionTo($permission);
-
-
-        // testing end
-        if (auth()->user()->usertype == "superadmin") {
-
+        if (auth()->user()->hasRole('SuperAdmin')) {
             $users = User::where('id', '!=', Auth::user()->id)->paginate(50);
-//            $users = User::with('roles')->get();
-//            dd($users);
             $business = Business::all();
             return view('users.index', compact('users', 'business'));
         }
@@ -172,6 +147,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+        dd($request->all());
         if (!Gate::allows('create user')) {
             return abort(401);
         }
@@ -187,7 +164,7 @@ class UserController extends Controller
                 'password' => $request->password,
                 'designation' => $request->designation,
                 'business_id' => auth()->user()->business_id,
-                'usertype' => $roleName->name,
+                'usertype' => ($roleName->name == "SuperAdmin"?strtolower($roleName->name):$roleName->name),
                 'status' => 3,
             ];
         }
@@ -244,7 +221,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        if (auth()->user()->usertype == "superadmin") {
+        if (auth()->user()->hasRole('SuperAdmin')) {
 
             $roles  = Role::get()->pluck('name', 'name');
             $permissions = Permission::get()->pluck('name', 'name');

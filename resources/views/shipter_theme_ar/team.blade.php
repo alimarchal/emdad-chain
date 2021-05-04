@@ -118,7 +118,7 @@
                     </div>
                     <div class="team-content">
                         <h4>آلاء الحمزي</h4>
-                        <span>مديرة مشتريات</span>
+                        <span>مشرف مبيعات</span>
                     </div>
                 </div>
             </div>
