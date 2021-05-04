@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\Bank;
+use App\Models\DraftPurchaseOrder;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Fortify;
@@ -24,7 +25,24 @@ class IreController extends Controller
             return redirect()->route('ireArabicDashboard');
         }
 
-        return view('ire.english.dashborad');
+        $poCount = 0;
+
+        $businessCount = IreCommission::where('type', '!=', 0)->where(['ire_no' => \auth()->guard('ire')->user()->ire_no],['status' => 1])->get();
+
+        if (isset($businessCount) && count($businessCount) > 0 )
+        {
+            foreach ($businessCount as $business)
+            {
+                $userPoCount = DraftPurchaseOrder::where(['user_id' => $business->user_id],['status' => 'approved'])->first();
+
+                if (isset($userPoCount))
+                {
+                    $poCount += 1;
+                }
+            }
+        }
+
+        return view('ire.english.dashborad', compact('poCount'));
     }
 
     public function reference()
@@ -92,7 +110,24 @@ class IreController extends Controller
             return redirect()->route('ireDashboard');
         }
 
-        return view('ire.arabic.dashboard');
+        $poCount = 0;
+
+        $businessCount = IreCommission::where('type', '!=', 0)->where(['ire_no' => \auth()->guard('ire')->user()->ire_no],['status' => 1])->get();
+
+        if (isset($businessCount) && count($businessCount) > 0 )
+        {
+            foreach ($businessCount as $business)
+            {
+                $userPoCount = DraftPurchaseOrder::where(['user_id' => $business->user_id],['status' => 'approved'])->first();
+
+                if (isset($userPoCount))
+                {
+                    $poCount += 1;
+                }
+            }
+        }
+
+        return view('ire.arabic.dashboard', compact('poCount'));
     }
 
     public function arabic_reference()

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminIreController;
 use App\Http\Controllers\BankPaymentController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\BusinessPackageController;
@@ -67,6 +68,14 @@ Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Htt
 Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', BusinessWarehouseController::class);
 Route::middleware(['auth:sanctum'])->get('/businessWarehouse/{id}/show', [BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
 Route::middleware(['auth:sanctum'])->resource('/purchaseOrderInfo', POInfoController::class);
+
+####################Admin IREs Controller###################
+Route::middleware(['auth:sanctum'])->get('/ires', [AdminIreController::class, 'index'])->name('adminIres');
+Route::middleware(['auth:sanctum'])->get('/ire-show', [AdminIreController::class, 'show'])->name('adminIreShow');
+Route::middleware(['auth:sanctum'])->post('/ire-edit', [AdminIreController::class, 'edit'])->name('adminIreEdit');
+Route::middleware(['auth:sanctum'])->post('/ire-update', [AdminIreController::class, 'update'])->name('adminIreUpdate');
+####################END#####################################
+
 
 ####################Survey###################
 Route::get('/survey', function () {
