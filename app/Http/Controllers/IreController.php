@@ -82,6 +82,16 @@ class IreController extends Controller
         return view('ire.english.payment', compact('ireCommissions'));
     }
 
+    public function download()
+    {
+        if (\auth()->guard('ire')->user()->rtl == 1)
+        {
+            return redirect()->route('ireArabicDownload');
+        }
+
+        return view('ire.english.download');
+    }
+
     public function profile()
     {
         if (\auth()->guard('ire')->user()->rtl == 1)
@@ -165,6 +175,16 @@ class IreController extends Controller
         $ireCommissions = IreCommission::where('ire_no', \auth()->guard('ire')->user()->ire_no)->where('status', 1)->get();
 
         return view('ire.arabic.payment', compact('ireCommissions'));
+    }
+
+    public function arabic_download()
+    {
+        if (\auth()->guard('ire')->user()->rtl == 0)
+        {
+            return redirect()->route('ireDownload');
+        }
+
+        return view('ire.arabic.download');
     }
 
     public function arabic_profile()

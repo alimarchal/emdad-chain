@@ -47,7 +47,7 @@ class IreRegisterController extends Controller
         ]);
 
         Ire::where('id', $ire->id)->update([
-            'ire_no' => 'IRE00000'.$ire->id,
+            'ire_no' => 'IRE'.$ire->id,
         ]);
 
         $ire->notify(new verifyEmail($ire));

@@ -86,9 +86,9 @@
 {{--            </div>--}}
 
 
-            <div class="mt-2">
-                <x-jet-label for="mobile_number" value="{{ __('رقم الجوال') }}"  class="mb-2"  />
-                <x-jet-input id="mobile_number" class="block mt-1 w-full" type="tel" name="mobile_number" :value="old('mobile_number')"  />
+            <div class="mt-2" style="direction: ltr;">
+                <x-jet-label for="mobile_number" value="{{ __('رقم الجوال') }}"  class="mb-2 float-right" style="direction: rtl;"  />
+                <x-jet-input id="phone" class="block mt-1 w-full" type="tel" name="mobile_number" :value="old('mobile_number')"  />
             </div>
 
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDownloadController;
 use App\Http\Controllers\AdminIreController;
 use App\Http\Controllers\BankPaymentController;
 use App\Http\Controllers\BusinessController;
@@ -74,6 +75,16 @@ Route::middleware(['auth:sanctum'])->get('/ires', [AdminIreController::class, 'i
 Route::middleware(['auth:sanctum'])->get('/ire-show', [AdminIreController::class, 'show'])->name('adminIreShow');
 Route::middleware(['auth:sanctum'])->post('/ire-edit', [AdminIreController::class, 'edit'])->name('adminIreEdit');
 Route::middleware(['auth:sanctum'])->post('/ire-update', [AdminIreController::class, 'update'])->name('adminIreUpdate');
+####################END#####################################
+
+
+#####################Admin Downloads Controller###################
+Route::middleware(['auth:sanctum'])->get('/downloadable-files', [AdminDownloadController::class, 'index'])->name('adminDownload');
+Route::middleware(['auth:sanctum'])->get('/create-downloadable-file', [AdminDownloadController::class, 'create'])->name('adminDownloadCreate');
+Route::middleware(['auth:sanctum'])->post('/store-downloadable-file', [AdminDownloadController::class, 'store'])->name('adminDownloadStore');
+//Route::middleware(['auth:sanctum'])->get('/ire-show', [AdminDownloadController::class, 'show'])->name('adminIreShow');
+//Route::middleware(['auth:sanctum'])->post('/ire-edit', [AdminDownloadController::class, 'edit'])->name('adminIreEdit');
+//Route::middleware(['auth:sanctum'])->post('/ire-update', [AdminDownloadController::class, 'update'])->name('adminIreUpdate');
 ####################END#####################################
 
 
@@ -360,6 +371,7 @@ Route::middleware(['ire'])->group(function () {
                 Route::get('ire-references', [IreController::class, 'reference'])->name('ireReference');
                 Route::get('ire-incomplete-references', [IreController::class, 'incomplete_reference'])->name('ireIncompleteReference');
                 Route::get('ire-payments', [IreController::class, 'payment'])->name('irePayment');
+                Route::get('ire-downloads', [IreController::class, 'download'])->name('ireDownload');
 
                         ########################### IREs Arabic Routes #######################################
                 Route::get('ar-ire-dashboard', [IreController::class, 'arabic_dashboard'])->name('ireArabicDashboard');
@@ -367,6 +379,7 @@ Route::middleware(['ire'])->group(function () {
                 Route::get('ar-ire-references', [IreController::class, 'arabic_reference'])->name('ireArabicReference');
                 Route::get('ar-ire-incomplete-references', [IreController::class, 'arabic_incomplete_reference'])->name('ireArabicIncompleteReference');
                 Route::get('ar-ire-payments', [IreController::class, 'arabic_payment'])->name('ireArabicPayment');
+                Route::get('ar-ire-downloads', [IreController::class, 'arabic_download'])->name('ireArabicDownload');
             });
     });
 });

@@ -1,3 +1,4 @@
+@extends('ire.english.layout.app')
 @section('headerScripts')
     <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
 
@@ -8,7 +9,7 @@
     {{--    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>--}}
     {{--    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>--}}
 @endsection
-@extends('ire.english.layout.app')
+
 
 @section('body')
     {{--        <h2 class="font-semibold text-center text-xl text-gray-800 leading-tight" style="padding-top: 10px;">--}}

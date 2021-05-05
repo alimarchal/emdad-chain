@@ -24,7 +24,7 @@
             <br>
             @if(empty(!$reference))
 
-                @if($reference->type == 0) {{-- type == 0 => for non-employee  --}}
+                @if($userType == 0) {{-- type == 0 => for non-employee  --}}
 
                     @if($user && $days < 30 && $poCount < 5 )
                         <h1 class="mt-3 text-green-600 ml-3">{{$user->name}}</h1>
@@ -41,12 +41,12 @@
                         @if(request()->routeIs('ireRegisterDetailsArabic'))
                             <h1 class="mt-3 ml-3">رقم مرجعي غير صحيح</h1>
                         @else
-                            <h1 class="mt-3 ml-3">Invalid Reference Number</h1>
+                            <h1 class="mt-3 ml-3 text-red-600">Invalid Reference Number</h1>
                         @endif
 
                     @endif
 
-                @elseif($reference->type == 1) {{-- type == 1 => for employee  --}}
+                @elseif($userType == 1) {{-- type == 1 => for employee  --}}
 
                     @if($user && $poCount < 5 )
                         <h1 class="mt-3 text-green-600 ml-3">{{$user->name}}</h1>
@@ -57,11 +57,13 @@
                         @if(request()->routeIs('ireRegisterDetailsArabic'))
                             <h1 class="mt-3 ml-3">رقم مرجعي غير صحيح</h1>
                         @else
-                            <h1 class="mt-3 ml-3">Invalid Reference Number</h1>
+                            <h1 class="mt-3 ml-3 text-red-600">Invalid Reference Number</h1>
                         @endif
 
                     @endif
 
+                @else
+                    <h1 class="mt-3 ml-3 text-red-600">Invalid Reference Number</h1>
                 @endif
 
             @endif
