@@ -2,7 +2,24 @@
 
     <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
         <!-- Primary Navigation Menu -->
+        @php
+            $poCount = 0;
 
+                $businessCount = \App\Models\IreCommission::where('type', '!=', 0)->where(['ire_no' => \auth()->guard('ire')->user()->ire_no],['status' => 1])->get();
+
+                if (isset($businessCount) && count($businessCount) > 0 )
+                {
+                    foreach ($businessCount as $business)
+                    {
+                        $userPoCount = \App\Models\DraftPurchaseOrder::where(['user_id' => $business->user_id],['status' => 'approved'])->first();
+
+                        if (isset($userPoCount))
+                        {
+                            $poCount += 1;
+                        }
+                    }
+                }
+        @endphp
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex">
@@ -14,9 +31,38 @@
                         </a>
                     </div>
 
+                    @if(auth()->guard('ire')->user()->type == 0) {{-- type == 0 is for non-employee--}}
+                        <!-- Days Remaining -->
+                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            @php
+                                $userCreatedAt = \Carbon\Carbon::parse(auth()->guard('ire')->user()->created_at);
+                                $remainingDays = $userCreatedAt->addDays(30);
+                            @endphp
+                            <x-jet-nav-link href="javascript:void(0)" title="Days remaining for anyone can use your reference">
+                                يبقى أيام:   &nbsp;<div class="text-gray-500" data-countdown="{{$remainingDays}}"></div>
+                            </x-jet-nav-link>
+                        </div>
+                    @endif
+
+                    <!-- Remaining Business -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        @php
+                            if ($poCount >= 0 && $poCount <=5)
+                            {
+                                $remainingBusiness = 5 - $poCount;
+                            }
+                            else{
+                                $remainingBusiness = 0;
+                            }
+                        @endphp
+                        <x-jet-nav-link href="javascript:void(0)" title="Business remaining who have incomplete registration or have no PO order">
+                            {{ __('يبقى اعمال:') }}  &nbsp;{{$remainingBusiness}}
+                        </x-jet-nav-link>
+                    </div>
+
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('policyProcedure.ire') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                        <x-jet-nav-link href="{{ route('arabic.policyProcedure.ire') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
                             {{ __('الشروط والأحكام') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
                         </x-jet-nav-link>
                     </div>

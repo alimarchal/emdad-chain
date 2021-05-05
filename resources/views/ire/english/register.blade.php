@@ -37,7 +37,7 @@
 
             <div class="mt-2">
                 <x-jet-label for="mobile_number" value="{{ __('Mobile Number') }}"  class="mb-2"  />
-                <x-jet-input id="mobile_number" class="block mt-1 w-full" type="tel" name="mobile_number" :value="old('mobile_number')"  />
+                <x-jet-input id="phone" class="block mt-1 w-full" type="tel" name="mobile_number" :value="old('mobile_number')"  />
             </div>
 
 

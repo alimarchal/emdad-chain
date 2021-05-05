@@ -13,6 +13,7 @@ class Reference extends Component
     public $reference = '';
     public $count = 0;
     public $user = '';
+    public $userType = '';
     public $days = '';
     public $businessCount = '';
     public $poCount = 0;
@@ -21,6 +22,9 @@ class Reference extends Component
     public function increment()
     {
         $this->user = Ire::where('ire_no', $this->reference)->first();
+        if (isset($this->user)){
+            $this->userType = $this->user->type;
+        }
 //        $this->businessCount = IreCommission::where('type', '!=', 0)->where(['ire_no' => $this->reference],['status' => 1])->count();
         $this->businessCount = IreCommission::where('type', '!=', 0)->where(['ire_no' => $this->reference],['status' => 1])->get();
 

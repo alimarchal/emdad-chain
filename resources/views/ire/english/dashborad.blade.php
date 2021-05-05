@@ -1,8 +1,8 @@
 @extends('ire.english.layout.app')
 @section('headerScripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"
-            integrity="sha512-lteuRD+aUENrZPTXWFRPTBcDDxIGWe5uu0apPEn+3ZKYDwDaEErIK9rvR0QzUGmUQ55KFE2RqGTVoZsKctGMVw=="
-            crossorigin="anonymous"></script>
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"--}}
+{{--            integrity="sha512-lteuRD+aUENrZPTXWFRPTBcDDxIGWe5uu0apPEn+3ZKYDwDaEErIK9rvR0QzUGmUQ55KFE2RqGTVoZsKctGMVw=="--}}
+{{--            crossorigin="anonymous"></script>--}}
 @endsection
 @section('body')
     {{--<h2 class="font-semibold text-center text-xl text-gray-800 leading-tight" name="header" style="padding-top: 20px;">--}}
