@@ -68,12 +68,16 @@
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                         Arabic Name
                                                     </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                        Type
+                                                    </th>
 {{--                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">--}}
 {{--                                                        Icon--}}
 {{--                                                    </th>--}}
-{{--                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">--}}
-{{--                                                        Action--}}
-{{--                                                    </th>--}}
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                        Action
+                                                    </th>
                                                 </tr>
                                                 </thead>
 
@@ -97,31 +101,31 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-{{--                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">--}}
-{{--                                                            <div class="ml-4">--}}
-{{--                                                                <div class="text-sm font-medium text-gray-900">--}}
-{{--                                                                    {{$download->icon}}--}}
-{{--                                                                </div>--}}
-{{--                                                            </div>--}}
-{{--                                                        </td>--}}
-{{--                                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">--}}
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                                            <div class="ml-4">
+                                                                <div class="text-sm font-medium text-gray-900">
+                                                                    <img src="{{\Illuminate\Support\Facades\Storage::url($download->icon)}}">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
 
-{{--                                                            <form action="#" method="post" class="inline-block">--}}
-{{--                                                                @csrf--}}
-{{--                                                                <input type="hidden" name="ire_id" value="">--}}
-{{--                                                                <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE" onsubmit="alert('Are you sure')">--}}
-{{--                                                                    <svg width="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">--}}
-{{--                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />--}}
-{{--                                                                    </svg>--}}
-{{--                                                                </button>--}}
-{{--                                                            </form>--}}
-{{--                                                            <a href="javascript:void(0)" class="text-indigo-600 inline-block hover:text-indigo-900" title="VIEW">--}}
-{{--                                                                <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red">--}}
-{{--                                                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />--}}
-{{--                                                                    <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />--}}
-{{--                                                                </svg>--}}
-{{--                                                            </a>--}}
-{{--                                                        </td>--}}
+                                                            <form action="{{route('adminDownloadEdit')}}" method="post" class="inline-block">
+                                                                @csrf
+                                                                <input type="hidden" name="download_id" value="{{encrypt($download->id)}}">
+                                                                <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="Edit">
+                                                                    <svg width="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                                    </svg>
+                                                                </button>
+                                                            </form>
+                                                            <a href="{{route('adminDownloadDelete', encrypt($download->id))}}" class="text-indigo-600 inline-block hover:text-indigo-900" title="Delete" onsubmit="alert('Are you sure')">
+                                                                <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red">
+                                                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                                                                    <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                                                </svg>
+                                                            </a>
+                                                        </td>
                                                     </tr>
 
                                                 @endforeach

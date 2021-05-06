@@ -1,11 +1,11 @@
+@extends('ire.arabic.layout.app')
 @section('headerScripts')
     <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
-{{--    <link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">--}}
+    {{--    <link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">--}}
 
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-{{--    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>--}}
+    {{--    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>--}}
 @endsection
-@extends('ire.arabic.layout.app')
 
 @section('body')
 
