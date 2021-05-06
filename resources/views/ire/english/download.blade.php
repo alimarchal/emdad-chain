@@ -1,72 +1,123 @@
 @extends('ire.english.layout.app')
 @section('headerScripts')
+    <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 @endsection
 @section('body')
-    <div class="mt-4">
-        <div class="flex flex-wrap -mx-6">
-            <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
-                <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
-                    <div class="p-3 rounded-full bg-indigo-600 bg-opacity-75">
-                        <i class="fa fa-file-pdf"></i>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                @if (session()->has('message'))
+                    <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                        <strong class="mr-1">{{ session('message') }}</strong>
+                        <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                            <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                        </button>
                     </div>
+                @endif
+                <script>
+                    $(document).ready(function() {
+                        $('#alermessage').delay(2000).hide(0);
+                        $('#roles-table').DataTable( {
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'copy', 'csv', 'excel', 'pdf', 'print'
+                            ]
+                        } );
+                    });
 
-                    <div class="mx-5">
-                        <h4 class="text-2xl font-semibold text-gray-700"></h4>
-                        <div class="text-gray-500"><a href="javascript:void(0)">E-business card</a></div>
+                </script>
+                <div class="py-3">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <h2 class="text-2xl font-bold text-center">Downloadable list</h2>
+                        <x-jet-validation-errors class="mb-4" />
+                    @if ($downloads->count())
+                        <!-- This example requires Tailwind CSS v2.0+ -->
+                            <div class="flex flex-col">
+                                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                        <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                            <table class="min-w-full divide-y divide-gray-200" id="roles-table">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                        #
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                        Name
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                        Arabic Name
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                        Type
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                        Download
+                                                    </th>
+                                                </tr>
+                                                </thead>
+
+                                                <tbody class="bg-white divide-y divide-gray-200">
+                                                @foreach ($downloads as $download)
+                                                    <tr>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                            <div class="text-sm text-gray-900">{{$loop->iteration}} </div>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                            <div class="ml-4">
+                                                                <div class="text-sm font-medium text-gray-900">
+                                                                    {{$download->name_en}}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                            <div class="ml-4">
+                                                                <div class="text-sm font-medium text-gray-900">
+                                                                    {{$download->name_ar}}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                                            <div class="ml-4">
+                                                                <div class="text-sm font-medium text-center text-gray-900">
+                                                                    <img src="{{\Illuminate\Support\Facades\Storage::url($download->icon)}}">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+
+                                                            <div class="text-gray-500" style="padding-left: 20%; font-size: 30px;"><a href="{{route('ireDownloadFile', encrypt($download->id))}}"><i class="fa fa-arrow-circle-down"></i></a></div>
+                                                        </td>
+                                                    </tr>
+
+                                                @endforeach
+                                                </tbody>
+
+                                                <!-- More rows... -->
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        @else
+                            <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                                <strong class="mr-1">No record found...!</strong>
+                                <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                                    <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        @endif
                     </div>
-                    <div class="text-gray-500" style="padding-left: 30%; font-size: 35px;"><a href="javascript:void(0)"><i class="fa fa-arrow-circle-down"></i></a></div>
                 </div>
 
-            </div>
-
-            <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
-                <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
-                    <div class="p-3 rounded-full bg-orange-600 bg-opacity-75">
-                        <i class="fa fa-file-excel-o"></i>
-                    </div>
-
-                    <div class="mx-5">
-                        <h4 class="text-2xl font-semibold text-gray-700"></h4>
-                        <div class="text-gray-500"><a href="javascript:void(0)">Sales file</a></div>
-                        <div class="text-gray-500"></div>
-                    </div>
-                    <div class="text-gray-500" style="padding-left: 40%; font-size: 35px;"><a href="javascript:void(0)"><i class="fa fa-arrow-circle-down"></i></a></div>
-                </div>
-            </div>
-
-            <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
-                <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
-                    <div class="p-3 rounded-full bg-pink-600 bg-opacity-75">
-                        <i class="fa fa-file-pdf"></i>
-                    </div>
-
-                    <div class="mx-5">
-                        <h4 class="text-2xl font-semibold text-gray-700"></h4>
-                        <div class="text-gray-500"><a href="javascript:void(0)">Emdad profile</a>
-                        </div>
-                        <div class="text-gray-500"></div>
-                    </div>
-                    <div class="text-gray-500" style="padding-left: 35%; font-size: 35px;"><a href="javascript:void(0)"><i class="fa fa-arrow-circle-down"></i></a></div>
-                </div>
-            </div>
-
-            <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0" style="padding-top: 15px;">
-                <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
-                    <div class="p-3 rounded-full bg-pink-600 bg-opacity-75">
-                        <i class="fa fa-file-powerpoint-o"></i>
-                    </div>
-
-                    <div class="mx-5">
-                        <h4 class="text-2xl font-semibold text-gray-700"></h4>
-                        <div class="text-gray-500"><a href="javascript:void(0)">Sample presentation</a>
-                        </div>
-                        <div class="text-gray-500"></div>
-                    </div>
-                    <div class="text-gray-500" style="padding-left: 20%; font-size: 35px;"><a href="javascript:void(0)"><i class="fa fa-arrow-circle-down"></i></a></div>
-                </div>
             </div>
 
         </div>

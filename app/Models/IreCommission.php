@@ -9,11 +9,16 @@ class IreCommission extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['ire_no', 'user_id', 'type', 'status', 'payment_status'];
+    protected $fillable = ['ire_no', 'user_id', 'type', 'status', 'payment', 'payment_status'];
 
     public function ireReference()
     {
         return $this->belongsTo(Ire::class, 'user_id','id');
+    }
+
+    public function ireNoReferencee()
+    {
+        return $this->belongsTo(Ire::class, 'ire_no','ire_no');
     }
 
     public function nonIreReference()

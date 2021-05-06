@@ -32,6 +32,9 @@
                                                         البريد الإلكتروني
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                        رقم الممثل المستقل #
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                         رقم الجوال #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
@@ -61,6 +64,9 @@
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap">
                                                             <div class="text-sm text-center text-gray-900">{{auth()->guard('ire')->user()->email}}</div>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap">
+                                                            <div class="text-sm text-center text-gray-900">{{auth()->guard('ire')->user()->ire_no}}</div>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                                             <div class="text-sm text-center text-gray-900">{{auth()->guard('ire')->user()->mobile_number}}</div>

@@ -82,9 +82,9 @@ Route::middleware(['auth:sanctum'])->post('/ire-update', [AdminIreController::cl
 Route::middleware(['auth:sanctum'])->get('/downloadable-files', [AdminDownloadController::class, 'index'])->name('adminDownload');
 Route::middleware(['auth:sanctum'])->get('/create-downloadable-file', [AdminDownloadController::class, 'create'])->name('adminDownloadCreate');
 Route::middleware(['auth:sanctum'])->post('/store-downloadable-file', [AdminDownloadController::class, 'store'])->name('adminDownloadStore');
-//Route::middleware(['auth:sanctum'])->get('/ire-show', [AdminDownloadController::class, 'show'])->name('adminIreShow');
-//Route::middleware(['auth:sanctum'])->post('/ire-edit', [AdminDownloadController::class, 'edit'])->name('adminIreEdit');
-//Route::middleware(['auth:sanctum'])->post('/ire-update', [AdminDownloadController::class, 'update'])->name('adminIreUpdate');
+Route::middleware(['auth:sanctum'])->post('/edit-downloadable-file', [AdminDownloadController::class, 'edit'])->name('adminDownloadEdit');
+Route::middleware(['auth:sanctum'])->post('/update-downloadable-file', [AdminDownloadController::class, 'update'])->name('adminDownloadUpdate');
+Route::middleware(['auth:sanctum'])->get('/delete-downloadable-file/{id}', [AdminDownloadController::class, 'delete'])->name('adminDownloadDelete');
 ####################END#####################################
 
 
@@ -360,7 +360,7 @@ Route::middleware(['ire'])->group(function () {
     Route::get('email-verify-check/{token}', [IreRegisterController::class, 'email_verify_check'])->name('ireEmailVerifyCheck');
 
     Route::middleware(['ireEmailVerify'])->group(function () {
-                    ############################### IREs English Routes ###################################
+                       ############################### IREs English Routes ###################################
         Route::get('ire-registration-details', [IreRegisterController::class, 'ire_register_details_view'])->name('ireRegisterDetails');
         Route::post('ire-registration-details', [IreRegisterController::class, 'ire_register_details']);
         Route::get('ar-ire-registration-details', [IreRegisterController::class, 'ire_register_details_arabic_view'])->name('ireRegisterDetailsArabic');
@@ -372,6 +372,7 @@ Route::middleware(['ire'])->group(function () {
                 Route::get('ire-incomplete-references', [IreController::class, 'incomplete_reference'])->name('ireIncompleteReference');
                 Route::get('ire-payments', [IreController::class, 'payment'])->name('irePayment');
                 Route::get('ire-downloads', [IreController::class, 'download'])->name('ireDownload');
+                Route::get('download-file/{id}', [IreController::class, 'download_file'])->name('ireDownloadFile');
 
                         ########################### IREs Arabic Routes #######################################
                 Route::get('ar-ire-dashboard', [IreController::class, 'arabic_dashboard'])->name('ireArabicDashboard');

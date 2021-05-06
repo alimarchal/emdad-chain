@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Models\Bank;
+use App\Models\DownloadableFile;
 use App\Models\DraftPurchaseOrder;
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Support\Env;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Fortify\Fortify;
 use App\Models\Ire;
 use App\Models\IreCommission;
@@ -89,7 +94,19 @@ class IreController extends Controller
             return redirect()->route('ireArabicDownload');
         }
 
-        return view('ire.english.download');
+        $downloads = DownloadableFile::all();
+        return view('ire.english.download', compact('downloads'));
+    }
+
+    public function download_file($id)
+    {
+        $download = DownloadableFile::where('id', decrypt($id))->first();
+
+//        $file = storage_path('app/storage/app/public/'). $download->file;
+        $file = Storage::url($download->file);
+
+        return \Response::download($file, $download->name_en);
+//        return response()->download($file, $download->name_en);
     }
 
     public function profile()
@@ -184,7 +201,9 @@ class IreController extends Controller
             return redirect()->route('ireDownload');
         }
 
-        return view('ire.arabic.download');
+        $downloads = DownloadableFile::all();
+
+        return view('ire.arabic.download', compact('downloads'));
     }
 
     public function arabic_profile()

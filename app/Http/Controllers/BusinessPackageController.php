@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\BusinessPackage;
+use App\Models\Ire;
+use App\Models\IreCommission;
 use App\Models\Package;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -55,6 +57,18 @@ class BusinessPackageController extends Controller
                     'subscription_end_date' => $subscription_end_date,
                 ]);
 
+                $reference = IreCommission::where(['user_id' => auth()->id()],['type' => 1])->first();   /* type 1 for Buyer */
+                if (isset($reference))
+                {
+                    if($reference->ireNoReferencee->type == 0)         /* 0 for non - employee */
+                    {
+                        IreCommission::where('id' , $reference->id)->update([
+                            'payment' => 50
+                        ]);
+                    }
+
+                }
+
                 return redirect()->route('parentCategories');
             } elseif (auth()->user()->registration_type == 'Supplier') {
                 BusinessPackage::create([
@@ -64,6 +78,19 @@ class BusinessPackageController extends Controller
                     'subscription_start_date' => Carbon::now(),
                     'subscription_end_date' => $subscription_end_date,
                 ]);
+
+                $reference = IreCommission::where(['user_id' => auth()->id()],['type' => 2])->first();      /* type 2 for Supplier */
+                if (isset($reference))
+                {
+                    if($reference->ireNoReferencee->type == 0)               /* 0 for non - employee */
+                    {
+                        IreCommission::where('id' , $reference->id)->update([
+                            'payment' => 30
+                        ]);
+                    }
+
+                }
+
                 return redirect()->route('parentCategories');
             }
         }
@@ -145,6 +172,27 @@ class BusinessPackageController extends Controller
                     'subscription_start_date' => Carbon::now(),
                     'subscription_end_date' => $subscription_end_date,
                 ]);
+
+                $reference = IreCommission::where(['user_id' => auth()->id()],['type' => 1])->first();      /* type 1 for Buyer */
+                if (isset($reference))
+                {
+                    if($reference->ireNoReferencee->type == 0)               /* 0 for non - employee */
+                    {
+                        $payment = round($package->charges * 0.1, 2);
+                        IreCommission::where('id' , $reference->id)->update([
+                            'payment' => $payment
+                        ]);
+                    }
+                    elseif ($reference->ireNoReferencee->type == 1)          /* 1 for employee */
+                    {
+                        $payment = round($package->charges * 0.03, 2);
+                        IreCommission::where('id' , $reference->id)->update([
+                            'payment' => $payment
+                        ]);
+                    }
+
+                }
+
                 return redirect()->route('parentCategories');
             } elseif (auth()->user()->registration_type == 'Supplier') {
                 BusinessPackage::create([
@@ -155,6 +203,27 @@ class BusinessPackageController extends Controller
                     'subscription_start_date' => Carbon::now(),
                     'subscription_end_date' => $subscription_end_date,
                 ]);
+
+                $reference = IreCommission::where(['user_id' => auth()->id()],['type' => 2])->first();      /* type 2 for Supplier */
+                if (isset($reference))
+                {
+                    if($reference->ireNoReferencee->type == 0)               /* 0 for non - employee */
+                    {
+                        $payment = round($package->charges * 0.1, 2);
+                        IreCommission::where('id' , $reference->id)->update([
+                            'payment' => $payment
+                        ]);
+                    }
+                    elseif ($reference->ireNoReferencee->type == 1)          /* 1 for employee */
+                    {
+                        $payment = round($package->charges * 0.03, 2);
+                        IreCommission::where('id' , $reference->id)->update([
+                            'payment' => $payment
+                        ]);
+                    }
+
+                }
+
                 return redirect()->route('parentCategories');
             }
         }
