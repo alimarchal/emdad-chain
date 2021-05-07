@@ -29,6 +29,7 @@ class IreRegisterController extends Controller
         Validator::make($request->all(), [
             'firstName' => ['required', 'string', 'max:55'],
             'lastName' => ['required', 'string'],
+            'gender' => ['required'],
             'mobile_number' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:ires'],
             'password' => $this->passwordRules(),
@@ -40,6 +41,7 @@ class IreRegisterController extends Controller
 
         $ire = Ire::create([
             'name' => $request['firstName'].' '.$request['lastName'],
+            'gender' => $request['gender'],
             'mobile_number' => $request['mobile_number'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
@@ -72,7 +74,6 @@ class IreRegisterController extends Controller
     {
         Validator::make($request->all(), [
             'referred_no' => ['string', 'nullable'],
-            'gender' => ['required'],
             'nid_num' => ['required', 'string', 'max:10'],
             'nid_image' => ['required', 'file','mimes:jpeg,jpg,png', 'max:5120'],
             'type' => ['required'],
@@ -86,7 +87,6 @@ class IreRegisterController extends Controller
 
         $ire = Ire::where('id', \auth()->guard('ire')->user()->id)->update([
             'referred_no' => $request['referred_no'],
-            'gender' => $request['gender'],
             'nid_num' => $request['nid_num'],
             'nid_image' => $request['nid_image'],
             'type' => $request['type'],
