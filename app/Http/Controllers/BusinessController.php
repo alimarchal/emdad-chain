@@ -75,7 +75,6 @@ class BusinessController extends Controller
         $request->validate([
             'user_id' => 'required',
             'business_name' => 'required',
-            'num_of_warehouse' => 'required',
             'business_photo_url_1' => 'required|mimes:jpeg,jpg,png,gif,csv,txt,pdf',
             'category' => 'required',
             'business_type' => 'required',

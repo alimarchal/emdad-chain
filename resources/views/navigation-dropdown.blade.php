@@ -292,7 +292,7 @@
                         @endcan
 
 {{--                        @can('create user' && Auth::user()->status == 3)--}}
-                            @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
+                            @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
 
                             @if (auth()->user()->business_id)
                                 <div class="border-t border-gray-100"></div>

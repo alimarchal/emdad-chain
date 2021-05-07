@@ -25,18 +25,18 @@
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 2: Business Information</h3>
                             <div class="flex space-x-5 mt-3">
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_name">Business Name @include('misc.required')</label>
-                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="num_of_warehouse">Select the numbers of Warehouses @include('misc.required')</label>
+{{--                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="num_of_warehouse">Select the numbers of Warehouses @include('misc.required')</label>--}}
                                 <input type="hidden" name="business_type" value="{{ auth()->user()->registration_type }}">
                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2" required></x-jet-input>
-                                <select name="num_of_warehouse" id="num_of_warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
-                                    <option value="">None</option>
-                                    @for ($count = 1; $count <= 100; $count++)
-                                        <option value="{{ $count }}">{{ $count }}</option>
-                                    @endfor
-                                </select>
+{{--                                <select name="num_of_warehouse" id="num_of_warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>--}}
+{{--                                    <option value="">None</option>--}}
+{{--                                    @for ($count = 1; $count <= 100; $count++)--}}
+{{--                                        <option value="{{ $count }}">{{ $count }}</option>--}}
+{{--                                    @endfor--}}
+{{--                                </select>--}}
                             </div>
 
 
@@ -105,7 +105,7 @@
 
 
                             <br>
-                            <p>Please use the map marker for your warehouse location.</p>
+                            <p>Please use the map marker for your office location.</p>
                             <br>
                             <div id="map" style="width:100%;height:400px; ">
                                 <div style="width: 100%; height: 100%" id="address-map"></div>

@@ -148,7 +148,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        dd($request->all());
+//        dd($request->all());
         if (!Gate::allows('create user')) {
             return abort(401);
         }
