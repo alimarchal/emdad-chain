@@ -7,6 +7,7 @@ use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\BusinessPackageController;
 use App\Http\Controllers\BusinessWarehouseController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommissionPercentageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DeliveryController;
@@ -85,6 +86,15 @@ Route::middleware(['auth:sanctum'])->post('/store-downloadable-file', [AdminDown
 Route::middleware(['auth:sanctum'])->post('/edit-downloadable-file', [AdminDownloadController::class, 'edit'])->name('adminDownloadEdit');
 Route::middleware(['auth:sanctum'])->post('/update-downloadable-file', [AdminDownloadController::class, 'update'])->name('adminDownloadUpdate');
 Route::middleware(['auth:sanctum'])->get('/delete-downloadable-file/{id}', [AdminDownloadController::class, 'delete'])->name('adminDownloadDelete');
+####################END#####################################
+
+######################Admin Commission Controller###################
+Route::middleware(['auth:sanctum'])->get('/commission-percentages', [CommissionPercentageController::class, 'index'])->name('adminPercentage');
+Route::middleware(['auth:sanctum'])->get('/create-commission-percentage', [CommissionPercentageController::class, 'create'])->name('adminPercentageCreate');
+Route::middleware(['auth:sanctum'])->post('/store-commission-percentage', [CommissionPercentageController::class, 'store'])->name('adminPercentageStore');
+//Route::middleware(['auth:sanctum'])->post('/edit-commission-percentage', [CommissionPercentageController::class, 'edit'])->name('adminPercentageEdit');
+//Route::middleware(['auth:sanctum'])->post('/update-commission-percentage', [CommissionPercentageController::class, 'update'])->name('adminPercentageUpdate');
+//Route::middleware(['auth:sanctum'])->get('/delete-commission-percentage/{id}', [CommissionPercentageController::class, 'delete'])->name('adminPercentageDelete');
 ####################END#####################################
 
 

@@ -34,16 +34,6 @@
             <div class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-1 lg:-mx-3 xl:-mx-2">
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <x-jet-label for="gender" value="{{ __('Mr/Ms/Mrs') }}" class="mb-1" />
-                    <select name="gender" id="gender" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="gender">
-                        <option disabled selected value="">Select</option>
-                        <option {{ old('gender') == 0 ? 'selected' : '' }} value="0">Mr.</option>
-                        <option {{ old('gender') == 1 ? 'selected' : '' }} value="1">Ms.</option>
-                        <option {{ old('gender') == 2 ? 'selected' : '' }} value="1">Mrs.</option>
-                    </select>
-                </div>
-
-                <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <x-jet-label for="nid_num" value="{{ __('National ID Number') }}" />
                     <x-jet-input id="nid_num" class="block mt-1 w-full" type="text" pattern="\d*"  maxlength="10" name="nid_num" :value="old('nid_num')" required />
                 </div>
