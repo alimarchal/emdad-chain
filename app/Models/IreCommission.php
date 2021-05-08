@@ -9,7 +9,7 @@ class IreCommission extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['ire_no', 'user_id', 'type', 'status', 'payment', 'payment_status'];
+    protected $fillable = ['ire_no', 'user_id', 'type', 'status', 'payment', 'sales_amount', 'payment_status'];
 
     public function ireReference()
     {

@@ -1,6 +1,5 @@
 @section('headerScripts')
-{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{{--    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />--}}
 @endsection
 <x-app-layout>
     <x-slot name="header">
@@ -25,6 +24,7 @@
                     @if($errors->first('ire_type'))<li><strong class="mr-1"> IRE Type is required </strong></li> &nbsp;@endif
                     @if($errors->first('amount_type'))<li><strong class="mr-1"> Amount Type is required </strong></li> @endif
                     @if($errors->first('amount'))<li><strong class="mr-1"> Amount is required </strong></li> @endif
+                    @if($errors->first('percentage_amount'))<li><strong class="mr-1"> Amount % is required </strong></li> @endif
                 </div>
             @endif
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -48,28 +48,28 @@
                             </select>
                             <select id="supplier_packages" style="display: none" name="package_type" class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{ old('package_type') }}">
                                 <option disabled selected value="">None</option>
-                                <option value="0">Basic</option>
-                                <option value="1">Silver</option>
-                                <option value="2">Gold</option>
+                                <option value="1">Basic</option>
+                                <option value="2">Silver</option>
+                                <option value="3">Gold</option>
                             </select>
                             <select id="buyer_packages" style="display: none" name="package_type" class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{ old('package_type') }}">
                                 <option disabled selected value="">None</option>
-                                <option value="0">Basic</option>
-                                <option value="1">Silver</option>
-                                <option value="2">Gold</option>
-                                <option value="3">Platinum</option>
+                                <option value="1">Basic</option>
+                                <option value="2">Silver</option>
+                                <option value="3">Gold</option>
+                                <option value="4">Platinum</option>
                             </select>
-                            <select name="ire_type" id="ire_type" class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{ old('ire_type') }}">
-                                <option value="">None</option>
-                                <option value="0">Employee</option>
-                                <option value="1">Non-Employee</option>
-                                <option value="2">Indirect Referral</option>
+                            <select name="ire_type" id="ire_type" class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{ old('ire_type') }}" required>
+                                <option selected disabled value="">None</option>
+                                <option {{old('ire_type') == '0' ? 'selected' : ''}} value="0">Non-Employee</option>
+                                <option {{old('ire_type') == '1' ? 'selected' : ''}} value="1">Employee</option>
+                                <option {{old('ire_type') == '2' ? 'selected' : ''}} value="2">Indirect Referral</option>
                             </select>
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-label class="w-1/2" for="amount_type">Amount Type</x-jet-label>
-                            <x-jet-label class="w-1/2" for="amount">Amount(Select if amount type Amount selected)</x-jet-label>
-                            <x-jet-label class="w-1/2" for="amount">Amount(Select if amount type Percentage selected)</x-jet-label>
+                            <x-jet-label class="w-1/2" for="amount">Amount</x-jet-label>
+                            <x-jet-label class="w-1/2" for="percentage_amount">Amount %</x-jet-label>
                         </div>
                         <div class="flex space-x-5 mt-3" required>
                             <select name="amount_type" id="amount_type" class="form-input rounded-md shadow-sm border p-2 w-1/2" onchange="disable()" value="{{ old('amount_type') }}" required>
@@ -77,18 +77,20 @@
                                 <option value="0">Amount</option>
                                 <option value="1">Percentage</option>
                             </select>
-                            <select name="amount" id="js-example-basic-single-amount" class="form-input rounded-md shadow-sm border p-2 w-1/2" style="width: 50%" value="{{ old('amount') }}" required disabled>
-                                @php $amounts = range(0, 6000, 5); @endphp
-                                @foreach($amounts as $amount)
-                                    <option value="{{$amount}}">{{$amount}}</option>
-                                @endforeach
-                            </select>
-                            <select name="amount" id="js-example-basic-single-percentage" class="form-input rounded-md shadow-sm border p-2 w-1/2" style="width: 50%" value="{{ old('amount') }}" required disabled>
-                                @php $amounts = range(1, 100, 1); @endphp
-                                @foreach($amounts as $amount)
-                                    <option value="{{$amount}}">{{$amount}}</option>
-                                @endforeach
-                            </select>
+                            <x-jet-input id="amount" type="number" name="amount" class="border p-2 w-1/2" value="{{ old('amount') }}" step="1" min="1" placeholder="Enter amount" disabled></x-jet-input>
+                            <x-jet-input id="percentage" type="number" name="percentage_amount" class="border p-2 w-1/2" value="{{ old('percentage_amount') }}" step="0.01" min="1" placeholder="Enter amount in percentage" disabled></x-jet-input>
+{{--                            <select name="amount" id="js-example-basic-single-amount" class="form-input rounded-md shadow-sm border p-2 w-1/2" style="width: 50%" value="{{ old('amount') }}" required disabled>--}}
+{{--                                @php $amounts = range(0, 6000, 5); @endphp--}}
+{{--                                @foreach($amounts as $amount)--}}
+{{--                                    <option value="{{$amount}}">{{$amount}}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                            <select name="amount" id="js-example-basic-single-percentage" class="form-input rounded-md shadow-sm border p-2 w-1/2" style="width: 50%" value="{{ old('amount') }}" required disabled>--}}
+{{--                                @php $amounts = range(1, 100, 1); @endphp--}}
+{{--                                @foreach($amounts as $amount)--}}
+{{--                                    <option value="{{$amount}}">{{$amount}}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
                         </div>
                         <br>
 
@@ -106,12 +108,12 @@
     </div>
 </x-app-layout>
 
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+{{--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
 <script>
-    $(document).ready(function() {
-        $('#js-example-basic-single-amount').select2();
-        $('#js-example-basic-single-percentage').select2();
-    });
+    // $(document).ready(function() {
+        // $('#js-example-basic-single-amount').select2();
+        // $('#js-example-basic-single-percentage').select2();
+    // });
 
     function packageType()
     {
@@ -143,12 +145,14 @@
         // let value = $( "#amount_type" ).val();
         if (value == 0)
         {
-            $('#js-example-basic-single-amount').select2('enable', [ true ]);
-            $('#js-example-basic-single-percentage').select2('enable', [ false ]);
+            $('#amount').removeAttr('disabled');
+            $('#percentage').prop('disabled', true);
+            $('#percentage').val('');
         }
         else if(value == 1){
-            $('#js-example-basic-single-percentage').select2('enable', [ true ]);
-            $('#js-example-basic-single-amount').select2('enable', [ false ]);
+            $('#percentage').removeAttr('disabled');
+            $('#amount').prop('disabled', true);
+            $('#amount').val('');
         }
     }
 </script>

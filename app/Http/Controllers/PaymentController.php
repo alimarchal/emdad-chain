@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CommissionPercentage;
 use App\Models\DeliveryNote;
 use App\Models\DraftPurchaseOrder;
 use App\Models\EmdadInvoice;
 use App\Models\Invoice;
+use App\Models\IreCommission;
 use App\Models\Payment;
 use App\Models\ProformaInvoice;
 use App\Models\Qoute;
@@ -158,11 +160,41 @@ class PaymentController extends Controller
         $totalEmdadCharges = ($totalCost * (1.5 / 100));    // Total emdad charges applicable
         $totalCharges =  $totalCost + $totalEmdadCharges ;  // Total emdad charges
 
-        EmdadInvoice::create([
-            'invoice_id' => $invoiceProforma->id,
-            'supplier_business_id' => $invoiceProforma->supplier_business_id,
-            'charges' => $totalCharges,
-        ]);
+        $emdadCharges = EmdadInvoice::create([
+                        'invoice_id' => $invoiceProforma->id,
+                        'supplier_business_id' => $invoiceProforma->supplier_business_id,
+                        'charges' => $totalCharges,
+                    ]);
+
+        $user = IreCommission::where('user_id', auth()->id())->first();
+
+        /* Sales commission calculations for employee or non-employee */
+
+        if (isset($user))
+        {
+            if ($user->ireNoReferencee->type == 0)       /* 0 for Non-Employee*/
+            {
+                $commission = CommissionPercentage::where(['commission_type' => 0], ['ire_type', 0])->first();
+                if (isset($commission))
+                {
+                    $total = $emdadCharges * $commission->amount;
+                    IreCommission::where('user_id', auth()->id())->update([
+                        'sales_amount' => $total,
+                    ]);
+                }
+            }
+            elseif ($user->ireNoReferencee->type == 1)  /* 1 for Employee*/
+            {
+                $commission = CommissionPercentage::where(['commission_type' => 0], ['ire_type', 1])->first();
+                if (isset($commission))
+                {
+                    $total = $emdadCharges * $commission->amount;
+                    IreCommission::where('user_id', auth()->id())->update([
+                        'sales_amount' => $total,
+                    ]);
+                }
+            }
+        }
 
         return redirect()->route('generate_proforma_invoices');
     }

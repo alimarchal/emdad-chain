@@ -76,6 +76,10 @@
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                         Ire Type
                                                     </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                        Package Type
+                                                    </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                         Action
                                                     </th>
@@ -91,14 +95,24 @@
                                                         <td class="px-6 py-4 whitespace-nowrap text-center">
                                                             <div class="ml-4">
                                                                 <div class="text-sm font-medium text-gray-900">
-                                                                    {{$commissionPercentage->commission_type}}
+                                                                  @if($commissionPercentage->commission_type == 0)
+                                                                      Sales
+                                                                  @elseif($commissionPercentage->commission_type == 1)
+                                                                      Supplier
+                                                                  @elseif($commissionPercentage->commission_type == 2)
+                                                                      Buyer
+                                                                  @endif
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-center">
                                                             <div class="ml-4">
                                                                 <div class="text-sm font-medium text-gray-900">
-                                                                    {{$commissionPercentage->amount_type}}
+                                                                    @if($commissionPercentage->amount_type == 0)
+                                                                        Amount
+                                                                    @elseif($commissionPercentage->amount_type == 1)
+                                                                        Amount in %
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -112,27 +126,50 @@
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
                                                             <div class="ml-4">
                                                                 <div class="text-sm font-medium text-gray-900">
-                                                                    {{$commissionPercentage->ire_type}}
+                                                                    @if($commissionPercentage->ire_type == 0)
+                                                                        Non-Employee
+                                                                    @elseif($commissionPercentage->ire_type == 1)
+                                                                        Employee
+                                                                    @elseif($commissionPercentage->ire_type == 2)
+                                                                        Indirect Referral
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                                            <div class="ml-4">
+                                                                <div class="text-sm font-medium text-gray-900">
+                                                                    @if($commissionPercentage->package_type == 1)
+                                                                        Basic
+                                                                    @elseif($commissionPercentage->package_type == 2)
+                                                                        Silver
+                                                                    @elseif($commissionPercentage->package_type == 3)
+                                                                        Gold
+                                                                    @elseif($commissionPercentage->package_type == 4)
+                                                                        Platinum
+                                                                    @else
+                                                                        N/A
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
 
-                                                            <form action="{{route('adminDownloadEdit')}}" method="post" class="inline-block">
+                                                            <form action="{{route('adminPercentageEdit')}}" method="post" class="inline-block">
                                                                 @csrf
-                                                                <input type="hidden" name="download_id" value="{{encrypt($commissionPercentage->id)}}">
+                                                                <input type="hidden" name="commissionPercentage" value="{{encrypt($commissionPercentage->id)}}">
                                                                 <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="Edit">
                                                                     <svg width="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                                                     </svg>
                                                                 </button>
                                                             </form>
-                                                            <a href="{{route('adminDownloadDelete', encrypt($commissionPercentage->id))}}" class="text-indigo-600 inline-block hover:text-indigo-900" title="Delete" onsubmit="alert('Are you sure')">
-                                                                <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red">
-                                                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
-                                                                    <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
-                                                                </svg>
-                                                            </a>
+{{--                                                            <a href="{{route('adminPercentageDelete', encrypt($commissionPercentage->id))}}" class="text-indigo-600 inline-block hover:text-indigo-900" title="Delete" onsubmit="alert('Are you sure')">--}}
+{{--                                                                <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red">--}}
+{{--                                                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />--}}
+{{--                                                                    <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />--}}
+{{--                                                                </svg>--}}
+{{--                                                            </a>--}}
                                                         </td>
                                                     </tr>
 
