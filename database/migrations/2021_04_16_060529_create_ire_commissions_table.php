@@ -20,6 +20,7 @@ class CreateIreCommissionsTable extends Migration
             $table->bigInteger('type');
             $table->integer('status')->default(0);
             $table->string('payment')->nullable();
+            $table->string('sales_amount')->nullable();
             $table->string('payment_status')->default(0);
             $table->dateTime('created_at');
             $table->dateTime('updated_at');

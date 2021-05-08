@@ -92,9 +92,9 @@ Route::middleware(['auth:sanctum'])->get('/delete-downloadable-file/{id}', [Admi
 Route::middleware(['auth:sanctum'])->get('/commission-percentages', [CommissionPercentageController::class, 'index'])->name('adminPercentage');
 Route::middleware(['auth:sanctum'])->get('/create-commission-percentage', [CommissionPercentageController::class, 'create'])->name('adminPercentageCreate');
 Route::middleware(['auth:sanctum'])->post('/store-commission-percentage', [CommissionPercentageController::class, 'store'])->name('adminPercentageStore');
-//Route::middleware(['auth:sanctum'])->post('/edit-commission-percentage', [CommissionPercentageController::class, 'edit'])->name('adminPercentageEdit');
-//Route::middleware(['auth:sanctum'])->post('/update-commission-percentage', [CommissionPercentageController::class, 'update'])->name('adminPercentageUpdate');
-//Route::middleware(['auth:sanctum'])->get('/delete-commission-percentage/{id}', [CommissionPercentageController::class, 'delete'])->name('adminPercentageDelete');
+Route::middleware(['auth:sanctum'])->post('/edit-commission-percentage', [CommissionPercentageController::class, 'edit'])->name('adminPercentageEdit');
+Route::middleware(['auth:sanctum'])->post('/update-commission-percentage', [CommissionPercentageController::class, 'update'])->name('adminPercentageUpdate');
+Route::middleware(['auth:sanctum'])->get('/delete-commission-percentage/{id}', [CommissionPercentageController::class, 'delete'])->name('adminPercentageDelete');
 ####################END#####################################
 
 

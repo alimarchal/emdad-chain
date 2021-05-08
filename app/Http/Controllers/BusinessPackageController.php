@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BusinessPackage;
+use App\Models\CommissionPercentage;
 use App\Models\Ire;
 use App\Models\IreCommission;
 use App\Models\Package;
@@ -60,10 +61,11 @@ class BusinessPackageController extends Controller
                 $reference = IreCommission::where(['user_id' => auth()->id()],['type' => 1])->first();   /* type 1 for Buyer */
                 if (isset($reference))
                 {
-                    if($reference->ireNoReferencee->type == 0)         /* 0 for non - employee */
+                    $commission = CommissionPercentage::where(['commission_type' => 2], ['package_type' => $package->id])->where('ire_type', $reference->ireNoReferencee->type)->first();
+                    if (isset($commission))
                     {
                         IreCommission::where('id' , $reference->id)->update([
-                            'payment' => 50
+                            'payment' => $commission->amount
                         ]);
                     }
 
@@ -82,13 +84,13 @@ class BusinessPackageController extends Controller
                 $reference = IreCommission::where(['user_id' => auth()->id()],['type' => 2])->first();      /* type 2 for Supplier */
                 if (isset($reference))
                 {
-                    if($reference->ireNoReferencee->type == 0)               /* 0 for non - employee */
+                    $commission = CommissionPercentage::where(['commission_type' => 2], ['package_type' => $package->id])->where('ire_type', $reference->ireNoReferencee->type)->first();
+                    if (isset($commission))
                     {
                         IreCommission::where('id' , $reference->id)->update([
-                            'payment' => 30
+                            'payment' => $commission->amount
                         ]);
                     }
-
                 }
 
                 return redirect()->route('parentCategories');
@@ -176,21 +178,14 @@ class BusinessPackageController extends Controller
                 $reference = IreCommission::where(['user_id' => auth()->id()],['type' => 1])->first();      /* type 1 for Buyer */
                 if (isset($reference))
                 {
-                    if($reference->ireNoReferencee->type == 0)               /* 0 for non - employee */
+                    $commission = CommissionPercentage::where(['commission_type' => 2], ['package_type' => $package->id])->where('ire_type', $reference->ireNoReferencee->type)->first();
+                    if (isset($commission))
                     {
-                        $payment = round($package->charges * 0.1, 2);
+                        $payment = round($package->charges * $commission->amount, 2);
                         IreCommission::where('id' , $reference->id)->update([
                             'payment' => $payment
                         ]);
                     }
-                    elseif ($reference->ireNoReferencee->type == 1)          /* 1 for employee */
-                    {
-                        $payment = round($package->charges * 0.03, 2);
-                        IreCommission::where('id' , $reference->id)->update([
-                            'payment' => $payment
-                        ]);
-                    }
-
                 }
 
                 return redirect()->route('parentCategories');
@@ -207,16 +202,10 @@ class BusinessPackageController extends Controller
                 $reference = IreCommission::where(['user_id' => auth()->id()],['type' => 2])->first();      /* type 2 for Supplier */
                 if (isset($reference))
                 {
-                    if($reference->ireNoReferencee->type == 0)               /* 0 for non - employee */
+                    $commission = CommissionPercentage::where(['commission_type' => 1], ['package_type' => $package->id])->where('ire_type', $reference->ireNoReferencee->type)->first();
+                    if (isset($commission))
                     {
-                        $payment = round($package->charges * 0.1, 2);
-                        IreCommission::where('id' , $reference->id)->update([
-                            'payment' => $payment
-                        ]);
-                    }
-                    elseif ($reference->ireNoReferencee->type == 1)          /* 1 for employee */
-                    {
-                        $payment = round($package->charges * 0.03, 2);
+                        $payment = round($package->charges * $commission->amount, 2);
                         IreCommission::where('id' , $reference->id)->update([
                             'payment' => $payment
                         ]);
