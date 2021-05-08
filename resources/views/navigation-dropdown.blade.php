@@ -203,8 +203,8 @@
 {{--                    Uncomment below line when arabic version is ready and delete comming soon line--}}
 {{--                <x-jet-button onclick="language(1)">--}}
                 <x-jet-button>
-                <a onclick="language(1)" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;" id="lan">العربية</a>
-{{--                    <a class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">قريباً</a>--}}
+{{--                <a onclick="language(1)" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;" id="lan">العربية</a>--}}
+                    <a class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">قريباً</a>
                 </x-jet-button>
                 @endcan
 

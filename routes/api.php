@@ -33,6 +33,7 @@ Route::prefix('v1')->group(function () {
     Route::get('TrackingDelivery/DeliveryID/{id}', [TrackingDeliveryController::class, 'getAllDelivery']);
     Route::apiResource('TrackingDelivery', TrackingDeliveryController::class);
     Route::apiResource('Delivery', DeliveryController::class);
+    Route::get('Delivery/Deliveries/{id}', [DeliveryController::class, 'getAllDeliveries']);
     Route::apiResource('ShipmentItems', ShipmentItemController::class);
     Route::apiResource('Shipment', ShipmentController::class);
     Route::apiResource('DeliveryNote', \App\Http\Controllers\Api\v1\DeliveryNoteController::class);

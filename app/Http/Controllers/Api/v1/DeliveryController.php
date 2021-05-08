@@ -39,6 +39,22 @@ class DeliveryController extends Controller
         }
     }
 
+
+    public function getAllDeliveries(Request $request, $id)
+    {
+        $token = $request->code;
+        if ($token == "RRNirxFh4j9Ftd") {
+            $collection = Delivery::where('user_id', $id)->get();
+            if ($collection->isEmpty()) {
+                return response()->json(['message' => 'Not Found!'], 404);
+            } else {
+                return $collection;
+            }
+        } else {
+            return response()->json(['message' => 'Not Found!'], 404);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -41,6 +41,7 @@ class CreateDeliveriesTable extends Migration
             $table->string('delivery_return')->nullable();
             $table->text('shipment_status')->nullable();
             $table->string('delivery_address')->nullable();
+            $table->boolean('review_status')->default(0);
             $table->timestamps();
         });
     }
