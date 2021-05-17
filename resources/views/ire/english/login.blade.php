@@ -13,6 +13,12 @@
             </div>
         @endif
 
+        @if (session('message'))
+            <div class="mb-4 text-center font-medium text-sm text-green-600">
+                {{ session('message') }}
+            </div>
+        @endif
+
         <form method="POST" action="{{route('ireLogin')}}">
             @csrf
 
@@ -46,8 +52,8 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                @if (Route::has('ireForgotPassword'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('ireForgotPassword') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif

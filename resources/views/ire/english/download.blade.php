@@ -85,7 +85,7 @@
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
                                                             <div class="ml-4">
                                                                 <div class="text-sm font-medium text-center text-gray-900">
-                                                                    <img src="{{\Illuminate\Support\Facades\Storage::url($download->icon)}}">
+                                                                    <img src="{{\Illuminate\Support\Facades\Storage::url($download->icon)}}" style="width: 35px; height: 35px; text-align: center;">
                                                                 </div>
                                                             </div>
                                                         </td>

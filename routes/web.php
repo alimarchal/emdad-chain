@@ -358,8 +358,10 @@ Route::post('ire-register', [IreRegisterController::class, 'ire_register']);
 Route::get('ar-ire-register', [IreRegisterController::class, 'register_arabic_view'])->name('ireRegisterArabic');
 
 Route::get('ire-login', [IreLoginController::class, 'login_view'])->name('ireLogin');
-Route::post('ire-login', [IreLoginController::class, 'login']);
-Route::get('ar-ire-login', [IreLoginController::class, 'arabic_login_view'])->name('ireLoginArabic');
+    Route::post('ire-login', [IreLoginController::class, 'login']);
+    Route::get('ire-forgot-password', [IreLoginController::class, 'forgot_password_view'])->name('ireForgotPassword');
+    Route::post('ire-forgot-password', [IreLoginController::class, 'forgot_password']);
+    Route::get('ar-ire-login', [IreLoginController::class, 'arabic_login_view'])->name('ireLoginArabic');
 });
 Route::get('/search', [IreLoginController::class, 'search_ire'])->name('search_ire');
 Route::post('ireLanguageChange', [IreController::class, 'languageChange'])->name('ireLanguageChange');
@@ -378,6 +380,8 @@ Route::middleware(['ire'])->group(function () {
             Route::middleware(['ireRegisterDetails'])->group(function () {
                 Route::get('ire-dashboard', [IreController::class, 'dashboard'])->name('ireDashboard');
                 Route::get('ire-profile', [IreController::class, 'profile'])->name('ireProfile');
+                Route::get('ire-change-password', [IreController::class, 'change_password_view'])->name('ireChangePassword');
+                Route::post('ire-change-password', [IreController::class, 'change_password']);
                 Route::get('ire-references', [IreController::class, 'reference'])->name('ireReference');
                 Route::get('ire-incomplete-references', [IreController::class, 'incomplete_reference'])->name('ireIncompleteReference');
                 Route::get('ire-payments', [IreController::class, 'payment'])->name('irePayment');

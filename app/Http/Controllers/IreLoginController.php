@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ire;
+use App\Notifications\ireForgotPassword;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class IreLoginController extends Controller
 {
@@ -62,6 +64,39 @@ class IreLoginController extends Controller
             // validation not successful, send back to form
             return redirect()->route('ireLogin')->with('status', 'Invalid credentials');
         }
+
+    }
+
+    public function forgot_password_view(Request $request)
+    {
+        return view('ire.english.forgotPassword');
+    }
+
+    public function forgot_password(Request $request)
+    {
+
+        $email = $request->only('email');
+
+        $ireEmail = Ire::where('email', $email)->first();
+
+        if (isset($ireEmail))
+        {
+            $password = rand();
+
+            Ire::where('id', $ireEmail->id)->update([
+                'password' => Hash::make($password),
+            ]);
+
+            $ire = Ire::where('id', $ireEmail->id)->first();
+
+            $ire->notify(new ireForgotPassword($password));
+
+            session()->flash('message','New password is send to your email address');
+            return redirect()->route('ireLogin');
+        }
+
+        session()->flash('message', 'Invalid Email ID');
+        return redirect()->back();
 
     }
 }

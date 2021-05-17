@@ -102,11 +102,11 @@ class IreController extends Controller
     {
         $download = DownloadableFile::where('id', decrypt($id))->first();
 
-//        $file = storage_path('app/storage/app/public/'). $download->file;
-        $file = Storage::url($download->file);
+        $file = storage_path('app/public/'). $download->file;
 
-        return \Response::download($file, $download->name_en);
-//        return response()->download($file, $download->name_en);
+//        return response()->download(storage_path('/app/public/'. $download->file), $download->name_en);
+        return response()->file($file);
+//        return \Response::download($file, $download->name_en);
     }
 
     public function profile()
@@ -117,6 +117,27 @@ class IreController extends Controller
         }
 
         return view('ire.english.profile');
+    }
+
+    public function change_password_view()
+    {
+        if (\auth()->guard('ire')->user()->rtl == 1)
+        {
+            return redirect()->route('ireArabicProfile');
+        }
+
+        return view('ire.english.changePassword');
+    }
+
+    public function change_password(Request $request)
+    {
+
+
+        Validator::make($request->all(), [
+            'password' => $this->passwordRules(),
+        ])->validate();
+
+        return view('ire.english.changePassword');
     }
 
     public function languageChange(Request $request)
