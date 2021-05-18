@@ -23,6 +23,9 @@ class BusinessPackageController extends Controller
         //
     }
 
+
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -33,6 +36,31 @@ class BusinessPackageController extends Controller
         //
     }
 
+
+    public function getCheckOutId(Request $request)
+    {
+        $url = "https://test.oppwa.com/v1/checkouts";
+        $data = "entityId=8ac7a4ca796a8ff7017974c6a6321418" .
+            "&amount=100.00" .
+            "&currency=SAR" .
+            "&paymentType=DB";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization:Bearer OGFjN2E0Y2E3OTZhOGZmNzAxNzk3NGM2MmZlZjE0MTR8QW5QRjRjMk1yOQ=='));
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $responseData = curl_exec($ch);
+        if(curl_errno($ch)) {
+            return curl_error($ch);
+        }
+        curl_close($ch);
+        return $responseData;
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -41,12 +69,36 @@ class BusinessPackageController extends Controller
      */
     public function store(Request $request)
     {
+        // stop
 
         //after payment add payment details to payment table after that insert that payment id to BusinessPackage table
         $package = Package::where('id', $request->package_id)->first();
         // if price exist then return to new view else it's free one
         if ($request->package_id == 2 || $request->package_id == 3 || $request->package_id == 6 || $request->package_id == 7) {
-            return view('subscribePackageView.payment', compact('package'));
+
+            $url = "https://test.oppwa.com/v1/checkouts";
+            $data = "entityId=8ac7a4ca796a8ff7017974c6a6321418" .
+                "&amount=" .  $package->charges  .
+                "&currency=SAR" .
+                "&paymentType=DB";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Authorization:Bearer OGFjN2E0Y2E3OTZhOGZmNzAxNzk3NGM2MmZlZjE0MTR8QW5QRjRjMk1yOQ=='));
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $responseData = curl_exec($ch);
+            if(curl_errno($ch)) {
+                return curl_error($ch);
+            }
+
+            curl_close($ch);
+            $res_data = json_decode($responseData, true);
+
+            return view('subscribePackageView.payment', compact('package','res_data'));
         } else {
             $subscription_end_date = Carbon::now()->addYear();
             if (auth()->user()->registration_type == 'Buyer') {
@@ -156,13 +208,42 @@ class BusinessPackageController extends Controller
         return redirect()->route('business.create');
     }
 
+
+    public function getPaymentStatus($id, $resourcePath)
+    {
+        $url = "https://test.oppwa.com/";
+        $url .= $resourcePath;
+        $url .= "?entityId=8ac7a4ca796a8ff7017974c6a6321418";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization:Bearer OGFjN2E0Y2E3OTZhOGZmNzAxNzk3NGM2MmZlZjE0MTR8QW5QRjRjMk1yOQ=='));
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $responseData = curl_exec($ch);
+        if(curl_errno($ch)) {
+            return curl_error($ch);
+        }
+        curl_close($ch);
+        return json_decode($responseData, true);
+    }
+
     public function businessPackagePaymentStatus(Request $request)
     {
-        $payment_status = $request->status;
-        if ($payment_status == "paid") {
-            $paymentService = new \Moyasar\Providers\PaymentService();
-            $payment_info = $paymentService->fetch($request->id);
-            $package_id = $payment_info->description;
+
+        $id = $request->id;
+        $resourcePath = $request->resourcePath;
+
+        $transaction_status = $this->getPaymentStatus($id,$resourcePath);
+
+        //000.100.110
+        $payment_status = $transaction_status['result']['code'];
+        if ($payment_status == "000.100.110") {
+            //$paymentService = new \Moyasar\Providers\PaymentService();
+            //$payment_info = $paymentService->fetch($request->id);
+            $package_id = $request->package_id;
             $package = Package::where('id', $package_id)->first();
             $subscription_end_date = Carbon::now()->addYear();
             if (auth()->user()->registration_type == 'Buyer') {

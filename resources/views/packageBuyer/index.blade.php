@@ -35,8 +35,10 @@
                                         <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
                                         <span class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center" disabled>Purchased</span>
                                     @else
+{{--                                        <form action="{{route('businessPackage.getCheckOutId')}}" method="POST">--}}
                                         <form action="{{route('business-packages.store')}}" method="POST">
                                             @csrf
+                                            <input type="hidden" name="merchantTransactionId" value="{{$package->id}}">
                                             <input type="hidden" name="package_id" value="{{$package->id}}">
                                             <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">Subscribe</button>
                                         </form>
