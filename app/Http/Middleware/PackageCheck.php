@@ -17,7 +17,11 @@ class PackageCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if (is_null(Auth::user()->business_package))
+        if (Auth::user()->hasRole('SuperAdmin'))
+        {
+            return $next($request);
+        }
+        else if (is_null(Auth::user()->business_package))
         {
             return redirect()->route('packages.index');
         }

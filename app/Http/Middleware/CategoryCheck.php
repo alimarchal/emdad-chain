@@ -17,7 +17,11 @@ class CategoryCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if (isset(Auth::user()->business_package) && is_null(Auth::user()->business_package->categories))
+        if (Auth::user()->hasRole('SuperAdmin'))
+        {
+            return $next($request);
+        }
+        else if (isset(Auth::user()->business_package) && is_null(Auth::user()->business_package->categories))
         {
             return redirect()->route('parentCategories');
         }

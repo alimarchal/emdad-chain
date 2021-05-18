@@ -55,7 +55,7 @@
                                 $remainingBusiness = 0;
                             }
                         @endphp
-                        <x-jet-nav-link href="javascript:void(0)" title="Business remaining who have incomplete registration or have no PO order">
+                        <x-jet-nav-link href="javascript:void(0)" title="العمليات المتبقية؛ المتبقي من العدد المطلوب للشركات المسجلة وعمليات الشراء لكلٍ منها">
                             {{ __('يبقى اعمال:') }}  &nbsp;{{$remainingBusiness}}
                         </x-jet-nav-link>
                     </div>
@@ -109,6 +109,9 @@
                                     {{ __('الملف الشخصي') }}
                                 </x-jet-dropdown-link>
 
+                                <x-jet-dropdown-link href="{{route('ireChangePassword')}}">
+                                    {{ __('تغيير كلمة المرور') }}
+                                </x-jet-dropdown-link>
 
                                 <div class="border-t border-gray-100"></div>
 
@@ -159,9 +162,14 @@
 
                 <div class="mt-3 space-y-1">
                     <!-- Account Management -->
-                    <x-jet-responsive-nav-link href="#" :active="request()->routeIs('profile.show')">
-{{--                        {{ __('Profile') }}--}}
+                    <x-jet-responsive-nav-link href="{{ route('ireArabicProfile') }}" :active="request()->routeIs('ireArabicProfile')">
+                        {{ __('الملف الشخصي') }}
                     </x-jet-responsive-nav-link>
+
+
+                    <x-jet-dropdown-link href="{{route('ireChangePassword')}}"  :active="request()->routeIs('ireChangePassword')">
+                        {{ __('تغيير كلمة المرور') }}
+                    </x-jet-dropdown-link>
 
 
                 <!-- Authentication -->

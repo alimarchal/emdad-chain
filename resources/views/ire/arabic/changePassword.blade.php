@@ -1,4 +1,4 @@
-@extends('ire.english.layout.app')
+@extends('ire.arabic.layout.app')
 @section('headerScripts')
 @endsection
 @section('body')
@@ -32,28 +32,28 @@
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
                     <form action="{{route('ireChangePassword')}}" method="POST" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         @csrf
-                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Change Password</h3>
+                        <h3 class="text-2xl text-gray-900 font-semibold text-center">تغيير كلمة المرور</h3>
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-label class="w-1/2" for="current_password">Current Password</x-jet-label>
+                            <x-jet-label class="w-1/2" for="current_password">كلمة المرور الحالية</x-jet-label>
                         </div>
                         <div class="flex space-x-5 mt-3" required>
-                            <x-jet-input id="current_password" type="text" name="current_password" class="border p-2 w-1/2" value="{{ old('current_password') }}" step="1" min="1" placeholder="Enter Current Password" ></x-jet-input>
+                            <x-jet-input id="current_password" type="text" name="current_password" class="border p-2 w-1/2" value="{{ old('current_password') }}" step="1" min="1" placeholder="كلمة المرور الحالية" ></x-jet-input>
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-label class="w-1/2" for="password">New Password</x-jet-label>
+                            <x-jet-label class="w-1/2" for="password">كلمة المرور الجديدة</x-jet-label>
                         </div>
                         <div class="flex space-x-5 mt-3" required>
-                            <x-jet-input id="password" type="text" name="password" class="border p-2 w-1/2" value="{{ old('password') }}" step="1" min="1" placeholder="Enter password" ></x-jet-input>
+                            <x-jet-input id="password" type="text" name="password" class="border p-2 w-1/2" value="{{ old('password') }}" step="1" min="1" placeholder="كلمة المرور الجديدة" ></x-jet-input>
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-label class="w-1/2" for="password_confirmation">Confirm Password</x-jet-label>
+                            <x-jet-label class="w-1/2" for="password_confirmation">تأكيد كلمة المرور</x-jet-label>
                         </div>
                         <div class="flex space-x-5 mt-3" required>
-                            <x-jet-input id="password_confirmation" type="text" name="password_confirmation" class="border p-2 w-1/2" value="{{ old('password_confirmation') }}" step="0.01" min="1" placeholder="Confirm Password" ></x-jet-input>
+                            <x-jet-input id="password_confirmation" type="text" name="password_confirmation" class="border p-2 w-1/2" value="{{ old('password_confirmation') }}" step="0.01" min="1" placeholder="تأكيد كلمة المرور" ></x-jet-input>
                         </div>
                         <br>
 
-                        <x-jet-button class="float-right mt-4 mb-4">Create</x-jet-button>
+                        <x-jet-button class="float-right mt-4 mb-4">إنشاء</x-jet-button>
 
                     </form>
 

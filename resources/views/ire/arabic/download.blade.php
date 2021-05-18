@@ -31,11 +31,11 @@
                                 "sSearch": "بحث:",
                                 "oPaginate": {
                                     "sFirst":    	"أولا",
-                                    "sPrevious": 	"سابق",
+                                    "sPrevious": 	"السابق",
                                     "sNext":     	"التالي",
                                     "sLast":     	"الاخير"
                                 },
-                                "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ إدخالات",
+                                "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ الملفات",
                             },
                         } );
                     });
@@ -43,7 +43,7 @@
                 </script>
                 <div class="py-3">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <h2 class="text-2xl font-bold text-center">للتحميل قائمة</h2>
+                        <h2 class="text-2xl font-bold text-center">قائمة الملفات</h2>
                         <x-jet-validation-errors class="mb-4" />
                     @if ($downloads->count())
                         <!-- This example requires Tailwind CSS v2.0+ -->
@@ -58,10 +58,10 @@
                                                         #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        اسم
+                                                        الاسم
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                        الاسم العربي
+                                                        الاسم بالعربي
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                         النوع
@@ -119,7 +119,7 @@
 
                         @else
                             <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                                <strong class="mr-1">No record found...!</strong>
+                                <strong class="mr-1" style="padding-right: 15px;">لم يتم العثور على أي سجلات ...!</strong>
                                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                                     <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                                 </button>
