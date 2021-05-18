@@ -340,7 +340,7 @@ Route::get('/payment-status', [\App\Http\Controllers\MakePaymentController::clas
 
 
 Route::middleware(['auth:sanctum'])->resource('packages', PackageController::class);
-Route::middleware(['auth:sanctum'])->get('business-packages/status', [\App\Http\Controllers\BusinessPackageController::class, 'businessPackagePaymentStatus'])->name('businessPackage.paymentStatus');
+Route::middleware(['auth:sanctum'])->get('business-packages/status', [BusinessPackageController::class, 'businessPackagePaymentStatus'])->name('businessPackage.paymentStatus');
 Route::middleware(['auth:sanctum'])->resource('business-packages', BusinessPackageController::class);
 Route::middleware(['auth:sanctum'])->post('updateCategories', [BusinessPackageController::class, 'updateCategories'])->name('updatePackageCategories');
 Route::middleware(['auth:sanctum'])->post('business-package-store/{id}', [BusinessPackageController::class, 'store'])->name('business-package.store');
@@ -391,6 +391,7 @@ Route::middleware(['ire'])->group(function () {
                         ########################### IREs Arabic Routes #######################################
                 Route::get('ar-ire-dashboard', [IreController::class, 'arabic_dashboard'])->name('ireArabicDashboard');
                 Route::get('ar-ire-profile', [IreController::class, 'arabic_profile'])->name('ireArabicProfile');
+                Route::get('ar-ire-change-password', [IreController::class, 'arabic_change_password_view'])->name('ireArabicChangePassword');
                 Route::get('ar-ire-references', [IreController::class, 'arabic_reference'])->name('ireArabicReference');
                 Route::get('ar-ire-incomplete-references', [IreController::class, 'arabic_incomplete_reference'])->name('ireArabicIncompleteReference');
                 Route::get('ar-ire-payments', [IreController::class, 'arabic_payment'])->name('ireArabicPayment');
@@ -418,4 +419,8 @@ Route::get('/testOne', function () {
 //    ], $business);
 //    $ratings = $business->getAllRatings($business->id, 'desc');
     dd($business->averageRating());
+});
+
+Route::get('/t', function () {
+    return view('testCssView');
 });

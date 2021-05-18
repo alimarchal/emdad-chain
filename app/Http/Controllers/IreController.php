@@ -123,7 +123,7 @@ class IreController extends Controller
     {
         if (\auth()->guard('ire')->user()->rtl == 1)
         {
-            return redirect()->route('ireArabicProfile');
+            return redirect()->route('ireArabicChangePassword');
         }
 
         return view('ire.english.changePassword');
@@ -131,13 +131,36 @@ class IreController extends Controller
 
     public function change_password(Request $request)
     {
-
+        if (!(Hash::check($request->get('current_password'), Auth::guard('ire')->user()->getAuthPassword())))
+        {
+            session()->flash('message', 'Current password not matched');
+            return redirect()->back();
+        }
+        if (strcmp($request->get('current_password'),$request->get('password')) == 0)
+        {
+            session()->flash('message', 'Your current password cannot be same to new password');
+            return redirect()->back();
+        }
 
         Validator::make($request->all(), [
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return view('ire.english.changePassword');
+        $password = [
+            'password'=> Hash::make($request->input('password'))
+        ];
+
+        $ire = Ire::where('id', \auth()->guard('ire')->user()->id)->first();
+
+        $ire->update($password);
+
+        if (\auth()->guard('ire')->user()->rtl == 1)
+        {
+            session()->flash('status', 'Password Updated Successfully');
+            return redirect()->route('ireArabicChangePassword');
+        }
+        session()->flash('status', 'Password Updated Successfully');
+        return redirect()->route('ireChangePassword');
     }
 
     public function languageChange(Request $request)
@@ -235,5 +258,15 @@ class IreController extends Controller
         }
 
         return view('ire.arabic.profile');
+    }
+
+    public function arabic_change_password_view()
+    {
+        if (\auth()->guard('ire')->user()->rtl == 0)
+        {
+            return redirect()->route('ireChangePassword');
+        }
+
+        return view('ire.arabic.changePassword');
     }
 }
