@@ -24,8 +24,6 @@ class BusinessPackageController extends Controller
     }
 
 
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -39,26 +37,9 @@ class BusinessPackageController extends Controller
 
     public function getCheckOutId(Request $request)
     {
-        $url = "https://test.oppwa.com/v1/checkouts";
-        $data = "entityId=8ac7a4ca796a8ff7017974c6a6321418" .
-            "&amount=100.00" .
-            "&currency=SAR" .
-            "&paymentType=DB";
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer OGFjN2E0Y2E3OTZhOGZmNzAxNzk3NGM2MmZlZjE0MTR8QW5QRjRjMk1yOQ=='));
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $responseData = curl_exec($ch);
-        if(curl_errno($ch)) {
-            return curl_error($ch);
-        }
-        curl_close($ch);
-        return $responseData;
+        $package = Package::where('id', $request->package_id)->first();
+//        dd($request->all());
+        return view('subscribePackageView.step-one', compact('package'));
     }
 
     /**
@@ -70,35 +51,46 @@ class BusinessPackageController extends Controller
     public function store(Request $request)
     {
         // stop
+        //return dd(env('entity_id_visa'));
 
         //after payment add payment details to payment table after that insert that payment id to BusinessPackage table
         $package = Package::where('id', $request->package_id)->first();
         // if price exist then return to new view else it's free one
         if ($request->package_id == 2 || $request->package_id == 3 || $request->package_id == 6 || $request->package_id == 7) {
-
+            $data = null;
             $url = "https://test.oppwa.com/v1/checkouts";
-            $data = "entityId=8ac7a4ca796a8ff7017974c6a6321418" .
-                "&amount=" .  $package->charges  .
-                "&currency=SAR" .
-                "&paymentType=DB";
+            if ($request->gateway == "mada") {
+                $data = "entityId=" . env('entity_id_mada') .
+                    "&amount=" . $package->charges .
+                    "&currency=SAR" .
+                    "&paymentType=DB";
+                $request->merge(["testMode" => "EXTERNAL"]);
+
+            } elseif ($request->gateway == "visa_master") {
+                $data = "entityId=" . env('entity_id_visa') .
+                    "&amount=" . $package->charges .
+                    "&currency=SAR" .
+                    "&paymentType=DB";
+            }
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                'Authorization:Bearer OGFjN2E0Y2E3OTZhOGZmNzAxNzk3NGM2MmZlZjE0MTR8QW5QRjRjMk1yOQ=='));
+                'Authorization:Bearer ' . env('AUTH_BEARER')));
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $responseData = curl_exec($ch);
-            if(curl_errno($ch)) {
+            if (curl_errno($ch)) {
                 return curl_error($ch);
             }
 
             curl_close($ch);
             $res_data = json_decode($responseData, true);
+            $gateway = $request->gateway;
 
-            return view('subscribePackageView.payment', compact('package','res_data'));
+            return view('subscribePackageView.payment', compact('package', 'res_data', 'gateway'));
         } else {
             $subscription_end_date = Carbon::now()->addYear();
             if (auth()->user()->registration_type == 'Buyer') {
@@ -110,13 +102,11 @@ class BusinessPackageController extends Controller
                     'subscription_end_date' => $subscription_end_date,
                 ]);
 
-                $reference = IreCommission::where(['user_id' => auth()->id()],['type' => 1])->first();   /* type 1 for Buyer */
-                if (isset($reference))
-                {
+                $reference = IreCommission::where(['user_id' => auth()->id()], ['type' => 1])->first();   /* type 1 for Buyer */
+                if (isset($reference)) {
                     $commission = CommissionPercentage::where(['commission_type' => 2], ['package_type' => $package->id])->where('ire_type', $reference->ireNoReferencee->type)->first();
-                    if (isset($commission))
-                    {
-                        IreCommission::where('id' , $reference->id)->update([
+                    if (isset($commission)) {
+                        IreCommission::where('id', $reference->id)->update([
                             'payment' => $commission->amount
                         ]);
                     }
@@ -133,13 +123,11 @@ class BusinessPackageController extends Controller
                     'subscription_end_date' => $subscription_end_date,
                 ]);
 
-                $reference = IreCommission::where(['user_id' => auth()->id()],['type' => 2])->first();      /* type 2 for Supplier */
-                if (isset($reference))
-                {
+                $reference = IreCommission::where(['user_id' => auth()->id()], ['type' => 2])->first();      /* type 2 for Supplier */
+                if (isset($reference)) {
                     $commission = CommissionPercentage::where(['commission_type' => 2], ['package_type' => $package->id])->where('ire_type', $reference->ireNoReferencee->type)->first();
-                    if (isset($commission))
-                    {
-                        IreCommission::where('id' , $reference->id)->update([
+                    if (isset($commission)) {
+                        IreCommission::where('id', $reference->id)->update([
                             'payment' => $commission->amount
                         ]);
                     }
@@ -209,21 +197,25 @@ class BusinessPackageController extends Controller
     }
 
 
-    public function getPaymentStatus($id, $resourcePath)
+    public function getPaymentStatus($id, $resourcePath, $gateway)
     {
         $url = "https://test.oppwa.com/";
         $url .= $resourcePath;
-        $url .= "?entityId=8ac7a4ca796a8ff7017974c6a6321418";
+        if ($gateway == "mada") {
+            $url .= "?entityId=" . env('entity_id_mada');
+        } else {
+            $url .= "?entityId=" . env('entity_id_visa');
+        }
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization:Bearer OGFjN2E0Y2E3OTZhOGZmNzAxNzk3NGM2MmZlZjE0MTR8QW5QRjRjMk1yOQ=='));
+            'Authorization:Bearer ' . env('AUTH_BEARER')));
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
-        if(curl_errno($ch)) {
+        if (curl_errno($ch)) {
             return curl_error($ch);
         }
         curl_close($ch);
@@ -232,11 +224,11 @@ class BusinessPackageController extends Controller
 
     public function businessPackagePaymentStatus(Request $request)
     {
-
         $id = $request->id;
         $resourcePath = $request->resourcePath;
+        $gateway = $request->gateway;
 
-        $transaction_status = $this->getPaymentStatus($id,$resourcePath);
+        $transaction_status = $this->getPaymentStatus($id, $resourcePath, $gateway);
 
         //000.100.110
         $payment_status = $transaction_status['result']['code'];
@@ -256,14 +248,12 @@ class BusinessPackageController extends Controller
                     'subscription_end_date' => $subscription_end_date,
                 ]);
 
-                $reference = IreCommission::where(['user_id' => auth()->id()],['type' => 1])->first();      /* type 1 for Buyer */
-                if (isset($reference))
-                {
+                $reference = IreCommission::where(['user_id' => auth()->id()], ['type' => 1])->first();      /* type 1 for Buyer */
+                if (isset($reference)) {
                     $commission = CommissionPercentage::where(['commission_type' => 2], ['package_type' => $package->id])->where('ire_type', $reference->ireNoReferencee->type)->first();
-                    if (isset($commission))
-                    {
+                    if (isset($commission)) {
                         $payment = round($package->charges * $commission->amount, 2);
-                        IreCommission::where('id' , $reference->id)->update([
+                        IreCommission::where('id', $reference->id)->update([
                             'payment' => $payment
                         ]);
                     }
@@ -281,14 +271,12 @@ class BusinessPackageController extends Controller
                     'subscription_end_date' => $subscription_end_date,
                 ]);
 
-                $reference = IreCommission::where(['user_id' => auth()->id()],['type' => 2])->first();      /* type 2 for Supplier */
-                if (isset($reference))
-                {
+                $reference = IreCommission::where(['user_id' => auth()->id()], ['type' => 2])->first();      /* type 2 for Supplier */
+                if (isset($reference)) {
                     $commission = CommissionPercentage::where(['commission_type' => 1], ['package_type' => $package->id])->where('ire_type', $reference->ireNoReferencee->type)->first();
-                    if (isset($commission))
-                    {
+                    if (isset($commission)) {
                         $payment = round($package->charges * $commission->amount, 2);
-                        IreCommission::where('id' , $reference->id)->update([
+                        IreCommission::where('id', $reference->id)->update([
                             'payment' => $payment
                         ]);
                     }
@@ -298,8 +286,7 @@ class BusinessPackageController extends Controller
                 session()->flash('success', 'Transaction Successful.');
                 return redirect()->route('parentCategories');
             }
-        }
-        else {
+        } else {
             session()->flash('message', 'Transaction failed.');
             return redirect()->route('packages.index');
         }
