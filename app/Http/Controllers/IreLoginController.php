@@ -37,7 +37,7 @@ class IreLoginController extends Controller
         {
             return response()->json( ['status' => 0]);
         }
-        return response()->json(['data' => 'Reference Verified: '.$seller->name]);
+        return response()->json(['data' => $seller->name]);
     }
 
     public function login_view()

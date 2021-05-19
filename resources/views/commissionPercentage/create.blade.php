@@ -77,7 +77,7 @@
                                 <option value="0">Amount</option>
                                 <option value="1">Percentage</option>
                             </select>
-                            <x-jet-input id="amount" type="number" name="amount" class="border p-2 w-1/2" value="{{ old('amount') }}" step="1" min="1" placeholder="Enter amount" disabled></x-jet-input>
+                            <x-jet-input id="amount" type="number" name="amount" class="border p-2 w-1/2" value="{{ old('amount') }}" step="1" min="0" placeholder="Enter amount" disabled></x-jet-input>
                             <x-jet-input id="percentage" type="number" name="percentage_amount" class="border p-2 w-1/2" value="{{ old('percentage_amount') }}" step="0.01" min="1" placeholder="Enter amount in percentage" disabled></x-jet-input>
 {{--                            <select name="amount" id="js-example-basic-single-amount" class="form-input rounded-md shadow-sm border p-2 w-1/2" style="width: 50%" value="{{ old('amount') }}" required disabled>--}}
 {{--                                @php $amounts = range(0, 6000, 5); @endphp--}}

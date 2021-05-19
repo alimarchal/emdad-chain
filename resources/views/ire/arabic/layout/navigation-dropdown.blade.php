@@ -38,7 +38,7 @@
                                 $userCreatedAt = \Carbon\Carbon::parse(auth()->guard('ire')->user()->created_at);
                                 $remainingDays = $userCreatedAt->addDays(30);
                             @endphp
-                            <x-jet-nav-link href="javascript:void(0)" title="Days remaining for anyone can use your reference">
+                            <x-jet-nav-link href="javascript:void(0)" title="الأيام المتبقية؛ عدد الأيام المتبقي ليتمكن الآخرون من استخدام الرقم المرجعي الخاص بك">
                                 يبقى أيام:   &nbsp;<div class="text-gray-500" data-countdown="{{$remainingDays}}"></div>
                             </x-jet-nav-link>
                         </div>
@@ -56,7 +56,7 @@
                             }
                         @endphp
                         <x-jet-nav-link href="javascript:void(0)" title="العمليات المتبقية؛ المتبقي من العدد المطلوب للشركات المسجلة وعمليات الشراء لكلٍ منها">
-                            {{ __('يبقى اعمال:') }}  &nbsp;{{$remainingBusiness}}
+                            {{ __('العمليات المتبقية:') }}  &nbsp;{{$remainingBusiness}}
                         </x-jet-nav-link>
                     </div>
 

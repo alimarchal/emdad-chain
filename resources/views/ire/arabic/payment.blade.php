@@ -36,7 +36,7 @@
                                     "sNext":     	"التالي",
                                     "sLast":     	"الاخير"
                                 },
-                                "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ الملفات",
+                                "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ المدخلات",
                             },
                         } );
                     });
@@ -69,6 +69,9 @@
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                         النوع
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                        المقدار
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                         حالة الدفع
@@ -122,10 +125,15 @@
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                                             <div class="text-sm text-center text-gray-900">
+                                                                {{$ireCommission->payment}}
+                                                            </div>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                                            <div class="text-sm text-center text-gray-900">
                                                                 @if($ireCommission->payment_status == 0)
-                                                                    Un-paid
+                                                                    غير مدفوع
                                                                 @else
-                                                                    Paid
+                                                                    مدفوع
                                                                 @endif
                                                             </div>
                                                         </td>

@@ -12,14 +12,16 @@
                 <a href="{{ route('dashboard') }}">
                     <img src="{{ url('logo.png') }}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto"/>
                 </a>
-                <a href="{{ route('dashboard') }}">
+                <a href="{{ route('dashboard') }}"
+                   @if(auth()->user()->hasRole('SuperAdmin')) title="SuperAdmin Virtual office"
+                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer') title="Buyer Virtual office"
+                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier') title="Supplier Virtual office"
+                   @elseif(auth()->user()->hasRole('Buyer Warehouse Admin')) title="Warehouse Admin Virtual office"
+                   @elseif(auth()->user()->hasRole('Supplier Sales')) title="Supplier Sales Virtual office"
+                   @endif
+                >
                 <span class="text-white text-2xl mx-2 font-semibold">
-                    @if(auth()->user()->hasRole('SuperAdmin')) Super Admin
-                    @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer') Buyer
-                    @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier') Supplier
-                    @elseif(auth()->user()->hasRole('Buyer Warehouse Admin')) Warehouse Admin
-                    @elseif(auth()->user()->hasRole('Supplier Sales')) Supplier Sales
-                    @endif
+                    Virtual office
                 </span>
                 </a>
             </div>

@@ -24,6 +24,14 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                @if (session()->has('success'))
+                    <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                        <strong class="mr-1">{{ session('success') }}</strong>
+                        <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                            <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
                     @if(auth()->user()->rtl == 0)
                         <h2 class="text-2xl font-bold text-center">Categories</h2>

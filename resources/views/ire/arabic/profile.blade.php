@@ -73,7 +73,7 @@
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                                             @php $bank = \App\Models\Bank::where('id', auth()->guard('ire')->user()->bank)->first(); @endphp
-                                                            <div class="text-sm text-center text-gray-900">{{$bank->name}}</div>
+                                                            <div class="text-sm text-center text-gray-900">{{$bank->ar_name}}</div>
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">

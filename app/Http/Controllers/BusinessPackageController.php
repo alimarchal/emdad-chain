@@ -269,6 +269,7 @@ class BusinessPackageController extends Controller
                     }
                 }
 
+                session()->flash('success', 'Transaction Successful.');
                 return redirect()->route('parentCategories');
             } elseif (auth()->user()->registration_type == 'Supplier') {
                 BusinessPackage::create([
@@ -294,11 +295,13 @@ class BusinessPackageController extends Controller
 
                 }
 
+                session()->flash('success', 'Transaction Successful.');
                 return redirect()->route('parentCategories');
             }
         }
         else {
-            redirect()->route('packages.index');
+            session()->flash('message', 'Transaction failed.');
+            return redirect()->route('packages.index');
         }
     }
 }

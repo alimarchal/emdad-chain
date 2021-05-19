@@ -37,13 +37,13 @@
                             <x-jet-label class="w-1/2" for="current_password">كلمة المرور الحالية</x-jet-label>
                         </div>
                         <div class="flex space-x-5 mt-3" required>
-                            <x-jet-input id="current_password" type="text" name="current_password" class="border p-2 w-1/2" value="{{ old('current_password') }}" step="1" min="1" placeholder="كلمة المرور الحالية" ></x-jet-input>
+                            <x-jet-input id="current_password" type="text" name="current_password" class="border p-2 w-1/2" value="{{ old('current_password') }}" step="1" min="1" placeholder="أدخل كلمة المرور الحالية" ></x-jet-input>
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-label class="w-1/2" for="password">كلمة المرور الجديدة</x-jet-label>
                         </div>
                         <div class="flex space-x-5 mt-3" required>
-                            <x-jet-input id="password" type="text" name="password" class="border p-2 w-1/2" value="{{ old('password') }}" step="1" min="1" placeholder="كلمة المرور الجديدة" ></x-jet-input>
+                            <x-jet-input id="password" type="text" name="password" class="border p-2 w-1/2" value="{{ old('password') }}" step="1" min="1" placeholder="أدخل كلمة المرور الجديدة" ></x-jet-input>
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-label class="w-1/2" for="password_confirmation">تأكيد كلمة المرور</x-jet-label>

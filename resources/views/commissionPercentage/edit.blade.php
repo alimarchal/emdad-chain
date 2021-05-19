@@ -113,12 +113,12 @@
                             </select>
 
                             @if($commissionPercentage->amount_type == 0)
-                                <x-jet-input id="amount" type="number" name="amount" class="border p-2 w-1/2" value="{{ $commissionPercentage->amount  }}" step="1" min="1" placeholder="Enter amount"></x-jet-input>
+                                <x-jet-input id="amount" type="number" name="amount" class="border p-2 w-1/2" value="{{ $commissionPercentage->amount  }}" step="1" min="0" placeholder="Enter amount"></x-jet-input>
                             @elseif($commissionPercentage->amount_type == 1)
                                 <x-jet-input id="percentage_amount" type="number" name="percentage_amount" class="border p-2 w-1/2" value="{{ $commissionPercentage->amount * 100  }}" step="0.01" min="1" placeholder="Enter amount in percentage"></x-jet-input>
                             @endif
 
-                            <x-jet-input id="amount" type="number" name="amount" class="border p-2 w-1/2" value="{{ old('amount') }}" step="1" min="1" placeholder="Enter amount" disabled style="display: none"></x-jet-input>
+                            <x-jet-input id="amount" type="number" name="amount" class="border p-2 w-1/2" value="{{ old('amount') }}" step="1" min="0" placeholder="Enter amount" disabled style="display: none"></x-jet-input>
                             <x-jet-input id="percentage_amount" type="number" name="percentage_amount" class="border p-2 w-1/2" value="{{ old('percentage_amount') }}" step="0.01" min="1" placeholder="Enter amount in percentage" disabled style="display: none"></x-jet-input>
 
                         </div>

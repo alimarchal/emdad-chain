@@ -38,7 +38,7 @@
                                 $userCreatedAt = \Carbon\Carbon::parse(auth()->guard('ire')->user()->created_at);
                                 $remainingDays = $userCreatedAt->addDays(30);
                             @endphp
-                            <x-jet-nav-link href="javascript:void(0)" title="Days remaining for anyone can use your reference">
+                            <x-jet-nav-link href="javascript:void(0)" title="Days remaining for others to be able to use your IRE number">
                                 Days remaining:   &nbsp;<div class="text-gray-500" data-countdown="{{$remainingDays}}"></div>
                             </x-jet-nav-link>
                         </div>
@@ -55,8 +55,8 @@
                                 $remainingBusiness = 0;
                             }
                         @endphp
-                        <x-jet-nav-link href="javascript:void(0)" title="Business remaining who have incomplete registration or have no PO order">
-                            {{ __('Remaining Business') }}  &nbsp;{{$remainingBusiness}}
+                        <x-jet-nav-link href="javascript:void(0)" title="Remaining businesses: the remaining from the requested number of registered businesses and purchase orders from each">
+                            {{ __('Remaining Businesses') }}  &nbsp;{{$remainingBusiness}}
                         </x-jet-nav-link>
                     </div>
 

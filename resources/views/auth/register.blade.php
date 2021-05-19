@@ -196,7 +196,7 @@
                 }
                 else {
                     $('#referred_no_response_not_found').empty();
-                    $('#referred_no_response').html(response.data);
+                    $('#referred_no_response').html('Reference Verified: '+response.data);
                 }
             }
         });

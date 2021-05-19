@@ -69,6 +69,9 @@
                                                         Type
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                        Amount
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                         Payment Status
                                                     </th>
                                                 </tr>
@@ -116,6 +119,11 @@
                                                                 @elseif($ireCommission->type == 2)
                                                                     Supplier
                                                                 @endif
+                                                            </div>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                                            <div class="text-sm text-center text-gray-900">
+                                                                {{$ireCommission->payment}}
                                                             </div>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
