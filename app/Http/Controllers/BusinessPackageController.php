@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BusinessPackage;
+use App\Models\CardPayment;
 use App\Models\CommissionPercentage;
 use App\Models\Ire;
 use App\Models\IreCommission;
@@ -50,19 +51,34 @@ class BusinessPackageController extends Controller
      */
     public function store(Request $request)
     {
-        // stop
-        //return dd(env('entity_id_visa'));
 
         //after payment add payment details to payment table after that insert that payment id to BusinessPackage table
+
         $package = Package::where('id', $request->package_id)->first();
+        $merchant_id = null;
         // if price exist then return to new view else it's free one
         if ($request->package_id == 2 || $request->package_id == 3 || $request->package_id == 6 || $request->package_id == 7) {
+            $merchant_id = CardPayment::create([
+                'package_id' => $request->package_id,
+                'user_id' => auth()->user()->id,
+                'amount' => $package->charges,
+                'status' => '0',
+            ]);
             $data = null;
             $url = "https://test.oppwa.com/v1/checkouts";
             if ($request->gateway == "mada") {
                 $data = "entityId=" . env('entity_id_mada') .
                     "&amount=" . $package->charges .
                     "&currency=SAR" .
+                    "&merchantTransactionId=" . $merchant_id->id .
+                    "&customer.email=" . $request->customer_email .
+                    "&billing.street1=" . $request->billing_street1 .
+                    "&billing.city=" . $request->billing_city .
+                    "&billing.state=" . $request->billing_state .
+                    "&billing.country=" . $request->billing_country .
+                    "&billing.postcode=" . $request->billing_postcode .
+                    "&customer.givenName=" . $request->customer_givenName .
+                    "&customer.surname=" . $request->customer_surname .
                     "&paymentType=DB";
                 $request->merge(["testMode" => "EXTERNAL"]);
 
@@ -70,6 +86,15 @@ class BusinessPackageController extends Controller
                 $data = "entityId=" . env('entity_id_visa') .
                     "&amount=" . $package->charges .
                     "&currency=SAR" .
+                    "&merchantTransactionId=" . $merchant_id->id .
+                    "&customer.email=" . $request->customer_email .
+                    "&billing.street1=" . $request->billing_street1 .
+                    "&billing.city=" . $request->billing_city .
+                    "&billing.state=" . $request->billing_state .
+                    "&billing.country=" . $request->billing_country .
+                    "&billing.postcode=" . $request->billing_postcode .
+                    "&customer.givenName=" . $request->customer_givenName .
+                    "&customer.surname=" . $request->customer_surname .
                     "&paymentType=DB";
             }
 
@@ -90,7 +115,18 @@ class BusinessPackageController extends Controller
             $res_data = json_decode($responseData, true);
             $gateway = $request->gateway;
 
-            return view('subscribePackageView.payment', compact('package', 'res_data', 'gateway'));
+
+            if ($res_data['result']['code'] == "200.300.404")
+            {
+
+                $cp = CardPayment::where('id',$merchant_id->id)->first();
+                $cp->status = 2;
+                $cp->save();
+                return redirect()->route('packages.index')->with(['message' => 'Transaction failed incorrect parameters.']);
+            }
+
+//            return dd($merchant_id);
+            return view('subscribePackageView.payment', compact('package', 'res_data', 'gateway','merchant_id'));
         } else {
             $subscription_end_date = Carbon::now()->addYear();
             if (auth()->user()->registration_type == 'Buyer') {
@@ -224,9 +260,12 @@ class BusinessPackageController extends Controller
 
     public function businessPackagePaymentStatus(Request $request)
     {
+
+//        dd($request->all());
         $id = $request->id;
         $resourcePath = $request->resourcePath;
         $gateway = $request->gateway;
+        $merchant_id = $request->merchant_id;
 
         $transaction_status = $this->getPaymentStatus($id, $resourcePath, $gateway);
 
@@ -235,6 +274,10 @@ class BusinessPackageController extends Controller
         if ($payment_status == "000.100.110") {
             //$paymentService = new \Moyasar\Providers\PaymentService();
             //$payment_info = $paymentService->fetch($request->id);
+            $cp = CardPayment::where('id',$merchant_id)->first();
+            $cp->status = 1;
+            $cp->save();
+
             $package_id = $request->package_id;
             $package = Package::where('id', $package_id)->first();
             $subscription_end_date = Carbon::now()->addYear();

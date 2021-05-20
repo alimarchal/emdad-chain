@@ -98,9 +98,7 @@
     </style>
 
 
-        <form action="{{route('businessPackage.paymentStatus')}}?package_id={{$package->id}}&gateway={{$gateway}}" method="get" class="paymentWidgets" data-brands="MADA VISA MASTER">
-            <input type="hidden" name="testMode" value="EXTERNAL">
-            <input type="hidden" name="package_id" value="{{$package->id}}">
+        <form action="{{route('businessPackage.paymentStatus')}}?package_id={{$package->id}}&merchant_id={{$merchant_id->id}}&gateway={{$gateway}}" method="get" class="paymentWidgets" data-brands="MADA VISA MASTER">
         </form>
 
 

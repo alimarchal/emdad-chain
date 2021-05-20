@@ -49,7 +49,8 @@
                                 @elseif(isset($businessPackage))
                                     <span onclick="alert('Contact Emdad To Update Your Package')" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center; cursor: pointer">Update</span>
                                 @else
-                                    <form action="{{route('business-packages.store')}}" method="POST">
+{{--                                    <form action="{{route('business-packages.store')}}" method="POST">--}}
+                                    <form action="{{route('businessPackage.stepOne')}}" method="POST">
                                         @csrf
                                         <input type="hidden" name="package_id" value="{{$package->id}}">
                                         <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">Subscribe</button>
@@ -69,7 +70,7 @@
                                 @elseif(isset($businessPackage))
                                     <span onclick="alert('Contact Emdad To Update Your Package')" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer">Update</span>
                                 @else
-                                    <form action="{{route('business-packages.store')}}" method="POST">
+                                    <form action="{{route('businessPackage.stepOne')}}" method="POST">
                                         @csrf
                                         <input type="hidden" name="package_id" value="{{$package->id}}">
                                         <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">Subscribe</button>

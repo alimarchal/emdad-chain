@@ -171,9 +171,9 @@
 
                     </div>
                     <div class="px-2 w-1/2">
-
+                        <label class="font-bold text-sm mb-2 ml-1">Postal Code</label>
                         <div>
-                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Postcode" required name="billing.postcode" type="text"/>
+                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Postcode"  pattern="[\s\S]{1,16}" required name="billing.postcode" type="text"/>
                         </div>
                     </div>
                 </div>
@@ -182,13 +182,14 @@
                 <div class="mb-3 -mx-2 flex items-end">
                     <div class="px-2 w-1/2">
 
-                        <label class="font-bold text-sm mb-2 ml-1">Expiration date</label>
+                        <label class="font-bold text-sm mb-2 ml-1">Given Name</label>
                         <div>
                             <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Given Name" required name="customer.givenName" type="text"/>
                         </div>
 
                     </div>
                     <div class="px-2 w-1/2">
+                        <label class="font-bold text-sm mb-2 ml-1">Surname</label>
                         <div>
                             <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Surname" required name="customer.surname" type="text"/>
                         </div>
