@@ -91,7 +91,7 @@
                 <span>We Provide the Best</span>
                 <h2 style="margin-bottom: 0px">Emdad Benefits</h2>
                 <p style="padding-top: 15px; padding-bottom: 15px;color: red; font-weight: bold;font-size: 24px;">
-                    Ramadan Offer: Subscribe now and get 50% off, on your subscription.
+
                 </p>
             </div>
             <div class="row">

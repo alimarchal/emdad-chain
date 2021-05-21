@@ -28,6 +28,10 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'ENTITY_ID_VISA' => env('ENTITY_ID_VISA', '8ac7a4ca796a8ff7017974c6a6321418'),
+    'ENTITY_ID_MADA' => env('ENTITY_ID_MADA', '8ac7a4ca796a8ff7017974c78afb141d'),
+    'AUTH_BEARER' => env('AUTH_BEARER', 'OGFjN2E0Y2E3OTZhOGZmNzAxNzk3NGM2MmZlZjE0MTR8QW5QRjRjMk1yOQ=='),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

@@ -67,7 +67,7 @@ class BusinessPackageController extends Controller
             $data = null;
             $url = "https://test.oppwa.com/v1/checkouts";
             if ($request->gateway == "mada") {
-                $data = "entityId=" . env('entity_id_mada') .
+                $data = "entityId=" . env('ENTITY_ID_MADA') .
                     "&amount=" . $package->charges .
                     "&currency=SAR" .
                     "&merchantTransactionId=" . $merchant_id->id .
@@ -83,7 +83,7 @@ class BusinessPackageController extends Controller
                 $request->merge(["testMode" => "EXTERNAL"]);
 
             } elseif ($request->gateway == "visa_master") {
-                $data = "entityId=" . env('entity_id_visa') .
+                $data = "entityId=" . env('ENTITY_ID_VISA') .
                     "&amount=" . $package->charges .
                     "&currency=SAR" .
                     "&merchantTransactionId=" . $merchant_id->id .
@@ -238,9 +238,9 @@ class BusinessPackageController extends Controller
         $url = "https://test.oppwa.com/";
         $url .= $resourcePath;
         if ($gateway == "mada") {
-            $url .= "?entityId=" . env('entity_id_mada');
+            $url .= "?entityId=" . env('ENTITY_ID_MADA');
         } else {
-            $url .= "?entityId=" . env('entity_id_visa');
+            $url .= "?entityId=" . env('ENTITY_ID_VISA');
         }
 
         $ch = curl_init();
