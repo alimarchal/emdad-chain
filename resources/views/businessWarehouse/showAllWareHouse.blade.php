@@ -60,7 +60,9 @@
                                 {{$biz->landline}}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                                <a  href="{{route('businessWarehouse.edit',$biz->id)}}" class="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">VIEW & EDIT</a>
+                                <a  href="{{route('businessWarehouse.edit',$biz->id)}}" class="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">
+                                    @if(auth()->user()->hasRole('SuperAdmin')) VIEW & EDIT @elseif(auth()->user()->hasRole('MarketingManager')) VIEW @endif
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -68,6 +70,7 @@
                     </tbody>
                 </table>
 
+                @if(auth()->user()->hasRole('SuperAdmin'))
                     <div class="card transition duration-300 ease-in-out hover:shadow-sm flex flex-col border m-5 rounded">
                         <h1 class="font-mono font-bold text-purple-900 text-lg leading-tight border-b p-3 px-5 my-0">If you want to add more warehouse/s</h1>
                         <div class="card-body p-4">
@@ -78,6 +81,7 @@
                             </div>
                         </div>
                     </div>
+                @endif
             </div>
         </div>
     </div>

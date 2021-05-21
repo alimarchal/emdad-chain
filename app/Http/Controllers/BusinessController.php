@@ -20,7 +20,6 @@ class BusinessController extends Controller
      */
     public function index(Request $request)
     {
-
         if (\auth()->user()->hasRole('SuperAdmin')) {
             if ($request->has('status')) {
                 if ($request->status == 1) {
@@ -37,7 +36,23 @@ class BusinessController extends Controller
 
             $businesses = Business::paginate(10);
             return view('business.index', compact('businesses'));
-        } else {
+        }
+        elseif (\auth()->user()->hasRole('MarketingManager'))
+        {
+            if ($request->has('status')) {
+                if ($request->status == 1) {
+                    $businesses = Business::where('status', 3)->paginate(10);
+                    return view('business.incompleteMarketing', compact('businesses'));
+                } elseif ($request->status == 2) {
+                    $users = User::where('usertype', 'CEO')->where('business_id', null)->paginate(10);
+                    return view('business.incompleteMarketing', compact('users'));
+                }
+            }
+
+            $businesses = Business::where('status', 3)->paginate(10);
+            return view('business.incompleteMarketing', compact('businesses'));
+        }
+        else {
             $businesses = Business::where('user_id', auth()->user()->id)->paginate(10);
             return view('business.index', compact('businesses'));
         }
@@ -285,6 +300,7 @@ class BusinessController extends Controller
     public function incomplete()
     {
         $incompleteBusiness = User::where('email_verified_at', null)->where('usertype', 'CEO')->where('business_id', null)->paginate(10);
+//        $incompleteBusiness = User::where(['usertype' => 'CEO','business_id' => null])->orWhere('email_verified_at', null)->paginate(10);
 
         return view('business.incomplete', compact('incompleteBusiness'));
     }

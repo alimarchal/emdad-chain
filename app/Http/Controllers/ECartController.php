@@ -100,4 +100,19 @@ class ECartController extends Controller
         $RFQCart->delete();
         return back();
     }
+
+    // used for change company name check
+    public function companyCheck(Request $request)
+    {
+        $eCartItem = ECart::where('id', $request->rfqNo)->first();
+
+        if (!$eCartItem)
+        {
+            return response()->json( ['status' => 0]);
+        }
+
+        ECart::where('id', $request->rfqNo)->update(['company_name_check' => $request->status]);
+
+        return response()->json( ['status' => 1]);
+    }
 }

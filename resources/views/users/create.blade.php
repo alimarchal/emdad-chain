@@ -69,7 +69,7 @@
                                     <label class="block font-medium text-sm text-gray-700" for="name">
                                         Name
                                     </label>
-                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name" type="text" name="name" required>
+                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name" type="text" name="name" value="{{old('name')}}" required>
                                 </div>
 
                                 <!-- Email -->
@@ -77,7 +77,7 @@
                                     <label class="block font-medium text-sm text-gray-700" for="email">
                                         Email
                                     </label>
-                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="email" type="email" name="email" required>
+                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="email" type="email" name="email" value="{{old('email')}}" required>
                                 </div>
 
 
@@ -85,7 +85,7 @@
                                     <label class="block font-medium text-sm text-gray-700" for="name">
                                         Designation
                                     </label>
-                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="designation" type="text" name="designation" required>
+                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="designation" type="text" name="designation" value="{{old('designation')}}" required>
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-2">
@@ -113,7 +113,7 @@
                                             @elseif (auth()->user()->registration_type == 'Supplier')
                                                 <option value="{{$role->id}}">{{str_replace('Supplier', '', $role->name)}}</option>
                                             @else
-                                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                                <option {{(old('role') == $role->id) ? 'selected' : ''}} value="{{$role->id}}">{{$role->name}}</option>
                                             @endif
                                         @endforeach
                                     </select>

@@ -20,6 +20,7 @@ class CreateECartsTable extends Migration
             $table->foreignId('warehouse_id')->nullable()->index();
             #for tracking one form
             $table->string('prf_multiple_id')->nullable();
+            $table->integer('company_name_check')->nullable();
             $table->string('item_code')->nullable();
             $table->string('item_name')->nullable();
             $table->string('description')->nullable();

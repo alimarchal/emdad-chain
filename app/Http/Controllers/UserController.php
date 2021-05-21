@@ -72,7 +72,7 @@ class UserController extends Controller
                 return redirect()->back();
             }
 
-            $roles  = Role::where('id' , '>', 10)->where('id', '!=', 18)->get();
+            $roles  = Role::where('id' , '>', 10)->where('id', '<', 18)->get();
             return view('users.create', compact('roles', 'userCount'));
         }
         elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Supplier')
@@ -158,15 +158,69 @@ class UserController extends Controller
 
         if($request->role == 1 || auth()->user()->hasRole('SuperAdmin'))
         {
-            $data = [
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $request->password,
-                'designation' => $request->designation,
-                'business_id' => auth()->user()->business_id,
-                'usertype' => ($roleName->name == "SuperAdmin"?strtolower($roleName->name):$roleName->name),
-                'status' => 3,
-            ];
+            if ($roleName->name == 'MarketingManager' && $roleName->id == 19)
+            {
+                $validated = validator::make($request->all(),[
+                    'email' => 'required|email|unique:users',
+                ]);
+
+                if ($validated->fails()) {
+                    session()->flash('message', 'Email already exits');
+                    return redirect()->back()->withInput();
+                }
+
+                $data = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'designation' => $request->designation,
+                    'email_verified_at' => Carbon::now(),
+                    'usertype' => ($roleName->name == "SuperAdmin"?strtolower($roleName->name):$roleName->name),
+                    'status' => 3,
+                ];
+            }
+            elseif ($roleName->name == 'SupplyChainManager' && $roleName->id == 20)
+            {
+                $validated = validator::make($request->all(),[
+                    'email' => 'required|email|unique:users',
+                ]);
+
+                if ($validated->fails()) {
+                    session()->flash('message', 'Email already exits');
+                    return redirect()->back()->withInput();
+                }
+
+                $data = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'designation' => $request->designation,
+                    'email_verified_at' => Carbon::now(),
+                    'usertype' => ($roleName->name == "SuperAdmin"?strtolower($roleName->name):$roleName->name),
+                    'status' => 3,
+                ];
+            }
+            else
+            {
+                $validated = validator::make($request->all(),[
+                    'email' => 'required|email|unique:users',
+                ]);
+
+                if ($validated->fails()) {
+                    session()->flash('message', 'Email already exits');
+                    return redirect()->back()->withInput();
+                }
+
+                $data = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'designation' => $request->designation,
+                    'business_id' => auth()->user()->business_id,
+                    'usertype' => ($roleName->name == "SuperAdmin"?strtolower($roleName->name):$roleName->name),
+                    'status' => 3,
+                ];
+            }
         }
         else{
             $validated = validator::make($request->all(),[
@@ -175,7 +229,7 @@ class UserController extends Controller
 
             if ($validated->fails()) {
                 session()->flash('message', 'Email already exits');
-                return redirect()->back();
+                return redirect()->back()->withInput();
             }
 
             $data = [
@@ -196,6 +250,7 @@ class UserController extends Controller
         $role = $request->input('role') ? $request->input('role') : [];
         $user->assignRole($role);
 
+        session()->flash('message', 'User added been successfully.');
         return redirect()->route('users.index');
     }
 

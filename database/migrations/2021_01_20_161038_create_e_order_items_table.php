@@ -19,6 +19,7 @@ class CreateEOrderItemsTable extends Migration
             $table->foreignId('business_id')->nullable()->index();
             $table->foreignId('user_id')->nullable()->index();
             #for tracking one form
+            $table->integer('company_name_check')->nullable();
             $table->string('item_code')->nullable();
             $table->string('item_name')->nullable();
             $table->string('description')->nullable();

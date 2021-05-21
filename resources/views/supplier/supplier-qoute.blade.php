@@ -24,7 +24,7 @@
                             <strong>Quote Request #: {{ $eOrderItems->id }}</strong>
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <strong>Client Name: {{ $eOrderItems->business->business_name }}</strong>
+                           @if($eOrderItems->company_name_check == 1) <strong>Client Name: {{ $eOrderItems->business->business_name }}</strong>@endif
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                             <strong>Qoute User:</strong> {{ $eOrderItems->user->name }}
@@ -373,7 +373,7 @@
         </div>
     </div>
     <div class="mt-5">
-        <a href="{{ route('dashboard') }}"
+        <a href="{{ url()->previous() }}"
             class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
             Back
         </a>

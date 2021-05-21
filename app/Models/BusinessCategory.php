@@ -13,6 +13,9 @@ class BusinessCategory extends Model
 
     protected $fillable = ['business_id','category_number'];
 
+    public function business()
+    {
+        return $this->belongsTo(Business::class,'business_id', 'id');
+    }
 
-    
 }

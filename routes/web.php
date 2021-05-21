@@ -223,6 +223,7 @@ Route::get('/downloads', function () {
 
 ####################Category##########################
 Route::middleware(['auth:sanctum'])->get('category/show', [CategoryController::class, 'showAllCategories'])->name('showAllCategory');
+Route::middleware(['auth:sanctum'])->get('businesses-related-to-category/{category_id}', [CategoryController::class, 'categoryRelatedBusiness'])->name('categoryRelatedBusiness');
 Route::middleware(['auth:sanctum'])->resource('category', CategoryController::class);
 ####################END###############################
 #################### RFP Purchase Request Form ##########################
@@ -230,6 +231,7 @@ Route::middleware(['auth:sanctum'])->resource('RFQ', PurchaseRequestFormControll
 Route::middleware(['auth:sanctum'])->resource('RFQCart', ECartController::class);
 Route::middleware(['auth:sanctum'])->resource('EOrders', EOrdersController::class);
 Route::middleware(['auth:sanctum'])->resource('PlacedRFQ', PlacedRFQController::class);
+Route::post('/change-company-check', [ECartController::class, 'companyCheck'])->name('companyCheck');
 #########################################################################
 Route::middleware(['auth:sanctum'])->get('/RFQPlacedItems/{EOrderItems}', [PlacedRFQController::class, 'RFQItems'])->name('RFQItemsByID');
 Route::middleware(['auth:sanctum'])->get('/viewRFQs', [PlacedRFQController::class, 'viewRFQs'])->name('viewRFQs');

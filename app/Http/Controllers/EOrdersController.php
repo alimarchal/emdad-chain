@@ -65,6 +65,7 @@ class EOrdersController extends Controller
                         $eOrderItem->business_id = $item->business_id;
                         $eOrderItem->user_id = $item->user_id;
                         $eOrderItem->warehouse_id = $item->warehouse_id;
+                        $eOrderItem->company_name_check = $item->company_name_check;
                         $eOrderItem->item_code = $item->item_code;
                         $eOrderItem->item_name = $item->item_name;
                         $eOrderItem->description = $item->description;
@@ -112,6 +113,7 @@ class EOrdersController extends Controller
                         $eOrderItem->business_id = $item->business_id;
                         $eOrderItem->user_id = $item->user_id;
                         $eOrderItem->warehouse_id = $item->warehouse_id;
+                        $eOrderItem->company_name_check = $item->company_name_check;
                         $eOrderItem->item_code = $item->item_code;
                         $eOrderItem->item_name = $item->item_name;
                         $eOrderItem->description = $item->description;
@@ -153,6 +155,7 @@ class EOrdersController extends Controller
                     $eOrderItem->business_id = $item->business_id;
                     $eOrderItem->user_id = $item->user_id;
                     $eOrderItem->warehouse_id = $item->warehouse_id;
+                    $eOrderItem->company_name_check = $item->company_name_check;
                     $eOrderItem->item_code = $item->item_code;
                     $eOrderItem->item_name = $item->item_name;
                     $eOrderItem->description = $item->description;

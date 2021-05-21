@@ -17,7 +17,7 @@ class PackageCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->hasRole('SuperAdmin'))
+        if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasRole('MarketingManager') )
         {
             return $next($request);
         }

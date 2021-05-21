@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BusinessCategory;
 use App\Models\BusinessPackage;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -124,5 +125,12 @@ class CategoryController extends Controller
     {
         $category = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();;
         return view('category.show.subCategories', compact('category'));
+    }
+
+    public function categoryRelatedBusiness($id)
+    {
+        $categories = BusinessCategory::with('business')->where('category_number', decrypt($id))->get();
+
+        return view('category.categoryRelatedbusiness', compact('categories'));
     }
 }

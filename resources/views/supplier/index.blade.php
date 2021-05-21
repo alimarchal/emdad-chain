@@ -124,7 +124,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $rfp->business->business_name }}
+                                                    @if($rfp->company_name_check == 1) {{ $rfp->business->business_name }} @endif
     {{--                                            {{ $rfp->business }}--}}
                                                 </td>
 
@@ -165,7 +165,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $rfp->business->business_name }}
+                                                    @if($rfp->company_name_check == 1) {{ $rfp->business->business_name }} @endif
                                                     {{--                                            {{ $rfp->business }}--}}
                                                 </td>
 

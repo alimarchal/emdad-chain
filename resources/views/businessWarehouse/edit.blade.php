@@ -123,7 +123,9 @@
 
                         </div>
 
+                        @if(auth()->user()->hasRole('SuperAdmin'))
                         <x-jet-button class="float-right mt-4 mb-4">Update</x-jet-button>
+                        @endif
                         <a href="{{url('businessWarehouse/'.$businessWarehouse->business_id . '/show')}}" class=" float-right mt-5 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">Back</a>
                     </form>
                     <div class="flex space-x-2">
