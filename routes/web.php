@@ -59,6 +59,16 @@ Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
 //Route::middleware(['auth:sanctum'])->post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
 Route::middleware(['auth:sanctum'])->post('/registrationType', [UserController::class, 'registrationType']);
 
+###################################################### Buyer and Supplier Add each other ##########################################
+Route::middleware(['auth:sanctum', 'verified'])->get('add-supplier', [UserController::class, 'createSupplier'])->name('createSupplier');
+Route::middleware(['auth:sanctum', 'verified'])->post('store-supplier', [UserController::class, 'storeSupplier'])->name('storeSupplier');
+Route::middleware(['auth:sanctum', 'verified'])->get('add-buyer', [UserController::class, 'createBuyer'])->name('createBuyer');
+Route::middleware(['auth:sanctum', 'verified'])->post('store-buyer', [UserController::class, 'storeBuyer'])->name('storeBuyer');
+
+Route::middleware(['auth:sanctum'])->get('/business-suppliers/', [BusinessController::class, 'suppliers'])->name('businessSuppliers');
+Route::middleware(['auth:sanctum'])->get('/business-buyers/', [BusinessController::class, 'buyers'])->name('businessBuyers');
+###################################################### Buyer and Supplier Adding each other ##########################################
+
 Route::middleware(['packageCheck', 'categoryCheck'])->group(function () {
     Route::middleware(['auth:sanctum'])->resource('/business', BusinessController::class);
 });

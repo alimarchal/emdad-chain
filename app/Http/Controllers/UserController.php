@@ -299,7 +299,7 @@ class UserController extends Controller
 //        $roles = Role::get()->pluck('name', 'name');
 //        $permissions = Permission::get()->pluck('name', 'name');
 //        $userRole =  $user->roles->pluck('id');
-        return view('users.edit', compact('user', 'roles','permissions'));
+//        return view('users.edit', compact('user', 'roles','permissions'));
     }
 
     /**
@@ -384,6 +384,104 @@ class UserController extends Controller
         //            }
         //        }
         return redirect()->route('users.create');
+    }
+
+    public function createSupplier()
+    {
+        return view('users.ceo.createSupplier');
+    }
+
+    public function storeSupplier(Request $request)
+    {
+        $validated = validator::make($request->all(),[
+            'gender' => 'required',
+            'name' => 'required',
+            'middle_initial' => 'required',
+            'family_name' => 'required',
+            'nid_num' => 'required',
+            'nid_exp_date' => 'required|date',
+            'mobile' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        if ($validated->fails()) {
+            return redirect()->back()->withInput()->withErrors($validated->errors());
+        }
+
+        $data = [
+            'gender' => $request->gender,
+            'name' => $request->name,
+            'middle_initial' => $request->middle_initial,
+            'family_name' => $request->family_name,
+            'nid_num' => $request->nid_num,
+            'nid_exp_date' => $request->nid_exp_date,
+            'mobile' => $request->mobile,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'usertype' => 'CEO',
+            'registration_type' => 'Supplier',
+            'added_by' => 1,           /* 1 for buyer*/
+            'added_by_userId' => \auth()->id(),
+        ];
+
+
+        $user = User::create($data);
+        $password = $request->password;
+        $user->notify(new \App\Notifications\UserCreate($password));
+        $user->assignRole('CEO');
+
+        session()->flash('message', 'Supplier added successfully.');
+        return redirect()->route('businessSuppliers');
+    }
+
+    public function createBuyer()
+    {
+        return view('users.ceo.createBuyer');
+    }
+
+    public function storeBuyer(Request $request)
+    {
+        $validated = validator::make($request->all(),[
+            'gender' => 'required',
+            'name' => 'required',
+            'middle_initial' => 'required',
+            'family_name' => 'required',
+            'nid_num' => 'required',
+            'nid_exp_date' => 'required|date',
+            'mobile' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        if ($validated->fails()) {
+            return redirect()->back()->withInput()->withErrors($validated->errors());
+        }
+
+        $data = [
+            'gender' => $request->gender,
+            'name' => $request->name,
+            'middle_initial' => $request->middle_initial,
+            'family_name' => $request->family_name,
+            'nid_num' => $request->nid_num,
+            'nid_exp_date' => $request->nid_exp_date,
+            'mobile' => $request->mobile,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'usertype' => 'CEO',
+            'registration_type' => 'Buyer',
+            'added_by' => 2,           /* 2 for supplier*/
+            'added_by_userId' => \auth()->id(),
+        ];
+
+
+        $user = User::create($data);
+        $password = $request->password;
+        $user->notify(new \App\Notifications\UserCreate($password));
+        $user->assignRole('CEO');
+
+        session()->flash('message', 'Buyer added successfully.');
+        return redirect()->route('businessBuyers');
     }
 
     // public function roleGet()

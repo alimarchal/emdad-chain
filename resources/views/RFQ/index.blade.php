@@ -71,8 +71,8 @@
                                         Remarks
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Show Company Name
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider" title="Display {{auth()->user()->business->business_name}} in the RFQ">
+                                        Display Company Name
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
@@ -140,7 +140,7 @@
                                         </td>
 
                                         <td class="px-8 py-3 whitespace-nowrap">
-                                            <select name="company_name_check" id="company_name_check" onchange="companyCheck({{$rfp->id}})" class="form-select shadow-sm block w-full" required>
+                                            <select name="company_name_check" id="company_name_check" onchange="companyCheck({{$rfp->id}})" class="form-select shadow-sm block w-full" required title="Display {{auth()->user()->business->business_name}} in the RFQ">
                                                 <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
                                                 <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
                                             </select>

@@ -122,7 +122,7 @@
                             </div>
 
                             <div class="flex space-x-5 mt-3">
-                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_photo_url_1">Company logo</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_photo_url_1">Company logo @include('misc.required')</label>
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-input id="business_photo_url" type="file" name="business_photo_url_1" class="border p-2 w-1/2"></x-jet-input>

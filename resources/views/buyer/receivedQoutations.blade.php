@@ -124,7 +124,9 @@
                                             $dpo = \App\Models\DraftPurchaseOrder::where('rfq_item_no', $rfp->id)->where('po_status' , 'pending')->where('status' , 'pending')->first();
                                         @endphp
                                         <td
-                                          @if($rfp->status == 'accepted')  class="px-6 py-4 text-center whitespace-nowrap" @else
+                                          @if($rfp->status == 'accepted')  class="px-6 py-4 text-center whitespace-nowrap"
+                                          @elseif($rfp->bypass == 1)
+                                          @else
                                               class="px-6 py-4 text-center whitespace-nowrap"  data-countdown="{{$time}}"
                                           @endif
                                         >

@@ -54,6 +54,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'is_active',
         'usertype',
         'driver_status',
+        'added_by',
+        'added_by_userId',
         'rtl',
     ];
 

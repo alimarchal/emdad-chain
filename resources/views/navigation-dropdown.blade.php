@@ -315,13 +315,21 @@
 
                         @if(auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
                             <div class="border-t border-gray-100"></div>
-                            <x-jet-dropdown-link>
-                                @if(auth()->user()->registration_type == 'Supplier')
+
+                            @if(auth()->user()->registration_type == 'Supplier')
+
+                                <x-jet-dropdown-link href="{{route('createBuyer')}}">
                                     {{ __('Add Buyer') }}
-                                @elseif(auth()->user()->registration_type == 'Buyer')
-                                    {{ __('Add Supplier') }}
-                                @endif
-                            </x-jet-dropdown-link>
+                                </x-jet-dropdown-link>
+
+                            @elseif(auth()->user()->registration_type == 'Buyer')
+
+                                <x-jet-dropdown-link href="{{route('createSupplier')}}">
+                                {{ __('Add Supplier') }}
+                                </x-jet-dropdown-link>
+
+                            @endif
+
                         @endif
 
                         @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

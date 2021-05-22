@@ -6,7 +6,7 @@
 
             --
             @php $count = \App\Models\BusinessCategory::where('category_number', $category->id)->count(); @endphp
-            <a @if($count > 0) class="text-green-600 hover:underline" href="{{route('categoryRelatedBusiness', encrypt($category->id))}}"  @else class="text-red-600 hover:underline" @endif >@if($count > 0) Registered Businesses {{$count}} @endif</a>
+            <a @if($count > 0) class="text-green-600 hover:underline" href="{{route('categoryRelatedBusiness', encrypt($category->id))}}"  @else class="text-red-600 hover:underline" style="cursor: no-drop" @endif > Registered Businesses {{$count}} </a>
 
             @if(auth()->user()->hasRole('SuperAdmin'))
                 --

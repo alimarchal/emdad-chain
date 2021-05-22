@@ -297,6 +297,20 @@ class BusinessController extends Controller
         return redirect()->back()->with('message', 'Business status updated...');
     }
 
+    public function suppliers()
+    {
+        $suppliers = User::with('business')->where(['added_by_userId' => \auth()->id(), 'added_by' => 1])->get();
+
+        return view('business.supplier', compact('suppliers'));
+    }
+
+    public function buyers()
+    {
+        $buyers = User::with('business')->where(['added_by_userId' => \auth()->id(), 'added_by' => 2])->get();
+
+        return view('business.buyer', compact('buyers'));
+    }
+
     public function incomplete()
     {
         $incompleteBusiness = User::where('email_verified_at', null)->where('usertype', 'CEO')->where('business_id', null)->paginate(10);
