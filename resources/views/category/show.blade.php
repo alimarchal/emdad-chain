@@ -81,6 +81,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
                     <h2 class="text-2xl font-bold text-center">All Categories</h2>
+                    <h3 class="text-2xl text-blue-600">Category -- Registered Businesses -- Active RFQs</h3>
                     <x-jet-validation-errors class="mb-4" />
 
                     @if (session('message'))

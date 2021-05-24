@@ -41,10 +41,10 @@ class BusinessController extends Controller
         {
             if ($request->has('status')) {
                 if ($request->status == 1) {
-                    $businesses = Business::where('status', 3)->paginate(10);
+                    $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
                     return view('business.incompleteMarketing', compact('businesses'));
                 } elseif ($request->status == 2) {
-                    $users = User::where('usertype', 'CEO')->where('business_id', null)->paginate(10);
+                    $users = User::where('usertype', 'CEO')->where('business_id', null)->orderBy('id','desc')->paginate(10);
                     return view('business.incompleteMarketing', compact('users'));
                 }
             }

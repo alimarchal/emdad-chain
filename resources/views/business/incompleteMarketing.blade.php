@@ -120,6 +120,10 @@
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
                                     Mobile
                                 </th>
+
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    Registered Date
+                                </th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -137,6 +141,10 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900 text-center">
                                         <span class="text-blue-900 ">{{ $user->mobile }}</span>
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900 text-center">
+                                        <span class="text-blue-900 ">{{ \Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</span>
                                     </td>
 
                                 </tr>

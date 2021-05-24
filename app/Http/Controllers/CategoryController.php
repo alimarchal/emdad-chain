@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\BusinessCategory;
 use App\Models\BusinessPackage;
 use App\Models\Category;
+use App\Models\EOrderItems;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -127,10 +129,27 @@ class CategoryController extends Controller
         return view('category.show.subCategories', compact('category'));
     }
 
+    //Businesses registered in categories record related to SupplyChainManager And SuperAdmin
     public function categoryRelatedBusiness($id)
     {
         $categories = BusinessCategory::with('business')->where('category_number', decrypt($id))->get();
 
         return view('category.categoryRelatedbusiness', compact('categories'));
+    }
+
+    //Active RFQs record related to SupplyChainManager And SuperAdmin
+    public function activeRFQs($id)
+    {
+        $activeRFQs = EOrderItems::where(['item_code' => decrypt($id), 'bypass' => 0])->where('quotation_time', '>=', Carbon::now())->get();
+
+        return view('category.active_rfq', compact('activeRFQs'));
+    }
+
+    //Active RFQ details view related to SupplyChainManager And SuperAdmin
+    public function activeRFQView($id)
+    {
+        $activeRFQs = EOrderItems::where('id', $id)->get();
+
+        return view('category.active_rfq_view', compact('activeRFQs'));
     }
 }
