@@ -57,9 +57,6 @@
                             <strong>Required Sample:</strong> {{ $eOrderItems->required_sample }}
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <strong>Required Sample:</strong> {{ $eOrderItems->required_sample }}
-                        </div>
-                        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                             <strong>Payment Mode:</strong> {{ $eOrderItems->payment_mode }}
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
@@ -175,6 +172,15 @@
                         <form method="POST" action="{{ route('qoute.update', $collection->id) }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
                             @method('PUT')
+
+                            @php $quote = \App\Models\QouteMessage::where('qoute_id',$collection->id )->first(); @endphp
+                            @if(isset($quote))
+                            <br>
+
+                            <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-blue-700">Message from Buyer:{{$quote->message}}</h1>
+                            <br>
+                            @endif
+
                             <p class="pt-6 pb-3 font-bold text-2xl text-center">
                                 @if ($collection->qoute_status == 'ModificationNeeded')
                                     <span class="text-red-900">Modification Needed</span>
@@ -199,6 +205,7 @@
                                     <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0" step="any" autocomplete="size" required>
                                 </div>
                             </div>
+                            @if($collection->required_sample == 'Yes')
                             <p class="py-2 font-bold text-center  text-2xl">Sample Information</p>
                             <div class="flex flex-wrap overflow-hidden xl:-mx-1">
                                 <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
@@ -226,6 +233,7 @@
                                     <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_charges_per_unit" value="{{ $collection->sample_charges_per_unit }}" min="0" autocomplete="size" required>
                                 </div>
                             </div>
+                            @endif
                             <p class="py-2 font-bold text-center  text-2xl">Shipping Information</p>
                             <div class="flex flex-wrap -mx-1 overflow-hidden sm:-mx-1 md:-mx-1 lg:-mx-1 xl:-mx-1">
                                 <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
@@ -295,6 +303,7 @@
                                         <input class="form-input rounded-md shadow-sm block w-full price_per_unit" id="size" type="number" name="quote_price_per_quantity" min="0" step="any" autocomplete="size" required>
                                     </div>
                                 </div>
+                                @if($eOrderItems->required_sample == 'Yes')
                                 <p class="py-2 font-bold text-center  text-2xl">Sample Information</p>
                                 <div class="flex flex-wrap overflow-hidden xl:-mx-1">
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
@@ -322,6 +331,7 @@
                                         <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_charges_per_unit" min="0" autocomplete="size" required>
                                     </div>
                                 </div>
+                                @endif
                                 <p class="py-2 font-bold text-center  text-2xl">Shipping Information</p>
                                 <div class="flex flex-wrap -mx-1 overflow-hidden sm:-mx-1 md:-mx-1 lg:-mx-1 xl:-mx-1">
                                     <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">

@@ -236,6 +236,8 @@ Route::get('/downloads', function () {
 ####################Category##########################
 Route::middleware(['auth:sanctum'])->get('category/show', [CategoryController::class, 'showAllCategories'])->name('showAllCategory');
 Route::middleware(['auth:sanctum'])->get('businesses-related-to-category/{category_id}', [CategoryController::class, 'categoryRelatedBusiness'])->name('categoryRelatedBusiness');
+Route::middleware(['auth:sanctum'])->get('active-rfq/{rfq_id}', [CategoryController::class, 'activeRFQs'])->name('activeRFQs');
+Route::middleware(['auth:sanctum'])->get('active-rfq-details/{rfq_id}', [CategoryController::class, 'activeRFQView'])->name('activeRFQView');
 Route::middleware(['auth:sanctum'])->resource('category', CategoryController::class);
 ####################END###############################
 #################### RFP Purchase Request Form ##########################

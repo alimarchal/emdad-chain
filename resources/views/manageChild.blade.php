@@ -8,6 +8,13 @@
             @php $count = \App\Models\BusinessCategory::where('category_number', $category->id)->count(); @endphp
             <a @if($count > 0) class="text-green-600 hover:underline" href="{{route('categoryRelatedBusiness', encrypt($category->id))}}"  @else class="text-red-600 hover:underline" style="cursor: no-drop" @endif > Registered Businesses {{$count}} </a>
 
+            --
+            @php
+                $RFQCounts = \App\Models\EOrderItems::where(['item_code' => $category->id, 'bypass' => 0])->where( 'quotation_time', '>=', \Carbon\Carbon::now())->get();
+            @endphp
+            <a @if(count($RFQCounts) > 0) class="text-green-600 hover:underline" href="{{route('activeRFQs', encrypt($category->id))}}"  @else class="text-red-600 hover:underline" style="cursor: no-drop" @endif >
+                Active RFQs {{count($RFQCounts)}} </a>
+
             @if(auth()->user()->hasRole('SuperAdmin'))
                 --
             <form class="inline" method="POST" action="{{ route('category.destroy', $category->id) }}">@csrf @method('delete')
