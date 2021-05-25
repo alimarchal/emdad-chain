@@ -8,7 +8,7 @@
 
     <div class="py-12">
         <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
-            <a href="{{ url()->previous() }}"
+            <a href="{{ route('business.index') }}"
                class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                 Back
             </a>
@@ -61,7 +61,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                 <a  href="{{route('businessWarehouse.edit',$biz->id)}}" class="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">
-                                    @if(auth()->user()->hasRole('SuperAdmin')) VIEW & EDIT @elseif(auth()->user()->hasRole('MarketingManager')) VIEW @endif
+                                    VIEW @if(auth()->user()->hasRole('SuperAdmin')) & EDIT @endif
                                 </a>
                             </td>
                         </tr>

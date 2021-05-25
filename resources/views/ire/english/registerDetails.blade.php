@@ -51,8 +51,8 @@
                     <x-jet-label for="type" value="{{ __('Employee') }}" class="mb-1" />
                     <select name="type" id="type" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="type" >
                         <option disabled selected value="">Select</option>
-                        <option {{ old('type') == 0 ? "selected" : "" }} value="0">No</option>
-                        <option {{ old('type') == 1 ? "selected" : "" }} value="1">Yes</option>
+                        <option {{ old('type') == '0' ? "selected" : '' }} value="0">No</option>
+                        <option {{ old('type') == '1' ? "selected" : '' }} value="1">Yes</option>
                     </select>
                 </div>
 

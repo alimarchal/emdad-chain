@@ -85,7 +85,7 @@
 
                                 <div class="col-span-6 sm:col-span-2">
                                     <x-jet-label for="nid_exp_date" value="{{ __('National ID Expiry Date') }}" />
-                                    <input type="date" id="datepicker" class="block mt-1 w-full" name="nid_exp_date" value="{{old('nid_exp_date')}}" placeholder="Choose Date (mm/dd/yy)">
+                                    <input type="text" id="datepicker" class="block mt-1 w-full" name="nid_exp_date" value="{{old('nid_exp_date')}}" placeholder="Choose Date (yy/mm/dd)" readonly>
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-2">
@@ -158,7 +158,7 @@
 <script>
     $(function() {
         $( "#datepicker" ).datepicker({
-            dateFormat : 'mm/dd/yy',
+            dateFormat : 'yy/mm/dd',
             changeMonth : true,
             changeYear : true,
             yearRange: '-100y:c+nn',

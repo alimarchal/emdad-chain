@@ -409,13 +409,16 @@ class UserController extends Controller
             return redirect()->back()->withInput()->withErrors($validated->errors());
         }
 
+        $date = strtotime($request->nid_exp_date);
+        $nid_exp_date = date('Y-m-d',$date);
+
         $data = [
             'gender' => $request->gender,
             'name' => $request->name,
             'middle_initial' => $request->middle_initial,
             'family_name' => $request->family_name,
             'nid_num' => $request->nid_num,
-            'nid_exp_date' => $request->nid_exp_date,
+            'nid_exp_date' => $nid_exp_date,
             'mobile' => $request->mobile,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -458,13 +461,16 @@ class UserController extends Controller
             return redirect()->back()->withInput()->withErrors($validated->errors());
         }
 
+        $date = strtotime($request->nid_exp_date);
+        $nid_exp_date = date('Y-m-d',$date);
+
         $data = [
             'gender' => $request->gender,
             'name' => $request->name,
             'middle_initial' => $request->middle_initial,
             'family_name' => $request->family_name,
             'nid_num' => $request->nid_num,
-            'nid_exp_date' => $request->nid_exp_date,
+            'nid_exp_date' => $nid_exp_date,
             'mobile' => $request->mobile,
             'email' => $request->email,
             'password' => Hash::make($request->password),

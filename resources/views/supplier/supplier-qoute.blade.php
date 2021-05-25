@@ -169,17 +169,32 @@
                         <h2 class="text-center text-2xl">You have already qouted...</h2>
 
                     @elseif($collection && $collection->qoute_status == 'ModificationNeeded')
+                        <hr>
+
+                        @php $quote = \App\Models\QouteMessage::where('qoute_id',$collection->id )->get(); @endphp
+                        @if(isset($quote))
+                            <br>
+
+                            <div class="border-2 p-2 m-2">
+                                @foreach ($quote as $msg)
+                                        @php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp
+
+                                        <span class="text-blue-700">
+                                            <span class="text-gray-600 text-left">
+                                                Message from {{$business->business_name}}
+                                            </span>
+                                            : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
+                                        </span>
+                                    <br> <br>
+                                @endforeach
+                            </div>
+                            <br>
+                        @endif
+                        <hr>
+
                         <form method="POST" action="{{ route('qoute.update', $collection->id) }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
                             @method('PUT')
-
-                            @php $quote = \App\Models\QouteMessage::where('qoute_id',$collection->id )->first(); @endphp
-                            @if(isset($quote))
-                            <br>
-
-                            <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-blue-700">Message from Buyer:{{$quote->message}}</h1>
-                            <br>
-                            @endif
 
                             <p class="pt-6 pb-3 font-bold text-2xl text-center">
                                 @if ($collection->qoute_status == 'ModificationNeeded')
@@ -244,7 +259,8 @@
                                 </div>
                                 <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                        Note For Customer
+                                        @php $business = \App\Models\Business::where('user_id', $collection->user_id)->first(); @endphp
+                                        Note to {{$business->business_name}} (buyer)
                                     </label>
                                     <textarea name="note_for_customer" id="description">{{ $collection->note_for_customer }}</textarea>
                                 </div>
@@ -271,10 +287,6 @@
                                 class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
                                 Update Send Quote
                             </button>
-                            <br>
-                            <a href="{{ route('dashboard') }}"
-                                class="inline-flex items-center px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                                Cancel</a>
                         </form>
                     @else
                         <form method="POST" action="{{ route('qoute.store') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
@@ -384,8 +396,8 @@
     </div>
     <div class="mt-5">
         <a href="{{ url()->previous() }}"
-            class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-            Back
+            class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+            Go Back
         </a>
     </div>
 

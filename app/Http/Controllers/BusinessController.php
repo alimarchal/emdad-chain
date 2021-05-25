@@ -37,7 +37,7 @@ class BusinessController extends Controller
             $businesses = Business::paginate(10);
             return view('business.index', compact('businesses'));
         }
-        elseif (\auth()->user()->hasRole('MarketingManager'))
+        elseif (\auth()->user()->hasRole('Sales Specialist'))
         {
             if ($request->has('status')) {
                 if ($request->status == 1) {
@@ -49,7 +49,7 @@ class BusinessController extends Controller
                 }
             }
 
-            $businesses = Business::where('status', 3)->paginate(10);
+            $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
             return view('business.incompleteMarketing', compact('businesses'));
         }
         else {

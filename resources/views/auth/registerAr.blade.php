@@ -87,7 +87,7 @@
 {{--                    <x-jet-input id="nid_exp_date" class="block mt-1 w-full" type="date" name="nid_exp_date" :value="old('nid_exp_date')" required min="{{date('Y-m-d')}}" />--}}
 
                     <x-jet-label for="nid_exp_date" value="{{ __('تاريخ انتهاء الهوية الوطنية') }}" />
-                    <input type="text" id="datepicker" class="block mt-1 w-full" name="nid_exp_date" placeholder="اختر موعدا (mm\dd\yy)">
+                    <input type="text" id="datepicker" class="block mt-1 w-full" name="nid_exp_date" placeholder="اختر موعدا (mm/dd/yy)" readonly>
                 </div>
 
             </div>
