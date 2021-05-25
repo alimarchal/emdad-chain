@@ -140,7 +140,7 @@ class CategoryController extends Controller
     //Active RFQs record related to SupplyChainManager And SuperAdmin
     public function activeRFQs($id)
     {
-        $activeRFQs = EOrderItems::where(['item_code' => decrypt($id), 'bypass' => 0])->where('quotation_time', '>=', Carbon::now())->get();
+        $activeRFQs = EOrderItems::where(['item_code' => decrypt($id), 'bypass' => 0])->where('quotation_time', '>=', Carbon::now()->toDateTimeString())->get();
 
         return view('category.active_rfq', compact('activeRFQs'));
     }

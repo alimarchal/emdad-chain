@@ -87,7 +87,7 @@
                     @if($QouteItem->messages->isNotEmpty())
                     <div class="border-2 p-2 m-2">
                         @foreach ($QouteItem->messages as $msg)
-                            Message from {{ $msg->usertype }} : {{ strip_tags($msg->message) }} <br>
+                            <span class="text-blue-600">Message from {{ $msg->usertype }}</span>  : {{ strip_tags(str_replace('&nbsp;', ' ',  $msg->message)) }} <br> <br>
                         @endforeach
                     </div>
                     @endif
@@ -95,7 +95,9 @@
                     <hr>
                     <form action="{{ route('QuotationMessage.store') }}" method="post">
                         @csrf
-                        <h1 class="text-center text-2xl mt-4">Message to Supplier</h1>
+                        @php $business = \App\Models\Business::where('user_id', $QouteItem->supplier_user_id)->first(); @endphp
+                        <h1 class="text-center text-2xl mt-4">Message to <span class="text-blue-600">{{$business->business_name}}</span>
+                            <span style="font-size: 20px;">(supplier)</span></h1>
                         <textarea name="message" id="message" cols="30" rows="10" class="form-input rounded-md shadow-sm mt-1 block w-full" autocomplete="name"></textarea>
                         <x-jet-input-error for="message" class="mt-2" />
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -103,21 +105,32 @@
                         <input type="hidden" name="usertype" value="{{ $QouteItem->business->business_type }}">
 
                         <br>
-                        <x-jet-button>
-                            {{ __('Send') }}
-                        </x-jet-button>
+
+                        <div class="justify-between p-2 m-2">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150">
+                            Send
+                            </button>
+{{--                            <a href="{{ route('updateQoute', $QouteItem->id) }}" style="margin-left: 70px;"--}}
+{{--                               class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">--}}
+{{--                                Qoute Again--}}
+{{--                            </a>--}}
+
+{{--                            <a href="{{ route('updateRejected', $QouteItem->id) }}" style="margin-left: 70px;"--}}
+{{--                               class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">Reject--}}
+{{--                                Request</a>--}}
+                        </div>
                         <br>
                     </form>
                     <br>
-                    <div class="flex justify-between p-2 m-2">
+                    <div class="justify-between p-2 m-2">
 
                         <a href="{{ route('updateQoute', $QouteItem->id) }}"
-                            class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
+                            class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">
                             Qoute Again
                         </a>
 
-                        <a href="{{ route('updateRejected', $QouteItem->id) }}"
-                            class="inline-flex items-center justify-center px-4 py-2 bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-blue-800 transition ease-in-out duration-150">Reject
+                        <a href="{{ route('updateRejected', $QouteItem->id) }}" style="margin-left: 70px; margin-top: 20px;"
+                            class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">Reject
                             Request</a>
                     </div>
 

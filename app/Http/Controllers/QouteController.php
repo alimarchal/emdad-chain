@@ -94,7 +94,7 @@ class QouteController extends Controller
         $request->merge(['qoute_status' => 'Modified']);
         $request->merge(['status' => 'pending']);
         $request->merge(['qoute_status_updated' => 'Modified']);
-        session()->flash('message', 'You have update qoute.');
+        session()->flash('message', 'You have updated quote.');
         $qoute->update($request->all());
         $quote = $qoute;
         $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
@@ -205,7 +205,7 @@ class QouteController extends Controller
         $buyer_id = 0;
         // inform supplier user
         $supplier_user = User::find($qoute->supplier_user_id)->notify(new \App\Notifications\QuoteAgain($qoute));
-        session()->flash('message', 'Qoute status changes to ' . $qoute_status);
+        session()->flash('message', 'Qoute status changed to ' . $qoute_status);
         return redirect()->route('QoutationsBuyerReceivedModificationNeeded', [$qoute->e_order_id, $qoute->e_order_items_id, $buyer_id]);
     }
 
