@@ -1,6 +1,62 @@
 <x-app-layout>
     @section('headerScripts')
+        @if($gateway == "mada")
+            <script src="https://code.jquery.com/jquery.js" type="text/javascript"></script>
+            <style>
+
+                .wpwl-form-card
+                {
+                    min-height: 0px !important;
+                }
+
+                .wpwl-label-brand{
+                    display: none !important;
+                }
+                .wpwl-control-brand{
+                    display: none !important;
+                }
+
+                .wpwl-brand-card
+                {
+                    display: block;
+                    visibility: visible;
+                    position: absolute;
+                    right: 178px;
+                    top: 40px;
+                    width: 67px;
+                    z-index: 10;
+                }
+
+                .wpwl-brand-MASTER
+                {
+                    margin-top: -10;
+                    margin-right: -10;
+                }
+
+            </style>
+
+            <script>
+
+                var wpwlOptions = {
+                    locale: "en", //check if the store is in Arabic or English
+
+                    onReady: function(){
+                        if (wpwlOptions.locale == "ar") {
+                            $(".wpwl-group").css('direction', 'ltr');
+                            $(".wpwl-control-cardNumber").css({'direction': 'ltr' , "text-align":"right"});
+                            $(".wpwl-brand-card").css('right', '200px');
+                        }
+                    }}
+            </script>
+        @endif
         <script src="https://test.oppwa.com/v1/paymentWidgets.js?checkoutId={{{$res_data['id']}}}"></script>
+        <script type="text/javascript">
+            var wpwlOptions = {
+                paymentTarget:"_top",
+            }
+        </script>
+
+
     @endsection
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -98,7 +154,7 @@
     </style>
 
 
-        <form action="{{route('businessPackage.paymentStatus')}}?package_id={{$package->id}}&merchant_id={{$merchant_id->id}}&gateway={{$gateway}}" method="get" class="paymentWidgets" data-brands="MADA VISA MASTER">
+        <form action="{{route('businessPackage.paymentStatus')}}?package_id={{$package->id}}&merchant_id={{$merchant_id->id}}&gateway={{$gateway}}" method="get" class="paymentWidgets" data-brands="@if($gateway == "mada") MADA @else VISA MASTER @endif">
         </form>
 
 
