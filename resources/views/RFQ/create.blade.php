@@ -287,9 +287,9 @@
                                 <select name="delivery_period" id="delivery_period" class="form-select shadow-sm block w-full" required>
                                     <option value="">None</option>
                                     <option value="Immediately">Immediately</option>
-                                    <option value="With in 30 Days">30 Days</option>
-                                    <option value="With in 60 Days">60 Days</option>
-                                    <option value="With in 90 Days">90 Days</option>
+                                    <option value="Within 30 Days">30 Days</option>
+                                    <option value="Within 60 Days">60 Days</option>
+                                    <option value="Within 90 Days">90 Days</option>
                                 </select>
                             </div>
 
@@ -302,6 +302,10 @@
                                     <option value="Cash">Cash</option>
                                     @if(auth()->user()->business_package->package_id != 1)
                                     <option value="Credit">Credit</option>
+                                    <option value="Credit30days">Credit (30 Days)</option>
+                                    <option value="Credit60days">Credit (60 Days)</option>
+                                    <option value="Credit90days">Credit (90 Days)</option>
+                                    <option value="Credit120days">Credit (120 Days)</option>
                                     @endif
                                 </select>
                             </div>
