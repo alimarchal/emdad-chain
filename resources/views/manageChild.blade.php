@@ -5,8 +5,21 @@
                 {{ $category->name . ' - ' . $category->name_ar . ' - ' .  $category->name_ur }}</a>
 
             --
-            @php $count = \App\Models\BusinessCategory::where('category_number', $category->id)->count(); @endphp
-            <a @if($count > 0) class="text-green-600 hover:underline" href="{{route('categoryRelatedBusiness', encrypt($category->id))}}"  @else class="text-red-600 hover:underline" style="cursor: no-drop" @endif > Registered Businesses {{$count}} </a>
+{{--            @php $count = \App\Models\BusinessCategory::where('category_number', $category->id)->count(); @endphp--}}
+{{--            <a @if($count > 0) class="text-green-600 hover:underline" href="{{route('categoryRelatedBusiness', encrypt($category->id))}}"  @else class="text-red-600 hover:underline" style="cursor: no-drop" @endif > Registered Businesses {{$count}} </a>--}}
+            @php
+                    $businessCategorires = \App\Models\BusinessCategory::where('category_number', $category->id)->get()->pluck('business_id');
+
+                    $buyerBusinesses = \App\Models\Business::whereIn('id', $businessCategorires)->where('business_type', 'Buyer')->count();
+                    $supplierBusinesses = \App\Models\Business::whereIn('id', $businessCategorires)->where('business_type', 'Supplier')->count();
+            @endphp
+            <a @if(count($businessCategorires) > 0) class="text-green-600 hover:underline" href="{{route('categoryRelatedBusiness', encrypt($category->id))}}"  @else class="text-red-600 hover:underline" style="cursor: no-drop" @endif >
+
+                Buyer Businesses  -- {{$buyerBusinesses}} --
+                Supplier Businesses {{$supplierBusinesses}}
+
+            </a>
+
 
             --
             @php

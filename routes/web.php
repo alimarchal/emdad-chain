@@ -245,6 +245,7 @@ Route::middleware(['auth:sanctum'])->resource('RFQ', PurchaseRequestFormControll
 Route::middleware(['auth:sanctum'])->resource('RFQCart', ECartController::class);
 Route::middleware(['auth:sanctum'])->resource('EOrders', EOrdersController::class);
 Route::middleware(['auth:sanctum'])->resource('PlacedRFQ', PlacedRFQController::class);
+Route::get('/rfq-with-no-quotations', [PlacedRFQController::class, 'RFQsWithNoQuotations'])->name('RFQsWithNoQuotations');
 Route::post('/change-company-check', [ECartController::class, 'companyCheck'])->name('companyCheck');
 #########################################################################
 Route::middleware(['auth:sanctum'])->get('/RFQPlacedItems/{EOrderItems}', [PlacedRFQController::class, 'RFQItems'])->name('RFQItemsByID');

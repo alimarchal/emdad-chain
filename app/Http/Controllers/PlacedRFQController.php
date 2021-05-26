@@ -170,4 +170,10 @@ class PlacedRFQController extends Controller
         $collection = EOrderItems::where('e_orders_id', $EOrderItems)->get();
         return view('RFQPlaced.show', compact('collection'));
     }
+
+    public function RFQsWithNoQuotations()
+    {
+        $rfqs = \App\Models\EOrderItems::with('qoutes')->doesntHave('qoutes')->get();
+        return view('RFQ.noQuotationReceived', compact('rfqs'));
+    }
 }
