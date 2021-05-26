@@ -290,6 +290,12 @@
                                     <option value="Within 30 Days">30 Days</option>
                                     <option value="Within 60 Days">60 Days</option>
                                     <option value="Within 90 Days">90 Days</option>
+                                    <option value="Standing Order - 2 per year">Standing Order - 2 times / year</option>
+                                    <option value="Standing Order - 3 per year">Standing Order - 3 times / year</option>
+                                    <option value="Standing Order - 4 per year">Standing Order - 4 times / year</option>
+                                    <option value="Standing Order - 6 per year">Standing Order - 6 times / year</option>
+                                    <option value="Standing Order - 12 per year">Standing Order - 12 times / year</option>
+                                    <option value="Standing Order Open">Standing Order - Open</option>
                                 </select>
                             </div>
 
