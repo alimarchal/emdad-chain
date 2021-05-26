@@ -209,6 +209,10 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                @role('SC Specialist')
+                @php $rfqs = \App\Models\EOrderItems::with('qoutes')->doesntHave('qoutes')->count(); @endphp
+                <span title="Number of RFQs which received no quotations">RFQs with no Quotations: &nbsp;<a href="{{route('RFQsWithNoQuotations')}}" style="padding-right: 10px;"><span class="text-blue-600 hover:underline">{{$rfqs}}</span></a></span>
+                @endrole
                 @can('all')
 {{--                    Uncomment below line when arabic version is ready and delete comming soon line--}}
 {{--                <x-jet-button onclick="language(1)">--}}
@@ -217,7 +221,6 @@
                     <a class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">قريباً</a>
                 </x-jet-button>
                 @endcan
-
                 <div x-data="{ notificationOpen: false }" class="relative">
                     <button @click="notificationOpen = ! notificationOpen" class="flex mx-4 text-gray-600 focus:outline-none">
                         <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
