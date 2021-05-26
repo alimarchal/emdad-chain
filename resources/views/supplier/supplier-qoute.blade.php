@@ -27,7 +27,7 @@
                            @if($eOrderItems->company_name_check == 1) <strong>Client Name: {{ $eOrderItems->business->business_name }}</strong>@endif
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <strong>Qoute User:</strong> {{ $eOrderItems->user->name }}
+                            @if($eOrderItems->company_name_check == 1) <strong>Qoute User:</strong> {{ $eOrderItems->user->name }} @endif
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                             <strong>Item Code:</strong> {{ $eOrderItems->item_code }}

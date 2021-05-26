@@ -287,9 +287,15 @@
                                 <select name="delivery_period" id="delivery_period" class="form-select shadow-sm block w-full" required>
                                     <option value="">None</option>
                                     <option value="Immediately">Immediately</option>
-                                    <option value="With in 30 Days">30 Days</option>
-                                    <option value="With in 60 Days">60 Days</option>
-                                    <option value="With in 90 Days">90 Days</option>
+                                    <option value="Within 30 Days">30 Days</option>
+                                    <option value="Within 60 Days">60 Days</option>
+                                    <option value="Within 90 Days">90 Days</option>
+                                    <option value="Standing Order - 2 per year">Standing Order - 2 times / year</option>
+                                    <option value="Standing Order - 3 per year">Standing Order - 3 times / year</option>
+                                    <option value="Standing Order - 4 per year">Standing Order - 4 times / year</option>
+                                    <option value="Standing Order - 6 per year">Standing Order - 6 times / year</option>
+                                    <option value="Standing Order - 12 per year">Standing Order - 12 times / year</option>
+                                    <option value="Standing Order Open">Standing Order - Open</option>
                                 </select>
                             </div>
 
@@ -302,6 +308,10 @@
                                     <option value="Cash">Cash</option>
                                     @if(auth()->user()->business_package->package_id != 1)
                                     <option value="Credit">Credit</option>
+                                    <option value="Credit30days">Credit (30 Days)</option>
+                                    <option value="Credit60days">Credit (60 Days)</option>
+                                    <option value="Credit90days">Credit (90 Days)</option>
+                                    <option value="Credit120days">Credit (120 Days)</option>
                                     @endif
                                 </select>
                             </div>

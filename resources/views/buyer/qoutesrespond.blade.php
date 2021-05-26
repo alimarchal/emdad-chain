@@ -23,17 +23,24 @@
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg p-4">
 
-                    <h2 class="text-2xl font-bold py-2 text-center">Quotation</h2>
-                    <h2 class="text-center text-2xl">
-                        @if ($QouteItem->qoute_status == 'ModificationNeeded')
-                            You have choose for modification needed for this quote
-                        @elseif($QouteItem->qoute_status == 'Qouted')
-                            You have not quoted...
-                        @elseif($QouteItem->qoute_status == 'Rejected')
-                            You have rejected this quote..
-                        @endif
-                    </h2>
-                    <hr>
+                    <div class="mt-5 d-flex">
+                        <div>
+                            <h2 class="text-center text-2xl font-bold py-2 text-center">Quotation</h2>
+                        </div>
+
+                        <div>
+                            <h2 class="text-left text-2xl font-bold py-2">
+                                Status:
+                                @if ($QouteItem->qoute_status == 'Modified')
+                                    <span class="bg-gray-400">You have asked for a modification for this quotation.</span>
+                                @elseif($QouteItem->qoute_status == 'Qouted')
+                                    <span class="bg-yellow-400">Waiting for response.</span>
+                                @elseif($QouteItem->qoute_status == 'Rejected')
+                                    <span class="bg-red-600">You have rejected this quotation.</span>
+                                @endif
+                            </h2>
+                        </div>
+                    </div>
 
                     <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded shadow-md ">
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
@@ -93,7 +100,7 @@
                     @endif
 
                     <hr>
-                    <form action="{{ route('QuotationMessage.store') }}" method="post">
+                    <form action="{{ route('QuotationMessage.store') }}" class="rounded shadow-md" method="post">
                         @csrf
                         @php $business = \App\Models\Business::where('user_id', $QouteItem->supplier_user_id)->first(); @endphp
                         <h1 class="text-center text-2xl mt-4">Message to <span class="text-blue-600">{{$business->business_name}}</span>
@@ -121,6 +128,7 @@
                         </div>
                         <br>
                     </form>
+
                     <br>
                     <div class="justify-between p-2 m-2">
 
