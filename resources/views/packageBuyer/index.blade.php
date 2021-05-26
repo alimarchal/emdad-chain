@@ -80,9 +80,10 @@
                                     <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
                                     <h1 class="text-4xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
                                         <span class="font-bold text-2xl">Free</span>
-                                        {{--                                    <span>{{$package->charges}}</span>--}}
                                         <span class="text-lg ml-1 font-normal text-gray-500">{{$package->charges}}</span>
                                     </h1>
+                                    <span class="text-xs mb-2 text-red-500"> * Only upgradable from Gold Package.</span>
+
                                     @if(isset($businessPackage) && $businessPackage->package_id == 4)
                                         <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
                                         <button class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full rounded" style="justify-content: center; cursor: no-drop" disabled>Purchased</button>
@@ -92,7 +93,7 @@
                                         <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
                                             <input type="hidden" name="package_id" value="{{$package->id}}">
-                                            <button class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded" style="justify-content: center">Subscribe</button>
+                                            <button class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded" disabled style="justify-content: center">Subscribe</button>
                                         </form>
                                     @endif
                                 @endif
