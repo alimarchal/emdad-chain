@@ -158,7 +158,7 @@ class UserController extends Controller
 
         if($request->role == 1 || auth()->user()->hasRole('SuperAdmin'))
         {
-            if ($roleName->name == 'MarketingManager' && $roleName->id == 19)
+            if ($roleName->name == 'Sales Specialist' && $roleName->id == 19)
             {
                 $validated = validator::make($request->all(),[
                     'email' => 'required|email|unique:users',
@@ -179,7 +179,7 @@ class UserController extends Controller
                     'status' => 3,
                 ];
             }
-            elseif ($roleName->name == 'SupplyChainManager' && $roleName->id == 20)
+            elseif ($roleName->name == 'SC Specialist' && $roleName->id == 20)
             {
                 $validated = validator::make($request->all(),[
                     'email' => 'required|email|unique:users',
