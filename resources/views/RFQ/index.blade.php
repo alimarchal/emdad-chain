@@ -23,7 +23,7 @@
         @if ($eCart->count())
             @php $total = 0; @endphp
 {{--            <div class="flex flex-col bg-white rounded ">--}}
-                <div class="-my-2 sm:-mx-6 lg:-mx-8">
+                <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                             <table class="min-w-full divide-y divide-gray-200">
@@ -186,8 +186,8 @@
                             <input type="hidden" name="item_number[]" value="{{ $rfp->id }}">
                         @endforeach
 
-                        <input type="hidden" value="{{ $user->business_id }}" name="business_id">
-                        <input type="hidden" value="{{ $user->id }}" name="user_id">
+                        <input type="hidden" value="{{ auth()->user()->business->id }}" name="business_id">
+                        <input type="hidden" value="{{ auth()->id() }}" name="user_id">
 
                         <button type="submit"
                                 class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
@@ -377,8 +377,8 @@
                             <input type="hidden" name="item_number[]" value="{{ $rfp->id }}">
                         @endforeach
 
-                        <input type="hidden" value="{{ $user->business_id }}" name="business_id">
-                        <input type="hidden" value="{{ $user->id }}" name="user_id">
+                        <input type="hidden" value="{{ auth()->user()->business->id }}" name="business_id">
+                        <input type="hidden" value="{{ auth()->id() }}" name="user_id">
 
                         <button type="submit"
                                 class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">

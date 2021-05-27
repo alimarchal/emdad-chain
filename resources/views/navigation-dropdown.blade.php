@@ -66,13 +66,13 @@
                     </x-jet-nav-link>
                     @endrole
 
-                    @if(auth()->user()->can('all') || auth()->user()->registration_type == "Buyer" && auth()->user()->status == 3)
+                    @if(auth()->user()->can('all') || auth()->user()->can('Buyer Create New RFQ') || auth()->user()->registration_type == "Buyer" && auth()->user()->status == 3)
                         <x-jet-nav-link href="{{ route('RFQCart.index') }}" :active="request()->routeIs('RFQCart.index')">
                             @include('RFQ.RFQICON') &nbsp;RFQ Items
-                            @if (\App\Models\ECart::where('user_id', auth()->user()->id)
-                                ->where('business_id', auth()->user()->business_id)
+{{--                            @if (\App\Models\ECart::where('user_id', auth()->user()->id)--}}
+                            @if (\App\Models\ECart::where('business_id', auth()->user()->business_id)
                                 ->count())
-                                ({{ \App\Models\ECart::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->count() }})
+                                ({{ \App\Models\ECart::where('business_id', auth()->user()->business_id)->count() }})
                             @endif
 
                         </x-jet-nav-link>

@@ -14,10 +14,11 @@
                 </a>
                 <a href="{{ route('dashboard') }}"
                    @if(auth()->user()->hasRole('SuperAdmin')) title="SuperAdmin Virtual office"
-                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer') title="Buyer Virtual office"
-                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier') title="Supplier Virtual office"
-                   @elseif(auth()->user()->hasRole('Buyer Warehouse Admin')) title="Warehouse Admin Virtual office"
-                   @elseif(auth()->user()->hasRole('Supplier Sales')) title="Supplier Sales Virtual office"
+                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer') title="{{auth()->user()->registration_type}} Virtual office"
+                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier') title="{{auth()->user()->registration_type}} Virtual office"
+                   @else
+                       @php $roleName = auth()->user()->roles()->pluck('name'); @endphp
+                       title="{{$roleName[0]}} Virtual office"
                    @endif
                 >
                 <span class="text-white text-2xl mx-2 font-semibold">
@@ -267,7 +268,7 @@
             @endif
 
             {{-- RFQs link for Buyer --}}
-            @if(auth()->user()->can('Buyer Create New Draft RFQ') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+            @if(auth()->user()->can('Buyer Create New RFQ') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('RFQ.create') || request()->routeIs('RFQCart.index')|| request()->routeIs('PlacedRFQ.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
@@ -299,10 +300,9 @@
                                 <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
                             </svg>
                             <a href="{{ route('RFQCart.index') }}"><span class="mx-3 ">RFQ Cart
-                                    @if (\App\Models\ECart::where('user_id', auth()->user()->id)
-                                    ->where('business_id', auth()->user()->business_id)
+                                    @if (\App\Models\ECart::where('business_id', auth()->user()->business_id)
                                     ->count())
-                                        ({{ \App\Models\ECart::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->count() }})
+                                        ({{ \App\Models\ECart::where('business_id', auth()->user()->business_id)->count() }})
                                     @endif</span>
                             </a>
                         </li>

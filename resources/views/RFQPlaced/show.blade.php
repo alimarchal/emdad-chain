@@ -33,7 +33,7 @@
                                     #
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                    Item Name
+                                    Category Name
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
@@ -86,7 +86,11 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ $rfp->item_name }}
+                                        @php
+                                            $category = \App\Models\Category::where('id',$rfp->category->id)->first();
+                                            $parentCategory = \App\Models\Category::where('id',$category->parent_id)->first();
+                                        @endphp
+                                        {{ $rfp->item_name }} , {{ $parentCategory->name }}
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">

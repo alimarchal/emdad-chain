@@ -105,7 +105,7 @@
                         @php $business = \App\Models\Business::where('user_id', $QouteItem->supplier_user_id)->first(); @endphp
                         <h1 class="text-center text-2xl mt-4">Message to <span class="text-blue-600">{{$business->business_name}}</span>
                             <span style="font-size: 20px;">(supplier)</span></h1>
-                        <textarea name="message" id="message" cols="30" rows="10" class="form-input rounded-md shadow-sm mt-1 block w-full" autocomplete="name"></textarea>
+                        <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Message..." required></textarea>
                         <x-jet-input-error for="message" class="mt-2" />
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="qoute_id" value="{{ $QouteItem->id }}">
@@ -192,7 +192,7 @@
                         <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" name="address" value="{{$warehouseAddress->address}}" readonly>
 
                         <x-jet-label for="Remarks" value="{{ __('Remarks') }}" class="text-black"  />
-                        <textarea name="remarks" id="remarks"></textarea>
+                        <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Remarks.." required></textarea>
 
                         <x-jet-label for="payment_term" class="my-2" value="{{ __('Payment Term') }}" class="text-black"  />
                         <select name="payment_term" id="payment_term" class="form-input rounded-md shadow-sm border p-2 w-full" readonly>
@@ -223,12 +223,12 @@
         </div>
     </div>
     </div>
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-            toolbar_mode: 'floating',
-        });
+{{--    <script>--}}
+{{--        tinymce.init({--}}
+{{--            selector: 'textarea',--}}
+{{--            plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',--}}
+{{--            toolbar_mode: 'floating',--}}
+{{--        });--}}
 
-    </script>
+{{--    </script>--}}
 </x-app-layout>

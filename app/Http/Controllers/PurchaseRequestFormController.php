@@ -30,22 +30,26 @@ class PurchaseRequestFormController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      */
     public function create()
     {
-        $user = User::findOrFail(auth()->user()->id);
-        $businessPackage = BusinessPackage::where('user_id', \auth()->id())->first();
+//        $user = User::findOrFail(auth()->user()->id);
+//        $businessPackage = BusinessPackage::where('user_id', \auth()->id())->first();
+        $businessPackage = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
         if (isset($businessPackage))
         {
             $categories = explode(',', $businessPackage->categories);
             $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
         }
         else{
-            $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+//            $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+            session()->flash('error','No Business Package Found for you account! Contact Admin.');
+            return redirect()->back();
         }
         $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-        $eCart = ECart::where('user_id',auth()->user()->id)->where('business_id',auth()->user()->business_id)->get();
+//        $eCart = ECart::where('user_id',auth()->user()->id)->where('business_id',auth()->user()->business_id)->get();
+        $eCart = ECart::where('business_id',auth()->user()->business_id)->get();
 
         // Remaining RFQ count
         $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
@@ -59,7 +63,8 @@ class PurchaseRequestFormController extends Controller
             $rfqCount = null;
         }
 
-        return view('RFQ.create', compact('parentCategories', 'childs', 'user','eCart','rfqCount'));
+//        return view('RFQ.create', compact('parentCategories', 'childs', 'user','eCart','rfqCount'));
+        return view('RFQ.create', compact('parentCategories', 'childs','eCart','rfqCount'));
     }
 
     /**
