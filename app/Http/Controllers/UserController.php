@@ -154,11 +154,11 @@ class UserController extends Controller
         }
 //        $user = User::create($request->all());
 //        $data = array();
-        $roleName  = Role::where('id' , $request->input('role'))->first();
+        $role  = Role::where('id' , $request->input('role'))->first();
 
         if($request->role == 1 || auth()->user()->hasRole('SuperAdmin'))
         {
-            if ($roleName->name == 'Sales Specialist' && $roleName->id == 19)
+            if ($role->id >= 19 && $role->id <= 26)
             {
                 $validated = validator::make($request->all(),[
                     'email' => 'required|email|unique:users',
@@ -175,28 +175,7 @@ class UserController extends Controller
                     'password' => $request->password,
                     'designation' => $request->designation,
                     'email_verified_at' => Carbon::now(),
-                    'usertype' => ($roleName->name == "SuperAdmin"?strtolower($roleName->name):$roleName->name),
-                    'status' => 3,
-                ];
-            }
-            elseif ($roleName->name == 'SC Specialist' && $roleName->id == 20)
-            {
-                $validated = validator::make($request->all(),[
-                    'email' => 'required|email|unique:users',
-                ]);
-
-                if ($validated->fails()) {
-                    session()->flash('message', 'Email already exits');
-                    return redirect()->back()->withInput();
-                }
-
-                $data = [
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => $request->password,
-                    'designation' => $request->designation,
-                    'email_verified_at' => Carbon::now(),
-                    'usertype' => ($roleName->name == "SuperAdmin"?strtolower($roleName->name):$roleName->name),
+                    'usertype' => ($role->name == "SuperAdmin"?strtolower($role->name):$role->name),
                     'status' => 3,
                 ];
             }
@@ -217,7 +196,7 @@ class UserController extends Controller
                     'password' => $request->password,
                     'designation' => $request->designation,
                     'business_id' => auth()->user()->business_id,
-                    'usertype' => ($roleName->name == "SuperAdmin"?strtolower($roleName->name):$roleName->name),
+                    'usertype' => ($role->name == "SuperAdmin"?strtolower($role->name):$role->name),
                     'status' => 3,
                 ];
             }
@@ -239,7 +218,7 @@ class UserController extends Controller
                 'designation' => $request->designation,
                 'email_verified_at' => Carbon::now(),
                 'business_id' => auth()->user()->business_id,
-                'usertype' => $roleName->name,
+                'usertype' => $role->name,
                 'status' => 1,
             ];
         }
