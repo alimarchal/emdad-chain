@@ -15,8 +15,8 @@
             @endphp
             <a @if(count($businessCategorires) > 0) class="text-green-600 hover:underline" href="{{route('categoryRelatedBusiness', encrypt($category->id))}}"  @else class="text-red-600 hover:underline" style="cursor: no-drop" @endif >
 
-                Buyer Businesses  -- {{$buyerBusinesses}} --
-                Supplier Businesses {{$supplierBusinesses}}
+                Buyer  -- {{$buyerBusinesses}} --
+                Supplier {{$supplierBusinesses}}
 
             </a>
 

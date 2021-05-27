@@ -33,7 +33,7 @@
                             <strong>Item Code:</strong> {{ $eOrderItems->item_code }}
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <strong>Item Name:</strong> {{ $eOrderItems->item_name }}
+                            <strong>Category Name:</strong> {{ $eOrderItems->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems->item_code)->first()->parent_id))->first()->name }}
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                             <strong>Unit of Measurement:</strong> {{ $eOrderItems->unit_of_measurement }}

@@ -74,7 +74,7 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Product Name
+                                        Category Name
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
@@ -120,7 +120,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $rfp->item_name }}
+                                                    {{ $rfp->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$rfp->item_code)->first()->parent_id))->first()->name }}
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -161,7 +161,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $rfp->item_name }}
+                                                    {{ $rfp->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$rfp->item_code)->first()->parent_id))->first()->name }}
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap">

@@ -133,7 +133,6 @@ class CategoryController extends Controller
     public function categoryRelatedBusiness($id)
     {
         $categories = BusinessCategory::with('business')->where('category_number', decrypt($id))->get();
-
         return view('category.categoryRelatedbusiness', compact('categories'));
     }
 

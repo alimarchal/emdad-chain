@@ -160,15 +160,15 @@ Route::get('/ar-supplier-package', [WebsiteArabicController::class, 'supplierPac
 
 #####################  Policy And Procedure   ###################
 //Route::get('/policy-procedure', view('policyProcedure.english.eula'))->name('policyProcedure.eula');
-Route::view('/policy-procedure','policyProcedure.english.eula')->name('policyProcedure.eula');
-Route::view('/ire-policy-procedure','policyProcedure.english.ire_pp')->name('policyProcedure.ire');
-Route::view('/buyer-policy-procedure','policyProcedure.english.buyer_pp')->name('policyProcedure.buyer');
-Route::view('/supplier-policy-procedure','policyProcedure.english.supplier_pp')->name('policyProcedure.supplier');
+Route::view('/policy-procedure', 'policyProcedure.english.eula')->name('policyProcedure.eula');
+Route::view('/ire-policy-procedure', 'policyProcedure.english.ire_pp')->name('policyProcedure.ire');
+Route::view('/buyer-policy-procedure', 'policyProcedure.english.buyer_pp')->name('policyProcedure.buyer');
+Route::view('/supplier-policy-procedure', 'policyProcedure.english.supplier_pp')->name('policyProcedure.supplier');
 
-Route::view('/ar-policy-procedure','policyProcedure.arabic.eula')->name('arabic.policyProcedure.eula');
-Route::view('/ar-ire-policy-procedure','policyProcedure.arabic.ire_pp')->name('arabic.policyProcedure.ire');
-Route::view('/ar-buyer-policy-procedure','policyProcedure.arabic.buyer_pp')->name('arabic.policyProcedure.buyer');
-Route::view('/ar-supplier-policy-procedure','policyProcedure.arabic.supplier_pp')->name('arabic.policyProcedure.supplier');
+Route::view('/ar-policy-procedure', 'policyProcedure.arabic.eula')->name('arabic.policyProcedure.eula');
+Route::view('/ar-ire-policy-procedure', 'policyProcedure.arabic.ire_pp')->name('arabic.policyProcedure.ire');
+Route::view('/ar-buyer-policy-procedure', 'policyProcedure.arabic.buyer_pp')->name('arabic.policyProcedure.buyer');
+Route::view('/ar-supplier-policy-procedure', 'policyProcedure.arabic.supplier_pp')->name('arabic.policyProcedure.supplier');
 ####################  End Policy And Procedure    ######################################
 
 ####################  Website    ###################
@@ -377,11 +377,11 @@ Route::middleware(['auth:sanctum'])->get('sub-categories', [CategoryController::
 ############################################### IREs routes ########################################################
 
 Route::middleware(['ireAuthentication'])->group(function () {
-Route::get('ire-register', [IreRegisterController::class, 'register_view'])->name('ireRegister');
-Route::post('ire-register', [IreRegisterController::class, 'ire_register']);
-Route::get('ar-ire-register', [IreRegisterController::class, 'register_arabic_view'])->name('ireRegisterArabic');
+    Route::get('ire-register', [IreRegisterController::class, 'register_view'])->name('ireRegister');
+    Route::post('ire-register', [IreRegisterController::class, 'ire_register']);
+    Route::get('ar-ire-register', [IreRegisterController::class, 'register_arabic_view'])->name('ireRegisterArabic');
 
-Route::get('ire-login', [IreLoginController::class, 'login_view'])->name('ireLogin');
+    Route::get('ire-login', [IreLoginController::class, 'login_view'])->name('ireLogin');
     Route::post('ire-login', [IreLoginController::class, 'login']);
     Route::get('ire-forgot-password', [IreLoginController::class, 'forgot_password_view'])->name('ireForgotPassword');
     Route::post('ire-forgot-password', [IreLoginController::class, 'forgot_password']);
@@ -396,31 +396,31 @@ Route::middleware(['ire'])->group(function () {
     Route::get('email-verify-check/{token}', [IreRegisterController::class, 'email_verify_check'])->name('ireEmailVerifyCheck');
 
     Route::middleware(['ireEmailVerify'])->group(function () {
-                       ############################### IREs English Routes ###################################
+        ############################### IREs English Routes ###################################
         Route::get('ire-registration-details', [IreRegisterController::class, 'ire_register_details_view'])->name('ireRegisterDetails');
         Route::post('ire-registration-details', [IreRegisterController::class, 'ire_register_details']);
         Route::get('ar-ire-registration-details', [IreRegisterController::class, 'ire_register_details_arabic_view'])->name('ireRegisterDetailsArabic');
 
-            Route::middleware(['ireRegisterDetails'])->group(function () {
-                Route::get('ire-dashboard', [IreController::class, 'dashboard'])->name('ireDashboard');
-                Route::get('ire-profile', [IreController::class, 'profile'])->name('ireProfile');
-                Route::get('ire-change-password', [IreController::class, 'change_password_view'])->name('ireChangePassword');
-                Route::post('ire-change-password', [IreController::class, 'change_password']);
-                Route::get('ire-references', [IreController::class, 'reference'])->name('ireReference');
-                Route::get('ire-incomplete-references', [IreController::class, 'incomplete_reference'])->name('ireIncompleteReference');
-                Route::get('ire-payments', [IreController::class, 'payment'])->name('irePayment');
-                Route::get('ire-downloads', [IreController::class, 'download'])->name('ireDownload');
-                Route::get('download-file/{id}', [IreController::class, 'download_file'])->name('ireDownloadFile');
+        Route::middleware(['ireRegisterDetails'])->group(function () {
+            Route::get('ire-dashboard', [IreController::class, 'dashboard'])->name('ireDashboard');
+            Route::get('ire-profile', [IreController::class, 'profile'])->name('ireProfile');
+            Route::get('ire-change-password', [IreController::class, 'change_password_view'])->name('ireChangePassword');
+            Route::post('ire-change-password', [IreController::class, 'change_password']);
+            Route::get('ire-references', [IreController::class, 'reference'])->name('ireReference');
+            Route::get('ire-incomplete-references', [IreController::class, 'incomplete_reference'])->name('ireIncompleteReference');
+            Route::get('ire-payments', [IreController::class, 'payment'])->name('irePayment');
+            Route::get('ire-downloads', [IreController::class, 'download'])->name('ireDownload');
+            Route::get('download-file/{id}', [IreController::class, 'download_file'])->name('ireDownloadFile');
 
-                        ########################### IREs Arabic Routes #######################################
-                Route::get('ar-ire-dashboard', [IreController::class, 'arabic_dashboard'])->name('ireArabicDashboard');
-                Route::get('ar-ire-profile', [IreController::class, 'arabic_profile'])->name('ireArabicProfile');
-                Route::get('ar-ire-change-password', [IreController::class, 'arabic_change_password_view'])->name('ireArabicChangePassword');
-                Route::get('ar-ire-references', [IreController::class, 'arabic_reference'])->name('ireArabicReference');
-                Route::get('ar-ire-incomplete-references', [IreController::class, 'arabic_incomplete_reference'])->name('ireArabicIncompleteReference');
-                Route::get('ar-ire-payments', [IreController::class, 'arabic_payment'])->name('ireArabicPayment');
-                Route::get('ar-ire-downloads', [IreController::class, 'arabic_download'])->name('ireArabicDownload');
-            });
+            ########################### IREs Arabic Routes #######################################
+            Route::get('ar-ire-dashboard', [IreController::class, 'arabic_dashboard'])->name('ireArabicDashboard');
+            Route::get('ar-ire-profile', [IreController::class, 'arabic_profile'])->name('ireArabicProfile');
+            Route::get('ar-ire-change-password', [IreController::class, 'arabic_change_password_view'])->name('ireArabicChangePassword');
+            Route::get('ar-ire-references', [IreController::class, 'arabic_reference'])->name('ireArabicReference');
+            Route::get('ar-ire-incomplete-references', [IreController::class, 'arabic_incomplete_reference'])->name('ireArabicIncompleteReference');
+            Route::get('ar-ire-payments', [IreController::class, 'arabic_payment'])->name('ireArabicPayment');
+            Route::get('ar-ire-downloads', [IreController::class, 'arabic_download'])->name('ireArabicDownload');
+        });
     });
 });
 ############################################################## END ##########################################################################
@@ -428,7 +428,7 @@ Route::middleware(['ire'])->group(function () {
 
 Route::get('/testOne', function () {
 //    $user = \App\Models\User::find(5);
-    $business = \App\Models\Business::find(1);
+//    $business = \App\Models\Business::find(1);
 
 //    $rating = $business->rating([
 //        'title' => 'This is a test title',
@@ -442,7 +442,26 @@ Route::get('/testOne', function () {
 //        'approved' => true, // This is optional and defaults to false
 //    ], $business);
 //    $ratings = $business->getAllRatings($business->id, 'desc');
-    dd($business->averageRating());
+//    dd($business->averageRating());
+//    $url = "http://mshastra.com/sendurlcomma.aspx?user=20098211&pwd=EmdadCode@123&senderid=EmdadChain&CountryCode=966&mobileno=.$mobile_no.&msgtext=" . urlencode($msg);966 552840506
+    $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=966552840506&sender=Emdad-Aid&unicode=e&randparams=1";
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $output = curl_exec($ch);
+    if (curl_errno($ch)) {
+        echo 'error:' . curl_error($c);
+    }
+    curl_close($ch);
+//
+//
+//
+//    $ch = curl_init($url);
+//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//    $curl_scraped_page = curl_exec($ch);
+//    curl_close($ch);
+//    return $ch;
 });
 
 

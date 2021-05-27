@@ -104,11 +104,23 @@ class DeliveryController extends Controller
 
                         $mobile_no = trim($delivery->otp_mobile_number);
                         $msg = "Your delivery is here. \n\nPlease share the OTP code: " . $otp . " with the driver after unloading the delivery. \n\nThank you for using EMDAD Platform.\n";
-                        $url = "http://mshastra.com/sendurlcomma.aspx?user=20098211&pwd=EmdadCode@123&senderid=EmdadChain&CountryCode=966&mobileno=.$mobile_no.&msgtext=" . urlencode($msg);
-                        $ch = curl_init($url);
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                        $curl_scraped_page = curl_exec($ch);
+                        $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=966552840506&sender=Emdad-Aid&unicode=e&randparams=1";
+
+                        $ch = curl_init();
+                        curl_setopt($ch,CURLOPT_URL,$url);
+                        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+                        $output=curl_exec($ch);
+                        if(curl_errno($ch))
+                        {
+                            echo 'error:' . curl_error($c);
+                        }
                         curl_close($ch);
+//
+//
+//                        $ch = curl_init($url);
+//                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//                        $curl_scraped_page = curl_exec($ch);
+//                        curl_close($ch);
 
                         $delivery->save();
                     }
