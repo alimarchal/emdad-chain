@@ -201,7 +201,7 @@
                         </div>
                         <div class="w-full overflow-hidden">
                             <label class="block font-medium text-sm text-gray-700 mb-1" for="description">
-                                Description
+                                Description @include('misc.required')
                             </label>
                             <textarea name="description" id="description" maxlength="255"></textarea>
                             <input type="hidden" value="{{ $user->business_id }}" name="business_id">
@@ -212,7 +212,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="unit_of_measurement">
-                                    Display Company Name <span class="text-red-600">*</span>
+                                    Display Company Name @include('misc.required')
                                 </label>
 
                                 <select name="company_name_check" id="company_name_check" class="form-select shadow-sm block w-full" required>
@@ -223,7 +223,7 @@
                             </div>
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="unit_of_measurement">
-                                    Unit of Measurement <span class="text-red-600">*</span>
+                                    Unit of Measurement @include('misc.required')
                                 </label>
 
                                 <select name="unit_of_measurement" id="unit_of_measurement" class="form-select shadow-sm block w-full" required>
@@ -243,7 +243,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="quantity">
-                                    Quantity (Units)<span class="text-red-600">*</span>
+                                    Quantity (Units) @include('misc.required')
                                 </label>
                                 <input class="form-input rounded-md shadow-sm block w-full" id="quantity" type="number" name="quantity" min="0" autocomplete="quantity" required>
                             </div>
@@ -266,12 +266,12 @@
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="remarks">
                                     Remarks
                                 </label>
-                                <input class="form-input rounded-md shadow-sm block w-full" id="remarks" name="remarks" type="text" autocomplete="remarks"  >
+                                <input class="form-input rounded-md shadow-sm block w-full" id="remarks" name="remarks" type="text" autocomplete="remarks">
                             </div>
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="required_sample">
-                                    Required Sample
+                                    Required Sample @include('misc.required')
                                 </label>
                                 <select name="required_sample" id="required_sample" class="form-select shadow-sm block w-full" required>
                                     <option value="">None</option>
@@ -282,7 +282,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="delivery_period">
-                                    Delivery Period<span class="text-red-600">*</span>
+                                    Delivery Period @include('misc.required')
                                 </label>
                                 <select name="delivery_period" id="delivery_period" class="form-select shadow-sm block w-full" required>
                                     <option value="">None</option>
@@ -301,7 +301,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="payment_mode">
-                                    Payment Mode<span class="text-red-600">*</span>
+                                    Payment Mode  @include('misc.required')
                                 </label>
                                 <select name="payment_mode" id="payment_mode" class="form-select shadow-sm block w-full" required>
                                     <option value="">None</option>
@@ -325,7 +325,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="warehouse_id">
-                                    Delivery Location (Warehouse)<span class="text-red-600">*</span>
+                                    Delivery Location (Warehouse) @include('misc.required')
                                 </label>
                                 <select name="warehouse_id" id="warehouse_id" class="form-select shadow-sm block w-full" required>
                                     <option value="">Select Warehouse</option>
@@ -533,7 +533,7 @@
                         </div>
                         <div class="w-full overflow-hidden">
                             <label class="block font-medium text-sm text-gray-700 mb-1" for="description">
-                                Description
+                                Description @include('misc.required')
                             </label>
                             <textarea name="description" id="description"></textarea>
                             <input type="hidden" value="{{ $user->business_id }}" name="business_id">
@@ -544,7 +544,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="unit_of_measurement">
-                                    Display Company Name <span class="text-red-600">*</span>
+                                    Display Company Name @include('misc.required')
                                 </label>
 
                                 <select name="company_name_check" id="company_name_check" class="form-select shadow-sm block w-full" required>
@@ -555,7 +555,7 @@
                             </div>
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="unit_of_measurement">
-                                    Unit of Measurement
+                                    Unit of Measurement @include('misc.required')
                                 </label>
 
                                 <select name="unit_of_measurement" id="unit_of_measurement" class="form-select shadow-sm block w-full" required>
@@ -576,7 +576,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="quantity">
-                                    Quantity (Units)
+                                    Quantity (Units) @include('misc.required')
                                 </label>
                                 <input class="form-input rounded-md shadow-sm block w-full" id="quantity" type="number" name="quantity" min="0" autocomplete="quantity" required>
                             </div>
@@ -585,7 +585,7 @@
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="brand">
                                     Brand
                                 </label>
-                                <input class="form-input rounded-md shadow-sm block w-full" id="brand" type="text" name="brand" min="0" autocomplete="brand" required>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="brand" type="text" name="brand" min="0" autocomplete="brand">
                             </div>
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
@@ -599,12 +599,12 @@
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="remarks">
                                     Remarks
                                 </label>
-                                <input class="form-input rounded-md shadow-sm block w-full" id="remarks" name="remarks" type="text" autocomplete="remarks" required>
+                                <input class="form-input rounded-md shadow-sm block w-full" id="remarks" name="remarks" type="text" autocomplete="remarks">
                             </div>
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="required_sample">
-                                    Required Sample
+                                    Required Sample @include('misc.required')
                                 </label>
                                 <select name="required_sample" id="required_sample" class="form-select shadow-sm block w-full" required>
                                     <option value="">None</option>
@@ -615,7 +615,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="delivery_period">
-                                    Delivery Period
+                                    Delivery Period @include('misc.required')
                                 </label>
                                 <select name="delivery_period" id="delivery_period" class="form-select shadow-sm block w-full" required>
                                     <option value="">None</option>
@@ -628,7 +628,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="payment_mode">
-                                    Payment Mode
+                                    Payment Mode @include('misc.required')
                                 </label>
                                 <select name="payment_mode" id="payment_mode" class="form-select shadow-sm block w-full" required>
                                     <option value="">None</option>
@@ -648,7 +648,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="warehouse_id">
-                                    Delivery Location (Warehouse)
+                                    Delivery Location (Warehouse) @include('misc.required')
                                 </label>
                                 <select name="warehouse_id" id="warehouse_id" class="form-select shadow-sm block w-full" required>
                                     <option value="">Select Warehouse</option>
@@ -929,14 +929,14 @@
                             <label class="block font-medium text-sm text-gray-700 mb-1" for="remarks">
                                 ملاحظات
                             </label>
-                            <input class="form-input rounded-md shadow-sm block w-full" id="remarks" name="remarks" type="text" autocomplete="remarks" required>
+                            <input class="form-input rounded-md shadow-sm block w-full" id="remarks" name="remarks" type="text" autocomplete="remarks">
                         </div>
 
                         <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                             <label class="block font-medium text-sm text-gray-700 mb-1" for="required_sample">
                                 مطلوب عينة
                             </label>
-                            <select name="required_sample" id="required_sample" class="form-select shadow-sm block w-full" required>
+                            <select name="required_sample" id="required_sample" class="form-select shadow-sm block w-full">
                                 <option value="">None</option>
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>
