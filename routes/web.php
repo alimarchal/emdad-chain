@@ -443,25 +443,7 @@ Route::get('/testOne', function () {
 //    ], $business);
 //    $ratings = $business->getAllRatings($business->id, 'desc');
 //    dd($business->averageRating());
-//    $url = "http://mshastra.com/sendurlcomma.aspx?user=20098211&pwd=EmdadCode@123&senderid=EmdadChain&CountryCode=966&mobileno=.$mobile_no.&msgtext=" . urlencode($msg);966 552840506
-    $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=966552840506&sender=Emdad-Aid&unicode=e&randparams=1";
 
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    $output = curl_exec($ch);
-    if (curl_errno($ch)) {
-        echo 'error:' . curl_error($c);
-    }
-    curl_close($ch);
-//
-//
-//
-//    $ch = curl_init($url);
-//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//    $curl_scraped_page = curl_exec($ch);
-//    curl_close($ch);
-//    return $ch;
 });
 
 
