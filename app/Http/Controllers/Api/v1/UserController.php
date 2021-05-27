@@ -80,7 +80,6 @@ class UserController extends Controller
         if ($token == "RRNirxFh4j9Ftd") {
             $user = User::find($id);
             $user->driver_status = $request->driver_status;
-            $user->status = $request->status;
             $user->save();
             return $user;
         } else {

@@ -42,10 +42,10 @@ class EOrdersController extends Controller
      */
     public function store(Request $request)
     {
+
         $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', Carbon::today())->count();
 
         $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
-
         if ($business_package->package_id == 1)
         {
             if ($rfq == 3)

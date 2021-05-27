@@ -1,4 +1,3 @@
-
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
@@ -27,7 +26,6 @@
                 <div class="-my-2 sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
                                 <tr>
@@ -167,8 +165,8 @@
 
                                                 <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE" onsubmit="alert('Are you sure')">
                                                     <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red">
-                                                        <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
-                                                        <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                                        <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
+                                                        <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"/>
                                                     </svg>
                                                 </button>
                                             </form>
@@ -358,8 +356,8 @@
 
                                                 <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE" onsubmit="alert('Are you sure')">
                                                     <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red">
-                                                        <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
-                                                        <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
+                                                        <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
+                                                        <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"/>
                                                     </svg>
                                                 </button>
                                             </form>
@@ -396,22 +394,20 @@
 @endif
 
 <script>
-    function companyCheck(itemno)
-    {
+    function companyCheck(itemno) {
         $value = $('#company_name_check').val();
         $.ajax({
-            type : 'POST',
-            url:"{{ route('companyCheck') }}",
-            data:{
+            type: 'POST',
+            url: "{{ route('companyCheck') }}",
+            data: {
                 "_token": "{{ csrf_token() }}",
-                'rfqNo':itemno,
-                'status':$value
+                'rfqNo': itemno,
+                'status': $value
             },
             success: function (response) {
-                if(response.status === 0){
+                if (response.status === 0) {
                     alert('Not Updated Try again');
-                }
-                else if(response.status === 1) {
+                } else if (response.status === 1) {
                     $('#status').show().delay(5000).fadeOut();
                 }
             }
