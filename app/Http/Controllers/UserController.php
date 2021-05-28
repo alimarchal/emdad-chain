@@ -152,8 +152,6 @@ class UserController extends Controller
         if (!Gate::allows('create user')) {
             return abort(401);
         }
-//        $user = User::create($request->all());
-//        $data = array();
         $role  = Role::where('id' , $request->input('role'))->first();
 
         if($request->role == 1 || auth()->user()->hasRole('SuperAdmin'))
@@ -211,16 +209,48 @@ class UserController extends Controller
                 return redirect()->back()->withInput();
             }
 
-            $data = [
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $request->password,
-                'designation' => $request->designation,
-                'email_verified_at' => Carbon::now(),
-                'business_id' => auth()->user()->business_id,
-                'usertype' => $role->name,
-                'status' => 1,
-            ];
+            if (\auth()->user()->hasRole('Buyer'))
+            {
+                $data = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'designation' => $request->designation,
+                    'email_verified_at' => Carbon::now(),
+                    'business_id' => auth()->user()->business_id,
+                    'usertype' => $role->name,
+                    'status' => 1,
+                    'added_by' => 1,           /* 1 for buyer*/
+                    'added_by_userId' => \auth()->id(),
+                ];
+            }
+            else if (\auth()->user()->hasRole('Supplier')){
+                $data = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'designation' => $request->designation,
+                    'email_verified_at' => Carbon::now(),
+                    'business_id' => auth()->user()->business_id,
+                    'usertype' => $role->name,
+                    'status' => 1,
+                    'added_by' => 2,           /* 2 for supplier*/
+                    'added_by_userId' => \auth()->id(),
+                ];
+            }
+            else{
+                $data = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'designation' => $request->designation,
+                    'email_verified_at' => Carbon::now(),
+                    'business_id' => auth()->user()->business_id,
+                    'usertype' => $role->name,
+                    'status' => 1,
+                ];
+            }
+
         }
 
         $user = User::create($data);

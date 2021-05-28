@@ -112,7 +112,7 @@
                             </div>
                             <div class="flex space-x-5 mt-3">
 
-                                <x-jet-input  id="datepicker" placeholder="Choose Date (mm/dd/yy)"  type="text" name="amount_date" class="border p-2 w-1/2" required></x-jet-input>
+                                <x-jet-input  id="datepicker" placeholder="Choose Date (mm/dd/yy)"  type="text" name="amount_date" readonly class="border p-2 w-1/2" required></x-jet-input>
                                 <x-jet-input id="file_path_1" type="file" name="file_path_1" class="border p-2 w-1/2" required></x-jet-input>
                             </div>
 

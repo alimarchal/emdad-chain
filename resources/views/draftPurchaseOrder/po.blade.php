@@ -39,7 +39,7 @@
                                                     DPO Number
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Item Name
+                                                    Category Name
                                                 </th>
 
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -93,11 +93,16 @@
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                                         @if($dpo->payment_term == 'Cash' || auth()->user()->can('all') && auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
-                                                            @php $proformaInvoice = \App\Models\ProformaInvoice::where('draft_purchase_order_id', $dpo->id)->first(); @endphp
-                                                            @if (isset($proformaInvoice) && $proformaInvoice->status == 0)
+                                                            {{--@php $proformaInvoice = \App\Models\ProformaInvoice::where('draft_purchase_order_id', $dpo->id)->first(); @endphp--}}
+                                                            @php $proformaInvoice = \App\Models\Invoice::where('draft_purchase_order_id', $dpo->id)->first(); @endphp
+                                                            @if (isset($proformaInvoice) && $proformaInvoice->invoice_status == 0)
                                                                 <a>Waiting for payment</a>
+                                                            @elseif (isset($proformaInvoice) && $proformaInvoice->invoice_status == 2)
+                                                                <a>Proforma invoice rejected by supplier</a>
+                                                            @elseif (isset($proformaInvoice) && $proformaInvoice->invoice_status == 3)
+                                                                <a>Proforma invoice confirmed by supplier</a>
                                                             @else
-                                                                <a>Waiting proforma invoice</a>
+                                                                <a>Waiting for proforma invoice</a>
                                                             @endif
                                                         @else
                                                             {{--                                                            <a>Completed</a>--}}

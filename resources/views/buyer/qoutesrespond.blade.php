@@ -94,7 +94,7 @@
                     @if($QouteItem->messages->isNotEmpty())
                     <div class="border-2 p-2 m-2">
                         @foreach ($QouteItem->messages as $msg)
-                            <span class="text-blue-600">Message from {{ $msg->usertype }}</span>  : {{ strip_tags(str_replace('&nbsp;', ' ',  $msg->message)) }} <br> <br>
+                            <span class="text-blue-600">Message you send</span>  : {{ strip_tags(str_replace('&nbsp;', ' ',  $msg->message)) }} <br> <br>
                         @endforeach
                     </div>
                     @endif

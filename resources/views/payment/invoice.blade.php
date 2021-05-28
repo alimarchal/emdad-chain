@@ -121,7 +121,7 @@
                                                                 <a href=" {{ route('bank-payments.create', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
                                                                     Manual Payment
                                                                 </a>
-                                                                @elseif($dn->invoice_status == '2')
+                                                            @elseif($dn->invoice_status == '2')
                                                                 <a href=" {{ route('bank-payments.edit', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
                                                                     Proceed
                                                                 </a>
@@ -153,7 +153,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        View
+                                                        <a href="{{ route('po.show', $dn->draft_purchase_order_id) }}" class="hover:text-blue-900 hover:underline text-blue-900">View</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

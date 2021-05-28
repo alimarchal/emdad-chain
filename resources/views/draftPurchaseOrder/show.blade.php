@@ -164,7 +164,7 @@
                                 agrees to deal with {{$draftPurchaseOrder->supplier_business->business_name}}. <br>
                                 Emdad has no responsibility with the kind of delivery and the source of finance for this delivery.</span> <br>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" name="note" id="flexCheckDefault" required>
+                                <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Please Check to acknowledge
                                 </label>
@@ -194,7 +194,7 @@
                         @elseif ($draftPurchaseOrder->status == 'rejectToEdit')
                             <span class="px-3 py-3 bg-red-600 text-white rounded uppercase">Rejected for Edit</span>
                         @else
-                            <a href="{{ route('dpo.approved', $draftPurchaseOrder->id) }}"
+                            <a href="{{ route('dpo.approved', $draftPurchaseOrder->id) }}" onclick="checkbox()"
                                class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">DPO
                                 Approved</a>
                             <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}"
@@ -217,3 +217,14 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function checkbox() {
+        // $('#acknowledge').val(this.checked);
+        if (!$("#acknowledge").is(":checked")) {
+            // do something if the checkbox is NOT checked
+            alert('Please check NOTE to acknowledge')
+            event.preventDefault();
+        }
+    }
+</script>
