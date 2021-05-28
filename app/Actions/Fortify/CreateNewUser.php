@@ -41,6 +41,7 @@ class CreateNewUser implements CreatesNewUsers
         $time = strtotime($input['nid_exp_date']);
         $newformat = date('Y-m-d',$time);
         $input['nid_exp_date'] = $newformat;
+        $input['mobile'] = str_replace(' ','',$input['mobile']);
 
         $user = User::create([
             'gender' => $input['gender'],

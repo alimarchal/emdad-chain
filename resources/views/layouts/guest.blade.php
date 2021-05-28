@@ -31,11 +31,11 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{{--        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>--}}
+{{--        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">--}}
 
         <!-- Scripts -->
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+{{--        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
 
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
 
@@ -47,6 +47,9 @@
                 background-position: top;
             }
         </style>
+
+        <link rel="stylesheet" href="https://www.jqueryscript.net/demo/jQuery-International-Telephone-Input-With-Flags-Dial-Codes/build/css/intlTelInput.css">
+
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -57,7 +60,6 @@
         </script>
         @livewireStyles
 
-        <link rel="stylesheet" href="{{url('build/css/intlTelInput.css')}}">
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
@@ -65,35 +67,9 @@
         </div>
         @livewireScripts
 
-
-
-
-        <script src="{{url('build/js/intlTelInput.js')}}"></script>
+        <script src="{{url('build/js/intlTelInput_2.js')}}"></script>
         <script>
-            var input = document.querySelector("#phone");
-            window.intlTelInput(input, {
-                // allowDropdown: false,
-                // autoHideDialCode: false,
-                // autoPlaceholder: "off",
-                // dropdownContainer: document.body,
-                // excludeCountries: ["us"],
-                // formatOnDisplay: false,
-                // geoIpLookup: function(callback) {
-                //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-                //     var countryCode = (resp && resp.country) ? resp.country : "";
-                //     callback(countryCode);
-                //   });
-                // },
-                // hiddenInput: "full_number",
-                // initialCountry: "auto",
-                // localizedCountries: { 'de': 'Deutschland' },
-                // nationalMode: false,
-                // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
-                // placeholderNumberType: "MOBILE",
-                // preferredCountries: ['cn', 'jp'],
-                // separateDialCode: true,
-                utilsScript: "{{url('build/js/utils.js')}}",
-            });
+            $("#mobile-number").intlTelInput();
         </script>
     </body>
 </html>
