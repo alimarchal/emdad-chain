@@ -3,7 +3,7 @@
         <li>
             باستطاعتك الآن التسجيل في منصة إمداد مجانا ً
 
-            <a href="{{route('english.index')}}" class="btn btn-warning"><img alt="" src="{{url('us.png')}}" style="font-family: 'Raleway', sans-serif;margin-right: 2px;margin-top: 4px;">&nbsp;English</a>
+            <a href="{{route('english.index')}}" class="btn btn-warning" style="background: #eb8e23;border-color: white;"><img alt="" src="{{url('us.png')}}" style="font-family: 'Raleway', sans-serif;margin-right: 2px;margin-top: 4px;">&nbsp;English</a>
         </li>
 
 
@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-lg-6 col-md-6">
             <ul class="login-r">
-                <li><a style="color: white;" href="{{route('login')}}">
+                <li><a style="color: white;" href="{{route('register')}}">
                         الدخول الى المنصة
                     </a> </li>
             </ul>

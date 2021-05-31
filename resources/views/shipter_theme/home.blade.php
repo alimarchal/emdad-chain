@@ -61,7 +61,7 @@
                             <h3 class="text-white">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
                                 , selling, supplying and warehousing processes. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
                             <div class="btns">
-                                <div class="btn-style"><a href="{{route('english.about')}}">About us</a></div>
+{{--                                <div class="btn-style"><a href="{{route('english.about')}}">About us</a></div>--}}
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                             <h3 class="text-white">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
                                 , selling, supplying and warehousing processes. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
                             <div class="btns">
-                                <div class="btn-style"><a href="{{route('english.about')}}">About us</a></div>
+{{--                                <div class="btn-style"><a href="{{route('english.about')}}">About us</a></div>--}}
                             </div>
                         </div>
                     </div>
