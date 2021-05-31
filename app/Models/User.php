@@ -502,4 +502,19 @@ class User extends Authenticatable implements MustVerifyEmail
             "531196"
         );
     }
+
+    public static function send_sms($mobile_no, $msg)
+    {
+        $mobile_no = trim($mobile_no);
+        $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=" . $mobile_no . "&sender=Emdad-Aid&unicode=e&randparams=1";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'error:' . curl_error($c);
+        }
+        curl_close($ch);
+    }
 }

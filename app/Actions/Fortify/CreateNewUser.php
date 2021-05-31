@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Models\Ire;
 use App\Models\IreCommission;
+use App\Models\SmsMessages;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -55,6 +56,17 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'usertype' => 'CEO',
         ]);
+
+        $user_language = $user->rtl;
+        if ($user_language == 0)
+        {
+            User::send_sms($input['mobile'], SmsMessages::find(1)->english_message);
+        } else if($user_language == 1)
+        {
+            User::send_sms($input['mobile'], SmsMessages::find(1)->arabic_message);
+        }
+
+
 
         if ($input['referred_no'] == null || $input['referred_no'] == ' ')
         {

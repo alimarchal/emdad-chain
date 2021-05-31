@@ -374,6 +374,10 @@ Route::middleware(['auth:sanctum'])->post('business-package-store/{id}', [Busine
 Route::middleware(['auth:sanctum'])->get('select-category', [CategoryController::class, 'parentCategories'])->name('parentCategories');
 Route::middleware(['auth:sanctum'])->get('sub-categories', [CategoryController::class, 'subCategories'])->name('subCategories');
 
+############################################### SMS routes ########################################################
+Route::middleware(['auth:sanctum'])->resource('smsMessages', \App\Http\Controllers\SmsMessagesController::class)->middleware('permission:all');
+
+
 ############################################### IREs routes ########################################################
 
 Route::middleware(['ireAuthentication'])->group(function () {
