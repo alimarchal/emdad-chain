@@ -39,7 +39,7 @@
                                 $remainingDays = $userCreatedAt->addDays(30);
                             @endphp
                             <x-jet-nav-link href="javascript:void(0)" title="الأيام المتبقية؛ عدد الأيام المتبقي ليتمكن الآخرون من استخدام الرقم المرجعي الخاص بك">
-                                يبقى أيام:   &nbsp;<div class="text-gray-500" data-countdown="{{$remainingDays}}"></div>
+                                الأيام المتبقية:   &nbsp;<div class="text-gray-500" data-countdown="{{$remainingDays}}"></div>
                             </x-jet-nav-link>
                         </div>
                     @endif

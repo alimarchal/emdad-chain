@@ -30,7 +30,7 @@
                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2" required></x-jet-input>
+                                <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2" value="{{old('business_name')}}" required></x-jet-input>
 {{--                                <select name="num_of_warehouse" id="num_of_warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>--}}
 {{--                                    <option value="">None</option>--}}
 {{--                                    @for ($count = 1; $count <= 100; $count++)--}}
@@ -57,10 +57,10 @@
 
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="chamber_reg_number" type="text" name="chamber_reg_number" class="border p-2 w-1/2"></x-jet-input>
-                                <x-jet-input id="chamber_reg_path_1" type="file" name="chamber_reg_path_1" class="border p-2 w-1/2"></x-jet-input>
-                                <x-jet-input id="vat_reg_certificate_number" type="text" name="vat_reg_certificate_number" class="border p-2 w-1/2"></x-jet-input>
-                                <x-jet-input id="vat_reg_certificate_path_1" type="file" name="vat_reg_certificate_path_1" class="border p-2 w-1/2"></x-jet-input>
+                                <x-jet-input id="chamber_reg_number" type="text" name="chamber_reg_number" class="border p-2 w-1/2" value="{{old('chamber_reg_number')}}"></x-jet-input>
+                                <x-jet-input id="chamber_reg_path_1" type="file" name="chamber_reg_path_1" class="border p-2 w-1/2" required></x-jet-input>
+                                <x-jet-input id="vat_reg_certificate_number" type="text" name="vat_reg_certificate_number" class="border p-2 w-1/2" value="{{old('vat_reg_certificate_number')}}" required></x-jet-input>
+                                <x-jet-input id="vat_reg_certificate_path_1" type="file" name="vat_reg_certificate_path_1" class="border p-2 w-1/2" required></x-jet-input>
                             </div>
                             <div class="flex space-x-5 mt-3">
 
@@ -69,8 +69,8 @@
                             </div>
                             <div class="flex space-x-5 mt-3">
 
-                                <x-jet-input id="website" name="website" class="border p-2 w-1/2"></x-jet-input>
-                                <x-jet-input id="business_email" type="email" name="business_email" class="border p-2 w-1/2"></x-jet-input>
+                                <x-jet-input id="website" name="website" class="border p-2 w-1/2" value="{{old('website')}}"></x-jet-input>
+                                <x-jet-input id="business_email" type="email" name="business_email" class="border p-2 w-1/2" value="{{old('business_email')}}"></x-jet-input>
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="phone">Landline @include('misc.required')</x-jet-label>
@@ -94,12 +94,12 @@
                                 <select id="bank_name" name="bank_name" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                     <option value="">None</option>
                                     @foreach(\App\Models\Bank::all() as $bank_name)
-                                        <option value="{{ $bank_name->name }}">{{ $bank_name->name }}</option>
+                                        <option {{(old('bank_name') ==  $bank_name->name ? 'selected' : '')}} value="{{ $bank_name->name }}">{{ $bank_name->name }}</option>
                                     @endforeach
                                 </select>
 
-                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="iban" type="text" name="iban" required="required">
-                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="longitude" required readonly  type="text" name="longitude">
+                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="iban" type="text" name="iban" value="{{old('iban')}}" required="required">
+                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="longitude" required readonly type="text" name="longitude">
                                 <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="latitude" required readonly type="text" name="latitude">
                             </div>
 
@@ -118,14 +118,14 @@
                                 </label>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <textarea id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required=""></textarea>
+                                <textarea id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>{{old('address')}}</textarea>
                             </div>
 
                             <div class="flex space-x-5 mt-3">
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_photo_url_1">Company logo @include('misc.required')</label>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="business_photo_url" type="file" name="business_photo_url_1" class="border p-2 w-1/2"></x-jet-input>
+                                <x-jet-input id="business_photo_url" type="file" name="business_photo_url_1" class="border p-2 w-1/2" required></x-jet-input>
                             </div>
 
                             <br>

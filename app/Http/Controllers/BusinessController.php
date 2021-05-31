@@ -104,6 +104,8 @@ class BusinessController extends Controller
             'phone' => 'required',
             'mobile' => 'required',
             'iban' => 'required',
+            'longitude' => 'required',
+            'latitude' => 'required',
             'bank_name' => 'required',
             'policy_procedure' => 'required',
 //            'address' => 'required',
