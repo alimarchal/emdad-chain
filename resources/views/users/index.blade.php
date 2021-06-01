@@ -72,19 +72,19 @@
                         }
                     @endphp
                     @if(auth()->user()->usertype != 'SuperAdmin')
-                    <div class="flex flex-wrap" style="justify-content: flex-start">
+                        <div class="flex flex-wrap" style="justify-content: flex-start">
 
-                        <h1 class="text-1xl mt-0 pb-0 text-center">
-                            @if(auth()->user()->rtl == 0)
-                            Remaining Users you can add:
-                            @elseif(auth()->user()->rtl == 1)
-                                عدد المستخدمين المتاح اضافتهم:
-                            @endif
-                        </h1>
+                            <h1 class="text-1xl mt-0 pb-0 text-center">
+                                @if(auth()->user()->rtl == 0)
+                                    Remaining Users you can add:
+                                @elseif(auth()->user()->rtl == 1)
+                                    عدد المستخدمين المتاح اضافتهم:
+                                @endif
+                            </h1>
 
-                        <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userRemaining}} </h1>
-                    </div>
-                    <hr>
+                            <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userRemaining}} </h1>
+                        </div>
+                        <hr>
                     @endif
                 @endif
                 <div class="py-3">
@@ -126,6 +126,13 @@
                                                         User
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Timestamp
+                                                    </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Business Name
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         Role
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -155,6 +162,25 @@
                                                                 </div>
                                                             </div>
                                                         </td>
+
+
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            {{$user->created_at}}
+                                                        </td>
+
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            @if(empty($user->business_id))
+                                                                NULL
+                                                            @else
+                                                                @if(empty($user->business_name_get->business_name))
+                                                                    NULL
+                                                                @else
+                                                                    {{$user->business_name_get->business_name}}
+                                                                @endif
+                                                            @endif
+
+                                                        </td>
+
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                             @foreach($user->roles()->pluck('name') as $role)
                                                                 <span class="badge badge-info">{{ $role }}</span>

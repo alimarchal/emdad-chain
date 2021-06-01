@@ -24,7 +24,7 @@ class UserController extends Controller
     {
         if (auth()->user()->hasRole('SuperAdmin')) {
             $users = User::where('id', '!=', Auth::user()->id)->paginate(50);
-            $business = Business::all();
+            $business = Business::orderBy('created_at', 'desc');
             return view('users.index', compact('users', 'business'));
         }
         elseif(auth()->user()->usertype == "CEO") {
