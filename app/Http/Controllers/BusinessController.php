@@ -42,15 +42,33 @@ class BusinessController extends Controller
             if ($request->has('status')) {
                 if ($request->status == 1) {
                     $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
-                    return view('business.incompleteMarketing', compact('businesses'));
+                    return view('business.saleSpecialist.incompleteMarketing', compact('businesses'));
                 } elseif ($request->status == 2) {
                     $users = User::where('usertype', 'CEO')->where('business_id', null)->orderBy('id','desc')->paginate(10);
-                    return view('business.incompleteMarketing', compact('users'));
+                    return view('business.saleSpecialist.incompleteMarketing', compact('users'));
                 }
             }
 
             $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
-            return view('business.incompleteMarketing', compact('businesses'));
+            return view('business.saleSpecialist.incompleteMarketing', compact('businesses'));
+        }
+        elseif (\auth()->user()->hasRole('Legal Approval Officer 1') || \auth()->user()->hasRole('Finance Officer 1'))
+        {
+            if ($request->has('status')) {
+                if ($request->status == 3) {
+                    $status = $request->status;
+                    $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
+                    return view('business.legalOfficer.legalBusinessesInfo', compact('businesses', 'status'));
+                } elseif ($request->status == 1) {
+                    $status = $request->status;
+                    $businesses = Business::where('status', 1)->orderBy('id','desc')->paginate(10);
+//                    $users = User::where('usertype', 'CEO')->where('business_id', null)->orderBy('id','desc')->paginate(10);
+                    return view('business.legalOfficer.legalBusinessesInfo', compact('businesses', 'status'));
+                }
+            }
+
+            $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
+            return view('business.legalOfficer.legalBusinessesInfo', compact('businesses'));
         }
         else {
             $businesses = Business::where('user_id', auth()->user()->id)->paginate(10);

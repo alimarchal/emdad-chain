@@ -58,6 +58,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12 slide-caption" >
+                            <div>
+                                <div class="btn-style" style="padding-bottom: 180px;padding-right: 450px;"><a href="{{route('login')}}">الدخول الى المنصة</a></div>
+                            </div>
 {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
                             <h3 class="text-white" style="font-family: arabicFont;direction: rtl;">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
                             <div class="btns">
@@ -72,6 +75,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12 slide-caption">
+                            <div>
+                                <div class="btn-style" style="padding-bottom: 180px;padding-right: 450px;"><a href="{{route('login')}}">الدخول الى المنصة</a></div>
+                            </div>
                             {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
                             <h3 class="text-white" style="font-family: arabicFont;direction: rtl;">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
                             <div class="btns" style="font-family: arabicFont;direction: rtl;">

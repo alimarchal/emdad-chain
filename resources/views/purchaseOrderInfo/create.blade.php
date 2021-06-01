@@ -33,12 +33,12 @@
                             </label>
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="no_of_monthly_orders" type="number" name="no_of_monthly_orders" required>
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="volume" type="text" name="volume" required>
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="no_of_monthly_orders" type="number" name="no_of_monthly_orders" value="{{old('no_of_monthly_orders')}}" required>
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="volume" type="text" name="volume" value="{{old('volume')}}" required>
                             <select name="type" id="type" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                 <option value="">None</option>
-                                <option value="Credit">Credit</option>
-                                <option value="Cash">Cash</option>
+                                <option {{(old('type') == 'Credit' ? 'selected' : '')}} value="Credit">Credit</option>
+                                <option {{(old('type') == 'Cash' ? 'selected' : '')}} value="Cash">Cash</option>
                             </select>
                             <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="order_info" type="file" name="order_info_1[]" multiple>
                             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
