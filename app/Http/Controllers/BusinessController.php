@@ -70,6 +70,24 @@ class BusinessController extends Controller
             $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
             return view('business.legalOfficer.legalBusinessesInfo', compact('businesses'));
         }
+        elseif (\auth()->user()->hasRole('IT Admin'))
+        {
+            if ($request->has('status')) {
+                if ($request->status == 3) {
+                    $status = $request->status;
+                    $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
+                    return view('business.itAdmin.business', compact('businesses', 'status'));
+                } elseif ($request->status == 1) {
+                    $status = $request->status;
+                    $businesses = Business::where('status', 1)->orderBy('id','desc')->paginate(10);
+//                    $users = User::where('usertype', 'CEO')->where('business_id', null)->orderBy('id','desc')->paginate(10);
+                    return view('business.itAdmin.business', compact('businesses', 'status'));
+                }
+            }
+
+            $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
+            return view('business.itAdmin.business', compact('businesses'));
+        }
         else {
             $businesses = Business::where('user_id', auth()->user()->id)->paginate(10);
             return view('business.index', compact('businesses'));
@@ -315,6 +333,44 @@ class BusinessController extends Controller
         }
 
         return redirect()->back()->with('message', 'Business status updated...');
+    }
+
+    public function businessLegalFinanceStatus(Request $request)
+    {
+        $business = Business::where('id', $request->business_id)->first();
+
+        if (\auth()->user()->hasRole('Legal Approval Officer 1'))
+        {
+            if ($request->status_id == 3) {
+                $business->update([
+                    'legal_status' => $request->status_id,
+                ]);
+
+            } elseif ($request->status_id == 4) {
+                $business->update([
+                    'legal_status' => $request->status_id,
+                ]);
+            } else {
+                return redirect()->back()->with('message', 'Something went wrong');
+            }
+        }
+        elseif (\auth()->user()->hasRole('Finance Officer 1'))
+        {
+            if ($request->status_id == 3) {
+                $business->update([
+                    'finance_status' => $request->status_id,
+                ]);
+
+            } elseif ($request->status_id == 4) {
+                $business->update([
+                    'finance_status' => $request->status_id,
+                ]);
+            } else {
+                return redirect()->back()->with('message', 'Something went wrong');
+            }
+        }
+
+        return redirect()->back()->with('message', 'Business response send');
     }
 
     public function suppliers()

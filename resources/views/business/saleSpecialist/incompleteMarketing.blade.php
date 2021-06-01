@@ -33,10 +33,31 @@
                                     #
                                 </th>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    Name
+                                    Business Name
                                 </th>
+
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    Total Warehouse
+                                    CEO Name
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    CEO Email
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    Total Warehouse(s)
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    National ID #
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    National ID Expire Date
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    IBAN
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
@@ -59,9 +80,25 @@
                                                 {{$business->name}} <br> {{$business->email}} @endif
                                         </a>
                                     </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                        {{$business->user->name}}
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                        {{$business->user->email}}
+                                    </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
                                         <a href="{{url('businessWarehouse/'. $business->id .'/show')}}" class="hover:underline text-blue-900 ">@if(isset($business->warehouse)) {{ $business->warehouse->count() }} @endif</a>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                        {{$business->user->nid_num}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                        {{$business->user->nid_exp_date}}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                        {{$business->iban}}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900 text-center">
                                         @if ($business->status == '3')

@@ -518,7 +518,7 @@ class User extends Authenticatable implements MustVerifyEmail
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $output = curl_exec($ch);
         if (curl_errno($ch)) {
-            echo 'error:' . curl_error($c);
+            echo 'error:' . curl_error($ch);
         }
         curl_close($ch);
     }

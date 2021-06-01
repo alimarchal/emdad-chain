@@ -83,8 +83,8 @@
                             <div class="flex space-x-5 mt-3">
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="bank_name">Bank Name @include('misc.required')</label>
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="iban">IBAN @include('misc.required')</label>
-                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="longitude">Longitude</label>
-                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="latitude">Latitude</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="latitude">Latitude @include('misc.required')</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="longitude">Longitude @include('misc.required')</label>
                             </div>
 
 
@@ -99,8 +99,8 @@
                                 </select>
 
                                 <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="iban" type="text" name="iban" value="{{old('iban')}}" required="required">
-                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="longitude" required readonly type="text" name="longitude">
                                 <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="latitude" required readonly type="text" name="latitude">
+                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="longitude" required readonly type="text" name="longitude">
                             </div>
 
 

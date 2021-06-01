@@ -77,6 +77,7 @@ Route::middleware(['packageCheck', 'categoryCheck'])->group(function () {
 
 Route::middleware(['auth:sanctum'])->get('/incomplete-business-registration/', [BusinessController::class, 'incomplete'])->name('incompleteBusiness');
 Route::middleware(['auth:sanctum'])->get('/business-status/', [BusinessController::class, 'accountStatus'])->name('accountStatus');
+Route::middleware(['auth:sanctum'])->get('/business-legal-finance-status/', [BusinessController::class, 'businessLegalFinanceStatus'])->name('businessLegalFinanceStatus');
 
 Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
 Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', BusinessWarehouseController::class);

@@ -35,6 +35,8 @@ class CreateBusinessesTable extends Migration
             $table->string('iban')->nullable();
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
+            $table->integer('legal_status')->default(1);   /* 1 for pending, 3 for approved, 4 for rejected*/
+            $table->integer('finance_status')->default(1); /* 1 for pending, 3 for approved, 4 for rejected*/
             # supplier or client category of client
             $table->string('supplier_client')->nullable();
             $table->string('status')->nullable();
