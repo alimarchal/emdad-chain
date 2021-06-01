@@ -77,11 +77,11 @@
 
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <p><strong>Longitude:</strong> {{$business->longitude}}</p>
+                                <p><strong>Latitude:</strong> {{$business->latitude}}</p>
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <p><strong>Longitude:</strong> {{$business->latitude}}</p>
+                                <p><strong>Longitude:</strong> {{$business->longitude}}</p>
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">

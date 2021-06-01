@@ -100,7 +100,7 @@
                                     @can('all')
                                         @if($business->status == 3)
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                                <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Accpected</span>
+                                                <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Accepted</span>
                                             </td>
                                         @elseif($business->status == 4)
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">

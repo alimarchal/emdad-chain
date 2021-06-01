@@ -40,18 +40,21 @@
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    Status
+                                    Business Status
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
                                     P.O Info
                                 </th>
-
-                                @if(isset($status) && $status == 1)
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                        Action
-                                    </th>
-                                @endif
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    Legal Officer Status
+                                </th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    Finance Officer Status
+                                </th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    Action
+                                </th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -87,35 +90,45 @@
                                         @endif
                                     </td>
 
-                                    @if(auth()->user()->hasRole('Legal Approval Officer 1') && $business->legal_status == 3)
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Accepted</span>
-                                        </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900 text-center">
+                                        @if ($business->legal_status == 1)
+                                            Pending
+                                        @elseif ($business->legal_status == 3)
+                                            Approved
+                                        @elseif ($business->legal_status == 4)
+                                            Rejected
+                                        @endif
+                                    </td>
 
-                                    @elseif(auth()->user()->hasRole('Finance Officer 1') && $business->finance_status == 3)
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900 text-center">
+                                        @if ($business->finance_status == 1)
+                                            Pending
+                                        @elseif ($business->finance_status == 3)
+                                            Approved
+                                        @elseif ($business->finance_status == 4)
+                                            Rejected
+                                        @endif
+                                    </td>
+
+                                    @if($business->status == 3)
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Accepted</span>
+                                            <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Accpected</span>
                                         </td>
-                                    @elseif(auth()->user()->hasRole('Legal Approval Officer 1') && $business->legal_status == 4)
+                                    @elseif($business->status == 4)
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
                                             <span class="bg-purple-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Rejected</span>
                                         </td>
-
-                                    @elseif(auth()->user()->hasRole('Finance Officer 1') && $business->finance_status == 4)
+                                    @else
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <span class="bg-purple-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Rejected</span>
-                                        </td>
-
-                                    @elseif(isset($status) && $status == 1 && $business->legal_status == 1 || $business->finance_status == 1)
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <a class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1" href="{{route('businessLegalFinanceStatus', ['business_id' => $business->id, 'status_id' => 3])}}" style="transition: all .15s ease">
+                                            <a class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1" href="{{route('accountStatus', ['business_id' => $business->id, 'status_id' => 3])}}" style="transition: all .15s ease">
                                                 Accept
                                             </a>
-                                            <a class="bg-purple-500 text-white active:bg-purple-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1" href="{{route('businessLegalFinanceStatus', ['business_id' => $business->id, 'status_id' => 4])}}" style="transition: all .15s ease">
+                                            <a class="bg-purple-500 text-white active:bg-purple-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1" href="{{route('accountStatus', ['business_id' => $business->id, 'status_id' => 4])}}" style="transition: all .15s ease">
                                                 Reject
                                             </a>
                                         </td>
                                     @endif
+
                                 </tr>
                             @endforeach
                             </tbody>
