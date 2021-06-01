@@ -76,17 +76,19 @@ class BusinessWarehouseController extends Controller
             'country' => 'required',
             'address' => 'required',
             'city' => 'required',
+            'longitude' => 'required',
+            'latitude' => 'required',
             'warehouse_type' => 'required',
             'cold_storage' => 'required',
             'gate_type' => 'required',
             'fork_lift' => 'required',
             'total_warehouse_manpower' => 'required',
             'working_time' => 'required',
+            'working_time_1' => 'required',
         ]);
 
         $merge_time = $request->working_time . " - " . $request->working_time_1;
         $request->merge(['working_time' => $merge_time]);
-
 
         /*
         $validated = $request->validate([

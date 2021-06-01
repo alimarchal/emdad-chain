@@ -17,7 +17,8 @@ class CategoryCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasRole('Sales Specialist'))
+        if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasRole('Sales Specialist')
+            || Auth::user()->hasRole('Legal Approval Officer 1') || Auth::user()->hasRole('Finance Officer 1'))
         {
             return $next($request);
         }

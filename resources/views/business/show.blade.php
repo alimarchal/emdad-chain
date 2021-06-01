@@ -20,7 +20,8 @@
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <p><strong>Total Warehouse:</strong> {{$business->num_of_warehouse}}</p>
+                                @php $warehouseCount = \App\Models\BusinessWarehouse::where('business_id', $business->id)->count(); @endphp
+                                <p><strong>Total Warehouse(s):</strong> {{$warehouseCount}}</p>
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
