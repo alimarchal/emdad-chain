@@ -432,6 +432,12 @@ Route::middleware(['ire'])->group(function () {
 
 
 Route::get('/testOne', function () {
+    $role = Role::create(['name' => 'Legal Approval Officer 1']);
+    $role = Role::create(['name' => 'Finance Officer 1']);
+    $role = Role::create(['name' => 'IT Admin']);
+    app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
+    dd('done');
+
 //    $user = \App\Models\User::find(5);
 //    $business = \App\Models\Business::find(1);
 
