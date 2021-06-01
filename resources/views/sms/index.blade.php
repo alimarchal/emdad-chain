@@ -108,9 +108,19 @@
                                 </button>
                             </div>
                         @endif
+
+                        <div class="flex justify-end my-4">
+                            <a href="{{route('smsMessages.create')}}" class="inline-flex px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                Create SMS
+                            </a>
+                        </div>
                     </div>
                 </div>
+
             </div>
+
+
+
             @if ($sms->count() >= 50)
                 <div class="px-4 py-5 mt-3 bg-white sm:p-6 rounded-sm">
                     <div class="col-span-12 sm:col-span-12">

@@ -38,7 +38,7 @@ class SmsMessagesController extends Controller
     {
         SmsMessages::create($request->all());
         session()->flash('message', 'SMS created successfully.');
-        return redirect()->route('sms.index');
+        return redirect()->route('smsMessages.index');
     }
 
     /**
