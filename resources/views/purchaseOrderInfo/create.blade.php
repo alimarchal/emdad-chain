@@ -11,6 +11,7 @@
             <!-- component -->
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
+                    <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
                     <x-jet-validation-errors class="mb-4" />
                     @if($po->isNotEmpty())
                         <h2 class="text-2xl text-gray-900 font-semibold text-center">Existing P.O. Info</h2>

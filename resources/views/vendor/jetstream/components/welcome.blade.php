@@ -6,6 +6,7 @@
         <div class="text-black text-2xl">
 
             @if (auth()->user()->rtl == 0)
+                <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto mb-4 m-auto"/>
                 Thank you for signing up! Your email address has been verified.
             @php
                 $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
@@ -24,6 +25,7 @@
                 @endif
                 registration form  before adding any user/s.
             @else
+                <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto mb-4 m-auto"/>
                 نشكرك لتسجيلك معنا
                 !
                 تم تفعيل بريدك الإلكتروني بنجاح. <br>
@@ -35,15 +37,19 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
 
             @if (auth()->user()->rtl == 0)
+
                 Welcome {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
 
                 <span class="float-right text-red-900 font-bold">{{(isset(Auth::user()->status) == 1)?'Under process':'InComplete'}}</span>
                 <span class=" float-right text-black-600 font-bold">Account Status:&nbsp;&nbsp;</span>
+                <img src="{{url('registration_step/E-3.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
             @else
                 مرحباً {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
 
                 <span class="float-left text-red-900 font-bold">{{(isset(Auth::user()->status) == 1)?'Under process':'InComplete'}}</span>
                 <span class=" float-left text-black-600 font-bold">حالة الحساب:&nbsp;&nbsp;</span>
+
+                <img src="{{url('registration_step/E-3.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
             @endif
 
         </h2>
@@ -65,6 +71,9 @@
             @else
                 <div class="text-2xl text-center font-bold">
                     النشاط التجاري: {{ Auth::user()->business->business_name }}<br>
+
+                    <img src="{{url('registration_step/E-3.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
+
                 </div>
                 <p class="m-2 font-bold">مرحباً {{ config('app.name', 'Laravel') }} as our prospective alliance</p>
                 <p class="font-bold m-2 text-justify">Thank you for choosing us to share our experience and expertise in supply chain management platform.</p>
@@ -88,7 +97,7 @@
 
             <span class="float-right text-red-900 font-bold">{{(isset(Auth::user()->status) == 1)?'Under process':'InComplete'}}</span>
             <span class=" float-right text-black-600 font-bold">Account Status:&nbsp;&nbsp;</span>
-
+            <img src="{{url('registration_step/E-3.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
         </h2>
         <div class="mt-6 text-black text-2xl">
             <div class="text-2xl text-center font-bold">
@@ -129,6 +138,7 @@
                 @if(is_null(Auth::user()->registration_type))
                     <div class="ml-12">
                         <div class="mt-2 text-sm text-gray-500">
+                            <img src="{{url('registration_step/E-3.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
                             <form action="{{url('registrationType')}}" method="post">
                                 @csrf
                                 <select id="registration_type" name="registration_type" class="border p-2 w-full" required>

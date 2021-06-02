@@ -52,13 +52,9 @@ use Spatie\Permission\Models\Permission;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcomeAr');
-//});
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [DashboardController::class, 'languageChange'])->name('languageChange');
 Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
-//Route::middleware(['auth:sanctum'])->post('createUserForCompany/{business}', [\App\Http\Controllers\UserController::class, 'createUserForCompany'])->name('createUserForCompany');
 Route::middleware(['auth:sanctum'])->post('/registrationType', [UserController::class, 'registrationType']);
 
 ###################################################### Buyer and Supplier Add each other ##########################################
@@ -377,8 +373,6 @@ Route::middleware(['auth:sanctum'])->get('sub-categories', [CategoryController::
 
 ############################################### SMS routes ########################################################
 Route::middleware(['auth:sanctum'])->resource('smsMessages', \App\Http\Controllers\SmsMessagesController::class)->middleware('permission:all');
-
-
 ############################################### IREs routes ########################################################
 
 Route::middleware(['ireAuthentication'])->group(function () {
@@ -429,32 +423,5 @@ Route::middleware(['ire'])->group(function () {
     });
 });
 ############################################################## END ##########################################################################
-
-
-Route::get('/testOne', function () {
-//    $role = Role::create(['name' => 'Legal Approval Officer 1']);
-//    $role = Role::create(['name' => 'Finance Officer 1']);
-//    $role = Role::create(['name' => 'IT Admin']);
-//    app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
-//    dd('done');
-
-//    $user = \App\Models\User::find(5);
-//    $business = \App\Models\Business::find(1);
-
-//    $rating = $business->rating([
-//        'title' => 'This is a test title',
-//        'body' => 'And we will add some shit here',
-//        'customer_service_rating' => 0,
-//        'quality_rating' => 0,
-//        'friendly_rating' => 0,
-//        'pricing_rating' => 0,
-//        'rating' => 1,
-//        'recommend' => 'Yes',
-//        'approved' => true, // This is optional and defaults to false
-//    ], $business);
-//    $ratings = $business->getAllRatings($business->id, 'desc');
-//    dd($business->averageRating());
-
-});
 
 

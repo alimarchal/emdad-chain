@@ -19,7 +19,8 @@
         <x-slot name="logo">
             <!-- <x-jet-authentication-card-logo /> -->
 
-            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-20 w-auto"/>
+            <img src="{{url('registration_step/E-1.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
+            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-20 w-auto m-auto"/>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4"/>
@@ -28,13 +29,9 @@
             <a href="{{route('registerAr')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
         </x-jet-button>
 
-
         <form method="POST" action="{{ route('register') }}">
             @csrf
-
             <p class="text-center font-bold text-2xl">Step # 1: Registration</p>
-
-
             {{--            <livewire:reference />--}}
             <div class="mt-2">
                 <x-jet-label for="referred_no" value="{{ __('Reference (If any)') }}" class="mb-2"/>

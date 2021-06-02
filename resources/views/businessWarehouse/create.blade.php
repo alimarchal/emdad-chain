@@ -29,7 +29,7 @@
                 @include('users.sessionMessage')
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
-
+                        <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
                         <form action="{{route('businessWarehouse.store')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                             @csrf
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 3: Business Warehouse </h3>

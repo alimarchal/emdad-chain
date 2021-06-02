@@ -19,6 +19,7 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                     <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
+                        <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto mb-4 m-auto"/>
                         <form action="{{ url('business') }}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                             <x-jet-validation-errors class="mb-4"/>
                             @csrf
