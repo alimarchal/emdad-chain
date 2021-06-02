@@ -59,7 +59,7 @@
                         <div class="col-xl-12 slide-caption">
                             {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
                             <div>
-                                <div class="btn-style" style="padding-bottom: 180px;padding-left: 450px;"><a href="{{route('login')}}">Platform Login</a></div>
+                                <div class="btn-style" style="padding-bottom: 180px;padding-left: 450px;"><a href="{{route('register')}}">Join us</a></div>
                             </div>
                             <h3 class="text-white">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
                                 , selling, supplying and warehousing processes. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>

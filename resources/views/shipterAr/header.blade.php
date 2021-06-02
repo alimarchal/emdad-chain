@@ -78,8 +78,8 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6">
                                 <ul class="login-r">
-                                    <li><a style="color: white;" href="{{route('register')}}">
-                                            الدخول الى المنصة
+                                    <li><a style="color: white;" href="{{route('login')}}">
+                                            الدخول إلى المنصة
                                         </a></li>
                                 </ul>
                             </div>
