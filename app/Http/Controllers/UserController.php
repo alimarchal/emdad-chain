@@ -293,7 +293,7 @@ class UserController extends Controller
             return view('users.edit', compact('user', 'roles','permissions'));
         }
         elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Buyer') {
-            $roles  = Role::where('id' , '>', 10)->get()->pluck('name', 'name');
+            $roles  = Role::where('id' , '>', 10)->where('id', '<', 18)->get()->pluck('name', 'name');
             $permissions = Permission::where('id' , '>=', 41)->where('id' , '<=', 65)->get()->pluck('name', 'name');
             return view('users.edit', compact('user', 'roles','permissions'));
         }

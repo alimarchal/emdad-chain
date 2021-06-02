@@ -87,7 +87,12 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap" >
-                                        {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}
+{{--                                        {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}--}}
+                                        @if(isset($item->userName))
+                                            {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}
+                                        @else
+                                            {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', ''))}}
+                                        @endif
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap" >

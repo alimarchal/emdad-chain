@@ -157,7 +157,13 @@
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                             @foreach($user->roles()->pluck('name') as $role)
-                                                                <span class="badge badge-info">{{ $role }}</span>
+                                                                @if(auth()->user()->registration_type == 'Buyer')
+                                                                    <span class="badge badge-info">{{ str_replace('Buyer','',$role) }}</span>
+                                                                @elseif(auth()->user()->registration_type == 'Supplier')
+                                                                    <span class="badge badge-info">{{ str_replace('Supplier','',$role) }}</span>
+                                                                @else
+                                                                    <span class="badge badge-info">{{ $role }}</span>
+                                                                @endif
                                                             @endforeach
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

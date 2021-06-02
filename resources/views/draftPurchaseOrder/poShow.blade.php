@@ -174,6 +174,7 @@
                             <span class="px-3 py-3 bg-red-800 text-white rounded">Canceled P.O</span>
                         @elseif ($draftPurchaseOrder->status == 'rejectToEdit')
                             <span class="px-3 py-3 bg-red-600 text-white rounded uppercase">Rejected for Edit</span>
+                        @elseif ($draftPurchaseOrder->status == 'completed')
                         @else
                             @if(auth()->user()->registeration_type == 'Buyer')
                             <a href="{{ route('dpo.approved', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">DPO Approved</a>

@@ -194,12 +194,16 @@
                         @elseif ($draftPurchaseOrder->status == 'rejectToEdit')
                             <span class="px-3 py-3 bg-red-600 text-white rounded uppercase">Rejected for Edit</span>
                         @else
+                            @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
                             <a href="{{ route('dpo.approved', $draftPurchaseOrder->id) }}" onclick="checkbox()"
-                               class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">DPO
-                                Approved</a>
+                               class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                Approve DPO
+                            </a>
                             <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}"
-                               class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">Cancel
-                                P.O</a>
+                               class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                Cancel DPO
+                            </a>
+                            @endif
                             {{-- <a href="{{ route('dpo.rejected', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Reject to Edit</a> --}}
                         @endif
 
