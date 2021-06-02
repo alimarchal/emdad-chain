@@ -76,7 +76,7 @@
                     <div class="row">
                         <div class="col-xl-12 slide-caption">
                             <div>
-                                <div class="btn-style" style="padding-bottom: 180px;padding-right: 450px;"><a href="{{route('login')}}">الدخول الى المنصة</a></div>
+                                <div class="btn-style" style="padding-bottom: 180px;padding-right: 450px;"><a href="{{route('register')}}">انضم إلينا</a></div>
                             </div>
                             {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
                             <h3 class="text-white" style="font-family: arabicFont;direction: rtl;">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
@@ -91,7 +91,7 @@
     </section>
     <!-- end of hero slider -->
     <!-- feature-area start -->
-    <div class="features-area features-style-2" style="direction: rtl; text-align: right;">
+    <div class="features-area features-style-2">
         <div class="container">
             <div class="section-title text-center">
                 <span>نقدم لكم الأفضل</span>
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="features-item features-item-2">
-                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: right;direction: rtl;">
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: left;direction: rtl;">
                             <div class="feature-wrap">
                                 <div class="features-icon features-icon2">
                                     <i><img src="{{url('Shipter/assets/images/icon/1.png')}}" alt="" style="width: 40px; transform: rotate(-45deg);"></i>
@@ -114,7 +114,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: right;direction: rtl;">
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: left;direction: rtl;">
                             <div class="feature-wrap">
                                 <div class="features-icon feature-icon3">
                                     <i><img src="{{url('Shipter/assets/images/icon/2.png')}}" alt="" style="width: 40px;"></i>

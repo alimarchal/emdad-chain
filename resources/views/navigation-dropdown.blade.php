@@ -284,7 +284,7 @@
                     <x-slot name="content">
                         <!-- Account Management -->
                         <div class="block px-4 py-2 text-xs text-gray-400">
-                            {{ __('Manage Account') }}
+                            {{ __('Business Info Management') }}
                         </div>
                         <div class="border-t border-gray-100"></div>
                         <x-jet-dropdown-link href="{{ route('profile.show') }}">
@@ -318,24 +318,61 @@
                             @endif
 {{--                        @endcan--}}
 
-                        @if(auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
-                            <div class="border-t border-gray-100"></div>
-
-                            @if(auth()->user()->registration_type == 'Supplier')
-
-                                <x-jet-dropdown-link href="{{route('createBuyer')}}">
-                                    {{ __('Add Buyer') }}
+                        @php
+                            $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
+                            if ($isBusinessDataExist) {
+                                $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
+                            }
+                        @endphp
+                        @if (auth()->user()->status == 3)
+                                <div class="border-t border-gray-100"></div>
+                                <x-jet-dropdown-link href="{{ route('business.create') }}">
+                                    {{ __('Business') }}
                                 </x-jet-dropdown-link>
 
-                            @elseif(auth()->user()->registration_type == 'Buyer')
-
-                                <x-jet-dropdown-link href="{{route('createSupplier')}}">
-                                {{ __('Add Supplier') }}
+                                <div class="border-t border-gray-100"></div>
+                            @if (isset($isBusinessPOIExist))
+                                <x-jet-dropdown-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}">
+                                    {{ __('P.O. Info') }}
                                 </x-jet-dropdown-link>
-
+                            @else
+                                <x-jet-dropdown-link href="{{ route('purchaseOrderInfo.create') }}">
+                                    {{ __('P.O. Info') }}
+                                </x-jet-dropdown-link>
                             @endif
-
                         @endif
+
+                        @if (auth()->user()->status == 3)
+                                <div class="border-t border-gray-100"></div>
+                                <x-jet-dropdown-link href="{{ route('users.index') }}">
+                                    {{ __('Users') }}
+                                </x-jet-dropdown-link>
+
+                                <div class="border-t border-gray-100"></div>
+                                <x-jet-dropdown-link href="{{ route('packages.index') }}">
+                                    {{ __('Subscription') }}
+                                </x-jet-dropdown-link>
+                        @endif
+
+
+{{--                        @if(auth()->user()->hasRole('CEO') && auth()->user()->status == 3)--}}
+{{--                            <div class="border-t border-gray-100"></div>--}}
+
+{{--                            @if(auth()->user()->registration_type == 'Supplier')--}}
+
+{{--                                <x-jet-dropdown-link href="{{route('createBuyer')}}">--}}
+{{--                                    {{ __('Add Buyer') }}--}}
+{{--                                </x-jet-dropdown-link>--}}
+
+{{--                            @elseif(auth()->user()->registration_type == 'Buyer')--}}
+
+{{--                                <x-jet-dropdown-link href="{{route('createSupplier')}}">--}}
+{{--                                {{ __('Add Supplier') }}--}}
+{{--                                </x-jet-dropdown-link>--}}
+
+{{--                            @endif--}}
+
+{{--                        @endif--}}
 
                         @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                             <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
@@ -432,6 +469,67 @@
                         {{ __('Log Viewer') }}
                     </x-jet-responsive-nav-link>
                 @endcan
+
+                {{--                        @can('create user' && Auth::user()->status == 3)--}}
+                @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
+
+                    @if (auth()->user()->business_id)
+                        <div class="border-t border-gray-100"></div>
+                        <x-jet-dropdown-link href="{{ route('users.create') }}">
+                            {{ __('Add User') }}
+                        </x-jet-dropdown-link>
+                    @endif
+                @endif
+                {{--                        @endcan--}}
+
+{{--                @if(auth()->user()->hasRole('CEO') && auth()->user()->status == 3)--}}
+{{--                    <div class="border-t border-gray-100"></div>--}}
+
+{{--                    @if(auth()->user()->registration_type == 'Supplier')--}}
+
+{{--                        <x-jet-dropdown-link href="{{route('createBuyer')}}">--}}
+{{--                            {{ __('Add Buyer') }}--}}
+{{--                        </x-jet-dropdown-link>--}}
+
+{{--                    @elseif(auth()->user()->registration_type == 'Buyer')--}}
+
+{{--                        <x-jet-dropdown-link href="{{route('createSupplier')}}">--}}
+{{--                            {{ __('Add Supplier') }}--}}
+{{--                        </x-jet-dropdown-link>--}}
+
+{{--                    @endif--}}
+
+{{--                @endif--}}
+
+                @if (auth()->user()->status == 3)
+                    <div class="border-t border-gray-100"></div>
+                    <x-jet-dropdown-link href="{{ route('business.create') }}">
+                        {{ __('Business') }}
+                    </x-jet-dropdown-link>
+
+                    <div class="border-t border-gray-100"></div>
+                    @if (isset($isBusinessPOIExist))
+                        <x-jet-dropdown-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}">
+                            {{ __('P.O. Info') }}
+                        </x-jet-dropdown-link>
+                    @else
+                        <x-jet-dropdown-link href="{{ route('purchaseOrderInfo.create') }}">
+                            {{ __('P.O. Info') }}
+                        </x-jet-dropdown-link>
+                    @endif
+                @endif
+
+                @if (auth()->user()->status == 3)
+                    <div class="border-t border-gray-100"></div>
+                    <x-jet-dropdown-link href="{{ route('users.index') }}">
+                        {{ __('Users') }}
+                    </x-jet-dropdown-link>
+
+                    <div class="border-t border-gray-100"></div>
+                    <x-jet-dropdown-link href="{{ route('packages.index') }}">
+                        {{ __('Subscription') }}
+                    </x-jet-dropdown-link>
+                @endif
 
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -693,7 +791,7 @@
                         <x-slot name="content">
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
+                                {{ __('Business Info Management') }}
                             </div>
                             <div class="border-t border-gray-100"></div>
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">

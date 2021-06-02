@@ -13,5 +13,6 @@
             </ul>
         </li>
         <li><a href="javascript:void(0)">Training Center</a></li>
+        <li><a href="javascript:void(0)">How it works</a></li>
     </ul>
 </nav>
