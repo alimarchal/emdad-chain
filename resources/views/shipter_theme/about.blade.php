@@ -53,7 +53,7 @@
                                 <img src="{{url('images/11.png')}}" style="height: 40px; width: 40px">
                             </i>
                         </div>
-                        <div class="section-content">
+                        <div class="section-content" style="padding-top: 50px;">
                             <span>Provides safe payments</span>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
                                 <img src="{{url('images/12.png')}}" style="height: 40px; width: 40px">
                             </i>
                         </div>
-                        <div class="section-content">
+                        <div class="section-content" style="padding-top: 50px;">
                             <span>Assures an organised and fast process</span>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                                 <img src="{{url('images/13.png')}}" style="height: 40px; width: 40px">
                             </i>
                         </div>
-                        <div class="section-content">
+                        <div class="section-content" style="padding-top: 50px;">
                             <span>Offers  the lowest costs</span>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                                 <img src="{{url('images/14.png')}}" style="height: 40px; width: 40px">
                             </i>
                         </div>
-                        <div class="section-content">
+                        <div class="section-content" style="padding-top: 50px;">
                             <span>Removes the logistical obstacles</span>
                         </div>
                     </div>
@@ -99,89 +99,89 @@
         </div>
     </div>
     <!-- team-area start -->
-    <div class="team-area team-area-3" style="padding-top: 0px;">
-        <div class="container">
-            <div class="col-l2">
-                <div class="section-title text-center">
-                    <h2>Our Team</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="team-single">
-                        <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
-                            <div class="social-1st">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="team-content">
-                            <h4>Abdulaziz AlSinany</h4>
-                            <span>Founder and CEO</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="team-single">
-                        <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
-                            <div class="social-1st">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="team-content">
-                            <h4>Ahsan Raza</h4>
-                            <span>Business Development & Sales Manager</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="team-single">
-                        <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
-                            <div class="social-1st">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="team-content">
-                            <h4>Rayan Al Sinany</h4>
-                            <span>Junior Accountant</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="team-single">
-                        <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
-                            <div class="social-1st">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="team-content">
-                            <h4>Muteb Al Buraikan</h4>
-                            <span>Human Resources Specialist</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{{--    <div class="team-area team-area-3" style="padding-top: 0px;">--}}
+{{--        <div class="container">--}}
+{{--            <div class="col-l2">--}}
+{{--                <div class="section-title text-center">--}}
+{{--                    <h2>Our Team</h2>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-lg-3 col-md-6 col-12">--}}
+{{--                    <div class="team-single">--}}
+{{--                        <div class="team-img">--}}
+{{--                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">--}}
+{{--                            <div class="social-1st">--}}
+{{--                                <ul>--}}
+{{--                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="team-content">--}}
+{{--                            <h4>Abdulaziz AlSinany</h4>--}}
+{{--                            <span>Founder and CEO</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-3 col-md-6 col-12">--}}
+{{--                    <div class="team-single">--}}
+{{--                        <div class="team-img">--}}
+{{--                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">--}}
+{{--                            <div class="social-1st">--}}
+{{--                                <ul>--}}
+{{--                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="team-content">--}}
+{{--                            <h4>Ahsan Raza</h4>--}}
+{{--                            <span>Business Development & Sales Manager</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-3 col-md-6 col-12">--}}
+{{--                    <div class="team-single">--}}
+{{--                        <div class="team-img">--}}
+{{--                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">--}}
+{{--                            <div class="social-1st">--}}
+{{--                                <ul>--}}
+{{--                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="team-content">--}}
+{{--                            <h4>Rayan Al Sinany</h4>--}}
+{{--                            <span>Junior Accountant</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-3 col-md-6 col-12">--}}
+{{--                    <div class="team-single">--}}
+{{--                        <div class="team-img">--}}
+{{--                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">--}}
+{{--                            <div class="social-1st">--}}
+{{--                                <ul>--}}
+{{--                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="team-content">--}}
+{{--                            <h4>Muteb Al Buraikan</h4>--}}
+{{--                            <span>Human Resources Specialist</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
     <!-- team-area end -->
 

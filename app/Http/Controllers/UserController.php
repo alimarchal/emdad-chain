@@ -311,6 +311,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+
+        if (isset($user->usertype) && $user->usertype == 'Supplier Driver' && $user->driver_status == 0)
+        {
+            session()->flash('error', 'Driver cannot be deleted because he has a shipment assigned');
+            return redirect()->back();
+        }
         $user->delete();
         session()->flash('message', 'Profile successfully deleted.');
         return redirect()->route('users.index');

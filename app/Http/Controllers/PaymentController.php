@@ -343,6 +343,15 @@ class PaymentController extends Controller
         return view('payment.invoice', compact('proformaInvoices'));
     }
 
+    // View function for Invoice details by ID (Payment history)
+    public function invoiceView($id)
+    {
+       $invoice = Invoice::where('id', $id)->first();
+
+       return view('payment.invoiceView', compact('invoice'));
+
+    }
+
     public function generate_proforma_invoice()
     {
         $dpos = DraftPurchaseOrder::where('supplier_user_id', auth()->user()->id)->where('payment_term', 'Cash')->get();

@@ -153,7 +153,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        View
+                                                        <a href="{{ route('invoiceView',$dn->id) }}" class="hover:underline hover:text-blue-800 text-blue-500">View</a>
                                                     </td>
                                                 </tr>
                                             @endforeach
