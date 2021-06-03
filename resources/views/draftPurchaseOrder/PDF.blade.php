@@ -45,7 +45,7 @@
         </div>
 
         <div class="center">
-            <h3 style="text-align: center; margin:0px;">Draft Purchase Order</h3>
+            <h3 style="text-align: center; margin:0px;">Purchase Order</h3>
         </div>
 
         <div class="center">
@@ -74,7 +74,7 @@
 
         <div class="center">
             <h3 class="text-2xl text-center"><strong>Draft P.O</strong></h3>
-            <strong>D.P.O No#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->id }}<br>
+            <strong>P.O.No#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->id }}<br>
             <strong>Date: &nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
             <strong>RFQ#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->rfq_no }}<br>
             <strong>Qoute#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->qoute_no }}<br>
@@ -181,10 +181,10 @@
             </tr>
             <tr>
                 <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                    Shipment
+                    &nbsp;
                 </td>
                 <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                    {{ number_format(0, 2) }}
+                    &nbsp;
                 </td>
             </tr>
             <tr>

@@ -4,7 +4,7 @@
             <div class="bg-white overflow-hidden shadow-xl ">
                 <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
                     <a href="{{ route('generatePDF', $draftPurchaseOrder) }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                        Generate PDF
+                        Create PDF
                     </a>
                 </div>
                 <div class="px-4 py-5 sm:p-6 bg-white shadow ">
@@ -39,7 +39,7 @@
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                             <h3 class="text-2xl text-center"><strong>Purchase Order</strong></h3>
-                            <strong>D..P. O. No#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->id }}<br>
+                            <strong>P.O.No#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->id }}<br>
                             <strong>Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
                             <strong>RFQ#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->rfq_no }}<br>
                             <strong>Qoute#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->qoute_no }}<br>
@@ -131,7 +131,7 @@
                         </tr>
                         <tr>
                             <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                Shipment
+                                Shipping Fees
                             </td>
                             <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
                                 {{ number_format(0, 2) }}

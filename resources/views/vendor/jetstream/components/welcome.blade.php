@@ -138,7 +138,7 @@
                 @if(is_null(Auth::user()->registration_type))
                     <div class="ml-12">
                         <div class="mt-2 text-sm text-gray-500">
-                            <img src="{{url('registration_step/E-3.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
+{{--                            <img src="{{url('registration_step/E-3.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>--}}
                             <form action="{{url('registrationType')}}" method="post">
                                 @csrf
                                 <select id="registration_type" name="registration_type" class="border p-2 w-full" required>

@@ -5,7 +5,7 @@
                 <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
                     <a href="{{ route('generatePDF', $draftPurchaseOrder) }}"
                        class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                        Generate PDF
+                        Create PDF
                     </a>
                 </div>
                 <div class="px-4 py-5 sm:p-6 bg-white shadow ">
@@ -132,7 +132,7 @@
                         </tr>
                         <tr>
                             <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                Shipment
+                                Shipping Fees
                             </td>
                             <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
 
@@ -163,12 +163,12 @@
                                 We acknowledge that {{$draftPurchaseOrder->buyer_business->business_name }}
                                 agrees to deal with {{$draftPurchaseOrder->supplier_business->business_name}}. <br>
                                 Emdad has no responsibility with the kind of delivery and the source of finance for this delivery.</span> <br>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Please Check to acknowledge
-                                </label>
-                            </div>
+{{--                            <div class="form-check">--}}
+{{--                                <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>--}}
+{{--                                <label class="form-check-label" for="flexCheckDefault">--}}
+{{--                                    Please Check to acknowledge--}}
+{{--                                </label>--}}
+{{--                            </div>--}}
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
                             {{-- <strong>Delivery Information</strong><br>
