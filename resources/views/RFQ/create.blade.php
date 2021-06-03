@@ -27,7 +27,7 @@
                                             #
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                            Item Name
+                                            Category Name
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
@@ -378,7 +378,7 @@
                                             #
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                            Item Name
+                                            Category Name
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">

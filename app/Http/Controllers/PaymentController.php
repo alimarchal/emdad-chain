@@ -347,7 +347,7 @@ class PaymentController extends Controller
         }
         elseif(auth()->user()->registration_type == "Buyer")
         {
-            $proformaInvoices = Invoice::where('buyer_user_id', auth()->user()->id)->get();
+            $proformaInvoices = Invoice::where('buyer_business_id', auth()->user()->business_id)->get();
         }
         else{
             $proformaInvoices = Invoice::all();

@@ -136,6 +136,12 @@ class VehicleController extends Controller
      */
     public function destroy(Vehicle $vehicle)
     {
+        if ($vehicle->availability_status == 0)
+        {
+            session()->flash('error', 'Vehicle cannot be deleted because it has a shipment assigned');
+            return redirect()->back();
+        }
+
         $vehicle->delete();
         return back()->with('success', 'Vehicle deleted successfully');
     }

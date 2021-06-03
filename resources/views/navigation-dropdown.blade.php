@@ -511,7 +511,11 @@
                 @if (auth()->user()->hasRole('CEO') && Auth::user()->registration_type != null)
                     <div class="border-t border-gray-100"></div>
                     <x-jet-dropdown-link href="{{ route('business.create') }}">
-                        {{ __('Business') }}
+                        @if(isset(auth()->user()->business->business_name))
+                            {{ auth()->user()->business->business_name . ' ' . 'Info' }}
+                        @else
+                            {{ __('Business') }}
+                        @endif
                     </x-jet-dropdown-link>
 
                     <div class="border-t border-gray-100"></div>

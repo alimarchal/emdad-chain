@@ -8,6 +8,7 @@
         </x-slot>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <h2 class="text-2xl font-bold py-2 text-center m-2">Invoices History</h2>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     @if (session()->has('message'))
                         <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
@@ -33,11 +34,11 @@
                                                     Delivery Note
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Purchase Order
+                                                    P.O.
                                                 </th>
 
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Item Name
+                                                    Category Name
                                                 </th>
 
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
