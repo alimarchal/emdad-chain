@@ -27,7 +27,7 @@ class DraftPurchaseOrderController extends Controller
         {
             $dpos = DraftPurchaseOrder::where('supplier_user_id', $user)->where('supplier_business_id', auth()->user()->business_id)->where('status','approved')->get();
         }
-        elseif(auth()->user()->registration_type == 'Buyer' || auth()->user()->can('Buyer DPO Approval'))
+        elseif(auth()->user()->registration_type == 'Buyer' || auth()->user()->can('Buyer DPO Approval') || auth()->user()->can('Buyer View Purchase Orders'))
         {
 //            $dpos = DraftPurchaseOrder::where('user_id', $user)->where('business_id', auth()->user()->business_id)->where('status', 'pending')->get();
             $dpos = DraftPurchaseOrder::where('business_id', auth()->user()->business_id)->where('status', 'pending')->get();
