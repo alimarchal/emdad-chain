@@ -28,7 +28,8 @@ class PlacedRFQController extends Controller
             $PlacedRFQ = EOrders::all();
         }
         else{
-            $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->get();
+//            $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->get();
+            $PlacedRFQ = EOrders::where('business_id', auth()->user()->business_id)->get();
         }
 
         return view('RFQPlaced.index', compact('PlacedRFQ'));

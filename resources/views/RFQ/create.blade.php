@@ -203,9 +203,9 @@
                             <label class="block font-medium text-sm text-gray-700 mb-1" for="description">
                                 Description @include('misc.required')
                             </label>
-                            <textarea name="description" id="description" maxlength="255"></textarea>
-                            <input type="hidden" value="{{ $user->business_id }}" name="business_id">
-                            <input type="hidden" value="{{ $user->id }}" name="user_id">
+                            <textarea name="description" id="description" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Description.." required></textarea>
+                            <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
+                            <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                         </div>
 
                         <div class="flex flex-wrap -mx-px overflow-hidden sm:-mx-1 md:-mx-2 lg:-mx-2 xl:-mx-1">
@@ -306,7 +306,12 @@
                                 <select name="payment_mode" id="payment_mode" class="form-select shadow-sm block w-full" required>
                                     <option value="">None</option>
                                     <option value="Cash">Cash</option>
-                                    @if(auth()->user()->business_package->package_id != 1)
+                                    @php
+                                        $businessId =  auth()->user()->business->id;
+                                        $package =    \App\Models\BusinessPackage::where('business_id', $businessId)->first();
+                                    @endphp
+{{--                                    @if(auth()->user()->business_package->package_id != 1)--}}
+                                    @if($package->package_id != 1)
                                     <option value="Credit">Credit</option>
                                     <option value="Credit30days">Credit (30 Days)</option>
                                     <option value="Credit60days">Credit (60 Days)</option>
@@ -329,7 +334,7 @@
                                 </label>
                                 <select name="warehouse_id" id="warehouse_id" class="form-select shadow-sm block w-full" required>
                                     <option value="">Select Warehouse</option>
-                                    @foreach(\App\Models\BusinessWarehouse::where('user_id', auth()->user()->id)->get() as $warehouse)
+                                    @foreach(\App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->get() as $warehouse)
                                         <option value="{{$warehouse->id}}">{{$warehouse->name . ' Address:' . $warehouse->address }}</option>
                                     @endforeach
                                 </select>
@@ -535,9 +540,9 @@
                             <label class="block font-medium text-sm text-gray-700 mb-1" for="description">
                                 Description @include('misc.required')
                             </label>
-                            <textarea name="description" id="description"></textarea>
-                            <input type="hidden" value="{{ $user->business_id }}" name="business_id">
-                            <input type="hidden" value="{{ $user->id }}" name="user_id">
+                            <textarea name="description" id="description" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Description.." required></textarea>
+                            <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
+                            <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                         </div>
 
                         <div class="flex flex-wrap -mx-px overflow-hidden sm:-mx-1 md:-mx-2 lg:-mx-2 xl:-mx-1">
@@ -633,8 +638,17 @@
                                 <select name="payment_mode" id="payment_mode" class="form-select shadow-sm block w-full" required>
                                     <option value="">None</option>
                                     <option value="Cash">Cash</option>
-                                    @if(auth()->user()->business_package->package_id != 1)
+                                    @php
+                                        $businessId =  auth()->user()->business->id;
+                                        $package =    \App\Models\BusinessPackage::where('business_id', $businessId)->first();
+                                    @endphp
+                                    {{--                                    @if(auth()->user()->business_package->package_id != 1)--}}
+                                    @if($package->package_id != 1)
                                         <option value="Credit">Credit</option>
+                                        <option value="Credit30days">Credit (30 Days)</option>
+                                        <option value="Credit60days">Credit (60 Days)</option>
+                                        <option value="Credit90days">Credit (90 Days)</option>
+                                        <option value="Credit120days">Credit (120 Days)</option>
                                     @endif
                                 </select>
                             </div>
@@ -652,7 +666,7 @@
                                 </label>
                                 <select name="warehouse_id" id="warehouse_id" class="form-select shadow-sm block w-full" required>
                                     <option value="">Select Warehouse</option>
-                                    @foreach(\App\Models\BusinessWarehouse::where('user_id', auth()->user()->id)->get() as $warehouse)
+                                    @foreach(\App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->get() as $warehouse)
                                         <option value="{{$warehouse->id}}">{{$warehouse->name . ' Address:' . $warehouse->address }}</option>
                                     @endforeach
                                 </select>
@@ -695,14 +709,6 @@
             </div>
             @endif
 
-
-        <script>
-            tinymce.init({
-                selector: 'textarea',
-                plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                toolbar_mode: 'floating',
-            });
-        </script>
     </x-app-layout>
 @else
     <x-app-layout>
@@ -876,9 +882,9 @@
                         <label class="block font-medium text-sm text-gray-700 mb-1" for="description">
                             وصف
                         </label>
-                        <textarea name="description" id="description"></textarea>
-                        <input type="hidden" value="{{ $user->business_id }}" name="business_id">
-                        <input type="hidden" value="{{ $user->id }}" name="user_id">
+                        <textarea name="description" id="description" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Description.." required></textarea>
+                        <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
+                        <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                     </div>
 
                     <div class="flex flex-wrap -mx-px overflow-hidden sm:-mx-1 md:-mx-2 lg:-mx-2 xl:-mx-1">
@@ -963,7 +969,18 @@
                             <select name="payment_mode" id="payment_mode" class="form-select shadow-sm block w-full" required>
                                 <option value="">None</option>
                                 <option value="Cash">Cash</option>
-                                <option value="Credit">Credit</option>
+                                @php
+                                    $businessId =  auth()->user()->business->id;
+                                    $package =    \App\Models\BusinessPackage::where('business_id', $businessId)->first();
+                                @endphp
+                                {{--                                    @if(auth()->user()->business_package->package_id != 1)--}}
+                                @if($package != 1)
+                                    <option value="Credit">Credit</option>
+                                    <option value="Credit30days">Credit (30 Days)</option>
+                                    <option value="Credit60days">Credit (60 Days)</option>
+                                    <option value="Credit90days">Credit (90 Days)</option>
+                                    <option value="Credit120days">Credit (120 Days)</option>
+                                @endif
                             </select>
                         </div>
 
@@ -1010,13 +1027,13 @@
             </div>
         </div>
 
-        <script>
-            tinymce.init({
-                selector: 'textarea',
-                plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                toolbar_mode: 'floating',
-            });
-        </script>
+{{--        <script>--}}
+{{--            tinymce.init({--}}
+{{--                selector: 'textarea',--}}
+{{--                plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',--}}
+{{--                toolbar_mode: 'floating',--}}
+{{--            });--}}
+{{--        </script>--}}
     </x-app-layout>
 @endif
 

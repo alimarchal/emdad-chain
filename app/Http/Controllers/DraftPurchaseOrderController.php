@@ -27,9 +27,10 @@ class DraftPurchaseOrderController extends Controller
         {
             $dpos = DraftPurchaseOrder::where('supplier_user_id', $user)->where('supplier_business_id', auth()->user()->business_id)->where('status','approved')->get();
         }
-        elseif(auth()->user()->registration_type == 'Buyer')
+        elseif(auth()->user()->registration_type == 'Buyer' || auth()->user()->can('Buyer DPO Approval') || auth()->user()->can('Buyer View Purchase Orders'))
         {
-            $dpos = DraftPurchaseOrder::where('user_id', $user)->where('business_id', auth()->user()->business_id)->where('status', 'pending')->get();
+//            $dpos = DraftPurchaseOrder::where('user_id', $user)->where('business_id', auth()->user()->business_id)->where('status', 'pending')->get();
+            $dpos = DraftPurchaseOrder::where('business_id', auth()->user()->business_id)->where('status', 'pending')->get();
         }
         return view('draftPurchaseOrder.index', compact('dpos'));
     }
@@ -136,7 +137,8 @@ class DraftPurchaseOrderController extends Controller
         $user = User::find($qoute->supplier_user_id)->notify(new \App\Notifications\QuoteAccepted($qoute));
         $user_1 = User::find(auth()->user()->id)->notify(new \App\Notifications\DpoApproved($draftPurchaseOrder));
         session()->flash('message', 'DPO Accepted.');
-        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
+//        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
+        return redirect()->route('po.po');
     }
 
     public function rejected(DraftPurchaseOrder $draftPurchaseOrder)
@@ -193,9 +195,15 @@ class DraftPurchaseOrderController extends Controller
     public function po()
     {
         $business_type = auth()->user()->business->business_type;
-        if ($business_type == "Buyer") {
+        if ($business_type == "Buyer" || auth()->user()->can('Buyer DPO Approval')) {
 //            $dpos = DraftPurchaseOrder::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->where('status', 'approved')->orWhere('status', 'prepareDelivery')->orWhere('status', 'completed')->get(); //->where('status','approved')
-            $dpos = DraftPurchaseOrder::where(['user_id'=> auth()->user()->id],['business_id' => auth()->user()->business_id],['status' => 'approved'])->orWhere(['status' => 'prepareDelivery'],['status' => 'completed'])->get(); //->where('status','approved')
+//            $dpos = DraftPurchaseOrder::where(['user_id'=> auth()->user()->id],['business_id' => auth()->user()->business_id],['status' => 'approved'])->orWhere(['status' => 'prepareDelivery'],['status' => 'completed'])->get(); //->where('status','approved')
+            $dpos = DraftPurchaseOrder::where(
+//                ['user_id'=> auth()->user()->id],
+                ['business_id' => auth()->user()->business_id],
+                ['status' => 'approved'])->orWhere(['status' => 'prepareDelivery'],
+                ['status' => 'completed'])
+                ->get(); //->where('status','approved')
         } else {
 //            $dpos = DraftPurchaseOrder::where('supplier_business_id', auth()->user()->business_id)->where('status', 'approved')->orWhere('status', 'prepareDelivery')->orWhere('status', 'completed')->get(); //
             $dpos = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id],['status' => 'approved'])->orWhere(['status' => 'prepareDelivery'], ['status' => 'completed'])->get(); //

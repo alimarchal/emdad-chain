@@ -13,6 +13,7 @@ use App\Models\IreIndirectCommission;
 use App\Models\Payment;
 use App\Models\ProformaInvoice;
 use App\Models\Qoute;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -169,7 +170,18 @@ class PaymentController extends Controller
                         'charges' => $totalCharges,
                     ]);
 
-        $user = IreCommission::where('user_id', auth()->id())->first();
+        if (auth()->user()->hasRole('CEO'))
+        {
+            $user = IreCommission::where('user_id', auth()->id())->first();
+        }
+        else{
+            /* Retrieving CEO ID*/
+            $userCeoID = User::where([
+                'business_id' => auth()->user()->business_id,
+                'usertype' => 'CEO'
+            ])->first();
+            $user = IreCommission::where('user_id', $userCeoID->id)->first();
+        }
 
         /* Sales commission calculations for employee or non-employee */
 
@@ -182,11 +194,11 @@ class PaymentController extends Controller
                 {
 //                    $totalSalesAmount = 0;
                     $total = $totalEmdadCharges * $commission->amount;                          //total charges
-                    $ireCommission = IreCommission::where('user_id', auth()->id())->first();
+                    $ireCommission = IreCommission::where('user_id', $user->user_id)->first();
                     $sales_amount = $ireCommission->sales_amount;
                     $totalSalesAmount = $sales_amount + $total;                                 //Total sales amount updated
 
-                    IreCommission::where('user_id', auth()->id())->update([
+                    IreCommission::where('user_id', $user->user_id)->update([
                         'sales_amount' => $totalSalesAmount,
                     ]);
 
@@ -250,11 +262,11 @@ class PaymentController extends Controller
                 {
 //                    $totalSalesAmount = 0;
                     $total = $totalEmdadCharges * $commission->amount;                          //total charges
-                    $ireCommission = IreCommission::where('user_id', auth()->id())->first();
+                    $ireCommission = IreCommission::where('user_id', $user->user_id)->first();
                     $sales_amount = $ireCommission->sales_amount;
                     $totalSalesAmount = $sales_amount + $total;                                 //Total sales amount updated
 
-                    IreCommission::where('user_id', auth()->id())->update([
+                    IreCommission::where('user_id', $user->user_id)->update([
                         'sales_amount' => $totalSalesAmount,
                     ]);
 
@@ -311,14 +323,14 @@ class PaymentController extends Controller
                 }
             }
         }
-
         return redirect()->route('generate_proforma_invoices');
     }
 
     public function proforma_invoices()
     {
         if (auth()->user()->registration_type == "Buyer"){
-            $proformaInvoices = Invoice::where('buyer_user_id', auth()->user()->id)->where('invoice_type', 1)->get();
+//            $proformaInvoices = Invoice::where('buyer_user_id', auth()->user()->id)->where('invoice_type', 1)->get();
+            $proformaInvoices = Invoice::where('buyer_business_id', auth()->user()->business_id)->where('invoice_type', 1)->get();
         }
         elseif(auth()->user()->hasRole('SuperAdmin')){
             $proformaInvoices = Invoice::where('invoice_type', 1)->get();

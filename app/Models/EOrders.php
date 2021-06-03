@@ -15,4 +15,9 @@ class EOrders extends Model
     {
         return $this->hasMany(EOrderItems::class,'e_order_id');
     }
+
+    public function userName()
+    {
+        return $this->hasMany(User::class,'id','user_id');
+    }
 }
