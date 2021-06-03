@@ -158,8 +158,9 @@ class UserController extends Controller
 
         if($request->role == 1 || auth()->user()->hasRole('SuperAdmin'))
         {
-            if ($role->id >= 19 && $role->id <= 26)
+            if ($role->id >= 19 && $role->id <= 29)
             {
+                /* For Users who don't need Email verification */
                 $validated = validator::make($request->all(),[
                     'email' => 'required|email|unique:users',
                 ]);
@@ -190,6 +191,7 @@ class UserController extends Controller
                     return redirect()->back()->withInput();
                 }
 
+                /* For Users who need Email verification */
                 $data = [
                     'name' => $request->name,
                     'email' => $request->email,
@@ -211,16 +213,47 @@ class UserController extends Controller
                 return redirect()->back()->withInput();
             }
 
-            $data = [
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $request->password,
-                'designation' => $request->designation,
-                'email_verified_at' => Carbon::now(),
-                'business_id' => auth()->user()->business_id,
-                'usertype' => $role->name,
-                'status' => 1,
-            ];
+            if (\auth()->user()->hasRole('Buyer'))
+            {
+                $data = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'designation' => $request->designation,
+                    'email_verified_at' => Carbon::now(),
+                    'business_id' => auth()->user()->business_id,
+                    'usertype' => $role->name,
+                    'status' => 1,
+                    'added_by' => 1,           /* 1 for buyer*/
+                    'added_by_userId' => \auth()->id(),
+                ];
+            }
+            else if (\auth()->user()->hasRole('Supplier')){
+                $data = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'designation' => $request->designation,
+                    'email_verified_at' => Carbon::now(),
+                    'business_id' => auth()->user()->business_id,
+                    'usertype' => $role->name,
+                    'status' => 1,
+                    'added_by' => 2,           /* 2 for supplier*/
+                    'added_by_userId' => \auth()->id(),
+                ];
+            }
+            else{
+                $data = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => $request->password,
+                    'designation' => $request->designation,
+                    'email_verified_at' => Carbon::now(),
+                    'business_id' => auth()->user()->business_id,
+                    'usertype' => $role->name,
+                    'status' => 1,
+                ];
+            }
         }
 
         $user = User::create($data);
@@ -263,7 +296,7 @@ class UserController extends Controller
             return view('users.edit', compact('user', 'roles','permissions'));
         }
         elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Buyer') {
-            $roles  = Role::where('id' , '>', 10)->get()->pluck('name', 'name');
+            $roles  = Role::where('id' , '>', 10)->where('id', '<', 18)->get()->pluck('name', 'name');
             $permissions = Permission::where('id' , '>=', 41)->where('id' , '<=', 65)->get()->pluck('name', 'name');
             return view('users.edit', compact('user', 'roles','permissions'));
         }
@@ -311,6 +344,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+
+        if (isset($user->usertype) && $user->usertype == 'Supplier Driver' && $user->driver_status == 0)
+        {
+            session()->flash('error', 'Driver cannot be deleted because he has a shipment assigned');
+            return redirect()->back();
+        }
         $user->delete();
         session()->flash('message', 'Profile successfully deleted.');
         return redirect()->route('users.index');

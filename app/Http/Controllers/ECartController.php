@@ -16,11 +16,13 @@ class ECartController extends Controller
      */
     public function index()
     {
-        $user = User::findOrFail(auth()->user()->id);
+//        $user = User::findOrFail(auth()->user()->id);
+//        $user = User::findOrFail(auth()->user()->id);
         $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
         $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-        $eCart = ECart::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->get();
-        return view('RFQ.index', compact('parentCategories', 'childs', 'user', 'eCart'));
+//        $eCart = ECart::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->get();
+        $eCart = ECart::where('business_id', auth()->user()->business_id)->get();
+        return view('RFQ.index', compact('parentCategories', 'childs', 'eCart'));
     }
 
     /**

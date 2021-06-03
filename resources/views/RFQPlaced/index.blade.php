@@ -15,7 +15,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">RFQ List</h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-15">RFQs History</h2>
 
         <!-- This example requires Tailwind CSS v2.0+ -->
 
@@ -35,15 +35,17 @@
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                    Status
+                                    RFQ #
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                    RFQ #
+                                    Made by
                                 </th>
-{{--                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">--}}
-{{--                                    Client Name--}}
-{{--                                </th>--}}
+
+
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    Status
+                                </th>
 
 
                                 <th scope="col" class="px-6 py-3 text-left text-center text-xs font-medium text-gray-500 tracking-wider" width="120">
@@ -71,10 +73,6 @@
                                         {{$item->created_at->format('d-m-Y')}}
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-nowrap" >
-                                        {{$item->status}}
-                                    </td>
-
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @if ($item->business_id)
                                             <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
@@ -88,14 +86,18 @@
 
                                     </td>
 
-{{--                                    <td class="px-6 py-4 whitespace-nowrap">--}}
-{{--                                        @if (\App\Models\Business::find($item->business_id))--}}
-{{--                                            <a href="{{url('business/'.$item->business_id)}}" class="hover:underline hover:text-blue-900 text-blue-900">--}}
-{{--                                                {{\App\Models\Business::find($item->business_id)->first()->business_name}}--}}
-{{--                                            </a>--}}
-{{--                                        @endif--}}
-{{--                                    </td>--}}
+                                    <td class="px-6 py-4 whitespace-nowrap" >
+{{--                                        {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}--}}
+                                        @if(isset($item->userName))
+                                            {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}
+                                        @else
+                                            {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', ''))}}
+                                        @endif
+                                    </td>
 
+                                    <td class="px-6 py-4 whitespace-nowrap" >
+                                        {{$item->status}}
+                                    </td>
 
 
                                     <td class="px-6 py-4 whitespace-nowrap">

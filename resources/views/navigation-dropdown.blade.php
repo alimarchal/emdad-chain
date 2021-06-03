@@ -188,24 +188,6 @@
                         @endif
                     @endif
 
-
-                    @if (auth()->user()->usertype != 'CEO')
-                        <x-jet-nav-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
-                            {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
-                        </x-jet-nav-link>
-                    @endif
-
-                    @if (auth()->user()->usertype == 'CEO')
-                        @if(auth()->user()->registration_type == 'Buyer')
-                            <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
-                                {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
-                            </x-jet-nav-link>
-                        @elseif(auth()->user()->registration_type == 'Supplier')
-                            <x-jet-nav-link href="{{ route('policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
-                                {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
-                            </x-jet-nav-link>
-                        @endif
-                    @endif
                 </div>
             </div>
 
@@ -307,15 +289,7 @@
                         @endcan
 
 {{--                        @can('create user' && Auth::user()->status == 3)--}}
-                            @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
 
-                            @if (auth()->user()->business_id)
-                                <div class="border-t border-gray-100"></div>
-                                <x-jet-dropdown-link href="{{ route('users.create') }}">
-                                    {{ __('Add User') }}
-                                </x-jet-dropdown-link>
-                            @endif
-                            @endif
 {{--                        @endcan--}}
 
                         @php
@@ -324,10 +298,14 @@
                                 $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
                             }
                         @endphp
-                        @if (auth()->user()->status == 3)
+                        @if (auth()->user()->hasRole('CEO') && Auth::user()->registration_type != null)
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('business.create') }}">
-                                    {{ __('Business') }}
+                                    @if(isset(auth()->user()->business->business_name))
+                                        {{ auth()->user()->business->business_name . ' ' . 'Info' }}
+                                    @else
+                                            {{ __('Business') }}
+                                    @endif
                                 </x-jet-dropdown-link>
 
                                 <div class="border-t border-gray-100"></div>
@@ -343,15 +321,26 @@
                         @endif
 
                         @if (auth()->user()->status == 3)
-                                <div class="border-t border-gray-100"></div>
-                                <x-jet-dropdown-link href="{{ route('users.index') }}">
-                                    {{ __('Users') }}
-                                </x-jet-dropdown-link>
 
-                                <div class="border-t border-gray-100"></div>
-                                <x-jet-dropdown-link href="{{ route('packages.index') }}">
-                                    {{ __('Subscription') }}
-                                </x-jet-dropdown-link>
+                            <div class="border-t border-gray-100"></div>
+                            <x-jet-dropdown-link href="{{ route('packages.index') }}">
+                                {{ __('Subscription') }}
+                            </x-jet-dropdown-link>
+
+                            <div class="border-t border-gray-100"></div>
+                            <x-jet-dropdown-link href="{{ route('users.index') }}">
+                                {{ __('Current Users') }}
+                            </x-jet-dropdown-link>
+
+                            @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
+
+                                @if (auth()->user()->business_id)
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('users.create') }}">
+                                        {{ __('Add User') }}
+                                    </x-jet-dropdown-link>
+                                @endif
+                            @endif
                         @endif
 
 
@@ -413,6 +402,24 @@
                             <div class="border-t border-gray-100"></div>
                         @endif
 
+                        @if (auth()->user()->usertype != 'CEO')
+                            <x-jet-dropdown-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                                {{ __('Policy and Procedure') }}
+                            </x-jet-dropdown-link>
+                        @endif
+
+                        @if (auth()->user()->usertype == 'CEO')
+                            @if(auth()->user()->registration_type == 'Buyer')
+                                <x-jet-dropdown-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
+                                    {{ __('Policy and Procedure') }}
+                                </x-jet-dropdown-link>
+                            @elseif(auth()->user()->registration_type == 'Supplier')
+                                <x-jet-dropdown-link href="{{ route('policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
+                                    {{ __('Policy and Procedure') }}
+                                </x-jet-dropdown-link>
+                            @endif
+                        @endif
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -471,15 +478,15 @@
                 @endcan
 
                 {{--                        @can('create user' && Auth::user()->status == 3)--}}
-                @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
+{{--                @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)--}}
 
-                    @if (auth()->user()->business_id)
-                        <div class="border-t border-gray-100"></div>
-                        <x-jet-dropdown-link href="{{ route('users.create') }}">
-                            {{ __('Add User') }}
-                        </x-jet-dropdown-link>
-                    @endif
-                @endif
+{{--                    @if (auth()->user()->business_id)--}}
+{{--                        <div class="border-t border-gray-100"></div>--}}
+{{--                        <x-jet-dropdown-link href="{{ route('users.create') }}">--}}
+{{--                            {{ __('Add User') }}--}}
+{{--                        </x-jet-dropdown-link>--}}
+{{--                    @endif--}}
+{{--                @endif--}}
                 {{--                        @endcan--}}
 
 {{--                @if(auth()->user()->hasRole('CEO') && auth()->user()->status == 3)--}}
@@ -501,10 +508,14 @@
 
 {{--                @endif--}}
 
-                @if (auth()->user()->status == 3)
+                @if (auth()->user()->hasRole('CEO') && Auth::user()->registration_type != null)
                     <div class="border-t border-gray-100"></div>
                     <x-jet-dropdown-link href="{{ route('business.create') }}">
-                        {{ __('Business') }}
+                        @if(isset(auth()->user()->business->business_name))
+                            {{ auth()->user()->business->business_name . ' ' . 'Info' }}
+                        @else
+                            {{ __('Business') }}
+                        @endif
                     </x-jet-dropdown-link>
 
                     <div class="border-t border-gray-100"></div>
@@ -521,14 +532,24 @@
 
                 @if (auth()->user()->status == 3)
                     <div class="border-t border-gray-100"></div>
-                    <x-jet-dropdown-link href="{{ route('users.index') }}">
-                        {{ __('Users') }}
-                    </x-jet-dropdown-link>
-
-                    <div class="border-t border-gray-100"></div>
                     <x-jet-dropdown-link href="{{ route('packages.index') }}">
                         {{ __('Subscription') }}
                     </x-jet-dropdown-link>
+
+                    <div class="border-t border-gray-100"></div>
+                    <x-jet-dropdown-link href="{{ route('users.index') }}">
+                        {{ __('Current Users') }}
+                    </x-jet-dropdown-link>
+
+                    @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
+
+                        @if (auth()->user()->business_id)
+                            <div class="border-t border-gray-100"></div>
+                            <x-jet-dropdown-link href="{{ route('users.create') }}">
+                                {{ __('Add User') }}
+                            </x-jet-dropdown-link>
+                        @endif
+                    @endif
                 @endif
 
 
@@ -536,6 +557,24 @@
                     <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
                         {{ __('API Tokens') }}
                     </x-jet-responsive-nav-link>
+                @endif
+
+                @if (auth()->user()->usertype != 'CEO')
+                    <x-jet-dropdown-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                        {{ __('Policy and Procedure') }}
+                    </x-jet-dropdown-link>
+                @endif
+
+                @if (auth()->user()->usertype == 'CEO')
+                    @if(auth()->user()->registration_type == 'Buyer')
+                        <x-jet-dropdown-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
+                            {{ __('Policy and Procedure') }}
+                        </x-jet-dropdown-link>
+                    @elseif(auth()->user()->registration_type == 'Supplier')
+                        <x-jet-dropdown-link href="{{ route('policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
+                            {{ __('Policy and Procedure') }}
+                        </x-jet-dropdown-link>
+                    @endif
                 @endif
 
                 <!-- Authentication -->

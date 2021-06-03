@@ -67,7 +67,15 @@
 {{--                                            <option value="{{ $role->id }}" {{ ($userRole[0] == $role->id ? 'selected' : '')}}>{{ $role->name }}</option>--}}
 {{--                                        @endforeach--}}
                                         @foreach($roles as $id => $roles)
-                                            <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || isset($user) && $user->roles()->pluck('name', 'id')->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
+                                            <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || isset($user) && $user->roles()->pluck('name', 'id')->contains($id)) ? 'selected' : '' }}>
+                                                @if(auth()->user()->registration_type == 'Buyer')
+                                                    {{ str_replace('Buyer', '',$roles) }}
+                                                @elseif(auth()->user()->registration_type == 'Supplier')
+                                                    {{ str_replace('Supplier', '',$roles) }}
+                                                @else
+                                                    {{ $roles }}
+                                                @endif
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>

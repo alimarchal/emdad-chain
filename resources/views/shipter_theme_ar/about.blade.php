@@ -31,10 +31,14 @@
                         <h2 id="about-h2">من إمداد؟</h2>
                         <p>منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين،</p>
                         <p> بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</p>
-                        <p><strong>رؤيتنا لمستقبلنا:</strong> أضخم منصة إلكترونية موثوقة تقدم خدمات سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم أسطول لوجستي بأفضل معايير الجودة العالمية.</p>
+{{--                        <p><strong>رؤيتنا لمستقبلنا:</strong> أضخم منصة إلكترونية موثوقة تقدم خدمات سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم أسطول لوجستي بأفضل معايير الجودة العالمية.</p>--}}
 
-                        <p><strong>رسالتنا للمستقبل:</strong> نحن قادرون بل ومستعدون على تحمل صعوبة جميع التطورات التقنية في العالم ومواكبة الأحداث الجديدة حتى نصبح الأسبق في الابتكار والتطور وإذا سنحت لنا الفرصة يوماً في خدمة كواكب خارج الأرض، سنفعل!</p>
-                        <p><strong>هدفنا:</strong> إزالة جميع المعوقات اللوجستية ورفع مستوى خدمة سلاسل الإمداد لجميع شركاء إمداد، وسنفعل!</p>
+{{--                        <p><strong>رسالتنا للمستقبل:</strong> نحن قادرون بل ومستعدون على تحمل صعوبة جميع التطورات التقنية في العالم ومواكبة الأحداث الجديدة حتى نصبح الأسبق في الابتكار والتطور وإذا سنحت لنا الفرصة يوماً في خدمة كواكب خارج الأرض، سنفعل!</p>--}}
+{{--                        <p><strong>هدفنا:</strong> إزالة جميع المعوقات اللوجستية ورفع مستوى خدمة سلاسل الإمداد لجميع شركاء إمداد، وسنفعل!</p>--}}
+                        <ul style="list-style-type: square; color: #eb8e23; direction: rtl;">
+                            <li class="mb-4"><strong style="color: white">رؤيتنا لمستقبلنا:</strong><a style="color: white"> أضخم منصة تقنية موثوقة تخدم سلاسل الإمداد وتمتلك اكبر عدد من الموردين وأضخم اسطول لوجستي بأفضل معايير الجودة العالمية. </a></li>
+                            <li><strong style="color: white">هدفنا:</strong><a style="color: white"> إزالة جميع المعوقات اللوجستية ورفع مستوى خدمة سلاسل الإمداد لجميع شركاء إمداد، وسنفعل! </a></li>
+                        </ul>
                     </div>
                     <div class="signature-section">
                         <div class="row">
@@ -62,7 +66,7 @@
                                 <img src="{{url('images/11.png')}}" style=" width: 40px">
                             </i>
                         </div>
-                        <div class="section-content">
+                        <div class="section-content" style="padding-top: 50px;">
                             <span>إمداد تقدم دفعاً آمناً</span>
                         </div>
                     </div>
@@ -74,7 +78,7 @@
                                 <img src="{{url('images/12.png')}}" style="width: 40px">
                             </i>
                         </div>
-                        <div class="section-content">
+                        <div class="section-content" style="padding-top: 50px;">
                             <span>تضمن لكم عمليات سريعة ومنظمة</span>
                         </div>
                     </div>
@@ -86,7 +90,7 @@
                                 <img src="{{url('images/13.png')}}" style=" width: 40px">
                             </i>
                         </div>
-                        <div class="section-content">
+                        <div class="section-content" style="padding-top: 50px;">
                             <span>توفر لكم أقل الأسعار</span>
                         </div>
                     </div>
@@ -99,7 +103,7 @@
                                 <img src="{{url('images/14.png')}}" style=" width: 40px">
                             </i>
                         </div>
-                        <div class="section-content">
+                        <div class="section-content" style="padding-top: 50px;">
                             <span>إزالة المعوقات اللوجستية</span>
                         </div>
                     </div>
@@ -108,91 +112,91 @@
         </div>
     </div>
     <!-- team-area start -->
-    <div class="team-area team-area-3" style="padding-top: 0px; direction: rtl">
-        <div class="container">
-            <div class="col-l2">
-                <div class="section-title text-center">
-                    <h2>الفريق</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="team-single">
-                        <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
-                            <div class="social-1st">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="team-content">
-                            <h4>عبد العزيز السناني</h4>
-                            <span>مؤسس ومدير مجلس الإدارة</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="team-single">
-                        <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
-                            <div class="social-1st">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="team-content">
-                            <h4>أحسن رضا</h4>
-                            <span>
-                                مدير مبيعات و تطوير أعمال
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="team-single">
-                        <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
-                            <div class="social-1st">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="team-content">
-                            <h4>ريان السناني</h4>
-                            <span>محاسب إداري</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="team-single">
-                        <div class="team-img">
-                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
-                            <div class="social-1st">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="team-content">
-                            <h4>متعب البريكان</h4>
-                            <span>مسؤول الموارد البشرية</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{{--    <div class="team-area team-area-3" style="padding-top: 0px; direction: rtl">--}}
+{{--        <div class="container">--}}
+{{--            <div class="col-l2">--}}
+{{--                <div class="section-title text-center">--}}
+{{--                    <h2>الفريق</h2>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-lg-3 col-md-6 col-12">--}}
+{{--                    <div class="team-single">--}}
+{{--                        <div class="team-img">--}}
+{{--                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">--}}
+{{--                            <div class="social-1st">--}}
+{{--                                <ul>--}}
+{{--                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="team-content">--}}
+{{--                            <h4>عبد العزيز السناني</h4>--}}
+{{--                            <span>مؤسس ومدير مجلس الإدارة</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-3 col-md-6 col-12">--}}
+{{--                    <div class="team-single">--}}
+{{--                        <div class="team-img">--}}
+{{--                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">--}}
+{{--                            <div class="social-1st">--}}
+{{--                                <ul>--}}
+{{--                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="team-content">--}}
+{{--                            <h4>أحسن رضا</h4>--}}
+{{--                            <span>--}}
+{{--                                مدير مبيعات و تطوير أعمال--}}
+{{--                            </span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-3 col-md-6 col-12">--}}
+{{--                    <div class="team-single">--}}
+{{--                        <div class="team-img">--}}
+{{--                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">--}}
+{{--                            <div class="social-1st">--}}
+{{--                                <ul>--}}
+{{--                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="team-content">--}}
+{{--                            <h4>ريان السناني</h4>--}}
+{{--                            <span>محاسب إداري</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-3 col-md-6 col-12">--}}
+{{--                    <div class="team-single">--}}
+{{--                        <div class="team-img">--}}
+{{--                            <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">--}}
+{{--                            <div class="social-1st">--}}
+{{--                                <ul>--}}
+{{--                                    <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>--}}
+{{--                                    <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="team-content">--}}
+{{--                            <h4>متعب البريكان</h4>--}}
+{{--                            <span>مسؤول الموارد البشرية</span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
     <!-- team-area end -->
 

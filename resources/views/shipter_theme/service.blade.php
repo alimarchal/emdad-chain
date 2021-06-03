@@ -46,8 +46,7 @@ background-image: url('images/Our sevices (photo no.4).jpg');
                             </div>
                             <div class="section-content">
                                 <p><a>Sales</a></p>
-                                <span>Easy increase for average sales percentage. Follow up with sales officers regularly. Quotations generating and approving online.
-</span>
+                                <span>Easy increase for average sales percentage. Follow up with sales officers regularly. Quotations generating and approving online.</span>
                             </div>
                         </div>
                         <div class="section-item-2">
@@ -65,7 +64,7 @@ background-image: url('images/Our sevices (photo no.4).jpg');
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-12 col-sm-12">
-                    <div class="tr-wrap">
+                    <div class="tr-wrap" style="padding-top: 45px;">
                         <div class="t-text">
                             <h2>Suppliers</h2>
                         </div>
@@ -127,7 +126,7 @@ background-image: url('images/Our sevices (photo no.4).jpg');
                 </div>
 
                 <div class="col-lg-8 col-md-12 col-sm-12">
-                    <div class="tr-wrap">
+                    <div class="tr-wrap" style="padding-top: 45px;">
                         <div class="t-text">
                             <h2>Buyers</h2>
                         </div>

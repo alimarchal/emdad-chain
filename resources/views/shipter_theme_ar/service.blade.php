@@ -14,7 +14,7 @@
             text-align: right;
         }
 
-        
+
     </style>
 @endsection
 @section('custom-body-style')
@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-12 col-sm-12">
-                    <div class="tr-wrap">
+                    <div class="tr-wrap" style="padding-top: 45px;">
                         <div class="t-text">
                             <h2>للموردين</h2>
                         </div>
@@ -160,7 +160,7 @@
                 </div>
 
                 <div class="col-lg-8 col-md-12 col-sm-12">
-                    <div class="tr-wrap">
+                    <div class="tr-wrap" style="padding-top: 45px;">
                         <div class="t-text">
                             <h2>للمشترين</h2>
                         </div>

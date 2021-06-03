@@ -29,6 +29,14 @@
                         </button>
                     </div>
                 @endif
+                @if (session()->has('error'))
+                    <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                        <strong class="mr-1">{{ session('error') }}</strong>
+                        <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                            <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                @endif
                 <script>
                     $(document).ready(function () {
                         $('#roles-table').DataTable({
@@ -182,7 +190,13 @@
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                             @foreach($user->roles()->pluck('name') as $role)
-                                                                <span class="badge badge-info">{{ $role }}</span>
+                                                                @if(auth()->user()->registration_type == 'Buyer')
+                                                                    <span class="badge badge-info">{{ str_replace('Buyer','',$role) }}</span>
+                                                                @elseif(auth()->user()->registration_type == 'Supplier')
+                                                                    <span class="badge badge-info">{{ str_replace('Supplier','',$role) }}</span>
+                                                                @else
+                                                                    <span class="badge badge-info">{{ $role }}</span>
+                                                                @endif
                                                             @endforeach
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

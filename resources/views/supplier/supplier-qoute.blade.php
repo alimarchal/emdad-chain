@@ -177,7 +177,11 @@
 
                             <div class="border-2 p-2 m-2">
                                 @foreach ($quote as $msg)
-                                        @php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp
+                                        {{--@php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp--}}
+                                        @php
+                                            $user = \App\Models\User::where('id', $msg->user_id)->first();
+                                            $business = \App\Models\Business::where('id', $user->business_id)->first();
+                                        @endphp
 
                                         <span class="text-blue-700">
                                             <span class="text-gray-600 text-left">
@@ -262,7 +266,8 @@
                                         @php $business = \App\Models\Business::where('user_id', $collection->user_id)->first(); @endphp
                                         Note to {{$business->business_name}} (buyer)
                                     </label>
-                                    <textarea name="note_for_customer" id="description">{{ $collection->note_for_customer }}</textarea>
+                                    <textarea name="note_for_customer" id="note_for_customer" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Note (if any)"></textarea>
+{{--                                    <textarea name="note_for_customer" id="description">{{ $collection->note_for_customer }}</textarea>--}}
                                 </div>
                                 <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
                                     <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
@@ -354,9 +359,10 @@
                                     </div>
                                     <div class="my-1 px-1 w-full overflow-hidden sm:my-1 sm:px-1 md:my-1 md:px-1 lg:my-1 lg:px-1 xl:my-1 xl:px-1">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                            Note For Customer
+                                            @php $business = \App\Models\Business::where('id', $eOrderItems->business_id)->first(); @endphp
+                                            Note to {{$business->business_name}} (buyer)
                                         </label>
-                                        <textarea name="note_for_customer" id="description"></textarea>
+                                        <textarea name="note_for_customer" id="note_for_customer" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Note.."></textarea>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
@@ -384,7 +390,7 @@
                                 </button>
                                 <br>
                                 <a href="{{ route('dashboard') }}"
-                                    class="inline-flex items-center px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                    class="inline-flex items-center px-4 mr-2 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-red disabled:opacity-25 transition ease-in-out duration-150">
                                     Cancel</a>
                             </div>
                         </form>
@@ -402,11 +408,11 @@
     </div>
 
     <script>
-        tinymce.init({
-            selector: 'textarea',
-            plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-            toolbar_mode: 'floating',
-        });
+        // tinymce.init({
+        //     selector: 'textarea',
+        //     plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+        //     toolbar_mode: 'floating',
+        // });
 
         $(document).on('change', '.quantity, .price_per_unit, .VAT, .shipment_cost', function(){
 
