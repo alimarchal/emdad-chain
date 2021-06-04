@@ -264,6 +264,8 @@ Route::resource('/permission', PermissionController::class);
 Route::get('business/Approval/Update/{id}', [BusinessController::class, 'businessApprovalUpdate'])->name('businessApprovalUpdate');
 Route::get('business/Approval/Rejected/{id}', [BusinessController::class, 'businessApprovalRejected'])->name('businessApprovalRejected');
 Route::middleware(['auth:sanctum'])->resource('qoute', QouteController::class);
+/* Calculating totalCost at the time of Supplier RFQ response */
+Route::middleware(['auth:sanctum'])->get('total-cost', [QouteController::class, 'totalCost'])->name('totalCost');
 
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Qouted', [QouteController::class, 'QoutedRFQQouted'])->name('QoutedRFQQouted');
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Rejected', [QouteController::class, 'QoutedRFQRejected'])->name('QoutedRFQRejected');

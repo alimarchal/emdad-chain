@@ -276,4 +276,15 @@ class QouteController extends Controller
         session()->flash('message', 'Draft purchase order has been generated');
         return redirect()->route('dpo.show', $dpo->id);
     }
+
+    // Calculating totalCost at the time of Supplier RFQ response
+    public function totalCost(Request $request)
+    {
+        $total_cost = ($request->quote_quantity * $request->quote_price_per_quantity);
+        $total_vat = ($total_cost * ($request->VAT / 100));
+        $total_shipment = $request->shipment_cost;
+        $sum = ($total_cost + $total_vat + $total_shipment);
+
+        return response()->json(['data'=> $sum]);
+    }
 }
