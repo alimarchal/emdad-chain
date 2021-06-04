@@ -305,7 +305,7 @@
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="unit_of_measurement">
                                             Quantity
                                         </label>
-                                        <input class="form-input rounded-md shadow-sm block w-full quantity" id="size" type="number" name="quote_quantity" min="0" step="any" autocomplete="size" required>
+                                        <input class="form-input rounded-md shadow-sm block w-full quantity" id="quote_quantity" type="number" name="quote_quantity" min="0" step="any" autocomplete="size" required>
                                         <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
                                         <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
                                         <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
@@ -317,7 +317,7 @@
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
                                             Price per unit
                                         </label>
-                                        <input class="form-input rounded-md shadow-sm block w-full price_per_unit" id="size" type="number" name="quote_price_per_quantity" min="0" step="any" autocomplete="size" required>
+                                        <input class="form-input rounded-md shadow-sm block w-full price_per_unit" id="quote_price_per_quantity" type="number" name="quote_price_per_quantity" min="0" step="any" autocomplete="size" required>
                                     </div>
                                 </div>
                                 @if($eOrderItems->required_sample == 'Yes')
@@ -368,7 +368,7 @@
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
                                             VAT(%)
                                         </label>
-                                        <input class="form-input rounded-md shadow-sm block w-full VAT" id="size" type="number" name="VAT" min="0" max="15" step="any" autocomplete="size" required>
+                                        <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15" step="any" autocomplete="size" required>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="shipment_cost">
@@ -381,7 +381,15 @@
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
                                             Total Cost
                                         </label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="text" name="total_cost" autocomplete="size" readonly>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly>
+                                    </div>
+
+                                    <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                    <div style="padding-top: 30px;">
+                                        <a style="cursor: pointer" id="totalCost" onclick="totalCost()" class="inline-flex items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ml-4">
+                                            Calculate Total Cost
+                                        </a>
+                                    </div>
                                     </div>
                                 </div>
                                 <button
@@ -414,19 +422,50 @@
         //     toolbar_mode: 'floating',
         // });
 
-        $(document).on('change', '.quantity, .price_per_unit, .VAT, .shipment_cost', function(){
+        // $(document).on('change', '.quantity, .price_per_unit, .VAT, .shipment_cost', function(){
+        //
+        //     // var total = 0;
+        //     var quantity = parseInt($('.quantity').val()); // 10
+        //     var unitPrice = parseInt($('.price_per_unit').val()); // 10
+        //     var shipment_cost = parseInt($('.shipment_cost').val()); // 10
+        //     var VAT = parseInt($('.VAT').val()); // 10
+        //
+        //     var totalCost = (quantity * unitPrice) // 100
+        //     var VAT_value = (totalCost) * (VAT / 100); // 10
+        //
+        //     var totalSumCost = (totalCost + VAT_value);
+        //     var totalSumCostFinalValue = (totalSumCost + shipment_cost);
+        //     $('#total_cost').val(totalSumCostFinalValue);
+        // });
 
-            // var total = 0;
-            var quantity = $('.quantity').val(); // 10
-            var unitPrice = $('.price_per_unit').val(); // 10
-            var shipment_cost = $('.shipment_cost').val(); // 10
-            var VAT = $('.VAT').val(); // 10
+        // Calculating total cost
+        function totalCost()
+        {
+            $quote_quantity = parseInt($('#quote_quantity').val());
+            $quote_price_per_quantity = parseInt($('#quote_price_per_quantity').val());
+            $VAT = parseInt($('#VAT').val());
+            $shipment_cost = parseInt($('#shipment_cost').val());
 
-            var totalCost = (quantity * unitPrice) // 100
-            var VAT_value = (totalCost) * (VAT / 100); // 10
+            $.ajax({
+                type : 'GET',
+                url:"{{ route('totalCost') }}",
+                data:{
+                    {{--"_token": "{{ csrf_token() }}",--}}
+                    'quote_quantity':$quote_quantity,
+                    'quote_price_per_quantity':$quote_price_per_quantity,
+                    'VAT':$VAT,
+                    'shipment_cost':$shipment_cost,
+                },
+                success: function (response) {
+                    console.log(response);
+                    $('#total_cost').val(response.data);
+                }
+            });
+        }
+        // Clearing Total Cost Field on any mentioned fields changed
+        $(document).on('keydown', '.quantity, .price_per_unit, .VAT, .shipment_cost', function(){
 
-            var totalSumCost = (totalCost + VAT_value);
-            $('#total_cost').val(totalSumCost);
+            $('#total_cost').val('');
         });
 
     </script>

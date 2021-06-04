@@ -260,13 +260,13 @@
 
             </div>
 
-            @if ($users->count() >= 50)
-                <div class="px-4 py-5 mt-3 bg-white sm:p-6 rounded-sm">
-                    <div class="col-span-12 sm:col-span-12">
-                        {{ $users->links() }}
-                    </div>
-                </div>
-            @endif
+{{--            @if ($users->count() >= 50)--}}
+{{--                <div class="px-4 py-5 mt-3 bg-white sm:p-6 rounded-sm">--}}
+{{--                    <div class="col-span-12 sm:col-span-12">--}}
+{{--                        {{ $users->links() }}--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            @endif--}}
         </div>
     </div>
 
