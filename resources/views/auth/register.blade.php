@@ -19,15 +19,15 @@
         <x-slot name="logo">
             <!-- <x-jet-authentication-card-logo /> -->
 
-            <img src="{{url('registration_step/E-1.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
-            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-20 w-auto m-auto"/>
+            <img src="{{url('registration_step/E-1.png')}}" alt="User Registration" class="block w-auto my-2 m-auto" style="margin:auto;" />
+            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-20 w-auto m-auto" style="margin:auto;" />
         </x-slot>
 
         <x-jet-validation-errors class="mb-4"/>
 
-        <x-jet-button>
-            <a href="{{route('registerAr')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
-        </x-jet-button>
+{{--        <x-jet-button>--}}
+{{--            <a href="{{route('registerAr')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>--}}
+{{--        </x-jet-button>--}}
 
         <form method="POST" action="{{ route('register') }}">
             @csrf

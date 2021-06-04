@@ -20,11 +20,13 @@
         <!-- Remaining Quotation count for Basic and Silver Business Packages -->
         @php
             $quotations = \App\Models\Qoute::where('supplier_business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
-
             $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+
             $package = \App\Models\Package::where('id', $business_package->package_id)->first();
             $count = $package->quotations - $quotations;
         @endphp
+
+
         @if($business_package->package_id == 5 || $business_package->package_id == 6 )
             <div class="flex flex-wrap" style="justify-content: flex-start">
                 <h1 class="text-1xl mt-0 pb-0 text-center"> New Quotation(s) response remaining for the day: </h1>

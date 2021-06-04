@@ -110,6 +110,7 @@ class PlacedRFQController extends Controller
 
     public function viewRFQs()
     {
+
         if (\auth()->user()->hasRole('SuperAdmin'))
         {
             $business_categories = [];
@@ -136,6 +137,8 @@ class PlacedRFQController extends Controller
                         $business_categories[] = (int)$item->category_number;
                     }
                 }
+
+
                 sort($business_categories);
                 // $business_categories = implode(",", $business_categories);
                 $collection = EOrderItems::where('status', 'pending')->where('bypass', 0)->whereDate('quotation_time', '>=', Carbon::now())->whereIn('item_code', $business_categories)->get();
@@ -151,6 +154,7 @@ class PlacedRFQController extends Controller
                 else{
                     $quotationCount = null;
                 }
+
                 return view('supplier.index', compact('collection','quotationCount'));
             }
     }

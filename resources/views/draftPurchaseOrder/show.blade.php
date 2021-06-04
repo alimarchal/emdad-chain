@@ -163,12 +163,12 @@
                                 We acknowledge that {{$draftPurchaseOrder->buyer_business->business_name }}
                                 agrees to deal with {{$draftPurchaseOrder->supplier_business->business_name}}. <br>
                                 Emdad has no responsibility with the kind of delivery and the source of finance for this delivery.</span> <br>
-{{--                            <div class="form-check">--}}
-{{--                                <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>--}}
-{{--                                <label class="form-check-label" for="flexCheckDefault">--}}
-{{--                                    Please Check to acknowledge--}}
-{{--                                </label>--}}
-{{--                            </div>--}}
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Please Check to acknowledge
+                                </label>
+                            </div>
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
                             {{-- <strong>Delivery Information</strong><br>
