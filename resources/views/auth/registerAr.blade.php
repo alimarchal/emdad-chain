@@ -18,7 +18,8 @@
         <x-slot name="logo">
             <!-- <x-jet-authentication-card-logo /> -->
 
-            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-20 w-auto" />
+            <img src="{{url('registration_step/1.png')}}" alt="User Registration" class="block w-auto my-2 m-auto" style="margin:auto;" />
+            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-20 w-auto m-auto" style="margin:auto;" />
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />

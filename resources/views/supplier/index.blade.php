@@ -23,7 +23,10 @@
             $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
 
             $package = \App\Models\Package::where('id', $business_package->package_id)->first();
-            $count = $package->quotations - $quotations;
+            if ($package->id != 7)
+            {
+                $count = $package->quotations - $quotations;
+            }
         @endphp
 
 
