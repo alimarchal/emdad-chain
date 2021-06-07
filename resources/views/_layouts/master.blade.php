@@ -12,6 +12,8 @@
 
     <title></title>
 
+
+
     {{-- <link rel="stylesheet" href="{{ mix('css/main.css', 'assets/build') }}"> --}}
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
