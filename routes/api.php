@@ -40,6 +40,21 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('User', \App\Http\Controllers\Api\v1\UserController::class);
     Route::apiResource('Vehicle', \App\Http\Controllers\Api\v1\VehicleController::class);
     Route::apiResource('RatingReview', \App\Http\Controllers\Api\v1\ReviewRatingController::class);
+    # driver rating
+    Route::post('DriverRating', [\App\Http\Controllers\Api\v1\DriverRatingController::class,'store']);
+    Route::get('DriverRating/{id}', [\App\Http\Controllers\Api\v1\DriverRatingController::class,'show']);
+    Route::get('DriverRating/driver_id/{id}', [\App\Http\Controllers\Api\v1\DriverRatingController::class,'driver_id']);
+    Route::get('DriverRating/buyer_business_id/{id}', [\App\Http\Controllers\Api\v1\DriverRatingController::class,'buyer_business_id']);
+    Route::get('DriverRating/{id}/average', [\App\Http\Controllers\Api\v1\DriverRatingController::class,'buyer_business_id_average']);
+    # buyer rating
+    Route::post('BuyerRating', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'store']);
+    Route::get('BuyerRating/buyer_user_id/{id}', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'buyer_user_id']);
+    Route::get('BuyerRating/buyer_business_id/{id}', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'buyer_business_id']);
+    Route::get('BuyerRating/rating_business_id/{id}', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'rating_business_id']);
+    Route::get('BuyerRating/rating_business_id/{id}/average', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'rating_business_id_average']);
+    Route::get('BuyerRating/buyer_rating_type/{id}/driver', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'buyer_rating_type_driver']);
+    Route::get('BuyerRating/buyer_rating_type/{id}/supplier', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'buyer_rating_type_supplier']);
+    Route::get('BuyerRating/buyer_rating_type/{id}/emdad', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'buyer_rating_type_emdad']);
 });
 
 
