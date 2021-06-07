@@ -23,7 +23,8 @@ class UserController extends Controller
     public function index()
     {
         if (auth()->user()->hasRole('SuperAdmin')) {
-            $users = User::where('id', '!=', Auth::user()->id)->paginate(50);
+//            $users = User::where('id', '!=', Auth::user()->id)->paginate(50);
+            $users = User::where('id', '!=', Auth::user()->id)->get();
             $business = Business::orderBy('created_at', 'desc');
             return view('users.index', compact('users', 'business'));
         }
@@ -31,7 +32,7 @@ class UserController extends Controller
             //Checking users & driver count for related packages
             $userCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', '!=','Supplier Driver'], ['id', '!=', \auth()->id()]])->count();
             $driverCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', 'Supplier Driver'],['id', '!=', \auth()->id()]])->count();
-            $users = User::where('business_id', auth()->user()->business_id)->where('id', '!=', Auth::user()->id)->paginate(50);
+            $users = User::where('business_id', auth()->user()->business_id)->where('id', '!=', Auth::user()->id)->get();
             return view('users.index', compact('users', 'userCount', 'driverCount'));
         }
         else {

@@ -313,6 +313,8 @@ Route::middleware(['auth:sanctum'])->get('/notes/{deliveryNote}', [DeliveryNoteC
 Route::middleware(['auth:sanctum'])->resource('shipment', ShipmentController::class);
 Route::middleware(['auth:sanctum'])->resource('shipmentCart', ShipmentCartController::class);
 Route::middleware(['auth:sanctum'])->resource('shipmentItem', ShipmentItemController::class);
+Route::middleware(['auth:sanctum'])->get('delivered-shipments', [ShipmentController::class, 'delivered'])->name('deliveredShipments');
+Route::middleware(['auth:sanctum'])->get('ongoing-shipments', [ShipmentController::class, 'ongoingShipment'])->name('ongoingShipment');
 #################### END ##################################################
 
 

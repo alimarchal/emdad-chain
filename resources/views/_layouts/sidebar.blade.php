@@ -190,7 +190,7 @@
             @endif
 
             {{-- Business link --}}
-            @if(auth()->user()->can('all') || auth()->user()->hasRole('Sales Specialist') || auth()->user()->hasRole('Legal Approval Officer 1') || auth()->user()->hasRole('Finance Officer 1') || auth()->user()->hasRole('IT Admin'))
+            @if(auth()->user()->can('all') || auth()->user()->hasRole('Sales Specialist') || auth()->user()->hasRole('Legal Approval Officer 1') || auth()->user()->hasRole('Finance Officer 1') || auth()->user()->hasRole('SC Supervisor') || auth()->user()->hasRole('IT Admin'))
                 <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('business.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                    href="{{ route('business.index') }}">
 
@@ -565,7 +565,7 @@
                 </a>
             @endif
 
-            {{-- Shipments link --}}
+            {{-- Supplier Shipments link --}}
             @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
@@ -730,6 +730,53 @@
                 </ul>
             </div>
         @endif
+
+            {{-- Buyer Shipments link --}}
+            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Buyer" && Auth::user()->status == 3)
+
+                <div x-data="{ open: false } ">
+                    <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments') || request()->routeIs('ongoingShipment') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                        </svg>
+                        <span class="mx-3">Shipments</span>
+                        <span x-show="open == false">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 4em;"  viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                        <span x-show="open == true">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 4em;" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                    </a>
+                    <ul
+                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        @if(request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments')|| request()->routeIs('ongoingShipment'))  x-data="{ open: true } " @endif
+                    >
+                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('ongoingShipment') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                            </svg>
+                            <a href="{{ route('ongoingShipment') }}"><span class="mx-3 ">Current Shipments</span></a>
+                        </li>
+                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('deliveredShipments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                            </svg>
+                            <a href="{{ route('deliveredShipments') }}"><span class="mx-3 ">Delivered Shipments</span></a>
+                        </li>
+                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('shipment.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                            </svg>
+                            <a href="{{ route('shipment.index') }}"><span class="mx-3 ">Shipments Histroy</span></a>
+                        </li>
+
+                    </ul>
+                </div>
+            @endif
 
             {{-- CEO Users link --}}
             @if(auth()->user()->hasRole('CEO') && Auth::user()->status == 3)

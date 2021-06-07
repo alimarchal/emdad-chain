@@ -52,7 +52,7 @@ class BusinessController extends Controller
             $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
             return view('business.saleSpecialist.incompleteMarketing', compact('businesses'));
         }
-        elseif (\auth()->user()->hasRole('Legal Approval Officer 1') || \auth()->user()->hasRole('Finance Officer 1'))
+        elseif (\auth()->user()->hasRole('Legal Approval Officer 1') || \auth()->user()->hasRole('Finance Officer 1') || \auth()->user()->hasRole('SC Supervisor'))
         {
             if ($request->has('status')) {
                 if ($request->status == 3) {
@@ -316,7 +316,8 @@ class BusinessController extends Controller
 
 
             $user->notify(new \App\Notifications\BusinessApproved());
-        } elseif ($request->status_id == 4) {
+        }
+        elseif ($request->status_id == 4) {
             $business->update([
                 'status' => 4,
             ]);
@@ -364,6 +365,21 @@ class BusinessController extends Controller
             } elseif ($request->status_id == 4) {
                 $business->update([
                     'finance_status' => $request->status_id,
+                ]);
+            } else {
+                return redirect()->back()->with('message', 'Something went wrong');
+            }
+        }
+        elseif (\auth()->user()->hasRole('SC Supervisor'))
+        {
+            if ($request->status_id == 3) {
+                $business->update([
+                    'sc_supervisor_status' => $request->status_id,
+                ]);
+
+            } elseif ($request->status_id == 4) {
+                $business->update([
+                    'sc_supervisor_status' => $request->status_id,
                 ]);
             } else {
                 return redirect()->back()->with('message', 'Something went wrong');

@@ -56,7 +56,7 @@
 <body @yield('custom-body-style','')>
 <!-- start page-loader -->
 <div class="page-loader">
-    <div class="page-loader-inner">
+    <div class="page-loader-inner" style="right: 50%;!important;">
         <div class="inner"></div>
     </div>
 </div>

@@ -13,38 +13,15 @@ use Illuminate\Support\Facades\DB;
 
 class ShipmentItemController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         DB::transaction(function () use ($request) {
+            $delivery = Delivery::where('id', decrypt($request->delivery_id))->first();
             $shipmentId = Shipment::insertGetId([
                 'supplier_id' => auth()->user()->id,
                 'supplier_business_id' => auth()->user()->business_id,
+                'buyer_business_id' => $delivery->business_id,
+                'shipment_cost' => $delivery->shipment_cost,
             ]);
 //            $eCartItems = ECart::findMany($request->item_number);
             $shipmentCart = ShipmentCart::where('supplier_business_id', auth()->user()->business_id)->get();
@@ -70,51 +47,5 @@ class ShipmentItemController extends Controller
         });
 
         return redirect()->route('shipment.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\ShipmentItem $shipmentItem
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ShipmentItem $shipmentItem, Request $request)
-    {
-       //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ShipmentItem  $shipmentItem
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ShipmentItem $shipmentItem)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ShipmentItem  $shipmentItem
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ShipmentItem $shipmentItem)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ShipmentItem  $shipmentItem
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ShipmentItem $shipmentItem)
-    {
-        //
     }
 }
