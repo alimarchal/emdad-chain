@@ -131,7 +131,7 @@
                                                 {{ $rfp->remarks }}
                                             </td>
 
-                                            <td class="px-8 py-3 whitespace-nowrap">
+                                            <td class="px-3 py-3 whitespace-nowrap">
                                                 <select name="company_name_check" id="company_name_check" onchange="companyCheck({{$rfp->id}})" class="form-select shadow-sm block w-full" required>
                                                     <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
                                                     <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
@@ -201,7 +201,7 @@
                         </div>
                         <div class="w-full overflow-hidden">
                             <label class="block font-medium text-sm text-gray-700 mb-1" for="description">
-                                Description @include('misc.required')
+                                Item description @include('misc.required')
                             </label>
                             <textarea name="description" id="description" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Description.." required></textarea>
                             <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
@@ -264,7 +264,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="remarks">
-                                    Remarks
+                                    Shipment Remarks
                                 </label>
                                 <input class="form-input rounded-md shadow-sm block w-full" id="remarks" name="remarks" type="text" autocomplete="remarks">
                             </div>
@@ -482,7 +482,7 @@
                                                 {{ $rfp->remarks }}
                                             </td>
 
-                                            <td class="px-8 py-3 whitespace-nowrap">
+                                            <td class="px-3 py-3 whitespace-nowrap">
                                                 <select name="company_name_check" id="company_name_check" onchange="companyCheck({{$rfp->id}})" class="form-select shadow-sm block w-full" required title="Display {{auth()->user()->business->business_name}} in the RFQ">
                                                     <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
                                                     <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
@@ -538,7 +538,7 @@
                         </div>
                         <div class="w-full overflow-hidden">
                             <label class="block font-medium text-sm text-gray-700 mb-1" for="description">
-                                Description @include('misc.required')
+                                Item description @include('misc.required')
                             </label>
                             <textarea name="description" id="description" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Description.." required></textarea>
                             <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
@@ -602,7 +602,7 @@
 
                             <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <label class="block font-medium text-sm text-gray-700 mb-1" for="remarks">
-                                    Remarks
+                                    Shipment Remarks
                                 </label>
                                 <input class="form-input rounded-md shadow-sm block w-full" id="remarks" name="remarks" type="text" autocomplete="remarks">
                             </div>

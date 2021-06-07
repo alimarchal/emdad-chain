@@ -9,33 +9,12 @@ use Illuminate\Http\Request;
 
 class ShipmentCartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $shipmentCarts = ShipmentCart::where('supplier_business_id', auth()->user()->business_id)->get();
         return view('shipment.generated', compact(  'shipmentCarts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $cartCheck = ShipmentCart::where(['supplier_business_id' =>  auth()->user()->business_id])->first();
@@ -71,46 +50,6 @@ class ShipmentCartController extends Controller
         return redirect()->route('shipment.create', compact('shipmentCarts'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ShipmentCart  $shipmentCart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ShipmentCart $shipmentCart)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ShipmentCart  $shipmentCart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ShipmentCart $shipmentCart)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ShipmentCart  $shipmentCart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ShipmentCart $shipmentCart)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ShipmentCart  $shipmentCart
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(ShipmentCart $shipmentCart)
     {
         Delivery::where('id', $shipmentCart->delivery_id)->update(['shipment_status' => 0]);

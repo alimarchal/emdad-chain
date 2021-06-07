@@ -87,34 +87,45 @@
                                         @endif
                                     </td>
 
-                                    @if(auth()->user()->hasRole('Legal Approval Officer 1') && $business->legal_status == 3)
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Accepted</span>
-                                        </td>
+                                    @if(isset($status) && $status == 1)
+                                        @if(auth()->user()->hasRole('Legal Approval Officer 1') && $business->legal_status == 3)
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                                <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Accepted</span>
+                                            </td>
 
-                                    @elseif(auth()->user()->hasRole('Finance Officer 1') && $business->finance_status == 3)
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Accepted</span>
-                                        </td>
-                                    @elseif(auth()->user()->hasRole('Legal Approval Officer 1') && $business->legal_status == 4)
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <span class="bg-purple-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Rejected</span>
-                                        </td>
+                                        @elseif(auth()->user()->hasRole('Finance Officer 1') && $business->finance_status == 3)
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                                <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Accepted</span>
+                                            </td>
+                                        @elseif(auth()->user()->hasRole('SC Supervisor') && $business->sc_supervisor_status == 3)
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                                <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Accepted</span>
+                                            </td>
+                                        @elseif(auth()->user()->hasRole('Legal Approval Officer 1') && $business->legal_status == 4)
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                                <span class="bg-purple-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Rejected</span>
+                                            </td>
 
-                                    @elseif(auth()->user()->hasRole('Finance Officer 1') && $business->finance_status == 4)
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <span class="bg-purple-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Rejected</span>
-                                        </td>
+                                        @elseif(auth()->user()->hasRole('Finance Officer 1') && $business->finance_status == 4)
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                                <span class="bg-purple-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Rejected</span>
+                                            </td>
 
-                                    @elseif(isset($status) && $status == 1 && $business->legal_status == 1 || $business->finance_status == 1)
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <a class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1" href="{{route('businessLegalFinanceStatus', ['business_id' => $business->id, 'status_id' => 3])}}" style="transition: all .15s ease">
-                                                Accept
-                                            </a>
-                                            <a class="bg-purple-500 text-white active:bg-purple-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1" href="{{route('businessLegalFinanceStatus', ['business_id' => $business->id, 'status_id' => 4])}}" style="transition: all .15s ease">
-                                                Reject
-                                            </a>
-                                        </td>
+                                        @elseif(auth()->user()->hasRole('SC Supervisor') && $business->sc_supervisor_status == 4)
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                                <span class="bg-purple-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Rejected</span>
+                                            </td>
+
+                                        @elseif(isset($status) && $status == 1 && $business->legal_status == 1 || $business->finance_status == 1 || $business->sc_supervisor_status == 1)
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                                <a class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1"
+                                                   href="{{route('businessLegalFinanceStatus', ['business_id' => $business->id, 'status_id' => 3])}}" style="transition: all .15s ease"> Accept
+                                                </a>
+                                                <a class="bg-purple-500 text-white active:bg-purple-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1"
+                                                   href="{{route('businessLegalFinanceStatus', ['business_id' => $business->id, 'status_id' => 4])}}" style="transition: all .15s ease"> Reject
+                                                </a>
+                                            </td>
+                                        @endif
                                     @endif
                                 </tr>
                             @endforeach

@@ -22,7 +22,7 @@
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg bg-white">
                         <div class="mt-5" style="text-align: center;">
                             <span class="inline-flex items-center justify-center px-4 py-2 bg-gray-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest  focus:border-red-700 transition ease-in-out duration-150">
-                                @if(isset($status) && $status == 1) List of Pending Businesses @else List of Complete Businesses @endif
+                                @if(isset($status) && $status == 1) List of Pending Businesses - Statuses @else List of Complete Businesses @endif
                             </span>
                         </div>
                         <br>
@@ -36,21 +36,25 @@
                                     Name
                                 </th>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    Total Warehouse
+                                    W.H.(s)
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    Business Status
+                                    Business
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
                                     P.O Info
                                 </th>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    Legal Officer Status
+                                    Legal
                                 </th>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    Finance Officer Status
+                                    Finance
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    SC
                                 </th>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
                                     Action
@@ -92,39 +96,53 @@
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900 text-center">
                                         @if ($business->legal_status == 1)
-                                            Pending
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100  text-yellow-800">Pending</span>
                                         @elseif ($business->legal_status == 3)
-                                            Approved
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100  text-green-800">Approved</span>
                                         @elseif ($business->legal_status == 4)
-                                            Rejected
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100  text-red-800">Rejected</span>
                                         @endif
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900 text-center">
                                         @if ($business->finance_status == 1)
-                                            Pending
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100  text-yellow-800">Pending</span>
                                         @elseif ($business->finance_status == 3)
-                                            Approved
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100  text-green-800">Approved</span>
                                         @elseif ($business->finance_status == 4)
-                                            Rejected
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100  text-red-800">Rejected</span>
+                                        @endif
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900 text-center">
+                                        @if ($business->sc_supervisor_status == 1)
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100  text-yellow-800">Pending</span>
+                                        @elseif ($business->sc_supervisor_status == 3)
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100  text-green-800">Approved</span>
+                                        @elseif ($business->sc_supervisor_status == 4)
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100  text-red-800">Rejected</span>
                                         @endif
                                     </td>
 
                                     @if($business->status == 3)
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Accpected</span>
+                                            <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
+                                                Accepted
+                                            </span>
                                         </td>
                                     @elseif($business->status == 4)
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <span class="bg-purple-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">Rejected</span>
+                                            <span class="bg-purple-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
+                                                Rejected
+                                            </span>
                                         </td>
                                     @else
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <a class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1" href="{{route('accountStatus', ['business_id' => $business->id, 'status_id' => 3])}}" style="transition: all .15s ease">
-                                                Accept
+                                            <a class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1"
+                                               href="{{route('accountStatus', ['business_id' => $business->id, 'status_id' => 3])}}" style="transition: all .15s ease"> Accept
                                             </a>
-                                            <a class="bg-purple-500 text-white active:bg-purple-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1" href="{{route('accountStatus', ['business_id' => $business->id, 'status_id' => 4])}}" style="transition: all .15s ease">
-                                                Reject
+                                            <a class="bg-purple-500 text-white active:bg-purple-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1"
+                                               href="{{route('accountStatus', ['business_id' => $business->id, 'status_id' => 4])}}" style="transition: all .15s ease"> Reject
                                             </a>
                                         </td>
                                     @endif

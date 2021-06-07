@@ -137,7 +137,7 @@
                                             {{ $rfp->remarks }}
                                         </td>
 
-                                        <td class="px-8 py-3 whitespace-nowrap">
+                                        <td class="px-3 py-3 whitespace-nowrap">
                                             <select name="company_name_check" id="company_name_check" onchange="companyCheck({{$rfp->id}})" class="form-select shadow-sm block w-full" required title="Display {{auth()->user()->business->business_name}} in the RFQ">
                                                 <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
                                                 <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
