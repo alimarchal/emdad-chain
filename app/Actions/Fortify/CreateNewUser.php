@@ -34,6 +34,7 @@ class CreateNewUser implements CreatesNewUsers
             'family_name' => ['required', 'string', 'max:55'],
             'nid_num' => ['required', 'string', 'max:10'],
             'nid_exp_date' => ['required', 'date'],
+            'nid_photo' => ['required'],
             'mobile' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
@@ -43,6 +44,7 @@ class CreateNewUser implements CreatesNewUsers
         $newformat = date('Y-m-d',$time);
         $input['nid_exp_date'] = $newformat;
         $input['mobile'] = str_replace(' ','',$input['mobile']);
+        $nid_photo = $input['nid_photo']->store('', 'public');
 
         $user = User::create([
             'gender' => $input['gender'],
@@ -51,6 +53,7 @@ class CreateNewUser implements CreatesNewUsers
             'family_name' => $input['family_name'],
             'nid_num' => $input['nid_num'],
             'nid_exp_date' => $input['nid_exp_date'],
+            'nid_photo' => $nid_photo,
             'mobile' => $input['mobile'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),

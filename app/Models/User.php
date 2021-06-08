@@ -50,6 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'usertype',
         'nid_num',
         'nid_exp_date',
+        'nid_photo',
         'status',
         'is_active',
         'usertype',

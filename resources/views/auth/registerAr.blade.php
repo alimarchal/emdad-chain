@@ -94,6 +94,11 @@
             </div>
 
 
+            <div class="mt-2">
+                <x-jet-label for="id_photo" value="{{ __('صورة الهوية الوطنية') }}" class="mb-2"/>
+                <input type="file" id="nid_photo" name="nid_photo" class="form-input rounded-md shadow-sm block mt-1 w-full" required>
+            </div>
+
             <div class="mt-2" style="direction: ltr;">
                 <x-jet-label for="mobile" value="{{ __('رقم الجوال') }}"  class="mb-2 float-right" style="direction: rtl;"  />
                 <input id="phone" name="mobile" type="tel" class="form-input rounded-md shadow-sm block mt-1 w-full" >

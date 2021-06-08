@@ -320,7 +320,7 @@
                             @endif
                         @endif
 
-                        @if (auth()->user()->status == 3)
+                        @if (auth()->user()->status == 3 && auth()->user()->hasRole('CEO|SuperAdmin'))
 
                             <div class="border-t border-gray-100"></div>
                             <x-jet-dropdown-link href="{{ route('packages.index') }}">
@@ -530,7 +530,7 @@
                     @endif
                 @endif
 
-                @if (auth()->user()->status == 3)
+                @if (auth()->user()->status == 3 && auth()->user()->hasRole('CEO|SuperAdmin'))
                     <div class="border-t border-gray-100"></div>
                     <x-jet-dropdown-link href="{{ route('packages.index') }}">
                         {{ __('Subscription') }}
