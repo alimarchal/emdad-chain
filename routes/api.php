@@ -55,6 +55,8 @@ Route::prefix('v1')->group(function () {
     Route::get('BuyerRating/buyer_rating_type/{id}/driver', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'buyer_rating_type_driver']);
     Route::get('BuyerRating/buyer_rating_type/{id}/supplier', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'buyer_rating_type_supplier']);
     Route::get('BuyerRating/buyer_rating_type/{id}/emdad', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'buyer_rating_type_emdad']);
+    # change password
+    Route::post('User/changePassword', [\App\Http\Controllers\Api\v1\UserController::class,'change_password']);
 });
 
 
