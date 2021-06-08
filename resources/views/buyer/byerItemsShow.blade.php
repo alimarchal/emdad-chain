@@ -33,7 +33,7 @@
                                         #
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Item Name
+                                        Category Name
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
@@ -52,7 +52,7 @@
 
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Qoutes Received
+                                        Quotes Received
                                     </th>
 
 
@@ -85,7 +85,7 @@
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $EOrderItems, 'EOrderItemID' => $rfp->id]) }}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                Qoutes({{ $rfp->qoutes->count() }})
+                                                Quotes({{ $rfp->qoutes->count() }})
                                             </a>
 
                                         </td>

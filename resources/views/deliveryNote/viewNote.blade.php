@@ -28,19 +28,23 @@
                                     #
                                 </th>
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    Item Code
+                                    Category Number
                                 </th>
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                     Description
                                 </th>
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    Quantitiy
+                                    Quantity
                                 </th>
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                     UOM
                                 </th>
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                     Packing
+                                </th>
+
+                                <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                    Shipment cost
                                 </th>
 
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
@@ -73,6 +77,9 @@
                                 </td>
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                     {{ $deliveryNote->purchase_order->unit_price }}
+                                </td>
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                    {{ $deliveryNote->purchase_order->shipment_cost }}
                                 </td>
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                     {{ $deliveryNote->purchase_order->brand }}
@@ -162,13 +169,13 @@
                                     #
                                 </th>
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    Item Code
+                                    Category Number
                                 </th>
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                     Description
                                 </th>
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    Quantitiy
+                                    Quantity
                                 </th>
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                     UOM

@@ -29,7 +29,7 @@
             <a href="{{route('registerAr')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
         </x-jet-button>
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
             @csrf
             <p class="text-center font-bold text-2xl">Step # 1: Registration</p>
             {{--            <livewire:reference />--}}
@@ -83,15 +83,17 @@
 
                 <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <!-- Column Content -->
-                    {{--                    <x-jet-label for="nid_exp_date" value="{{ __('National ID Expiry Date') }}" />--}}
-                    {{--                    <x-jet-input id="nid_exp_date" class="block mt-1 w-full" type="date" name="nid_exp_date" :value="old('nid_exp_date')" required min="{{date('Y-m-d')}}" />--}}
-
                     <x-jet-label for="nid_exp_date" value="{{ __('National ID Expiry Date') }}"/>
                     <input type="text" id="datepicker" class="block mt-1 w-full" name="nid_exp_date" placeholder="Choose Date (mm/dd/yy)" readonly>
                 </div>
 
             </div>
 
+
+            <div class="mt-2">
+                <x-jet-label for="id_photo" value="{{ __('National ID Photo') }}" class="mb-2"/>
+                <input type="file" id="nid_photo" name="nid_photo" class="form-input rounded-md shadow-sm block mt-1 w-full" required>
+            </div>
 
             <div class="mt-2">
                 <x-jet-label for="mobile" value="{{ __('Mobile Number') }}" class="mb-2"/>

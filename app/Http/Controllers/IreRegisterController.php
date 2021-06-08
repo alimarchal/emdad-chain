@@ -83,12 +83,11 @@ class IreRegisterController extends Controller
         ])->validate();
 
         $path = $request->file('nid_image')->store('', 'public');
-        $request->merge(['nid_image' => $path]);
 
         $ire = Ire::where('id', \auth()->guard('ire')->user()->id)->update([
             'referred_no' => $request['referred_no'],
             'nid_num' => $request['nid_num'],
-            'nid_image' => $request['nid_image'],
+            'nid_image' => $path,
             'type' => $request['type'],
             'bank' => $request['bank'],
             'iban' => $request['iban'],

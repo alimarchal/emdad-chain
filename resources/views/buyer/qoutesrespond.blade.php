@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <strong>Item Name:</strong> {{ $QouteItem->orderItem->item_name }}
+                            <strong>Category Name:</strong> {{ $QouteItem->orderItem->item_name }}
                         </div>
 
                         <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
@@ -192,7 +192,7 @@
                         <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" name="address" value="{{$warehouseAddress->address}}" readonly>
 
                         <x-jet-label for="Remarks" value="{{ __('Remarks') }}" class="text-black"  />
-                        <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Remarks.." required></textarea>
+                        <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Remarks.."></textarea>
 
                         <x-jet-label for="payment_term" class="my-2" value="{{ __('Payment Term') }}" class="text-black"  />
                         <select name="payment_term" id="payment_term" class="form-input rounded-md shadow-sm border p-2 w-full" readonly>
