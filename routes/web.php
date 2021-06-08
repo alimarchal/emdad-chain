@@ -428,5 +428,5 @@ Route::middleware(['ire'])->group(function () {
 
 ############################################################## END ##########################################################################
 
-Route::view('/newrf','RFQ.newrf');
+Route::view('/supplierquote','supplier.supplier-quote1');
 

@@ -71,7 +71,7 @@
         {{--                </div>--}}
         {{--            </header>--}}
 
-        <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200 font-roboto" id="side-bar">
+        <div x-data="{ sidebarOpen: false }" class="flex {{--h-screen--}} bg-gray-200 font-roboto" id="side-bar">
             @include('_layouts.sidebar')
 
             <div class="flex-1 flex flex-col overflow-hidden">
@@ -82,7 +82,7 @@
                 {{--                    {{ $header }}--}}
                 {{--                </div>--}}
                 {{--            </div>--}}
-                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                <main class="flex-1 overflow-x-hidden  bg-gray-200">
                     <div class="container mx-auto px-6 pb-8">
                         {{ $slot }}
                         @yield('body')
