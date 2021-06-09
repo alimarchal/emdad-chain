@@ -211,8 +211,7 @@
                                             <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes
                                             </option>
                                         </select>
-                                        <span style="display: none " id="status"
-                                            class="text-green-600 text-sm-center text-sm">Status Updated.</span>
+                                        <span style="display: none" id="status" class="text-green-600 text-sm-center text-sm">Status Updated.</span>
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap" >
@@ -312,7 +311,7 @@
                                             fill="#000000" fill-rule="nonzero" /></svg>
                                     <select
                                         class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
-                                        required name="company_name_check" id="company_name_check">
+                                        required name="company_name_check">
                                         <option value="">Select</option>
                                         <option
                                             @if(isset($latest_rfq)){{$latest_rfq->company_name_check == 0 ? 'selected' : ''}}
@@ -506,17 +505,6 @@
 
                         @foreach($eCart as $item)
                         <tr>
-                            {{-- <td>
-                                @php
-                                $record = \App\Models\Category::where('name',$item->item_name)->first();
-                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                @endphp
-
-                                {{$parent != '' ? $parent->name :'' }}
-
-                                {{ $item->item_name}} , {{ $parent->name}}
-
-                            </td> --}}
                             <td>
                                 {{strip_tags($item->description)}}
                             </td>
@@ -554,13 +542,6 @@
                         @endforeach
 
                         <tr>
-
-                            {{-- <td>
-                                <div class="w-full overflow-hidden">
-                                    <!-- Column Content -->
-                                    @include('category.rfp')
-                                </div>
-                            </td> --}}
                             <td>
                                 <textarea name="description" id="description"
                                     class="w-full description rounded-md shadow-sm" maxlength="254"
@@ -650,6 +631,7 @@
     function companyCheck(itemno)
     {
         $value = $('#company_name_check').val();
+        alert($value);
         $.ajax({
             type: 'POST',
             url: "{{ route('companyCheck') }}",
