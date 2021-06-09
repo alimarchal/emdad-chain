@@ -16,7 +16,10 @@
             $package = \App\Models\Package::where('id', $business_package->package_id)->first();
             if(auth()->user()->usertype != 'superadmin')
             {
-                $vehiclesRemaining = $package->truck - $vehiclesCount;
+                if($business_package->package_id != 7)
+                    {
+                        $vehiclesRemaining = $package->truck - $vehiclesCount;
+                    }
             }
         @endphp
         @if($business_package->package_id == 5 || $business_package->package_id == 6 )

@@ -28,8 +28,11 @@
                         @php
                             $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
                             $package = \App\Models\Package::where('id', $business_package->package_id)->first();
-                            $userRemaining = $package->users - $userCount;
-                            $driverRemaining = $package->driver - $driverCount;
+                            if ($business_package->package_id != 7)
+                                {
+                                    $userRemaining = $package->users - $userCount;
+                                    $driverRemaining = $package->driver - $driverCount;
+                                }
                         @endphp
                         @if($business_package->package_id == 5 || $business_package->package_id == 6 )
                             <div class="flex flex-wrap" style="justify-content: flex-start">
