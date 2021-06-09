@@ -102,11 +102,6 @@
                                         Category Name
                                     </th>
 
-                                    {{-- <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Brand
-                                    </th> --}}
-
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                         Description
@@ -139,11 +134,6 @@
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                         Payment Mode
                                     </th>
-
-                                    {{-- <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Remarks
-                                    </th> --}}
 
                                     <th scope="col"
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
@@ -187,10 +177,6 @@
                                         {{ $rfp->item_name }}
                                     </td>
 
-                                    {{-- <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ $rfp->brand }}
-                                    </td> --}}
-
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{ strip_tags($rfp->description) }}
                                     </td>
@@ -215,10 +201,6 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $rfp->payment_mode }}
                                     </td>
-{{--
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ $rfp->remarks }}
-                                    </td> --}}
 
                                     <td class="px-3 py-3 whitespace-nowrap">
                                         <select name="company_name_check" id="company_name_check"
@@ -249,7 +231,6 @@
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        </form>
                                         <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
                                             class="inline">
                                             @csrf
@@ -280,12 +261,7 @@
     </div>
     <br>
 
-
     <div class="flex flex-col bg-white rounded">
-
-
-
-
         <div class="p-4" style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
             <div class="d-block text-center">
                 <span class="text-2xl font-bold color-7f7f7f">Request For Quotation</span>
@@ -295,8 +271,6 @@
             <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
                 <div class="flex-1 py-5">
                     <div class="my-5 pl-5">
-                        {{-- <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo"
-                        style="height: 80px;width: 200px;" /> --}}
                         <img src="{{ url('imp_img.jpg') }}" alt="logo" style="height: 80px;width: 200px;" />
                     </div>
                     @php
@@ -304,9 +278,6 @@
                     @endphp
                     <div class="my-5 pl-5 ">
                         <h1 class="font-extrabold color-1f3864 text-xl ">{{$user_business_details->business_name}}</h1>
-                        {{-- <span>Location :
-                        <span class="font-bold">{{$user_business_details->city}}</span></span> <br>
-                        <span>Emdad Id : <span class="font-bold">{{Auth::user()->business_id}}</span></span> --}}
                     </div>
                 </div>
 
@@ -319,10 +290,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
         </div>
 
         <form method="POST" action="{{ route('RFQCart.store') }}" enctype="multipart/form-data">
@@ -462,39 +429,36 @@
                                         class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                         name="delivery_period" id="delivery_period" required>
                                         <option value="">Select Delivery Period</option>
-                                        <option value="Immediately" @if (isset($latest_rfq))
-                                            {{$latest_rfq->delivery_period =='Immediately' ? 'selected' : ''}} @endif>
-                                            Immediately</option>
-                                        <option value="Within 30 Days" @if (isset($latest_rfq))
-                                            {{$latest_rfq->delivery_period =='Within 30 Days' ? 'selected' : ''}}
-                                            @endif>30 Days</option>
-                                        <option value="Within 60 Days" @if (isset($latest_rfq))
-                                            {{$latest_rfq->delivery_period =='Within 60 Days' ? 'selected' : ''}}
-                                            @endif>60 Days</option>
-                                        <option value="Within 90 Days">90 Days</option>
-                                        <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
-                                            {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
-                                            @endif>Standing Order - 2 times / year
+                                        <option value="Immediately" @if (isset($latest_rfq)) {{$latest_rfq->delivery_period =='Immediately' ? 'selected' : ''}} @endif>
+                                            Immediately
                                         </option>
-                                        <option value="Standing Order - 3 per year" @if (isset($latest_rfq))
-                                            {{$latest_rfq->delivery_period =='Standing Order - 3 per year' ? 'selected' : ''}}
-                                            @endif>Standing Order - 3 times / year
+                                        <option value="Within 30 Days" @if (isset($latest_rfq)) {{$latest_rfq->delivery_period =='Within 30 Days' ? 'selected' : ''}}@endif>
+                                            30 Days
                                         </option>
-                                        <option value="Standing Order - 4 per year" @if(isset($latest_rfq))
-                                            {{$latest_rfq->delivery_period =='Standing Order - 4 per year' ? 'selected' : ''}}
-                                            @endif>Standing Order - 4 times / year
+                                        <option value="Within 60 Days" @if (isset($latest_rfq)) {{$latest_rfq->delivery_period =='Within 60 Days' ? 'selected' : ''}}@endif>
+                                            60 Days
                                         </option>
-                                        <option value="Standing Order - 6 per year" @if(isset($latest_rfq))
-                                            {{$latest_rfq->delivery_period =='Standing Order - 6 per year' ? 'selected' : ''}}
-                                            @endif>Standing Order - 6 times / year
+                                        <option value="Within 90 Days" @if (isset($latest_rfq)) {{$latest_rfq->delivery_period =='Within 90 Days' ? 'selected' : ''}}@endif>
+                                            90 Days
                                         </option>
-                                        <option value="Standing Order - 12 per year" @if(isset($latest_rfq))
-                                            {{$latest_rfq->delivery_period =='Standing Order - 12 per year' ? 'selected' : ''}}
-                                            @endif>Standing Order - 12 times / year
+                                        <option value="Standing Order - 2 per year" @if (isset($latest_rfq)) {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}@endif>
+                                            Standing Order - 2 times / year
                                         </option>
-                                        <option value="Standing Order Open" @if(isset($latest_rfq))
-                                            {{$latest_rfq->delivery_period =='Standing Order Open' ? 'selected' : ''}}
-                                            @endif>Standing Order - Open</option>
+                                        <option value="Standing Order - 3 per year" @if (isset($latest_rfq)) {{$latest_rfq->delivery_period =='Standing Order - 3 per year' ? 'selected' : ''}}@endif>
+                                            Standing Order - 3 times / year
+                                        </option>
+                                        <option value="Standing Order - 4 per year" @if(isset($latest_rfq)) {{$latest_rfq->delivery_period =='Standing Order - 4 per year' ? 'selected' : ''}}@endif>
+                                            Standing Order - 4 times / year
+                                        </option>
+                                        <option value="Standing Order - 6 per year" @if(isset($latest_rfq)) {{$latest_rfq->delivery_period =='Standing Order - 6 per year' ? 'selected' : ''}}@endif>
+                                            Standing Order - 6 times / year
+                                        </option>
+                                        <option value="Standing Order - 12 per year" @if(isset($latest_rfq)) {{$latest_rfq->delivery_period =='Standing Order - 12 per year' ? 'selected' : ''}}@endif>
+                                            Standing Order - 12 times / year
+                                        </option>
+                                        <option value="Standing Order Open" @if(isset($latest_rfq)) {{$latest_rfq->delivery_period =='Standing Order Open' ? 'selected' : ''}}@endif>
+                                            Standing Order - Open
+                                        </option>
 
                                     </select>
                                 </div> <br>
@@ -667,30 +631,21 @@
         </form>
     </div>
     @else
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
-                    <div class="text-black text-2xl" style="text-align: center">
-                        Your have reached daily RFQ generate limit.
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                        <div class="text-black text-2xl" style="text-align: center">
+                            Your have reached daily RFQ generate limit.
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     @endif
-
-
-
-
-
-
-
-
 
 </x-app-layout>
 
-{{-- @endif --}}
 <script>
     function companyCheck(itemno)
     {
