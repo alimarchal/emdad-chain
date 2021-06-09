@@ -427,8 +427,8 @@ Route::middleware(['ire'])->group(function () {
         });
     });
 });
+
 ############################################################## END ##########################################################################
 
-Route::get('test', function (){
-    return view('testRFQView');
-});
+Route::view('/supplierquote','supplier.supplier-quote1');
+

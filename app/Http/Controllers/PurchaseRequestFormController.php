@@ -54,6 +54,8 @@ class PurchaseRequestFormController extends Controller
         // Remaining RFQ count
         $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
         $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+
+        $latest_rfq = ECart::latest('business_id', auth()->user()->business_id)->first();
         $package = Package::where('id', $business_package->package_id)->first();
         if ($business_package->package_id == 1 || $business_package->package_id == 2)
         {
@@ -62,9 +64,11 @@ class PurchaseRequestFormController extends Controller
         else{
             $rfqCount = null;
         }
+        // dd($latest_rfq);
 
 //        return view('RFQ.create', compact('parentCategories', 'childs', 'user','eCart','rfqCount'));
-        return view('RFQ.create', compact('parentCategories', 'childs','eCart','rfqCount'));
+
+        return view('RFQ.create', compact('parentCategories', 'childs','eCart','rfqCount','latest_rfq'));
     }
 
     /**
