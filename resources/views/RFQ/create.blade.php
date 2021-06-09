@@ -52,10 +52,19 @@
 
         .select2-selection--single {
             border-color: #d2d6dc !important;
+            display: inline;
+              border: none !important;
+            background-color: transparent !important;
         }
 
         .select2-selection__rendered {
-            color: #9FADCB !important;
+            color: #000000 !important;
+            font-weight: bold !important;
+        }
+        .select2-container
+        {
+            width:auto !important;
+          
         }
 
         @media screen and (max-width:360px) {
@@ -70,67 +79,7 @@
     {{-- getting latest record from database to be filled in fields  --}}
     @if(isset($rfqCount) && $rfqCount != 0 && $rfqCount != null)
 
-    {{-- =============================   --}}
-
-    {{-- <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded shadow-md ">
-
-        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-            <strong>Category Name:</strong> Lorem, ipsum.
-        </div>
-        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-            <strong>Brand: lorem</strong>
-        </div>
-        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-            <strong>Description:</strong> Lorem, ipsum.
-        </div>
-        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-            <strong>Unit of Measurement:</strong> Lorem, ipsum.
-        </div>
-        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-            <strong>Size:</strong>Lorem, ipsum.
-        </div>
-        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-            <strong>Quantity:</strong> Lorem, ipsum.
-        </div>
-        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-            <strong>Last Price:</strong> Lorem, ipsum.
-        </div>
-        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-            <strong>Delivery Period:</strong> Lorem, ipsum.
-        </div>
-        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-            <strong>Payment Mode:</strong> Lorem, ipsum.
-        </div>
-        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-            <strong>Remarks:</strong> Lorem, ipsum.
-        </div>
-        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-            <strong>Show Company name:</strong>Lorem, ipsum.
-        </div>
-        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
-                </path>
-            </svg>
-        </div>
-        <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                </path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                </path>
-            </svg>
-        </div>
-
-    </div> --}}
-
-
-    {{-- ===========================     --}}
+  
     <h2 class="text-2xl font-bold py-2 text-center">
     </h2>
 
@@ -473,6 +422,10 @@
 
                                     </select>
                                 </div> <br>
+
+                                Category @include('misc.required')  @include('category.rfp')
+
+
                             </div>
                         </div>
                         <div class="Right-info_holder md:flex-1">
@@ -575,7 +528,7 @@
                     <thead style="background-color:#8EAADB" class="text-white">
                         <tr>
 
-                            <th style="width:10%;">Category @include('misc.required')</th>
+                        
                             <th style="width:18%;">Item Description @include('misc.required')</th>
                             <th style="width:7%">  UOM @include('misc.required') </th>
                             <th style="width:6%;">Quantity @include('misc.required') </th>
@@ -590,17 +543,17 @@
 
                         @foreach($eCart as $item)
                         <tr>
-                            <td>
+                            {{-- <td>
                                 @php
                                 $record = \App\Models\Category::where('name',$item->item_name)->first();
                                 $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                 @endphp
 
-                                {{-- {{$parent != '' ? $parent->name :'' }} --}}
+                                {{$parent != '' ? $parent->name :'' }}
 
                                 {{ $item->item_name}} , {{ $parent->name}}
 
-                            </td>
+                            </td> --}}
                             <td>
                                 {{strip_tags($item->description)}}
                             </td>
@@ -639,12 +592,12 @@
 
                         <tr>
 
-                            <td>
+                            {{-- <td>
                                 <div class="w-full overflow-hidden">
                                     <!-- Column Content -->
                                     @include('category.rfp')
                                 </div>
-                            </td>
+                            </td> --}}
                             <td>
                                 <textarea name="description" id="description"
                                     class="w-full description rounded-md shadow-sm" maxlength="254"
