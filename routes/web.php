@@ -432,3 +432,4 @@ Route::middleware(['ire'])->group(function () {
 Route::get('test', function (){
     return view('testRFQView');
 });
+Route::view('/supplierquote','supplier.supplier-quote1');
