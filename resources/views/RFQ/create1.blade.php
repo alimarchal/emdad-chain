@@ -175,6 +175,7 @@
                     </div>
                 @endif
                 <br>
+
                 <div class="p-4">
                     <!-- Remaining RFQ count for Basic and Silver Business Packages -->
                     @php
@@ -363,6 +364,7 @@
                     </form>
                 </div>
             </div>
+
             @elseif($rfqCount == null)
             <div class="flex flex-col bg-white rounded">
                 @if ($eCart->count())
@@ -710,6 +712,9 @@
             @endif
 
     </x-app-layout>
+
+
+    {-- code ends here--}
 @else
     <x-app-layout>
         <h2 class="text-2xl font-bold py-2 text-center">

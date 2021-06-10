@@ -71,7 +71,7 @@
         {{--                </div>--}}
         {{--            </header>--}}
 
-        <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200 font-roboto" id="side-bar">
+        <div x-data="{ sidebarOpen: false }" class="flex  @if(!request()->routeIs('RFQ.create'))h-screen @endif bg-gray-200 font-roboto" id="side-bar">
             @include('_layouts.sidebar')
 
             <div class="flex-1 flex flex-col overflow-hidden">
