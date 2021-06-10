@@ -132,7 +132,8 @@
                                             </td>
 
                                             <td class="px-3 py-3 whitespace-nowrap">
-                                                <select name="company_name_check" id="company_name_check" onchange="companyCheck({{$rfp->id}})" class="form-select shadow-sm block w-full" required>
+{{--                                                <select name="company_name_check" id="company_name_check" onchange="companyCheck({{$rfp->id}})" class="form-select shadow-sm block w-full" required>--}}
+                                                <select name="company_name_check" id="company_name_check" onchange="companyCheckOnChange()" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required>
                                                     <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
                                                     <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
                                                 </select>
@@ -483,11 +484,10 @@
                                             </td>
 
                                             <td class="px-3 py-3 whitespace-nowrap">
-                                                <select name="company_name_check" id="company_name_check" onchange="companyCheck({{$rfp->id}})" class="form-select shadow-sm block w-full" required title="Display {{auth()->user()->business->business_name}} in the RFQ">
-                                                    <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
-                                                    <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
+                                                <select name="company_name_check" id="company_name_check" class="form-select shadow-sm block w-full company_name_check" required title="Display {{auth()->user()->business->business_name}} in the RFQ">
+                                                    <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} data-id="0" value="0">No</option>
+                                                    <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} data-id="1" value="1">Yes</option>
                                                 </select>
-                                                <span style="display: none" id="status" class="text-green-600 text-sm-center">Status Updated.</span>
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-nowrap">
@@ -504,7 +504,6 @@
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                </form>
                                                 <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}" class="inline">
                                                     @csrf
                                                     @method('delete')
@@ -1038,25 +1037,30 @@
 @endif
 
 <script>
-    function companyCheck(itemno)
-    {
-        $value = $('#company_name_check').val();
+
+    $('.company_name_check').change(function(){
+        // alert($(this).attr('data-id'));
+        // alert($(this).val());
+        var status = $(this).val();
+        var rfqId = $(this).attr('data-id');
+
         $.ajax({
             type : 'POST',
             url:"{{ route('companyCheck') }}",
             data:{
                 "_token": "{{ csrf_token() }}",
-                'rfqNo':itemno,
-                'status':$value
+                'rfqNo':rfqId,
+                'status':status
             },
             success: function (response) {
                 if(response.status === 0){
                     alert('Not Updated Try again');
                 }
                 else if(response.status === 1) {
-                    $('#status').show().delay(5000).fadeOut();
+                    alert('Updated Successfully!');
+                    // $('#status').show().delay(5000).fadeOut();
                 }
             }
         });
-    }
+    });
 </script>
