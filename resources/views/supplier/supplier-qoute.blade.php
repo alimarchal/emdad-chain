@@ -172,7 +172,7 @@
                         <hr>
 
                         @php $quote = \App\Models\QouteMessage::where('qoute_id',$collection->id )->get(); @endphp
-                        @if(isset($quote))
+                        @if(isset($quote) && !$quote)
                             <br>
 
                             <div class="border-2 p-2 m-2">
