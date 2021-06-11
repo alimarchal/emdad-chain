@@ -430,6 +430,12 @@ Route::middleware(['ire'])->group(function () {
         });
     });
 });
+#invoice payment
+Route::middleware(['auth:sanctum'])->post('invoice-payment/step-one', [\App\Http\Controllers\BusinessPackageController::class, 'getCheckOutId_InvoicePayment'])->name('invoicePayment.stepOne');
+Route::middleware(['auth:sanctum'])->post('invoice-payment/proceed_payment', [\App\Http\Controllers\BusinessPackageController::class, 'proceed_payment'])->name('invoicePayment.proceed_payment');
+Route::middleware(['auth:sanctum'])->get('invoice-payment/invoice_payment_status', [\App\Http\Controllers\BusinessPackageController::class, 'invoice_payment_status'])->name('invoice_payment_status');
+
+
 
 ############################################################## END ##########################################################################
 
