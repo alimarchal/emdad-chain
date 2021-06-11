@@ -5,7 +5,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script src="{{ url('select2/src/select2totree.js') }}"></script>
 @endsection
-{{-- @if (auth()->user()->rtl == 0) --}}
 <x-app-layout>
     <style type="text/css">
         /* color for request for quotation heading*/
@@ -265,9 +264,6 @@
 
 
         <div class="flex flex-col bg-white rounded">
-
-
-
 
             <div class="p-4" style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
                 <div class="d-block text-center">
@@ -1214,7 +1210,6 @@
 
 </x-app-layout>
 
-{{-- @endif --}}
 <script>
 
     $('.company_name_check').change(function(){
@@ -1222,7 +1217,6 @@
     // alert($(this).val());
     let status = $(this).val();
     let rfqId = $(this).attr('data-id');
-    // alert(rfqId);
 
         $.ajax({
             type : 'POST',
