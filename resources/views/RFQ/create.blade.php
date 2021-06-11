@@ -852,12 +852,7 @@
             </div>
         </div>
         <br>
-
-
         <div class="flex flex-col bg-white rounded">
-
-
-
 
             <div class="p-4" style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
                 <div class="d-block text-center">
@@ -892,10 +887,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
 
             <form method="POST" action="{{ route('RFQCart.store') }}" enctype="multipart/form-data">
@@ -1204,8 +1195,6 @@
                                        autocomplete="name" style="display:none;"></td>
                         </tr>
 
-
-
                         </tbody>
                     </table>
                     <div class="text-center my-4">
@@ -1232,14 +1221,6 @@
             </div>
         </div>
     @endif
-
-
-
-
-
-
-
-
 
 </x-app-layout>
 
