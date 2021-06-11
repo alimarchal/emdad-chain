@@ -32,12 +32,16 @@
                             </div>
 
                             <div class="w-full  lg:w-1/3 xl:w-1/2 h-auto text-lg text-black">
-                                <p><strong>Orders Information Pictures</strong></p>
+                                <p><strong>Orders Information Pictures:</strong></p>
                                 <ol class="list-decimal">
                                     @php $exp = explode(', ', $purchaseOrderInfo->order_info); @endphp
-                                    @foreach($exp as $ex)
-                                        <li><a href="{{asset('storage/'.$ex)}}" class="hover:text-blue-900 hover:underline text-blue-900">Image#{{$loop->iteration}} (Click to show)</a></li>
-                                    @endforeach
+                                    @if($purchaseOrderInfo->order_info != null)
+                                        @foreach($exp as $ex)
+                                            <li><a href="{{asset('storage/'.$ex)}}" class="hover:text-blue-900 hover:underline text-blue-900">Image#{{$loop->iteration}} (Click to show)</a></li>
+                                        @endforeach
+                                    @else
+                                        N/A
+                                    @endif
                                 </ol>
                             </div>
 

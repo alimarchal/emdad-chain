@@ -57,6 +57,9 @@ Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [Dashboa
 Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
 Route::middleware(['auth:sanctum'])->post('/registrationType', [UserController::class, 'registrationType']);
 
+// Adding National Id Card photo
+Route::middleware(['auth:sanctum', 'verified'])->post('national-id-card-image/{user_id}', [UserController::class, 'nationalIdCardPhoto'])->name('nationalIdCardPhoto');
+
 ###################################################### Buyer and Supplier Add each other ##########################################
 Route::middleware(['auth:sanctum', 'verified'])->get('add-supplier', [UserController::class, 'createSupplier'])->name('createSupplier');
 Route::middleware(['auth:sanctum', 'verified'])->post('store-supplier', [UserController::class, 'storeSupplier'])->name('storeSupplier');

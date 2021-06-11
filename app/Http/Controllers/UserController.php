@@ -509,6 +509,35 @@ class UserController extends Controller
         return redirect()->route('businessBuyers');
     }
 
+    // Adding User National Id Card Photo
+    public function nationalIdCardPhoto(Request $request, $user_id)
+    {
+        $user = User::where('id', $user_id)->first();
+
+        if (!$user)
+        {
+            session()->flash('error','User not found!');
+            return redirect()->back();
+        }
+
+        $validated = validator::make($request->all(),[
+            'nid_photo' => 'required',
+        ]);
+
+        if ($validated->fails()) {
+            session()->flash('error','Photo is required!');
+            return redirect()->back()->withErrors($validated->errors());
+        }
+
+        $photo = $request->file('nid_photo')->store('', 'public');
+
+        $user->update(['nid_photo' => $photo]);
+        $user->save();
+
+        session()->flash('message', 'Photo added successfully.');
+        return redirect()->back();
+    }
+
     // public function roleGet()
     // {
     //     return view('users.role');

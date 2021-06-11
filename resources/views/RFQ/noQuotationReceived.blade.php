@@ -62,11 +62,11 @@
                                                     #
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                    Item name
+                                                    Cat name
                                                 </th>
 
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                    Item code
+                                                    Cat code
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                     Business Name
@@ -80,6 +80,9 @@
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                     Payment Mode
                                                 </th>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                    Created At
+                                                </th>
                                             </tr>
                                             </thead>
 
@@ -89,10 +92,15 @@
                                                     <td class="px-6 py-4 whitespace-nowrap text-center">
                                                         <div class="text-sm text-gray-900">{{$loop->iteration}} </div>
                                                     </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                    <td class="px-6 py-4 whitespace-nowrap">
                                                         <div class="ml-4">
                                                             <div class="text-sm font-medium text-gray-900">
-                                                                {{$rfq->item_name}}
+                                                                @php
+                                                                    $record = \App\Models\Category::where('id',$rfq->item_code)->first();
+                                                                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                                @endphp
+
+                                                                {{ $rfq->item_name}} , {{ $parent->name}}
                                                             </div>
                                                         </div>
                                                     </td>
@@ -128,6 +136,13 @@
                                                         <div class="ml-4">
                                                             <div class="text-sm font-medium text-gray-900">
                                                                 {{$rfq->payment_mode}}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                                        <div class="ml-3">
+                                                            <div class="text-sm font-medium text-gray-900">
+                                                                {{\Carbon\Carbon::parse($rfq->created_at)->format('Y-m-d')}}
                                                             </div>
                                                         </div>
                                                     </td>
