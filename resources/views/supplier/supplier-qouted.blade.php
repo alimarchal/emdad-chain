@@ -42,98 +42,98 @@
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        #
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Item Name
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                         {{ ucwords(str_replace("_", " ", "quantity")) }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                         {{ ucwords(str_replace("_", " ", "price_per_quantity")) }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                         {{ ucwords(str_replace("_", " ", "sample_information")) }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                         {{ ucwords(str_replace("_", " ", "sample_unit")) }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                         {{ ucwords(str_replace("_", " ", "sample_security_charges")) }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                         {{ ucwords(str_replace("_", " ", "sample_charges_per_unit")) }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                         {{ ucwords(str_replace("_", " ", "shipping_time_in_days")) }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                         {{ ucwords(str_replace("_", " ", "note_for_customer")) }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                         {{ ucwords(str_replace("_", " ", "qoute_status")) }}
-                                    </th>
-                                </tr>
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    #
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    Item Name
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    {{ ucwords(str_replace("_", " ", "quantity")) }}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    {{ ucwords(str_replace("_", " ", "price_per_quantity")) }}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    {{ ucwords(str_replace("_", " ", "sample_information")) }}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    {{ ucwords(str_replace("_", " ", "sample_unit")) }}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    {{ ucwords(str_replace("_", " ", "sample_security_charges")) }}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    {{ ucwords(str_replace("_", " ", "sample_charges_per_unit")) }}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    {{ ucwords(str_replace("_", " ", "shipping_time_in_days")) }}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    {{ ucwords(str_replace("_", " ", "note_for_customer")) }}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    {{ ucwords(str_replace("_", " ", "qoute_status")) }}
+                                </th>
+                            </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($collection as $rfp)
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $loop->iteration }}
-                                        </td>
+                            @foreach ($collection as $rfp)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $loop->iteration }}
+                                    </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->orderItem->item_name }}
-                                        </td>
-                                      
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->quote_quantity }}
-                                        </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->orderItem->item_name }}
+                                    </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->quote_price_per_quantity }}
-                                        </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->quote_quantity }}
+                                    </td>
 
-
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->sample_information }}
-                                        </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->quote_price_per_quantity }}
+                                    </td>
 
 
-
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->sample_unit }}
-                                        </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->sample_information }}
+                                    </td>
 
 
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->sample_security_charges }}
-                                        </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->sample_unit }}
+                                    </td>
 
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->sample_charges_per_unit }}
-                                        </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->sample_security_charges }}
+                                    </td>
 
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->shipping_time_in_days }}
-                                        </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->sample_charges_per_unit }}
+                                    </td>
 
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ strip_tags($rfp->note_for_customer) }}
-                                        </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->shipping_time_in_days }}
+                                    </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $rfp->qoute_status }}
-                                        </td>
-                                    </tr>
-                                @endforeach
+
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ strip_tags($rfp->note_for_customer) }}
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->qoute_status }}
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -143,7 +143,7 @@
     @endif
     <div class="mt-5">
         <a href="{{ route('dashboard') }}"
-            class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+           class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
             Back
         </a>
     </div>
