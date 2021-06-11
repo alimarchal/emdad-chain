@@ -55,7 +55,7 @@ class PurchaseRequestFormController extends Controller
         $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
         $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
 
-        $latest_rfq = ECart::latest('business_id', auth()->user()->business_id)->first();
+        $latest_rfq = ECart::latest()->where('business_id', auth()->user()->business_id)->first();
         $package = Package::where('id', $business_package->package_id)->first();
         if ($business_package->package_id == 1 || $business_package->package_id == 2)
         {

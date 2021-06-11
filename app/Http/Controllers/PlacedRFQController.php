@@ -165,8 +165,7 @@ class PlacedRFQController extends Controller
         $user_id = auth()->user()->id;
         $user_business_id = auth()->user()->business_id;
         $collection = Qoute::where('e_order_items_id', $eOrderItems->id)->where('supplier_user_id', $user_id)->first();
-
-        return view('supplier.supplier-qoute', compact('eOrderItems', 'collection', 'user_business_id'));
+        return view('supplier.supplier-quote', compact('eOrderItems', 'collection', 'user_business_id'));
     }
 
 
