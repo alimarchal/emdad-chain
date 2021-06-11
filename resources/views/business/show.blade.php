@@ -1,3 +1,6 @@
+@section('headerScripts')
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js" integrity="sha512-VQQXLthlZQO00P+uEu4mJ4G4OAgqTtKG1hri56kQY1DtdLeIqhKUp9W/lllDDu3uN3SnUNawpW7lBda8+dSi7w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
+@endsection
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -9,6 +12,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- component -->
             @include('users.sessionMessage')
+            @if (session()->has('error'))
+                <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                    <strong class="mr-1">{{ session('error') }}</strong>
+                    <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                        <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-green-900" aria-hidden="true">×</span>
+                    </button>
+                </div>
+            @endif
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-0 bg-white sm:p-6">
                     <h1 class="text-center text-3xl font-bold p-4 border-t-2 bg-opacity-5 border-black border-2"> Business Information<br>{{$business->business_name}}</h1>
@@ -62,8 +73,24 @@
                                 <a href="{{(isset($business->chamber_reg_path)?Storage::url($business->chamber_reg_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->chamber_reg_path)?'Chamber Registration Certificate':'Not Uploaded')}}</a>
                             </div>
 
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <a href="{{(isset($business->user->nid_photo)?Storage::url($business->user->nid_photo):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->user->nid_photo)?'National ID Photo':'Not Uploaded')}}</a>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black mb-2">
+                               @if(isset($business->user->nid_photo) && $business->user->nid_photo != null)
+                                    <a href="{{(isset($business->user->nid_photo)?Storage::url($business->user->nid_photo):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->user->nid_photo)?'National ID Photo':'Not Uploaded')}}</a>
+                               @else
+                                    <a class="text-blue-600 visited:text-purple-600 py-1">
+                                        <div class="flex">
+                                            <form action="{{route('nationalIdCardPhoto', $business->user->id)}}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="flex-1 float-left">
+                                                    <input name="nid_photo" class="text-xs" type="file" required/>
+                                                </div>
+                                                <div class="flex-1 float-right">
+                                                    <button type="submit" class="text-xs bg-green-600 border border-transparent rounded-md text-white text-uppercase hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">Click to Upload</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </a>
+                               @endif
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
@@ -103,24 +130,28 @@
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <p><strong>Total No of Monthly Order:</strong> {{$po->no_of_monthly_orders}}</p>
+                                <p><strong>Total No of Monthly Order:</strong> {{(isset($po->no_of_monthly_orders) ? $po->no_of_monthly_orders : 'N/A') }}</p>
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <p><strong>Volume: </strong> {{$po->volume}}</p>
+                                <p><strong>Volume: </strong> {{(isset($po->volume) ? $po->volume : 'N/A')}}</p>
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <p><strong>Type: </strong> {{$po->type}}</p>
+                                <p><strong>Type: </strong> {{(isset($po->type) ? $po->type : 'N/A')}}</p>
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
                                 <p><strong>Orders Information Pictures: </strong></p>
                                 <ol class="list-decimal">
                                     @php $exp = explode(', ', $po->order_info); @endphp
-                                    @foreach($exp as $ex)
-                                        <li><a href="{{asset('storage/'.$ex)}}" class="hover:text-blue-900 hover:underline text-blue-900">Image#{{$loop->iteration}} (Click to show)</a></li>
-                                    @endforeach
+                                    @if($po->order_info != null)
+                                        @foreach($exp as $ex)
+                                            <li><a href="{{asset('storage/'.$ex)}}" class="hover:text-blue-900 hover:underline text-blue-900">Image#{{$loop->iteration}} (Click to show)</a></li>
+                                        @endforeach
+                                    @else
+                                        N/A
+                                    @endif
                                 </ol>
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
@@ -132,15 +163,16 @@
 
 
                             <div class="w-full lg:w-1/3 xl:w-1/2 h-auto mt-2 text-lg text-black">
-                                <p><strong>Category Deals With:</strong><br>
+                                <p><strong>Category(s) selected:</strong><br>
                                 @php $cat = explode(',',$business->category_number); @endphp
 
                                 @foreach($cat as $c)
                                     @php
                                         $catg = \App\Models\Category::find($c);
+                                        $parent= \App\Models\Category::where('id',$catg->parent_id)->first();
                                     @endphp
                                        @if ($catg != '')
-                                    {{$loop->iteration . ': ' . $catg->name }} <br>
+                                    {{$loop->iteration . ': ' . $catg->name . ' , ' . $parent->name }} <br>
                                     @else
                                     {{ "There is no category yet !" }}
                                     @endif

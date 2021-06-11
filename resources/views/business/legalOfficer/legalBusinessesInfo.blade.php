@@ -32,8 +32,11 @@
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
                                     #
                                 </th>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                     Name
+                                </th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    Type
                                 </th>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
                                     Total Warehouse
@@ -60,10 +63,13 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
                                         {{ $loop->iteration }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                         <a href="{{ route('business.show', $business->id) }}" class="hover:text-red-700 hover:underline text-black  md:text-blue-600">@if(isset($business->business_name)) {{ $business->business_name }} @else
                                                 {{$business->name}} <br> {{$business->email}} @endif
                                         </a>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                        <span>{{(isset($business->user->registration_type) ? $business->user->registration_type : 'N/A')}}</span>
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
