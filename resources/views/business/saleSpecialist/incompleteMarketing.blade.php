@@ -81,7 +81,9 @@
                                         </a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+{{--                                        {{$business->id}}--}}
                                         {{$business->user->name}}
+{{--                                        {{ \App\Models\User::where('business_id', $business->id)->where('usertype','CEO')->first() }}--}}
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">

@@ -1,5 +1,5 @@
 @section('headerScripts')
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js" integrity="sha512-VQQXLthlZQO00P+uEu4mJ4G4OAgqTtKG1hri56kQY1DtdLeIqhKUp9W/lllDDu3uN3SnUNawpW7lBda8+dSi7w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
+    {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js" integrity="sha512-VQQXLthlZQO00P+uEu4mJ4G4OAgqTtKG1hri56kQY1DtdLeIqhKUp9W/lllDDu3uN3SnUNawpW7lBda8+dSi7w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
 @endsection
 <x-app-layout>
     <x-slot name="header">
@@ -29,7 +29,7 @@
                             {{-- Reterving Business PO Info --}}
                             @php $po = \App\Models\POInfo::where('business_id', $business->id)->first(); @endphp
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3  h-12 text-lg text-black">
-                               <p><strong>Name:</strong> {{$business->business_name}}</p>
+                                <p><strong>Name:</strong> {{$business->business_name}}</p>
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
@@ -74,9 +74,9 @@
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black mb-2">
-                               @if(isset($business->user->nid_photo) && $business->user->nid_photo != null)
+                                @if(isset($business->user->nid_photo) && $business->user->nid_photo != null)
                                     <a href="{{(isset($business->user->nid_photo)?Storage::url($business->user->nid_photo):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->user->nid_photo)?'National ID Photo':'Not Uploaded')}}</a>
-                               @else
+                                @else
                                     <a class="text-blue-600 visited:text-purple-600 py-1">
                                         <div class="flex">
                                             <form action="{{route('nationalIdCardPhoto', $business->user->id)}}" method="POST" enctype="multipart/form-data">
@@ -85,12 +85,15 @@
                                                     <input name="nid_photo" class="text-xs" type="file" required/>
                                                 </div>
                                                 <div class="flex-1 float-right">
-                                                    <button type="submit" class="text-xs bg-green-600 border border-transparent rounded-md text-white text-uppercase hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">Click to Upload</button>
+                                                    <button type="submit"
+                                                            class="text-xs bg-green-600 border border-transparent rounded-md text-white text-uppercase hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                        Click to Upload
+                                                    </button>
                                                 </div>
                                             </form>
                                         </div>
                                     </a>
-                               @endif
+                                @endif
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
@@ -144,39 +147,41 @@
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
                                 <p><strong>Orders Information Pictures: </strong></p>
                                 <ol class="list-decimal">
-                                    @php $exp = explode(', ', $po->order_info); @endphp
-                                    @if($po->order_info != null)
-                                        @foreach($exp as $ex)
-                                            <li><a href="{{asset('storage/'.$ex)}}" class="hover:text-blue-900 hover:underline text-blue-900">Image#{{$loop->iteration}} (Click to show)</a></li>
-                                        @endforeach
-                                    @else
-                                        N/A
+                                    @if(!empty($po))
+                                        @php $exp = explode(', ', $po->order_info); @endphp
+                                        @if($po->order_info != null)
+                                            @foreach($exp as $ex)
+                                                <li><a href="{{asset('storage/'.$ex)}}" class="hover:text-blue-900 hover:underline text-blue-900">Image#{{$loop->iteration}} (Click to show)</a></li>
+                                            @endforeach
+                                        @else
+                                            N/A
+                                        @endif
                                     @endif
                                 </ol>
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-{{--                                <p><strong>Type: </strong> {{$po->type}}</p>--}}
+                                {{--                                <p><strong>Type: </strong> {{$po->type}}</p>--}}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-{{--                                <p><strong>Type: </strong> {{$po->type}}</p>--}}
+                                {{--                                <p><strong>Type: </strong> {{$po->type}}</p>--}}
                             </div>
 
 
                             <div class="w-full lg:w-1/3 xl:w-1/2 h-auto mt-2 text-lg text-black">
                                 <p><strong>Category(s) selected:</strong><br>
-                                @php $cat = explode(',',$business->category_number); @endphp
+                                    @php $cat = explode(',',$business->category_number); @endphp
 
-                                @foreach($cat as $c)
-                                    @php
-                                        $catg = \App\Models\Category::find($c);
-                                        $parent= \App\Models\Category::where('id',$catg->parent_id)->first();
-                                    @endphp
-                                       @if ($catg != '')
-                                    {{$loop->iteration . ': ' . $catg->name . ' , ' . $parent->name }} <br>
-                                    @else
-                                    {{ "There is no category yet !" }}
-                                    @endif
-                                @endforeach
+                                    @foreach($cat as $c)
+                                        @php
+                                            $catg = \App\Models\Category::find($c);
+                                            $parent= \App\Models\Category::where('id',$catg->parent_id)->first();
+                                        @endphp
+                                        @if ($catg != '')
+                                            {{$loop->iteration . ': ' . $catg->name . ' , ' . $parent->name }} <br>
+                                        @else
+                                            {{ "There is no category yet !" }}
+                                        @endif
+                                    @endforeach
 
 
                                 </p>
@@ -185,17 +190,20 @@
                             <div class="w-full overflow-hidden">
 
                                 @if(auth()->user()->hasRole('SuperAdmin'))
-                                <a href="{{route('business.edit',$business->id)}}" class="float-right inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                                    Edit
-                                </a>
+                                    <a href="{{route('business.edit',$business->id)}}"
+                                       class="float-right inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                        Edit
+                                    </a>
 
                                 @endif
 
-                                <a href="#" onclick="window.print();" class="mr-3 float-right inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                <a href="#" onclick="window.print();"
+                                   class="mr-3 float-right inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                     Print
                                 </a>
 
-                                <a href="{{url()->previous()}}" class="mr-3 float-right inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                <a href="{{url()->previous()}}"
+                                   class="mr-3 float-right inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                     Back
                                 </a>
                             </div>

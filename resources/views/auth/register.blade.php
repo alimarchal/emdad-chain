@@ -25,9 +25,9 @@
 
         <x-jet-validation-errors class="mb-4"/>
 
-        <x-jet-button>
-            <a href="{{route('registerAr')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
-        </x-jet-button>
+{{--        <x-jet-button>--}}
+{{--            <a href="{{route('registerAr')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>--}}
+{{--        </x-jet-button>--}}
 
         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
             @csrf
