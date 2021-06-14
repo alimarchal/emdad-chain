@@ -37,13 +37,11 @@
         </h2>
     </x-slot>
 
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         @include('users.sessionMessage')
         <!-- component -->
             @if(isset($delivery))
-
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
                         <form action="{{ route('bank-payments.store') }}" method="post" class="form bg-white p-6 mb-4" enctype="multipart/form-data">
@@ -52,14 +50,18 @@
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/3" for="bank_name">Bank Name</x-jet-label>
                                 <x-jet-label class="w-1/3" for="amount_received">Amount Deposited</x-jet-label>
-                                @php $supplierBusinessName = \App\Models\Business::where('id', $invoice->supplier_business_id)->first(); @endphp
-                                <x-jet-label class="w-1/3" for="account_number">{{$supplierBusinessName->business_name}}&nbsp;IBAN#</x-jet-label>
+                                {{--@php $supplierBusinessName = \App\Models\Business::where('id', $invoice->supplier_business_id)->first(); @endphp--}}
+{{--                                <x-jet-label class="w-1/3" for="account_number">{{$supplierBusinessName->business_name}}&nbsp;IBAN#</x-jet-label>--}}
+                                {{-- Emdad IBAN #--}}
+                                <x-jet-label class="w-1/3" for="account_number">Emdad IBAN#</x-jet-label>
                             </div>
                             <div class="flex space-x-5 mt-3">
 
-                                <x-jet-input id="bank_name" type="text" name="bank_name" class="border p-2 w-1/2" value="{{$supplierBusinessName->bank_name}}" required></x-jet-input>
+{{--                                <x-jet-input id="bank_name" type="text" name="bank_name" class="border p-2 w-1/2" value="{{$supplierBusinessName->bank_name}}" required></x-jet-input>--}}
+                                <x-jet-input id="bank_name" type="text" name="bank_name" class="border p-2 w-1/2" value="Riyad Bank" readonly required></x-jet-input>
                                 <x-jet-input id="amount_received" type="text" name="amount_received" class="border p-2 w-1/2" value="{{$invoice->total_cost}}" required></x-jet-input>
-                                <x-jet-input id="account_number" type="text" name="account_number" class="border p-2 w-1/2" value="{{$supplierBusinessName->iban}}" required></x-jet-input>
+{{--                                <x-jet-input id="account_number" type="text" name="account_number" class="border p-2 w-1/2" value="{{$supplierBusinessName->iban}}" required></x-jet-input>--}}
+                                <x-jet-input id="account_number" type="text" name="account_number" class="border p-2 w-1/2" value="KSAIBAN464647974978998895" readonly required></x-jet-input>
                             </div>
 
 
@@ -95,14 +97,13 @@
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/3" for="bank_name">Bank Name</x-jet-label>
                                 <x-jet-label class="w-1/3" for="amount_received">Amount Deposited</x-jet-label>
-                                @php $supplierBusinessName = \App\Models\Business::where('id', $invoice->supplier_business_id)->first(); @endphp
-                                <x-jet-label class="w-1/3" for="account_number">{{$supplierBusinessName->business_name}}&nbsp;IBAN#</x-jet-label>
+                                {{-- Emdad IBAN #--}}
+                                <x-jet-label class="w-1/3" for="account_number">Emdad IBAN#</x-jet-label>
                             </div>
                             <div class="flex space-x-5 mt-3">
-
-                                <x-jet-input id="bank_name" type="text" name="bank_name" class="border p-2 w-1/2" value="{{$supplierBusinessName->bank_name}}" required></x-jet-input>
+                                <x-jet-input id="bank_name" type="text" name="bank_name" class="border p-2 w-1/2" value="Riyad Bank" readonly required></x-jet-input>
                                 <x-jet-input id="amount_received" type="text" name="amount_received" class="border p-2 w-1/2" value="{{$invoice->total_cost}}" required></x-jet-input>
-                                <x-jet-input id="account_number" type="text" name="account_number" class="border p-2 w-1/2" value="{{$supplierBusinessName->iban}}" required></x-jet-input>
+                                <x-jet-input id="account_number" type="text" name="account_number" class="border p-2 w-1/2" value="KSAIBAN464647974978998895" readonly required></x-jet-input>
                             </div>
 
 

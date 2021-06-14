@@ -457,7 +457,9 @@
                                             <option value="Within 60 Days" @if (isset($latest_rfq))
                                                 {{$latest_rfq->delivery_period =='Within 60 Days' ? 'selected' : ''}}
                                                 @endif>60 Days</option>
-                                            <option value="Within 90 Days">90 Days</option>
+                                            <option value="Within 90 Days" @if (isset($latest_rfq))
+                                                {{$latest_rfq->delivery_period =='Within 90 Days' ? 'selected' : ''}}
+                                                @endif>90 Days</option>
                                             <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
                                                 {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
                                                 @endif>Standing Order - 2 times / year

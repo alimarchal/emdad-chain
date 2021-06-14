@@ -37,6 +37,10 @@
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    Type
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
                                     CEO Name
                                 </th>
 
@@ -67,6 +71,10 @@
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
                                     P.O Info
                                 </th>
+
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    Created at
+                                </th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -80,6 +88,10 @@
                                                 {{$business->name}} <br> {{$business->email}} @endif
                                         </a>
                                     </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                        {{(isset($business->user->registration_type) ? $business->user->registration_type : 'N/A')}}
+                                    </td>
+
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
                                         {{$business->user->name}}
                                     </td>
@@ -117,6 +129,10 @@
                                             @endforeach
                                         @endif
                                     </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                        {{\Carbon\Carbon::parse($business->created_at)->format('Y-m-d')}}
+                                    </td>
+
 
                                 </tr>
                             @endforeach
@@ -165,7 +181,7 @@
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    Registered Date
+                                    Registered duration
                                 </th>
                             </tr>
                             </thead>
