@@ -439,5 +439,3 @@ Route::middleware(['auth:sanctum'])->get('invoice-payment/invoice_payment_status
 
 ############################################################## END ##########################################################################
 
-Route::view('/supplierquote','supplier.supplier-quote1');
-

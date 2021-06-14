@@ -33,7 +33,7 @@
                                         #
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Item Name
+                                        Category Name
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
@@ -89,7 +89,6 @@
                                         </svg>
                                     </th>
 
-
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -138,7 +137,7 @@
                                         </td>
 
                                         <td class="px-3 py-3 whitespace-nowrap">
-                                            <select name="company_name_check" id="company_name_check" onchange="companyCheck({{$rfp->id}})" class="form-select shadow-sm block w-full" required title="Display {{auth()->user()->business->business_name}} in the RFQ">
+                                            <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required title="Display {{auth()->user()->business->business_name}} in the RFQ">
                                                 <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
                                                 <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
                                             </select>
@@ -394,23 +393,31 @@
 @endif
 
 <script>
-    function companyCheck(itemno) {
-        $value = $('#company_name_check').val();
+    $('.company_name_check').change(function(){
+        // alert($(this).attr('data-id'));
+        // alert($(this).val());
+        let status = $(this).val();
+        let rfqId = $(this).attr('data-id');
+        // alert(rfqId);
+
+
         $.ajax({
-            type: 'POST',
-            url: "{{ route('companyCheck') }}",
-            data: {
+            type : 'POST',
+            url:"{{ route('companyCheck') }}",
+            data:{
                 "_token": "{{ csrf_token() }}",
-                'rfqNo': itemno,
-                'status': $value
+                'rfqNo':rfqId,
+                'status':status
             },
             success: function (response) {
-                if (response.status === 0) {
+                if(response.status === 0){
                     alert('Not Updated Try again');
-                } else if (response.status === 1) {
-                    $('#status').show().delay(5000).fadeOut();
+                }
+                else if(response.status === 1) {
+                    alert('Updated Successfully!');
+                    // $('#status').show().delay(5000).fadeOut();
                 }
             }
         });
-    }
+    });
 </script>
