@@ -49,7 +49,7 @@ class UserController extends Controller
     {
         if (auth()->user()->hasRole('SuperAdmin')) {
 
-            $roles  = Role::all();
+            $roles  = Role::where('id', '=',1 )->orWhere('id', '>=', 19 )->get();
 //            $permissions  = Permission::all();
             return view('users.create', compact('roles'));
         }
@@ -148,7 +148,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
 //        dd($request->all());
         if (!Gate::allows('create user')) {
             return abort(401);
@@ -157,53 +156,31 @@ class UserController extends Controller
 //        $data = array();
         $role  = Role::where('id' , $request->input('role'))->first();
 
+        /* If Authenticated User is not SuperAdmin */
         if($request->role == 1 || auth()->user()->hasRole('SuperAdmin'))
         {
-            if ($role->id >= 19 && $role->id <= 29)
-            {
-                /* For Users who don't need Email verification */
-                $validated = validator::make($request->all(),[
-                    'email' => 'required|email|unique:users',
-                ]);
+            $validated = validator::make($request->all(),[
+                'email' => 'required|email|unique:users',
+            ]);
 
-                if ($validated->fails()) {
-                    session()->flash('message', 'Email already exits');
-                    return redirect()->back()->withInput();
-                }
-
-                $data = [
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => $request->password,
-                    'designation' => $request->designation,
-                    'email_verified_at' => Carbon::now(),
-                    'usertype' => ($role->name == "SuperAdmin"?strtolower($role->name):$role->name),
-                    'status' => 3,
-                ];
+            if ($validated->fails()) {
+                session()->flash('message', 'Email already exits');
+                return redirect()->back()->withInput();
             }
-            else
-            {
-                $validated = validator::make($request->all(),[
-                    'email' => 'required|email|unique:users',
-                ]);
 
-                if ($validated->fails()) {
-                    session()->flash('message', 'Email already exits');
-                    return redirect()->back()->withInput();
-                }
-
-                /* For Users who need Email verification */
-                $data = [
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => $request->password,
-                    'designation' => $request->designation,
-                    'business_id' => auth()->user()->business_id,
-                    'usertype' => ($role->name == "SuperAdmin"?strtolower($role->name):$role->name),
-                    'status' => 3,
-                ];
-            }
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'designation' => $request->designation,
+                'business_id' => auth()->user()->business_id,
+                'email_verified_at' => Carbon::now(),
+                'usertype' => ($role->name == "SuperAdmin"?strtolower($role->name):$role->name),
+                'status' => 3,
+            ];
         }
+
+        /* else if Authenticated User is not SuperAdmin */
         else{
             $validated = validator::make($request->all(),[
                 'email' => 'required|email|unique:users',
@@ -214,7 +191,7 @@ class UserController extends Controller
                 return redirect()->back()->withInput();
             }
 
-            if (\auth()->user()->hasRole('Buyer'))
+            if (\auth()->user()->hasRole('CEO') && \auth()->user()->registration_type == 'Buyer')
             {
                 $data = [
                     'name' => $request->name,
@@ -229,7 +206,7 @@ class UserController extends Controller
                     'added_by_userId' => \auth()->id(),
                 ];
             }
-            else if (\auth()->user()->hasRole('Supplier')){
+            else if (\auth()->user()->hasRole('CEO') && \auth()->user()->registration_type == 'Supplier'){
                 $data = [
                     'name' => $request->name,
                     'email' => $request->email,
@@ -241,18 +218,6 @@ class UserController extends Controller
                     'status' => 1,
                     'added_by' => 2,           /* 2 for supplier*/
                     'added_by_userId' => \auth()->id(),
-                ];
-            }
-            else{
-                $data = [
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => $request->password,
-                    'designation' => $request->designation,
-                    'email_verified_at' => Carbon::now(),
-                    'business_id' => auth()->user()->business_id,
-                    'usertype' => $role->name,
-                    'status' => 1,
                 ];
             }
         }
