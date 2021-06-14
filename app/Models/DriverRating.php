@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CardPayment extends Model
+class DriverRating extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['package_id', 'user_id','status','amount','invoice_id','invoice_transaction_id'];
+    protected $fillable = ['driver_user_id','buyer_business_id','recommend','rating',];
 }

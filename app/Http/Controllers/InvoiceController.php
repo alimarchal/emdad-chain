@@ -188,10 +188,12 @@ class InvoiceController extends Controller
             ]);
 
 
-            $bankPayment = BankPayment::where('invoice_id', $invoice->id)->first();
-
-            $bankPayment->delivery_id = $del->id;
-            $bankPayment->save();
+            if($invoice->invoice_cash_online != 1)
+            {
+                $bankPayment = BankPayment::where('invoice_id', $invoice->id)->first();
+                $bankPayment->delivery_id = $del->id;
+                $bankPayment->save();
+            }
 
             $delivery_note->status = 'completed';
             $delivery_note->save();

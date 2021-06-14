@@ -5,7 +5,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script src="{{ url('select2/src/select2totree.js') }}"></script>
 @endsection
-{{-- @if (auth()->user()->rtl == 0) --}}
+
 <x-app-layout>
     <style type="text/css">
         /* color for request for quotation heading*/
@@ -279,16 +279,10 @@
         </div>
         <br>
 
-
         <div class="flex flex-col bg-white rounded">
-
-
-
-
             <div class="p-4" style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
                 <div class="d-block text-center">
                     <span class="text-2xl font-bold color-7f7f7f">Request For Quotation</span>
-
                 </div>
                 <hr>
                 <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
@@ -318,10 +312,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
 
             <form method="POST" action="{{ route('RFQCart.store') }}" enctype="multipart/form-data">
@@ -863,10 +853,6 @@
 
 
         <div class="flex flex-col bg-white rounded">
-
-
-
-
             <div class="p-4" style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
                 <div class="d-block text-center">
                     <span class="text-2xl font-bold color-7f7f7f">Request For Quotation</span>
@@ -900,10 +886,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
 
             <form method="POST" action="{{ route('RFQCart.store') }}" enctype="multipart/form-data">
@@ -1242,48 +1224,36 @@
         </div>
     @endif
 
-
-
-
-
-
-
-
-
 </x-app-layout>
 
-{{-- @endif --}}
 <script>
 
-
-
-        $('.company_name_check').change(function(){
-        // alert($(this).attr('data-id'));
-        // alert($(this).val());
-        let status = $(this).val();
-        let rfqId = $(this).attr('data-id');
-        // alert(rfqId);
+    $('.company_name_check').change(function(){
+    // alert($(this).attr('data-id'));
+    // alert($(this).val());
+    let status = $(this).val();
+    let rfqId = $(this).attr('data-id');
+    // alert(rfqId);
 
 
         $.ajax({
         type : 'POST',
         url:"{{ route('companyCheck') }}",
         data:{
-        "_token": "{{ csrf_token() }}",
-        'rfqNo':rfqId,
-        'status':status
-    },
+            "_token": "{{ csrf_token() }}",
+            'rfqNo':rfqId,
+            'status':status
+        },
         success: function (response) {
         if(response.status === 0){
-        alert('Not Updated Try again');
-    }
+            alert('Not Updated Try again');
+        }
         else if(response.status === 1) {
         alert('Updated Successfully!');
         // $('#status').show().delay(5000).fadeOut();
-    }
-    }
+            }
+         }
+        });
     });
-    });
-
 
 </script>
