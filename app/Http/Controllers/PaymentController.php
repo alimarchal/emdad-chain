@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BankPayment;
 use App\Models\CommissionPercentage;
 use App\Models\DeliveryNote;
 use App\Models\DraftPurchaseOrder;
@@ -30,70 +31,9 @@ class PaymentController extends Controller
         return view('supplier.deliveryNotes', compact('collection'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         dd($request->all());
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Payment  $payment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Payment  $payment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Payment  $payment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Payment  $payment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Payment $payment)
-    {
-        //
     }
 
     public function generateProformaInvoiceView($id)
@@ -368,5 +308,13 @@ class PaymentController extends Controller
     {
         $dpos = DraftPurchaseOrder::where('supplier_user_id', auth()->user()->id)->where('payment_term', 'Cash')->get();
         return view('payment.proformaInvoices', compact('dpos'));
+    }
+
+    /* Manual Payments Emdad received from Buyer */
+    public function payments()
+    {
+        $payments = BankPayment::all();
+
+        return view('payment.emdad.payment', compact('payments'));
     }
 }

@@ -20,8 +20,11 @@ class BankPaymentController extends Controller
         if (auth()->user()->registration_type == 'Buyer') {
 //            $collection = BankPayment::where('buyer_business_id', auth()->user()->business_id)->get();
             $collection = Invoice::where('buyer_business_id', auth()->user()->business_id)->where('invoice_status', 0)->get();
-        } elseif (auth()->user()->registration_type == 'Supplier') {
+        } if (auth()->user()->registration_type == 'Supplier') {
             $collection = BankPayment::where('supplier_business_id', auth()->user()->business_id)->where('status', '!=' ,0)->get();
+        }
+        if (auth()->user()->hasRole('SuperAdmin')) {
+            return redirect()->route('emdad_payments');
         }
         return view('manual-payments.index', compact('collection'));
     }
@@ -48,8 +51,6 @@ class BankPaymentController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $time = strtotime($request->amount_date);
         $newformat = date('Y-m-d',$time);
         $request->merge(['amount_date'=> $newformat]);
@@ -100,7 +101,7 @@ class BankPaymentController extends Controller
      */
     public function update(Request $request, BankPayment $bankPayment)
     {
-        $updated = $bankPayment->update($request->all());
+        $bankPayment->update($request->all());
         Invoice::where('id', $request->invoice_id)->update([
             'invoice_status' => $request->status
         ]);

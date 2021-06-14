@@ -339,6 +339,7 @@ Route::middleware(['auth:sanctum'])->resource('payment', PaymentController::clas
 Route::middleware(['auth:sanctum'])->get('generate-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoiceView'])->name('generateProformaView');
 Route::middleware(['auth:sanctum'])->get('create-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoice'])->name('generateProforma');
 Route::middleware(['auth:sanctum'])->get('invoices-history', [PaymentController::class, 'invoices'])->name('invoices');
+Route::middleware(['auth:sanctum'])->get('emdad-invoices-history', [PaymentController::class, 'payments'])->name('emdad_payments');
 Route::middleware(['auth:sanctum'])->get('invoice-details/{id}', [PaymentController::class, 'invoiceView'])->name('invoiceView');
 Route::middleware(['auth:sanctum'])->get('proforma-invoices', [PaymentController::class, 'proforma_invoices'])->name('proforma_invoices');
 Route::middleware(['auth:sanctum'])->get('generate-proforma-invoice', [PaymentController::class, 'generate_proforma_invoice'])->name('generate_proforma_invoices');
