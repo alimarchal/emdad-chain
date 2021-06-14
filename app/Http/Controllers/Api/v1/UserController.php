@@ -32,7 +32,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,7 +43,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -59,7 +59,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -70,8 +70,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -90,7 +90,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -116,5 +116,36 @@ class UserController extends Controller
         $user = User::where('email', $request->email)->first();
 
         return $user;
+    }
+
+
+    public function change_password(Request $request)
+    {
+        $data = $request->validate([
+            'user_id' => 'required',
+            'old_password' => 'required',
+            'new_password' => 'required',
+        ]);
+
+        $token = env('API_TOKEN');
+        if ($token == $request->code) {
+            $user = User::where('id', $request->user_id)->first();
+            if (!empty($user)) {
+                if (Hash::check($request->old_password, $user->password)) {
+                    $user->password = Hash::make($request->new_password);
+                    $user->save();
+                    $response = ['message' => "Your password has been changed successfully."];
+                    return response()->json($response, 200);
+                } else {
+                    $response = ['message' => "You have entered wrong password!"];
+                    return response()->json($response, 200);
+                }
+            } else {
+                $response = ['message' => "User not found!"];
+                return response()->json($response, 200);
+            }
+        } else {
+            return response()->json(['message' => 'UnAuthorized access '], 403);
+        }
     }
 }

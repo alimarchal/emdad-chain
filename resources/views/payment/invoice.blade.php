@@ -121,7 +121,15 @@
                                                             @if($dn->invoice_status == '0')
                                                                 <a href=" {{ route('bank-payments.create', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
                                                                     Manual Payment
-                                                                </a>
+                                                                </a> |
+
+                                                                    <form action="{{route('invoicePayment.stepOne')}}" method="POST" >
+                                                                        @csrf
+                                                                        <input type="hidden" name="invoice_id" value="{{$dn->id}}">
+                                                                        <button class="text-blue-600 hover:underline">Online Payment</button>
+                                                                    </form>
+
+
                                                                 @elseif($dn->invoice_status == '2')
                                                                 <a href=" {{ route('bank-payments.edit', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
                                                                     Proceed
