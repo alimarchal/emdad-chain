@@ -28,6 +28,7 @@ class CreateBankPaymentsTable extends Migration
             $table->string('supplier_user_id', 30)->nullable();
             $table->string('buyer_business_id', 30)->nullable();
             $table->string('buyer_user_id', 30)->nullable();
+            $table->integer('supplier_payment_status')->default(0);
             $table->string('status', 30)->nullable();
             $table->timestamps();
         });
