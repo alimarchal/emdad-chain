@@ -130,17 +130,17 @@
                                                                     </form>
 
 
-                                                                @elseif($dn->invoice_status == '2')
+                                                            @elseif($dn->invoice_status == '2')
                                                                 <a href=" {{ route('bank-payments.edit', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
                                                                     Proceed
                                                                 </a>
                                                             @endif
                                                         @elseif($dn->invoice_status == '1')
-                                                            Supplier verification pending
+                                                            Emdad verification pending
                                                         @elseif($dn->invoice_status == '2')
-                                                            Supplier rejected manual payment
+                                                            Emdad rejected manual payment
                                                         @elseif($dn->invoice_status == '3')
-                                                            Supplier confirmed manual payment
+                                                            Emdad confirmed manual payment
                                                         @endif
 
                                                     @elseif(auth()->user()->registration_type == 'Supplier')
@@ -148,13 +148,13 @@
                                                             Waiting for payment
                                                         @elseif($dn->invoice_status == '1')
                                                         @php $bankPaymentId = \App\Models\BankPayment::where('invoice_id', $dn->id)->first(); @endphp
-                                                        <a href="{{ route('bank-payments.show', $bankPaymentId->id) }}" class="text-blue-600 hover:underline" target="_blank">
-                                                            View Payment
-                                                        </a>
+{{--                                                        <a href="{{ route('bank-payments.show', $bankPaymentId->id) }}" class="text-blue-600 hover:underline" target="_blank">--}}
+{{--                                                            View Payment--}}
+                                                            Emdad verification pending
                                                         @elseif($dn->invoice_status == '2')
-                                                            Rejected manual payment
+                                                            Manual payment rejected
                                                         @elseif($dn->invoice_status == '3')
-                                                            Confirmed manual payment
+                                                            Payment in Transit, Received by Emdad
                                                         @endif
                                                     @endif
 

@@ -4,7 +4,8 @@
             @if(auth()->user()->registration_type == 'Buyer')
                 All Unpaid Invoices
             @elseif(auth()->user()->registration_type == 'Supplier')
-                All invoices (through manual payments)
+{{--                All invoices (through manual payments)--}}
+                List of Unpaid invoices
             @endif
         </h2>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -36,11 +37,11 @@
                                     @if(auth()->user()->registration_type == 'Buyer') Claim @elseif(auth()->user()->registration_type == 'Supplier') Confirm @endif manual payment
                                 </th>
                             @endif
-                            @if(auth()->user()->registration_type == 'Supplier')
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Payments View
-                                </th>
-                            @endif
+{{--                            @if(auth()->user()->registration_type == 'Supplier')--}}
+{{--                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">--}}
+{{--                                    Payments View--}}
+{{--                                </th>--}}
+{{--                            @endif--}}
                         </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -53,14 +54,16 @@
                                     @if (auth()->user()->registration_type == 'Buyer')
                                         <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->id}}</a>
                                     @elseif(auth()->user()->registration_type == 'Supplier')
-                                        <a href="{{ route('invoice.show',$item->invoice_id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->invoice_id}}</a>
+{{--                                        <a href="{{ route('invoice.show',$item->invoice_id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->invoice_id}}</a>--}}
+                                        <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->id}}</a>
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-black text-center">
                                     @if (auth()->user()->registration_type == 'Buyer')
                                         @php $invoiceDate = \App\Models\Invoice::where('id', $item->id)->first(); @endphp
                                     @elseif(auth()->user()->registration_type == 'Supplier')
-                                        @php $invoiceDate = \App\Models\Invoice::where('id', $item->invoice_id)->first(); @endphp
+                                        {{--@php $invoiceDate = \App\Models\Invoice::where('id', $item->invoice_id)->first(); @endphp--}}
+                                        @php $invoiceDate = \App\Models\Invoice::where('id', $item->id)->first(); @endphp
                                     @endif
                                     {{\Carbon\Carbon::parse($item->created_at)->format('d-M-Y')}}
                                 </td>
@@ -85,13 +88,17 @@
                                             Supplier Confirmed
                                         @endif
                                     @elseif(auth()->user()->registration_type == 'Supplier')
-                                        @if ($item->status == '0')
+{{--                                        @if ($item->status == '0')--}}
+                                        @if ($item->invoice_status == '0')
                                             Un-Paid
-                                        @elseif ($item->status == '1')
+{{--                                        @elseif ($item->status == '1')--}}
+                                        @elseif ($item->invoice_status == '1')
                                             Verification Pending
-                                        @elseif ($item->status == '2')
+{{--                                        @elseif ($item->status == '2')--}}
+                                        @elseif ($item->invoice_status == '2')
                                             Rejected
-                                        @elseif ($item->status == '3')
+{{--                                        @elseif ($item->status == '3')--}}
+                                        @elseif ($item->invoice_status == '3')
                                             Confirmed
                                         @endif
                                     @endif
@@ -120,13 +127,13 @@
                                     </td>
                                 @endif
 
-                                @if(auth()->user()->registration_type == 'Supplier')
-                                    <td class="px-6 py-4 whitespace-nowrap text-black">
-                                        <a href="{{ route('bank-payments.show', $item->id) }}" class="text-blue-600 hover:underline" target="_blank">
-                                            View Payment
-                                        </a>
-                                    </td>
-                                @endif
+{{--                                @if(auth()->user()->registration_type == 'Supplier')--}}
+{{--                                    <td class="px-6 py-4 whitespace-nowrap text-black">--}}
+{{--                                        <a href="{{ route('bank-payments.show', $item->id) }}" class="text-blue-600 hover:underline" target="_blank">--}}
+{{--                                            View Payment--}}
+{{--                                        </a>--}}
+{{--                                    </td>--}}
+{{--                                @endif--}}
 
                             </tr>
                         @endforeach
