@@ -15,11 +15,6 @@ use League\CommonMark\Extension\SmartPunct\Quote;
 
 class DraftPurchaseOrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $user = auth()->user()->id;
@@ -35,70 +30,9 @@ class DraftPurchaseOrderController extends Controller
         return view('draftPurchaseOrder.index', compact('dpos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\DraftPurchaseOrder  $draftPurchaseOrder
-     * @return \Illuminate\Http\Response
-     */
     public function show(DraftPurchaseOrder $draftPurchaseOrder)
     {
         return view('draftPurchaseOrder.show', compact('draftPurchaseOrder'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\DraftPurchaseOrder  $draftPurchaseOrder
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DraftPurchaseOrder $draftPurchaseOrder)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DraftPurchaseOrder  $draftPurchaseOrder
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, DraftPurchaseOrder $draftPurchaseOrder)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\DraftPurchaseOrder  $draftPurchaseOrder
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(DraftPurchaseOrder $draftPurchaseOrder)
-    {
-        //
     }
 
     public function approved(DraftPurchaseOrder $draftPurchaseOrder)

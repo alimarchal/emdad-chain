@@ -619,22 +619,59 @@
                 </div>
             @endif
 
-            {{-- Payments link for SuperAdmin --}}
-            @if(auth()->user()->hasRole('SuperAdmin'))
-                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('emdad_payments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                   href="{{route('emdad_payments')}}">
+            {{-- Payments link for SuperAdmin && Finance Officer --}}
+            @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('Finance Officer 1'))
+                <div x-data="{ open: false } ">
+                    <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                            {{--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>--}}
+                        </svg>
+                        <span class="mx-3">Payments</span>
+                        <span x-show="open == false">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"  style="margin-left: 4em;"   viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                        <span x-show="open == true">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4"  style="margin-left: 4em;"  viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                    </a>
+                    <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        @if(request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment'))  x-data="{ open: true } " @endif
+                    >
+                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                            </svg>
+                            <a href="{{ route('emdad_payments') }}"><span class="mx-3 ">Manual Payments</span></a>
+                        </li>
 
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                    </svg>
-                    <span class="mx-3">Payments</span>
-                </a>
+                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('supplier_payment') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                            </svg>
+                            <a href="{{ route('supplier_payment') }}"><span class="mx-3 ">Payments to supplier</span></a>
+                        </li>
+
+                    </ul>
+                </div>
+{{--                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('emdad_payments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"--}}
+{{--                   href="{{route('emdad_payments')}}">--}}
+
+{{--                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>--}}
+{{--                    </svg>--}}
+{{--                    <span class="mx-3">Payments</span>--}}
+{{--                </a>--}}
             @endif
 
             {{-- Payments link --}}
             @if(auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
             <div x-data="{ open: false } ">
-                <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('payment.index') || request()->routeIs('generate_proforma_invoices')|| request()->routeIs('bank-payments.index')|| request()->routeIs('invoices')|| request()->routeIs('proforma_invoices')|| request()->routeIs('emdadInvoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
+                <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('payment.index') || request()->routeIs('generate_proforma_invoices')|| request()->routeIs('bank-payments.index')|| request()->routeIs('invoices')|| request()->routeIs('proforma_invoices')|| request()->routeIs('emdadInvoices')|| request()->routeIs('supplier_payment_received') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
                     </svg>
@@ -650,7 +687,7 @@
                         </svg>
                     </span>
                 </a>
-                <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('payment.index') || request()->routeIs('generate_proforma_invoices')|| request()->routeIs('invoices')|| request()->routeIs('proforma_invoices')|| request()->routeIs('bank-payments.index')|| request()->routeIs('emdadInvoices'))  x-data="{ open: true } " @endif>
+                <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('payment.index') || request()->routeIs('generate_proforma_invoices')|| request()->routeIs('invoices')|| request()->routeIs('proforma_invoices')|| request()->routeIs('bank-payments.index')|| request()->routeIs('emdadInvoices')|| request()->routeIs('supplier_payment_received'))  x-data="{ open: true } " @endif>
                     @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
 
                     <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('payment.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
@@ -689,8 +726,6 @@
                     </li>
                     @endif
 
-
-
                     {{-- for buyer --}}
                     @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Buyer" && Auth::user()->status == 3)
 
@@ -716,7 +751,7 @@
 
                     @endif
 
-                        {{-- for supllier --}}
+                    {{-- for supllier --}}
                     @if(auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
 
                     <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdadInvoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
@@ -724,6 +759,13 @@
                             <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
                         </svg>
                         <a href="{{ route('emdadInvoices') }}"><span class="mx-3 ">Emdad Invoices</span></a>
+                    </li>
+
+                    <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('supplier_payment_received') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                        </svg>
+                        <a href="{{ route('supplier_payment_received') }}"><span class="mx-3 ">Manual Payments</span></a>
                     </li>
 
                     @endif

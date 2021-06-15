@@ -6,7 +6,7 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold py-2 text-center m-2">Manual Payments History</h2>
+            <h2 class="text-2xl font-bold py-2 text-center m-2">Payments to supplier history</h2>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 @if (session()->has('message'))
                     <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
@@ -94,19 +94,19 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
-                                                    @if($payment->status == 0)
+                                                    @if($payment->supplier_payment_status == 0)
                                                         Un-paid
-                                                    @elseif($payment->status == 1)
+                                                    @elseif($payment->supplier_payment_status == 1)
                                                         Verification pending
-                                                    @elseif($payment->status == 2)
+                                                    @elseif($payment->supplier_payment_status == 2)
                                                         Rejected
-                                                    @elseif($payment->status == 3)
+                                                    @elseif($payment->supplier_payment_status == 3)
                                                         Confirmed
                                                     @endif
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
-                                                    <a href="{{ route('bank-payments.show',$payment->id) }}" class="hover:underline hover:text-blue-800 text-blue-500" target="_blank">
+                                                    <a href="{{ route('admin_supplier_payment_view',$payment->id) }}" class="hover:underline hover:text-blue-800 text-blue-500" target="_blank">
                                                         <svg class="w-6 h-6 inline" fill="none" stroke="red"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
                                                             </path>

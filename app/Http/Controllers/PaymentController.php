@@ -14,6 +14,7 @@ use App\Models\IreIndirectCommission;
 use App\Models\Payment;
 use App\Models\ProformaInvoice;
 use App\Models\Qoute;
+use App\Models\SupplierBankPayment;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -316,5 +317,21 @@ class PaymentController extends Controller
         $payments = BankPayment::all();
 
         return view('payment.emdad.payment', compact('payments'));
+    }
+
+    /* Manual Payments Emdad has sent to Supplier (For Emdad) */
+    public function supplier_payment()
+    {
+        $payments = BankPayment::all();
+
+        return view('payment.emdad.supplierPayment', compact('payments'));
+    }
+
+    /* Manual Payments Supplier received from Emdad (For Supplier) */
+    public function supplier_payment_received()
+    {
+        $supplierPayments = SupplierBankPayment::with('bankPayment')->get();
+
+        return view('manual-payments.supplier.list', compact('supplierPayments'));
     }
 }

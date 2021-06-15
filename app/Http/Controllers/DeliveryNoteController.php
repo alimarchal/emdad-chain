@@ -10,11 +10,7 @@ use Illuminate\Http\Request;
 
 class DeliveryNoteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $user = auth()->user()->id;
@@ -22,22 +18,6 @@ class DeliveryNoteController extends Controller
         return view('deliveryNote.index', compact('dpos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
@@ -54,51 +34,6 @@ class DeliveryNoteController extends Controller
         $buyer_user = User::find($delivery->user_id)->notify(new \App\Notifications\PreparingDelivery());
         session()->flash('message', 'Delivery note has been successfully created.');
         return redirect('notes');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\DeliveryNote  $deliveryNote
-     * @return \Illuminate\Http\Response
-     */
-    public function show(DeliveryNote $deliveryNote)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\DeliveryNote  $deliveryNote
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DeliveryNote $deliveryNote)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DeliveryNote  $deliveryNote
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, DeliveryNote $deliveryNote)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\DeliveryNote  $deliveryNote
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(DeliveryNote $deliveryNote)
-    {
-        //
     }
 
     public function deliveryNoteView(DraftPurchaseOrder $draftPurchaseOrder)
