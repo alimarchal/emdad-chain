@@ -33,7 +33,7 @@
                                     #
                                 </th>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    Business Name
+                                    <abbr title="Business Name">Business</abbr>
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
@@ -41,28 +41,28 @@
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    CEO Name
+                                    <abbr title="CEO Name">CEO Name</abbr>
+                                </th>
+
+{{--                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">--}}
+{{--                                    CEO Email--}}
+{{--                                </th>--}}
+
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
+                                    <abbr title="Total Warehouse(s)">Warehouse(s)</abbr>
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    CEO Email
+                                    <abbr title="National ID #">NID</abbr>
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    Total Warehouse(s)
+                                    <abbr title="National ID Expire Date"> NID Expiry</abbr>
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    National ID #
-                                </th>
-
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    National ID Expire Date
-                                </th>
-
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
-                                    IBAN
-                                </th>
+{{--                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">--}}
+{{--                                    IBAN--}}
+{{--                                </th>--}}
 
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black text-center uppercase tracking-wider">
                                     Status
@@ -83,36 +83,36 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
                                         {{ $loop->iteration }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                    <td class="whitespace-nowrap text-sm text-black text-center">
                                         <a href="{{ route('business.show', $business->id) }}" class="hover:text-red-700 hover:underline text-black  md:text-blue-600">@if(isset($business->business_name)) {{ $business->business_name }} @else
                                                 {{$business->name}} <br> {{$business->email}} @endif
                                         </a>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                    <td class="whitespace-nowrap text-sm text-black text-center">
                                         {{(isset($business->user->registration_type) ? $business->user->registration_type : 'N/A')}}
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                    <td class="whitespace-nowrap text-sm text-black text-center">
                                         {{$business->user->name}}
 {{--                                        {{ \App\Models\User::where('business_id', $business->id)->where('usertype','CEO')->first() }}--}}
                                     </td>
 
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                        {{$business->user->email}}
-                                    </td>
+{{--                                    <td class="w-8 whitespace-nowrap text-sm text-black text-center" style="overflow: elipses" >--}}
+{{--                                        {{$business->user->email}}--}}
+{{--                                    </td>--}}
 
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                    <td class="whitespace-nowrap text-sm text-black text-center">
                                         <a href="{{url('businessWarehouse/'. $business->id .'/show')}}" class="hover:underline text-blue-900 ">@if(isset($business->warehouse)) {{ $business->warehouse->count() }} @endif</a>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
+                                    <td class=" whitespace-nowrap text-sm text-black text-center">
                                         {{$business->user->nid_num}}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                        {{$business->user->nid_exp_date}}
+                                    <td class=" whitespace-nowrap text-sm text-black text-center" style="width: 60px;">
+                                        {{\Carbon\Carbon::parse($business->user->nid_exp_date)->format('d-m-y')}}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                        {{$business->iban}}
-                                    </td>
+{{--                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">--}}
+{{--                                        {{$business->iban}}--}}
+{{--                                    </td>--}}
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900 text-center">
                                         @if ($business->status == '3')
                                             Completed
@@ -124,14 +124,14 @@
                                         @if(isset($business->poinfo))
                                             @foreach ($business->poinfo as $Puinfo)
                                                 <a href="{{ route('purchaseOrderInfo.show', $Puinfo->id) }}" class="inline-flex items-center
-                                                 justify-center px-4 py-2 text-blue-700 hover:underline" name=" approved">
+                                                 justify-center px-4 py-2 text-blue-700 hover:underline" name="approved">
                                                     PoInfo
-                                                </a>
+                                                </a><br>
                                             @endforeach
                                         @endif
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                        {{\Carbon\Carbon::parse($business->created_at)->format('Y-m-d')}}
+                                        {{\Carbon\Carbon::parse($business->created_at)->format('m-d-Y')}}
                                     </td>
 
 

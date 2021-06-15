@@ -53,6 +53,8 @@
                                 <p><strong>IBAN No:</strong> {{$business->iban}}</p>
                             </div>
 
+
+
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
                                 <p><strong>City:</strong> {{$business->city}}</p>
                             </div>
@@ -185,6 +187,9 @@
 
 
                                 </p>
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
+                                <p><strong>CEO Email:</strong> {{$business->user->email}} </p>
                             </div>
 
                             <div class="w-full overflow-hidden">
