@@ -104,7 +104,7 @@ class DeliveryController extends Controller
 
                         $mobile_no = trim($delivery->otp_mobile_number);
                         $msg = "Your delivery is here. \n\nPlease share the OTP code: " . $otp . " with the driver after unloading the delivery. \n\nThank you for using EMDAD Platform.\n";
-                        $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=966552840506&sender=Emdad-Aid&unicode=e&randparams=1";
+                        $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=966" . $mobile_no . "&sender=Emdad-Aid&unicode=e&randparams=1";
 
                         $ch = curl_init();
                         curl_setopt($ch,CURLOPT_URL,$url);

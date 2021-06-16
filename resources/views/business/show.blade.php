@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <p><strong>Chamber No:</strong> {{$business->chamber_reg_number}}</p>
+                                <p><strong>Commercial Reg No:</strong> {{$business->chamber_reg_number}}</p>
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">

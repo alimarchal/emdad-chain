@@ -18,6 +18,7 @@ class CreateUserLogsTable extends Migration
             $table->integer('user_id');
             $table->dateTime('login_at');
             $table->integer('status')->default(1);
+            $table->timestamps();
         });
     }
 

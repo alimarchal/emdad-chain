@@ -47,7 +47,7 @@
                             </ol> --}}
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-label class="w-1/2" for="chamber_reg_number">Chamber Registration Number</x-jet-label>
+                            <x-jet-label class="w-1/2" for="chamber_reg_number">Commercial  Registration Number</x-jet-label>
                             <x-jet-label class="w-1/2" for="chamber_reg_path" title="File type: JPEG|PNG|PDF|DOCX => (Filesize: Max 10MB)">Chamber Certificate/File</x-jet-label>
                             <x-jet-label class="w-1/2" for="vat_reg_certificate_number">VAT Number</x-jet-label>
                             <x-jet-label class="w-1/2" for="vat_reg_certificate_path">VAT Certificate (If available)</x-jet-label>

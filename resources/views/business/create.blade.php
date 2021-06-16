@@ -50,7 +50,7 @@
 
 
                             <div class="flex space-x-5 mt-3">
-                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_number">Chamber Registration Number @include('misc.required')</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_number">Commercial Registration  Number @include('misc.required')</label>
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_path_1" title="File type: JPEG|PNG|PDF|DOCX => (Filesize: Max 10MB)">Chamber
                                     Certificate/File @include('misc.required')</label>
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="vat_reg_certificate_number">VAT Number @include('misc.required')</label>
