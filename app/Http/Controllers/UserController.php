@@ -4,22 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Business;
 use App\Models\User;
+use App\Models\UserLog;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use phpDocumentor\Reflection\Utils;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         if (auth()->user()->hasRole('SuperAdmin')) {
@@ -40,11 +37,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         if (auth()->user()->hasRole('SuperAdmin')) {
@@ -140,12 +132,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 //        dd($request->all());
@@ -232,12 +218,6 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $user = User::findOrFail($id);
@@ -246,12 +226,6 @@ class UserController extends Controller
         return view('users.show', compact('user', 'business'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $user)
     {
         if (auth()->user()->hasRole('SuperAdmin')) {
@@ -280,13 +254,6 @@ class UserController extends Controller
 //        return view('users.edit', compact('user', 'roles','permissions'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user)
     {
         if (!Gate::allows('edit user')) {
@@ -302,12 +269,6 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(User $user)
     {
 
@@ -500,6 +461,19 @@ class UserController extends Controller
         $user->save();
 
         session()->flash('message', 'Photo added successfully.');
+        return redirect()->back();
+    }
+
+    // User log details
+    public function user_log()
+    {
+        if (\auth()->user()->hasRole('SuperAdmin'))
+        {
+            $users = UserLog::with('user')->get();
+
+            return view('userLog.index', compact('users'));
+        }
+
         return redirect()->back();
     }
 

@@ -13,11 +13,6 @@ use Illuminate\Http\Request;
 
 class BusinessController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         if (\auth()->user()->hasRole('SuperAdmin')) {
@@ -94,12 +89,6 @@ class BusinessController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
     public function create()
     {
         $business = Business::where('user_id', auth()->user()->id)->first();
@@ -114,12 +103,6 @@ class BusinessController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
@@ -180,24 +163,12 @@ class BusinessController extends Controller
         return redirect()->route('businessWarehouse.create');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\Business $business
-     * @return \Illuminate\Http\Response
-     */
     public function show(Business $business)
     {
         $cats = explode(',', $business->category_number);
         return view('business.show', compact('business'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\Business $business
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Business $business)
     {
 //        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
@@ -208,13 +179,6 @@ class BusinessController extends Controller
         return view('business.edit', compact('parentCategories', 'business','categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Business $business
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Business $business)
     {
 
@@ -272,12 +236,6 @@ class BusinessController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\Business $business
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Business $business)
     {
         //

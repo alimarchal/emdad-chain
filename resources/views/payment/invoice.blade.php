@@ -92,7 +92,7 @@
                                                             @if ($dn->invoice_status == 0)
                                                                 Waiting for payment
                                                             @elseif($dn->invoice_status == 1)
-                                                                Waiting for supplier confirmation
+                                                                Waiting for Emdad confirmation
                                                             @elseif($dn->invoice_status == 3)
                                                                 Manual payment Confirmed
                                                             @else
@@ -139,8 +139,10 @@
                                                             Emdad verification pending
                                                         @elseif($dn->invoice_status == '2')
                                                             Emdad rejected manual payment
+                                                        @elseif($dn->bankPayment->supplier_payment_status == 3)
+                                                            Payment received by supplier
                                                         @elseif($dn->invoice_status == '3')
-                                                            Emdad confirmed manual payment
+                                                            Payment in Transit, on hold, with Emdad
                                                         @endif
 
                                                     @elseif(auth()->user()->registration_type == 'Supplier')
