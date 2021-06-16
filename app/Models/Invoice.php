@@ -22,4 +22,9 @@ class Invoice extends Model
     {
         return $this->belongsTo(Qoute::class, 'qoute_no', 'id');
     }
+
+    public function bankPayment()
+    {
+        return $this->hasOne(BankPayment::class, 'invoice_id');
+    }
 }

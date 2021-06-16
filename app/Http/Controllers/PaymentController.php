@@ -271,7 +271,7 @@ class PaymentController extends Controller
     {
         if (auth()->user()->registration_type == "Buyer"){
 //            $proformaInvoices = Invoice::where('buyer_user_id', auth()->user()->id)->where('invoice_type', 1)->get();
-            $proformaInvoices = Invoice::where('buyer_business_id', auth()->user()->business_id)->where('invoice_type', 1)->get();
+            $proformaInvoices = Invoice::with('bankPayment')->where('buyer_business_id', auth()->user()->business_id)->where('invoice_type', 1)->get();
         }
         elseif(auth()->user()->hasRole('SuperAdmin')){
             $proformaInvoices = Invoice::where('invoice_type', 1)->get();

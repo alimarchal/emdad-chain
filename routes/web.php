@@ -56,6 +56,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardCont
 Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [DashboardController::class, 'languageChange'])->name('languageChange');
 Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
 Route::middleware(['auth:sanctum'])->post('/registrationType', [UserController::class, 'registrationType']);
+// User Log route for SuperAdmin
+Route::middleware(['auth:sanctum'])->get('/user-logs', [UserController::class, 'user_log'])->name('user_logs');
 
 // Adding National Id Card photo
 Route::middleware(['auth:sanctum', 'verified'])->post('national-id-card-image/{user_id}', [UserController::class, 'nationalIdCardPhoto'])->name('nationalIdCardPhoto');

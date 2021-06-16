@@ -279,6 +279,11 @@
                         <x-jet-responsive-nav-link href="{{ route('log.viewer') }}" :active="request()->routeIs('log.viewer')">
                             {{ __('Log Viewer') }}
                         </x-jet-responsive-nav-link>
+
+                        <div class="border-t border-gray-100"></div>
+                        <x-jet-responsive-nav-link href="{{ route('user_logs') }}" :active="request()->routeIs('user_logs')">
+                            {{ __('User Logs') }}
+                        </x-jet-responsive-nav-link>
                          @endcan
 
                         @can('all')

@@ -49,11 +49,9 @@
                                 <p><strong>Country:</strong> {{$business->country}}</p>
                             </div>
 
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <p><strong>IBAN No:</strong> {{$business->iban}}</p>
+                            <div class="w-full overflow-hidden mb-2 lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
+                                <p><strong>CEO Email:</strong> {{$business->user->email}} </p>
                             </div>
-
-
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
                                 <p><strong>City:</strong> {{$business->city}}</p>
@@ -63,30 +61,43 @@
                                 <p><strong>Address:</strong> {{$business->address}}</p>
                             </div>
 
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <p><strong>ID No:</strong> {{$business->user->nid_num}}</p>
+                            <div class="w-full overflow-hidden mb-2 lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
+                                <p><strong>IBAN No:</strong> {{$business->iban}}</p>
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
                                 <a href="{{(isset($business->vat_reg_certificate_path)?Storage::url($business->vat_reg_certificate_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->vat_reg_certificate_path)?'VAT Certificate':'Not Uploaded')}}</a>
                             </div>
 
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
+                            <div class="w-full overflow-hidden mb-2 lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
                                 <a href="{{(isset($business->chamber_reg_path)?Storage::url($business->chamber_reg_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->chamber_reg_path)?'Chamber Registration Certificate':'Not Uploaded')}}</a>
                             </div>
 
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black mb-2">
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
+                                <p><strong>ID No:</strong> {{$business->user->nid_num}}</p>
+                            </div>
+
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
+                                <a href="{{(isset($business->business_photo_url)?Storage::url($business->business_photo_url):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->business_photo_url)?'Business Logo':'Not Uploaded')}}</a>
+                            </div>
+
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
+                                <p><strong>VAT Number:</strong> {{$business->vat_reg_certificate_number}}</p>
+                            </div>
+
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 min-h-16 text-lg text-black mb-2">
                                 @if(isset($business->user->nid_photo) && $business->user->nid_photo != null)
                                     <a href="{{(isset($business->user->nid_photo)?Storage::url($business->user->nid_photo):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->user->nid_photo)?'National ID Photo':'Not Uploaded')}}</a>
                                 @else
+                                    <span class="text-red-600 text-sm">Upload National ID Photo: </span>
                                     <a class="text-blue-600 visited:text-purple-600 py-1">
                                         <div class="flex">
                                             <form action="{{route('nationalIdCardPhoto', $business->user->id)}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
-                                                <div class="flex-1 float-left">
+                                                <div class="flex-1 md:float-left w-2/5 p-2">
                                                     <input name="nid_photo" class="text-xs" type="file" required/>
                                                 </div>
-                                                <div class="flex-1 float-right">
+                                                <div class="flex-1 md:float-right w-2/5 p-2">
                                                     <button type="submit"
                                                             class="text-xs bg-green-600 border border-transparent rounded-md text-white text-uppercase hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
                                                         Click to Upload
@@ -98,18 +109,11 @@
                                 @endif
                             </div>
 
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <a href="{{(isset($business->business_photo_url)?Storage::url($business->business_photo_url):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->business_photo_url)?'Business Logo':'Not Uploaded')}}</a>
-                            </div>
-
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <p><strong>VAT Number:</strong> {{$business->vat_reg_certificate_number}}</p>
-                            </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
+                            <div class="w-full overflow-hidden mb-2 lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
                                 <p><strong>Website:</strong> {{$business->website}}</p>
                             </div>
 
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
+                            <div class="w-full overflow-hidden mb-2 lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
                                 <p><strong>Business Email:</strong> {{$business->business_email}}</p>
                             </div>
 
@@ -125,7 +129,6 @@
                                 <p><strong>Supplier/Client:</strong> {{$business->user->registration_type ?? ''}}</p>
                             </div>
 
-
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
                                 <p><strong>Latitude:</strong> {{$business->latitude}}</p>
                             </div>
@@ -134,7 +137,7 @@
                                 <p><strong>Longitude:</strong> {{$business->longitude}}</p>
                             </div>
 
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
+                            <div class="w-full overflow-hidden mb-2 lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
                                 <p><strong>Total No of Monthly Order:</strong> {{(isset($po->no_of_monthly_orders) ? $po->no_of_monthly_orders : 'N/A') }}</p>
                             </div>
 
@@ -161,12 +164,6 @@
                                     @endif
                                 </ol>
                             </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                {{--                                <p><strong>Type: </strong> {{$po->type}}</p>--}}
-                            </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                {{--                                <p><strong>Type: </strong> {{$po->type}}</p>--}}
-                            </div>
 
 
                             <div class="w-full lg:w-1/3 xl:w-1/2 h-auto mt-2 text-lg text-black">
@@ -187,9 +184,6 @@
 
 
                                 </p>
-                            </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <p><strong>CEO Email:</strong> {{$business->user->email}} </p>
                             </div>
 
                             <div class="w-full overflow-hidden">
