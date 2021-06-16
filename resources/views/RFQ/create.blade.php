@@ -897,11 +897,11 @@
                         <div style="background: #DEEAF6; min-height: 235px; padding-top: 1px;" class="md:flex">
 
                             <div class="left-info_holder md:flex-1">
-                                <div class="my-5 pl-5 ">
+                                <div class="my-5 pl-5 " style="padding-left: 20px">
                                     <span class="font-bold color-1f3864 text-lg">RFQ Information</span>
                                     <hr style="border-top: 1px solid gray;width: 25%;">
                                 </div>
-                                <div class="my-5 pl-5 ">
+                                <div class="my-5 pl-5"  style="padding-left: 20px">
                                     Display Company Name: @include('misc.required')<div class="relative inline-flex ">
                                         <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"  style="width: 8px; height: 8px;"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
