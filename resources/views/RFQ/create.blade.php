@@ -23,11 +23,9 @@
         }
 
 
-
         input,
         .description,
-        .selection .select2-selection
-        {
+        .selection .select2-selection {
             height: 35px;
         }
 
@@ -44,10 +42,9 @@
             border-color: #a4cafe;
         }
 
-        select:hover , .file-label:hover {
+        select:hover, .file-label:hover {
             cursor: pointer;
         }
-
 
 
         .select2-selection--single {
@@ -57,21 +54,19 @@
             /*background-color: transparent !important;*/
         }
 
-        .select2-selection__rendered
-        , .uom
-        , input::placeholder,
-        textarea::placeholder
-        {
+        .select2-selection__rendered, .uom, input::placeholder,
+        textarea::placeholder {
             color: #000000 !important;
 
         }
+
         /*.select2-container*/
         /*{*/
         /*    width:auto !important;*/
 
         /*}*/
 
-        @media screen and (max-width:360px) {
+        @media screen and (max-width: 360px) {
             .date {
                 margin-left: auto;
                 margin-right: auto;
@@ -232,7 +227,7 @@
                                                 </select>
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap" >
+                                            <td class="px-6 py-4 whitespace-nowrap">
                                                 @if ($rfp->file_path)
                                                     <a href="{{ Storage::url($rfp->file_path) }}">
                                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -259,10 +254,10 @@
                                                             title="DELETE" onsubmit="alert('Are you sure')">
                                                         <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                              fill="red">
-                                                            <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                                                            <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
                                                             <path fill-rule="evenodd"
                                                                   d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
-                                                                  clip-rule="evenodd" />
+                                                                  clip-rule="evenodd"/>
                                                         </svg>
                                                     </button>
                                                 </form>
@@ -288,18 +283,13 @@
                 <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
                     <div class="flex-1 py-5">
                         <div class="my-5 pl-5">
-                            {{-- <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo"
-                            style="height: 80px;width: 200px;" /> --}}
-                            <img src="{{ url('imp_img.jpg') }}" alt="logo" style="height: 80px;width: 200px;" />
+                            <img src="{{(isset(auth()->user()->business->business_photo_url)?Storage::url(auth()->user()->business->business_photo_url):'#')}}" alt="logo" style="height: 80px;width: 200px;"/>
                         </div>
                         @php
                             $user_business_details=auth()->user()->business;
                         @endphp
                         <div class="my-5 pl-5 ">
                             <h1 class="font-extrabold color-1f3864 text-xl ">{{$user_business_details->business_name}}</h1>
-                            {{-- <span>Location :
-                            <span class="font-bold">{{$user_business_details->city}}</span></span> <br>
-                            <span>Emdad Id : <span class="font-bold">{{Auth::user()->business_id}}</span></span> --}}
                         </div>
                     </div>
 
@@ -325,32 +315,41 @@
                                     <span class="font-bold color-1f3864 text-lg">RFQ Information</span>
                                     <hr style="border-top: 1px solid gray;width: 25%;">
                                 </div>
-                                <div class="my-5 pl-5 "  style="padding-left: 40px;">
-                                    Display Company Name: @include('misc.required')<div class="relative inline-flex ">
+                                <div class="my-5 pl-5 " style="padding-left: 40px;">
+
+                                    Display Company Name: @include('misc.required')
+                                    <div class="relative inline-flex">
                                         <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                             <path
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                                fill="#000000" fill-rule="nonzero" /></svg>
-                                        <select
-                                            class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" style="width: 8px; height: 8px;"
+                                                fill="#000000" fill-rule="nonzero"/>
+                                        </svg>
+                                        <select class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             required name="company_name_check" id="company_name_check">
                                             <option value="">Select</option>
                                             <option
                                                 @if(isset($latest_rfq)){{$latest_rfq->company_name_check == 0 ? 'selected' : ''}}
-                                                @endif value="0">No</option>
+                                                @endif value="0">No
+                                            </option>
                                             <option
                                                 @if(isset($latest_rfq)){{$latest_rfq->company_name_check == 1  ? 'selected' : ''}}
-                                                @endif value="1">Yes</option>
+                                                @endif value="1">Yes
+                                            </option>
                                         </select>
                                     </div>
+
+
+
                                     <br>
-                                    Payment Mode: @include('misc.required')<div class="relative inline-flex">
-                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"  style="width: 8px; height: 8px;"
+                                    Payment Mode: @include('misc.required')
+                                    <div class="relative inline-flex">
+                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                             <path
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                                fill="#000000" fill-rule="nonzero" /></svg>
+                                                fill="#000000" fill-rule="nonzero"/>
+                                        </svg>
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             name="payment_mode" id="payment_mode" required>
@@ -375,28 +374,35 @@
                                                 <option value="Credit30days" @if (isset($latest_rfq))
                                                     {{$latest_rfq->payment_mode =='Credit30days' ? 'selected' : ''}} @endif>
                                                     Credit (30
-                                                    Days)</option>
+                                                    Days)
+                                                </option>
                                                 <option value="Credit60days" @if (isset($latest_rfq))
                                                     {{$latest_rfq->payment_mode =='Credit60days' ? 'selected' : ''}} @endif>
                                                     Credit (60
-                                                    Days)</option>
+                                                    Days)
+                                                </option>
                                                 <option value="Credit90days" @if (isset($latest_rfq))
                                                     {{$latest_rfq->payment_mode =='Credit90days' ? 'selected' : ''}} @endif>
                                                     Credit (90
-                                                    Days)</option>
+                                                    Days)
+                                                </option>
                                                 <option value="Credit120days" @if (isset($latest_rfq))
                                                     {{$latest_rfq->payment_mode =='Credit120days' ? 'selected' : ''}} @endif>
                                                     Credit (120
-                                                    Days)</option>
+                                                    Days)
+                                                </option>
                                             @endif
                                         </select>
-                                    </div> <br>
-                                    Required Sample: @include('misc.required')<div class="relative inline-flex">
-                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"  style="width: 8px; height: 8px;"
+                                    </div>
+                                    <br>
+                                    Required Sample: @include('misc.required')
+                                    <div class="relative inline-flex">
+                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                             <path
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                                fill="#000000" fill-rule="nonzero" /></svg>
+                                                fill="#000000" fill-rule="nonzero"/>
+                                        </svg>
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             required name="required_sample" id="required_sample">
@@ -419,12 +425,14 @@
                                     <hr style="border-top: 1px solid gray;width: 25%;">
                                 </div>
                                 <div class="my-5 pl-5 ">
-                                    Warehouse Location: @include('misc.required')<div class="relative inline-flex">
-                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"  style="width: 8px; height: 8px;"
+                                    Warehouse Location: @include('misc.required')
+                                    <div class="relative inline-flex">
+                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                             <path
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                                fill="#000000" fill-rule="nonzero" /></svg>
+                                                fill="#000000" fill-rule="nonzero"/>
+                                        </svg>
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             required name="warehouse_id" id="warehouse_id">
@@ -437,29 +445,36 @@
                                             @endforeach
 
                                         </select>
-                                    </div> <br>
-                                    Delivery Period: @include('misc.required')<div class="relative inline-flex">
-                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"  style="width: 8px; height: 8px;"
+                                    </div>
+                                    <br>
+                                    Delivery Period: @include('misc.required')
+                                    <div class="relative inline-flex">
+                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                             <path
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                                fill="#000000" fill-rule="nonzero" /></svg>
+                                                fill="#000000" fill-rule="nonzero"/>
+                                        </svg>
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             name="delivery_period" id="delivery_period" required>
                                             <option value="">Select Delivery Period</option>
                                             <option value="Immediately" @if (isset($latest_rfq))
                                                 {{$latest_rfq->delivery_period =='Immediately' ? 'selected' : ''}} @endif>
-                                                Immediately</option>
+                                                Immediately
+                                            </option>
                                             <option value="Within 30 Days" @if (isset($latest_rfq))
                                                 {{$latest_rfq->delivery_period =='Within 30 Days' ? 'selected' : ''}}
-                                                @endif>30 Days</option>
+                                                @endif>30 Days
+                                            </option>
                                             <option value="Within 60 Days" @if (isset($latest_rfq))
                                                 {{$latest_rfq->delivery_period =='Within 60 Days' ? 'selected' : ''}}
-                                                @endif>60 Days</option>
+                                                @endif>60 Days
+                                            </option>
                                             <option value="Within 90 Days" @if (isset($latest_rfq))
                                                 {{$latest_rfq->delivery_period =='Within 90 Days' ? 'selected' : ''}}
-                                                @endif>90 Days</option>
+                                                @endif>90 Days
+                                            </option>
                                             <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
                                                 {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
                                                 @endif>Standing Order - 2 times / year
@@ -482,10 +497,12 @@
                                             </option>
                                             <option value="Standing Order Open" @if(isset($latest_rfq))
                                                 {{$latest_rfq->delivery_period =='Standing Order Open' ? 'selected' : ''}}
-                                                @endif>Standing Order - Open</option>
+                                                @endif>Standing Order - Open
+                                            </option>
 
                                         </select>
-                                    </div> <br>
+                                    </div>
+                                    <br>
                                 </div>
                             </div>
                         </div>
@@ -517,9 +534,9 @@
 
                             <th style="width:15%;">Category @include('misc.required')</th>
                             <th style="width:20%;">Item Description @include('misc.required')</th>
-                            <th style="width:7%">  UOM @include('misc.required') </th>
+                            <th style="width:7%"> UOM @include('misc.required') </th>
                             <th style="width:7%;">Quantity @include('misc.required') </th>
-                            <th style="width:10%;">Size </th>
+                            <th style="width:10%;">Size</th>
                             <th style="width:10%;">Brand</th>
                             <th style="width:7%;">Last Unit Price</th>
                             <th style="width:15%;"> Shipment Remarks</th>
@@ -598,11 +615,12 @@
                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                         <path
                                             d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                            fill="#000000" fill-rule="nonzero" /></svg>
+                                            fill="#000000" fill-rule="nonzero"/>
+                                    </svg>
                                     <select
                                         class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom"
                                         required name="unit_of_measurement" id="unit_of_measurement" style="max-height:35px;">
-                                        <option value="" >None</option>
+                                        <option value="">None</option>
                                         @foreach (\App\Models\UnitMeasurement::all() as $item)
                                             <option value="{{$item->uom_en}}">{{$item->uom_en}}</option>
                                         @endforeach
@@ -618,8 +636,8 @@
                                 <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text" name="size"
                                        min="0" placeholder="Size">
                             </td>
-                            <td> <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                        name="brand" min="0" autocomplete="brand" placeholder="Brand"></td>
+                            <td><input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
+                                       name="brand" min="0" autocomplete="brand" placeholder="Brand"></td>
 
                             <td>
                                 <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
@@ -634,12 +652,11 @@
                             <td>
 
                                 <label for="file" class="file-label"><img class="mx-auto" style="width:25px;"
-                                                                          src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png" /></label>
+                                                                          src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
                                 <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1"
                                        autocomplete="name" style="display:none;">
                             </td>
                         </tr>
-
 
 
                         </tbody>
@@ -649,6 +666,10 @@
                                 class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                             ADD ITEM
                         </button>
+
+                        <a href="{{route('RFQCart.index')}}"
+                           class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">RFQs
+                            Cart</a>
                     </div>
 
                 </div>
@@ -806,7 +827,7 @@
                                                 </select>
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap" >
+                                            <td class="px-6 py-4 whitespace-nowrap">
                                                 @if ($rfp->file_path)
                                                     <a href="{{ Storage::url($rfp->file_path) }}">
                                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -833,10 +854,10 @@
                                                             title="DELETE" onsubmit="alert('Are you sure')">
                                                         <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                              fill="red">
-                                                            <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
+                                                            <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
                                                             <path fill-rule="evenodd"
                                                                   d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
-                                                                  clip-rule="evenodd" />
+                                                                  clip-rule="evenodd"/>
                                                         </svg>
                                                     </button>
                                                 </form>
@@ -866,7 +887,7 @@
                         <div class="my-5 pl-5">
                             {{-- <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo"
                             style="height: 80px;width: 200px;" /> --}}
-                            <img src="{{ url('imp_img.jpg') }}" alt="logo" style="height: 80px;width: 200px;" />
+                            <img src="{{(isset(auth()->user()->business->business_photo_url)?Storage::url(auth()->user()->business->business_photo_url):'#')}}" alt="logo" style="height: 80px;width: 200px;"/>
                         </div>
                         @php
                             $user_business_details=auth()->user()->business;
@@ -901,32 +922,40 @@
                                     <span class="font-bold color-1f3864 text-lg">RFQ Information</span>
                                     <hr style="border-top: 1px solid gray;width: 25%;">
                                 </div>
-                                <div class="my-5 pl-5"  style="padding-left: 20px">
-                                    Display Company Name: @include('misc.required')<div class="relative inline-flex ">
-                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"  style="width: 8px; height: 8px;"
+                                <div class="my-5 pl-5" style="padding-left: 20px">
+
+                                    Display Company Name: @include('misc.required')
+                                    <div class="relative inline-flex">
+                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                             <path
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                                fill="#000000" fill-rule="nonzero" /></svg>
-                                        <select
-                                            class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
-                                            required name="company_name_check" id="company_name_check">
+                                                fill="#000000" fill-rule="nonzero"/>
+                                        </svg>
+                                        <select class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
+                                                required name="company_name_check" id="company_name_check">
                                             <option value="">Select</option>
                                             <option
                                                 @if(isset($latest_rfq)){{$latest_rfq->company_name_check == 0 ? 'selected' : ''}}
-                                                @endif value="0">No</option>
+                                                @endif value="0">No
+                                            </option>
                                             <option
                                                 @if(isset($latest_rfq)){{$latest_rfq->company_name_check == 1  ? 'selected' : ''}}
-                                                @endif value="1">Yes</option>
+                                                @endif value="1">Yes
+                                            </option>
                                         </select>
                                     </div>
+
+
                                     <br>
-                                    Payment Mode: @include('misc.required')<div class="relative inline-flex">
-                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"  style="width: 8px; height: 8px;"
+                                    Payment Mode: @include('misc.required')
+                                    <div class="relative inline-flex">
+                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                             <path
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                                fill="#000000" fill-rule="nonzero" /></svg>
+                                                fill="#000000" fill-rule="nonzero"/>
+                                        </svg>
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             name="payment_mode" id="payment_mode" required>
@@ -951,28 +980,35 @@
                                                 <option value="Credit30days" @if (isset($latest_rfq))
                                                     {{$latest_rfq->payment_mode =='Credit30days' ? 'selected' : ''}} @endif>
                                                     Credit (30
-                                                    Days)</option>
+                                                    Days)
+                                                </option>
                                                 <option value="Credit60days" @if (isset($latest_rfq))
                                                     {{$latest_rfq->payment_mode =='Credit60days' ? 'selected' : ''}} @endif>
                                                     Credit (60
-                                                    Days)</option>
+                                                    Days)
+                                                </option>
                                                 <option value="Credit90days" @if (isset($latest_rfq))
                                                     {{$latest_rfq->payment_mode =='Credit90days' ? 'selected' : ''}} @endif>
                                                     Credit (90
-                                                    Days)</option>
+                                                    Days)
+                                                </option>
                                                 <option value="Credit120days" @if (isset($latest_rfq))
                                                     {{$latest_rfq->payment_mode =='Credit120days' ? 'selected' : ''}} @endif>
                                                     Credit (120
-                                                    Days)</option>
+                                                    Days)
+                                                </option>
                                             @endif
                                         </select>
-                                    </div> <br>
-                                    Required Sample: @include('misc.required')<div class="relative inline-flex">
-                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"  style="width: 8px; height: 8px;"
+                                    </div>
+                                    <br>
+                                    Required Sample: @include('misc.required')
+                                    <div class="relative inline-flex">
+                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                             <path
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                                fill="#000000" fill-rule="nonzero" /></svg>
+                                                fill="#000000" fill-rule="nonzero"/>
+                                        </svg>
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             required name="required_sample" id="required_sample">
@@ -985,7 +1021,8 @@
                                             </option>
 
                                         </select>
-                                    </div> <br>
+                                    </div>
+                                    <br>
 
 
                                 </div>
@@ -996,12 +1033,14 @@
                                     <hr style="border-top: 1px solid gray;width: 25%;">
                                 </div>
                                 <div class="my-5 pl-5 ">
-                                    Warehouse Location: @include('misc.required')<div class="relative inline-flex">
-                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"  style="width: 8px; height: 8px;"
+                                    Warehouse Location: @include('misc.required')
+                                    <div class="relative inline-flex">
+                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                             <path
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                                fill="#000000" fill-rule="nonzero" /></svg>
+                                                fill="#000000" fill-rule="nonzero"/>
+                                        </svg>
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             required name="warehouse_id" id="warehouse_id">
@@ -1014,26 +1053,32 @@
                                             @endforeach
 
                                         </select>
-                                    </div> <br>
-                                    Delivery Period: @include('misc.required')<div class="relative inline-flex">
-                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"  style="width: 8px; height: 8px;"
+                                    </div>
+                                    <br>
+                                    Delivery Period: @include('misc.required')
+                                    <div class="relative inline-flex">
+                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                             <path
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                                fill="#000000" fill-rule="nonzero" /></svg>
+                                                fill="#000000" fill-rule="nonzero"/>
+                                        </svg>
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             name="delivery_period" id="delivery_period" required>
                                             <option value="">Select Delivery Period</option>
                                             <option value="Immediately" @if (isset($latest_rfq))
                                                 {{$latest_rfq->delivery_period =='Immediately' ? 'selected' : ''}} @endif>
-                                                Immediately</option>
+                                                Immediately
+                                            </option>
                                             <option value="Within 30 Days" @if (isset($latest_rfq))
                                                 {{$latest_rfq->delivery_period =='Within 30 Days' ? 'selected' : ''}}
-                                                @endif>30 Days</option>
+                                                @endif>30 Days
+                                            </option>
                                             <option value="Within 60 Days" @if (isset($latest_rfq))
                                                 {{$latest_rfq->delivery_period =='Within 60 Days' ? 'selected' : ''}}
-                                                @endif>60 Days</option>
+                                                @endif>60 Days
+                                            </option>
                                             <option value="Within 90 Days">90 Days</option>
                                             <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
                                                 {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
@@ -1057,10 +1102,12 @@
                                             </option>
                                             <option value="Standing Order Open" @if(isset($latest_rfq))
                                                 {{$latest_rfq->delivery_period =='Standing Order Open' ? 'selected' : ''}}
-                                                @endif>Standing Order - Open</option>
+                                                @endif>Standing Order - Open
+                                            </option>
 
                                         </select>
-                                    </div> <br>
+                                    </div>
+                                    <br>
                                 </div>
                             </div>
                         </div>
@@ -1075,9 +1122,9 @@
 
                             <th style="width:15%;">Category @include('misc.required')</th>
                             <th style="width:20%;">Item Description @include('misc.required')</th>
-                            <th style="width:7%">  UOM @include('misc.required') </th>
+                            <th style="width:7%"> UOM @include('misc.required') </th>
                             <th style="width:7%;">Quantity @include('misc.required') </th>
-                            <th style="width:10%;">Size </th>
+                            <th style="width:10%;">Size</th>
                             <th style="width:10%;">Brand</th>
                             <th style="width:7%;">Last Unit Price</th>
                             <th style="width:15%;"> Shipment Remarks</th>
@@ -1156,16 +1203,17 @@
                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                         <path
                                             d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                            fill="#000000" fill-rule="nonzero" /></svg>
+                                            fill="#000000" fill-rule="nonzero"/>
+                                    </svg>
                                     <select
                                         class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom"
                                         required name="unit_of_measurement" id="unit_of_measurement" style="max-height:35px;">
-                                        <option value="" >None</option>
+                                        <option value="">None</option>
                                         @foreach (\App\Models\UnitMeasurement::all() as $item)
                                             <option value="{{$item->uom_en}}">{{$item->uom_en}}</option>
                                         @endforeach
 
-                                    </select  >
+                                    </select>
                                 </div>
                             </td>
                             <td>
@@ -1176,8 +1224,8 @@
                                 <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text" name="size"
                                        min="0" placeholder="Size">
                             </td>
-                            <td> <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                        name="brand" min="0" autocomplete="brand" placeholder="Brand"></td>
+                            <td><input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
+                                       name="brand" min="0" autocomplete="brand" placeholder="Brand"></td>
 
                             <td>
                                 <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
@@ -1192,11 +1240,10 @@
                             <td>
 
                                 <label for="file" class="file-label"><img class="mx-auto" style="width:25px;"
-                                                                          src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png" /></label>
+                                                                          src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
                                 <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1"
                                        autocomplete="name" style="display:none;"></td>
                         </tr>
-
 
 
                         </tbody>
@@ -1206,6 +1253,11 @@
                                 class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                             ADD ITEM
                         </button>
+
+
+                        <a href="{{route('RFQCart.index')}}"
+                           class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">RFQ
+                            Cart</a>
                     </div>
 
                 </div>
@@ -1230,31 +1282,30 @@
 
 <script>
 
-    $('.company_name_check').change(function(){
-    // alert($(this).attr('data-id'));
-    // alert($(this).val());
-    let status = $(this).val();
-    let rfqId = $(this).attr('data-id');
-    // alert(rfqId);
+    $('.company_name_check').change(function () {
+        // alert($(this).attr('data-id'));
+        // alert($(this).val());
+        let status = $(this).val();
+        let rfqId = $(this).attr('data-id');
+        // alert(rfqId);
 
 
         $.ajax({
-        type : 'POST',
-        url:"{{ route('companyCheck') }}",
-        data:{
-            "_token": "{{ csrf_token() }}",
-            'rfqNo':rfqId,
-            'status':status
-        },
-        success: function (response) {
-        if(response.status === 0){
-            alert('Not Updated Try again');
-        }
-        else if(response.status === 1) {
-        alert('Updated Successfully!');
-        // $('#status').show().delay(5000).fadeOut();
+            type: 'POST',
+            url: "{{ route('companyCheck') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                'rfqNo': rfqId,
+                'status': status
+            },
+            success: function (response) {
+                if (response.status === 0) {
+                    alert('Not Updated Try again');
+                } else if (response.status === 1) {
+                    alert('Updated Successfully!');
+                    // $('#status').show().delay(5000).fadeOut();
+                }
             }
-         }
         });
     });
 
