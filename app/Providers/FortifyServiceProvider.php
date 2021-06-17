@@ -35,19 +35,6 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Fortify::authenticateUsing(function (Request $request) {
-            $user = User::where('email', $request->email)->first();
-
-            if ($user && Hash::check($request->password, $user->password))
-            {
-                UserLog::create([
-                    'user_id' => $user->id,
-                    'login_at' => Carbon::now()->toDateTime()
-                ]);
-                return $user;
-            }
-        });
-
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);

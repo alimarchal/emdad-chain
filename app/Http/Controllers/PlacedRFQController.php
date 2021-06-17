@@ -15,11 +15,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PlacedRFQController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         if (\auth()->user()->hasRole('SuperAdmin'))
@@ -35,78 +30,11 @@ class PlacedRFQController extends Controller
         return view('RFQPlaced.index', compact('PlacedRFQ'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\PlacedRFQ  $placedRFQ
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PlacedRFQ $placedRFQ)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\PlacedRFQ  $placedRFQ
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PlacedRFQ $placedRFQ)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PlacedRFQ  $placedRFQ
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PlacedRFQ $placedRFQ)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\PlacedRFQ  $placedRFQ
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PlacedRFQ $placedRFQ)
-    {
-        //
-    }
-
     public function RFQItems(Request $request, $EOrderItems)
     {
         $collection = EOrderItems::where('e_order_id', $EOrderItems)->get();
         return view('RFQPlaced.show', compact('collection'));
     }
-
 
     public function viewRFQs()
     {
@@ -159,7 +87,6 @@ class PlacedRFQController extends Controller
             }
     }
 
-
     public function viewRFQsID(EOrderItems $eOrderItems)
     {
         $user_id = auth()->user()->id;
@@ -167,7 +94,6 @@ class PlacedRFQController extends Controller
         $collection = Qoute::where('e_order_items_id', $eOrderItems->id)->where('supplier_user_id', $user_id)->first();
         return view('supplier.supplier-quote', compact('eOrderItems', 'collection', 'user_business_id'));
     }
-
 
     public function RFQsQouted($EOrderItems)
     {

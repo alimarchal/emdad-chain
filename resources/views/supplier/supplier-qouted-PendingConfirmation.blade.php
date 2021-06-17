@@ -22,16 +22,20 @@
                 New
             </a>
             <a href="{{ route('QoutedRFQQouted') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQQouted') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
-                Qouted
+                @php $quotedCount = \App\Models\Qoute::where('supplier_user_id', auth()->user()->id)->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->orWhere('qoute_status', 'Modified')->count(); @endphp
+                Quoted <span class="text-red-400">({{$quotedCount}})</span>
             </a>
             <a href="{{ route('QoutedRFQRejected') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQRejected') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                Rejected
+                @php $rejectedCount = \App\Models\Qoute::where('supplier_user_id', auth()->user()->id)->where('qoute_status_updated', 'Rejected')->count(); @endphp
+                Rejected <span class="text-red-400">({{$rejectedCount}})</span>
             </a>
             <a href="{{ route('QoutedRFQModificationNeeded') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQModificationNeeded') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                Modification needed
+                @php $modificationCount = \App\Models\Qoute::where('supplier_user_id', auth()->user()->id)->where('qoute_status_updated', 'ModificationNeeded')->count(); @endphp
+                Modification needed <span class="text-red-400">({{$modificationCount}})</span>
             </a>
             <a href="{{ route('QoutedRFQPendingConfirmation') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQPendingConfirmation') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                Pending Confirmation
+                @php $pendingCount = \App\Models\Qoute::where('supplier_user_id', auth()->user()->id)->where('qoute_status', 'RFQPendingConfirmation')->count(); @endphp
+                Pending Confirmation <span class="text-red-400">({{$pendingCount}})</span>
             </a>
         </nav>
     </div>
@@ -88,7 +92,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $rfp->orderItem->item_name }}
                                         </td>
-                                      
+
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $rfp->quote_quantity }}
                                         </td>

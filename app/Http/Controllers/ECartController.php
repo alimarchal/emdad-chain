@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class ECartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
 //        $user = User::findOrFail(auth()->user()->id);
@@ -25,22 +20,6 @@ class ECartController extends Controller
         return view('RFQ.index', compact('parentCategories', 'childs', 'eCart'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         if ($request->has('file_path_1')) {
@@ -56,46 +35,6 @@ class ECartController extends Controller
         return redirect('RFQ/create');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ECart  $eCart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ECart $eCart)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ECart  $eCart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ECart $eCart)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ECart  $eCart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ECart $eCart)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ECart  $eCart
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(ECart $RFQCart)
     {
         session()->flash('message', 'Item successfully deleted.');

@@ -313,6 +313,11 @@
                                     @endif
                                 </x-jet-dropdown-link>
 
+                            <div class="border-t border-gray-100"></div>
+                            <x-jet-dropdown-link href="{{ route('certificateView') }}">
+                                {{ __('Update Certificates') }}
+                            </x-jet-dropdown-link>
+
                                 <div class="border-t border-gray-100"></div>
                             @if (isset($isBusinessPOIExist))
                                 <x-jet-dropdown-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}">
@@ -526,6 +531,11 @@
                         @else
                             {{ __('Business') }}
                         @endif
+                    </x-jet-dropdown-link>
+
+                    <div class="border-t border-gray-100"></div>
+                    <x-jet-dropdown-link href="{{ route('certificateView') }}">
+                        {{ __('Update Certificates') }}
                     </x-jet-dropdown-link>
 
                     <div class="border-t border-gray-100"></div>

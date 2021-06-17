@@ -6,6 +6,7 @@ use App\Models\Auth;
 use App\Models\Business;
 use App\Models\BusinessCategory;
 use App\Models\BusinessPackage;
+use App\Models\BusinessUpdateCertificate;
 use App\Models\Category;
 use App\Models\IreCommission;
 use App\Models\User;
@@ -368,4 +369,104 @@ class BusinessController extends Controller
 
         return view('business.incomplete', compact('incompleteBusiness'));
     }
+
+    /* Certificate update functions for CEO start */
+    public function certificateView()
+    {
+        $business = Business::where('id', \auth()->user()->business_id)->first();
+
+        return view('business.certificate.user.edit', compact('business'));
+    }
+
+    public function certificateUpdate(Request $request)
+    {
+        if ($request->has('vat_reg_certificate_path_1') || $request->has('chamber_reg_path_1') || $request->has('business_photo_url_1'))
+        {
+            if ($request->has('vat_reg_certificate_path_1')) {
+                $path = $request->file('vat_reg_certificate_path_1')->store('', 'public');
+                $request->merge(['vat_reg_certificate_path' => $path]);
+            }
+
+            if ($request->has('chamber_reg_path_1')) {
+                $pathVat = $request->file('chamber_reg_path_1')->store('', 'public');
+                $request->merge(['chamber_reg_path' => $pathVat]);
+            }
+
+            if ($request->has('business_photo_url_1')) {
+                $pathLogo = $request->file('business_photo_url_1')->store('', 'public');
+                $request->merge(['business_photo_url' => $pathLogo]);
+            }
+
+            BusinessUpdateCertificate::updateOrCreate(
+                ['business_id' =>  \auth()->user()->business_id],
+                [
+                'business_id' =>  \auth()->user()->business_id,
+                'vat_reg_certificate_path' =>  $request->vat_reg_certificate_path,
+                'chamber_reg_path' =>  $request->chamber_reg_path,
+                'business_photo_url' =>  $request->business_photo_url,
+
+            ]);
+            session()->flash('message', 'Respective Certificate Upload. Will be updated once emdad approves');
+        }
+
+        session()->flash('error', 'No Certificates were uploaded for updating');
+        return redirect()->route('business.show', \auth()->user()->business_id);
+    }
+
+    /* Certificate update functions for CEO end */
+
+    /* Certificate update functions for Emdad Users start */
+    public function certificates()
+    {
+        $businessCertificates = BusinessUpdateCertificate::with('business')->get();
+
+        return view('business.certificate.emdadUser.index', compact('businessCertificates'));
+    }
+
+    public function certificateShow($id)
+    {
+        $businessCertificate = BusinessUpdateCertificate::with('business')->where('id', $id)->first();
+
+        return view('business.certificate.emdadUser.show', compact('businessCertificate'));
+    }
+
+    // Update status function for legal office status update for certificates
+    public function certificateStatusUpdate($id, $status)
+    {
+        BusinessUpdateCertificate::where('id', $id)->update(['legal_officer_status' => $status]);
+
+        session()->flash('message', 'Status Updated successfully!!');
+        return redirect()->route('certificates');
+    }
+
+    // Update status function for IT Admin to update certificates
+    public function certificateBusinessStatusUpdate($id)
+    {
+        $businessCertificates = BusinessUpdateCertificate::where('id', $id)->first();
+
+        $business = Business::where('id', $businessCertificates->business_id)->first();
+
+        if($businessCertificates->vat_reg_certificate_path != null)
+        {
+            $business->vat_reg_certificate_path = $businessCertificates->vat_reg_certificate_path;
+            $business->save();
+        }
+        if($businessCertificates->chamber_reg_path != null)
+        {
+            $business->chamber_reg_path = $businessCertificates->chamber_reg_path;
+            $business->save();
+        }
+        if($businessCertificates->business_photo_url != null)
+        {
+            $business->business_photo_url = $businessCertificates->business_photo_url;
+            $business->save();
+        }
+
+        $businessCertificates->delete();
+
+        session()->flash('message', 'Updated certificates successfully!!');
+        return redirect()->route('certificates');
+    }
+
+    /* Certificate update functions for Emdad Users end */
 }

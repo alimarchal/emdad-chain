@@ -20,6 +20,14 @@
                     </button>
                 </div>
             @endif
+
+            @php $businessCertificate = \App\Models\BusinessUpdateCertificate::where('business_id', auth()->user()->business_id)->first(); @endphp
+            @if(isset($businessCertificate))
+                <div class="text-center text-red-600 mr-5">
+                    <span class="text-center text-red-600 mr-5">Approval for New Uploaded Certificate(s) is pending</span>
+                </div>
+            @endif
+
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-0 bg-white sm:p-6">
                     <h1 class="text-center text-3xl font-bold p-4 border-t-2 bg-opacity-5 border-black border-2"> Business Information<br>{{$business->business_name}}</h1>
@@ -70,7 +78,7 @@
                             </div>
 
                             <div class="w-full overflow-hidden mb-2 lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                <a href="{{(isset($business->chamber_reg_path)?Storage::url($business->chamber_reg_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->chamber_reg_path)?'Chamber Registration Certificate':'Not Uploaded')}}</a>
+                                <a href="{{(isset($business->chamber_reg_path)?Storage::url($business->chamber_reg_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->chamber_reg_path)?'Commercial Registration Certificate':'Not Uploaded')}}</a>
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">

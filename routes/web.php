@@ -76,6 +76,16 @@ Route::middleware(['packageCheck', 'categoryCheck'])->group(function () {
     Route::middleware(['auth:sanctum'])->resource('/business', BusinessController::class);
 });
 
+// Update business certificate route for Users
+Route::middleware(['auth:sanctum'])->get('/update-certificates/', [BusinessController::class, 'certificateView'])->name('certificateView');
+Route::middleware(['auth:sanctum'])->post('/update-certificates/', [BusinessController::class, 'certificateUpdate']);
+
+// Update business certificate route for Emdad users
+Route::middleware(['auth:sanctum'])->get('/certificates-update-requests/', [BusinessController::class, 'certificates'])->name('certificates');
+Route::middleware(['auth:sanctum'])->get('/certificates-show/{id}', [BusinessController::class, 'certificateShow'])->name('certificateShow');
+Route::middleware(['auth:sanctum'])->get('/certificates-status-update/{id}/{status}', [BusinessController::class, 'certificateStatusUpdate'])->name('certificateStatusUpdate');
+Route::middleware(['auth:sanctum'])->get('/business-certificates-update/{id}', [BusinessController::class, 'certificateBusinessStatusUpdate'])->name('certificateBusinessStatusUpdate');
+
 Route::middleware(['auth:sanctum'])->get('/incomplete-business-registration/', [BusinessController::class, 'incomplete'])->name('incompleteBusiness');
 Route::middleware(['auth:sanctum'])->get('/business-status/', [BusinessController::class, 'accountStatus'])->name('accountStatus');
 Route::middleware(['auth:sanctum'])->get('/business-legal-finance-status/', [BusinessController::class, 'businessLegalFinanceStatus'])->name('businessLegalFinanceStatus');

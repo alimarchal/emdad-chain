@@ -225,7 +225,7 @@
                         @php
                             $quote = \App\Models\QouteMessage::where('qoute_id', $collection->id )->get();
                         @endphp
-                        @if(isset($quote) && !$quote)
+                        @if(isset($quote) && $quote->isNotEmpty())
 
                             <div class="border-2 p-2 m-2">
                                 @foreach ($quote as $msg)
@@ -283,9 +283,23 @@
                                 </td>
 
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="shipment_cost" type="number" name="shipment_cost" value="{{$collection->shipment_cost}}" min="0" step="any" autocomplete="size" required placeholder="Shipment Cost">
+                                    <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost" value="{{$collection->shipment_cost}}" min="0" step="any" autocomplete="size" required placeholder="Shipment Cost">
                                 </td>
 
+
+                            </tr>
+
+                            <tr class="mt-2">
+                                <td colspan="2" class="" >
+
+                                    <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
+
+                                </td>
+                                <td colspan="2" class="text-left">
+                                    <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                        Calculate Total Cost
+                                    </a>
+                                </td>
 
                             </tr>
 

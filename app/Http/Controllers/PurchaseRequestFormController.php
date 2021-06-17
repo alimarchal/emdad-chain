@@ -16,22 +16,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PurchaseRequestFormController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $rfq = PurchaseRequestForm::where('business_id', Auth::user()->business_id)->get();
         return view('RFQ.index', compact('rfq'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
-     */
     public function create()
     {
 //        $user = User::findOrFail(auth()->user()->id);
@@ -71,12 +61,6 @@ class PurchaseRequestFormController extends Controller
         return view('RFQ.create', compact('parentCategories', 'childs','eCart','rfqCount','latest_rfq'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         if ($request->has('file_path_1')) {
@@ -95,48 +79,4 @@ class PurchaseRequestFormController extends Controller
         return redirect('RFQ/create',compact('parentCategories', 'childs', 'user'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\PurchaseRequestForm $purchaseRequestForm
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PurchaseRequestForm $purchaseRequestForm)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\PurchaseRequestForm $purchaseRequestForm
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PurchaseRequestForm $purchaseRequestForm)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\PurchaseRequestForm $purchaseRequestForm
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PurchaseRequestForm $purchaseRequestForm)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\PurchaseRequestForm $purchaseRequestForm
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PurchaseRequestForm $purchaseRequestForm)
-    {
-        //
-    }
 }
