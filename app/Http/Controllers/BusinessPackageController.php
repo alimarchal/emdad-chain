@@ -372,10 +372,16 @@ class BusinessPackageController extends Controller
 
     public function proceed_payment(Request $request)
     {
+
         $invoice = Invoice::where('id', $request->invoice_id)->first();
         $merchant_id = null;
-        $total_charges = round(($invoice->total_cost + ($invoice->total_cost * 0.0175)),2);
-
+        $total_charges = 0;
+        if ($request->gateway == "mada")
+        {
+            $total_charges = round(($invoice->total_cost + ($invoice->total_cost * 0.0175)),2);
+        } elseif($request->gateway == "visa_master") {
+            $total_charges = round(($invoice->total_cost + ($invoice->total_cost * 0.0275) + 1),2);
+        }
 
         $merchant_id = CardPayment::create([
             'invoice_id' => $request->invoice_id,
@@ -400,9 +406,23 @@ class BusinessPackageController extends Controller
                 "&customer.givenName=" . $request->customer_givenName .
                 "&customer.surname=" . $request->customer_surname .
                 "&paymentType=" . env("PAYMENT_TYPE");
-            $request->merge(["testMode" => "EXTERNAL"]);
+                $request->merge(["testMode" => "EXTERNAL"]);
 
         } elseif ($request->gateway == "visa_master") {
+//            $data = "entityId=" . env('ENTITY_ID_VISA') .
+//                "&amount=" . $total_charges .
+//                "&currency=SAR" .
+//                "&merchantTransactionId=" . $merchant_id->id .
+//                "&customer.email=" . $request->customer_email .
+//                "&billing.street1=" . $request->billing_street1 .
+//                "&billing.city=" . $request->billing_city .
+//                "&billing.state=" . $request->billing_state .
+//                "&billing.country=" . $request->billing_country .
+//                "&billing.postcode=" . $request->billing_postcode .
+//                "&customer.givenName=" . $request->customer_givenName .
+//                "&customer.surname=" . $request->customer_surname .
+//                "&paymentType=" . env("PAYMENT_TYPE");
+
             $data = "entityId=" . env('ENTITY_ID_VISA') .
                 "&amount=" . $total_charges .
                 "&currency=SAR" .
@@ -417,6 +437,7 @@ class BusinessPackageController extends Controller
                 "&customer.surname=" . $request->customer_surname .
                 "&paymentType=" . env("PAYMENT_TYPE");
         }
+
 
 
         $ch = curl_init();
@@ -444,7 +465,7 @@ class BusinessPackageController extends Controller
             return redirect()->route('invoices')->with(['message' => 'Transaction failed incorrect parameters.']);
         }
 
-        return view('invoice-payment-online.payment', compact('invoice', 'res_data', 'gateway', 'merchant_id'));
+        return view('invoice-payment-online.payment', compact('invoice', 'res_data', 'gateway', 'total_charges', 'merchant_id'));
 
     }
 

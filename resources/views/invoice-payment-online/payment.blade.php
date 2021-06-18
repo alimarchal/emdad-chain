@@ -73,7 +73,7 @@
         </div>
     @endif
     <h2 class="text-2xl font-bold py-2 text-center m-2">
-        Amount: SAR {{number_format(($invoice->total_cost + ($invoice->total_cost * 0.0175)),2)}}
+        Amount: SAR {{number_format($total_charges,2)}}
     </h2>
     <style>
         .form-radio {
