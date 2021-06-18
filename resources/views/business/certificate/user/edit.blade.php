@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-label class="w-1/2" for="chamber_reg_path_1">Chamber Registration certificate</x-jet-label>
+                            <x-jet-label class="w-1/2" for="chamber_reg_path_1">Commercial Registration certificate</x-jet-label>
                         </div>
                         <div class="flex space-x-5 mt-3">
 

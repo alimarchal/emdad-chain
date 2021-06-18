@@ -13,6 +13,6 @@
             </ul>
         </li>
         <li><a href="javascript:void(0)">مركز التدريب</a></li>
-        <li><a href="javascript:void(0)">How it works</a></li>
+        <li><a href="javascript:void(0)">كيف تعمل</a></li>
     </ul>
 </nav>

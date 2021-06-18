@@ -160,7 +160,7 @@ class QouteController extends Controller
 
     public function QoutationsBuyerReceivedQoutes(Request $request, $EOrderID, $EOrderItemID, $bypass_id)
     {
-        $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
+        $collection = EOrderItems::with('qoutes')->where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
         if($bypass_id == 1)
         {
             $collection->update([

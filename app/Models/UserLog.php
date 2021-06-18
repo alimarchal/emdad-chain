@@ -11,7 +11,7 @@ class UserLog extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['user_id' , 'login_at' ,'status'];
+    protected $fillable = ['user_id' , 'login_at' , 'business_inspect_check' ,'status'];
 
     public function user()
     {

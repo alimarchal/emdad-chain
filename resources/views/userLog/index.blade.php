@@ -65,6 +65,11 @@
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                         Company Name
                                                     </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                        Business Checked/Saw
+                                                    </th>
+
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                         Logged in at
                                                     </th>
@@ -86,6 +91,14 @@
                                                             <div class="text-sm text-gray-900">
                                                                 {{ isset($user->user->business->business_name) ? $user->user->business->business_name : 'N/A'  }}
                                                             </div>
+                                                        </td>
+
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                            @if($user->business_inspect_check == 0)
+                                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800"> No </span>
+                                                            @elseif($user->business_inspect_check == 1)
+                                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"> Yes </span>
+                                                            @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap">

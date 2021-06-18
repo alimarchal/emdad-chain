@@ -10,6 +10,7 @@ use App\Models\BusinessUpdateCertificate;
 use App\Models\Category;
 use App\Models\IreCommission;
 use App\Models\User;
+use App\Models\UserLog;
 use Illuminate\Http\Request;
 
 class BusinessController extends Controller
@@ -41,6 +42,15 @@ class BusinessController extends Controller
                     return view('business.saleSpecialist.incompleteMarketing', compact('businesses'));
                 } elseif ($request->status == 2) {
                     $users = User::where('usertype', 'CEO')->where('business_id', null)->orderBy('id','desc')->paginate(10);
+
+                    // Check for Sales Specialist if they checked/saw incomplete businesses
+                    $userBusinessCheck = UserLog::latest('login_at')->where(['user_id' => \auth()->id()])->first();
+                    if (isset($userBusinessCheck) && $userBusinessCheck->business_inspect_check == 0)
+                    {
+                        $userBusinessCheck->update(['business_inspect_check' => 1]);
+                        $userBusinessCheck->save();
+                    }
+
                     return view('business.saleSpecialist.incompleteMarketing', compact('users'));
                 }
             }
@@ -58,6 +68,14 @@ class BusinessController extends Controller
                 } elseif ($request->status == 1) {
                     $status = $request->status;
                     $businesses = Business::where('status', 1)->orderBy('id','desc')->paginate(10);
+
+                    // Check for Emdad users if they checked/saw pending businesses
+                    $userBusinessCheck = UserLog::latest('login_at')->where(['user_id' => \auth()->id()])->first();
+                    if (isset($userBusinessCheck) && $userBusinessCheck->business_inspect_check == 0)
+                    {
+                        $userBusinessCheck->update(['business_inspect_check' => 1]);
+                        $userBusinessCheck->save();
+                    }
 //                    $users = User::where('usertype', 'CEO')->where('business_id', null)->orderBy('id','desc')->paginate(10);
                     return view('business.legalOfficer.legalBusinessesInfo', compact('businesses', 'status'));
                 }
@@ -76,6 +94,15 @@ class BusinessController extends Controller
                 } elseif ($request->status == 1) {
                     $status = $request->status;
                     $businesses = Business::where('status', 1)->orderBy('id','desc')->paginate(10);
+
+                    // Check for IT Admin if he checked/saw pending businesses
+                    $userBusinessCheck = UserLog::latest('login_at')->where(['user_id' => \auth()->id()])->first();
+                    if (isset($userBusinessCheck) && $userBusinessCheck->business_inspect_check == 0)
+                    {
+                        $userBusinessCheck->update(['business_inspect_check' => 1]);
+                        $userBusinessCheck->save();
+                    }
+
 //                    $users = User::where('usertype', 'CEO')->where('business_id', null)->orderBy('id','desc')->paginate(10);
                     return view('business.itAdmin.business', compact('businesses', 'status'));
                 }

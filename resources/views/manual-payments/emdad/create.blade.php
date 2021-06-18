@@ -66,7 +66,7 @@
                             <div class="flex space-x-5 mt-3">
 
                                 <x-jet-input id="bank_name" type="text" name="bank_name" class="border p-2 w-1/2" value="{{$supplierBusinessName->bank_name}}" readonly required></x-jet-input>
-                                <x-jet-input id="amount_received" type="text" name="amount_received" class="border p-2 w-1/2" value="{{$invoice->total_cost}}" required></x-jet-input>
+                                <x-jet-input id="amount_received" type="text" name="amount_received" class="border p-2 w-1/2" value="{{$invoice->total_cost}}" readonly required></x-jet-input>
                                 <x-jet-input id="account_number" type="text" name="account_number" class="border p-2 w-1/2" value="{{$supplierBusinessName->iban}}" readonly required></x-jet-input>
                             </div>
 

@@ -441,7 +441,7 @@
                                             auth()->user()->business_id)->get() as $warehouse)
                                                 <option value="{{$warehouse->id}}" @if (isset($latest_rfq))
                                                     {{$latest_rfq->warehouse_id ==$warehouse->id ? 'selected' : ''}} @endif>
-                                                    {{$warehouse->name . ' Address:' . $warehouse->address }}</option>
+                                                    {{$warehouse->address }}</option>
                                             @endforeach
 
                                         </select>
@@ -1049,7 +1049,7 @@
                                             auth()->user()->business_id)->get() as $warehouse)
                                                 <option value="{{$warehouse->id}}" @if (isset($latest_rfq))
                                                     {{$latest_rfq->warehouse_id ==$warehouse->id ? 'selected' : ''}} @endif>
-                                                    {{$warehouse->name . ' Address:' . $warehouse->address }}</option>
+                                                    {{$warehouse->address }}</option>
                                             @endforeach
 
                                         </select>

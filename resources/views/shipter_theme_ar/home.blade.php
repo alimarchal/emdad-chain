@@ -59,7 +59,7 @@
                     <div class="row">
                         <div class="col-xl-12 slide-caption" >
                             <div>
-                                <div class="btn-style" style="padding-bottom: 180px;padding-right: 450px;"><a href="{{route('register')}}">انضم إلينا</a></div>
+                                <div class="btn-style" style="padding-bottom: 180px;padding-right: 450px;"><a href="{{route('register')}}"  style="font-size: 20px;">انضم إلينا</a></div>
                             </div>
 {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
                             <h3 class="text-white" style="font-family: arabicFont;direction: rtl;">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
@@ -76,7 +76,7 @@
                     <div class="row">
                         <div class="col-xl-12 slide-caption">
                             <div>
-                                <div class="btn-style" style="padding-bottom: 180px;padding-right: 450px;"><a href="{{route('register')}}">انضم إلينا</a></div>
+                                <div class="btn-style" style="padding-bottom: 180px;padding-right: 450px;"><a href="{{route('register')}}" style="font-size: 20px;">انضم إلينا</a></div>
                             </div>
                             {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
                             <h3 class="text-white" style="font-family: arabicFont;direction: rtl;">منصة إمداد هي منصة إلكترونية بنيت بخبرة عالية لتخدم البائع والمشتري في عمليات الشراء والبيع والتوريد والتخزين، بأقل التكاليف وأفضل المعايير التقنية واللوجستية.</h3>
@@ -659,6 +659,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="btns text-center">
+                <div class="btn-style"><a href="{{route('arabic.team')}}">المزيد</a></div>
             </div>
         </div>
     </div>

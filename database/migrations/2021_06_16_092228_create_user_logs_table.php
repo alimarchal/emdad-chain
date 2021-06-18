@@ -17,6 +17,7 @@ class CreateUserLogsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->dateTime('login_at');
+            $table->integer('business_inspect_check')->default(0);  /* 0 for not inspected, 1 for inspected */
             $table->integer('status')->default(1);
         });
     }

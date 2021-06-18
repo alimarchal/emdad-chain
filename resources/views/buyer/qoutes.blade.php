@@ -13,7 +13,7 @@
             </button>
         </div>
     @endif
-    <h2 class="text-2xl font-bold py-2 text-center m-2">Qoute List @if (!$collection->qoutes->count()) seems empty @endif
+    <h2 class="text-2xl font-bold py-2 text-center m-2">Quote List @if (!$collection->qoutes->count()) seems empty @endif
     </h2>
 
     <!-- This example requires Tailwind CSS v2.0+ -->
@@ -71,9 +71,14 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @if($packageType->package_id == 1)
                                     @php
-                                        $modification = $collection->qoutes()->where('qoute_status', 'ModificationNeeded')->orWhere('qoute_status', 'Modified')->first();
+                                        /*$modification = $collection->qoutes()->where('qoute_status', 'ModificationNeeded')->orWhere('qoute_status', 'Modified')->first();*/
+
+                                        /* Changed query and added two because of orWhere clause Error in single query */
+                                        $modificationModificationNeeded = $collection->qoutes()->where('qoute_status', 'ModificationNeeded')->first();
+                                        $modificationModified = $collection->qoutes()->where('qoute_status', 'Modified')->first();
                                     @endphp
-                                    @if(isset($modification) )
+{{--                                    @if(isset($modification) )--}}
+                                    @if(isset($modificationModificationNeeded) || isset($modificationModified))
 {{--                                        @foreach ($collection->qoutes->where('qoute_status', 'ModificationNeeded') as $rfp)--}}
 {{--                                            <tr>--}}
 {{--                                                <td class="px-6 py-4 whitespace-nowrap">--}}
@@ -174,9 +179,10 @@
 
                                 @elseif($packageType->package_id == 2)
                                     @php
-                                        $modified = $collection->qoutes()->where('qoute_status', 'ModificationNeeded')->orWhere('qoute_status', 'Modified')->first();
+                                        $modificationModificationNeeded = $collection->qoutes()->where('qoute_status', 'ModificationNeeded')->first();
+                                        $modificationModified = $collection->qoutes()->where('qoute_status', 'Modified')->first();
                                     @endphp
-                                    @if(isset($modified))
+                                    @if(isset($modificationModificationNeeded) || isset($modificationModified))
                                         <div class="text-center"> <span class="py-4 px-6 block hover:text-red-500 focus:outline-none 'text-blue-500 border-b-2 font-medium border-blue-500' text-center text-bold text-red-700"> See Modification needed tab</span></div>
                                     @else
                                         @foreach ($collection->qoutes->where('qoute_status', 'Qouted')->sortBy('total_cost')->take(3) as $rfp)
@@ -232,9 +238,10 @@
                                     @endif
                                 @elseif($packageType->package_id == 3 || $packageType->package_id == 4)
                                     @php
-                                        $modified = $collection->qoutes()->where('qoute_status', 'ModificationNeeded')->orWhere('qoute_status', 'Modified')->first();
+                                        $modificationModificationNeeded = $collection->qoutes()->where('qoute_status', 'ModificationNeeded')->first();
+                                        $modificationModified = $collection->qoutes()->where('qoute_status', 'Modified')->first();
                                     @endphp
-                                    @if(isset($modified))
+                                    @if(isset($modificationModificationNeeded) || isset($modificationModified))
                                         <div class="text-center"> <span class="py-4 px-6 block hover:text-red-500 focus:outline-none 'text-blue-500 border-b-2 font-medium border-blue-500' text-center text-bold text-red-700"> See Modification needed tab</span></div>
                                     @else
                                         @foreach ($collection->qoutes->where('qoute_status', 'Qouted')->sortBy('total_cost')->take(5) as $rfp)
