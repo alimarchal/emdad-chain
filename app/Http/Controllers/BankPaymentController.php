@@ -13,6 +13,7 @@ class BankPaymentController extends Controller
 {
     public function index()
     {
+        $collection = null;
         if (auth()->user()->registration_type == 'Buyer') {
 //            $collection = BankPayment::where('buyer_business_id', auth()->user()->business_id)->get();
             $collection = Invoice::where('buyer_business_id', auth()->user()->business_id)->where('invoice_status', 0)->get();

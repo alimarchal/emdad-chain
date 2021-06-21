@@ -89,10 +89,10 @@ class DeliveryController extends Controller
             $delivery = Delivery::find($id);
             if (!empty($delivery)) {
                 if ($request->input('otp') == 'generate') {
-
                     $string = rand(1000, 9999);
                     $otp = $delivery->otp = $string;
-                    $rfq_item_no = $delivery->rfq_item_no;
+                    $delivery->save();
+                    $rfq_item_no = ltrim($delivery->rfq_item_no, '0');
 
                     $wh_id = EOrderItems::where('id', $rfq_item_no)->first()->warehouse_id;
                     if (!empty($wh_id)) {
@@ -107,25 +107,24 @@ class DeliveryController extends Controller
                         $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=966" . $mobile_no . "&sender=Emdad-Aid&unicode=e&randparams=1";
 
                         $ch = curl_init();
-                        curl_setopt($ch,CURLOPT_URL,$url);
-                        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-                        $output=curl_exec($ch);
-                        if(curl_errno($ch))
-                        {
+                        curl_setopt($ch, CURLOPT_URL, $url);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        $output = curl_exec($ch);
+                        if (curl_errno($ch)) {
                             echo 'error:' . curl_error($c);
                         }
                         curl_close($ch);
-//
-//
-//                        $ch = curl_init($url);
-//                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//                        $curl_scraped_page = curl_exec($ch);
-//                        curl_close($ch);
-
-                        $delivery->save();
                     }
                 }
-                $delivery = Delivery::find($id);
+                $business_url = Business::find($delivery->supplier_business_id)->first();
+                $business_photo_url = $business_url->business_photo_url;
+                if (!empty($business_url)) {
+                    #convert to collection for appending the delivery eloquent collection
+                    $delivery = collect(Delivery::find($id));
+                    $custom = collect(['supplier_logo_url' => config('app.url') . '/storage/' . $business_photo_url]);
+                    $delivery = $delivery->merge($custom);
+                }
+
                 return $delivery;
             } else {
                 return response()->json(['message' => 'Not Found!'], 404);
