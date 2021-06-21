@@ -25,7 +25,7 @@
                             <strong>Purchase Order #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->id }}<br>
                             <strong>Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
                             <strong>RFQ#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->rfq_no }}<br>
-                            <strong>Qoute#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->qoute_no }}<br>
+                            <strong>Quote#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->qoute_no }}<br>
                             <strong>Payment Terms#: &nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->payment_term }}<br>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                                     Category Name
                                 </th>
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    Quantitiy
+                                    Quantity
                                 </th>
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                     UOM
@@ -112,7 +112,7 @@
                                         <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
                                             Warranty
                                         </label>
-                                        <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" name="warranty" required>
+                                        <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" name="warranty">
 
                                         <label class="block font-medium text-sm text-gray-700 mt-4" for="delivery_address">
                                             Terms and Conditions
@@ -178,7 +178,7 @@
                                     <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
                                         Warranty
                                     </label>
-                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" name="warranty" required>
+                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" name="warranty">
 
                                     <label class="block font-medium text-sm text-gray-700 mt-4" for="delivery_address">
                                         Terms and Conditions

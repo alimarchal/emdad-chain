@@ -9,7 +9,7 @@ class EOrders extends Model
 {
     use HasFactory;
 
-    protected $fillable  = ['business_id', 'user_id', 'status'];
+    protected $fillable  = ['business_id', 'user_id', 'rfq_type', 'status'];
 
     public function OrderItems()
     {

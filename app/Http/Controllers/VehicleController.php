@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         if (auth()->user()->hasRole('SuperAdmin'))
@@ -30,11 +25,6 @@ class VehicleController extends Controller
         return view('vehicle.index', compact('vehicles', 'vehiclesCount'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //Checking vehicles count for related packages
@@ -55,12 +45,6 @@ class VehicleController extends Controller
         return view('vehicle.create', compact('vehiclesCount'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $vehicleCount = Vehicle::where('supplier_business_id', auth()->id())->count();
@@ -89,35 +73,11 @@ class VehicleController extends Controller
         return redirect()->route('vehicle.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Vehicle $vehicle)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Vehicle $vehicle)
     {
         return view('vehicle.edit', compact('vehicle'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Vehicle $vehicle)
     {
         $vehicle->type = $request->type;
@@ -128,12 +88,6 @@ class VehicleController extends Controller
         return redirect()->route('vehicle.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Vehicle  $vehicle
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Vehicle $vehicle)
     {
         if ($vehicle->availability_status == 0)

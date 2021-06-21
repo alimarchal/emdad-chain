@@ -90,7 +90,7 @@
                                             $category = \App\Models\Category::where('id',$rfp->category->id)->first();
                                             $parentCategory = \App\Models\Category::where('id',$category->parent_id)->first();
                                         @endphp
-                                        {{ $rfp->item_name }} , {{ $parentCategory->name }}
+                                        {{ $rfp->item_name }} @if(isset($parentCategory->name)) , {{ $parentCategory->name }} @endif
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">
@@ -149,7 +149,7 @@
         </div>
     @endif
     <div class="mt-5">
-        <a href="{{route('PlacedRFQ.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+        <a href="{{route('single_category_rfq_index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
             Back
         </a>
     </div>

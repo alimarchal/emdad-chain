@@ -39,7 +39,8 @@ class PurchaseRequestFormController extends Controller
         }
         $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
 //        $eCart = ECart::where('user_id',auth()->user()->id)->where('business_id',auth()->user()->business_id)->get();
-        $eCart = ECart::where('business_id',auth()->user()->business_id)->get();
+//        $eCart = ECart::where('business_id',auth()->user()->business_id)->get();
+        $eCart = ECart::where(['business_id' => auth()->user()->business_id,'rfq_type' => 1])->get();
 
         // Remaining RFQ count
         $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
@@ -77,6 +78,40 @@ class PurchaseRequestFormController extends Controller
         $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
         $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
         return redirect('RFQ/create',compact('parentCategories', 'childs', 'user'));
+    }
+
+    /* For Single Category RFQ*/
+    public function create_single_rfq()
+    {
+        $businessPackage = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+        if (isset($businessPackage))
+        {
+            $categories = explode(',', $businessPackage->categories);
+            $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
+        }
+        else{
+//            $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+            session()->flash('error','No Business Package Found for you account! Contact Admin.');
+            return redirect()->back();
+        }
+        $eCart = ECart::where(['business_id' => auth()->user()->business_id , 'rfq_type' => 0])->get();
+
+        // Remaining RFQ count
+        $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
+        $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+
+        $latest_rfq = ECart::latest()->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->first();
+        $package = Package::where('id', $business_package->package_id)->first();
+
+        if ($business_package->package_id == 1 || $business_package->package_id == 2)
+        {
+            $rfqCount = $package->rfq_per_day - $rfq;
+        }
+        else{
+            $rfqCount = null;
+        }
+
+        return view('RFQ.singleCategory.create', compact('parentCategories','eCart','rfqCount','latest_rfq'));
     }
 
 }

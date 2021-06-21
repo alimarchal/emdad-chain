@@ -106,6 +106,9 @@
                                                             Licence #
                                                         </th>
                                                         <th scope="col" class="px-6 py-30 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                                            Status
+                                                        </th>
+                                                        <th scope="col" class="px-6 py-30 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                             Action
                                                         </th>
 
@@ -122,6 +125,18 @@
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap ml-10 text-center">
                                                                 <a href="{{ route('vehicle.edit', $vehicle) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{$vehicle->licence_plate_No}}</a>
+                                                            </td>
+
+                                                            <td class="px-6 py-4 whitespace-nowrap ml-10 text-center">
+                                                                @if($vehicle->availability_status == 1)
+                                                                    <span class="px-2 inline-flex text-xs font-semibold rounded-full bg-green-100  text-green-800">
+                                                                        Available
+                                                                    </span>
+                                                                @elseif($vehicle->availability_status == 0)
+                                                                    <span class="px-2 inline-flex text-xs font-semibold rounded-full bg-red-100  text-red-800">
+                                                                        Not-Available
+                                                                    </span>
+                                                                @endif
                                                             </td>
 
                                                             <td class="whitespace-nowrap ml-10 text-center">

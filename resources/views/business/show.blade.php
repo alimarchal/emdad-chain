@@ -118,6 +118,10 @@
                             </div>
 
                             <div class="w-full overflow-hidden mb-2 lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
+                                <p><strong>Bank Name:</strong> {{$business->bank_name}}</p>
+                            </div>
+
+                            <div class="w-full overflow-hidden mb-2 lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
                                 <p><strong>Website:</strong> {{$business->website}}</p>
                             </div>
 

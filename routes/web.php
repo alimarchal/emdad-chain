@@ -254,9 +254,29 @@ Route::middleware(['auth:sanctum'])->resource('category', CategoryController::cl
 ####################END###############################
 #################### RFP Purchase Request Form ##########################
 Route::middleware(['auth:sanctum'])->resource('RFQ', PurchaseRequestFormController::class);
+
+// For Single Category RFQ
+Route::middleware(['auth:sanctum'])->get('create-single-category-rfq', [PurchaseRequestFormController::class, 'create_single_rfq'])->name('create_single_rfq');
+Route::middleware(['auth:sanctum'])->post('create-single-category-rfq', [PurchaseRequestFormController::class, 'store_single_rfq']);
+
 Route::middleware(['auth:sanctum'])->resource('RFQCart', ECartController::class);
+
+// For Single Category RFQ
+Route::middleware(['auth:sanctum'])->get('single-category-cart', [ECartController::class, 'single_cart_index'])->name('single_cart_index');
+Route::middleware(['auth:sanctum'])->post('store-single-category-cart-rfq', [ECartController::class, 'single_cart_store_rfq'])->name('single_cart_store_rfq');
+Route::middleware(['auth:sanctum'])->post('delete-single-category-rfq/{id}', [ECartController::class, 'single_cart_destroy'])->name('single_cart_destroy');
+
 Route::middleware(['auth:sanctum'])->resource('EOrders', EOrdersController::class);
+
+// For Single Category RFQ
+Route::middleware(['auth:sanctum'])->post('store-single-category-rfq', [EOrdersController::class, 'single_category_store'])->name('single_category_store');
+
 Route::middleware(['auth:sanctum'])->resource('PlacedRFQ', PlacedRFQController::class);
+
+// For Single category RFQ
+Route::middleware(['auth:sanctum'])->get('placed-single-category-rfq', [PlacedRFQController::class, 'single_category_rfq_index'])->name('single_category_rfq_index');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq/{id}', [PlacedRFQController::class, 'single_category_rfq_view'])->name('single_category_rfq_view');
+
 Route::get('/rfq-with-no-quotations', [PlacedRFQController::class, 'RFQsWithNoQuotations'])->name('RFQsWithNoQuotations');
 Route::post('/change-company-check', [ECartController::class, 'companyCheck'])->name('companyCheck');
 #########################################################################

@@ -304,7 +304,7 @@
                 </div>
             </div>
 
-            <form method="POST" action="{{ route('RFQCart.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('single_cart_store_rfq') }}" enctype="multipart/form-data">
                 @csrf
                 <div class=" mb-3">
                     <div>
@@ -338,9 +338,6 @@
                                             </option>
                                         </select>
                                     </div>
-
-
-
                                     <br>
                                     Payment Mode: @include('misc.required')
                                     <div class="relative inline-flex">
@@ -415,6 +412,29 @@
                                             </option>
 
                                         </select>
+                                    </div>
+                                    <br>
+
+                                    Category: @include('misc.required')
+                                    <div class="relative inline-flex">
+                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
+                                            <path
+                                                d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
+                                                fill="#000000" fill-rule="nonzero"/>
+                                        </svg>
+                                        @if (isset($latest_rfq))
+                                            @php
+                                                $record = \App\Models\Category::where('id',$latest_rfq->item_code)->first();
+                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                            @endphp
+
+                                            <select name="item_name" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" readonly>
+                                                <option value="{{$latest_rfq->item_code}}">{{$latest_rfq->item_name . ' - ' . $parent->name }}</option>
+                                            </select>
+                                        @else
+                                            @include('category.rfp')
+                                        @endif
                                     </div>
                                     <br>
                                 </div>
@@ -532,14 +552,14 @@
                         <thead style="background-color:#8EAADB" class="text-white">
                         <tr>
 
-                            <th style="width:15%;">Category @include('misc.required')</th>
+                            <th style="width:3%;"># </th>
                             <th style="width:20%;">Item Description @include('misc.required')</th>
-                            <th style="width:7%"> UOM @include('misc.required') </th>
+                            <th style="width:7%">UOM @include('misc.required') </th>
                             <th style="width:7%;">Quantity @include('misc.required') </th>
                             <th style="width:10%;">Size</th>
                             <th style="width:10%;">Brand</th>
                             <th style="width:7%;">Last Unit Price</th>
-                            <th style="width:15%;"> Shipment Remarks</th>
+                            <th style="width:15%;">Shipment Remarks</th>
                             <th style="width:7%;">Attachments</th>
                         </tr>
                         </thead>
@@ -548,15 +568,7 @@
                         @foreach($eCart as $item)
                             <tr>
                                 <td>
-                                    @php
-                                        $record = \App\Models\Category::where('id',$item->item_code)->first();
-                                        $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                    @endphp
-
-                                    {{$parent != '' ? $parent->name :'' }}
-
-                                    {{ $item->item_name}} , {{ $parent->name}}
-
+                                    {{$loop->iteration}}
                                 </td>
                                 <td>
                                     {{strip_tags($item->description)}}
@@ -598,8 +610,7 @@
 
                             <td>
                                 <div class="w-full overflow-hidden">
-                                    <!-- Column Content -->
-                                    @include('category.rfp')
+
                                 </div>
                             </td>
                             <td>
@@ -667,9 +678,9 @@
                             ADD ITEM
                         </button>
 
-                        <a href="{{route('RFQCart.index')}}"
-                           class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">RFQs
-                            Cart</a>
+                        <a href="{{route('single_cart_index')}}"
+                           class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            RFQs Cart</a>
                     </div>
 
                 </div>
@@ -677,7 +688,7 @@
             </form>
         </div>
 
-    @elseif($rfqCount==null)
+    @elseif($rfqCount == null )
         <h2 class="text-2xl font-bold py-2 text-center">
         </h2>
 
@@ -843,7 +854,6 @@
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                </form>
                                                 <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
                                                       class="inline">
                                                     @csrf
@@ -885,8 +895,6 @@
                 <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
                     <div class="flex-1 py-5">
                         <div class="my-5 pl-5">
-                            {{-- <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo"
-                            style="height: 80px;width: 200px;" /> --}}
                             <img src="{{(isset(auth()->user()->business->business_photo_url)?Storage::url(auth()->user()->business->business_photo_url):'#')}}" alt="logo" style="height: 80px;width: 200px;"/>
                         </div>
                         @php
@@ -894,9 +902,6 @@
                         @endphp
                         <div class="my-5 pl-5 ">
                             <h1 class="font-extrabold color-1f3864 text-xl ">{{$user_business_details->business_name}}</h1>
-                            {{-- <span>Location :
-                            <span class="font-bold">{{$user_business_details->city}}</span></span> <br>
-                            <span>Emdad Id : <span class="font-bold">{{Auth::user()->business_id}}</span></span> --}}
                         </div>
                     </div>
 
@@ -911,7 +916,7 @@
                 </div>
             </div>
 
-            <form method="POST" action="{{ route('RFQCart.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('single_cart_store_rfq') }}" enctype="multipart/form-data">
                 @csrf
                 <div class=" mb-3">
                     <div>
@@ -1024,6 +1029,28 @@
                                     </div>
                                     <br>
 
+                                    Category: @include('misc.required')
+                                    <div class="relative inline-flex">
+                                        <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
+                                            <path
+                                                d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
+                                                fill="#000000" fill-rule="nonzero"/>
+                                        </svg>
+                                        @if (isset($latest_rfq))
+                                            @php
+                                                $record = \App\Models\Category::where('id',$latest_rfq->item_code)->first();
+                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                            @endphp
+
+                                            <select name="item_name" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" readonly>
+                                                <option value="{{$latest_rfq->item_code}}">{{$latest_rfq->item_name . ' - ' . $parent->name }}</option>
+                                            </select>
+                                        @else
+                                            @include('category.rfp')
+                                        @endif
+                                    </div>
+                                    <br>
 
                                 </div>
                             </div>
@@ -1120,9 +1147,9 @@
                         <thead style="background-color:#8EAADB" class="text-white">
                         <tr>
 
-                            <th style="width:15%;">Category @include('misc.required')</th>
+                            <th style="width:3%;">#</th>
                             <th style="width:20%;">Item Description @include('misc.required')</th>
-                            <th style="width:7%"> UOM @include('misc.required') </th>
+                            <th style="width:7%">UOM @include('misc.required') </th>
                             <th style="width:7%;">Quantity @include('misc.required') </th>
                             <th style="width:10%;">Size</th>
                             <th style="width:10%;">Brand</th>
@@ -1136,14 +1163,7 @@
                         @foreach($eCart as $item)
                             <tr>
                                 <td>
-                                    @php
-                                        $record = \App\Models\Category::where('id',$item->item_code)->first();
-                                        $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                    @endphp
-
-                                    {{$parent != '' ? $parent->name :'' }}
-
-                                    {{ $item->item_name}} , {{ $parent->name}}
+                                    {{$loop->iteration}}
 
                                 </td>
                                 <td>
@@ -1186,8 +1206,7 @@
 
                             <td>
                                 <div class="w-full overflow-hidden">
-                                    <!-- Column Content -->
-                                    @include('category.rfp')
+
                                 </div>
                             </td>
                             <td>
@@ -1224,8 +1243,10 @@
                                 <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text" name="size"
                                        min="0" placeholder="Size">
                             </td>
-                            <td><input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                       name="brand" min="0" autocomplete="brand" placeholder="Brand"></td>
+                            <td>
+                                <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
+                                       name="brand" min="0" autocomplete="brand" placeholder="Brand">
+                            </td>
 
                             <td>
                                 <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
@@ -1242,7 +1263,8 @@
                                 <label for="file" class="file-label"><img class="mx-auto" style="width:25px;"
                                                                           src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
                                 <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1"
-                                       autocomplete="name" style="display:none;"></td>
+                                       autocomplete="name" style="display:none;">
+                            </td>
                         </tr>
 
 
@@ -1255,7 +1277,7 @@
                         </button>
 
 
-                        <a href="{{route('RFQCart.index')}}"
+                        <a href="{{route('single_cart_index')}}"
                            class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">RFQ
                             Cart</a>
                     </div>

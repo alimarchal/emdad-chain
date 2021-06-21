@@ -42,6 +42,10 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                        Licence Number
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                         Delivery Id
                                     </th>
 
@@ -56,12 +60,17 @@
 
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             @php $driverName = \App\Models\User::where('id', $shipmentDetail->driver_id)->first();  @endphp
-                                            {{ $driverName->name }}
+                                            @if(isset($driverName)) {{ $driverName->name }} @endif
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_type)->first();  @endphp
                                             {{ $vehicleName->type }}
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_type)->first();  @endphp
+                                            {{ $vehicleName->licence_plate_No }}
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap">

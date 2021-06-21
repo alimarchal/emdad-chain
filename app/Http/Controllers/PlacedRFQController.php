@@ -23,8 +23,8 @@ class PlacedRFQController extends Controller
             $PlacedRFQ = EOrders::all();
         }
         else{
-//            $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->get();
-            $PlacedRFQ = EOrders::where('business_id', auth()->user()->business_id)->get();
+//            $PlacedRFQ = EOrders::where('business_id', auth()->user()->business_id)->get();
+            $PlacedRFQ = EOrders::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->get();
         }
 
         return view('RFQPlaced.index', compact('PlacedRFQ'));
@@ -106,4 +106,20 @@ class PlacedRFQController extends Controller
         $rfqs = \App\Models\EOrderItems::with('qoutes')->doesntHave('qoutes')->get();
         return view('RFQ.noQuotationReceived', compact('rfqs'));
     }
+
+    /* Functions for Single Category RFQ */
+    public function single_category_rfq_index()
+    {
+        $PlacedRFQ = EOrders::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->get();
+
+        return view('RFQPlaced.singleCategory.index', compact('PlacedRFQ'));
+    }
+
+    public function single_category_rfq_view($EOrderItems)
+    {
+        $collection = EOrderItems::where('e_order_id', $EOrderItems)->get();
+
+        return view('RFQPlaced.singleCategory.view', compact('collection'));
+    }
+
 }

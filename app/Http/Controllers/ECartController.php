@@ -15,8 +15,8 @@ class ECartController extends Controller
 //        $user = User::findOrFail(auth()->user()->id);
         $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
         $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-//        $eCart = ECart::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->get();
-        $eCart = ECart::where('business_id', auth()->user()->business_id)->get();
+//        $eCart = ECart::where('business_id', auth()->user()->business_id)->get();
+        $eCart = ECart::where(['business_id' => auth()->user()->business_id,  'rfq_type' => 1])->get();
         return view('RFQ.index', compact('parentCategories', 'childs', 'eCart'));
     }
 
@@ -29,6 +29,7 @@ class ECartController extends Controller
         $request->merge(['item_code' => $request->item_name]);
         $request->merge(['status' => 'pending']);
         $request->merge(['item_name' => Category::where('id', $request->item_code)->first()->name]);
+        $request->merge(['rfq_type' => 1]);
         ECart::create($request->all());
         session()->flash('message', 'RFQ successfully created.');
 
@@ -56,4 +57,37 @@ class ECartController extends Controller
 
         return response()->json( ['status' => 1]);
     }
+
+    /* For Single Category RFQ */
+
+    public function single_cart_index()
+    {
+        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+        $eCart = ECart::where(['business_id' => auth()->user()->business_id,  'rfq_type' => 0])->get();
+        return view('RFQ.singleCategory.cart', compact('parentCategories',  'eCart'));
+    }
+
+    public function single_cart_store_rfq(Request $request)
+    {
+        if ($request->has('file_path_1')) {
+            $path = $request->file('file_path_1')->store('', 'public');
+            $request->merge(['file_path' => $path]);
+        }
+        $request->merge(['item_code' => $request->item_name]);
+        $request->merge(['status' => 'pending']);
+        $request->merge(['item_name' => Category::where('id', $request->item_code)->first()->name]);
+        $request->merge(['rfq_type' => 0]);
+        ECart::create($request->all());
+        session()->flash('message', 'RFQ successfully created.');
+
+        return redirect()->route('create_single_rfq');
+    }
+
+    public function single_cart_destroy($id)
+    {
+        ECart::where('id', $id)->delete();
+        session()->flash('message', 'Item successfully deleted.');
+        return back();
+    }
+
 }

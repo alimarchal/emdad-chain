@@ -17,30 +17,30 @@
                     <div class="flex flex-wrap -mx-1 overflow-hidden sm:-mx-px md:-mx-1 lg:-mx-1 xl:-mx-1">
 
                         <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <p><strong>Invoice Number:</strong> <a href="{{ route('invoice.show', $bankPayment->invoice_id) }}" target="_blank" class="text-blue-600 hover:underline">{{ $bankPayment->invoice_id }} (View)</a></p>
+                            <p><strong>Invoice Number:</strong> <a href="{{ route('invoice.show', $bankPaymentToSupplier->bankPayment->invoice_id) }}" target="_blank" class="text-blue-600 hover:underline">{{ $bankPaymentToSupplier->bankPayment->invoice_id }} (View)</a></p>
                         </div>
 
                         <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <p><strong>Purchase Order:</strong> {{ $bankPayment->draft_purchase_order_id }} </p>
+                            <p><strong>Purchase Order:</strong> {{ $bankPaymentToSupplier->bankPayment->draft_purchase_order_id }} </p>
                         </div>
                         <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <p><strong>Bank Name:</strong> {{ $bankPayment->bank_name }} </p>
-                        </div>
-
-                        <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <p><strong>Amount Received:</strong> {{ $bankPayment->amount_received }} </p>
+                            <p><strong>Bank Name:</strong> {{ $bankPaymentToSupplier->bank_name }} </p>
                         </div>
 
                         <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <p><strong>Amount Date:</strong> {{ $bankPayment->amount_date }} </p>
+                            <p><strong>Amount Received:</strong> {{ $bankPaymentToSupplier->amount_received }} </p>
                         </div>
 
                         <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <p><strong>Account Number:</strong> {{ $bankPayment->account_number }} </p>
+                            <p><strong>Amount Date:</strong> {{ $bankPaymentToSupplier->amount_date }} </p>
                         </div>
 
                         <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <p><strong>Proof of invoice:</strong> @if(isset($bankPayment->file_path)) <img src="{{Storage::url($bankPayment->file_path)}}"> @endif </p>
+                            <p><strong>Account Number:</strong> {{ $bankPaymentToSupplier->account_number }} </p>
+                        </div>
+
+                        <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            <p><strong>Proof of invoice:</strong> @if(isset($bankPaymentToSupplier->file_path)) <img src="{{Storage::url($bankPaymentToSupplier->file_path)}}"> @endif </p>
                         </div>
 
                         <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">

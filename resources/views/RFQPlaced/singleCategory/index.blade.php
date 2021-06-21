@@ -3,7 +3,7 @@
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
+                {{ __('RFQs (Single Category) History') }}
             </h2>
         </x-slot>
 
@@ -15,7 +15,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-0 text-center m-5">RFQs History</h2>
+        <h2 class="text-2xl font-bold py-0 text-center m-5">RFQs (Single Category) History</h2>
 
         <!-- This example requires Tailwind CSS v2.0+ -->
 
@@ -69,11 +69,11 @@
 
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @if ($item->business_id)
-                                            <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
+                                            <a href="{{route('single_category_rfq_view',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
                                                 {{$item->id}}
                                             </a>
                                         @else
-                                            <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
+                                            <a href="{{route('single_category_rfq_view',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
                                                 {{ $item->business_id }}-{{$item->id}}
                                             </a>
                                         @endif
@@ -95,7 +95,7 @@
 
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        <a href="{{route('RFQItemsByID',$item->id)}}" >
+                                        <a href="{{route('single_category_rfq_view',$item->id)}}" >
                                             <svg class="w-6 h-6 inline" fill="none" stroke="red"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
                                                 </path>

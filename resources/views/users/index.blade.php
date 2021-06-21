@@ -179,10 +179,10 @@
                                                             @if(empty($user->business_id))
                                                                 NULL
                                                             @else
-                                                                @if(empty($user->business_name_get->business_name))
-                                                                    NULL
+                                                                @if($user->business->business_name)
+                                                                    {{$user->business->business_name}}
                                                                 @else
-                                                                    {{$user->business_name_get->business_name}}
+                                                                    NULL
                                                                 @endif
                                                             @endif
 

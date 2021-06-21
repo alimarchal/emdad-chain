@@ -21,7 +21,7 @@ class BankPaymentController extends Controller
 //            $collection = BankPayment::where('supplier_business_id', auth()->user()->business_id)->where('status', '!=' ,0)->get();
             $collection = Invoice::where('supplier_business_id', auth()->user()->business_id)->where('invoice_status', 0)->get();
         }
-        if (auth()->user()->hasRole('SuperAdmin')) {
+        if (auth()->user()->hasRole('SuperAdmin|Finance Officer 1')) {
             return redirect()->route('emdad_payments');
         }
 
@@ -109,7 +109,9 @@ class BankPaymentController extends Controller
             return view('manual-payments.emdad.create', compact('bankPayment', 'invoice'));
         }
 
-        return view('manual-payments.emdad.show', compact('bankPayment'));
+        $bankPaymentToSupplier = SupplierBankPayment::with('bankPayment')->where('bank_payment_id', $bankPayment->id)->first();
+
+        return view('manual-payments.emdad.show', compact('bankPaymentToSupplier'));
 
     }
 
