@@ -39,8 +39,12 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('DeliveryNote', \App\Http\Controllers\Api\v1\DeliveryNoteController::class);
     Route::apiResource('User', \App\Http\Controllers\Api\v1\UserController::class);
     Route::apiResource('Vehicle', \App\Http\Controllers\Api\v1\VehicleController::class);
-    Route::apiResource('RatingReview', \App\Http\Controllers\Api\v1\ReviewRatingController::class);
-    # driver rating
+    Route::apiResource('DeliveryComment', \App\Http\Controllers\Api\v1\DeliveryCommentController::class);
+
+
+    /*
+     * Route::apiResource('RatingReview', \App\Http\Controllers\Api\v1\ReviewRatingController::class);
+     # driver rating
     Route::post('DriverRating', [\App\Http\Controllers\Api\v1\DriverRatingController::class,'store']);
     Route::get('DriverRating/{id}', [\App\Http\Controllers\Api\v1\DriverRatingController::class,'show']);
     Route::get('DriverRating/driver_id/{id}', [\App\Http\Controllers\Api\v1\DriverRatingController::class,'driver_id']);
@@ -55,6 +59,8 @@ Route::prefix('v1')->group(function () {
     Route::get('BuyerRating/buyer_rating_type/{id}/driver', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'buyer_rating_type_driver']);
     Route::get('BuyerRating/buyer_rating_type/{id}/supplier', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'buyer_rating_type_supplier']);
     Route::get('BuyerRating/buyer_rating_type/{id}/emdad', [\App\Http\Controllers\Api\v1\BuyerRatingController::class,'buyer_rating_type_emdad']);
+    *
+    */
     # change password
     Route::post('User/changePassword', [\App\Http\Controllers\Api\v1\UserController::class,'change_password']);
 });

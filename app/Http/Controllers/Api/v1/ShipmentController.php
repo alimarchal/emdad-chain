@@ -65,7 +65,6 @@ class ShipmentController extends Controller
     public function show($id)
     {
         $shipment = Shipment::find($id);
-
         if (empty($shipment)) {
             return response()->json(['message' => 'Not Found!'], 404);
         } else {

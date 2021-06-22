@@ -1,5 +1,5 @@
 @section('headerScripts')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection
@@ -10,7 +10,7 @@
         </h2>
     </x-slot>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.js-example-basic-multiple').select2();
             $('.js-example-basic-single').select2();
         });
@@ -19,47 +19,49 @@
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             @include('users.sessionMessage')
-                @if(auth()->user()->hasRole('SuperAdmin'))
-
-                    {{-- @endif--}}
-                    <hr>
-                @elseif(auth()->user()->registration_type == 'Supplier')
-                    <!-- Remaining User and Driver count for respective packages -->
-                        @php
-                            $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
-                            $package = \App\Models\Package::where('id', $business_package->package_id)->first();
-                            if ($business_package->package_id != 7)
-                                {
-                                    $userRemaining = $package->users - $userCount;
-                                    $driverRemaining = $package->driver - $driverCount;
-                                }
-                        @endphp
-                        @if($business_package->package_id == 5 || $business_package->package_id == 6 )
-                            <div class="flex flex-wrap" style="justify-content: flex-start">
-                                <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Users you can add: </h1>
-                                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userRemaining}} &nbsp;</h1>
-                                <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Drivers you can add: </h1>
-                                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$driverRemaining}} </h1>
-                            </div>
-                        @endif
-                        <hr>
-                @elseif(auth()->user()->registration_type == 'Buyer')
-                    <!-- Remaining User count for respective packages -->
-                        @php
-                            $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
-                            $package = \App\Models\Package::where('id', $business_package->package_id)->first();
+            @if(auth()->user()->hasRole('SuperAdmin'))
+                {{-- @endif--}}
+                <hr>
+            @elseif(auth()->user()->registration_type == 'Supplier')
+            <!-- Remaining User and Driver count for respective packages -->
+                @php
+                    $user_type = 'Supplier';
+                    $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+                    $package = \App\Models\Package::where('id', $business_package->package_id)->first();
+                    if ($business_package->package_id != 7)
+                        {
                             $userRemaining = $package->users - $userCount;
-                        @endphp
-{{--                        @if($business_package->package_id == 1 || $business_package->package_id == 2 )--}}
-                            <div class="flex flex-wrap" style="justify-content: flex-start">
-                                <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Users you can add: </h1>
-                                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userRemaining}} </h1>
-                            </div>
-{{--                        @endif--}}
-                        <hr>
+                            $driverRemaining = $package->driver - $driverCount;
+                        }
+                @endphp
+                @if($business_package->package_id == 5 || $business_package->package_id == 6 )
+                    <div class="flex flex-wrap" style="justify-content: flex-start">
+                        <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Users you can add: </h1>
+                        <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userRemaining}} &nbsp;</h1>
+                        <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Drivers you can add: </h1>
+                        <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$driverRemaining}} </h1>
+                    </div>
                 @endif
+                <hr>
+            @elseif(auth()->user()->registration_type == 'Buyer')
+            <!-- Remaining User count for respective packages -->
+                @php
+                        $user_type = 'Buyer';
+                        $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+                        $package = \App\Models\Package::where('id', $business_package->package_id)->first();
+                        $userRemaining = $package->users - $userCount;
+                @endphp
+                {{--                        @if($business_package->package_id == 1 || $business_package->package_id == 2 )--}}
+                <div class="flex flex-wrap" style="justify-content: flex-start">
+                    <h1 class="text-1xl mt-0 pb-0 text-center"> Remaining Users you can add: </h1>
+                    <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userRemaining}} </h1>
+
+                </div>
+                {{--                        @endif--}}
+                <hr>
+            @endif
             <div class="mt-5 md:mt-0 md:col-span-2">
-{{--                <form method="post" action="{{route('createUserForCompany',auth()->user()->business->id)}}">--}}
+                {{--                <form method="post" action="{{route('createUserForCompany',auth()->user()->business->id)}}">--}}
                 <form method="post" action="{{route('users.store')}}">
                     @csrf
                     <div class="shadow overflow-hidden sm:rounded-md">
@@ -73,6 +75,7 @@
                                         Name
                                     </label>
                                     <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name" type="text" name="name" value="{{old('name')}}" required>
+                                    <input type="hidden" name="registration_type" value="{{$user_type}}">
                                 </div>
 
                                 <!-- Email -->
@@ -125,7 +128,8 @@
                         </div>
 
                         <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                            <button type="submit"
+                                    class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                 Create
                             </button>
                         </div>
