@@ -19,6 +19,7 @@ class CreateBusinessUpdateCertificatesTable extends Migration
             $table->string('vat_reg_certificate_path')->nullable();
             $table->string('chamber_reg_path')->nullable();
             $table->string('business_photo_url')->nullable();
+            $table->string('nid_photo')->nullable();
             $table->integer('legal_officer_status')->default(0);  /* 0 for pending, 1 for accepted, 2 for rejected*/
             $table->timestamps();
         });

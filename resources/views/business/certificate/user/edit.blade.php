@@ -46,6 +46,20 @@
                             <a href="{{(isset($business->business_photo_url)?Storage::url($business->business_photo_url):'')}}" class="flex-1 text-blue-600 visited:text-purple-600" target="blank">Old Photo</a>
                         </div>
 
+                        <div class="flex space-x-5 mt-3">
+                            <x-jet-label class="w-1/2" for="nid_photo">National ID Card Photo</x-jet-label>
+                        </div>
+                        <div class="flex space-x-5 mt-3">
+
+                            <x-jet-input id="file_path_1" type="file" name="nid_photo_1" class="border p-2 w-1/2"></x-jet-input>
+                            <br>
+                            @if(isset($business->user->nid_photo))
+                                <a href="{{(isset($business->user->nid_photo)?Storage::url($business->user->nid_photo):'')}}" class="flex-1 text-blue-600 visited:text-purple-600" target="blank">
+                                    Old Photo
+                                </a>
+                            @endif
+                        </div>
+
                         <x-jet-button class="float-right mt-4 mb-4 mr-4">Send request to update Certificates</x-jet-button>
                     </form>
                 </div>

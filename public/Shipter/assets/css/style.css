@@ -208,7 +208,7 @@ a:focus {
     color: #fff;
 }
 .header-top  ul.login-r {
-    text-align: right;
+    text-align: end;
 }
 .header-top  ul.login-r li{
    position: relative;
@@ -264,6 +264,45 @@ a:focus {
 }
 .account_login-area .account-item-2{
  padding-left: 35px;
+}
+@media (min-width: 575px) {
+    .company {
+        transform: scaleX(-1);
+        text-align: right;
+    }
+    .ul_content{
+        margin-right: 73px;
+    }
+    .login_link{
+        text-align: start;
+    }
+    .join_us{
+        padding-left: 450px;
+        padding-bottom: 180px;
+    }
+    .join_us_ar{
+        padding-right: 450px;
+        padding-bottom: 180px;
+    }
+    .join_us_font_size{
+        font-size: 20px;
+    }
+}
+@media (max-width: 575px) {
+    .join_us{
+        padding-left: 1px;
+        padding-bottom: 10px;
+    }
+    .join_us_ar{
+        padding-right: 1px;
+        padding-bottom: 10px;
+    }
+    .join_us_font_size{
+        font-size: 10px;
+    }
+    .emdad_description{
+        font-size: 19px;
+    }
 }
 .account_login-area .account-item-2 i {
     left: -8%;

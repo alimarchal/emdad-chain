@@ -14,7 +14,7 @@
 <div class="col-md-6 col-sm-12 col-12 col-lg-6">
     <div class="row">
         <div class="col-lg-9 col-md-6">
-            <ul class="login-r">
+            <ul class="login-r login_link">
                 <li><a style="color: white;" href="{{route('login')}}">
                         الدخول إلى المنصة
                     </a> </li>

@@ -103,13 +103,12 @@ class PaymentController extends Controller
         $quote = Qoute::where('id', $invoiceProforma->quote->id)->first();
         $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
         $totalEmdadCharges = ($totalCost * (1.5 / 100));    // Total emdad charges applicable
-        $totalCharges =  $totalCost + $totalEmdadCharges ;  // Total emdad charges
 
-        $emdadCharges = EmdadInvoice::create([
-                        'invoice_id' => $invoiceProforma->id,
-                        'supplier_business_id' => $invoiceProforma->supplier_business_id,
-                        'charges' => $totalCharges,
-                    ]);
+        EmdadInvoice::create([
+            'invoice_id' => $invoiceProforma->id,
+            'supplier_business_id' => $invoiceProforma->supplier_business_id,
+            'charges' => $totalEmdadCharges,
+        ]);
 
         if (auth()->user()->hasRole('CEO'))
         {

@@ -40,6 +40,10 @@
                                             </th>
 
                                             <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Amount to pay
+                                            </th>
+
+                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                 Date Deposited
                                             </th>
 
@@ -77,6 +81,18 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
                                                     {{ $payment->amount_received }}
                                                     {{-- <a href="{{ route('po.show', $payment->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $payment->item_name }}</a> --}}
+                                                </td>
+
+                                                <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
+                                                    @php
+                                                     // Calculating and Subtracting 1.5 % emdad charges that is applied to supplier payment
+                                                    $dpo = \App\Models\DraftPurchaseOrder::where('id', $payment->draft_purchase_order_id)->first();
+                                                    $total_amount = ($dpo->quantity * $dpo->unit_price) + $dpo->shipment_cost;
+                                                    $emdadCharges = ($total_amount * (1.5 / 100));
+                                                    $total_vat = ($total_amount * ($dpo->vat / 100));
+                                                    $sum = ($total_amount + $total_vat) - $emdadCharges ;
+                                                    @endphp
+                                                    {{ $sum }}
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">

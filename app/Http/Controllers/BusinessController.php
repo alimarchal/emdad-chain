@@ -407,7 +407,7 @@ class BusinessController extends Controller
 
     public function certificateUpdate(Request $request)
     {
-        if ($request->has('vat_reg_certificate_path_1') || $request->has('chamber_reg_path_1') || $request->has('business_photo_url_1'))
+        if ($request->has('vat_reg_certificate_path_1') || $request->has('chamber_reg_path_1') || $request->has('business_photo_url_1') || $request->has('nid_photo_1'))
         {
             if ($request->has('vat_reg_certificate_path_1')) {
                 $path = $request->file('vat_reg_certificate_path_1')->store('', 'public');
@@ -424,6 +424,11 @@ class BusinessController extends Controller
                 $request->merge(['business_photo_url' => $pathLogo]);
             }
 
+            if ($request->has('nid_photo_1')) {
+                $pathLogo = $request->file('nid_photo_1')->store('', 'public');
+                $request->merge(['nid_photo' => $pathLogo]);
+            }
+
             BusinessUpdateCertificate::updateOrCreate(
                 ['business_id' =>  \auth()->user()->business_id],
                 [
@@ -431,9 +436,11 @@ class BusinessController extends Controller
                 'vat_reg_certificate_path' =>  $request->vat_reg_certificate_path,
                 'chamber_reg_path' =>  $request->chamber_reg_path,
                 'business_photo_url' =>  $request->business_photo_url,
+                'nid_photo' =>  $request->nid_photo,
 
             ]);
             session()->flash('message', 'Respective Certificate Upload. Will be updated once emdad approves');
+            return redirect()->route('business.show', \auth()->user()->business_id);
         }
 
         session()->flash('error', 'No Certificates were uploaded for updating');
@@ -472,6 +479,7 @@ class BusinessController extends Controller
         $businessCertificates = BusinessUpdateCertificate::where('id', $id)->first();
 
         $business = Business::where('id', $businessCertificates->business_id)->first();
+        $user = User::where('business_id', $businessCertificates->business_id)->first();
 
         if($businessCertificates->vat_reg_certificate_path != null)
         {
@@ -487,6 +495,11 @@ class BusinessController extends Controller
         {
             $business->business_photo_url = $businessCertificates->business_photo_url;
             $business->save();
+        }
+        if($businessCertificates->nid_photo != null)
+        {
+            $user->nid_photo = $businessCertificates->nid_photo;
+            $user->save();
         }
 
         $businessCertificates->delete();

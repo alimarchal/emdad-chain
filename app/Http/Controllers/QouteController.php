@@ -12,42 +12,16 @@ use Illuminate\Support\Facades\DB;
 
 class QouteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $buyer_id = User::where('business_id', $request->business_id)->first();
         $request->merge(['user_id' => $buyer_id->id]);
         $request->merge(['qoute_status' => 'Qouted']);
         $request->merge(['status' => 'pending']);
-        $total_cost = ($request->quote_quantity * $request->quote_price_per_quantity);
+        $total_amount = ($request->quote_quantity * $request->quote_price_per_quantity);
+        $total_cost = $total_amount + $request->shipment_cost;
         $total_vat = ($total_cost * ($request->VAT / 100));
-        $total_shipment = $request->shipment_cost;
-        $sum = ($total_cost + $total_vat + $total_shipment);
+        $sum = ($total_cost + $total_vat);
         $request->merge(['total_cost' => $sum]);
         $quote = Qoute::create($request->all());
         // sending mail for confirmation
@@ -59,35 +33,6 @@ class QouteController extends Controller
         return redirect()->route('QoutedRFQQouted');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Qoute  $qoute
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Qoute $qoute)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Qoute  $qoute
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Qoute $qoute)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Qoute  $qoute
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Qoute $qoute)
     {
         $request->merge(['user_id' => auth()->user()->id]);
@@ -99,17 +44,6 @@ class QouteController extends Controller
         $quote = $qoute;
         $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
         return redirect()->route('viewRFQs');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Qoute  $qoute
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Qoute $qoute)
-    {
-        //
     }
 
     public function QoutedRFQQouted()
@@ -280,10 +214,17 @@ class QouteController extends Controller
     // Calculating totalCost at the time of Supplier RFQ response
     public function totalCost(Request $request)
     {
-        $total_cost = ($request->quote_quantity * $request->quote_price_per_quantity);
+        /* Old Total Cost Calculating Formula */
+//        $total_cost = ($request->quote_quantity * $request->quote_price_per_quantity);
+//        $total_vat = ($total_cost * ($request->VAT / 100));
+//        $total_shipment = $request->shipment_cost;
+//        $sum = ($total_cost + $total_vat + $total_shipment);
+
+        /* NEW Total Cost Calculating Formula */
+        $total_amount = ($request->quote_quantity * $request->quote_price_per_quantity);
+        $total_cost = $total_amount + $request->shipment_cost;
         $total_vat = ($total_cost * ($request->VAT / 100));
-        $total_shipment = $request->shipment_cost;
-        $sum = ($total_cost + $total_vat + $total_shipment);
+        $sum = ($total_cost + $total_vat);
 
         return response()->json(['data'=> $sum]);
     }

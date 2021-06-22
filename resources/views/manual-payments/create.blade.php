@@ -54,7 +54,7 @@
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">Manual Payment Information</h3>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/3" for="bank_name">Bank Name</x-jet-label>
-                                <x-jet-label class="w-1/3" for="amount_received">Amount Deposited</x-jet-label>
+                                <x-jet-label class="w-1/3" for="amount_received">Amount to pay</x-jet-label>
                                 {{--@php $supplierBusinessName = \App\Models\Business::where('id', $invoice->supplier_business_id)->first(); @endphp--}}
 {{--                                <x-jet-label class="w-1/3" for="account_number">{{$supplierBusinessName->business_name}}&nbsp;IBAN#</x-jet-label>--}}
                                 {{-- Emdad IBAN #--}}
@@ -101,7 +101,7 @@
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">Manual Payment Information</h3>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/3" for="bank_name">Bank Name</x-jet-label>
-                                <x-jet-label class="w-1/3" for="amount_received">Amount Deposited</x-jet-label>
+                                <x-jet-label class="w-1/3" for="amount_received">Amount to pay</x-jet-label>
                                 {{-- Emdad IBAN #--}}
                                 <x-jet-label class="w-1/3" for="account_number">Emdad IBAN#</x-jet-label>
                             </div>

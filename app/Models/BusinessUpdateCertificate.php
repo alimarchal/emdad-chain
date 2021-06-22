@@ -9,7 +9,7 @@ class BusinessUpdateCertificate extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'business_id', 'vat_reg_certificate_path', 'chamber_reg_path', 'business_photo_url', 'legal_officer_status'];
+    protected $fillable = [ 'business_id', 'vat_reg_certificate_path', 'chamber_reg_path', 'business_photo_url', 'nid_photo', 'legal_officer_status'];
 
     public function business()
     {

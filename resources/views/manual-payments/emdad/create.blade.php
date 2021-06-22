@@ -59,14 +59,24 @@
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">Manual Payment Information</h3>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/3" for="bank_name">Bank Name</x-jet-label>
-                                <x-jet-label class="w-1/3" for="amount_received">Amount Deposited</x-jet-label>
-                                @php $supplierBusinessName = \App\Models\Business::where('id', $invoice->supplier_business_id)->first(); @endphp
+                                <x-jet-label class="w-1/3" for="amount_received">Amount to pay</x-jet-label>
+                                @php
+                                    $supplierBusinessName = \App\Models\Business::where('id', $invoice->supplier_business_id)->first();
+
+                                    // Calculating and Subtracting 1.5 % emdad charges that is applied to supplier payment
+                                    $dpo = \App\Models\DraftPurchaseOrder::where('id', $bankPayment->draft_purchase_order_id)->first();
+                                    $total_amount = ($dpo->quantity * $dpo->unit_price) + $dpo->shipment_cost;
+                                    $emdadCharges = ($total_amount * (1.5 / 100));
+                                    $total_vat = ($total_amount * ($dpo->vat / 100));
+                                    $sum = ($total_amount + $total_vat) - $emdadCharges ;
+
+                                @endphp
                                 <x-jet-label class="w-1/3" for="account_number">{{$supplierBusinessName->business_name}}&nbsp;IBAN#</x-jet-label>
                             </div>
                             <div class="flex space-x-5 mt-3">
 
                                 <x-jet-input id="bank_name" type="text" name="bank_name" class="border p-2 w-1/2" value="{{$supplierBusinessName->bank_name}}" readonly required></x-jet-input>
-                                <x-jet-input id="amount_received" type="text" name="amount_received" class="border p-2 w-1/2" value="{{$invoice->total_cost}}" readonly required></x-jet-input>
+                                <x-jet-input id="amount_received" type="text" name="amount_received" class="border p-2 w-1/2" value="{{$sum}}" readonly required></x-jet-input>
                                 <x-jet-input id="account_number" type="text" name="account_number" class="border p-2 w-1/2" value="{{$supplierBusinessName->iban}}" readonly required></x-jet-input>
                             </div>
 
@@ -77,7 +87,7 @@
                             </div>
                             <div class="flex space-x-5 mt-3">
 
-                                <x-jet-input id="amount_date" type="date" name="amount_date" class="border p-2 w-1/2" required></x-jet-input>
+                                <x-jet-input id="datepicker" placeholder="Choose Date (mm/dd/yy)"  type="text" name="amount_date" class="border p-2 w-1/2" readonly required></x-jet-input>
                                 <x-jet-input id="file_path_1" type="file" name="file_path_1" class="border p-2 w-1/2" required></x-jet-input>
                             </div>
 

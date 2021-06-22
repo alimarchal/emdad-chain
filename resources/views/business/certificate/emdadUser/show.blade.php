@@ -35,6 +35,12 @@
                         </div>
                         @endif
 
+                        @if(isset($businessCertificate->nid_photo))
+                        <div class="flex space-x-5 mt-3">
+                                <a href="{{Storage::url($businessCertificate->nid_photo)}}" class="text-blue-600 visited:text-purple-600" target="blank">{{'National ID Card Photo'}}</a>
+                        </div>
+                        @endif
+
                     </form>
                 </div>
             </div>
