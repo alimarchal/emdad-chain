@@ -37,6 +37,7 @@ class CreateEOrderItemsTable extends Migration
             $table->string('status')->nullable();
             $table->bigInteger('bypass')->default(0);
             $table->dateTime('quotation_time')->nullable();
+            $table->integer('rfq_type');  /* 0 for single category RFQ, 1 for multi categories */
             $table->timestamps();
         });
     }

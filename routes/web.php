@@ -283,6 +283,9 @@ Route::post('/change-company-check', [ECartController::class, 'companyCheck'])->
 Route::middleware(['auth:sanctum'])->get('/RFQPlacedItems/{EOrderItems}', [PlacedRFQController::class, 'RFQItems'])->name('RFQItemsByID');
 Route::middleware(['auth:sanctum'])->get('/viewRFQs', [PlacedRFQController::class, 'viewRFQs'])->name('viewRFQs');
 Route::middleware(['auth:sanctum'])->get('/viewRFQs/{eOrderItems}', [PlacedRFQController::class, 'viewRFQsID'])->name('viewRFQsID');
+Route::middleware(['auth:sanctum'])->get('/single-category-RFQs', [PlacedRFQController::class, 'viewSingleCategoryRFQs'])->name('singleCategoryRFQs');
+Route::middleware(['auth:sanctum'])->get('/view-RFQs-for-single-category-{eOrderID}', [PlacedRFQController::class, 'viewRFQsOfSingleCategory'])->name('viewRFQsOfSingleCategory');
+Route::middleware(['auth:sanctum'])->get('/quote-RFQs-for-single-category-{eOrderItems}', [PlacedRFQController::class, 'viewSingleCategoryRFQByID'])->name('viewSingleCategoryRFQByID');
 Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [PlacedRFQController::class, 'RFQsQouted'])->name('RFQsQouted');
 
 #################### Roles display and update ##########################
@@ -299,9 +302,19 @@ Route::middleware(['auth:sanctum'])->resource('qoute', QouteController::class);
 Route::middleware(['auth:sanctum'])->get('total-cost', [QouteController::class, 'totalCost'])->name('totalCost');
 
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Qouted', [QouteController::class, 'QoutedRFQQouted'])->name('QoutedRFQQouted');
+Route::middleware(['auth:sanctum'])->get('/Quoted/Modified/RFQs', [QouteController::class, 'QuotedModifiedRFQ'])->name('QuotedModifiedRFQ');
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Rejected', [QouteController::class, 'QoutedRFQRejected'])->name('QoutedRFQRejected');
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/ModificationNeeded', [QouteController::class, 'QoutedRFQModificationNeeded'])->name('QoutedRFQModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/PendingConfirmation', [QouteController::class, 'QoutedRFQQoutedRFQPendingConfirmation'])->name('QoutedRFQPendingConfirmation');
+
+######################## Single Category RFQ routes ############################################
+Route::middleware(['auth:sanctum'])->get('/single-category-quoted-RFQs', [QouteController::class, 'singleCategoryQuotedRFQQuoted'])->name('singleCategoryQuotedRFQQuoted');
+Route::middleware(['auth:sanctum'])->get('/single-category-quoted-modified-RFQs', [QouteController::class, 'singleCategoryQuotedModifiedRFQ'])->name('singleCategoryQuotedModifiedRFQ');
+Route::middleware(['auth:sanctum'])->get('/single-category-rejected-RFQs', [QouteController::class, 'singleCategoryQuotedRFQRejected'])->name('singleCategoryQuotedRFQRejected');
+Route::middleware(['auth:sanctum'])->get('/single-category-modification-needed-RFQs', [QouteController::class, 'singleCategoryQuotedRFQModificationNeeded'])->name('singleCategoryQuotedRFQModificationNeeded');
+Route::middleware(['auth:sanctum'])->get('/single-category-pending-confirmation-RFQs', [QouteController::class, 'singleCategoryQuotedRFQPendingConfirmation'])->name('singleCategoryQuotedRFQPendingConfirmation');
+################################################################################################
+
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived', [QouteController::class, 'QoutationsBuyerReceived'])->name('QoutationsBuyerReceived');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/{QouteItem}', [QouteController::class, 'QoutationsBuyerReceivedQouteID'])->name('QoutationsBuyerReceivedQouteID');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderItems}', [QouteController::class, 'QoutationsBuyerReceivedRFQItemsByID'])->name('QoutationsBuyerReceivedRFQItemsByID');

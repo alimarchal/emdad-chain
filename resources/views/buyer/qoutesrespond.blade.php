@@ -134,7 +134,7 @@
 
                         <a href="{{ route('updateQoute', $QouteItem->id) }}"
                             class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">
-                            Qoute Again
+                            Quote Again
                         </a>
 
                         <a href="{{ route('updateRejected', $QouteItem->id) }}" style="margin-left: 70px; margin-top: 20px;"
