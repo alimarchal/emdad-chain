@@ -416,7 +416,7 @@
                                     <br>
 
                                     Category: @include('misc.required')
-                                    <div class="relative inline-flex">
+                                    <div class="relative inline-flex" style="width: 400px;">
                                         <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                             <path
@@ -429,7 +429,7 @@
                                                 $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                             @endphp
 
-                                            <select name="item_name" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" readonly>
+                                            <select name="item_name" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" readonly style="width: 400px;">
                                                 <option value="{{$latest_rfq->item_code}}">{{$latest_rfq->item_name . ' - ' . $parent->name }}</option>
                                             </select>
                                         @else

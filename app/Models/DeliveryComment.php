@@ -9,5 +9,5 @@ class DeliveryComment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['delivery_id','user_id','comment_content','comment_type','rating',];
+    protected $fillable = ['delivery_id', 'user_id', 'business_id', 'comment_content', 'comment_type', 'rating',];
 }

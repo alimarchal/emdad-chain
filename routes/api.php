@@ -40,6 +40,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('User', \App\Http\Controllers\Api\v1\UserController::class);
     Route::apiResource('Vehicle', \App\Http\Controllers\Api\v1\VehicleController::class);
     Route::apiResource('DeliveryComment', \App\Http\Controllers\Api\v1\DeliveryCommentController::class);
+    Route::get('DeliveryComment/{user_id}/{delivery_id}', [\App\Http\Controllers\Api\v1\DeliveryCommentController::class,'getRatingByUserID']);
 
 
     /*

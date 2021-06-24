@@ -68,7 +68,6 @@ class DeliveryCommentController extends Controller
         $token = env('API_TOKEN');
 
         if ($token == $request->code) {
-
             $collection = DeliveryComment::find($id);
             if (empty($collection)) {
                 return response()->json(['message' => 'Not Found!'], 404);
@@ -113,4 +112,22 @@ class DeliveryCommentController extends Controller
     {
         //
     }
+
+
+    public function getRatingByUserID(Request $request, $user_id, $delivery_id)
+    {
+        $token = env('API_TOKEN');
+        if ($token == $request->code) {
+            $collection = DeliveryComment::where('user_id', $user_id)->where('delivery_id', $delivery_id)->get();
+            if ($collection->isEmpty()) {
+                return response()->json(['message' => 'Not Found!'], 404);
+            } else {
+                return response()->json($collection, 200);
+            }
+        } else {
+            return response()->json(['message' => 'UnAuthorized Access!'], 403);
+        }
+    }
+
+
 }
