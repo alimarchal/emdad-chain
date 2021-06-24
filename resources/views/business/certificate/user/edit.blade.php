@@ -23,7 +23,9 @@
 
                             <x-jet-input id="vat_reg_certificate_path_1" type="file" name="vat_reg_certificate_path_1" class="border p-2 w-1/2"></x-jet-input>
                             <br>
+                            @if(isset($business->vat_reg_certificate_path))
                             <a href="{{(isset($business->vat_reg_certificate_path)?Storage::url($business->vat_reg_certificate_path):'')}}" class="text-blue-600 visited:text-purple-600" target="blank">Old Certificate</a>
+                            @endif
                         </div>
 
                         <div class="flex space-x-5 mt-3">
@@ -33,7 +35,9 @@
 
                             <x-jet-input id="file_path_1" type="file" name="chamber_reg_path_1" class="border p-2 w-1/2"></x-jet-input>
                             <br>
+                            @if(isset($business->chamber_reg_path))
                             <a href="{{(isset($business->chamber_reg_path)?Storage::url($business->chamber_reg_path):'')}}" class="text-blue-600 visited:text-purple-600" target="blank">Old Certificate</a>
+                            @endif
                         </div>
 
                         <div class="flex space-x-5 mt-3">
@@ -43,7 +47,9 @@
 
                             <x-jet-input id="file_path_1" type="file" name="business_photo_url_1" class="border p-2 w-1/2"></x-jet-input>
                             <br>
+                            @if(isset($business->business_photo_url))
                             <a href="{{(isset($business->business_photo_url)?Storage::url($business->business_photo_url):'')}}" class="flex-1 text-blue-600 visited:text-purple-600" target="blank">Old Photo</a>
+                            @endif
                         </div>
 
                         <div class="flex space-x-5 mt-3">

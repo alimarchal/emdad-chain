@@ -61,7 +61,7 @@
             </a>
             @endif
 
-            {{-- B & S Info link --}}
+            {{-- Warehouse link --}}
 {{--           @if(auth()->user()->hasRole('CEO') && Auth::user()->status == 3)--}}
            @if(auth()->user()->hasRole('CEO') && Auth::user()->registration_type != null)
             <div x-data="{ open: false } ">
@@ -158,6 +158,7 @@
                     <span class="mx-3">Businesses Certificates</span>
                 </a>
             @endif
+
             {{-- IREs link --}}
             @if(auth()->user()->hasRole('SuperAdmin'))
                 <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('adminIres') || request()->routeIs('adminIreEdit') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
@@ -451,24 +452,65 @@
             {{-- Qoutations (Supplier) link --}}
             @if(auth()->user()->can('Supplier View New RFQs')|| auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && Auth::user()->status == 3)
 
-                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('viewRFQs') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                   href="{{ route('viewRFQs') }}">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-                    </svg>
-                    <span class="mx-3 ">Quotations</span>
-                    <span x-show="open == false">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"  style="margin-left: 4em;"   viewBox="0 0 20 20" fill="currentColor">
+                <div x-data="{ open: false } ">
+                    <a @click="open = true" class="flex items-center mt-4 py-2 px-6
+                            {{ request()->routeIs('viewRFQs') || request()->routeIs('singleCategoryRFQs') || request()->routeIs('singleCategoryQuotedRFQQuoted')||
+                            request()->routeIs('singleCategoryQuotedRFQRejected')|| request()->routeIs('singleCategoryQuotedRFQModificationNeeded')||
+                            request()->routeIs('singleCategoryQuotedRFQPendingConfirmation') || request()->routeIs('singleCategoryQuotedModifiedRFQ') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}
+                        hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="javascript:void(0);">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                        <span class="mx-3">Quotations</span>
+                        <span x-show="open == false" >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"  style="margin-left: 3.3em;"  viewBox="0 0 20 20" fill="currentColor">
                           <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
                         </svg>
                     </span>
-                    <span x-show="open == true">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4"  style="margin-left: 4em;"  viewBox="0 0 20 20" fill="currentColor">
+                        <span x-show="open == true">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4"  style="margin-left: 3.3em;"   viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
                     </span>
-                </a>
+                    </a>
+
+                    <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        @if(request()->routeIs('viewRFQs') || request()->routeIs('singleCategoryRFQs') || request()->routeIs('singleCategoryQuotedRFQQuoted') || request()->routeIs('singleCategoryQuotedRFQRejected') || request()->routeIs('singleCategoryQuotedRFQModificationNeeded') || request()->routeIs('singleCategoryQuotedRFQPendingConfirmation') || request()->routeIs('singleCategoryQuotedModifiedRFQ') )  x-data="{ open: true } " @endif
+                    >
+                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('viewRFQs') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                            </svg>
+                            <a href="{{ route('viewRFQs') }}"><span class="mx-3 ">Multi categories</span></a>
+                        </li>
+                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryRFQs') ||request()->routeIs('singleCategoryQuotedRFQQuoted') ||request()->routeIs('singleCategoryQuotedRFQRejected') ||request()->routeIs('singleCategoryQuotedRFQModificationNeeded') ||request()->routeIs('singleCategoryQuotedRFQPendingConfirmation') ||request()->routeIs('singleCategoryQuotedModifiedRFQ') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                            </svg>
+                            <a href="{{ route('singleCategoryRFQs') }}"><span class="mx-3 ">Single category</span></a>
+                        </li>
+                    </ul>
+                </div>
+
+{{--                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('viewRFQs') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"--}}
+{{--                   href="{{ route('viewRFQs') }}">--}}
+{{--                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
+{{--                              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>--}}
+{{--                    </svg>--}}
+{{--                    <span class="mx-3 ">Quotations</span>--}}
+{{--                    <span x-show="open == false">--}}
+{{--                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"  style="margin-left: 4em;"   viewBox="0 0 20 20" fill="currentColor">--}}
+{{--                          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />--}}
+{{--                        </svg>--}}
+{{--                    </span>--}}
+{{--                    <span x-show="open == true">--}}
+{{--                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4"  style="margin-left: 4em;"  viewBox="0 0 20 20" fill="currentColor">--}}
+{{--                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />--}}
+{{--                        </svg>--}}
+{{--                    </span>--}}
+{{--                </a>--}}
             @endif
 
             {{-- Qoutations (Buyer) link --}}

@@ -1,4 +1,3 @@
-{{-- @if (auth()->user()->rtl == 0) --}}
 <x-app-layout>
     <style type="text/css">
         /* color for request for quotation heading*/
@@ -59,13 +58,7 @@
         </div>
     @endif
 
-
-
     <div class="flex flex-col bg-white rounded">
-
-
-
-
         <div class="p-4"
             style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
             <div class="d-block text-center">
@@ -100,10 +93,7 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-
 
             <div class=" mb-3">
                 <div>
@@ -119,9 +109,9 @@
                                 <br>
                                 <strong>RFQ #:</strong> {{$eOrderItems->id}}
                                 <br>
-                                <strong>Quote User:</strong>{{$eOrderItems->user->name}}
+                                <strong>User Quoted:</strong> {{$eOrderItems->user->name}}
                                 <br>
-                                <strong>Item Code: </strong> {{$eOrderItems->item_code}}
+                                <strong>Category Code: </strong> {{$eOrderItems->item_code}}
                                 <br>
                                 <strong>Remarks: </strong>{{$eOrderItems->remarks}}
                                 <br>
@@ -171,21 +161,14 @@
             </div>
 
             <div class="p4 mb-5 overflow-x-auto">
-
-
-
                 <table class="table-fixed  min-w-full text-center ">
                     <thead style="background-color:#8EAADB" class="text-white">
-
-
-
                         <tr>
-
 
                             <th style="width:10%;">Quantity @include('misc.required')</th>
                             <th style="width:10%;"> Price Per Unit @include('misc.required') </th>
-                            <th style="width:10%;">Shipping Time(In Days) @include('misc.required') </th>
-                            <th style="width:20%;"> Note</th>
+                            <th style="width:11%;">Shipping Time(In Days) @include('misc.required') </th>
+                            <th style="width:20%;">Note</th>
                             <th style="width:10%;">VAT % @include('misc.required') </th>
                             <th style="width:10%;">Shipment Cost @include('misc.required')</th>
 
@@ -349,9 +332,6 @@
                                 </td>
 
                             </tr>
-
-
-
                         </form>
                     @else
 
@@ -368,7 +348,7 @@
                             </div>
                             <td>
                                 <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                       name="quote_quantity" min="0"  min="0" step="any" autocomplete="quantity" required  placeholder="Qty" >
+                                       name="quote_quantity" min="0" step="any" autocomplete="quantity" required  placeholder="Qty" >
                             </td>
 
                             <td>
@@ -391,7 +371,6 @@
                             </td>
 
                         </tr>
-
 
                             @if($eOrderItems->required_sample == 'Yes')
                                 <tr >
@@ -431,11 +410,7 @@
 
                             <tr class="mt-2">
                                 <td colspan="2" class="" >
-
-
                                         <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
-
-
                                 </td>
                                 <td colspan="2" class="text-left">
                                     <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
@@ -447,16 +422,15 @@
 
                             <tr style="border: none !important;">
                                 <td colspan="6" class="px-10 text-left"  >
-
                                         <button
                                             class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
                                             Send Quote
                                         </button>
                                         <br>
-                                        <a href="{{ route('dashboard') }}"
-                                           class="inline-flex items-center px-4 mr-2 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-red disabled:opacity-25 transition ease-in-out duration-150">
-                                            Cancel</a>
-
+                                        <a href="{{ route('viewRFQs') }}"
+                                           class="inline-flex items-center px-4 mr-2 py-2 mb-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                            Back
+                                        </a>
 
                                 </td>
 
@@ -467,27 +441,10 @@
                     </tbody>
 
                 </table>
-
-
-
                 @endif
-
-
-
-
             </div>
-
-
-
        </div>
-
-
-
-
-
 </x-app-layout>
-
-{{-- @endif --}}
 
 <script>
     function calculateCost()

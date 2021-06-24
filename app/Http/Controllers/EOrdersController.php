@@ -53,6 +53,7 @@ class EOrdersController extends Controller
                         $eOrderItem->required_sample = $item->required_sample;
                         $eOrderItem->status = $item->status;
                         $eOrderItem->quotation_time = Carbon::now()->addDays(3);
+                        $eOrderItem->rfq_type = $item->rfq_type;
                         $eOrderItem->save();
                     }
                     foreach ($eCartItems as $item) {
@@ -98,6 +99,7 @@ class EOrdersController extends Controller
                         $eOrderItem->required_sample = $item->required_sample;
                         $eOrderItem->status = $item->status;
                         $eOrderItem->quotation_time = Carbon::now()->addDays(3);
+                        $eOrderItem->rfq_type = $item->rfq_type;
                         $eOrderItem->save();
                     }
                     foreach ($eCartItems as $item) {
@@ -139,6 +141,7 @@ class EOrdersController extends Controller
                     $eOrderItem->required_sample = $item->required_sample;
                     $eOrderItem->status = $item->status;
                     $eOrderItem->quotation_time = Carbon::now()->addDays(3);
+                    $eOrderItem->rfq_type = $item->rfq_type;
                     $eOrderItem->save();
                 }
                 foreach ($eCartItems as $item) {
@@ -153,7 +156,6 @@ class EOrdersController extends Controller
         }
 
     }
-
 
     // For single category RFQ
 
@@ -196,6 +198,7 @@ class EOrdersController extends Controller
                         $eOrderItem->required_sample = $item->required_sample;
                         $eOrderItem->status = $item->status;
                         $eOrderItem->quotation_time = Carbon::now()->addDays(3);
+                        $eOrderItem->rfq_type = $item->rfq_type;
                         $eOrderItem->save();
                     }
                     foreach ($eCartItems as $item) {
@@ -241,6 +244,7 @@ class EOrdersController extends Controller
                         $eOrderItem->required_sample = $item->required_sample;
                         $eOrderItem->status = $item->status;
                         $eOrderItem->quotation_time = Carbon::now()->addDays(3);
+                        $eOrderItem->rfq_type = $item->rfq_type;
                         $eOrderItem->save();
                     }
                     foreach ($eCartItems as $item) {
@@ -282,6 +286,7 @@ class EOrdersController extends Controller
                     $eOrderItem->required_sample = $item->required_sample;
                     $eOrderItem->status = $item->status;
                     $eOrderItem->quotation_time = Carbon::now()->addDays(3);
+                    $eOrderItem->rfq_type = $item->rfq_type;
                     $eOrderItem->save();
                 }
                 foreach ($eCartItems as $item) {

@@ -32,7 +32,7 @@
 
         @if($business_package->package_id == 5 || $business_package->package_id == 6 )
             <div class="flex flex-wrap" style="justify-content: flex-start">
-                <h1 class="text-1xl mt-0 pb-0 text-center"> New Quotation(s) response remaining for the day: </h1>
+                <h1 class="text-1xl mt-0 pb-0 text-center"> New RFQ(s) response remaining for the day: </h1>
                 <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$count}} </h1>
             </div>
         @endif
@@ -46,19 +46,23 @@
                     New
                 </a>
                 <a href="{{ route('QoutedRFQQouted') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQQouted') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
-                    @php $quotedCount = \App\Models\Qoute::where('supplier_user_id', auth()->user()->id)->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->orWhere('qoute_status', 'Modified')->count(); @endphp
+                    @php $quotedCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->count(); @endphp
                     Quoted <span class="text-red-400">({{$quotedCount}})</span>
                 </a>
+                <a href="{{ route('QuotedModifiedRFQ') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QuotedModifiedRFQ') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
+                    @php $quotedCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1, 'qoute_status' => 'Modified'])->count(); @endphp
+                    Modified <span class="text-red-400">({{$quotedCount}})</span>
+                </a>
                 <a href="{{ route('QoutedRFQRejected') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQRejected') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    @php $rejectedCount = \App\Models\Qoute::where('supplier_user_id', auth()->user()->id)->where('qoute_status_updated', 'Rejected')->count(); @endphp
+                    @php $rejectedCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status_updated', 'Rejected')->count(); @endphp
                     Rejected <span class="text-red-400">({{$rejectedCount}})</span>
                 </a>
                 <a href="{{ route('QoutedRFQModificationNeeded') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQModificationNeeded') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    @php $modificationCount = \App\Models\Qoute::where('supplier_user_id', auth()->user()->id)->where('qoute_status_updated', 'ModificationNeeded')->count(); @endphp
+                    @php $modificationCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status_updated', 'ModificationNeeded')->count(); @endphp
                     Modification needed <span class="text-red-400">({{$modificationCount}})</span>
                 </a>
                 <a href="{{ route('QoutedRFQPendingConfirmation') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQPendingConfirmation') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    @php $pendingCount = \App\Models\Qoute::where('supplier_user_id', auth()->user()->id)->where('qoute_status', 'RFQPendingConfirmation')->count(); @endphp
+                    @php $pendingCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status', 'RFQPendingConfirmation')->count(); @endphp
                     Pending Confirmation <span class="text-red-400">({{$pendingCount}})</span>
                 </a>
             </nav>
@@ -125,26 +129,22 @@
                                                             </svg>
                                                         </a>
                                                     @else
-                                                        #N/A
+                                                        N/A
                                                     @endif
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ $rfp->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$rfp->item_code)->first()->parent_id))->first()->name }}
                                                 </td>
-
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     @if($rfp->company_name_check == 1) {{ $rfp->business->business_name }} @endif
     {{--                                            {{ $rfp->business }}--}}
                                                 </td>
-
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ $rfp->quantity }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ $rfp->created_at->format('d-m-Y') }} <br>
                                                 </td>
-
-
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <a href="{{ url('viewRFQs/'.$rfp->id) }}" class=" px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                         Response
@@ -166,26 +166,22 @@
                                                             </svg>
                                                         </a>
                                                     @else
-                                                        #N/A
+                                                        N/A
                                                     @endif
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ $rfp->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$rfp->item_code)->first()->parent_id))->first()->name }}
                                                 </td>
-
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     @if($rfp->company_name_check == 1) {{ $rfp->business->business_name }} @endif
                                                     {{--                                            {{ $rfp->business }}--}}
                                                 </td>
-
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ $rfp->quantity }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     {{ $rfp->created_at->format('d-m-Y') }} <br>
                                                 </td>
-
-
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <a href="{{ url('viewRFQs/'.$rfp->id) }}" class=" px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                         Response
@@ -222,11 +218,6 @@
                 Back
             </a>
         </div>
-
-
-
-
-
     </x-app-layout>
 @else
     <x-app-layout>

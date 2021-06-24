@@ -77,38 +77,6 @@
 {{--                            @endif--}}
 
 {{--                        </x-jet-nav-link>--}}
-
-
-                    @endif
-
-                    @if (auth()->user()->hasRole('CEO') && (auth()->user()->registration_type == "Buyer" ||  auth()->user()->registration_type == "Supplier") && auth()->user()->status == 1)
-                        @php
-                            $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
-                            $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
-                            $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
-                        @endphp
-
-{{--                        <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">--}}
-{{--                            {{ __('Business') }} &nbsp;--}}
-{{--                            @if (isset($isBusinessDataExist))--}}
-{{--                            <img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                            @endif--}}
-{{--                        </x-jet-nav-link>--}}
-
-{{--                        <x-jet-nav-link href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}" :active="request()->routeIs('businessWarehouseShow')">--}}
-{{--                            {{ __('Warehouse') }}--}}
-{{--                            @if (isset($isBusinessWarehouseDataExist))--}}
-{{--                                &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                            @endif--}}
-{{--                        </x-jet-nav-link>--}}
-
-{{--                        <x-jet-nav-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}" :active="request()->routeIs('purchaseOrderInfo.*')">--}}
-{{--                            {{ __('P.O. Info') }}--}}
-{{--                            @if (isset($isBusinessPOIExist))--}}
-{{--                                &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                            @endif--}}
-{{--                        </x-jet-nav-link>--}}
-
                     @endif
 
 {{--                    @if (auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3)--}}
@@ -116,76 +84,6 @@
                     <x-jet-nav-link href="{{ route('packages.index') }}" :active="request()->routeIs('subscription')">
                         {{ __('Subscription') }}
                     </x-jet-nav-link>
-                    @endif
-
-
-                    @if (Auth::user()->status == 1)
-                    @else
-                        @if (Auth::user()->registration_type && ! auth()->user()->hasRole('SuperAdmin') )
-
-                                @php
-                                    $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
-                                    if ($isBusinessDataExist) {
-                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
-                                        $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
-                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();
-                                        $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
-                                    }
-                                @endphp
-
-                            @if (isset($isBusinessDataExist))
-
-{{--                                <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">--}}
-{{--                                    {{ __('Business') }} &nbsp;--}}
-{{--                                    @if (isset($isBusinessDataExist))--}}
-{{--                                        <img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                                    @endif--}}
-{{--                                </x-jet-nav-link>--}}
-
-                            @else
-{{--                                <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">--}}
-{{--                                    {{ __('Business') }} &nbsp;--}}
-{{--                                    @if (isset($isBusinessDataExist))--}}
-{{--                                        <img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                                    @endif--}}
-{{--                                </x-jet-nav-link>--}}
-                            @endif
-
-                            @if (isset($isBusinessWarehouseDataExist))
-
-{{--                                <x-jet-nav-link href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}" :active="request()->routeIs('businessWarehouseShow')">--}}
-{{--                                    {{ __('Warehouse') }}--}}
-{{--                                    @if (isset($isBusinessWarehouseDataExist))--}}
-{{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                                    @endif--}}
-{{--                                </x-jet-nav-link>--}}
-
-                            @else
-{{--                                <x-jet-nav-link href="{{ route('businessWarehouse.create') }}" :active="request()->routeIs('businessWarehouse.*')">--}}
-{{--                                    {{ __('Warehouse') }}--}}
-{{--                                    @if (isset($isBusinessWarehouseDataExist))--}}
-{{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                                    @endif--}}
-{{--                                </x-jet-nav-link>--}}
-                            @endif
-
-                            @if (isset($isBusinessPOIExist))
-{{--                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}" :active="request()->routeIs('purchaseOrderInfo.*')">--}}
-{{--                                    {{ __('P.O. Info') }}--}}
-{{--                                    @if (isset($isBusinessPOIExist))--}}
-{{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                                    @endif--}}
-{{--                                </x-jet-nav-link>--}}
-                            @else
-{{--                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.create') }}" :active="request()->routeIs('purchaseOrderInfo.*')">--}}
-{{--                                    {{ __('P.O. Info') }}--}}
-{{--                                    @if (isset($isBusinessPOIExist))--}}
-{{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-{{--                                    @endif--}}
-{{--                                </x-jet-nav-link>--}}
-                            @endif
-
-                        @endif
                     @endif
 
                 </div>
@@ -197,6 +95,38 @@
                 @php $rfqs = \App\Models\EOrderItems::with('qoutes')->doesntHave('qoutes')->count(); @endphp
                 <span title="Number of RFQs which received no quotations">RFQs with no Quotations: &nbsp;<a href="{{route('RFQsWithNoQuotations')}}" style="padding-right: 10px;"><span class="text-blue-600 hover:underline">{{$rfqs}}</span></a></span>
                 @endrole
+
+                @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
+                    @php
+                        $business_cate = \App\Models\BusinessCategory::where('business_id', auth()->user()->business_id)->get();
+                        if ($business_cate->isNotEmpty()) {
+                            foreach ($business_cate as $item) {
+                                $business_categories[] = (int)$item->category_number;
+                            }
+                        }
+                        sort($business_categories);
+
+                        // Counting NEW RFQs for multiple categories for supplier
+                        $rfqCount = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->count();
+
+                        // Counting NEW RFQs for single category for supplier
+                        $eOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 0])
+                                                                        ->where('bypass', 0)
+                                                                        ->whereDate('quotation_time', '>=', \Carbon\Carbon::now())
+                                                                        ->whereIn('item_code', $business_categories)
+                                                                        ->get();
+                        foreach ($eOrderItems as $eOrderItem)
+                        {
+                            $eOrderPresent[] = \App\Models\EOrders::where(['id' => $eOrderItem->e_order_id])->first();
+
+                            $eOrders = $eOrderPresent;
+                        }
+
+                    @endphp
+                    <span title="Number of New RFQ(s) received against multiple categories">Multiple Categories RFQ(s): &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span class="text-blue-600 hover:underline">{{$rfqCount}}</span></a></span>
+                    <span title="Number of New RFQ(s) received against single category">Single Categories RFQ(s): &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span class="text-blue-600 hover:underline">{{count($eOrders)}}</span></a></span>
+                @endif
+
                 @can('all')
 {{--                    Uncomment below line when arabic version is ready and delete comming soon line--}}
 {{--                <x-jet-button onclick="language(1)">--}}
@@ -293,10 +223,6 @@
                             </x-jet-dropdown-link>
                         @endcan
 
-{{--                        @can('create user' && Auth::user()->status == 3)--}}
-
-{{--                        @endcan--}}
-
                         @php
                             $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
                             if ($isBusinessDataExist) {
@@ -314,9 +240,11 @@
                                 </x-jet-dropdown-link>
 
                             <div class="border-t border-gray-100"></div>
-                            <x-jet-dropdown-link href="{{ route('certificateView') }}">
-                                {{ __('Update Certificates') }}
-                            </x-jet-dropdown-link>
+                            @if($isBusinessDataExist)
+                                <x-jet-dropdown-link href="{{ route('certificateView') }}">
+                                    {{ __('Update Certificates') }}
+                                </x-jet-dropdown-link>
+                            @endif
 
                                 <div class="border-t border-gray-100"></div>
                             @if (isset($isBusinessPOIExist))
@@ -352,26 +280,6 @@
                                 @endif
                             @endif
                         @endif
-
-
-{{--                        @if(auth()->user()->hasRole('CEO') && auth()->user()->status == 3)--}}
-{{--                            <div class="border-t border-gray-100"></div>--}}
-
-{{--                            @if(auth()->user()->registration_type == 'Supplier')--}}
-
-{{--                                <x-jet-dropdown-link href="{{route('createBuyer')}}">--}}
-{{--                                    {{ __('Add Buyer') }}--}}
-{{--                                </x-jet-dropdown-link>--}}
-
-{{--                            @elseif(auth()->user()->registration_type == 'Buyer')--}}
-
-{{--                                <x-jet-dropdown-link href="{{route('createSupplier')}}">--}}
-{{--                                {{ __('Add Supplier') }}--}}
-{{--                                </x-jet-dropdown-link>--}}
-
-{{--                            @endif--}}
-
-{{--                        @endif--}}
 
                         @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                             <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
@@ -492,37 +400,6 @@
                     </x-jet-responsive-nav-link>
                 @endcan
 
-                {{--                        @can('create user' && Auth::user()->status == 3)--}}
-{{--                @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)--}}
-
-{{--                    @if (auth()->user()->business_id)--}}
-{{--                        <div class="border-t border-gray-100"></div>--}}
-{{--                        <x-jet-dropdown-link href="{{ route('users.create') }}">--}}
-{{--                            {{ __('Add User') }}--}}
-{{--                        </x-jet-dropdown-link>--}}
-{{--                    @endif--}}
-{{--                @endif--}}
-                {{--                        @endcan--}}
-
-{{--                @if(auth()->user()->hasRole('CEO') && auth()->user()->status == 3)--}}
-{{--                    <div class="border-t border-gray-100"></div>--}}
-
-{{--                    @if(auth()->user()->registration_type == 'Supplier')--}}
-
-{{--                        <x-jet-dropdown-link href="{{route('createBuyer')}}">--}}
-{{--                            {{ __('Add Buyer') }}--}}
-{{--                        </x-jet-dropdown-link>--}}
-
-{{--                    @elseif(auth()->user()->registration_type == 'Buyer')--}}
-
-{{--                        <x-jet-dropdown-link href="{{route('createSupplier')}}">--}}
-{{--                            {{ __('Add Supplier') }}--}}
-{{--                        </x-jet-dropdown-link>--}}
-
-{{--                    @endif--}}
-
-{{--                @endif--}}
-
                 @if (auth()->user()->hasRole('CEO') && Auth::user()->registration_type != null)
                     <div class="border-t border-gray-100"></div>
                     <x-jet-dropdown-link href="{{ route('business.create') }}">
@@ -534,9 +411,11 @@
                     </x-jet-dropdown-link>
 
                     <div class="border-t border-gray-100"></div>
+                    @if($isBusinessDataExist)
                     <x-jet-dropdown-link href="{{ route('certificateView') }}">
                         {{ __('Update Certificates') }}
                     </x-jet-dropdown-link>
+                    @endif
 
                     <div class="border-t border-gray-100"></div>
                     @if (isset($isBusinessPOIExist))

@@ -23,6 +23,17 @@ class QouteController extends Controller
         $total_vat = ($total_cost * ($request->VAT / 100));
         $sum = ($total_cost + $total_vat);
         $request->merge(['total_cost' => $sum]);
+
+        /* Setting RFQ Type */
+        if (isset($request->single_rfq))
+        {
+            $request->merge(['rfq_type' => 0]);
+        }
+        else
+        {
+            $request->merge(['rfq_type' => 1]);
+        }
+
         $quote = Qoute::create($request->all());
         // sending mail for confirmation
         $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
@@ -30,6 +41,10 @@ class QouteController extends Controller
         // send mail to buyer also for receiving email
         $buyer_user = User::find($buyer_user_id)->notify(new \App\Notifications\QuoteReceivedBuyer());
         session()->flash('message', 'You have successfully qouted.');
+        if (isset($request->single_rfq))
+        {
+            return redirect()->route('singleCategoryQuotedRFQQuoted');
+        }
         return redirect()->route('QoutedRFQQouted');
     }
 
@@ -39,42 +54,104 @@ class QouteController extends Controller
         $request->merge(['qoute_status' => 'Modified']);
         $request->merge(['status' => 'pending']);
         $request->merge(['qoute_status_updated' => 'Modified']);
-        session()->flash('message', 'You have updated quote.');
+
+        $total_amount = ($request->quote_quantity * $request->quote_price_per_quantity);
+        $total_cost = $total_amount + $request->shipment_cost;
+        $total_vat = ($total_cost * ($request->VAT / 100));
+        $sum = ($total_cost + $total_vat);
+        $request->merge(['total_cost' => $sum]);
+
+        session()->flash('message', 'You have updated the quote.');
         $qoute->update($request->all());
         $quote = $qoute;
         $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
+        if (isset($request->single_rfq))
+        {
+            return redirect()->route('singleCategoryQuotedRFQQuoted');
+        }
         return redirect()->route('viewRFQs');
     }
 
     public function QoutedRFQQouted()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('supplier_user_id', $user_id)->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->orWhere('qoute_status', 'Modified')->get();
+//        $collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 1])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->orWhere('qoute_status', 'Modified')->get();
+        $collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 1])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->get();
+
         return view('supplier.supplier-qouted', compact('collection'));
+    }
+
+    public function QuotedModifiedRFQ()
+    {
+        $user_id = auth()->user()->id;
+        $collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 1])->where(['qoute_status' => 'Modified'])->get();
+
+        return view('supplier.supplier-modified-quoted-quotes', compact('collection'));
     }
 
     public function QoutedRFQRejected()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('supplier_user_id', $user_id)->where('qoute_status_updated', 'Rejected')->get();
+        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 1])->where('qoute_status_updated', 'Rejected')->get();
         return view('supplier.supplier-qouted-Rejected', compact('collection'));
     }
 
     public function QoutedRFQModificationNeeded()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('supplier_user_id', $user_id)->where('qoute_status_updated', 'ModificationNeeded')->get();
+        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 1])->where('qoute_status_updated', 'ModificationNeeded')->get();
         return view('supplier.supplier-qouted-ModificationNeeded', compact('collection'));
     }
 
     public function QoutedRFQQoutedRFQPendingConfirmation()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where('supplier_user_id', $user_id)->where('qoute_status', 'RFQPendingConfirmation')->get();
+        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 1])->where('qoute_status', 'RFQPendingConfirmation')->get();
         return view('supplier.supplier-qouted-PendingConfirmation', compact('collection'));
     }
 
-    public function QoutationsBuyerReceived(Request $request)
+    ################### Functions For Single Category RFQ Type ###################
+
+    public function singleCategoryQuotedRFQQuoted()
+    {
+        $user_id = auth()->user()->id;
+        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->get();
+
+        return view('supplier.singleCategoryRFQ.supplier-qouted', compact('collection'));
+    }
+
+    public function singleCategoryQuotedModifiedRFQ()
+    {
+        $user_id = auth()->user()->id;
+        $collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 0])->where(['qoute_status' => 'Modified'])->get();
+
+        return view('supplier.singleCategoryRFQ.supplier-modified-quoted-quotes', compact('collection'));
+    }
+
+    public function singleCategoryQuotedRFQRejected()
+    {
+        $user_id = auth()->user()->id;
+        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where('qoute_status_updated', 'Rejected')->get();
+        return view('supplier.singleCategoryRFQ.supplier-qouted-Rejected', compact('collection'));
+    }
+
+    public function singleCategoryQuotedRFQModificationNeeded()
+    {
+        $user_id = auth()->user()->id;
+        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where('qoute_status_updated', 'ModificationNeeded')->get();
+        return view('supplier.singleCategoryRFQ.supplier-qouted-ModificationNeeded', compact('collection'));
+    }
+
+    public function singleCategoryQuotedRFQPendingConfirmation()
+    {
+        $user_id = auth()->user()->id;
+        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where('qoute_status', 'RFQPendingConfirmation')->get();
+        return view('supplier.singleCategoryRFQ.supplier-qouted-PendingConfirmation', compact('collection'));
+    }
+
+    #############################################################################
+
+    public function QoutationsBuyerReceived()
     {
         if (auth()->user()->hasRole('SuperAdmin')) {
             $PlacedRFQ = EOrders::orderBy('created_at', 'desc')->get();
@@ -86,13 +163,13 @@ class QouteController extends Controller
         return view('buyer.receivedQoutations', compact('PlacedRFQ'));
     }
 
-    public function QoutationsBuyerReceivedRFQItemsByID(Request $request, $EOrderItems)
+    public function QoutationsBuyerReceivedRFQItemsByID($EOrderItems)
     {
         $collection = EOrderItems::where('e_order_id', $EOrderItems)->orderBy('created_at', 'desc')->get();
         return view('buyer.byerItemsShow', compact('collection', 'EOrderItems'));
     }
 
-    public function QoutationsBuyerReceivedQoutes(Request $request, $EOrderID, $EOrderItemID, $bypass_id)
+    public function QoutationsBuyerReceivedQoutes($EOrderID, $EOrderItemID, $bypass_id)
     {
         $collection = EOrderItems::with('qoutes')->where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
         if($bypass_id == 1)
@@ -104,30 +181,30 @@ class QouteController extends Controller
         return view('buyer.qoutes', compact('collection', 'EOrderID', 'EOrderItemID', 'bypass_id'));
     }
 
-    public function QoutationsBuyerReceivedRejected(Request $request, $EOrderID, $EOrderItemID,$bypass_id)
+    public function QoutationsBuyerReceivedRejected($EOrderID, $EOrderItemID,$bypass_id)
     {
         $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
         return view('buyer.qoutedRejected', compact('collection', 'EOrderID', 'EOrderItemID', 'bypass_id'));
     }
 
-    public function QoutationsBuyerReceivedModificationNeeded(Request $request, $EOrderID, $EOrderItemID,$bypass_id)
+    public function QoutationsBuyerReceivedModificationNeeded($EOrderID, $EOrderItemID,$bypass_id)
     {
         $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
         return view('buyer.qoutationsBuyerReceivedModificationNeeded', compact('collection', 'EOrderID', 'EOrderItemID', 'bypass_id'));
     }
 
-    public function QoutationsBuyerReceivedAccepted(Request $request, $EOrderID, $EOrderItemID,$bypass_id)
+    public function QoutationsBuyerReceivedAccepted($EOrderID, $EOrderItemID,$bypass_id)
     {
         $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
         return view('buyer.QoutationsBuyerReceivedAccepted', compact('collection', 'EOrderID', 'EOrderItemID', 'bypass_id'));
     }
 
-    public function QoutationsBuyerReceivedQouteID(Request $request, Qoute $QouteItem)
+    public function QoutationsBuyerReceivedQouteID(Qoute $QouteItem)
     {
         return view('buyer.qoutesrespond', compact('QouteItem'));
     }
 
-    public function updateModificationNeeded(Request $request, Qoute $qoute)
+    public function updateModificationNeeded(Qoute $qoute)
     {
         $qoute_status = 'ModificationNeeded';
         $qoute->update([
@@ -140,11 +217,11 @@ class QouteController extends Controller
         $buyer_id = 0;
         // inform supplier user
         $supplier_user = User::find($qoute->supplier_user_id)->notify(new \App\Notifications\QuoteAgain($qoute));
-        session()->flash('message', 'Qoute status changed to ' . $qoute_status);
+        session()->flash('message', 'Quote status changed to ' . $qoute_status);
         return redirect()->route('QoutationsBuyerReceivedModificationNeeded', [$qoute->e_order_id, $qoute->e_order_items_id, $buyer_id]);
     }
 
-    public function updateRejected(Request $request, Qoute $qoute)
+    public function updateRejected(Qoute $qoute)
     {
         $qoute_status = 'Rejected';
         $qoute->update([
