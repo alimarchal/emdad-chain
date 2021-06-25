@@ -87,10 +87,6 @@
             @endif
         </div>
 
-
-
-
-
     @elseif(Auth::user()->status == 1 && Auth::user()->registration_type == "Supplier")
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Welcome {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
