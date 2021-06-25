@@ -67,7 +67,7 @@ class QouteController extends Controller
         $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
         if (isset($request->single_rfq))
         {
-            return redirect()->route('singleCategoryQuotedRFQQuoted');
+            return redirect()->route('singleCategoryQuotedModifiedRFQ');
         }
         return redirect()->route('viewRFQs');
     }
@@ -110,7 +110,7 @@ class QouteController extends Controller
         return view('supplier.supplier-qouted-PendingConfirmation', compact('collection'));
     }
 
-    ################### Functions For Single Category RFQ Type ###################
+    ################### Functions For Single Category RFQ Type For Supplier ##################
 
     public function singleCategoryQuotedRFQQuoted()
     {
@@ -149,7 +149,7 @@ class QouteController extends Controller
         return view('supplier.singleCategoryRFQ.supplier-qouted-PendingConfirmation', compact('collection'));
     }
 
-    #############################################################################
+    ##########################################################################################
 
     public function QoutationsBuyerReceived()
     {
@@ -157,7 +157,8 @@ class QouteController extends Controller
             $PlacedRFQ = EOrders::orderBy('created_at', 'desc')->get();
         } else {
 //            $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
-            $PlacedRFQ = EOrders::where('business_id', auth()->user()->business_id)->orderBy('created_at', 'desc')->get();
+//            $PlacedRFQ = EOrders::where('business_id', auth()->user()->business_id)->orderBy('created_at', 'desc')->get();
+            $PlacedRFQ = EOrders::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->orderBy('created_at', 'desc')->get();
         }
 
         return view('buyer.receivedQoutations', compact('PlacedRFQ'));
@@ -287,6 +288,84 @@ class QouteController extends Controller
         session()->flash('message', 'Draft purchase order has been generated');
         return redirect()->route('dpo.show', $dpo->id);
     }
+
+    ################### Functions For Single Category RFQ Type For Buyer ##################
+
+    public function singleCategoryBuyerRFQs()
+    {
+        $placedRFQs = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->orderBy('id', 'DESC')->get();
+
+        return view('buyer.singleCategory.index', compact('placedRFQs'));
+    }
+
+    public function singleCategoryRFQItems($rfq_id)
+    {
+        $RFQItems = EOrderItems::with('qoutes','category')->where(['e_order_id' => $rfq_id])->get();
+
+        return view('buyer.singleCategory.rfq', compact('RFQItems'));
+    }
+
+    public function singleCategoryRFQItemByID(Qoute $QuoteItem)
+    {
+        return view('buyer.singleCategory.respond', compact('QuoteItem'));
+    }
+
+    public function singleCategoryRFQQuotationsBuyerReceived($EOrderItemID, $bypass_id)
+    {
+        $collection = EOrderItems::with('qoutes')->where('id', $EOrderItemID)->orderBy('created_at', 'DESC')->first();
+        if($bypass_id == 1)
+        {
+            $collection->update([
+                'bypass' => 1
+            ]);
+        }
+        return view('buyer.singleCategory.quotation', compact('collection',  'EOrderItemID', 'bypass_id'));
+    }
+
+    public function singleCategoryRFQQuotationsBuyerRejected($EOrderItemID,$bypass_id)
+    {
+        $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'DESC')->first();
+        return view('buyer.singleCategory.rejectedQuotation', compact('collection', 'EOrderItemID', 'bypass_id'));
+    }
+
+    public function singleCategoryRFQQuotationsModificationNeeded($EOrderItemID,$bypass_id)
+    {
+        $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'DESC')->first();
+        return view('buyer.singleCategory.modifiedQuotation', compact('collection',  'EOrderItemID', 'bypass_id'));
+    }
+
+    public function singleCategoryRFQUpdateStatusModificationNeeded(Qoute $quote)
+    {
+        $quote_status = 'ModificationNeeded';
+        $quote->update([
+            'qoute_status' => $quote_status,
+            'qoute_updated_user_id' => auth()->user()->id,
+            'qoute_status_updated' => $quote_status,
+            'status' => 'pending',
+        ]);
+
+        $buyer_id = 0;
+        // inform supplier user
+        User::find($quote->supplier_user_id)->notify(new \App\Notifications\QuoteAgain($quote));
+        session()->flash('message', 'Quote status changed to ' . $quote_status);
+        return redirect()->route('singleCategoryRFQQuotationsModificationNeeded', [$quote->e_order_items_id, $buyer_id]);
+    }
+
+    public function singleCategoryRFQUpdateStatusRejected(Qoute $quote)
+    {
+        $quote_status = 'Rejected';
+        $quote->update([
+            'qoute_updated_user_id' => auth()->user()->id,
+            'qoute_status_updated' => $quote_status,
+            'status' => 'expired',
+        ]);
+
+        User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteRejected($quote));
+        session()->flash('message', 'Quote status changes to ' . $quote_status);
+        return redirect()->route('singleCategoryBuyerRFQs');
+    }
+
+    ##########################################################################################
 
     // Calculating totalCost at the time of Supplier RFQ response
     public function totalCost(Request $request)

@@ -98,7 +98,7 @@
                                             $record = \App\Models\Category::where('id',$rfp->orderItem->item_code)->first();
                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                         @endphp
-                                        {{ $rfp->orderItem->item_name }} , {{$parent->name}}
+                                        {{ $rfp->orderItem->item_name }}, {{$parent->name}}
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">
