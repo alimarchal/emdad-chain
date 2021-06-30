@@ -98,6 +98,7 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                             @php
+                                $eOrders =array();
                                 $eOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 0])
                                                                         ->where('bypass', 0)
                                                                         ->whereDate('quotation_time', '>=', \Carbon\Carbon::now())
@@ -186,6 +187,7 @@
                                     @endif
 
                             @endforeach
+
                             </tbody>
                         </table>
                     </div>

@@ -115,6 +115,7 @@
                                                                         ->whereDate('quotation_time', '>=', \Carbon\Carbon::now())
                                                                         ->whereIn('item_code', $business_categories)
                                                                         ->get();
+                        $eOrders = array();
                         foreach ($eOrderItems as $eOrderItem)
                         {
                             $eOrderPresent[] = \App\Models\EOrders::where(['id' => $eOrderItem->e_order_id])->first();
@@ -123,8 +124,8 @@
                         }
 
                     @endphp
-                    <span title="Number of New RFQ(s) received against multiple categories">Multiple Categories RFQ(s): &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span class="text-blue-600 hover:underline">{{$rfqCount}}</span></a></span>
-                    <span title="Number of New RFQ(s) received against single category">Single Categories RFQ(s): &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span class="text-blue-600 hover:underline">{{count($eOrders)}}</span></a></span>
+                    <span title="Number of New RFQ(s) received against multiple categories">Multiple Categories RFQ(s): &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span @if($rfqCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>{{$rfqCount}}</span></a></span>
+                    <span title="Number of New RFQ(s) received against single category">Single Categories RFQ(s): &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>{{count($eOrders)}}</span></a></span>
                 @endif
 
                 @can('all')
@@ -368,6 +369,14 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
 
+            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
+                <a @if($rfqCount > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out" @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('viewRFQs') }}">
+                    Multiple Categories RFQ(s): &nbsp; {{ $rfqCount }}
+                </a>
+                <a @if(count($eOrders) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out" @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryRFQs') }}">
+                    Single Categories RFQ(s): &nbsp; {{ count($eOrders) }}
+                </a>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
