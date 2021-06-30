@@ -41,6 +41,7 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('Vehicle', \App\Http\Controllers\Api\v1\VehicleController::class);
     Route::apiResource('DeliveryComment', \App\Http\Controllers\Api\v1\DeliveryCommentController::class);
     Route::get('DeliveryComment/{user_id}/{delivery_id}', [\App\Http\Controllers\Api\v1\DeliveryCommentController::class,'getRatingByUserID']);
+    Route::apiResource('Business', \App\Http\Controllers\Api\v1\BusinessController::class);
 
 
     /*
