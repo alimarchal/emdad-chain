@@ -58,11 +58,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12 slide-caption" >
+
+{{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
+                            <h3 class="text-white emdad_description" style="font-family: arabicFont;direction: rtl;">إمداد هي منصة إلكترونية (B2B) تم إنشاؤها على أيدي فريق طموح وخبير وفي المجال التقني، بغرض تحويل عمليات البيع والشراء والتوريد والتخزين إلى منصة ذكية وموحدة، بأقل التكاليف وبأفضل المعايير التقنية واللوجستية. ولتصبح عمليات سلاسل الإمداد المحلية في المملكة العربية السعودية أكثر ذكاءً وتقدمًا واستدامةً وفقاً لرؤية ٢٠٣٠.</h3>
                             <div>
                                 <div class="btn-style join_us_ar"><a href="{{route('register')}}" class="join_us_font_size">انضم إلينا</a></div>
                             </div>
-{{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
-                            <h3 class="text-white emdad_description" style="font-family: arabicFont;direction: rtl;">إمداد هي منصة إلكترونية (B2B) تم إنشاؤها على أيدي فريق طموح وخبير وفي المجال التقني، بغرض تحويل عمليات البيع والشراء والتوريد والتخزين إلى منصة ذكية وموحدة، بأقل التكاليف وبأفضل المعايير التقنية واللوجستية. ولتصبح عمليات سلاسل الإمداد المحلية في المملكة العربية السعودية أكثر ذكاءً وتقدمًا واستدامةً وفقاً لرؤية ٢٠٣٠.</h3>
                             <div class="btns">
 {{--                                <div class="btn-style"><a href="{{route('arabic.about')}}">من إمداد</a></div>--}}
                             </div>

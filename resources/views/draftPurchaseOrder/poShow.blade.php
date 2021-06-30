@@ -169,11 +169,14 @@
 
 
                         @if ($draftPurchaseOrder->status == 'approved')
-                            <span class="px-3 py-3 bg-green-800 text-white rounded">APPROVED P.O</span>
+                            <img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-9@8x.png')}}" alt="APPROVED P.O">
+{{--                            <span class="px-3 py-3 bg-green-800 text-white rounded">APPROVED P.O</span>--}}
                         @elseif ($draftPurchaseOrder->status == 'cancel')
-                            <span class="px-3 py-3 bg-red-800 text-white rounded">Canceled P.O</span>
+                            <img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-8@8x.png')}}" alt="Canceled P.O">
+{{--                            <span class="px-3 py-3 bg-red-800 text-white rounded">Canceled P.O</span>--}}
                         @elseif ($draftPurchaseOrder->status == 'rejectToEdit')
-                            <span class="px-3 py-3 bg-red-600 text-white rounded uppercase">Rejected for Edit</span>
+                            <img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-7@8x.png')}}" alt="ARejected for Edit">
+{{--                            <span class="px-3 py-3 bg-red-600 text-white rounded uppercase">Rejected for Edit</span>--}}
                         @elseif ($draftPurchaseOrder->status == 'completed')
                         @else
                             @if(auth()->user()->registeration_type == 'Buyer')

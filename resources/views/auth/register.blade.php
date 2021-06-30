@@ -90,10 +90,10 @@
             </div>
 
 
-            <div class="mt-2">
-                <x-jet-label for="id_photo" value="{{ __('National ID Photo') }}" class="mb-2"/>
-                <input type="file" id="nid_photo" name="nid_photo" class="form-input rounded-md shadow-sm block mt-1 w-full" required>
-            </div>
+{{--            <div class="mt-2">--}}
+{{--                <x-jet-label for="id_photo" value="{{ __('National ID Photo') }}" class="mb-2"/>--}}
+{{--                <input type="file" id="nid_photo" name="nid_photo" class="form-input rounded-md shadow-sm block mt-1 w-full" required>--}}
+{{--            </div>--}}
 
             <div class="mt-2">
                 <x-jet-label for="mobile" value="{{ __('Mobile Number') }}" class="mb-2"/>

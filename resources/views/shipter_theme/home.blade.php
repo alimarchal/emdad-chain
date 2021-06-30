@@ -58,12 +58,13 @@
                     <div class="row">
                         <div class="col-xl-12 slide-caption">
                             {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
-                            <div>
-                                <div class="btn-style join_us"><a href="{{route('register')}}" class="join_us_font_size">Join us</a></div>
-                            </div>
+
                             <h3 class="text-white emdad_description">Emdad, is an online (B2B) platform, established by an ambitious and technical expert team, to transform the purchasing, selling, supplying,
                                 and warehousing processes into one intelligent and unified platform. It offers the lowest costs, yet the best technical and logistical standards.
                                 Emdad aims to make the local supply chain operations in the Kingdom of Saudi Arabia smarter, more advanced and sustainable, according to the Vision 2030.</h3>
+                            <div>
+                                <div class="btn-style join_us"><a href="{{route('register')}}" class="join_us_font_size">Join us</a></div>
+                            </div>
                         </div>
                     </div>
                 </div>

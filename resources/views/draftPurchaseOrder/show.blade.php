@@ -188,6 +188,7 @@
 
 
                         @if ($draftPurchaseOrder->status == 'approved')
+                            <img src="" alt="">
                             <span class="px-3 py-3 bg-green-800 text-white rounded">Approve</span>
                         @elseif ($draftPurchaseOrder->status == 'cancel')
                             <span class="px-3 py-3 bg-red-800 text-white rounded">Cancel DPO</span>
