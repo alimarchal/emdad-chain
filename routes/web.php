@@ -258,19 +258,16 @@ Route::middleware(['auth:sanctum'])->resource('RFQ', PurchaseRequestFormControll
 // For Single Category RFQ
 Route::middleware(['auth:sanctum'])->get('create-single-category-rfq', [PurchaseRequestFormController::class, 'create_single_rfq'])->name('create_single_rfq');
 Route::middleware(['auth:sanctum'])->post('create-single-category-rfq', [PurchaseRequestFormController::class, 'store_single_rfq']);
-
 Route::middleware(['auth:sanctum'])->resource('RFQCart', ECartController::class);
 
 // For Single Category RFQ
 Route::middleware(['auth:sanctum'])->get('single-category-cart', [ECartController::class, 'single_cart_index'])->name('single_cart_index');
 Route::middleware(['auth:sanctum'])->post('store-single-category-cart-rfq', [ECartController::class, 'single_cart_store_rfq'])->name('single_cart_store_rfq');
 Route::middleware(['auth:sanctum'])->post('delete-single-category-rfq/{id}', [ECartController::class, 'single_cart_destroy'])->name('single_cart_destroy');
-
 Route::middleware(['auth:sanctum'])->resource('EOrders', EOrdersController::class);
 
 // For Single Category RFQ
 Route::middleware(['auth:sanctum'])->post('store-single-category-rfq', [EOrdersController::class, 'single_category_store'])->name('single_category_store');
-
 Route::middleware(['auth:sanctum'])->resource('PlacedRFQ', PlacedRFQController::class);
 
 // For Single category RFQ
@@ -426,18 +423,12 @@ Route::get('/payment-status', [\App\Http\Controllers\MakePaymentController::clas
 
 
 Route::middleware(['auth:sanctum'])->resource('packages', PackageController::class);
-
 Route::middleware(['auth:sanctum'])->get('business-packages/status', [\App\Http\Controllers\BusinessPackageController::class, 'businessPackagePaymentStatus'])->name('businessPackage.paymentStatus');
-
 Route::middleware(['auth:sanctum'])->post('business-packages/step-one', [\App\Http\Controllers\BusinessPackageController::class, 'getCheckOutId'])->name('businessPackage.stepOne');
-
 Route::middleware(['auth:sanctum'])->resource('business-packages', BusinessPackageController::class);
-
 Route::middleware(['auth:sanctum'])->post('business-packages/checkout', [\App\Http\Controllers\BusinessPackageController::class, 'getCheckOutId'])->name('businessPackage.getCheckOutId');
-
 Route::middleware(['auth:sanctum'])->post('updateCategories', [BusinessPackageController::class, 'updateCategories'])->name('updatePackageCategories');
 Route::middleware(['auth:sanctum'])->post('business-package-store/{id}', [BusinessPackageController::class, 'store'])->name('business-package.store');
-
 #################### END ##############################################################
 
 Route::middleware(['auth:sanctum'])->get('select-category', [CategoryController::class, 'parentCategories'])->name('parentCategories');
