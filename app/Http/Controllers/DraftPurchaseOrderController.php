@@ -113,7 +113,6 @@ class DraftPurchaseOrderController extends Controller
         return redirect()->route('dpo.show', $draftPurchaseOrder->id);
     }
 
-
     /**
      * Generating PDF file for POs.
      *
@@ -124,7 +123,6 @@ class DraftPurchaseOrderController extends Controller
         //        $pdf = PDF::loadView('draftPurchaseOrder.PDF', $data);
         return $pdf->download('POs.pdf');
     }
-
 
     public function po()
     {

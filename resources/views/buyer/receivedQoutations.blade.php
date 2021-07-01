@@ -47,7 +47,7 @@
 
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    #
+                                    RFQ Item #
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">

@@ -17,31 +17,7 @@
     <!-- This example requires Tailwind CSS v2.0+ -->
     <!-- component -->
     <div class="bg-white">
-        <nav class="flex flex-col sm:flex-row">
-            <a href="{{ route('singleCategoryRFQs') }}" class="py-4 px-6 block hover:text-blue-500 focus:outline-none {{ request()->routeIs('singleCategoryRFQs') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                New
-            </a>
-            <a href="{{ route('singleCategoryQuotedRFQQuoted') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('singleCategoryQuotedRFQQuoted') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
-                @php $quotedCount = \App\Models\Qoute::where(['supplier_user_id'=> auth()->user()->id, 'rfq_type' => 0])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->count(); @endphp
-                Quoted <span class="text-red-400">({{$quotedCount}})</span>
-            </a>
-            <a href="{{ route('singleCategoryQuotedModifiedRFQ') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('singleCategoryQuotedModifiedRFQ') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
-                @php $quotedCount = \App\Models\Qoute::where(['supplier_user_id'=> auth()->user()->id, 'rfq_type' => 0])->where(['qoute_status' => 'Modified'])->count(); @endphp
-                Modified <span class="text-red-400">({{$quotedCount}})</span>
-            </a>
-            <a href="{{ route('singleCategoryQuotedRFQRejected') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('singleCategoryQuotedRFQRejected') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                @php $rejectedCount = \App\Models\Qoute::where(['supplier_user_id'=> auth()->user()->id, 'rfq_type' => 0])->where('qoute_status_updated', 'Rejected')->count(); @endphp
-                Rejected <span class="text-red-400">({{$rejectedCount}})</span>
-            </a>
-            <a href="{{ route('singleCategoryQuotedRFQModificationNeeded') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('singleCategoryQuotedRFQModificationNeeded') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                @php $modificationCount = \App\Models\Qoute::where(['supplier_user_id'=> auth()->user()->id, 'rfq_type' => 0])->where('qoute_status_updated', 'ModificationNeeded')->count(); @endphp
-                Modification needed <span class="text-red-400">({{$modificationCount}})</span>
-            </a>
-            <a href="{{ route('singleCategoryQuotedRFQPendingConfirmation') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('singleCategoryQuotedRFQPendingConfirmation') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                @php $pendingCount = \App\Models\Qoute::where(['supplier_user_id'=> auth()->user()->id, 'rfq_type' => 0])->where('qoute_status', 'RFQPendingConfirmation')->count(); @endphp
-                Pending Confirmation <span class="text-red-400">({{$pendingCount}})</span>
-            </a>
-        </nav>
+        @include('supplier.singleCategoryRFQ.navBar')
     </div>
     @if ($collection->count())
         <div class="flex flex-col bg-white rounded ">
@@ -56,6 +32,9 @@
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                     Category Name
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    {{ ucwords(str_replace("_", " ", "RFQ #")) }}
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                     {{ ucwords(str_replace("_", " ", "quantity")) }}
@@ -101,6 +80,9 @@
                                         {{ $rfp->orderItem->item_name }}, {{$parent->name}}
                                     </td>
 
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $rfp->RFQ->id }}
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $rfp->quote_quantity }}
                                     </td>

@@ -105,6 +105,8 @@
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                                         @if ($dpo->status == 'prepareDelivery')
                                                             Preparing Delivery
+                                                        @elseif ($dpo->status == 'cancel')
+                                                            canceled
                                                         @else
                                                             {{ $dpo->status }}
                                                         @endif
