@@ -258,19 +258,16 @@ Route::middleware(['auth:sanctum'])->resource('RFQ', PurchaseRequestFormControll
 // For Single Category RFQ
 Route::middleware(['auth:sanctum'])->get('create-single-category-rfq', [PurchaseRequestFormController::class, 'create_single_rfq'])->name('create_single_rfq');
 Route::middleware(['auth:sanctum'])->post('create-single-category-rfq', [PurchaseRequestFormController::class, 'store_single_rfq']);
-
 Route::middleware(['auth:sanctum'])->resource('RFQCart', ECartController::class);
 
 // For Single Category RFQ
 Route::middleware(['auth:sanctum'])->get('single-category-cart', [ECartController::class, 'single_cart_index'])->name('single_cart_index');
 Route::middleware(['auth:sanctum'])->post('store-single-category-cart-rfq', [ECartController::class, 'single_cart_store_rfq'])->name('single_cart_store_rfq');
 Route::middleware(['auth:sanctum'])->post('delete-single-category-rfq/{id}', [ECartController::class, 'single_cart_destroy'])->name('single_cart_destroy');
-
 Route::middleware(['auth:sanctum'])->resource('EOrders', EOrdersController::class);
 
 // For Single Category RFQ
 Route::middleware(['auth:sanctum'])->post('store-single-category-rfq', [EOrdersController::class, 'single_category_store'])->name('single_category_store');
-
 Route::middleware(['auth:sanctum'])->resource('PlacedRFQ', PlacedRFQController::class);
 
 // For Single category RFQ
@@ -284,8 +281,10 @@ Route::middleware(['auth:sanctum'])->get('/RFQPlacedItems/{EOrderItems}', [Place
 Route::middleware(['auth:sanctum'])->get('/viewRFQs', [PlacedRFQController::class, 'viewRFQs'])->name('viewRFQs');
 Route::middleware(['auth:sanctum'])->get('/viewRFQs/{eOrderItems}', [PlacedRFQController::class, 'viewRFQsID'])->name('viewRFQsID');
 Route::middleware(['auth:sanctum'])->get('/single-category-RFQs', [PlacedRFQController::class, 'viewSingleCategoryRFQs'])->name('singleCategoryRFQs');
-Route::middleware(['auth:sanctum'])->get('/view-RFQs-for-single-category-{eOrderID}', [PlacedRFQController::class, 'viewRFQsOfSingleCategory'])->name('viewRFQsOfSingleCategory');
-Route::middleware(['auth:sanctum'])->get('/quote-RFQs-for-single-category-{eOrderItems}', [PlacedRFQController::class, 'viewSingleCategoryRFQByID'])->name('viewSingleCategoryRFQByID');
+//Route::middleware(['auth:sanctum'])->get('/view-RFQs-for-single-category-{eOrderID}', [PlacedRFQController::class, 'viewRFQsOfSingleCategory'])->name('viewRFQsOfSingleCategory');
+//Route::middleware(['auth:sanctum'])->get('/quote-RFQs-for-single-category-{eOrderItems}', [PlacedRFQController::class, 'viewSingleCategoryRFQByID'])->name('viewSingleCategoryRFQByID');
+Route::middleware(['auth:sanctum'])->get('/quote-RFQs-for-single-category-{eOrder}', [PlacedRFQController::class, 'viewSingleCategoryRFQByID'])->name('viewSingleCategoryRFQByID');
+Route::middleware(['auth:sanctum'])->get('/modification-needed-quote-RFQs-for-single-category-{quote}', [PlacedRFQController::class, 'viewModifiedSingleCategoryRFQByID'])->name('viewModifiedSingleCategoryRFQByID');
 Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [PlacedRFQController::class, 'RFQsQouted'])->name('RFQsQouted');
 
 #################### Roles display and update ##########################
@@ -297,9 +296,13 @@ Route::resource('/permission', PermissionController::class);
 //>>>>>>This is Business informtion rout to check tatus of business <<<<<<<<<<<<<<<<
 Route::get('business/Approval/Update/{id}', [BusinessController::class, 'businessApprovalUpdate'])->name('businessApprovalUpdate');
 Route::get('business/Approval/Rejected/{id}', [BusinessController::class, 'businessApprovalRejected'])->name('businessApprovalRejected');
+Route::middleware(['auth:sanctum'])->post('single-quote-store', [QouteController::class, 'singleRFQQuotationStore'])->name('singleRFQQuotationStore');
+Route::middleware(['auth:sanctum'])->post('single-quote-update', [QouteController::class, 'singleRFQQuotationUpdate'])->name('singleRFQQuotationUpdate');
 Route::middleware(['auth:sanctum'])->resource('qoute', QouteController::class);
 /* Calculating totalCost at the time of Supplier RFQ response */
 Route::middleware(['auth:sanctum'])->get('total-cost', [QouteController::class, 'totalCost'])->name('totalCost');
+/* Calculating totalCost for single category RFQ Type at the time of Supplier RFQ response */
+Route::middleware(['auth:sanctum'])->get('single-total-cost', [QouteController::class, 'singleTotalCost'])->name('singleTotalCost');
 
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Qouted', [QouteController::class, 'QoutedRFQQouted'])->name('QoutedRFQQouted');
 Route::middleware(['auth:sanctum'])->get('/Quoted/Modified/RFQs', [QouteController::class, 'QuotedModifiedRFQ'])->name('QuotedModifiedRFQ');
@@ -326,12 +329,13 @@ Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOr
 ######################## Single Category Quotations routes For Buyer ############################################
 Route::middleware(['auth:sanctum'])->get('/single-category-rfq', [QouteController::class, 'singleCategoryBuyerRFQs'])->name('singleCategoryBuyerRFQs');
 Route::middleware(['auth:sanctum'])->get('/single-category-rfq-items/{rfq_id}', [QouteController::class, 'singleCategoryRFQItems'])->name('singleCategoryRFQItems');
-Route::middleware(['auth:sanctum'])->get('/single-category-rfq-item-response/{QuoteItem}', [QouteController::class, 'singleCategoryRFQItemByID'])->name('singleCategoryRFQItemByID');
-Route::middleware(['auth:sanctum'])->get('/single-category-RFQ-quotations/{EOrderItemID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerReceived'])->name('singleCategoryRFQQuotationsBuyerReceived');
+Route::middleware(['auth:sanctum'])->get('/single-category-rfq-item-response/{quote}', [QouteController::class, 'singleCategoryRFQItemByID'])->name('singleCategoryRFQItemByID');
+Route::middleware(['auth:sanctum'])->get('/single-category-RFQ-quotations/{eOrderID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerReceived'])->name('singleCategoryRFQQuotationsBuyerReceived');
 Route::middleware(['auth:sanctum'])->get('/single-category-RFQ-rejected-quotations/{EOrderItemID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerRejected'])->name('singleCategoryRFQQuotationsBuyerRejected');
-Route::middleware(['auth:sanctum'])->get('/single-category-RFQ-modification-quotations/{EOrderItemID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsModificationNeeded'])->name('singleCategoryRFQQuotationsModificationNeeded');
-Route::middleware(['auth:sanctum'])->get('quote/{quote}/ModificationNeeded', [QouteController::class, 'singleCategoryRFQUpdateStatusModificationNeeded'])->name('singleCategoryRFQUpdateStatusModificationNeeded');
-Route::middleware(['auth:sanctum'])->get('quote/{quote}/Rejected', [QouteController::class, 'singleCategoryRFQUpdateStatusRejected'])->name('singleCategoryRFQUpdateStatusRejected');
+Route::middleware(['auth:sanctum'])->get('/single-category-RFQ-modification-quotations/{eOrderID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsModificationNeeded'])->name('singleCategoryRFQQuotationsModificationNeeded');
+Route::middleware(['auth:sanctum'])->get('single-rfq-quote/{quotes}/ModificationNeeded', [QouteController::class, 'singleCategoryRFQUpdateStatusModificationNeeded'])->name('singleCategoryRFQUpdateStatusModificationNeeded');
+Route::middleware(['auth:sanctum'])->get('single-rfq-quote/{quotes}/Rejected', [QouteController::class, 'singleCategoryRFQUpdateStatusRejected'])->name('singleCategoryRFQUpdateStatusRejected');
+Route::middleware(['auth:sanctum'])->post('singleCategoryQuote/Accepted', [QouteController::class, 'singleCategoryQuoteAccepted'])->name('singleCategoryQuoteAccepted');
 #################################################################################################################
 
 
@@ -426,18 +430,12 @@ Route::get('/payment-status', [\App\Http\Controllers\MakePaymentController::clas
 
 
 Route::middleware(['auth:sanctum'])->resource('packages', PackageController::class);
-
 Route::middleware(['auth:sanctum'])->get('business-packages/status', [\App\Http\Controllers\BusinessPackageController::class, 'businessPackagePaymentStatus'])->name('businessPackage.paymentStatus');
-
 Route::middleware(['auth:sanctum'])->post('business-packages/step-one', [\App\Http\Controllers\BusinessPackageController::class, 'getCheckOutId'])->name('businessPackage.stepOne');
-
 Route::middleware(['auth:sanctum'])->resource('business-packages', BusinessPackageController::class);
-
 Route::middleware(['auth:sanctum'])->post('business-packages/checkout', [\App\Http\Controllers\BusinessPackageController::class, 'getCheckOutId'])->name('businessPackage.getCheckOutId');
-
 Route::middleware(['auth:sanctum'])->post('updateCategories', [BusinessPackageController::class, 'updateCategories'])->name('updatePackageCategories');
 Route::middleware(['auth:sanctum'])->post('business-package-store/{id}', [BusinessPackageController::class, 'store'])->name('business-package.store');
-
 #################### END ##############################################################
 
 Route::middleware(['auth:sanctum'])->get('select-category', [CategoryController::class, 'parentCategories'])->name('parentCategories');

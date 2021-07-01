@@ -13,13 +13,13 @@
             </button>
         </div>
     @endif
-    <h2 class="text-2xl font-bold py-2 text-center m-2">Quotations List @if (!$collection->qoutes->count()) seems empty @endif
+    <h2 class="text-2xl font-bold py-2 text-center m-2">Quotations List @if (!$collection->count()) seems empty @endif
     </h2>
     <div class="bg-white">
         @include('buyer.singleCategory.navBar')
     </div>
 
-    @if ($collection->qoutes->count())
+    @if ($collection->count())
         <div class="flex flex-col bg-white ">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -62,11 +62,17 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                             @php
-                                $modification = $collection->qoutes->where('qoute_status', 'ModificationNeeded')->first();
-                                $modified = $collection->qoutes->where('qoute_status', 'Modified')->first();
+                                foreach ($collection as $collect)
+                                {
+                                    $modification = \App\Models\Qoute::where(['qoute_status' => 'ModificationNeeded', 'e_order_id' => $collect->e_order_id])->first();
+                                }
+                                foreach ($collection as $collect)
+                                {
+                                    $modified = \App\Models\Qoute::where(['qoute_status' => 'Modified', 'e_order_id' => $collect->e_order_id])->first();
+                                }
                             @endphp
                             @if(isset($modified) )
-                                @foreach ($collection->qoutes->where('qoute_status', 'Modified') as $rfp)
+                                @foreach ($collection->where('qoute_status', 'Modified') as $rfp)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $loop->iteration }}
@@ -107,7 +113,7 @@
                                     </tr>
                                 @endforeach
                             @elseif(isset($modification))
-                                @foreach ($collection->qoutes->where('qoute_status', 'ModificationNeeded') as $rfp)
+                                @foreach ($collection->where('qoute_status', 'ModificationNeeded') as $rfp)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $loop->iteration }}

@@ -141,6 +141,8 @@
                                             <a class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1"
                                                href="{{route('accountStatus', ['business_id' => $business->id, 'status_id' => 3])}}" style="transition: all .15s ease"> Accept
                                             </a>
+                                            <br>
+                                            <br>
                                             <a class="bg-purple-500 text-white active:bg-purple-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1"
                                                href="{{route('accountStatus', ['business_id' => $business->id, 'status_id' => 4])}}" style="transition: all .15s ease"> Reject
                                             </a>

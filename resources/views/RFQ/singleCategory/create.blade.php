@@ -102,11 +102,6 @@
                                             Category Name
                                         </th>
 
-                                        {{-- <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                            Brand
-                                        </th> --}}
-
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                             Description
@@ -139,11 +134,6 @@
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                             Payment Mode
                                         </th>
-
-                                        {{-- <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                            Remarks
-                                        </th> --}}
 
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
@@ -187,10 +177,6 @@
                                                 {{ $rfp->item_name }}
                                             </td>
 
-                                            {{-- <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $rfp->brand }}
-                                            </td> --}}
-
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 {{ strip_tags($rfp->description) }}
                                             </td>
@@ -215,16 +201,9 @@
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 {{ $rfp->payment_mode }}
                                             </td>
-                                            {{--
-                                                                         <td class="px-6 py-4 whitespace-nowrap">
-                                                                             {{ $rfp->remarks }}
-                                                                         </td> --}}
 
-                                            <td class="px-3 py-3 whitespace-nowrap">
-                                                <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required>
-                                                    <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
-                                                    <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
-                                                </select>
+                                            <td class="px-3 py-3 text-center whitespace-nowrap">
+                                                @if($rfp->company_name_check == 0) No @elseif($rfp->company_name_check == 1) Yes @endif
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-nowrap">
@@ -238,7 +217,7 @@
                                                         </svg>
                                                     </a>
                                                 @else
-                                                    #N/A
+                                                    N/A
                                                 @endif
                                             </td>
 
@@ -327,15 +306,17 @@
                                         </svg>
                                         <select class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             required name="company_name_check" id="company_name_check">
-                                            <option value="">Select</option>
-                                            <option
-                                                @if(isset($latest_rfq)){{$latest_rfq->company_name_check == 0 ? 'selected' : ''}}
-                                                @endif value="0">No
-                                            </option>
-                                            <option
-                                                @if(isset($latest_rfq)){{$latest_rfq->company_name_check == 1  ? 'selected' : ''}}
-                                                @endif value="1">Yes
-                                            </option>
+                                            @if(isset($latest_rfq))
+                                                <option value="{{$latest_rfq->company_name_check}}">
+                                                    @if($latest_rfq->company_name_check == 0)No
+                                                    @elseif($latest_rfq->company_name_check == 1) Yes
+                                                    @endif
+                                                </option>
+                                            @else
+                                                <option value="">Select</option>
+                                                <option value="0">No</option>
+                                                <option value="1">Yes</option>
+                                            @endif
                                         </select>
                                     </div>
                                     <br>
@@ -347,48 +328,26 @@
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
                                                 fill="#000000" fill-rule="nonzero"/>
                                         </svg>
-                                        <select
-                                            class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
-                                            name="payment_mode" id="payment_mode" required>
-                                            <option value="">None</option>
+                                        <select class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" name="payment_mode" id="payment_mode" required>
+                                            @if(isset($latest_rfq))
+                                                <option value="{{$latest_rfq->payment_mode}}">{{$latest_rfq->payment_mode}}</option>
+                                            @else
+                                                <option value="">None</option>
+                                                <option value="Cash">Cash</option>
 
-                                            <option value="Cash" @if (isset($latest_rfq))
-                                                {{$latest_rfq->payment_mode =='Cash' ? 'selected' : ''}} @endif>Cash
-                                            </option>
+                                                @php
+                                                    $package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business->id)->first();
+                                                @endphp
 
-                                            @php
-                                                $businessId = auth()->user()->business->id;
-                                                $package = \App\Models\BusinessPackage::where('business_id',
-                                                $businessId)->first();
-
-                                            @endphp
-
-                                            {{--@if(auth()->user()->business_package->package_id != 1)--}}
-                                            @if($package->package_id != 1)
-                                                <option value="Credit" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->payment_mode =='Credit' ? 'selected' : ''}} @endif>Credit
-                                                </option>
-                                                <option value="Credit30days" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->payment_mode =='Credit30days' ? 'selected' : ''}} @endif>
-                                                    Credit (30
-                                                    Days)
-                                                </option>
-                                                <option value="Credit60days" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->payment_mode =='Credit60days' ? 'selected' : ''}} @endif>
-                                                    Credit (60
-                                                    Days)
-                                                </option>
-                                                <option value="Credit90days" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->payment_mode =='Credit90days' ? 'selected' : ''}} @endif>
-                                                    Credit (90
-                                                    Days)
-                                                </option>
-                                                <option value="Credit120days" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->payment_mode =='Credit120days' ? 'selected' : ''}} @endif>
-                                                    Credit (120
-                                                    Days)
-                                                </option>
+                                                @if($package->package_id != 1)
+                                                    <option value="Credit">Credit</option>
+                                                    <option value="Credit30days">Credit (30 Days)</option>
+                                                    <option value="Credit60days">Credit (60 Days)</option>
+                                                    <option value="Credit90days">Credit (90 Days)</option>
+                                                    <option value="Credit120days">Credit (120 Days)</option>
+                                                @endif
                                             @endif
+
                                         </select>
                                     </div>
                                     <br>
@@ -403,14 +362,13 @@
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             required name="required_sample" id="required_sample">
-                                            <option value="">None</option>
-                                            <option value="Yes" @if (isset($latest_rfq))
-                                                {{$latest_rfq->required_sample =='Yes' ? 'selected' : ''}} @endif>Yes
-                                            </option>
-                                            <option value="No" @if (isset($latest_rfq))
-                                                {{$latest_rfq->required_sample =='No' ? 'selected' : ''}} @endif>No
-                                            </option>
-
+                                            @if(isset($latest_rfq))
+                                                <option value="{{$latest_rfq->required_sample}}">{{$latest_rfq->required_sample}}</option>
+                                            @else
+                                                <option value="">None</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                            @endif
                                         </select>
                                     </div>
                                     <br>
@@ -456,14 +414,15 @@
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             required name="warehouse_id" id="warehouse_id">
-                                            <option value="">Select Warehouse Location</option>
-                                            @foreach(\App\Models\BusinessWarehouse::where('business_id',
-                                            auth()->user()->business_id)->get() as $warehouse)
-                                                <option value="{{$warehouse->id}}" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->warehouse_id ==$warehouse->id ? 'selected' : ''}} @endif>
-                                                    {{$warehouse->address }}</option>
-                                            @endforeach
-
+                                            @if(isset($latest_rfq))
+                                                @php $warehouse = \App\Models\BusinessWarehouse::where('id',$latest_rfq->warehouse_id)->first(); @endphp
+                                                <option value="{{$warehouse->id}}">{{$warehouse->address }}</option>
+                                            @else
+                                                <option value="">Select Warehouse Location</option>
+                                                @foreach(\App\Models\BusinessWarehouse::where('business_id',auth()->user()->business_id)->get() as $warehouse)
+                                                    <option value="{{$warehouse->id}}">{{$warehouse->address }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </div>
                                     <br>
@@ -478,47 +437,21 @@
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             name="delivery_period" id="delivery_period" required>
-                                            <option value="">Select Delivery Period</option>
-                                            <option value="Immediately" @if (isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Immediately' ? 'selected' : ''}} @endif>
-                                                Immediately
-                                            </option>
-                                            <option value="Within 30 Days" @if (isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Within 30 Days' ? 'selected' : ''}}
-                                                @endif>30 Days
-                                            </option>
-                                            <option value="Within 60 Days" @if (isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Within 60 Days' ? 'selected' : ''}}
-                                                @endif>60 Days
-                                            </option>
-                                            <option value="Within 90 Days" @if (isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Within 90 Days' ? 'selected' : ''}}
-                                                @endif>90 Days
-                                            </option>
-                                            <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
-                                                @endif>Standing Order - 2 times / year
-                                            </option>
-                                            <option value="Standing Order - 3 per year" @if (isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Standing Order - 3 per year' ? 'selected' : ''}}
-                                                @endif>Standing Order - 3 times / year
-                                            </option>
-                                            <option value="Standing Order - 4 per year" @if(isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Standing Order - 4 per year' ? 'selected' : ''}}
-                                                @endif>Standing Order - 4 times / year
-                                            </option>
-                                            <option value="Standing Order - 6 per year" @if(isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Standing Order - 6 per year' ? 'selected' : ''}}
-                                                @endif>Standing Order - 6 times / year
-                                            </option>
-                                            <option value="Standing Order - 12 per year" @if(isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Standing Order - 12 per year' ? 'selected' : ''}}
-                                                @endif>Standing Order - 12 times / year
-                                            </option>
-                                            <option value="Standing Order Open" @if(isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Standing Order Open' ? 'selected' : ''}}
-                                                @endif>Standing Order - Open
-                                            </option>
+                                            @if(isset($latest_rfq))
+                                                <option value="{{$latest_rfq->delivery_period}}">{{$latest_rfq->delivery_period}}</option>
+                                            @else
+                                                <option value="">Select Delivery Period</option>
+                                                <option value="Immediately">Immediately</option>
+                                                <option value="Within 30 Days">30 Days</option>
+                                                <option value="Within 60 Days">60 Days</option>
+                                                <option value="Within 90 Days">90 Days</option>
+                                                <option value="Standing Order - 2 per year">Standing Order - 2 times / year</option>
+                                                <option value="Standing Order - 3 per year">Standing Order - 3 times / year</option>
+                                                <option value="Standing Order - 4 per year">Standing Order - 4 times / year</option>
+                                                <option value="Standing Order - 6 per year">Standing Order - 6 times / year</option>
+                                                <option value="Standing Order - 12 per year">Standing Order - 12 times / year</option>
+                                                <option value="Standing Order Open">Standing Order - Open</option>
+                                            @endif
 
                                         </select>
                                     </div>
@@ -599,7 +532,7 @@
                                             </svg>
                                         </a>
                                     @else
-                                        #N/A
+                                        N/A
                                     @endif
                                 </td>
 
@@ -712,11 +645,6 @@
                                             Category Name
                                         </th>
 
-                                        {{-- <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                            Brand
-                                        </th> --}}
-
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                             Description
@@ -749,11 +677,6 @@
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                             Payment Mode
                                         </th>
-
-                                        {{-- <th scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                            Remarks
-                                        </th> --}}
 
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
@@ -797,10 +720,6 @@
                                                 {{ $rfp->item_name }}
                                             </td>
 
-                                            {{-- <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $rfp->brand }}
-                                            </td> --}}
-
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 {{ strip_tags($rfp->description) }}
                                             </td>
@@ -825,17 +744,9 @@
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 {{ $rfp->payment_mode }}
                                             </td>
-                                            {{--
-                                                                         <td class="px-6 py-4 whitespace-nowrap">
-                                                                             {{ $rfp->remarks }}
-                                                                         </td> --}}
-
 
                                             <td class="px-3 py-3 whitespace-nowrap">
-                                                <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required>
-                                                    <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
-                                                    <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
-                                                </select>
+                                                @if($rfp->company_name_check == 0) No @elseif($rfp->company_name_check == 1) Yes @endif
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-nowrap">
@@ -849,7 +760,7 @@
                                                         </svg>
                                                     </a>
                                                 @else
-                                                    #N/A
+                                                    N/A
                                                 @endif
                                             </td>
 
@@ -884,12 +795,10 @@
         </div>
         <br>
 
-
         <div class="flex flex-col bg-white rounded">
             <div class="p-4" style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
                 <div class="d-block text-center">
                     <span class="text-2xl font-bold color-7f7f7f">Request For Quotation</span>
-
                 </div>
                 <hr>
                 <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
@@ -939,18 +848,19 @@
                                         </svg>
                                         <select class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 required name="company_name_check" id="company_name_check">
-                                            <option value="">Select</option>
-                                            <option
-                                                @if(isset($latest_rfq)){{$latest_rfq->company_name_check == 0 ? 'selected' : ''}}
-                                                @endif value="0">No
-                                            </option>
-                                            <option
-                                                @if(isset($latest_rfq)){{$latest_rfq->company_name_check == 1  ? 'selected' : ''}}
-                                                @endif value="1">Yes
-                                            </option>
+                                            @if(isset($latest_rfq))
+                                                <option value="{{$latest_rfq->company_name_check}}">
+                                                    @if($latest_rfq->company_name_check == 0)No
+                                                    @elseif($latest_rfq->company_name_check == 1) Yes
+                                                    @endif
+                                                </option>
+                                            @else
+                                                <option value="">Select</option>
+                                                <option value="0">No</option>
+                                                <option value="1">Yes</option>
+                                            @endif
                                         </select>
                                     </div>
-
 
                                     <br>
                                     Payment Mode: @include('misc.required')
@@ -961,48 +871,26 @@
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
                                                 fill="#000000" fill-rule="nonzero"/>
                                         </svg>
-                                        <select
-                                            class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
-                                            name="payment_mode" id="payment_mode" required>
-                                            <option value="">None</option>
+                                        <select class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" name="payment_mode" id="payment_mode" required>
+                                            @if(isset($latest_rfq))
+                                                <option value="{{$latest_rfq->payment_mode}}">{{$latest_rfq->payment_mode}}</option>
+                                            @else
+                                                <option value="">None</option>
+                                                <option value="Cash">Cash</option>
 
-                                            <option value="Cash" @if (isset($latest_rfq))
-                                                {{$latest_rfq->payment_mode =='Cash' ? 'selected' : ''}} @endif>Cash
-                                            </option>
+                                                @php
+                                                    $package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business->id)->first();
+                                                @endphp
 
-                                            @php
-                                                $businessId = auth()->user()->business->id;
-                                                $package = \App\Models\BusinessPackage::where('business_id',
-                                                $businessId)->first();
-
-                                            @endphp
-
-                                            {{--@if(auth()->user()->business_package->package_id != 1)--}}
-                                            @if($package->package_id != 1)
-                                                <option value="Credit" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->payment_mode =='Credit' ? 'selected' : ''}} @endif>Credit
-                                                </option>
-                                                <option value="Credit30days" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->payment_mode =='Credit30days' ? 'selected' : ''}} @endif>
-                                                    Credit (30
-                                                    Days)
-                                                </option>
-                                                <option value="Credit60days" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->payment_mode =='Credit60days' ? 'selected' : ''}} @endif>
-                                                    Credit (60
-                                                    Days)
-                                                </option>
-                                                <option value="Credit90days" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->payment_mode =='Credit90days' ? 'selected' : ''}} @endif>
-                                                    Credit (90
-                                                    Days)
-                                                </option>
-                                                <option value="Credit120days" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->payment_mode =='Credit120days' ? 'selected' : ''}} @endif>
-                                                    Credit (120
-                                                    Days)
-                                                </option>
+                                                @if($package->package_id != 1)
+                                                    <option value="Credit">Credit</option>
+                                                    <option value="Credit30days">Credit (30 Days)</option>
+                                                    <option value="Credit60days">Credit (60 Days)</option>
+                                                    <option value="Credit90days">Credit (90 Days)</option>
+                                                    <option value="Credit120days">Credit (120 Days)</option>
+                                                @endif
                                             @endif
+
                                         </select>
                                     </div>
                                     <br>
@@ -1017,14 +905,13 @@
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             required name="required_sample" id="required_sample">
-                                            <option value="">None</option>
-                                            <option value="Yes" @if (isset($latest_rfq))
-                                                {{$latest_rfq->required_sample =='Yes' ? 'selected' : ''}} @endif>Yes
-                                            </option>
-                                            <option value="No" @if (isset($latest_rfq))
-                                                {{$latest_rfq->required_sample =='No' ? 'selected' : ''}} @endif>No
-                                            </option>
-
+                                            @if(isset($latest_rfq))
+                                                <option value="{{$latest_rfq->required_sample}}">{{$latest_rfq->required_sample}}</option>
+                                            @else
+                                                <option value="">None</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                            @endif
                                         </select>
                                     </div>
                                     <br>
@@ -1071,14 +958,15 @@
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             required name="warehouse_id" id="warehouse_id">
-                                            <option value="">Select Warehouse Location</option>
-                                            @foreach(\App\Models\BusinessWarehouse::where('business_id',
-                                            auth()->user()->business_id)->get() as $warehouse)
-                                                <option value="{{$warehouse->id}}" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->warehouse_id ==$warehouse->id ? 'selected' : ''}} @endif>
-                                                    {{$warehouse->address }}</option>
-                                            @endforeach
-
+                                            @if(isset($latest_rfq))
+                                                @php $warehouse = \App\Models\BusinessWarehouse::where('id',$latest_rfq->warehouse_id)->first(); @endphp
+                                                <option value="{{$warehouse->id}}">{{$warehouse->address }}</option>
+                                            @else
+                                                <option value="">Select Warehouse Location</option>
+                                                @foreach(\App\Models\BusinessWarehouse::where('business_id',auth()->user()->business_id)->get() as $warehouse)
+                                                    <option value="{{$warehouse->id}}">{{$warehouse->address }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </div>
                                     <br>
@@ -1093,44 +981,21 @@
                                         <select
                                             class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                             name="delivery_period" id="delivery_period" required>
-                                            <option value="">Select Delivery Period</option>
-                                            <option value="Immediately" @if (isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Immediately' ? 'selected' : ''}} @endif>
-                                                Immediately
-                                            </option>
-                                            <option value="Within 30 Days" @if (isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Within 30 Days' ? 'selected' : ''}}
-                                                @endif>30 Days
-                                            </option>
-                                            <option value="Within 60 Days" @if (isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Within 60 Days' ? 'selected' : ''}}
-                                                @endif>60 Days
-                                            </option>
-                                            <option value="Within 90 Days">90 Days</option>
-                                            <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
-                                                @endif>Standing Order - 2 times / year
-                                            </option>
-                                            <option value="Standing Order - 3 per year" @if (isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Standing Order - 3 per year' ? 'selected' : ''}}
-                                                @endif>Standing Order - 3 times / year
-                                            </option>
-                                            <option value="Standing Order - 4 per year" @if(isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Standing Order - 4 per year' ? 'selected' : ''}}
-                                                @endif>Standing Order - 4 times / year
-                                            </option>
-                                            <option value="Standing Order - 6 per year" @if(isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Standing Order - 6 per year' ? 'selected' : ''}}
-                                                @endif>Standing Order - 6 times / year
-                                            </option>
-                                            <option value="Standing Order - 12 per year" @if(isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Standing Order - 12 per year' ? 'selected' : ''}}
-                                                @endif>Standing Order - 12 times / year
-                                            </option>
-                                            <option value="Standing Order Open" @if(isset($latest_rfq))
-                                                {{$latest_rfq->delivery_period =='Standing Order Open' ? 'selected' : ''}}
-                                                @endif>Standing Order - Open
-                                            </option>
+                                            @if(isset($latest_rfq))
+                                                <option value="{{$latest_rfq->delivery_period}}">{{$latest_rfq->delivery_period}}</option>
+                                            @else
+                                                <option value="">Select Delivery Period</option>
+                                                <option value="Immediately">Immediately</option>
+                                                <option value="Within 30 Days">30 Days</option>
+                                                <option value="Within 60 Days">60 Days</option>
+                                                <option value="Within 90 Days">90 Days</option>
+                                                <option value="Standing Order - 2 per year">Standing Order - 2 times / year</option>
+                                                <option value="Standing Order - 3 per year">Standing Order - 3 times / year</option>
+                                                <option value="Standing Order - 4 per year">Standing Order - 4 times / year</option>
+                                                <option value="Standing Order - 6 per year">Standing Order - 6 times / year</option>
+                                                <option value="Standing Order - 12 per year">Standing Order - 12 times / year</option>
+                                                <option value="Standing Order Open">Standing Order - Open</option>
+                                            @endif
 
                                         </select>
                                     </div>
@@ -1195,7 +1060,7 @@
                                             </svg>
                                         </a>
                                     @else
-                                        #N/A
+                                        N/A
                                     @endif
                                 </td>
 
@@ -1301,34 +1166,3 @@
     @endif
 
 </x-app-layout>
-
-<script>
-
-    $('.company_name_check').change(function () {
-        // alert($(this).attr('data-id'));
-        // alert($(this).val());
-        let status = $(this).val();
-        let rfqId = $(this).attr('data-id');
-        // alert(rfqId);
-
-
-        $.ajax({
-            type: 'POST',
-            url: "{{ route('companyCheck') }}",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                'rfqNo': rfqId,
-                'status': status
-            },
-            success: function (response) {
-                if (response.status === 0) {
-                    alert('Not Updated Try again');
-                } else if (response.status === 1) {
-                    alert('Updated Successfully!');
-                    // $('#status').show().delay(5000).fadeOut();
-                }
-            }
-        });
-    });
-
-</script>

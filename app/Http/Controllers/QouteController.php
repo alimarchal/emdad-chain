@@ -9,6 +9,7 @@ use App\Models\Qoute;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use League\CommonMark\Extension\SmartPunct\Quote;
 
 class QouteController extends Controller
 {
@@ -48,6 +49,68 @@ class QouteController extends Controller
         return redirect()->route('QoutedRFQQouted');
     }
 
+    /* Saving Quotation response for Single Category RFQ */
+    public function singleRFQQuotationStore(Request $request)
+    {
+        $buyer_id = User::where('business_id', $request->business_id)->first();
+        $request->merge(['user_id' => $buyer_id->id]);
+        $request->merge(['qoute_status' => 'Qouted']);
+        $request->merge(['status' => 'pending']);
+
+        $total_amount = 0;
+        for ($i = 0; $i < count($request->quote_quantity); $i++)
+        {
+            $total_amount += $request->quote_quantity[$i] * $request->quote_price_per_quantity[$i];
+        }
+
+        $total_cost = $total_amount + $request->shipment_cost;
+        $total_vat = ($total_cost * ($request->VAT / 100));
+        $sum = ($total_cost + $total_vat);
+
+        $request->merge(['total_cost' => $sum]);
+
+        /* Setting RFQ Type */
+        $request->merge(['rfq_type' => 0]);
+
+        for ($i=0 ; $i < count($request->e_order_items_id); $i++)
+        {
+            $data = [
+                'user_id' => $request->user_id,
+                'supplier_business_id' => $request->supplier_business_id,
+                'supplier_user_id' => $request->supplier_user_id,
+                'e_order_id' => $request->e_order_id,
+                'e_order_items_id' => $request->e_order_items_id[$i],
+                'business_id' => $request->business_id,
+                'quote_quantity' => $request->quote_quantity[$i],
+                'quote_price_per_quantity' => $request->quote_price_per_quantity[$i],
+                'sample_information' => $request->sample_information[$i],
+                'sample_unit' => $request->sample_unit[$i],
+                'sample_security_charges' => $request->sample_security_charges[$i],
+                'sample_charges_per_unit' => $request->sample_charges_per_unit[$i],
+                'shipping_time_in_days' => $request->shipping_time_in_days,
+                'shipment_cost' => $request->shipment_cost,
+                'VAT' => $request->VAT,
+                'total_cost' => $request->total_cost,
+                'note_for_customer' => $request->note_for_customer[$i],
+                'qoute_status' => $request->qoute_status,
+                'warehouse_id' => $request->warehouse_id,
+                'rfq_type' => $request->rfq_type,
+                'status' => $request->status,
+            ];
+
+            $quote = Qoute::create($data);
+        }
+
+        // sending mail for confirmation
+        User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
+        $buyer_user_id = $quote->RFQ->user_id;
+        // send mail to buyer also for receiving email
+        User::find($buyer_user_id)->notify(new \App\Notifications\QuoteReceivedBuyer());
+        session()->flash('message', 'You have successfully quoted.');
+
+        return redirect()->route('singleCategoryQuotedRFQQuoted');
+    }
+
     public function update(Request $request, Qoute $qoute)
     {
         $request->merge(['user_id' => auth()->user()->id]);
@@ -70,6 +133,52 @@ class QouteController extends Controller
             return redirect()->route('singleCategoryQuotedModifiedRFQ');
         }
         return redirect()->route('viewRFQs');
+    }
+
+    /* Updating Quotation response for Single Category RFQ */
+    public function singleRFQQuotationUpdate(Request $request, Qoute $qoute)
+    {
+        $request->merge(['qoute_status' => 'Modified']);
+        $request->merge(['qoute_status_updated' => 'Modified']);
+
+        $total_amount = 0;
+        for ($i = 0; $i < count($request->quote_quantity); $i++)
+        {
+            $total_amount += $request->quote_quantity[$i] * $request->quote_price_per_quantity[$i];
+        }
+
+        $total_cost = $total_amount + $request->shipment_cost;
+        $total_vat = ($total_cost * ($request->VAT / 100));
+        $sum = ($total_cost + $total_vat);
+
+        $request->merge(['total_cost' => $sum]);
+
+        for ($i=0 ; $i < count($request->e_order_items_id); $i++)
+        {
+            $data = [
+                'quote_quantity' => $request->quote_quantity[$i],
+                'quote_price_per_quantity' => $request->quote_price_per_quantity[$i],
+                'sample_information' => $request->sample_information[$i],
+                'sample_unit' => $request->sample_unit[$i],
+                'sample_security_charges' => $request->sample_security_charges[$i],
+                'sample_charges_per_unit' => $request->sample_charges_per_unit[$i],
+                'shipping_time_in_days' => $request->shipping_time_in_days,
+                'shipment_cost' => $request->shipment_cost,
+                'VAT' => $request->VAT,
+                'total_cost' => $request->total_cost,
+                'note_for_customer' => $request->note_for_customer[$i],
+                'qoute_status' => $request->qoute_status,
+                'qoute_status_updated' => $request->qoute_status_updated,
+            ];
+
+            Qoute::where(['e_order_items_id' => $request->e_order_items_id[$i], 'supplier_business_id' => auth()->user()->business_id])->update($data);
+        }
+
+        session()->flash('message', 'You have updated the quote.');
+        $quote = $qoute;
+        User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
+
+        return redirect()->route('singleCategoryQuotedModifiedRFQ');
     }
 
     public function QoutedRFQQouted()
@@ -138,7 +247,8 @@ class QouteController extends Controller
     public function singleCategoryQuotedRFQModificationNeeded()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where('qoute_status_updated', 'ModificationNeeded')->get();
+        $modificationQuotes = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where('qoute_status_updated', 'ModificationNeeded')->get();
+        $collection = $modificationQuotes->unique('e_order_id');
         return view('supplier.singleCategoryRFQ.supplier-qouted-ModificationNeeded', compact('collection'));
     }
 
@@ -305,21 +415,28 @@ class QouteController extends Controller
         return view('buyer.singleCategory.rfq', compact('RFQItems'));
     }
 
-    public function singleCategoryRFQItemByID(Qoute $QuoteItem)
+    public function singleCategoryRFQItemByID(Qoute $quote)
     {
-        return view('buyer.singleCategory.respond', compact('QuoteItem'));
+        $quotes = Qoute::where(['supplier_business_id' => $quote->supplier_business_id])->where( 'e_order_id' , $quote->e_order_id)->get();
+
+        return view('buyer.singleCategory.respond', compact('quotes'));
     }
 
-    public function singleCategoryRFQQuotationsBuyerReceived($EOrderItemID, $bypass_id)
+    public function singleCategoryRFQQuotationsBuyerReceived($eOrderID, $bypass_id)
     {
-        $collection = EOrderItems::with('qoutes')->where('id', $EOrderItemID)->orderBy('created_at', 'DESC')->first();
+        $quotes = Qoute::where('e_order_id', $eOrderID)->orderBy('created_at', 'DESC')->get();
+        $collection = $quotes->unique('supplier_user_id');
+
         if($bypass_id == 1)
         {
-            $collection->update([
+            foreach ($collection as $collect)
+            {
+                EOrderItems::where('e_order_id', $collect->e_order_id)->update([
                 'bypass' => 1
-            ]);
+                 ]);
+            }
         }
-        return view('buyer.singleCategory.quotation', compact('collection',  'EOrderItemID', 'bypass_id'));
+        return view('buyer.singleCategory.quotation', compact('collection',  'eOrderID', 'bypass_id'));
     }
 
     public function singleCategoryRFQQuotationsBuyerRejected($EOrderItemID,$bypass_id)
@@ -328,41 +445,145 @@ class QouteController extends Controller
         return view('buyer.singleCategory.rejectedQuotation', compact('collection', 'EOrderItemID', 'bypass_id'));
     }
 
-    public function singleCategoryRFQQuotationsModificationNeeded($EOrderItemID,$bypass_id)
+    public function singleCategoryRFQQuotationsModificationNeeded($eOrderID,$bypass_id)
     {
-        $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'DESC')->first();
-        return view('buyer.singleCategory.modifiedQuotation', compact('collection',  'EOrderItemID', 'bypass_id'));
+        $quotes = Qoute::where('e_order_id', $eOrderID)->orderBy('created_at', 'DESC')->get();
+        $collection = $quotes->unique('supplier_user_id');
+        return view('buyer.singleCategory.modifiedQuotation', compact('collection',  'eOrderID', 'bypass_id'));
     }
 
-    public function singleCategoryRFQUpdateStatusModificationNeeded(Qoute $quote)
+    public function singleCategoryRFQUpdateStatusModificationNeeded(Qoute $quotes)
     {
         $quote_status = 'ModificationNeeded';
-        $quote->update([
-            'qoute_status' => $quote_status,
-            'qoute_updated_user_id' => auth()->user()->id,
-            'qoute_status_updated' => $quote_status,
-            'status' => 'pending',
-        ]);
+
+        $relatedQuotes = Qoute::where(['supplier_user_id' => $quotes->supplier_user_id, 'e_order_id' => $quotes->e_order_id])->get();
+
+        foreach ($relatedQuotes as $quote)
+        {
+            Qoute::where('id', $quote->id)->update([
+                'qoute_status' => $quote_status,
+                'qoute_updated_user_id' => auth()->user()->id,
+                'qoute_status_updated' => $quote_status,
+                'status' => 'pending',
+            ]);
+        }
 
         $buyer_id = 0;
         // inform supplier user
-        User::find($quote->supplier_user_id)->notify(new \App\Notifications\QuoteAgain($quote));
+        User::find($quotes->supplier_user_id)->notify(new \App\Notifications\QuoteAgain($quotes));
         session()->flash('message', 'Quote status changed to ' . $quote_status);
-        return redirect()->route('singleCategoryRFQQuotationsModificationNeeded', [$quote->e_order_items_id, $buyer_id]);
+        return redirect()->route('singleCategoryRFQQuotationsModificationNeeded', [$quote->e_order_id, $buyer_id]);
+//        return redirect()->route('singleCategoryRFQQuotationsModificationNeeded', [$quote->e_order_items_id, $buyer_id]);
     }
 
-    public function singleCategoryRFQUpdateStatusRejected(Qoute $quote)
+    public function singleCategoryRFQUpdateStatusRejected(Qoute $quotes)
     {
         $quote_status = 'Rejected';
-        $quote->update([
-            'qoute_updated_user_id' => auth()->user()->id,
-            'qoute_status_updated' => $quote_status,
-            'status' => 'expired',
-        ]);
 
-        User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteRejected($quote));
+        $relatedQuotes = Qoute::where(['supplier_user_id' => $quotes->supplier_user_id, 'e_order_id' => $quotes->e_order_id])->get();
+
+        foreach ($relatedQuotes as $quote)
+        {
+            Qoute::where('id', $quote->id)->update([
+                'qoute_updated_user_id' => auth()->user()->id,
+                'qoute_status_updated' => $quote_status,
+                'status' => 'expired',
+            ]);
+        }
+
+        User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteRejected($quotes));
         session()->flash('message', 'Quote status changes to ' . $quote_status);
         return redirect()->route('singleCategoryBuyerRFQs');
+    }
+
+    public function singleCategoryQuoteAccepted(Request $request)
+    {
+
+        $request->merge(['po_date' => date('Y-m-d')]);
+        $request->merge(['po_status' => 'pending']);
+        $request->merge(['status' => 'pending']);
+        $qoute_status = 'accepted';
+//        $dpo = null;
+        $quotes = Qoute::where(['e_order_id' => $request->rfq_no, 'supplier_business_id' => $request->supplier_business_id])->get();
+//        dd($quotes);
+
+
+        try {
+            DB::beginTransaction();
+            $dpo = null;
+            $dpoCheck = DraftPurchaseOrder::where('qoute_no',$request->qoute_no)->first();
+
+            if (isset($dpoCheck))
+            {
+                foreach ($quotes as $quote)
+                {
+                    Qoute::where('id',$quote->id)->update([
+                        'qoute_status' => $qoute_status,
+                        'qoute_status_updated' => $qoute_status,
+                        'status' => 'completed',
+                    ]);
+                }
+                foreach ($quotes as $quote)
+                {
+                    DraftPurchaseOrder::where('qoute_no',$quote->id)->update([
+                        'po_status' => $qoute_status,
+                        'status' => $qoute_status,
+                    ]);
+                }
+                $dpo = $dpoCheck;
+            }
+            else
+            {
+                $dpo = null;
+                $data = [
+                    'user_id' => $request->user_id,
+                    'business_id' => $request->business_id,
+                    'supplier_user_id' => $request->supplier_user_id,
+                    'supplier_business_id' => $request->supplier_business_id,
+                    'rfq_no' => $request->rfq_no,
+                    'rfq_item_no' => $request->rfq_item_no,
+                    'item_code' => $request->item_code,
+                    'item_name' => $request->item_name,
+                    'uom' => $request->uom,
+                    'brand' => $request->brand,
+                    'quantity' => $request->quantity,
+                    'unit_price' => $request->unit_price,
+                    'sub_total' => $request->sub_total,
+                    'delivery_time' => $request->delivery_time,
+                    'qoute_no' => $request->qoute_no,
+                    'warehouse_id' => $request->warehouse_id,
+                    'shipment_cost' => $request->shipment_cost,
+                    'vat' => $request->vat,
+                    'total_cost' => $request->total_cost,
+                    'payment_term' => $request->payment_term,
+                    'remarks' => $request->remarks,
+                    'delivery_address' => $request->delivery_address,
+                    'address' => $request->address,
+                    'otp_mobile_number' => $request->otp_mobile_number,
+                    'po_date' => $request->po_date,
+                    'po_status' => $request->po_status,
+                    'status' => $request->status,
+                ];
+
+                $dpo = DraftPurchaseOrder::create($request->all());
+                $qoute_status = 'accepted';
+                $qoute->update([
+                    'qoute_status' => $qoute_status,
+                    'qoute_updated_user_id' => auth()->user()->id,
+                    'qoute_status_updated' => $qoute_status,
+                    'status' => 'completed',
+                    'dpo' => $dpo->id,
+                ]);
+            }
+            DB::commit();
+            /* Transaction successful. */
+        } catch (\Exception $e) {
+
+            DB::rollback();
+            /* Transaction failed. */
+        }
+        session()->flash('message', 'Draft purchase order has been generated');
+        return redirect()->route('dpo.show', $dpo->id);
     }
 
     ##########################################################################################
@@ -378,6 +599,22 @@ class QouteController extends Controller
 
         /* NEW Total Cost Calculating Formula */
         $total_amount = ($request->quote_quantity * $request->quote_price_per_quantity);
+        $total_cost = $total_amount + $request->shipment_cost;
+        $total_vat = ($total_cost * ($request->VAT / 100));
+        $sum = ($total_cost + $total_vat);
+
+        return response()->json(['data'=> $sum]);
+    }
+
+    // Calculating totalCost for Single Category RFQ Type at the time of Supplier RFQ response
+    public function singleTotalCost(Request $request)
+    {
+        $total_amount = 0;
+        for ($i = 0; $i < count($request->quantities); $i++)
+        {
+            $total_amount += $request->quantities[$i] * $request->prices[$i];
+        }
+
         $total_cost = $total_amount + $request->shipment_cost;
         $total_vat = ($total_cost * ($request->VAT / 100));
         $sum = ($total_cost + $total_vat);

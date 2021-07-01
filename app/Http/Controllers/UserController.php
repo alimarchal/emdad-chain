@@ -119,7 +119,6 @@ class UserController extends Controller
             $validated = validator::make($request->all(), [
                 'email' => 'required|email|unique:users',
             ]);
-
             if ($validated->fails()) {
                 session()->flash('message', 'Email already exits');
                 return redirect()->back()->withInput();

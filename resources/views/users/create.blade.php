@@ -20,7 +20,7 @@
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             @include('users.sessionMessage')
             @if(auth()->user()->hasRole('SuperAdmin'))
-                {{-- @endif--}}
+                @php $user_type = 'SuperAdmin'; @endphp
                 <hr>
             @elseif(auth()->user()->registration_type == 'Supplier')
             <!-- Remaining User and Driver count for respective packages -->
