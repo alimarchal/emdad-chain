@@ -107,10 +107,8 @@
                                 }
                             }
                             sort($business_categories);
-
                             // Counting NEW RFQs for multiple categories for supplier
                             $rfqCount = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->count();
-
                             // Counting NEW RFQs for single category for supplier
                             $eOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 0])
                                                                             ->where('bypass', 0)
@@ -121,70 +119,29 @@
                             foreach ($eOrderItems as $eOrderItem)
                             {
                                 $eOrderPresent[] = \App\Models\EOrders::where(['id' => $eOrderItem->e_order_id])->first();
-
                                 $eOrders = $eOrderPresent;
                             }
-                        }
-                        sort($business_categories);
-
-                        // Counting NEW RFQs for multiple categories for supplier
-                        $rfqCount = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->count();
-
-                        // Counting NEW RFQs for single category for supplier
-                        $eOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 0])
-                                                                        ->where('bypass', 0)
-                                                                        ->whereDate('quotation_time', '>=', \Carbon\Carbon::now())
-                                                                        ->whereIn('item_code', $business_categories)
-                                                                        ->get();
-                        $eOrders = array();
-                        foreach ($eOrderItems as $eOrderItem)
-                        {
-                            $eOrderPresent[] = \App\Models\EOrders::where(['id' => $eOrderItem->e_order_id])->first();
-
-                            $eOrders = $eOrderPresent;
-                        }
-                        if (count($eOrders) > 0)
-                        {
-                            $quote = \App\Models\Qoute::where(['e_order_id' => $eOrders[0]->id, 'supplier_business_id' => auth()->user()->business_id])->first();
-                        }
-
-                    @endphp
-                    <span title="Number of New RFQ(s) received against multiple categories">Multiple Categories RFQ(s): &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span @if($rfqCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>{{$rfqCount}}</span></a></span>
-                    <span title="Number of New RFQ(s) received against single category">Single Categories RFQ(s): &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0 && !isset($quote)) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else 0 @endif</span></a></span>
-                @endif
-
-                @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
-                    @php
-                        $multiPlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 1])->count();
-                        $singlePlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 0])->get();
-
-                    @endphp
-                    <span title="Number of New Quotation(s) received against multiple categories">Multiple Categories Quotations(s): &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>{{$multiPlacedRFQ}}</span></a></span>
-                    <span title="Number of New Quotation(s) received against single category">Single Categories Quotations(s): &nbsp;<a href="{{route('singleCategoryBuyerRFQs')}}" style="padding-right: 10px;"><span @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>{{count($singlePlacedRFQ->unique('e_order_id'))}}</span></a></span>
-                @endif
-
-                @can('all')
-{{--                    Uncomment below line when arabic version is ready and delete comming soon line--}}
-{{--                <x-jet-button onclick="language(1)">--}}
-                <x-jet-button>
-{{--                <a onclick="language(1)" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;" id="lan">العربية</a>--}}
-                    <a class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">قريباً</a>
-                </x-jet-button>
-                @endcan
-                <div x-data="{ notificationOpen: false }" class="relative">
-                    <button @click="notificationOpen = ! notificationOpen" class="flex mx-4 text-gray-600 focus:outline-none">
-                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M15 17H20L18.5951 15.5951C18.2141 15.2141 18 14.6973 18 14.1585V11C18 8.38757 16.3304 6.16509 14 5.34142V5C14 3.89543 13.1046 3 12 3C10.8954 3 10 3.89543 10 5V5.34142C7.66962 6.16509 6 8.38757 6 11V14.1585C6 14.6973 5.78595 15.2141 5.40493 15.5951L4 17H9M15 17V18C15 19.6569 13.6569 21 12 21C10.3431 21 9 19.6569 9 18V17M15 17H9"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </button>
-
+                            if (count($eOrders) > 0)
+                            {
+                                $quote = \App\Models\Qoute::where(['e_order_id' => $eOrders[0]->id, 'supplier_business_id' => auth()->user()->business_id])->first();
+                            }
                         @endphp
                         <span title="Number of New RFQ(s) received against multiple categories">Multiple Categories RFQ(s): &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span @if($rfqCount > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                      @else class="text-red-600 hover:underline" @endif>{{$rfqCount}}</span></a></span>
-                        <span title="Number of New RFQ(s) received against single category">Single Categories RFQ(s): &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0) class="text-green-600 hover:underline"
-                                                                                                                                                                                                         @else class="text-red-600 hover:underline" @endif>{{count($eOrders)}}</span></a></span>
+                        <span title="Number of New RFQ(s) received against single category">Single Categories RFQ(s): &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0 && !isset($quote)) class="text-green-600 hover:underline"
+                                                                                                                                                                                                         @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else
+                                        0 @endif</span></a></span>
+                    @endif
+
+                    @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
+                        @php
+                            $multiPlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 1])->count();
+                            $singlePlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 0])->get();
+                        @endphp
+                        <span title="Number of New Quotation(s) received against multiple categories">Multiple Categories Quotations(s): &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                                                 @else class="text-red-600 hover:underline" @endif>{{$multiPlacedRFQ}}</span></a></span>
+                        <span title="Number of New Quotation(s) received against single category">Single Categories Quotations(s): &nbsp;<a href="{{route('singleCategoryBuyerRFQs')}}" style="padding-right: 10px;"><span @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                                           @else class="text-red-600 hover:underline" @endif>{{count($singlePlacedRFQ->unique('e_order_id'))}}</span></a></span>
                     @endif
 
                     @can('all')
@@ -325,7 +282,6 @@
                                     {{ __('Subscription') }}
                                 </x-jet-dropdown-link>
 
-
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('users.create') }}">
                                     {{ __('Create Users') }}
@@ -335,8 +291,6 @@
                                 <x-jet-dropdown-link href="{{ route('users.index') }}">
                                     {{ __('Current Users') }}
                                 </x-jet-dropdown-link>
-
-
 
                                 @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
 
@@ -428,33 +382,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-jet-responsive-nav-link>
-
-            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
-                <a @if($rfqCount > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out" @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('viewRFQs') }}">
-                    Multiple Categories RFQ(s): &nbsp; {{ $rfqCount }}
-                </a>
-                <a @if(count($eOrders) > 0 && !isset($quote)) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out" @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryRFQs') }}">
-                    Single Categories RFQ(s): &nbsp; @if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else 0 @endif
-                </a>
-            @endif
-
-            @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
-                <a @if($multiPlacedRFQ > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out" @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
-                Multiple Categories Quotations(s): &nbsp; {{ $multiPlacedRFQ }}
-                </a>
-                <a @if(count($singlePlacedRFQ) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out" @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryBuyerRFQs') }}">
-                Single Categories Quotations(s): &nbsp; {{ count($singlePlacedRFQ->unique('e_order_id')) }}
-                </a>
-            @endif
-        </div>
 
         <!-- Responsive Navigation Menu -->
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
@@ -468,9 +395,20 @@
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('viewRFQs') }}">
                         Multiple Categories RFQ(s): &nbsp; {{ $rfqCount }}
                     </a>
-                    <a @if(count($eOrders) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                    <a @if(count($eOrders) > 0 && !isset($quote)) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryRFQs') }}">
-                        Single Categories RFQ(s): &nbsp; {{ count($eOrders) }}
+                        Single Categories RFQ(s): &nbsp; @if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else 0 @endif
+                    </a>
+                @endif
+
+                @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
+                    <a @if($multiPlacedRFQ > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                       @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
+                        Multiple Categories Quotations(s): &nbsp; {{ $multiPlacedRFQ }}
+                    </a>
+                    <a @if(count($singlePlacedRFQ) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                       @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryBuyerRFQs') }}">
+                        Single Categories Quotations(s): &nbsp; {{ count($singlePlacedRFQ->unique('e_order_id')) }}
                     </a>
                 @endif
             </div>

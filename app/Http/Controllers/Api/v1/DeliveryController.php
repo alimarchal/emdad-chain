@@ -92,7 +92,7 @@ class DeliveryController extends Controller
                     $string = rand(1000, 9999);
                     $otp = $delivery->otp = $string;
                     $delivery->save();
-                    $rfq_item_no = ltrim($delivery->rfq_item_no, '0');
+                    $rfq_item_no = $delivery->rfq_item_no;
 
                     $wh_id = EOrderItems::where('id', $rfq_item_no)->first()->warehouse_id;
                     if (!empty($wh_id)) {
@@ -102,7 +102,7 @@ class DeliveryController extends Controller
                         Notification::route('mail', $wh_email)
                             ->notify(new OTP($otp));
 
-                        $mobile_no = trim($delivery->otp_mobile_number);
+                        $mobile_no =  ltrim( trim($delivery->otp_mobile_number),'0');
                         $msg = "Your delivery is here. \n\nPlease share the OTP code: " . $otp . " with the driver after unloading the delivery. \n\nThank you for using EMDAD Platform.\n";
                         $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=966" . $mobile_no . "&sender=Emdad-Aid&unicode=e&randparams=1";
 
