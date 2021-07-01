@@ -125,7 +125,7 @@ class PlacedRFQController extends Controller
 
     ###################################################################################################
 
-    ########################  Functions for Single Category RFQ (FOR SUPPLY) ##########################
+    ########################  Functions for Single Category RFQ (FOR SUPPLIER) ##########################
 
     /* Getting all RFQs by e_order */
     public function viewSingleCategoryRFQs()
@@ -177,63 +177,77 @@ class PlacedRFQController extends Controller
     }
 
     /* Getting all RFQs by e_order_items against e_order */
-    public function viewRFQsOfSingleCategory($eOrderID)
-    {
-
-        if (\auth()->user()->hasRole('SuperAdmin'))
-        {
-            $business_categories = [];
-            $business_cate = BusinessCategory::all();
-            if ($business_cate->isNotEmpty()) {
-                foreach ($business_cate as $item) {
-                    $business_categories[] = (int)$item->category_number;
-                }
-            }
-            sort($business_categories);
-            // $business_categories = implode(",", $business_categories);
-            $collection = EOrderItems::where('status', 'pending')->whereIn('item_code', $business_categories)->get();
-
-            $quotationCount = null;
-            return view('supplier.index', compact('collection','quotationCount'));
-        }
-        else
-        {
-            $user_business_id = Auth::user()->business_id;
-            $business_categories = [];
-            $business_cate = BusinessCategory::where('business_id', $user_business_id)->get();
-            if ($business_cate->isNotEmpty()) {
-                foreach ($business_cate as $item) {
-                    $business_categories[] = (int)$item->category_number;
-                }
-            }
-            sort($business_categories);
-
-            $collection = EOrderItems::where(['status' => 'pending', 'e_order_id' => $eOrderID])->where('bypass', 0)->whereDate('quotation_time', '>=', Carbon::now())->whereIn('item_code', $business_categories)->get();
-
-            // Remaining Quotations count
-            $quotations = Qoute::where('supplier_business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
-            $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
-            $package = Package::where('id', $business_package->package_id)->first();
-            if ($business_package->package_id == 5 || $business_package->package_id == 6)
-            {
-                $quotationCount = $package->quotations - $quotations;
-            }
-            else{
-                $quotationCount = null;
-            }
-
-            return view('supplier.singleCategoryRFQ.view', compact('collection','quotationCount'));
-        }
-    }
+//    public function viewRFQsOfSingleCategory($eOrderID)
+//    {
+//
+//        if (\auth()->user()->hasRole('SuperAdmin'))
+//        {
+//            $business_categories = [];
+//            $business_cate = BusinessCategory::all();
+//            if ($business_cate->isNotEmpty()) {
+//                foreach ($business_cate as $item) {
+//                    $business_categories[] = (int)$item->category_number;
+//                }
+//            }
+//            sort($business_categories);
+//            // $business_categories = implode(",", $business_categories);
+//            $collection = EOrderItems::where('status', 'pending')->whereIn('item_code', $business_categories)->get();
+//
+//            $quotationCount = null;
+//            return view('supplier.index', compact('collection','quotationCount'));
+//        }
+//        else
+//        {
+//            $user_business_id = Auth::user()->business_id;
+//            $business_categories = [];
+//            $business_cate = BusinessCategory::where('business_id', $user_business_id)->get();
+//            if ($business_cate->isNotEmpty()) {
+//                foreach ($business_cate as $item) {
+//                    $business_categories[] = (int)$item->category_number;
+//                }
+//            }
+//            sort($business_categories);
+//
+//            $collection = EOrderItems::where(['status' => 'pending', 'e_order_id' => $eOrderID])->where('bypass', 0)->whereDate('quotation_time', '>=', Carbon::now())->whereIn('item_code', $business_categories)->get();
+//
+//            // Remaining Quotations count
+//            $quotations = Qoute::where('supplier_business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
+//            $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+//            $package = Package::where('id', $business_package->package_id)->first();
+//            if ($business_package->package_id == 5 || $business_package->package_id == 6)
+//            {
+//                $quotationCount = $package->quotations - $quotations;
+//            }
+//            else{
+//                $quotationCount = null;
+//            }
+//
+//            return view('supplier.singleCategoryRFQ.view', compact('collection','quotationCount'));
+//        }
+//    }
 
     /* Getting Quotation by e_order_item ID */
-    public function viewSingleCategoryRFQByID(EOrderItems $eOrderItems)
+    /* Getting Quotation by e_order ID */
+//    public function viewSingleCategoryRFQByID(EOrderItems $eOrderItems)
+    public function viewSingleCategoryRFQByID(EOrders $eOrder)
     {
-        $user_id = auth()->user()->id;
         $user_business_id = auth()->user()->business_id;
-        $collection = Qoute::where('e_order_items_id', $eOrderItems->id)->where('supplier_user_id', $user_id)->first();
-//        dd($collection);
-        return view('supplier.singleCategoryRFQ.viewById', compact('eOrderItems', 'collection', 'user_business_id'));
+//        $collection = Qoute::where('e_order_items_id', $eOrderItems->id)->where('supplier_user_id', $user_id)->first();
+        $eOrderItems = EOrderItems::where('e_order_id', $eOrder->id)->get();
+        $collection = Qoute::where('e_order_id', $eOrder->id)->where('supplier_business_id', \auth()->user()->business_id)->first();
+
+//        return view('supplier.singleCategoryRFQ.viewById', compact('eOrderItems', 'collection', 'user_business_id'));
+        return view('supplier.singleCategoryRFQ.viewById', compact('eOrder', 'eOrderItems','collection', 'user_business_id'));
+    }
+
+    /* Same function as viewSingleCategoryRFQByID function but this is for modification we are passing Quote in this whereas in viewSingleCategoryRFQByID we are passing EOrder */
+    public function viewModifiedSingleCategoryRFQByID(Qoute $quote)
+    {
+        $user_business_id = auth()->user()->business_id;
+        $eOrderItems = EOrderItems::where('e_order_id', $quote->e_order_id)->get();
+        $collection = Qoute::where(['id' => $quote->id, 'supplier_business_id' => \auth()->user()->business_id])->first();
+
+        return view('supplier.singleCategoryRFQ.viewById', compact('quote', 'eOrderItems','collection', 'user_business_id'));
     }
 
     ###################################################################################################
