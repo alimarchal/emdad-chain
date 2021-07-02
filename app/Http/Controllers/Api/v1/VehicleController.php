@@ -47,7 +47,7 @@ class VehicleController extends Controller
      */
     public function show($id)
     {
-         $vehicle = Vehicle::find($id);
+        $vehicle = Vehicle::find($id);
         if (empty($vehicle)) {
             return response()->json(['message' => 'Not Found!'], 404);
         } else {

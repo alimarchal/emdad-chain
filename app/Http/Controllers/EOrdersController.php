@@ -166,18 +166,22 @@ class EOrdersController extends Controller
         $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
 
         if ($business_package->package_id == 1) {
+
             if ($rfq == 3) {
                 session()->flash('error', 'You have reached daily rfq limit');
                 return redirect()->back();
             } else {
+
                 DB::transaction(function () use ($request) {
                     $request->merge(['status' => 'Open']);
                     $request->merge(['rfq_type' => 0]);
                     $eOrders = EOrders::create($request->all());
+
                     $eCartItems = ECart::findMany($request->item_number);
+//                    dd(request()->all());
                     foreach ($eCartItems as $item) {
                         $eOrderItem = new EOrderItems;
-                        $eOrderItem->id = $item->id;
+//                        $eOrderItem->id = $item->id;
                         $eOrderItem->e_order_id = $eOrders->id;
                         $eOrderItem->business_id = $item->business_id;
                         $eOrderItem->user_id = $item->user_id;
