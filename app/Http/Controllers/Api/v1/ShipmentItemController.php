@@ -17,10 +17,15 @@ class ShipmentItemController extends Controller
     public function index(Request $request)
     {
         $shipment_item = new ShipmentItem();
-        if ($request->has('driver_id') || $request->has('status')) {
+        if ($request->has('driver_id') || $request->has('status') || $request->has('supplier_business_id')) {
             if ($request->input('driver_id')) {
                 $shipment_item = $shipment_item->where('driver_id', $request->driver_id);
             }
+
+            if ($request->input('supplier_business_id')) {
+                $shipment_item = $shipment_item->where('supplier_business_id', $request->supplier_business_id);
+            }
+
             if ($request->input('status')) {
                 $shipment_item = $shipment_item->where('status', $request->status);
             }
