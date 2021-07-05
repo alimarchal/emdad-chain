@@ -311,11 +311,11 @@ Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/ModificationNeeded', [Qoute
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/PendingConfirmation', [QouteController::class, 'QoutedRFQQoutedRFQPendingConfirmation'])->name('QoutedRFQPendingConfirmation');
 
 ######################## Single Category RFQ routes For Supplier ############################################
-Route::middleware(['auth:sanctum'])->get('/single-category-quoted-RFQs', [QouteController::class, 'singleCategoryQuotedRFQQuoted'])->name('singleCategoryQuotedRFQQuoted');
-Route::middleware(['auth:sanctum'])->get('/single-category-quoted-modified-RFQs', [QouteController::class, 'singleCategoryQuotedModifiedRFQ'])->name('singleCategoryQuotedModifiedRFQ');
-Route::middleware(['auth:sanctum'])->get('/single-category-rejected-RFQs', [QouteController::class, 'singleCategoryQuotedRFQRejected'])->name('singleCategoryQuotedRFQRejected');
-Route::middleware(['auth:sanctum'])->get('/single-category-modification-needed-RFQs', [QouteController::class, 'singleCategoryQuotedRFQModificationNeeded'])->name('singleCategoryQuotedRFQModificationNeeded');
-Route::middleware(['auth:sanctum'])->get('/single-category-pending-confirmation-RFQs', [QouteController::class, 'singleCategoryQuotedRFQPendingConfirmation'])->name('singleCategoryQuotedRFQPendingConfirmation');
+Route::middleware(['auth:sanctum'])->get('/single/category/quoted-RFQs', [QouteController::class, 'singleCategoryQuotedRFQQuoted'])->name('singleCategoryQuotedRFQQuoted');
+Route::middleware(['auth:sanctum'])->get('/single/category/quoted/modified/RFQs', [QouteController::class, 'singleCategoryQuotedModifiedRFQ'])->name('singleCategoryQuotedModifiedRFQ');
+Route::middleware(['auth:sanctum'])->get('/single/category/rejected-RFQs', [QouteController::class, 'singleCategoryQuotedRFQRejected'])->name('singleCategoryQuotedRFQRejected');
+Route::middleware(['auth:sanctum'])->get('/single/category/modification/needed/RFQs', [QouteController::class, 'singleCategoryQuotedRFQModificationNeeded'])->name('singleCategoryQuotedRFQModificationNeeded');
+Route::middleware(['auth:sanctum'])->get('/single/category/pending/confirmation/RFQs', [QouteController::class, 'singleCategoryQuotedRFQPendingConfirmation'])->name('singleCategoryQuotedRFQPendingConfirmation');
 #############################################################################################################
 
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived', [QouteController::class, 'QoutationsBuyerReceived'])->name('QoutationsBuyerReceived');
@@ -327,12 +327,12 @@ Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOr
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/accepted/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedAccepted'])->name('QoutationsBuyerReceivedAccepted');
 
 ######################## Single Category Quotations routes For Buyer ############################################
-Route::middleware(['auth:sanctum'])->get('/single-category-rfq', [QouteController::class, 'singleCategoryBuyerRFQs'])->name('singleCategoryBuyerRFQs');
-Route::middleware(['auth:sanctum'])->get('/single-category-rfq-items/{rfq_id}', [QouteController::class, 'singleCategoryRFQItems'])->name('singleCategoryRFQItems');
-Route::middleware(['auth:sanctum'])->get('/single-category-rfq-item-response/{quote}', [QouteController::class, 'singleCategoryRFQItemByID'])->name('singleCategoryRFQItemByID');
-Route::middleware(['auth:sanctum'])->get('/single-category-RFQ-quotations/{eOrderID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerReceived'])->name('singleCategoryRFQQuotationsBuyerReceived');
-Route::middleware(['auth:sanctum'])->get('/single-category-RFQ-rejected-quotations/{EOrderItemID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerRejected'])->name('singleCategoryRFQQuotationsBuyerRejected');
-Route::middleware(['auth:sanctum'])->get('/single-category-RFQ-modification-quotations/{eOrderID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsModificationNeeded'])->name('singleCategoryRFQQuotationsModificationNeeded');
+Route::middleware(['auth:sanctum'])->get('/single/category/rfq', [QouteController::class, 'singleCategoryBuyerRFQs'])->name('singleCategoryBuyerRFQs');
+Route::middleware(['auth:sanctum'])->get('/single/category/rfq/items/{rfq_id}', [QouteController::class, 'singleCategoryRFQItems'])->name('singleCategoryRFQItems');
+Route::middleware(['auth:sanctum'])->get('/single/category/rfq/item/response/{quote}', [QouteController::class, 'singleCategoryRFQItemByID'])->name('singleCategoryRFQItemByID');
+Route::middleware(['auth:sanctum'])->get('/single/category/RFQ/quotations/{eOrderID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerReceived'])->name('singleCategoryRFQQuotationsBuyerReceived');
+Route::middleware(['auth:sanctum'])->get('/single/category/RFQ/rejected/quotations/{EOrderItemID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerRejected'])->name('singleCategoryRFQQuotationsBuyerRejected');
+Route::middleware(['auth:sanctum'])->get('/single/category/RFQ/modification/quotations/{eOrderID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsModificationNeeded'])->name('singleCategoryRFQQuotationsModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('single-rfq-quote/{quotes}/ModificationNeeded', [QouteController::class, 'singleCategoryRFQUpdateStatusModificationNeeded'])->name('singleCategoryRFQUpdateStatusModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('single-rfq-quote/{quotes}/Rejected', [QouteController::class, 'singleCategoryRFQUpdateStatusRejected'])->name('singleCategoryRFQUpdateStatusRejected');
 Route::middleware(['auth:sanctum'])->post('singleCategoryQuote/Accepted', [QouteController::class, 'singleCategoryQuoteAccepted'])->name('singleCategoryQuoteAccepted');
@@ -345,6 +345,12 @@ Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/Rejected', [QouteControl
 Route::middleware(['auth:sanctum'])->post('qoute/{qoute}/Accepted', [QouteController::class, 'qouteAccepted'])->name('qouteAccepted');
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'show'])->name('dpo.show');
 Route::middleware(['auth:sanctum'])->get('dpo', [DraftPurchaseOrderController::class, 'index'])->name('dpo.index');
+##################################### Single Category DPO #######################################################
+Route::middleware(['auth:sanctum'])->get('single/category/dpo', [DraftPurchaseOrderController::class, 'singleCategoryDPOIndex'])->name('singleCategoryIndex');
+Route::middleware(['auth:sanctum'])->get('single/category/dpo-{eOrderID}', [DraftPurchaseOrderController::class, 'singleCategoryDPOShow'])->name('singleCategoryShow');
+Route::middleware(['auth:sanctum'])->post('single/category/dpo/approved/{rfqNo}/{supplierBusinessID}', [DraftPurchaseOrderController::class, 'singleCategoryApproved'])->name('singleCategoryApproved');
+Route::middleware(['auth:sanctum'])->post('single/category/dpo/cancel/{rfqNo}/{supplierBusinessID}', [DraftPurchaseOrderController::class, 'singleCategoryCancel'])->name('singleCategoryCancel');
+#################################################################################################################
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/approved', [DraftPurchaseOrderController::class, 'approved'])->name('dpo.approved');
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/rejected', [DraftPurchaseOrderController::class, 'rejected'])->name('dpo.rejected');
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/cancel', [DraftPurchaseOrderController::class, 'cancel'])->name('dpo.cancel');
@@ -352,6 +358,7 @@ Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/cancel', [Dra
 
 #################### PDF generate Routes ##########################
 Route::middleware(['auth:sanctum'])->get('/generate-PO-pdf/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'generatePDF'])->name('generatePDF');
+Route::middleware(['auth:sanctum'])->post('/single/category/generate/PO/pdf/{rfqNO}', [DraftPurchaseOrderController::class, 'singleCategoryGeneratePDF'])->name('singleCategoryGeneratePDF');
 #################### END ##########################################
 
 #################### PDF generate Routes ##########################
@@ -360,15 +367,24 @@ Route::middleware(['auth:sanctum'])->get('/logviewer', function () {
 })->name('log.viewer');
 #################### END ##########################################
 
-#################### Delivery and Delivery Note ##########################
+#################### Delivery and Delivery Note ###################################################################################
 Route::middleware(['auth:sanctum'])->resource('delivery', DeliveryController::class);
 Route::middleware(['auth:sanctum'])->get('/deliveryNote/{draftPurchaseOrder}/view', [DeliveryNoteController::class, 'deliveryNoteView'])->name('deliveryNoteView');
 Route::middleware(['auth:sanctum'])->resource('deliveryNote', DeliveryNoteController::class);
-#################### END ##################################################
+
+##################### Single Category RFQ PO routes ####################################
+Route::middleware(['auth:sanctum'])->get('/single/category/deliveryNote/{rfqNo}/view', [DeliveryNoteController::class, 'singleCategoryDeliveryNoteView'])->name('singleCategoryDeliveryNoteView');
+Route::middleware(['auth:sanctum'])->get('/single/category/deliveryNote/save', [DeliveryNoteController::class, 'singleCategoryStore'])->name('singleCategoryStore');
+################################### END ################################################
+#################### END ###########################################################################################################
 
 ##################### Draft purchase order routes ####################################
 Route::middleware(['auth:sanctum'])->get('/po', [DraftPurchaseOrderController::class, 'po'])->name('po.po');
 Route::middleware(['auth:sanctum'])->get('/po/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'poShow'])->name('po.show');
+##################### Single Category RFQ PO routes ####################################
+Route::middleware(['auth:sanctum'])->get('/single/category/po', [DraftPurchaseOrderController::class, 'singleCategoryPO'])->name('singleCategoryPO');
+Route::middleware(['auth:sanctum'])->get('/single/category/po/{rfqNo}', [DraftPurchaseOrderController::class, 'singleCategoryPOShow'])->name('singleCategoryPOByID');
+################################### END ################################################
 Route::middleware(['auth:sanctum'])->get('/notes', [DeliveryNoteController::class, 'notes'])->name('notes');
 Route::middleware(['auth:sanctum'])->get('/notes/{deliveryNote}', [DeliveryNoteController::class, 'viewNote'])->name('viewNote');
 #################### END ##################################################
@@ -415,6 +431,10 @@ Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/create', [Bank
 Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/edit', [BankPaymentController::class, 'edit'])->name('bank-payments.edit');
 Route::middleware(['auth:sanctum'])->post('bank-payments/update', [BankPaymentController::class, 'update_payment'])->name('bank_payments_update');
 //Route::middleware(['auth:sanctum'])->resource('moyasar-payment', Moyas::class)->names('mps');
+
+####################### Single Category Quotation Payment routes ####################################
+Route::middleware(['auth:sanctum'])->get('single-generate-proforma-invoice', [PaymentController::class, 'single_category_generate_proforma_invoice'])->name('singleCategoryGenerateProformaInvoice');
+
 #################### END ##############################################################
 
 

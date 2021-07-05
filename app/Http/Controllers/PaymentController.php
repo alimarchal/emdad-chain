@@ -21,11 +21,6 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $collection = DeliveryNote::where('supplier_business_id', auth()->user()->business->id)->get();
@@ -306,7 +301,7 @@ class PaymentController extends Controller
 
     public function generate_proforma_invoice()
     {
-        $dpos = DraftPurchaseOrder::where('supplier_user_id', auth()->user()->id)->where('payment_term', 'Cash')->get();
+        $dpos = DraftPurchaseOrder::where(['supplier_user_id' => auth()->user()->id , 'rfq_type' => 1])->where('payment_term', 'Cash')->get();
         return view('payment.proformaInvoices', compact('dpos'));
     }
 
@@ -333,4 +328,15 @@ class PaymentController extends Controller
 
         return view('manual-payments.supplier.list', compact('supplierPayments'));
     }
+
+    ######################################################### Single Category Quotations functions ############################################################
+
+    public function single_category_generate_proforma_invoice()
+    {
+        $collection = DraftPurchaseOrder::where(['supplier_user_id' => auth()->user()->id , 'rfq_type' => 0])->where('payment_term', 'Cash')->get();
+        $dpos = $collection->unique('rfq_no');
+
+        return view('payment.singleCategory.proformaInvoices', compact('dpos'));
+    }
+
 }

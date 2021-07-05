@@ -12,6 +12,14 @@
             </button>
         </div>
     @endif
+    @if (session()->has('error'))
+        <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+            <strong class="mr-1">{{ session('error') }}</strong>
+            <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+            </button>
+        </div>
+    @endif
     <div class="mt-5">
         <a href="{{ url()->previous() }}" class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
             Go Back
@@ -126,9 +134,9 @@
                             Quote Again
                         </a>
 
-{{--                        <a href="{{ route('singleCategoryRFQUpdateStatusRejected', $quotes[0]) }}" style="margin-left: 70px; margin-top: 20px;" class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">--}}
-{{--                            Reject Request--}}
-{{--                        </a>--}}
+                        <a href="{{ route('singleCategoryRFQUpdateStatusRejected', $quotes[0]) }}" style="margin-left: 70px; margin-top: 20px;" class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
+                            Reject Request
+                        </a>
                     </div>
 
                     <br>
@@ -143,22 +151,11 @@
                         <input type="hidden" name="supplier_user_id" value="{{ $quotes[0]->supplier_user_id }}">
                         <input type="hidden" name="supplier_business_id" value="{{ $quotes[0]->supplier_business_id }}">
 
-                        <input type="hidden" name="rfq_no" value="{{ $quotes[0]->e_order_id }}">
-                        <input type="hidden" name="rfq_item_no" value="{{ $quotes[0]->e_order_items_id }}">
+                        <input type="hidden" name="e_order_id" value="{{ $quotes[0]->e_order_id }}">
 
                         <input type="hidden" name="item_code" value="{{ $quotes[0]->orderItem->item_code }}">
                         <input type="hidden" name="item_name" value="{{ $quotes[0]->orderItem->item_name }}">
-
-                        <input type="hidden" name="uom" value="{{ $quotes[0]->orderItem->unit_of_measurement }}">
-                        <input type="hidden" name="brand" value="{{ $quotes[0]->orderItem->brand }}">
-
-                        <input type="hidden" name="quantity" value="{{ $quotes[0]->quote_quantity }}">
-                        <input type="hidden" name="unit_price" value="{{ $quotes[0]->quote_price_per_quantity }}">
-
-                        <input type="hidden" name="sub_total" value="{{ $quotes[0]->quote_quantity * $quotes[0]->quote_price_per_quantity }}">
                         <input type="hidden" name="delivery_time" value="{{ $quotes[0]->shipping_time_in_days }}">
-
-                        <input type="hidden" name="qoute_no" value="{{ $quotes[0]->id }}">
 
                         <input type="hidden" name="warehouse_id" value="{{ $quotes[0]->warehouse_id }}">
                         <input type="hidden" name="shipment_cost" value="{{ $quotes[0]->shipment_cost }}">
@@ -174,7 +171,7 @@
                         <input type="text" name="delivery_address" class="form-input rounded-md shadow-sm border p-2 w-full" readonly value="{{$warehouseAddress->address}}">
                         <br>
                         <br>
-                        <x-jet-label for="Remarks" value="{{ __('OTP FOR Receiving Delivery Mobile Number (We will send One Time Password when you receive delivery)') }}" class="text-center text-black font-bold text-red-600"  />
+                        <x-jet-label for="otp_mobile_number" value="{{ __('OTP FOR Receiving Delivery Mobile Number (We will send One Time Password when you receive delivery)') }}" class="text-center text-black font-bold text-red-600"  />
                         <input type="text" name="otp_mobile_number" class="form-input rounded-md shadow-sm border p-2 w-full" value="{{$warehouseAddress->mobile}}">
                         <br>
                         <br>
@@ -199,7 +196,7 @@
                                 </a>
                             </div>
                             <div style="display: inline">
-{{--                                <input type="submit" value="Accept" style="cursor: pointer" class="inline-flex items-center justify-center px-4 my-5 py-2 bg-green-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">--}}
+                                <input type="submit" value="Accept" style="cursor: pointer" class="inline-flex items-center justify-center px-4 my-5 py-2 bg-green-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
                             </div>
                         </div>
 
