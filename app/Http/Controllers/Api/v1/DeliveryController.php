@@ -8,6 +8,7 @@ use App\Models\Business;
 use App\Models\Delivery;
 use App\Models\DraftPurchaseOrder;
 use App\Models\EOrderItems;
+use App\Models\User;
 use App\Notifications\OTP;
 use App\Notifications\OtpSend;
 use Illuminate\Http\Request;
@@ -92,51 +93,40 @@ class DeliveryController extends Controller
                     $string = rand(1000, 9999);
                     $otp = $delivery->otp = $string;
                     $delivery->save();
-                    $rfq_item_no = $delivery->rfq_item_no;
 
-                    $wh_id = EOrderItems::where('id', $rfq_item_no)->first()->warehouse_id;
+                    $delivery =  \App\Models\Delivery::where('id',$id)->first();
+                    $eOrder = EOrderItems::where('id', $delivery->rfq_item_no)->first();
+                    $wh_id = \App\Models\BusinessWarehouse::where('id',$eOrder->warehouse_id)->first();
+
                     if (!empty($wh_id)) {
-                        $wh_email = \App\Models\BusinessWarehouse::find($wh_id)->first()->warehouse_email;
+                        $wh_email = $wh_id->warehouse_email;
                     }
+
                     if (!empty($wh_email)) {
-                        Notification::route('mail', $wh_email)
-                            ->notify(new OTP($otp));
-
-                        $mobile_no =  ltrim( trim($delivery->otp_mobile_number),'0');
-                        $msg = "Your delivery is here. \n\nPlease share the OTP code: " . $otp . " with the driver after unloading the delivery. \n\nThank you for using EMDAD Platform.\n";
-                        $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=966" . $mobile_no . "&sender=Emdad-Aid&unicode=e&randparams=1";
-
-                        $ch = curl_init();
-                        curl_setopt($ch, CURLOPT_URL, $url);
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                        $output = curl_exec($ch);
-                        if (curl_errno($ch)) {
-                            echo 'error:' . curl_error($c);
-                        }
-                        curl_close($ch);
+                        Notification::route('mail', $wh_email)->notify(new OTP($otp));
+                        $mobile_no = trim($delivery->otp_mobile_number);
+                        $ch = User::send_otp($otp,$mobile_no);
                     }
                 }
+
                 $business_url = Business::find($delivery->supplier_business_id)->first();
                 $business_photo_url = $business_url->business_photo_url;
+
                 if (!empty($business_url)) {
                     #convert to collection for appending the delivery eloquent collection
                     $delivery = collect(Delivery::find($id));
-                    $custom = collect(['supplier_logo_url' => config('app.url') . '/storage/' . $business_photo_url]);
+                    $custom = collect([
+                        'supplier_logo_url' => config('app.url') . '/storage/' . $business_photo_url,
+                        'business_name' => $business_url->business_name,
+
+                        ]);
                     $delivery = $delivery->merge($custom);
                 }
-
-                return $delivery;
+                return response()->json($delivery, 200);
             } else {
                 return response()->json(['message' => 'Not Found!'], 404);
             }
         }
-
-        // $delivery = Delivery::find($id);
-        // if (!empty($delivery)) {
-        //     return $delivery;
-        // } else {
-        //     return response()->json(['message' => 'Not Found!'], 404);
-        // }
     }
 
     /**
