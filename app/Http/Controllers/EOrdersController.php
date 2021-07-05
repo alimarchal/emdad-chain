@@ -32,7 +32,6 @@ class EOrdersController extends Controller
                     $eCartItems = ECart::findMany($request->item_number);
                     foreach ($eCartItems as $item) {
                         $eOrderItem = new EOrderItems;
-                        $eOrderItem->id = $item->id;
                         $eOrderItem->e_order_id = $eOrders->id;
                         $eOrderItem->business_id = $item->business_id;
                         $eOrderItem->user_id = $item->user_id;
@@ -78,7 +77,6 @@ class EOrdersController extends Controller
                     $eCartItems = ECart::findMany($request->item_number);
                     foreach ($eCartItems as $item) {
                         $eOrderItem = new EOrderItems;
-                        $eOrderItem->id = $item->id;
                         $eOrderItem->e_order_id = $eOrders->id;
                         $eOrderItem->business_id = $item->business_id;
                         $eOrderItem->user_id = $item->user_id;
@@ -120,7 +118,6 @@ class EOrdersController extends Controller
                 $eCartItems = ECart::findMany($request->item_number);
                 foreach ($eCartItems as $item) {
                     $eOrderItem = new EOrderItems;
-                    $eOrderItem->id = $item->id;
                     $eOrderItem->e_order_id = $eOrders->id;
                     $eOrderItem->business_id = $item->business_id;
                     $eOrderItem->user_id = $item->user_id;
@@ -181,7 +178,6 @@ class EOrdersController extends Controller
 //                    dd(request()->all());
                     foreach ($eCartItems as $item) {
                         $eOrderItem = new EOrderItems;
-//                        $eOrderItem->id = $item->id;
                         $eOrderItem->e_order_id = $eOrders->id;
                         $eOrderItem->business_id = $item->business_id;
                         $eOrderItem->user_id = $item->user_id;
@@ -227,7 +223,6 @@ class EOrdersController extends Controller
                     $eCartItems = ECart::findMany($request->item_number);
                     foreach ($eCartItems as $item) {
                         $eOrderItem = new EOrderItems;
-                        $eOrderItem->id = $item->id;
                         $eOrderItem->e_order_id = $eOrders->id;
                         $eOrderItem->business_id = $item->business_id;
                         $eOrderItem->user_id = $item->user_id;
@@ -269,7 +264,6 @@ class EOrdersController extends Controller
                 $eCartItems = ECart::findMany($request->item_number);
                 foreach ($eCartItems as $item) {
                     $eOrderItem = new EOrderItems;
-                    $eOrderItem->id = $item->id;
                     $eOrderItem->e_order_id = $eOrders->id;
                     $eOrderItem->business_id = $item->business_id;
                     $eOrderItem->user_id = $item->user_id;

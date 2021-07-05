@@ -126,6 +126,8 @@
                                                                 <a>Proforma invoice rejected by Emdad</a>
                                                             @elseif (isset($proformaInvoice) && $proformaInvoice->invoice_status == 3)
                                                                 <a>Proforma invoice confirmed by Emdad</a>
+                                                            @elseif($dpo->status == 'pending')
+                                                                <a>DPO not approved yet</a>
                                                             @else
                                                                 <a>Waiting for proforma invoice</a>
                                                             @endif
@@ -137,10 +139,10 @@
                                                         <a href="{{ route('po.show', $dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">View</a>
                                                         <br>
                                                         @if(auth()->user()->registration_type == 'Supplier')
-                                                        @if($dpo->payment_term == 'Credit')
-                                                            <a href="{{ url('deliveryNote') }}" class="hover:text-blue-900 hover:underline text-blue-900"> Generate delivery note </a>
-                                                        @endif
+                                                            @if($dpo->payment_term == 'Credit')
+                                                                <a href="{{ url('deliveryNote') }}" class="hover:text-blue-900 hover:underline text-blue-900"> Generate delivery note </a>
                                                             @endif
+                                                        @endif
                                                     </td>
 
                                                 </tr>

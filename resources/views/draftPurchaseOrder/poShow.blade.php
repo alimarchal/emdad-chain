@@ -162,9 +162,9 @@
                     </div>
 
 
-                    <div class="flex justify-center">
-                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>
-                    </div>
+{{--                    <div class="flex justify-center">--}}
+{{--                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>--}}
+{{--                    </div>--}}
                     <div class="flex justify-between mt-4 mb-4">
 
 
@@ -178,6 +178,7 @@
                             <img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-7@8x.png')}}" alt="ARejected for Edit">
 {{--                            <span class="px-3 py-3 bg-red-600 text-white rounded uppercase">Rejected for Edit</span>--}}
                         @elseif ($draftPurchaseOrder->status == 'completed')
+                        @elseif ($draftPurchaseOrder->status == 'prepareDelivery')
                         @else
                             @if(auth()->user()->registeration_type == 'Buyer')
                             <a href="{{ route('dpo.approved', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">DPO Approved</a>
@@ -186,15 +187,17 @@
                             <a href="{{ route('dpo.rejected', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Reject to Edit</a>
                         @endif
 
-
-
-
                     </div>
 
                     <div class="flex justify-between px-2 py-2 mt-2 h-15">
                         <div></div>
-                        <div class="mt-3">Thanks for your Business</div>
-                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>
+                        <div class="mt-3">Thank you for using Emdad platform for your business.</div>
+{{--                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>--}}
+                        <div></div>
+                    </div>
+                    <div class="flex justify-end px-2 py-2 h-15">
+                        <div class="mt-2">Copied to Emdad records</div>
+                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" style="margin-left: auto; margin-right: auto;"/></div>
                     </div>
 
                 </div>

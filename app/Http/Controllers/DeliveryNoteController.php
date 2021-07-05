@@ -31,16 +31,14 @@ class DeliveryNoteController extends Controller
             $po->status = 'prepareDelivery';
             $po->save();
         }
-        $buyer_user = User::find($delivery->user_id)->notify(new \App\Notifications\PreparingDelivery());
+        User::find($delivery->user_id)->notify(new \App\Notifications\PreparingDelivery());
         session()->flash('message', 'Delivery note has been successfully created.');
         return redirect('notes');
     }
 
     public function deliveryNoteView(DraftPurchaseOrder $draftPurchaseOrder)
     {
-
         return view('deliveryNote.show', compact('draftPurchaseOrder'));
-
     }
 
     public function notes(Request $request)
@@ -53,4 +51,30 @@ class DeliveryNoteController extends Controller
     {
         return view('deliveryNote.viewNote',compact('deliveryNote'));
     }
+
+    ###################################################### Single Category Quotation Functions #########################################
+
+    /*public function singleCategoryStore(Request $request)
+    {
+        $request->merge(['status' => 'processing']);
+        $po_no = $request->draft_purchase_order_id;
+        $delivery = DeliveryNote::create($request->all());
+        if($delivery)
+        {
+            $po = DraftPurchaseOrder::where('id', $po_no)->first();
+            $po->status = 'prepareDelivery';
+            $po->save();
+        }
+        User::find($delivery->user_id)->notify(new \App\Notifications\PreparingDelivery());
+        session()->flash('message', 'Delivery note has been successfully created.');
+        return redirect('notes');
+    }*/
+
+    public function singleCategoryDeliveryNoteView($rfqNo)
+    {
+        $draftPurchaseOrders = DraftPurchaseOrder::where('rfq_no', $rfqNo)->get();
+
+        return view('deliveryNote.singleCategory.show', compact('draftPurchaseOrders'));
+    }
+
 }

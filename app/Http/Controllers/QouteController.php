@@ -72,33 +72,63 @@ class QouteController extends Controller
         /* Setting RFQ Type */
         $request->merge(['rfq_type' => 0]);
 
-        for ($i=0 ; $i < count($request->e_order_items_id); $i++)
+        if (isset($request->sample_information))
         {
-            $data = [
-                'user_id' => $request->user_id,
-                'supplier_business_id' => $request->supplier_business_id,
-                'supplier_user_id' => $request->supplier_user_id,
-                'e_order_id' => $request->e_order_id,
-                'e_order_items_id' => $request->e_order_items_id[$i],
-                'business_id' => $request->business_id,
-                'quote_quantity' => $request->quote_quantity[$i],
-                'quote_price_per_quantity' => $request->quote_price_per_quantity[$i],
-//                'sample_information' => $request->sample_information[$i],
-//                'sample_unit' => $request->sample_unit[$i],
-//                'sample_security_charges' => $request->sample_security_charges[$i],
-//                'sample_charges_per_unit' => $request->sample_charges_per_unit[$i],
-                'shipping_time_in_days' => $request->shipping_time_in_days,
-                'shipment_cost' => $request->shipment_cost,
-                'VAT' => $request->VAT,
-                'total_cost' => $request->total_cost,
-                'note_for_customer' => $request->note_for_customer[$i],
-                'qoute_status' => $request->qoute_status,
-                'warehouse_id' => $request->warehouse_id,
-                'rfq_type' => $request->rfq_type,
-                'status' => $request->status,
-            ];
+            for ($i=0 ; $i < count($request->e_order_items_id); $i++)
+            {
+                $data = [
+                    'user_id' => $request->user_id,
+                    'supplier_business_id' => $request->supplier_business_id,
+                    'supplier_user_id' => $request->supplier_user_id,
+                    'e_order_id' => $request->e_order_id,
+                    'e_order_items_id' => $request->e_order_items_id[$i],
+                    'business_id' => $request->business_id,
+                    'quote_quantity' => $request->quote_quantity[$i],
+                    'quote_price_per_quantity' => $request->quote_price_per_quantity[$i],
+                    'sample_information' => $request->sample_information[$i],
+                    'sample_unit' => $request->sample_unit[$i],
+                    'sample_security_charges' => $request->sample_security_charges[$i],
+                    'sample_charges_per_unit' => $request->sample_charges_per_unit[$i],
+                    'shipping_time_in_days' => $request->shipping_time_in_days,
+                    'shipment_cost' => $request->shipment_cost,
+                    'VAT' => $request->VAT,
+                    'total_cost' => $request->total_cost,
+                    'note_for_customer' => $request->note_for_customer[$i],
+                    'qoute_status' => $request->qoute_status,
+                    'warehouse_id' => $request->warehouse_id,
+                    'rfq_type' => $request->rfq_type,
+                    'status' => $request->status,
+                ];
 
-            $quote = Qoute::create($data);
+                $quote = Qoute::create($data);
+            }
+        }
+        else
+        {
+            for ($i=0 ; $i < count($request->e_order_items_id); $i++)
+            {
+                $data = [
+                    'user_id' => $request->user_id,
+                    'supplier_business_id' => $request->supplier_business_id,
+                    'supplier_user_id' => $request->supplier_user_id,
+                    'e_order_id' => $request->e_order_id,
+                    'e_order_items_id' => $request->e_order_items_id[$i],
+                    'business_id' => $request->business_id,
+                    'quote_quantity' => $request->quote_quantity[$i],
+                    'quote_price_per_quantity' => $request->quote_price_per_quantity[$i],
+                    'shipping_time_in_days' => $request->shipping_time_in_days,
+                    'shipment_cost' => $request->shipment_cost,
+                    'VAT' => $request->VAT,
+                    'total_cost' => $request->total_cost,
+                    'note_for_customer' => $request->note_for_customer[$i],
+                    'qoute_status' => $request->qoute_status,
+                    'warehouse_id' => $request->warehouse_id,
+                    'rfq_type' => $request->rfq_type,
+                    'status' => $request->status,
+                ];
+
+                $quote = Qoute::create($data);
+            }
         }
 
         // sending mail for confirmation
@@ -153,25 +183,47 @@ class QouteController extends Controller
 
         $request->merge(['total_cost' => $sum]);
 
-        for ($i=0 ; $i < count($request->e_order_items_id); $i++)
+        if (isset($request->sample_information))
         {
-            $data = [
-                'quote_quantity' => $request->quote_quantity[$i],
-                'quote_price_per_quantity' => $request->quote_price_per_quantity[$i],
-                'sample_information' => $request->sample_information[$i],
-                'sample_unit' => $request->sample_unit[$i],
-                'sample_security_charges' => $request->sample_security_charges[$i],
-                'sample_charges_per_unit' => $request->sample_charges_per_unit[$i],
-                'shipping_time_in_days' => $request->shipping_time_in_days,
-                'shipment_cost' => $request->shipment_cost,
-                'VAT' => $request->VAT,
-                'total_cost' => $request->total_cost,
-                'note_for_customer' => $request->note_for_customer[$i],
-                'qoute_status' => $request->qoute_status,
-                'qoute_status_updated' => $request->qoute_status_updated,
-            ];
+            for ($i=0 ; $i < count($request->e_order_items_id); $i++)
+            {
+                $data = [
+                    'quote_quantity' => $request->quote_quantity[$i],
+                    'quote_price_per_quantity' => $request->quote_price_per_quantity[$i],
+                    'sample_information' => $request->sample_information[$i],
+                    'sample_unit' => $request->sample_unit[$i],
+                    'sample_security_charges' => $request->sample_security_charges[$i],
+                    'sample_charges_per_unit' => $request->sample_charges_per_unit[$i],
+                    'shipping_time_in_days' => $request->shipping_time_in_days,
+                    'shipment_cost' => $request->shipment_cost,
+                    'VAT' => $request->VAT,
+                    'total_cost' => $request->total_cost,
+                    'note_for_customer' => $request->note_for_customer[$i],
+                    'qoute_status' => $request->qoute_status,
+                    'qoute_status_updated' => $request->qoute_status_updated,
+                ];
 
-            Qoute::where(['e_order_items_id' => $request->e_order_items_id[$i], 'supplier_business_id' => auth()->user()->business_id])->update($data);
+                Qoute::where(['e_order_items_id' => $request->e_order_items_id[$i], 'supplier_business_id' => auth()->user()->business_id])->update($data);
+            }
+        }
+        else
+        {
+            for ($i=0 ; $i < count($request->e_order_items_id); $i++)
+            {
+                $data = [
+                    'quote_quantity' => $request->quote_quantity[$i],
+                    'quote_price_per_quantity' => $request->quote_price_per_quantity[$i],
+                    'shipping_time_in_days' => $request->shipping_time_in_days,
+                    'shipment_cost' => $request->shipment_cost,
+                    'VAT' => $request->VAT,
+                    'total_cost' => $request->total_cost,
+                    'note_for_customer' => $request->note_for_customer[$i],
+                    'qoute_status' => $request->qoute_status,
+                    'qoute_status_updated' => $request->qoute_status_updated,
+                ];
+
+                Qoute::where(['e_order_items_id' => $request->e_order_items_id[$i], 'supplier_business_id' => auth()->user()->business_id])->update($data);
+            }
         }
 
         session()->flash('message', 'You have updated the quote.');
@@ -224,7 +276,8 @@ class QouteController extends Controller
     public function singleCategoryQuotedRFQQuoted()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->get();
+        $quoted = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->get();
+        $collection = $quoted->unique('e_order_id');
 
         return view('supplier.singleCategoryRFQ.supplier-qouted', compact('collection'));
     }
@@ -232,7 +285,8 @@ class QouteController extends Controller
     public function singleCategoryQuotedModifiedRFQ()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 0])->where(['qoute_status' => 'Modified'])->get();
+        $modified = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 0])->where(['qoute_status' => 'Modified'])->get();
+        $collection = $modified->unique('e_order_id');
 
         return view('supplier.singleCategoryRFQ.supplier-modified-quoted-quotes', compact('collection'));
     }
@@ -240,7 +294,9 @@ class QouteController extends Controller
     public function singleCategoryQuotedRFQRejected()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where('qoute_status_updated', 'Rejected')->get();
+        $rejected = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where('qoute_status_updated', 'Rejected')->get();
+        $collection = $rejected->unique('e_order_id');
+
         return view('supplier.singleCategoryRFQ.supplier-qouted-Rejected', compact('collection'));
     }
 
@@ -255,7 +311,9 @@ class QouteController extends Controller
     public function singleCategoryQuotedRFQPendingConfirmation()
     {
         $user_id = auth()->user()->id;
-        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where('qoute_status', 'RFQPendingConfirmation')->get();
+        $pending = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where('qoute_status', 'RFQPendingConfirmation')->get();
+        $collection = $pending->unique('e_order_id');
+
         return view('supplier.singleCategoryRFQ.supplier-qouted-PendingConfirmation', compact('collection'));
     }
 
@@ -354,6 +412,7 @@ class QouteController extends Controller
         $request->merge(['po_date' => date('Y-m-d')]);
         $request->merge(['po_status' => 'pending']);
         $request->merge(['status' => 'pending']);
+        $request->merge(['rfq_type' => 1]);
 //        $dpo = null;
 
         try {
@@ -503,14 +562,10 @@ class QouteController extends Controller
         $request->merge(['po_status' => 'pending']);
         $request->merge(['status' => 'pending']);
         $qoute_status = 'accepted';
-//        $dpo = null;
-        $quotes = Qoute::where(['e_order_id' => $request->rfq_no, 'supplier_business_id' => $request->supplier_business_id])->get();
-//        dd($quotes);
-
+        $quotes = Qoute::where(['e_order_id' => $request->e_order_id, 'supplier_business_id' => $request->supplier_business_id])->get();
 
         try {
             DB::beginTransaction();
-            $dpo = null;
             $dpoCheck = DraftPurchaseOrder::where('qoute_no',$request->qoute_no)->first();
 
             if (isset($dpoCheck))
@@ -530,50 +585,51 @@ class QouteController extends Controller
                         'status' => $qoute_status,
                     ]);
                 }
-                $dpo = $dpoCheck;
             }
             else
             {
-                $dpo = null;
-                $data = [
-                    'user_id' => $request->user_id,
-                    'business_id' => $request->business_id,
-                    'supplier_user_id' => $request->supplier_user_id,
-                    'supplier_business_id' => $request->supplier_business_id,
-                    'rfq_no' => $request->rfq_no,
-                    'rfq_item_no' => $request->rfq_item_no,
-                    'item_code' => $request->item_code,
-                    'item_name' => $request->item_name,
-                    'uom' => $request->uom,
-                    'brand' => $request->brand,
-                    'quantity' => $request->quantity,
-                    'unit_price' => $request->unit_price,
-                    'sub_total' => $request->sub_total,
-                    'delivery_time' => $request->delivery_time,
-                    'qoute_no' => $request->qoute_no,
-                    'warehouse_id' => $request->warehouse_id,
-                    'shipment_cost' => $request->shipment_cost,
-                    'vat' => $request->vat,
-                    'total_cost' => $request->total_cost,
-                    'payment_term' => $request->payment_term,
-                    'remarks' => $request->remarks,
-                    'delivery_address' => $request->delivery_address,
-                    'address' => $request->address,
-                    'otp_mobile_number' => $request->otp_mobile_number,
-                    'po_date' => $request->po_date,
-                    'po_status' => $request->po_status,
-                    'status' => $request->status,
-                ];
+                for ($i =0; $i<count($quotes); $i++)
+                {
+                    $data = [
+                        'user_id' => $request->user_id,
+                        'business_id' => $request->business_id,
+                        'supplier_user_id' => $request->supplier_user_id,
+                        'supplier_business_id' => $request->supplier_business_id,
+                        'rfq_no' => $request->e_order_id,
+                        'rfq_item_no' => $quotes[$i]->e_order_items_id,
+                        'item_code' => $request->item_code,
+                        'item_name' => $request->item_name,
+                        'uom' => $quotes[$i]->orderItem->unit_of_measurement,
+                        'brand' => $quotes[$i]->orderItem->brand,
+                        'quantity' => $quotes[$i]->quote_quantity,
+                        'unit_price' => $quotes[$i]->quote_price_per_quantity,
+                        'sub_total' => $quotes[$i]->quote_quantity * $quotes[$i]->quote_price_per_quantity,
+                        'delivery_time' => $request->delivery_time,
+                        'qoute_no' => $quotes[$i]->id,
+                        'warehouse_id' => $request->warehouse_id,
+                        'shipment_cost' => $request->shipment_cost,
+                        'vat' => $request->vat,
+                        'total_cost' => $request->total_cost,
+                        'payment_term' => $request->payment_term,
+                        'remarks' => $request->remarks,
+                        'delivery_address' => $request->delivery_address,
+                        'address' => $request->address,
+                        'otp_mobile_number' => $request->otp_mobile_number,
+                        'po_date' => $request->po_date,
+                        'po_status' => $request->po_status,
+                        'status' => $request->status,
+                        'rfq_type' => 0,
+                    ];
+                    $dpo = DraftPurchaseOrder::create($data)->id;
 
-                $dpo = DraftPurchaseOrder::create($request->all());
-                $qoute_status = 'accepted';
-                $qoute->update([
-                    'qoute_status' => $qoute_status,
-                    'qoute_updated_user_id' => auth()->user()->id,
-                    'qoute_status_updated' => $qoute_status,
-                    'status' => 'completed',
-                    'dpo' => $dpo->id,
-                ]);
+                    Qoute::where('id', $quotes[$i]->id)->update([
+                        'qoute_status' => $qoute_status,
+                        'qoute_updated_user_id' => auth()->user()->id,
+                        'qoute_status_updated' => $qoute_status,
+                        'status' => 'completed',
+                        'dpo' => $dpo,
+                    ]);
+                }
             }
             DB::commit();
             /* Transaction successful. */
@@ -583,7 +639,7 @@ class QouteController extends Controller
             /* Transaction failed. */
         }
         session()->flash('message', 'Draft purchase order has been generated');
-        return redirect()->route('dpo.show', $dpo->id);
+        return redirect()->route('singleCategoryIndex');
     }
 
     ##########################################################################################
