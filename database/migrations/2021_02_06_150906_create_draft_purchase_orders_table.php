@@ -49,6 +49,7 @@ class CreateDraftPurchaseOrdersTable extends Migration
             $table->string('remarks')->nullable();
             $table->string('approval_details')->nullable();
             $table->string('status')->nullable();
+            $table->integer('rfq_type'); /* 0 for single category RFQ, 1 for multi categories */
             $table->timestamps();
         });
     }

@@ -144,11 +144,7 @@
                                 </td>
 
                                 <td class="px-3 py-3 whitespace-nowrap">
-                                    <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required title="Display {{auth()->user()->business->business_name}} in the RFQ">
-                                        <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
-                                        <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
-                                    </select>
-                                    <span style="display: none" id="status" class="text-green-600 text-sm-center">Status Updated.</span>
+                                    @if($rfp->company_name_check == 0) No @elseif($rfp->company_name_check == 1) Yes @endif
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -204,33 +200,3 @@
 
 
 </x-app-layout>
-
-<script>
-    $('.company_name_check').change(function(){
-        // alert($(this).attr('data-id'));
-        // alert($(this).val());
-        let status = $(this).val();
-        let rfqId = $(this).attr('data-id');
-        // alert(rfqId);
-
-
-        $.ajax({
-            type : 'POST',
-            url:"{{ route('companyCheck') }}",
-            data:{
-                "_token": "{{ csrf_token() }}",
-                'rfqNo':rfqId,
-                'status':status
-            },
-            success: function (response) {
-                if(response.status === 0){
-                    alert('Not Updated Try again');
-                }
-                else if(response.status === 1) {
-                    alert('Updated Successfully!');
-                    // $('#status').show().delay(5000).fadeOut();
-                }
-            }
-        });
-    });
-</script>

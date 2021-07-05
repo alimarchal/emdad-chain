@@ -517,7 +517,7 @@
                                     {{$item->brand}}
                                 </td>
 
-                                <td> {{ number_format($rfp->last_price, 2) }}</td>
+                                <td> {{ number_format($item->last_price, 2) }}</td>
                                 <td>
                                     {{$item->remarks}}
                                 </td>
@@ -1045,7 +1045,7 @@
                                     {{$item->brand}}
                                 </td>
 
-                                <td> {{ number_format($rfp->last_price, 2) }}</td>
+                                <td> {{ number_format($item->last_price, 2) }}</td>
                                 <td>
                                     {{$item->remarks}}
                                 </td>
