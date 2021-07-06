@@ -94,9 +94,9 @@ class DeliveryController extends Controller
                     $otp = $delivery->otp = $string;
                     $delivery->save();
 
-                    $delivery =  \App\Models\Delivery::where('id',$id)->first();
+                    $delivery = \App\Models\Delivery::where('id', $id)->first();
                     $eOrder = EOrderItems::where('id', $delivery->rfq_item_no)->first();
-                    $wh_id = \App\Models\BusinessWarehouse::where('id',$eOrder->warehouse_id)->first();
+                    $wh_id = \App\Models\BusinessWarehouse::where('id', $eOrder->warehouse_id)->first();
 
                     if (!empty($wh_id)) {
                         $wh_email = $wh_id->warehouse_email;
@@ -105,11 +105,11 @@ class DeliveryController extends Controller
                     if (!empty($wh_email)) {
                         Notification::route('mail', $wh_email)->notify(new OTP($otp));
                         $mobile_no = trim($delivery->otp_mobile_number);
-                        $ch = User::send_otp($otp,$mobile_no);
+                        $ch = User::send_otp($otp, $mobile_no);
                     }
                 }
 
-                $business_url = Business::find($delivery->supplier_business_id)->first();
+                $business_url = Business::where('id', $delivery->supplier_business_id)->first();
                 $business_photo_url = $business_url->business_photo_url;
 
                 if (!empty($business_url)) {
@@ -119,7 +119,7 @@ class DeliveryController extends Controller
                         'supplier_logo_url' => config('app.url') . '/storage/' . $business_photo_url,
                         'business_name' => $business_url->business_name,
 
-                        ]);
+                    ]);
                     $delivery = $delivery->merge($custom);
                 }
                 return response()->json($delivery, 200);
