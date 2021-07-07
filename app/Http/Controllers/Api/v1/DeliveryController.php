@@ -49,7 +49,12 @@ class DeliveryController extends Controller
             if ($collection->isEmpty()) {
                 return response()->json(['message' => 'Not Found!'], 404);
             } else {
-                return $collection;
+                $Deliveries = [];
+                foreach ($collection as $col) {
+                    $itm = collect($col);
+                    $Deliveries[] = $itm->merge(['SupplierBusiness' => [Business::find($col->supplier_business_id)]]);
+                }
+                return $Deliveries;
             }
         } else {
             return response()->json(['message' => 'Not Found!'], 404);

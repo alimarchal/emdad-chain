@@ -10,11 +10,17 @@ class ShipmentItem extends Model
     use HasFactory;
 
     protected $fillable = [
-        'driver_id', 'vehicle_type', 'supplier_business_id', 'delivery_id','status',
+        'driver_id', 'vehicle_type', 'supplier_business_id', 'delivery_id', 'status',
     ];
 
     public function shipment()
     {
         return $this->belongsTo(Shipment::class);
     }
+
+    public function deliveries()
+    {
+        return $this->hasMany(Delivery::class,'deliveries.id','shipment_items.delivery_id');
+    }
+
 }
