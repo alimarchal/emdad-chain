@@ -55,7 +55,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $shipmentDetail->delivery_id }}
+                                            <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600">{{ $shipmentDetail->delivery_id }}</a>
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap">

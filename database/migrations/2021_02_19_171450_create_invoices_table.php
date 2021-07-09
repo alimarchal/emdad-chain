@@ -30,6 +30,7 @@ class CreateInvoicesTable extends Migration
             $table->string('total_cost')->nullable();
             $table->string('invoice_status')->nullable();
             $table->string('invoice_type')->nullable();
+            $table->integer('rfq_type'); /* 0 for single category RFQ, 1 for multi categories */
             $table->string('invoice_cash_online')->nullable();
             $table->string('ship_to_address')->nullable();
             $table->timestamps();

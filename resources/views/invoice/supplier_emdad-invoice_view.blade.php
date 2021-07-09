@@ -33,17 +33,17 @@
                             </th>
                         </tr>
                         </thead>
-                        @php $deliveryItem = \App\Models\Delivery::where('draft_purchase_order_id', $emdadInvoice->invoice->purchase_order->id)->first(); @endphp
+                        @php $dpo = \App\Models\DraftPurchaseOrder::where('id', $emdadInvoice->invoice->purchase_order->id)->first(); @endphp
                         <tbody class="bg-white divide-y divide-black border-1 border-black">
                         <tr>
                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                 1
                             </td>
                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                {{ $deliveryItem->item_name }}
+                                {{ $dpo->item_name }}
                             </td>
                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                {{ $deliveryItem->payment_term }}
+                                {{ $dpo->payment_term }}
                             </td>
                             {{-- calculating total cost without VAT--}}
                             @php
@@ -52,10 +52,10 @@
                                 $totalEmdadCharges = $totalCost * (1.5 / 100);
                             @endphp
                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                {{ $totalCost }}
+                                {{ number_format($totalCost,2,'.') }}
                             </td>
                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                {{ $totalEmdadCharges }}
+                                {{ number_format($totalEmdadCharges,2,'.') }}
                             </td>
 
                         </tr>
@@ -66,14 +66,14 @@
                     <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
                     </div>
 
-                    <div class="flex justify-center">
-                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block" style="height: 104px" /></div>
-                    </div>
-
                     <div class="flex justify-between px-2 py-2 mt-2 h-15">
                         <div></div>
-                        <div class="mt-3">Thanks for your Business</div>
-                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block" style="height: 60px" /></div>
+                        <div class="mt-3">Thank you for using Emdad platform for your business.</div>
+                        <div></div>
+                    </div>
+                    <div class="flex justify-end px-2 py-2 h-15">
+                        <div class="mt-2">Copied to Emdad records</div>
+                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" style="margin-left: auto; margin-right: auto;"/></div>
                     </div>
 
                 </div>

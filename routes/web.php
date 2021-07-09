@@ -372,22 +372,28 @@ Route::middleware(['auth:sanctum'])->resource('delivery', DeliveryController::cl
 Route::middleware(['auth:sanctum'])->get('/deliveryNote/{draftPurchaseOrder}/view', [DeliveryNoteController::class, 'deliveryNoteView'])->name('deliveryNoteView');
 Route::middleware(['auth:sanctum'])->resource('deliveryNote', DeliveryNoteController::class);
 
-##################### Single Category RFQ PO routes ####################################
+##################### Single Category RFQ Delivery and Delivery Note routes ####################################
+Route::middleware(['auth:sanctum'])->get('/single/category/delivery/notes', [DeliveryNoteController::class, 'singleCategoryIndex'])->name('singleCategoryIndex');
 Route::middleware(['auth:sanctum'])->get('/single/category/deliveryNote/{rfqNo}/view', [DeliveryNoteController::class, 'singleCategoryDeliveryNoteView'])->name('singleCategoryDeliveryNoteView');
-Route::middleware(['auth:sanctum'])->get('/single/category/deliveryNote/save', [DeliveryNoteController::class, 'singleCategoryStore'])->name('singleCategoryStore');
+Route::middleware(['auth:sanctum'])->post('/single/category/deliveryNote/{rfqNo}/save', [DeliveryNoteController::class, 'singleCategoryStore'])->name('singleCategoryDeliveryNoteStore');
 ################################### END ################################################
+
 #################### END ###########################################################################################################
 
-##################### Draft purchase order routes ####################################
+############################################################# Draft purchase order routes ####################################
 Route::middleware(['auth:sanctum'])->get('/po', [DraftPurchaseOrderController::class, 'po'])->name('po.po');
 Route::middleware(['auth:sanctum'])->get('/po/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'poShow'])->name('po.show');
+Route::middleware(['auth:sanctum'])->get('/notes', [DeliveryNoteController::class, 'notes'])->name('notes');
+Route::middleware(['auth:sanctum'])->get('/notes/{deliveryNote}', [DeliveryNoteController::class, 'viewNote'])->name('viewNote');
+
 ##################### Single Category RFQ PO routes ####################################
 Route::middleware(['auth:sanctum'])->get('/single/category/po', [DraftPurchaseOrderController::class, 'singleCategoryPO'])->name('singleCategoryPO');
 Route::middleware(['auth:sanctum'])->get('/single/category/po/{rfqNo}', [DraftPurchaseOrderController::class, 'singleCategoryPOShow'])->name('singleCategoryPOByID');
+Route::middleware(['auth:sanctum'])->get('/single/category/notes', [DeliveryNoteController::class, 'singleCategoryNotes'])->name('singleCategoryNotes');
+Route::middleware(['auth:sanctum'])->get('/single/category/notes/{rfq_no}', [DeliveryNoteController::class, 'singleCategoryViewNote'])->name('singleCategoryViewNote');
 ################################### END ################################################
-Route::middleware(['auth:sanctum'])->get('/notes', [DeliveryNoteController::class, 'notes'])->name('notes');
-Route::middleware(['auth:sanctum'])->get('/notes/{deliveryNote}', [DeliveryNoteController::class, 'viewNote'])->name('viewNote');
-#################### END ##################################################
+
+################################################################## END ##################################################
 
 ##################### Shipment routes ####################################
 Route::middleware(['auth:sanctum'])->resource('shipment', ShipmentController::class);
@@ -409,9 +415,16 @@ Route::middleware(['auth:sanctum'])->get('/invoice/{invoice}', [InvoiceControlle
 Route::middleware(['auth:sanctum'])->get('/emdad-invoices/', [EmdadInvoiceController::class, 'index'])->name('emdadInvoices');
 Route::middleware(['auth:sanctum'])->get('/emdad-invoice/{id}', [EmdadInvoiceController::class, 'view'])->name('emdadInvoiceView');
 Route::middleware(['auth:sanctum'])->get('/generate-emdad-invoice/{id}', [EmdadInvoiceController::class, 'generateInvoice'])->name('emdadGenerateInvoice');
+
+########################## Single Category Invoice & Delivery Routes ####################
+Route::middleware(['auth:sanctum'])->get('single/category/invoice/{invoiceID}', [InvoiceController::class, 'singleCategoryShow'])->name('singleCategoryInvoiceShow');
+Route::middleware(['auth:sanctum'])->post('single/category/invoice/generate', [InvoiceController::class, 'singleCategoryInvoiceGenerate'])->name('singleCategoryInvoiceGenerate');
+Route::middleware(['auth:sanctum'])->get('/single/category/emdad-invoices/', [EmdadInvoiceController::class, 'singleCategoryIndex'])->name('singleCategoryEmdadInvoicesIndex');
+Route::middleware(['auth:sanctum'])->get('/single/category/emdad-invoice/{rfq_no}', [EmdadInvoiceController::class, 'singleCategoryView'])->name('singleCategoryView');
+Route::middleware(['auth:sanctum'])->post('/single/category/generate-emdad-invoice', [EmdadInvoiceController::class, 'singleCategoryGenerateInvoice'])->name('singleCategoryGenerateInvoice');
 #################### END ##############################################################
 
-####################### Payment routes ####################################
+########################################################## Payment routes #################################################################################
 Route::middleware(['auth:sanctum'])->resource('payment', PaymentController::class);
 Route::middleware(['auth:sanctum'])->get('generate-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoiceView'])->name('generateProformaView');
 Route::middleware(['auth:sanctum'])->get('create-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoice'])->name('generateProforma');
@@ -433,9 +446,27 @@ Route::middleware(['auth:sanctum'])->post('bank-payments/update', [BankPaymentCo
 //Route::middleware(['auth:sanctum'])->resource('moyasar-payment', Moyas::class)->names('mps');
 
 ####################### Single Category Quotation Payment routes ####################################
-Route::middleware(['auth:sanctum'])->get('single-generate-proforma-invoice', [PaymentController::class, 'single_category_generate_proforma_invoice'])->name('singleCategoryGenerateProformaInvoice');
-
-#################### END ##############################################################
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-payment', [PaymentController::class, 'singleCategoryIndex'])->name('singleCategoryPaymentIndex');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-proforma-invoice', [PaymentController::class, 'singleCategoryGenerateProformaInvoiceView'])->name('singleCategoryGenerateProformaInvoiceView');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-generate-proforma-invoice/{rfqNo}', [PaymentController::class, 'singleCategoryGenerateProformaInvoice'])->name('singleCategoryGenerateProformaInvoice');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-proforma-invoices', [PaymentController::class, 'singleCategoryProformaInvoices'])->name('singleCategoryProformaInvoices');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-invoice-details/{rfq_no}', [PaymentController::class, 'singleCategoryInvoiceView'])->name('singleCategoryInvoiceView');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-bank-payments/{rfq_no}/create', [BankPaymentController::class, 'singleCategoryCreate'])->name('singleCategoryBankPaymentCreate');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-bank-payments/{id}/edit', [BankPaymentController::class, 'singleCategoryEdit'])->name('singleCategoryBankPaymentEdit');
+Route::middleware(['auth:sanctum'])->post('single-category-rfq-bank-payment-store', [BankPaymentController::class, 'singleCategoryStore'])->name('singleCategoryStore');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-emdad-invoices-history', [PaymentController::class, 'singleCategoryPayments'])->name('singleCategoryPayments');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-bank-payment/{id}', [BankPaymentController::class, 'singleCategoryShow'])->name('singleCategoryShow');
+Route::middleware(['auth:sanctum'])->post('single-category-rfq-bank-payment-update/{rfq_no}', [BankPaymentController::class, 'singleCategoryUpdate'])->name('singleCategoryBankPaymentUpdate');
+Route::middleware(['auth:sanctum'])->post('single-category-rfq-bank-payments/update/bank-payment/{rfq_no}', [BankPaymentController::class, 'singleUpdatePayment'])->name('singleCategoryBankPaymentBuyerUpdate');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-invoices-history', [PaymentController::class, 'singleCategoryInvoices'])->name('singleCategoryInvoices');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-unpaid-bank-payments', [BankPaymentController::class, 'singleCategoryIndex'])->name('singleCategoryBankPaymentIndex');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-manual-payments', [PaymentController::class, 'singleCategorySupplierPaymentsReceived'])->name('singleCategorySupplierPaymentsReceived');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-emdad-supplier-manual-payments', [PaymentController::class, 'singleCategorySupplierPayment'])->name('singleCategorySupplierPayment');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-emdad-supplier-manual-payment/{rfq_no}', [BankPaymentController::class, 'singleCategoryAdminSupplierPaymentView'])->name('singleCategoryAdminSupplierPaymentView');
+Route::middleware(['auth:sanctum'])->post('single-category-rfq-emdad-update-supplier-manual-payment/{rfqNo}', [BankPaymentController::class, 'singleCategoryUpdateSupplierPaymentStatus'])->name('singleCategoryUpdateSupplierPaymentStatus');
+Route::middleware(['auth:sanctum'])->get('single-category-rfq-supplier-manual-payment/{id}', [BankPaymentController::class, 'singleCategorySupplierPaymentView'])->name('singleCategorySupplierPaymentView');
+Route::middleware(['auth:sanctum'])->post('single-category-rfq-supplier-manual-payment-update/{rfqNo}', [BankPaymentController::class, 'singleCategoryUpdateBankPayment'])->name('singleCategoryUpdateBankPayment');
+################################################################### END ############################################################################################
 
 
 ####################### Subscription routes ####################################

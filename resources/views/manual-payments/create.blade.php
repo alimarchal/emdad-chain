@@ -76,7 +76,7 @@
                             </div>
                             <div class="flex space-x-5 mt-3">
 
-                                <x-jet-input id="amount_date" type="date" name="amount_date" class="border p-2 w-1/2" required></x-jet-input>
+                                <x-jet-input  id="datepicker" placeholder="Choose Date (mm/dd/yy)"  type="text" name="amount_date" readonly class="border p-2 w-1/2" required></x-jet-input>
                                 <x-jet-input id="file_path_1" type="file" name="file_path_1" class="border p-2 w-1/2" required></x-jet-input>
                             </div>
 
@@ -84,6 +84,7 @@
                             <input type="hidden" name="delivery_id" value="{{ $delivery->id }}">
                             <input type="hidden" name="draft_purchase_order_id" value="{{ $delivery->draft_purchase_order_id }}">
                             <input type="hidden" name="quote_no" value="{{ $delivery->qoute_no }}">
+                            <input type="hidden" name="rfq_no" value="{{ $delivery->rfq_no }}">
                             <input type="hidden" name="supplier_business_id" value="{{ $delivery->supplier_business_id }}">
                             <input type="hidden" name="supplier_user_id" value="{{ $delivery->supplier_user_id }}">
                             <input type="hidden" name="buyer_user_id" value="{{ $delivery->user_id }}">
@@ -125,6 +126,7 @@
                             <input type="hidden" name="invoice_id" value="{{ $invoice->id }}">
                             <input type="hidden" name="draft_purchase_order_id" value="{{ $invoice->draft_purchase_order_id }}">
                             <input type="hidden" name="quote_no" value="{{ $invoice->qoute_no }}">
+                            <input type="hidden" name="rfq_no" value="{{ $invoice->rfq_no }}">
                             <input type="hidden" name="supplier_business_id" value="{{ $invoice->supplier_business_id }}">
                             <input type="hidden" name="supplier_user_id" value="{{ $invoice->supplier_user_id }}">
                             <input type="hidden" name="buyer_user_id" value="{{ $invoice->buyer_user_id }}">

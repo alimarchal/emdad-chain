@@ -41,7 +41,7 @@
                                 Status
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-left text-center text-xs font-medium text-gray-500 tracking-wider" width="120">
+                            <th scope="col" class="px-6 py-3 text-left text-center text-xs font-medium text-gray-500 tracking-wider" style="width: 120px;">
                                 View
                             </th>
                         </tr>
@@ -49,20 +49,20 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($shipments as $shipment)
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap" width="30">
+                                <td class="px-6 py-4 whitespace-nowrap" style="width: 30px;">
                                     {{$loop->iteration}}
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap" width="130">
-                                    {{$shipment->id}}
+                                <td class="px-6 py-4 whitespace-nowrap" style="width: 130px;">
+                                    <a href="{{route('shipment.show',$shipment->id)}}" class="hover:underline text-blue-600">{{$shipment->id}}</a>
 
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap" width="140">
+                                <td class="px-6 py-4 whitespace-nowrap" style="width: 140px;">
                                     {{$shipment->created_at->format('d-m-Y')}}
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap" width="170">
+                                <td class="px-6 py-4 whitespace-nowrap" style="width: 170px;">
                                     @if($shipment->status == 1) Delivered @elseif($shipment->status == 0) Not delivered yet @endif
                                 </td>
 

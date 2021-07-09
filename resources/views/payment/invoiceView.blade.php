@@ -13,11 +13,11 @@
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                             <h3 class="text-2xl text-center"><strong>Invoice details</strong></h3>
-                            <strong>Purchase Order #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $invoice->purchase_order->id }}<br>
-                            <strong>Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $invoice->purchase_order->created_at }}<br>
-                            <strong>RFQ#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $invoice->purchase_order->rfq_no }}<br>
-                            <strong>Quote#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $invoice->purchase_order->qoute_no }}<br>
-                            <strong>Payment Terms#: &nbsp;&nbsp;&nbsp;</strong>{{ $invoice->purchase_order->payment_term }}<br>
+                            <strong>Purchase Order #: &nbsp;&nbsp;</strong>{{ $invoice->purchase_order->id }}<br>
+                            <strong>Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $invoice->purchase_order->created_at }}<br>
+                            <strong>RFQ#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $invoice->purchase_order->rfq_no }}<br>
+                            <strong>Quote#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $invoice->purchase_order->qoute_no }}<br>
+                            <strong>Payment Terms #: &nbsp;&nbsp;&nbsp;</strong>{{ $invoice->purchase_order->payment_term }}<br>
                         </div>
                     </div>
                     <table class="min-w-full divide-y divide-black ">
@@ -30,7 +30,7 @@
                                 Category Number
                             </th>
                             <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                Description
+                                Category Name
                             </th>
                             <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                 Quantity
@@ -97,17 +97,14 @@
                     <br>
                     <br>
 
-                    <div class="flex justify-center">
-                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>
-                    </div>
-
-
-
-
                     <div class="flex justify-between px-2 py-2 mt-2 h-15">
                         <div></div>
-                        <div class="mt-3">Thanks for your Business</div>
-                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>
+                        <div class="mt-3">Thank you for using Emdad platform for your business.</div>
+                        <div></div>
+                    </div>
+                    <div class="flex justify-end px-2 py-2 h-15">
+                        <div class="mt-2">Copied to Emdad records</div>
+                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" style="margin-left: auto; margin-right: auto;"/></div>
                     </div>
 
                 </div>

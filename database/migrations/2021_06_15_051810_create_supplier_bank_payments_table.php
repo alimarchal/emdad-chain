@@ -17,6 +17,7 @@ class CreateSupplierBankPaymentsTable extends Migration
             $table->id();
             $table->integer('bank_payment_id');
             $table->string('bank_name');
+            $table->integer('rfq_no');
             $table->string('amount_received');
             $table->string('account_number');
             $table->string('amount_date');
@@ -24,6 +25,7 @@ class CreateSupplierBankPaymentsTable extends Migration
             $table->string('supplier_business_id');
             $table->string('supplier_user_id');
             $table->integer('status');
+            $table->integer('rfq_type');                             /* 0 for single category RFQ, 1 for multi categories */
             $table->timestamps();
         });
     }

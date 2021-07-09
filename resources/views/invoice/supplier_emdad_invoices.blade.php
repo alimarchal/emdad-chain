@@ -16,8 +16,6 @@
         @endif
         <h2 class="text-2xl font-bold py-2 text-center m-2">Emdad Invoices</h2>
 
-        <!-- This example requires Tailwind CSS v2.0+ -->
-
         <div class="flex flex-col bg-white rounded ">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -40,10 +38,6 @@
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                     Emdad invoice amount (1.5 %)
-                                </th>
-
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Status
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
@@ -73,10 +67,6 @@
                                         </td>
                                         <td class="px-7 py-4 text-center whitespace-nowrap">
                                             {{ $totalEmdadCharges }}
-                                        </td>
-
-                                        <td class="px-7 py-4 text-center whitespace-nowrap">
-                                            @if($emdadInvoice->status == 0)  Un-paid @elseif($emdadInvoice->status == 1) Paid @endif
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">

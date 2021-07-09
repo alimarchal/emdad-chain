@@ -9,7 +9,7 @@ class EmdadInvoice extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['invoice_id', 'charges', 'supplier_business_id', 'send_status', 'status'];
+    protected $fillable = ['invoice_id', 'charges', 'supplier_business_id', 'rfq_no', 'send_status', 'status', 'rfq_type'];
 
     public function invoice()
     {

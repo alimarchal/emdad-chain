@@ -16,6 +16,7 @@ class CreateDeliveryNotesTable extends Migration
         Schema::create('delivery_notes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('draft_purchase_order_id')->nullable()->index();
+            $table->integer('rfq-no');
             $table->string('user_id')->nullable();
             $table->string('business_id')->nullable();
             // suppliers
@@ -27,6 +28,7 @@ class CreateDeliveryNotesTable extends Migration
             $table->string('terms_and_conditions')->nullable();
             $table->string('update_user_id')->nullable();
             $table->string('status')->nullable();
+            $table->integer('rfq_type');                             /* 0 for single category RFQ, 1 for multi categories */
             $table->timestamps();
         });
     }

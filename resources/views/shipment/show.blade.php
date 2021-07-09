@@ -17,9 +17,6 @@
         <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$shipmentDetails->count()) seems empty @endif
         </h2>
 
-        <!-- This example requires Tailwind CSS v2.0+ -->
-
-
         @if ($shipmentDetails->count())
             @php $total = 0; @endphp
             <div class="flex flex-col bg-white rounded ">
@@ -64,17 +61,17 @@
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_type)->first();  @endphp
+                                            @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_id)->first();  @endphp
                                             {{ $vehicleName->type }}
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_type)->first();  @endphp
+                                            @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_id)->first();  @endphp
                                             {{ $vehicleName->licence_plate_No }}
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $shipmentDetail->delivery_id }}
+                                            <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600" target="_blank">{{$shipmentDetail->delivery_id}}</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -90,10 +87,6 @@
                 Back
             </a>
         </div>
-
-
-
-
 
     </x-app-layout>
 @else
@@ -158,7 +151,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_type)->first();  @endphp
+                                            @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_id)->first();  @endphp
                                             {{ $vehicleName->type }}
                                         </td>
 

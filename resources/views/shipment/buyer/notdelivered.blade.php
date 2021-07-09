@@ -17,9 +17,6 @@
         <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$shipments->count()) seems empty @endif
         </h2>
 
-        <!-- This example requires Tailwind CSS v2.0+ -->
-
-
         @if ($shipments->count())
             @php $total = 0; @endphp
             <div class="flex flex-col bg-white rounded ">
@@ -30,19 +27,19 @@
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         #
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         Shipment #
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         Supplier Business Name
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         Status
                                     </th>
 
@@ -51,20 +48,20 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($shipments as $shipment)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $loop->iteration }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $shipment->id }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @php $supplierBusiness = \App\Models\Business::where('id', $shipment->supplier_business_id)->first();  @endphp
                                             {{ $supplierBusiness->business_name }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @if($shipment->status == 1 )
                                                 <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
                                                     Delivered

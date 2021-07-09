@@ -309,7 +309,7 @@ class DraftPurchaseOrderController extends Controller
     }
 
     /**
-     * Generating PDF file for Single Categroy POs.
+     * Generating PDF file for Single Category POs.
      *
      */
     public function singleCategoryGeneratePDF($rfqNo)

@@ -40,14 +40,13 @@
                         });
 
                     </script>
-{{--                    <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">--}}
-{{--                        <a href="{{route('generatePDF')}}"--}}
-{{--                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">--}}
-{{--                            Generate PDF--}}
-{{--                        </a>--}}
-{{--                    </div>--}}
+{{--                    <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
+                        <a href="{{route('generatePDF')}}"
+                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                            Generate PDF
+                        </a>
+                    </div>--}}
                 @if ($dpos->count())
-                <!-- This example requires Tailwind CSS v2.0+ -->
                     <div class="flex flex-col">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -104,8 +103,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                    {{--                                                    <a href="{{ route('deliveryNoteView',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dpo->item_name }}</a>--}}
-                                                    {{ $dpo->item_name }}
+                                                    <a href="{{ route('singleCategoryDeliveryNoteView',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dpo->item_name }}</a>
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
@@ -118,15 +116,19 @@
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                                     @if($dpo->payment_term == 'Cash' || auth()->user()->can('all') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
-{{--                                                            @php $proformaInvoice = \App\Models\ProformaInvoice::where('draft_purchase_order_id', $dpo->id)->first(); @endphp--}}
-                                                        @php $proformaInvoice = \App\Models\Invoice::where('draft_purchase_order_id', $dpo->id)->where('invoice_type', 1)->first(); @endphp
-                                                        @if (isset($proformaInvoice) && $proformaInvoice->invoice_status == 3)
+                                                        @php $proformaInvoice = \App\Models\Invoice::where('draft_purchase_order_id', $dpo->id)->where('invoice_type', 1)->first();
+                                                            $deliveryNote = \App\Models\DeliveryNote::where('rfq_no', $dpo->rfq_no)->first();
+                                                        @endphp
+                                                        @if(isset($deliveryNote) && $deliveryNote->status != 'completed' )
+                                                        <a>Generate Final Invoice</a>
+                                                        @elseif(isset($deliveryNote) && $deliveryNote->status == 'completed' )
+                                                        <a>Final Invoice Generated</a>
+                                                        @elseif (isset($proformaInvoice) && $proformaInvoice->invoice_status == 3)
                                                             <a>Create delivery Note</a>
                                                         @elseif(isset($proformaInvoice))
                                                             <a>Proforma invoice generated</a>
                                                         @else
-                                                            <a class="text-blue-900 hover:underline">Generate proforma invoice</a>
-{{--                                                            <a href="{{route('generateProforma', $dpo->id)}}" class="text-blue-900 hover:underline">Generate proforma invoice</a>--}}
+                                                            <a href="{{route('singleCategoryGenerateProformaInvoice', $dpo->rfq_no)}}" class="text-blue-900 hover:underline">Generate proforma invoice</a>
                                                         @endif
                                                     @else
                                                         {{--                                                            <a>Completed</a>--}}
@@ -134,7 +136,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                    <a class="hover:text-blue-900 hover:underline text-blue-900">{{$dpo->status}}</a>
+                                                    <a class="hover:text-blue-900 text-blue-900">@if($dpo->status == 'prepareDelivery') Preparing delivery @else {{$dpo->status}} @endif</a>
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
@@ -142,7 +144,6 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-                                        <!-- More rows... -->
                                         </tbody>
                                     </table>
                                 </div>

@@ -120,8 +120,12 @@
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                                         @if($dpo->payment_term == 'Cash' || auth()->user()->can('all') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
 {{--                                                            @php $proformaInvoice = \App\Models\ProformaInvoice::where('draft_purchase_order_id', $dpo->id)->first(); @endphp--}}
-                                                            @php $proformaInvoice = \App\Models\Invoice::where('draft_purchase_order_id', $dpo->id)->where('invoice_type', 1)->first(); @endphp
-                                                            @if (isset($proformaInvoice) && $proformaInvoice->invoice_status == 3)
+                                                            @php $proformaInvoice = \App\Models\Invoice::where('draft_purchase_order_id', $dpo->id)->where('invoice_type', 1)->first();
+                                                                $deliveryNote = \App\Models\DeliveryNote::where('rfq_no', $dpo->rfq_no)->first();
+                                                            @endphp
+                                                            @if(isset($deliveryNote))
+                                                                <a>Generate Final Invoice</a>
+                                                            @elseif (isset($proformaInvoice) && $proformaInvoice->invoice_status == 3)
                                                                 <a>Create delivery Note</a>
                                                             @elseif(isset($proformaInvoice))
                                                                 <a>Proforma invoice generated</a>
@@ -134,7 +138,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        <a class="hover:text-blue-900 hover:underline text-blue-900">{{$dpo->status}}</a>
+                                                        <a class="hover:text-blue-900 text-blue-900">@if($dpo->status == 'prepareDelivery') Preparing delivery @else {{$dpo->status}} @endif</a>
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">

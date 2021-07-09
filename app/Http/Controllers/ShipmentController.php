@@ -30,7 +30,11 @@ class ShipmentController extends Controller
     public function create()
     {
         $shipmentCarts = ShipmentCart::where('supplier_business_id', auth()->user()->business_id)->get();
-        return view('shipment.create', compact('shipmentCarts'));
+
+        $collection = Delivery::where(['supplier_business_id' =>  auth()->user()->business_id, 'shipment_status' => 0])->get();
+        $deliveries = $collection->unique('rfq_no');
+
+        return view('shipment.create', compact('shipmentCarts', 'deliveries'));
     }
 
     public function show(Shipment $shipment)
@@ -46,11 +50,6 @@ class ShipmentController extends Controller
             return view('shipment.buyer.show', compact('shipmentDetails'));
         }
 
-    }
-
-    public function destroy(Shipment $shipment)
-    {
-        //
     }
 
     /* Delivered delivery of Buyers */

@@ -77,7 +77,13 @@
                                 <strong>Quote Quantity:</strong> {{ $quote->quote_quantity }}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>Quote Price Per Quantity: {{ $quote->quote_price_per_quantity }}</strong>
+                                <strong>Quote Price Per Quantity:</strong> {{ $quote->quote_price_per_quantity }}
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                                <strong>Quote Description:</strong> {{ $quote->orderItem->description }}
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                                <strong>Note:</strong> {{ strip_tags($quote->note_for_customer) }}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <strong>Sample Information:</strong> {{ $quote->sample_information }}
@@ -90,9 +96,6 @@
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <strong>Sample Charges Per Unit:</strong> {{ $quote->sample_charges_per_unit }}
-                            </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>Note:</strong> {{ strip_tags($quote->note_for_customer) }}
                             </div>
                         </div>
                     @endforeach

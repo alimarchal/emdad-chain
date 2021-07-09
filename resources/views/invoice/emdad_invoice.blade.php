@@ -56,7 +56,6 @@
                         <h2 class="text-2xl font-bold text-center">Emdad Invoices</h2>
                         <x-jet-validation-errors class="mb-4" />
                     @if ($emdadInvoices->count())
-                        <!-- This example requires Tailwind CSS v2.0+ -->
                             <div class="flex flex-col">
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -72,14 +71,17 @@
                                                         Supplier Business Name
                                                     </th>
                                                     <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center;">
+                                                        Invoice #
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center;">
                                                         Invoice Type
                                                     </th>
                                                     <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center;">
                                                         Invoice status
                                                     </th>
-                                                    <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center;">
+                                                    {{--<th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center;">
                                                         Emdad Invoice status
-                                                    </th>
+                                                    </th>--}}
                                                     <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center;">
                                                         Action
                                                     </th>
@@ -87,56 +89,61 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody class="bg-white divide-y divide-gray-200 ">
-                                                @foreach ($emdadInvoices as $emdadInvoice)
-                                                    <tr>
-                                                        <td class="px-6 py-4 whitespace-nowrap ml-10" style="text-align:center;">
-                                                            {{ $loop->iteration }}
-                                                        </td>
-                                                        @php $supplierName = \App\Models\User::where('id', $emdadInvoice->invoice->supplier_user_id)->first(); @endphp
-                                                        <td class="px-6 py-4 whitespace-nowrap ml-10" style="text-align:center;">
-                                                            <a href="{{ route('business.show', $supplierName->business->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $supplierName->business->business_name }}</a>
-                                                        </td>
+                                                    @foreach ($emdadInvoices as $emdadInvoice)
+                                                        <tr>
+                                                            <td class="px-6 py-4 whitespace-nowrap ml-10" style="text-align:center;">
+                                                                {{ $loop->iteration }}
+                                                            </td>
+                                                            @php $supplierName = \App\Models\User::where('id', $emdadInvoice->invoice->supplier_user_id)->first(); @endphp
+                                                            <td class="px-6 py-4 whitespace-nowrap ml-10" style="text-align:center;">
+                                                                <a href="{{ route('business.show', $supplierName->business->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $supplierName->business->business_name }}</a>
+                                                            </td>
 
-                                                        <td class="whitespace-nowrap ml-10" style="text-align:center;">
-                                                            <span>@if($emdadInvoice->invoice->invoice_type == 1) Proforma Invoice @else Final Invoice @endif</span>
-                                                        </td>
+                                                            <td class="px-6 py-4 whitespace-nowrap ml-10" style="text-align:center;">
+                                                                <a href="{{route('emdadInvoiceView', $emdadInvoice->id)}}" class="hover:underline text-blue-600" target="_blank">{{$emdadInvoice->invoice->id}}</a>
+                                                            </td>
 
-                                                        <td class="whitespace-nowrap ml-10" style="text-align:center;">
-                                                            <span>
-                                                                @if($emdadInvoice->invoice->invoice_status == 0) Un-Paid
-                                                                @elseif($emdadInvoice->invoice->invoice_status == 1) Supplier Verification Pending
-                                                                @elseif($emdadInvoice->invoice->invoice_status == 2) Supplier Rejected
-                                                                @elseif($emdadInvoice->invoice->invoice_status == 3) Payment received
-                                                                @endif
-                                                            </span>
-                                                        </td>
-                                                        <td class="whitespace-nowrap ml-10" style="text-align:center;">
-                                                            <span>@if($emdadInvoice->status == 1) Paid @else Un-paid @endif</span>
-                                                        </td>
-                                                        <td class="whitespace-nowrap ml-10" style="text-align:center;">
-                                                            @if($emdadInvoice->invoice->invoice_status == 3 && $emdadInvoice->invoice->invoice_type == 0 && $emdadInvoice->send_status == 0)
-                                                                <a href="{{route('emdadGenerateInvoice', $emdadInvoice->id)}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
-                                                                    Send Emdad Invoice
-                                                                </a>
-                                                            @elseif($emdadInvoice->invoice->invoice_status != 3 && $emdadInvoice->invoice->invoice_type == 0 && $emdadInvoice->send_status == 0)
-                                                                <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                                                                    Invoice Un-paid
-                                                                </a>
-                                                            @elseif($emdadInvoice->invoice->invoice_type == 1)
-                                                                <a class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
-                                                                    @if($emdadInvoice->invoice->invoice_status == 0) Proforma Invoice Un-paid
-                                                                    @elseif($emdadInvoice->invoice->invoice_status == 1) Proforma invoice verification Pending
-                                                                    @elseif($emdadInvoice->invoice->invoice_status == 2) Proforma invoice rejected
+                                                            <td class="whitespace-nowrap ml-10" style="text-align:center;">
+                                                                <span>@if($emdadInvoice->invoice->invoice_type == 1) Proforma Invoice @else Final Invoice @endif</span>
+                                                            </td>
+
+                                                            <td class="whitespace-nowrap ml-10" style="text-align:center;">
+                                                                <span>
+                                                                    @if($emdadInvoice->invoice->invoice_status == 0) Un-Paid
+                                                                    @elseif($emdadInvoice->invoice->invoice_status == 1) Verification Pending
+                                                                    @elseif($emdadInvoice->invoice->invoice_status == 2) Rejected
+                                                                    @elseif($emdadInvoice->invoice->invoice_status == 3) Payment received
                                                                     @endif
-                                                                </a>
-                                                            @elseif($emdadInvoice->send_status == 1)
-                                                                <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                                    Emdad Invoice Sent
-                                                                </a>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                                                </span>
+                                                            </td>
+                                                            {{--<td class="whitespace-nowrap ml-10" style="text-align:center;">
+                                                                <span>@if($emdadInvoice->status == 1) Paid @else Un-paid @endif</span>
+                                                            </td>--}}
+                                                            <td class="whitespace-nowrap ml-10" style="text-align:center;">
+                                                                @if($emdadInvoice->invoice->invoice_status == 3 && $emdadInvoice->invoice->invoice_type == 0 && $emdadInvoice->send_status == 0)
+                                                                    <a href="{{route('emdadGenerateInvoice', $emdadInvoice->id)}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
+                                                                        Send Emdad Invoice
+                                                                    </a>
+                                                                @elseif($emdadInvoice->invoice->invoice_status != 3 && $emdadInvoice->invoice->invoice_type == 0 && $emdadInvoice->send_status == 0)
+                                                                    <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                                        Invoice Un-paid
+                                                                    </a>
+                                                                @elseif($emdadInvoice->invoice->invoice_type == 1)
+                                                                    <a @if($emdadInvoice->invoice->invoice_status == 2) class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150" @else class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-600 transition ease-in-out duration-150" @endif>
+                                                                        @if($emdadInvoice->invoice->invoice_status == 0) Proforma Invoice Un-paid
+                                                                        @elseif($emdadInvoice->invoice->invoice_status == 1) Proforma invoice verification Pending
+                                                                        @elseif($emdadInvoice->invoice->invoice_status == 2) Proforma invoice rejected
+                                                                        @elseif($emdadInvoice->invoice->invoice_status == 3) Proforma invoice accepted
+                                                                        @endif
+                                                                    </a>
+                                                                @elseif($emdadInvoice->send_status == 1)
+                                                                    <a class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                                        Emdad Invoice Sent
+                                                                    </a>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
 

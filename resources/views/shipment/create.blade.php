@@ -10,8 +10,20 @@
         <h2 class="text-2xl font-bold py-2 text-center">
         </h2>
 
-        <div class="flex flex-col bg-white rounded">
+        @include('users.sessionMessage')
+        @if ($errors->any())
+            <div>
+                <div class="font-medium text-red-600">{{ __('Field(s) required.') }}</div>
 
+                <ul class="mt-3 list-disc list-inside text-sm text-red-600">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <div class="flex flex-col bg-white rounded">
             @if ($shipmentCarts->count())
                 @php $total = 0; @endphp
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -44,8 +56,6 @@
                                             </path>
                                         </svg>
                                     </th>
-
-
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -69,11 +79,11 @@
 
                                         <td class="px-6 py-4 whitespace-nowrap">
 
-                                            <form method="POST" action="{{ route('shipmentCart.destroy', $shipmentCart->id) }}" class="inline">
+                                            <form method="POST" action="{{ route('shipmentCart.destroy', $shipmentCart->rfq_no) }}" class="inline delete">
                                                 @csrf
                                                 @method('delete')
 
-                                                <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE" onsubmit="alert('Are you sure')">
+                                                <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE">
                                                     <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red">
                                                         <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
                                                         <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
@@ -106,9 +116,7 @@
                     <div class="flex flex-wrap -mx-px overflow-hidden sm:-mx-1 md:-mx-2 lg:-mx-2 xl:-mx-1">
 
                         <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <label class="block font-medium text-sm text-gray-700 mb-1" for="driver_id">
-                                Drivers
-                            </label>
+                            <label class="block font-medium text-sm text-gray-700 mb-1" for="driver_id">Driver</label>
 
                             <select name="driver_id" id="driver_id" class="form-select shadow-sm block w-full" @if ($shipmentCarts->count() > 0) disabled @endif @if ($shipmentCarts->count() <= 0) required @endif>
                                 <option value="">None</option>
@@ -120,10 +128,8 @@
                         </div>
 
                         <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <label class="block font-medium text-sm text-gray-700 mb-1" for="vehicle_type">
-                                Vehicle
-                            </label>
-                            <select name="vehicle_type" id="vehicle_type" class="form-select shadow-sm block w-full" @if ($shipmentCarts->count() > 0) disabled @endif @if ($shipmentCarts->count() <= 0) required @endif>
+                            <label class="block font-medium text-sm text-gray-700 mb-1" for="vehicle_id">Vehicle</label>
+                            <select name="vehicle_id" id="vehicle_id" class="form-select shadow-sm block w-full" @if ($shipmentCarts->count() > 0) disabled @endif @if ($shipmentCarts->count() <= 0) required @endif>
                                 <option value="">None</option>
                                 @foreach (\App\Models\Vehicle::where(['supplier_business_id' =>  auth()->user()->business_id, 'availability_status' => 1])->get() as $vehicle)
                                     <option @if ($shipmentCarts->count() > 0) selected @endif value="{{$vehicle->id}}">{{$vehicle->type. ' -- '. $vehicle->licence_plate_No}}</option>
@@ -132,13 +138,14 @@
                         </div>
 
                         <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <label class="block font-medium text-sm text-gray-700 mb-1" for="delivery_id">
-                                Delivery
-                            </label>
+                            <label class="block font-medium text-sm text-gray-700 mb-1" for="delivery_id">Delivery</label>
                             <select name="delivery_id" id="delivery_id" class="form-select shadow-sm block w-full" required>
                                 <option value="">None</option>
-                                @foreach(\App\Models\Delivery::where(['supplier_business_id' =>  auth()->user()->business_id, 'shipment_status' => 0])->get() as $delivery)
+                                {{--@foreach(\App\Models\Delivery::where(['supplier_business_id' =>  auth()->user()->business_id, 'shipment_status' => 0])->get() as $delivery)
                                     <option value="{{$delivery->id}}">{{$delivery->item_name . ' - ' . $delivery->draft_purchase_order_id}}</option>
+                                @endforeach--}}
+                                @foreach($deliveries as $delivery)
+                                    <option value="{{$delivery->id.','.$delivery->rfq_no}}">{{$delivery->item_name . ' - ' . $delivery->draft_purchase_order_id}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -238,11 +245,11 @@
 
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             </form>
-                                            <form method="POST" action="{{ route('shipmentCart.destroy', $shipmentCart->id) }}" class="inline">
+                                            <form method="POST" action="{{ route('shipmentCart.destroy', $shipmentCart->id) }}" class="inline delete">
                                                 @csrf
                                                 @method('delete')
 
-                                                <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE" onsubmit="alert('Are you sure')">
+                                                <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE">
                                                     <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red">
                                                         <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
                                                         <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd" />
@@ -289,10 +296,10 @@
                         </div>
 
                         <div class="my-px px-px w-full overflow-hidden sm:my-1 sm:px-1 md:my-2 md:px-2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                            <label class="block font-medium text-sm text-gray-700 mb-1" for="vehicle_type">
+                            <label class="block font-medium text-sm text-gray-700 mb-1" for="vehicle_id">
                                 Vehicle
                             </label>
-                            <select name="vehicle_type" id="vehicle_type" class="form-select shadow-sm block w-full" @if ($shipmentCarts->count() > 0) disabled @endif @if ($shipmentCarts->count() <= 0) required @endif>
+                            <select name="vehicle_id" id="vehicle_id" class="form-select shadow-sm block w-full" @if ($shipmentCarts->count() > 0) disabled @endif @if ($shipmentCarts->count() <= 0) required @endif>
                                 <option value="">None</option>
                                 @foreach (\App\Models\Vehicle::where(['supplier_business_id' =>  auth()->user()->business_id, 'availability_status' => 1])->get() as $vehicle)
                                     <option @if ($shipmentCarts->count() > 0) selected @endif value="{{$vehicle->id}}">{{$vehicle->type}}</option>
@@ -306,8 +313,8 @@
                             </label>
                             <select name="delivery_id" id="delivery_id" class="form-select shadow-sm block w-full" required>
                                 <option value="">None</option>
-                                @foreach(\App\Models\Delivery::where(['supplier_business_id' =>  auth()->user()->business_id, 'shipment_status' => 0])->get() as $delivery)
-                                    <option value="{{$delivery->id}}">{{$delivery->item_name}}</option>
+                                @foreach($deliveries as $delivery)
+                                    <option value="{{$delivery->id.','.$delivery->rfq_no}}">{{$delivery->item_name . ' - ' . $delivery->draft_purchase_order_id}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -344,3 +351,9 @@
         </script>
     </x-app-layout>
 @endif
+
+<script>
+    $(".delete").on("submit", function(){
+        return confirm("Are you sure you want to delete?");
+    });
+</script>

@@ -83,7 +83,7 @@
                 {{--                </div>--}}
                 {{--            </div>--}}
                 <main class="flex-1 overflow-x-hidden  bg-gray-200">
-                    <div class="container mx-auto px-6 pb-8">
+                    <div class="container mx-auto @if(request()->routeIs('supplier_payment')) px-8 @else px-6 @endif pb-8">
                         {{ $slot }}
                         @yield('body')
                     </div>

@@ -17,7 +17,6 @@
                         </div>
                     @endif
                     @if ($collection->count())
-                    <!-- This example requires Tailwind CSS v2.0+ -->
                         <div class="flex flex-col">
                             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -53,45 +52,44 @@
                                             </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
-                                            @foreach ($collection as $dn)
-                                                <tr>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        {{ $loop->iteration }}
-                                                    </td>
+                                                @foreach ($collection as $dn)
+                                                    <tr>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                            {{ $loop->iteration }}
+                                                        </td>
 
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        Delivery Note-{{ $dn->id }}
-                                                    </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                            Delivery Note-{{ $dn->id }}
+                                                        </td>
 
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        PO-{{ $dn->purchase_order->id }}
-                                                    </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                            PO-{{ $dn->purchase_order->id }}
+                                                        </td>
 
 
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        {{ $dn->purchase_order->item_name }}
-                                                        {{-- <a href="{{ route('po.show', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dn->item_name }}</a> --}}
-                                                    </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                            {{ $dn->purchase_order->item_name }}
+                                                            {{-- <a href="{{ route('po.show', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dn->item_name }}</a> --}}
+                                                        </td>
 
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        {{ Carbon\Carbon::parse($dn->purchase_order->po_date)->format('d-m-Y') }}
-                                                    </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                            {{ Carbon\Carbon::parse($dn->purchase_order->po_date)->format('d-m-Y') }}
+                                                        </td>
 
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        @if ($dn->status == 'prepareDelivery')
-                                                            Preparing Delivery
-                                                        @else
-                                                            {{ $dn->status }}
-                                                        @endif
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                            @if ($dn->status == 'prepareDelivery')
+                                                                Preparing Delivery
+                                                            @else
+                                                                {{ $dn->status }}
+                                                            @endif
 
-                                                    </td>
+                                                        </td>
 
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        <a href="{{ route('viewNote',$dn->id) }}" class="hover:underline hover:text-blue-800 text-blue-500">View</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            <!-- More rows... -->
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                            <a href="{{ route('viewNote',$dn->id) }}" class="hover:underline hover:text-blue-800 text-blue-500">View</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>

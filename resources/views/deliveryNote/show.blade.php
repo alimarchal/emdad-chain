@@ -210,17 +210,14 @@
                         </form>
                     @endif
 
-                    <div class="flex justify-center">
-                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>
-                    </div>
-
-
-
-
                     <div class="flex justify-between px-2 py-2 mt-2 h-15">
                         <div></div>
-                        <div class="mt-3">Thanks for your Business</div>
-                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>
+                        <div class="mt-3">Thank you for using Emdad platform for your business.</div>
+                        <div></div>
+                    </div>
+                    <div class="flex justify-end px-2 py-2 h-15">
+                        <div class="mt-2">Copied to Emdad records</div>
+                        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" style="margin-left: auto; margin-right: auto;"/></div>
                     </div>
 
                 </div>
