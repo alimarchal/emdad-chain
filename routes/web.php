@@ -253,6 +253,7 @@ Route::middleware(['auth:sanctum'])->get('active-rfq-details/{rfq_id}', [Categor
 Route::middleware(['auth:sanctum'])->resource('category', CategoryController::class);
 ####################END###############################
 #################### RFP Purchase Request Form ##########################
+Route::middleware(['auth:sanctum'])->get('rfq-view', [PurchaseRequestFormController::class, 'view'])->name('rfqView');
 Route::middleware(['auth:sanctum'])->resource('RFQ', PurchaseRequestFormController::class);
 
 // For Single Category RFQ

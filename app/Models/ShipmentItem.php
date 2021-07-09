@@ -17,4 +17,10 @@ class ShipmentItem extends Model
     {
         return $this->belongsTo(Shipment::class);
     }
+
+    public function deliveries()
+    {
+        return $this->hasMany(Delivery::class,'deliveries.id','shipment_items.delivery_id');
+    }
+
 }

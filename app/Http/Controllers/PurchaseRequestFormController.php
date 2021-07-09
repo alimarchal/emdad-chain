@@ -114,4 +114,9 @@ class PurchaseRequestFormController extends Controller
         return view('RFQ.singleCategory.create', compact('parentCategories','eCart','rfqCount','latest_rfq'));
     }
 
+    public function view()
+    {
+        return view('RFQ.view');
+    }
+
 }
