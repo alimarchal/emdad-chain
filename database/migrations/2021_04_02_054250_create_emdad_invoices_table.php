@@ -21,7 +21,7 @@ class CreateEmdadInvoicesTable extends Migration
             $table->string('charges');                                // emdad charges  (1.5% of total cost w/o VAT)
             $table->integer('send_status')->default(0);         //  default 0 for not send to supplier & 1 for sen to supplier
             $table->integer('status')->default(0);              //  default 0 for not paid & 1 for paid
-            $table->integer('rfq_type');                             /* 0 for single category RFQ, 1 for multi categories */
+            $table->integer('rfq_no');                             /* 0 for single category RFQ, 1 for multi categories */
             $table->timestamps();
         });
     }
