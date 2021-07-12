@@ -13,21 +13,6 @@ use Illuminate\Support\Facades\Mail;
 
 class POInfoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $business = Business::where('user_id', auth()->id())->get();
@@ -46,12 +31,6 @@ class POInfoController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -87,49 +66,14 @@ class POInfoController extends Controller
         return redirect()->route('dashboard');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\POInfo $pOInfo
-     * @return \Illuminate\Http\Response
-     */
     public function show(POInfo $purchaseOrderInfo)
     {
         $business = Business::find($purchaseOrderInfo->business_id);
         return view('purchaseOrderInfo.show', compact('purchaseOrderInfo', 'business'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\POInfo $pOInfo
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(POInfo $pOInfo)
+    public function view()
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\POInfo $pOInfo
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, POInfo $pOInfo)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\POInfo $pOInfo
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(POInfo $pOInfo)
-    {
-        //
+        return view('purchaseOrderInfo.view');
     }
 }
