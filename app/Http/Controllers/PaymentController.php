@@ -32,6 +32,11 @@ class PaymentController extends Controller
         dd($request->all());
     }
 
+    public function view()
+    {
+        return view('payment.view');
+    }
+
     public function generateProformaInvoiceView($id)
     {
         $draftPurchaseOrder = DraftPurchaseOrder::where('id', $id)->where('supplier_business_id', auth()->user()->business_id)->where('payment_term', 'Cash')->first();

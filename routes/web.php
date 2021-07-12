@@ -93,6 +93,7 @@ Route::middleware(['auth:sanctum'])->get('/business-legal-finance-status/', [Bus
 Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
 Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', BusinessWarehouseController::class);
 Route::middleware(['auth:sanctum'])->get('/businessWarehouse/{id}/show', [BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
+Route::middleware(['auth:sanctum'])->get('/purchase-order', [POInfoController::class, 'view'])->name('purchaseOrderView');
 Route::middleware(['auth:sanctum'])->resource('/purchaseOrderInfo', POInfoController::class);
 
 ####################Admin IREs Controller###################
@@ -426,6 +427,7 @@ Route::middleware(['auth:sanctum'])->post('/single/category/generate-emdad-invoi
 #################### END ##############################################################
 
 ########################################################## Payment routes #################################################################################
+Route::middleware(['auth:sanctum'])->get('payments', [PaymentController::class, 'view'])->name('paymentView');
 Route::middleware(['auth:sanctum'])->resource('payment', PaymentController::class);
 Route::middleware(['auth:sanctum'])->get('generate-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoiceView'])->name('generateProformaView');
 Route::middleware(['auth:sanctum'])->get('create-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoice'])->name('generateProforma');
