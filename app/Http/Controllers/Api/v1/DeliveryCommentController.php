@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Models\DeliveryComment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DeliveryCommentController extends Controller
 {
@@ -66,13 +67,38 @@ class DeliveryCommentController extends Controller
     public function show(Request $request, $id)
     {
         $token = env('API_TOKEN');
-
         if ($token == $request->code) {
-            $collection = DeliveryComment::find($id);
+
+            $collection = null;
+
+            if ($request->has('delivery_id') && $request->has('comment_type')) {
+                $ct = str_replace('[', '', $request->comment_type);
+                $ct = str_replace(']', '', $ct);
+                $ct = explode(',', $ct);
+                $collection = DeliveryComment::where('delivery_id', $request->delivery_id)->whereIn('comment_type', $ct)->get();
+            } else if ($request->has('user_id') && $request->has('comment_type')) {
+                $ct = str_replace('[', '', $request->comment_type);
+                $ct = str_replace(']', '', $ct);
+                $ct = explode(',', $ct);
+                $collection = DeliveryComment::where('user_id', $request->user_id)->whereIn('comment_type', $ct)->get();
+            } else if ($request->has('business_id') && $request->has('comment_type')) {
+                $ct = str_replace('[', '', $request->comment_type);
+                $ct = str_replace(']', '', $ct);
+                $ct = explode(',', $ct);
+                $collection = DeliveryComment::where('business_id', $request->business_id)->whereIn('comment_type', $ct)->get();
+            } elseif ($request->has('user_id')) {
+                $collection = DeliveryComment::where('user_id', $request->user_id)->get();
+            } else if ($request->has('delivery_id')) {
+                $collection = DeliveryComment::where('delivery_id', $request->delivery_id)->get();
+            } else if ($request->has('business_id')) {
+                $collection = DeliveryComment::where('business_id', $request->business_id)->get();
+            } else {
+                $collection = DeliveryComment::find($id);
+            }
             if (empty($collection)) {
                 return response()->json(['message' => 'Not Found!'], 404);
             } else {
-                return $collection;
+                return response()->json($collection, 200);
             }
         } else {
             return response()->json(['message' => 'UnAuthorized Access!'], 403);
@@ -85,7 +111,8 @@ class DeliveryCommentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
         //
     }
@@ -97,7 +124,8 @@ class DeliveryCommentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public
+    function update(Request $request, $id)
     {
         //
     }
@@ -108,13 +136,15 @@ class DeliveryCommentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         //
     }
 
 
-    public function getRatingByUserID(Request $request, $user_id, $delivery_id)
+    public
+    function getRatingByUserID(Request $request, $user_id, $delivery_id)
     {
         $token = env('API_TOKEN');
         if ($token == $request->code) {
