@@ -114,7 +114,7 @@ class ShipmentItemController extends Controller
                     $ShipmentItem[]['ShipmentItem'] = $itm->merge([
                         'Delivery' => [Delivery::find($col->delivery_id)],
                         'User' => [User::find($col->driver_id)],
-                        'Vehicle' => [Vehicle::find($col->vehicle_type)],
+                        'Vehicle' => [Vehicle::find($col->vehicle_id)],
                     ]);
                 }
 
