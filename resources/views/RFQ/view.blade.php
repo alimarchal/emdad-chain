@@ -21,7 +21,7 @@
         <div class="flex flex-wrap overflow-hidden lg:-mx-2 xl:-mx-1 ">
 
             <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 ">
-                <span>Multi Categories</span>
+                <span>Multiple Categories</span>
                 <div class="md:flex flex-1 rounded-md bg-white">
 
                     <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3">
@@ -30,11 +30,11 @@
                             <div class="mx-5">
                                 <div class="text-gray-500">
                                     <a href="{{route('RFQ.create')}}"
-                                       class="inline-flex items-center justify-center px-4 py-2 bg-blue-500 border
+                                       class="inline-flex items-center justify-center px-4 py-5 bg-blue-500 border
                                        border-transparent rounded-md font-semibold text-xs text-white uppercase
                                        tracking-widest hover:bg-red-500  focus:outline-none focus:border-blue-700
                                        focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
-                                        Create RFQ
+                                        Make New RFQ
                                     </a>
                                 </div>
                             </div>
@@ -47,11 +47,10 @@
                             <div class="mx-5">
                                 <div class="text-gray-500">
                                     <a href="{{route('RFQCart.index')}}"
-                                       class="inline-flex items-center justify-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                       class="inline-flex items-center justify-center px-4 py-3 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
                                     <span class="mx-3 ">
-                                        RFQs Cart
+                                        RFQ Cart
                                         @if (\App\Models\ECart::where('business_id', auth()->user()->business_id)->count())
-                                            ({{ \App\Models\ECart::where('business_id', auth()->user()->business_id)->count() }})
                                             ({{ \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->count() }})
                                         @endif
                                     </span>
@@ -65,9 +64,12 @@
                         <div class="items-center text-center px-2 py-6 ">
 
                             <div class="mx-5">
-                                <div class="text-gray-500"><a href="{{route('PlacedRFQ.index')}}"
-                                                              class="inline-flex items-center justify-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">RFQ(s)
-                                        History</a></div>
+                                <div class="text-gray-500">
+                                    <a href="{{route('PlacedRFQ.index')}}"
+                                                              class="inline-flex items-center justify-center px-4 py-5 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                        RFQ History
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -83,9 +85,11 @@
                         <div class="items-center text-center px-2 py-6 ">
 
                             <div class="mx-5">
-                                <div class="text-gray-500"><a href="{{route('create_single_rfq')}}"
-                                                              class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Create
-                                        RFQ</a></div>
+                                <div class="text-gray-500">
+                                    <a href="{{route('create_single_rfq')}}" class="inline-flex items-center justify-center px-4 py-5 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                        Make New RFQ
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,8 +100,8 @@
                             <div class="mx-5">
                                 <div class="text-gray-500">
                                     <a href="{{route('single_cart_index')}}"
-                                       class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
-                                <span class="mx-3 ">RFQs Cart
+                                       class="inline-flex items-center justify-center px-4 py-3 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
+                                <span class="mx-3 ">RFQ Cart
                                     @if (\App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->count())
                                         ({{ \App\Models\ECart::where(['business_id' => auth()->user()->business_id , 'rfq_type' => 0])->count() }})
                                     @endif
@@ -111,9 +115,11 @@
                     <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 xl:mt-0">
                         <div class="items-center text-center px-2 py-6 ">
                             <div class="mx-5">
-                                <div class="text-gray-500"><a href="{{route('single_category_rfq_index')}}"
-                                                              class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">RFQ(s)
-                                        History</a></div>
+                                <div class="text-gray-500">
+                                    <a href="{{route('single_category_rfq_index')}}" class="inline-flex items-center justify-center px-4 py-5 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
+                                        RFQ History
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

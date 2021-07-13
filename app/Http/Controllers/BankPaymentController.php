@@ -58,7 +58,7 @@ class BankPaymentController extends Controller
             $request->merge(['file_path' => $path]);
         }
         $request->merge(['status' => 1]);
-        $request->merge(['rfq_type' => 0]);
+        $request->merge(['rfq_type' => 1]);
         BankPayment::create($request->all());
         $invoice = Invoice::where('id', $request->invoice_id)->first();
         $invoice->invoice_status = 1;

@@ -125,6 +125,7 @@
                                         <input type="hidden" value="{{ $draftPurchaseOrder->supplier_user_id }}" name="supplier_user_id">
                                         <input type="hidden" value="{{ $draftPurchaseOrder->supplier_business_id }}" name="supplier_business_id">
                                         <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
+                                        <input type="hidden" value="{{ $draftPurchaseOrder->rfq_no }}" name="rfq_no">
                                         <input type="hidden" value="{{ $draftPurchaseOrder->shipment_cost }}" name="shipment_cost">
                                         <input type="hidden" value="{{ $draftPurchaseOrder->quantity }}" name="quantity">
                                         <input type="hidden" value="{{ $draftPurchaseOrder->unit_price }}" name="unit_price">
@@ -191,6 +192,7 @@
                                     <input type="hidden" value="{{ $draftPurchaseOrder->supplier_user_id }}" name="supplier_user_id">
                                     <input type="hidden" value="{{ $draftPurchaseOrder->supplier_business_id }}" name="supplier_business_id">
                                     <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
+                                    <input type="hidden" value="{{ $draftPurchaseOrder->rfq_no }}" name="rfq_no">
                                     <input type="hidden" value="{{ $draftPurchaseOrder->shipment_cost }}" name="shipment_cost">
                                     <input type="hidden" value="{{ $draftPurchaseOrder->quantity }}" name="quantity">
                                     <input type="hidden" value="{{ $draftPurchaseOrder->unit_price }}" name="unit_price">

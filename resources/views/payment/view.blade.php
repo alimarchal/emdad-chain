@@ -16,16 +16,13 @@
         </div>
     @endif
 
-    {{-- Multi Categories Routes--}}
+     {{--Multi Categories Routes--}}
     <div class="mt-4">
 
-        <span>Multi Categories</span>
+        <span>Multiple Categories</span>
+        <div class="md:flex flex-1 rounded-md bg-white">
 
-        <div class="-mx-3">
-
-            <div class="md:flex flex-1 rounded-md bg-white">
-
-                {{-- For Supplier --}}
+                 {{--For Supplier--}}
                 @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
                     <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3">
                         <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
@@ -48,7 +45,7 @@
                     </div>
                 @endif
 
-                {{-- For Both --}}
+                 {{--For Both--}}
                 @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
                     <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 xl:mt-0">
                         <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
@@ -69,7 +66,7 @@
                     </div>
                 @endif
 
-                {{-- For Buyer --}}
+                 {{--For Buyer--}}
                 @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Buyer" && Auth::user()->status == 3)
                     <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 xl:mt-0">
                         <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
@@ -81,7 +78,7 @@
                     </div>
                 @endif
 
-                {{-- For Supplier --}}
+                 {{--For Supplier--}}
                 @if(auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
                     <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 xl:mt-0">
                         <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
@@ -104,19 +101,15 @@
 
             </div>
 
-        </div>
     </div>
 
     {{--Single Category Routes--}}
     <div class="mt-4">
 
         <span>Single Category</span>
+        <div class="md:flex flex-1 rounded-md bg-white">
 
-        <div class="-mx-3">
-
-            <div class="md:flex flex-1 rounded-md bg-white">
-
-                {{-- For Supplier --}}
+                 {{--For Supplier--}}
                 @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
                     <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3">
                         <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
@@ -139,7 +132,7 @@
                     </div>
                 @endif
 
-                {{-- For Both --}}
+                 {{--For Both--}}
                 @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
                     <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 xl:mt-0">
                         <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
@@ -160,7 +153,7 @@
                     </div>
                 @endif
 
-                {{-- For Buyer --}}
+                 {{--For Buyer--}}
                 @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Buyer" && Auth::user()->status == 3)
                     <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 xl:mt-0">
                         <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
@@ -172,7 +165,7 @@
                     </div>
                 @endif
 
-                {{-- For Supplier --}}
+                 {{--For Supplier--}}
                 @if(auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
                     <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 xl:mt-0">
                         <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
@@ -195,7 +188,6 @@
 
             </div>
 
-        </div>
     </div>
 
 </x-app-layout>
