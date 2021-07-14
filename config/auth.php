@@ -47,6 +47,12 @@ return [
             'provider' => 'ires',
         ],
 
+        'logistic' => [
+            'redirectTo' => 'seller-dashboard',
+            'driver' => 'session',
+            'provider' => 'logictic',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -82,6 +88,12 @@ return [
              'model' => App\Models\Ire::class,
              'table' => 'ires',
          ],
+
+        'logictic' => [
+            'driver' => 'database',
+            'model' => App\Models\Logistic::class,
+            'table' => 'logictic',
+        ],
     ],
 
     /*

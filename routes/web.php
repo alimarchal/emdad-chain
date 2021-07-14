@@ -554,3 +554,21 @@ Route::middleware(['auth:sanctum'])->get('invoice-payment/invoice_payment_status
 
 
 ############################################################## END ##########################################################################
+
+############################################### IREs routes ########################################################
+
+Route::middleware(['logictic'])->group(function () {
+    Route::get('logistic-register', [\App\Http\Controllers\LogisticController::class, 'create'])->name('logistic.create');
+    Route::post('logistic-register', [\App\Http\Controllers\LogisticController::class, 'store'])->name('logistic.store');
+//    Route::get('ire-register', [IreRegisterController::class, 'register_view'])->name('ireRegister');
+//    Route::post('ire-register', [IreRegisterController::class, 'ire_register']);
+//    Route::get('ar-ire-register', [IreRegisterController::class, 'register_arabic_view'])->name('ireRegisterArabic');
+//
+//    Route::get('ire-login', [IreLoginController::class, 'login_view'])->name('ireLogin');
+//    Route::post('ire-login', [IreLoginController::class, 'login']);
+//    Route::get('ire-forgot-password', [IreLoginController::class, 'forgot_password_view'])->name('ireForgotPassword');
+//    Route::post('ire-forgot-password', [IreLoginController::class, 'forgot_password']);
+//    Route::get('ar-ire-login', [IreLoginController::class, 'arabic_login_view'])->name('ireLoginArabic');
+});
+
+

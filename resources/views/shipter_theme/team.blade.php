@@ -350,7 +350,7 @@
                     </div>
                     <div class="team-content">
                         <h4>Insha Murad</h4>
-                        <span>Mobila App Developer</span>
+                        <span>Mobile App Developer</span>
                     </div>
                 </div>
             </div>

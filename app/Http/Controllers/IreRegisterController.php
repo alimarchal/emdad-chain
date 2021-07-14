@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Validator;
 
 class IreRegisterController extends Controller
 {
-    use PasswordValidationRules; use Authenticatable;
+    use PasswordValidationRules;
+    use Authenticatable;
 
     public function register_view()
     {
