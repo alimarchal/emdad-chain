@@ -20,12 +20,12 @@ class CreateDeliveryCommentsTable extends Migration
             $table->integer('business_id')->nullable();
             $table->text('comment_content')->nullable();
             /*
-                0 => 'Rating by Driver for Byer'
-                1 => 'Rating by Supplier for Byer'
+                0 => 'Rating by Driver for Buyer'
+                1 => 'Rating by Supplier for Buyer'
                 2 => 'Rating by Supplier for Emdad'
-                3 => 'Rating by Byer for driver'
-                4 => 'Rating by Byer for Supplier'
-                5 => 'Rating by Byer for Emdad'
+                3 => 'Rating by Buyer for driver'
+                4 => 'Rating by Buyer for Supplier'
+                5 => 'Rating by Buyer for Emdad'
                 6 => 'Rating by Emdad for Supplier'
                 7 => 'Rating by Emdad for Buyer'
              */

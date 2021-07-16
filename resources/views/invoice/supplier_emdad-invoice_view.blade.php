@@ -23,7 +23,7 @@
                                 Delivery item
                             </th>
                             <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                Payment Tpye
+                                Payment Type
                             </th>
                             <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                 Amount w/o VAT

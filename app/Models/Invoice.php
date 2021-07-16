@@ -23,6 +23,11 @@ class Invoice extends Model
         return $this->belongsTo(Qoute::class, 'qoute_no', 'id');
     }
 
+    public function eOrderItem()
+    {
+        return $this->belongsTo(EOrderItems::class, 'rfq_item_no', 'id');
+    }
+
     public function bankPayment()
     {
         return $this->hasOne(BankPayment::class, 'invoice_id');
