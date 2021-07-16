@@ -309,7 +309,7 @@ class PaymentController extends Controller
     // View function for Invoice details by ID (Payment history)
     public function invoiceView($id)
     {
-       $invoice = Invoice::where('id', $id)->first();
+       $invoice = Invoice::with('purchase_order','eOrderItem')->where('id', $id)->first();
 
        return view('payment.invoiceView', compact('invoice'));
 
@@ -607,7 +607,7 @@ class PaymentController extends Controller
     // View function for Invoice details by ID (Payment history)
     public function singleCategoryInvoiceView($rfq_no)
     {
-        $invoices = Invoice::where('rfq_no', $rfq_no)->get();
+        $invoices = Invoice::with('purchase_order','eOrderItem')->where('rfq_no', $rfq_no)->get();
 
         return view('payment.singleCategory.invoiceView', compact('invoices'));
     }

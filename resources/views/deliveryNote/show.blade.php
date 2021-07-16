@@ -35,9 +35,9 @@
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                     #
                                 </th>
-                                <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                {{--<th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                     Category Code
-                                </th>
+                                </th>--}}
                                 <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                     Category Name
                                 </th>
@@ -63,9 +63,9 @@
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                     1
                                 </td>
-                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                {{--<td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                     {{ $draftPurchaseOrder->item_code }}
-                                </td>
+                                </td>--}}
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                     {{ $draftPurchaseOrder->item_name }}
                                 </td>

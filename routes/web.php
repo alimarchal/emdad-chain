@@ -26,6 +26,7 @@ use App\Http\Controllers\PlacedRFQController;
 use App\Http\Controllers\POInfoController;
 use App\Http\Controllers\PurchaseRequestFormController;
 use App\Http\Controllers\QouteController;
+use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\IreController;
 use App\Http\Controllers\IreLoginController;
@@ -471,6 +472,22 @@ Route::middleware(['auth:sanctum'])->get('single-category-rfq-supplier-manual-pa
 Route::middleware(['auth:sanctum'])->post('single-category-rfq-supplier-manual-payment-update/{rfqNo}', [BankPaymentController::class, 'singleCategoryUpdateBankPayment'])->name('singleCategoryUpdateBankPayment');
 ################################################################### END ############################################################################################
 
+################################################################# Rating routes ##########################################################################
+Route::middleware(['auth:sanctum'])->get('rating', [RatingController::class, 'view'])->name('ratingView');
+Route::middleware(['auth:sanctum'])->get('ratings', [RatingController::class, 'index'])->name('ratingListIndex');
+Route::middleware(['auth:sanctum'])->get('ratings-received/{id}', [RatingController::class, 'viewByID'])->name('ratingViewByID');
+Route::middleware(['auth:sanctum'])->get('emdad-ratings', [RatingController::class, 'emdadRated'])->name('emdadRated');
+Route::middleware(['auth:sanctum'])->get('emdad-rated/{id}', [RatingController::class, 'emdadRatedViewByID'])->name('emdadRatedViewByID');
+Route::middleware(['auth:sanctum'])->get('emdad-not-rated', [RatingController::class, 'emdadUnRated'])->name('emdadUnRated');
+Route::middleware(['auth:sanctum'])->get('rated-buyers', [RatingController::class, 'buyerRated'])->name('buyerRated');
+Route::middleware(['auth:sanctum'])->get('rated-suppliers', [RatingController::class, 'supplierRated'])->name('supplierRated');
+Route::middleware(['auth:sanctum'])->get('rate', [RatingController::class, 'buyerList'])->name('buyerList');
+Route::middleware(['auth:sanctum'])->get('rate-buyer/{id}/{deliveryID}', [RatingController::class, 'createBuyerRating'])->name('rateBuyer');
+Route::middleware(['auth:sanctum'])->post('save-buyer-rating', [RatingController::class, 'saveBuyerRating'])->name('storeBuyerRating');
+Route::middleware(['auth:sanctum'])->get('rate-supplier', [RatingController::class, 'supplierList'])->name('supplierList');
+Route::middleware(['auth:sanctum'])->get('rate-supplier/{id}/{deliveryID}', [RatingController::class, 'createSupplierRating'])->name('rateSupplier');
+Route::middleware(['auth:sanctum'])->post('save-supplier-rating', [RatingController::class, 'saveSupplierRating'])->name('storeSupplierRating');
+################################################################# END ####################################################################################
 
 ####################### Subscription routes ####################################
 // Route::middleware(['auth:sanctum'])->get('sub', function () {

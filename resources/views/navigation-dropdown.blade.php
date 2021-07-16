@@ -257,10 +257,10 @@
                                     {{ __('Subscription') }}
                                 </x-jet-dropdown-link>
 
-                                <div class="border-t border-gray-100"></div>
+                                {{--<div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('users.create') }}">
                                     {{ __('Create Users') }}
-                                </x-jet-dropdown-link>
+                                </x-jet-dropdown-link>--}}
 
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('users.index') }}">

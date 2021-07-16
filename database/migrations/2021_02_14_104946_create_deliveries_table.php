@@ -45,7 +45,8 @@ class CreateDeliveriesTable extends Migration
             $table->boolean('driver_rating')->default(0);
             $table->boolean('buyer_rating')->default(0);
             $table->boolean('supplier_rating')->default(0);
-            $table->boolean('emdad_rating')->default(0);
+            $table->boolean('emdad_buyer_rating')->default(0);
+            $table->boolean('emdad_supplier_rating')->default(0);
             $table->integer('rfq_type');                             /* 0 for single category RFQ, 1 for multi categories */
 
             $table->timestamps();
