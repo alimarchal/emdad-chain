@@ -65,14 +65,13 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+
         'ire' => \App\Http\Middleware\Ire::class,
         'ireAuthentication' => \App\Http\Middleware\IREAuthentication::class,
         'ireEmailVerify' => \App\Http\Middleware\IREemailVerification::class,
         'ireRegisterDetails' => \App\Http\Middleware\IreRegisterDetails::class,
         'packageCheck' => \App\Http\Middleware\PackageCheck::class,
         'categoryCheck' => \App\Http\Middleware\CategoryCheck::class,
-
-        'logictic' => \App\Http\Middleware\Logistic::class,
 
     ];
 }

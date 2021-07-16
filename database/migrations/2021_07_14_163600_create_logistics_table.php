@@ -32,6 +32,7 @@ class CreateLogisticsTable extends Migration
             $table->date('nid_exp_date')->nullable();
             $table->boolean('is_active')->default(0);
             $table->bigInteger('rtl')->default(0);
+            $table->boolean('verified')->default(0);
             $table->bigInteger('status')->default(0);
             $table->timestamps();
         });

@@ -57,6 +57,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'driver_status',
         'added_by',
         'added_by_userId',
+        'logistic_solution',
+        'packaging_solution',
+        'storage_solution',
+        'local_cargo',
+        'international_cargo',
         'rtl',
     ];
 

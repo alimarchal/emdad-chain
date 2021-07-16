@@ -8,11 +8,15 @@ use App\Models\EOrderItems;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 
 class DashboardController extends Controller
 {
     public function index()
     {
+        if (auth()->user()->logistic_solution == 1) {
+            return redirect()->route('logistics.dashboard');
+        }
         $user_business_id = Auth::user()->business_id;
         $business_categories = [];
         $business_cate = BusinessCategory::where('business_id', $user_business_id)->get();
@@ -23,9 +27,9 @@ class DashboardController extends Controller
         }
         sort($business_categories);
         // $business_categories = implode(",", $business_categories);
-        $pending_orders = EOrderItems::where('status','pending')->whereIn('item_code', $business_categories)->get();
+        $pending_orders = EOrderItems::where('status', 'pending')->whereIn('item_code', $business_categories)->get();
 
-        return view('dashboard',compact($pending_orders));
+        return view('dashboard', compact($pending_orders));
     }
 
     public function languageChange(Request $request)
@@ -35,6 +39,16 @@ class DashboardController extends Controller
         ]);
 
         return response()->json(['success']);
+    }
+
+    public function logistic_dashboard(Request $request)
+    {
+        return view('logistic.dashboard');
+    }
+
+    public function logistic_setting(Request $request)
+    {
+        return view('logistic.setting');
     }
 
 }

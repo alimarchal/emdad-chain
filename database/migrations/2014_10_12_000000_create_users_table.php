@@ -37,6 +37,11 @@ class CreateUsersTable extends Migration
             $table->string('driver_status')->default(1);
             $table->integer('added_by')->default(0);
             $table->bigInteger('added_by_userId')->nullable();
+            $table->boolean('logistic_solution')->nullable();
+            $table->boolean('packaging_solution')->nullable();
+            $table->boolean('storage_solution')->nullable();
+            $table->boolean('transportation_solution')->nullable();
+            $table->boolean('international_cargo')->nullable();
             $table->bigInteger('rtl')->default(0);
             $table->timestamps();
         });

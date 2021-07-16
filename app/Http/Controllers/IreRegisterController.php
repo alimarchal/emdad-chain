@@ -38,10 +38,10 @@ class IreRegisterController extends Controller
 
         ])->validate();
 
-        $verifyToken = sha1(rand(1,100));
+        $verifyToken = sha1(rand(1, 100));
 
         $ire = Ire::create([
-            'name' => $request['firstName'].' '.$request['lastName'],
+            'name' => $request['firstName'] . ' ' . $request['lastName'],
             'gender' => $request['gender'],
             'mobile_number' => $request['mobile_number'],
             'email' => $request['email'],
@@ -50,7 +50,7 @@ class IreRegisterController extends Controller
         ]);
 
         Ire::where('id', $ire->id)->update([
-            'ire_no' => 'IRE'.$ire->id,
+            'ire_no' => 'IRE' . $ire->id,
         ]);
 
         $ire->notify(new verifyEmail($ire));
@@ -61,8 +61,7 @@ class IreRegisterController extends Controller
 
     public function ire_register_details_view()
     {
-        if (\auth()->guard('ire')->user()->bank != null || \auth()->guard('ire')->user()->iban != null || \auth()->guard('ire')->user()->nid_num != null)
-        {
+        if (\auth()->guard('ire')->user()->bank != null || \auth()->guard('ire')->user()->iban != null || \auth()->guard('ire')->user()->nid_num != null) {
             return redirect()->route('ireDashboard');
         }
 
@@ -76,7 +75,7 @@ class IreRegisterController extends Controller
         Validator::make($request->all(), [
             'referred_no' => ['string', 'nullable'],
             'nid_num' => ['required', 'string', 'max:10'],
-            'nid_image' => ['required', 'file','mimes:jpeg,jpg,png', 'max:5120'],
+            'nid_image' => ['required', 'file', 'mimes:jpeg,jpg,png', 'max:5120'],
             'type' => ['required'],
             'bank' => ['required'],
             'iban' => ['required'],
@@ -94,36 +93,28 @@ class IreRegisterController extends Controller
             'iban' => $request['iban'],
         ]);
 
-        if ($request->referred_no == null || $request->referred_no == ' ')
-        {
+        if ($request->referred_no == null || $request->referred_no == ' ') {
             return redirect()->route('ireDashboard');
-        }
-        else
-        {
+        } else {
             $poCount = 0;
 
             $ireReferred = Ire::where('ire_no', $request->referred_no)->first();
 
-            if (isset($ireReferred))
-            {
-                $businessCount = IreCommission::where('type', '!=', 0)->where(['ire_no' => $request->referred_no],['status' => 1])->get();
+            if (isset($ireReferred)) {
+                $businessCount = IreCommission::where('type', '!=', 0)->where(['ire_no' => $request->referred_no], ['status' => 1])->get();
                 $current = Carbon::now();
                 $days = $current->diffInDays($ireReferred->created_at);
 
-                if (isset($businessCount) && count($businessCount) > 0 )
-                {
-                    foreach ($businessCount as $business)
-                    {
-                        $this->userPoCount = DraftPurchaseOrder::where(['user_id' => $business->user_id],['status' => 'approved'])->first();
+                if (isset($businessCount) && count($businessCount) > 0) {
+                    foreach ($businessCount as $business) {
+                        $this->userPoCount = DraftPurchaseOrder::where(['user_id' => $business->user_id], ['status' => 'approved'])->first();
 
-                        if (isset($this->userPoCount))
-                        {
+                        if (isset($this->userPoCount)) {
                             $poCount += 1;
                         }
                     }
                 }
-                if ($days >= 30 && $poCount >= 5)
-                {
+                if ($days >= 30 && $poCount >= 5) {
                     IreCommission::create([
                         'ire_no' => $request->referred_no,
                         'user_id' => \auth()->guard('ire')->user()->id,
@@ -140,8 +131,7 @@ class IreRegisterController extends Controller
 
     public function email_verify()
     {
-        if (\auth()->guard('ire')->user()->verified == 1)
-        {
+        if (\auth()->guard('ire')->user()->verified == 1) {
             return redirect()->route('ireRegisterDetails');
         }
         return view('ire.english.verify-email');
@@ -149,7 +139,7 @@ class IreRegisterController extends Controller
 
     public function resend_email_verification()
     {
-        $ire = Ire::where('id',auth()->guard('ire')->user()->id)->first();
+        $ire = Ire::where('id', auth()->guard('ire')->user()->id)->first();
 
         $verifyToken = sha1($ire->name);
 
@@ -165,8 +155,7 @@ class IreRegisterController extends Controller
 
     public function email_verify_check($token)
     {
-        if (auth()->guard('ire')->user()->verify_token == $token)
-        {
+        if (auth()->guard('ire')->user()->verify_token == $token) {
             Ire::where('id', auth()->guard('ire')->user()->id)->update([
                 'email_verified_at' => Carbon::now(),
                 'verified' => 1,
@@ -188,8 +177,7 @@ class IreRegisterController extends Controller
 
     public function ire_register_details_arabic_view()
     {
-        if (\auth()->guard('ire')->user()->bank != null || \auth()->guard('ire')->user()->iban != null || \auth()->guard('ire')->user()->nid_num != null)
-        {
+        if (\auth()->guard('ire')->user()->bank != null || \auth()->guard('ire')->user()->iban != null || \auth()->guard('ire')->user()->nid_num != null) {
             return redirect()->route('ireDashboard');
         }
 
