@@ -62,6 +62,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'storage_solution',
         'local_cargo',
         'international_cargo',
+        'logistics_business_id',
         'rtl',
     ];
 
