@@ -131,7 +131,7 @@ class DeliveryNoteController extends Controller
 
     public function singleCategoryViewNote($rfq_no)
     {
-        $deliveryNotes = DeliveryNote::where('rfq_no', $rfq_no)->get();
+        $deliveryNotes = DeliveryNote::with('purchase_order')->where('rfq_no', $rfq_no)->get();
 
         return view('deliveryNote.singleCategory.viewNote',compact('deliveryNotes'));
     }

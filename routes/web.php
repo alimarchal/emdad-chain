@@ -499,7 +499,7 @@ Route::post('/make-payment', [\App\Http\Controllers\MakePaymentController::class
 Route::get('/payment-status', [\App\Http\Controllers\MakePaymentController::class, 'paymentStatus'])->name('payment.status');
 //return view('moyasar_payment.payment');
 
-
+Route::middleware(['auth:sanctum'])->get('subscription-pdf', [PackageController::class, 'pdf'])->name('subscriptionPDF');
 Route::middleware(['auth:sanctum'])->resource('packages', PackageController::class);
 Route::middleware(['auth:sanctum'])->get('business-packages/status', [\App\Http\Controllers\BusinessPackageController::class, 'businessPackagePaymentStatus'])->name('businessPackage.paymentStatus');
 Route::middleware(['auth:sanctum'])->post('business-packages/step-one', [\App\Http\Controllers\BusinessPackageController::class, 'getCheckOutId'])->name('businessPackage.stepOne');

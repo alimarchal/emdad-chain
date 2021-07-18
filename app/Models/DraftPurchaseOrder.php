@@ -25,4 +25,9 @@ class DraftPurchaseOrder extends Model
     {
         return $this->hasOne(DeliveryNote::class);
     }
+
+    public function eOrderItem()
+    {
+        return $this->belongsTo(EOrderItems::class, 'rfq_item_no', 'id');
+    }
 }

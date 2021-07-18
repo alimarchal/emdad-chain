@@ -8,42 +8,50 @@
                         <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                            <h3 class="text-2xl text-center"><strong>Delivery Note</strong></h3>
                         </div>
                         <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                            <h3 class="text-2xl text-center"><strong>Delivery Note</strong></h3>
-                            <strong>Purchase Order #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->purchase_order->id }}<br>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                             @if ($deliveryNotes[0]->status == 'completed')
-                            <strong>Invoice ID: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->delivery->invoice_id }}<br>
+                                <strong>Invoice #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->delivery->invoice_id }}<br>
                             @endif
+                            <strong>Purchase Order #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->purchase_order->id }}<br>
 {{--                            <strong>Category #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->purchase_order->item_code }}<br>--}}
                             <strong>Category Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->purchase_order->item_name }}<br>
                             <strong>Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->purchase_order->created_at }}<br>
                             <strong>RFQ #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->purchase_order->rfq_no }}<br>
                             <strong>Quote #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->purchase_order->qoute_no }}<br>
-                            <strong>Payment Terms #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->purchase_order->payment_term }}<br>
-                            <strong>Shipment cost: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->purchase_order->shipment_cost }}<br>
+                            <strong>Payment Terms : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->purchase_order->payment_term }}<br>
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                         </div>
                     </div>
+
+
                     <table class="min-w-full divide-y divide-black ">
                         <thead>
                         <tr>
                             <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                 #
                             </th>
-                            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                Quantity
-                            </th>
 
                             <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                Price per unit
+                                Description
                             </th>
 
                             <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                 UOM
                             </th>
 
+
                             <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                Brand
+                                Quantity
                             </th>
 
                         </tr>
@@ -56,16 +64,13 @@
                                         {{$loop->iteration}}
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                        {{ $deliveryNote->purchase_order->quantity }}
-                                    </td>
-                                    <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                        {{ $deliveryNote->purchase_order->unit_price }}
+                                        {{ $deliveryNote->purchase_order->eOrderItem->description }}
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                         {{ $deliveryNote->purchase_order->uom }}
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                        {{ $deliveryNote->purchase_order->brand }}
+                                        {{ $deliveryNote->purchase_order->quantity }}
                                     </td>
                                 </tr>
                             @endforeach
