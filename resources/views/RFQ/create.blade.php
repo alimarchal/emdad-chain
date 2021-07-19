@@ -364,9 +364,7 @@
                                             </option>
 
                                             @php
-                                                $businessId = auth()->user()->business->id;
-                                                $package = \App\Models\BusinessPackage::where('business_id',
-                                                $businessId)->first();
+                                                $package = \App\Models\BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
 
                                             @endphp
 
@@ -519,8 +517,7 @@
                         $rfq = \App\Models\EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at',
                         \Carbon\Carbon::today())->count();
 
-                        $business_package = \App\Models\BusinessPackage::where('business_id',
-                        auth()->user()->business_id)->first();
+                        $business_package = \App\Models\BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
                         $package = \App\Models\Package::where('id', $business_package->package_id)->first();
                         $count = $package->rfq_per_day - $rfq;
                     @endphp
@@ -974,9 +971,7 @@
                                             </option>
 
                                             @php
-                                                $businessId = auth()->user()->business->id;
-                                                $package = \App\Models\BusinessPackage::where('business_id',
-                                                $businessId)->first();
+                                                $package = \App\Models\BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
 
                                             @endphp
 

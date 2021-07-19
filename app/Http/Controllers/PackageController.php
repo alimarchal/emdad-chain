@@ -28,6 +28,14 @@ class PackageController extends Controller
 
     }
 
+    public function update($id)
+    {
+        $package = Package::where('id', decrypt($id))->first();
+        $businessPackage = BusinessPackage::with('package')->where(['user_id' => auth()->id(), 'status' => 1])->first();
+
+        return view('package.update', compact('businessPackage', 'package'));
+    }
+
     public function pdf()
     {
         $businessPackage = BusinessPackage::with('package')->where('business_id', auth()->user()->business_id)->first();

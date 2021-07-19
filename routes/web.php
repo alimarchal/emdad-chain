@@ -499,11 +499,16 @@ Route::post('/make-payment', [\App\Http\Controllers\MakePaymentController::class
 Route::get('/payment-status', [\App\Http\Controllers\MakePaymentController::class, 'paymentStatus'])->name('payment.status');
 //return view('moyasar_payment.payment');
 
+Route::middleware(['auth:sanctum'])->get('subscription-update/{id}', [PackageController::class, 'update'])->name('subscriptionUpdate');
 Route::middleware(['auth:sanctum'])->get('subscription-pdf', [PackageController::class, 'pdf'])->name('subscriptionPDF');
 Route::middleware(['auth:sanctum'])->resource('packages', PackageController::class);
 Route::middleware(['auth:sanctum'])->get('business-packages/status', [\App\Http\Controllers\BusinessPackageController::class, 'businessPackagePaymentStatus'])->name('businessPackage.paymentStatus');
 Route::middleware(['auth:sanctum'])->post('business-packages/step-one', [\App\Http\Controllers\BusinessPackageController::class, 'getCheckOutId'])->name('businessPackage.stepOne');
 Route::middleware(['auth:sanctum'])->resource('business-packages', BusinessPackageController::class);
+/* Route for upgrading package */
+Route::middleware(['auth:sanctum'])->post('subscription-store/', [BusinessPackageController::class, 'storeBusinessPackageUpgrade'])->name('storeBusinessPackageUpgrade');
+Route::middleware(['auth:sanctum'])->get('subscription-payment-status/', [BusinessPackageController::class, 'businessPackageUpgradePaymentStatus'])->name('businessPackageUpgradePaymentStatus');
+
 Route::middleware(['auth:sanctum'])->post('business-packages/checkout', [\App\Http\Controllers\BusinessPackageController::class, 'getCheckOutId'])->name('businessPackage.getCheckOutId');
 Route::middleware(['auth:sanctum'])->post('updateCategories', [BusinessPackageController::class, 'updateCategories'])->name('updatePackageCategories');
 Route::middleware(['auth:sanctum'])->post('business-package-store/{id}', [BusinessPackageController::class, 'store'])->name('business-package.store');

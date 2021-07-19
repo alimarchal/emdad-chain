@@ -26,7 +26,7 @@ class PurchaseRequestFormController extends Controller
     {
 //        $user = User::findOrFail(auth()->user()->id);
 //        $businessPackage = BusinessPackage::where('user_id', \auth()->id())->first();
-        $businessPackage = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+        $businessPackage = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
         if (isset($businessPackage))
         {
             $categories = explode(',', $businessPackage->categories);
@@ -44,7 +44,7 @@ class PurchaseRequestFormController extends Controller
 
         // Remaining RFQ count
         $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
-        $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+        $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
 
         $latest_rfq = ECart::latest()->where('business_id', auth()->user()->business_id)->first();
         $package = Package::where('id', $business_package->package_id)->first();
@@ -83,7 +83,7 @@ class PurchaseRequestFormController extends Controller
     /* For Single Category RFQ*/
     public function create_single_rfq()
     {
-        $businessPackage = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+        $businessPackage = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
         if (isset($businessPackage))
         {
             $categories = explode(',', $businessPackage->categories);
@@ -98,7 +98,7 @@ class PurchaseRequestFormController extends Controller
 
         // Remaining RFQ count
         $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
-        $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+        $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
 
         $latest_rfq = ECart::latest()->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->first();
         $package = Package::where('id', $business_package->package_id)->first();

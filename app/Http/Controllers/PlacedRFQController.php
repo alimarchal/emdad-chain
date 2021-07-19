@@ -73,7 +73,7 @@ class PlacedRFQController extends Controller
 
                 // Remaining Quotations count
                 $quotations = Qoute::where('supplier_business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
-                $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+                $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
                 $package = Package::where('id', $business_package->package_id)->first();
                 if ($business_package->package_id == 5 || $business_package->package_id == 6)
                 {
@@ -162,7 +162,7 @@ class PlacedRFQController extends Controller
 
             // Remaining Quotations count
             $quotations = Qoute::where('supplier_business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
-            $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+            $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
             $package = Package::where('id', $business_package->package_id)->first();
             if ($business_package->package_id == 5 || $business_package->package_id == 6)
             {
