@@ -11,7 +11,7 @@
         @endif
         <div class="container px-5 py-15 mx-auto">
             <div class="flex flex-wrap -m-4">
-                @php $businessPackage = \App\Models\BusinessPackage::where('user_id', auth()->id())->first(); @endphp
+                @php $businessPackage = \App\Models\BusinessPackage::where(['user_id' => auth()->id(), 'status' => 1])->first(); @endphp
 
                 @foreach($packages as $package)
                     <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
@@ -26,7 +26,7 @@
                                     <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
                                     <button class="flex items-center mt-auto text-white bg-gray-500 border-0 py-2 px-4 w-full rounded" style="justify-content: center;cursor: no-drop" disabled>Purchased</button>
                                 @elseif(isset($businessPackage))
-                                    <span onclick="alert('Contact Emdad To Update Your Package')" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center; cursor: pointer">Update</span>
+{{--                                    <span onclick="alert('Contact Emdad To Update Your Package')" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center; cursor: pointer">Update</span>--}}
                                 @else
                                     <form action="{{route('business-packages.store')}}" method="POST">
                                         @csrf
@@ -46,8 +46,9 @@
                                 @if(isset($businessPackage) && $businessPackage->package_id == 6)
                                     <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
                                     <button class="flex items-center mt-auto text-white bg-gray-500 border-0 py-2 px-4 w-full rounded" style="justify-content: center;cursor: no-drop" disabled>Purchased</button>
+                                @elseif(isset($businessPackage) && isset($businessPackage->package_id) == 5)
+                                    <a href="{{route('subscriptionUpdate', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center; cursor: pointer">Update</a>
                                 @elseif(isset($businessPackage))
-                                    <span onclick="alert('Contact Emdad To Update Your Package')" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center; cursor: pointer">Update</span>
                                 @else
 {{--                                    <form action="{{route('business-packages.store')}}" method="POST">--}}
                                     <form action="{{route('businessPackage.stepOne')}}" method="POST">
@@ -67,8 +68,9 @@
                                 @if(isset($businessPackage) && $businessPackage->package_id == 7)
                                     <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
                                     <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full rounded" style="justify-content: center;cursor: no-drop" disabled>Purchased</button>
+                                @elseif(isset($businessPackage) && isset($businessPackage->package_id) == 5 || isset($businessPackage->package_id) == 6)
+                                    <a href="{{route('subscriptionUpdate', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer">Update</a>
                                 @elseif(isset($businessPackage))
-                                    <span onclick="alert('Contact Emdad To Update Your Package')" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer">Update</span>
                                 @else
                                     <form action="{{route('businessPackage.stepOne')}}" method="POST">
                                         @csrf
@@ -176,6 +178,19 @@
                     </tbody>
                 </table>
             </div>
+
+            @if(auth()->user()->business_package->package_id == 6 || auth()->user()->business_package->package_id == 6 )
+            <br>
+                <div class="text-gray-500" style="text-align: end">
+                    <a href="{{route('subscriptionPDF')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
+                                               border-transparent rounded-md font-semibold text-xs text-white uppercase
+                                               tracking-widest hover:bg-red-500  focus:outline-none focus:border-blue-700
+                                               focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150" title="Generate PDF of the subscription invoice">
+                        Subscription Invoice PDF
+                    </a>
+                </div>
+            @endif
+
         </div>
     </section>
 

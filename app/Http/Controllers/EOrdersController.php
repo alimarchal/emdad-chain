@@ -19,7 +19,7 @@ class EOrdersController extends Controller
 
         $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', Carbon::today())->count();
 
-        $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+        $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
         if ($business_package->package_id == 1) {
             if ($rfq == 3) {
                 session()->flash('error', 'You have reached daily rfq limit');
@@ -160,7 +160,7 @@ class EOrdersController extends Controller
     {
         $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', Carbon::today())->count();
 
-        $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+        $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
 
         if ($business_package->package_id == 1) {
 

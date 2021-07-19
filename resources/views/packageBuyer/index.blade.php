@@ -11,11 +11,11 @@
             @endif
             <div class="container px-5 py-15 mx-auto">
                 <div class="flex flex-wrap -m-4">
-                    @php $businessPackage = \App\Models\BusinessPackage::where('user_id', auth()->id())->first(); @endphp
+                    @php $businessPackage = \App\Models\BusinessPackage::where(['user_id' => auth()->id(), 'status' => 1])->first(); @endphp
                     @foreach($packages as $package)
                         <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
                             <div class="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative @if($package->package_type == 'Basic') bg-white @else bg-gray-300 @endif overflow-hidden"
-                                 @if($package->package_type != 'Basic') style="background-color: #ececec; border: 2px solid #c3c3c3" @endif>
+                                @if($package->package_type != 'Basic') style="background-color: #ececec; border: 2px solid #c3c3c3" @endif>
                                 @if($package->package_type == 'Basic')
                                     <h2 class="text-sm tracking-widest title-font mb-1 font-medium">{{$package->package_type}}</h2>
                                     <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
@@ -25,7 +25,7 @@
                                         <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
                                         <button class="flex items-center mt-auto text-white bg-gray-500 border-0 py-2 px-4 w-full rounded" style="justify-content: center; cursor: no-drop" disabled>Purchased</button>
                                     @elseif(isset($businessPackage))
-                                        <span onclick="alert('Contact Emdad To Update Your Package')" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center; cursor: pointer">Update</span>
+{{--                                        <span onclick="alert('Contact Emdad To Update Your Package')" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center; cursor: pointer">Update</span>--}}
                                     @else
                                         <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
@@ -44,8 +44,9 @@
                                     @if(isset($businessPackage) && $businessPackage->package_id == 2)
                                         <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
                                         <span class="flex items-center mt-auto text-white bg-gray-500 border-0 py-2 px-4 w-full rounded" style="justify-content: center; cursor: no-drop" disabled>Purchased</span>
+                                    @elseif(isset($businessPackage) && isset($businessPackage->package_id) == 1)
+                                        <a href="{{route('subscriptionUpdate', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center; cursor: pointer">Update</a>
                                     @elseif(isset($businessPackage))
-                                        <span onclick="alert('Contact Emdad To Update Your Package')" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center; cursor: pointer">Update</span>
                                     @else
 {{--                                        <form action="{{route('businessPackage.getCheckOutId')}}" method="POST">--}}
 {{--                                        <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">--}}
@@ -65,8 +66,9 @@
                                     @if(isset($businessPackage) && $businessPackage->package_id == 3)
                                         <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
                                         <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: no-drop" disabled>Purchased</button>
+                                    @elseif(isset($businessPackage) && isset($businessPackage->package_id) == 1 || isset($businessPackage->package_id) == 2)
+                                        <a href="{{route('subscriptionUpdate', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer">Update</a>
                                     @elseif(isset($businessPackage))
-                                        <span onclick="alert('Contact Emdad To Update Your Package')" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer">Update</span>
                                     @else
 {{--                                        <form action="{{route('business-packages.store')}}" method="POST">--}}
                                         <form  action="{{route('businessPackage.stepOne')}}" method="POST">
@@ -126,7 +128,7 @@
                             @endforeach
                         </tr>
                         <tr>
-                            <td class="border-t-2 border-gray-200 px-4 py-3">Registeration</td>
+                            <td class="border-t-2 border-gray-200 px-4 py-3">Registration</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->registeration}}</td>
                             @endforeach
@@ -202,6 +204,17 @@
                 </div>
                 <br>
                 <span>@include('misc.required') <strong>Note:</strong> Minimum 1 quotation received, in case of Branded item</span>
+                @if(isset($businessPackage->package_id) == 2 || isset($businessPackage->package_id) == 3 )
+                    <br>
+                    <div class="text-gray-500" style="text-align: end">
+                        <a href="{{route('subscriptionPDF')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
+                                               border-transparent rounded-md font-semibold text-xs text-white uppercase
+                                               tracking-widest hover:bg-red-500  focus:outline-none focus:border-blue-700
+                                               focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                            Generate PDF
+                        </a>
+                    </div>
+                @endif
             </div>
         </section>
 
