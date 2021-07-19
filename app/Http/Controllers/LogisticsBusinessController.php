@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Business;
 use App\Models\LogisticsBusiness;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LogisticsBusinessController extends Controller
@@ -25,11 +25,11 @@ class LogisticsBusinessController extends Controller
      */
     public function create()
     {
-        $logisticsBusiness = Business::where('logistics_business_id', auth()->user()->id)->first();
-        if ($logisticsBusiness === null) {
-            return view('logistic.business.create', compact('logisticsBusiness'));
+        $user = User::find(auth()->user()->id);
+        if ($user->logistics_business_id === null) {
+            return view('logistic.business.create');
         } else {
-            return redirect()->route('business.show', $logisticsBusiness->id);
+            return redirect()->route('business.show', $user->logistics_business_id);
         }
     }
 
@@ -41,7 +41,49 @@ class LogisticsBusinessController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
+        $request->validate([
+            'user_id' => 'required',
+            'business_name' => 'required',
+            'business_photo_url_1' => 'required|mimes:jpeg,jpg,png',
+            'business_type' => 'required',
+            'chamber_reg_number' => 'required',
+            'chamber_reg_path_1' => 'required|mimes:jpeg,jpg,png',
+            'vat_reg_certificate_number' => 'required',
+            'vat_reg_certificate_path_1' => 'required|mimes:jpeg,jpg,png',
+            'country' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'business_email' => 'required',
+            'phone' => 'required',
+            'mobile' => 'required',
+            'iban' => 'required',
+            'longitude' => 'required',
+            'latitude' => 'required',
+            'bank_name' => 'required',
+        ]);
+
+        if ($request->has('chamber_reg_path_1')) {
+            $path = $request->file('chamber_reg_path_1')->store('', 'public');
+            $request->merge(['chamber_reg_path' => $path]);
+        }
+        if ($request->has('vat_reg_certificate_path_1')) {
+            $path = $request->file('vat_reg_certificate_path_1')->store('', 'public');
+            $request->merge(['vat_reg_certificate_path' => $path]);
+        }
+        if ($request->has('business_photo_url_1')) {
+            $path = $request->file('business_photo_url_1')->store('', 'public');
+            $request->merge(['business_photo_url' => $path]);
+        }
+
+        $business = LogisticsBusiness::create($request->all());
+        $user = User::find($business->user_id);
+        $user->business_id = $business->id;
+        $user->save();
+
+        session()->flash('message', 'Business information successfully saved.');
+        dd('done');
+//        return redirect()->route('businessWarehouse.create');
     }
 
     /**

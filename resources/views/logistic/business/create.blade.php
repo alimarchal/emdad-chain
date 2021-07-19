@@ -37,7 +37,7 @@
 
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
                     <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto mb-4 m-auto"/>
-                    <form action="{{ url('business') }}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
+                    <form action="{{route('logistics.store')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         <x-jet-validation-errors class="mb-4"/>
                         @csrf
                         <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 2: Business Information</h3>
@@ -131,23 +131,6 @@
                         </div>
 
                         <br>
-
-                        {{--                            @if (auth()->user()->registration_type == 'Buyer')--}}
-                        {{--                                @include('business.buyerPolicy')--}}
-                        {{--                            @else--}}
-                        {{--                                @include('business.supplierPolicy')--}}
-                        {{--                            @endif--}}
-
-                        <div class="block mt-4">
-                            <label for="policy_procedure" class="flex items-center">
-                                <input id="policy_procedure" type="checkbox" class="form-checkbox" name="policy_procedure" required>
-                                @if(auth()->user()->registration_type == 'Buyer')
-                                    <span class="ml-2 text-sm text-gray-600">I agree</span> <a href="{{route('policyProcedure.buyer')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('Policy and Procedures') }}</u></a>
-                                @elseif(auth()->user()->registration_type == 'Supplier')
-                                    <span class="ml-2 text-sm text-gray-600">I agree</span> <a href="{{route('policyProcedure.supplier')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('Policy and Procedures') }}</u></a>
-                                @endif
-                            </label>
-                        </div>
 
                         <x-jet-button class="float-right mt-4 mb-4">Save & Next</x-jet-button>
 

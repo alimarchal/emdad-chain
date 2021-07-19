@@ -18,8 +18,6 @@ class CreateLogisticsBusinessesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->index();
             $table->string('business_name')->nullable();
-            $table->string('num_of_warehouse')->nullable();
-            $table->string('business_type')->nullable();
             $table->string('chamber_reg_number')->nullable();
             $table->string('chamber_reg_path')->nullable();
             $table->string('vat_reg_certificate_number')->nullable();
@@ -35,12 +33,8 @@ class CreateLogisticsBusinessesTable extends Migration
             $table->string('iban')->nullable();
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
-            $table->integer('legal_status')->default(1);   /* 1 for pending, 3 for approved, 4 for rejected*/
-            $table->integer('finance_status')->default(1); /* 1 for pending, 3 for approved, 4 for rejected*/
-            $table->integer('sc_supervisor_status')->default(1); /* 1 for pending, 3 for approved, 4 for rejected*/
-            # supplier or client category of client
-            $table->string('supplier_client')->nullable();
-            $table->string('status')->nullable();
+            $table->integer('legal_status')->default(1);
+            $table->string('status')->nullable(); /* 1 for pending, 3 for approved, 4 for rejected*/
             $table->timestamps();
         });
     }
