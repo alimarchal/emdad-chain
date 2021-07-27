@@ -20,7 +20,7 @@
 
     <div class="py-12">
         <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
-            <a href="{{ route('ratingView') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gray-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-orange-500 focus:outline-none focus:border-orange-700 focus:shadow-outline-orange active:bg-orange-600 transition ease-in-out duration-150">
+            <a href="{{ route('supplierRatingView') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gray-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-orange-500 focus:outline-none focus:border-orange-700 focus:shadow-outline-orange active:bg-orange-600 transition ease-in-out duration-150">
                 Back
             </a>
         </div>
@@ -48,8 +48,8 @@
 
                 <div class="py-3">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <h2 class="text-2xl font-bold text-center text-blue-600">Suppliers List</h2>
-                        @if (count($deliveries) > 0)
+                        <h2 class="text-2xl font-bold text-center text-blue-600">Un-Rated deliveries List</h2>
+                        @if ($deliveries->count() > 0)
                             <div class="flex flex-col">
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -61,16 +61,7 @@
                                                         #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                        Name
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                        Business Name
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                         Delivery ID
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                        Rate
                                                     </th>
                                                 </tr>
                                                 </thead>
@@ -81,26 +72,9 @@
                                                             <span class="badge badge-info">{{ $loop->iteration }}</span>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                            <span class="badge badge-info">{{ $delivery->supplier->name }}</span>
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                            <span class="badge badge-info">{{ $delivery->supplier->business->business_name }}</span>
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                             <span class="badge badge-info">
                                                                 <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank"> {{ $delivery->id }} </a>
                                                             </span>
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                            <a href="{{ route('rateSupplier', [ 'id' => $delivery->supplier_user_id,  'deliveryID' => $delivery->id]) }}" class="text-green-600 inline-block hover:text-green-900" title="Rate">
-                                                                <svg width="18" xmlns="http://www.w3.org/2000/svg"
-                                                                     fill="none" viewBox="0 0 24 24"
-                                                                     stroke="currentColor">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                                          stroke-width="2"
-                                                                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                                                </svg>
-                                                            </a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -115,7 +89,7 @@
 
                         @else
                             <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                                <strong class="mr-1">No record found..!</strong>
+                                <strong class="mr-1">Not Rated yet..!</strong>
                                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                                     <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                                 </button>

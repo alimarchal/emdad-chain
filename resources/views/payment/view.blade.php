@@ -21,7 +21,7 @@
 
         <div class="flex flex-wrap overflow-hidden lg:-mx-2 xl:-mx-1 ">
 
-            <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 ">
+            <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/2 xl:my-1 xl:px-1 xl:w-screen ">
                 <span>Multiple Categories</span>
                 <div class="md:flex flex-1 rounded-md bg-white">
 
@@ -33,9 +33,7 @@
 
                                 <div class="mx-5">
                                     <div class="text-gray-500">
-                                        <a href="{{route('payment.index')}}"
-                                           class="inline-flex items-center justify-center px-4 py-4 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Generate
-                                            invoice
+                                        <a href="{{route('payment.index')}}" class="inline-flex items-center justify-center px-4 py-4 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Generate invoice
                                         </a>
                                     </div>
                                 </div>
@@ -47,9 +45,7 @@
 
                                 <div class="mx-5">
                                     <div class="text-gray-500">
-                                        <a href="{{route('generate_proforma_invoices')}}"
-                                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Generate
-                                            Proforma Invoice</a>
+                                        <a href="{{route('generate_proforma_invoices')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Generate Proforma Invoice</a>
                                     </div>
                                 </div>
                             </div>
@@ -62,9 +58,9 @@
                             <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
 
                                 <div class="mx-5">
-                                    <div class="text-gray-500"><a href="{{route('invoices')}}"
-                                                                  class="inline-flex items-center justify-center px-4 py-1 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Invoices
-                                            History</a></div>
+                                    <div class="text-gray-500">
+                                        <a href="{{route('invoices')}}" class="inline-flex items-center justify-center px-4 py-4 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Invoices History</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -73,9 +69,9 @@
                             <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
 
                                 <div class="mx-5">
-                                    <div class="text-gray-500"><a href="{{route('bank-payments.index')}}"
-                                                                  class="inline-flex items-center justify-center px-4 py-1 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Unpaid
-                                            Invoices</a></div>
+                                    <div class="text-gray-500">
+                                        <a href="{{route('bank-payments.index')}}" class="inline-flex items-center justify-center px-4 py-4 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Unpaid Invoices</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -87,9 +83,7 @@
                             <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
 
                                 <div class="mx-5">
-                                    <div class="text-gray-500"><a href="{{route('proforma_invoices')}}"
-                                                                  class="inline-flex items-center justify-center px-4 py-1 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Proforma
-                                            Invoices</a></div>
+                                    <div class="text-gray-500"><a href="{{route('proforma_invoices')}}" class="inline-flex items-center justify-center px-4 py-4 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Proforma Invoices</a></div>
                                 </div>
                             </div>
                         </div>
@@ -101,9 +95,9 @@
                             <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
 
                                 <div class="mx-5">
-                                    <div class="text-gray-500"><a href="{{route('emdadInvoices')}}"
-                                                                  class="inline-flex items-center justify-center px-4 py-1 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Emdad
-                                            Invoices</a></div>
+                                    <div class="text-gray-500">
+                                        <a href="{{route('emdadInvoices')}}" class="inline-flex items-center justify-center px-4 py-4 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Emdad Invoices</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -112,9 +106,9 @@
                             <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
 
                                 <div class="mx-5">
-                                    <div class="text-gray-500"><a href="{{route('supplier_payment_received')}}"
-                                                                  class="inline-flex items-center justify-center px-4 py-1 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Manual
-                                            Payments</a></div>
+                                    <div class="text-gray-500">
+                                        <a href="{{route('supplier_payment_received')}}" class="inline-flex items-center justify-center px-4 py-4 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Manual Payments</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +118,7 @@
                 </div>
             </div>
 
-            <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
+            <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/2 xl:my-1 xl:px-1 xl:w-screen">
                 <span>Single Category</span>
                 <div class="md:flex flex-1 rounded-md bg-white">
 
@@ -134,9 +128,9 @@
                             <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
 
                                 <div class="mx-5">
-                                    <div class="text-gray-500"><a href="{{route('singleCategoryPaymentIndex')}}"
-                                     class="inline-flex items-center justify-center px-4 py-1 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Generate
-                                            invoice</a></div>
+                                    <div class="text-gray-500">
+                                        <a href="{{route('singleCategoryPaymentIndex')}}" class="inline-flex items-center justify-center px-4 py-4 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Generate invoice</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -146,9 +140,7 @@
 
                                 <div class="mx-5">
                                     <div class="text-gray-500">
-                                        <a href="{{route('singleCategoryGenerateProformaInvoiceView')}}"
-                                           class="inline-flex items-center justify-center px-4 py-1 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Generate
-                                            Proforma Invoice</a>
+                                        <a href="{{route('singleCategoryGenerateProformaInvoiceView')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Generate Proforma Invoice</a>
                                     </div>
                                 </div>
                             </div>
@@ -161,9 +153,9 @@
                             <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
 
                                 <div class="mx-5">
-                                    <div class="text-gray-500"><a href="{{route('singleCategoryInvoices')}}"
-                                                                  class="inline-flex items-center justify-center px-4 py-1 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Invoices
-                                            History</a></div>
+                                    <div class="text-gray-500">
+                                        <a href="{{route('singleCategoryInvoices')}}" class="inline-flex items-center justify-center px-4 py-4 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Invoices History</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -172,9 +164,9 @@
                             <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
 
                                 <div class="mx-5">
-                                    <div class="text-gray-500"><a href="{{route('singleCategoryBankPaymentIndex')}}"
-                                                                  class="inline-flex items-center justify-center px-4 py-1 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Unpaid
-                                            Invoices</a></div>
+                                    <div class="text-gray-500">
+                                        <a href="{{route('singleCategoryBankPaymentIndex')}}" class="inline-flex items-center justify-center px-4 py-4 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Unpaid Invoices</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -186,9 +178,9 @@
                             <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
 
                                 <div class="mx-5">
-                                    <div class="text-gray-500"><a href="{{route('singleCategoryProformaInvoices')}}"
-                                                                  class="inline-flex items-center justify-center px-4 py-1 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Proforma
-                                            Invoices</a></div>
+                                    <div class="text-gray-500">
+                                        <a href="{{route('singleCategoryProformaInvoices')}}" class="inline-flex items-center justify-center px-4 py-4 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Proforma Invoices</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -200,9 +192,9 @@
                             <div class="items-center text-center px-2 py-6 shadow-sm rounded-md bg-white">
 
                                 <div class="mx-5">
-                                    <div class="text-gray-500"><a href="{{route('singleCategoryEmdadInvoicesIndex')}}"
-                          class="inline-flex items-center justify-center px-4 py-1 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Emdad
-                                            Invoices</a></div>
+                                    <div class="text-gray-500">
+                                        <a href="{{route('singleCategoryEmdadInvoicesIndex')}}" class="inline-flex items-center justify-center px-4 py-4 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Emdad Invoices</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -212,9 +204,8 @@
 
                                 <div class="mx-5">
                                     <div class="text-gray-500">
-                                        <a href="{{route('singleCategorySupplierPaymentsReceived')}}"
-                                    class="inline-flex items-center justify-center px-4 py-1 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Manual
-                                            Payments</a></div>
+                                        <a href="{{route('singleCategorySupplierPaymentsReceived')}}" class="inline-flex items-center justify-center px-4 py-4 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">Manual Payments</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -30,7 +30,7 @@
                             <div class="mx-5">
                                 <div class="text-gray-500">
                                     <a href="{{route('RFQ.create')}}"
-                                       class="inline-flex items-center justify-center px-4 py-3 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                       class="inline-flex items-center justify-center px-4 py-5 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
                                         Make New RFQ
                                     </a>
                                 </div>
@@ -77,7 +77,7 @@
 
                             <div class="mx-5">
                                 <div class="text-gray-500">
-                                    <a href="{{route('create_single_rfq')}}" class="inline-flex items-center justify-center px-4 py-3 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                    <a href="{{route('create_single_rfq')}}" class="inline-flex items-center justify-center px-4 py-5 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
                                         Make New RFQ
                                     </a>
                                 </div>
@@ -103,7 +103,7 @@
                         <div class="items-center text-center px-2 py-6 ">
                             <div class="mx-5">
                                 <div class="text-gray-500">
-                                    <a href="{{route('single_category_rfq_index')}}" class="inline-flex items-center justify-center px-4 py-3 bg-blue-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                    <a href="{{route('single_category_rfq_index')}}" class="inline-flex items-center justify-center px-4 py-5 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
                                         RFQ History
                                     </a>
                                 </div>

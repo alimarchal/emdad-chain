@@ -67,22 +67,25 @@
                                             <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                         #
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                         Rated By
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                        Delivery ID
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                         Name
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                         Business Name
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                         Comment
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                         Rating
                                                     </th>
                                                 </tr>
@@ -105,6 +108,10 @@
                                                             @elseif($deliveryComment->comment_type == 8 )Emdad to Supplier
                                                             @endif
                                                             </span>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
+                                                            @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
+                                                            <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer"> {{ $delivery->id }} </a>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
                                                             <span class="badge badge-info">{{ $deliveryComment->user->name }}</span>

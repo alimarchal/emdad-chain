@@ -303,7 +303,7 @@
                                     <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                    <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                    <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                         Calculate Total Cost
                                     </a>
                                 </div>
@@ -440,7 +440,7 @@
                                         <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                        <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                             Calculate Total Cost
                                         </a>
                                     </div>
@@ -474,6 +474,38 @@
         return value;
     }
 
+    function calculateCostForSingleItemInSingleCategory()
+    {
+
+        let quantity =$('#quantity_id').val();
+
+        let ppu= $("#price_per_unit_id").val();
+        let ship_cost= $("#ship_cost").val();
+        let VAT= $("#VAT").val();
+        $.ajax({
+            type : 'GET',
+            url:"{{ route('totalCost') }}",
+            data:{
+                {{--"_token": "{{ csrf_token() }}",--}}
+                'quote_quantity':quantity,
+                'quote_price_per_quantity':ppu,
+                'VAT':VAT,
+                'shipment_cost':ship_cost,
+            },
+            success: function (response) {
+                console.log(response);
+                $('#total_cost').val(response.data);
+            }
+        });
+
+        // Clearing Total Cost Field on any mentioned fields changed
+        $(document).on('keydown', '.quantity, .price_per_unit, .VAT, .shipment_cost', function(){
+
+            $('#total_cost').val('');
+        });
+
+    }
+
     function calculateCost()
     {
         let quantityArray = [] ;
@@ -493,12 +525,12 @@
         });
 
 
-        /* Arranging array for quantities array */
+        /!* Arranging array for quantities array *!/
         let removedCommaArray = quantityArray.replace(/,(?=\s*$)/, '');
         const arrayItems = removedCommaArray.split(',');
         const quantityItemsArray = arrayItems.map(creatingArrayFunction);
 
-        /* Arranging array for prices array */
+        /!* Arranging array for prices array *!/
         let removedPriceCommaArray = priceArray.replace(/,(?=\s*$)/, '');
         const priceArrayItems = removedPriceCommaArray.split(',');
         const priceItemsArray = priceArrayItems.map(creatingArrayFunction);

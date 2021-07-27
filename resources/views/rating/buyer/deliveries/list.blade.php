@@ -20,7 +20,7 @@
 
     <div class="py-12">
         <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
-            <a href="{{ route('ratingView') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gray-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-orange-500 focus:outline-none focus:border-orange-700 focus:shadow-outline-orange active:bg-orange-600 transition ease-in-out duration-150">
+            <a href="{{ route('buyerRatingView') }}" class="inline-flex items-center justify-center px-4 py-2 bg-gray-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-orange-500 focus:outline-none focus:border-orange-700 focus:shadow-outline-orange active:bg-orange-600 transition ease-in-out duration-150">
                 Back
             </a>
         </div>
@@ -48,7 +48,7 @@
 
                 <div class="py-3">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <h2 class="text-2xl font-bold text-center text-blue-600">Suppliers List</h2>
+                        <h2 class="text-2xl font-bold text-center text-blue-600">List of deliveries to rate</h2>
                         @if (count($deliveries) > 0)
                             <div class="flex flex-col">
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -57,14 +57,8 @@
                                             <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                 <thead>
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         #
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                        Name
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                        Business Name
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                         Delivery ID
@@ -81,18 +75,13 @@
                                                             <span class="badge badge-info">{{ $loop->iteration }}</span>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                            <span class="badge badge-info">{{ $delivery->supplier->name }}</span>
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                            <span class="badge badge-info">{{ $delivery->supplier->business->business_name }}</span>
-                                                        </td>
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                             <span class="badge badge-info">
                                                                 <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank"> {{ $delivery->id }} </a>
                                                             </span>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                            <a href="{{ route('rateSupplier', [ 'id' => $delivery->supplier_user_id,  'deliveryID' => $delivery->id]) }}" class="text-green-600 inline-block hover:text-green-900" title="Rate">
+                                                            @php $driverID = \App\Models\ShipmentItem::where('delivery_id', $delivery->id)->pluck('driver_id')->first(); @endphp
+                                                            <a href="{{ route('rateDelivery', [ 'supplierID' => encrypt($delivery->supplier_user_id),'driverID' => encrypt($driverID),  'deliveryID' => encrypt($delivery->id)]) }}" class="text-green-600 inline-block hover:text-green-900" title="Rate">
                                                                 <svg width="18" xmlns="http://www.w3.org/2000/svg"
                                                                      fill="none" viewBox="0 0 24 24"
                                                                      stroke="currentColor">
