@@ -7,6 +7,7 @@ use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Qoute;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use League\CommonMark\Extension\SmartPunct\Quote;
@@ -326,10 +327,29 @@ class QouteController extends Controller
         } else {
 //            $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
 //            $PlacedRFQ = EOrders::where('business_id', auth()->user()->business_id)->orderBy('created_at', 'desc')->get();
-            $PlacedRFQ = EOrders::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->orderBy('created_at', 'desc')->get();
+//            $PlacedRFQ = EOrders::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->orderBy('created_at', 'desc')->get();
+            $PlacedRFQ = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('discard',0)->orderBy('created_at', 'desc')->get();
         }
 
         return view('buyer.receivedQoutations', compact('PlacedRFQ'));
+    }
+
+    /* Adding 3 more days to expired Multi category RFQs */
+    public function resetQuotationTime($EOrderItemID)
+    {
+        EOrderItems::where('id', $EOrderItemID)->update(['quotation_time' => Carbon::now()->addDays(3)]);
+
+        session()->flash('message', 'Quotation Time Reset Successfully!');
+        return redirect()->route('QoutationsBuyerReceived');
+    }
+
+    /* Discarding expired Multi category RFQs */
+    public function discardQuotation($EOrderID)
+    {
+        EOrders::where('id', $EOrderID)->update(['discard' => 1]);
+
+        session()->flash('message', 'Quotation Discarded Successfully!');
+        return redirect()->route('QoutationsBuyerReceived');
     }
 
     public function QoutationsBuyerReceivedRFQItemsByID($EOrderItems)
@@ -462,9 +482,27 @@ class QouteController extends Controller
 
     public function singleCategoryBuyerRFQs()
     {
-        $placedRFQs = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->orderBy('id', 'DESC')->get();
+        $placedRFQs = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->where('discard',0)->orderBy('id', 'DESC')->get();
 
         return view('buyer.singleCategory.index', compact('placedRFQs'));
+    }
+
+    /* Adding 3 more days to expired single category RFQs */
+    public function resetSingleCategoryQuotationTime($eOrderID)
+    {
+        EOrderItems::where('e_order_id', $eOrderID)->update(['quotation_time' => Carbon::now()->addDays(3)]);
+
+        session()->flash('message', 'Quotation Time Reset Successfully!');
+        return redirect()->route('singleCategoryBuyerRFQs');
+    }
+
+    /* Discarding expired single category RFQs */
+    public function discardSingleCategoryQuotation($eOrderID)
+    {
+        EOrders::where('id', $eOrderID)->update(['discard' => 1]);
+
+        session()->flash('message', 'Quotation Discarded Successfully!');
+        return redirect()->route('singleCategoryBuyerRFQs');
     }
 
     public function singleCategoryRFQItems($rfq_id)

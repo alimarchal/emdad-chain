@@ -21,7 +21,7 @@
 
         <div class="flex flex-wrap overflow-hidden lg:-mx-2 xl:-mx-1 ">
 
-            <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 ">
+            <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/2 xl:my-1 xl:px-1 xl:w-screen ">
                 <span>Multiple Categories</span>
                 <div class="md:flex flex-1 rounded-md bg-white">
 
@@ -124,7 +124,7 @@
                 </div>
             </div>
 
-            <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
+            <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/2 xl:my-1 xl:px-1 xl:w-screen">
                 <span>Single Category</span>
                 <div class="md:flex flex-1 rounded-md bg-white">
 

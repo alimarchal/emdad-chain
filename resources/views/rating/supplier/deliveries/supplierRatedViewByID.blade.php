@@ -49,7 +49,7 @@
                         </a>--}}
                     </div>
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <h2 class="text-2xl font-bold text-center">Rated By List</h2> <br>
+                        <h2 class="text-2xl font-bold text-center text-blue-600">Rating details</h2> <br>
                         @if ($deliveryComments->count())
                             <div class="flex flex-col">
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -62,7 +62,10 @@
                                                         #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                        Rated By
+                                                        Rated To
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                        Delivery ID
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                         Name
@@ -86,22 +89,25 @@
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
                                                             <span>
-                                                            @if($deliveryComment->comment_type == 1 )Driver to Buyer
-                                                                @elseif($deliveryComment->comment_type == 2 )Buyer to Driver
-                                                                @elseif($deliveryComment->comment_type == 3 )Buyer to Supplier
-                                                                @elseif($deliveryComment->comment_type == 4 )Buyer to Emdad
-                                                                @elseif($deliveryComment->comment_type == 5 )Supplier to Buyer
-                                                                @elseif($deliveryComment->comment_type == 6 )Supplier to Emdad
-                                                                @elseif($deliveryComment->comment_type == 7 )Emdad to Buyer
-                                                                @elseif($deliveryComment->comment_type == 8 )Emdad to Supplier
+                                                                @if($deliveryComment->comment_type == 5 )To Buyer
+                                                                @elseif($deliveryComment->comment_type == 6 )To Emdad
                                                                 @endif
                                                             </span>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
-                                                            <span class="badge badge-info">{{ $deliveryComment->user->name }}</span>
+                                                            @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
+                                                            <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer"> {{ $delivery->id }} </a>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
-                                                            <span class="badge badge-info">{{ $deliveryComment->user->business->business_name }}</span>
+                                                            @php
+                                                                $deliveryDetail = \App\Models\Delivery::where('id', $delivery->id)->first();
+                                                                $user = \App\Models\User::with('business')->where('id', $deliveryDetail->user_id)->first();
+                                                                $shipmentItem = \App\Models\ShipmentItem::where('delivery_id', $delivery->id)->first();
+                                                            @endphp
+                                                            <span class="badge badge-info">@if($loop->iteration == 1) {{ $user->name }} @else Emdad @endif</span>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
+                                                            <span class="badge badge-info">@if($loop->iteration == 1) {{ $user->business->business_name }} @else Emdad Supply Chain @endif</span>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
                                                             <span class="badge badge-info">{{ $deliveryComment->comment_content }}</span>

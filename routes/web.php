@@ -325,6 +325,8 @@ Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived', [QouteContr
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/{QouteItem}', [QouteController::class, 'QoutationsBuyerReceivedQouteID'])->name('QoutationsBuyerReceivedQouteID');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderItems}', [QouteController::class, 'QoutationsBuyerReceivedRFQItemsByID'])->name('QoutationsBuyerReceivedRFQItemsByID');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/qoutes/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedQoutes'])->name('QoutationsBuyerReceivedQoutes');
+Route::middleware(['auth:sanctum'])->get('/QuotationResetTime/{EOrderItemID}/', [QouteController::class, 'resetQuotationTime'])->name('resetQuotationTime');
+Route::middleware(['auth:sanctum'])->get('/QuotationDiscard/{EOrderID}/', [QouteController::class, 'discardQuotation'])->name('discardQuotation');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/rejected/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedRejected'])->name('QoutationsBuyerReceivedRejected');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/modification/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedModificationNeeded'])->name('QoutationsBuyerReceivedModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/accepted/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedAccepted'])->name('QoutationsBuyerReceivedAccepted');
@@ -334,6 +336,8 @@ Route::middleware(['auth:sanctum'])->get('/single/category/rfq', [QouteControlle
 Route::middleware(['auth:sanctum'])->get('/single/category/rfq/items/{rfq_id}', [QouteController::class, 'singleCategoryRFQItems'])->name('singleCategoryRFQItems');
 Route::middleware(['auth:sanctum'])->get('/single/category/rfq/item/response/{quote}', [QouteController::class, 'singleCategoryRFQItemByID'])->name('singleCategoryRFQItemByID');
 Route::middleware(['auth:sanctum'])->get('/single/category/RFQ/quotations/{eOrderID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerReceived'])->name('singleCategoryRFQQuotationsBuyerReceived');
+Route::middleware(['auth:sanctum'])->get('/SingleCategoryQuotationResetTime/{eOrderID}/', [QouteController::class, 'resetSingleCategoryQuotationTime'])->name('resetSingleCategoryQuotationTime');
+Route::middleware(['auth:sanctum'])->get('/SingleCategoryQuotationDiscard/{eOrderID}/', [QouteController::class, 'discardSingleCategoryQuotation'])->name('discardSingleCategoryQuotation');
 Route::middleware(['auth:sanctum'])->get('/single/category/RFQ/rejected/quotations/{EOrderItemID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerRejected'])->name('singleCategoryRFQQuotationsBuyerRejected');
 Route::middleware(['auth:sanctum'])->get('/single/category/RFQ/modification/quotations/{eOrderID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsModificationNeeded'])->name('singleCategoryRFQQuotationsModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('single-rfq-quote/{quotes}/ModificationNeeded', [QouteController::class, 'singleCategoryRFQUpdateStatusModificationNeeded'])->name('singleCategoryRFQUpdateStatusModificationNeeded');
@@ -473,8 +477,10 @@ Route::middleware(['auth:sanctum'])->post('single-category-rfq-supplier-manual-p
 ################################################################### END ############################################################################################
 
 ################################################################# Rating routes ##########################################################################
-Route::middleware(['auth:sanctum'])->get('rating', [RatingController::class, 'view'])->name('ratingView');
-Route::middleware(['auth:sanctum'])->get('ratings', [RatingController::class, 'index'])->name('ratingListIndex');
+
+                                                        /* Super admin rating routes starts */
+Route::middleware(['auth:sanctum'])->get('rating-view', [RatingController::class, 'view'])->name('ratingView');
+Route::middleware(['auth:sanctum'])->get('ratings-list', [RatingController::class, 'index'])->name('ratingListIndex');
 Route::middleware(['auth:sanctum'])->get('ratings-received/{id}', [RatingController::class, 'viewByID'])->name('ratingViewByID');
 Route::middleware(['auth:sanctum'])->get('emdad-ratings', [RatingController::class, 'emdadRated'])->name('emdadRated');
 Route::middleware(['auth:sanctum'])->get('emdad-rated/{id}', [RatingController::class, 'emdadRatedViewByID'])->name('emdadRatedViewByID');
@@ -487,6 +493,32 @@ Route::middleware(['auth:sanctum'])->post('save-buyer-rating', [RatingController
 Route::middleware(['auth:sanctum'])->get('rate-supplier', [RatingController::class, 'supplierList'])->name('supplierList');
 Route::middleware(['auth:sanctum'])->get('rate-supplier/{id}/{deliveryID}', [RatingController::class, 'createSupplierRating'])->name('rateSupplier');
 Route::middleware(['auth:sanctum'])->post('save-supplier-rating', [RatingController::class, 'saveSupplierRating'])->name('storeSupplierRating');
+                                                        /* Super admin rating routes ends */
+
+                                                        /* Buyer rating routes starts */
+Route::middleware(['auth:sanctum'])->get('rating', [RatingController::class, 'buyerRatingView'])->name('buyerRatingView');
+Route::middleware(['auth:sanctum'])->get('deliveries-ratings', [RatingController::class, 'buyerDeliveryIndex'])->name('buyerDeliveryRatingListIndex');
+Route::middleware(['auth:sanctum'])->get('delivery-ratings/{id}', [RatingController::class, 'buyerDeliveryViewByID'])->name('buyerDeliveryRatingViewByID');
+Route::middleware(['auth:sanctum'])->get('buyer-rated', [RatingController::class, 'buyerRatedToDeliveries'])->name('buyerRatedToDeliveries');
+Route::middleware(['auth:sanctum'])->get('buyer-rated/{id}', [RatingController::class, 'buyerRatedViewByID'])->name('buyerRatedViewByID');
+Route::middleware(['auth:sanctum'])->get('buyer-not-rated', [RatingController::class, 'buyerUnRatedDeliveries'])->name('buyerUnRatedDeliveries');
+Route::middleware(['auth:sanctum'])->get('rate-deliveries', [RatingController::class, 'deliveriesListToRate'])->name('deliveriesListToRate');
+Route::middleware(['auth:sanctum'])->get('rate-delivery/{supplierID}/{driverID}/{deliveryID}', [RatingController::class, 'createDeliveryRating'])->name('rateDelivery');
+Route::middleware(['auth:sanctum'])->post('save-buyer-rated', [RatingController::class, 'saveBuyerRatedToDelivery'])->name('storeBuyerRatedToDelivery');
+                                                        /* Buyer rating routes ends */
+
+                                                        /* Supplier rating routes starts */
+Route::middleware(['auth:sanctum'])->get('ratings', [RatingController::class, 'supplierRatingView'])->name('supplierRatingView');
+Route::middleware(['auth:sanctum'])->get('deliveries-rating', [RatingController::class, 'supplierDeliveryIndex'])->name('supplierDeliveryRatingListIndex');
+Route::middleware(['auth:sanctum'])->get('delivery/ratings/{id}', [RatingController::class, 'supplierDeliveryViewByID'])->name('supplierDeliveryRatingViewByID');
+Route::middleware(['auth:sanctum'])->get('supplier-rated', [RatingController::class, 'supplierRatedToDeliveries'])->name('supplierRatedToDeliveries');
+Route::middleware(['auth:sanctum'])->get('supplier-rated/{id}', [RatingController::class, 'supplierRatedViewByID'])->name('supplierRatedViewByID');
+Route::middleware(['auth:sanctum'])->get('supplier-not-rated', [RatingController::class, 'supplierUnRatedDeliveries'])->name('supplierUnRatedDeliveries');
+Route::middleware(['auth:sanctum'])->get('deliveries-to-rate', [RatingController::class, 'supplierDeliveriesListToRate'])->name('supplierDeliveriesListToRate');
+Route::middleware(['auth:sanctum'])->get('rate-delivery-by-supplier/{buyerID}/{deliveryID}', [RatingController::class, 'createDeliveryRatingBySupplier'])->name('rateDeliveryBySupplier');
+Route::middleware(['auth:sanctum'])->post('save-supplier-rated', [RatingController::class, 'saveSupplierRatedToDelivery'])->name('storeSupplierRatedToDelivery');
+                                                        /* Supplier rating routes ends */
+
 ################################################################# END ####################################################################################
 
 ####################### Subscription routes ####################################

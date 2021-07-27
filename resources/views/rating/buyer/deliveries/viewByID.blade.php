@@ -48,10 +48,19 @@
                             Add Buyer
                         </a>--}}
                     </div>
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <h2 class="text-2xl font-bold text-center">Rated By List</h2> <br>
+                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <h2 class="text-2xl font-bold text-center">Rating details</h2> <br>
+                            @php
+                                $sum = 0;
+                                    foreach ($deliveryComments as $deliveryComment)
+                                        {
+                                            $sum += $deliveryComment->rating;
+                                        }
+                                $count = count($deliveryComments);
+                            @endphp
+                            <div class="text-center"><span class="text-blue-600">Average rating: {{number_format($sum/$count,2,'.')}} </span></div>
                         @if ($deliveryComments->count())
-                            <div class="flex flex-col">
+                                <div class="flex flex-col">
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -65,6 +74,9 @@
                                                         Rated By
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                        Delivery ID
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                         Name
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
@@ -74,7 +86,7 @@
                                                         Comment
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                        Rated
+                                                        Rating
                                                     </th>
                                                 </tr>
                                                 </thead>
@@ -86,22 +98,21 @@
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
                                                             <span>
-                                                            @if($deliveryComment->comment_type == 1 )Driver to Buyer
-                                                                @elseif($deliveryComment->comment_type == 2 )Buyer to Driver
-                                                                @elseif($deliveryComment->comment_type == 3 )Buyer to Supplier
-                                                                @elseif($deliveryComment->comment_type == 4 )Buyer to Emdad
-                                                                @elseif($deliveryComment->comment_type == 5 )Supplier to Buyer
-                                                                @elseif($deliveryComment->comment_type == 6 )Supplier to Emdad
-                                                                @elseif($deliveryComment->comment_type == 7 )Emdad to Buyer
-                                                                @elseif($deliveryComment->comment_type == 8 )Emdad to Supplier
-                                                                @endif
+                                                            @if($deliveryComment->comment_type == 1 )Driver
+                                                            @elseif($deliveryComment->comment_type == 5 )Supplier
+                                                            @elseif($deliveryComment->comment_type == 7 )Emdad
+                                                            @endif
                                                             </span>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
-                                                            <span class="badge badge-info">{{ $deliveryComment->user->name }}</span>
+                                                            @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
+                                                            <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer"> {{ $delivery->id }} </a>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
-                                                            <span class="badge badge-info">{{ $deliveryComment->user->business->business_name }}</span>
+                                                            <span class="badge badge-info">@if($deliveryComment->user->registration_type == 'SuperAdmin') Emdad @else {{ $deliveryComment->user->name }} @endif</span>
+                                                        </td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
+                                                            <span class="badge badge-info">@if($deliveryComment->user->registration_type == 'SuperAdmin') Emdad Supply Chain @else {{ $deliveryComment->user->business->business_name }} @endif</span>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
                                                             <span class="badge badge-info">{{ $deliveryComment->comment_content }}</span>
