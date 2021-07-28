@@ -30,7 +30,7 @@
                             <div class="mx-5">
                                 <div class="text-gray-500">
                                     <a href="{{route('RFQ.create')}}"
-                                       class="inline-flex items-center justify-center px-4  py-3  bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
+                                       class="inline-flex items-center justify-center px-4  py-5  bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
                                         Make New RFQ
                                     </a>
                                 </div>
@@ -44,7 +44,7 @@
                             <div class="mx-5">
                                 <div class="text-gray-500">
                                     @php $multipleCategoryCount = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->count(); @endphp
-                                    <a href="{{route('RFQCart.index')}}" class="inline-flex items-center justify-center px-4  py-3  bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
+                                    <a href="{{route('RFQCart.index')}}" class="inline-flex items-center justify-center px-4  @if($multipleCategoryCount > 0) py-3 @else py-5 @endif bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
                                         <span class="mx-3 ">RFQ Cart @if($multipleCategoryCount > 0) ({{$multipleCategoryCount}}) @endif</span>
                                     </a>
                                 </div>
@@ -57,7 +57,7 @@
 
                             <div class="mx-5">
                                 <div class="text-gray-500">
-                                    <a href="{{route('PlacedRFQ.index')}}" class="inline-flex items-center justify-center px-4  py-3  bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
+                                    <a href="{{route('PlacedRFQ.index')}}" class="inline-flex items-center justify-center px-4  py-5  bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
                                         RFQ History
                                     </a>
                                 </div>
@@ -77,7 +77,7 @@
 
                             <div class="mx-5">
                                 <div class="text-gray-500">
-                                    <a href="{{route('create_single_rfq')}}" class="inline-flex items-center justify-center px-4  py-3  bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
+                                    <a href="{{route('create_single_rfq')}}" class="inline-flex items-center justify-center px-4  py-5  bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
                                         Make New RFQ
                                     </a>
                                 </div>
@@ -91,7 +91,7 @@
                             <div class="mx-5">
                                 <div class="text-gray-500">
                                     @php $count = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->count(); @endphp
-                                    <a href="{{route('single_cart_index')}}" class="inline-flex items-center justify-center px-4 @if($count > 0) py-3 @else py-3 @endif bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
+                                    <a href="{{route('single_cart_index')}}" class="inline-flex items-center justify-center px-4 @if($count > 0) py-3 @else py-5 @endif bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
                                         <span class="mx-3 ">RFQ Cart @if($count > 0) ({{$count}}) @endif</span>
                                     </a>
                                 </div>
@@ -103,7 +103,7 @@
                         <div class="items-center text-center px-2 py-6 ">
                             <div class="mx-5">
                                 <div class="text-gray-500">
-                                    <a href="{{route('single_category_rfq_index')}}" class="inline-flex items-center justify-center px-4  py-3  bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
+                                    <a href="{{route('single_category_rfq_index')}}" class="inline-flex items-center justify-center px-4  py-5  bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 focus:shadow-outline-red active:bg-blue-500 transition ease-in-out duration-150">
                                         RFQ History
                                     </a>
                                 </div>
