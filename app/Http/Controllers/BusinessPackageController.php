@@ -42,7 +42,8 @@ class BusinessPackageController extends Controller
                 'status' => '0',
             ]);
             $data = null;
-            $url = "https://test.oppwa.com/v1/checkouts";
+            $url = "https://oppwa.com/v1/checkouts";
+//            $url = "https://test.oppwa.com/v1/checkouts";
             if ($request->gateway == "mada") {
                 $data = "entityId=" . env('ENTITY_ID_MADA') .
                     "&amount=" . $package->charges .
@@ -166,7 +167,8 @@ class BusinessPackageController extends Controller
 
     public function getPaymentStatus($id, $resourcePath, $gateway)
     {
-        $url = "https://test.oppwa.com/";
+        $url = "https://oppwa.com/";
+//        $url = "https://test.oppwa.com/";
         $url .= $resourcePath;
         if ($gateway == "mada") {
             $url .= "?entityId=" . env('ENTITY_ID_MADA');
@@ -306,7 +308,8 @@ class BusinessPackageController extends Controller
             'status' => '0',
         ]);
         $data = null;
-        $url = "https://test.oppwa.com/v1/checkouts";
+        $url = "https://oppwa.com/v1/checkouts";
+//        $url = "https://test.oppwa.com/v1/checkouts";
         if ($request->gateway == "mada") {
             $data = "entityId=" . env('ENTITY_ID_MADA') .
                 "&amount=" . $package->charges .
@@ -479,7 +482,8 @@ class BusinessPackageController extends Controller
         ]);
 
         $data = null;
-        $url = "https://test.oppwa.com/v1/checkouts";
+        $url = "https://oppwa.com/v1/checkouts";
+//        $url = "https://test.oppwa.com/v1/checkouts";
         if ($request->gateway == "mada") {
             $data = "entityId=" . env('ENTITY_ID_MADA') .
                 "&amount=" . $total_charges .

@@ -51,10 +51,14 @@ class DeliveryController extends Controller
             } else {
                 $Deliveries = [];
                 foreach ($collection as $col) {
+                    $warehouse_id = DraftPurchaseOrder::find($col->draft_purchase_order_id)->warehouse_id;
                     $itm = collect($col);
                     $Deliveries[] = $itm->merge([
                         'SupplierBusiness' => Business::find($col->supplier_business_id),
                         'BuyerBusiness'=> Business::find($col->business_id),
+                        'buyer_business' => Business::find($col->business_id)->business_name,
+                        'supplier_logo_url' => config('app.url') . '/storage/' . Business::find($col->supplier_business_id)->business_photo_url,
+                        'BuyerRFQWarehouse' => [\App\Models\BusinessWarehouse::find($warehouse_id)],
                     ]);
                 }
                 return $Deliveries;
@@ -97,6 +101,8 @@ class DeliveryController extends Controller
         if ($token == "RRNirxFh4j9Ftd") {
             $delivery = Delivery::find($id);
             if (!empty($delivery)) {
+
+                // if send otp attr then generate code
                 if ($request->input('otp') == 'generate') {
                     $string = rand(1000, 9999);
                     $otp = $delivery->otp = $string;
@@ -119,14 +125,17 @@ class DeliveryController extends Controller
 
                 $business_url = Business::where('id', $delivery->supplier_business_id)->first();
                 $business_photo_url = $business_url->business_photo_url;
+                $warehouse_id = DraftPurchaseOrder::find($delivery->draft_purchase_order_id)->warehouse_id;
 
                 if (!empty($business_url)) {
                     #convert to collection for appending the delivery eloquent collection
                     $delivery = collect(Delivery::find($id));
+                    $business_warehouse = \App\Models\BusinessWarehouse::find($warehouse_id);
                     $custom = collect([
                         'supplier_logo_url' => config('app.url') . '/storage/' . $business_photo_url,
                         'business_name' => $business_url->business_name,
-
+                        'buyerRFQWarehouse' => [$business_warehouse],
+                        'buyerBusiness' => [Business::find($business_warehouse->business_id)],
                     ]);
                     $delivery = $delivery->merge($custom);
                 }
