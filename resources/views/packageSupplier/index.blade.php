@@ -179,7 +179,7 @@
                 </table>
             </div>
 
-            @if(auth()->user()->business_package->package_id == 6 || auth()->user()->business_package->package_id == 6 )
+            @if(isset($businessPackage->package_id) == 6 || isset($businessPackage->package_id) == 7 )
             <br>
                 <div class="text-gray-500" style="text-align: end">
                     <a href="{{route('subscriptionPDF')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
