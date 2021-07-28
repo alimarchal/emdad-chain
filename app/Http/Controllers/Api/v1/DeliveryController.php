@@ -52,7 +52,10 @@ class DeliveryController extends Controller
                 $Deliveries = [];
                 foreach ($collection as $col) {
                     $itm = collect($col);
-                    $Deliveries[] = $itm->merge(['SupplierBusiness' => [Business::find($col->supplier_business_id)]]);
+                    $Deliveries[] = $itm->merge([
+                        'SupplierBusiness' => Business::find($col->supplier_business_id),
+                        'BuyerBusiness'=> Business::find($col->business_id),
+                    ]);
                 }
                 return $Deliveries;
             }
