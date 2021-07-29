@@ -93,6 +93,8 @@ class ShipmentItemController extends Controller
                         'supplier_logo_url' => config('app.url') . '/storage/' . Business::find($del_item->supplier_business_id)->business_photo_url,
                         'buyer_business' => Business::find($del_item->business_id)->business_name,
                         'buyerRFQWarehouse' => BusinessWarehouse::find(DraftPurchaseOrder::find($del_item->draft_purchase_order_id)->warehouse_id),
+                        'BuyerBusiness' => Business::find($del_item->business_id),
+                        'SupplierBusiness' => Business::find($del_item->supplier_business_id),
                     ]);
                 }
                 return response()->json($ShipmentItem, 200);
@@ -129,6 +131,8 @@ class ShipmentItemController extends Controller
                         'supplier_logo_url' => config('app.url') . '/storage/' . Business::find($del_item->supplier_business_id)->business_photo_url,
                         'buyer_business' => Business::find($del_item->business_id)->business_name,
                         'BuyerRFQWarehouse' => [BusinessWarehouse::find($warehouse_id)],
+                        'BuyerBusiness' => Business::find($del_item->business_id),
+                        'SupplierBusiness' => Business::find($del_item->supplier_business_id),
                     ]);
                 }
 

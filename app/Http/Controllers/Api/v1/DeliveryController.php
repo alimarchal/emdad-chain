@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Livewire\BusinessWarehouse;
 use App\Models\Business;
 use App\Models\Delivery;
 use App\Models\DraftPurchaseOrder;
 use App\Models\EOrderItems;
+use App\Models\Shipment;
+use App\Models\ShipmentItem;
 use App\Models\User;
+use App\Models\Vehicle;
 use App\Notifications\OTP;
-use App\Notifications\OtpSend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
-use Moyasar\Providers\PaymentService;
 
 
 class DeliveryController extends Controller
@@ -55,7 +55,7 @@ class DeliveryController extends Controller
                     $itm = collect($col);
                     $Deliveries[] = $itm->merge([
                         'SupplierBusiness' => Business::find($col->supplier_business_id),
-                        'BuyerBusiness'=> Business::find($col->business_id),
+                        'BuyerBusiness' => Business::find($col->business_id),
                         'buyer_business' => Business::find($col->business_id)->business_name,
                         'supplier_logo_url' => config('app.url') . '/storage/' . Business::find($col->supplier_business_id)->business_photo_url,
                         'BuyerRFQWarehouse' => [\App\Models\BusinessWarehouse::find($warehouse_id)],
@@ -190,4 +190,50 @@ class DeliveryController extends Controller
     {
         //
     }
+
+    public function vehicle_user_shipment_update($vid, $uid, $sid, Request $request)
+    {
+        $token = $request->code;
+        if ($token == "RRNirxFh4j9Ftd") {
+            $vehicle = Vehicle::find($vid);
+            $user = User::find($uid);
+            $shipment = Shipment::find($sid);
+            if ($user != null && $vehicle != null && $shipment != null) {
+                $vehicle->availability_status = 1;
+                $vehicle->save();
+                $user->driver_status = 1;
+                $user->save();
+                $shipment->status = 1;
+                $shipment->save();
+                return response()->json(['message' => 'Updated...'], 200);
+            } else {
+                return response()->json(['message' => 'Error some model not found please check your uid, sid, vid'], 404);
+            }
+        } else {
+            return response()->json(['message' => 'Not Found!'], 404);
+        }
+    }
+
+
+    public function delivery_shipment($did, $sitm, Request $request)
+    {
+        $token = $request->code;
+        if ($token == "RRNirxFh4j9Ftd") {
+            $delivery = Delivery::find($did);
+            $shipment_item = ShipmentItem::find($sitm);
+            if ($delivery != null && $shipment_item != null) {
+                $delivery->status = 1;
+                $delivery->save();
+                $shipment_item->status = 1;
+                $shipment_item->save();
+                return response()->json(['message' => 'Updated...'], 200);
+            } else {
+                return response()->json(['message' => 'Error some model not found please check your uid, sid, vid'], 404);
+            }
+        } else {
+            return response()->json(['message' => 'Not Found!'], 404);
+        }
+    }
+
+
 }
