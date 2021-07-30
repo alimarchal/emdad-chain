@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Business;
+use App\Models\BusinessWarehouse;
 use App\Models\Delivery;
-use App\Models\Shipment;
+use App\Models\DraftPurchaseOrder;
 use App\Models\ShipmentItem;
 use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ShipmentItemController extends Controller
 {
@@ -84,7 +85,17 @@ class ShipmentItemController extends Controller
                 $item = ShipmentItem::where('driver_id', $request->driver_id)->get();
                 foreach ($item as $col) {
                     $itm = collect($col);
-                    $ShipmentItem[]['ShipmentItem'] = $itm->merge(['Delivery' => [Delivery::find($col->delivery_id)]]);
+
+                    $del_item = Delivery::find($col->delivery_id);
+
+                    $ShipmentItem[]['ShipmentItem'] = $itm->merge([
+                        'Delivery' => [$del_item],
+                        'supplier_logo_url' => config('app.url') . '/storage/' . Business::find($del_item->supplier_business_id)->business_photo_url,
+                        'buyer_business' => Business::find($del_item->business_id)->business_name,
+                        'buyerRFQWarehouse' => BusinessWarehouse::find(DraftPurchaseOrder::find($del_item->draft_purchase_order_id)->warehouse_id),
+                        'BuyerBusiness' => Business::find($del_item->business_id),
+                        'SupplierBusiness' => Business::find($del_item->supplier_business_id),
+                    ]);
                 }
                 return response()->json($ShipmentItem, 200);
 //                $item = DB::table('shipment_items')
@@ -111,10 +122,17 @@ class ShipmentItemController extends Controller
                 $item = ShipmentItem::where('supplier_business_id', $request->supplier_business_id)->get();
                 foreach ($item as $col) {
                     $itm = collect($col);
+                    $warehouse_id = DraftPurchaseOrder::find(Delivery::find($col->delivery_id)->draft_purchase_order_id)->warehouse_id;
+                    $del_item = Delivery::find($col->delivery_id);
                     $ShipmentItem[]['ShipmentItem'] = $itm->merge([
                         'Delivery' => [Delivery::find($col->delivery_id)],
                         'User' => [User::find($col->driver_id)],
                         'Vehicle' => [Vehicle::find($col->vehicle_id)],
+                        'supplier_logo_url' => config('app.url') . '/storage/' . Business::find($del_item->supplier_business_id)->business_photo_url,
+                        'buyer_business' => Business::find($del_item->business_id)->business_name,
+                        'BuyerRFQWarehouse' => [BusinessWarehouse::find($warehouse_id)],
+                        'BuyerBusiness' => Business::find($del_item->business_id),
+                        'SupplierBusiness' => Business::find($del_item->supplier_business_id),
                     ]);
                 }
 

@@ -30,6 +30,7 @@ class BusinessPackageController extends Controller
 
     public function store(Request $request)
     {
+
         //after payment add payment details to payment table after that insert that payment id to BusinessPackage table
         $package = Package::where('id', $request->package_id)->first();
         $merchant_id = null;
@@ -42,7 +43,8 @@ class BusinessPackageController extends Controller
                 'status' => '0',
             ]);
             $data = null;
-            $url = "https://test.oppwa.com/v1/checkouts";
+            $url = "https://oppwa.com/v1/checkouts";
+//            $url = "https://test.oppwa.com/v1/checkouts";
             if ($request->gateway == "mada") {
                 $data = "entityId=" . env('ENTITY_ID_MADA') .
                     "&amount=" . $package->charges .
@@ -57,7 +59,7 @@ class BusinessPackageController extends Controller
                     "&customer.givenName=" . $request->customer_givenName .
                     "&customer.surname=" . $request->customer_surname .
                     "&paymentType=" . env("PAYMENT_TYPE");
-                $request->merge(["testMode" => "EXTERNAL"]);
+//                $request->merge(["testMode" => "EXTERNAL"]);
 
             } elseif ($request->gateway == "visa_master") {
                 $data = "entityId=" . env('ENTITY_ID_VISA') .
@@ -166,7 +168,8 @@ class BusinessPackageController extends Controller
 
     public function getPaymentStatus($id, $resourcePath, $gateway)
     {
-        $url = "https://test.oppwa.com/";
+        $url = "https://oppwa.com/";
+//        $url = "https://test.oppwa.com/";
         $url .= $resourcePath;
         if ($gateway == "mada") {
             $url .= "?entityId=" . env('ENTITY_ID_MADA');
@@ -296,6 +299,7 @@ class BusinessPackageController extends Controller
 
     public function storeBusinessPackageUpgrade(Request $request)
     {
+
         //after payment add payment details to payment table after that insert that payment id to BusinessPackage table
         $package = Package::where('id', $request->package_id)->first();
         $merchant_id = null;
@@ -306,7 +310,8 @@ class BusinessPackageController extends Controller
             'status' => '0',
         ]);
         $data = null;
-        $url = "https://test.oppwa.com/v1/checkouts";
+        $url = "https://oppwa.com/v1/checkouts";
+//        $url = "https://test.oppwa.com/v1/checkouts";
         if ($request->gateway == "mada") {
             $data = "entityId=" . env('ENTITY_ID_MADA') .
                 "&amount=" . $package->charges .
@@ -479,7 +484,8 @@ class BusinessPackageController extends Controller
         ]);
 
         $data = null;
-        $url = "https://test.oppwa.com/v1/checkouts";
+        $url = "https://oppwa.com/v1/checkouts";
+//        $url = "https://test.oppwa.com/v1/checkouts";
         if ($request->gateway == "mada") {
             $data = "entityId=" . env('ENTITY_ID_MADA') .
                 "&amount=" . $total_charges .

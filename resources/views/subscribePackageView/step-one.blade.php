@@ -225,7 +225,7 @@
                         </div>
                     </div>
                     <div class="mb-10">
-                        <h1 class="text-center font-bold text-xl uppercase">Secure payment info</h1>
+                        <h1 class="text-center font-bold text-xl uppercase">Secure payment info2</h1>
                     </div>
                     <div class="mb-3 flex -mx-2">
                         <div class="px-2">

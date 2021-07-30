@@ -34,6 +34,10 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('TrackingDelivery', TrackingDeliveryController::class);
     Route::apiResource('Delivery', DeliveryController::class);
     Route::get('Delivery/Deliveries/{id}', [DeliveryController::class, 'getAllDeliveries']);
+
+    Route::get('veh/{vid}/usr/{uid}/shp/{sid}', [DeliveryController::class, 'vehicle_user_shipment_update']);
+    Route::get('del/{did}/shpitem/{sitm}', [DeliveryController::class, 'delivery_shipment']);
+
     Route::apiResource('ShipmentItems', ShipmentItemController::class);
     Route::apiResource('Shipment', ShipmentController::class);
     Route::apiResource('DeliveryNote', \App\Http\Controllers\Api\v1\DeliveryNoteController::class);
