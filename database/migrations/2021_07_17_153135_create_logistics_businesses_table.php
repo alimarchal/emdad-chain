@@ -22,6 +22,7 @@ class CreateLogisticsBusinessesTable extends Migration
             $table->string('chamber_reg_path')->nullable();
             $table->string('vat_reg_certificate_number')->nullable();
             $table->string('vat_reg_certificate_path')->nullable();
+            $table->string('business_photo_url')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('address')->nullable();
