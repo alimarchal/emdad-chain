@@ -224,36 +224,42 @@
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
-
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    #
+                                    RFQ Item #
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    تاريخ
+                                    Date
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    اسم المنتج
-                                </th>
-
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    الوحدة
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    مقاس
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    العدد
+                                    Category Name
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    السعر الأخير
+                                    Unit
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    Size
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    Quantity
                                 </th>
 
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    Last Price
+                                </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    عرض السعر
+                                    Time left
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    Quotations
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    Override
                                 </th>
 
 
@@ -266,7 +272,7 @@
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $rfp->id }}
                                         </td>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-7 py-4 text-center whitespace-nowrap">
                                             {{ $rfp->created_at->format('d-m-Y') }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -287,49 +293,97 @@
                                             {{ number_format($rfp->last_price, 2) }} <br>
                                         </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id]) }}"
-                                               class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                عروض الأسعار  ({{ $rfp->qoutes->count() }})
-                                            </a>
+                                        @php
+                                            $created = $rfp->quotation_time;
+                                            $time = \Carbon\Carbon::parse($created)->format('Y-m-d');
+                                            $now = \Carbon\Carbon::now();
+                                            $diffInHrs = $now->diffInHours($created);
+                                            $diffInMins = $now->diffInMinutes($created);
+                                            // checking previous dpo if any
+                                            $dpo = \App\Models\DraftPurchaseOrder::where('rfq_item_no', $rfp->id)->where('po_status' , 'pending')->where('status' , 'pending')->first();
+                                        @endphp
+                                        <td
+                                            @if($rfp->status == 'accepted')  class="px-6 py-4 text-center whitespace-nowrap"
+                                            @elseif($rfp->bypass == 1)
+                                            @else
+                                            class="px-6 py-4 text-center whitespace-nowrap"  data-countdown="{{$time}}"
+                                            @endif
+                                        >
+                                            @if($rfp->status == 'accepted')
+                                                N/A
+                                            @else
+                                                {{--                                                {{ $diffInHrs }} hours @if($diffInHrs == 0) and {{ $diffInMins }} minutes @endif --}}
+                                                {{--                                                <br>--}}
+                                                <div class="text-center"><span class="text-center">--</span></div>
+                                            @endif
+                                        </td>
 
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            @if(isset($dpo))
+                                                <a class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
+                                                    DPO generated
+                                                </a>
+                                            @elseif($rfp->bypass == 1 && $rfp->quotation_time > \Carbon\Carbon::now() && $rfp->status == 'pending')
+                                                @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
+                                                    <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
+                                                       class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                        See Quotes
+                                                    </a>
+                                                @endif
+                                            @elseif($rfp->bypass == 1 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
+                                                @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
+                                                    <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
+                                                       class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                        See Quotes
+                                                    </a>
+                                                @endif
+                                            @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
+                                                @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
+                                                    <a href="{{ route('resetQuotationTime', ['EOrderItemID' => $rfp->id]) }}"
+                                                       class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                        Reset
+                                                    </a>
+                                                    <a href="{{ route('discardQuotation', ['EOrderID' => $item->id]) }}"
+                                                       class="inline-flex items-center justify-center mt-2 px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                        Discard
+                                                    </a>
+                                                @endif
+                                            @elseif($rfp->bypass == 0 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
+                                                @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
+                                                    <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
+                                                       class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                        See Quotes
+                                                    </a>
+                                                @endif
+                                            @elseif($rfp->status == 'accepted')
+                                                <a class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
+                                                    Completed
+                                                </a>
+                                            @else
+                                                {{ $rfp->qoutes->count() }}
+                                            @endif
+
+                                        </td>
+
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            @if($rfp->qoutes->count() > 0 && $rfp->quotation_time >= \Carbon\Carbon::now() && $rfp->bypass == 0)
+                                                {{--                                                @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))--}}
+                                                @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
+                                                    <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 1]) }}"
+                                                       class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                        Override
+                                                    </a>
+                                                @endif
+                                            @elseif($rfp->quotation_time >= \Carbon\Carbon::now() && $rfp->bypass == 1)
+                                                Overrode
+                                            @else
+                                                N/A
+                                            @endif
                                         </td>
 
                                     </tr>
 
                                 @endforeach
-                                {{-- <tr>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        {{ $loop->iteration }}
-                                    </td>
-
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        {{ $item->created_at->format('d-m-Y') }}
-                                    </td>
-
-
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        @if ($item->business_id)
-                                            <a href="{{ route('RFQItemsByID', $item->id) }}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                EMDAD-{{ $item->business_id }}-{{ $item->id }}
-                                            </a>
-                                            @else
-                                            <a href="{{ route('RFQItemsByID', $item->id) }}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                EMDAD-{{ $item->business_id }}-{{ $item->id }}
-                                            </a>
-                                        @endif
-
-                                    </td>
-
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        <a href="{{ route('QoutationsBuyerReceivedRFQItemsByID', $item->id) }}"
-                                            class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                            View-Items: {{ $item->OrderItems->count() }})
-                                        </a>
-                                    </td>
-
-
-                                </tr> --}}
                             @endforeach
                             </tbody>
                         </table>

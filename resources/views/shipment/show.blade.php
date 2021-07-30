@@ -66,7 +66,6 @@
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_id)->first();  @endphp
                                             {{ $vehicleName->licence_plate_No }}
                                         </td>
 

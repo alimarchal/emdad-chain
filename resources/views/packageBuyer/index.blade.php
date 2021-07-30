@@ -44,9 +44,11 @@
                                     @if(isset($businessPackage) && $businessPackage->package_id == 2)
                                         <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
                                         <span class="flex items-center mt-auto text-white bg-gray-500 border-0 py-2 px-4 w-full rounded" style="justify-content: center; cursor: no-drop" disabled>Purchased</span>
-                                    @elseif(isset($businessPackage) && isset($businessPackage->package_id) == 1)
+                                    @elseif(isset($businessPackage) )
+                                        @if($businessPackage->package_id == 1)
                                         <a href="{{route('subscriptionUpdate', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center; cursor: pointer">Update</a>
-                                    @elseif(isset($businessPackage))
+                                        @else
+                                        @endif
                                     @else
 {{--                                        <form action="{{route('businessPackage.getCheckOutId')}}" method="POST">--}}
 {{--                                        <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">--}}
@@ -66,9 +68,11 @@
                                     @if(isset($businessPackage) && $businessPackage->package_id == 3)
                                         <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
                                         <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: no-drop" disabled>Purchased</button>
-                                    @elseif(isset($businessPackage) && isset($businessPackage->package_id) == 1 || isset($businessPackage->package_id) == 2)
-                                        <a href="{{route('subscriptionUpdate', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer">Update</a>
                                     @elseif(isset($businessPackage))
+                                        @if($businessPackage->package_id == 1 || $businessPackage->package_id == 2)
+                                        <a href="{{route('subscriptionUpdate', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer">Update</a>
+                                        @else
+                                        @endif
                                     @else
 {{--                                        <form action="{{route('business-packages.store')}}" method="POST">--}}
                                         <form  action="{{route('businessPackage.stepOne')}}" method="POST">
@@ -426,7 +430,7 @@
 
     </x-app-layout>
 @endif
-<script>
+{{--<script>
     function language(rtl_value) {
         $.ajax({
             url: "{{route('languageChange')}}",
@@ -443,4 +447,4 @@
             // }
         });
     }
-</script>
+</script>--}}

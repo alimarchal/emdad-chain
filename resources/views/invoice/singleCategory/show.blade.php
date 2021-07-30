@@ -7,7 +7,7 @@
                         $supplierBusiness = \App\Models\Business::where('id', $draftPurchaseOrders[0]->supplier_business_id)->first();
                         $buyerBusiness = \App\Models\Business::where('id', $draftPurchaseOrders[0]->business_id)->first();
                     @endphp
-                    <div class="flex flex-wrap overflow-hidden bg-white p-4">
+{{--                    <div class="flex flex-wrap overflow-hidden bg-white p-4">--}}
                         <div class="flex flex-wrap overflow-hidden bg-white p-4">
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                             </div>
@@ -69,7 +69,7 @@
                             <strong>Shipment Cost: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->shipment_cost, 2) }}<br>
                             <strong>Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->total_cost, 2) }}<br>
                         </div>--}}
-                    </div>
+{{--                    </div>--}}
                     <table class="min-w-full divide-y divide-black ">
                         <thead>
                             <tr>

@@ -59,7 +59,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                    <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dpo->item_name }}</a>
+                                                    <a href="{{ route('singleCategoryDPOShow',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dpo->item_name }}</a>
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
@@ -67,7 +67,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                    <a href="{{ route('singleCategoryShow',$dpo->rfq_no) }}" class="hover:text-blue-600 hover:underline text-blue-600">VIEW</a>
+                                                    <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-600 hover:underline text-blue-600">VIEW</a>
                                                 </td>
                                             </tr>
                                         @endforeach

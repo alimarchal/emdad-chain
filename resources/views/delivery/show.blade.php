@@ -60,7 +60,7 @@
                                         {{ $delivery->unit_price }}
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                        {{ number_format($delivery->quantity * $delivery->unit_price, 2, '.') }}
+                                        {{ number_format($delivery->quantity * $delivery->unit_price, 2) }}
                                     </td>
                                 </tr>
                             @endforeach

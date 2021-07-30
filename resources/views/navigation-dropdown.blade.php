@@ -31,9 +31,9 @@
                                 </svg>
                                 &nbsp;
                                 @if(auth()->user()->hasRole('SuperAdmin'))
-                                    {{ __('Users Admin') }}
+                                    {{ __('navigation-dropdown.Users Admin') }}
                                 @else
-                                    {{ __('Users') }}
+                                    {{ __('navigation-dropdown.Users') }}
                                 @endif
                             </x-jet-nav-link>
                         @endif
@@ -46,7 +46,7 @@
                                       d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                             </svg>
                             &nbsp;
-                            {{ __('Categories Admin') }}
+                            {{ __('navigation-dropdown.Categories Admin') }}
                         </x-jet-nav-link>
 
                         <x-jet-nav-link href="{{ route('contact.index') }}" :active="request()->routeIs('contact.*')">
@@ -54,7 +54,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
                             </svg>
                             &nbsp;
-                            {{ __('Support Requests') }}
+                            {{ __('navigation-dropdown.Support Requests') }}
                         </x-jet-nav-link>
                         @endrole
 
@@ -65,7 +65,7 @@
                                       d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                             </svg>
                             &nbsp;
-                            {{ __('Categories with sub-categories') }}
+                            {{ __('navigation-dropdown.Categories with sub-categories') }}
                         </x-jet-nav-link>
                         @endrole
 
@@ -84,7 +84,7 @@
                         {{--                    @if (auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3)--}}
                         @if (auth()->user()->hasRole('SuperAdmin'))
                             <x-jet-nav-link href="{{ route('packages.index') }}" :active="request()->routeIs('subscription')">
-                                {{ __('Subscription') }}
+                                {{ __('navigation-dropdown.Subscription') }}
                             </x-jet-nav-link>
                         @endif
 
@@ -126,11 +126,10 @@
                                 $quote = \App\Models\Qoute::where(['e_order_id' => $eOrders[0]->id, 'supplier_business_id' => auth()->user()->business_id])->first();
                             }
                         @endphp
-                        <span title="Number of New RFQ(s) received against multiple categories">Multiple Categories RFQ: &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span @if($rfqCount > 0) class="text-green-600 hover:underline"
+                        <span title="Number of New RFQ(s) received against multiple categories">{{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span @if($rfqCount > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                      @else class="text-red-600 hover:underline" @endif>{{$rfqCount}}</span></a></span>
-                        <span title="Number of New RFQ(s) received against single category">Single Category RFQ: &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0 && !isset($quote)) class="text-green-600 hover:underline"
-                                                                                                                                                                                                         @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else
-                                        0 @endif</span></a></span>
+                        <span title="Number of New RFQ(s) received against single category">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0 && !isset($quote)) class="text-green-600 hover:underline"
+                                                                                                                                                                                                         @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else 0 @endif</span></a></span>
                     @endif
 
                     @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
@@ -138,20 +137,21 @@
                             $multiPlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 1])->count();
                             $singlePlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 0])->get();
                         @endphp
-                        <span title="Number of New Quotation(s) received against multiple categories">Multiple Categories Quotations: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
+                        <span title="Number of New Quotation(s) received against multiple categories">{{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                                                  @else class="text-red-600 hover:underline" @endif>{{$multiPlacedRFQ}}</span></a></span>
-                        <span title="Number of New Quotation(s) received against single category">Single Category Quotations: &nbsp;<a href="{{route('singleCategoryBuyerRFQs')}}" style="padding-right: 10px;"><span @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
+                        <span title="Number of New Quotation(s) received against single category">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('singleCategoryBuyerRFQs')}}" style="padding-right: 10px;"><span @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                                            @else class="text-red-600 hover:underline" @endif>{{count($singlePlacedRFQ->unique('e_order_id'))}}</span></a></span>
                     @endif
 
-                    @can('all')
+{{--                    @can('all')--}}
                         {{--                    Uncomment below line when arabic version is ready and delete comming soon line--}}
                         {{--                <x-jet-button onclick="language(1)">--}}
-                        <x-jet-button>
-                            {{--                <a onclick="language(1)" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;" id="lan">العربية</a>--}}
-                            <a class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">قريباً</a>
-                        </x-jet-button>
-                    @endcan
+{{--                        <x-jet-button>--}}
+{{--                                <a onclick="language(1, 'en')" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;" id="lan">العربية</a>--}}
+{{--                                <a href="{{route('languageChange', ['lang' => 'ar', 'rtl_value' => 1])}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;" id="lan">العربية</a>--}}
+{{--                            <a class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">قريباً</a>--}}
+{{--                        </x-jet-button>--}}
+{{--                    @endcan--}}
                     <div x-data="{ notificationOpen: false }" class="relative">
                         <button @click="notificationOpen = ! notificationOpen" class="flex mx-4 text-gray-600 focus:outline-none">
                             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -188,30 +188,30 @@
                         <x-slot name="content">
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Business Info Management') }}
+                                {{ __('navigation-dropdown.Business Info Management') }}
                             </div>
                             <div class="border-t border-gray-100"></div>
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                                {{ __('navigation-dropdown.Profile') }}
                             </x-jet-dropdown-link>
 
 
                             @can('all')
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-responsive-nav-link href="{{ route('log.viewer') }}" :active="request()->routeIs('log.viewer')">
-                                    {{ __('Log Viewer') }}
+                                    {{ __('navigation-dropdown.Log Viewer') }}
                                 </x-jet-responsive-nav-link>
 
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-responsive-nav-link href="{{ route('user_logs') }}" :active="request()->routeIs('user_logs')">
-                                    {{ __('User Logs') }}
+                                    {{ __('navigation-dropdown.User Logs') }}
                                 </x-jet-responsive-nav-link>
                             @endcan
 
                             @can('all')
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('downloads') }}">
-                                    {{ __('Downloads') }}
+                                    {{ __('navigation-dropdown.Downloads') }}
                                 </x-jet-dropdown-link>
                             @endcan
 
@@ -227,25 +227,25 @@
                                     @if(isset(auth()->user()->business->business_name))
                                         {{ auth()->user()->business->business_name . ' ' . 'Info' }}
                                     @else
-                                        {{ __('Business') }}
+                                        {{ __('navigation-dropdown.Business') }}
                                     @endif
                                 </x-jet-dropdown-link>
 
                                 <div class="border-t border-gray-100"></div>
                                 @if($isBusinessDataExist)
                                     <x-jet-dropdown-link href="{{ route('certificateView') }}">
-                                        {{ __('Update Certificates') }}
+                                        {{ __('navigation-dropdown.Update Certificates') }}
                                     </x-jet-dropdown-link>
                                 @endif
 
                                 <div class="border-t border-gray-100"></div>
                                 @if (isset($isBusinessPOIExist))
                                     <x-jet-dropdown-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}">
-                                        {{ __('P.O. Info') }}
+                                        {{ __('navigation-dropdown.P.O. Info') }}
                                     </x-jet-dropdown-link>
                                 @else
                                     <x-jet-dropdown-link href="{{ route('purchaseOrderInfo.create') }}">
-                                        {{ __('P.O. Info') }}
+                                        {{ __('navigation-dropdown.P.O. Info') }}
                                     </x-jet-dropdown-link>
                                 @endif
                             @endif
@@ -254,17 +254,17 @@
 
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('packages.index') }}">
-                                    {{ __('Subscription') }}
+                                    {{ __('navigation-dropdown.Subscription') }}
                                 </x-jet-dropdown-link>
 
                                 {{--<div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('users.create') }}">
-                                    {{ __('Create Users') }}
+                                    {{ __('navigation-dropdown.Create Users') }}
                                 </x-jet-dropdown-link>--}}
 
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('users.index') }}">
-                                    {{ __('Current Users') }}
+                                    {{ __('navigation-dropdown.Current Users') }}
                                 </x-jet-dropdown-link>
 
                                 @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
@@ -272,7 +272,7 @@
                                     @if (auth()->user()->business_id)
                                         <div class="border-t border-gray-100"></div>
                                         <x-jet-dropdown-link href="{{ route('users.create') }}">
-                                            {{ __('Add User') }}
+                                            {{ __('navigation-dropdown.Add User') }}
                                         </x-jet-dropdown-link>
                                     @endif
                                 @endif
@@ -280,7 +280,7 @@
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
+                                    {{ __('navigation-dropdown.API Tokens') }}
                                 </x-jet-dropdown-link>
                             @endif
 
@@ -289,17 +289,17 @@
                             <!-- Team Management -->
                             @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                    {{ __('Manage Team') }}
+                                    {{ __('navigation-dropdown.Manage Team') }}
                                 </div>
 
                                 <!-- Team Settings -->
                                 <x-jet-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
-                                    {{ __('Team Settings') }}
+                                    {{ __('navigation-dropdown.Team Settings') }}
                                 </x-jet-dropdown-link>
 
                                 @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                                     <x-jet-dropdown-link href="{{ route('teams.create') }}">
-                                        {{ __('Create New Team') }}
+                                        {{ __('navigation-dropdown.Create New Team') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
@@ -307,7 +307,7 @@
 
                                 <!-- Team Switcher -->
                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                    {{ __('Switch Teams') }}
+                                    {{ __('navigation-dropdown.Switch Teams') }}
                                 </div>
 
                                 @foreach (Auth::user()->allTeams() as $team)
@@ -319,18 +319,18 @@
 
                             @if (auth()->user()->usertype != 'CEO')
                                 <x-jet-dropdown-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
-                                    {{ __('Policy and Procedure') }}
+                                    {{ __('navigation-dropdown.Policy and Procedure') }}
                                 </x-jet-dropdown-link>
                             @endif
 
                             @if (auth()->user()->usertype == 'CEO')
                                 @if(auth()->user()->registration_type == 'Buyer')
                                     <x-jet-dropdown-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
-                                        {{ __('Policy and Procedure') }}
+                                        {{ __('navigation-dropdown.Policy and Procedure') }}
                                     </x-jet-dropdown-link>
                                 @elseif(auth()->user()->registration_type == 'Supplier')
                                     <x-jet-dropdown-link href="{{ route('policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
-                                        {{ __('Policy and Procedure') }}
+                                        {{ __('navigation-dropdown.Policy and Procedure') }}
                                     </x-jet-dropdown-link>
                             @endif
                         @endif
@@ -340,7 +340,7 @@
                                 @csrf
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('navigation-dropdown.Logout') }}
                                 </x-jet-dropdown-link>
                             </form>
                         </x-slot>
@@ -362,28 +362,28 @@
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
                 <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
+                    {{ __('navigation-dropdown.Dashboard') }}
                 </x-jet-responsive-nav-link>
 
                 @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
                     <a @if($rfqCount > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('viewRFQs') }}">
-                        Multiple Categories RFQ: &nbsp; {{ $rfqCount }}
+                        {{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp; {{ $rfqCount }}
                     </a>
                     <a @if(count($eOrders) > 0 && !isset($quote)) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryRFQs') }}">
-                        Single Category RFQ: &nbsp; @if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else 0 @endif
+                        {{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp; @if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else 0 @endif
                     </a>
                 @endif
 
                 @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
                     <a @if($multiPlacedRFQ > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
-                        Multiple Categories Quotations: &nbsp; {{ $multiPlacedRFQ }}
+                        {{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp; {{ $multiPlacedRFQ }}
                     </a>
                     <a @if(count($singlePlacedRFQ) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryBuyerRFQs') }}">
-                        Single Category Quotations: &nbsp; {{ count($singlePlacedRFQ->unique('e_order_id')) }}
+                        {{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp; {{ count($singlePlacedRFQ->unique('e_order_id')) }}
                     </a>
                 @endif
             </div>
@@ -404,17 +404,17 @@
                 <div class="mt-3 space-y-1">
                     <!-- Account Management -->
                     <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                        {{ __('Profile') }}
+                        {{ __('navigation-dropdown.Profile') }}
                     </x-jet-responsive-nav-link>
 
                     @can('all')
                         <x-jet-responsive-nav-link href="{{ route('log.viewer') }}" :active="request()->routeIs('log.viewer')">
-                            {{ __('Log Viewer') }}
+                            {{ __('navigation-dropdown.Log Viewer') }}
                         </x-jet-responsive-nav-link>
 
                         <div class="border-t border-gray-100"></div>
                         <x-jet-responsive-nav-link href="{{ route('user_logs') }}" :active="request()->routeIs('user_logs')">
-                            {{ __('User Logs') }}
+                            {{ __('navigation-dropdown.User Logs') }}
                         </x-jet-responsive-nav-link>
                     @endcan
 
@@ -424,25 +424,25 @@
                             @if(isset(auth()->user()->business->business_name))
                                 {{ auth()->user()->business->business_name . ' ' . 'Info' }}
                             @else
-                                {{ __('Business') }}
+                                {{ __('navigation-dropdown.Business') }}
                             @endif
                         </x-jet-dropdown-link>
 
                         <div class="border-t border-gray-100"></div>
                         @if($isBusinessDataExist)
                             <x-jet-dropdown-link href="{{ route('certificateView') }}">
-                                {{ __('Update Certificates') }}
+                                {{ __('navigation-dropdown.Update Certificates') }}
                             </x-jet-dropdown-link>
                         @endif
 
                         <div class="border-t border-gray-100"></div>
                         @if (isset($isBusinessPOIExist))
                             <x-jet-dropdown-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}">
-                                {{ __('P.O. Info') }}
+                                {{ __('navigation-dropdown.P.O. Info') }}
                             </x-jet-dropdown-link>
                         @else
                             <x-jet-dropdown-link href="{{ route('purchaseOrderInfo.create') }}">
-                                {{ __('P.O. Info') }}
+                                {{ __('navigation-dropdown.P.O. Info') }}
                             </x-jet-dropdown-link>
                         @endif
                     @endif
@@ -450,12 +450,12 @@
                     @if (auth()->user()->status == 3 && auth()->user()->hasRole('CEO|SuperAdmin'))
                         <div class="border-t border-gray-100"></div>
                         <x-jet-dropdown-link href="{{ route('packages.index') }}">
-                            {{ __('Subscription') }}
+                            {{ __('navigation-dropdown.Subscription') }}
                         </x-jet-dropdown-link>
 
                         <div class="border-t border-gray-100"></div>
                         <x-jet-dropdown-link href="{{ route('users.index') }}">
-                            {{ __('Current Users') }}
+                            {{ __('navigation-dropdown.Current Users') }}
                         </x-jet-dropdown-link>
 
                         @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
@@ -463,7 +463,7 @@
                             @if (auth()->user()->business_id)
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('users.create') }}">
-                                    {{ __('Add User') }}
+                                    {{ __('navigation-dropdown.Add User') }}
                                 </x-jet-dropdown-link>
                             @endif
                         @endif
@@ -472,34 +472,34 @@
 
                     @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                         <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
-                            {{ __('API Tokens') }}
+                            {{ __('navigation-dropdown.API Tokens') }}
                         </x-jet-responsive-nav-link>
                     @endif
 
                     @if (auth()->user()->usertype != 'CEO')
                         <x-jet-dropdown-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
-                            {{ __('Policy and Procedure') }}
+                            {{ __('navigation-dropdown.Policy and Procedure') }}
                         </x-jet-dropdown-link>
                     @endif
 
                     @if (auth()->user()->usertype == 'CEO')
                         @if(auth()->user()->registration_type == 'Buyer')
                             <x-jet-dropdown-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
-                                {{ __('Policy and Procedure') }}
+                                {{ __('navigation-dropdown.Policy and Procedure') }}
                             </x-jet-dropdown-link>
                         @elseif(auth()->user()->registration_type == 'Supplier')
                             <x-jet-dropdown-link href="{{ route('policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
-                                {{ __('Policy and Procedure') }}
+                                {{ __('navigation-dropdown.Policy and Procedure') }}
                             </x-jet-dropdown-link>
                         @endif
                     @endif
 
-                <!-- Authentication -->
+                    <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
                         <x-jet-responsive-nav-link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                            {{ __('Logout') }}
+                            {{ __('navigation-dropdown.Logout') }}
                         </x-jet-responsive-nav-link>
                     </form>
 
@@ -508,23 +508,23 @@
                         <div class="border-t border-gray-200"></div>
 
                         <div class="block px-4 py-2 text-xs text-gray-400">
-                            {{ __('Manage Team') }}
+                            {{ __('navigation-dropdown.Manage Team') }}
                         </div>
 
                         <!-- Team Settings -->
                         <x-jet-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
-                            {{ __('Team Settings') }}
+                            {{ __('navigation-dropdown.Team Settings') }}
                         </x-jet-responsive-nav-link>
 
                         <x-jet-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
-                            {{ __('Create New Team') }}
+                            {{ __('navigation-dropdown.Create New Team') }}
                         </x-jet-responsive-nav-link>
 
                         <div class="border-t border-gray-200"></div>
 
                         <!-- Team Switcher -->
                         <div class="block px-4 py-2 text-xs text-gray-400">
-                            {{ __('Switch Teams') }}
+                            {{ __('navigation-dropdown.Switch Teams') }}
                         </div>
 
                         @foreach (Auth::user()->allTeams() as $team)
@@ -556,7 +556,7 @@
 
                         @role('SuperAdmin|CEO')
                         @if (auth()->user()->status == 3)
-                            <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
+                           {{-- <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
                                 <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z"/>
                                     <circle cx="9" cy="7" r="4"/>
@@ -565,11 +565,11 @@
                                 </svg>
                                 &nbsp;
                                 @if(auth()->user()->hasRole('SuperAdmin'))
-                                    {{ __('مشرف المستخدمين') }}
+                                    {{ __('navigation-dropdown.Users Admin') }}
                                 @else
-                                    {{ __('المستخدمين') }}
+                                    {{ __('navigation-dropdown.Users') }}
                                 @endif
-                            </x-jet-nav-link>
+                            </x-jet-nav-link>--}}
                         @endif
                         @endrole
                         @role('SuperAdmin')
@@ -579,7 +579,7 @@
                                       d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                             </svg>
                             &nbsp;
-                            {{ __('مشرف الأقسام') }}
+                            {{ __('navigation-dropdown.Categories Admin') }}
                         </x-jet-nav-link>
 
                         <x-jet-nav-link href="{{ route('contact.index') }}" :active="request()->routeIs('contact.*')">
@@ -587,11 +587,11 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
                             </svg>
                             &nbsp;
-                            {{ __('طلبات الدعم') }}
+                            {{ __('navigation-dropdown.Support Requests') }}
                         </x-jet-nav-link>
                         @endrole
 
-                        @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
+                       {{-- @if(auth()->user()->can('all') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
                             <x-jet-nav-link href="{{ route('RFQCart.index') }}" :active="request()->routeIs('RFQCart.index')">
                                 @include('RFQ.RFQICON') &nbsp;طلبات أسعار المنتجات
                                 @if (\App\Models\ECart::where('user_id', auth()->user()->id)
@@ -605,88 +605,79 @@
 
                         @if (auth()->user()->usertype != 'CEO')
                             <x-jet-nav-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
-                                {{ __('Policy and Procedure') }} &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                                {{ __('navigation-dropdown.Policy and Procedure') }} &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
                             </x-jet-nav-link>
                         @endif
 
                         @if (auth()->user()->usertype == 'CEO')
                             @if(auth()->user()->registration_type == 'Buyer')
                                 <x-jet-nav-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
-                                    {{ __('Policy and Procedure') }} &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                                    {{ __('navigation-dropdown.Policy and Procedure') }} &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
                                 </x-jet-nav-link>
                             @elseif(auth()->user()->registration_type == 'Supplier')
                                 <x-jet-nav-link href="{{ route('policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
-                                    {{ __('Policy and Procedure') }} &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                                    {{ __('navigation-dropdown.Policy and Procedure') }} &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
                                 </x-jet-nav-link>
                             @endif
-                        @endif
-
-
-                        {{--                    @if (Auth::user()->status == 1)--}}
-                        {{--                    @else--}}
-                        {{--                        @if (Auth::user()->registration_type)--}}
-                        {{--                            <x-jet-nav-link href="{{ route('business.create') }}" :active="request()->routeIs('business.*')">--}}
-                        {{--                                {{ __('Business') }}--}}
-                        {{--                                @php--}}
-                        {{--                                    $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();--}}
-                        {{--                                    if ($isBusinessDataExist) {--}}
-                        {{--                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();--}}
-                        {{--                                        $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();--}}
-                        {{--                                        //$isBusinessFinanceDataExist = \App\Models\BusinessFinanceDetail::where('business_id',$isBusinessDataExist->id)->first();--}}
-                        {{--                                        $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();--}}
-                        {{--                                    }--}}
-                        {{--                                @endphp--}}
-                        {{--                                @if (isset($isBusinessDataExist))--}}
-                        {{--                                    &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-                        {{--                                @endif--}}
-                        {{--                            </x-jet-nav-link>--}}
-
-
-
-                        {{--                            @if (isset($isBusinessWarehouseDataExist))--}}
-
-                        {{--                                <x-jet-nav-link href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}" :active="request()->routeIs('businessWarehouse.*')">--}}
-                        {{--                                    {{ __('Warehouse') }}--}}
-                        {{--                                    @if (isset($isBusinessWarehouseDataExist))--}}
-                        {{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-                        {{--                                    @endif--}}
-                        {{--                                </x-jet-nav-link>--}}
-
-                        {{--                            @else--}}
-                        {{--                                <x-jet-nav-link href="{{ route('businessWarehouse.create') }}" :active="request()->routeIs('businessWarehouse.*')">--}}
-                        {{--                                    {{ __('Warehouse') }}--}}
-                        {{--                                    @if (isset($isBusinessWarehouseDataExist))--}}
-                        {{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-                        {{--                                    @endif--}}
-                        {{--                                </x-jet-nav-link>--}}
-                        {{--                            @endif--}}
-
-                        {{--                            @if (isset($isBusinessPOIExist))--}}
-                        {{--                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}" :active="request()->routeIs('purchaseOrderInfo.*')">--}}
-                        {{--                                    {{ __('P.O. Info') }}--}}
-                        {{--                                    @if (isset($isBusinessPOIExist))--}}
-                        {{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-                        {{--                                    @endif--}}
-                        {{--                                </x-jet-nav-link>--}}
-                        {{--                            @else--}}
-                        {{--                                <x-jet-nav-link href="{{ route('purchaseOrderInfo.create') }}" :active="request()->routeIs('purchaseOrderInfo.*')">--}}
-                        {{--                                    {{ __('P.O. Info') }}--}}
-                        {{--                                    @if (isset($isBusinessPOIExist))--}}
-                        {{--                                        &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-                        {{--                                    @endif--}}
-                        {{--                                </x-jet-nav-link>--}}
-                        {{--                            @endif--}}
-
-                        {{--                        @endif--}}
-                        {{--                    @endif--}}
+                        @endif--}}
                     </div>
                 </div>
 
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
-                    @cannot('all')
-                        <a onclick="language(0)" class="get-started-btn scrollto" style="cursor: pointer"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top: -4px;">English</a>
-                    @endcannot
+                    @role('SC Specialist')
+                    @php $rfqs = \App\Models\EOrderItems::with('qoutes')->doesntHave('qoutes')->count(); @endphp
+                    <span title="Number of RFQs which received no quotations">RFQs with no Quotations: &nbsp;<a href="{{route('RFQsWithNoQuotations')}}" style="padding-right: 10px;"><span class="text-blue-600 hover:underline">{{$rfqs}}</span></a></span>
+                    @endrole
+
+                    @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
+                        @php
+                            $business_cate = \App\Models\BusinessCategory::where('business_id', auth()->user()->business_id)->get();
+                            if ($business_cate->isNotEmpty()) {
+                                foreach ($business_cate as $item) {
+                                    $business_categories[] = (int)$item->category_number;
+                                }
+                            }
+                            sort($business_categories);
+                            // Counting NEW RFQs for multiple categories for supplier
+                            $rfqCount = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->count();
+                            // Counting NEW RFQs for single category for supplier
+                            $eOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 0])
+                                                                            ->where('bypass', 0)
+                                                                            ->whereDate('quotation_time', '>=', \Carbon\Carbon::now())
+                                                                            ->whereIn('item_code', $business_categories)
+                                                                            ->get();
+                            $eOrders = array();
+                            foreach ($eOrderItems as $eOrderItem)
+                            {
+                                $eOrderPresent[] = \App\Models\EOrders::where(['id' => $eOrderItem->e_order_id])->first();
+                                $eOrders = $eOrderPresent;
+                            }
+                            if (count($eOrders) > 0)
+                            {
+                                $quote = \App\Models\Qoute::where(['e_order_id' => $eOrders[0]->id, 'supplier_business_id' => auth()->user()->business_id])->first();
+                            }
+                        @endphp
+                        <span title="Number of New RFQ(s) received against multiple categories">{{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span @if($rfqCount > 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                  @else class="text-red-600 hover:underline" @endif>{{$rfqCount}}</span></a></span>
+                        <span title="Number of New RFQ(s) received against single category">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0 && !isset($quote)) class="text-green-600 hover:underline"
+                                                                                                                                                                                                    @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else 0 @endif</span></a></span>
+                    @endif
+
+                    @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
+                        @php
+                            $multiPlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 1])->count();
+                            $singlePlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 0])->get();
+                        @endphp
+                        <span title="Number of New Quotation(s) received against multiple categories">{{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                                              @else class="text-red-600 hover:underline" @endif>{{$multiPlacedRFQ}}</span></a></span>
+                        <span title="Number of New Quotation(s) received against single category">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('singleCategoryBuyerRFQs')}}" style="padding-right: 10px;"><span @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                                      @else class="text-red-600 hover:underline" @endif>{{count($singlePlacedRFQ->unique('e_order_id'))}}</span></a></span>
+                    @endif
+{{--                    @cannot('all')--}}
+{{--                        <a onclick="language(0, 'en')" class="get-started-btn scrollto" style="cursor: pointer"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top: -4px;">English</a>--}}
+                        <a href="{{route('languageChange', ['lang' => 'en', 'rtl_value' => 0])}}" class="get-started-btn scrollto" style="cursor: pointer"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top: -4px;">English</a>
+{{--                    @endcannot--}}
                     <div x-data="{ notificationOpen: false }" class="relative">
                         <button @click="notificationOpen = ! notificationOpen" class="flex mx-4 text-gray-600 focus:outline-none">
                             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -748,43 +739,94 @@
                         <x-slot name="content">
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Business Info Management') }}
+                                {{ __('navigation-dropdown.Business Info Management') }}
                             </div>
                             <div class="border-t border-gray-100"></div>
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                                {{ __('navigation-dropdown.Profile') }}
                             </x-jet-dropdown-link>
 
 
                             @can('all')
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-responsive-nav-link href="{{ route('log.viewer') }}" :active="request()->routeIs('log.viewer')">
-                                    {{ __('Log Viewer') }}
+                                    {{ __('navigation-dropdown.Log Viewer') }}
+                                </x-jet-responsive-nav-link>
+
+                                <div class="border-t border-gray-100"></div>
+                                <x-jet-responsive-nav-link href="{{ route('user_logs') }}" :active="request()->routeIs('user_logs')">
+                                    {{ __('navigation-dropdown.User Logs') }}
                                 </x-jet-responsive-nav-link>
                             @endcan
 
                             @can('all')
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('downloads') }}">
-                                    {{ __('التحميلات') }}
+                                    {{ __('navigation-dropdown.Downloads') }}
                                 </x-jet-dropdown-link>
                             @endcan
 
-                            {{--                        @can('create user' && Auth::user()->status == 3)--}}
-                            @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
+                            @php
+                                $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
+                                if ($isBusinessDataExist) {
+                                    $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
+                                }
+                            @endphp
+                            @if (auth()->user()->hasRole('CEO') && Auth::user()->registration_type != null)
+                                <div class="border-t border-gray-100"></div>
+                                <x-jet-dropdown-link href="{{ route('business.create') }}">
+                                    @if(isset(auth()->user()->business->business_name))
+                                        {{ auth()->user()->business->business_name . ' ' . 'Info' }}
+                                    @else
+                                        {{ __('navigation-dropdown.Business') }}
+                                    @endif
+                                </x-jet-dropdown-link>
 
-                                @if (auth()->user()->business_id)
-                                    <div class="border-t border-gray-100"></div>
-                                    <x-jet-dropdown-link href="{{ route('users.create') }}">
-                                        {{ __('إضافة مستخدم') }}
+                                <div class="border-t border-gray-100"></div>
+                                @if($isBusinessDataExist)
+                                    <x-jet-dropdown-link href="{{ route('certificateView') }}">
+                                        {{ __('navigation-dropdown.Update Certificates') }}
+                                    </x-jet-dropdown-link>
+                                @endif
+
+                                <div class="border-t border-gray-100"></div>
+                                @if (isset($isBusinessPOIExist))
+                                    <x-jet-dropdown-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}">
+                                        {{ __('navigation-dropdown.P.O. Info') }}
+                                    </x-jet-dropdown-link>
+                                @else
+                                    <x-jet-dropdown-link href="{{ route('purchaseOrderInfo.create') }}">
+                                        {{ __('navigation-dropdown.P.O. Info') }}
                                     </x-jet-dropdown-link>
                                 @endif
                             @endif
-                            {{--                        @endcan--}}
+
+                            @if (auth()->user()->status == 3 && auth()->user()->hasRole('CEO|SuperAdmin'))
+
+                                <div class="border-t border-gray-100"></div>
+                                <x-jet-dropdown-link href="{{ route('packages.index') }}">
+                                    {{ __('navigation-dropdown.Subscription') }}
+                                </x-jet-dropdown-link>
+
+                                <div class="border-t border-gray-100"></div>
+                                <x-jet-dropdown-link href="{{ route('users.index') }}">
+                                    {{ __('navigation-dropdown.Current Users') }}
+                                </x-jet-dropdown-link>
+
+                                @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
+
+                                    @if (auth()->user()->business_id)
+                                        <div class="border-t border-gray-100"></div>
+                                        <x-jet-dropdown-link href="{{ route('users.create') }}">
+                                            {{ __('navigation-dropdown.Add User') }}
+                                        </x-jet-dropdown-link>
+                                    @endif
+                                @endif
+                            @endif
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
+                                    {{ __('navigation-dropdown.API Tokens') }}
                                 </x-jet-dropdown-link>
                             @endif
 
@@ -793,17 +835,17 @@
                             <!-- Team Management -->
                             @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                    {{ __('Manage Team') }}
+                                    {{ __('navigation-dropdown.Manage Team') }}
                                 </div>
 
                                 <!-- Team Settings -->
                                 <x-jet-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
-                                    {{ __('Team Settings') }}
+                                    {{ __('navigation-dropdown.Team Settings') }}
                                 </x-jet-dropdown-link>
 
                                 @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                                     <x-jet-dropdown-link href="{{ route('teams.create') }}">
-                                        {{ __('Create New Team') }}
+                                        {{ __('navigation-dropdown.Create New Team') }}
                                     </x-jet-dropdown-link>
                                 @endcan
 
@@ -811,7 +853,7 @@
 
                                 <!-- Team Switcher -->
                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                    {{ __('Switch Teams') }}
+                                    {{ __('navigation-dropdown.Switch Teams') }}
                                 </div>
 
                                 @foreach (Auth::user()->allTeams() as $team)
@@ -819,14 +861,31 @@
                                 @endforeach
 
                                 <div class="border-t border-gray-100"></div>
-                        @endif
+                            @endif
+                            @if (auth()->user()->usertype != 'CEO')
+                                <x-jet-dropdown-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                                    {{ __('navigation-dropdown.Policy and Procedure') }}
+                                </x-jet-dropdown-link>
+                            @endif
+
+                            @if (auth()->user()->usertype == 'CEO')
+                                @if(auth()->user()->registration_type == 'Buyer')
+                                    <x-jet-dropdown-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
+                                        {{ __('navigation-dropdown.Policy and Procedure') }}
+                                    </x-jet-dropdown-link>
+                                @elseif(auth()->user()->registration_type == 'Supplier')
+                                    <x-jet-dropdown-link href="{{ route('policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
+                                        {{ __('navigation-dropdown.Policy and Procedure') }}
+                                    </x-jet-dropdown-link>
+                                @endif
+                            @endif
 
                         <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                                    {{ __('تسجيل خروج') }}
+                                    {{ __('navigation-dropdown.Logout') }}
                                 </x-jet-dropdown-link>
                             </form>
                         </x-slot>
@@ -848,8 +907,30 @@
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
                 <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
+                    {{ __('navigation-dropdown.Dashboard') }}
                 </x-jet-responsive-nav-link>
+
+                @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
+                    <a @if($rfqCount > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                       @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('viewRFQs') }}">
+                        {{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp; {{ $rfqCount }}
+                    </a>
+                    <a @if(count($eOrders) > 0 && !isset($quote)) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                       @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryRFQs') }}">
+                        {{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp; @if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else 0 @endif
+                    </a>
+                @endif
+
+                @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
+                    <a @if($multiPlacedRFQ > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                       @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
+                        {{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp; {{ $multiPlacedRFQ }}
+                    </a>
+                    <a @if(count($singlePlacedRFQ) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                       @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryBuyerRFQs') }}">
+                        {{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp; {{ count($singlePlacedRFQ->unique('e_order_id')) }}
+                    </a>
+                @endif
 
             </div>
 
@@ -869,28 +950,101 @@
                 <div class="mt-3 space-y-1">
                     <!-- Account Management -->
                     <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                        {{ __('Profile') }}
+                        {{ __('navigation-dropdown.Profile') }}
                     </x-jet-responsive-nav-link>
 
                     @can('all')
                         <x-jet-responsive-nav-link href="{{ route('log.viewer') }}" :active="request()->routeIs('log.viewer')">
-                            {{ __('Log Viewer') }}
+                            {{ __('navigation-dropdown.Log Viewer') }}
+                        </x-jet-responsive-nav-link>
+
+                        <div class="border-t border-gray-100"></div>
+                        <x-jet-responsive-nav-link href="{{ route('user_logs') }}" :active="request()->routeIs('user_logs')">
+                            {{ __('navigation-dropdown.User Logs') }}
                         </x-jet-responsive-nav-link>
                     @endcan
 
+                    @if (auth()->user()->hasRole('CEO') && Auth::user()->registration_type != null)
+                        <div class="border-t border-gray-100"></div>
+                        <x-jet-dropdown-link href="{{ route('business.create') }}">
+                            @if(isset(auth()->user()->business->business_name))
+                                {{ auth()->user()->business->business_name . ' ' . 'Info' }}
+                            @else
+                                {{ __('navigation-dropdown.Business') }}
+                            @endif
+                        </x-jet-dropdown-link>
+
+                        <div class="border-t border-gray-100"></div>
+                        @if($isBusinessDataExist)
+                            <x-jet-dropdown-link href="{{ route('certificateView') }}">
+                                {{ __('navigation-dropdown.Update Certificates') }}
+                            </x-jet-dropdown-link>
+                        @endif
+
+                        <div class="border-t border-gray-100"></div>
+                        @if (isset($isBusinessPOIExist))
+                            <x-jet-dropdown-link href="{{ route('purchaseOrderInfo.show', $isBusinessPOIExist->id) }}">
+                                {{ __('navigation-dropdown.P.O. Info') }}
+                            </x-jet-dropdown-link>
+                        @else
+                            <x-jet-dropdown-link href="{{ route('purchaseOrderInfo.create') }}">
+                                {{ __('navigation-dropdown.P.O. Info') }}
+                            </x-jet-dropdown-link>
+                        @endif
+                    @endif
+
+                    @if (auth()->user()->status == 3 && auth()->user()->hasRole('CEO|SuperAdmin'))
+                        <div class="border-t border-gray-100"></div>
+                        <x-jet-dropdown-link href="{{ route('packages.index') }}">
+                            {{ __('navigation-dropdown.Subscription') }}
+                        </x-jet-dropdown-link>
+
+                        <div class="border-t border-gray-100"></div>
+                        <x-jet-dropdown-link href="{{ route('users.index') }}">
+                            {{ __('navigation-dropdown.Current Users') }}
+                        </x-jet-dropdown-link>
+
+                        @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
+
+                            @if (auth()->user()->business_id)
+                                <div class="border-t border-gray-100"></div>
+                                <x-jet-dropdown-link href="{{ route('users.create') }}">
+                                    {{ __('navigation-dropdown.Add User') }}
+                                </x-jet-dropdown-link>
+                            @endif
+                        @endif
+                    @endif
 
                     @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                         <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
-                            {{ __('API Tokens') }}
+                            {{ __('navigation-dropdown.API Tokens') }}
                         </x-jet-responsive-nav-link>
                     @endif
 
-                <!-- Authentication -->
+                    @if (auth()->user()->usertype != 'CEO')
+                        <x-jet-dropdown-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                            {{ __('navigation-dropdown.Policy and Procedure') }}
+                        </x-jet-dropdown-link>
+                    @endif
+
+                    @if (auth()->user()->usertype == 'CEO')
+                        @if(auth()->user()->registration_type == 'Buyer')
+                            <x-jet-dropdown-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
+                                {{ __('navigation-dropdown.Policy and Procedure') }}
+                            </x-jet-dropdown-link>
+                        @elseif(auth()->user()->registration_type == 'Supplier')
+                            <x-jet-dropdown-link href="{{ route('policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
+                                {{ __('navigation-dropdown.Policy and Procedure') }}
+                            </x-jet-dropdown-link>
+                        @endif
+                    @endif
+
+                    <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
                         <x-jet-responsive-nav-link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                            {{ __('Logout') }}
+                            {{ __('navigation-dropdown.Logout') }}
                         </x-jet-responsive-nav-link>
                     </form>
 
@@ -899,23 +1053,23 @@
                         <div class="border-t border-gray-200"></div>
 
                         <div class="block px-4 py-2 text-xs text-gray-400">
-                            {{ __('Manage Team') }}
+                            {{ __('navigation-dropdown.Manage Team') }}
                         </div>
 
                         <!-- Team Settings -->
                         <x-jet-responsive-nav-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}" :active="request()->routeIs('teams.show')">
-                            {{ __('Team Settings') }}
+                            {{ __('navigation-dropdown.Team Settings') }}
                         </x-jet-responsive-nav-link>
 
                         <x-jet-responsive-nav-link href="{{ route('teams.create') }}" :active="request()->routeIs('teams.create')">
-                            {{ __('Create New Team') }}
+                            {{ __('navigation-dropdown.Create New Team') }}
                         </x-jet-responsive-nav-link>
 
                         <div class="border-t border-gray-200"></div>
 
                         <!-- Team Switcher -->
                         <div class="block px-4 py-2 text-xs text-gray-400">
-                            {{ __('Switch Teams') }}
+                            {{ __('navigation-dropdown.Switch Teams') }}
                         </div>
 
                         @foreach (Auth::user()->allTeams() as $team)
@@ -928,14 +1082,15 @@
     </nav>
 @endif
 
-<script>
-    function language(rtl_value) {
+{{--<script>
+    function language(rtl_value, lang) {
         $.ajax({
-            url: "{{route('languageChange')}}",
+--}}{{--            url: "{{route('languageChange')}}",--}}{{--
             method: 'post',
             data: {
                 "_token": "{{ csrf_token() }}",
                 rtl_value: rtl_value,
+                lang: lang,
             },
             success: function () {
                 window.location.reload();
@@ -945,4 +1100,4 @@
             // }
         });
     }
-</script>
+</script>--}}

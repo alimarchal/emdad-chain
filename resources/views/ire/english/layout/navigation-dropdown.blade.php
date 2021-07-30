@@ -39,7 +39,7 @@
                                 $remainingDays = $userCreatedAt->addDays(30);
                             @endphp
                             <x-jet-nav-link href="javascript:void(0)" title="Days remaining for others to be able to use your IRE number">
-                                Days remaining:   &nbsp;<div class="text-gray-500" data-countdown="{{$remainingDays}}"></div>
+                                {{ __('ire/navigation-dropdown.Days remaining') }}   &nbsp;<div class="text-gray-500" data-countdown="{{$remainingDays}}"></div>
                             </x-jet-nav-link>
                         </div>
                     @endif
@@ -56,14 +56,14 @@
                             }
                         @endphp
                         <x-jet-nav-link href="javascript:void(0)" title="Remaining businesses: the remaining from the requested number of registered businesses and purchase orders from each">
-                            {{ __('Remaining Businesses') }}  &nbsp;{{$remainingBusiness}}
+                            {{ __('ire/navigation-dropdown.Remaining Businesses') }}  &nbsp;{{$remainingBusiness}}
                         </x-jet-nav-link>
                     </div>
 
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-jet-nav-link href="{{ route('policyProcedure.ire') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
-                            {{ __('Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
+                            {{ __('ire/navigation-dropdown.Policy and Procedure') }}  &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">
                         </x-jet-nav-link>
                     </div>
                 </div>
@@ -104,15 +104,15 @@
                             <x-slot name="content">
                                 <!-- Account Management -->
                                 <div class="block px-4 py-2 text-xs text-gray-400">
-                                    {{ __('Manage Account') }}
+                                    {{ __('ire/navigation-dropdown.Manage Account') }}
                                 </div>
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{route('ireProfile')}}">
-                                    {{ __('Profile') }}
+                                    {{ __('ire/navigation-dropdown.Profile') }}
                                 </x-jet-dropdown-link>
 
                                 <x-jet-dropdown-link href="{{route('ireChangePassword')}}">
-                                    {{ __('Change Password') }}
+                                    {{ __('ire/navigation-dropdown.Change Password') }}
                                 </x-jet-dropdown-link>
 
 
@@ -123,7 +123,7 @@
                                     @csrf
 
                                     <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('ire/navigation-dropdown.Logout') }}
                                     </x-jet-dropdown-link>
                                 </form>
                             </x-slot>
@@ -145,7 +145,7 @@
         <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
                 <x-jet-responsive-nav-link href="{{ route('ireDashboard') }}" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
+                    {{ __('ire/navigation-dropdown.Dashboard') }}
                 </x-jet-responsive-nav-link>
 
             </div>
@@ -166,7 +166,7 @@
                 <div class="mt-3 space-y-1">
                     <!-- Account Management -->
                     <x-jet-responsive-nav-link href="{{route('ireProfile')}}" :active="request()->routeIs('profile.show')">
-                        {{ __('Profile') }}
+                        {{ __('ire/navigation-dropdown.Profile') }}
                     </x-jet-responsive-nav-link>
 
 
@@ -175,7 +175,7 @@
                         @csrf
 
                         <x-jet-responsive-nav-link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                            {{ __('Logout') }}
+                            {{ __('ire/navigation-dropdown.Logout') }}
                         </x-jet-responsive-nav-link>
                     </form>
 

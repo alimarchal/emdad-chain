@@ -42,7 +42,7 @@
     @if (auth()->user()->rtl == 1)
 
         <!-- Template Main CSS File -->
-        <link href="Presento/assets/css/style.css" rel="stylesheet">
+        <link href="{{asset('Presento/assets/css/style.css')}}" rel="stylesheet">
         <style>
             nav, #side-bar, #main, .inner-page {
                 direction: rtl;

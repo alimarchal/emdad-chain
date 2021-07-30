@@ -68,16 +68,20 @@ class EmdadInvoiceController extends Controller
         elseif(auth()->user()->registration_type == "Supplier")
         {
             $totalAmount = 0;  /* For Calculating Total Amount W/O VAT */
+            $totalEmdadCharges = 0; /* Total Emdad Charged */
 
             $collections = EmdadInvoice::where([['supplier_business_id', auth()->user()->business_id],['send_status', 1]])->where('rfq_type', '=', 0)->get();
 
-            foreach ($collections as $collection)
+            if (isset($collections) && $collections->count() > 0)
             {
-                $quote = Qoute::where('id', $collection->invoice->quote->id)->first();
-                $totalAmount += ($quote->quote_quantity * $quote->quote_price_per_quantity);
+                foreach ($collections as $collection)
+                {
+                    $quote = Qoute::where('id', $collection->invoice->quote->id)->first();
+                    $totalAmount += ($quote->quote_quantity * $quote->quote_price_per_quantity);
+                }
+                $totalAmount += $quote->shipment_cost;
+                $totalEmdadCharges = $totalAmount * (1.5 / 100);
             }
-            $totalAmount += $quote->shipment_cost;
-            $totalEmdadCharges = $totalAmount * (1.5 / 100);
 
             $emdadInvoices = $collections->unique('rfq_no');
 

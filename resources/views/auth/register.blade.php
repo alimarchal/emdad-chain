@@ -22,9 +22,9 @@
         </x-slot>
         <x-jet-validation-errors class="mb-4"/>
 
-        {{--        <x-jet-button>--}}
-        {{--            <a href="{{route('registerAr')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>--}}
-        {{--        </x-jet-button>--}}
+        <x-jet-button>
+            <a href="{{route('registerAr', 'ar')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
+        </x-jet-button>
 
         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
 
@@ -67,10 +67,10 @@
                     <x-jet-label for="gender" value="{{ __('Title') }}" class="mb-2"/>
 
                     <select name="gender" id="gender" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name">
-                        <option value="">Select</option>
-                        <option value="Male">Mr.</option>
-                        <option value="Female">Ms.</option>
-                        <option value="Female">Mrs.</option>
+                        <option value="">{{ __('Select') }}</option>
+                        <option value="Male">{{ __('Mr.') }}</option>
+                        <option value="Female">{{ __('Ms.') }}</option>
+                        <option value="Female">{{ __('Mrs.') }}</option>
                     </select>
                 </div>
 
@@ -179,7 +179,7 @@
                 <div class="w-full overflow-hidden">
                     <label for="policy_procedure" class="flex items-center">
                         <input id="policy_procedure" type="checkbox" class="form-checkbox" name="policy_procedure" required>
-                        <span class="ml-2 text-sm text-gray-600">I agree</span> <a href="{{route('policyProcedure.eula')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('Policy and Procedures') }}</u></a>
+                        <span class="ml-2 text-sm text-gray-600">{{ __('I agree')}}</span> <a href="{{route('policyProcedure.eula')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('Policy and Procedures') }}</u></a>
                     </label>
                 </div>
 

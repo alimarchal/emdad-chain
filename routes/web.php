@@ -54,7 +54,8 @@ use Spatie\Permission\Models\Permission;
 */
 
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [DashboardController::class, 'languageChange'])->name('languageChange');
+//Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [DashboardController::class, 'languageChange'])->name('languageChange');
+Route::middleware(['auth:sanctum', 'verified'])->get('languageChange/{lang}/{rtl_value}', [DashboardController::class, 'languageChange'])->name('languageChange');
 Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
 Route::middleware(['auth:sanctum'])->post('/registrationType', [UserController::class, 'registrationType']);
 // User Log route for SuperAdmin
@@ -205,10 +206,12 @@ Route::resource('contact', ContactController::class);
 Route::get('/en', function () {
     return view('welcome');
 })->name('ar');
-Route::get('/registerAr', function () {
+Route::get('/register/{lang}', function ($lang) {
+    App::setlocale($lang);
     return view('auth.registerAr');
 })->name('registerAr');
-Route::get('/loginAr', function () {
+Route::get('/login/{lang}', function ($lang) {
+    App::setlocale($lang);
     return view('auth.loginAr');
 })->name('loginAr');
 //Route::get('/dashboard_ar', function () {
@@ -353,8 +356,8 @@ Route::middleware(['auth:sanctum'])->post('qoute/{qoute}/Accepted', [QouteContro
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'show'])->name('dpo.show');
 Route::middleware(['auth:sanctum'])->get('dpo', [DraftPurchaseOrderController::class, 'index'])->name('dpo.index');
 ##################################### Single Category DPO #######################################################
-Route::middleware(['auth:sanctum'])->get('single/category/dpo', [DraftPurchaseOrderController::class, 'singleCategoryDPOIndex'])->name('singleCategoryIndex');
-Route::middleware(['auth:sanctum'])->get('single/category/dpo-{eOrderID}', [DraftPurchaseOrderController::class, 'singleCategoryDPOShow'])->name('singleCategoryShow');
+Route::middleware(['auth:sanctum'])->get('single/category/dpo', [DraftPurchaseOrderController::class, 'singleCategoryDPOIndex'])->name('singleCategoryDPOIndex');
+Route::middleware(['auth:sanctum'])->get('single/category/dpo-{eOrderID}', [DraftPurchaseOrderController::class, 'singleCategoryDPOShow'])->name('singleCategoryDPOShow');
 Route::middleware(['auth:sanctum'])->post('single/category/dpo/approved/{rfqNo}/{supplierBusinessID}', [DraftPurchaseOrderController::class, 'singleCategoryApproved'])->name('singleCategoryApproved');
 Route::middleware(['auth:sanctum'])->post('single/category/dpo/cancel/{rfqNo}/{supplierBusinessID}', [DraftPurchaseOrderController::class, 'singleCategoryCancel'])->name('singleCategoryCancel');
 #################################################################################################################

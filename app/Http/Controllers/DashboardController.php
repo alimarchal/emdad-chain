@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Models\Business;
 use App\Models\BusinessCategory;
 use App\Models\BusinessPackage;
@@ -35,13 +36,30 @@ class DashboardController extends Controller
         return view('dashboard', compact($pending_orders));
     }
 
-    public function languageChange(Request $request)
+    /*public function languageChange(Request $request)
     {
         User::where('id', \auth()->user()->id)->update([
             'rtl' => $request->rtl_value,
         ]);
 
-        return response()->json(['success']);
+//        $locale = App::currentLocale();
+//        if ($request->lang == 'ar')
+//        if ($locale != $request->lang )
+//        {
+//        $lang = strval($request->lang);
+//            App::setlocale($lang);
+//        }
+    }*/
+    public function languageChange($lang, $rtl_value)
+    {
+        if (array_key_exists($lang, \Config::get('languages'))) {
+            \Session::put('applocale', $lang);
+        }
+        User::where('id', \auth()->user()->id)->update([
+            'rtl' => $rtl_value,
+        ]);
+
+        return redirect()->back();
     }
 
     public function logistic_dashboard(Request $request)
