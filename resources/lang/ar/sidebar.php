@@ -27,7 +27,7 @@ return [
     'IREs' => 'IREs',
     'Ratings' => 'Ratings',
     'SMS' => 'SMS',
-    'RFQs' => 'RFQs',
+    'RFQs' => 'Requisitions',
     'Quotations' => 'Quotations',
     'Multi categories' => 'Multi categories',
     'Single category' => 'Single category',

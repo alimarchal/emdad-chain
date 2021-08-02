@@ -30,7 +30,7 @@
                                         <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
                                             <input type="hidden" name="package_id" value="{{$package->id}}">
-                                            <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">Subscribe</button>
+                                            <button class="flex items-center mt-6 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">Subscribe</button>
                                         </form>
                                     @endif
                                 @elseif($package->package_type == 'Silver')
@@ -55,7 +55,7 @@
                                         <form action="{{route('businessPackage.stepOne')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
                                             <input type="hidden" name="package_id" value="{{$package->id}}">
-                                            <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">Subscribe</button>
+                                            <button class="flex items-center mt-6 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">Subscribe</button>
                                         </form>
                                     @endif
                                 @elseif($package->package_type == 'Gold')
@@ -78,7 +78,7 @@
                                         <form  action="{{route('businessPackage.stepOne')}}" method="POST">
                                             @csrf
                                             <input type="hidden" name="package_id" value="{{$package->id}}">
-                                            <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">Subscribe</button>
+                                            <button class="flex items-center mt-6 text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">Subscribe</button>
                                         </form>
                                     @endif
                                 @elseif($package->package_type == 'Platinum')
@@ -246,7 +246,7 @@
                                             <form action="{{route('business-packages.store')}}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="package_id" value="{{$package->id}}">
-                                                <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">اشترك</button>
+                                                <button class="flex items-center mt-4 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">اشترك</button>
                                             </form>
                                         @endif
                                     @elseif($package->package_type == 'Silver')
@@ -264,7 +264,7 @@
                                             <form action="{{route('business-packages.store')}}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="package_id" value="{{$package->id}}">
-                                                <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">اشترك</button>
+                                                <button class="flex items-center mt-4 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">اشترك</button>
                                             </form>
                                         @endif
                                     @elseif($package->package_type == 'Gold')
@@ -281,7 +281,7 @@
                                             <form action="{{route('business-packages.store')}}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="package_id" value="{{$package->id}}">
-                                                <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">اشترك</button>
+                                                <button class="flex items-center mt-4 text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">اشترك</button>
                                             </form>
                                         @endif
                                     @elseif($package->package_type == 'Platinum')

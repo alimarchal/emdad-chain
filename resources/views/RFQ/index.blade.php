@@ -23,7 +23,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-0 text-center m-5">Cart Items @if (!$eCart->count()) seems empty @endif
+        <h2 class="text-2xl font-bold py-0 text-center m-5">Cart @if (!$eCart->count()) seems empty @endif
         </h2>
 
         <!-- This example requires Tailwind CSS v2.0+ -->

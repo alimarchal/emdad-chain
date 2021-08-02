@@ -52,9 +52,9 @@
                             <strong>RFQ #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->rfq_no }}<br>
                             <strong>Quote #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->qoute_no }}<br>
                             <strong>Payment Terms: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->payment_term }}<br>
-                            <strong>VAT %: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->vat, 2) }}<br>
-                            <strong>Shipping Fees: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->shipment_cost, 2) }}<br>
-                            <strong>Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->total_cost, 2) }}<br>
+{{--                            <strong>VAT %: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->vat, 2) }}<br>--}}
+{{--                            <strong>Shipping Fees: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->shipment_cost, 2) }}<br>--}}
+{{--                            <strong>Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->total_cost, 2) }}<br>--}}
                         </div>
                     </div>
 
@@ -114,6 +114,27 @@
                         @endforeach
                     </table>
 
+                    <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                        </div>
+                        <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                            @php
+                                $subtotal = 0;
+                                    foreach($draftPurchaseOrders as $draftPurchaseOrder)
+                                    {
+                                        $subtotal += $draftPurchaseOrder->sub_total;
+                                    }
+                            @endphp
+                            <strong>Sub-total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($subtotal, 2) }}<br>
+                            <strong>VAT %: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->vat, 2) }}<br>
+                            <strong>Shipment cost: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->shipment_cost, 2) }}<br>
+                            <hr>
+                            <strong>Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->total_cost, 2) }}<br>
+                            <hr>
+                        </div>
+                    </div>
 
                     <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
                         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
@@ -131,11 +152,11 @@
                     <div class="flex justify-between mt-4 mb-4">
 
                         @if ($draftPurchaseOrders[0]->status == 'approved')
-                            <span class="px-3 py-3 bg-green-800 text-white rounded">P.O. APPROVED</span>
+                        <img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-9@8x.png')}}" alt="P.O. APPROVED">
                         @elseif ($draftPurchaseOrders[0]->status == 'cancel')
-                            <span class="px-3 py-3 bg-red-800 text-white rounded">P.O. Canceled</span>
+                        <img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-8@8x.png')}}" alt="P.O. Canceled">
                         @elseif ($draftPurchaseOrders[0]->status == 'rejectToEdit')
-                            <span class="px-3 py-3 bg-red-600 text-white rounded uppercase">Rejected for Edit</span>
+                        <img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-7@8x.png')}}" alt="Rejected for Edit">
                         @elseif ($draftPurchaseOrders[0]->status == 'completed')
                         @elseif ($draftPurchaseOrders[0]->status == 'prepareDelivery')
                         @endif
