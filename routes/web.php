@@ -614,4 +614,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('logistics-dashboard', [Das
 Route::middleware(['auth:sanctum', 'verified'])->get('logistics-setting', [DashboardController::class, 'logistic_setting'])->name('logistics.setting');
 Route::middleware(['auth:sanctum', 'verified'])->get('logisticsBusiness/create', [\App\Http\Controllers\LogisticsBusinessController::class, 'create'])->name('logistics.business');
 Route::middleware(['auth:sanctum', 'verified'])->post('logisticsBusiness', [\App\Http\Controllers\LogisticsBusinessController::class, 'store'])->name('logistics.store');
+Route::middleware(['auth:sanctum', 'verified'])->get('logisticsBusiness/{logisticsBusiness}/edit', [\App\Http\Controllers\LogisticsBusinessController::class, 'edit'])->name('logistics.edit');
+Route::middleware(['auth:sanctum', 'verified'])->put('logisticsBusiness/{logisticsBusiness}', [\App\Http\Controllers\LogisticsBusinessController::class, 'update'])->name('logistics.update');
+Route::middleware(['auth:sanctum', 'verified'])->get('logisticsBusiness', [\App\Http\Controllers\LogisticsBusinessController::class, 'index'])->name('logistics.index');
 

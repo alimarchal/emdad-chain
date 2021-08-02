@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\LogisticsBusiness;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Laravel\Jetstream\HasProfilePhoto;
 
 class LogisticsBusinessController extends Controller
 {
+    use HasProfilePhoto;
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +17,10 @@ class LogisticsBusinessController extends Controller
      */
     public function index()
     {
-        //
+        $logistic_business = LogisticsBusiness::all();
+        return view('logistic.business.index',compact('logistic_business'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -29,7 +33,7 @@ class LogisticsBusinessController extends Controller
         if ($user->logistics_business_id === null) {
             return view('logistic.business.create');
         } else {
-            return redirect()->route('business.show', $user->logistics_business_id);
+            return redirect()->route('logistics.index', $user->logistics_business_id);
         }
     }
 
@@ -41,12 +45,11 @@ class LogisticsBusinessController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         $request->validate([
             'user_id' => 'required',
             'business_name' => 'required',
             'business_photo_url_1' => 'required|mimes:jpeg,jpg,png',
-            'business_type' => 'required',
             'chamber_reg_number' => 'required',
             'chamber_reg_path_1' => 'required|mimes:jpeg,jpg,png',
             'vat_reg_certificate_number' => 'required',
@@ -78,11 +81,9 @@ class LogisticsBusinessController extends Controller
 
         $business = LogisticsBusiness::create($request->all());
         $user = User::find($business->user_id);
-        $user->business_id = $business->id;
+        $user->logistics_business_id = $business->id;
         $user->save();
-
         session()->flash('message', 'Business information successfully saved.');
-        dd('done');
 //        return redirect()->route('businessWarehouse.create');
     }
 
@@ -105,7 +106,7 @@ class LogisticsBusinessController extends Controller
      */
     public function edit(LogisticsBusiness $logisticsBusiness)
     {
-        //
+        return view('logistic.business.edit', compact('logisticsBusiness'));
     }
 
     /**
@@ -117,7 +118,42 @@ class LogisticsBusinessController extends Controller
      */
     public function update(Request $request, LogisticsBusiness $logisticsBusiness)
     {
-        //
+        $request->validate([
+            'user_id' => 'required',
+            'business_name' => 'required',
+            'business_photo_url_1' => 'required|mimes:jpeg,jpg,png',
+            'chamber_reg_number' => 'required',
+            'chamber_reg_path_1' => 'required|mimes:jpeg,jpg,png',
+            'vat_reg_certificate_number' => 'required',
+            'vat_reg_certificate_path_1' => 'required|mimes:jpeg,jpg,png',
+            'country' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'business_email' => 'required',
+            'phone' => 'required',
+            'mobile' => 'required',
+            'iban' => 'required',
+            'longitude' => 'required',
+            'latitude' => 'required',
+            'bank_name' => 'required',
+        ]);
+
+        if ($request->has('chamber_reg_path_1')) {
+            $path = $request->file('chamber_reg_path_1')->store('', 'public');
+            $request->merge(['chamber_reg_path' => $path]);
+        }
+        if ($request->has('vat_reg_certificate_path_1')) {
+            $path = $request->file('vat_reg_certificate_path_1')->store('', 'public');
+            $request->merge(['vat_reg_certificate_path' => $path]);
+        }
+        if ($request->has('business_photo_url_1')) {
+            $path = $request->file('business_photo_url_1')->store('', 'public');
+            $request->merge(['business_photo_url' => $path]);
+        }
+
+        $logisticsBusiness->update($request->all());
+        session()->flash('message', 'Business information successfully saved.');
+        return redirect()->route('logistics.index');
     }
 
     /**

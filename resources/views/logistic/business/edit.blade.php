@@ -37,9 +37,10 @@
 
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
                     <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto mb-4 m-auto"/>
-                    <form action="{{route('logistics.store')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
+                    <form action="{{route('logistics.update',$logisticsBusiness)}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         <x-jet-validation-errors class="mb-4"/>
                         @csrf
+                        @method('PUT')
                         <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 2: Business Information</h3>
                         <div class="flex space-x-5 mt-3">
                             <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_name">Business Name @include('misc.required')</label>
@@ -48,7 +49,7 @@
                             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2" value="{{old('business_name')}}" required></x-jet-input>
+                            <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2" value="{{$logisticsBusiness->business_name}}" required></x-jet-input>
                         </div>
 
                         <div class="flex space-x-5 mt-3">
@@ -60,10 +61,10 @@
 
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="chamber_reg_number" type="text" name="chamber_reg_number" class="border p-2 w-1/2" value="{{old('chamber_reg_number')}}"></x-jet-input>
-                            <x-jet-input id="chamber_reg_path_1" type="file" name="chamber_reg_path_1" class="border p-2 w-1/2" required></x-jet-input>
-                            <x-jet-input id="vat_reg_certificate_number" type="text" name="vat_reg_certificate_number" class="border p-2 w-1/2" value="{{old('vat_reg_certificate_number')}}" required></x-jet-input>
-                            <x-jet-input id="vat_reg_certificate_path_1" type="file" name="vat_reg_certificate_path_1" class="border p-2 w-1/2" required></x-jet-input>
+                            <x-jet-input id="chamber_reg_number" type="text" name="chamber_reg_number" class="border p-2 w-1/2"   value="{{$logisticsBusiness->chamber_reg_number}}"  ></x-jet-input>
+                            <x-jet-input id="chamber_reg_path_1" type="file" name="chamber_reg_path_1" class="border p-2 w-1/2" ></x-jet-input>
+                            <x-jet-input id="vat_reg_certificate_number" type="text" name="vat_reg_certificate_number"   value="{{$logisticsBusiness->vat_reg_certificate_number}}" class="border p-2 w-1/2"  required></x-jet-input>
+                            <x-jet-input id="vat_reg_certificate_path_1" type="file" name="vat_reg_certificate_path_1"  class="border p-2 w-1/2" required></x-jet-input>
                         </div>
                         <div class="flex space-x-5 mt-3">
 
@@ -72,8 +73,8 @@
                         </div>
                         <div class="flex space-x-5 mt-3">
 
-                            <x-jet-input id="website" name="website" class="border p-2 w-1/2" value="{{old('website')}}"></x-jet-input>
-                            <x-jet-input id="business_email" type="email" name="business_email" class="border p-2 w-1/2" value="{{old('business_email')}}"></x-jet-input>
+                            <x-jet-input id="website" name="website" class="border p-2 w-1/2" value="{{$logisticsBusiness->website}}" ></x-jet-input>
+                            <x-jet-input id="business_email" type="email" name="business_email" class="border p-2 w-1/2" value="{{$logisticsBusiness->business_email}}" ></x-jet-input>
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-label class="w-1/2" for="phone">Landline @include('misc.required')</x-jet-label>
@@ -82,7 +83,23 @@
                             <x-jet-label class="w-1/2" for="city">City @include('misc.required')</x-jet-label>
                         </div>
 
-                        <livewire:country/>
+                        <div class="flex space-x-5 mt-3">
+                            <x-jet-input id="phone" type="tel" name="phone" class="border p-2 w-1/2" value="{{$logisticsBusiness->phone}}" required></x-jet-input>
+                            <x-jet-input id="mobile" type="number" name="mobile" class="border p-2 w-1/2" value="{{$logisticsBusiness->mobile}}" required></x-jet-input>
+                            <select name="country" id="country" class="form-select rounded-md shadow-sm border p-2 w-1/2" required>
+                                <option value="">None</option>
+                                @foreach (\App\Models\User::countries() as $country)
+                                    <option value="{{ $country }}" @if($logisticsBusiness->country == $country) selected @endif>{{ $country }}</option>
+                                @endforeach
+                            </select>
+
+                            <select name="city" id="city" class="form-select select2 rounded-md shadow-sm border p-2 w-1/2" required>
+                                @foreach (\App\Models\City::all() as $city)
+                                    <option @if($logisticsBusiness->city == $city) selected @endif value="{{ $city->name_en }}">{{ $city->name_en . ' - ' . $city->name_ar }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="flex space-x-5 mt-3">
                             <label class="block font-medium text-sm text-gray-700 w-1/2" for="bank_name">Bank Name @include('misc.required')</label>
                             <label class="block font-medium text-sm text-gray-700 w-1/2" for="iban">IBAN @include('misc.required')</label>
@@ -92,17 +109,16 @@
 
 
                         <div class="flex space-x-5 mt-3">
-
                             <select id="bank_name" name="bank_name" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                 <option value="">None</option>
                                 @foreach(\App\Models\Bank::all() as $bank_name)
-                                    <option {{(old('bank_name') ==  $bank_name->name ? 'selected' : '')}} value="{{ $bank_name->name }}">{{ $bank_name->name }}</option>
+                                    <option  @if($logisticsBusiness->bank_name == $bank_name->name  ) selected @endif  value="{{ $bank_name->name }}">{{ $bank_name->name }}</option>
                                 @endforeach
                             </select>
 
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="iban" type="text" name="iban" value="{{old('iban')}}" required="required">
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="latitude" required readonly type="text" name="latitude">
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="longitude" required readonly type="text" name="longitude">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$logisticsBusiness->iban}}" id="iban" type="text" name="iban" required="required">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$logisticsBusiness->latitude}}" id="latitude" required readonly type="text" name="latitude">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$logisticsBusiness->longitude}}" id="longitude" required readonly type="text" name="longitude">
                         </div>
 
 
@@ -120,7 +136,7 @@
                             </label>
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <textarea id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>{{old('address')}}</textarea>
+                            <textarea id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>{{$logisticsBusiness->address}}</textarea>
                         </div>
 
                         <div class="flex space-x-5 mt-3">
@@ -132,7 +148,7 @@
 
                         <br>
 
-                        <x-jet-button class="float-right mt-4 mb-4">Save</x-jet-button>
+                        <x-jet-button class="float-right mt-4 mb-4">Update</x-jet-button>
 
                     </form>
 

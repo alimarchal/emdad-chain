@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class LogisticsBusiness extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['user_id','business_name','business_photo_url','chamber_reg_number','chamber_reg_path','vat_reg_certificate_number','vat_reg_certificate_path','country','city','address','website','business_email','phone','mobile','bank_name','iban','longitude','latitude','legal_status','status',];
 }
