@@ -49,7 +49,7 @@
                     }}
             </script>
         @endif
-        <script src="https://test.oppwa.com/v1/paymentWidgets.js?checkoutId={{{$res_data['id']}}}"></script>
+        <script src="{{env('URL_GATEWAY')}}/v1/paymentWidgets.js?checkoutId={{{$res_data['id']}}}"></script>
         <script type="text/javascript">
             var wpwlOptions = {
                 paymentTarget:"_top",

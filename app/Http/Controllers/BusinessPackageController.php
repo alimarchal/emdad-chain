@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BankPayment;
 use App\Models\BusinessPackage;
 use App\Models\CardPayment;
 use App\Models\CommissionPercentage;
-use App\Models\Delivery;
 use App\Models\Invoice;
-use App\Models\Ire;
 use App\Models\IreCommission;
 use App\Models\Package;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class BusinessPackageController extends Controller
 {
@@ -25,15 +21,17 @@ class BusinessPackageController extends Controller
         $businessPackage = BusinessPackage::where('id', $request->business_package_id)->first();
         $amountToPay = $request->amountToPay;
 
-        return view('subscribePackageView.step-one', compact('package','businessPackage', 'amountToPay'));
+        return view('subscribePackageView.step-one', compact('package', 'businessPackage', 'amountToPay'));
     }
 
     public function store(Request $request)
     {
 
+
         //after payment add payment details to payment table after that insert that payment id to BusinessPackage table
         $package = Package::where('id', $request->package_id)->first();
         $merchant_id = null;
+
         // if price exist then return to new view else it's free one
         if ($request->package_id == 2 || $request->package_id == 3 || $request->package_id == 6 || $request->package_id == 7) {
             $merchant_id = CardPayment::create([
@@ -42,13 +40,15 @@ class BusinessPackageController extends Controller
                 'amount' => $package->charges,
                 'status' => '0',
             ]);
+
             $data = null;
-            $url = "https://oppwa.com/v1/checkouts";
+            $url = env('URL_GATEWAY') . "/v1/checkouts";
 //            $url = "https://test.oppwa.com/v1/checkouts";
             if ($request->gateway == "mada") {
                 $data = "entityId=" . env('ENTITY_ID_MADA') .
                     "&amount=" . $package->charges .
                     "&currency=SAR" .
+                    "&paymentType=" . env("PAYMENT_TYPE") .
                     "&merchantTransactionId=" . $merchant_id->id .
                     "&customer.email=" . $request->customer_email .
                     "&billing.street1=" . $request->billing_street1 .
@@ -57,9 +57,7 @@ class BusinessPackageController extends Controller
                     "&billing.country=" . $request->billing_country .
                     "&billing.postcode=" . $request->billing_postcode .
                     "&customer.givenName=" . $request->customer_givenName .
-                    "&customer.surname=" . $request->customer_surname .
-                    "&paymentType=" . env("PAYMENT_TYPE");
-//                $request->merge(["testMode" => "EXTERNAL"]);
+                    "&customer.surname=" . $request->customer_surname;
 
             } elseif ($request->gateway == "visa_master") {
                 $data = "entityId=" . env('ENTITY_ID_VISA') .
@@ -83,7 +81,7 @@ class BusinessPackageController extends Controller
                 'Authorization:Bearer ' . env('AUTH_BEARER')));
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);// this should be set to true in production
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $responseData = curl_exec($ch);
             if (curl_errno($ch)) {
@@ -96,14 +94,12 @@ class BusinessPackageController extends Controller
 
 
             if ($res_data['result']['code'] == "200.300.404") {
-
                 $cp = CardPayment::where('id', $merchant_id->id)->first();
                 $cp->status = 2;
                 $cp->save();
                 return redirect()->route('packages.index')->with(['message' => 'Transaction failed incorrect parameters.']);
             }
 
-//            return dd($merchant_id);
             return view('subscribePackageView.payment', compact('package', 'res_data', 'gateway', 'merchant_id'));
         } else {
             $subscription_end_date = Carbon::now()->addYear();
@@ -168,7 +164,8 @@ class BusinessPackageController extends Controller
 
     public function getPaymentStatus($id, $resourcePath, $gateway)
     {
-        $url = "https://oppwa.com/";
+        $url = env('URL_GATEWAY') . "/";
+//        $url = "https://oppwa.com/";
 //        $url = "https://test.oppwa.com/";
         $url .= $resourcePath;
         if ($gateway == "mada") {
@@ -182,7 +179,7 @@ class BusinessPackageController extends Controller
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Authorization:Bearer ' . env('AUTH_BEARER')));
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {
@@ -310,7 +307,8 @@ class BusinessPackageController extends Controller
             'status' => '0',
         ]);
         $data = null;
-        $url = "https://oppwa.com/v1/checkouts";
+        $url = env('URL_GATEWAY') . "/v1/checkouts";
+//        $url = "https://oppwa.com/v1/checkouts";
 //        $url = "https://test.oppwa.com/v1/checkouts";
         if ($request->gateway == "mada") {
             $data = "entityId=" . env('ENTITY_ID_MADA') .
@@ -326,7 +324,7 @@ class BusinessPackageController extends Controller
                 "&customer.givenName=" . $request->customer_givenName .
                 "&customer.surname=" . $request->customer_surname .
                 "&paymentType=" . env("PAYMENT_TYPE");
-            $request->merge(["testMode" => "EXTERNAL"]);
+//            $request->merge(["testMode" => "EXTERNAL"]);
 
         } elseif ($request->gateway == "visa_master") {
             $data = "entityId=" . env('ENTITY_ID_VISA') .
@@ -350,7 +348,7 @@ class BusinessPackageController extends Controller
             'Authorization:Bearer ' . env('AUTH_BEARER')));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);// this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {
@@ -414,7 +412,7 @@ class BusinessPackageController extends Controller
                         'subscription_end_date' => Carbon::now()->addYear(),
                     ]);
 
-                    $msg = 'Transaction Successful. Updated your package to '. $package->package_type;
+                    $msg = 'Transaction Successful. Updated your package to ' . $package->package_type;
                     session()->flash('success', $msg);
                     return redirect()->route('dashboard');
                 } elseif (auth()->user()->registration_type == 'Supplier') {
@@ -427,7 +425,7 @@ class BusinessPackageController extends Controller
                         'subscription_end_date' => Carbon::now()->addYear(),
                     ]);
 
-                    $msg = 'Transaction Successful. Updated your package to '. $package->package_type;
+                    $msg = 'Transaction Successful. Updated your package to ' . $package->package_type;
                     session()->flash('success', $msg);
                     return redirect()->route('dashboard');
                 }
@@ -469,11 +467,10 @@ class BusinessPackageController extends Controller
         $invoice = Invoice::where('id', $request->invoice_id)->first();
         $merchant_id = null;
         $total_charges = 0;
-        if ($request->gateway == "mada")
-        {
-            $total_charges = round(($invoice->total_cost + ($invoice->total_cost * 0.0175)),2);
-        } elseif($request->gateway == "visa_master") {
-            $total_charges = round(($invoice->total_cost + ($invoice->total_cost * 0.0275) + 1),2);
+        if ($request->gateway == "mada") {
+            $total_charges = round(($invoice->total_cost + ($invoice->total_cost * 0.0175)), 2);
+        } elseif ($request->gateway == "visa_master") {
+            $total_charges = round(($invoice->total_cost + ($invoice->total_cost * 0.0275) + 1), 2);
         }
 
         $merchant_id = CardPayment::create([
@@ -484,7 +481,8 @@ class BusinessPackageController extends Controller
         ]);
 
         $data = null;
-        $url = "https://oppwa.com/v1/checkouts";
+        $url = env('URL_GATEWAY') . "/v1/checkouts";
+//        $url = "https://oppwa.com/v1/checkouts";
 //        $url = "https://test.oppwa.com/v1/checkouts";
         if ($request->gateway == "mada") {
             $data = "entityId=" . env('ENTITY_ID_MADA') .
@@ -500,7 +498,7 @@ class BusinessPackageController extends Controller
                 "&customer.givenName=" . $request->customer_givenName .
                 "&customer.surname=" . $request->customer_surname .
                 "&paymentType=" . env("PAYMENT_TYPE");
-                $request->merge(["testMode" => "EXTERNAL"]);
+//            $request->merge(["testMode" => "EXTERNAL"]);
 
         } elseif ($request->gateway == "visa_master") {
 //            $data = "entityId=" . env('ENTITY_ID_VISA') .
@@ -533,14 +531,13 @@ class BusinessPackageController extends Controller
         }
 
 
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Authorization:Bearer ' . env('AUTH_BEARER')));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {
@@ -609,7 +606,6 @@ class BusinessPackageController extends Controller
                 $invoice->invoice_status = 3;
                 $invoice->invoice_cash_online = 1;
                 $invoice->save();
-
 
 
                 session()->flash('success', 'Transaction Successful.');
