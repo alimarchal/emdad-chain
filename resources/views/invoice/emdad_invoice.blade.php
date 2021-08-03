@@ -48,7 +48,6 @@
 
                 </script>
 
-                <!-- This example requires Tailwind CSS v2.0+ -->
                 @php $total = 0; @endphp
 
                 <div class="py-3">

@@ -1,6 +1,17 @@
 @section('headerScripts')
     {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js" integrity="sha512-lteuRD+aUENrZPTXWFRPTBcDDxIGWe5uu0apPEn+3ZKYDwDaEErIK9rvR0QzUGmUQ55KFE2RqGTVoZsKctGMVw==" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">
+
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
 @endsection
 <x-app-layout>
     <x-slot name="header">
@@ -25,8 +36,7 @@
             </button>
         </div>
     @endif
-    <h2 class="text-2xl font-bold py-2 text-center m-2">Items List @if (!$placedRFQs->count()) seems empty @endif
-    </h2>
+    <h2 class="text-2xl font-bold py-2 text-center m-2">Items List @if (!$placedRFQs->count()) seems empty @endif </h2>
 
     @if ($placedRFQs->count())
         <div class="flex flex-col bg-white rounded ">
@@ -37,15 +47,15 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                    RFQ #
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    Requisition #
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                     Category Name
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                     Created At
                                 </th>
 
@@ -66,13 +76,13 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($placedRFQs as $placedRFQ)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{ $placedRFQ->id }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{ $placedRFQ->OrderItems[0]->item_name }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{ $placedRFQ->created_at->format('d-m-Y') }} <br>
                                     </td>
                                     @php
@@ -101,9 +111,7 @@
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
                                         @if(isset($dpo))
-                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
-                                                DPO generated
-                                            </a>
+                                            <span class="text-blue-600">DPO generated</span>
                                         @elseif($placedRFQ->OrderItems[0]->bypass == 1 && $placedRFQ->OrderItems[0]->quotation_time > \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->status == 'pending')
                                             @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
                                                 <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 0]) }}"
@@ -137,9 +145,7 @@
                                                 </a>
                                             @endif
                                         @elseif($placedRFQ->OrderItems[0]->status == 'accepted')
-                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
-                                                Completed
-                                            </a>
+                                            <span style="color: #eb8e08">Completed</span>
                                         @else
                                             @php
                                             /* Counting Total quotations for Single Category RFQ */
@@ -155,7 +161,7 @@
                                         @if($placedRFQ->OrderItems[0]->qoutes->count() > 0 && $placedRFQ->OrderItems[0]->quotation_time >= \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->bypass == 0)
                                             @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                 <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 1]) }}"
-                                                   class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                   class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = 'Once overrode you cannot receive quotations for this requisition'>
                                                     Override
                                                 </a>
                                             @endif
@@ -179,10 +185,23 @@
 </x-app-layout>
 
 <script>
+
+    $('.confirm').on('click', function (e) {
+        return confirm($(this).data('confirm'));
+    });
+
     $('[data-countdown]').each(function() {
         var $this = $(this), finalDate = $(this).data('countdown');
         $this.countdown(finalDate, function(event) {
             $this.html(event.strftime('%D day(s) %H:%M:%S'));
         });
     });
+
+    $('#quotation-table').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            // 'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+
 </script>

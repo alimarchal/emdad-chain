@@ -1,3 +1,15 @@
+@section('headerScripts')
+    <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">
+
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+@endsection
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -21,11 +33,7 @@
             </button>
         </div>
     @endif
-    <h2 class="text-2xl font-bold py-0 text-center m-5">Cart @if (!$eCart->count()) seems empty @endif
-    </h2>
-
-    <!-- This example requires Tailwind CSS v2.0+ -->
-
+    <h2 class="text-2xl font-bold py-0 text-center m-5">Cart @if (!$eCart->count()) seems empty @endif </h2>
 
     @if ($eCart->count())
         @php $total = 0; @endphp
@@ -33,67 +41,62 @@
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-200">
+                    <table class="min-w-full divide-y divide-gray-200" id="cart">
                         <thead class="bg-gray-50">
                         <tr>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                 #
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                 Category Name
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                 Brand
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                 Description
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                 Unit
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                 Size
                             </th>
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                 Quantity
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                 Last Price
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                 Delivery Period
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                 Payment Mode
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                 Remarks
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider" title="Display {{auth()->user()->business->business_name}} in the RFQ">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Display {{auth()->user()->business->business_name}} in the RFQ">
                                 Display Company Name
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Attachment">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
                                     </path>
                                 </svg>
                             </th>
 
-                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                    </path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                    </path>
-                                </svg>
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                Action
                             </th>
 
                         </tr>
@@ -101,53 +104,53 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($eCart as $rfp)
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                     {{ $loop->iteration }}
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                     {{ $rfp->item_name }}
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                     {{ $rfp->brand }}
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                     {{ strip_tags($rfp->description) }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{ $rfp->unit_of_measurement }}
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                     {{ $rfp->size }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                     {{ $rfp->quantity }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                     {{ number_format($rfp->last_price, 2) }} <br>
                                 </td>
 
 
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                     {{ $rfp->delivery_period }}
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                     {{ $rfp->payment_mode }}
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                     {{ $rfp->remarks }}
                                 </td>
 
-                                <td class="px-3 py-3 whitespace-nowrap">
+                                <td class="px-3 py-3 text-center whitespace-nowrap">
                                     @if($rfp->company_name_check == 0) No @elseif($rfp->company_name_check == 1) Yes @endif
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                     @if ($rfp->file_path)
                                         <a href="{{ Storage::url($rfp->file_path) }}">
                                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -160,11 +163,11 @@
                                     @endif
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <form method="POST" action="{{ route('single_cart_destroy', $rfp->id) }}" class="inline">
+                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                    <form method="POST" action="{{ route('single_cart_destroy', $rfp->id) }}" class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
                                         @csrf
                                         <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE" onsubmit="alert('Are you sure')">
-                                            <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red">
+                                            <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="orange">
                                                 <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
                                                 <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"/>
                                             </svg>
@@ -190,7 +193,7 @@
                 <input type="hidden" value="{{ auth()->id() }}" name="user_id">
 
                 <button type="submit"
-                        class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                        class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                     Place RFQ
                 </button>
             </form>
@@ -200,3 +203,19 @@
 
 
 </x-app-layout>
+
+<script>
+
+    $('.confirm').on('click', function (e) {
+        return confirm($(this).data('confirm'));
+    });
+
+    $(document).ready(function() {
+        $('#cart').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                // 'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    });
+</script>

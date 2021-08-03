@@ -155,7 +155,6 @@
 
                                                 </tr>
                                             @endforeach
-                                            <!-- More rows... -->
                                             </tbody>
                                         </table>
                                     </div>

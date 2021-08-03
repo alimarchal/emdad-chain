@@ -56,68 +56,62 @@
                                         <table id="proforma-table" class="min-w-full divide-y divide-gray-200">
                                             <thead>
                                             <tr>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     #
                                                 </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     Order Number
                                                 </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     Item Name
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     P.O Date
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     P.O Type
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     Status
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     Status
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                        </path>
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                        </path>
-                                                    </svg>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    View
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
                                             @foreach ($dpos as $dpo)
                                                 <tr>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         {{ $loop->iteration }}
                                                     </td>
 
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         EMDAD-{{ $dpo->id }}
                                                     </td>
 
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         {{--                                                    <a href="{{ route('deliveryNoteView',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dpo->item_name }}</a>--}}
                                                         {{ $dpo->item_name }}
                                                     </td>
 
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         {{ $dpo->po_date }}
                                                     </td>
 
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         {{ $dpo->payment_term }}
                                                     </td>
 
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if($dpo->payment_term == 'Cash' || auth()->user()->can('all') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
 {{--                                                            @php $proformaInvoice = \App\Models\ProformaInvoice::where('draft_purchase_order_id', $dpo->id)->first(); @endphp--}}
                                                             @php $proformaInvoice = \App\Models\Invoice::where('draft_purchase_order_id', $dpo->id)->where('invoice_type', 1)->first();
@@ -137,16 +131,23 @@
                                                         @endif
                                                     </td>
 
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         <a class="hover:text-blue-900 text-blue-900">@if($dpo->status == 'prepareDelivery') Preparing delivery @else {{$dpo->status}} @endif</a>
                                                     </td>
 
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                        <a href="{{ route('deliveryNoteView',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">View</a>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        <a href="{{ route('deliveryNoteView',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                </path>
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                </path>
+                                                            </svg>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
-                                            <!-- More rows... -->
                                             </tbody>
                                         </table>
                                     </div>

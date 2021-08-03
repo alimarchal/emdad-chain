@@ -1,3 +1,15 @@
+@section('headerScripts')
+    <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">
+
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+@endsection
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
@@ -17,9 +29,6 @@
         <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$shipmentDetails->count()) seems empty @endif
         </h2>
 
-        <!-- This example requires Tailwind CSS v2.0+ -->
-
-
         @if ($shipmentDetails->count())
             @php $total = 0; @endphp
             <div class="flex flex-col bg-white rounded ">
@@ -27,21 +36,21 @@
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
 
-                            <table class="min-w-full divide-y divide-gray-200">
+                            <table class="min-w-full divide-y divide-gray-200" id="shipment-table">
                                 <thead class="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         #
                                     </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         Delivery ID
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         Supplier Business Name
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         Status
                                     </th>
 
@@ -50,20 +59,20 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($shipmentDetails as $shipmentDetail)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 text-center py-4 whitespace-nowrap">
                                             {{ $loop->iteration }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 text-center py-4 whitespace-nowrap">
                                             <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600">{{ $shipmentDetail->delivery_id }}</a>
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 text-center py-4 whitespace-nowrap">
                                             @php $supplierBusiness = \App\Models\Business::where('id', $shipmentDetail->supplier_business_id)->first();  @endphp
                                             {{ $supplierBusiness->business_name }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 text-center py-4 whitespace-nowrap">
                                             @if($shipmentDetail->status == 1 )
                                                 <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
                                                     Delivered
@@ -84,14 +93,10 @@
             </div>
         @endif
         <div class="mt-5">
-            <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+            <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                 Back
             </a>
         </div>
-
-
-
-
 
     </x-app-layout>
 @else
@@ -110,11 +115,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$shipmentDetails->count()) seems empty @endif
-        </h2>
-
-        <!-- This example requires Tailwind CSS v2.0+ -->
-
+        <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$shipmentDetails->count()) seems empty @endif </h2>
 
         @if ($shipmentDetails->count())
             @php $total = 0; @endphp
@@ -123,22 +124,22 @@
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
 
-                            <table class="min-w-full divide-y divide-gray-200">
+                            <table class="min-w-full divide-y divide-gray-200" id="shipment-table">
                                 <thead class="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         #
                                     </th>
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
-                                        Driver Name
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        Delivery ID
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
-                                        نوع العربة
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        Supplier Business Name
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
-                                        Delivery Id
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        Status
                                     </th>
 
                                 </tr>
@@ -146,22 +147,29 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($shipmentDetails as $shipmentDetail)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 text-center py-4 whitespace-nowrap">
                                             {{ $loop->iteration }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            @php $driverName = \App\Models\User::where('id', $shipmentDetail->driver_id)->first();  @endphp
-                                            {{ $driverName->name }}
+                                        <td class="px-6 text-center py-4 whitespace-nowrap">
+                                            <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600">{{ $shipmentDetail->delivery_id }}</a>
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_type)->first();  @endphp
-                                            {{ $vehicleName->type }}
+                                        <td class="px-6 text-center py-4 whitespace-nowrap">
+                                            @php $supplierBusiness = \App\Models\Business::where('id', $shipmentDetail->supplier_business_id)->first();  @endphp
+                                            {{ $supplierBusiness->business_name }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $shipmentDetail->delivery_id }}
+                                        <td class="px-6 text-center py-4 whitespace-nowrap">
+                                            @if($shipmentDetail->status == 1 )
+                                                <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
+                                                    Delivered
+                                                </span>
+                                            @else
+                                                <span class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
+                                                    Not Delivered yet
+                                                </span>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -173,7 +181,7 @@
             </div>
         @endif
         <div class="mt-5">
-            <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+            <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                 عودة
             </a>
         </div>
@@ -184,3 +192,14 @@
 
     </x-app-layout>
 @endif
+
+<script>
+    $(document).ready(function() {
+        $('#shipment-table').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                // 'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    });
+</script>

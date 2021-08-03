@@ -95,64 +95,64 @@
                                         <thead class="bg-gray-50">
                                         <tr>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 #
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Category Name')}}
                                             </th>
 
                                             {{-- <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 Brand
                                             </th> --}}
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Description')}}
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Unit')}}
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Size')}}
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Quantity')}}
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Last Price')}}
                                             </th>
 
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Delivery Period')}}
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Payment Mode')}}
                                             </th>
 
                                             {{-- <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 Remarks
                                             </th> --}}
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Show Company Name')}}
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Attachment">
                                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -162,16 +162,8 @@
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                    </path>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                    </path>
-                                                </svg>
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                                Action
                                             </th>
 
 
@@ -180,11 +172,11 @@
                                         <tbody class="bg-white divide-y divide-gray-200">
                                         @foreach ($eCart as $rfp)
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $loop->iteration }}
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @php
                                                         $record = \App\Models\Category::where('id',$rfp->item_code)->first();
                                                         $parent= \App\Models\Category::where('id',$record->parent_id)->first();
@@ -192,47 +184,47 @@
                                                     {{ $rfp->item_name }}, {{ $parent->name}}
                                                 </td>
 
-                                                {{-- <td class="px-6 py-4 whitespace-nowrap">
+                                                {{-- <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->brand }}
                                                 </td> --}}
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ strip_tags($rfp->description) }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <td class="px-6 py- text-center4 whitespace-nowrap text-sm text-gray-500">
                                                     {{ $rfp->unit_of_measurement }}
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->size }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->quantity }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ number_format($rfp->last_price, 2) }} <br>
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->delivery_period }}
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->payment_mode }}
                                                 </td>
                                                 {{--
-                                                                             <td class="px-6 py-4 whitespace-nowrap">
+                                                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                                                  {{ $rfp->remarks }}
                                                                              </td> --}}
 
-                                                <td class="px-3 py-3 whitespace-nowrap">
+                                                <td class="px-3 py-3 text-center whitespace-nowrap">
                                                     <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required>
                                                         <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
                                                         <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
                                                     </select>
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if ($rfp->file_path)
                                                         <a href="{{ Storage::url($rfp->file_path) }}">
                                                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -247,18 +239,17 @@
                                                     @endif
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    </form>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
-                                                          class="inline">
+                                                          class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
                                                         @csrf
                                                         @method('delete')
 
                                                         <button type="submit"
                                                                 class="text-indigo-600 inline-block hover:text-indigo-900"
-                                                                title="DELETE" onsubmit="alert('Are you sure')">
+                                                                title="DELETE">
                                                             <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                                 fill="red">
+                                                                 fill="orange">
                                                                 <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
                                                                 <path fill-rule="evenodd"
                                                                       d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
@@ -691,64 +682,64 @@
                                         <thead class="bg-gray-50">
                                         <tr>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 #
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Category Name')}}
                                             </th>
 
                                             {{-- <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 Brand
                                             </th> --}}
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Description')}}
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Unit')}}
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Size')}}
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Quantity')}}
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Last Price')}}
                                             </th>
 
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Delivery Period')}}
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Payment Mode')}}
                                             </th>
 
                                             {{-- <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 Remarks
                                             </th> --}}
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Show Company Name')}}
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Attachment">
                                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -758,16 +749,8 @@
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                    </path>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                    </path>
-                                                </svg>
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                                Action
                                             </th>
 
 
@@ -776,11 +759,11 @@
                                         <tbody class="bg-white divide-y divide-gray-200">
                                         @foreach ($eCart as $rfp)
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $loop->iteration }}
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @php
                                                         $record = \App\Models\Category::where('id',$rfp->item_code)->first();
                                                         $parent= \App\Models\Category::where('id',$record->parent_id)->first();
@@ -788,48 +771,48 @@
                                                     {{ $rfp->item_name }}, {{ $parent->name}}
                                                 </td>
 
-                                                {{-- <td class="px-6 py-4 whitespace-nowrap">
+                                                {{-- <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->brand }}
                                                 </td> --}}
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ strip_tags($rfp->description) }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
                                                     {{ $rfp->unit_of_measurement }}
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->size }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->quantity }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ number_format($rfp->last_price, 2) }} <br>
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->delivery_period }}
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->payment_mode }}
                                                 </td>
                                                 {{--
-                                                                             <td class="px-6 py-4 whitespace-nowrap">
+                                                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                                                  {{ $rfp->remarks }}
                                                                              </td> --}}
 
 
-                                                <td class="px-3 py-3 whitespace-nowrap">
+                                                <td class="px-3 py-3 text-center whitespace-nowrap">
                                                     <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required>
                                                         <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
                                                         <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
                                                     </select>
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if ($rfp->file_path)
                                                         <a href="{{ Storage::url($rfp->file_path) }}">
                                                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -844,18 +827,18 @@
                                                     @endif
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     </form>
                                                     <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
-                                                          class="inline">
+                                                          class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
                                                         @csrf
                                                         @method('delete')
 
                                                         <button type="submit"
                                                                 class="text-indigo-600 inline-block hover:text-indigo-900"
-                                                                title="DELETE" onsubmit="alert('Are you sure')">
+                                                                title="DELETE">
                                                             <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                                 fill="red">
+                                                                 fill="orange">
                                                                 <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
                                                                 <path fill-rule="evenodd"
                                                                       d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
@@ -1365,64 +1348,64 @@
                                         <thead class="bg-gray-50">
                                         <tr>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 #
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Category Name')}}
                                             </th>
 
                                             {{-- <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 Brand
                                             </th> --}}
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Description')}}
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Unit')}}
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Size')}}
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Quantity')}}
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Last Price')}}
                                             </th>
 
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Delivery Period')}}
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Payment Mode')}}
                                             </th>
 
                                             {{-- <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 Remarks
                                             </th> --}}
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Show Company Name')}}
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Attachment">
                                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1432,16 +1415,8 @@
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                    </path>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                    </path>
-                                                </svg>
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                                Action
                                             </th>
 
 
@@ -1450,11 +1425,11 @@
                                         <tbody class="bg-white divide-y divide-gray-200">
                                         @foreach ($eCart as $rfp)
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $loop->iteration }}
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @php
                                                         $record = \App\Models\Category::where('id',$rfp->item_code)->first();
                                                         $parent= \App\Models\Category::where('id',$record->parent_id)->first();
@@ -1462,47 +1437,47 @@
                                                     {{ $rfp->item_name }}, {{ $parent->name}}
                                                 </td>
 
-                                                {{-- <td class="px-6 py-4 whitespace-nowrap">
+                                                {{-- <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->brand }}
                                                 </td> --}}
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ strip_tags($rfp->description) }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
                                                     {{ $rfp->unit_of_measurement }}
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->size }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->quantity }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ number_format($rfp->last_price, 2) }} <br>
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->delivery_period }}
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->payment_mode }}
                                                 </td>
                                                 {{--
-                                                                             <td class="px-6 py-4 whitespace-nowrap">
+                                                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                                                  {{ $rfp->remarks }}
                                                                              </td> --}}
 
-                                                <td class="px-3 py-3 whitespace-nowrap">
+                                                <td class="px-3 py-3 text-center whitespace-nowrap">
                                                     <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required>
                                                         <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
                                                         <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
                                                     </select>
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if ($rfp->file_path)
                                                         <a href="{{ Storage::url($rfp->file_path) }}">
                                                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -1517,18 +1492,17 @@
                                                     @endif
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    </form>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
-                                                          class="inline">
+                                                          class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
                                                         @csrf
                                                         @method('delete')
 
                                                         <button type="submit"
                                                                 class="text-indigo-600 inline-block hover:text-indigo-900"
-                                                                title="DELETE" onsubmit="alert('Are you sure')">
+                                                                title="DELETE">
                                                             <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                                 fill="red">
+                                                                 fill="orange">
                                                                 <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
                                                                 <path fill-rule="evenodd"
                                                                       d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
@@ -1964,64 +1938,64 @@
                                         <thead class="bg-gray-50">
                                         <tr>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 #
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Category Name')}}
                                             </th>
 
                                             {{-- <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 Brand
                                             </th> --}}
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Description')}}
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Unit')}}
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Size')}}
                                             </th>
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Quantity')}}
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Last Price')}}
                                             </th>
 
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Delivery Period')}}
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 {{__('portal.Payment Mode')}}
                                             </th>
 
                                             {{-- <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 Remarks
                                             </th> --}}
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                                 Show Company Name
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Attachment">
                                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -2031,16 +2005,8 @@
                                             </th>
 
                                             <th scope="col"
-                                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                    </path>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                    </path>
-                                                </svg>
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                                Action
                                             </th>
 
 
@@ -2049,11 +2015,11 @@
                                         <tbody class="bg-white divide-y divide-gray-200">
                                         @foreach ($eCart as $rfp)
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $loop->iteration }}
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @php
                                                         $record = \App\Models\Category::where('id',$rfp->item_code)->first();
                                                         $parent= \App\Models\Category::where('id',$record->parent_id)->first();
@@ -2061,48 +2027,48 @@
                                                     {{ $rfp->item_name }}, {{ $parent->name}}
                                                 </td>
 
-                                                {{-- <td class="px-6 py-4 whitespace-nowrap">
+                                                {{-- <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->brand }}
                                                 </td> --}}
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ strip_tags($rfp->description) }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
                                                     {{ $rfp->unit_of_measurement }}
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->size }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->quantity }}
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ number_format($rfp->last_price, 2) }} <br>
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->delivery_period }}
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->payment_mode }}
                                                 </td>
                                                 {{--
-                                                                             <td class="px-6 py-4 whitespace-nowrap">
+                                                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                                                  {{ $rfp->remarks }}
                                                                              </td> --}}
 
 
-                                                <td class="px-3 py-3 whitespace-nowrap">
+                                                <td class="px-3 py-3 text-center whitespace-nowrap">
                                                     <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required>
                                                         <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
                                                         <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
                                                     </select>
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if ($rfp->file_path)
                                                         <a href="{{ Storage::url($rfp->file_path) }}">
                                                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -2117,18 +2083,17 @@
                                                     @endif
                                                 </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    </form>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
-                                                          class="inline">
+                                                          class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
                                                         @csrf
                                                         @method('delete')
 
                                                         <button type="submit"
                                                                 class="text-indigo-600 inline-block hover:text-indigo-900"
-                                                                title="DELETE" onsubmit="alert('Are you sure')">
+                                                                title="DELETE">
                                                             <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                                 fill="red">
+                                                                 fill="orange">
                                                                 <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
                                                                 <path fill-rule="evenodd"
                                                                       d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
@@ -2553,6 +2518,10 @@
 @endif
 
 <script>
+
+    $('.confirm').on('click', function (e) {
+        return confirm($(this).data('confirm'));
+    });
 
     $('.company_name_check').change(function () {
         // alert($(this).attr('data-id'));

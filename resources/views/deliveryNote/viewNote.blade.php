@@ -20,13 +20,13 @@
                         <div class="flex flex-wrap overflow-hidden bg-white p-4">
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                 @if ($deliveryNote->status == 'completed')
-                                <strong>Invoice #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->delivery->invoice_id }}<br>
+                                <strong>Invoice #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Emdad-{{ $deliveryNote->delivery->invoice_id }}<br>
                                 @endif
-                                <strong>Purchase Order #: &nbsp;</strong>{{ $deliveryNote->purchase_order->id }}<br>
+                                <strong>Purchase Order #: &nbsp;&nbsp;</strong>Emdad-{{ $deliveryNote->purchase_order->id }}<br>
                                 <strong>Category Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->purchase_order->item_name }}<br>
                                 <strong>Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->purchase_order->created_at }}<br>
-                                <strong>RFQ #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->purchase_order->rfq_no }}<br>
-                                <strong>Quote #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->purchase_order->qoute_no }}<br>
+                                <strong>RFQ #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Emdad-{{ $deliveryNote->purchase_order->rfq_no }}<br>
+                                <strong>Quote #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Emdad-{{ $deliveryNote->purchase_order->qoute_no }}<br>
                                 <strong>Payment Terms : &nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->purchase_order->payment_term }}<br>
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
@@ -97,7 +97,7 @@
                                     <input type="hidden" name="delivery_note" value="{{ $deliveryNote->id }}">
                                     <input type="hidden" name="draft_purchase_order_id" value="{{ $deliveryNote->purchase_order->id }}">
                                     <input type="hidden" name="otp_mobile_number" value="{{ $deliveryNote->otp_mobile_number }}">
-                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                                         Generate Final Invoice
                                     </button>
                                 </div>
@@ -136,10 +136,10 @@
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                 <h3 class="text-2xl text-center"><strong>Delivery Note</strong></h3>
-                                <strong>Purchase Order #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->purchase_order->id }}<br>
+                                <strong>Purchase Order #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Emdad-{{ $deliveryNote->purchase_order->id }}<br>
                                 <strong>Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->purchase_order->created_at }}<br>
-                                <strong>RFQ#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->purchase_order->rfq_no }}<br>
-                                <strong>Qoute#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->purchase_order->qoute_no }}<br>
+                                <strong>RFQ #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Emdad-{{ $deliveryNote->purchase_order->rfq_no }}<br>
+                                <strong>Quote #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>Emdad-{{ $deliveryNote->purchase_order->qoute_no }}<br>
                                 <strong>Payment Terms#: &nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->purchase_order->payment_term }}<br>
                             </div>
                         </div>
@@ -227,7 +227,7 @@
                                 <div class="mt-5">
                                     <input type="hidden" name="delivery_note" value="{{ $deliveryNote->id }}">
                                     <input type="hidden" name="draft_purchase_order_id" value="{{ $deliveryNote->purchase_order->id }}">
-                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                                         Generate Final Invoice
                                     </button>
                                 </div>

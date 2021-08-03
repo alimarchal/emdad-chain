@@ -10,7 +10,7 @@
                 <div class="px-4 py-5 sm:p-6 bg-white shadow ">
                     <div class="flex flex-wrap overflow-hidden bg-gray-100 p-4">
                         <div class="w-full overflow-hidden lg:w-1/4 xl:w-1/4">
-                            <h1 class="text-center text-2xl">Emdad Invoice for invoice &nbsp; <strong>{{ $emdadInvoices[0]->invoice->id }}</strong></h1>
+                            <h1 class="text-center text-2xl">Emdad Invoice for invoice &nbsp; <strong>Emadad-{{ $emdadInvoices[0]->invoice->id }}</strong></h1>
                         </div>
                     </div>
                     <table class="min-w-full divide-y divide-black ">
@@ -82,7 +82,7 @@
             </div>
             <div class="flex justify-end mt-4 mb-4">
 
-                <a href="{{url()->previous()}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                <a href="{{url()->previous()}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                     Back
                 </a>
             </div>

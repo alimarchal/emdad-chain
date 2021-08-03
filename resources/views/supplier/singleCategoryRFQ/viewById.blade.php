@@ -100,7 +100,7 @@
                         <div class="my-5 pl-5 ">
                             <strong>Buyer Name:</strong> {{$eOrderItems[0]->business->business_name}}
                             <br>
-                            <strong>RFQ #:</strong> {{$eOrderItems[0]->e_order_id}}
+                            <strong>RFQ #:</strong> Emdad-{{$eOrderItems[0]->e_order_id}}
                             <br>
                             <strong>User Quoted:</strong> {{$eOrderItems[0]->user->name}}
                             <br>
