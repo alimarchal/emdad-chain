@@ -80,16 +80,17 @@ class ShipmentItemController extends Controller
         if ($token == "RRNirxFh4j9Ftd") {
 
             if ($request->has('driver_id')) {
-
                 $ShipmentItem = [];
                 $item = ShipmentItem::where('driver_id', $request->driver_id)->get();
                 foreach ($item as $col) {
                     $itm = collect($col);
 
                     $del_item = Delivery::find($col->delivery_id);
+//                    $del_item = Delivery::where('rfq_no',"27")->get();
+//                    return $del_item;
 
                     $ShipmentItem[]['ShipmentItem'] = $itm->merge([
-                        'Delivery' => [$del_item],
+                        'Deliveries' => [$del_item],
                         'supplier_logo_url' => config('app.url') . '/storage/' . Business::find($del_item->supplier_business_id)->business_photo_url,
                         'buyer_business' => Business::find($del_item->business_id)->business_name,
                         'buyerRFQWarehouse' => BusinessWarehouse::find(DraftPurchaseOrder::find($del_item->draft_purchase_order_id)->warehouse_id),
