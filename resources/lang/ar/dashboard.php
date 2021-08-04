@@ -10,11 +10,11 @@ return [
     */
 
     'Dashboard' => 'لوحة القيادة',
-    'Total RFQs' => 'Total RFQs',
-    'Total Quotation(s)' => 'Total Quotation(s)',
-    'Total Purchase Order(s)' => 'Total Purchase Order(s)',
-    'Total Shipments Delivered' => 'Total Shipments Delivered',
-    'Total User' => 'Total User',
-    'Total Business' => 'Total Business',
-    'Received RFQ' => 'Received RFQ',
+    'Total RFQs' => 'مجموع طلبات عروض الأسعار',
+    'Total Quotation(s)' => 'مجموع عروض الأسعار',
+    'Total Purchase Order(s)' => 'مجموع الطلبات',
+    'Total Shipments Delivered' => 'مجموع الشحنات المرسلة',
+    'Total User' => 'مجموع المستخدمين',
+    'Total Business' => 'مجموع الأنشطة التجارية',
+    'Received RFQ' => 'طلبات عروض الأسعار المستلمة',
 ];

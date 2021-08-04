@@ -18,13 +18,13 @@
                 @csrf
 
                 <div>
-                    <x-jet-label for="email" value="{{ __('Email') }}" />
+                    <x-jet-label for="email" value="{{ __('login.Email') }}" />
                     <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
                 </div>
 
                 <div class="mt-4">
                     <div class="py-2" x-data="{ show: true }">
-                        <x-jet-label for="password" value="{{ __('Password') }}"/>
+                        <x-jet-label for="password" value="{{ __('login.Password') }}"/>
                         <div class="relative">
                             <input id="password" name="password" required autocomplete="current-password" :type="show ? 'password' : 'text'" class="form-input rounded-md shadow-sm block mt-1 w-full">
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mr-2">
@@ -42,27 +42,27 @@
                 <div class="block mt-4">
                     <label for="remember_me" class="flex items-center">
                         <input id="remember_me" type="checkbox" class="form-checkbox" name="remember">
-                        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                        <span class="ml-2 text-sm text-gray-600">{{ __('login.Remember me') }}</span>
                     </label>
                 </div>
 
                 <div class="flex items-center justify-end mt-4">
                     @if (Route::has('password.request'))
                         <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
+                            {{ __('login.Forgot your password?') }}
                         </a>
                     @endif
 
                     <x-jet-button class="ml-4">
-                        {{ __('Login') }}
+                        {{ __('login.Login') }}
                     </x-jet-button>
                 </div>
 
                 <div class="flex items-center mt-4" style="margin: auto;width: 50%; padding: 10px;">
-                    <span class="ml-2 text-lg text-gray-600">{{ __('Not a member?') }}</span>
+                    <span class="ml-2 text-lg text-gray-600">{{ __('login.Not a member?') }}</span>
                     &nbsp;
                     <a class="underline text-lg text-blue-500 hover:text-gray-900" href="{{ route('register') }}">
-                        {{ __('Register') }}
+                        {{ __('login.Register') }}
                     </a>
                 </div>
             </form>

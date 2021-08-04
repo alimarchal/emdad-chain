@@ -35,7 +35,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-0 text-center m-5">Cart @if (!$eCart->count()) seems empty @endif </h2>
+        <h2 class="text-2xl font-bold py-0 text-center m-5">{{__('portal.Cart')}} @if (!$eCart->count()) {{__('portal.seems empty')}} @endif </h2>
 
         @if ($eCart->count())
             @php $total = 0; @endphp
@@ -50,44 +50,44 @@
                                         #
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Category Name
+                                        {{__('portal.Category Name')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Brand
+                                        {{__('portal.Brand')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Description
+                                        {{__('portal.Description')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Unit
+                                        {{__('portal.Unit')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Size
+                                        {{__('portal.Size')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Quantity
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Last Price
+                                        {{__('portal.Quantity')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Delivery Period
+                                        {{__('portal.Last Price')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Payment Mode
+                                        {{__('portal.Delivery Period')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Remarks
+                                        {{__('portal.Payment Mode')}}
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Remarks')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Display {{auth()->user()->business->business_name}} in the RFQ">
-                                        Display Company Name
+                                        {{__('portal.Display Company Name')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Attachment">
@@ -98,7 +98,7 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Action
+                                        {{__('portal.Action')}}
                                     </th>
 
                                 </tr>
@@ -154,8 +154,8 @@
 
                                         <td class="px-3 py-3 text-center whitespace-nowrap">
                                             <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required title="Display {{auth()->user()->business->business_name}} in the RFQ">
-                                                <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
-                                                <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
+                                                <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">{{__('portal.No')}}</option></option>
+                                                <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">{{__('portal.Yes')}}</option></option>
                                             </select>
                                             <span style="display: none" id="status" class="text-green-600 text-sm-center">Status Updated.</span>
                                         </td>
@@ -169,7 +169,7 @@
                                                     </svg>
                                                 </a>
                                             @else
-                                                #N/A
+                                            {{__('portal.N/A')}}
                                             @endif
                                         </td>
 
@@ -206,7 +206,7 @@
 
                         <button type="submit"
                                 class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                            Place RFQ
+                            {{__('portal.Place RFQ')}}
                         </button>
                     </form>
                 </div>
@@ -215,6 +215,17 @@
 
 
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#cart').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+        });
+    </script>
 @else
     <x-app-layout>
         <x-slot name="header">
@@ -231,11 +242,11 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">المنتجات في السلة @if (!$eCart->count()) seems empty @endif </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Cart')}} @if (!$eCart->count()) {{__('portal.seems empty')}} @endif </h2>
 
         @if ($eCart->count())
             @php $total = 0; @endphp
-            <div class="flex flex-col bg-white rounded ">
+{{--            <div class="flex flex-col bg-white rounded ">--}}
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -247,40 +258,44 @@
                                         #
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        اسم المنتج
+                                        {{__('portal.Category Name')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        العلامة التجارية
+                                        {{__('portal.Brand')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        الوصف
+                                        {{__('portal.Description')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        الوحدة
+                                        {{__('portal.Unit')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        مقاس
+                                        {{__('portal.Size')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        العدد
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        السعر الأخير
+                                        {{__('portal.Quantity')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        مدة التوصيل
+                                        {{__('portal.Last Price')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        طريقة الدفع
+                                        {{__('portal.Delivery Period')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        ملاحظات
+                                        {{__('portal.Payment Mode')}}
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Remarks')}}
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Display {{auth()->user()->business->business_name}} in the RFQ">
+                                        {{__('portal.Display Company Name')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
@@ -335,11 +350,34 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->payment_mode }}
+                                            @if($rfp->payment_mode == 'Cash')
+                                                {{__('portal.Cash')}}
+                                            @elseif($rfp->payment_mode == 'Credit')
+                                                {{__('portal.Credit')}}
+                                            @elseif($rfp->payment_mode == 'Credit (30 Days)')
+                                                {{__('portal.Credit (30 Days)')}}
+                                            @elseif($rfp->payment_mode == 'Credit (60 Days)')
+                                                {{__('portal.Credit (60 Days)')}}
+                                            @elseif($rfp->payment_mode == 'Credit (90 Days)')
+                                                {{__('portal.Credit (90 Days)')}}
+                                            @elseif($rfp->payment_mode == 'Credit (120 Days)')
+                                                {{__('portal.Credit (120 Days)')}}
+                                            @endif
+{{--                                            {{ $rfp->payment_mode }}--}}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $rfp->remarks }}
+                                        </td>
+
+                                        <td class="px-2 py-3 text-center whitespace-nowrap">
+                                            <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required title="Display {{auth()->user()->business->business_name}} in the RFQ">
+                                                <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">
+                                                    {{__('portal.No')}}</option>
+                                                <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">
+                                                    {{__('portal.Yes')}}</option>
+                                            </select>
+                                            <span style="display: none" id="status" class="text-green-600 text-sm-center">Status Updated.</span>
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -351,16 +389,16 @@
                                                     </svg>
                                                 </a>
                                             @else
-                                                لاشيء مما سبق
+                                            {{__('portal.N/A')}}
                                             @endif
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}" class="inline">
+                                            <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}" class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
                                                 @csrf
                                                 @method('delete')
 
-                                                <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE" onsubmit="alert('Are you sure')">
+                                                <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE">
                                                     <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="orange">
                                                         <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
                                                         <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"/>
@@ -388,31 +426,41 @@
 
                         <button type="submit"
                                 class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                            Place RFQ
+                            {{__('portal.Place RFQ')}}
                         </button>
                     </form>
                 </div>
-            </div>
+{{--            </div>--}}
         @endif
 
-
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#cart').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "language": {
+                    "sSearch": "بحث:",
+                    "oPaginate": {
+                        "sFirst":    	"أولا",
+                        "sPrevious": 	"السابق",
+                        "sNext":     	"التالي",
+                        "sLast":     	"الاخير"
+                    },
+                    "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ المدخلات",
+                },
+            } );
+        });
+    </script>
 @endif
 
 <script>
 
     $('.confirm').on('click', function (e) {
         return confirm($(this).data('confirm'));
-    });
-
-
-    $(document).ready(function() {
-        $('#cart').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                // 'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        } );
     });
 
     $('.company_name_check').change(function(){

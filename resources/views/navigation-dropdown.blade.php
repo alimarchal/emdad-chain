@@ -70,15 +70,15 @@
                         @endrole
 
                         @if(auth()->user()->can('all') || auth()->user()->registration_type == "Buyer" && auth()->user()->status == 3)
-                            {{--                        <x-jet-nav-link href="{{ route('RFQCart.index') }}" :active="request()->routeIs('RFQCart.index')">--}}
-                            {{--                            @include('RFQ.RFQICON') &nbsp;RFQ Items--}}
-                            {{--                            @if (\App\Models\ECart::where('user_id', auth()->user()->id)--}}
-                            {{--                                ->where('business_id', auth()->user()->business_id)--}}
-                            {{--                                ->count())--}}
-                            {{--                                ({{ \App\Models\ECart::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->count() }})--}}
-                            {{--                            @endif--}}
+                            {{--                        <x-jet-nav-link href="{{ route('RFQCart.index') }}" :active="request()->routeIs('RFQCart.index')">
+                                                        @include('RFQ.RFQICON') &nbsp;RFQ Items
+                                                        @if (\App\Models\ECart::where('user_id', auth()->user()->id)
+                                                            ->where('business_id', auth()->user()->business_id)
+                                                            ->count())
+                                                            ({{ \App\Models\ECart::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->count() }})
+                                                        @endif
 
-                            {{--                        </x-jet-nav-link>--}}
+                                                    </x-jet-nav-link>--}}
                         @endif
 
                         {{--                    @if (auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3)--}}
@@ -126,9 +126,9 @@
                                 $quote = \App\Models\Qoute::where(['e_order_id' => $eOrders[0]->id, 'supplier_business_id' => auth()->user()->business_id])->first();
                             }
                         @endphp
-                        <span title="Number of New RFQ(s) received against multiple categories">{{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span @if($rfqCount > 0) class="text-green-600 hover:underline"
+                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span @if($rfqCount > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                      @else class="text-red-600 hover:underline" @endif>{{$rfqCount}}</span></a></span>
-                        <span title="Number of New RFQ(s) received against single category">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0 && !isset($quote)) class="text-green-600 hover:underline"
+                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against single category')}}">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0 && !isset($quote)) class="text-green-600 hover:underline"
                                                                                                                                                                                                          @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else 0 @endif</span></a></span>
                     @endif
 
@@ -137,9 +137,9 @@
                             $multiPlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 1])->count();
                             $singlePlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 0])->get();
                         @endphp
-                        <span title="Number of New Quotation(s) received against multiple categories">{{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
+                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                                                  @else class="text-red-600 hover:underline" @endif>{{$multiPlacedRFQ}}</span></a></span>
-                        <span title="Number of New Quotation(s) received against single category">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('singleCategoryBuyerRFQs')}}" style="padding-right: 10px;"><span @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
+                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against single category')}}">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('singleCategoryBuyerRFQs')}}" style="padding-right: 10px;"><span @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                                            @else class="text-red-600 hover:underline" @endif>{{count($singlePlacedRFQ->unique('e_order_id'))}}</span></a></span>
                     @endif
 
@@ -554,9 +554,9 @@
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex" style="direction: rtl">
 
-                        @role('SuperAdmin|CEO')
+                        @role('SuperAdmin')
                         @if (auth()->user()->status == 3)
-                           {{-- <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
+                            <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.*')">
                                 <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z"/>
                                     <circle cx="9" cy="7" r="4"/>
@@ -569,7 +569,7 @@
                                 @else
                                     {{ __('navigation-dropdown.Users') }}
                                 @endif
-                            </x-jet-nav-link>--}}
+                            </x-jet-nav-link>
                         @endif
                         @endrole
                         @role('SuperAdmin')
@@ -588,6 +588,17 @@
                             </svg>
                             &nbsp;
                             {{ __('navigation-dropdown.Support Requests') }}
+                        </x-jet-nav-link>
+                        @endrole
+
+                        @role('SC Specialist')
+                        <x-jet-nav-link href="{{ route('showAllCategory') }}" :active="request()->routeIs('showAllCategory')">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                            &nbsp;
+                            {{ __('navigation-dropdown.Categories with sub-categories') }}
                         </x-jet-nav-link>
                         @endrole
 
@@ -620,6 +631,12 @@
                                 </x-jet-nav-link>
                             @endif
                         @endif--}}
+
+                        @if (auth()->user()->hasRole('SuperAdmin'))
+                            <x-jet-nav-link href="{{ route('packages.index') }}" :active="request()->routeIs('subscription')">
+                                {{ __('navigation-dropdown.Subscription') }}
+                            </x-jet-nav-link>
+                        @endif
                     </div>
                 </div>
 
@@ -658,9 +675,9 @@
                                 $quote = \App\Models\Qoute::where(['e_order_id' => $eOrders[0]->id, 'supplier_business_id' => auth()->user()->business_id])->first();
                             }
                         @endphp
-                        <span title="Number of New RFQ(s) received against multiple categories">{{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span @if($rfqCount > 0) class="text-green-600 hover:underline"
+                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp;<a href="{{route('viewRFQs')}}"><span style="padding-left: 7px;" @if($rfqCount > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                   @else class="text-red-600 hover:underline" @endif>{{$rfqCount}}</span></a></span>
-                        <span title="Number of New RFQ(s) received against single category">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0 && !isset($quote)) class="text-green-600 hover:underline"
+                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against single category')}}">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}"><span style="padding-left: 7px;" @if(count($eOrders) > 0 && !isset($quote)) class="text-green-600 hover:underline"
                                                                                                                                                                                                     @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else 0 @endif</span></a></span>
                     @endif
 
@@ -669,9 +686,9 @@
                             $multiPlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 1])->count();
                             $singlePlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 0])->get();
                         @endphp
-                        <span title="Number of New Quotation(s) received against multiple categories">{{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
+                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}"><span style="padding-left: 7px;" @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                                               @else class="text-red-600 hover:underline" @endif>{{$multiPlacedRFQ}}</span></a></span>
-                        <span title="Number of New Quotation(s) received against single category">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('singleCategoryBuyerRFQs')}}" style="padding-right: 10px;"><span @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
+                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against single category')}}">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('singleCategoryBuyerRFQs')}}"><span style="padding-left: 7px;" @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                                       @else class="text-red-600 hover:underline" @endif>{{count($singlePlacedRFQ->unique('e_order_id'))}}</span></a></span>
                     @endif
 {{--                    @cannot('all')--}}

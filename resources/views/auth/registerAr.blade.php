@@ -35,6 +35,7 @@
 {{--            <p class="text-center font-bold text-2xl">الخطوة الأولى: التسجيل</p>--}}
 {{--            <livewire:reference />--}}
             <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-20 w-auto m-auto" style="margin:auto;" />
+            <p class="text-center font-bold text-2xl mt-2">{{__('register.Step # 1: Registration')}}</p>
 
             <div class="flex flex-wrap overflow-hidden lg:-mx-3 xl:-mx-3">
 
@@ -47,11 +48,11 @@
                 </div>
 
                 <div class="w-full overflow-hidden lg:my-3 lg:px-3 lg:w-1/2 xl:my-3 xl:px-3 xl:w-1/2">
-                    <x-jet-label for="service" value="{{ __('Register as ') }}" class="mb-2"/>
+                    <x-jet-label for="service" value="{{ __('register.Register as') }}" class="mb-2"/>
                     <select name="service" id="service" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name">
                         <option value="">{{ __('register.Select')}}</option>
-                        <option value="1">CEO</option>
-                        <option value="2">Logistics Solution</option>
+                        <option value="1">{{__('register.CEO')}}</option>
+                        <option value="2">{{__('register.Logistics Solution')}}</option>
                     </select>
                 </div>
 

@@ -9,7 +9,11 @@ return [
     |
     */
 
+    'Step # 1: Registration' => 'الخطوة الأولى: التسجيل',
     'Reference (If any)' => 'المرجع (ان وجد)',
+    'Register as' => 'التسجيل بصفتك',
+    'CEO' => 'رئيس تنفيذي',
+    'Logistics Solution' => 'مقدم حلول لوجستية ',
     'Title' => 'اللقب',
     'Select' => 'اختر',
     'Mr.' => 'سيد',

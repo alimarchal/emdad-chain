@@ -15,6 +15,6 @@ return [
     'Remember me' => 'تذكرني',
     'Forgot your password?' => 'نسيت كلمة المرور',
     'Login' => 'الدخول',
-    'Not a member?' => 'ألست عضواً؟',
+    'Not a member?' => 'ألست عضواً ؟',
 
 ];

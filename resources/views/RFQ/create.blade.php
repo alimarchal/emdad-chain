@@ -219,8 +219,8 @@
 
                                                 <td class="px-3 py-3 text-center whitespace-nowrap">
                                                     <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required>
-                                                        <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
-                                                        <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
+                                                        <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">{{__('portal.No')}}</option>
+                                                        <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">{{__('portal.Yes')}}</option>
                                                     </select>
                                                 </td>
 
@@ -235,7 +235,7 @@
                                                             </svg>
                                                         </a>
                                                     @else
-                                                        #N/A
+                                                        {{__('portal.N/A')}}
                                                     @endif
                                                 </td>
 
@@ -807,8 +807,8 @@
 
                                                 <td class="px-3 py-3 text-center whitespace-nowrap">
                                                     <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required>
-                                                        <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
-                                                        <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
+                                                        <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">{{__('portal.No')}}</option>
+                                                        <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">{{__('portal.Yes')}}</option>
                                                     </select>
                                                 </td>
 
@@ -823,7 +823,7 @@
                                                             </svg>
                                                         </a>
                                                     @else
-                                                        #N/A
+                                                        {{__('portal.N/A')}}
                                                     @endif
                                                 </td>
 
@@ -1250,7 +1250,7 @@
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                             <div class="text-black text-2xl" style="text-align: center">
-                                {{__('portal.Your have reached daily RFQ generate limit.')}}
+                                {{__('portal.Your have reached daily requisition generate limit.')}}
                             </div>
                         </div>
                     </div>
@@ -1463,17 +1463,29 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $rfp->payment_mode }}
+                                                    @if($rfp->payment_mode == 'Cash')
+                                                        {{__('portal.Cash')}}
+                                                    @elseif($rfp->payment_mode == 'Credit')
+                                                        {{__('portal.Credit')}}
+                                                    @elseif($rfp->payment_mode == 'Credit (30 Days)')
+                                                        {{__('portal.Credit (30 Days)')}}
+                                                    @elseif($rfp->payment_mode == 'Credit (60 Days)')
+                                                        {{__('portal.Credit (60 Days)')}}
+                                                    @elseif($rfp->payment_mode == 'Credit (90 Days)')
+                                                        {{__('portal.Credit (90 Days)')}}
+                                                    @elseif($rfp->payment_mode == 'Credit (120 Days)')
+                                                        {{__('portal.Credit (120 Days)')}}
+                                                    @endif
                                                 </td>
                                                 {{--
                                                                              <td class="px-6 py-4 text-center whitespace-nowrap">
                                                                                  {{ $rfp->remarks }}
                                                                              </td> --}}
 
-                                                <td class="px-3 py-3 text-center whitespace-nowrap">
+                                                <td class="px-2 py-3 text-center whitespace-nowrap">
                                                     <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required>
-                                                        <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
-                                                        <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
+                                                        <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">{{__('portal.No')}}</option>
+                                                        <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">{{__('portal.Yes')}}</option>
                                                     </select>
                                                 </td>
 
@@ -1488,7 +1500,7 @@
                                                             </svg>
                                                         </a>
                                                     @else
-                                                        #N/A
+                                                        {{__('portal.N/A')}}
                                                     @endif
                                                 </td>
 
@@ -1880,7 +1892,7 @@
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text" name="{{__('portal.Size')}}"
-                                           min="0" placeholder="Size">
+                                           min="0" placeholder="{{__('portal.Size')}}">
                                 </td>
                                 <td><input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
                                            name="brand" min="0" autocomplete="brand" placeholder="{{__('portal.Brand')}}"></td>
@@ -1991,7 +2003,7 @@
 
                                             <th scope="col"
                                                 class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                                Show Company Name
+                                                {{__('portal.Show Company Name')}}
                                             </th>
 
                                             <th scope="col"
@@ -2053,7 +2065,19 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $rfp->payment_mode }}
+                                                    @if($rfp->payment_mode == 'Cash')
+                                                        {{__('portal.Cash')}}
+                                                    @elseif($rfp->payment_mode == 'Credit')
+                                                        {{__('portal.Credit')}}
+                                                    @elseif($rfp->payment_mode == 'Credit (30 Days)')
+                                                        {{__('portal.Credit (30 Days)')}}
+                                                    @elseif($rfp->payment_mode == 'Credit (60 Days)')
+                                                        {{__('portal.Credit (60 Days)')}}
+                                                    @elseif($rfp->payment_mode == 'Credit (90 Days)')
+                                                        {{__('portal.Credit (90 Days)')}}
+                                                    @elseif($rfp->payment_mode == 'Credit (120 Days)')
+                                                        {{__('portal.Credit (120 Days)')}}
+                                                    @endif
                                                 </td>
                                                 {{--
                                                                              <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -2061,10 +2085,10 @@
                                                                              </td> --}}
 
 
-                                                <td class="px-3 py-3 text-center whitespace-nowrap">
+                                                <td class="px-2 py-3 text-center whitespace-nowrap">
                                                     <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required>
-                                                        <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">No</option>
-                                                        <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">Yes</option>
+                                                        <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">{{__('portal.No')}}</option>
+                                                        <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">{{__('portal.Yes')}}</option>
                                                     </select>
                                                 </td>
 
@@ -2079,7 +2103,7 @@
                                                             </svg>
                                                         </a>
                                                     @else
-                                                        #N/A
+                                                        {{__('portal.N/A')}}
                                                     @endif
                                                 </td>
 
@@ -2430,7 +2454,7 @@
                                 <td>
                                 <textarea name="description" id="description"
                                           class="w-full description rounded-md shadow-sm" maxlength="254"
-                                          placeholder="Enter Description.." required></textarea>
+                                          placeholder="{{__('portal.Enter Description..')}}" required></textarea>
                                     <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
                                     <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                                 </td>
@@ -2506,7 +2530,7 @@
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                         <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
                             <div class="text-black text-2xl" style="text-align: center">
-                                {{__('portal.Your have reached daily RFQ generate limit.')}}
+                                {{__('portal.Your have reached daily requisition generate limit.')}}
                             </div>
                         </div>
                     </div>

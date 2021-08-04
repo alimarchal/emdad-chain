@@ -26,9 +26,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-0 text-center m-5">Requisitions History</h2>
-
-        <!-- This example requires Tailwind CSS v2.0+ -->
+        <h2 class="text-2xl font-bold py-0 text-center m-5">{{__('portal.Requisitions History')}}</h2>
 
         <div class="flex flex-col bg-white rounded ">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -42,29 +40,29 @@
                                     #
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Requisition No.
+                                    {{__('portal.Requisition No.')}}
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Date
+                                    {{__('portal.Date')}}
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Requested by
+                                    {{__('portal.Requested by')}}
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Requisition Type
+                                    {{__('portal.Requisition Type')}}
                                 </th>
 
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Status
+                                    {{__('portal.Status')}}
                                 </th>
 
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" width="120">
-                                    View
+                                    {{__('portal.View')}}
                                 </th>
 
                             </tr>
@@ -79,11 +77,11 @@
                                     <td class="px-6 py-4 text-center whitespace-nowrap" >
                                         @if ($item->business_id)
                                             <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                Emdad-{{$item->id}}
+                                                {{__('portal.Emdad')}}-{{$item->id}}
                                             </a>
                                         @else
                                             <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                {{ $item->business_id }}-Emdad-{{$item->id}}
+                                                {{ $item->business_id }}-{{__('portal.Emdad')}}-{{$item->id}}
                                             </a>
                                         @endif
                                     </td>
@@ -104,9 +102,9 @@
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" >
                                         @if($item->rfq_type == 0)
-                                            Single Category
+                                            {{__('portal.Single Category')}}
                                         @elseif($item->rfq_type == 1)
-                                            Multi Category
+                                            {{__('portal.Multiple Categories')}}
                                         @endif
                                     </td>
 
@@ -138,6 +136,18 @@
             </div>
         </div>
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#requisition-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+        });
+
+    </script>
 @else
     <x-app-layout>
         <x-slot name="header">
@@ -147,16 +157,14 @@
         </x-slot>
 
         @if (session()->has('message'))
-            <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+            <div class="block text-sm text-green-600 mt-2 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
                 <strong class="mr-1">{{ session('message') }}</strong>
                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                     <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">RFQ List</h2>
-
-        <!-- This example requires Tailwind CSS v2.0+ -->
+        <h2 class="text-2xl font-bold py-0 text-center m-5">{{__('portal.Requisitions History')}}</h2>
 
         <div class="flex flex-col bg-white rounded ">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -170,26 +178,29 @@
                                     #
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    تاريخ
+                                    {{__('portal.Requisition No.')}}
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    الحالة
+                                    {{__('portal.Date')}}
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    RFQ #
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Client Name
+                                    {{__('portal.Requested by')}}
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Who Place
+                                    {{__('portal.Requisition Type')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-left text-center text-xs font-medium text-gray-500 tracking-wider" width="120">
-                                    معاينة
+
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Status')}}
+                                </th>
+
+
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" width="120">
+                                    {{__('portal.View')}}
                                 </th>
 
                             </tr>
@@ -197,46 +208,50 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($PlacedRFQ as $item)
                                 <tr>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" width="30">
+                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
                                         {{$loop->iteration}}
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" width="140">
-                                        {{$item->created_at->format('d-m-Y')}}
-                                    </td>
-
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" width="140">
-                                        {{$item->status}}
-                                    </td>
-
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
                                         @if ($item->business_id)
                                             <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                {{ $item->business_id }}-{{$item->id}}
+                                                {{__('portal.Emdad')}}-{{$item->id}}
                                             </a>
                                         @else
                                             <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                {{ $item->business_id }}-{{$item->id}}
-                                            </a>
-                                        @endif
-
-                                    </td>
-
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        @if (\App\Models\Business::find($item->business_id))
-                                            <a href="{{url('business/'.$item->business_id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                {{\App\Models\Business::find($item->business_id)->first()->business_name}}
+                                                {{ $item->business_id }}-{{__('portal.Emdad')}}-{{$item->id}}
                                             </a>
                                         @endif
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        @if (\App\Models\User::find($item->user_id))
-                                            {{\App\Models\User::find($item->user_id)->first()->name}}
+                                        {{$item->created_at->format('d-m-Y')}}
+
+                                    </td>
+
+                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                        {{--                                        {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}--}}
+                                        @if(isset($item->userName))
+                                            {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}
+                                        @else
+                                            {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', ''))}}
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                        @if($item->rfq_type == 0)
+                                            {{__('portal.Single Category')}}
+                                        @elseif($item->rfq_type == 1)
+                                            {{__('portal.Multiple Categories')}}
+                                        @endif
+                                    </td>
+
+                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                        {{$item->status}}
+                                    </td>
+
+
+                                    <td class="px-6 py-4 text-center text-center whitespace-nowrap">
                                         <a href="{{route('RFQItemsByID',$item->id)}}" >
                                             <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
@@ -246,6 +261,7 @@
                                                 </path>
                                             </svg>
                                         </a>
+
                                     </td>
 
                                 </tr>
@@ -258,16 +274,25 @@
             </div>
         </div>
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#requisition-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "language": {
+                    "sSearch": "بحث:",
+                    "oPaginate": {
+                        "sFirst":    	"أولا",
+                        "sPrevious": 	"السابق",
+                        "sNext":     	"التالي",
+                        "sLast":     	"الاخير"
+                    },
+                    "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ المدخلات",
+                },
+            } );
+        });
+    </script>
 @endif
-
-<script>
-    $(document).ready(function() {
-        $('#requisition-table').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                // 'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        } );
-    });
-
-</script>
