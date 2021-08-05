@@ -84,7 +84,7 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                            <div class="text-sm text-gray-900">{{ $user->user->name }}</div>
+                                                            <div class="text-sm text-gray-900">{{ isset($user->user->name) ? $user->user->name : 'N/A'  }}</div>
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap">
