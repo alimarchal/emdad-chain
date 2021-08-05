@@ -13,7 +13,7 @@
     </style>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }} - Welcome
+            {{ __('.dashboard.Dashboard') }} - Welcome
             {{ auth()->user()->gender == 'Male' ? 'Mr. ' . Auth::user()->name : 'Mrs.' . Auth::user()->name }}
 
             <span class="float-right text-red-900 font-bold">{{ isset(Auth::user()->status) == 1 ? 'Under process' : 'InComplete' }}</span>
@@ -84,7 +84,7 @@
                     <hr class="m-4">
 
                     <div class="flex justify-start">
-                        <a href="{{ route('subCategories') }}" target="_blank" class="inline-flex px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                        <a href="{{ route('subCategories') }}" target="_blank" class="inline-flex px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 @if(auth()->user()->rtl == 1) hover:text-white @endif focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                             @if(auth()->user()->rtl == 0)
                                 Show all Categories
                             @else

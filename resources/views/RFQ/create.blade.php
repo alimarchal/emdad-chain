@@ -531,7 +531,7 @@
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
                                 <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
-                                <th style="width:7%;">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
                                 <th style="width:15%;">{{__('portal.Shipment Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
@@ -1011,11 +1011,11 @@
                                 </div>
                                 <div class="Right-info_holder md:flex-1">
                                     <div class="my-5 pl-5 ">
-                                        <span class="font-bold text-lg color-1f3864">{{__('portal.Shipping Information')}}</span></span>
+                                        <span class="font-bold text-lg color-1f3864">{{__('portal.Shipping Information')}}</span>
                                         <hr style="border-top: 1px solid gray;width: 25%;">
                                     </div>
                                     <div class="my-5 pl-5 ">
-                                        {{__('portal.Warehouse Location')}}: @include('misc.required'): @include('misc.required')
+                                        {{__('portal.Warehouse Location')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
@@ -1026,7 +1026,7 @@
                                             <select
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 required name="warehouse_id" id="warehouse_id">
-                                                <option value="">{{__('portal.Select Warehouse Location')}}</option></option>
+                                                <option value="">{{__('portal.Select Warehouse Location')}}</option>
                                                 @foreach(\App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->get() as $warehouse)
                                                     <option value="{{$warehouse->id}}" @if (isset($latest_rfq))
                                                         {{$latest_rfq->warehouse_id ==$warehouse->id ? 'selected' : ''}} @endif>
@@ -1037,7 +1037,7 @@
                                             </select>
                                         </div>
                                         <br>
-                                        {{__('portal.Delivery Period')}}: @include('misc.required'): @include('misc.required')
+                                        {{__('portal.Delivery Period')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
@@ -1048,7 +1048,7 @@
                                             <select
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 name="delivery_period" id="delivery_period" required>
-                                                <option value="">{{__('portal.Select Delivery Period')}}</option></option>
+                                                <option value="">{{__('portal.Select Delivery Period')}}</option>
                                                 <option value="Immediately" @if (isset($latest_rfq))
                                                     {{$latest_rfq->delivery_period =='Immediately' ? 'selected' : ''}} @endif>
                                                     {{__('portal.Immediately')}}
@@ -1108,7 +1108,7 @@
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
                                 <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
-                                <th style="width:7%;">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
                                 <th style="width:15%;">{{__('portal.Shipment Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
@@ -1459,7 +1459,17 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $rfp->delivery_period }}
+                                                    @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}
+                                                    @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
+                                                    @elseif($rfp->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
+                                                    @elseif($rfp->delivery_period =='Within 90 Days') {{__('portal.90 Days')}}
+                                                    @elseif($rfp->delivery_period =='Standing Order - 2 per year') {{__('portal.Standing Order - 2 times / year')}}
+                                                    @elseif($rfp->delivery_period =='Standing Order - 3 per year') {{__('portal.Standing Order - 3 times / year')}}
+                                                    @elseif($rfp->delivery_period =='Standing Order - 4 per year') {{__('portal.Standing Order - 4 times / year')}}
+                                                    @elseif($rfp->delivery_period =='Standing Order - 6 per year') {{__('portal.Standing Order - 6 times / year')}}
+                                                    @elseif($rfp->delivery_period =='Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}
+                                                    @elseif($rfp->delivery_period =='Standing Order Open') {{__('portal.Standing Order - Open')}}
+                                                    @endif
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -1467,13 +1477,13 @@
                                                         {{__('portal.Cash')}}
                                                     @elseif($rfp->payment_mode == 'Credit')
                                                         {{__('portal.Credit')}}
-                                                    @elseif($rfp->payment_mode == 'Credit (30 Days)')
+                                                    @elseif($rfp->payment_mode == 'Credit30days')
                                                         {{__('portal.Credit (30 Days)')}}
-                                                    @elseif($rfp->payment_mode == 'Credit (60 Days)')
+                                                    @elseif($rfp->payment_mode == 'Credit60days')
                                                         {{__('portal.Credit (60 Days)')}}
-                                                    @elseif($rfp->payment_mode == 'Credit (90 Days)')
+                                                    @elseif($rfp->payment_mode == 'Credit90days')
                                                         {{__('portal.Credit (90 Days)')}}
-                                                    @elseif($rfp->payment_mode == 'Credit (120 Days)')
+                                                    @elseif($rfp->payment_mode == 'Credit120days')
                                                         {{__('portal.Credit (120 Days)')}}
                                                     @endif
                                                 </td>
@@ -1482,7 +1492,7 @@
                                                                                  {{ $rfp->remarks }}
                                                                              </td> --}}
 
-                                                <td class="px-2 py-3 text-center whitespace-nowrap">
+                                                <td class="px-0 py-3 text-center whitespace-nowrap">
                                                     <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required>
                                                         <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">{{__('portal.No')}}</option>
                                                         <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">{{__('portal.Yes')}}</option>
@@ -1539,11 +1549,14 @@
                 <div class="p-4" style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
                     <div class="d-block text-center">
                         <span class="text-2xl font-bold color-7f7f7f">{{__('portal.Request For Quotation')}}</span>
+
                     </div>
                     <hr>
                     <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
                         <div class="flex-1 py-5">
                             <div class="my-5 pl-5">
+                                {{-- <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo"
+                                style="height: 80px;width: 200px;" /> --}}
                                 <img src="{{(isset(auth()->user()->business->business_photo_url)?Storage::url(auth()->user()->business->business_photo_url):'#')}}" alt="logo" style="height: 80px;width: 200px;"/>
                             </div>
                             @php
@@ -1551,11 +1564,14 @@
                             @endphp
                             <div class="my-5 pl-5 ">
                                 <h1 class="font-extrabold color-1f3864 text-xl ">{{$user_business_details->business_name}}</h1>
+                                {{-- <span>Location :
+                                <span class="font-bold">{{$user_business_details->city}}</span></span> <br>
+                                <span>Emdad Id : <span class="font-bold">{{Auth::user()->business_id}}</span></span> --}}
                             </div>
                         </div>
 
                         <div class="flex-1 ">
-                            <div class="ml-auto date" style="width:150px; ">
+                            <div class="ml-auto date" style="width:150px; float: left">
                                 <br>
                                 <span class="color-1f3864 font-bold">{{__('portal.Date')}}:
                             {{\Carbon\Carbon::today()->format('Y-m-d')}}</span><br>
@@ -1569,14 +1585,14 @@
                     @csrf
                     <div class=" mb-3">
                         <div>
-                            <div style="background: #DEEAF6; min-height: 235px; padding-top: 1px;" class="flex">
+                            <div style="background: #DEEAF6; min-height: 235px; padding-top: 1px;" class="md:flex">
 
-                                <div class="left-info_holder flex-1">
-                                    <div class="my-5 pl-5 " style="padding-left: 40px;">
+                                <div class="left-info_holder md:flex-1 mr-2">
+                                    <div class="my-5 pl-5 " style="padding-left: 20px">
                                         <span class="font-bold color-1f3864 text-lg">{{__('portal.Requisition Information')}}</span>
                                         <hr style="border-top: 1px solid gray;width: 25%;">
                                     </div>
-                                    <div class="my-5 pl-5 " style="padding-left: 40px;">
+                                    <div class="my-5 pl-5" style="padding-left: 20px">
 
                                         {{__('portal.Display Company Name')}}: @include('misc.required')
                                         <div class="relative inline-flex">
@@ -1591,15 +1607,14 @@
                                                 <option value="">{{__('portal.Select')}}</option>
                                                 <option
                                                     @if(isset($latest_rfq)){{$latest_rfq->company_name_check == 0 ? 'selected' : ''}}
-                                                    @endif value="0">No
+                                                    @endif value="0">{{__('portal.No')}}
                                                 </option>
                                                 <option
                                                     @if(isset($latest_rfq)){{$latest_rfq->company_name_check == 1  ? 'selected' : ''}}
-                                                    @endif value="1">Yes
+                                                    @endif value="1">{{__('portal.Yes')}}
                                                 </option>
                                             </select>
                                         </div>
-
 
 
                                         <br>
@@ -1617,8 +1632,7 @@
                                                 <option value="">{{__('portal.None')}}</option>
 
                                                 <option value="Cash" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->payment_mode =='Cash' ? 'selected' : ''}} @endif>
-                                                    {{__('portal.Cash')}}
+                                                    {{$latest_rfq->payment_mode =='Cash' ? 'selected' : ''}} @endif>{{__('portal.Cash')}}
                                                 </option>
 
                                                 @php
@@ -1676,9 +1690,11 @@
                                             </select>
                                         </div>
                                         <br>
+
+
                                     </div>
                                 </div>
-                                <div class="Right-info_holder flex-1">
+                                <div class="Right-info_holder md:flex-1">
                                     <div class="my-5 pl-5 ">
                                         <span class="font-bold text-lg color-1f3864">{{__('portal.Shipping Information')}}</span>
                                         <hr style="border-top: 1px solid gray;width: 25%;">
@@ -1696,11 +1712,11 @@
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 required name="warehouse_id" id="warehouse_id">
                                                 <option value="">{{__('portal.Select Warehouse Location')}}</option>
-                                                @foreach(\App\Models\BusinessWarehouse::where('business_id',
-                                                auth()->user()->business_id)->get() as $warehouse)
+                                                @foreach(\App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->get() as $warehouse)
                                                     <option value="{{$warehouse->id}}" @if (isset($latest_rfq))
                                                         {{$latest_rfq->warehouse_id ==$warehouse->id ? 'selected' : ''}} @endif>
-                                                        {{$warehouse->address }}</option>
+                                                        {{$warehouse->address }}
+                                                    </option>
                                                 @endforeach
 
                                             </select>
@@ -1730,10 +1746,7 @@
                                                     {{$latest_rfq->delivery_period =='Within 60 Days' ? 'selected' : ''}}
                                                     @endif>{{__('portal.60 Days')}}
                                                 </option>
-                                                <option value="Within 90 Days" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->delivery_period =='Within 90 Days' ? 'selected' : ''}}
-                                                    @endif>{{__('portal.90 Days')}}
-                                                </option>
+                                                <option value="Within 90 Days">{{__('portal.90 Days')}}</option>
                                                 <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
                                                     {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
                                                     @endif>{{__('portal.Standing Order - 2 times / year')}}
@@ -1769,22 +1782,6 @@
                     </div>
 
                     <div class="p4 mb-5 overflow-x-auto">
-                        <!-- Remaining RFQ count for Basic and Silver Business Packages -->
-                        @php
-                            $rfq = \App\Models\EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at',
-                            \Carbon\Carbon::today())->count();
-
-                            $business_package = \App\Models\BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
-                            $package = \App\Models\Package::where('id', $business_package->package_id)->first();
-                            $count = $package->rfq_per_day - $rfq;
-                        @endphp
-                        @if($business_package->package_id == 1 || $business_package->package_id == 2 )
-                            <div class="flex flex-wrap pl-5 " style="justify-content: center">
-                                <h1 class="text-1xl mt-0 pb-0 text-center"> {{__('portal.RFQ(s) remaining for the day')}}: </h1>
-                                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$count}} </h1>
-                            </div>
-                        @endif
-
 
                         <table class="table-fixed text-center min-w-full ">
                             <thead style="background-color:#8EAADB" class="text-white">
@@ -1796,7 +1793,7 @@
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
                                 <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
-                                <th style="width:7%;">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
                                 <th style="width:15%;">{{__('portal.Shipment Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
@@ -1869,7 +1866,7 @@
                                 </td>
                                 <td>
                                     <div class="relative inline-flex">
-                                        <svg class="w-2 h-2 absolute top-0 right-1.5 mt-4 pointer-events-none" style="width: 8px; height:8px;"
+                                        <svg class="w-2 h-2 absolute top-0 right-1.5 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                              xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                             <path
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
@@ -1891,7 +1888,7 @@
                                            name="quantity" min="0" autocomplete="quantity" required placeholder="{{__('portal.Qty')}}">
                                 </td>
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text" name="{{__('portal.Size')}}"
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text" name="size"
                                            min="0" placeholder="{{__('portal.Size')}}">
                                 </td>
                                 <td><input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
@@ -1909,10 +1906,8 @@
 
                                 <td>
 
-                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;"
-                                                                              src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
-                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1"
-                                           autocomplete="name" style="display:none;">
+                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;" src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
+                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1" autocomplete="name" style="display:none;">
                                 </td>
                             </tr>
 
@@ -1923,6 +1918,7 @@
                             <button type="submit" class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
                             </button>
+
 
                             <a href="{{route('RFQCart.index')}}" class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.Requisitions Cart')}}
@@ -2061,7 +2057,18 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $rfp->delivery_period }}
+                                                    @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}
+                                                    @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
+                                                    @elseif($rfp->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
+                                                    @elseif($rfp->delivery_period =='Within 90 Days') {{__('portal.90 Days')}}
+                                                    @elseif($rfp->delivery_period =='Standing Order - 2 per year') {{__('portal.Standing Order - 2 times / year')}}
+                                                    @elseif($rfp->delivery_period =='Standing Order - 3 per year') {{__('portal.Standing Order - 3 times / year')}}
+                                                    @elseif($rfp->delivery_period =='Standing Order - 4 per year') {{__('portal.Standing Order - 4 times / year')}}
+                                                    @elseif($rfp->delivery_period =='Standing Order - 6 per year') {{__('portal.Standing Order - 6 times / year')}}
+                                                    @elseif($rfp->delivery_period =='Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}
+                                                    @elseif($rfp->delivery_period =='Standing Order Open') {{__('portal.Standing Order - Open')}}
+                                                    @endif
+{{--                                                        {{ $rfp->delivery_period }}--}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -2069,13 +2076,13 @@
                                                         {{__('portal.Cash')}}
                                                     @elseif($rfp->payment_mode == 'Credit')
                                                         {{__('portal.Credit')}}
-                                                    @elseif($rfp->payment_mode == 'Credit (30 Days)')
+                                                    @elseif($rfp->payment_mode == 'Credit30days')
                                                         {{__('portal.Credit (30 Days)')}}
-                                                    @elseif($rfp->payment_mode == 'Credit (60 Days)')
+                                                    @elseif($rfp->payment_mode == 'Credit60days')
                                                         {{__('portal.Credit (60 Days)')}}
-                                                    @elseif($rfp->payment_mode == 'Credit (90 Days)')
+                                                    @elseif($rfp->payment_mode == 'Credit90days')
                                                         {{__('portal.Credit (90 Days)')}}
-                                                    @elseif($rfp->payment_mode == 'Credit (120 Days)')
+                                                    @elseif($rfp->payment_mode == 'Credit120days')
                                                         {{__('portal.Credit (120 Days)')}}
                                                     @endif
                                                 </td>
@@ -2085,7 +2092,7 @@
                                                                              </td> --}}
 
 
-                                                <td class="px-2 py-3 text-center whitespace-nowrap">
+                                                <td class="px-0 py-3 text-center whitespace-nowrap">
                                                     <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required>
                                                         <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">{{__('portal.No')}}</option>
                                                         <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">{{__('portal.Yes')}}</option>
@@ -2165,7 +2172,7 @@
                         </div>
 
                         <div class="flex-1 ">
-                            <div class="ml-auto date" style="width:150px; ">
+                            <div class="ml-auto date" style="width:150px; float: left">
                                 <br>
                                 <span class="color-1f3864 font-bold">{{__('portal.Date')}}:
                             {{\Carbon\Carbon::today()->format('Y-m-d')}}</span><br>
@@ -2181,7 +2188,7 @@
                         <div>
                             <div style="background: #DEEAF6; min-height: 235px; padding-top: 1px;" class="md:flex">
 
-                                <div class="left-info_holder md:flex-1">
+                                <div class="left-info_holder md:flex-1  mr-2">
                                     <div class="my-5 pl-5 " style="padding-left: 20px">
                                         <span class="font-bold color-1f3864 text-lg">{{__('portal.Requisition Information')}}</span>
                                         <hr style="border-top: 1px solid gray;width: 25%;">
@@ -2226,8 +2233,7 @@
                                                 <option value="">{{__('portal.None')}}</option>
 
                                                 <option value="Cash" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->payment_mode =='Cash' ? 'selected' : ''}} @endif>
-                                                    {{__('portal.Cash')}}
+                                                    {{$latest_rfq->payment_mode =='Cash' ? 'selected' : ''}} @endif>{{__('portal.Cash')}}
                                                 </option>
 
                                                 @php
@@ -2307,11 +2313,11 @@
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 required name="warehouse_id" id="warehouse_id">
                                                 <option value="">{{__('portal.Select Warehouse Location')}}</option>
-                                                @foreach(\App\Models\BusinessWarehouse::where('business_id',
-                                                auth()->user()->business_id)->get() as $warehouse)
+                                                @foreach(\App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->get() as $warehouse)
                                                     <option value="{{$warehouse->id}}" @if (isset($latest_rfq))
                                                         {{$latest_rfq->warehouse_id ==$warehouse->id ? 'selected' : ''}} @endif>
-                                                        {{$warehouse->address }}</option>
+                                                        {{$warehouse->address }}
+                                                    </option>
                                                 @endforeach
 
                                             </select>
@@ -2388,7 +2394,7 @@
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
                                 <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
-                                <th style="width:7%;">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
                                 <th style="width:15%;">{{__('portal.Shipment Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
@@ -2448,6 +2454,7 @@
 
                                 <td>
                                     <div class="w-full overflow-hidden">
+                                        <!-- Column Content -->
                                         @include('category.rfp')
                                     </div>
                                 </td>
@@ -2500,10 +2507,9 @@
 
                                 <td>
 
-                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;"
-                                                                              src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
-                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1"
-                                           autocomplete="name" style="display:none;"></td>
+                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;" src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
+                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1" autocomplete="name" style="display:none;">
+                                </td>
                             </tr>
 
 
@@ -2515,7 +2521,7 @@
                             </button>
 
 
-                            <a href="{{route('RFQCart.index')}}" class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700  hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <a href="{{route('RFQCart.index')}}" class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.Requisitions Cart')}}
                             </a>
                         </div>
