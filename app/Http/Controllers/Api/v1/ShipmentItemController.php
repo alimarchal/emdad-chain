@@ -96,6 +96,7 @@ class ShipmentItemController extends Controller
                         'buyerRFQWarehouse' => BusinessWarehouse::find(DraftPurchaseOrder::find($del_item->draft_purchase_order_id)->warehouse_id),
                         'BuyerBusiness' => Business::find($del_item->business_id),
                         'SupplierBusiness' => Business::find($del_item->supplier_business_id),
+                        'MultipleItems' => Delivery::where('rfq_no', $col->rfq_no)->where('rfq_type', 1)->get(),
                     ]);
                 }
                 return response()->json($ShipmentItem, 200);
