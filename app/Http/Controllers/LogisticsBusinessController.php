@@ -6,6 +6,7 @@ use App\Models\LogisticsBusiness;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Jetstream\HasProfilePhoto;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class LogisticsBusinessController extends Controller
 {
@@ -17,7 +18,10 @@ class LogisticsBusinessController extends Controller
      */
     public function index()
     {
-        $logistic_business = LogisticsBusiness::all();
+        $logistic_business = QueryBuilder::for(LogisticsBusiness::class)
+            ->allowedFilters(['business_name', 'vat_reg_certificate_number', 'phone'])
+            ->where('user_id', auth()->user()->id)
+            ->get();
         return view('logistic.business.index',compact('logistic_business'));
     }
 
@@ -30,7 +34,7 @@ class LogisticsBusinessController extends Controller
     public function create()
     {
         $user = User::find(auth()->user()->id);
-        if ($user->logistics_business_id === null) {
+        if ($user->logistics_business_id == 0) {
             return view('logistic.business.create');
         } else {
             return redirect()->route('logistics.index', $user->logistics_business_id);
@@ -84,7 +88,7 @@ class LogisticsBusinessController extends Controller
         $user->logistics_business_id = $business->id;
         $user->save();
         session()->flash('message', 'Business information successfully saved.');
-//        return redirect()->route('businessWarehouse.create');
+        return redirect()->route('logistics.index');
     }
 
     /**

@@ -618,3 +618,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('logisticsBusiness/{logisti
 Route::middleware(['auth:sanctum', 'verified'])->put('logisticsBusiness/{logisticsBusiness}', [\App\Http\Controllers\LogisticsBusinessController::class, 'update'])->name('logistics.update');
 Route::middleware(['auth:sanctum', 'verified'])->get('logisticsBusiness', [\App\Http\Controllers\LogisticsBusinessController::class, 'index'])->name('logistics.index');
 
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::resource('packagingSolution', \App\Http\Controllers\PackagingSolutionController::class);
+});
+
+
