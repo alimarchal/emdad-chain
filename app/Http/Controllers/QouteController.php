@@ -677,7 +677,8 @@ class QouteController extends Controller
             /* Transaction failed. */
         }
         session()->flash('message', 'Draft purchase order has been generated');
-        return redirect()->route('singleCategoryIndex');
+//        return redirect()->route('singleCategoryIndex');
+        return redirect()->route('singleCategoryDPOIndex');
     }
 
     ##########################################################################################

@@ -249,7 +249,7 @@
 
                         </tr>
 
-                            @if($eOrderItem->required_sample == 'Yes')
+                            {{--@if($eOrderItem->required_sample == 'Yes')
                                 <tr>
                                     <td colspan="9">
                                         <p class="py-2 font-bold text-center text-2xl">Sample Information {{$loop->iteration}}</p>
@@ -282,7 +282,7 @@
 
                                     </td>
                                 </tr>
-                            @endif
+                            @endif--}}
                         @endforeach
                         <tr class="mt-2">
                             <td colspan="9">
@@ -384,7 +384,7 @@
                                 </td>
 
                             </tr>
-                            @if($eOrderItem->required_sample == 'Yes')
+                            {{--@if($eOrderItem->required_sample == 'Yes')
                                 <tr>
                                     <td colspan="9">
                                         <p class="py-2 font-bold text-center text-2xl">Sample Information {{$loop->iteration}}</p>
@@ -417,7 +417,7 @@
 
                                     </td>
                                 </tr>
-                            @endif
+                            @endif--}}
                         @endforeach
 
                         <tr class="mt-2">

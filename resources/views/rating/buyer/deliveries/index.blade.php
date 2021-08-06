@@ -99,9 +99,9 @@
                                                         @endphp
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                             @if(count($deliveryComments) > 0)
-                                                                {{number_format($sum/$count,2,'.')}}
+                                                                {{number_format($sum/$count,2)}}
                                                             @else
-                                                                {{number_format(0,2,'.')}}
+                                                                {{number_format(0,2)}}
                                                             @endif
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">

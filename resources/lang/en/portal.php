@@ -82,6 +82,10 @@ return [
     'Last Unit Price' => 'Last UP',
     'UP' => 'Last Unit Price',
     'Shipment Remarks' => 'Shipment Remarks',
+    'Display' => 'Display',
+    'in the Requisition' => 'in the Requisition',
+    'Select Ok to place requisition' => 'Select Ok to place requisition',
+    'Are you sure you want to delete?' => 'Are you sure you want to delete?',
     'Attachments' => 'Attachments',
     'Qty' => 'Qty',
     'Price' => 'Price',
@@ -103,5 +107,9 @@ return [
     'View' => 'View',
     'Items List' => 'Items List',
     'Back' => 'Back',
+    'Requisitions (Single Category) History' => 'Requisitions (Single Category) History',
+    'DPO Number' => 'DPO Number',
+    'P.O Date' => 'P.O Date',
+    'No record found...!' => 'No record found...!',
 
 ];

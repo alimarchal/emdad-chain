@@ -86,7 +86,7 @@
                                         {{__('portal.Remarks')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Display {{auth()->user()->business->business_name}} in the RFQ">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="{{__('portal.Display')}} {{auth()->user()->business->business_name}} {{__('portal.in the Requisition')}}">
                                         {{__('portal.Display Company Name')}}
                                     </th>
 
@@ -153,9 +153,9 @@
                                         </td>
 
                                         <td class="px-3 py-3 text-center whitespace-nowrap">
-                                            <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required title="Display {{auth()->user()->business->business_name}} in the RFQ">
-                                                <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">{{__('portal.No')}}</option></option>
-                                                <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">{{__('portal.Yes')}}</option></option>
+                                            <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required title="{{__('portal.Display')}} {{auth()->user()->business->business_name}} {{__('portal.in the Requisition')}}">
+                                                <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">{{__('portal.No')}}</option>
+                                                <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">{{__('portal.Yes')}}</option>
                                             </select>
                                             <span style="display: none" id="status" class="text-green-600 text-sm-center">Status Updated.</span>
                                         </td>
@@ -174,7 +174,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}" class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
+                                            <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}" class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
                                                 @csrf
                                                 @method('delete')
 
@@ -205,7 +205,7 @@
                         <input type="hidden" value="{{ auth()->id() }}" name="user_id">
 
                         <button type="submit"
-                                class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Select Ok to place requisition')}}'>
                             {{__('portal.Place RFQ')}}
                         </button>
                     </form>
@@ -294,7 +294,7 @@
                                         {{__('portal.Remarks')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Display {{auth()->user()->business->business_name}} in the RFQ">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="{{__('portal.Display')}} {{auth()->user()->business->business_name}} {{__('portal.in the Requisition')}}">
                                         {{__('portal.Display Company Name')}}
                                     </th>
 
@@ -320,7 +320,12 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->item_name }}
+                                            @php
+                                                $record = \App\Models\Category::where('id',$rfp->item_code)->first();
+                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                            @endphp
+
+                                            {{ $record->name_ar}} , {{ $parent->name_ar}}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -346,7 +351,17 @@
 
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->delivery_period }}
+                                            @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}
+                                            @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
+                                            @elseif($rfp->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
+                                            @elseif($rfp->delivery_period =='Within 90 Days') {{__('portal.90 Days')}}
+                                            @elseif($rfp->delivery_period =='Standing Order - 2 per year') {{__('portal.Standing Order - 2 times / year')}}
+                                            @elseif($rfp->delivery_period =='Standing Order - 3 per year') {{__('portal.Standing Order - 3 times / year')}}
+                                            @elseif($rfp->delivery_period =='Standing Order - 4 per year') {{__('portal.Standing Order - 4 times / year')}}
+                                            @elseif($rfp->delivery_period =='Standing Order - 6 per year') {{__('portal.Standing Order - 6 times / year')}}
+                                            @elseif($rfp->delivery_period =='Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}
+                                            @elseif($rfp->delivery_period =='Standing Order Open') {{__('portal.Standing Order - Open')}}
+                                            @endif
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -354,16 +369,15 @@
                                                 {{__('portal.Cash')}}
                                             @elseif($rfp->payment_mode == 'Credit')
                                                 {{__('portal.Credit')}}
-                                            @elseif($rfp->payment_mode == 'Credit (30 Days)')
+                                            @elseif($rfp->payment_mode == 'Credit30days')
                                                 {{__('portal.Credit (30 Days)')}}
-                                            @elseif($rfp->payment_mode == 'Credit (60 Days)')
+                                            @elseif($rfp->payment_mode == 'Credit60days')
                                                 {{__('portal.Credit (60 Days)')}}
-                                            @elseif($rfp->payment_mode == 'Credit (90 Days)')
+                                            @elseif($rfp->payment_mode == 'Credit90days')
                                                 {{__('portal.Credit (90 Days)')}}
-                                            @elseif($rfp->payment_mode == 'Credit (120 Days)')
+                                            @elseif($rfp->payment_mode == 'Credit120days')
                                                 {{__('portal.Credit (120 Days)')}}
                                             @endif
-{{--                                            {{ $rfp->payment_mode }}--}}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -371,7 +385,7 @@
                                         </td>
 
                                         <td class="px-2 py-3 text-center whitespace-nowrap">
-                                            <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required title="Display {{auth()->user()->business->business_name}} in the RFQ">
+                                            <select name="company_name_check" id="company_name_check" data-id="{{$rfp->id}}" class="form-select shadow-sm block w-full company_name_check" required title="{{__('portal.Display')}} {{auth()->user()->business->business_name}} {{__('portal.in the Requisition')}}">
                                                 <option {{($rfp->company_name_check == 0) ? 'selected' : ''}} value="0">
                                                     {{__('portal.No')}}</option>
                                                 <option {{($rfp->company_name_check == 1) ? 'selected' : ''}} value="1">
@@ -394,7 +408,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}" class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
+                                            <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}" class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
                                                 @csrf
                                                 @method('delete')
 
@@ -424,8 +438,7 @@
                         <input type="hidden" value="{{ auth()->user()->business->id }}" name="business_id">
                         <input type="hidden" value="{{ auth()->id() }}" name="user_id">
 
-                        <button type="submit"
-                                class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                        <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Select Ok to place requisition')}}'>
                             {{__('portal.Place RFQ')}}
                         </button>
                     </form>

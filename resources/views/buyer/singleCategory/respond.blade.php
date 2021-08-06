@@ -85,7 +85,7 @@
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <strong>Note:</strong> {{ strip_tags($quote->note_for_customer) }}
                             </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                            {{--<div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <strong>Sample Information:</strong> {{ $quote->sample_information }}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
@@ -96,7 +96,7 @@
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <strong>Sample Charges Per Unit:</strong> {{ $quote->sample_charges_per_unit }}
-                            </div>
+                            </div>--}}
                         </div>
                     @endforeach
 

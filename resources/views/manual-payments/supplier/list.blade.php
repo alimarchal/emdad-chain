@@ -79,7 +79,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
-                                                        {{ number_format($supplierPayment->amount_received,2,'.') }}
+                                                        {{ number_format($supplierPayment->amount_received,2) }}
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">

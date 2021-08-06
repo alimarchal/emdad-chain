@@ -58,7 +58,7 @@
                                         }
                                 $count = count($deliveryComments);
                             @endphp
-                            <div class="text-center"><span class="text-blue-600">Average rating: {{number_format($sum/$count,2,'.')}} </span></div>
+                            <div class="text-center"><span class="text-blue-600">Average rating: {{number_format($sum/$count,2)}} </span></div>
                         @if ($deliveryComments->count())
                                 <div class="flex flex-col">
                                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -118,7 +118,7 @@
                                                             <span class="badge badge-info">{{ $deliveryComment->comment_content }}</span>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
-                                                            <span class="badge badge-info">{{ number_format($deliveryComment->rating,2,'.') }}</span>
+                                                            <span class="badge badge-info">{{ number_format($deliveryComment->rating,2) }}</span>
                                                         </td>
                                                     </tr>
                                                 @endforeach

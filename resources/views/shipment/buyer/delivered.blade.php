@@ -41,7 +41,7 @@
                                         #
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Delivery ID
+                                        Shipment ID
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
@@ -62,7 +62,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $shipment->delivery_id }}
+                                            {{ $shipment->id }}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -88,12 +88,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="mt-5">
-                <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-gray-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-orange-700 focus:outline-none focus:border-orange-700 focus:shadow-outline-orange active:bg-orange-700 transition ease-in-out duration-150">
-                    Back
-                </a>
             </div>
 
         @endif
@@ -131,7 +125,7 @@
                                         #
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Delivery ID
+                                        Shipment ID
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
@@ -152,7 +146,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $shipment->delivery_id }}
+                                            {{ $shipment->id }}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -178,11 +172,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="mt-5">
-                <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-700 transition ease-in-out duration-150">
-                    عودة
-                </a>
             </div>
         @endif
     </x-app-layout>

@@ -115,7 +115,7 @@
                                                             <span class="badge badge-info">{{ $deliveryComment->comment_content }}</span>
                                                         </td>
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
-                                                            <span class="badge badge-info">{{ number_format($deliveryComment->rating,2,'.') }}</span>
+                                                            <span class="badge badge-info">{{ number_format($deliveryComment->rating,2) }}</span>
                                                         </td>
                                                     </tr>
                                                 @endforeach

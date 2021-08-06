@@ -34,7 +34,7 @@ return [
     'P.O. Info' => 'معلومات الطلب',
     'Current Users' => 'المستخدمون الحاليّون',
     'Add User' => 'إضافة مستخدم',
-    'API Tokens' => 'API Tokens',
+    'API Tokens' => 'مستعرض العمليات',
     'Policy and Procedure' => 'الشروط والأحكام',
     'Logout' => 'تسجيل خروج',
     'Manage Team' => 'إدارة الفريق',

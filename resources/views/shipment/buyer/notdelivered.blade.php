@@ -92,11 +92,6 @@
                 </div>
             </div>
         @endif
-        <div class="mt-5">
-            <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-600 focus:outline-none focus:border-gray-600 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                Back
-            </a>
-        </div>
 
     </x-app-layout>
 @else
@@ -180,11 +175,6 @@
                 </div>
             </div>
         @endif
-        <div class="mt-5">
-            <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-700 transition ease-in-out duration-150">
-                عودة
-            </a>
-        </div>
 
     </x-app-layout>
 @endif

@@ -241,7 +241,7 @@
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
-                                                          class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
+                                                          class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
                                                         @csrf
                                                         @method('delete')
 
@@ -830,7 +830,7 @@
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     </form>
                                                     <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
-                                                          class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
+                                                          class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
                                                         @csrf
                                                         @method('delete')
 
@@ -1061,7 +1061,10 @@
                                                     {{$latest_rfq->delivery_period =='Within 60 Days' ? 'selected' : ''}}
                                                     @endif>{{__('portal.60 Days')}}
                                                 </option>
-                                                <option value="Within 90 Days">{{__('portal.90 Days')}}</option>
+                                                <option value="Within 90 Days" @if (isset($latest_rfq))
+                                                    {{$latest_rfq->delivery_period =='Within 90 Days' ? 'selected' : ''}}
+                                                    @endif>{{__('portal.90 Days')}}
+                                                </option>
                                                 <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
                                                     {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
                                                     @endif>{{__('portal.Standing Order - 2 times / year')}}
@@ -1434,7 +1437,7 @@
                                                         $record = \App\Models\Category::where('id',$rfp->item_code)->first();
                                                         $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                     @endphp
-                                                    {{ $rfp->item_name }}, {{ $parent->name}}
+                                                    {{ $record->name_ar }}, {{ $parent->name_ar}}
                                                 </td>
 
                                                 {{-- <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -1516,7 +1519,7 @@
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
-                                                          class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
+                                                          class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
                                                         @csrf
                                                         @method('delete')
 
@@ -1746,7 +1749,10 @@
                                                     {{$latest_rfq->delivery_period =='Within 60 Days' ? 'selected' : ''}}
                                                     @endif>{{__('portal.60 Days')}}
                                                 </option>
-                                                <option value="Within 90 Days">{{__('portal.90 Days')}}</option>
+                                                <option value="Within 90 Days" @if (isset($latest_rfq))
+                                                    {{$latest_rfq->delivery_period =='Within 90 Days' ? 'selected' : ''}}
+                                                    @endif>{{__('portal.90 Days')}}
+                                                </option>
                                                 <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
                                                     {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
                                                     @endif>{{__('portal.Standing Order - 2 times / year')}}
@@ -1808,9 +1814,7 @@
                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                         @endphp
 
-                                        {{$parent != '' ? $parent->name :'' }}
-
-                                        {{ $item->item_name}} , {{ $parent->name}}
+                                        {{ $record->name_ar}} , {{ $parent->name_ar}}
 
                                     </td>
                                     <td>
@@ -2032,7 +2036,7 @@
                                                         $record = \App\Models\Category::where('id',$rfp->item_code)->first();
                                                         $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                     @endphp
-                                                    {{ $rfp->item_name }}, {{ $parent->name}}
+                                                    {{ $record->name_ar }}, {{ $parent->name_ar}}
                                                 </td>
 
                                                 {{-- <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -2068,7 +2072,6 @@
                                                     @elseif($rfp->delivery_period =='Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}
                                                     @elseif($rfp->delivery_period =='Standing Order Open') {{__('portal.Standing Order - Open')}}
                                                     @endif
-{{--                                                        {{ $rfp->delivery_period }}--}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -2116,7 +2119,7 @@
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
-                                                          class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
+                                                          class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
                                                         @csrf
                                                         @method('delete')
 
@@ -2347,7 +2350,10 @@
                                                     {{$latest_rfq->delivery_period =='Within 60 Days' ? 'selected' : ''}}
                                                     @endif>{{__('portal.60 Days')}}
                                                 </option>
-                                                <option value="Within 90 Days">{{__('portal.90 Days')}}</option>
+                                                <option value="Within 90 Days" @if (isset($latest_rfq))
+                                                    {{$latest_rfq->delivery_period =='Within 90 Days' ? 'selected' : ''}}
+                                                    @endif>{{__('portal.90 Days')}}
+                                                </option>
                                                 <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
                                                     {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
                                                     @endif>{{__('portal.Standing Order - 2 times / year')}}
@@ -2409,9 +2415,7 @@
                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                         @endphp
 
-                                        {{$parent != '' ? $parent->name :'' }}
-
-                                        {{ $item->item_name}} , {{ $parent->name}}
+                                        {{ $record->name_ar}} , {{ $parent->name_ar}}
 
                                     </td>
                                     <td>

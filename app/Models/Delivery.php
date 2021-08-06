@@ -29,4 +29,9 @@ class Delivery extends Model
     {
         return $this->belongsTo(User::class, 'supplier_user_id','id');
     }
+
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class, 'invoice_id','id');
+    }
 }

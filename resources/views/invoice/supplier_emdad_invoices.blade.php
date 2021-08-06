@@ -75,10 +75,10 @@
                                             $totalEmdadCharges = $totalCost * (1.5 / 100);
                                         @endphp
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{$totalCost}}
+                                            {{ number_format($totalCost,2,'.') }}
                                         </td>
                                         <td class="px-7 py-4 text-center whitespace-nowrap">
-                                            {{ $totalEmdadCharges }}
+                                            {{ number_format($totalEmdadCharges,2) }}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">

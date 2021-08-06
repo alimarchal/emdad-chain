@@ -39,9 +39,9 @@
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                     Price Per Quantity
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                {{--<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
                                     Sample Information
-                                </th>
+                                </th>--}}
 
 
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
@@ -86,9 +86,9 @@
                                             {{ $rfp->quote_price_per_quantity }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        {{--<td class="px-6 py-4 whitespace-nowrap">
                                             {{ $rfp->sample_information }}
-                                        </td>
+                                        </td>--}}
 
 
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -127,9 +127,9 @@
                                             {{ $rfp->quote_price_per_quantity }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        {{--<td class="px-6 py-4 whitespace-nowrap">
                                             {{ $rfp->sample_information }}
-                                        </td>
+                                        </td>--}}
 
 
                                         <td class="px-6 py-4 whitespace-nowrap">

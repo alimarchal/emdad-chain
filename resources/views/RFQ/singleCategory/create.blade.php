@@ -215,7 +215,7 @@
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
-                                                          class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
+                                                          class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
                                                         @csrf
                                                         @method('delete')
 
@@ -480,11 +480,11 @@
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
                                 <th style="width:7%">{{__('portal.UOM')}} @include('misc.required')</th>
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
-                                <th style="width:10%;">{{__('portal.Size')}} @include('misc.required')</th>
-                                <th style="width:10%;">{{__('portal.Brand')}} @include('misc.required')</th>
-                                <th style="width:7%;">{{__('portal.Last Unit Price')}} @include('misc.required')</th>
-                                <th style="width:15%;">{{__('portal.Shipment Remarks')}} @include('misc.required')</th>
-                                <th style="width:7%;">{{__('portal.Attachments')}} @include('misc.required')</th>
+                                <th style="width:10%;">{{__('portal.Size')}}</th>
+                                <th style="width:10%;">{{__('portal.Brand')}}</th>
+                                <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:15%;">{{__('portal.Shipment Remarks')}}</th>
+                                <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -749,7 +749,7 @@
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
-                                                          class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
+                                                          class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
                                                         @csrf
                                                         @method('delete')
 
@@ -999,11 +999,11 @@
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
                                 <th style="width:7%">{{__('portal.UOM')}} @include('misc.required')</th>
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
-                                <th style="width:10%;">{{__('portal.Size')}} @include('misc.required')</th>
-                                <th style="width:10%;">{{__('portal.Brand')}} @include('misc.required')</th>
-                                <th style="width:7%;">{{__('portal.Last Unit Price')}} @include('misc.required')</th>
-                                <th style="width:15%;"> {{__('portal.Shipment Remarks')}} @include('misc.required')</th>
-                                <th style="width:7%;">{{__('portal.Attachments')}} @include('misc.required')</th>
+                                <th style="width:10%;">{{__('portal.Size')}}</th>
+                                <th style="width:10%;">{{__('portal.Brand')}}</th>
+                                <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:15%;"> {{__('portal.Shipment Remarks')}}</th>
+                                <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -1311,7 +1311,11 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $rfp->item_name }}
+                                                    @php
+                                                        $record = \App\Models\Category::where('id',$rfp->item_code)->first();
+                                                        $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                    @endphp
+                                                    {{ $record->name_ar }}, {{ $parent->name_ar}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -1382,7 +1386,7 @@
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
-                                                          class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
+                                                          class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
                                                         @csrf
                                                         @method('delete')
 
@@ -1448,7 +1452,7 @@
                         <div>
                             <div style="background: #DEEAF6; min-height: 235px; padding-top: 1px;" class="flex">
 
-                                <div class="left-info_holder flex-1">
+                                <div class="left-info_holder flex-1 mr-2">
                                     <div class="my-5 pl-5 " style="padding-left: 40px;">
                                         <span class="font-bold color-1f3864 text-lg">{{__('portal.Requisition Information')}}</span>
                                         <hr style="border-top: 1px solid gray;width: 25%;">
@@ -1560,7 +1564,7 @@
                                                 @endphp
 
                                                 <select name="item_name" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" readonly style="width: 400px;">
-                                                    <option value="{{$latest_rfq->item_code}}">{{$latest_rfq->item_name . ' - ' . $parent->name }}</option>
+                                                    <option value="{{$latest_rfq->item_code}}">{{$record->name_ar . ' - ' . $parent->name_ar }}</option>
                                                 </select>
                                             @else
                                                 @include('category.rfp')
@@ -1672,11 +1676,11 @@
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
                                 <th style="width:7%">{{__('portal.UOM')}} @include('misc.required')</th>
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
-                                <th style="width:10%;">{{__('portal.Size')}} @include('misc.required')</th>
-                                <th style="width:10%;">{{__('portal.Brand')}} @include('misc.required')</th>
-                                <th style="width:7%;">{{__('portal.Last Unit Price')}} @include('misc.required')</th>
-                                <th style="width:15%;">{{__('portal.Shipment Remarks')}} @include('misc.required')</th>
-                                <th style="width:7%;">{{__('portal.Attachments')}} @include('misc.required')</th>
+                                <th style="width:10%;">{{__('portal.Size')}}</th>
+                                <th style="width:10%;">{{__('portal.Brand')}}</th>
+                                <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:15%;">{{__('portal.Shipment Remarks')}}</th>
+                                <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -1893,7 +1897,11 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $rfp->item_name }}
+                                                    @php
+                                                        $record = \App\Models\Category::where('id',$rfp->item_code)->first();
+                                                        $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                    @endphp
+                                                    {{ $record->name_ar }}, {{ $parent->name_ar}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -1964,7 +1972,7 @@
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
-                                                          class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
+                                                          class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
                                                         @csrf
                                                         @method('delete')
 
@@ -2030,7 +2038,7 @@
                         <div>
                             <div style="background: #DEEAF6; min-height: 235px; padding-top: 1px;" class="md:flex">
 
-                                <div class="left-info_holder md:flex-1">
+                                <div class="left-info_holder md:flex-1 mr-2">
                                     <div class="my-5 pl-5 " style="padding-left: 20px">
                                         <span class="font-bold color-1f3864 text-lg">{{__('portal.Requisition Information')}}</span>
                                         <hr style="border-top: 1px solid gray;width: 25%;">
@@ -2144,7 +2152,7 @@
                                                 @endphp
 
                                                 <select name="item_name" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" readonly>
-                                                    <option value="{{$latest_rfq->item_code}}">{{$latest_rfq->item_name . ' - ' . $parent->name }}</option>
+                                                    <option value="{{$latest_rfq->item_code}}">{{$record->name_ar . ' - ' . $parent->name_ar }}</option>
                                                 </select>
                                             @else
                                                 @include('category.rfp')
@@ -2241,11 +2249,11 @@
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
                                 <th style="width:7%">{{__('portal.UOM')}} @include('misc.required')</th>
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
-                                <th style="width:10%;">{{__('portal.Size')}} @include('misc.required')</th>
-                                <th style="width:10%;">{{__('portal.Brand')}} @include('misc.required')</th>
-                                <th style="width:7%;">{{__('portal.Last Unit Price')}} @include('misc.required')</th>
-                                <th style="width:15%;"> {{__('portal.Shipment Remarks')}} @include('misc.required')</th>
-                                <th style="width:7%;">{{__('portal.Attachments')}} @include('misc.required')</th>
+                                <th style="width:10%;">{{__('portal.Size')}}</th>
+                                <th style="width:10%;">{{__('portal.Brand')}}</th>
+                                <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:15%;"> {{__('portal.Shipment Remarks')}}</th>
+                                <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">

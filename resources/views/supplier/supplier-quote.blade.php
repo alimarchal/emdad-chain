@@ -286,7 +286,7 @@
 
                             </tr>
 
-                            @if($collection->required_sample == 'Yes')
+                            {{--@if($collection->required_sample == 'Yes')
                             <tr>
                                 <td colspan="6" >
 
@@ -320,7 +320,7 @@
 
                                 </td>
                             </tr>
-                            @endif
+                            @endif--}}
                             <tr>
                                 <td colspan="6">
                                     <div class="my-4">
