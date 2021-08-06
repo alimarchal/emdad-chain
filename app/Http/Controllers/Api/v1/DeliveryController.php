@@ -59,6 +59,7 @@ class DeliveryController extends Controller
                         'buyer_business' => Business::find($col->business_id)->business_name,
                         'supplier_logo_url' => config('app.url') . '/storage/' . Business::find($col->supplier_business_id)->business_photo_url,
                         'BuyerRFQWarehouse' => [\App\Models\BusinessWarehouse::find($warehouse_id)],
+                        'MultipleItems' => Delivery::where('rfq_no', $col->rfq_no)->where('rfq_type', 1)->get(),
                     ]);
                 }
                 return $Deliveries;
