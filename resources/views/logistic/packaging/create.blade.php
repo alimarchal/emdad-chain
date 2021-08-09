@@ -36,11 +36,12 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
-                    <form action="{{route('logistics.store')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
+                    <form action="{{route('packagingSolution.store')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         <x-jet-validation-errors class="mb-4"/>
                         @csrf
                         <h3 class="text-2xl text-gray-900 font-semibold text-center">Packaging Solution</h3>
-
+                        <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+                        <input type="hidden" name="logistics_businesse_id" value="{{auth()->user()->logistics_business_id}}">
                         <div class="flex space-x-5 mt-3">
                             <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="box_quantity_pieces">
                                 Quantity of Boxes / Pieces @include('misc.required')
@@ -50,7 +51,7 @@
                                 Weight/Piece (Kg) @include('misc.required')
                             </label>
 
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="weight_piece">
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="forklift">
                                 Forklift / Manual @include('misc.required')
                             </label>
                         </div>
@@ -58,7 +59,7 @@
                             <x-jet-input id="box_quantity_pieces" type="number" step="0" min="1" placeholder="e.g 500" name="box_quantity_pieces" class="border p-2 w-1/2" value="{{old('box_quantity_pieces')}}" required></x-jet-input>
                             <x-jet-input id="weight_piece" type="number" step="0" min="1" placeholder="Weight/Piece (Kg)" name="weight_piece" class="border p-2 w-1/2" value="{{old('box_quantity_pieces')}}" required></x-jet-input>
 
-                            <select id="bank_name" name="bank_name" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
+                            <select id="forklift" name="forklift" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
                                 <option value="">None</option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
@@ -93,16 +94,16 @@
 
 
                         <div class="flex space-x-5 mt-3">
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="length">
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="printing">
                                 Printing @include('misc.required')
                             </label>
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="length">
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="printing_design">
                                 Printing Design (if yes)
                             </label>
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="length">
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="commodity_type">
                                 Commodity Type  @include('misc.required')
                             </label>
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="length">
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="commodity_information">
                                Explain @include('misc.required')
                             </label>
                         </div>
@@ -110,46 +111,48 @@
 
                         <div class="flex space-x-5 mt-3">
 
-                            <select id="bank_name" name="bank_name" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
+                            <select id="printing" name="printing" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
                                 <option value="">None</option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
                             </select>
 
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="iban" type="file" name="iban" required="required">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="printing_design" type="file" name="printing_design_1">
 
-                            <select id="bank_name" name="bank_name" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
+                            <select id="commodity_type" name="commodity_type" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
                                 <option value="">None</option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
+                                <option value="General">General</option>
+                                <option value="Dangerous Good">Dangerous Good</option>
+                                <option value="Energy: Gas, Oil etc.">Energy: Gas, Oil etc.</option>
+                                <option value="Medical">Medical</option>
+                                <option value="Other">Other</option>
                             </select>
 
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="iban" type="text" placeholder="Explain" name="iban" required="required">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="commodity_information" type="text" placeholder="What's inside commodity type" name="commodity_information" required="required">
 
                         </div>
 
 
                         <div class="flex space-x-5 mt-3">
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="length">
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="msds">
                                 MSDS <abbr title="If the shipment include DG items"> ? Upload the document</abbr>
                                 @include('misc.required')
                             </label>
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="length">
-                                Additional Information
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="msds_information">
+                                Additional Information (MSDS)
                             </label>
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="length">
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="latitude">
                                 Latitude  @include('misc.required')
                             </label>
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="length">
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="longitude">
                                 Longitude @include('misc.required')
                             </label>
                         </div>
 
                         <div class="flex space-x-5 mt-3">
 
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="iban" type="file" name="iban" required="required">
-
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="iban" type="text" placeholder="Upload the document" name="iban" required="required">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="msds" type="file" name="msds_1">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="msds_information" type="text" placeholder="If the shipment include DG items" name="msds_information" required="required">
                             <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="latitude" placeholder="Please use map marker" required readonly type="text" name="latitude">
                             <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="longitude" placeholder="Please use map marker" required readonly type="text" name="longitude">
                         </div>
@@ -169,16 +172,8 @@
                             </label>
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <textarea id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>{{old('address')}}</textarea>
+                            <textarea id="address" type="text" name="address" placeholder="Please type your full address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>{{old('address')}}</textarea>
                         </div>
-
-                        <div class="flex space-x-5 mt-3">
-                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_photo_url_1">Company logo @include('misc.required')</label>
-                        </div>
-                        <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="business_photo_url" type="file" name="business_photo_url_1" class="border p-2 w-1/2" required></x-jet-input>
-                        </div>
-
                         <br>
 
                         <x-jet-button class="float-right mt-4 mb-4">Save</x-jet-button>

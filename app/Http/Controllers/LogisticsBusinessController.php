@@ -156,7 +156,7 @@ class LogisticsBusinessController extends Controller
         }
 
         $logisticsBusiness->update($request->all());
-        session()->flash('message', 'Business information successfully saved.');
+        session()->flash('message', 'Business information successfully updated.');
         return redirect()->route('logistics.index');
     }
 

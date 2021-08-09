@@ -63,8 +63,8 @@
 
 
                 <input type="submit"class="inline-flex items-center justify-center px-4 py-2 mb-4 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 cursor-pointer" value="Search">
-{{--                <button class="mb-5 su-button su-button-style-3d" style="color:#FFF;background-color:#0CAFFA;border-color:#0a8cc8;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px" target="_blank" rel="nofollow"><span--}}
-{{--                        style="color:#FFF;padding:0px 26px;font-size:20px;line-height:40px;border-color:#55c7fc;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;text-shadow:none;-moz-text-shadow:none;-webkit-text-shadow:none">Search</span></button>--}}
+                {{--                <button class="mb-5 su-button su-button-style-3d" style="color:#FFF;background-color:#0CAFFA;border-color:#0a8cc8;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px" target="_blank" rel="nofollow"><span--}}
+                {{--                        style="color:#FFF;padding:0px 26px;font-size:20px;line-height:40px;border-color:#55c7fc;border-radius:10px;-moz-border-radius:10px;-webkit-border-radius:10px;text-shadow:none;-moz-text-shadow:none;-webkit-text-shadow:none">Search</span></button>--}}
             </form>
         </div>
         <div class="flex flex-col">
@@ -79,22 +79,22 @@
                             <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Business Name
+                                    Boxes & Weight (Kg)
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Chamber & VAT
-                                </th>
-
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Country & City
+                                    Size (cm)
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Address & Website
+                                   Printing
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Phone
+                                    Commodity
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    MSDS
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Location
@@ -105,63 +105,73 @@
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach($logistic_business as $lb)
+                            @foreach($packagingSolution as $lb)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10">
-                                                <img class="h-10 w-10 rounded-full" src="{{$lb->business_photo_url ? Storage::url($lb->business_photo_url) : 'https://ui-avatars.com/api/?name='.urlencode($lb->business_name).'&color=7F9CF5&background=EBF4FF'}}" alt="">
-                                            </div>
+
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">
-                                                    {{$lb->business_name}}
+                                                    Quantity of Boxes / Pieces: {{$lb->box_quantity_pieces}}
                                                 </div>
                                                 <div class="text-sm text-gray-500">
-                                                    {{$lb->business_email}}
+                                                    Weight/Piece (Kg): {{$lb->weight_piece}}
+                                                </div>
+
+                                                <div class="text-sm font-medium text-gray-900">
+                                                    Forklift / Manual:
+                                                    @if($lb->forklift == 1) Yes - Automatic @else No - Manual @endif
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                            Chamber: <a href="{{$lb->chamber_reg_path ? Storage::url($lb->chamber_reg_path) : '#'}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">{{$lb->chamber_reg_number}}</a>
+                                            Length:&nbsp;&nbsp;{{$lb->length}}
+{{--                                            Chamber: <a href="{{$lb->chamber_reg_path ? Storage::url($lb->chamber_reg_path) : '#'}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">{{$lb->chamber_reg_number}}</a>--}}
                                         </div>
-                                        <div class="text-sm text-gray-500">
-                                            VAT: <a href="{{$lb->vat_reg_certificate_path ? Storage::url($lb->vat_reg_certificate_path) : '#'}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">{{$lb->vat_reg_certificate_number}}</a>
+                                        <div class="text-sm text-gray-900">
+                                            Width:&nbsp;&nbsp;&nbsp;{{$lb->width}}
+                                        </div>
+
+                                        <div class="text-sm text-gray-900">
+                                            Height:&nbsp;&nbsp;{{$lb->height}}
                                         </div>
                                     </td>
 
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                            {{$lb->country}}
+                                            Printing: &nbsp; @if($lb->printing == 1) Yes @else No @endif
                                         </div>
                                         <div class="text-sm text-gray-500">
-                                            {{$lb->city}}
+                                            <a href="{{$lb->printing_design ? Storage::url($lb->printing_design) : '#'}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Printing Design</a>
                                         </div>
                                     </td>
 
 
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
-                                            {{$lb->address}}
+                                            Commodity Type: &nbsp;{{$lb->commodity_type}}
                                         </div>
                                         <div class="text-sm text-gray-500">
-                                            {{$lb->website}}
+                                            Commodity Info: &nbsp;{{$lb->commodity_information}}
                                         </div>
                                     </td>
 
 
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                           <a href="tel:{{$lb->phone}}">{{$lb->phone}}</a>
-
-                                        </span>
+                                        <div class="text-sm text-gray-900">
+                                            <a href="{{$lb->msds ? Storage::url($lb->msds) : '#'}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">MSDS</a>
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            MSDS Info: &nbsp;{{$lb->msds_information}}
+                                        </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         <a href="https://maps.google.com/?q={{$lb->latitude}},{{$lb->longitude}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">View On Map</a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="{{route('logistics.edit',$lb->id)}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        <a href="{{route('packagingSolution.edit',$lb->id)}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                     </td>
                                 </tr>
                             @endforeach

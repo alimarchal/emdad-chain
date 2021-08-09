@@ -18,6 +18,8 @@ use App\Http\Controllers\ECartController;
 use App\Http\Controllers\EmdadInvoiceController;
 use App\Http\Controllers\EOrdersController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\IreController;
+use App\Http\Controllers\IreLoginController;
 use App\Http\Controllers\IreRegisterController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PaymentController;
@@ -28,19 +30,13 @@ use App\Http\Controllers\PurchaseRequestFormController;
 use App\Http\Controllers\QouteController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\IreController;
-use App\Http\Controllers\IreLoginController;
 use App\Http\Controllers\ShipmentCartController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\ShipmentItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\WebsiteArabicController;
-use App\Models\DraftPurchaseOrder;
-use App\Models\TrackingDelivery;
 use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -483,7 +479,7 @@ Route::middleware(['auth:sanctum'])->post('single-category-rfq-supplier-manual-p
 
 ################################################################# Rating routes ##########################################################################
 
-                                                        /* Super admin rating routes starts */
+/* Super admin rating routes starts */
 Route::middleware(['auth:sanctum'])->get('rating-view', [RatingController::class, 'view'])->name('ratingView');
 Route::middleware(['auth:sanctum'])->get('ratings-list', [RatingController::class, 'index'])->name('ratingListIndex');
 Route::middleware(['auth:sanctum'])->get('ratings-received/{id}', [RatingController::class, 'viewByID'])->name('ratingViewByID');
@@ -498,9 +494,9 @@ Route::middleware(['auth:sanctum'])->post('save-buyer-rating', [RatingController
 Route::middleware(['auth:sanctum'])->get('rate-supplier', [RatingController::class, 'supplierList'])->name('supplierList');
 Route::middleware(['auth:sanctum'])->get('rate-supplier/{id}/{deliveryID}', [RatingController::class, 'createSupplierRating'])->name('rateSupplier');
 Route::middleware(['auth:sanctum'])->post('save-supplier-rating', [RatingController::class, 'saveSupplierRating'])->name('storeSupplierRating');
-                                                        /* Super admin rating routes ends */
+/* Super admin rating routes ends */
 
-                                                        /* Buyer rating routes starts */
+/* Buyer rating routes starts */
 Route::middleware(['auth:sanctum'])->get('rating', [RatingController::class, 'buyerRatingView'])->name('buyerRatingView');
 Route::middleware(['auth:sanctum'])->get('deliveries-ratings', [RatingController::class, 'buyerDeliveryIndex'])->name('buyerDeliveryRatingListIndex');
 Route::middleware(['auth:sanctum'])->get('delivery-ratings/{id}', [RatingController::class, 'buyerDeliveryViewByID'])->name('buyerDeliveryRatingViewByID');
@@ -510,9 +506,9 @@ Route::middleware(['auth:sanctum'])->get('buyer-not-rated', [RatingController::c
 Route::middleware(['auth:sanctum'])->get('rate-deliveries', [RatingController::class, 'deliveriesListToRate'])->name('deliveriesListToRate');
 Route::middleware(['auth:sanctum'])->get('rate-delivery/{supplierID}/{driverID}/{deliveryID}', [RatingController::class, 'createDeliveryRating'])->name('rateDelivery');
 Route::middleware(['auth:sanctum'])->post('save-buyer-rated', [RatingController::class, 'saveBuyerRatedToDelivery'])->name('storeBuyerRatedToDelivery');
-                                                        /* Buyer rating routes ends */
+/* Buyer rating routes ends */
 
-                                                        /* Supplier rating routes starts */
+/* Supplier rating routes starts */
 Route::middleware(['auth:sanctum'])->get('ratings', [RatingController::class, 'supplierRatingView'])->name('supplierRatingView');
 Route::middleware(['auth:sanctum'])->get('deliveries-rating', [RatingController::class, 'supplierDeliveryIndex'])->name('supplierDeliveryRatingListIndex');
 Route::middleware(['auth:sanctum'])->get('delivery/ratings/{id}', [RatingController::class, 'supplierDeliveryViewByID'])->name('supplierDeliveryRatingViewByID');
@@ -522,7 +518,7 @@ Route::middleware(['auth:sanctum'])->get('supplier-not-rated', [RatingController
 Route::middleware(['auth:sanctum'])->get('deliveries-to-rate', [RatingController::class, 'supplierDeliveriesListToRate'])->name('supplierDeliveriesListToRate');
 Route::middleware(['auth:sanctum'])->get('rate-delivery-by-supplier/{buyerID}/{deliveryID}', [RatingController::class, 'createDeliveryRatingBySupplier'])->name('rateDeliveryBySupplier');
 Route::middleware(['auth:sanctum'])->post('save-supplier-rated', [RatingController::class, 'saveSupplierRatedToDelivery'])->name('storeSupplierRatedToDelivery');
-                                                        /* Supplier rating routes ends */
+/* Supplier rating routes ends */
 
 ################################################################# END ####################################################################################
 
@@ -621,6 +617,13 @@ Route::middleware(['auth:sanctum', 'verified'])->put('logisticsBusiness/{logisti
 Route::middleware(['auth:sanctum', 'verified'])->get('logisticsBusiness', [\App\Http\Controllers\LogisticsBusinessController::class, 'index'])->name('logistics.index');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('logistics-dashboard', [DashboardController::class, 'logistic_dashboard'])->name('logistics.dashboard');
+    Route::get('logistics-setting', [DashboardController::class, 'logistic_setting'])->name('logistics.setting');
+    Route::get('logisticsBusiness/create', [\App\Http\Controllers\LogisticsBusinessController::class, 'create'])->name('logistics.business');
+    Route::post('logisticsBusiness', [\App\Http\Controllers\LogisticsBusinessController::class, 'store'])->name('logistics.store');
+    Route::get('logisticsBusiness/{logisticsBusiness}/edit', [\App\Http\Controllers\LogisticsBusinessController::class, 'edit'])->name('logistics.edit');
+    Route::put('logisticsBusiness/{logisticsBusiness}', [\App\Http\Controllers\LogisticsBusinessController::class, 'update'])->name('logistics.update');
+    Route::get('logisticsBusiness', [\App\Http\Controllers\LogisticsBusinessController::class, 'index'])->name('logistics.index');
     Route::resource('packagingSolution', \App\Http\Controllers\PackagingSolutionController::class);
 });
 

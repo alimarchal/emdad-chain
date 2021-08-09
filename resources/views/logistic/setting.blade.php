@@ -85,7 +85,7 @@
     @if(Auth::user()->logistic_solution == 1)
 
         <div class="mt-4">
-            <livewire:logistic-solution />
+            <livewire:logistic-solution/>
         </div>
 
     @endif

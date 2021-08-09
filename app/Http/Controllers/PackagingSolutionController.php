@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PackagingSolution;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class PackagingSolutionController extends Controller
 {
@@ -15,7 +16,11 @@ class PackagingSolutionController extends Controller
      */
     public function index()
     {
-        //
+        $packagingSolution = QueryBuilder::for(PackagingSolution::class)
+//            ->allowedFilters(['business_name', 'vat_reg_certificate_number', 'phone'])
+            ->where('user_id', auth()->user()->id)
+            ->get();
+        return view('logistic.packaging.index',compact('packagingSolution'));
     }
 
     /**
@@ -42,7 +47,41 @@ class PackagingSolutionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'user_id' => 'required',
+            'logistics_businesse_id' => 'required',
+            'box_quantity_pieces' => 'required',
+            'weight_piece' => 'required',
+            'forklift' => 'required',
+            'length' => 'required',
+            'width' => 'required',
+            'height' => 'required',
+            'printing' => 'required|boolean',
+            'printing_design_1' => 'exclude_if:printing,false|required|mimes:jpeg,jpg,png,JPEG,JPG,PNG',
+            'commodity_type' => 'required',
+            'commodity_information' => 'required',
+            'msds_1' => 'exclude_if:printing,false|required|mimes:jpeg,jpg,png,JPEG,JPG,PNG',
+            'msds_information' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'address' => 'required',
+        ]);
+
+        $request->merge(['user_id' => auth()->user()->id]);
+        $request->merge(['logistics_businesse_id' => auth()->user()->logistics_business_id]);
+
+        if ($request->has('printing_design_1')) {
+            $path = $request->file('printing_design_1')->store('', 'public');
+            $request->merge(['printing_design' => $path]);
+        }
+        if ($request->has('msds_1')) {
+            $path = $request->file('msds_1')->store('', 'public');
+            $request->merge(['msds' => $path]);
+        }
+
+        $packagingSolution = PackagingSolution::create($request->all());
+        session()->flash('message', 'Packaging Solution created successfully.');
+        return redirect()->route('packagingSolution.index');
     }
 
     /**
@@ -64,7 +103,7 @@ class PackagingSolutionController extends Controller
      */
     public function edit(PackagingSolution $packagingSolution)
     {
-        //
+        return view('logistic.packaging.edit', compact('packagingSolution'));
     }
 
     /**
@@ -76,7 +115,41 @@ class PackagingSolutionController extends Controller
      */
     public function update(Request $request, PackagingSolution $packagingSolution)
     {
-        //
+        $request->validate([
+            'user_id' => 'required',
+            'logistics_businesse_id' => 'required',
+            'box_quantity_pieces' => 'required',
+            'weight_piece' => 'required',
+            'forklift' => 'required',
+            'length' => 'required',
+            'width' => 'required',
+            'height' => 'required',
+            'printing' => 'required|boolean',
+            'printing_design_1' => 'exclude_if:printing,false|required|mimes:jpeg,jpg,png,JPEG,JPG,PNG',
+            'commodity_type' => 'required',
+            'commodity_information' => 'required',
+            'msds_1' => 'exclude_if:printing,false|required|mimes:jpeg,jpg,png,JPEG,JPG,PNG',
+            'msds_information' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'address' => 'required',
+        ]);
+
+        $request->merge(['user_id' => auth()->user()->id]);
+        $request->merge(['logistics_businesse_id' => auth()->user()->logistics_business_id]);
+
+        if ($request->has('printing_design_1')) {
+            $path = $request->file('printing_design_1')->store('', 'public');
+            $request->merge(['printing_design' => $path]);
+        }
+        if ($request->has('msds_1')) {
+            $path = $request->file('msds_1')->store('', 'public');
+            $request->merge(['msds' => $path]);
+        }
+
+        $packagingSolution->update($request->all());
+        session()->flash('message', 'Packaging info successfully updated...');
+        return redirect()->route('packagingSolution.index');
     }
 
     /**

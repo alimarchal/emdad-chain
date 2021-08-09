@@ -15,6 +15,23 @@ class CreatePackagingSolutionsTable extends Migration
     {
         Schema::create('packaging_solutions', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->integer('logistics_businesse_id');
+            $table->integer('box_quantity_pieces')->nullable();
+            $table->integer('weight_piece')->nullable();
+            $table->boolean('forklift')->nullable();
+            $table->decimal('length',11,2)->nullable();
+            $table->decimal('width',11,2)->nullable();
+            $table->decimal('height',11,2)->nullable();
+            $table->string('printing',191)->nullable();
+            $table->string('printing_design',191)->nullable();
+            $table->string('commodity_type',191)->nullable();
+            $table->string('commodity_information',191)->nullable();
+            $table->string('msds',191)->nullable();
+            $table->string('msds_information',191)->nullable();
+            $table->string('latitude',25)->nullable();
+            $table->string('longitude',25)->nullable();
+            $table->string('address',191)->nullable();
             $table->timestamps();
         });
     }

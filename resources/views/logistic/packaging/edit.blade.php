@@ -36,94 +36,135 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
-                    <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto mb-4 m-auto"/>
-                    <form action="{{route('logistics.update',$logisticsBusiness)}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
+                    <form action="{{route('packagingSolution.update',$packagingSolution->id)}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         <x-jet-validation-errors class="mb-4"/>
                         @csrf
                         @method('PUT')
-                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Step # 2: Business Information</h3>
+                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Packaging Solution</h3>
+                        <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+                        <input type="hidden" name="logistics_businesse_id" value="{{auth()->user()->logistics_business_id}}">
                         <div class="flex space-x-5 mt-3">
-                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_name">Business Name @include('misc.required')</label>
-                            {{--                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="num_of_warehouse">Select the numbers of Warehouses @include('misc.required')</label>--}}
-                            <input type="hidden" name="business_type" value="{{ auth()->user()->registration_type }}">
-                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                        </div>
-                        <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2" value="{{$logisticsBusiness->business_name}}" required></x-jet-input>
-                        </div>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="box_quantity_pieces">
+                                Quantity of Boxes / Pieces @include('misc.required')
+                            </label>
 
-                        <div class="flex space-x-5 mt-3">
-                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_number">Commercial Registration Number @include('misc.required')</label>
-                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="chamber_reg_path_1" title="File type: JPEG|PNG|PDF|DOCX => (Filesize: Max 10MB)">
-                                Commercial Registration Certificate @include('misc.required')</label>
-                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="vat_reg_certificate_number">VAT Number @include('misc.required')</label>
-                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="vat_reg_certificate_path_1">VAT Certificate (If available) @include('misc.required')</label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="weight_piece">
+                                Weight/Piece (Kg) @include('misc.required')
+                            </label>
 
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="forklift">
+                                Forklift / Manual @include('misc.required')
+                            </label>
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="chamber_reg_number" type="text" name="chamber_reg_number" class="border p-2 w-1/2"   value="{{$logisticsBusiness->chamber_reg_number}}"  ></x-jet-input>
-                            <x-jet-input id="chamber_reg_path_1" type="file" name="chamber_reg_path_1" class="border p-2 w-1/2" ></x-jet-input>
-                            <x-jet-input id="vat_reg_certificate_number" type="text" name="vat_reg_certificate_number"   value="{{$logisticsBusiness->vat_reg_certificate_number}}" class="border p-2 w-1/2"  required></x-jet-input>
-                            <x-jet-input id="vat_reg_certificate_path_1" type="file" name="vat_reg_certificate_path_1"  class="border p-2 w-1/2" required></x-jet-input>
-                        </div>
-                        <div class="flex space-x-5 mt-3">
+                            <x-jet-input id="box_quantity_pieces" type="number" step="0" min="1" placeholder="e.g 500" name="box_quantity_pieces" class="border p-2 w-1/2" value="{{$packagingSolution->box_quantity_pieces}}" required></x-jet-input>
+                            <x-jet-input id="weight_piece" type="number" step="0" min="1" placeholder="Weight/Piece (Kg)" name="weight_piece" class="border p-2 w-1/2" value="{{$packagingSolution->weight_piece}}" required></x-jet-input>
 
-                            <x-jet-label class="w-1/2" for="website">Website</x-jet-label>
-                            <x-jet-label class="w-1/2" for="business_email">Company Email @include('misc.required')</x-jet-label>
-                        </div>
-                        <div class="flex space-x-5 mt-3">
-
-                            <x-jet-input id="website" name="website" class="border p-2 w-1/2" value="{{$logisticsBusiness->website}}" ></x-jet-input>
-                            <x-jet-input id="business_email" type="email" name="business_email" class="border p-2 w-1/2" value="{{$logisticsBusiness->business_email}}" ></x-jet-input>
-                        </div>
-                        <div class="flex space-x-5 mt-3">
-                            <x-jet-label class="w-1/2" for="phone">Landline @include('misc.required')</x-jet-label>
-                            <x-jet-label class="w-1/2" for="mobile">Mobile @include('misc.required')</x-jet-label>
-                            <x-jet-label class="w-1/2" for="country">Country @include('misc.required')</x-jet-label>
-                            <x-jet-label class="w-1/2" for="city">City @include('misc.required')</x-jet-label>
-                        </div>
-
-                        <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="phone" type="tel" name="phone" class="border p-2 w-1/2" value="{{$logisticsBusiness->phone}}" required></x-jet-input>
-                            <x-jet-input id="mobile" type="number" name="mobile" class="border p-2 w-1/2" value="{{$logisticsBusiness->mobile}}" required></x-jet-input>
-                            <select name="country" id="country" class="form-select rounded-md shadow-sm border p-2 w-1/2" required>
+                            <select id="forklift" name="forklift" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
                                 <option value="">None</option>
-                                @foreach (\App\Models\User::countries() as $country)
-                                    <option value="{{ $country }}" @if($logisticsBusiness->country == $country) selected @endif>{{ $country }}</option>
-                                @endforeach
-                            </select>
-
-                            <select name="city" id="city" class="form-select select2 rounded-md shadow-sm border p-2 w-1/2" required>
-                                @foreach (\App\Models\City::all() as $city)
-                                    <option @if($logisticsBusiness->city == $city) selected @endif value="{{ $city->name_en }}">{{ $city->name_en . ' - ' . $city->name_ar }}</option>
-                                @endforeach
+                                <option value="1" @if($packagingSolution->forklift == 1) selected @endif>Yes</option>
+                                <option value="0" @if($packagingSolution->forklift == 0) selected @endif>No</option>
                             </select>
                         </div>
 
                         <div class="flex space-x-5 mt-3">
-                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="bank_name">Bank Name @include('misc.required')</label>
-                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="iban">IBAN @include('misc.required')</label>
-                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="latitude">Latitude @include('misc.required')</label>
-                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="longitude">Longitude @include('misc.required')</label>
+                            <label class="block font-medium text-sm text-gray-700 w-1/3">
+                            </label>
+
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="length">
+                                Length @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="width">
+                                Width @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="height">
+                                Height @include('misc.required')
+                            </label>
+                        </div>
+                        <div class="flex space-x-5 mt-3">
+                            <label class="block font-medium text-lg font-bold text-gray-700 p-2 w-1/4" for="length">
+                                Dimensions (cm)
+                            </label>
+                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="Length" name="length" class="border p-2 w-1/4" value="{{$packagingSolution->length}}">
+                            </x-jet-input>
+                            <x-jet-input id="width" type="number" step="0.01" min="0" placeholder="Width" name="width" class="border p-2 w-1/4" value="{{$packagingSolution->width}}">
+                            </x-jet-input>
+                            <x-jet-input id="height" type="number" step="0.01" min="0" placeholder="Height" name="height" class="border p-2 w-1/4" value="{{$packagingSolution->height}}">
+                            </x-jet-input>
                         </div>
 
 
                         <div class="flex space-x-5 mt-3">
-                            <select id="bank_name" name="bank_name" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="printing">
+                                Printing @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="printing_design">
+                                <a href="{{$packagingSolution->printing_design ? Storage::url($packagingSolution->printing_design) : '#'}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Printing Design (if yes)</a>
+
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="commodity_type">
+                                Commodity Type @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="commodity_information">
+                                Explain @include('misc.required')
+                            </label>
+                        </div>
+
+
+                        <div class="flex space-x-5 mt-3">
+
+                            <select id="printing" name="printing" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
                                 <option value="">None</option>
-                                @foreach(\App\Models\Bank::all() as $bank_name)
-                                    <option  @if($logisticsBusiness->bank_name == $bank_name->name  ) selected @endif  value="{{ $bank_name->name }}">{{ $bank_name->name }}</option>
-                                @endforeach
+                                <option value="1" @if($packagingSolution->printing == 1) selected @endif >Yes</option>
+                                <option value="0" @if($packagingSolution->printing == 0) selected @endif >No</option>
                             </select>
 
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$logisticsBusiness->iban}}" id="iban" type="text" name="iban" required="required">
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$logisticsBusiness->latitude}}" id="latitude" required readonly type="text" name="latitude">
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$logisticsBusiness->longitude}}" id="longitude" required readonly type="text" name="longitude">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="printing_design" type="file" name="printing_design_1">
+
+                            <select id="commodity_type" name="commodity_type" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
+                                <option value="">None</option>
+                                <option value="General" @if($packagingSolution->commodity_type ==  "General") selected @endif>General</option>
+                                <option value="Dangerous Good" @if($packagingSolution->commodity_type ==  "Dangerous Good") selected @endif>Dangerous Good</option>
+                                <option value="Energy: Gas, Oil etc." @if($packagingSolution->commodity_type == "Energy: Gas, Oil etc." ) selected @endif>Energy: Gas, Oil etc.</option>
+                                <option value="Medical" @if($packagingSolution->commodity_type == "Medical" ) selected @endif>Medical</option>
+                                <option value="Other" @if($packagingSolution->commodity_type ==  "Other") selected @endif>Other</option>
+                            </select>
+
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="commodity_information" value="{{$packagingSolution->commodity_information}}" type="text" placeholder="What's inside commodity type" name="commodity_information" required="required">
+
+                        </div>
+
+
+                        <div class="flex space-x-5 mt-3">
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="msds">
+                                <a href="{{$packagingSolution->msds ? Storage::url($packagingSolution->msds) : '#'}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">
+                                    MSDS <abbr title="If the shipment include DG items"> ? Upload the document</abbr>
+                                    @include('misc.required')
+                                </a>
+
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="msds_information">
+                                Additional Information (MSDS)
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="latitude">
+                                Latitude @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="longitude">
+                                Longitude @include('misc.required')
+                            </label>
+                        </div>
+
+                        <div class="flex space-x-5 mt-3">
+
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="msds" type="file" name="msds_1">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$packagingSolution->msds_information}}" id="msds_information" type="text" placeholder="If the shipment include DG items" name="msds_information" required="required">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$packagingSolution->latitude}}" id="latitude" placeholder="Please use map marker" required readonly type="text" name="latitude">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$packagingSolution->longitude}}" id="longitude" placeholder="Please use map marker" required readonly type="text" name="longitude">
                         </div>
 
 
                         <br>
-                        <p>Please use the map marker for your office location.</p>
+                        <p>Please use the map marker for your solution location.</p>
                         <br>
                         <div id="map" style="width:100%;height:400px; ">
                             <div style="width: 100%; height: 100%" id="address-map"></div>
@@ -136,16 +177,8 @@
                             </label>
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <textarea id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>{{$logisticsBusiness->address}}</textarea>
+                            <textarea id="address" type="text" name="address" placeholder="Please type your full address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>{{$packagingSolution->address}}</textarea>
                         </div>
-
-                        <div class="flex space-x-5 mt-3">
-                            <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_photo_url_1">Company logo @include('misc.required')</label>
-                        </div>
-                        <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="business_photo_url" type="file" name="business_photo_url_1" class="border p-2 w-1/2" required></x-jet-input>
-                        </div>
-
                         <br>
 
                         <x-jet-button class="float-right mt-4 mb-4">Update</x-jet-button>
