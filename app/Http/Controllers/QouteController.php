@@ -536,10 +536,14 @@ class QouteController extends Controller
         return view('buyer.singleCategory.quotation', compact('collection',  'eOrderID', 'bypass_id'));
     }
 
-    public function singleCategoryRFQQuotationsBuyerRejected($EOrderItemID,$bypass_id)
+//    public function singleCategoryRFQQuotationsBuyerRejected($EOrderItemID,$bypass_id)
+    public function singleCategoryRFQQuotationsBuyerRejected($eOrderID,$bypass_id)
     {
-        $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'DESC')->first();
-        return view('buyer.singleCategory.rejectedQuotation', compact('collection', 'EOrderItemID', 'bypass_id'));
+//        $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'DESC')->first();
+        $quotes = Qoute::where('e_order_id', $eOrderID)->orderBy('created_at', 'DESC')->get();
+        $collection = $quotes->unique('supplier_user_id');
+
+        return view('buyer.singleCategory.rejectedQuotation', compact('collection', 'eOrderID', 'bypass_id'));
     }
 
     public function singleCategoryRFQQuotationsModificationNeeded($eOrderID,$bypass_id)

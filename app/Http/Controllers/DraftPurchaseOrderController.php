@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CommissionPercentage;
 use App\Models\DeliveryNote;
 use App\Models\DraftPurchaseOrder;
+use App\Models\EmdadInvoice;
 use App\Models\EOrderItems;
+use App\Models\Invoice;
+use App\Models\Ire;
+use App\Models\IreCommission;
+use App\Models\IreIndirectCommission;
 use App\Models\Qoute;
 use App\Models\User;
 //use Barryvdh\DomPDF\PDF as PDF;
 use App\Notifications\DpoApproved;
 use App\Notifications\QuoteAccepted;
 use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use League\CommonMark\Extension\SmartPunct\Quote;
@@ -37,9 +44,8 @@ class DraftPurchaseOrderController extends Controller
         return view('draftPurchaseOrder.show', compact('draftPurchaseOrder'));
     }
 
-    public function approved(DraftPurchaseOrder $draftPurchaseOrder)
+    public function approved(Request $request, DraftPurchaseOrder $draftPurchaseOrder)
     {
-
         try {
             DB::beginTransaction();
 
@@ -58,6 +64,197 @@ class DraftPurchaseOrderController extends Controller
             $order_items = EOrderItems::find($draftPurchaseOrder->rfq_item_no);
             $order_items->status = 'accepted';
             $order_items->save();
+
+            /* Proforma invoice being generated automatically rather than supplier generates it */
+            if ($request->payment_method == 'Cash')
+            {
+                $proformaInvoice = [
+                    'rfq_no' => $request->rfq_no,
+                    'rfq_item_no' => $request->rfq_item_no,
+                    'qoute_no' => $request->qoute_no,
+                    'draft_purchase_order_id' => $request->draft_purchase_order_id,
+                    'buyer_user_id' => $request->buyer_user_id,
+                    'buyer_business_id' => $request->buyer_business_id,
+                    'supplier_user_id' => $request->supplier_user_id,
+                    'supplier_business_id' => $request->supplier_business_id,
+                    'payment_method' => $request->payment_method,
+                    'shipment_cost' => $request->shipment_cost,
+                    'total_cost' => $request->total_cost,
+                    'vat' => $request->vat,
+                    'ship_to_address' => $request->ship_to_address,
+                    'invoice_type' => 1,
+                    'rfq_type' => 1,
+                ];
+
+                $invoiceProforma = Invoice::create($proformaInvoice);
+                //      Calculating total cost w/o VAT
+                $quote = Qoute::where('id', $invoiceProforma->quote->id)->first();
+                $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
+                $totalEmdadCharges = ($totalCost * (1.5 / 100));    // Total emdad charges applicable
+
+                EmdadInvoice::create([
+                    'invoice_id' => $invoiceProforma->id,
+                    'supplier_business_id' => $invoiceProforma->supplier_business_id,
+                    'rfq_no' => $invoiceProforma->rfq_no,
+                    'charges' => $totalEmdadCharges,
+                    'rfq_type' => 1,
+                ]);
+
+                $userRole = User::where('id', $request->supplier_user_id)->first();
+                if ($userRole->usertype == 'CEO')
+                {
+                    $user = IreCommission::where('user_id', $request->supplier_user_id)->first();
+                }
+                else{
+                    /* Retrieving CEO ID*/
+                    $userCeoID = User::where([
+                        'business_id' => $request->supplier_business_id,
+                        'usertype' => 'CEO'
+                    ])->first();
+                    $user = IreCommission::where('user_id', $userCeoID->id)->first();
+                }
+
+                /* Sales commission calculations for employee or non-employee */
+
+                if (isset($user))
+                {
+                    if ($user->ireNoReferencee->type == 0)       /* 0 for Non-Employee*/
+                    {
+                        $commission = CommissionPercentage::where(['commission_type' => 0], ['ire_type', 0])->first();
+                        if (isset($commission))
+                        {
+//                    $totalSalesAmount = 0;
+                            $total = $totalEmdadCharges * $commission->amount;                          //total charges
+                            $ireCommission = IreCommission::where('user_id', $user->user_id)->first();
+                            $sales_amount = $ireCommission->sales_amount;
+                            $totalSalesAmount = $sales_amount + $total;                                 //Total sales amount updated
+
+                            IreCommission::where('user_id', $user->user_id)->update([
+                                'sales_amount' => $totalSalesAmount,
+                            ]);
+
+                            /* Indirect Commission Calculations Start*/
+                            $indirectCommission = CommissionPercentage::where(['commission_type' => 0], ['ire_type', 2])->first();
+                            if (isset($indirectCommission))
+                            {
+                                $ire = Ire::where('ire_no', $ireCommission->ire_no)->first();
+
+                                if (isset($ire->referred_no) || $ire->referred_no != null)
+                                {
+                                    $totalAmount = 0;
+                                    $ireReferenceDetails  = IreCommission::where('ire_no', $ire->referred_no)->where('payment_status', 0)->get();
+                                    foreach ($ireReferenceDetails as $ireReferenceDetail)
+                                    {
+                                        $totalAmount = $ireReferenceDetail->payment + $ireReferenceDetail->sales_amount;
+                                    }
+                                    $totalIndirectAmount = $totalAmount * $indirectCommission->amount;
+
+                                    $indirectCommissionCheck =  IreIndirectCommission::where('ire_no',$ireCommission->ire_no)->first();
+                                    if (isset($indirectCommissionCheck))
+                                    {
+                                        $indirectCommissionCheckCreated = Carbon::parse($indirectCommissionCheck->created_at)->floorMonth();
+                                        $todayDate = Carbon::parse(Carbon::now())->floorMonth();
+                                        $diff = $todayDate->diffInMonths($indirectCommissionCheckCreated);
+
+                                        if ($diff == 0)
+                                        {
+                                            IreIndirectCommission::where('ire_no',$ireCommission->ire_no)->update([
+                                                'amount' => $totalIndirectAmount,
+                                            ]);
+                                        }
+                                        elseif ($diff > 0)
+                                        {
+                                            IreIndirectCommission::create([
+                                                'ire_no' => $ireCommission->ire_no,
+                                                'referencee_ire_no' => $ireCommission->ire_no->ireNoReferencee->referred_no,
+                                                'amount' => $totalIndirectAmount,
+                                            ]);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        IreIndirectCommission::create([
+                                            'ire_no' => $ireCommission->ire_no,
+                                            'referencee_ire_no' => $ireCommission->ire_no->ireNoReferencee->referred_no,
+                                            'amount' => $totalIndirectAmount,
+                                        ]);
+                                    }
+                                }
+                            }
+
+                            /* Indirect Commission Calculations End*/
+
+                        }
+                    }
+                    elseif ($user->ireNoReferencee->type == 1)  /* 1 for Employee*/
+                    {
+                        $commission = CommissionPercentage::where(['commission_type' => 0], ['ire_type', 1])->first();
+                        if (isset($commission))
+                        {
+//                    $totalSalesAmount = 0;
+                            $total = $totalEmdadCharges * $commission->amount;                          //total charges
+                            $ireCommission = IreCommission::where('user_id', $user->user_id)->first();
+                            $sales_amount = $ireCommission->sales_amount;
+                            $totalSalesAmount = $sales_amount + $total;                                 //Total sales amount updated
+
+                            IreCommission::where('user_id', $user->user_id)->update([
+                                'sales_amount' => $totalSalesAmount,
+                            ]);
+
+                            /* Indirect Commission Calculations Start*/
+                            $indirectCommission = CommissionPercentage::where(['commission_type' => 0], ['ire_type', 2])->first();
+                            if (isset($indirectCommission))
+                            {
+                                $ire = Ire::where('ire_no', $ireCommission->ire_no)->first();
+
+                                if (isset($ire->referred_no) || $ire->referred_no != null)
+                                {
+                                    $totalAmount = 0;
+                                    $ireReferenceDetails  = IreCommission::where('ire_no', $ire->referred_no)->where('payment_status', 0)->get();
+                                    foreach ($ireReferenceDetails as $ireReferenceDetail)
+                                    {
+                                        $totalAmount = $ireReferenceDetail->payment + $ireReferenceDetail->sales_amount;
+                                    }
+                                    $totalIndirectAmount = $totalAmount * $indirectCommission->amount;
+
+                                    $indirectCommissionCheck =  IreIndirectCommission::where('ire_no',$ireCommission->ire_no)->first();
+                                    if (isset($indirectCommissionCheck))
+                                    {
+                                        $indirectCommissionCheckCreated = Carbon::parse($indirectCommissionCheck->created_at)->floorMonth();
+                                        $todayDate = Carbon::parse(Carbon::now())->floorMonth();
+                                        $diff = $todayDate->diffInMonths($indirectCommissionCheckCreated);
+
+                                        if ($diff == 0)
+                                        {
+                                            IreIndirectCommission::where('ire_no',$ireCommission->ire_no)->update([
+                                                'amount' => $totalIndirectAmount,
+                                            ]);
+                                        }
+                                        elseif ($diff > 0)
+                                        {
+                                            IreIndirectCommission::create([
+                                                'ire_no' => $ireCommission->ire_no,
+                                                'referencee_ire_no' => $ireCommission->ire_no->ireNoReferencee->referred_no,
+                                                'amount' => $totalIndirectAmount,
+                                            ]);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        IreIndirectCommission::create([
+                                            'ire_no' => $ireCommission->ire_no,
+                                            'referencee_ire_no' => $ireCommission->ire_no->ireNoReferencee->referred_no,
+                                            'amount' => $totalIndirectAmount,
+                                        ]);
+                                    }
+                                }
+                            }
+
+                            /* Indirect Commission Calculations End*/
+                        }
+                    }
+                }
+            }
 
             $affected = DB::table('qoutes')->where('e_order_items_id', $draftPurchaseOrder->rfq_item_no)->where('id', '<>', $draftPurchaseOrder->qoute_no)->update(['qoute_status' => 'Rejected', 'qoute_status_updated' => 'Rejected', 'status' => 'expired']);
             DB::commit();
@@ -221,6 +418,213 @@ class DraftPurchaseOrderController extends Controller
                     'qoute_status_updated' => 'Rejected',
                     'status' => 'expired'
                 ]);
+
+                /* Proforma invoice being generated automatically rather than supplier generates it */
+                if ($draftPurchaseOrder->payment_term == 'Cash')
+                {
+                    $proformaInvoice = [
+                        'rfq_no' => $draftPurchaseOrder->rfq_no,
+                        'rfq_item_no' => $draftPurchaseOrder->rfq_item_no,
+                        'qoute_no' => $draftPurchaseOrder->qoute_no,
+                        'draft_purchase_order_id' => $draftPurchaseOrder->id,
+                        'buyer_user_id' => $draftPurchaseOrder->user_id,
+                        'buyer_business_id' => $draftPurchaseOrder->business_id,
+                        'supplier_user_id' => $draftPurchaseOrder->supplier_user_id,
+                        'supplier_business_id' => $draftPurchaseOrder->supplier_business_id,
+                        'payment_method' => $draftPurchaseOrder->payment_term,
+                        'shipment_cost' => $draftPurchaseOrder->shipment_cost,
+                        'total_cost' => $draftPurchaseOrder->total_cost,
+                        'vat' => $draftPurchaseOrder->vat,
+                        'ship_to_address' => $draftPurchaseOrder->address,
+                        'invoice_type' => 1,
+                        'rfq_type' => 0,
+                    ];
+                    Invoice::create($proformaInvoice)->id;
+                }
+            }
+
+            /* Part of automatically proforma invoice being generated */
+            $total = 0;
+            if ($draftPurchaseOrders[0]->payment_term == 'Cash')
+            {
+        //      Calculating total cost w/o VAT
+                foreach ($draftPurchaseOrders as $draftPurchaseOrder)
+                {
+                    $quote = Qoute::where('dpo', $draftPurchaseOrder->id)->first();
+                    $totalCost = $quote->quote_quantity * $quote->quote_price_per_quantity;
+                    $total +=  $totalCost;
+                }
+
+                $totalWithShipmentCharges = $total + $draftPurchaseOrders[0]->shipment_cost;
+                $totalEmdadCharges = ($totalWithShipmentCharges * (1.5 / 100));    // Total Emdad charges applicable
+
+                $proformaInvoices = Invoice::where('rfq_no', $rfqNo)->get();
+
+                foreach ($proformaInvoices as $proformaInvoice)
+                {
+                    EmdadInvoice::create([
+                        'invoice_id' => $proformaInvoice->id,
+                        'supplier_business_id' => $proformaInvoice->supplier_business_id,
+                        'rfq_no' => $proformaInvoice->rfq_no,
+                        'charges' => $totalEmdadCharges,
+                        'rfq_type' => 0,
+                    ]);
+                }
+
+                $userRole = User::where('id', $draftPurchaseOrder->supplier_user_id)->first();
+                if ($userRole->usertype == 'CEO')
+                {
+                    $user = IreCommission::where('user_id', $draftPurchaseOrder->supplier_user_id)->first();
+                }
+                else{
+                    /* Retrieving CEO ID*/
+                    $userCeoID = User::where([
+                        'business_id' => $draftPurchaseOrder->business_id,
+                        'usertype' => 'CEO'
+                    ])->first();
+                    $user = IreCommission::where('user_id', $userCeoID->id)->first();
+                }
+
+                /* Sales commission calculations for employee or non-employee */
+
+                if (isset($user))
+                {
+                    if ($user->ireNoReferencee->type == 0)       /* 0 for Non-Employee*/
+                    {
+                        $commission = CommissionPercentage::where(['commission_type' => 0], ['ire_type', 0])->first();
+                        if (isset($commission))
+                        {
+                            //                  $totalSalesAmount = 0;
+                            $total = $totalEmdadCharges * $commission->amount;                          // Total charges
+                            $ireCommission = IreCommission::where('user_id', $user->user_id)->first();
+                            $sales_amount = $ireCommission->sales_amount;
+                            $totalSalesAmount = $sales_amount + $total;                                 // Total sales amount updated
+
+                            IreCommission::where('user_id', $user->user_id)->update([
+                                'sales_amount' => $totalSalesAmount,
+                            ]);
+
+                            /* Indirect Commission Calculations Start*/
+                            $indirectCommission = CommissionPercentage::where(['commission_type' => 0], ['ire_type', 2])->first();
+                            if (isset($indirectCommission))
+                            {
+                                $ire = Ire::where('ire_no', $ireCommission->ire_no)->first();
+
+                                if (isset($ire->referred_no) || $ire->referred_no != null)
+                                {
+                                    $totalAmount = 0;
+                                    $ireReferenceDetails  = IreCommission::where('ire_no', $ire->referred_no)->where('payment_status', 0)->get();
+                                    foreach ($ireReferenceDetails as $ireReferenceDetail)
+                                    {
+                                        $totalAmount = $ireReferenceDetail->payment + $ireReferenceDetail->sales_amount;
+                                    }
+                                    $totalIndirectAmount = $totalAmount * $indirectCommission->amount;
+
+                                    $indirectCommissionCheck =  IreIndirectCommission::where('ire_no',$ireCommission->ire_no)->first();
+                                    if (isset($indirectCommissionCheck))
+                                    {
+                                        $indirectCommissionCheckCreated = Carbon::parse($indirectCommissionCheck->created_at)->floorMonth();
+                                        $todayDate = Carbon::parse(Carbon::now())->floorMonth();
+                                        $diff = $todayDate->diffInMonths($indirectCommissionCheckCreated);
+
+                                        if ($diff == 0)
+                                        {
+                                            IreIndirectCommission::where('ire_no',$ireCommission->ire_no)->update([
+                                                'amount' => $totalIndirectAmount,
+                                            ]);
+                                        }
+                                        elseif ($diff > 0)
+                                        {
+                                            IreIndirectCommission::create([
+                                                'ire_no' => $ireCommission->ire_no,
+                                                'referencee_ire_no' => $ireCommission->ire_no->ireNoReferencee->referred_no,
+                                                'amount' => $totalIndirectAmount,
+                                            ]);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        IreIndirectCommission::create([
+                                            'ire_no' => $ireCommission->ire_no,
+                                            'referencee_ire_no' => $ireCommission->ire_no->ireNoReferencee->referred_no,
+                                            'amount' => $totalIndirectAmount,
+                                        ]);
+                                    }
+                                }
+                            }
+
+                            /* Indirect Commission Calculations End*/
+
+                        }
+                    }
+                    elseif ($user->ireNoReferencee->type == 1)  /* 1 for Employee*/
+                    {
+                        $commission = CommissionPercentage::where(['commission_type' => 0], ['ire_type', 1])->first();
+                        if (isset($commission))
+                        {
+//                    $totalSalesAmount = 0;
+                            $total = $totalEmdadCharges * $commission->amount;                          //total charges
+                            $ireCommission = IreCommission::where('user_id', $user->user_id)->first();
+                            $sales_amount = $ireCommission->sales_amount;
+                            $totalSalesAmount = $sales_amount + $total;                                 //Total sales amount updated
+
+                            IreCommission::where('user_id', $user->user_id)->update([
+                                'sales_amount' => $totalSalesAmount,
+                            ]);
+
+                            /* Indirect Commission Calculations Start*/
+                            $indirectCommission = CommissionPercentage::where(['commission_type' => 0], ['ire_type', 2])->first();
+                            if (isset($indirectCommission))
+                            {
+                                $ire = Ire::where('ire_no', $ireCommission->ire_no)->first();
+
+                                if (isset($ire->referred_no) || $ire->referred_no != null)
+                                {
+                                    $totalAmount = 0;
+                                    $ireReferenceDetails  = IreCommission::where('ire_no', $ire->referred_no)->where('payment_status', 0)->get();
+                                    foreach ($ireReferenceDetails as $ireReferenceDetail)
+                                    {
+                                        $totalAmount = $ireReferenceDetail->payment + $ireReferenceDetail->sales_amount;
+                                    }
+                                    $totalIndirectAmount = $totalAmount * $indirectCommission->amount;
+
+                                    $indirectCommissionCheck =  IreIndirectCommission::where('ire_no',$ireCommission->ire_no)->first();
+                                    if (isset($indirectCommissionCheck))
+                                    {
+                                        $indirectCommissionCheckCreated = Carbon::parse($indirectCommissionCheck->created_at)->floorMonth();
+                                        $todayDate = Carbon::parse(Carbon::now())->floorMonth();
+                                        $diff = $todayDate->diffInMonths($indirectCommissionCheckCreated);
+
+                                        if ($diff == 0)
+                                        {
+                                            IreIndirectCommission::where('ire_no',$ireCommission->ire_no)->update([
+                                                'amount' => $totalIndirectAmount,
+                                            ]);
+                                        }
+                                        elseif ($diff > 0)
+                                        {
+                                            IreIndirectCommission::create([
+                                                'ire_no' => $ireCommission->ire_no,
+                                                'referencee_ire_no' => $ireCommission->ire_no->ireNoReferencee->referred_no,
+                                                'amount' => $totalIndirectAmount,
+                                            ]);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        IreIndirectCommission::create([
+                                            'ire_no' => $ireCommission->ire_no,
+                                            'referencee_ire_no' => $ireCommission->ire_no->ireNoReferencee->referred_no,
+                                            'amount' => $totalIndirectAmount,
+                                        ]);
+                                    }
+                                }
+                            }
+
+                            /* Indirect Commission Calculations End*/
+                        }
+                    }
+                }
             }
 
             $qoute = Qoute::find($draftPurchaseOrders[0]->qoute_no);

@@ -115,7 +115,7 @@
                                     @foreach (array_unique($eOrders) as $order)
     {{--                                @foreach ($eOrders->unique('id') as $order)--}}
 
-                                        @if(isset($quotationCount) && $quotationCount != 0 && $quotationCount != null)
+                                        @if(isset($quotationCount) && $quotationCount > 0))
                                             <tr>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $loop->iteration }}
@@ -125,7 +125,7 @@
                                                     {{ $eOrder->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrder->item_code)->first()->parent_id))->first()->name }}
                                                 </td>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    @if($eOrder->company_name_check == 1) {{ $eOrder->business->business_name }} @endif
+                                                    @if($eOrder->company_name_check == 1) {{ $eOrder->business->business_name }} @else N/A @endif
                                                 </td>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $order->created_at->format('d-m-Y') }} <br>
@@ -137,7 +137,7 @@
                                                 </td>
 
                                             </tr>
-                                        @elseif($quotationCount == null)
+                                        @elseif(is_null($quotationCount))
                                             <tr>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $loop->iteration }}
@@ -147,7 +147,7 @@
                                                     {{ $eOrder->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrder->item_code)->first()->parent_id))->first()->name }}
                                                 </td>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    @if($eOrder->company_name_check == 1) {{ $eOrder->business->business_name }} @endif
+                                                    @if($eOrder->company_name_check == 1) {{ $eOrder->business->business_name }} @else N/A @endif
                                                 </td>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $order->created_at->format('d-m-Y') }} <br>

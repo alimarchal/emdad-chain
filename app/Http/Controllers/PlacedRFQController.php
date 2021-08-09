@@ -95,6 +95,12 @@ class PlacedRFQController extends Controller
         return view('supplier.supplier-quote', compact('eOrderItems', 'collection', 'user_business_id'));
     }
 
+    /* Supplier rejecting RFQ */
+    public function rejectRFQ($eOrderID)
+    {
+        dd($eOrderID);
+    }
+
     public function RFQsQouted($EOrderItems)
     {
         $collection = EOrderItems::where('e_orders_id', $EOrderItems)->get();

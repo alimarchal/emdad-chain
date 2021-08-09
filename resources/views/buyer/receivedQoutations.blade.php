@@ -89,7 +89,11 @@
                                             {{ $rfp->created_at->format('d-m-Y') }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->item_name }}
+                                            @php
+                                                $record = \App\Models\Category::where('id',$rfp->item_code)->first();
+                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                            @endphp
+                                            {{ $record->name }} @if(isset($parent)), {{$parent->name}} @endif
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -278,7 +282,12 @@
                                             {{ $rfp->created_at->format('d-m-Y') }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->item_name }}
+{{--                                            {{ $rfp->item_name }}--}}
+                                            @php
+                                                $record = \App\Models\Category::where('id',$rfp->item_code)->first();
+                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                            @endphp
+                                            {{ $record->name }} @if(isset($parent)), {{$parent->name}} @endif
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">

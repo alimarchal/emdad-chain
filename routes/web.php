@@ -286,6 +286,7 @@ Route::post('/change-company-check', [ECartController::class, 'companyCheck'])->
 Route::middleware(['auth:sanctum'])->get('/RFQPlacedItems/{EOrderItems}', [PlacedRFQController::class, 'RFQItems'])->name('RFQItemsByID');
 Route::middleware(['auth:sanctum'])->get('/viewRFQs', [PlacedRFQController::class, 'viewRFQs'])->name('viewRFQs');
 Route::middleware(['auth:sanctum'])->get('/viewRFQs/{eOrderItems}', [PlacedRFQController::class, 'viewRFQsID'])->name('viewRFQsID');
+Route::middleware(['auth:sanctum'])->get('/rejectRFQ/{eOrderID}', [PlacedRFQController::class, 'rejectRFQ'])->name('rejectRFQ');
 Route::middleware(['auth:sanctum'])->get('/single-category-RFQs', [PlacedRFQController::class, 'viewSingleCategoryRFQs'])->name('singleCategoryRFQs');
 //Route::middleware(['auth:sanctum'])->get('/view-RFQs-for-single-category-{eOrderID}', [PlacedRFQController::class, 'viewRFQsOfSingleCategory'])->name('viewRFQsOfSingleCategory');
 //Route::middleware(['auth:sanctum'])->get('/quote-RFQs-for-single-category-{eOrderItems}', [PlacedRFQController::class, 'viewSingleCategoryRFQByID'])->name('viewSingleCategoryRFQByID');
@@ -362,6 +363,7 @@ Route::middleware(['auth:sanctum'])->post('single/category/dpo/approved/{rfqNo}/
 Route::middleware(['auth:sanctum'])->post('single/category/dpo/cancel/{rfqNo}/{supplierBusinessID}', [DraftPurchaseOrderController::class, 'singleCategoryCancel'])->name('singleCategoryCancel');
 #################################################################################################################
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/approved', [DraftPurchaseOrderController::class, 'approved'])->name('dpo.approved');
+Route::middleware(['auth:sanctum'])->post('cash/dpo/{draftPurchaseOrder}/approved', [DraftPurchaseOrderController::class, 'approved'])->name('cashDpo.approved');
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/rejected', [DraftPurchaseOrderController::class, 'rejected'])->name('dpo.rejected');
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/cancel', [DraftPurchaseOrderController::class, 'cancel'])->name('dpo.cancel');
 

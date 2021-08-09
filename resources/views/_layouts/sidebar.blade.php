@@ -571,7 +571,7 @@
             {{-- Purchase Order link --}}
             @if(auth()->user()->can('Buyer DPO Approval') || auth()->user()->can('Buyer View Purchase Orders') || auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
 
-                <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                    href="{{ route('purchaseOrderView') }}">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path fill="none"
@@ -1889,7 +1889,7 @@
             {{-- Purchase Order link --}}
             @if(auth()->user()->can('Buyer DPO Approval') || auth()->user()->can('Buyer View Purchase Orders') || auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
 
-                <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                    href="{{ route('purchaseOrderView') }}">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);">
                         <path fill="none"

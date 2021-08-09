@@ -80,7 +80,11 @@
                                         {{ $placedRFQ->id }}
                                     </td>
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        {{ $placedRFQ->OrderItems[0]->item_name }}
+                                        @php
+                                            $record = \App\Models\Category::where('id',$placedRFQ->OrderItems[0]->item_code)->first();
+                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                        @endphp
+                                        {{ $record->name }} @if(isset($parent)) , {{$parent->name}} @endif
                                     </td>
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{ $placedRFQ->created_at->format('d-m-Y') }} <br>

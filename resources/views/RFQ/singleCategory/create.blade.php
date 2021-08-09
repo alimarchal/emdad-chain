@@ -77,7 +77,7 @@
         </style>
 
         {{-- getting latest record from database to be filled in fields  --}}
-        @if(isset($rfqCount) && $rfqCount != 0 && $rfqCount != null)
+        @if(isset($rfqCount) && $rfqCount != 0 && !is_null($rfqCount))
 
 
             <h2 class="text-2xl font-bold py-2 text-center"></h2>
@@ -166,7 +166,11 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $rfp->item_name }}
+                                                    @php
+                                                        $record = \App\Models\Category::where('id',$rfp->item_code)->first();
+                                                        $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                    @endphp
+                                                    {{ $rfp->item_name }}, {{ $parent->name}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -366,7 +370,7 @@
                                         <br>
 
                                         {{__('portal.Category')}}: @include('misc.required')
-                                        <div class="relative inline-flex" style="width: 400px;">
+                                        <div class="relative inline-flex" style="width: 45%;">
                                             <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                                 <path
@@ -379,7 +383,7 @@
                                                     $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                 @endphp
 
-                                                <select name="item_name" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" readonly style="width: 400px;">
+                                                <select name="item_name" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" readonly>
                                                     <option value="{{$latest_rfq->item_code}}">{{$latest_rfq->item_name . ' - ' . $parent->name }}</option>
                                                 </select>
                                             @else
@@ -612,7 +616,7 @@
                 </form>
             </div>
 
-        @elseif($rfqCount == null )
+        @elseif(is_null($rfqCount) )
             <h2 class="text-2xl font-bold py-2 text-center">
             </h2>
 
@@ -700,7 +704,11 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $rfp->item_name }}
+                                                    @php
+                                                        $record = \App\Models\Category::where('id',$rfp->item_code)->first();
+                                                        $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                    @endphp
+                                                    {{ $rfp->item_name }}, {{ $parent->name}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -900,7 +908,7 @@
                                         <br>
 
                                         {{__('portal.Category')}}: @include('misc.required')
-                                        <div class="relative inline-flex">
+                                        <div class="relative inline-flex" style="width: 45%;">
                                             <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                                 <path
@@ -1221,11 +1229,10 @@
         </style>
 
         {{-- getting latest record from database to be filled in fields  --}}
-        @if(isset($rfqCount) && $rfqCount != 0 && $rfqCount != null)
+        @if(isset($rfqCount) && $rfqCount != 0 && !is_null($rfqCount))
 
 
-            <h2 class="text-2xl font-bold py-2 text-center">
-            </h2>
+            <h2 class="text-2xl font-bold py-2 text-center"></h2>
 
             <div class="flex flex-col mb-5 ">
                 <div class="cart">
@@ -1315,7 +1322,7 @@
                                                         $record = \App\Models\Category::where('id',$rfp->item_code)->first();
                                                         $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                     @endphp
-                                                    {{ $record->name_ar }}, {{ $parent->name_ar}}
+                                                    {{ $rfp->item_name }}, {{ $parent->name}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -1336,33 +1343,11 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}
-                                                    @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
-                                                    @elseif($rfp->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
-                                                    @elseif($rfp->delivery_period =='Within 90 Days') {{__('portal.90 Days')}}
-                                                    @elseif($rfp->delivery_period =='Standing Order - 2 per year') {{__('portal.Standing Order - 2 times / year')}}
-                                                    @elseif($rfp->delivery_period =='Standing Order - 3 per year') {{__('portal.Standing Order - 3 times / year')}}
-                                                    @elseif($rfp->delivery_period =='Standing Order - 4 per year') {{__('portal.Standing Order - 4 times / year')}}
-                                                    @elseif($rfp->delivery_period =='Standing Order - 6 per year') {{__('portal.Standing Order - 6 times / year')}}
-                                                    @elseif($rfp->delivery_period =='Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}
-                                                    @elseif($rfp->delivery_period =='Standing Order Open') {{__('portal.Standing Order - Open')}}
-                                                    @endif
+                                                    {{ $rfp->delivery_period }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    @if($rfp->payment_mode == 'Cash')
-                                                        {{__('portal.Cash')}}
-                                                    @elseif($rfp->payment_mode == 'Credit')
-                                                        {{__('portal.Credit')}}
-                                                    @elseif($rfp->payment_mode == 'Credit30days')
-                                                        {{__('portal.Credit (30 Days)')}}
-                                                    @elseif($rfp->payment_mode == 'Credit60days')
-                                                        {{__('portal.Credit (60 Days)')}}
-                                                    @elseif($rfp->payment_mode == 'Credit90days')
-                                                        {{__('portal.Credit (90 Days)')}}
-                                                    @elseif($rfp->payment_mode == 'Credit120days')
-                                                        {{__('portal.Credit (120 Days)')}}
-                                                    @endif
+                                                    {{ $rfp->payment_mode }}
                                                 </td>
 
                                                 <td class="px-3 py-3 text-center whitespace-nowrap">
@@ -1380,7 +1365,7 @@
                                                             </svg>
                                                         </a>
                                                     @else
-                                                       {{__('portal.N/A')}}
+                                                        {{__('portal.N/A')}}
                                                     @endif
                                                 </td>
 
@@ -1434,11 +1419,11 @@
                             </div>
                         </div>
 
-                        <div class="flex-1" style="flex: inherit">
-                            <div class="ml-auto date" style="width:150px; ">
+                        <div class="flex-1 ">
+                            <div class="ml-auto date" style="width:150px; float: left">
                                 <br>
                                 <span class="color-1f3864 font-bold">{{__('portal.Date')}}:
-                                    {{\Carbon\Carbon::today()->format('Y-m-d')}}
+                                     {{\Carbon\Carbon::today()->format('Y-m-d')}}
                                 </span><br>
                                 <hr>
                             </div>
@@ -1493,16 +1478,7 @@
                                             </svg>
                                             <select class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" name="payment_mode" id="payment_mode" required>
                                                 @if(isset($latest_rfq))
-                                                    <option value="{{$latest_rfq->payment_mode}}">
-                                                        @if($latest_rfq->payment_mode == 'Cash') {{__('portal.Cash')}}
-                                                        @elseif($latest_rfq->payment_mode == 'Credit') {{__('portal.Credit')}}
-                                                        @elseif($latest_rfq->payment_mode == 'Credit30days') {{__('portal.Credit (30 Days)')}}
-                                                        @elseif($latest_rfq->payment_mode == 'Credit60days') {{__('portal.Credit (60 Days)')}}
-                                                        @elseif($latest_rfq->payment_mode == 'Credit90days') {{__('portal.Credit (90 Days)')}}
-                                                        @elseif($latest_rfq->payment_mode == 'Credit120days') {{__('portal.Credit (120 Days)')}}
-                                                        @endif
-{{--                                                        {{$latest_rfq->payment_mode}}--}}
-                                                    </option>
+                                                    <option value="{{$latest_rfq->payment_mode}}">{{$latest_rfq->payment_mode}}</option>
                                                 @else
                                                     <option value="">{{__('portal.None')}}</option>
                                                     <option value="Cash">{{__('portal.Cash')}}</option>
@@ -1535,11 +1511,7 @@
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 required name="required_sample" id="required_sample">
                                                 @if(isset($latest_rfq))
-                                                    <option value="{{$latest_rfq->required_sample}}">
-                                                        @if($latest_rfq->required_sample == 'Yes') {{__('portal.Yes')}}
-                                                        @elseif($latest_rfq->required_sample == 'No') {{__('portal.No')}}
-                                                        @endif
-                                                    </option>
+                                                    <option value="{{$latest_rfq->required_sample}}">{{$latest_rfq->required_sample}}</option>
                                                 @else
                                                     <option value="">{{__('portal.None')}}</option>
                                                     <option value="Yes">{{__('portal.Yes')}}</option>
@@ -1550,7 +1522,7 @@
                                         <br>
 
                                         {{__('portal.Category')}}: @include('misc.required')
-                                        <div class="relative inline-flex" style="width: 400px;">
+                                        <div class="relative inline-flex" style="width: 45%;">
                                             <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                                 <path
@@ -1563,8 +1535,8 @@
                                                     $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                 @endphp
 
-                                                <select name="item_name" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" readonly style="width: 400px;">
-                                                    <option value="{{$latest_rfq->item_code}}">{{$record->name_ar . ' - ' . $parent->name_ar }}</option>
+                                                <select name="item_name" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" readonly>
+                                                    <option value="{{$latest_rfq->item_code}}">{{$latest_rfq->item_name . ' - ' . $parent->name }}</option>
                                                 </select>
                                             @else
                                                 @include('category.rfp')
@@ -1614,19 +1586,7 @@
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 name="delivery_period" id="delivery_period" required>
                                                 @if(isset($latest_rfq))
-                                                    <option value="{{$latest_rfq->delivery_period}}">
-                                                        @if($latest_rfq->delivery_period == 'Immediately') {{__('portal.Immediately')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Within 30 Days') {{__('portal.30 Days')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Within 60 Days') {{__('portal.60 Days')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Within 90 Days') {{__('portal.90 Days')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 2 per year') {{__('portal.Standing Order - 2 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 3 per year') {{__('portal.Standing Order - 3 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 4 per year') {{__('portal.Standing Order - 4 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 6 per year') {{__('portal.Standing Order - 6 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order Open') {{__('portal.Standing Order - Open')}}
-                                                        @endif
-                                                    </option>
+                                                    <option value="{{$latest_rfq->delivery_period}}">{{$latest_rfq->delivery_period}}</option>
                                                 @else
                                                     <option value="">{{__('portal.Select Delivery Period')}}</option>
                                                     <option value="Immediately">{{__('portal.Immediately')}}</option>
@@ -1719,7 +1679,7 @@
                                                 </svg>
                                             </a>
                                         @else
-                                           {{__('portal.N/A')}}
+                                            {{__('portal.N/A')}}
                                         @endif
                                     </td>
 
@@ -1800,8 +1760,7 @@
 
                             <a href="{{route('single_cart_index')}}"
                                class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
-                                {{__('portal.Requisitions Cart')}}
-                            </a>
+                                {{__('portal.Requisitions Cart')}}</a>
                         </div>
 
                     </div>
@@ -1809,7 +1768,7 @@
                 </form>
             </div>
 
-        @elseif($rfqCount == null )
+        @elseif(is_null($rfqCount) )
             <h2 class="text-2xl font-bold py-2 text-center">
             </h2>
 
@@ -1901,7 +1860,7 @@
                                                         $record = \App\Models\Category::where('id',$rfp->item_code)->first();
                                                         $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                     @endphp
-                                                    {{ $record->name_ar }}, {{ $parent->name_ar}}
+                                                    {{ $rfp->item_name }}, {{ $parent->name}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -1922,33 +1881,11 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}
-                                                    @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
-                                                    @elseif($rfp->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
-                                                    @elseif($rfp->delivery_period =='Within 90 Days') {{__('portal.90 Days')}}
-                                                    @elseif($rfp->delivery_period =='Standing Order - 2 per year') {{__('portal.Standing Order - 2 times / year')}}
-                                                    @elseif($rfp->delivery_period =='Standing Order - 3 per year') {{__('portal.Standing Order - 3 times / year')}}
-                                                    @elseif($rfp->delivery_period =='Standing Order - 4 per year') {{__('portal.Standing Order - 4 times / year')}}
-                                                    @elseif($rfp->delivery_period =='Standing Order - 6 per year') {{__('portal.Standing Order - 6 times / year')}}
-                                                    @elseif($rfp->delivery_period =='Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}
-                                                    @elseif($rfp->delivery_period =='Standing Order Open') {{__('portal.Standing Order - Open')}}
-                                                    @endif
+                                                    {{ $rfp->delivery_period }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    @if($rfp->payment_mode == 'Cash')
-                                                        {{__('portal.Cash')}}
-                                                    @elseif($rfp->payment_mode == 'Credit')
-                                                        {{__('portal.Credit')}}
-                                                    @elseif($rfp->payment_mode == 'Credit30days')
-                                                        {{__('portal.Credit (30 Days)')}}
-                                                    @elseif($rfp->payment_mode == 'Credit60days')
-                                                        {{__('portal.Credit (60 Days)')}}
-                                                    @elseif($rfp->payment_mode == 'Credit90days')
-                                                        {{__('portal.Credit (90 Days)')}}
-                                                    @elseif($rfp->payment_mode == 'Credit120days')
-                                                        {{__('portal.Credit (120 Days)')}}
-                                                    @endif
+                                                    {{ $rfp->payment_mode }}
                                                 </td>
 
                                                 <td class="px-3 py-3 text-center whitespace-nowrap">
@@ -1966,7 +1903,7 @@
                                                             </svg>
                                                         </a>
                                                     @else
-                                                       {{__('portal.N/A')}}
+                                                        {{__('portal.N/A')}}
                                                     @endif
                                                 </td>
 
@@ -2020,12 +1957,11 @@
                             </div>
                         </div>
 
-                        <div class="flex-1" style="flex: inherit">
-                            <div class="ml-auto date" style="width:150px; ">
+                        <div class="flex-1 ">
+                            <div class="ml-auto date" style="width:150px; float: left">
                                 <br>
                                 <span class="color-1f3864 font-bold">{{__('portal.Date')}}:
-                                    {{\Carbon\Carbon::today()->format('Y-m-d')}}
-                                </span><br>
+                            {{\Carbon\Carbon::today()->format('Y-m-d')}}</span><br>
                                 <hr>
                             </div>
                         </div>
@@ -2057,10 +1993,8 @@
                                                     required name="company_name_check" id="company_name_check">
                                                 @if(isset($latest_rfq))
                                                     <option value="{{$latest_rfq->company_name_check}}">
-                                                        @if($latest_rfq->company_name_check == 0)
-                                                            {{__('portal.No')}}
-                                                        @elseif($latest_rfq->company_name_check == 1)
-                                                            {{__('portal.Yes')}}
+                                                        @if($latest_rfq->company_name_check == 0){{__('portal.No')}}
+                                                        @elseif($latest_rfq->company_name_check == 1){{__('portal.Yes')}}
                                                         @endif
                                                     </option>
                                                 @else
@@ -2082,15 +2016,7 @@
                                             </svg>
                                             <select class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" name="payment_mode" id="payment_mode" required>
                                                 @if(isset($latest_rfq))
-                                                    <option value="{{$latest_rfq->payment_mode}}">
-                                                        @if($latest_rfq->payment_mode == 'Cash') {{__('portal.Cash')}}
-                                                        @elseif($latest_rfq->payment_mode == 'Credit') {{__('portal.Credit')}}
-                                                        @elseif($latest_rfq->payment_mode == 'Credit30days') {{__('portal.Credit (30 Days)')}}
-                                                        @elseif($latest_rfq->payment_mode == 'Credit60days') {{__('portal.Credit (60 Days)')}}
-                                                        @elseif($latest_rfq->payment_mode == 'Credit90days') {{__('portal.Credit (90 Days)')}}
-                                                        @elseif($latest_rfq->payment_mode == 'Credit120days') {{__('portal.Credit (120 Days)')}}
-                                                        @endif
-                                                    </option>
+                                                    <option value="{{$latest_rfq->payment_mode}}">{{$latest_rfq->payment_mode}}</option>
                                                 @else
                                                     <option value="">{{__('portal.None')}}</option>
                                                     <option value="Cash">{{__('portal.Cash')}}</option>
@@ -2123,11 +2049,7 @@
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 required name="required_sample" id="required_sample">
                                                 @if(isset($latest_rfq))
-                                                    <option value="{{$latest_rfq->required_sample}}">
-                                                        @if($latest_rfq->required_sample == 'Yes') {{__('portal.Yes')}}
-                                                        @elseif($latest_rfq->required_sample == 'No') {{__('portal.No')}}
-                                                        @endif
-                                                    </option>
+                                                    <option value="{{$latest_rfq->required_sample}}">{{$latest_rfq->required_sample}}</option>
                                                 @else
                                                     <option value="">{{__('portal.None')}}</option>
                                                     <option value="Yes">{{__('portal.Yes')}}</option>
@@ -2138,7 +2060,7 @@
                                         <br>
 
                                         {{__('portal.Category')}}: @include('misc.required')
-                                        <div class="relative inline-flex">
+                                        <div class="relative inline-flex" style="width: 45%;">
                                             <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none" style="width: 8px; height: 8px;"
                                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                                 <path
@@ -2152,7 +2074,7 @@
                                                 @endphp
 
                                                 <select name="item_name" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" readonly>
-                                                    <option value="{{$latest_rfq->item_code}}">{{$record->name_ar . ' - ' . $parent->name_ar }}</option>
+                                                    <option value="{{$latest_rfq->item_code}}">{{$latest_rfq->item_name . ' - ' . $parent->name }}</option>
                                                 </select>
                                             @else
                                                 @include('category.rfp')
@@ -2203,19 +2125,7 @@
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 name="delivery_period" id="delivery_period" required>
                                                 @if(isset($latest_rfq))
-                                                    <option value="{{$latest_rfq->delivery_period}}">
-                                                        @if($latest_rfq->delivery_period == 'Immediately') {{__('portal.Immediately')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Within 30 Days') {{__('portal.30 Days')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Within 60 Days') {{__('portal.60 Days')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Within 90 Days') {{__('portal.90 Days')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 2 per year') {{__('portal.Standing Order - 2 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 3 per year') {{__('portal.Standing Order - 3 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 4 per year') {{__('portal.Standing Order - 4 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 6 per year') {{__('portal.Standing Order - 6 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order Open') {{__('portal.Standing Order - Open')}}
-                                                        @endif
-                                                    </option>
+                                                    <option value="{{$latest_rfq->delivery_period}}">{{$latest_rfq->delivery_period}}</option>
                                                 @else
                                                     <option value="">{{__('portal.Select Delivery Period')}}</option>
                                                     <option value="Immediately">{{__('portal.Immediately')}}</option>
@@ -2293,7 +2203,7 @@
                                                 </svg>
                                             </a>
                                         @else
-                                           {{__('portal.N/A')}}
+                                            {{__('portal.N/A')}}
                                         @endif
                                     </td>
 
@@ -2376,7 +2286,7 @@
 
 
                             <a href="{{route('single_cart_index')}}"
-                               class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                               class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.Requisitions Cart')}}
                             </a>
                         </div>

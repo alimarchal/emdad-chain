@@ -31,37 +31,37 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                     ID
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                     Quantity
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                     Price Per Quantity
                                 </th>
-                                {{--<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                {{--<th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                     Sample Information
                                 </th>--}}
 
 
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                     Shipping Time In Days
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                     Total Cost
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                     Note
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                     Created At
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                     Action
                                 </th>
 
@@ -91,39 +91,39 @@
                                 @else
                                     @foreach ($collection->sortBy('total_cost')->take(2) as $quote)
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $loop->iteration }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->quote_quantity }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->quote_price_per_quantity }}
                                             </td>
 
-                                            {{--<td class="px-6 py-4 whitespace-nowrap">
+                                            {{--<td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->sample_information }}
                                             </td>--}}
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->shipping_time_in_days }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->total_cost }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ strip_tags($quote->note_for_customer) }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->created_at->format('d-m-Y') }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if($quote->qoute_status_updated == 'Rejected')
                                                     <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                         Rejected
@@ -159,39 +159,39 @@
                                 @else
                                     @foreach ($collection->sortBy('total_cost')->take(3) as $quote)
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $loop->iteration }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->quote_quantity }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->quote_price_per_quantity }}
                                             </td>
 
-                                            {{--<td class="px-6 py-4 whitespace-nowrap">
+                                            {{--<td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->sample_information }}
                                             </td>--}}
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->shipping_time_in_days }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->total_cost }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ strip_tags($quote->note_for_customer) }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->created_at->format('d-m-Y') }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if($quote->qoute_status_updated == 'Rejected')
                                                     <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                         Rejected
@@ -227,39 +227,39 @@
                                 @else
                                     @foreach ($collection->sortBy('total_cost')->take(5) as $quote)
                                         <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $loop->iteration }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->quote_quantity }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->quote_price_per_quantity }}
                                             </td>
 
-                                            {{--<td class="px-6 py-4 whitespace-nowrap">
+                                            {{--<td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->sample_information }}
                                             </td>--}}
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->shipping_time_in_days }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->total_cost }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ strip_tags($quote->note_for_customer) }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $quote->created_at->format('d-m-Y') }}
                                             </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if($quote->qoute_status_updated == 'Rejected')
                                                     <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                         Rejected
@@ -284,7 +284,7 @@
     @endif
     <div class="mt-5">
         <a href="{{ route('singleCategoryBuyerRFQs') }}"
-           class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+           class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
             Back
         </a>
     </div>

@@ -110,7 +110,19 @@
                                                                 <a href="{{route('generateProforma', $dpo->id)}}" class="text-blue-900 hover:underline">Generate proforma invoice</a>
                                                             @endif
                                                         @else
-                                                            {{--                                                            <a>Completed</a>--}}
+                                                            @if(auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
+                                                                @if($dpo->payment_term == 'Credit')
+                                                                    @if($dpo->status == 'approved')
+                                                                        <span>Create delivery Note</span>
+                                                                    @elseif($dpo->status == 'completed')
+                                                                        <span>Completed</span>
+                                                                    @elseif($dpo->status == 'prepareDelivery')
+                                                                        <span>Preparing delivery</span>
+                                                                    @elseif($dpo->status == 'cancel')
+                                                                        <span>Purchase Order Canceled</span>
+                                                                    @endif
+                                                                @endif
+                                                            @endif
                                                         @endif
                                                     </td>
 

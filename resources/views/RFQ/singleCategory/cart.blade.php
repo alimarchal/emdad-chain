@@ -110,7 +110,11 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        {{ $rfp->item_name }}
+                                        @php
+                                            $record = \App\Models\Category::where('id',$rfp->item_code)->first();
+                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                        @endphp
+                                        {{ $rfp->item_name }}, {{ $parent->name}}
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -317,7 +321,11 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        {{ $rfp->item_name }}
+                                        @php
+                                            $record = \App\Models\Category::where('id',$rfp->item_code)->first();
+                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                        @endphp
+                                        {{ $record->name_ar }}, {{ $parent->name_ar}}
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">

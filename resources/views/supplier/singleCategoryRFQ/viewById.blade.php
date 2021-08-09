@@ -303,7 +303,7 @@
                                     <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                    <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                    <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                         Calculate Total Cost
                                     </a>
                                 </div>
@@ -440,8 +440,8 @@
                                         <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
-                                            Calculate Total Cost
+                                        <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                            Calculate Total Costs
                                         </a>
                                     </div>
 {{--                                </div>--}}

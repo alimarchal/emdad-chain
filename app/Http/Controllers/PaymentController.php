@@ -294,14 +294,14 @@ class PaymentController extends Controller
     {
         if (auth()->user()->registration_type == "Supplier")
         {
-            $proformaInvoices = Invoice::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->get();
+            $proformaInvoices = Invoice::with('purchase_order')->where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->get();
         }
         elseif(auth()->user()->registration_type == "Buyer")
         {
-            $proformaInvoices = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->get();
+            $proformaInvoices = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->get();
         }
         else{
-            $proformaInvoices = Invoice::where(['rfq_type' => 1])->get();
+            $proformaInvoices = Invoice::with('purchase_order')->where(['rfq_type' => 1])->get();
         }
         return view('payment.invoice', compact('proformaInvoices'));
     }

@@ -84,7 +84,7 @@
                                             @php $businessName = \App\Models\Business::where('id', $item->buyer_business_id)->first(); @endphp
                                         @endif
 
-                                        {{$businessName->business_name}}
+                                        @if(isset($businessName->business_name)) {{$businessName->business_name}} @else N/A @endif
                                     </td>
                                     <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                         @if (auth()->user()->registration_type == 'Buyer')

@@ -279,7 +279,7 @@
 
                                 </td>
                                 <td colspan="2" class="text-left">
-                                    <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                    <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                         Calculate Total Cost
                                     </a>
                                 </td>
@@ -372,7 +372,7 @@
 
                         </tr>
 
-                            @if($eOrderItems->required_sample == 'Yes')
+                            {{--@if($eOrderItems->required_sample == 'Yes')
                                 <tr >
                                     <td colspan="6" >
 
@@ -406,14 +406,14 @@
 
                                     </td>
                                 </tr>
-                            @endif
+                            @endif--}}
 
                             <tr class="mt-2">
                                 <td colspan="2" class="" >
                                         <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
                                 </td>
                                 <td colspan="2" class="text-left">
-                                    <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                    <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                         Calculate Total Cost
                                     </a>
                                 </td>
@@ -422,15 +422,19 @@
 
                             <tr style="border: none !important;">
                                 <td colspan="6" class="px-10 text-left"  >
-                                        <button
-                                            class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
-                                            Send Quote
-                                        </button>
-                                        <br>
-                                        <a href="{{ route('viewRFQs') }}"
-                                           class="inline-flex items-center px-4 mr-2 py-2 mb-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                                            Back
-                                        </a>
+                                    <button
+                                        class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                        Send Quote
+                                    </button>
+                                    <br>
+                                    <a href="{{ route('viewRFQs') }}"
+                                       class="inline-flex items-center px-4 mr-2 py-2 mb-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                        Back
+                                    </a>
+{{--                                    <a href="{{ route('rejectRFQ', $eOrderItems->e_order_id) }}"  id="reject"--}}
+{{--                                       class="inline-flex items-center px-4 mr-2 py-2 mb-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-red disabled:opacity-25 transition ease-in-out duration-150">--}}
+{{--                                        Reject--}}
+{{--                                    </a>--}}
 
                                 </td>
 
@@ -447,6 +451,13 @@
 </x-app-layout>
 
 <script>
+
+    $('#reject').on('click', function (e) {
+        if(!confirm('Are you sure?')){
+            e.preventDefault();
+        }
+    });
+
     function calculateCost()
     {
 

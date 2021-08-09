@@ -57,7 +57,7 @@ class InvoiceController extends Controller
             'delivery_address' => $delivery_note->delivery_address,
             'destination_coordinates' => $business_warehouse->longitude . ',' . $business_warehouse->latitude,
             'waiting_time' => \App\Models\User::waitingTime(),
-            'rfq-type' => 1,
+            'rfq_type' => 1,
         ];
 
         $del = Delivery::create($delivery);
@@ -102,7 +102,9 @@ class InvoiceController extends Controller
             EmdadInvoice::create([
                 'invoice_id' => $inv->id,
                 'supplier_business_id' => $inv->supplier_business_id,
+                'rfq_no' => $quote->e_order_id,
                 'charges' => $totalCharges,
+                'rfq_type' => 1,
             ]);
             return redirect()->route('invoice.show',$inv->id);
         }
@@ -227,7 +229,9 @@ class InvoiceController extends Controller
                 EmdadInvoice::create([
                     'invoice_id' => $inv->id,
                     'supplier_business_id' => $inv->supplier_business_id,
+                    'rfq_no' => $quote->e_order_id,
                     'charges' => $totalCharges,
+                    'rfq_type' => 1,
                 ]);
             }
             elseif($del->payment_term == "Cash"){

@@ -57,6 +57,13 @@ class PurchaseRequestFormController extends Controller
         }
         // dd($latest_rfq);
 
+        /* Below code added to redirect back if Requisition limit for day is reached Added because h-screen issue in App.css blade */
+        if ($rfqCount <= 0 && $business_package->package_id != 3 && $business_package->package_id != 4)
+        {
+            session()->flash('error', 'Your have reached daily requisition generate limit.');
+            return redirect()->route('rfqView');
+        }
+
 //        return view('RFQ.create', compact('parentCategories', 'childs', 'user','eCart','rfqCount'));
 
         return view('RFQ.create', compact('parentCategories', 'childs','eCart','rfqCount','latest_rfq'));
@@ -109,6 +116,13 @@ class PurchaseRequestFormController extends Controller
         }
         else{
             $rfqCount = null;
+        }
+
+        /* Below code added to redirect back if Requisition limit for day is reached Added because h-screen issue in App.css blade */
+        if ($rfqCount <= 0 && $business_package->package_id != 3 && $business_package->package_id != 4)
+        {
+            session()->flash('error', 'Your have reached daily requisition generate limit.');
+            return redirect()->route('rfqView');
         }
 
         return view('RFQ.singleCategory.create', compact('parentCategories','eCart','rfqCount','latest_rfq'));
