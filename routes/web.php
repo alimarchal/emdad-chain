@@ -52,6 +52,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 //Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [DashboardController::class, 'languageChange'])->name('languageChange');
 Route::middleware(['auth:sanctum', 'verified'])->get('languageChange/{lang}/{rtl_value}', [DashboardController::class, 'languageChange'])->name('languageChange');
+Route::middleware(['auth:sanctum', 'verified'])->get('languageChangeForPayment/{lang}/{rtl_value}', [DashboardController::class, 'languageChangeForPayment'])->name('languageChangeForPayment');
 Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
 Route::middleware(['auth:sanctum'])->post('/registrationType', [UserController::class, 'registrationType']);
 // User Log route for SuperAdmin
@@ -296,7 +297,7 @@ Route::resource('/role', RoleController::class);
 //>>>>>>>>>>>>>>>This is Permission Route<<<<<<<<<<<<<<<<<<<<<<<
 Route::resource('/permission', PermissionController::class);
 #################### END ##########################
-//>>>>>>This is Business informtion rout to check tatus of business <<<<<<<<<<<<<<<<
+//>>>>>>This is Business information rout to check status of business <<<<<<<<<<<<<<<<
 Route::get('business/Approval/Update/{id}', [BusinessController::class, 'businessApprovalUpdate'])->name('businessApprovalUpdate');
 Route::get('business/Approval/Rejected/{id}', [BusinessController::class, 'businessApprovalRejected'])->name('businessApprovalRejected');
 Route::middleware(['auth:sanctum'])->post('single-quote-store', [QouteController::class, 'singleRFQQuotationStore'])->name('singleRFQQuotationStore');

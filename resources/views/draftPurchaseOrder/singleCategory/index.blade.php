@@ -1,3 +1,15 @@
+@section('headerScripts')
+    <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">
+
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+@endsection
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
@@ -23,7 +35,7 @@
                             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                        <table class="min-w-full divide-y divide-gray-200">
+                                        <table class="min-w-full divide-y divide-gray-200" id="single-category-dpo">
                                             <thead>
                                                 <tr>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -104,6 +116,18 @@
         </div>
 
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#single-category-dpo').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+        });
+
+    </script>
 @else
     <x-app-layout>
         <x-slot name="header">
@@ -129,7 +153,7 @@
                             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                        <table class="min-w-full divide-y divide-gray-200">
+                                        <table class="min-w-full divide-y divide-gray-200" id="single-category-dpo">
                                             <thead>
                                                 <tr>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -147,7 +171,7 @@
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        {{__('portal.VIEW')}}
+                                                        {{__('portal.View')}}
                                                     </th>
 
 
@@ -210,4 +234,25 @@
         </div>
 
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#single-category-dpo').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "language": {
+                    "sSearch": "بحث:",
+                    "oPaginate": {
+                        "sFirst":    	"أولا",
+                        "sPrevious": 	"السابق",
+                        "sNext":     	"التالي",
+                        "sLast":     	"الاخير"
+                    },
+                    "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ المدخلات",
+                },
+            } );
+        });
+    </script>
 @endif

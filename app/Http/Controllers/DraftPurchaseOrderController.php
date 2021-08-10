@@ -723,5 +723,4 @@ class DraftPurchaseOrderController extends Controller
         return $pdf->download('POs.pdf');
     }
 
-
 }

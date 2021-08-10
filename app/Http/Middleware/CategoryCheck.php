@@ -25,6 +25,7 @@ class CategoryCheck
         }
         else if (isset(Auth::user()->business_package) && is_null(Auth::user()->business_package->categories))
         {
+            session()->flash('error', 'Select Category to proceed to the registration');
             return redirect()->route('parentCategories');
         }
 

@@ -26,7 +26,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$shipments->count()) seems empty @endif </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Items List')}} @if (!$shipments->count()) {{__('portal.seems empty')}} @endif </h2>
 
         @if ($shipments->count())
             @php $total = 0; @endphp
@@ -43,15 +43,15 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Shipment #
+                                        {{__('portal.Shipment')}} #
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Supplier Business Name
+                                        {{__('portal.Supplier Business Name')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Status
+                                        {{__('portal.Status')}}
                                     </th>
 
                                 </tr>
@@ -75,11 +75,11 @@
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @if($shipment->status == 1 )
                                                 <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    Delivered
+                                                    {{__('portal.Delivered')}}
                                                 </span>
                                             @else
                                                 <span class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    Not Delivered yet
+                                                    {{__('portal.Not Delivered yet')}}
                                                 </span>
                                             @endif
                                         </td>
@@ -94,6 +94,18 @@
         @endif
 
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#shipment-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+        });
+
+    </script>
 @else
     <x-app-layout>
         <x-slot name="header">
@@ -110,7 +122,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$shipments->count()) seems empty @endif </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Items List')}} @if (!$shipments->count()) {{__('portal.seems empty')}} @endif </h2>
 
         @if ($shipments->count())
             @php $total = 0; @endphp
@@ -118,6 +130,7 @@
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+
                             <table class="min-w-full divide-y divide-gray-200" id="shipment-table">
                                 <thead class="bg-gray-50">
                                 <tr>
@@ -126,15 +139,15 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Shipment #
+                                        {{__('portal.Shipment')}} #
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Supplier Business Name
+                                        {{__('portal.Supplier Business Name')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Status
+                                        {{__('portal.Status')}}
                                     </th>
 
                                 </tr>
@@ -158,11 +171,11 @@
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @if($shipment->status == 1 )
                                                 <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    Delivered
+                                                    {{__('portal.Delivered')}}
                                                 </span>
                                             @else
                                                 <span class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    Not Delivered yet
+                                                    {{__('portal.Not Delivered yet')}}
                                                 </span>
                                             @endif
                                         </td>
@@ -177,15 +190,25 @@
         @endif
 
     </x-app-layout>
-@endif
 
-<script>
-    $(document).ready(function() {
-        $('#shipment-table').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                // 'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        } );
-    });
-</script>
+    <script>
+        $(document).ready(function() {
+            $('#shipment-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "language": {
+                    "sSearch": "بحث:",
+                    "oPaginate": {
+                        "sFirst":    	"أولا",
+                        "sPrevious": 	"السابق",
+                        "sNext":     	"التالي",
+                        "sLast":     	"الاخير"
+                    },
+                    "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ المدخلات",
+                },
+            } );
+        });
+    </script>
+@endif
