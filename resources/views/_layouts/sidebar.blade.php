@@ -70,14 +70,14 @@
                 @endif
 
                     @if(Auth::user()->logistics_business_id == 0)
-                        <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs(['packagingSolution.index','packagingSolution.business']) ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('packagingSolution.business') }}">
+                        <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs(['packagingSolution.index','packagingSolution.create']) ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('packagingSolution.create') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                             </svg>
                             <span class="mx-3">Packaging Solution</span>
                         </a>
                     @else
-                        <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs(['packagingSolution.index','packagingSolution.business']) ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('packagingSolution.index') }}">
+                        <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs(['packagingSolution.index','packagingSolution.create']) ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('packagingSolution.index') }}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                             </svg>
