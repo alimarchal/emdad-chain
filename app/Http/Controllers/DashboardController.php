@@ -62,6 +62,18 @@ class DashboardController extends Controller
         return redirect()->back();
     }
 
+    public function languageChangeForPayment($lang, $rtl_value)
+    {
+        if (array_key_exists($lang, \Config::get('languages'))) {
+            \Session::put('applocale', $lang);
+        }
+        User::where('id', \auth()->user()->id)->update([
+            'rtl' => $rtl_value,
+        ]);
+
+        return redirect()->route('paymentView');
+    }
+
     public function logistic_dashboard(Request $request)
     {
         return view('logistic.dashboard');

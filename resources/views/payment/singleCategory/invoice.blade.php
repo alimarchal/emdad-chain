@@ -1,4 +1,3 @@
-@if (auth()->user()->rtl == 0)
 @section('headerScripts')
     <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">
@@ -11,6 +10,7 @@
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
 @endsection
+@if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -19,7 +19,7 @@
         </x-slot>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <h2 class="text-2xl font-bold py-2 text-center m-2">Invoices History</h2>
+                <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Invoices History')}}</h2>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     @if (session()->has('message'))
                         <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
@@ -29,18 +29,7 @@
                             </button>
                         </div>
                     @endif
-                    <script>
-                        $(document).ready(function() {
-                            $('#alermessage').delay(2000).hide(0);
-                            $('#proforma-table').DataTable( {
-                                dom: 'Bfrtip',
-                                buttons: [
-                                    // 'copy', 'csv', 'excel', 'pdf', 'print'
-                                ]
-                            } );
-                        });
 
-                    </script>
                     @if ($proformaInvoices->count())
                         <div class="flex flex-col">
                             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -48,41 +37,41 @@
                                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                         <table id="proforma-table" class="min-w-full divide-y divide-gray-200">
                                             <thead>
-                                            <tr>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    #
-                                                </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Delivery Note
-                                                </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    P.O.
-                                                </th>
+                                                <tr>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        #
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.Delivery Note')}}
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.P.O.')}}
+                                                    </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Category Name
-                                                </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.Category Name')}}
+                                                    </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    P.O Date
-                                                </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.P.O Date')}}
+                                                    </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Status
-                                                </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.Status')}}
+                                                    </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    @if (auth()->user()->registration_type == 'Buyer')
-                                                        Claim manual payment
-                                                    @elseif(auth()->user()->registration_type == 'Supplier')
-                                                        Payment Status
-                                                    @endif
-                                                </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        @if (auth()->user()->registration_type == 'Buyer')
+                                                            {{__('portal.Claim manual payment')}}
+                                                        @elseif(auth()->user()->registration_type == 'Supplier')
+                                                            {{__('portal.Payment Status')}}
+                                                        @endif
+                                                    </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    View
-                                                </th>
-                                            </tr>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.View')}}
+                                                    </th>
+                                                </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
                                             @foreach ($proformaInvoices as $dn)
@@ -92,16 +81,21 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        Emdad-{{ $dn->id }}
+                                                        {{__('portal.Emdad')}}-{{ $dn->id }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        Emdad-{{ $dn->purchase_order->id }}
+                                                        {{__('portal.Emdad')}}-{{ $dn->purchase_order->id }}
                                                     </td>
 
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                       {{ $dn->purchase_order->item_name }}
+                                                        @php
+                                                            $record = \App\Models\Category::where('id',$dn->purchase_order->item_code)->first();
+                                                            $parent = \App\Models\Category::where('id',$record->parent_id)->first();
+                                                        @endphp
+                                                          {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif
+{{--                                                       {{ $dn->purchase_order->item_name }}--}}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -111,28 +105,28 @@
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if (auth()->user()->registration_type == 'Buyer')
                                                             @if ($dn->invoice_status == 0)
-                                                                Waiting for payment
+                                                                {{__('portal.Waiting for payment')}}
                                                             @elseif($dn->invoice_status == 1)
-                                                                Waiting for Emdad confirmation
+                                                                {{__('portal.Waiting for Emdad confirmation')}}
                                                             @elseif($dn->invoice_status == 3)
-                                                                Manual payment Confirmed
+                                                                {{__('portal.Manual payment Confirmed')}}
                                                             @else
-                                                                Payment rejected
+                                                                {{__('portal.Payment rejected')}}
                                                             @endif
                                                         @elseif(auth()->user()->registration_type == 'Supplier')
                                                             @if($dn->invoice_type == 0)
-                                                                Final Invoice Generated
+                                                                {{__('portal.Final Invoice Generated')}}
                                                             @elseif ($dn->invoice_status == 0)
-                                                                Waiting for payment
+                                                                {{__('portal.Waiting for payment')}}
                                                             @elseif($dn->invoice_status == 1)
-                                                                Waiting for confirmation
+                                                                {{__('portal.Waiting for confirmation')}}
                                                             @elseif($dn->invoice_status == 3)
-                                                                Create Delivery Note
+                                                                {{__('portal.Create Delivery Note')}}
                                                             @else
-                                                                Payment rejected
+                                                                {{__('portal.Payment rejected')}}
                                                             @endif
                                                         @else
-                                                            N/A
+                                                            {{__('portal.N/A')}}
                                                         @endif
 
                                                     </td>
@@ -143,41 +137,41 @@
                                                         @if($dn->invoice_status == '0' || $dn->invoice_status == '2')
                                                             @if($dn->invoice_status == '0')
                                                                 <a href=" {{ route('singleCategoryBankPaymentCreate', $dn->rfq_no) }}" class="text-blue-600 hover:underline" target="_blank">
-                                                                    Manual Payment
+                                                                    {{__('portal.Manual Payment')}}
                                                                 </a> |
 
                                                                 <form action="{{route('invoicePayment.stepOne')}}" method="POST" >
                                                                     @csrf
                                                                     <input type="hidden" name="invoice_id" value="{{$dn->id}}">
-                                                                    <button class="text-blue-600 hover:underline">Online Payment</button>
+                                                                    <button class="text-blue-600 hover:underline">{{__('portal.Online Payment')}}</button>
                                                                 </form>
 
 
                                                             @elseif($dn->invoice_status == '2')
                                                                 <a href=" {{ route('singleCategoryBankPaymentEdit', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
-                                                                    Proceed
+                                                                    {{__('portal.Proceed')}}
                                                                 </a>
                                                             @endif
                                                         @elseif($dn->invoice_status == '1')
-                                                            Emdad verification pending
+                                                            {{__('portal.Emdad verification pending')}}
                                                         @elseif($dn->invoice_status == '2')
-                                                            Emdad rejected manual payment
+                                                            {{__('portal.Emdad rejected manual payment')}}
                                                         @elseif($dn->bankPayment->supplier_payment_status == 3)
-                                                            Payment received by supplier
+                                                            {{__('portal.Payment received by supplier')}}
                                                         @elseif($dn->invoice_status == '3')
-                                                            Payment in Transit, on hold, with Emdad
+                                                            {{__('portal.Payment in Transit, on hold, with Emdad')}}
                                                         @endif
 
                                                     @elseif(auth()->user()->registration_type == 'Supplier')
                                                         @if($dn->invoice_status == '0')
-                                                            Waiting for payment
+                                                            {{__('portal.Waiting for payment')}}
                                                         @elseif($dn->invoice_status == '1')
                                                         @php $bankPaymentId = \App\Models\BankPayment::where('invoice_id', $dn->id)->first(); @endphp
-                                                            Emdad verification pending
+                                                            {{__('portal.Emdad verification pending')}}
                                                         @elseif($dn->invoice_status == '2')
-                                                            Manual payment rejected
+                                                            {{__('portal.Manual payment rejected')}}
                                                         @elseif($dn->invoice_status == '3')
-                                                            Payment in Transit, Received by Emdad
+                                                            {{__('portal.Payment in Transit, Received by Emdad')}}
                                                         @endif
                                                     @endif
 
@@ -208,7 +202,7 @@
 
                     @else
                         <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                            <strong class="mr-1">No record found...!</strong>
+                            <strong class="mr-1">{{__('portal.No record found...!')}}</strong>
                             <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                                 <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                             </button>
@@ -223,6 +217,18 @@
 
 
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#proforma-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+        });
+
+    </script>
 @else
     <x-app-layout>
         <x-slot name="header">
@@ -232,6 +238,7 @@
         </x-slot>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Invoices History')}}</h2>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     @if (session()->has('message'))
                         <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
@@ -241,38 +248,47 @@
                             </button>
                         </div>
                     @endif
+
                     @if ($proformaInvoices->count())
                         <div class="flex flex-col">
                             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                        <table class="min-w-full divide-y divide-gray-200">
+                                        <table id="proforma-table" class="min-w-full divide-y divide-gray-200">
                                             <thead>
                                             <tr>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     #
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    تذكرة التوصيل
+                                                    {{__('portal.Delivery Note')}}
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    أمر شراء
-                                                </th>
-
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    اسم المنتج
+                                                    {{__('portal.P.O.')}}
                                                 </th>
 
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    تاريخ أمر الشراء
+                                                    {{__('portal.Category Name')}}
                                                 </th>
 
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    الحالة
+                                                    {{__('portal.P.O Date')}}
                                                 </th>
 
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    معاينة
+                                                    {{__('portal.Status')}}
+                                                </th>
+
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    @if (auth()->user()->registration_type == 'Buyer')
+                                                        {{__('portal.Claim manual payment')}}
+                                                    @elseif(auth()->user()->registration_type == 'Supplier')
+                                                        {{__('portal.Payment Status')}}
+                                                    @endif
+                                                </th>
+
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    {{__('portal.View')}}
                                                 </th>
                                             </tr>
                                             </thead>
@@ -284,17 +300,21 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        Emdad-{{ $dn->id }}
+                                                        {{__('portal.Emdad')}}-{{ $dn->id }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        Emdad-{{ $dn->purchase_order->id }}
+                                                        {{__('portal.Emdad')}}-{{ $dn->purchase_order->id }}
                                                     </td>
 
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{ $dn->purchase_order->item_name }}
-                                                        {{-- <a href="{{ route('po.show', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dn->item_name }}</a> --}}
+                                                        @php
+                                                            $record = \App\Models\Category::where('id',$dn->purchase_order->item_code)->first();
+                                                            $parent = \App\Models\Category::where('id',$record->parent_id)->first();
+                                                        @endphp
+                                                            {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif
+{{--                                                       {{ $dn->purchase_order->item_name }}--}}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -302,16 +322,91 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        @if ($dn->status == 0)
-                                                            بانتظار الدفع
+                                                        @if (auth()->user()->registration_type == 'Buyer')
+                                                            @if ($dn->invoice_status == 0)
+                                                                {{__('portal.Waiting for payment')}}
+                                                            @elseif($dn->invoice_status == 1)
+                                                                {{__('portal.Waiting for Emdad confirmation')}}
+                                                            @elseif($dn->invoice_status == 3)
+                                                                {{__('portal.Manual payment Confirmed')}}
+                                                            @else
+                                                                {{__('portal.Payment rejected')}}
+                                                            @endif
+                                                        @elseif(auth()->user()->registration_type == 'Supplier')
+                                                            @if($dn->invoice_type == 0)
+                                                                {{__('portal.Final Invoice Generated')}}
+                                                            @elseif ($dn->invoice_status == 0)
+                                                                {{__('portal.Waiting for payment')}}
+                                                            @elseif($dn->invoice_status == 1)
+                                                                {{__('portal.Waiting for confirmation')}}
+                                                            @elseif($dn->invoice_status == 3)
+                                                                {{__('portal.Create Delivery Note')}}
+                                                            @else
+                                                                {{__('portal.Payment rejected')}}
+                                                            @endif
                                                         @else
-                                                            إنشاء مذكرة توصيل
+                                                            {{__('portal.N/A')}}
                                                         @endif
 
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        View
+
+                                                        @if (auth()->user()->registration_type == 'Buyer')
+                                                            @if($dn->invoice_status == '0' || $dn->invoice_status == '2')
+                                                                @if($dn->invoice_status == '0')
+                                                                    <a href=" {{ route('singleCategoryBankPaymentCreate', $dn->rfq_no) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                                        {{__('portal.Manual Payment')}}
+                                                                    </a> |
+
+                                                                    <form action="{{route('invoicePayment.stepOne')}}" method="POST" >
+                                                                        @csrf
+                                                                        <input type="hidden" name="invoice_id" value="{{$dn->id}}">
+                                                                        <button class="text-blue-600 hover:underline">{{__('portal.Online Payment')}}</button>
+                                                                    </form>
+
+
+                                                                @elseif($dn->invoice_status == '2')
+                                                                    <a href=" {{ route('singleCategoryBankPaymentEdit', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                                        {{__('portal.Proceed')}}
+                                                                    </a>
+                                                                @endif
+                                                            @elseif($dn->invoice_status == '1')
+                                                                {{__('portal.Emdad verification pending')}}
+                                                            @elseif($dn->invoice_status == '2')
+                                                                {{__('portal.Emdad rejected manual payment')}}
+                                                            @elseif($dn->bankPayment->supplier_payment_status == 3)
+                                                                {{__('portal.Payment received by supplier')}}
+                                                            @elseif($dn->invoice_status == '3')
+                                                                {{__('portal.Payment in Transit, on hold, with Emdad')}}
+                                                            @endif
+
+                                                        @elseif(auth()->user()->registration_type == 'Supplier')
+                                                            @if($dn->invoice_status == '0')
+                                                                {{__('portal.Waiting for payment')}}
+                                                            @elseif($dn->invoice_status == '1')
+                                                                @php $bankPaymentId = \App\Models\BankPayment::where('invoice_id', $dn->id)->first(); @endphp
+                                                                {{__('portal.Emdad verification pending')}}
+                                                            @elseif($dn->invoice_status == '2')
+                                                                {{__('portal.Manual payment rejected')}}
+                                                            @elseif($dn->invoice_status == '3')
+                                                                {{__('portal.Payment in Transit, Received by Emdad')}}
+                                                            @endif
+                                                        @endif
+
+
+                                                    </td>
+
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        <a href="{{ route('singleCategoryInvoiceView',$dn->rfq_no) }}" class="hover:underline hover:text-blue-800 text-blue-500">
+                                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                </path>
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                </path>
+                                                            </svg>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -326,7 +421,7 @@
 
                     @else
                         <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                            <strong class="mr-1">No record found...!</strong> Something seriously bad happened...
+                            <strong class="mr-1">{{__('portal.No record found...!')}}</strong>
                             <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                                 <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                             </button>
@@ -341,4 +436,25 @@
 
 
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#proforma-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "language": {
+                    "sSearch": "بحث:",
+                    "oPaginate": {
+                        "sFirst":    	"أولا",
+                        "sPrevious": 	"السابق",
+                        "sNext":     	"التالي",
+                        "sLast":     	"الاخير"
+                    },
+                    "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ المدخلات",
+                },
+            } );
+        });
+    </script>
 @endif

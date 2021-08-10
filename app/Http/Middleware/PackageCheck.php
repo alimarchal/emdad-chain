@@ -25,6 +25,7 @@ class PackageCheck
         }
         else if (is_null(Auth::user()->business_package))
         {
+            session()->flash('error', 'You do not have any package selected yet, please select a package to proceed to the registration');
             return redirect()->route('packages.index');
         }
 

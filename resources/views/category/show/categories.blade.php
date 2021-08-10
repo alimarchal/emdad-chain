@@ -32,6 +32,14 @@
                         </button>
                     </div>
                 @endif
+                @if (session()->has('error'))
+                    <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                        <strong class="mr-1">{{ session('error') }}</strong>
+                        <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                            <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="px-4 py-5 sm:p-6 bg-white shadow sm:rounded-lg">
                     @if(auth()->user()->rtl == 0)
                         <h2 class="text-2xl font-bold text-center">Categories</h2>

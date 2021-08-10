@@ -26,7 +26,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$shipmentDetails->count()) seems empty @endif
+        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Items List')}} @if (!$shipmentDetails->count()) {{__('portal.seems empty')}} @endif
         </h2>
 
         @if ($shipmentDetails->count())
@@ -38,23 +38,23 @@
 
                             <table class="min-w-full divide-y divide-gray-200" id="shipment-table">
                                 <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        #
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Delivery ID
-                                    </th>
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            #
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Delivery ID')}}
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Supplier Business Name
-                                    </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Supplier Business Name')}}
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Status
-                                    </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Status')}}
+                                        </th>
 
-                                </tr>
+                                    </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($shipmentDetails as $shipmentDetail)
@@ -75,11 +75,11 @@
                                         <td class="px-6 text-center py-4 whitespace-nowrap">
                                             @if($shipmentDetail->status == 1 )
                                                 <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    Delivered
+                                                    {{__('portal.Delivered')}}
                                                 </span>
                                             @else
                                                 <span class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    Not Delivered yet
+                                                    {{__('portal.Not Delivered yet')}}
                                                 </span>
                                             @endif
                                         </td>
@@ -94,11 +94,23 @@
         @endif
         <div class="mt-5">
             <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                Back
+                {{__('portal.Back')}}
             </a>
         </div>
 
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#shipment-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+        });
+
+    </script>
 @else
     <x-app-layout>
         <x-slot name="header">
@@ -115,7 +127,8 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$shipmentDetails->count()) seems empty @endif </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Items List')}} @if (!$shipmentDetails->count()) {{__('portal.seems empty')}} @endif
+        </h2>
 
         @if ($shipmentDetails->count())
             @php $total = 0; @endphp
@@ -131,15 +144,15 @@
                                         #
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Delivery ID
+                                        {{__('portal.Delivery ID')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Supplier Business Name
+                                        {{__('portal.Supplier Business Name')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Status
+                                        {{__('portal.Status')}}
                                     </th>
 
                                 </tr>
@@ -163,11 +176,11 @@
                                         <td class="px-6 text-center py-4 whitespace-nowrap">
                                             @if($shipmentDetail->status == 1 )
                                                 <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    Delivered
+                                                    {{__('portal.Delivered')}}
                                                 </span>
                                             @else
                                                 <span class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    Not Delivered yet
+                                                    {{__('portal.Not Delivered yet')}}
                                                 </span>
                                             @endif
                                         </td>
@@ -181,25 +194,31 @@
             </div>
         @endif
         <div class="mt-5">
-            <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                عودة
+            <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                {{__('portal.Back')}}
             </a>
         </div>
 
-
-
-
-
     </x-app-layout>
-@endif
 
-<script>
-    $(document).ready(function() {
-        $('#shipment-table').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                // 'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        } );
-    });
-</script>
+    <script>
+        $(document).ready(function() {
+            $('#shipment-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "language": {
+                    "sSearch": "بحث:",
+                    "oPaginate": {
+                        "sFirst":    	"أولا",
+                        "sPrevious": 	"السابق",
+                        "sNext":     	"التالي",
+                        "sLast":     	"الاخير"
+                    },
+                    "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ المدخلات",
+                },
+            } );
+        });
+    </script>
+@endif
