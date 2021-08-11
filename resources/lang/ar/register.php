@@ -32,5 +32,6 @@ return [
     'Policy and Procedures' => ' الشروط والأحكام',
     'Already registered?' => 'هل سبق لك التسجيل؟',
     'Register' => 'تسجيل',
+    'Choose Date' => 'اختر موعدا',
 
 ];

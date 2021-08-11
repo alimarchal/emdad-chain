@@ -107,7 +107,7 @@
 
                 <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
                     <x-jet-label for="nid_exp_date" value="{{ __('register.National ID Expiry Date') }}" />
-                    <input type="text" id="datepicker" class="block mt-1 w-full" name="nid_exp_date" placeholder="اختر موعدا (mm/dd/yy)" readonly>
+                    <input type="text" id="datepicker" class="block mt-1 w-full" name="nid_exp_date" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" readonly>
                 </div>
 
             </div>

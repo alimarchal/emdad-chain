@@ -46,13 +46,16 @@ class UserController extends Controller
             //Checking users count for related packages
             $userCount = User::where([['business_id', \auth()->user()->business_id], ['id', '!=', \auth()->id()]])->count();
             if (\auth()->user()->business_package->package_id == 1 && $userCount == 2) {
-                session()->flash('message', 'Add Users limit reached');
+                session()->flash('error', 'Add Users limit reached');
                 return redirect()->back();
             } elseif (\auth()->user()->business_package->package_id == 2 && $userCount == 5) {
-                session()->flash('message', 'Add Users limit reached');
+                session()->flash('error', 'Add Users limit reached');
                 return redirect()->back();
-            } elseif (\auth()->user()->business_package->package_id == 3 || \auth()->user()->business_package->package_id == 4 && $userCount == 100) {
-                session()->flash('message', 'Add Users limit reached');
+            } elseif (\auth()->user()->business_package->package_id == 3 && $userCount == 100) {
+                session()->flash('error', 'Add Users limit reached');
+                return redirect()->back();
+            }elseif (\auth()->user()->business_package->package_id == 4 && $userCount == 100) {
+                session()->flash('error', 'Add Users limit reached');
                 return redirect()->back();
             }
 

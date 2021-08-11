@@ -890,18 +890,18 @@
                                 <div class="border-t border-gray-100"></div>
                             @endif
                             @if (auth()->user()->usertype != 'CEO')
-                                <x-jet-dropdown-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                                <x-jet-dropdown-link href="{{ route('arabic.policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
                                     {{ __('navigation-dropdown.Policy and Procedure') }}
                                 </x-jet-dropdown-link>
                             @endif
 
                             @if (auth()->user()->usertype == 'CEO')
                                 @if(auth()->user()->registration_type == 'Buyer')
-                                    <x-jet-dropdown-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
+                                    <x-jet-dropdown-link href="{{ route('arabic.policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
                                         {{ __('navigation-dropdown.Policy and Procedure') }}
                                     </x-jet-dropdown-link>
                                 @elseif(auth()->user()->registration_type == 'Supplier')
-                                    <x-jet-dropdown-link href="{{ route('policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
+                                    <x-jet-dropdown-link href="{{ route('arabic.policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
                                         {{ __('navigation-dropdown.Policy and Procedure') }}
                                     </x-jet-dropdown-link>
                                 @endif
@@ -1049,18 +1049,18 @@
                     @endif
 
                     @if (auth()->user()->usertype != 'CEO')
-                        <x-jet-dropdown-link href="{{ route('policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
+                        <x-jet-dropdown-link href="{{ route('arabic.policyProcedure.eula') }}" target="_blank" :active="request()->routeIs('policyProcedure.eula')">
                             {{ __('navigation-dropdown.Policy and Procedure') }}
                         </x-jet-dropdown-link>
                     @endif
 
                     @if (auth()->user()->usertype == 'CEO')
                         @if(auth()->user()->registration_type == 'Buyer')
-                            <x-jet-dropdown-link href="{{ route('policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
+                            <x-jet-dropdown-link href="{{ route('arabic.policyProcedure.buyer') }}" target="_blank" :active="request()->routeIs('policyProcedure.buyer')">
                                 {{ __('navigation-dropdown.Policy and Procedure') }}
                             </x-jet-dropdown-link>
                         @elseif(auth()->user()->registration_type == 'Supplier')
-                            <x-jet-dropdown-link href="{{ route('policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
+                            <x-jet-dropdown-link href="{{ route('arabic.policyProcedure.supplier') }}" target="_blank" :active="request()->routeIs('policyProcedure.supplier')">
                                 {{ __('navigation-dropdown.Policy and Procedure') }}
                             </x-jet-dropdown-link>
                         @endif

@@ -32,5 +32,6 @@ return [
     'Policy and Procedures' => 'Policy and Procedures',
     'Already registered?' => 'Already registered?',
     'Register' => 'Register',
+    'Choose Date' => 'Choose Date',
 
 ];
