@@ -131,13 +131,13 @@
                 <div class="mb-3">
                     <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Email ID')}} *</label>
                     <div>
-                        <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Email" required name="customer.email" type="email"/>
+                        <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Email')}}" required name="customer.email" type="email"/>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <div>
-                        <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Billing address" required name="billing.street1" type="text"/>
+                        <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Billing address')}}" required name="billing.street1" type="text"/>
                     </div>
                 </div>
 
@@ -145,12 +145,12 @@
                 <div class="mb-3 -mx-2 flex items-end">
                     <div class="px-2 w-1/2">
                         <div>
-                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="City" required name="billing.city" type="text"/>
+                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.City')}}" required name="billing.city" type="text"/>
                         </div>
                     </div>
                     <div class="px-2 w-1/2">
                         <div>
-                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="State" required name="billing.state" type="text"/>
+                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.State')}}" required name="billing.state" type="text"/>
                         </div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@
                     <div class="px-2 w-1/2">
                         <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Postal Code')}}</label>
                         <div>
-                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Postcode"  pattern="[\s\S]{1,16}" required name="billing.postcode" type="text"/>
+                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Postcode')}}"  pattern="[\s\S]{1,16}" required name="billing.postcode" type="text"/>
                         </div>
                     </div>
                 </div>
@@ -182,14 +182,14 @@
 
                         <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Given Name')}}</label>
                         <div>
-                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Given Name" required name="customer.givenName" type="text"/>
+                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Given Name')}}" required name="customer.givenName" type="text"/>
                         </div>
 
                     </div>
                     <div class="px-2 w-1/2">
                         <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Surname')}}</label>
                         <div>
-                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Surname" required name="customer.surname" type="text"/>
+                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Surname')}}" required name="customer.surname" type="text"/>
                         </div>
                     </div>
                 </div>

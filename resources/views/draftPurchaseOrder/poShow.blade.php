@@ -39,7 +39,7 @@
                                 <strong>{{__('portal.City')}}: </strong>{{ $draftPurchaseOrder->supplier_business->city }}<br>
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                                <h3 class="text-2xl text-center"><strong>{{__('portal.Purchase Order')}}</strong></h3>
+                                <h3 class="text-2xl" style="padding-left: 55px;"><strong>{{__('portal.Purchase Order')}}</strong></h3>
                                 <strong>{{__('portal.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Emdad')}}-{{ $draftPurchaseOrder->id }}<br>
                                 <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                 @php
@@ -174,7 +174,7 @@
                         </div>
 
                         <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
-                            <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
+                            <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
                                 <strong>{{__('portal.Mobile Number for OTP')}}: </strong> {{ strip_tags($draftPurchaseOrder->otp_mobile_number) }} <br>
                                 <strong>{{__('portal.Delivery Address')}}: </strong> {{ strip_tags($draftPurchaseOrder->delivery_address) }} <br>
                             </div>
@@ -270,19 +270,19 @@
                                 <strong>{{__('portal.City')}}: </strong>{{ $draftPurchaseOrder->supplier_business->city }}<br>
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                                <h3 class="text-2xl text-center"><strong>{{__('portal.Purchase Order')}}</strong></h3>
-                                <strong>{{__('portal.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Emdad')}}-{{ $draftPurchaseOrder->id }}<br>
-                                <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                <h3 class="text-2xl" style="padding-right: 55px;"><strong>{{__('portal.Purchase Order')}}</strong></h3>
+                                <strong>{{__('portal.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Emdad')}}-{{ $draftPurchaseOrder->id }}<br>
+                                <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                 @php
                                     $record = \App\Models\Category::where('id',$draftPurchaseOrder->item_code)->first();
                                     $parent = \App\Models\Category::where('id',$record->parent_id)->first();
                                 @endphp
                                         {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif
                                 <br>
-                                <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
-                                <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Emdad')}}-{{ $draftPurchaseOrder->rfq_no }}<br>
+                                <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
+                                <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Emdad')}}-{{ $draftPurchaseOrder->rfq_no }}<br>
                                 <strong>{{__('portal.Quote')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Emdad')}}-{{ $draftPurchaseOrder->qoute_no }}<br>
-                                <strong>{{__('portal.Payment Terms')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                <strong>{{__('portal.Payment Terms')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                     @if($draftPurchaseOrder->payment_term == 'Cash') {{__('portal.Cash')}}
                                     @elseif($draftPurchaseOrder->payment_term == 'Credit') {{__('portal.Credit')}}
                                     @elseif($draftPurchaseOrder->payment_term == 'Credit30days') {{__('portal.Credit (30 Days)')}}
@@ -296,34 +296,34 @@
                         </div>
                         <table class="min-w-full divide-y divide-black ">
                             <thead>
-                            <tr>
-                                <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    #
-                                </th>
-                                {{--<th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    Category Number
-                                </th>--}}
-                                <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    {{__('portal.Quantity')}}
-                                </th>
-                                <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    {{__('portal.Unit Price')}}
-                                </th>
-                                <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    {{__('portal.UOM')}}
-                                </th>
-                                <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    {{__('portal.Brand')}}
-                                </th>
+                                <tr>
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                        #
+                                    </th>
+                                    {{--<th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                        Category Number
+                                    </th>--}}
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                        {{__('portal.Quantity')}}
+                                    </th>
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                        {{__('portal.Unit Price')}}
+                                    </th>
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                        {{__('portal.UOM')}}
+                                    </th>
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                        {{__('portal.Brand')}}
+                                    </th>
 
-                                <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    {{__('portal.Remarks')}}
-                                </th>
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                        {{__('portal.Remarks')}}
+                                    </th>
 
-                                <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
-                                    {{__('portal.Amount')}}
-                                </th>
-                            </tr>
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                        {{__('portal.Amount')}}
+                                    </th>
+                                </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-black border-1 border-black">
                             <tr>
@@ -395,17 +395,17 @@
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->sub_total, 2) }}<br>
-                                <strong>{{__('portal.VAT')}} %: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->sub_total * 0.15, 2) }}<br>
-                                <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->shipment_cost, 2) }}<br>
+                                <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->sub_total, 2) }}<br>
+                                <strong>{{__('portal.VAT')}} %: &nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->sub_total * 0.15, 2) }}<br>
+                                <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->shipment_cost, 2) }}<br>
                                 <hr>
-                                <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->sub_total * 0.15 + $draftPurchaseOrder->sub_total + $draftPurchaseOrder->shipment_cost, 2) }}<br>
+                                <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->sub_total * 0.15 + $draftPurchaseOrder->sub_total + $draftPurchaseOrder->shipment_cost, 2) }}<br>
                                 <hr>
                             </div>
                         </div>
 
                         <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
-                            <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
+                            <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
                                 <strong>{{__('portal.Mobile Number for OTP')}}: </strong> {{ strip_tags($draftPurchaseOrder->otp_mobile_number) }} <br>
                                 <strong>{{__('portal.Delivery Address')}}: </strong> {{ strip_tags($draftPurchaseOrder->delivery_address) }} <br>
                             </div>

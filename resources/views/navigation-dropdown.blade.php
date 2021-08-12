@@ -230,7 +230,7 @@
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('business.create') }}">
                                     @if(isset(auth()->user()->business->business_name))
-                                        {{ auth()->user()->business->business_name . ' ' . 'Info' }}
+                                        {{ auth()->user()->business->business_name . ' ' . __('navigation-dropdown.Info') }}
                                     @else
                                         {{ __('navigation-dropdown.Business') }}
                                     @endif
@@ -427,7 +427,7 @@
                         <div class="border-t border-gray-100"></div>
                         <x-jet-dropdown-link href="{{ route('business.create') }}">
                             @if(isset(auth()->user()->business->business_name))
-                                {{ auth()->user()->business->business_name . ' ' . 'Info' }}
+                                {{ auth()->user()->business->business_name . ' ' . __('navigation-dropdown.Info') }}
                             @else
                                 {{ __('navigation-dropdown.Business') }}
                             @endif
@@ -803,7 +803,7 @@
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('business.create') }}">
                                     @if(isset(auth()->user()->business->business_name))
-                                        {{ auth()->user()->business->business_name . ' ' . 'Info' }}
+                                        {{ auth()->user()->business->business_name . ' ' . __('navigation-dropdown.Info') }}
                                     @else
                                         {{ __('navigation-dropdown.Business') }}
                                     @endif
@@ -995,7 +995,7 @@
                         <div class="border-t border-gray-100"></div>
                         <x-jet-dropdown-link href="{{ route('business.create') }}">
                             @if(isset(auth()->user()->business->business_name))
-                                {{ auth()->user()->business->business_name . ' ' . 'Info' }}
+                                {{ auth()->user()->business->business_name . ' ' . __('navigation-dropdown.Info') }}
                             @else
                                 {{ __('navigation-dropdown.Business') }}
                             @endif

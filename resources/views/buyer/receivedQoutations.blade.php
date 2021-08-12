@@ -29,7 +29,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-2">Quotations List</h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Quotations List')}}</h2>
 
         <div class="flex flex-col bg-white rounded ">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -37,46 +37,46 @@
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Requisition Item #
-                                </th>
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Requisition Item')}} #
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Date
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Category Name
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Date')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Category Name')}}
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Unit
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Size
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Quantity
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Unit')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Size')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Quantity')}}
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Last Price
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Last Price')}}
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Time left
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Time left')}}
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Quotations
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Quotations')}}
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Override
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Override')}}
+                                    </th>
 
 
-                            </tr>
+                                </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($PlacedRFQ as $item)
@@ -127,7 +127,7 @@
                                           @endif
                                         >
                                             @if($rfp->status == 'accepted')
-                                                N/A
+                                                {{__('portal.N/A')}}
                                             @else
 {{--                                                {{ $diffInHrs }} hours @if($diffInHrs == 0) and {{ $diffInMins }} minutes @endif --}}
 {{--                                                <br>--}}
@@ -137,41 +137,41 @@
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @if(isset($dpo))
-                                                <span class="text-blue-600">DPO generated</span>
+                                                <span class="text-blue-600">{{__('portal.DPO generated')}}</span>
                                             @elseif($rfp->bypass == 1 && $rfp->quotation_time > \Carbon\Carbon::now() && $rfp->status == 'pending')
                                                 @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
                                                     <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
                                                        class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                                                       See Quotes
+                                                       {{__('portal.See Quotes')}}
                                                     </a>
                                                 @endif
                                             @elseif($rfp->bypass == 1 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
                                                 @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
                                                     <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
                                                        class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                                                        See Quotes
+                                                        {{__('portal.See Quotes')}}
                                                     </a>
                                                 @endif
                                             @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
                                                 @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                     <a href="{{ route('resetQuotationTime', ['EOrderItemID' => $rfp->id]) }}"
                                                        class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
-                                                        Reset
+                                                        {{__('portal.Reset')}}
                                                     </a>
                                                     <a href="{{ route('discardQuotation', ['EOrderID' => $item->id]) }}"
                                                        class="inline-flex items-center justify-center mt-2 px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                        Discard
+                                                        {{__('portal.Discard')}}
                                                     </a>
                                                 @endif
                                             @elseif($rfp->bypass == 0 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
                                                 @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                     <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
                                                        class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                                                        See Quotes
+                                                        {{__('portal.See Quotes')}}
                                                     </a>
                                                 @endif
                                             @elseif($rfp->status == 'accepted')
-                                                <span style="color: #eb8e08">Completed</span>
+                                                <span style="color: #eb8e08">{{__('portal.Completed')}}</span>
                                             @else
                                                 {{ $rfp->qoutes->count() }}
                                             @endif
@@ -184,13 +184,13 @@
                                                 @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                     <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 1]) }}"
                                                        class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = 'Once overrode you cannot receive quotations for this requisition'>
-                                                        Override
+                                                        {{__('portal.Override')}}
                                                     </a>
                                                 @endif
                                             @elseif($rfp->quotation_time >= \Carbon\Carbon::now() && $rfp->bypass == 1)
-                                                Overrode
+                                                {{__('portal.Overrode')}}
                                             @else
-                                                N/A
+                                                {{__('portal.N/A')}}
                                             @endif
                                         </td>
 
@@ -205,7 +205,6 @@
             </div>
         </div>
     </x-app-layout>
-
 @else
     <x-app-layout>
         <x-slot name="header">
@@ -222,7 +221,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-2">Quotations List</h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Quotations List')}}</h2>
 
         <div class="flex flex-col bg-white rounded ">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -232,40 +231,40 @@
                             <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    RFQ Item #
+                                    {{__('portal.Requisition Item')}} #
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Date
+                                    {{__('portal.Date')}}
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Category Name
-                                </th>
-
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Unit
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Size
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Quantity
+                                    {{__('portal.Category Name')}}
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Last Price
+                                    {{__('portal.Unit')}}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Size')}}
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Quantity')}}
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Time left
+                                    {{__('portal.Last Price')}}
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Quotations
+                                    {{__('portal.Time left')}}
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    Override
+                                    {{__('portal.Quotations')}}
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Override')}}
                                 </th>
 
 
@@ -282,12 +281,11 @@
                                             {{ $rfp->created_at->format('d-m-Y') }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-{{--                                            {{ $rfp->item_name }}--}}
                                             @php
                                                 $record = \App\Models\Category::where('id',$rfp->item_code)->first();
                                                 $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                             @endphp
-                                            {{ $record->name }} @if(isset($parent)), {{$parent->name}} @endif
+                                            {{ $record->name_ar }} @if(isset($parent)), {{$parent->name_ar}} @endif
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -321,7 +319,7 @@
                                             @endif
                                         >
                                             @if($rfp->status == 'accepted')
-                                                N/A
+                                                {{__('portal.N/A')}}
                                             @else
                                                 {{--                                                {{ $diffInHrs }} hours @if($diffInHrs == 0) and {{ $diffInMins }} minutes @endif --}}
                                                 {{--                                                <br>--}}
@@ -331,41 +329,41 @@
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @if(isset($dpo))
-                                                <span class="text-blue-600">DPO generated</span>
+                                                <span class="text-blue-600">{{__('portal.DPO generated')}}</span>
                                             @elseif($rfp->bypass == 1 && $rfp->quotation_time > \Carbon\Carbon::now() && $rfp->status == 'pending')
                                                 @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
                                                     <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
-                                                       class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                                                        See Quotes
+                                                       class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                        {{__('portal.See Quotes')}}
                                                     </a>
                                                 @endif
                                             @elseif($rfp->bypass == 1 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
                                                 @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
                                                     <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
-                                                       class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                                                        See Quotes
+                                                       class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                        {{__('portal.See Quotes')}}
                                                     </a>
                                                 @endif
                                             @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
                                                 @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                     <a href="{{ route('resetQuotationTime', ['EOrderItemID' => $rfp->id]) }}"
-                                                       class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
-                                                        Reset
+                                                       class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                        {{__('portal.Reset')}}
                                                     </a>
                                                     <a href="{{ route('discardQuotation', ['EOrderID' => $item->id]) }}"
-                                                       class="inline-flex items-center justify-center mt-2 px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                        Discard
+                                                       class="inline-flex items-center justify-center mt-2 px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                        {{__('portal.Discard')}}
                                                     </a>
                                                 @endif
                                             @elseif($rfp->bypass == 0 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
                                                 @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                     <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
-                                                       class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                                                        See Quotes
+                                                       class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                        {{__('portal.See Quotes')}}
                                                     </a>
                                                 @endif
                                             @elseif($rfp->status == 'accepted')
-                                                <span style="color: #eb8e08">Completed</span>
+                                                <span style="color: #eb8e08">{{__('portal.Completed')}}</span>
                                             @else
                                                 {{ $rfp->qoutes->count() }}
                                             @endif
@@ -378,22 +376,22 @@
                                                 @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                     <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $item->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 1]) }}"
                                                        class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = 'Once overrode you cannot receive quotations for this requisition'>
-                                                        Override
+                                                        {{__('portal.Override')}}
                                                     </a>
                                                 @endif
                                             @elseif($rfp->quotation_time >= \Carbon\Carbon::now() && $rfp->bypass == 1)
-                                                Overrode
+                                                {{__('portal.Overrode')}}
                                             @else
-                                                N/A
+                                                {{__('portal.N/A')}}
                                             @endif
                                         </td>
 
                                     </tr>
-
                                 @endforeach
                             @endforeach
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
@@ -413,6 +411,7 @@
             $this.html(event.strftime('%D day(s) %H:%M:%S'));
         });
     });
+
     $(document).ready(function() {
         $('#quotation-table').DataTable( {
             dom: 'Bfrtip',

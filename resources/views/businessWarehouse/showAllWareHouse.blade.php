@@ -165,7 +165,7 @@
                                             {{$biz->landline}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-center text-sm font-medium">
-                                            <a  href="{{route('businessWarehouse.edit',$biz->id)}}" class="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">
+                                            <a  href="{{route('businessWarehouse.edit',$biz->id)}}" class="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800 hover:text-white">
                                                 {{--                                            VIEW @if(auth()->user()->hasRole('SuperAdmin')) & EDIT @endif--}}
                                                 {{__('portal.VIEW & EDIT')}}
                                             </a>
@@ -180,7 +180,7 @@
                                 <h1 class="font-mono font-bold text-purple-900 text-lg leading-tight border-b p-3 px-5 my-0">{{__('portal.If you want to add more warehouse(s)')}}</h1>
                                 <div class="card-body p-4">
                                     <div class="btn-group">
-                                        <a href="{{ route('businessWarehouse.create') }}"  class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-left add-more mt-4 mb-4 bg-green-500">
+                                        <a href="{{ route('businessWarehouse.create') }}"  class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-left add-more mt-4 mb-4 bg-green-500">
                                             {{__('portal.Add More')}}
                                         </a>
                                     </div>

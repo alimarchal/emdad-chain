@@ -30,31 +30,31 @@
                                     <h1 class="text-4xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{{$package->charges}}</h1>
 
                                     @if(isset($businessPackage) && $businessPackage->package_id == 1)
-                                        <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
-                                        <button class="flex items-center mt-auto text-white bg-gray-500 border-0 py-2 px-4 w-full rounded" style="justify-content: center; cursor: no-drop" disabled>Purchased</button>
+                                        <span class="text-lg ml-1 font-normal text-gray-500">{{__('portal.Emdad-ID')}}: {{auth()->user()->business_id}}</span>
+                                        <button class="flex items-center mt-auto text-white bg-gray-500 border-0 py-2 px-4 w-full rounded" style="justify-content: center; cursor: no-drop" disabled>{{__('portal.Purchased')}}</button>
                                     @elseif(isset($businessPackage))
 {{--                                        <span onclick="alert('Contact Emdad To Update Your Package')" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center; cursor: pointer">Update</span>--}}
                                     @else
                                         <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
                                             <input type="hidden" name="package_id" value="{{$package->id}}">
-                                            <button class="flex items-center mt-6 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">Subscribe</button>
+                                            <button class="flex items-center mt-6 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>
                                     @endif
                                 @elseif($package->package_type == 'Silver')
                                     <h2 class="text-sm tracking-widest title-font mb-1 font-medium">{{$package->package_type}}</h2>
-                                    <span class="bg-blue-600 text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl">POPULAR</span>
+                                    <span class="bg-blue-600 text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl">{{__('portal.POPULAR')}}</span>
                                     <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
                                     <h1 class="text-4xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                        <span>{{$package->charges}} SAR</span>
-                                        <span class="text-lg ml-1 font-normal text-gray-500">/year</span>
+                                        <span>{{$package->charges}} {{__('portal.SAR')}}</span>
+                                        <span class="text-lg ml-1 font-normal text-gray-500">/{{__('portal.year')}}</span>
                                     </h1>
                                     @if(isset($businessPackage) && $businessPackage->package_id == 2)
-                                        <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
-                                        <span class="flex items-center mt-auto text-white bg-gray-500 border-0 py-2 px-4 w-full rounded" style="justify-content: center; cursor: no-drop" disabled>Purchased</span>
+                                        <span class="text-lg ml-1 font-normal text-gray-500">{{__('portal.Emdad-ID')}}: {{auth()->user()->business_id}}</span>
+                                        <span class="flex items-center mt-auto text-white bg-gray-500 border-0 py-2 px-4 w-full rounded" style="justify-content: center; cursor: no-drop" disabled>{{__('portal.Purchased')}}</span>
                                     @elseif(isset($businessPackage) )
                                         @if($businessPackage->package_id == 1)
-                                        <a href="{{route('subscriptionUpdate', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center; cursor: pointer">Update</a>
+                                        <a href="{{route('subscriptionUpdate', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center; cursor: pointer">{{__('portal.Update')}}</a>
                                         @else
                                         @endif
                                     @else
@@ -63,22 +63,22 @@
                                         <form action="{{route('businessPackage.stepOne')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
                                             <input type="hidden" name="package_id" value="{{$package->id}}">
-                                            <button class="flex items-center mt-6 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">Subscribe</button>
+                                            <button class="flex items-center mt-6 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>
                                     @endif
                                 @elseif($package->package_type == 'Gold')
                                     <h2 class="text-sm tracking-widest title-font mb-1 font-medium">{{$package->package_type}}</h2>
                                     <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
                                     <h1 class="text-4xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                        <span>{{$package->charges}} SAR</span>
-                                        <span class="text-lg ml-1 font-normal text-gray-500">/year</span>
+                                        <span>{{$package->charges}} {{__('portal.SAR')}}</span>
+                                        <span class="text-lg ml-1 font-normal text-gray-500">/{{__('portal.year')}}</span>
                                     </h1>
                                     @if(isset($businessPackage) && $businessPackage->package_id == 3)
-                                        <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
-                                        <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: no-drop" disabled>Purchased</button>
+                                        <span class="text-lg ml-1 font-normal text-gray-500">{{__('portal.Emdad-ID')}}: {{auth()->user()->business_id}}</span>
+                                        <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: no-drop" disabled>{{__('portal.Purchased')}}</button>
                                     @elseif(isset($businessPackage))
                                         @if($businessPackage->package_id == 1 || $businessPackage->package_id == 2)
-                                        <a href="{{route('subscriptionUpdate', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer">Update</a>
+                                        <a href="{{route('subscriptionUpdate', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer">{{__('portal.Update')}}</a>
                                         @else
                                         @endif
                                     @else
@@ -86,28 +86,28 @@
                                         <form  action="{{route('businessPackage.stepOne')}}" method="POST">
                                             @csrf
                                             <input type="hidden" name="package_id" value="{{$package->id}}">
-                                            <button class="flex items-center mt-6 text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">Subscribe</button>
+                                            <button class="flex items-center mt-6 text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>
                                     @endif
                                 @elseif($package->package_type == 'Platinum')
                                     <h2 class="text-sm tracking-widest title-font mb-1 font-medium">{{$package->package_type}}</h2>
                                     <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
                                     <h1 class="text-4xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                        <span class="font-bold text-2xl">Free</span>
+                                        <span class="font-bold text-2xl">{{__('portal.Free')}}</span>
                                         <span class="text-lg ml-1 font-normal text-gray-500">{{$package->charges}}</span>
                                     </h1>
-                                    <span class="text-xs mb-2 text-red-500"> * Only upgradable from Gold Package.</span>
+                                    <span class="text-xs mb-2 text-red-500"> * {{__('portal.Only upgradable from Gold Package.')}}</span>
 
                                     @if(isset($businessPackage) && $businessPackage->package_id == 4)
-                                        <span class="text-lg ml-1 font-normal text-gray-500">Emdad-ID: {{auth()->user()->business_id}}</span>
-                                        <button class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full rounded" style="justify-content: center; cursor: no-drop" disabled>Purchased</button>
+                                        <span class="text-lg ml-1 font-normal text-gray-500">{{__('portal.Emdad-ID')}}: {{auth()->user()->business_id}}</span>
+                                        <button class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full rounded" style="justify-content: center; cursor: no-drop" disabled>{{__('portal.Purchased')}}</button>
                                     @elseif(isset($businessPackage))
-                                        <span onclick="alert('Contact Emdad To Update Your Package')" class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded" style="justify-content: center; cursor: pointer">Update</span>
+                                        <span onclick="alert('Contact Emdad To Update Your Package')" class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded" style="justify-content: center; cursor: pointer">{{__('portal.Update')}}</span>
                                     @else
                                         <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
                                             <input type="hidden" name="package_id" value="{{$package->id}}">
-                                            <button class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded" disabled style="justify-content: center">Subscribe</button>
+                                            <button class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded" disabled style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>
                                     @endif
                                 @endif
@@ -125,7 +125,7 @@
                     <table class="table-auto bg-white overflow-hidden w-full text-left whitespace-no-wrap">
                         <thead>
                         <tr>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500 rounded-tl rounded-bl">Functions</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500 rounded-tl rounded-bl">{{__('portal.Functions')}}</th>
                             @foreach($packages as $package)
                                 <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500">
                                     {{$package->package_type}}</th>
@@ -134,37 +134,37 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="px-4 py-3">Subscription For 1 year</td>
+                            <td class="px-4 py-3">{{__('portal.Subscription For 1 year')}}</td>
                             @foreach($packages as $package)
                                 <td class="px-4 py-3 text-center">{{$package->charges}}</td>
                             @endforeach
                         </tr>
                         <tr>
-                            <td class="border-t-2 border-gray-200 px-4 py-3">Registration</td>
+                            <td class="border-t-2 border-gray-200 px-4 py-3">{{__('portal.Registration')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->registeration}}</td>
                             @endforeach
                         </tr>
                         <tr>
-                            <td class="border-t-2 border-gray-200 px-4 py-3">Main Categories</td>
+                            <td class="border-t-2 border-gray-200 px-4 py-3">{{__('portal.Main Categories')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->category}}</td>
                             @endforeach
                         </tr>
                         <tr>
-                            <td class="border-t-2 border-gray-200 px-4 py-3">Sub Categories</td>
+                            <td class="border-t-2 border-gray-200 px-4 py-3">{{__('portal.Sub Categories')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->sub_category}}</td>
                             @endforeach
                         </tr>
                         <tr>
-                            <td class="border-t-2 border-gray-200 px-4 py-3">No. of available RFQs per Day</td>
+                            <td class="border-t-2 border-gray-200 px-4 py-3">{{__('portal.No. of available RFQs per Day')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->rfq_per_day}}</td>
                             @endforeach
                         </tr>
                         <tr>
-                            <td class="border-t-2 border-gray-200 px-4 py-3">No. Quots. Per 1 RFQ</td>
+                            <td class="border-t-2 border-gray-200 px-4 py-3">{{__('portal.No. Quotes. Per 1 RFQ')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">
                                     @if($package->quotations_per_rfq == 2) 1-{{$package->quotations_per_rfq}} @include('misc.required')
@@ -175,31 +175,31 @@
                             @endforeach
                         </tr>
                         <tr>
-                            <td class="border-t-2 border-gray-200 px-4 py-3">Emdad Tools App</td>
+                            <td class="border-t-2 border-gray-200 px-4 py-3">{{__('portal.Emdad Tools App')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->emdad_tools}}</td>
                             @endforeach
                         </tr>
                         <tr>
-                            <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Super Admin (CEO role)</td>
+                            <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{__('portal.Super Admin (CEO role)')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->super_admin_count}}</td>
                             @endforeach
                         </tr>
                         <tr>
-                            <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Users</td>
+                            <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{__('portal.Users')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->users}}</td>
                             @endforeach
                         </tr>
                         <tr>
-                            <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Payment</td>
+                            <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{__('portal.Payment')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->payment_type}}</td>
                             @endforeach
                         </tr>
                         <tr>
-                            <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Trainings</td>
+                            <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{__('portal.Trainings')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->training}}</td>
                             @endforeach
@@ -207,15 +207,15 @@
                         <tr>
                             <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3"></td>
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
-                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
-                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
-                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{__('portal.Discount Code')}}</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{__('portal.Discount Code')}}</td>
+                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{__('portal.Discount Code')}}</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <br>
-                <span>@include('misc.required') <strong>Note:</strong> Minimum 1 quotation received, in case of Branded item</span>
+                <span>@include('misc.required') <strong>{{__('portal.Note')}}:</strong> {{__('portal.Minimum 1 quotation received, in case of Branded item')}}</span>
                 @if(isset($businessPackage->package_id) == 2 || isset($businessPackage->package_id) == 3 )
                     <br>
                     <div class="text-gray-500" style="text-align: end">
@@ -223,7 +223,7 @@
                                                border-transparent rounded-md font-semibold text-xs text-white uppercase
                                                tracking-widest hover:bg-red-500  focus:outline-none focus:border-blue-700
                                                focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
-                            Generate PDF
+                            {{__('portal.Generate PDF')}}
                         </a>
                     </div>
                 @endif

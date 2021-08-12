@@ -349,14 +349,14 @@
                                     </select>
                                 @endif
 
-                                <select name="working_time" id="working_time" class="form-select rounded-md shadow-sm border p-2 w-1/4" required>
+                                <select name="working_time" id="working_time" class="form-input rounded-md shadow-sm border p-2 w-1/4" required>
                                     <option value="">{{__('portal.Select')}}</option>
                                     @for($count = 0; $count <= 23; $count++)
                                         <option {{(old('working_time') == $count.":00" ? 'selected' : '')}} value="{{$count}}:00">{{$count}}:00</option>
                                     @endfor
                                 </select>
 
-                                <select name="working_time_1" id="working_time_1" class="form-select rounded-md shadow-sm border p-2 w-1/4" style="margin-right: 5px;" required>
+                                <select name="working_time_1" id="working_time_1" class="form-input rounded-md shadow-sm border p-2 w-1/4" style="margin-right: 5px;" required>
                                     <option value="">{{__('portal.Select')}}</option>
                                     @for($count = 0; $count <= 23; $count++)
                                         <option {{(old('working_time_1') == $count.":00" ? 'selected' : '')}} value="{{$count}}:00">{{$count}}:00</option>
