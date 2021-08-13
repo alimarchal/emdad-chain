@@ -13,9 +13,7 @@
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))
@@ -26,7 +24,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$shipmentDetails->count()) seems empty @endif
+        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Items List')}} @if (!$shipmentDetails->count()) {{__('portal.seems empty')}} @endif
         </h2>
 
         @if ($shipmentDetails->count())
@@ -38,54 +36,54 @@
 
                             <table class="min-w-full divide-y divide-gray-200" id="shipment-table">
                                 <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        #
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Driver Name
-                                    </th>
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            #
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Driver Name')}}
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Vehicle Type
-                                    </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Vehicle Type')}}
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Licence Number
-                                    </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Licence Number')}}
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Delivery Id
-                                    </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Delivery ID')}}
+                                        </th>
 
-                                </tr>
+                                    </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($shipmentDetails as $shipmentDetail)
-                                    <tr>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $loop->iteration }}
-                                        </td>
+                                    @foreach ($shipmentDetails as $shipmentDetail)
+                                        <tr>
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                {{ $loop->iteration }}
+                                            </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            @php $driverName = \App\Models\User::where('id', $shipmentDetail->driver_id)->first();  @endphp
-                                            @if(isset($driverName)) {{ $driverName->name }} @endif
-                                        </td>
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                @php $driverName = \App\Models\User::where('id', $shipmentDetail->driver_id)->first();  @endphp
+                                                @if(isset($driverName)) {{ $driverName->name }} @endif
+                                            </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_id)->first();  @endphp
-                                            {{ $vehicleName->type }}
-                                        </td>
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_id)->first();  @endphp
+                                                {{ $vehicleName->type }}
+                                            </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $vehicleName->licence_plate_No }}
-                                        </td>
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                {{ $vehicleName->licence_plate_No }}
+                                            </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600" target="_blank">{{$shipmentDetail->delivery_id}}</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600" target="_blank">{{$shipmentDetail->delivery_id}}</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -95,17 +93,26 @@
         @endif
         <div class="mt-5">
             <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                Back
+                {{__('portal.Back')}}
             </a>
         </div>
 
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#shipment-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+        });
+    </script>
 @else
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))
@@ -116,7 +123,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$shipmentDetails->count()) seems empty @endif </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Items List')}} @if (!$shipmentDetails->count()) {{__('portal.seems empty')}} @endif </h2>
 
         @if ($shipmentDetails->count())
             @php $total = 0; @endphp
@@ -127,46 +134,54 @@
 
                             <table class="min-w-full divide-y divide-gray-200" id="shipment-table">
                                 <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        #
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Driver Name
-                                    </th>
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            #
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Driver Name')}}
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        نوع العربة
-                                    </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Vehicle Type')}}
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Delivery Id
-                                    </th>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Licence Number')}}
+                                        </th>
 
-                                </tr>
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Delivery ID')}}
+                                        </th>
+
+                                    </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($shipmentDetails as $shipmentDetail)
-                                    <tr>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $loop->iteration }}
-                                        </td>
+                                    @foreach ($shipmentDetails as $shipmentDetail)
+                                        <tr>
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                {{ $loop->iteration }}
+                                            </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            @php $driverName = \App\Models\User::where('id', $shipmentDetail->driver_id)->first();  @endphp
-                                            {{ $driverName->name }}
-                                        </td>
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                @php $driverName = \App\Models\User::where('id', $shipmentDetail->driver_id)->first();  @endphp
+                                                @if(isset($driverName)) {{ $driverName->name }} @endif
+                                            </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_id)->first();  @endphp
-                                            {{ $vehicleName->type }}
-                                        </td>
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                @php $vehicleName = \App\Models\Vehicle::where('id', $shipmentDetail->vehicle_id)->first();  @endphp
+                                                {{ $vehicleName->type }}
+                                            </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $shipmentDetail->delivery_id }}
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                {{ $vehicleName->licence_plate_No }}
+                                            </td>
+
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600" target="_blank">{{$shipmentDetail->delivery_id}}</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -176,24 +191,30 @@
         @endif
         <div class="mt-5">
             <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                عودة
+                {{__('portal.Back')}}
             </a>
         </div>
 
-
-
-
-
     </x-app-layout>
-@endif
 
-<script>
-    $(document).ready(function() {
-        $('#shipment-table').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                // 'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
-        } );
-    });
-</script>
+    <script>
+        $(document).ready(function() {
+            $('#shipment-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "language": {
+                    "sSearch": "بحث:",
+                    "oPaginate": {
+                        "sFirst":    	"أولا",
+                        "sPrevious": 	"السابق",
+                        "sNext":     	"التالي",
+                        "sLast":     	"الاخير"
+                    },
+                    "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ المدخلات",
+                },
+            } );
+        });
+    </script>
+@endif

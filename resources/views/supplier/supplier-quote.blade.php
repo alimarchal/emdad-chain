@@ -1,99 +1,97 @@
-<x-app-layout>
-    <style type="text/css">
-        /* color for request for quotation heading*/
-        .color-7f7f7f {
-            color: #7f7f7f;
-        }
-
-        .color-1f3864 {
-            color: #1f3864;
-        }
-
-
-
-        select:hover{
-            cursor: pointer;
-        }
-
-        input ,
-        .note
-        {
-            height: 35px;
-        }
-        .note {
-            border: 1px solid #d2d6dc !important;
-            resize: none;
-            margin-top: 8px;
-            padding: 2px 10px;
-        }
-
-        .note:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
-            border-color: #a4cafe;
-        }
-
-
-        @media screen and (max-width:360px) {
-            .date {
-                margin-left: auto;
-                margin-right: auto;
+@if (auth()->user()->rtl == 0)
+    <x-app-layout>
+        <style type="text/css">
+            /* color for request for quotation heading*/
+            .color-7f7f7f {
+                color: #7f7f7f;
             }
-        }
 
-    </style>
+            .color-1f3864 {
+                color: #1f3864;
+            }
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('User List') }}
-        </h2>
-    </x-slot>
 
-    @if (session()->has('message'))
-        <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-            <strong class="mr-1">{{ session('message') }}</strong>
-            <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
-                <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
-            </button>
-        </div>
-    @endif
 
-    <div class="flex flex-col bg-white rounded">
-        <div class="p-4"
-            style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
-            <div class="d-block text-center">
-                <span class="text-2xl font-bold color-7f7f7f">RFQ</span>
+            select:hover{
+                cursor: pointer;
+            }
 
+            input ,
+            .note
+            {
+                height: 35px;
+            }
+            .note {
+                border: 1px solid #d2d6dc !important;
+                resize: none;
+                margin-top: 8px;
+                padding: 2px 10px;
+            }
+
+            .note:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
+                border-color: #a4cafe;
+            }
+
+
+            @media screen and (max-width:360px) {
+                .date {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+
+        </style>
+
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
+        </x-slot>
+
+        @if (session()->has('message'))
+            <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                <strong class="mr-1">{{ session('message') }}</strong>
+                <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                    <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                </button>
             </div>
-            <hr>
-            <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
-                <div class="flex-1 py-5">
-                    <div class="my-5 pl-5">
-                        {{-- <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo"
-                        style="height: 80px;width: 200px;" /> --}}
-                        <img src="{{ url('imp_img.jpg') }}" alt="logo" style="height: 80px;width: 200px;" />
+        @endif
+
+        <div class="flex flex-col bg-white rounded">
+            <div class="p-4"
+                 style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
+                <div class="d-block text-center">
+                    <span class="text-2xl font-bold color-7f7f7f">{{__('portal.Requisition')}}</span>
+                </div>
+                <hr>
+                <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
+                    <div class="flex-1 py-5">
+                        <div class="my-5 pl-5">
+                            {{-- <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo"
+                            style="height: 80px;width: 200px;" /> --}}
+                            <img src="{{ url('imp_img.jpg') }}" alt="logo" style="height: 80px;width: 200px;" />
+                        </div>
+                        @php
+                            $user_business_details=auth()->user()->business;
+                        @endphp
+                        <div class="my-5 pl-5 ">
+                            <h1 class="font-extrabold color-1f3864 text-xl ">{{$user_business_details->business_name}}</h1>
+                            {{-- <span>Location :
+                            <span class="font-bold">{{$user_business_details->city}}</span></span> <br>
+                            <span>Emdad Id : <span class="font-bold">{{Auth::user()->business_id}}</span></span> --}}
+                        </div>
                     </div>
-                    @php
-                    $user_business_details=auth()->user()->business;
-                    @endphp
-                    <div class="my-5 pl-5 ">
-                        <h1 class="font-extrabold color-1f3864 text-xl ">{{$user_business_details->business_name}}</h1>
-                        {{-- <span>Location :
-                        <span class="font-bold">{{$user_business_details->city}}</span></span> <br>
-                        <span>Emdad Id : <span class="font-bold">{{Auth::user()->business_id}}</span></span> --}}
+
+                    <div class="flex-1 ">
+                        <div class="ml-auto date" style="width:150px; ">
+                            <br>
+                            <span class="color-1f3864 font-bold">{{__('portal.Date')}}:
+                                {{\Carbon\Carbon::today()->format('Y-m-d')}}</span><br>
+                            <hr>
+                        </div>
                     </div>
                 </div>
-
-                <div class="flex-1 ">
-                    <div class="ml-auto date" style="width:150px; ">
-                        <br>
-                        <span class="color-1f3864 font-bold">Date:
-                            {{\Carbon\Carbon::today()->format('Y-m-d')}}</span><br>
-                        <hr>
-                    </div>
-                </div>
             </div>
-        </div>
 
             <div class=" mb-3">
                 <div>
@@ -101,58 +99,79 @@
 
                         <div class="left-info_holder flex-1">
                             <div class="my-5 pl-5 ">
-                                 <span class="font-bold color-1f3864 text-lg">RFQ Information</span>
+                                <span class="font-bold color-1f3864 text-lg">{{__('portal.Requisition Information')}}</span>
                                 <hr style="border-top: 1px solid gray;width: 25%;">
                             </div>
                             <div class="my-5 pl-5 ">
-                                <strong>Buyer Name:</strong> {{$eOrderItems->business->business_name}}
+                                <strong>{{__('portal.Buyer Name')}}:</strong> {{$eOrderItems->business->business_name}}
                                 <br>
-                                <strong>RFQ #:</strong> Emdad-{{$eOrderItems->id}}
+                                <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.Emdad')}}-{{$eOrderItems->id}}
                                 <br>
-                                <strong>User Quoted:</strong> {{$eOrderItems->user->name}}
+                                <strong>{{__('portal.User Quoted')}}:</strong> {{$eOrderItems->user->name}}
                                 <br>
-                                <strong>Category Code: </strong> {{$eOrderItems->item_code}}
+                                <strong>{{__('portal.Category Code')}}: </strong> {{$eOrderItems->item_code}}
                                 <br>
-                                <strong>Remarks: </strong>{{$eOrderItems->remarks}}
+                                <strong>{{__('portal.Remarks')}}: </strong>{{$eOrderItems->remarks}}
                                 <br>
-                                <strong>Payment Mode: </strong> {{$eOrderItems->payment_mode}}
+                                <strong>{{__('portal.Payment Mode')}}: </strong>
+                                    @if($eOrderItems->payment_mode == 'Cash') {{__('portal.Cash')}}
+                                    @elseif($eOrderItems->payment_mode == 'Credit') {{__('portal.Credit')}}
+                                    @elseif($eOrderItems->payment_mode == 'Credit30days') {{__('portal.Credit (30 Days)')}}
+                                    @elseif($eOrderItems->payment_mode == 'Credit60days') {{__('portal.Credit (60 Days)')}}
+                                    @elseif($eOrderItems->payment_mode == 'Credit90days') {{__('portal.Credit (90 Days)')}}
+                                    @elseif($eOrderItems->payment_mode == 'Credit120days') {{__('portal.Credit (120 Days)')}}
+                                    @endif
+{{--                                    {{$eOrderItems->payment_mode}}--}}
                             </div>
                         </div>
                         <div class="center-info-holder flex-1">
-                                <div class="my-5 pl-5 ">
-                                 <span class="font-bold text-lg color-1f3864">Item Information</span>
+                            <div class="my-5 pl-5 ">
+                                <span class="font-bold text-lg color-1f3864">{{__('portal.Item Information')}}</span>
                                 <hr style="border-top: 1px solid gray;width: 25%;">
                             </div>
                             <div class="my-5 pl-5 ">
-                                <strong>Category Name: </strong> {{ $eOrderItems->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems->item_code)->first()->parent_id))->first()->name }}
+                                <strong>{{__('portal.Category Name')}}: </strong> {{ $eOrderItems->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems->item_code)->first()->parent_id))->first()->name }}
                                 <br>
 
-                                <strong>Brand: </strong> {{ $eOrderItems->brand }}
+                                <strong>{{__('portal.Brand')}}: </strong> {{ $eOrderItems->brand }}
                                 <br>
-                                <strong>Quantity: </strong> {{ $eOrderItems->quantity }}
+                                <strong>{{__('portal.Quantity')}}: </strong> {{ $eOrderItems->quantity }}
                                 <br>
-                                <strong>Unit of Measurement: </strong> {{ $eOrderItems->unit_of_measurement }}
+                                <strong>{{__('portal.Unit of Measurement')}}: </strong> {{ $eOrderItems->unit_of_measurement }}
                                 <br>
-                                <strong>Size: </strong> {{ $eOrderItems->size }}
+                                <strong>{{__('portal.Size')}}: </strong> {{ $eOrderItems->size }}
                                 <br>
 
-                                 <strong>Description:</strong> {{ strip_tags($eOrderItems->description) }}
+                                <strong>{{__('portal.Description')}}:</strong> {{ strip_tags($eOrderItems->description) }}
                             </div>
                         </div>
                         <div class="Right-info_holder flex-1">
                             <div class="my-5 pl-5 ">
-                                 <span class="font-bold text-lg color-1f3864">Shipping Information</span>
+                                <span class="font-bold text-lg color-1f3864">{{__('portal.Shipping Information')}}</span>
                                 <hr style="border-top: 1px solid gray;width: 25%;">
                             </div>
                             <div class="my-5 pl-5 ">
 
-                              <strong>Delivery Period: </strong> {{ $eOrderItems->delivery_period }}
+                                <strong>{{__('portal.Delivery Period')}}: </strong>
+                                    @if ($eOrderItems->delivery_period =='Immediately') {{__('portal.Immediately')}} @endif
+                                    @if ($eOrderItems->delivery_period =='Within 30 Days') {{__('portal.30 Days')}} @endif
+                                    @if ($eOrderItems->delivery_period =='Within 60 Days') {{__('portal.60 Days')}} @endif
+                                    @if ($eOrderItems->delivery_period =='Within 90 Days') {{__('portal.90 Days')}} @endif
+                                    @if ($eOrderItems->delivery_period =='Standing Order - 2 per year' ) {{__('portal.Standing Order - 2 times / year')}} @endif
+                                    @if ($eOrderItems->delivery_period =='Standing Order - 3 per year' ) {{__('portal.Standing Order - 3 times / year')}} @endif
+                                    @if ($eOrderItems->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}} @endif
+                                    @if ($eOrderItems->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}} @endif
+                                    @if ($eOrderItems->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}} @endif
+                                    @if ($eOrderItems->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}} @endif
+{{--                                    {{ $eOrderItems->delivery_period }}--}}
                                 <br>
-                                <strong>Delivery Address: </strong> {{ $eOrderItems->warehouse->address }}
+                                <strong>{{__('portal.Delivery Address')}}: </strong> {{ $eOrderItems->warehouse->address }}
                                 <br>
 
-                                <strong>Required Sample: </strong> {{ $eOrderItems->required_sample }}
-                                   <br>
+                                <strong>{{__('portal.Required Sample')}}: </strong>
+                                    @if($eOrderItems->required_sample == 'Yes') {{__('portal.Yes')}} @endif
+                                    @if($eOrderItems->required_sample == 'No') {{__('portal.No')}} @endif
+                                <br>
 
                             </div>
                         </div>
@@ -163,24 +182,24 @@
             <div class="p4 mb-5 overflow-x-auto">
                 <table class="table-fixed  min-w-full text-center ">
                     <thead style="background-color:#8EAADB" class="text-white">
-                        <tr>
+                    <tr>
 
-                            <th style="width:10%;">Quantity @include('misc.required')</th>
-                            <th style="width:10%;"> Price Per Unit @include('misc.required') </th>
-                            <th style="width:11%;">Shipping Time(In Days) @include('misc.required') </th>
-                            <th style="width:20%;">Note</th>
-                            <th style="width:10%;">VAT % @include('misc.required') </th>
-                            <th style="width:10%;">Shipment Cost @include('misc.required')</th>
+                        <th style="width:10%;">{{__('portal.Quantity')}} @include('misc.required')</th>
+                        <th style="width:10%;">{{__('portal.Price Per Unit')}} @include('misc.required') </th>
+                        <th style="width:11%;">{{__('portal.Shipping Time(In Days)')}} @include('misc.required') </th>
+                        <th style="width:20%;">{{__('portal.Note')}}</th>
+                        <th style="width:10%;">{{__('portal.VAT')}} % @include('misc.required') </th>
+                        <th style="width:10%;">{{__('portal.Shipment Cost')}} @include('misc.required')</th>
 
-                        </tr>
+                    </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                    {{--                    this will show the information if user has some previous quotes--}}
+{{--                    this will show the information if user has some previous quotes--}}
                     @if($collection)
 
                         <tr>
                             <td>
-                            {{$collection->quote_quantity}}
+                                {{$collection->quote_quantity}}
                             </td>
                             <td>
                                 {{$collection->quote_price_per_quantity}}
@@ -201,7 +220,7 @@
                     @endif
                     @if ($collection && $collection->qoute_status == 'Qouted')
 
-                        <h2 class="text-center text-2xl">You have already qouted...</h2>
+                        <h2 class="text-center text-2xl">{{__('portal.You have already quoted.')}}</h2>
 
                     @elseif($collection && $collection->qoute_status == 'ModificationNeeded')
 
@@ -212,25 +231,25 @@
 
                             <div class="border-2 p-2 m-2">
                                 @foreach ($quote as $msg)
-                                    {{--@php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp--}}
+                                {{--@php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp--}}
                                     @php
                                         $user = \App\Models\User::where('id', $msg->user_id)->first();
                                         $business = \App\Models\Business::where('id', $user->business_id)->first();
                                     @endphp
 
                                     <span class="text-blue-700">
-                                            <span class="text-gray-600 text-left">
-                                                Message from {{$business->business_name}}
+                                                <span class="text-gray-600 text-left">
+                                                    {{__('portal.Message from')}} {{$business->business_name}}
+                                                </span>
+                                                : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
                                             </span>
-                                            : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
-                                        </span>
                                     <br> <br>
                                 @endforeach
                             </div>
                             <br>
                         @endif
                         <div class="text-center">
-                            <span class="text-2xl font-bold text-red-700">Modification Needed</span>
+                            <span class="text-2xl font-bold text-red-700">{{__('portal.Modification Needed')}}</span>
                         </div>
                         <br>
                         <form method="POST" action="{{ route('qoute.update', $collection->id) }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
@@ -247,26 +266,26 @@
                                 </div>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quote_quantity" min="0" value="{{ $collection->quote_quantity }}" min="0" step="any" autocomplete="quantity" required  placeholder="Qty">
+                                           name="quote_quantity" min="0" value="{{ $collection->quote_quantity }}" min="0" step="any" autocomplete="quantity" required  placeholder="{{__('portal.Qty')}}">
                                 </td>
 
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="price_per_unit" type="number"
-                       name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0" step="any" autocomplete="price_per_unit" required placeholder="Price Per Unit">
+                                           name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
                                 </td>
-                                <td>   <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" value="{{ $collection->shipping_time_in_days }}" name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="Shipment(Days)">
-                                </td>
-
-                                <td>
-                                    <textarea name="note_for_customer" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Note (if any)"></textarea>
+                                <td>   <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" value="{{ $collection->shipping_time_in_days }}" name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">
                                 </td>
 
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15" value="{{$collection->VAT}}" autocomplete="size" required placeholder="VAT%">
+                                    <textarea name="note_for_customer" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}"></textarea>
                                 </td>
 
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost" value="{{$collection->shipment_cost}}" min="0" step="any" autocomplete="size" required placeholder="Shipment Cost">
+                                    <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15" value="{{$collection->VAT}}" autocomplete="size" required placeholder="{{__('portal.VAT')}}">
+                                </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost" value="{{$collection->shipment_cost}}" min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Cost')}}">
                                 </td>
 
 
@@ -275,12 +294,12 @@
                             <tr class="mt-2">
                                 <td colspan="2" class="" >
 
-                                    <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
+                                    <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="{{__('portal.Total Cost')}}">
 
                                 </td>
                                 <td colspan="2" class="text-left">
                                     <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
-                                        Calculate Total Cost
+                                        {{__('portal.Calculate Total Cost')}}
                                     </a>
                                 </td>
 
@@ -326,7 +345,7 @@
                                     <div class="my-4">
                                         <button
                                             class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
-                                            Update Send Quote
+                                            {{__('portal.Update Send Quote')}}
                                         </button>
                                     </div>
                                 </td>
@@ -337,40 +356,40 @@
 
                         <form method="POST" action="{{ route('qoute.store') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
-                        <tr>
-                            <div class="hidden_fields">
-                                <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
-                                <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
-                                <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
-                                <input type="hidden" name="supplier_business_id" value="{{ $user_business_id }}">
-                                <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
-                                <input type="hidden" name="warehouse_id" value="{{ $eOrderItems->warehouse->id }}">
-                            </div>
-                            <td>
-                                <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                       name="quote_quantity" min="0" step="any" autocomplete="quantity" required  placeholder="Qty" >
-                            </td>
+                            <tr>
+                                <div class="hidden_fields">
+                                    <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
+                                    <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
+                                    <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
+                                    <input type="hidden" name="supplier_business_id" value="{{ $user_business_id }}">
+                                    <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
+                                    <input type="hidden" name="warehouse_id" value="{{ $eOrderItems->warehouse->id }}">
+                                </div>
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
+                                           name="quote_quantity" min="0" step="any" autocomplete="quantity" required  placeholder="{{__('portal.Qty')}}" >
+                                </td>
 
-                            <td>
-                                <input class="form-input rounded-md shadow-sm  w-full" id="price_per_unit" type="number"
-                                       name="quote_price_per_quantity"  min="0" step="any" autocomplete="price_per_unit" required placeholder="Price Per Unit" onchange=>
-                            </td>
-                            <td>   <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="Shipment(Days)">
-                            </td>
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="price_per_unit" type="number"
+                                           name="quote_price_per_quantity"  min="0" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}" onchange=>
+                                </td>
+                                <td>   <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">
+                                </td>
 
-                            <td>
-                                <textarea name="note_for_customer" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Note (if any)"></textarea>
-                            </td>
+                                <td>
+                                    <textarea name="note_for_customer" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}"></textarea>
+                                </td>
 
-                            <td>
-                                <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15"  autocomplete="size" required placeholder="VAT%">
-                            </td>
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15"  autocomplete="size" required placeholder="{{__('portal.VAT')}}">
+                                </td>
 
-                            <td>
-                                <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost"  min="0" step="any" autocomplete="size" required placeholder="Shipment Cost" >
-                            </td>
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost"  min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Cost')}}" >
+                                </td>
 
-                        </tr>
+                            </tr>
 
                             {{--@if($eOrderItems->required_sample == 'Yes')
                                 <tr >
@@ -410,11 +429,11 @@
 
                             <tr class="mt-2">
                                 <td colspan="2" class="" >
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
+                                    <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
                                 </td>
                                 <td colspan="2" class="text-left">
                                     <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
-                                        Calculate Total Cost
+                                        {{__('portal.Calculate Total Cost')}}
                                     </a>
                                 </td>
 
@@ -424,17 +443,17 @@
                                 <td colspan="6" class="px-10 text-left"  >
                                     <button
                                         class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
-                                        Send Quote
+                                        {{__('portal.Send Quote')}}
                                     </button>
                                     <br>
                                     <a href="{{ route('viewRFQs') }}"
                                        class="inline-flex items-center px-4 mr-2 py-2 mb-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-                                        Back
+                                        {{__('portal.Back')}}
                                     </a>
-{{--                                    <a href="{{ route('rejectRFQ', $eOrderItems->e_order_id) }}"  id="reject"--}}
-{{--                                       class="inline-flex items-center px-4 mr-2 py-2 mb-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-red disabled:opacity-25 transition ease-in-out duration-150">--}}
-{{--                                        Reject--}}
-{{--                                    </a>--}}
+                              {{--      <a href="{{ route('rejectRFQ', $eOrderItems->e_order_id) }}"  id="reject"
+                                       class="inline-flex items-center px-4 mr-2 py-2 mb-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-red disabled:opacity-25 transition ease-in-out duration-150">
+                                        Reject
+                                    </a>--}}
 
                                 </td>
 
@@ -447,8 +466,481 @@
                 </table>
                 @endif
             </div>
-       </div>
-</x-app-layout>
+        </div>
+    </x-app-layout>
+@else
+    <x-app-layout>
+        <style type="text/css">
+            /* color for request for quotation heading*/
+            .color-7f7f7f {
+                color: #7f7f7f;
+            }
+
+            .color-1f3864 {
+                color: #1f3864;
+            }
+
+
+
+            select:hover{
+                cursor: pointer;
+            }
+
+            input ,
+            .note
+            {
+                height: 35px;
+            }
+            .note {
+                border: 1px solid #d2d6dc !important;
+                resize: none;
+                margin-top: 8px;
+                padding: 2px 10px;
+            }
+
+            .note:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
+                border-color: #a4cafe;
+            }
+
+
+            @media screen and (max-width:360px) {
+                .date {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+
+        </style>
+
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
+        </x-slot>
+
+        @if (session()->has('message'))
+            <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                <strong class="mr-1">{{ session('message') }}</strong>
+                <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                    <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                </button>
+            </div>
+        @endif
+
+        <div class="flex flex-col bg-white rounded">
+            <div class="p-4"
+                 style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
+                <div class="d-block text-center">
+                    <span class="text-2xl font-bold color-7f7f7f">{{__('portal.Requisition')}}</span>
+                </div>
+                <hr>
+                <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
+                    <div class="flex-1 py-5">
+                        <div class="my-5 pl-5">
+                            {{-- <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo"
+                            style="height: 80px;width: 200px;" /> --}}
+                            <img src="{{ url('imp_img.jpg') }}" alt="logo" style="height: 80px;width: 200px;" />
+                        </div>
+                        @php
+                            $user_business_details=auth()->user()->business;
+                        @endphp
+                        <div class="my-5 pl-5 ">
+                            <h1 class="font-extrabold color-1f3864 text-xl ">{{$user_business_details->business_name}}</h1>
+                            {{-- <span>Location :
+                            <span class="font-bold">{{$user_business_details->city}}</span></span> <br>
+                            <span>Emdad Id : <span class="font-bold">{{Auth::user()->business_id}}</span></span> --}}
+                        </div>
+                    </div>
+
+                    <div class="flex-1 ">
+                        <div class="ml-auto date" style="width:150px; float: left">
+                            <br>
+                            <span class="color-1f3864 font-bold">{{__('portal.Date')}}:
+                                {{\Carbon\Carbon::today()->format('Y-m-d')}}</span><br>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" mb-3">
+                <div>
+                    <div style="background: #DEEAF6; min-height: 235px; padding-top: 1px;" class="flex ">
+
+                        <div class="left-info_holder flex-1 mr-2">
+                            <div class="my-5 pl-5 ">
+                                <span class="font-bold color-1f3864 text-lg">{{__('portal.Requisition Information')}}</span>
+                                <hr style="border-top: 1px solid gray;width: 25%;">
+                            </div>
+                            <div class="my-5 pl-5 ">
+                                <strong>{{__('portal.Buyer Name')}}:</strong> {{$eOrderItems->business->business_name}}
+                                <br>
+                                <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.Emdad')}}-{{$eOrderItems->id}}
+                                <br>
+                                <strong>{{__('portal.User Quoted')}}:</strong> {{$eOrderItems->user->name}}
+                                <br>
+                                <strong>{{__('portal.Category Code')}}: </strong> {{$eOrderItems->item_code}}
+                                <br>
+                                <strong>{{__('portal.Remarks')}}: </strong>{{$eOrderItems->remarks}}
+                                <br>
+                                <strong>{{__('portal.Payment Mode')}}: </strong>
+                                @if($eOrderItems->payment_mode == 'Cash') {{__('portal.Cash')}}
+                                @elseif($eOrderItems->payment_mode == 'Credit') {{__('portal.Credit')}}
+                                @elseif($eOrderItems->payment_mode == 'Credit30days') {{__('portal.Credit (30 Days)')}}
+                                @elseif($eOrderItems->payment_mode == 'Credit60days') {{__('portal.Credit (60 Days)')}}
+                                @elseif($eOrderItems->payment_mode == 'Credit90days') {{__('portal.Credit (90 Days)')}}
+                                @elseif($eOrderItems->payment_mode == 'Credit120days') {{__('portal.Credit (120 Days)')}}
+                                @endif
+                                {{--                                    {{$eOrderItems->payment_mode}}--}}
+                            </div>
+                        </div>
+                        <div class="center-info-holder flex-1">
+                            <div class="my-5 pl-5 ">
+                                <span class="font-bold text-lg color-1f3864">{{__('portal.Item Information')}}</span>
+                                <hr style="border-top: 1px solid gray;width: 25%;">
+                            </div>
+                            <div class="my-5 pl-5 ">
+                                <strong>{{__('portal.Category Name')}}: </strong> {{ \App\Models\Category::where('id', $eOrderItems->item_code)->first()->name_ar }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems->item_code)->first()->parent_id))->first()->name_ar }}
+                                <br>
+
+                                <strong>{{__('portal.Brand')}}: </strong> {{ $eOrderItems->brand }}
+                                <br>
+                                <strong>{{__('portal.Quantity')}}: </strong> {{ $eOrderItems->quantity }}
+                                <br>
+                                <strong>{{__('portal.Unit of Measurement')}}: </strong> {{ $eOrderItems->unit_of_measurement }}
+                                <br>
+                                <strong>{{__('portal.Size')}}: </strong> {{ $eOrderItems->size }}
+                                <br>
+
+                                <strong>{{__('portal.Description')}}:</strong> {{ strip_tags($eOrderItems->description) }}
+                            </div>
+                        </div>
+                        <div class="Right-info_holder flex-1">
+                            <div class="my-5 pl-5 ">
+                                <span class="font-bold text-lg color-1f3864">{{__('portal.Shipping Information')}}</span>
+                                <hr style="border-top: 1px solid gray;width: 25%;">
+                            </div>
+                            <div class="my-5 pl-5 ">
+
+                                <strong>{{__('portal.Delivery Period')}}: </strong>
+                                @if ($eOrderItems->delivery_period =='Immediately') {{__('portal.Immediately')}} @endif
+                                @if ($eOrderItems->delivery_period =='Within 30 Days') {{__('portal.30 Days')}} @endif
+                                @if ($eOrderItems->delivery_period =='Within 60 Days') {{__('portal.60 Days')}} @endif
+                                @if ($eOrderItems->delivery_period =='Within 90 Days') {{__('portal.90 Days')}} @endif
+                                @if ($eOrderItems->delivery_period =='Standing Order - 2 per year' ) {{__('portal.Standing Order - 2 times / year')}} @endif
+                                @if ($eOrderItems->delivery_period =='Standing Order - 3 per year' ) {{__('portal.Standing Order - 3 times / year')}} @endif
+                                @if ($eOrderItems->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}} @endif
+                                @if ($eOrderItems->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}} @endif
+                                @if ($eOrderItems->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}} @endif
+                                @if ($eOrderItems->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}} @endif
+                                {{--                                    {{ $eOrderItems->delivery_period }}--}}
+                                <br>
+                                <strong>{{__('portal.Delivery Address')}}: </strong> {{ $eOrderItems->warehouse->address }}
+                                <br>
+
+                                <strong>{{__('portal.Required Sample')}}: </strong>
+                                @if($eOrderItems->required_sample == 'Yes') {{__('portal.Yes')}} @endif
+                                @if($eOrderItems->required_sample == 'No') {{__('portal.No')}} @endif
+                                <br>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p4 mb-5 overflow-x-auto">
+                <table class="table-fixed  min-w-full text-center ">
+                    <thead style="background-color:#8EAADB" class="text-white">
+                    <tr>
+
+                        <th style="width:10%;">{{__('portal.Quantity')}} @include('misc.required')</th>
+                        <th style="width:10%;">{{__('portal.Price Per Unit')}} @include('misc.required') </th>
+                        <th style="width:11%;">{{__('portal.Shipping Time(In Days)')}} @include('misc.required') </th>
+                        <th style="width:20%;">{{__('portal.Note')}}</th>
+                        <th style="width:10%;">{{__('portal.VAT')}} % @include('misc.required') </th>
+                        <th style="width:10%;">{{__('portal.Shipment Cost')}} @include('misc.required')</th>
+
+                    </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                    {{--                    this will show the information if user has some previous quotes--}}
+                    @if($collection)
+
+                        <tr>
+                            <td>
+                                {{$collection->quote_quantity}}
+                            </td>
+                            <td>
+                                {{$collection->quote_price_per_quantity}}
+                            </td>
+                            <td>
+                                {{$collection->shipping_time_in_days}}
+                            </td>
+                            <td>
+                                {{$collection->note_for_customer}}
+                            </td>
+                            <td>
+                                {{$collection->VAT}}%
+                            </td>
+                            <td>
+                                {{$collection->shipment_cost}}
+                            </td>
+                        </tr>
+                    @endif
+                    @if ($collection && $collection->qoute_status == 'Qouted')
+
+                        <h2 class="text-center text-2xl">{{__('portal.You have already quoted.')}}</h2>
+
+                    @elseif($collection && $collection->qoute_status == 'ModificationNeeded')
+
+                        @php
+                            $quote = \App\Models\QouteMessage::where('qoute_id', $collection->id )->get();
+                        @endphp
+                        @if(isset($quote) && $quote->isNotEmpty())
+
+                            <div class="border-2 p-2 m-2">
+                                @foreach ($quote as $msg)
+                                    {{--@php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp--}}
+                                    @php
+                                        $user = \App\Models\User::where('id', $msg->user_id)->first();
+                                        $business = \App\Models\Business::where('id', $user->business_id)->first();
+                                    @endphp
+
+                                    <span class="text-blue-700">
+                                                <span class="text-gray-600 text-left">
+                                                    {{__('portal.Message from')}} {{$business->business_name}}
+                                                </span>
+                                                : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
+                                            </span>
+                                    <br> <br>
+                                @endforeach
+                            </div>
+                            <br>
+                        @endif
+                        <div class="text-center">
+                            <span class="text-2xl font-bold text-red-700">{{__('portal.Modification Needed')}}</span>
+                        </div>
+                        <br>
+                        <form method="POST" action="{{ route('qoute.update', $collection->id) }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
+                            @csrf
+                            @method('PUT')
+
+                            <tr>
+                                <div class="hidden_fields">
+                                    <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
+                                    <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
+                                    <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
+                                    <input type="hidden" name="supplier_business_id" value="{{ $user_business_id }}">
+                                    <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
+                                </div>
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
+                                           name="quote_quantity" min="0" value="{{ $collection->quote_quantity }}" min="0" step="any" autocomplete="quantity" required  placeholder="{{__('portal.Qty')}}">
+                                </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="price_per_unit" type="number"
+                                           name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
+                                </td>
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" value="{{ $collection->shipping_time_in_days }}" name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">
+                                </td>
+
+                                <td>
+                                    <textarea name="note_for_customer" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}"></textarea>
+                                </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15" value="{{$collection->VAT}}" autocomplete="size" required placeholder="{{__('portal.VAT')}}">
+                                </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost" value="{{$collection->shipment_cost}}" min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Cost')}}">
+                                </td>
+
+
+                            </tr>
+
+                            <tr class="mt-2">
+                                <td colspan="2" class="" >
+
+                                    <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="{{__('portal.Total Cost')}}">
+
+                                </td>
+                                <td colspan="2" class="text-right">
+                                    <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="mr-2 px-4 py-1 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 hover:text-white active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                        {{__('portal.Calculate Total Cost')}}
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            {{--@if($collection->required_sample == 'Yes')
+                            <tr>
+                                <td colspan="6" >
+
+                                        <p class="py-2 font-bold text-center  text-2xl">Sample Information</p>
+                                        <div class="flex flex-wrap overflow-hidden xl:-mx-1">
+                                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                                    Samples
+                                                </label>
+                                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="sample_information" value="{{ $collection->sample_information }}" min="0" step="any" autocomplete="size" required>
+                                            </div>
+                                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                                    Sample Unit
+                                                </label>
+                                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_unit" value="{{ $collection->sample_unit }}" min="0" autocomplete="size" required>
+                                            </div>
+                                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                                    Quantity
+                                                </label>
+                                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_security_charges" value="{{ $collection->sample_security_charges }}" min="0" autocomplete="size" required>
+                                            </div>
+                                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                                    Sample Charges Per Unit
+                                                </label>
+                                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_charges_per_unit" value="{{ $collection->sample_charges_per_unit }}" min="0" autocomplete="size" required>
+                                            </div>
+                                        </div>
+
+                                </td>
+                            </tr>
+                            @endif--}}
+                            <tr>
+                                <td colspan="6">
+                                    <div class="my-4">
+                                        <button
+                                            class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 hover:text-white focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                            {{__('portal.Update Send Quote')}}
+                                        </button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </form>
+                    @else
+
+                        <form method="POST" action="{{ route('qoute.store') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
+                            @csrf
+                            <tr>
+                                <div class="hidden_fields">
+                                    <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
+                                    <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
+                                    <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
+                                    <input type="hidden" name="supplier_business_id" value="{{ $user_business_id }}">
+                                    <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
+                                    <input type="hidden" name="warehouse_id" value="{{ $eOrderItems->warehouse->id }}">
+                                </div>
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
+                                           name="quote_quantity" min="0" step="any" autocomplete="quantity" required  placeholder="{{__('portal.Qty')}}" >
+                                </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="price_per_unit" type="number"
+                                           name="quote_price_per_quantity"  min="0" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}" onchange=>
+                                </td>
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">
+                                </td>
+
+                                <td>
+                                    <textarea name="note_for_customer" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}"></textarea>
+                                </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15"  autocomplete="size" required placeholder="{{__('portal.VAT')}}">
+                                </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost"  min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Cost')}}" >
+                                </td>
+
+                            </tr>
+
+                            {{--@if($eOrderItems->required_sample == 'Yes')
+                                <tr >
+                                    <td colspan="6" >
+
+                                        <p class="py-2 font-bold text-center  text-2xl">Sample Information</p>
+                                        <div class="flex flex-wrap overflow-hidden xl:-mx-1">
+                                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                                    Samples
+                                                </label>
+                                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="sample_information"  min="0" step="any" autocomplete="size" required>
+                                            </div>
+                                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                                    Sample Unit
+                                                </label>
+                                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_unit"  min="0" autocomplete="size" required>
+                                            </div>
+                                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                                    Quantity
+                                                </label>
+                                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_security_charges"  min="0" autocomplete="size" required>
+                                            </div>
+                                            <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 p-2">
+                                                <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
+                                                    Sample Charges Per Unit
+                                                </label>
+                                                <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_charges_per_unit"  min="0" autocomplete="size" required>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            @endif--}}
+
+                            <tr class="mt-2">
+                                <td colspan="2" class="" >
+                                    <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
+                                </td>
+                                <td colspan="2" class="text-right">
+                                    <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="mr-2 px-4 py-1 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 hover:text-white active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                        {{__('portal.Calculate Total Cost')}}
+                                    </a>
+                                </td>
+
+                            </tr>
+
+                            <tr style="border: none !important;">
+                                <td colspan="6" class="px-10 text-left"  >
+                                    <button
+                                        class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                        {{__('portal.Send Quote')}}
+                                    </button>
+                                    <br>
+                                    <a href="{{ route('viewRFQs') }}"
+                                       class="inline-flex items-center px-4 mr-2 py-2 mb-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700  hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                        {{__('portal.Back')}}
+                                    </a>
+                                      {{--<a href="{{ route('rejectRFQ', $eOrderItems->e_order_id) }}"  id="reject"
+                                         class="inline-flex items-center px-4 mr-2 py-2 mb-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-red disabled:opacity-25 transition ease-in-out duration-150">
+                                          Reject
+                                      </a>--}}
+
+                                </td>
+
+                            </tr>
+
+                        </form>
+
+                    </tbody>
+
+                </table>
+                @endif
+            </div>
+        </div>
+    </x-app-layout>
+@endif
 
 <script>
 

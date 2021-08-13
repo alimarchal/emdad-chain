@@ -15,9 +15,7 @@
 
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Ratings List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('Ratings List') }} </h2>
         </x-slot>
 
         <div class="py-12">
@@ -71,7 +69,7 @@
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                 <span class="badge badge-info">
-                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank"> {{ $delivery->id }} </a>
+                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{ $delivery->id }} </a>
                                                                 </span>
                                                             </td>
                                                             @php
@@ -206,7 +204,7 @@
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                 <span class="badge badge-info">
-                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank"> {{ $delivery->id }} </a>
+                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{ $delivery->id }} </a>
                                                                 </span>
                                                             </td>
                                                             @php

@@ -110,7 +110,7 @@ class DeliveryNoteController extends Controller
 
     public function singleCategoryDeliveryNoteView($rfqNo)
     {
-        $draftPurchaseOrders = DraftPurchaseOrder::where('rfq_no', $rfqNo)->get();
+        $draftPurchaseOrders = DraftPurchaseOrder::with('eOrderItem')->where('rfq_no', $rfqNo)->get();
 
         $deliveryNote = DeliveryNote::where('rfq_no', $draftPurchaseOrders[0]->rfq_no)->first();
         if (isset($deliveryNote))
