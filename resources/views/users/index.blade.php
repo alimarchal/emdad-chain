@@ -46,18 +46,24 @@
                             $package = \App\Models\Package::where('id', $business_package->package_id)->first();
                             if(auth()->user()->usertype != 'SuperAdmin')
                             {
-                                $userRemaining = $package->users - $userCount;
-                                $driverRemaining = $package->driver - $driverCount;
+
+                                    $userRemaining = $package->users - $userCount;
+                                    if($business_package->package_id != 7)
+                                    {
+                                        $driverRemaining = $package->driver - $driverCount;
+                                    }
                             }
                         @endphp
-                        @if($business_package->package_id == 5 || $business_package->package_id == 6 )
-                            <div class="flex flex-wrap" style="justify-content: flex-start">
-                                <h1 class="text-1xl mt-0 pb-0 text-center"> {{__('portal.Remaining Users you can add')}}: </h1>
-                                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userRemaining}} &nbsp;</h1>
+
+                        <div class="flex flex-wrap" style="justify-content: flex-start">
+                            <h1 class="text-1xl mt-0 pb-0 text-center"> {{__('portal.Remaining Users you can add')}}: </h1>
+                            <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userRemaining}} &nbsp;</h1>
+                            @if($business_package->package_id == 5 || $business_package->package_id == 6 )
                                 <h1 class="text-1xl mt-0 pb-0 text-center"> {{__('portal.Remaining Drivers you can add')}}: </h1>
                                 <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$driverRemaining}} </h1>
-                            </div>
-                        @endif
+                            @endif
+                        </div>
+
                         <hr>
                     @elseif(auth()->user()->registration_type == 'Buyer')
                     <!-- Remaining User count for respective packages -->
@@ -303,18 +309,24 @@
                             $package = \App\Models\Package::where('id', $business_package->package_id)->first();
                             if(auth()->user()->usertype != 'SuperAdmin')
                             {
-                                $userRemaining = $package->users - $userCount;
-                                $driverRemaining = $package->driver - $driverCount;
+
+                                    $userRemaining = $package->users - $userCount;
+                                    if($business_package->package_id != 7)
+                                    {
+                                        $driverRemaining = $package->driver - $driverCount;
+                                    }
                             }
                         @endphp
-                        @if($business_package->package_id == 5 || $business_package->package_id == 6 )
-                            <div class="flex flex-wrap" style="justify-content: flex-start">
-                                <h1 class="text-1xl mt-0 pb-0 text-center"> {{__('portal.Remaining Users you can add')}}: </h1>
-                                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userRemaining}} &nbsp;</h1>
+
+                        <div class="flex flex-wrap" style="justify-content: flex-start">
+                            <h1 class="text-1xl mt-0 pb-0 text-center"> {{__('portal.Remaining Users you can add')}}: </h1>
+                            <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$userRemaining}} &nbsp;</h1>
+                            @if($business_package->package_id == 5 || $business_package->package_id == 6 )
                                 <h1 class="text-1xl mt-0 pb-0 text-center"> {{__('portal.Remaining Drivers you can add')}}: </h1>
                                 <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$driverRemaining}} </h1>
-                            </div>
-                        @endif
+                            @endif
+                        </div>
+
                         <hr>
                     @elseif(auth()->user()->registration_type == 'Buyer')
                     <!-- Remaining User count for respective packages -->
@@ -351,9 +363,9 @@
                         @elseif(auth()->user()->registration_type == 'Buyer')
                             @if(auth()->user()->usertype != 'SuperAdmin')
                                 @if($userRemaining != 0)
-                                    <div class="mt-5" style=" margin-right: 30px; margin-bottom: 10px ">
+                                    <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
                                         <a href="{{ route('users.create') }}"
-                                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                             {{__('portal.Add User')}}
                                         </a>
                                     </div>
@@ -372,23 +384,23 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                     <tr>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                             {{__('portal.User')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                             {{__('portal.Timestamp')}}
                                                         </th>
 
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                             {{__('portal.Business Name')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                             {{__('portal.Role')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                             {{__('portal.Permissions')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                             {{__('portal.Action')}}
                                                         </th>
                                                     </tr>

@@ -41,4 +41,5 @@ return [
     'Team Settings' => 'Team Settings',
     'Create New Team' => 'Create New Team',
     'Switch Teams' => 'Switch Teams',
+    'Info' => 'Info',
 ];

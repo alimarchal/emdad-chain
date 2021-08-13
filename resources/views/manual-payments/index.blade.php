@@ -28,127 +28,127 @@
                     <div class="px-4 py-0 bg-white sm:p-0 rounded-sm">
                         <table class="min-w-full divide-y divide-gray-200" id="manual-payments">
                             <thead>
-                            <tr>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    #
-                                </th>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    {{__('portal.Invoice Number')}}
-                                </th>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    {{__('portal.Invoice Date')}}
-                                </th>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Supplier Business name')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Buyer Business name')}} @endif
-                                </th>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Status
-                                </th>
-                                @if(auth()->user()->registration_type == 'Buyer')
+                                <tr>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Claim')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Confirm')}} @endif {{__('portal.Manual Payment')}}
+                                        #
                                     </th>
-                                @endif
-                                       {{--     @if(auth()->user()->registration_type == 'Supplier')
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Payments View
-                                                </th>
-                                            @endif--}}
-                            </tr>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{__('portal.Invoice Number')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{__('portal.Invoice Date')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Supplier Business name')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Buyer Business name')}} @endif
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{__('portal.Status')}}
+                                    </th>
+                                    @if(auth()->user()->registration_type == 'Buyer')
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Claim')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Confirm')}} @endif {{__('portal.Manual Payment')}}
+                                        </th>
+                                    @endif
+                                           {{--     @if(auth()->user()->registration_type == 'Supplier')
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Payments View
+                                                    </th>
+                                                @endif--}}
+                                </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ($collection as $item)
-                                <tr>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                        {{ $loop->iteration }}
-                                    </td>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                        @if (auth()->user()->registration_type == 'Buyer')
-                                            <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{$item->id}}</a>
-                                        @elseif(auth()->user()->registration_type == 'Supplier')
-                                            {{--                                        <a href="{{ route('invoice.show',$item->invoice_id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->invoice_id}}</a>--}}
-                                            <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{$item->id}}</a>
-                                        @endif
-                                    </td>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                        @if (auth()->user()->registration_type == 'Buyer')
-                                            @php $invoiceDate = \App\Models\Invoice::where('id', $item->id)->first(); @endphp
-                                        @elseif(auth()->user()->registration_type == 'Supplier')
-                                            {{--@php $invoiceDate = \App\Models\Invoice::where('id', $item->invoice_id)->first(); @endphp--}}
-                                            @php $invoiceDate = \App\Models\Invoice::where('id', $item->id)->first(); @endphp
-                                        @endif
-                                        {{\Carbon\Carbon::parse($item->created_at)->format('d-M-Y')}}
-                                    </td>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                        @if(auth()->user()->registration_type == 'Buyer')
-                                            @php $businessName = \App\Models\Business::where('id', $item->supplier_business_id)->first(); @endphp
-                                        @elseif(auth()->user()->registration_type == 'Supplier')
-                                            @php $businessName = \App\Models\Business::where('id', $item->buyer_business_id)->first(); @endphp
-                                        @endif
-
-                                        @if(isset($businessName->business_name)) {{$businessName->business_name}} @else {{__('portal.N/A')}} @endif
-                                    </td>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                        @if (auth()->user()->registration_type == 'Buyer')
-                                            @if ($item->invoice_status == '0')
-                                                <span class="text-blue-800">{{__('portal.Un-Paid')}}</span>
-                                            @elseif ($item->invoice_status == '1')
-                                                <span style="color: #eb8e08;">{{__('portal.Supplier Verification Pending')}}</span>
-                                            @elseif ($item->invoice_status == '2')
-                                                <span class="text-red-800">{{__('portal.Supplier Rejected')}}</span>
-                                            @elseif ($item->invoice_status == '3')
-                                                <span class="text-green-500">{{__('portal.Supplier Confirmed')}}</span>
-                                            @endif
-                                        @elseif(auth()->user()->registration_type == 'Supplier')
-                                            {{--                                        @if ($item->status == '0')--}}
-                                            @if ($item->invoice_status == '0')
-                                                <span class="text-blue-800">{{__('portal.Un-Paid')}}</span>
-                                                {{--                                        @elseif ($item->status == '1')--}}
-                                            @elseif ($item->invoice_status == '1')
-                                                <span style="color: #eb8e08;">{{__('portal.Verification Pending')}}</span>
-                                                {{--                                        @elseif ($item->status == '2')--}}
-                                            @elseif ($item->invoice_status == '2')
-                                                <span class="text-red-800">{{__('portal.Rejected')}}</span>
-                                                {{--                                        @elseif ($item->status == '3')--}}
-                                            @elseif ($item->invoice_status == '3')
-                                                <span class="text-green-500">{{__('portal.Confirmed')}}</span>
-                                            @endif
-                                        @endif
-
-                                    </td>
-                                    @if (auth()->user()->registration_type == 'Buyer')
-
+                                @foreach ($collection as $item)
+                                    <tr>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                                {{--@if (auth()->user()->registration_type == 'Buyer')
-                                                    <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
-                                                @elseif(auth()->user()->registration_type == 'Supplier')
-                                                    <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->invoice_id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
-                                                @endif--}}
-                                            <a href="@if($item->invoice_status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
-                                                {{__('portal.Proceed')}}
-                                            </a> |
-                                            @if($item->invoice_status == '0')
-                                                <form action="{{route('make.payment')}}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="invoice_id" value="{{$item->id}}">
-                                                    <button type="submit" class="text-blue-600 hover:underline" target="_blank">
-                                                        {{__('portal.Make Payment Online')}}
-                                                    </button>
-                                                </form>
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                            @if (auth()->user()->registration_type == 'Buyer')
+                                                <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{$item->id}}</a>
+                                            @elseif(auth()->user()->registration_type == 'Supplier')
+                                                {{--                                        <a href="{{ route('invoice.show',$item->invoice_id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->invoice_id}}</a>--}}
+                                                <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{$item->id}}</a>
                                             @endif
                                         </td>
-                                    @endif
-
-                                  {{--  @if(auth()->user()->registration_type == 'Supplier')
-                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black">
-                                            <a href="{{ route('bank-payments.show', $item->id) }}" class="text-blue-600 hover:underline" target="_blank">
-                                                View Payment
-                                            </a>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                            @if (auth()->user()->registration_type == 'Buyer')
+                                                @php $invoiceDate = \App\Models\Invoice::where('id', $item->id)->first(); @endphp
+                                            @elseif(auth()->user()->registration_type == 'Supplier')
+                                                {{--@php $invoiceDate = \App\Models\Invoice::where('id', $item->invoice_id)->first(); @endphp--}}
+                                                @php $invoiceDate = \App\Models\Invoice::where('id', $item->id)->first(); @endphp
+                                            @endif
+                                            {{\Carbon\Carbon::parse($item->created_at)->format('d-M-Y')}}
                                         </td>
-                                    @endif--}}
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                            @if(auth()->user()->registration_type == 'Buyer')
+                                                @php $businessName = \App\Models\Business::where('id', $item->supplier_business_id)->first(); @endphp
+                                            @elseif(auth()->user()->registration_type == 'Supplier')
+                                                @php $businessName = \App\Models\Business::where('id', $item->buyer_business_id)->first(); @endphp
+                                            @endif
 
-                                </tr>
-                            @endforeach
+                                            @if(isset($businessName->business_name)) {{$businessName->business_name}} @else {{__('portal.N/A')}} @endif
+                                        </td>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                            @if (auth()->user()->registration_type == 'Buyer')
+                                                @if ($item->invoice_status == '0')
+                                                    <span class="text-blue-800">{{__('portal.Un-Paid')}}</span>
+                                                @elseif ($item->invoice_status == '1')
+                                                    <span style="color: #eb8e08;">{{__('portal.Supplier Verification Pending')}}</span>
+                                                @elseif ($item->invoice_status == '2')
+                                                    <span class="text-red-800">{{__('portal.Supplier Rejected')}}</span>
+                                                @elseif ($item->invoice_status == '3')
+                                                    <span class="text-green-500">{{__('portal.Supplier Confirmed')}}</span>
+                                                @endif
+                                            @elseif(auth()->user()->registration_type == 'Supplier')
+                                                {{--                                        @if ($item->status == '0')--}}
+                                                @if ($item->invoice_status == '0')
+                                                    <span class="text-blue-800">{{__('portal.Un-Paid')}}</span>
+                                                    {{--                                        @elseif ($item->status == '1')--}}
+                                                @elseif ($item->invoice_status == '1')
+                                                    <span style="color: #eb8e08;">{{__('portal.Verification Pending')}}</span>
+                                                    {{--                                        @elseif ($item->status == '2')--}}
+                                                @elseif ($item->invoice_status == '2')
+                                                    <span class="text-red-800">{{__('portal.Rejected')}}</span>
+                                                    {{--                                        @elseif ($item->status == '3')--}}
+                                                @elseif ($item->invoice_status == '3')
+                                                    <span class="text-green-500">{{__('portal.Confirmed')}}</span>
+                                                @endif
+                                            @endif
+
+                                        </td>
+                                        @if (auth()->user()->registration_type == 'Buyer')
+
+                                            <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                                    {{--@if (auth()->user()->registration_type == 'Buyer')
+                                                        <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
+                                                    @elseif(auth()->user()->registration_type == 'Supplier')
+                                                        <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->invoice_id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
+                                                    @endif--}}
+                                                <a href="@if($item->invoice_status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
+                                                    {{__('portal.Proceed')}}
+                                                </a> |
+                                                @if($item->invoice_status == '0')
+                                                    <form action="{{route('make.payment')}}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="invoice_id" value="{{$item->id}}">
+                                                        <button type="submit" class="text-blue-600 hover:underline" target="_blank">
+                                                            {{__('portal.Make Payment Online')}}
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            </td>
+                                        @endif
+
+                                      {{--  @if(auth()->user()->registration_type == 'Supplier')
+                                            <td class="px-6 py-4 text-center whitespace-nowrap text-black">
+                                                <a href="{{ route('bank-payments.show', $item->id) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                    View Payment
+                                                </a>
+                                            </td>
+                                        @endif--}}
+
+                                    </tr>
+                                @endforeach
 
                             </tbody>
                         </table>
@@ -186,127 +186,127 @@
                     <div class="px-4 py-0 bg-white sm:p-0 rounded-sm">
                         <table class="min-w-full divide-y divide-gray-200" id="manual-payments">
                             <thead>
-                            <tr>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    #
-                                </th>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    {{__('portal.Invoice Number')}}
-                                </th>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    {{__('portal.Invoice Date')}}
-                                </th>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Supplier Business name')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Buyer Business name')}} @endif
-                                </th>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Status
-                                </th>
-                                @if(auth()->user()->registration_type == 'Buyer')
+                                <tr>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Claim')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Confirm')}} @endif {{__('portal.Manual Payment')}}
+                                        #
                                     </th>
-                                @endif
-                                {{--     @if(auth()->user()->registration_type == 'Supplier')
-                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                             Payments View
-                                         </th>
-                                     @endif--}}
-                            </tr>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{__('portal.Invoice Number')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{__('portal.Invoice Date')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Supplier Business name')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Buyer Business name')}} @endif
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{__('portal.Status')}}
+                                    </th>
+                                    @if(auth()->user()->registration_type == 'Buyer')
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Claim')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Confirm')}} @endif {{__('portal.Manual Payment')}}
+                                        </th>
+                                    @endif
+                                    {{--     @if(auth()->user()->registration_type == 'Supplier')
+                                             <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                 Payments View
+                                             </th>
+                                         @endif--}}
+                                </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ($collection as $item)
-                                <tr>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                        {{ $loop->iteration }}
-                                    </td>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                        @if (auth()->user()->registration_type == 'Buyer')
-                                            <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{$item->id}}</a>
-                                        @elseif(auth()->user()->registration_type == 'Supplier')
-                                            {{--                                        <a href="{{ route('invoice.show',$item->invoice_id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->invoice_id}}</a>--}}
-                                            <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{$item->id}}</a>
-                                        @endif
-                                    </td>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                        @if (auth()->user()->registration_type == 'Buyer')
-                                            @php $invoiceDate = \App\Models\Invoice::where('id', $item->id)->first(); @endphp
-                                        @elseif(auth()->user()->registration_type == 'Supplier')
-                                            {{--@php $invoiceDate = \App\Models\Invoice::where('id', $item->invoice_id)->first(); @endphp--}}
-                                            @php $invoiceDate = \App\Models\Invoice::where('id', $item->id)->first(); @endphp
-                                        @endif
-                                        {{\Carbon\Carbon::parse($item->created_at)->format('d-M-Y')}}
-                                    </td>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                        @if(auth()->user()->registration_type == 'Buyer')
-                                            @php $businessName = \App\Models\Business::where('id', $item->supplier_business_id)->first(); @endphp
-                                        @elseif(auth()->user()->registration_type == 'Supplier')
-                                            @php $businessName = \App\Models\Business::where('id', $item->buyer_business_id)->first(); @endphp
-                                        @endif
-
-                                        @if(isset($businessName->business_name)) {{$businessName->business_name}} @else {{__('portal.N/A')}} @endif
-                                    </td>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                        @if (auth()->user()->registration_type == 'Buyer')
-                                            @if ($item->invoice_status == '0')
-                                                <span class="text-blue-800">{{__('portal.Un-Paid')}}</span>
-                                            @elseif ($item->invoice_status == '1')
-                                                <span style="color: #eb8e08;">{{__('portal.Supplier Verification Pending')}}</span>
-                                            @elseif ($item->invoice_status == '2')
-                                                <span class="text-red-800">{{__('portal.Supplier Rejected')}}</span>
-                                            @elseif ($item->invoice_status == '3')
-                                                <span class="text-green-500">{{__('portal.Supplier Confirmed')}}</span>
-                                            @endif
-                                        @elseif(auth()->user()->registration_type == 'Supplier')
-                                            {{--                                        @if ($item->status == '0')--}}
-                                            @if ($item->invoice_status == '0')
-                                                <span class="text-blue-800">{{__('portal.Un-Paid')}}</span>
-                                                {{--                                        @elseif ($item->status == '1')--}}
-                                            @elseif ($item->invoice_status == '1')
-                                                <span style="color: #eb8e08;">{{__('portal.Verification Pending')}}</span>
-                                                {{--                                        @elseif ($item->status == '2')--}}
-                                            @elseif ($item->invoice_status == '2')
-                                                <span class="text-red-800">{{__('portal.Rejected')}}</span>
-                                                {{--                                        @elseif ($item->status == '3')--}}
-                                            @elseif ($item->invoice_status == '3')
-                                                <span class="text-green-500">{{__('portal.Confirmed')}}</span>
-                                            @endif
-                                        @endif
-
-                                    </td>
-                                    @if (auth()->user()->registration_type == 'Buyer')
-
+                                @foreach ($collection as $item)
+                                    <tr>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                            {{--@if (auth()->user()->registration_type == 'Buyer')
-                                                <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                            @if (auth()->user()->registration_type == 'Buyer')
+                                                <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{$item->id}}</a>
                                             @elseif(auth()->user()->registration_type == 'Supplier')
-                                                <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->invoice_id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
-                                            @endif--}}
-                                            <a href="@if($item->invoice_status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
-                                                {{__('portal.Proceed')}}
-                                            </a> |
-                                            @if($item->invoice_status == '0')
-                                                <form action="{{route('make.payment')}}" method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="invoice_id" value="{{$item->id}}">
-                                                    <button type="submit" class="text-blue-600 hover:underline" target="_blank">
-                                                        {{__('portal.Make Payment Online')}}
-                                                    </button>
-                                                </form>
+                                                {{--                                        <a href="{{ route('invoice.show',$item->invoice_id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->invoice_id}}</a>--}}
+                                                <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{$item->id}}</a>
                                             @endif
                                         </td>
-                                    @endif
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                            @if (auth()->user()->registration_type == 'Buyer')
+                                                @php $invoiceDate = \App\Models\Invoice::where('id', $item->id)->first(); @endphp
+                                            @elseif(auth()->user()->registration_type == 'Supplier')
+                                                {{--@php $invoiceDate = \App\Models\Invoice::where('id', $item->invoice_id)->first(); @endphp--}}
+                                                @php $invoiceDate = \App\Models\Invoice::where('id', $item->id)->first(); @endphp
+                                            @endif
+                                            {{\Carbon\Carbon::parse($item->created_at)->format('d-M-Y')}}
+                                        </td>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                            @if(auth()->user()->registration_type == 'Buyer')
+                                                @php $businessName = \App\Models\Business::where('id', $item->supplier_business_id)->first(); @endphp
+                                            @elseif(auth()->user()->registration_type == 'Supplier')
+                                                @php $businessName = \App\Models\Business::where('id', $item->buyer_business_id)->first(); @endphp
+                                            @endif
 
-                                    {{--  @if(auth()->user()->registration_type == 'Supplier')
-                                          <td class="px-6 py-4 text-center whitespace-nowrap text-black">
-                                              <a href="{{ route('bank-payments.show', $item->id) }}" class="text-blue-600 hover:underline" target="_blank">
-                                                  View Payment
-                                              </a>
-                                          </td>
-                                      @endif--}}
+                                            @if(isset($businessName->business_name)) {{$businessName->business_name}} @else {{__('portal.N/A')}} @endif
+                                        </td>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                            @if (auth()->user()->registration_type == 'Buyer')
+                                                @if ($item->invoice_status == '0')
+                                                    <span class="text-blue-800">{{__('portal.Un-Paid')}}</span>
+                                                @elseif ($item->invoice_status == '1')
+                                                    <span style="color: #eb8e08;">{{__('portal.Supplier Verification Pending')}}</span>
+                                                @elseif ($item->invoice_status == '2')
+                                                    <span class="text-red-800">{{__('portal.Supplier Rejected')}}</span>
+                                                @elseif ($item->invoice_status == '3')
+                                                    <span class="text-green-500">{{__('portal.Supplier Confirmed')}}</span>
+                                                @endif
+                                            @elseif(auth()->user()->registration_type == 'Supplier')
+                                                {{--                                        @if ($item->status == '0')--}}
+                                                @if ($item->invoice_status == '0')
+                                                    <span class="text-blue-800">{{__('portal.Un-Paid')}}</span>
+                                                    {{--                                        @elseif ($item->status == '1')--}}
+                                                @elseif ($item->invoice_status == '1')
+                                                    <span style="color: #eb8e08;">{{__('portal.Verification Pending')}}</span>
+                                                    {{--                                        @elseif ($item->status == '2')--}}
+                                                @elseif ($item->invoice_status == '2')
+                                                    <span class="text-red-800">{{__('portal.Rejected')}}</span>
+                                                    {{--                                        @elseif ($item->status == '3')--}}
+                                                @elseif ($item->invoice_status == '3')
+                                                    <span class="text-green-500">{{__('portal.Confirmed')}}</span>
+                                                @endif
+                                            @endif
 
-                                </tr>
-                            @endforeach
+                                        </td>
+                                        @if (auth()->user()->registration_type == 'Buyer')
+
+                                            <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                                {{--@if (auth()->user()->registration_type == 'Buyer')
+                                                    <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
+                                                @elseif(auth()->user()->registration_type == 'Supplier')
+                                                    <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->invoice_id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
+                                                @endif--}}
+                                                <a href="@if($item->invoice_status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
+                                                    {{__('portal.Proceed')}}
+                                                </a> |
+                                                @if($item->invoice_status == '0')
+                                                    <form action="{{route('make.payment')}}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="invoice_id" value="{{$item->id}}">
+                                                        <button type="submit" class="text-blue-600 hover:underline" target="_blank">
+                                                            {{__('portal.Make Payment Online')}}
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            </td>
+                                        @endif
+
+                                        {{--  @if(auth()->user()->registration_type == 'Supplier')
+                                              <td class="px-6 py-4 text-center whitespace-nowrap text-black">
+                                                  <a href="{{ route('bank-payments.show', $item->id) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                      View Payment
+                                                  </a>
+                                              </td>
+                                          @endif--}}
+
+                                    </tr>
+                                @endforeach
 
                             </tbody>
                         </table>

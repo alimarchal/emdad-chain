@@ -14,9 +14,7 @@
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Ratings List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('Ratings List') }} </h2>
         </x-slot>
 
         <div class="py-12">
@@ -83,7 +81,7 @@
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
-                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer"> {{ $delivery->id }} </a>
+                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.Emdad')}}-{{ $delivery->id }} </a>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     @php
@@ -145,9 +143,7 @@
 @else
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Ratings List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('Ratings List') }} </h2>
         </x-slot>
 
         <div class="py-12">
@@ -174,68 +170,68 @@
                                             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
-                                                    <tr>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                            #
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                            {{__('portal.Rated To')}}
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                            {{__('portal.Delivery ID')}}
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                            {{__('portal.Name')}}
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                            {{__('portal.Business Name')}}
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                            {{__('portal.Comment')}}
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                            {{__('portal.Rated')}}
-                                                        </th>
-                                                    </tr>
+                                                        <tr>
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                                #
+                                                            </th>
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                                {{__('portal.Rated To')}}
+                                                            </th>
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                                {{__('portal.Delivery ID')}}
+                                                            </th>
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                                {{__('portal.Name')}}
+                                                            </th>
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                                {{__('portal.Business Name')}}
+                                                            </th>
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                                {{__('portal.Comment')}}
+                                                            </th>
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                                {{__('portal.Rated')}}
+                                                            </th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody class="bg-white divide-y divide-gray-200">
-                                                    @foreach ($deliveryComments as $deliveryComment)
-                                                        <tr>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                <span class="badge badge-info">{{ $loop->iteration }}</span>
-                                                            </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                    <span>
-                                                                        @if($deliveryComment->comment_type == 2 ) {{__('portal.To Driver')}}
-                                                                        @elseif($deliveryComment->comment_type == 3 ) {{__('portal.To Supplier')}}
-                                                                        @elseif($deliveryComment->comment_type == 4 ) {{__('portal.To Emdad')}}
-                                                                        @endif
-                                                                    </span>
-                                                            </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
-                                                                <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer"> {{ $delivery->id }} </a>
-                                                            </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                @php
-                                                                    $deliveryDetail = \App\Models\Delivery::where('id', $delivery->id)->first();
-                                                                    $user = \App\Models\User::with('business')->where('id', $deliveryDetail->supplier_user_id)->first();
-                                                                    $shipmentItem = \App\Models\ShipmentItem::where('delivery_id', $delivery->id)->first();
-                                                                    $driver = \App\Models\User::with('business')->where('id', $shipmentItem->driver_id)->first();
-                                                                @endphp
-                                                                <span class="badge badge-info">@if($loop->iteration == 1) {{ $user->name }} @elseif($loop->iteration == 2) {{$driver->name}} @else {{__('portal.Emdad')}} @endif</span>
-                                                            </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                <span class="badge badge-info">@if($loop->iteration == 1) {{ $user->business->business_name }} @elseif($loop->iteration == 2) {{$driver->business->business_name}} @else {{__('portal.Emdad Supply Chain')}} @endif</span>
-                                                            </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                <span class="badge badge-info">{{ $deliveryComment->comment_content }}</span>
-                                                            </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                <span class="badge badge-info">{{ number_format($deliveryComment->rating,2) }}</span>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
+                                                        @foreach ($deliveryComments as $deliveryComment)
+                                                            <tr>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                    <span class="badge badge-info">{{ $loop->iteration }}</span>
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                        <span>
+                                                                            @if($deliveryComment->comment_type == 2 ) {{__('portal.To Driver')}}
+                                                                            @elseif($deliveryComment->comment_type == 3 ) {{__('portal.To Supplier')}}
+                                                                            @elseif($deliveryComment->comment_type == 4 ) {{__('portal.To Emdad')}}
+                                                                            @endif
+                                                                        </span>
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                    @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
+                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.Emdad')}}-{{ $delivery->id }} </a>
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                    @php
+                                                                        $deliveryDetail = \App\Models\Delivery::where('id', $delivery->id)->first();
+                                                                        $user = \App\Models\User::with('business')->where('id', $deliveryDetail->supplier_user_id)->first();
+                                                                        $shipmentItem = \App\Models\ShipmentItem::where('delivery_id', $delivery->id)->first();
+                                                                        $driver = \App\Models\User::with('business')->where('id', $shipmentItem->driver_id)->first();
+                                                                    @endphp
+                                                                    <span class="badge badge-info">@if($loop->iteration == 1) {{ $user->name }} @elseif($loop->iteration == 2) {{$driver->name}} @else {{__('portal.Emdad')}} @endif</span>
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                    <span class="badge badge-info">@if($loop->iteration == 1) {{ $user->business->business_name }} @elseif($loop->iteration == 2) {{$driver->business->business_name}} @else {{__('portal.Emdad Supply Chain')}} @endif</span>
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                    <span class="badge badge-info">{{ $deliveryComment->comment_content }}</span>
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                    <span class="badge badge-info">{{ number_format($deliveryComment->rating,2) }}</span>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>

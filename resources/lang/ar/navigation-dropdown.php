@@ -41,4 +41,5 @@ return [
     'Team Settings' => 'إعدادات الفريق',
     'Create New Team' => 'إنشاء فريق جديد',
     'Switch Teams' => 'تبديل الفِرق',
+    'Info' => 'معلومات',
 ];
