@@ -608,15 +608,6 @@ Route::middleware(['auth:sanctum'])->post('invoice-payment/proceed_payment', [\A
 Route::middleware(['auth:sanctum'])->get('invoice-payment/invoice_payment_status', [\App\Http\Controllers\BusinessPackageController::class, 'invoice_payment_status'])->name('invoice_payment_status');
 
 ############################################################## END ##########################################################################
-
-Route::middleware(['auth:sanctum', 'verified'])->get('logistics-dashboard', [DashboardController::class, 'logistic_dashboard'])->name('logistics.dashboard');
-Route::middleware(['auth:sanctum', 'verified'])->get('logistics-setting', [DashboardController::class, 'logistic_setting'])->name('logistics.setting');
-Route::middleware(['auth:sanctum', 'verified'])->get('logisticsBusiness/create', [\App\Http\Controllers\LogisticsBusinessController::class, 'create'])->name('logistics.business');
-Route::middleware(['auth:sanctum', 'verified'])->post('logisticsBusiness', [\App\Http\Controllers\LogisticsBusinessController::class, 'store'])->name('logistics.store');
-Route::middleware(['auth:sanctum', 'verified'])->get('logisticsBusiness/{logisticsBusiness}/edit', [\App\Http\Controllers\LogisticsBusinessController::class, 'edit'])->name('logistics.edit');
-Route::middleware(['auth:sanctum', 'verified'])->put('logisticsBusiness/{logisticsBusiness}', [\App\Http\Controllers\LogisticsBusinessController::class, 'update'])->name('logistics.update');
-Route::middleware(['auth:sanctum', 'verified'])->get('logisticsBusiness', [\App\Http\Controllers\LogisticsBusinessController::class, 'index'])->name('logistics.index');
-
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('logistics-dashboard', [DashboardController::class, 'logistic_dashboard'])->name('logistics.dashboard');
     Route::get('logistics-setting', [DashboardController::class, 'logistic_setting'])->name('logistics.setting');

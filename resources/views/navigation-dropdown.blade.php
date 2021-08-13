@@ -149,11 +149,11 @@
 {{--                        <x-jet-button>--}}
 {{--                                <a onclick="language(1, 'en')" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;" id="lan">العربية</a>--}}
                     {{-- Added below if condition because of POST method being used and POST is not able to redirect --}}
-                    @if(request()->routeIs('invoicePayment.stepOne'))
-                        <a href="{{route('languageChangeForPayment', ['lang' => 'ar', 'rtl_value' => 1])}}" class="inline-flex items-center px-4 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img alt="" src="{{url('sa.png')}}" style="margin-right: -18px;margin-top:-28px;" id="lan">العربية</a>
-                    @else
-                        <a href="{{route('languageChange', ['lang' => 'ar', 'rtl_value' => 1])}}" class="inline-flex items-center px-4 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img alt="" src="{{url('sa.png')}}" style="margin-right: -18px;margin-top:-28px;" id="lan">العربية</a>
-                    @endif
+{{--                    @if(request()->routeIs('invoicePayment.stepOne'))--}}
+{{--                        <a href="{{route('languageChangeForPayment', ['lang' => 'ar', 'rtl_value' => 1])}}" class="inline-flex items-center px-4 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img alt="" src="{{url('sa.png')}}" style="margin-right: -18px;margin-top:-28px;" id="lan">العربية</a>--}}
+{{--                    @else--}}
+{{--                        <a href="{{route('languageChange', ['lang' => 'ar', 'rtl_value' => 1])}}" class="inline-flex items-center px-4 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img alt="" src="{{url('sa.png')}}" style="margin-right: -18px;margin-top:-28px;" id="lan">العربية</a>--}}
+{{--                    @endif--}}
 {{--                            <a class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">قريباً</a>--}}
 {{--                        </x-jet-button>--}}
 {{--                    @endcan--}}
