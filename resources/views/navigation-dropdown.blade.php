@@ -151,6 +151,8 @@
                     {{-- Added below if condition because of POST method being used and POST is not able to redirect --}}
                     @if(request()->routeIs('invoicePayment.stepOne'))
                         <a href="{{route('languageChangeForPayment', ['lang' => 'ar', 'rtl_value' => 1])}}" class="inline-flex items-center px-4 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img alt="" src="{{url('sa.png')}}" style="margin-right: -18px;margin-top:-28px;" id="lan">العربية</a>
+                    @elseif(request()->routeIs('businessPackage.stepOne'))
+                        <a href="{{route('languageChangeForPackagePayment', ['lang' => 'ar', 'rtl_value' => 1])}}" class="inline-flex items-center px-4 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img alt="" src="{{url('sa.png')}}" style="margin-right: -18px;margin-top:-28px;" id="lan">العربية</a>
                     @else
                         <a href="{{route('languageChange', ['lang' => 'ar', 'rtl_value' => 1])}}" class="inline-flex items-center px-4 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img alt="" src="{{url('sa.png')}}" style="margin-right: -18px;margin-top:-28px;" id="lan">العربية</a>
                     @endif
@@ -701,6 +703,8 @@
                     {{-- Added below if condition because of POST method being used and POST is not able to redirect --}}
                     @if(request()->routeIs('invoicePayment.stepOne'))
                         <a href="{{route('languageChangeForPayment', ['lang' => 'en', 'rtl_value' => 0])}}" class="get-started-btn scrollto" style="cursor: pointer"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top: -4px;">English</a>
+                    @elseif(request()->routeIs('businessPackage.stepOne'))
+                        <a href="{{route('languageChangeForPackagePayment', ['lang' => 'en', 'rtl_value' => 0])}}" class="get-started-btn scrollto" style="cursor: pointer"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top: -4px;">English</a>
                     @else
                         <a href="{{route('languageChange', ['lang' => 'en', 'rtl_value' => 0])}}" class="get-started-btn scrollto" style="cursor: pointer"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top: -4px;">English</a>
                     @endif

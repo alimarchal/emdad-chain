@@ -49,7 +49,12 @@
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Category Name')}}:</strong> {{ $QouteItem->orderItem->item_name }}
+                                <strong>{{__('portal.Category Name')}}:</strong>
+                                @php
+                                    $record = \App\Models\Category::where('id',$QouteItem->orderItem->item_code)->first();
+                                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                @endphp
+                                {{ $record->name }} @if(isset($parent)), {{$parent->name}} @endif
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
@@ -270,7 +275,12 @@
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Category Name')}}:</strong> {{ $QouteItem->orderItem->item_name }}
+                                <strong>{{__('portal.Category Name')}}:</strong>
+                                @php
+                                    $record = \App\Models\Category::where('id',$QouteItem->orderItem->item_code)->first();
+                                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                @endphp
+                                {{ $record->name_ar }} @if(isset($parent)), {{$parent->name_ar}} @endif
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">

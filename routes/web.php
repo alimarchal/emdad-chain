@@ -53,6 +53,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardCont
 //Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [DashboardController::class, 'languageChange'])->name('languageChange');
 Route::middleware(['auth:sanctum', 'verified'])->get('languageChange/{lang}/{rtl_value}', [DashboardController::class, 'languageChange'])->name('languageChange');
 Route::middleware(['auth:sanctum', 'verified'])->get('languageChangeForPayment/{lang}/{rtl_value}', [DashboardController::class, 'languageChangeForPayment'])->name('languageChangeForPayment');
+Route::middleware(['auth:sanctum', 'verified'])->get('languageChangeForPackagePayment/{lang}/{rtl_value}', [DashboardController::class, 'languageChangeForPackagePayment'])->name('languageChangeForPackagePayment');
 Route::middleware(['auth:sanctum'])->resource('users', UserController::class);
 Route::middleware(['auth:sanctum'])->post('/registrationType', [UserController::class, 'registrationType']);
 // User Log route for SuperAdmin
