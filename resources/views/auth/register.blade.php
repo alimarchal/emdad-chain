@@ -54,7 +54,7 @@
                     <select name="service" id="service" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name">
                         <option value="">{{__('register.Select')}}</option>
                         <option value="1">{{__('register.CEO')}}</option>
-{{--                        <option value="2">{{__('register.Logistics Solution')}}</option>--}}
+                        <option value="2">{{__('register.Logistics Solution')}}</option>
                     </select>
                 </div>
 

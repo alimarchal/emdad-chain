@@ -32,6 +32,11 @@ class CreatePackagingSolutionsTable extends Migration
             $table->string('latitude',25)->nullable();
             $table->string('longitude',25)->nullable();
             $table->string('address',191)->nullable();
+            $table->decimal('per_day',14,2)->default(0.00);
+            $table->decimal('month',14,2)->default(0.00);
+            $table->decimal('quarter',14,2)->default(0.00);
+            $table->decimal('half_year',14,2)->default(0.00);
+            $table->decimal('one_year',14,2)->default(0.00);
             $table->timestamps();
         });
     }

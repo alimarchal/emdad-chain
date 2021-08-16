@@ -65,6 +65,11 @@ class PackagingSolutionController extends Controller
             'latitude' => 'required',
             'longitude' => 'required',
             'address' => 'required',
+            'per_day' => 'required|min:0',
+            'month' => 'required|min:0',
+            'quarter' => 'required|min:0',
+            'half_year' => 'required|min:0',
+            'one_year' => 'required|min:0',
         ]);
 
         $request->merge(['user_id' => auth()->user()->id]);

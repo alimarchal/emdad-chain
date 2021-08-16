@@ -62,8 +62,8 @@
 
                             <select id="forklift" name="forklift" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
                                 <option value="">None</option>
-                                <option value="1" @if($packagingSolution->forklift == 1) selected @endif>Yes</option>
-                                <option value="0" @if($packagingSolution->forklift == 0) selected @endif>No</option>
+                                <option value="1" @if($packagingSolution->forklift == 1) selected @endif >Yes</option>
+                                <option value="0" @if($packagingSolution->forklift == 0) selected @endif >No</option>
                             </select>
                         </div>
 
@@ -93,6 +93,37 @@
                             </x-jet-input>
                         </div>
 
+
+                        <div class="flex space-x-5 mt-3">
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="per_day">
+                                Per Day Charges (cm)<sup>3<sup> @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="month">
+                                1 Month Charges (cm)<sup>3<sup> @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="quarter">
+                                3 Month Charges (cm)<sup>3<sup> @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="half_year">
+                                6 Month Charges (cm)<sup>3<sup> @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="one_year">
+                                1 Year Charges (cm)<sup>3<sup> @include('misc.required')
+                            </label>
+                        </div>
+
+                        <div class="flex space-x-5 mt-3">
+                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="Per Day Charges" name="per_day" class="border p-2 w-1/4"  value="{{$packagingSolution->per_day}}" >
+                            </x-jet-input>
+                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="1 Month Charges" name="month" class="border p-2 w-1/4" value="{{$packagingSolution->month}}"  >
+                            </x-jet-input>
+                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="3 Month Charges" name="quarter" class="border p-2 w-1/4" value="{{$packagingSolution->quarter}}"  >
+                            </x-jet-input>
+                            <x-jet-input id="width" type="number" step="0.01" min="0" placeholder="6 Month Charges" name="half_year" class="border p-2 w-1/4" value="{{$packagingSolution->half_year}}"  >
+                            </x-jet-input>
+                            <x-jet-input id="height" type="number" step="0.01" min="0" placeholder="Half Year" name="one_year" class="border p-2 w-1/4" value="{{$packagingSolution->one_year}}"  >
+                            </x-jet-input>
+                        </div>
 
                         <div class="flex space-x-5 mt-3">
                             <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="printing">

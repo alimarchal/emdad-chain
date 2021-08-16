@@ -82,7 +82,7 @@
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <label class="block font-medium text-lg font-bold text-gray-700 p-2 w-1/4" for="length">
-                                Dimensions (cm)
+                                Dimensions (cm)<sup>3<sup>
                             </label>
                             <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="Length" name="length" class="border p-2 w-1/4" value="{{old('length')}}">
                             </x-jet-input>
@@ -91,6 +91,41 @@
                             <x-jet-input id="height" type="number" step="0.01" min="0" placeholder="Height" name="height" class="border p-2 w-1/4" value="{{old('height')}}">
                             </x-jet-input>
                         </div>
+
+
+
+                        <div class="flex space-x-5 mt-3">
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="per_day">
+                                Per Day Charges (cm)<sup>3<sup> @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="month">
+                                1 Month Charges (cm)<sup>3<sup> @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="quarter">
+                                3 Month Charges (cm)<sup>3<sup> @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="half_year">
+                                6 Month Charges (cm)<sup>3<sup> @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="one_year">
+                                1 Year Charges (cm)<sup>3<sup> @include('misc.required')
+                            </label>
+                        </div>
+
+                        <div class="flex space-x-5 mt-3">
+                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="Per Day Charges" name="per_day" class="border p-2 w-1/4" value="{{old('per_day')}}">
+                            </x-jet-input>
+                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="1 Month Charges" name="month" class="border p-2 w-1/4" value="{{old('month')}}">
+                            </x-jet-input>
+                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="3 Month Charges" name="quarter" class="border p-2 w-1/4" value="{{old('quarter')}}">
+                            </x-jet-input>
+                            <x-jet-input id="width" type="number" step="0.01" min="0" placeholder="6 Month Charges" name="half_year" class="border p-2 w-1/4" value="{{old('half_year')}}">
+                            </x-jet-input>
+                            <x-jet-input id="height" type="number" step="0.01" min="0" placeholder="Half Year" name="one_year" class="border p-2 w-1/4" value="{{old('one_year')}}">
+                            </x-jet-input>
+                        </div>
+
+
 
 
                         <div class="flex space-x-5 mt-3">
