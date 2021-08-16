@@ -62,6 +62,7 @@ class DashboardController extends Controller
         return redirect()->back();
     }
 
+    /* redirecting to index page because of post method */
     public function languageChangeForPayment($lang, $rtl_value)
     {
         if (array_key_exists($lang, \Config::get('languages'))) {
@@ -72,6 +73,19 @@ class DashboardController extends Controller
         ]);
 
         return redirect()->route('paymentView');
+    }
+
+    /* redirecting to index page because of post method */
+    public function languageChangeForPackagePayment($lang, $rtl_value)
+    {
+        if (array_key_exists($lang, \Config::get('languages'))) {
+            \Session::put('applocale', $lang);
+        }
+        User::where('id', \auth()->user()->id)->update([
+            'rtl' => $rtl_value,
+        ]);
+
+        return redirect()->route('packages.index');
     }
 
     public function logistic_dashboard(Request $request)

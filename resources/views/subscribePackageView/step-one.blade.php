@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <div class="mb-10">
-                        <h1 class="text-center font-bold text-xl uppercase">Secure payment info</h1>
+                        <h1 class="text-center font-bold text-xl uppercase">{{__('portal.Secure payment info')}}</h1>
                     </div>
                     <div class="mb-3 flex -mx-2">
                         <div class="px-2">
@@ -132,15 +132,15 @@
 
 
                     <div class="mb-3">
-                        <label class="font-bold text-sm mb-2 ml-1">Email ID *</label>
+                        <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Email ID')}} *</label>
                         <div>
-                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Email" required name="customer.email" type="email"/>
+                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Email')}}" required name="customer.email" type="email"/>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <div>
-                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Billing address" required name="billing.street1" type="text"/>
+                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Billing address')}}" required name="billing.street1" type="text"/>
                         </div>
                     </div>
 
@@ -148,12 +148,12 @@
                     <div class="mb-3 -mx-2 flex items-end">
                         <div class="px-2 w-1/2">
                             <div>
-                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="City" required name="billing.city" type="text"/>
+                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.City')}}" required name="billing.city" type="text"/>
                             </div>
                         </div>
                         <div class="px-2 w-1/2">
                             <div>
-                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="State" required name="billing.state" type="text"/>
+                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.State')}}" required name="billing.state" type="text"/>
                             </div>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                     <div class="mb-3 -mx-2 flex items-end">
                         <div class="px-2 w-1/2">
 
-                            <label class="font-bold text-sm mb-2 ml-1">Country</label>
+                            <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Country')}}</label>
                             <div>
                                 <select class="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer" required name="billing.country">
                                     @foreach(\App\Models\User::countries_with_code() as $country => $code)
@@ -172,9 +172,9 @@
 
                         </div>
                         <div class="px-2 w-1/2">
-                            <label class="font-bold text-sm mb-2 ml-1">Postal Code</label>
+                            <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Postal Code')}}</label>
                             <div>
-                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Postcode"  pattern="[\s\S]{1,16}" required name="billing.postcode" type="text"/>
+                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Postcode')}}"  pattern="[\s\S]{1,16}" required name="billing.postcode" type="text"/>
                             </div>
                         </div>
                     </div>
@@ -183,29 +183,29 @@
                     <div class="mb-3 -mx-2 flex items-end">
                         <div class="px-2 w-1/2">
 
-                            <label class="font-bold text-sm mb-2 ml-1">Given Name</label>
+                            <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Given Name')}}</label>
                             <div>
-                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Given Name" required name="customer.givenName" type="text"/>
+                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Given Name')}}" required name="customer.givenName" type="text"/>
                             </div>
 
                         </div>
                         <div class="px-2 w-1/2">
-                            <label class="font-bold text-sm mb-2 ml-1">Surname</label>
+                            <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Surname')}}</label>
                             <div>
-                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Surname" required name="customer.surname" type="text"/>
+                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Surname')}}" required name="customer.surname" type="text"/>
                             </div>
                         </div>
                     </div>
 
 
                     <div class="mb-2">
-                        <button readonly disabled class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded">Amount: SAR {{number_format($amountToPay,2)}}</button>
+                        <button readonly disabled class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded">{{__('portal.Amount')}}: {{__('portal.SAR')}} {{number_format($amountToPay,2)}}</button>
                     </div>
 
                     <div>
                         <button class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">
                             <i class="mdi mdi-lock-outline mr-1"></i>
-                            Proceed
+                            {{__('portal.Proceed')}}
                         </button>
                     </div>
                 </div>
@@ -225,7 +225,7 @@
                         </div>
                     </div>
                     <div class="mb-10">
-                        <h1 class="text-center font-bold text-xl uppercase">Secure payment info</h1>
+                        <h1 class="text-center font-bold text-xl uppercase">{{__('portal.Secure payment info')}}</h1>
                     </div>
                     <div class="mb-3 flex -mx-2">
                         <div class="px-2">
@@ -244,15 +244,15 @@
 
 
                     <div class="mb-3">
-                        <label class="font-bold text-sm mb-2 ml-1">Email ID *</label>
+                        <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Email ID')}} *</label>
                         <div>
-                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Email" required name="customer.email" type="email"/>
+                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Email')}}" required name="customer.email" type="email"/>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <div>
-                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Billing address" required name="billing.street1" type="text"/>
+                            <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Billing address')}}" required name="billing.street1" type="text"/>
                         </div>
                     </div>
 
@@ -260,12 +260,12 @@
                     <div class="mb-3 -mx-2 flex items-end">
                         <div class="px-2 w-1/2">
                             <div>
-                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="City" required name="billing.city" type="text"/>
+                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.City')}}" required name="billing.city" type="text"/>
                             </div>
                         </div>
                         <div class="px-2 w-1/2">
                             <div>
-                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="State" required name="billing.state" type="text"/>
+                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.State')}}" required name="billing.state" type="text"/>
                             </div>
                         </div>
                     </div>
@@ -273,7 +273,7 @@
                     <div class="mb-3 -mx-2 flex items-end">
                         <div class="px-2 w-1/2">
 
-                            <label class="font-bold text-sm mb-2 ml-1">Country</label>
+                            <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Country')}}</label>
                             <div>
                                 <select class="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer" required name="billing.country">
                                     @foreach(\App\Models\User::countries_with_code() as $country => $code)
@@ -284,9 +284,9 @@
 
                         </div>
                         <div class="px-2 w-1/2">
-                            <label class="font-bold text-sm mb-2 ml-1">Postal Code</label>
+                            <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Postal Code')}}</label>
                             <div>
-                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Postcode"  pattern="[\s\S]{1,16}" required name="billing.postcode" type="text"/>
+                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Postcode')}}"  pattern="[\s\S]{1,16}" required name="billing.postcode" type="text"/>
                             </div>
                         </div>
                     </div>
@@ -295,29 +295,29 @@
                     <div class="mb-3 -mx-2 flex items-end">
                         <div class="px-2 w-1/2">
 
-                            <label class="font-bold text-sm mb-2 ml-1">Given Name</label>
+                            <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Given Name')}}</label>
                             <div>
-                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Given Name" required name="customer.givenName" type="text"/>
+                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Given Name')}}" required name="customer.givenName" type="text"/>
                             </div>
 
                         </div>
                         <div class="px-2 w-1/2">
-                            <label class="font-bold text-sm mb-2 ml-1">Surname</label>
+                            <label class="font-bold text-sm mb-2 ml-1">{{__('portal.Surname')}}</label>
                             <div>
-                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="Surname" required name="customer.surname" type="text"/>
+                                <input class="w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors" placeholder="{{__('portal.Surname')}}" required name="customer.surname" type="text"/>
                             </div>
                         </div>
                     </div>
 
 
                     <div class="mb-2">
-                        <button readonly disabled class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded">Amount: SAR {{number_format($package->charges,2)}}</button>
+                        <button readonly disabled class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded">{{__('portal.Amount')}}: {{__('portal.SAR')}} {{number_format($package->charges,2)}}</button>
                     </div>
 
                     <div>
                         <button class="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">
                             <i class="mdi mdi-lock-outline mr-1"></i>
-                            Proceed
+                            {{__('portal.Proceed')}}
                         </button>
                     </div>
                 </div>
@@ -331,3 +331,4 @@
 
 
 </x-app-layout>
+

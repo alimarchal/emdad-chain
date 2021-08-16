@@ -52,7 +52,12 @@
 
                         <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded shadow-md bg-gray-200 ">
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Category Name')}}:</strong> {{ $quotes[0]->orderItem->item_name }}
+                                <strong>{{__('portal.Category Name')}}:</strong>
+                                @php
+                                    $record = \App\Models\Category::where('id',$quotes[0]->orderItem->item_code)->first();
+                                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                @endphp
+                                {{ $record->name }} @if(isset($parent)), {{$parent->name}} @endif
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <strong>{{__('portal.Shipping Time In Days')}}:</strong> {{ $quotes[0]->shipping_time_in_days }}
@@ -101,8 +106,8 @@
                         <form action="{{ route('QuotationMessage.store') }}" class="rounded shadow-md" method="post">
                             @csrf
                             @php $business = \App\Models\Business::where('user_id', $quotes[0]->supplier_user_id)->first(); @endphp
-                            <h1 class="text-center text-2xl mt-4">Message to <span class="text-blue-600">{{$business->business_name}}</span>
-                                <span style="font-size: 20px;">(supplier)</span></h1>
+                            <h1 class="text-center text-2xl mt-4">{{__('portal.Message to')}} <span class="text-blue-600">{{$business->business_name}}</span>
+                                <span style="font-size: 20px;">({{__('portal.supplier')}})</span></h1>
                             <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Message..." required></textarea>
                             <x-jet-input-error for="message" class="mt-2" />
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -170,7 +175,7 @@
                             <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" name="address" value="{{$warehouseAddress->address}}" readonly>
 
                             <x-jet-label for="Remarks" value="{{ __('portal.Remarks') }}" class="text-black"  />
-                            <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Remarks.."></textarea>
+                            <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Remarks')}}.."></textarea>
 
                             <x-jet-label for="payment_term" class="my-2" value="{{ __('portal.Payment Term') }}" class="text-black"  />
                             <select name="payment_term" id="payment_term" class="form-input rounded-md shadow-sm border p-2 w-full" readonly>
@@ -253,7 +258,12 @@
 
                         <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded shadow-md bg-gray-200 ">
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Category Name')}}:</strong> {{ $quotes[0]->orderItem->item_name }}
+                                <strong>{{__('portal.Category Name')}}:</strong>
+                                @php
+                                    $record = \App\Models\Category::where('id',$quotes[0]->orderItem->item_code)->first();
+                                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                @endphp
+                                {{ $record->name_ar }} @if(isset($parent)), {{$parent->name_ar}} @endif
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <strong>{{__('portal.Shipping Time In Days')}}:</strong> {{ $quotes[0]->shipping_time_in_days }}
@@ -302,9 +312,9 @@
                         <form action="{{ route('QuotationMessage.store') }}" class="rounded shadow-md" method="post">
                             @csrf
                             @php $business = \App\Models\Business::where('user_id', $quotes[0]->supplier_user_id)->first(); @endphp
-                            <h1 class="text-center text-2xl mt-4">Message to <span class="text-blue-600">{{$business->business_name}}</span>
-                                <span style="font-size: 20px;">(supplier)</span></h1>
-                            <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Message..." required></textarea>
+                            <h1 class="text-center text-2xl mt-4">{{__('portal.Message to')}} <span class="text-blue-600">{{$business->business_name}}</span>
+                                <span style="font-size: 20px;">({{__('portal.supplier')}})</span></h1>
+                            <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Message')}}..." required></textarea>
                             <x-jet-input-error for="message" class="mt-2" />
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="qoute_id" value="{{ $quotes[0]->id }}">
@@ -371,7 +381,7 @@
                             <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" name="address" value="{{$warehouseAddress->address}}" readonly>
 
                             <x-jet-label for="Remarks" value="{{ __('portal.Remarks') }}" class="text-black"  />
-                            <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Remarks.."></textarea>
+                            <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Remarks')}}.."></textarea>
 
                             <x-jet-label for="payment_term" class="my-2" value="{{ __('portal.Payment Term') }}" class="text-black"  />
                             <select name="payment_term" id="payment_term" class="form-input rounded-md shadow-sm border p-2 w-full" readonly>
