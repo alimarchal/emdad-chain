@@ -75,11 +75,11 @@
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                    <a href="{{(isset($business->vat_reg_certificate_path)?Storage::url($business->vat_reg_certificate_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->vat_reg_certificate_path)?'VAT Certificate':'Not Uploaded')}}</a>
+                                    <a href="{{(isset($business->vat_reg_certificate_path)?Storage::url($business->vat_reg_certificate_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->vat_reg_certificate_path)? __('portal.Vat certificate') : __('portal.Not Uploaded') )}}</a>
                                 </div>
 
                                 <div class="w-full overflow-hidden mb-2 lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                    <a href="{{(isset($business->chamber_reg_path)?Storage::url($business->chamber_reg_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->chamber_reg_path)?'Commercial Registration Certificate':'Not Uploaded')}}</a>
+                                    <a href="{{(isset($business->chamber_reg_path)?Storage::url($business->chamber_reg_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->chamber_reg_path)? __('portal.Commercial Registration Certificate') : __('portal.Not Uploaded') )}}</a>
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
@@ -87,7 +87,7 @@
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                    <a href="{{(isset($business->business_photo_url)?Storage::url($business->business_photo_url):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->business_photo_url)?'Business Logo':'Not Uploaded')}}</a>
+                                    <a href="{{(isset($business->business_photo_url)?Storage::url($business->business_photo_url):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->business_photo_url)? __('portal.Business Logo') : __('portal.Not Uploaded') )}}</a>
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
@@ -96,7 +96,7 @@
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 min-h-16 text-lg text-black mb-2">
                                     @if(isset($business->user->nid_photo) && $business->user->nid_photo != null)
-                                        <a href="{{(isset($business->user->nid_photo)?Storage::url($business->user->nid_photo):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->user->nid_photo)?'National ID Photo':'Not Uploaded')}}</a>
+                                        <a href="{{(isset($business->user->nid_photo)?Storage::url($business->user->nid_photo):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->user->nid_photo)? __('portal.National ID Card Photo') : __('portal.Not Uploaded') )}}</a>
                                     @else
                                         <span class="text-red-600 text-sm">{{__('portal.Upload National ID Photo')}}: </span>
                                         <a class="text-blue-600 visited:text-purple-600 py-1">
@@ -139,7 +139,15 @@
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                    <p><strong>{{__('portal.Supplier/Client')}}:</strong> {{$business->user->registration_type ?? ''}}</p>
+                                    <p><strong>{{__('portal.Supplier/Client')}}:</strong>
+{{--                                        {{$business->user->registration_type ?? ''}}--}}
+                                        @if(isset($business->user->registration_type))
+                                            @if($business->user->registration_type == 'Buyer') {{__('portal.Buyer')}}
+                                            @elseif($business->user->registration_type == 'Supplier') {{__('portal.Supplier')}}
+                                            @else {{__('portal.N/A')}}
+                                            @endif
+                                        @endif
+                                    </p>
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
@@ -159,7 +167,10 @@
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                    <p><strong>{{__('portal.Type')}}: </strong> {{(isset($po->type) ? $po->type : 'N/A')}}</p>
+                                    <p><strong>{{__('portal.Type')}}: </strong>
+{{--                                        {{(isset($po->type) ? $po->type : 'N/A')}}--}}
+                                        @if(isset($po->type))  @if($po->type == 'Cash') {{__('portal.Cash')}} @elseif($po->type == 'Credit')  {{__('portal.Credit')}} @else {{$po->type}} @endif @endif
+                                    </p>
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
@@ -306,11 +317,11 @@
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                    <a href="{{(isset($business->vat_reg_certificate_path)?Storage::url($business->vat_reg_certificate_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->vat_reg_certificate_path)?'VAT Certificate':'Not Uploaded')}}</a>
+                                    <a href="{{(isset($business->vat_reg_certificate_path)?Storage::url($business->vat_reg_certificate_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->vat_reg_certificate_path)? __('portal.Vat certificate') : __('portal.Not Uploaded') )}}</a>
                                 </div>
 
                                 <div class="w-full overflow-hidden mb-2 lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                    <a href="{{(isset($business->chamber_reg_path)?Storage::url($business->chamber_reg_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->chamber_reg_path)?'Commercial Registration Certificate':'Not Uploaded')}}</a>
+                                    <a href="{{(isset($business->chamber_reg_path)?Storage::url($business->chamber_reg_path):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->chamber_reg_path)? __('portal.Commercial Registration Certificate') : __('portal.Not Uploaded') )}}</a>
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
@@ -318,7 +329,7 @@
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                    <a href="{{(isset($business->business_photo_url)?Storage::url($business->business_photo_url):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->business_photo_url)?'Business Logo':'Not Uploaded')}}</a>
+                                    <a href="{{(isset($business->business_photo_url)?Storage::url($business->business_photo_url):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->business_photo_url)? __('portal.Business Logo') : __('portal.Not Uploaded') )}}</a>
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
@@ -327,7 +338,7 @@
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 min-h-16 text-lg text-black mb-2">
                                     @if(isset($business->user->nid_photo) && $business->user->nid_photo != null)
-                                        <a href="{{(isset($business->user->nid_photo)?Storage::url($business->user->nid_photo):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->user->nid_photo)?'National ID Photo':'Not Uploaded')}}</a>
+                                        <a href="{{(isset($business->user->nid_photo)?Storage::url($business->user->nid_photo):'#')}}" class="text-blue-600 visited:text-purple-600" target="blank">{{(isset($business->user->nid_photo)? __('portal.National ID Card Photo') : __('portal.Not Uploaded') )}}</a>
                                     @else
                                         <span class="text-red-600 text-sm">{{__('portal.Upload National ID Photo')}}: </span>
                                         <a class="text-blue-600 visited:text-purple-600 py-1">
@@ -350,7 +361,10 @@
                                 </div>
 
                                 <div class="w-full overflow-hidden mb-2 lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                    <p><strong>{{__('portal.Bank Name')}}:</strong> {{$business->bank_name}}</p>
+                                    <p><strong>{{__('portal.Bank Name')}}:</strong>
+                                        @php $bankName = \App\Models\Bank::where('name', $business->bank_name)->pluck('ar_name')->first(); @endphp
+                                        {{$bankName}}
+                                    </p>
                                 </div>
 
                                 <div class="w-full overflow-hidden mb-2 lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
@@ -370,7 +384,14 @@
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                    <p><strong>{{__('portal.Supplier/Client')}}:</strong> {{$business->user->registration_type ?? ''}}</p>
+                                    <p><strong>{{__('portal.Supplier/Client')}}:</strong>
+                                        @if(isset($business->user->registration_type))
+                                            @if($business->user->registration_type == 'Buyer') {{__('portal.Buyer')}}
+                                            @elseif($business->user->registration_type == 'Supplier') {{__('portal.Supplier')}}
+                                            @else {{__('portal.N/A')}}
+                                            @endif
+                                        @endif
+                                    </p>
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
@@ -390,7 +411,10 @@
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                    <p><strong>{{__('portal.Type')}}: </strong> {{(isset($po->type) ? $po->type : 'N/A')}}</p>
+                                    <p><strong>{{__('portal.Type')}}: </strong>
+{{--                                        {{(isset($po->type) ? $po->type : 'N/A')}}--}}
+                                        @if(isset($po->type))  @if($po->type == 'Cash') {{__('portal.Cash')}} @elseif($po->type == 'Credit')  {{__('portal.Credit')}} @else {{$po->type}} @endif @endif
+                                    </p>
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">

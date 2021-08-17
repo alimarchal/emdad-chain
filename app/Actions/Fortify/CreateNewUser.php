@@ -45,7 +45,7 @@ class CreateNewUser implements CreatesNewUsers
         $input['mobile'] = str_replace('-', '', $input['mobile']);
 
         $user = null;
-        if ($input['service'] == 2) {
+        if ($input['service'] == 3) {
             $user = User::create([
                 'gender' => $input['gender'],
                 'name' => $input['name'],
@@ -59,7 +59,7 @@ class CreateNewUser implements CreatesNewUsers
                 'usertype' => 'Logistics Solution',
                 'logistic_solution' => 1,
             ]);
-        } else {
+        } elseif ($input['service'] == 1) {
             $user = User::create([
                 'gender' => $input['gender'],
                 'name' => $input['name'],
@@ -70,6 +70,21 @@ class CreateNewUser implements CreatesNewUsers
                 'mobile' => $input['mobile'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
+                'registration_type' => 'Buyer',
+                'usertype' => 'CEO',
+            ]);
+        } elseif ($input['service'] == 2) {
+            $user = User::create([
+                'gender' => $input['gender'],
+                'name' => $input['name'],
+                'middle_initial' => $input['middle_initial'],
+                'family_name' => $input['family_name'],
+                'nid_num' => $input['nid_num'],
+                'nid_exp_date' => $input['nid_exp_date'],
+                'mobile' => $input['mobile'],
+                'email' => $input['email'],
+                'password' => Hash::make($input['password']),
+                'registration_type' => 'Supplier',
                 'usertype' => 'CEO',
             ]);
         }
@@ -83,7 +98,7 @@ class CreateNewUser implements CreatesNewUsers
 
 
         if ($input['referred_no'] == null || $input['referred_no'] == ' ') {
-            if ($input['service'] == 2) {
+            if ($input['service'] == 3) {
                 $role = Role::findByName('Logistics Solution');
                 $user->assignRole($role);
                 return $user;
@@ -105,7 +120,7 @@ class CreateNewUser implements CreatesNewUsers
         }
 
 
-        if ($input['service'] == 2) {
+        if ($input['service'] == 3) {
             $role = Role::findByName('Logistics Solution');
             $user->assignRole($role);
         } else {

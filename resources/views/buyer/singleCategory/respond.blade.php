@@ -38,7 +38,7 @@
 
                             <div>
                                 <h2 class="text-left text-2xl font-bold py-2">
-                                    Status:
+                                    {{__('portal.Status')}}:
                                     @if ($quotes[0]->qoute_status == 'Modified')
                                         <span class="overflow-hidden xl:-mx-1 rounded shadow-md bg-gray-400">{{__('portal.You have asked for a modification for this quotation.')}}</span>
                                     @elseif($quotes[0]->qoute_status == 'Qouted')
@@ -77,7 +77,7 @@
                         @foreach($quotes as $quote)
                             <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded shadow-md ">
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                    <strong>{{__('portal.Sr #')}}: {{ $loop->iteration }}</strong>
+                                    <strong>{{__('portal.Sr #')}} : {{ $loop->iteration }}</strong>
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                     <strong>{{__('portal.Quote Quantity')}}:</strong> {{ $quote->quote_quantity }}
@@ -244,7 +244,7 @@
 
                             <div>
                                 <h2 class="text-left text-2xl font-bold py-2">
-                                    Status:
+                                    {{__('portal.Status')}}:
                                     @if ($quotes[0]->qoute_status == 'Modified')
                                         <span class="overflow-hidden xl:-mx-1 rounded shadow-md bg-gray-400">{{__('portal.You have asked for a modification for this quotation.')}}</span>
                                     @elseif($quotes[0]->qoute_status == 'Qouted')
@@ -283,7 +283,7 @@
                         @foreach($quotes as $quote)
                             <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded shadow-md ">
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                    <strong>{{__('portal.Sr #')}}: {{ $loop->iteration }}</strong>
+                                    <strong>{{__('portal.Sr #')}} : {{ $loop->iteration }}</strong>
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                     <strong>{{__('portal.Quote Quantity')}}:</strong> {{ $quote->quote_quantity }}

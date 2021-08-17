@@ -171,13 +171,14 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
-                            <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
-                                <strong>{{__('portal.Remarks')}}: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br>
-                                {{--                            <strong>Warranty: </strong> {{ $draftPurchaseOrder->warranty }} <br>--}}
+                        @if(isset($draftPurchaseOrder->remarks))
+                            <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
+                                <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
+                                    <strong>{{__('portal.Remarks')}}: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br>
+                                    {{--                            <strong>Warranty: </strong> {{ $draftPurchaseOrder->warranty }} <br>--}}
+                                </div>
                             </div>
-                        </div>
-
+                        @endif
 
                     </div>
                 </div>
@@ -315,12 +316,14 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
-                            <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
-                                <strong>{{__('portal.Remarks')}}: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br>
-                                {{--                            <strong>Warranty: </strong> {{ $draftPurchaseOrder->warranty }} <br>--}}
+                        @if(isset($draftPurchaseOrder->remarks))
+                            <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
+                                <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
+                                    <strong>{{__('portal.Remarks')}}: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br>
+                                    {{--                            <strong>Warranty: </strong> {{ $draftPurchaseOrder->warranty }} <br>--}}
+                                </div>
                             </div>
-                        </div>
+                        @endif
 
 
                     </div>

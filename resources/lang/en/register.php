@@ -13,6 +13,8 @@ return [
     'Reference (If any)' => 'Reference (If any)',
     'Register as' => 'Register as',
     'CEO' => 'CEO',
+    'CEO (Supplier)' => 'CEO (Supplier)',
+    'CEO (Buyer)' => 'CEO (Buyer)',
     'Logistics Solution' => 'Logistics Solution Provider',
     'Title' => 'Title',
     'Select' => 'Select',

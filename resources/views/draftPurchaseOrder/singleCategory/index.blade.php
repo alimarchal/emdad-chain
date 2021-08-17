@@ -71,7 +71,13 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dpo->item_name }}</a>
+                                                        <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                            @php
+                                                                $record = \App\Models\Category::where('id',$dpo->item_code)->first();
+                                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                            @endphp
+                                                            {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif
+                                                        </a>
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -189,7 +195,13 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dpo->item_name }}</a>
+                                                        <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                            @php
+                                                                $record = \App\Models\Category::where('id',$dpo->item_code)->first();
+                                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                            @endphp
+                                                            {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif
+                                                        </a>
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">

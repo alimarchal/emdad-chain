@@ -171,9 +171,9 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        <form method="POST" action="{{ route('single_cart_destroy', $rfp->id) }}" class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
+                                        <form method="POST" action="{{ route('single_cart_destroy', $rfp->id) }}" class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
                                             @csrf
-                                            <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE">
+                                            <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="{{__('portal.DELETE')}}">
                                                 <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="orange">
                                                     <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
                                                     <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"/>
@@ -231,7 +231,7 @@
 
         @if (session()->has('message'))
             <div class="block mt-2 text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                <strong class="mr-1">{{ session('message') }}</strong>
+                <strong class="mr-3">{{ session('message') }}</strong>
                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                     <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                 </button>
@@ -239,7 +239,7 @@
         @endif
         @if (session()->has('error'))
             <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                <strong class="mr-1">{{ session('error') }}</strong>
+                <strong class="mr-3">{{ session('error') }}</strong>
                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                     <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                 </button>
@@ -255,63 +255,63 @@
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200" id="cart">
                             <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    #
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    {{__('portal.Category Name')}}
-                                </th>
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        #
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Category Name')}}
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    {{__('portal.Brand')}}
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Brand')}}
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    {{__('portal.Description')}}
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    {{__('portal.Unit')}}
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    {{__('portal.Size')}}
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    {{__('portal.Quantity')}}
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Description')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Unit')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Size')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Quantity')}}
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    {{__('portal.Last Price')}}
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Last Price')}}
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    {{__('portal.Delivery Period')}}
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Delivery Period')}}
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    {{__('portal.Payment Mode')}}
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Payment Mode')}}
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    {{__('portal.Remarks')}}
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Remarks')}}
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="{{__('portal.Display')}} {{auth()->user()->business->business_name}} {{__('portal.in the Requisition')}}">
-                                    {{__('portal.Display Company Name')}}
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="{{__('portal.Display')}} {{auth()->user()->business->business_name}} {{__('portal.in the Requisition')}}">
+                                        {{__('portal.Display Company Name')}}
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Attachment">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
-                                        </path>
-                                    </svg>
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Attachment">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
+                                            </path>
+                                        </svg>
+                                    </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                    {{__('portal.Action')}}
-                                </th>
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Action')}}
+                                    </th>
 
-                            </tr>
+                                </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($eCart as $rfp)
@@ -404,9 +404,9 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        <form method="POST" action="{{ route('single_cart_destroy', $rfp->id) }}" class="inline confirm" data-confirm = 'Are you sure you want to delete?'>
+                                        <form method="POST" action="{{ route('single_cart_destroy', $rfp->id) }}" class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
                                             @csrf
-                                            <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE">
+                                            <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="{{__('portal.DELETE')}}">
                                                 <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="orange">
                                                     <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
                                                     <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"/>

@@ -13,6 +13,8 @@ return [
     'Reference (If any)' => 'المرجع (ان وجد)',
     'Register as' => 'التسجيل بصفتك',
     'CEO' => 'رئيس تنفيذي',
+    'CEO (Supplier)' => 'الرئيس التنفيذي (المورّد)',
+    'CEO (Buyer)' => 'الرئيس التنفيذي (المشتري)',
     'Logistics Solution' => 'مقدم حلول لوجستية ',
     'Title' => 'اللقب',
     'Select' => 'اختر',

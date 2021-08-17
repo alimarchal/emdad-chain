@@ -159,7 +159,8 @@
                                             {{$biz->name}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
-                                            {{$biz->designation}}
+{{--                                            {{$biz->designation}}--}}
+                                            @if($biz->designation == 'CEO') {{__('portal.CEO')}} @else {{$biz->designation}} @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
                                             {{$biz->landline}}

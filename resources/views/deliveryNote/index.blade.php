@@ -66,7 +66,7 @@
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        {{__('portal.P.O. Status')}}
+                                                        {{__('portal.P.O Status')}}
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -254,7 +254,7 @@
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        {{__('portal.P.O. Status')}}
+                                                        {{__('portal.P.O Status')}}
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">

@@ -199,7 +199,7 @@
                     <button readonly disabled class="px-4 pt-3 pb-3 text-white font-light tracking-wider bg-gray-900 rounded w-full">{{__('portal.Amount: SAR')}} {{number_format($invoice->total_cost,2)}} <br><br> {{__('portal.Online Charges For MADA (1.75%)')}}: {{number_format($invoice->total_cost*0.0175,2)}} <br> {{__('portal.Total MADA (If you choose MADA)')}}: {{number_format((($invoice->total_cost)+$invoice->total_cost*0.0175),2)}} </button>
                     <br>
                     <br>
-                    <button readonly disabled class="px-4 pt-3 pb-3 text-white font-light tracking-wider bg-red-900 rounded w-full">{{__('portal.Amount: SAR')}} {{number_format($invoice->total_cost,2)}} <br><br> {{__('portal.Online Charges For VISA/MASTER (2.50%): SAR')}} {{number_format($invoice->total_cost*0.0250,2)}} <br> {{__('portal.Total (If you choose VISA/MASTER)')}}: SAR {{number_format((($invoice->total_cost)+$invoice->total_cost*0.0250)+1,2)}} </button>
+                    <button readonly disabled class="px-4 pt-3 pb-3 text-white font-light tracking-wider bg-red-900 rounded w-full">{{__('portal.Amount: SAR')}} {{number_format($invoice->total_cost,2)}} <br><br> {{__('portal.Online Charges For VISA/MASTER (2.50%): SAR')}} {{number_format($invoice->total_cost*0.0250,2)}} <br> {{__('portal.Total (If you choose VISA/MASTER)')}}: {{__('portal.SAR')}} {{number_format((($invoice->total_cost)+$invoice->total_cost*0.0250)+1,2)}} </button>
                 </div>
 
                 <div>

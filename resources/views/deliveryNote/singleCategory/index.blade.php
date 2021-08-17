@@ -137,7 +137,12 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            <a class="hover:text-blue-900 hover:underline text-blue-900">{{$dpo->status}}</a>
+                                                            <a class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                @if($dpo->status == 'cancel') {{__('portal.Cancel')}} @endif
+                                                                @if($dpo->status == 'approved') {{__('portal.approved')}} @endif
+                                                                @if($dpo->status == 'completed') {{__('portal.Completed')}} @endif
+                                                                @if($dpo->status == 'pending') {{__('portal.pending')}} @endif
+                                                            </a>
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -317,7 +322,12 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            <a class="hover:text-blue-900 hover:underline text-blue-900">{{$dpo->status}}</a>
+                                                            <a class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                @if($dpo->status == 'cancel') {{__('portal.Cancel')}} @endif
+                                                                @if($dpo->status == 'approved') {{__('portal.approved')}} @endif
+                                                                @if($dpo->status == 'completed') {{__('portal.Completed')}} @endif
+                                                                @if($dpo->status == 'pending') {{__('portal.pending')}} @endif
+                                                            </a>
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">

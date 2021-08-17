@@ -148,7 +148,7 @@
                                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                                     <div class="flex items-center">
                                                                         <div class="flex-shrink-0 h-10 w-10">
-                                                                            <img class="h-3xl w-24 rounded-full" src="{{ empty($user->profile_photo_path) ? Storage::url('images.png') : Storage::url($user->profile_photo_path) }}" alt="Profile Picture">
+                                                                            <img class="h-3xl w-24 rounded-full" src="{{ empty($user->profile_photo_path) ? Storage::url('images.png') : Storage::url($user->profile_photo_path) }}" alt="{{__('portal.Profile Picture')}}">
                                                                             <!-- https://images.unsplash.com/photo-1584824486539-53bb4646bdbc?&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60 -->
                                                                         </div>
                                                                         <div class="ml-4">
@@ -363,9 +363,9 @@
                         @elseif(auth()->user()->registration_type == 'Buyer')
                             @if(auth()->user()->usertype != 'SuperAdmin')
                                 @if($userRemaining != 0)
-                                    <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
+                                    <div class="mt-5" style=" margin-right: 30px; margin-bottom: 10px ">
                                         <a href="{{ route('users.create') }}"
-                                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                             {{__('portal.Add User')}}
                                         </a>
                                     </div>
@@ -411,7 +411,7 @@
                                                             <td class="px-6 py-4 whitespace-nowrap">
                                                                 <div class="flex items-center">
                                                                     <div class="flex-shrink-0 h-10 w-10">
-                                                                        <img class="h-3xl w-24 rounded-full" src="{{ empty($user->profile_photo_path) ? Storage::url('images.png') : Storage::url($user->profile_photo_path) }}" alt="Profile Picture">
+                                                                        <img class="h-3xl w-24 rounded-full" src="{{ empty($user->profile_photo_path) ? Storage::url('images.png') : Storage::url($user->profile_photo_path) }}" alt="{{__('portal.Profile Picture')}}">
                                                                         <!-- https://images.unsplash.com/photo-1584824486539-53bb4646bdbc?&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60 -->
                                                                     </div>
                                                                     <div class="ml-4">

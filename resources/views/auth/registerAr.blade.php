@@ -51,8 +51,9 @@
                     <x-jet-label for="service" value="{{ __('register.Register as') }}" class="mb-2"/>
                     <select name="service" id="service" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name">
                         <option value="">{{ __('register.Select')}}</option>
-                        <option value="1">{{__('register.CEO')}}</option>
-                        <option value="2">{{__('register.Logistics Solution')}}</option>
+                        <option {{old('service') == 1 ? 'selected' : ''}} value="1">{{__('register.CEO (Buyer)')}}</option>
+                        <option {{old('service') == 2 ? 'selected' : ''}} value="2">{{__('register.CEO (Supplier)')}}</option>
+                        <option {{old('service') == 3 ? 'selected' : ''}} value="3">{{__('register.Logistics Solution')}}</option>
                     </select>
                 </div>
 

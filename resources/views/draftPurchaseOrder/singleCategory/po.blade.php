@@ -136,15 +136,15 @@
                                                                     </form>--}}
                                                                     @php $invoice = \App\Models\Invoice::where('draft_purchase_order_id', $po->id)->first(); @endphp
                                                                     @if($po->status == 'approved' && auth()->user()->registration_type == 'Supplier')
-                                                                        <span>Create delivery Note</span>
+                                                                        <span>{{__('portal.Create delivery Note')}}</span>
                                                                     @elseif(!isset($invoice) && auth()->user()->registration_type == 'Supplier')
-                                                                        <span>Generate Final Invoice</span>
+                                                                        <span>{{__('portal.Generate Final Invoice')}}</span>
                                                                     @elseif($po->status == 'approved' && auth()->user()->registration_type == 'Buyer')
-                                                                        <span>Invoice not generated</span>
+                                                                        <span>{{__('portal.Invoice not generated')}}</span>
                                                                     @elseif(!isset($invoice) && auth()->user()->registration_type == 'Buyer')
-                                                                        <span>Invoice not generated</span>
+                                                                        <span>{{__('portal.Invoice not generated')}}</span>
                                                                     @elseif(isset($invoice))
-                                                                        <span>Invoice generated</span>
+                                                                        <span>{{__('portal.Invoice generated')}}</span>
                                                                     @endif
                                                                 @endif
                                                             @endif
@@ -333,15 +333,15 @@
                                                                     </form>--}}
                                                                     @php $invoice = \App\Models\Invoice::where('draft_purchase_order_id', $po->id)->first(); @endphp
                                                                     @if($po->status == 'approved' && auth()->user()->registration_type == 'Supplier')
-                                                                        <span>Create delivery Note</span>
+                                                                        <span>{{__('portal.Create delivery Note')}}</span>
                                                                     @elseif(!isset($invoice) && auth()->user()->registration_type == 'Supplier')
-                                                                        <span>Generate Final Invoice</span>
+                                                                        <span>{{__('portal.Generate Final Invoice')}}</span>
                                                                     @elseif($po->status == 'approved' && auth()->user()->registration_type == 'Buyer')
-                                                                        <span>Invoice not generated</span>
+                                                                        <span>{{__('portal.Invoice not generated')}}</span>
                                                                     @elseif(!isset($invoice) && auth()->user()->registration_type == 'Buyer')
-                                                                        <span>Invoice not generated</span>
+                                                                        <span>{{__('portal.Invoice not generated')}}</span>
                                                                     @elseif(isset($invoice))
-                                                                        <span>Invoice generated</span>
+                                                                        <span>{{__('portal.Invoice generated')}}</span>
                                                                     @endif
                                                                 @endif
                                                             @endif

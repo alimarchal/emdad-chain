@@ -235,7 +235,7 @@
             <div class="max-w-7xl mx-auto sm:px-2 lg:2x-8">
                 <div class="bg-white overflow-hidden shadow-xl ">
                     <div class="mt-5" style=" margin-right: 30px; margin-bottom: 10px ">
-                        <a href="{{ route('generatePDF', $draftPurchaseOrder) }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                        <a href="{{ route('generatePDF', $draftPurchaseOrder) }}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                             {{__('portal.Create PDF')}}
                         </a>
                     </div>
@@ -297,30 +297,30 @@
                         <table class="min-w-full divide-y divide-black ">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider">
                                         #
                                     </th>
-                                    {{--<th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                    {{--<th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider">
                                         Category Number
                                     </th>--}}
-                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider">
                                         {{__('portal.Quantity')}}
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider">
                                         {{__('portal.Unit Price')}}
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider">
                                         {{__('portal.UOM')}}
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider">
                                         {{__('portal.Brand')}}
                                     </th>
 
-                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider">
                                         {{__('portal.Remarks')}}
                                     </th>
 
-                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider">
                                         {{__('portal.Amount')}}
                                     </th>
                                 </tr>
