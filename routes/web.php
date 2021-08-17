@@ -618,6 +618,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::put('logisticsBusiness/{logisticsBusiness}', [\App\Http\Controllers\LogisticsBusinessController::class, 'update'])->name('logistics.update');
     Route::get('logisticsBusiness', [\App\Http\Controllers\LogisticsBusinessController::class, 'index'])->name('logistics.index');
     Route::resource('packagingSolution', \App\Http\Controllers\PackagingSolutionController::class);
+    Route::resource('storageSolution', \App\Http\Controllers\StorageSolutionController::class);
 });
 
 

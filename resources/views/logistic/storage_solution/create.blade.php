@@ -39,7 +39,7 @@
                     <form action="{{route('packagingSolution.store')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         <x-jet-validation-errors class="mb-4"/>
                         @csrf
-                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Packaging Solution</h3>
+                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Storage Solution</h3>
                         <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                         <input type="hidden" name="logistics_businesse_id" value="{{auth()->user()->logistics_business_id}}">
                         <div class="flex space-x-5 mt-3">
@@ -51,19 +51,31 @@
                                 Weight/Piece (Kg) @include('misc.required')
                             </label>
 
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="forklift">
-                                Forklift / Manual @include('misc.required')
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="temprature_ctrl">
+                                Temperature Control @include('misc.required')
                             </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="temprature_ctrl_max">
+                                Min @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="temprature_ctrl_min">
+                                Max @include('misc.required')
+                            </label>
+
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <x-jet-input id="box_quantity_pieces" type="number" step="0" min="1" placeholder="e.g 500" name="box_quantity_pieces" class="border p-2 w-1/2" value="{{old('box_quantity_pieces')}}" required></x-jet-input>
                             <x-jet-input id="weight_piece" type="number" step="0" min="1" placeholder="Weight/Piece (Kg)" name="weight_piece" class="border p-2 w-1/2" value="{{old('box_quantity_pieces')}}" required></x-jet-input>
-
-                            <select id="forklift" name="forklift" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
+                            <select id="temprature_ctrl" name="temprature_ctrl" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
                                 <option value="">None</option>
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
                             </select>
+                            <x-jet-input id="temprature_ctrl_max" type="number" step="0.01" min="0" placeholder="MAX" name="temprature_ctrl_max" class="border p-2 w-1/2" value="{{old('temprature_ctrl_max')}}">
+                            </x-jet-input>
+
+                            <x-jet-input id="temprature_ctrl_min" type="number" step="0.01" min="0" placeholder="MIN" name="temprature_ctrl_min" class="border p-2 w-1/2" value="{{old('one_year')}}">
+                            </x-jet-input>
+
                         </div>
 
                         <div class="flex space-x-5 mt-3">
@@ -132,12 +144,7 @@
                             <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="one_year">
                                 1 Year Charges (cm)<sup>3<sup> @include('misc.required')
                             </label>
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="printing">
-                                Printing @include('misc.required')
-                            </label>
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="printing_design">
-                                Printing Design (if yes)
-                            </label>
+
                             <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="commodity_type">
                                 Commodity Type @include('misc.required')
                             </label>
@@ -148,16 +155,10 @@
 
 
                         <div class="flex space-x-5 mt-3">
+
+
                             <x-jet-input id="height" type="number" step="0.01" min="0" placeholder="1 Year" name="one_year" class="border p-2 w-1/2" value="{{old('one_year')}}">
                             </x-jet-input>
-                            <select id="printing" name="printing" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
-                                <option value="">None</option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
-
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="printing_design" type="file" name="printing_design_1">
-
                             <select id="commodity_type" name="commodity_type" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
                                 <option value="">None</option>
                                 <option value="General">General</option>
@@ -198,7 +199,7 @@
 
 
                         <br>
-                        <p>Please use the map marker for your solution location.</p>
+                        <p>Please use the map marker for location pickup.</p>
                         <br>
                         <div id="map" style="width:100%;height:400px; ">
                             <div style="width: 100%; height: 100%" id="address-map"></div>

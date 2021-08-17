@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePackagingSolutionsTable extends Migration
+class CreateStorageSolutionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,19 @@ class CreatePackagingSolutionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('packaging_solutions', function (Blueprint $table) {
+        Schema::create('storage_solutions', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
             $table->integer('logistics_businesse_id');
             $table->integer('box_quantity_pieces')->nullable();
-            $table->integer('weight_piece')->nullable();
-            $table->boolean('forklift')->nullable();
+            $table->unsignedDouble('weight_piece')->default(0);
+            $table->boolean('forklift')->nullable(); //
             $table->decimal('length',11,2)->nullable();
             $table->decimal('width',11,2)->nullable();
             $table->decimal('height',11,2)->nullable();
-            $table->string('printing',191)->nullable();
-            $table->string('printing_design',191)->nullable();
+            $table->boolean('temprature_ctrl')->default(0);
+            $table->integer('temprature_ctrl_max')->default(0);
+            $table->integer('temprature_ctrl_min')->default(0);
             $table->string('commodity_type',191)->nullable();
             $table->string('commodity_information',191)->nullable();
             $table->string('msds',191)->nullable();
@@ -49,6 +50,6 @@ class CreatePackagingSolutionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('packaging_solutions');
+        Schema::dropIfExists('storage_solutions');
     }
 }
