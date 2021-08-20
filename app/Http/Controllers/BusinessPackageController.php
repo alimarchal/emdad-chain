@@ -16,9 +16,27 @@ class BusinessPackageController extends Controller
 {
     public function getCheckOutId(Request $request)
     {
-        $package = Package::where('id', $request->package_id)->first();
-        $businessPackage = BusinessPackage::where('id', $request->business_package_id)->first();
-        $amountToPay = $request->amountToPay;
+        $package = Package::where('id', decrypt($request->package_id))->first();
+//        $businessPackage = BusinessPackage::where('id', decrypt($request->business_package_id))->first();
+
+        $businessPackage = BusinessPackage::with('package')->where(['user_id' => auth()->id(), 'status' => 1])->first();
+        $startDate = Carbon::parse($businessPackage->subscription_start_date);
+        $now = Carbon::now();
+        $usedDays = $now->diffInDays($startDate);
+        $balance = 0;
+        $amountToPay = 0;
+        if ($businessPackage->package->id != 1 && $businessPackage->package->id != 5)
+        {
+            $currentAmountUsed = ($businessPackage->package->charges * $usedDays) / 365 ;
+            $balance += $businessPackage->package->charges - $currentAmountUsed;
+            $amountToPay += $package->charges - $balance;
+        }
+        else
+        {
+            $amountToPay += $package->charges;
+        }
+
+//        $amountToPay = decrypt($request->amountToPay);
         return view('subscribePackageView.step-one', compact('package', 'businessPackage', 'amountToPay'));
     }
 
@@ -293,20 +311,39 @@ class BusinessPackageController extends Controller
     {
 //        dd($request->all());
         //after payment add payment details to payment table after that insert that payment id to BusinessPackage table
-        $package = Package::where('id', $request->package_id)->first();
+        $package = Package::where('id', decrypt($request->package_id))->first();
         $merchant_id = null;
-        $amnt = $request->amount;
+        $amnt = decrypt($request->amount);
+
+//        $businessPackage = BusinessPackage::where('id', decrypt($request->package_id))->first();
+        $userBusinessPackage = BusinessPackage::with('package')->where(['user_id' => auth()->id(), 'status' => 1])->first();
+        $startDate = Carbon::parse($userBusinessPackage->subscription_start_date);
+        $now = Carbon::now();
+        $usedDays = $now->diffInDays($startDate);
+        $balance = 0;
+        $amountToPay = 0;
+        if ($userBusinessPackage->package->id != 1 && $userBusinessPackage->package->id != 5)
+        {
+            $currentAmountUsed = ($userBusinessPackage->package->charges * $usedDays) / 365 ;
+            $balance += $userBusinessPackage->package->charges - $currentAmountUsed;
+            $amountToPay += $package->charges - $balance;
+        }
+        else
+        {
+            $amountToPay += $package->charges;
+        }
+
         $merchant_id = CardPayment::create([
-            'package_id' => $request->package_id,
+            'package_id' => $package->id,
             'user_id' => auth()->user()->id,
-            'amount' => $request->amount,
+            'amount' => $amountToPay,
             'status' => '0',
         ]);
         $data = null;
         $url = env('URL_GATEWAY') . "/v1/checkouts";
         if ($request->gateway == "mada") {
             $data = "entityId=" . env('ENTITY_ID_MADA') .
-                "&amount=" . $request->amount .
+                "&amount=" . decrypt($request->amount) .
                 "&currency=SAR" .
                 "&merchantTransactionId=" . $merchant_id->id .
                 "&customer.email=" . $request->customer_email .
@@ -322,7 +359,7 @@ class BusinessPackageController extends Controller
 
         } elseif ($request->gateway == "visa_master") {
             $data = "entityId=" . env('ENTITY_ID_VISA') .
-                "&amount=" . $request->amount .
+                "&amount=" . decrypt($request->amount) .
                 "&currency=SAR" .
                 "&merchantTransactionId=" . $merchant_id->id .
                 "&customer.email=" . $request->customer_email .
