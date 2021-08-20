@@ -530,9 +530,15 @@ Route::middleware(['auth:sanctum'])->post('save-supplier-rated', [RatingControll
 // })->name('subscription');
 #################### END ##############################################################
 
-Route::post('/make-payment', [\App\Http\Controllers\MakePaymentController::class, 'makePayment'])->name('make.payment');
-Route::get('/payment-status', [\App\Http\Controllers\MakePaymentController::class, 'paymentStatus'])->name('payment.status');
+//Route::post('/make-payment', [\App\Http\Controllers\MakePaymentController::class, 'makePayment'])->name('make.payment');
+//Route::get('/payment-status', [\App\Http\Controllers\MakePaymentController::class, 'paymentStatus'])->name('payment.status');
 //return view('moyasar_payment.payment');
+
+
+Route::post('/credit/step-one', [\App\Http\Controllers\MakePaymentController::class, 'getPaymentCheckOutId'])->name('getPaymentCheckOutId');
+Route::post('/process-payment', [\App\Http\Controllers\MakePaymentController::class, 'processPayment'])->name('processPaymentCheckout');
+Route::get('/process-payment-status', [\App\Http\Controllers\MakePaymentController::class, 'processPaymentStatus'])->name('processPaymentStatus');
+
 
 Route::middleware(['auth:sanctum'])->get('subscription-update/{id}', [PackageController::class, 'update'])->name('subscriptionUpdate');
 Route::middleware(['auth:sanctum'])->get('subscription-pdf', [PackageController::class, 'pdf'])->name('subscriptionPDF');

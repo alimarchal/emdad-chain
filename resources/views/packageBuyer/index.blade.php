@@ -37,7 +37,7 @@
                                     @else
                                         <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
-                                            <input type="hidden" name="package_id" value="{{$package->id}}">
+                                            <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
                                             <button class="flex items-center mt-6 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>
                                     @endif
@@ -62,7 +62,7 @@
 {{--                                        <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">--}}
                                         <form action="{{route('businessPackage.stepOne')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
-                                            <input type="hidden" name="package_id" value="{{$package->id}}">
+                                            <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
                                             <button class="flex items-center mt-6 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>
                                     @endif
@@ -85,7 +85,7 @@
 {{--                                        <form action="{{route('business-packages.store')}}" method="POST">--}}
                                         <form  action="{{route('businessPackage.stepOne')}}" method="POST" style="padding-top: 43px;">
                                             @csrf
-                                            <input type="hidden" name="package_id" value="{{$package->id}}">
+                                            <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
                                             <button class="flex items-center mt-6 text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>
                                     @endif
@@ -106,7 +106,7 @@
                                     @else
                                         <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
-                                            <input type="hidden" name="package_id" value="{{$package->id}}">
+                                            <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
                                             <button class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded" disabled style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>
                                     @endif
@@ -303,7 +303,7 @@
                                     @else
                                         <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
-                                            <input type="hidden" name="package_id" value="{{$package->id}}">
+                                            <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
                                             <span class="text-lg ml-1 font-normal text-gray-500"></span>
                                             <button class="flex items-center mt-4 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>
@@ -329,7 +329,7 @@
                                         {{--                                        <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">--}}
                                         <form action="{{route('businessPackage.stepOne')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
-                                            <input type="hidden" name="package_id" value="{{$package->id}}">
+                                            <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
                                             <span class="text-lg ml-1 font-normal text-gray-500"></span>
                                             <button class="flex items-center mt-4 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>
@@ -353,7 +353,7 @@
                                         {{--                                        <form action="{{route('business-packages.store')}}" method="POST">--}}
                                         <form  action="{{route('businessPackage.stepOne')}}" method="POST" style="padding-top: 43px;">
                                             @csrf
-                                            <input type="hidden" name="package_id" value="{{$package->id}}">
+                                            <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
                                             <span class="text-lg ml-1 font-normal text-gray-500"></span>
                                             <button class="flex items-center mt-4 text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>
@@ -375,7 +375,7 @@
                                     @else
                                         <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
-                                            <input type="hidden" name="package_id" value="{{$package->id}}">
+                                            <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
                                             <button class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded" disabled style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>
                                     @endif

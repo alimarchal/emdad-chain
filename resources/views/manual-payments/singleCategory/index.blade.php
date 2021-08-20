@@ -45,7 +45,11 @@
                                     </th>
                                     @if(auth()->user()->registration_type == 'Buyer')
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Claim')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Confirm')}} @endif {{__('portal.manual payment')}}
+                                            @if(auth()->user()->registration_type == 'Buyer')
+                                                {{__('portal.Claim')}}
+                                            @elseif(auth()->user()->registration_type == 'Supplier')
+                                                {{__('portal.Confirm')}}
+                                            @endif {{__('portal.manual payment')}}
                                         </th>
                                     @endif
                                 </tr>
@@ -111,7 +115,7 @@
                                                     {{__('portal.Proceed')}}
                                                 </a> |
                                                 @if($item->invoice_status == '0')
-                                                    <form action="{{route('make.payment')}}" method="post">
+                                                    <form action="{{route('getPaymentCheckOutId')}}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="invoice_id" value="{{$item->id}}">
                                                         <button type="submit" class="text-blue-600 hover:underline" target="_blank">
@@ -177,7 +181,11 @@
                                     </th>
                                     @if(auth()->user()->registration_type == 'Buyer')
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Claim')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Confirm')}} @endif {{__('portal.manual payment')}}
+                                            @if(auth()->user()->registration_type == 'Buyer')
+                                                {{__('portal.Claim')}}
+                                            @elseif(auth()->user()->registration_type == 'Supplier')
+                                                {{__('portal.Confirm')}}
+                                            @endif {{__('portal.manual payment')}}
                                         </th>
                                     @endif
                                 </tr>
