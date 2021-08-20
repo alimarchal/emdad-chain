@@ -16,7 +16,8 @@
 
                         <div class="flex flex-wrap overflow-hidden bg-white p-4">
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                <strong>{{__('portal.Current Package')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $businessPackage->package->package_type }}<br>
+                                <strong>{{__('portal.Current Package')}}:
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $businessPackage->package->package_type }}<br>
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                             </div>
@@ -41,6 +42,7 @@
                                             $balance = $businessPackage->package->charges - $currentAmountUsed;
                                             $amountToPay = $package->charges - $balance;
                                         }
+
                                 @endphp
                                 <strong>{{__('portal.Current days used')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{$usedDays}}<br>
                                 <strong>{{__('portal.Current amount used')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($currentAmountUsed, 2)}}<br>
@@ -48,9 +50,11 @@
                                 <strong>{{__('portal.New Package Charges')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($package->charges, 2) }}<br>
                                 <hr>
                                 <strong>{{__('portal.Amount to be paid')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-                                    @if($businessPackage->package->id != 1) {{ number_format($amountToPay, 2) }}
-                                    @else {{number_format($package->charges, 2)}}
-                                    @endif
+                                @if($businessPackage->package->id != 1)
+                                    {{ number_format($amountToPay, 2) }}
+                                @else
+                                    {{number_format($package->charges, 2)}}
+                                @endif
                                 <br>
                                 <hr>
                             </div>
@@ -63,8 +67,9 @@
                         <div class="flex flex-wrap overflow-hidden p-4 mt-4" style="justify-content: flex-end;">
                             <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
                                 <div class="text-gray-500" style="text-align: end">
-                                    <form  action="{{route('businessPackage.stepOne')}}" method="POST">
+                                    <form action="{{route('businessPackage.stepOne')}}" method="POST">
                                         @csrf
+
                                         <input type="hidden" name="package_id" value="{{$package->id}}">
                                         <input type="hidden" name="business_package_id" value="{{$businessPackage->id}}">
                                         <input type="hidden" name="amountToPay" value="{{$amountToPay}}">
@@ -162,7 +167,7 @@
                         <div class="flex flex-wrap overflow-hidden p-4 mt-4" style="justify-content: flex-end;">
                             <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
                                 <div class="text-gray-500" style="text-align: end">
-                                    <form  action="{{route('businessPackage.stepOne')}}" method="POST">
+                                    <form action="{{route('businessPackage.stepOne')}}" method="POST">
                                         @csrf
                                         <input type="hidden" name="package_id" value="{{$package->id}}">
                                         <input type="hidden" name="business_package_id" value="{{$businessPackage->id}}">

@@ -49,7 +49,7 @@
                     }}
             </script>
         @endif
-        <script src="https://test.oppwa.com/v1/paymentWidgets.js?checkoutId={{{$res_data['id']}}}"></script>
+        <script src="{{env('URL_GATEWAY')}}/v1/paymentWidgets.js?checkoutId={{{$res_data['id']}}}"></script>
         <script type="text/javascript">
             var wpwlOptions = {
                 paymentTarget:"_top",
@@ -73,7 +73,7 @@
         </div>
     @endif
     <h2 class="text-2xl font-bold py-2 text-center m-2">
-        Amount: SAR {{number_format($package->charges,2)}}
+        Amount: SAR {{number_format($amnt,2)}}
     </h2>
     <style>
         .form-radio {
