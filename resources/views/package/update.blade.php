@@ -173,9 +173,9 @@
                                 <div class="text-gray-500" style="text-align: end">
                                     <form action="{{route('businessPackage.stepOne')}}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="package_id" value="{{$package->id}}">
-                                        <input type="hidden" name="business_package_id" value="{{$businessPackage->id}}">
-                                        <input type="hidden" name="amountToPay" value="{{$amountToPay}}">
+                                        <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
+{{--                                        <input type="hidden" name="business_package_id" value="{{$businessPackage->id}}">--}}
+{{--                                        <input type="hidden" name="amountToPay" value="{{$amountToPay}}">--}}
                                         <button class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border
                                                    border-transparent rounded-md font-semibold text-xs text-white uppercase
                                                    tracking-widest hover:bg-red-500  focus:outline-none focus:border-green-700
