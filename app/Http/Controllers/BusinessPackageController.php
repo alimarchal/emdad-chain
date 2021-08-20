@@ -476,8 +476,6 @@ class BusinessPackageController extends Controller
 
         $data = null;
         $url = env('URL_GATEWAY') . "/v1/checkouts";
-//        $url = "https://oppwa.com/v1/checkouts";
-//        $url = "https://test.oppwa.com/v1/checkouts";
         if ($request->gateway == "mada") {
             $data = "entityId=" . env('ENTITY_ID_MADA') .
                 "&amount=" . $total_charges .
@@ -495,20 +493,6 @@ class BusinessPackageController extends Controller
 //            $request->merge(["testMode" => "EXTERNAL"]);
 
         } elseif ($request->gateway == "visa_master") {
-//            $data = "entityId=" . env('ENTITY_ID_VISA') .
-//                "&amount=" . $total_charges .
-//                "&currency=SAR" .
-//                "&merchantTransactionId=" . $merchant_id->id .
-//                "&customer.email=" . $request->customer_email .
-//                "&billing.street1=" . $request->billing_street1 .
-//                "&billing.city=" . $request->billing_city .
-//                "&billing.state=" . $request->billing_state .
-//                "&billing.country=" . $request->billing_country .
-//                "&billing.postcode=" . $request->billing_postcode .
-//                "&customer.givenName=" . $request->customer_givenName .
-//                "&customer.surname=" . $request->customer_surname .
-//                "&paymentType=" . env("PAYMENT_TYPE");
-
             $data = "entityId=" . env('ENTITY_ID_VISA') .
                 "&amount=" . $total_charges .
                 "&currency=SAR" .
@@ -524,14 +508,13 @@ class BusinessPackageController extends Controller
                 "&paymentType=" . env("PAYMENT_TYPE");
         }
 
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Authorization:Bearer ' . env('AUTH_BEARER')));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // this should be set to true in production
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);// this should be set to true in production
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $responseData = curl_exec($ch);
         if (curl_errno($ch)) {
@@ -541,6 +524,8 @@ class BusinessPackageController extends Controller
         curl_close($ch);
         $res_data = json_decode($responseData, true);
         $gateway = $request->gateway;
+
+
 
         if ($res_data['result']['code'] == "200.300.404") {
 
@@ -557,15 +542,12 @@ class BusinessPackageController extends Controller
 
     public function invoice_payment_status(Request $request)
     {
-
-
         $id = $request->id;
         $resourcePath = $request->resourcePath;
         $gateway = $request->gateway;
         $merchant_id = $request->merchant_id;
 
         $transaction_status = $this->getPaymentStatus($id, $resourcePath, $gateway);
-
         //000.100.110
         $payment_status = $transaction_status['result']['code'];
 
@@ -578,29 +560,15 @@ class BusinessPackageController extends Controller
             if (preg_match($successCodePattern, $transaction_status['result']['code']) || preg_match($successManualReviewCodePattern, $transaction_status['result']['code'])) {
                 $success = 'Your payment has been processed successfully';
 
-                //$paymentService = new \Moyasar\Providers\PaymentService();
-                //$payment_info = $paymentService->fetch($request->id);
-
                 $cp = CardPayment::where('id', $merchant_id)->first();
                 $cp->status = 1;
                 $cp->invoice_transaction_id = $request->id;
                 $cp->save();
 
-
-//                $time = strtotime($request->amount_date);
-//                $newformat = date('Y-m-d',$time);
-//                $amount_date = $newformat;
-//                $status = 1;
-//
-//                $bankPayment = BankPayment::create(
-//
-//                );
-
                 $invoice = Invoice::where('id', $request->invoice_id)->first();
                 $invoice->invoice_status = 3;
                 $invoice->invoice_cash_online = 1;
                 $invoice->save();
-
 
                 session()->flash('success', 'Transaction Successful.');
                 return redirect()->route('invoices');
