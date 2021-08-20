@@ -118,86 +118,6 @@
                 </a>
             @endif
 
-            {{-- Warehouse link --}}
-            {{--           @if(auth()->user()->hasRole('CEO') && Auth::user()->status == 3)--}}
-            @if(auth()->user()->hasRole('CEO') && Auth::user()->registration_type != null)
-                <div x-data="{ open: false } ">
-                    <a @click="open = true"
-                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow') || request()->routeIs('vehicle.create')|| request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                       href="javascript:void(0);">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>
-                        </svg>
-                        {{--                    <svg class="svg-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 20 20">--}}
-                        {{--                        <path d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>--}}
-                        {{--                    </svg>--}}
-                        <span class="mx-3">{{ __('sidebar.Warehouse') }}</span>
-                        <span x-show="open == false">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                        </svg>
-                    </span>
-                        <span x-show="open == true">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                        </svg>
-                    </span>
-                    </a>
-
-                    @php
-                        $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
-                        if ($isBusinessDataExist) {
-                            $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
-                            $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
-                        }
-                    @endphp
-
-                    <ul
-                        x-show="open"
-                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        x-show.transition.in="open"
-                        x-show.transition.out="open"
-                        @click.away="open = false"
-                        @if(request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow'))  x-data="{ open: false } " @endif >
-                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                            </svg>
-                            @if (isset($isBusinessWarehouseDataExist))
-                                <a href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
-                                {{--                            @if (isset($isBusinessWarehouseDataExist))--}}
-                                {{--                                &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-                                {{--                            @endif--}}
-                            @else
-                                <a href="{{ route('businessWarehouse.create') }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
-                                {{--                            @if (isset($isBusinessWarehouseDataExist))--}}
-                                {{--                                &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-                                {{--                            @endif--}}
-                            @endif
-                        </li>
-
-                        @if (auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
-                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('vehicle.create') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                                </svg>
-                                <a href="{{ route('vehicle.create') }}"><span class="mx-3 ">{{ __('sidebar.Add Vehicle') }}</span></a>
-                            </li>
-                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                                </svg>
-                                <a href="{{ route('vehicle.index') }}"><span class="mx-3 ">{{ __('sidebar.List of Vehicles') }}</span></a>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            @endif
-
             {{-- Business link --}}
             @if(auth()->user()->can('all') || auth()->user()->hasRole('Sales Specialist') || auth()->user()->hasRole('Legal Approval Officer 1') || auth()->user()->hasRole('Finance Officer 1') || auth()->user()->hasRole('SC Supervisor') || auth()->user()->hasRole('IT Admin'))
                 <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('business.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
@@ -472,7 +392,7 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
-                    <span class="mx-3">{{ __('sidebar.Quotations') }}</span>
+                    <span class="mx-3 font-extrabold">{{ __('sidebar.Quotations') }}</span>
                 </a>
             @endif
 
@@ -489,7 +409,7 @@
                             <path
                                 d="M8.627,7.885C8.499,8.388,7.873,8.101,8.13,8.177L4.12,7.143c-0.218-0.057-0.351-0.28-0.293-0.498c0.057-0.218,0.279-0.351,0.497-0.294l4.011,1.037C8.552,7.444,8.685,7.667,8.627,7.885 M8.334,10.123L4.323,9.086C4.105,9.031,3.883,9.162,3.826,9.38C3.769,9.598,3.901,9.82,4.12,9.877l4.01,1.037c-0.262-0.062,0.373,0.192,0.497-0.294C8.685,10.401,8.552,10.18,8.334,10.123 M7.131,12.507L4.323,11.78c-0.218-0.057-0.44,0.076-0.497,0.295c-0.057,0.218,0.075,0.439,0.293,0.495l2.809,0.726c-0.265-0.062,0.37,0.193,0.495-0.293C7.48,12.784,7.35,12.562,7.131,12.507M18.159,3.677v10.701c0,0.186-0.126,0.348-0.306,0.393l-7.755,1.948c-0.07,0.016-0.134,0.016-0.204,0l-7.748-1.948c-0.179-0.045-0.306-0.207-0.306-0.393V3.677c0-0.267,0.249-0.461,0.509-0.396l7.646,1.921l7.654-1.921C17.91,3.216,18.159,3.41,18.159,3.677 M9.589,5.939L2.656,4.203v9.857l6.933,1.737V5.939z M17.344,4.203l-6.939,1.736v9.859l6.939-1.737V4.203z M16.168,6.645c-0.058-0.218-0.279-0.351-0.498-0.294l-4.011,1.037c-0.218,0.057-0.351,0.28-0.293,0.498c0.128,0.503,0.755,0.216,0.498,0.292l4.009-1.034C16.092,7.085,16.225,6.863,16.168,6.645 M16.168,9.38c-0.058-0.218-0.279-0.349-0.498-0.294l-4.011,1.036c-0.218,0.057-0.351,0.279-0.293,0.498c0.124,0.486,0.759,0.232,0.498,0.294l4.009-1.037C16.092,9.82,16.225,9.598,16.168,9.38 M14.963,12.385c-0.055-0.219-0.276-0.35-0.495-0.294l-2.809,0.726c-0.218,0.056-0.351,0.279-0.293,0.496c0.127,0.506,0.755,0.218,0.498,0.293l2.807-0.723C14.89,12.825,15.021,12.603,14.963,12.385"></path>
                         </svg>
-                        <span class="mx-3">{{ __('sidebar.Quotations') }}</span>
+                        <span class="mx-3 font-extrabold">{{ __('sidebar.Quotations') }}</span>
                         <span x-show="open == false">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
                           <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
@@ -502,8 +422,15 @@
                     </span>
                     </a>
 
-                    <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        @if(request()->routeIs('viewRFQs') || request()->routeIs('singleCategoryRFQs') || request()->routeIs('singleCategoryQuotedRFQQuoted') || request()->routeIs('singleCategoryQuotedRFQRejected') || request()->routeIs('singleCategoryQuotedRFQModificationNeeded') || request()->routeIs('singleCategoryQuotedRFQPendingConfirmation') || request()->routeIs('singleCategoryQuotedModifiedRFQ') )  x-data="{ open: true } " @endif
+                    <ul
+                        x-show="open"
+                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+                        {{-- Uncomment below code for dropdown to keep to droped and comment above code --}}
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
+{{--                        @if(request()->routeIs('viewRFQs') || request()->routeIs('singleCategoryRFQs') || request()->routeIs('singleCategoryQuotedRFQQuoted') || request()->routeIs('singleCategoryQuotedRFQRejected') || request()->routeIs('singleCategoryQuotedRFQModificationNeeded') || request()->routeIs('singleCategoryQuotedRFQPendingConfirmation') || request()->routeIs('singleCategoryQuotedModifiedRFQ') )  x-data="{ open: true } " @endif--}}
                     >
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('viewRFQs') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -534,7 +461,7 @@
                             <path
                                 d="M8.627,7.885C8.499,8.388,7.873,8.101,8.13,8.177L4.12,7.143c-0.218-0.057-0.351-0.28-0.293-0.498c0.057-0.218,0.279-0.351,0.497-0.294l4.011,1.037C8.552,7.444,8.685,7.667,8.627,7.885 M8.334,10.123L4.323,9.086C4.105,9.031,3.883,9.162,3.826,9.38C3.769,9.598,3.901,9.82,4.12,9.877l4.01,1.037c-0.262-0.062,0.373,0.192,0.497-0.294C8.685,10.401,8.552,10.18,8.334,10.123 M7.131,12.507L4.323,11.78c-0.218-0.057-0.44,0.076-0.497,0.295c-0.057,0.218,0.075,0.439,0.293,0.495l2.809,0.726c-0.265-0.062,0.37,0.193,0.495-0.293C7.48,12.784,7.35,12.562,7.131,12.507M18.159,3.677v10.701c0,0.186-0.126,0.348-0.306,0.393l-7.755,1.948c-0.07,0.016-0.134,0.016-0.204,0l-7.748-1.948c-0.179-0.045-0.306-0.207-0.306-0.393V3.677c0-0.267,0.249-0.461,0.509-0.396l7.646,1.921l7.654-1.921C17.91,3.216,18.159,3.41,18.159,3.677 M9.589,5.939L2.656,4.203v9.857l6.933,1.737V5.939z M17.344,4.203l-6.939,1.736v9.859l6.939-1.737V4.203z M16.168,6.645c-0.058-0.218-0.279-0.351-0.498-0.294l-4.011,1.037c-0.218,0.057-0.351,0.28-0.293,0.498c0.128,0.503,0.755,0.216,0.498,0.292l4.009-1.034C16.092,7.085,16.225,6.863,16.168,6.645 M16.168,9.38c-0.058-0.218-0.279-0.349-0.498-0.294l-4.011,1.036c-0.218,0.057-0.351,0.279-0.293,0.498c0.124,0.486,0.759,0.232,0.498,0.294l4.009-1.037C16.092,9.82,16.225,9.598,16.168,9.38 M14.963,12.385c-0.055-0.219-0.276-0.35-0.495-0.294l-2.809,0.726c-0.218,0.056-0.351,0.279-0.293,0.496c0.127,0.506,0.755,0.218,0.498,0.293l2.807-0.723C14.89,12.825,15.021,12.603,14.963,12.385"></path>
                         </svg>
-                        <span class="mx-3 ">{{__('sidebar.Quotations')}}</span>
+                        <span class="mx-3 font-extrabold">{{__('sidebar.Quotations')}}</span>
                         <span x-show="open == false">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
                               <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
@@ -547,8 +474,14 @@
                         </span>
                     </a>
 
-                    <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        @if(request()->routeIs('QoutationsBuyerReceived') || request()->routeIs('singleCategoryBuyerRFQs') || request()->routeIs('singleCategoryRFQItems') || request()->routeIs('singleCategoryRFQQuotationsBuyerReceived') || request()->routeIs('singleCategoryRFQQuotationsBuyerRejected') || request()->routeIs('singleCategoryRFQQuotationsModificationNeeded'))  x-data="{ open: true } " @endif
+                    <ul
+                        x-show="open"
+                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
+{{--                        @if(request()->routeIs('QoutationsBuyerReceived') || request()->routeIs('singleCategoryBuyerRFQs') || request()->routeIs('singleCategoryRFQItems') || request()->routeIs('singleCategoryRFQQuotationsBuyerReceived') || request()->routeIs('singleCategoryRFQQuotationsBuyerRejected') || request()->routeIs('singleCategoryRFQQuotationsModificationNeeded'))  x-data="{ open: true } " @endif--}}
                     >
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('QoutationsBuyerReceived') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -729,7 +662,7 @@
                             <path
                                 d="M17.638,6.181h-3.844C13.581,4.273,11.963,2.786,10,2.786c-1.962,0-3.581,1.487-3.793,3.395H2.362c-0.233,0-0.424,0.191-0.424,0.424v10.184c0,0.232,0.191,0.424,0.424,0.424h15.276c0.234,0,0.425-0.191,0.425-0.424V6.605C18.062,6.372,17.872,6.181,17.638,6.181 M13.395,9.151c0.234,0,0.425,0.191,0.425,0.424S13.629,10,13.395,10c-0.232,0-0.424-0.191-0.424-0.424S13.162,9.151,13.395,9.151 M10,3.635c1.493,0,2.729,1.109,2.936,2.546H7.064C7.271,4.744,8.506,3.635,10,3.635 M6.605,9.151c0.233,0,0.424,0.191,0.424,0.424S6.838,10,6.605,10c-0.233,0-0.424-0.191-0.424-0.424S6.372,9.151,6.605,9.151 M17.214,16.365H2.786V7.029h3.395v1.347C5.687,8.552,5.332,9.021,5.332,9.575c0,0.703,0.571,1.273,1.273,1.273c0.702,0,1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h5.941v1.347c-0.495,0.176-0.849,0.645-0.849,1.199c0,0.703,0.57,1.273,1.272,1.273s1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h3.395V16.365z"></path>
                         </svg>
-                        <span class="mx-3">{{ __('sidebar.Delivery') }}</span>
+                        <span class="mx-3 font-extrabold">{{ __('sidebar.Delivery') }}</span>
                         <span x-show="open == false">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 4.7em;" viewBox="0 0 20 20" fill="currentColor">
                           <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
@@ -741,7 +674,14 @@
                         </svg>
                     </span>
                     </a>
-                    <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('deliveryNote.index') || request()->routeIs('notes') || request()->routeIs('singleCategoryIndex') || request()->routeIs('singleCategoryNotes'))  x-data="{ open: true } " @endif>
+                    <ul
+                        x-show="open"
+                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('deliveryNote.index') || request()->routeIs('notes') || request()->routeIs('singleCategoryIndex') || request()->routeIs('singleCategoryNotes'))  x-data="{ open: true } " @endif--}}
+                    >
 
                         {{-- Multi Categories Routes --}}
                         <div x-data="{ open: false } ">
@@ -833,7 +773,7 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
-                    <span class="mx-3">{{__('sidebar.Shipments')}}</span>
+                    <span class="mx-3 font-extrabold">{{__('sidebar.Shipments')}}</span>
                 </a>
             @endif
 
@@ -857,7 +797,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span class="mx-3">{{__('sidebar.Shipments')}}</span>
+                        <span class="mx-3 font-extrabold">{{__('sidebar.Shipments')}}</span>
                         <span x-show="open == false">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 3.6em;" viewBox="0 0 20 20" fill="currentColor">
                           <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
@@ -870,8 +810,13 @@
                     </span>
                     </a>
                     <ul
+                        x-show="open"
                         x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        @if(request()->routeIs('shipment.create') || request()->routeIs('shipmentCart.index')|| request()->routeIs('shipment.index'))  x-data="{ open: true } " @endif
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
+{{--                        @if(request()->routeIs('shipment.create') || request()->routeIs('shipmentCart.index')|| request()->routeIs('shipment.index'))  x-data="{ open: true } " @endif--}}
                     >
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('shipment.create') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -927,8 +872,14 @@
                         </svg>
                     </span>
                     </a>
-                    <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        @if(request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment') || request()->routeIs('emdadInvoices') || request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex'))  x-data="{ open: true } " @endif
+                    <ul
+                        x-show="open"
+                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
+{{--                        @if(request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment') || request()->routeIs('emdadInvoices') || request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex'))  x-data="{ open: true } " @endif--}}
                     >
                         {{-- Multi Categories Routes --}}
                         <div x-data="{ open: false } ">
@@ -1361,7 +1312,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span class="mx-3">{{__('sidebar.Shipments')}}</span>
+                        <span class="mx-3 font-extrabold">{{__('sidebar.Shipments')}}</span>
                         <span x-show="open == false">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 3.6em;" viewBox="0 0 20 20" fill="currentColor">
                           <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
@@ -1374,8 +1325,13 @@
                     </span>
                     </a>
                     <ul
+                        x-show="open"
                         x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        @if(request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments')|| request()->routeIs('ongoingShipment'))  x-data="{ open: true } " @endif
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
+{{--                        @if(request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments')|| request()->routeIs('ongoingShipment'))  x-data="{ open: true } " @endif--}}
                     >
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('ongoingShipment') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -1403,6 +1359,88 @@
                 </div>
             @endif
 
+            {{-- Warehouse link --}}
+            {{--           @if(auth()->user()->hasRole('CEO') && Auth::user()->status == 3)--}}
+            @if(auth()->user()->hasRole('CEO') && Auth::user()->registration_type != null)
+                <hr class="mt-4">
+                <div x-data="{ open: false } ">
+                    <a @click="open = true"
+                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow') || request()->routeIs('vehicle.create')|| request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                       href="javascript:void(0);">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>
+                        </svg>
+                        {{--                    <svg class="svg-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 20 20">--}}
+                        {{--                        <path d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>--}}
+                        {{--                    </svg>--}}
+                        <span class="mx-3 font-extrabold">{{ __('sidebar.Warehouse') }}</span>
+                        <span x-show="open == false">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    </svg>
+                </span>
+                        <span x-show="open == true">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </span>
+                    </a>
+
+                    @php
+                        $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
+                        if ($isBusinessDataExist) {
+                            $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
+                            $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
+                        }
+                    @endphp
+
+                    <ul
+                        x-show="open"
+                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        @if(request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow'))  x-data="{ open: false } " @endif --}}
+                    >
+                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                            </svg>
+                            @if (isset($isBusinessWarehouseDataExist))
+                                <a href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
+                                {{--                            @if (isset($isBusinessWarehouseDataExist))--}}
+                                {{--                                &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
+                                {{--                            @endif--}}
+                            @else
+                                <a href="{{ route('businessWarehouse.create') }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
+                                {{--                            @if (isset($isBusinessWarehouseDataExist))--}}
+                                {{--                                &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
+                                {{--                            @endif--}}
+                            @endif
+                        </li>
+
+                        @if (auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
+                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('vehicle.create') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                                </svg>
+                                <a href="{{ route('vehicle.create') }}"><span class="mx-3 ">{{ __('sidebar.Add Vehicle') }}</span></a>
+                            </li>
+                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                                </svg>
+                                <a href="{{ route('vehicle.index') }}"><span class="mx-3 ">{{ __('sidebar.List of Vehicles') }}</span></a>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+            @endif
+
             {{-- CEO Users link --}}
             @if(auth()->user()->hasRole('CEO') && Auth::user()->status == 3)
 
@@ -1414,7 +1452,7 @@
                             <path
                                 d="M15.573,11.624c0.568-0.478,0.947-1.219,0.947-2.019c0-1.37-1.108-2.569-2.371-2.569s-2.371,1.2-2.371,2.569c0,0.8,0.379,1.542,0.946,2.019c-0.253,0.089-0.496,0.2-0.728,0.332c-0.743-0.898-1.745-1.573-2.891-1.911c0.877-0.61,1.486-1.666,1.486-2.812c0-1.79-1.479-3.359-3.162-3.359S4.269,5.443,4.269,7.233c0,1.146,0.608,2.202,1.486,2.812c-2.454,0.725-4.252,2.998-4.252,5.685c0,0.218,0.178,0.396,0.395,0.396h16.203c0.218,0,0.396-0.178,0.396-0.396C18.497,13.831,17.273,12.216,15.573,11.624 M12.568,9.605c0-0.822,0.689-1.779,1.581-1.779s1.58,0.957,1.58,1.779s-0.688,1.779-1.58,1.779S12.568,10.427,12.568,9.605 M5.06,7.233c0-1.213,1.014-2.569,2.371-2.569c1.358,0,2.371,1.355,2.371,2.569S8.789,9.802,7.431,9.802C6.073,9.802,5.06,8.447,5.06,7.233 M2.309,15.335c0.202-2.649,2.423-4.742,5.122-4.742s4.921,2.093,5.122,4.742H2.309z M13.346,15.335c-0.067-0.997-0.382-1.928-0.882-2.732c0.502-0.271,1.075-0.429,1.686-0.429c1.828,0,3.338,1.385,3.535,3.161H13.346z"></path>
                         </svg>
-                        <span class="mx-3">@if(auth()->user()->registration_type == "Supplier") {{__('sidebar.Buyers')}} @elseif(auth()->user()->registration_type == "Buyer") {{__('sidebar.Suppliers')}} @endif</span>
+                        <span class="mx-3 font-extrabold">@if(auth()->user()->registration_type == "Supplier") {{__('sidebar.Buyers')}} @elseif(auth()->user()->registration_type == "Buyer") {{__('sidebar.Suppliers')}} @endif</span>
                         <span x-show="open == false">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 5.2em;" @else style="margin-left: 4em;" @endif  viewBox="0 0 20 20" fill="currentColor">
                           <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
@@ -1427,8 +1465,13 @@
                     </span>
                     </a>
                     <ul
+                        x-show="open"
                         x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        @if(request()->routeIs('createBuyer') || request()->routeIs('createSupplier')|| request()->routeIs('businessBuyers')|| request()->routeIs('businessSuppliers'))  x-data="{ open: true } " @endif
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
+{{--                        @if(request()->routeIs('createBuyer') || request()->routeIs('createSupplier')|| request()->routeIs('businessBuyers')|| request()->routeIs('businessSuppliers'))  x-data="{ open: true } " @endif--}}
                     >
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('createBuyer') || request()->routeIs('createSupplier') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -1573,77 +1616,6 @@
                     </svg>
                     <span class="mx-3">{{ __('sidebar.Permissions') }}</span>
                 </a>
-            @endif
-
-            {{-- Warehouse link --}}
-            @if(auth()->user()->hasRole('CEO') && Auth::user()->registration_type != null)
-                <div x-data="{ open: false } ">
-                    <a @click="open = true"
-                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow') || request()->routeIs('vehicle.create')|| request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                       href="javascript:void(0);">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>
-                        </svg>
-                        <span class="mx-3">{{ __('sidebar.Warehouse') }}</span>
-                        <span x-show="open == false">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
-                            <path
-                                d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                        </svg>
-                    </span>
-                        <span x-show="open == true">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                        </svg>
-                    </span>
-                    </a>
-
-                    @php
-                        $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
-                        if ($isBusinessDataExist) {
-                            $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
-                            $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
-                        }
-                    @endphp
-
-                    <ul
-                        x-show="open"
-                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        x-show.transition.in="open"
-                        x-show.transition.out="open"
-                        @click.away="open = false"
-                        @if(request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow'))  x-data="{ open: false } " @endif >
-                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
-                            </svg>
-                            @if (isset($isBusinessWarehouseDataExist))
-                                <a href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}" class="hover:text-white {{ request()->routeIs('businessWarehouseShow') ? 'text-white' : 'text-gray-500' }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
-                            @else
-                                <a href="{{ route('businessWarehouse.create') }}" class="hover:text-white {{ request()->routeIs('businessWarehouse.create') ? 'text-white' : 'text-gray-500' }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
-                            @endif
-                        </li>
-
-                        @if (auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
-                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('vehicle.create') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
-                                </svg>
-                                <a href="{{ route('vehicle.create') }}" class="hover:text-white {{ request()->routeIs('vehicle.create') ? 'text-white' : 'text-gray-500' }}"><span class="mx-3 ">{{ __('sidebar.Add Vehicle') }}</span></a>
-                            </li>
-                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
-                                </svg>
-                                <a href="{{ route('vehicle.index') }}" class="hover:text-white {{ request()->routeIs('vehicle.index') ? 'text-white' : 'text-gray-500' }}"><span class="mx-3 ">{{ __('sidebar.List of Vehicles') }}</span></a>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
             @endif
 
             {{-- Business link --}}
@@ -1794,7 +1766,7 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
-                    <span class="mx-3">{{ __('sidebar.Quotations') }}</span>
+                    <span class="mx-3 font-extrabold">{{ __('sidebar.Quotations') }}</span>
                 </a>
             @endif
 
@@ -1811,7 +1783,7 @@
                             <path
                                 d="M8.627,7.885C8.499,8.388,7.873,8.101,8.13,8.177L4.12,7.143c-0.218-0.057-0.351-0.28-0.293-0.498c0.057-0.218,0.279-0.351,0.497-0.294l4.011,1.037C8.552,7.444,8.685,7.667,8.627,7.885 M8.334,10.123L4.323,9.086C4.105,9.031,3.883,9.162,3.826,9.38C3.769,9.598,3.901,9.82,4.12,9.877l4.01,1.037c-0.262-0.062,0.373,0.192,0.497-0.294C8.685,10.401,8.552,10.18,8.334,10.123 M7.131,12.507L4.323,11.78c-0.218-0.057-0.44,0.076-0.497,0.295c-0.057,0.218,0.075,0.439,0.293,0.495l2.809,0.726c-0.265-0.062,0.37,0.193,0.495-0.293C7.48,12.784,7.35,12.562,7.131,12.507M18.159,3.677v10.701c0,0.186-0.126,0.348-0.306,0.393l-7.755,1.948c-0.07,0.016-0.134,0.016-0.204,0l-7.748-1.948c-0.179-0.045-0.306-0.207-0.306-0.393V3.677c0-0.267,0.249-0.461,0.509-0.396l7.646,1.921l7.654-1.921C17.91,3.216,18.159,3.41,18.159,3.677 M9.589,5.939L2.656,4.203v9.857l6.933,1.737V5.939z M17.344,4.203l-6.939,1.736v9.859l6.939-1.737V4.203z M16.168,6.645c-0.058-0.218-0.279-0.351-0.498-0.294l-4.011,1.037c-0.218,0.057-0.351,0.28-0.293,0.498c0.128,0.503,0.755,0.216,0.498,0.292l4.009-1.034C16.092,7.085,16.225,6.863,16.168,6.645 M16.168,9.38c-0.058-0.218-0.279-0.349-0.498-0.294l-4.011,1.036c-0.218,0.057-0.351,0.279-0.293,0.498c0.124,0.486,0.759,0.232,0.498,0.294l4.009-1.037C16.092,9.82,16.225,9.598,16.168,9.38 M14.963,12.385c-0.055-0.219-0.276-0.35-0.495-0.294l-2.809,0.726c-0.218,0.056-0.351,0.279-0.293,0.496c0.127,0.506,0.755,0.218,0.498,0.293l2.807-0.723C14.89,12.825,15.021,12.603,14.963,12.385"></path>
                         </svg>
-                        <span class="mx-3">{{ __('sidebar.Quotations') }}</span>
+                        <span class="mx-3 font-extrabold">{{ __('sidebar.Quotations') }}</span>
                         <span x-show="open == false">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 1.3em;" viewBox="0 0 20 20" fill="currentColor">
                                 <path
@@ -1825,8 +1797,14 @@
                         </span>
                     </a>
 
-                    <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        @if(request()->routeIs('viewRFQs') || request()->routeIs('singleCategoryRFQs') || request()->routeIs('singleCategoryQuotedRFQQuoted') || request()->routeIs('singleCategoryQuotedRFQRejected') || request()->routeIs('singleCategoryQuotedRFQModificationNeeded') || request()->routeIs('singleCategoryQuotedRFQPendingConfirmation') || request()->routeIs('singleCategoryQuotedModifiedRFQ') )  x-data="{ open: true } " @endif
+                    <ul
+                        x-show="open"
+                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
+{{--                        @if(request()->routeIs('viewRFQs') || request()->routeIs('singleCategoryRFQs') || request()->routeIs('singleCategoryQuotedRFQQuoted') || request()->routeIs('singleCategoryQuotedRFQRejected') || request()->routeIs('singleCategoryQuotedRFQModificationNeeded') || request()->routeIs('singleCategoryQuotedRFQPendingConfirmation') || request()->routeIs('singleCategoryQuotedModifiedRFQ') )  x-data="{ open: true } " @endif--}}
                     >
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('viewRFQs') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -1857,7 +1835,7 @@
                             <path
                                 d="M8.627,7.885C8.499,8.388,7.873,8.101,8.13,8.177L4.12,7.143c-0.218-0.057-0.351-0.28-0.293-0.498c0.057-0.218,0.279-0.351,0.497-0.294l4.011,1.037C8.552,7.444,8.685,7.667,8.627,7.885 M8.334,10.123L4.323,9.086C4.105,9.031,3.883,9.162,3.826,9.38C3.769,9.598,3.901,9.82,4.12,9.877l4.01,1.037c-0.262-0.062,0.373,0.192,0.497-0.294C8.685,10.401,8.552,10.18,8.334,10.123 M7.131,12.507L4.323,11.78c-0.218-0.057-0.44,0.076-0.497,0.295c-0.057,0.218,0.075,0.439,0.293,0.495l2.809,0.726c-0.265-0.062,0.37,0.193,0.495-0.293C7.48,12.784,7.35,12.562,7.131,12.507M18.159,3.677v10.701c0,0.186-0.126,0.348-0.306,0.393l-7.755,1.948c-0.07,0.016-0.134,0.016-0.204,0l-7.748-1.948c-0.179-0.045-0.306-0.207-0.306-0.393V3.677c0-0.267,0.249-0.461,0.509-0.396l7.646,1.921l7.654-1.921C17.91,3.216,18.159,3.41,18.159,3.677 M9.589,5.939L2.656,4.203v9.857l6.933,1.737V5.939z M17.344,4.203l-6.939,1.736v9.859l6.939-1.737V4.203z M16.168,6.645c-0.058-0.218-0.279-0.351-0.498-0.294l-4.011,1.037c-0.218,0.057-0.351,0.28-0.293,0.498c0.128,0.503,0.755,0.216,0.498,0.292l4.009-1.034C16.092,7.085,16.225,6.863,16.168,6.645 M16.168,9.38c-0.058-0.218-0.279-0.349-0.498-0.294l-4.011,1.036c-0.218,0.057-0.351,0.279-0.293,0.498c0.124,0.486,0.759,0.232,0.498,0.294l4.009-1.037C16.092,9.82,16.225,9.598,16.168,9.38 M14.963,12.385c-0.055-0.219-0.276-0.35-0.495-0.294l-2.809,0.726c-0.218,0.056-0.351,0.279-0.293,0.496c0.127,0.506,0.755,0.218,0.498,0.293l2.807-0.723C14.89,12.825,15.021,12.603,14.963,12.385"></path>
                         </svg>
-                        <span class="mx-3 ">{{__('sidebar.Quotations')}}</span>
+                        <span class="mx-3 font-extrabold">{{__('sidebar.Quotations')}}</span>
                         <span x-show="open == false">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 1.3em;" viewBox="0 0 20 20" fill="currentColor">
                                 <path
@@ -1871,8 +1849,14 @@
                         </span>
                     </a>
 
-                    <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        @if(request()->routeIs('QoutationsBuyerReceived') || request()->routeIs('singleCategoryBuyerRFQs') || request()->routeIs('singleCategoryRFQItems') || request()->routeIs('singleCategoryRFQQuotationsBuyerReceived') || request()->routeIs('singleCategoryRFQQuotationsBuyerRejected') || request()->routeIs('singleCategoryRFQQuotationsModificationNeeded'))  x-data="{ open: true } " @endif
+                    <ul
+                        x-show="open"
+                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
+{{--                        @if(request()->routeIs('QoutationsBuyerReceived') || request()->routeIs('singleCategoryBuyerRFQs') || request()->routeIs('singleCategoryRFQItems') || request()->routeIs('singleCategoryRFQQuotationsBuyerReceived') || request()->routeIs('singleCategoryRFQQuotationsBuyerRejected') || request()->routeIs('singleCategoryRFQQuotationsModificationNeeded'))  x-data="{ open: true } " @endif--}}
                     >
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('QoutationsBuyerReceived') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -1950,7 +1934,7 @@
                             <path
                                 d="M17.638,6.181h-3.844C13.581,4.273,11.963,2.786,10,2.786c-1.962,0-3.581,1.487-3.793,3.395H2.362c-0.233,0-0.424,0.191-0.424,0.424v10.184c0,0.232,0.191,0.424,0.424,0.424h15.276c0.234,0,0.425-0.191,0.425-0.424V6.605C18.062,6.372,17.872,6.181,17.638,6.181 M13.395,9.151c0.234,0,0.425,0.191,0.425,0.424S13.629,10,13.395,10c-0.232,0-0.424-0.191-0.424-0.424S13.162,9.151,13.395,9.151 M10,3.635c1.493,0,2.729,1.109,2.936,2.546H7.064C7.271,4.744,8.506,3.635,10,3.635 M6.605,9.151c0.233,0,0.424,0.191,0.424,0.424S6.838,10,6.605,10c-0.233,0-0.424-0.191-0.424-0.424S6.372,9.151,6.605,9.151 M17.214,16.365H2.786V7.029h3.395v1.347C5.687,8.552,5.332,9.021,5.332,9.575c0,0.703,0.571,1.273,1.273,1.273c0.702,0,1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h5.941v1.347c-0.495,0.176-0.849,0.645-0.849,1.199c0,0.703,0.57,1.273,1.272,1.273s1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h3.395V16.365z"></path>
                         </svg>
-                        <span class="mx-3">{{ __('sidebar.Delivery') }}</span>
+                        <span class="mx-3 font-extrabold">{{ __('sidebar.Delivery') }}</span>
                         <span x-show="open == false">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 5em;" viewBox="0 0 20 20" fill="currentColor">
                                 <path
@@ -1963,7 +1947,14 @@
                             </svg>
                         </span>
                     </a>
-                    <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('deliveryNote.index') || request()->routeIs('notes') || request()->routeIs('singleCategoryIndex') || request()->routeIs('singleCategoryNotes'))  x-data="{ open: true } " @endif>
+                    <ul
+                        x-show="open"
+                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('deliveryNote.index') || request()->routeIs('notes') || request()->routeIs('singleCategoryIndex') || request()->routeIs('singleCategoryNotes'))  x-data="{ open: true } " @endif--}}
+                    >
 
                         {{-- Multi Categories Routes --}}
                         <div x-data="{ open: false } ">
@@ -2056,7 +2047,7 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
-                    <span class="mx-3">{{__('sidebar.Shipments')}}</span>
+                    <span class="mx-3 font-extrabold">{{__('sidebar.Shipments')}}</span>
                 </a>
             @endif
 
@@ -2080,7 +2071,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span class="mx-3">{{__('sidebar.Shipments')}}</span>
+                        <span class="mx-3 font-extrabold">{{__('sidebar.Shipments')}}</span>
                         <span x-show="open == false">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 3.6em;" viewBox="0 0 20 20" fill="currentColor">
                                 <path
@@ -2094,8 +2085,13 @@
                         </span>
                     </a>
                     <ul
+                        x-show="open"
                         x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        @if(request()->routeIs('shipment.create') || request()->routeIs('shipmentCart.index')|| request()->routeIs('shipment.index'))  x-data="{ open: true } " @endif
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
+{{--                        @if(request()->routeIs('shipment.create') || request()->routeIs('shipmentCart.index')|| request()->routeIs('shipment.index'))  x-data="{ open: true } " @endif--}}
                     >
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('shipment.create') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -2151,8 +2147,14 @@
                             </svg>
                         </span>
                     </a>
-                    <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        @if(request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment') || request()->routeIs('emdadInvoices') || request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex'))  x-data="{ open: true } " @endif
+                    <ul
+                        x-show="open"
+                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
+{{--                        @if(request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment') || request()->routeIs('emdadInvoices') || request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex'))  x-data="{ open: true } " @endif--}}
                     >
                         {{-- Multi Categories Routes --}}
                         <div x-data="{ open: false } ">
@@ -2288,7 +2290,7 @@
                                 </g>
                             </g>
                         </svg>
-                        <span class="mx-3">{{__('sidebar.Shipments')}}</span>
+                        <span class="mx-3 font-extrabold">{{__('sidebar.Shipments')}}</span>
                         <span x-show="open == false">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 3.6em;" viewBox="0 0 20 20" fill="currentColor">
                             <path
@@ -2302,8 +2304,13 @@
                     </span>
                     </a>
                     <ul
+                        x-show="open"
                         x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        @if(request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments')|| request()->routeIs('ongoingShipment'))  x-data="{ open: true } " @endif
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
+{{--                        @if(request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments')|| request()->routeIs('ongoingShipment'))  x-data="{ open: true } " @endif--}}
                     >
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('ongoingShipment') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -2331,6 +2338,79 @@
                 </div>
             @endif
 
+            {{-- Warehouse link --}}
+            @if(auth()->user()->hasRole('CEO') && Auth::user()->registration_type != null)
+                <hr class="mt-4">
+                <div x-data="{ open: false } ">
+                    <a @click="open = true"
+                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow') || request()->routeIs('vehicle.create')|| request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                       href="javascript:void(0);">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>
+                        </svg>
+                        <span class="mx-3 font-extrabold">{{ __('sidebar.Warehouse') }}</span>
+                        <span x-show="open == false">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
+                            <path
+                                d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                        </svg>
+                    </span>
+                        <span x-show="open == true">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </span>
+                    </a>
+
+                    @php
+                        $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
+                        if ($isBusinessDataExist) {
+                            $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
+                            $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
+                        }
+                    @endphp
+
+                    <ul
+                        x-show="open"
+                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        @if(request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow'))  x-data="{ open: false } " @endif --}}
+                    >
+                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
+                            </svg>
+                            @if (isset($isBusinessWarehouseDataExist))
+                                <a href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}" class="hover:text-white {{ request()->routeIs('businessWarehouseShow') ? 'text-white' : 'text-gray-500' }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
+                            @else
+                                <a href="{{ route('businessWarehouse.create') }}" class="hover:text-white {{ request()->routeIs('businessWarehouse.create') ? 'text-white' : 'text-gray-500' }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
+                            @endif
+                        </li>
+
+                        @if (auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
+                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('vehicle.create') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
+                                </svg>
+                                <a href="{{ route('vehicle.create') }}" class="hover:text-white {{ request()->routeIs('vehicle.create') ? 'text-white' : 'text-gray-500' }}"><span class="mx-3 ">{{ __('sidebar.Add Vehicle') }}</span></a>
+                            </li>
+                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
+                                </svg>
+                                <a href="{{ route('vehicle.index') }}" class="hover:text-white {{ request()->routeIs('vehicle.index') ? 'text-white' : 'text-gray-500' }}"><span class="mx-3 ">{{ __('sidebar.List of Vehicles') }}</span></a>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+            @endif
+
             {{-- CEO Users link --}}
             @if(auth()->user()->hasRole('CEO') && Auth::user()->status == 3)
 
@@ -2342,7 +2422,7 @@
                             <path
                                 d="M15.573,11.624c0.568-0.478,0.947-1.219,0.947-2.019c0-1.37-1.108-2.569-2.371-2.569s-2.371,1.2-2.371,2.569c0,0.8,0.379,1.542,0.946,2.019c-0.253,0.089-0.496,0.2-0.728,0.332c-0.743-0.898-1.745-1.573-2.891-1.911c0.877-0.61,1.486-1.666,1.486-2.812c0-1.79-1.479-3.359-3.162-3.359S4.269,5.443,4.269,7.233c0,1.146,0.608,2.202,1.486,2.812c-2.454,0.725-4.252,2.998-4.252,5.685c0,0.218,0.178,0.396,0.395,0.396h16.203c0.218,0,0.396-0.178,0.396-0.396C18.497,13.831,17.273,12.216,15.573,11.624 M12.568,9.605c0-0.822,0.689-1.779,1.581-1.779s1.58,0.957,1.58,1.779s-0.688,1.779-1.58,1.779S12.568,10.427,12.568,9.605 M5.06,7.233c0-1.213,1.014-2.569,2.371-2.569c1.358,0,2.371,1.355,2.371,2.569S8.789,9.802,7.431,9.802C6.073,9.802,5.06,8.447,5.06,7.233 M2.309,15.335c0.202-2.649,2.423-4.742,5.122-4.742s4.921,2.093,5.122,4.742H2.309z M13.346,15.335c-0.067-0.997-0.382-1.928-0.882-2.732c0.502-0.271,1.075-0.429,1.686-0.429c1.828,0,3.338,1.385,3.535,3.161H13.346z"></path>
                         </svg>
-                        <span class="mx-3">@if(auth()->user()->registration_type == "Supplier") {{__('sidebar.Buyers')}} @elseif(auth()->user()->registration_type == "Buyer") {{__('sidebar.Suppliers')}} @endif</span>
+                        <span class="mx-3 font-extrabold">@if(auth()->user()->registration_type == "Supplier") {{__('sidebar.Buyers')}} @elseif(auth()->user()->registration_type == "Buyer") {{__('sidebar.Suppliers')}} @endif</span>
                         <span x-show="open == false">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 5.2em;" @else style="margin-left: 4em;" @endif  viewBox="0 0 20 20" fill="currentColor">
                               <path
@@ -2356,8 +2436,13 @@
                         </span>
                     </a>
                     <ul
+                        x-show="open"
                         x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        @if(request()->routeIs('createBuyer') || request()->routeIs('createSupplier')|| request()->routeIs('businessBuyers')|| request()->routeIs('businessSuppliers'))  x-data="{ open: true } " @endif
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false"
+{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
+{{--                        @if(request()->routeIs('createBuyer') || request()->routeIs('createSupplier')|| request()->routeIs('businessBuyers')|| request()->routeIs('businessSuppliers'))  x-data="{ open: true } " @endif--}}
                     >
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('createBuyer') || request()->routeIs('createSupplier') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

@@ -25,7 +25,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Items List')}} @if (!$eOrders->count()) {{__('portal.seems empty')}} @endif </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Quotations List')}} @if (!$eOrders->count()) {{__('portal.seems empty')}} @endif </h2>
 
         <!-- Remaining Quotation count for Basic and Silver Business Packages -->
         @php
@@ -215,7 +215,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Items List')}} @if (!$eOrders->count()) {{__('portal.seems empty')}} @endif </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Quotations List')}} @if (!$eOrders->count()) {{__('portal.seems empty')}} @endif </h2>
 
         <!-- Remaining Quotation count for Basic and Silver Business Packages -->
         @php

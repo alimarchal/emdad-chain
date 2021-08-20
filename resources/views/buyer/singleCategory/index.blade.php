@@ -37,7 +37,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Items List')}} @if (!$placedRFQs->count()) {{__('portal.seems empty')}} @endif </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Quotations List')}} @if (!$placedRFQs->count()) {{__('portal.seems empty')}} @endif </h2>
 
         @if ($placedRFQs->count())
             <div class="flex flex-col bg-white rounded ">
@@ -212,7 +212,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Items List')}} @if (!$placedRFQs->count()) {{__('portal.seems empty')}} @endif </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Quotations List')}} @if (!$placedRFQs->count()) {{__('portal.seems empty')}} @endif </h2>
 
         @if ($placedRFQs->count())
             <div class="flex flex-col bg-white rounded ">

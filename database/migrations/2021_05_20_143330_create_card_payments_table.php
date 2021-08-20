@@ -16,6 +16,7 @@ class CreateCardPaymentsTable extends Migration
         Schema::create('card_payments', function (Blueprint $table) {
             $table->id();
             $table->string('package_id')->nullable();
+            $table->string('invoice_id')->nullable();
             $table->string('invoice_transaction_id')->nullable();
             $table->string('user_id')->nullable();
             $table->decimal('amount',14,2)->nullable();
