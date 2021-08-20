@@ -50,7 +50,7 @@
                                 <strong>{{__('portal.New Package Charges')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($package->charges, 2) }}<br>
                                 <hr>
                                 <strong>{{__('portal.Amount to be paid')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-                                @if($businessPackage->package->id != 1)
+                                @if($businessPackage->package->id != 1 && $businessPackage->package->id != 5)
                                     {{ number_format($amountToPay, 2) }}
                                 @else
                                     {{number_format($package->charges, 2)}}
@@ -70,9 +70,13 @@
                                     <form action="{{route('businessPackage.stepOne')}}" method="POST">
                                         @csrf
 
-                                        <input type="hidden" name="package_id" value="{{$package->id}}">
-                                        <input type="hidden" name="business_package_id" value="{{$businessPackage->id}}">
-                                        <input type="hidden" name="amountToPay" value="{{$amountToPay}}">
+                                        <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
+{{--                                        <input type="hidden" name="business_package_id" value="{{encrypt($businessPackage->id)}}">--}}
+                                        {{--@if($businessPackage->package->id != 1 && $businessPackage->package->id != 5)
+                                            <input type="hidden" name="amountToPay" value="{{encrypt($amountToPay)}}">
+                                        @else
+                                            <input type="hidden" name="amountToPay" value="{{encrypt($package->charges)}}">
+                                        @endif--}}
                                         <button class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border
                                                    border-transparent rounded-md font-semibold text-xs text-white uppercase
                                                    tracking-widest hover:bg-red-500  focus:outline-none focus:border-green-700
@@ -169,9 +173,9 @@
                                 <div class="text-gray-500" style="text-align: end">
                                     <form action="{{route('businessPackage.stepOne')}}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="package_id" value="{{$package->id}}">
-                                        <input type="hidden" name="business_package_id" value="{{$businessPackage->id}}">
-                                        <input type="hidden" name="amountToPay" value="{{$amountToPay}}">
+                                        <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
+{{--                                        <input type="hidden" name="business_package_id" value="{{$businessPackage->id}}">--}}
+{{--                                        <input type="hidden" name="amountToPay" value="{{$amountToPay}}">--}}
                                         <button class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border
                                                    border-transparent rounded-md font-semibold text-xs text-white uppercase
                                                    tracking-widest hover:bg-red-500  focus:outline-none focus:border-green-700

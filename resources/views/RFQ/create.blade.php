@@ -529,7 +529,7 @@
 
                                 <th style="width:15%;">{{__('portal.Category')}} @include('misc.required')</th>
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
-                                <th style="width:7%">{{__('portal.UOM')}} @include('misc.required') </th>
+                                <th style="width:7%" title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required') </th>
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
                                 <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
@@ -1109,7 +1109,7 @@
 
                                 <th style="width:15%;">{{__('portal.Category')}} @include('misc.required')</th>
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
-                                <th style="width:7%">{{__('portal.UOM')}} @include('misc.required') </th>
+                                <th style="width:7%" title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required') </th>
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
                                 <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
@@ -1786,7 +1786,7 @@
 
                                 <th style="width:15%;">{{__('portal.Category')}} @include('misc.required')</th>
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
-                                <th style="width:8%">{{__('portal.UOM')}} @include('misc.required') </th>
+                                <th style="width:8%" title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required') </th>
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
                                 <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
@@ -2364,7 +2364,7 @@
 
                                 <th style="width:15%;">{{__('portal.Category')}} @include('misc.required')</th>
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
-                                <th style="width:8%">{{__('portal.UOM')}} @include('misc.required') </th>
+                                <th style="width:8%" title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required') </th>
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
                                 <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>

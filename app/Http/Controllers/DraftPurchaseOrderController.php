@@ -271,6 +271,10 @@ class DraftPurchaseOrderController extends Controller
         User::find(auth()->user()->id)->notify(new DpoApproved($draftPurchaseOrder));
         session()->flash('message', 'DPO Accepted.');
 //        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
+        if ($request->payment_method == 'Cash')
+        {
+            return redirect()->route('proforma_invoices');
+        }
         return redirect()->route('po.po');
     }
 
@@ -643,6 +647,10 @@ class DraftPurchaseOrderController extends Controller
         User::find(auth()->user()->id)->notify(new DpoApproved($draftPurchaseOrders[0]));
 
         session()->flash('message', 'DPO Accepted and PO generated.');
+        if ($draftPurchaseOrders[0]->payment_term == 'Cash')
+        {
+            return redirect()->route('singleCategoryProformaInvoices');
+        }
         return redirect()->route('singleCategoryPO');
     }
 

@@ -63,7 +63,7 @@ class EOrdersController extends Controller
                 $user = User::find(auth()->user()->id);
                 $user->notify(new \App\Notifications\RfqCreated());
                 session()->flash('message', 'RFQ placed successfully');
-                return redirect()->route('PlacedRFQ.index');
+                return redirect()->route('QoutationsBuyerReceived');
             }
         } elseif ($business_package->package_id == 2) {
             if ($rfq == 10) {
@@ -108,7 +108,7 @@ class EOrdersController extends Controller
                 $user = User::find(auth()->user()->id);
                 $user->notify(new \App\Notifications\RfqCreated());
                 session()->flash('message', 'RFQ placed successfully');
-                return redirect()->route('PlacedRFQ.index');
+                return redirect()->route('QoutationsBuyerReceived');
             }
         } elseif ($business_package->package_id == 3 || $business_package->package_id == 4) {
             DB::transaction(function () use ($request) {
@@ -149,7 +149,7 @@ class EOrdersController extends Controller
             $user = User::find(auth()->user()->id);
             $user->notify(new \App\Notifications\RfqCreated());
             session()->flash('message', 'RFQ placed successfully');
-            return redirect()->route('PlacedRFQ.index');
+            return redirect()->route('QoutationsBuyerReceived');
         }
 
     }
@@ -209,7 +209,7 @@ class EOrdersController extends Controller
                 $user = User::find(auth()->user()->id);
                 $user->notify(new \App\Notifications\RfqCreated());
                 session()->flash('message', 'RFQ placed successfully');
-                return redirect()->route('single_category_rfq_index');
+                return redirect()->route('singleCategoryBuyerRFQs');
             }
         } elseif ($business_package->package_id == 2) {
             if ($rfq == 10) {
@@ -254,7 +254,7 @@ class EOrdersController extends Controller
                 $user = User::find(auth()->user()->id);
                 $user->notify(new \App\Notifications\RfqCreated());
                 session()->flash('message', 'RFQ placed successfully');
-                return redirect()->route('single_category_rfq_index');
+                return redirect()->route('singleCategoryBuyerRFQs');
             }
         } elseif ($business_package->package_id == 3 || $business_package->package_id == 4) {
             DB::transaction(function () use ($request) {
@@ -295,7 +295,7 @@ class EOrdersController extends Controller
             $user = User::find(auth()->user()->id);
             $user->notify(new \App\Notifications\RfqCreated());
             session()->flash('message', 'RFQ placed successfully');
-            return redirect()->route('single_category_rfq_index');
+            return redirect()->route('singleCategoryBuyerRFQs');
         }
 
     }

@@ -103,8 +103,8 @@
     @if(isset($businessPackage))
         <form action="{{route('storeBusinessPackageUpgrade')}}" method="POST">
             @csrf
-            <input type="hidden" name="package_id" value="{{$package->id}}">
-            <input type="hidden" name="amount" value="{{$amountToPay}}">
+            <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
+            <input type="hidden" name="amount" value="{{encrypt($amountToPay)}}">
             <div class="min-w-screen bg-gray-200 flex items-center justify-center px-5 pb-10 pt-0">
                 <div class="w-full mx-auto rounded-lg bg-white shadow-lg p-5 text-gray-700" style="max-width: 600px">
                     <div class="w-full pt-1 pb-5">

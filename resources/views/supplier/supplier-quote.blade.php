@@ -103,11 +103,11 @@
                                 <hr style="border-top: 1px solid gray;width: 25%;">
                             </div>
                             <div class="my-5 pl-5 ">
-                                <strong>{{__('portal.Buyer Name')}}:</strong> {{$eOrderItems->business->business_name}}
+                                <strong>{{__('portal.Buyer Name')}}:</strong> @if($eOrderItems->company_name_check == 1) {{$eOrderItems->business->business_name}} @else {{__('portal.N/A')}} @endif
                                 <br>
                                 <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.Emdad')}}-{{$eOrderItems->id}}
                                 <br>
-                                <strong>{{__('portal.User Quoted')}}:</strong> {{$eOrderItems->user->name}}
+                                <strong>{{__('portal.User Quoted')}}:</strong> @if($eOrderItems->company_name_check == 1) {{$eOrderItems->user->name}} @else {{__('portal.N/A')}} @endif
                                 <br>
                                 <strong>{{__('portal.Category Code')}}: </strong> {{$eOrderItems->item_code}}
                                 <br>
@@ -573,11 +573,11 @@
                                 <hr style="border-top: 1px solid gray;width: 25%;">
                             </div>
                             <div class="my-5 pl-5 ">
-                                <strong>{{__('portal.Buyer Name')}}:</strong> {{$eOrderItems->business->business_name}}
+                                <strong>{{__('portal.Buyer Name')}}:</strong> @if($eOrderItems->company_name_check == 1) {{$eOrderItems->business->business_name}} @else {{__('portal.N/A')}} @endif
                                 <br>
                                 <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.Emdad')}}-{{$eOrderItems->id}}
                                 <br>
-                                <strong>{{__('portal.User Quoted')}}:</strong> {{$eOrderItems->user->name}}
+                                <strong>{{__('portal.User Quoted')}}:</strong> @if($eOrderItems->company_name_check == 1) {{$eOrderItems->user->name}} @else {{__('portal.N/A')}} @endif
                                 <br>
                                 <strong>{{__('portal.Category Code')}}: </strong> {{$eOrderItems->item_code}}
                                 <br>
