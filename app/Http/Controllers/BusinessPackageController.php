@@ -291,9 +291,11 @@ class BusinessPackageController extends Controller
 
     public function storeBusinessPackageUpgrade(Request $request)
     {
+//        dd($request->all());
         //after payment add payment details to payment table after that insert that payment id to BusinessPackage table
         $package = Package::where('id', $request->package_id)->first();
         $merchant_id = null;
+        $amnt = $request->amount;
         $merchant_id = CardPayment::create([
             'package_id' => $request->package_id,
             'user_id' => auth()->user()->id,
@@ -304,7 +306,7 @@ class BusinessPackageController extends Controller
         $url = env('URL_GATEWAY') . "/v1/checkouts";
         if ($request->gateway == "mada") {
             $data = "entityId=" . env('ENTITY_ID_MADA') .
-                "&amount=" . $package->charges .
+                "&amount=" . $request->amount .
                 "&currency=SAR" .
                 "&merchantTransactionId=" . $merchant_id->id .
                 "&customer.email=" . $request->customer_email .
@@ -320,7 +322,7 @@ class BusinessPackageController extends Controller
 
         } elseif ($request->gateway == "visa_master") {
             $data = "entityId=" . env('ENTITY_ID_VISA') .
-                "&amount=" . $package->charges .
+                "&amount=" . $request->amount .
                 "&currency=SAR" .
                 "&merchantTransactionId=" . $merchant_id->id .
                 "&customer.email=" . $request->customer_email .
@@ -360,7 +362,7 @@ class BusinessPackageController extends Controller
             return redirect()->route('packages.index')->with(['message' => 'Transaction failed incorrect parameters.']);
         }
 
-        return view('subscribePackageView.upgradingPackingPaymentView', compact('package', 'res_data', 'gateway', 'merchant_id'));
+        return view('subscribePackageView.upgradingPackingPaymentView', compact('package', 'amnt','res_data', 'gateway', 'merchant_id'));
     }
 
     public function businessPackageUpgradePaymentStatus(Request $request)

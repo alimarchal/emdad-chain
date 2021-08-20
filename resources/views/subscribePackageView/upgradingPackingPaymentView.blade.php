@@ -73,7 +73,7 @@
         </div>
     @endif
     <h2 class="text-2xl font-bold py-2 text-center m-2">
-        Amount: SAR {{number_format($package->charges,2)}}
+        Amount: SAR {{number_format($amnt,2)}}
     </h2>
     <style>
         .form-radio {
