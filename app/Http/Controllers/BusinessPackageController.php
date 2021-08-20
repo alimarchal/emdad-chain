@@ -16,10 +16,12 @@ class BusinessPackageController extends Controller
 {
     public function getCheckOutId(Request $request)
     {
-        $package = Package::where('id', decrypt($request->package_id))->first();
+
+        $package = Package::where('id', $request->package_id)->first();
 //        $businessPackage = BusinessPackage::where('id', decrypt($request->business_package_id))->first();
 
         $businessPackage = BusinessPackage::with('package')->where(['user_id' => auth()->id(), 'status' => 1])->first();
+
         $startDate = Carbon::parse($businessPackage->subscription_start_date);
         $now = Carbon::now();
         $usedDays = $now->diffInDays($startDate);
@@ -419,23 +421,23 @@ class BusinessPackageController extends Controller
             $successCodePattern = '/^(000\.000\.|000\.100\.1|000\.[36])/';
             $successManualReviewCodePattern = '/^(000\.400\.0|000\.400\.100)/';
             if (preg_match($successCodePattern, $transaction_status['result']['code']) || preg_match($successManualReviewCodePattern, $transaction_status['result']['code'])) {
-//                $success = 'Your payment has been processed successfully';
-
-                //$paymentService = new \Moyasar\Providers\PaymentService();
-                //$payment_info = $paymentService->fetch($request->id);
-
                 $cp = CardPayment::where('id', $merchant_id)->first();
                 $cp->status = 1;
                 $cp->save();
 
                 $package_id = $request->package_id;
+
                 $package = Package::where('id', $package_id)->first();
 
-                BusinessPackage::where('user_id', auth()->id())->update(['status' => 0]);
+                $old_business_package = BusinessPackage::where('user_id', auth()->id())->first();
+                $old_business_package->status = 0;
+                $old_business_package->save();
 
                 if (auth()->user()->registration_type == 'Buyer') {
                     BusinessPackage::create([
                         'business_type' => 1,
+                        'business_id' => $old_business_package->business_id,
+                        'categories' => $old_business_package->categories,
                         'package_id' => $package->id,
                         'invoice_id' => $request->id,
                         'user_id' => auth()->id(),
@@ -449,6 +451,8 @@ class BusinessPackageController extends Controller
                 } elseif (auth()->user()->registration_type == 'Supplier') {
                     BusinessPackage::create([
                         'business_type' => 2,
+                        'business_id' => $old_business_package->business_id,
+                        'categories' => $old_business_package->categories,
                         'package_id' => $package->id,
                         'invoice_id' => $request->id,
                         'user_id' => auth()->id(),
