@@ -17,17 +17,15 @@ class BusinessPackageController extends Controller
     public function getCheckOutId(Request $request)
     {
         $package = Package::where('id', $request->package_id)->first();
-
         $businessPackage = BusinessPackage::where('id', $request->business_package_id)->first();
         $amountToPay = $request->amountToPay;
-
         return view('subscribePackageView.step-one', compact('package', 'businessPackage', 'amountToPay'));
     }
 
     public function store(Request $request)
     {
 
-
+//        dd($request->all());
         //after payment add payment details to payment table after that insert that payment id to BusinessPackage table
         $package = Package::where('id', $request->package_id)->first();
         $merchant_id = null;
@@ -91,7 +89,6 @@ class BusinessPackageController extends Controller
             curl_close($ch);
             $res_data = json_decode($responseData, true);
             $gateway = $request->gateway;
-
 
             if ($res_data['result']['code'] == "200.300.404") {
                 $cp = CardPayment::where('id', $merchant_id->id)->first();
@@ -191,8 +188,6 @@ class BusinessPackageController extends Controller
 
     public function businessPackagePaymentStatus(Request $request)
     {
-
-//        dd($request->all());
         $id = $request->id;
         $resourcePath = $request->resourcePath;
         $gateway = $request->gateway;
@@ -296,7 +291,6 @@ class BusinessPackageController extends Controller
 
     public function storeBusinessPackageUpgrade(Request $request)
     {
-
         //after payment add payment details to payment table after that insert that payment id to BusinessPackage table
         $package = Package::where('id', $request->package_id)->first();
         $merchant_id = null;
@@ -308,8 +302,6 @@ class BusinessPackageController extends Controller
         ]);
         $data = null;
         $url = env('URL_GATEWAY') . "/v1/checkouts";
-//        $url = "https://oppwa.com/v1/checkouts";
-//        $url = "https://test.oppwa.com/v1/checkouts";
         if ($request->gateway == "mada") {
             $data = "entityId=" . env('ENTITY_ID_MADA') .
                 "&amount=" . $package->charges .
