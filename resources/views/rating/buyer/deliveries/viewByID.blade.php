@@ -92,7 +92,7 @@
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
-                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer"> {{ $delivery->id }} </a>
+                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer"> {{__('portal.D')}}-{{ $delivery->id }} </a>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     <span class="badge badge-info">@if($deliveryComment->user->registration_type == 'SuperAdmin') {{__('portal.Emdad')}} @else {{ $deliveryComment->user->name }} @endif</span>
@@ -226,7 +226,7 @@
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                 @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
-                                                                <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer"> {{ $delivery->id }} </a>
+                                                                <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer"> {{__('portal.D')}}-{{ $delivery->id }} </a>
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                 <span class="badge badge-info">@if($deliveryComment->user->registration_type == 'SuperAdmin') {{__('portal.Emdad')}} @else {{ $deliveryComment->user->name }} @endif</span>

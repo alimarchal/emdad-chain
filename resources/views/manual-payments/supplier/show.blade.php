@@ -15,7 +15,7 @@
                         <div class="flex flex-wrap -mx-1 overflow-hidden sm:-mx-px md:-mx-1 lg:-mx-1 xl:-mx-1">
 
                             <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <p><strong>{{__('portal.Invoice Number')}}:</strong> <a href="{{ route('invoice.show', $supplierBankPayment->bankPayment->invoice_id) }}" target="_blank" class="text-blue-600 hover:underline">{{ $supplierBankPayment->bankPayment->invoice_id }} ({{__('portal.View')}})</a></p>
+                                <p><strong>{{__('portal.Invoice Number')}}:</strong> <a href="{{ route('invoice.show', $supplierBankPayment->bankPayment->invoice_id) }}" target="_blank" class="text-blue-600 hover:underline">{{__('portal.Inv.')}} -{{ $supplierBankPayment->bankPayment->invoice_id }} ({{__('portal.View')}})</a></p>
                             </div>
 
                             <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
@@ -97,7 +97,7 @@
                         <div class="flex flex-wrap -mx-1 overflow-hidden sm:-mx-px md:-mx-1 lg:-mx-1 xl:-mx-1">
 
                             <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <p><strong>{{__('portal.Invoice Number')}}:</strong> <a href="{{ route('invoice.show', $supplierBankPayment->bankPayment->invoice_id) }}" target="_blank" class="text-blue-600 hover:underline">{{ $supplierBankPayment->bankPayment->invoice_id }} ({{__('portal.View')}})</a></p>
+                                <p><strong>{{__('portal.Invoice Number')}}:</strong> <a href="{{ route('invoice.show', $supplierBankPayment->bankPayment->invoice_id) }}" target="_blank" class="text-blue-600 hover:underline">{{__('portal.Inv.')}}-{{ $supplierBankPayment->bankPayment->invoice_id }} ({{__('portal.View')}})</a></p>
                             </div>
 
                             <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">

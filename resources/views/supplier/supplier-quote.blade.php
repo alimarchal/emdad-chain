@@ -105,7 +105,7 @@
                             <div class="my-5 pl-5 ">
                                 <strong>{{__('portal.Buyer Name')}}:</strong> @if($eOrderItems->company_name_check == 1) {{$eOrderItems->business->business_name}} @else {{__('portal.N/A')}} @endif
                                 <br>
-                                <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.Emdad')}}-{{$eOrderItems->id}}
+                                <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-{{$eOrderItems->id}}
                                 <br>
                                 <strong>{{__('portal.User Quoted')}}:</strong> @if($eOrderItems->company_name_check == 1) {{$eOrderItems->user->name}} @else {{__('portal.N/A')}} @endif
                                 <br>
@@ -575,7 +575,7 @@
                             <div class="my-5 pl-5 ">
                                 <strong>{{__('portal.Buyer Name')}}:</strong> @if($eOrderItems->company_name_check == 1) {{$eOrderItems->business->business_name}} @else {{__('portal.N/A')}} @endif
                                 <br>
-                                <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.Emdad')}}-{{$eOrderItems->id}}
+                                <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-{{$eOrderItems->id}}
                                 <br>
                                 <strong>{{__('portal.User Quoted')}}:</strong> @if($eOrderItems->company_name_check == 1) {{$eOrderItems->user->name}} @else {{__('portal.N/A')}} @endif
                                 <br>

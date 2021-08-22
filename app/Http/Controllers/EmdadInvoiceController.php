@@ -11,7 +11,7 @@ class EmdadInvoiceController extends Controller
 {
     public function index()
     {
-        if (auth()->user()->hasRole('SuperAdmin'))
+        if (auth()->user()->hasRole('SuperAdmin|Finance Officer 1'))
         {
             $emdadInvoices = EmdadInvoice::where('rfq_type','=',1)->get();
 
@@ -48,7 +48,7 @@ class EmdadInvoiceController extends Controller
 
     public function singleCategoryIndex()
     {
-        if (auth()->user()->hasRole('SuperAdmin'))
+        if (auth()->user()->hasRole('SuperAdmin|Finance Officer 1'))
         {
             $collection = EmdadInvoice::where('rfq_type','=',0)->get();
 

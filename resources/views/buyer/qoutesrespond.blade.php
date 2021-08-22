@@ -45,7 +45,7 @@
 
                         <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded shadow-md ">
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Quote Request')}} #: {{ $QouteItem->id }}</strong>
+                                <strong>{{__('portal.Quote Request')}} #: {{__('portal.Q')}}-{{ $QouteItem->id }}</strong>
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
@@ -271,7 +271,7 @@
 
                         <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded shadow-md ">
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Quote Request')}} #: {{ $QouteItem->id }}</strong>
+                                <strong>{{__('portal.Quote Request')}} #: {{__('portal.Q')}}-{{ $QouteItem->id }}</strong>
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">

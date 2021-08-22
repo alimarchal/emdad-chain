@@ -36,140 +36,140 @@
                                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                         <table id="po-table" class="min-w-full divide-y divide-gray-200">
                                             <thead>
-                                            <tr>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    #
-                                                </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    {{__('portal.P.O Number')}}
-                                                </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    {{__("portal.Category")}}
-                                                </th>
+                                                <tr>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        #
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.P.O Number')}}
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__("portal.Category")}}
+                                                    </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    {{__('portal.P.O Date')}}
-                                                </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.P.O Date')}}
+                                                    </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    {{__('portal.P.O Status')}}
-                                                </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    {{__('portal.Payment')}}
-                                                </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    {{__('portal.Chain Status')}}
-                                                </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    {{__('portal.View')}}
-                                                </th>
-                                            </tr>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.P.O Status')}}
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.Payment')}}
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.Chain Status')}}
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.View')}}
+                                                    </th>
+                                                </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
-                                            @foreach ($pos as $po)
-                                                <tr>
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{ $loop->iteration }}
-                                                    </td>
+                                                @foreach ($pos as $po)
+                                                    <tr>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            {{ $loop->iteration }}
+                                                        </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.Emdad')}}-{{ $po->id }}
-                                                    </td>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            {{__('portal.P.O.')}} -{{ $po->id }}
+                                                        </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        @php
-                                                            $record = \App\Models\Category::where('id',$po->item_code)->first();
-                                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                                        @endphp
-                                                        <a href="{{ route('singleCategoryPOByID', $po->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                            {{ $record->name }}, {{ $parent->name}}
-                                                        </a>
-                                                    </td>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            @php
+                                                                $record = \App\Models\Category::where('id',$po->item_code)->first();
+                                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                            @endphp
+                                                            <a href="{{ route('singleCategoryPOByID', $po->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                {{ $record->name }}, {{ $parent->name}}
+                                                            </a>
+                                                        </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{ $po->po_date }}
-                                                    </td>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            {{ $po->po_date }}
+                                                        </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        @if ($po->status == 'prepareDelivery')
-                                                            {{__('portal.Preparing Delivery')}}
-                                                        @elseif ($po->status == 'cancel')
-                                                            {{__('portal.canceled')}}
-                                                        @elseif ($po->status == 'approved')
-                                                            {{__('portal.approved')}}
-                                                        @else
-                                                            {{ $po->status }}
-                                                        @endif
-
-                                                    </td>
-
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        @if($po->payment_term == 'Cash') {{__('portal.Cash')}}
-                                                        @elseif($po->payment_term == 'Credit') {{__('portal.Credit')}}
-                                                        @elseif($po->payment_term == 'Credit30days') {{__('portal.Credit (30 Days)')}}
-                                                        @elseif($po->payment_term == 'Credit60days') {{__('portal.Credit (60 Days)')}}
-                                                        @elseif($po->payment_term == 'Credit90days') {{__('portal.Credit (90 Days)')}}
-                                                        @elseif($po->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
-                                                        @endif
-                                                    </td>
-
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        @if($po->payment_term == 'Cash' || auth()->user()->can('all') && auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
-                                                            @php $proformaInvoice = \App\Models\Invoice::where('draft_purchase_order_id', $po->id)->first(); @endphp
-                                                            @if (isset($proformaInvoice) && $proformaInvoice->invoice_status == 0)
-                                                                <a>{{__('portal.Waiting for payment')}}</a>
-                                                            @elseif (isset($proformaInvoice) && $proformaInvoice->invoice_status == 2)
-                                                                <a>{{__('portal.Proforma invoice rejected by Emdad')}}</a>
-                                                            @elseif (isset($proformaInvoice) && $proformaInvoice->invoice_status == 3)
-                                                                <a>{{__('portal.Proforma invoice confirmed by Emdad')}}</a>
-                                                            @elseif($po->status == 'pending')
-                                                                <a>{{__('portal.DPO not approved yet')}}</a>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            @if ($po->status == 'prepareDelivery')
+                                                                {{__('portal.Preparing Delivery')}}
+                                                            @elseif ($po->status == 'cancel')
+                                                                {{__('portal.canceled')}}
+                                                            @elseif ($po->status == 'approved')
+                                                                {{__('portal.approved')}}
                                                             @else
-                                                                <a>{{__('portal.Waiting for proforma invoice')}}</a>
+                                                                {{ $po->status }}
                                                             @endif
-                                                        @else
-                                                            @if(auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
-                                                                @if($po->payment_term == 'Credit')
-                                                                    {{--<form method="post" action="{{route('singleCategoryDeliveryNoteStore', $po->rfq_no)}}">
-                                                                        @csrf
-                                                                        <button class="button-blue" type="submit">{{__('portal.Generate delivery note')}}</button>
-                                                                    </form>--}}
-                                                                    @php $invoice = \App\Models\Invoice::where('draft_purchase_order_id', $po->id)->first(); @endphp
-                                                                    @if($po->status == 'approved' && auth()->user()->registration_type == 'Supplier')
-                                                                        <span>{{__('portal.Create delivery Note')}}</span>
-                                                                    @elseif(!isset($invoice) && auth()->user()->registration_type == 'Supplier')
-                                                                        <span>{{__('portal.Generate Final Invoice')}}</span>
-                                                                    @elseif($po->status == 'approved' && auth()->user()->registration_type == 'Buyer')
-                                                                        <span>{{__('portal.Invoice not generated')}}</span>
-                                                                    @elseif(!isset($invoice) && auth()->user()->registration_type == 'Buyer')
-                                                                        <span>{{__('portal.Invoice not generated')}}</span>
-                                                                    @elseif(isset($invoice))
-                                                                        <span>{{__('portal.Invoice generated')}}</span>
+
+                                                        </td>
+
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            @if($po->payment_term == 'Cash') {{__('portal.Cash')}}
+                                                            @elseif($po->payment_term == 'Credit') {{__('portal.Credit')}}
+                                                            @elseif($po->payment_term == 'Credit30days') {{__('portal.Credit (30 Days)')}}
+                                                            @elseif($po->payment_term == 'Credit60days') {{__('portal.Credit (60 Days)')}}
+                                                            @elseif($po->payment_term == 'Credit90days') {{__('portal.Credit (90 Days)')}}
+                                                            @elseif($po->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
+                                                            @endif
+                                                        </td>
+
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            @if($po->payment_term == 'Cash' || auth()->user()->can('all') && auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
+                                                                @php $proformaInvoice = \App\Models\Invoice::where('draft_purchase_order_id', $po->id)->first(); @endphp
+                                                                @if (isset($proformaInvoice) && $proformaInvoice->invoice_status == 0)
+                                                                    <a>{{__('portal.Waiting for payment')}}</a>
+                                                                @elseif (isset($proformaInvoice) && $proformaInvoice->invoice_status == 2)
+                                                                    <a>{{__('portal.Proforma invoice rejected by Emdad')}}</a>
+                                                                @elseif (isset($proformaInvoice) && $proformaInvoice->invoice_status == 3)
+                                                                    <a>{{__('portal.Proforma invoice confirmed by Emdad')}}</a>
+                                                                @elseif($po->status == 'pending')
+                                                                    <a>{{__('portal.DPO not approved yet')}}</a>
+                                                                @else
+                                                                    <a>{{__('portal.Waiting for proforma invoice')}}</a>
+                                                                @endif
+                                                            @else
+                                                                @if(auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
+                                                                    @if($po->payment_term == 'Credit')
+                                                                        {{--<form method="post" action="{{route('singleCategoryDeliveryNoteStore', $po->rfq_no)}}">
+                                                                            @csrf
+                                                                            <button class="button-blue" type="submit">{{__('portal.Generate delivery note')}}</button>
+                                                                        </form>--}}
+                                                                        @php $invoice = \App\Models\Invoice::where('draft_purchase_order_id', $po->id)->first(); @endphp
+                                                                        @if($po->status == 'approved' && auth()->user()->registration_type == 'Supplier')
+                                                                            <span>{{__('portal.Create delivery Note')}}</span>
+                                                                        @elseif(!isset($invoice) && auth()->user()->registration_type == 'Supplier')
+                                                                            <span>{{__('portal.Generate Final Invoice')}}</span>
+                                                                        @elseif($po->status == 'approved' && auth()->user()->registration_type == 'Buyer')
+                                                                            <span>{{__('portal.Invoice not generated')}}</span>
+                                                                        @elseif(!isset($invoice) && auth()->user()->registration_type == 'Buyer')
+                                                                            <span>{{__('portal.Invoice not generated')}}</span>
+                                                                        @elseif(isset($invoice))
+                                                                            <span>{{__('portal.Invoice generated')}}</span>
+                                                                        @endif
                                                                     @endif
                                                                 @endif
                                                             @endif
-                                                        @endif
-                                                    </td>
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        <a href="{{ route('singleCategoryPOByID', $po->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                                </path>
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                                </path>
-                                                            </svg>
-                                                        </a>
-                                                        <br>
-                                                        {{--@if(auth()->user()->registration_type == 'Supplier')
-                                                            @if($po->payment_term == 'Credit')
-                                                                <a href="{{ url('deliveryNote') }}" class="hover:text-blue-900 hover:underline text-blue-900"> {{__('portal.Generate delivery note')}} </a>
-                                                            @endif
-                                                        @endif--}}
-                                                    </td>
+                                                        </td>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            <a href="{{ route('singleCategoryPOByID', $po->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                    </path>
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                    </path>
+                                                                </svg>
+                                                            </a>
+                                                            <br>
+                                                            {{--@if(auth()->user()->registration_type == 'Supplier')
+                                                                @if($po->payment_term == 'Credit')
+                                                                    <a href="{{ url('deliveryNote') }}" class="hover:text-blue-900 hover:underline text-blue-900"> {{__('portal.Generate delivery note')}} </a>
+                                                                @endif
+                                                            @endif--}}
+                                                        </td>
 
-                                                </tr>
-                                            @endforeach
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -270,7 +270,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.Emdad')}}-{{ $po->id }}
+                                                        {{__('portal.P.O.')}}-{{ $po->id }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">

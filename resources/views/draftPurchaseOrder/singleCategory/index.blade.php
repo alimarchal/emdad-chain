@@ -60,43 +60,43 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
-                                            @foreach ($dpos as $dpo)
-                                                <tr>
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{ $loop->iteration }}
-                                                    </td>
+                                                @foreach ($dpos as $dpo)
+                                                    <tr>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            {{ $loop->iteration }}
+                                                        </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.Emdad')}}-{{ $dpo->id }}
-                                                    </td>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            {{__('portal.D.P.O.')}} -{{ $dpo->id }}
+                                                        </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                            @php
-                                                                $record = \App\Models\Category::where('id',$dpo->item_code)->first();
-                                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                                            @endphp
-                                                            {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif
-                                                        </a>
-                                                    </td>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                @php
+                                                                    $record = \App\Models\Category::where('id',$dpo->item_code)->first();
+                                                                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                                @endphp
+                                                                {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif
+                                                            </a>
+                                                        </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{ $dpo->po_date }}
-                                                    </td>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            {{ $dpo->po_date }}
+                                                        </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-600 hover:underline text-blue-600">
-                                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                                </path>
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                                </path>
-                                                            </svg>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-600 hover:underline text-blue-600">
+                                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                    </path>
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                    </path>
+                                                                </svg>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -191,7 +191,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.Emdad')}}-{{ $dpo->id }}
+                                                        {{__('portal.D.P.O.')}}-{{ $dpo->id }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">

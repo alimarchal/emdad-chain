@@ -64,62 +64,62 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
-                                            @foreach ($collection as $dn)
-                                                <tr>
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{ $loop->iteration }}
-                                                    </td>
+                                                @foreach ($collection as $dn)
+                                                    <tr>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            {{ $loop->iteration }}
+                                                        </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.Emdad')}}-{{ $dn->id }}
-                                                    </td>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            {{__('portal.D.N.')}} -{{ $dn->id }}
+                                                        </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.Emdad')}}-{{ $dn->purchase_order->id }}
-                                                    </td>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            {{__('portal.P.O.')}} -{{ $dn->purchase_order->id }}
+                                                        </td>
 
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        <a href="{{ route('singleCategoryViewNote', $dn->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                            @php
-                                                                $record = \App\Models\Category::where('id',$dn->purchase_order->item_code)->first();
-                                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                                            @endphp
-                                                            {{ $record->name }} , {{ $parent->name }}
-                                                        </a>
-                                                    </td>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            <a href="{{ route('singleCategoryViewNote', $dn->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                @php
+                                                                    $record = \App\Models\Category::where('id',$dn->purchase_order->item_code)->first();
+                                                                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                                @endphp
+                                                                {{ $record->name }} , {{ $parent->name }}
+                                                            </a>
+                                                        </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{ Carbon\Carbon::parse($dn->purchase_order->po_date)->format('d-m-Y') }}
-                                                    </td>
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            {{ Carbon\Carbon::parse($dn->purchase_order->po_date)->format('d-m-Y') }}
+                                                        </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        @if ($dn->status == 'prepareDelivery')
-                                                            {{__('portal.Preparing Delivery')}}
-                                                        @else
-                                                            @if($dn->status == 'cancel') {{__('portal.Cancel')}} @endif
-                                                            @if($dn->status == 'approved') {{__('portal.approved')}} @endif
-                                                            @if($dn->status == 'completed') {{__('portal.Completed')}} @endif
-                                                            @if($dn->status == 'pending') {{__('portal.pending')}} @endif
-                                                            @if($dn->status == 'processing') {{__('portal.processing')}} @endif
-{{--                                                            {{ $dn->status }}--}}
-                                                        @endif
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            @if ($dn->status == 'prepareDelivery')
+                                                                {{__('portal.Preparing Delivery')}}
+                                                            @else
+                                                                @if($dn->status == 'cancel') {{__('portal.Cancel')}} @endif
+                                                                @if($dn->status == 'approved') {{__('portal.approved')}} @endif
+                                                                @if($dn->status == 'completed') {{__('portal.Completed')}} @endif
+                                                                @if($dn->status == 'pending') {{__('portal.pending')}} @endif
+                                                                @if($dn->status == 'processing') {{__('portal.processing')}} @endif
+    {{--                                                            {{ $dn->status }}--}}
+                                                            @endif
 
-                                                    </td>
+                                                        </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        <a href="{{ route('singleCategoryViewNote',$dn->rfq_no) }}" class="hover:underline hover:text-blue-800 text-blue-500">
-                                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                                </path>
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                                </path>
-                                                            </svg>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            <a href="{{ route('singleCategoryViewNote',$dn->rfq_no) }}" class="hover:underline hover:text-blue-800 text-blue-500">
+                                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                    </path>
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                    </path>
+                                                                </svg>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -218,11 +218,11 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            {{__('portal.Emdad')}}-{{ $dn->id }}
+                                                            {{__('portal.D.N.')}}-{{ $dn->id }}
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            {{__('portal.Emdad')}}-{{ $dn->purchase_order->id }}
+                                                            {{__('portal.P.O.')}}-{{ $dn->purchase_order->id }}
                                                         </td>
 
 

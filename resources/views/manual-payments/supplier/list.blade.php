@@ -70,7 +70,7 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-center text-black">
-                                                            {{ $supplierPayment->bankPayment->invoice_id }}
+                                                            {{__('portal.Inv.')}} -{{ $supplierPayment->bankPayment->invoice_id }}
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
@@ -209,7 +209,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-center text-black">
-                                                        {{ $supplierPayment->bankPayment->invoice_id }}
+                                                        {{__('portal.Inv.')}}-{{ $supplierPayment->bankPayment->invoice_id }}
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">

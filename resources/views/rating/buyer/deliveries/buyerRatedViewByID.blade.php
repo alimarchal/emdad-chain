@@ -81,7 +81,7 @@
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
-                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.Emdad')}}-{{ $delivery->id }} </a>
+                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.D')}}-{{ $delivery->id }} </a>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     @php
@@ -210,7 +210,7 @@
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
-                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.Emdad')}}-{{ $delivery->id }} </a>
+                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.D')}}-{{ $delivery->id }} </a>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     @php
@@ -243,7 +243,7 @@
 
                             @else
                                 <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                                    <strong class="mr-1">{{__('portal.No Ratings yet..!')}}</strong>
+                                    <strong class="mr-3">{{__('portal.No Ratings yet..!')}}</strong>
                                     <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                                         <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                                     </button>

@@ -62,51 +62,51 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody class="bg-white divide-y divide-gray-200">
-                                                    @foreach ($deliveries as $delivery)
-                                                        <tr>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                <span class="badge badge-info">{{ $loop->iteration }}</span>
-                                                            </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                <span class="badge badge-info">
-                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{ $delivery->id }} </a>
-                                                                </span>
-                                                            </td>
-                                                            @php
-                                                                $comment_type = [1,5,7];
-                                                                $deliveryComment = \App\Models\DeliveryComment::where('delivery_id', $delivery->id)->first();
-                                                                $deliveryComments = \App\Models\DeliveryComment::where('delivery_id', $delivery->id)->whereIn('comment_type', $comment_type)->get();
-                                                                $sum = 0;
-                                                                if (count($deliveryComments) > 0 )
-                                                                    {
-                                                                        foreach ($deliveryComments as $deliveryComm)
+                                                        @foreach ($deliveries as $delivery)
+                                                            <tr>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                    <span class="badge badge-info">{{ $loop->iteration }}</span>
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                    <span class="badge badge-info">
+                                                                        <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.D')}}-{{ $delivery->id }} </a>
+                                                                    </span>
+                                                                </td>
+                                                                @php
+                                                                    $comment_type = [1,5,7];
+                                                                    $deliveryComment = \App\Models\DeliveryComment::where('delivery_id', $delivery->id)->first();
+                                                                    $deliveryComments = \App\Models\DeliveryComment::where('delivery_id', $delivery->id)->whereIn('comment_type', $comment_type)->get();
+                                                                    $sum = 0;
+                                                                    if (count($deliveryComments) > 0 )
                                                                         {
-                                                                            $sum += $deliveryComm->rating;
+                                                                            foreach ($deliveryComments as $deliveryComm)
+                                                                            {
+                                                                                $sum += $deliveryComm->rating;
+                                                                            }
                                                                         }
-                                                                    }
-                                                                $count = count($deliveryComments);
-                                                            @endphp
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                @if(count($deliveryComments) > 0)
-                                                                    {{number_format($sum/$count,2)}}
-                                                                @else
-                                                                    {{number_format(0,2)}}
-                                                                @endif
-                                                            </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                @if($deliveryComment)
-                                                                    <a href="{{ route('buyerDeliveryRatingViewByID', encrypt($delivery->id)) }}" class="hover:underline hover:text-blue-800 text-blue-500" target="_blank" rel="noreferrer">
-                                                                        <svg class="w-6 h-6 inline" fill="none" stroke="red"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                                                        </svg>
-                                                                    </a>
-                                                                @else
-                                                                    {{__('portal.No ratings received')}}
-                                                                @endif
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
+                                                                    $count = count($deliveryComments);
+                                                                @endphp
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                    @if(count($deliveryComments) > 0)
+                                                                        {{number_format($sum/$count,2)}}
+                                                                    @else
+                                                                        {{number_format(0,2)}}
+                                                                    @endif
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                    @if($deliveryComment)
+                                                                        <a href="{{ route('buyerDeliveryRatingViewByID', encrypt($delivery->id)) }}" class="hover:underline hover:text-blue-800 text-blue-500" target="_blank" rel="noreferrer">
+                                                                            <svg class="w-6 h-6 inline" fill="none" stroke="red"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                                                            </svg>
+                                                                        </a>
+                                                                    @else
+                                                                        {{__('portal.No ratings received')}}
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -204,7 +204,7 @@
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                 <span class="badge badge-info">
-                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{ $delivery->id }} </a>
+                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.D')}}-{{ $delivery->id }} </a>
                                                                 </span>
                                                             </td>
                                                             @php

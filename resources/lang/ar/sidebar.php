@@ -52,5 +52,6 @@ return [
     'Add Supplier' => 'إضافة مورّد',
     'List of Buyers' => 'قائمة المشترين',
     'List of Suppliers' => 'قائمة المورّدين',
+    'Delivery Note' => 'مذكرة توصيل',
 
 ];

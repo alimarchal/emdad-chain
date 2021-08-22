@@ -57,34 +57,34 @@
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($shipmentDetails as $shipmentDetail)
-                                    <tr>
-                                        <td class="px-6 text-center py-4 whitespace-nowrap">
-                                            {{ $loop->iteration }}
-                                        </td>
+                                    @foreach ($shipmentDetails as $shipmentDetail)
+                                        <tr>
+                                            <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                {{ $loop->iteration }}
+                                            </td>
 
-                                        <td class="px-6 text-center py-4 whitespace-nowrap">
-                                            <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600">{{ $shipmentDetail->delivery_id }}</a>
-                                        </td>
+                                            <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600">{{__('portal.D')}}-{{ $shipmentDetail->delivery_id }}</a>
+                                            </td>
 
-                                        <td class="px-6 text-center py-4 whitespace-nowrap">
-                                            @php $supplierBusiness = \App\Models\Business::where('id', $shipmentDetail->supplier_business_id)->first();  @endphp
-                                            {{ $supplierBusiness->business_name }}
-                                        </td>
+                                            <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                @php $supplierBusiness = \App\Models\Business::where('id', $shipmentDetail->supplier_business_id)->first();  @endphp
+                                                {{ $supplierBusiness->business_name }}
+                                            </td>
 
-                                        <td class="px-6 text-center py-4 whitespace-nowrap">
-                                            @if($shipmentDetail->status == 1 )
-                                                <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    {{__('portal.Delivered')}}
-                                                </span>
-                                            @else
-                                                <span class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    {{__('portal.Not Delivered yet')}}
-                                                </span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                            <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                @if($shipmentDetail->status == 1 )
+                                                    <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
+                                                        {{__('portal.Delivered')}}
+                                                    </span>
+                                                @else
+                                                    <span class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
+                                                        {{__('portal.Not Delivered yet')}}
+                                                    </span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -165,7 +165,7 @@
                                         </td>
 
                                         <td class="px-6 text-center py-4 whitespace-nowrap">
-                                            <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600">{{ $shipmentDetail->delivery_id }}</a>
+                                            <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600">{{__('portal.D')}}-{{ $shipmentDetail->delivery_id }}</a>
                                         </td>
 
                                         <td class="px-6 text-center py-4 whitespace-nowrap">

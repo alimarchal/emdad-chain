@@ -52,5 +52,6 @@ return [
     'Add Supplier' => 'Add Supplier',
     'List of Buyers' => 'List of Buyers',
     'List of Suppliers' => 'List of Suppliers',
+    'Delivery Note' => 'Delivery Note',
 
 ];

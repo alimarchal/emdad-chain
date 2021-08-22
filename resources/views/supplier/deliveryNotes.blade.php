@@ -71,11 +71,11 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            {{__('portal.Emdad')}}-{{ $dn->id }}
+                                                            {{__('portal.D.N.')}} -{{ $dn->id }}
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            {{__('portal.Emdad')}}-{{ $dn->purchase_order->id }}
+                                                            {{__('portal.P.O.')}} -{{ $dn->purchase_order->id }}
                                                         </td>
 
 
@@ -218,11 +218,11 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            {{__('portal.Emdad')}}-{{ $dn->id }}
+                                                            {{__('portal.D.N.')}}-{{ $dn->id }}
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            {{__('portal.Emdad')}}-{{ $dn->purchase_order->id }}
+                                                            {{__('portal.P.O.')}}-{{ $dn->purchase_order->id }}
                                                         </td>
 
 

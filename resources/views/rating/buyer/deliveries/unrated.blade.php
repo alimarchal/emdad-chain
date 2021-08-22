@@ -63,7 +63,7 @@
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     <span class="badge badge-info">
-                                                                        <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{ $delivery->id }} </a>
+                                                                        <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.D')}}-{{ $delivery->id }} </a>
                                                                     </span>
                                                                 </td>
                                                             </tr>
@@ -140,28 +140,28 @@
                                             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
-                                                    <tr>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                            #
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                            {{__('portal.Delivery ID')}}
-                                                        </th>
-                                                    </tr>
+                                                        <tr>
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                                #
+                                                            </th>
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                                {{__('portal.Delivery ID')}}
+                                                            </th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody class="bg-white divide-y divide-gray-200">
-                                                    @foreach ($deliveries as $delivery)
-                                                        <tr>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                <span class="badge badge-info">{{ $loop->iteration }}</span>
-                                                            </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                    <span class="badge badge-info">
-                                                                        <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{ $delivery->id }} </a>
-                                                                    </span>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
+                                                        @foreach ($deliveries as $delivery)
+                                                            <tr>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                    <span class="badge badge-info">{{ $loop->iteration }}</span>
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                        <span class="badge badge-info">
+                                                                            <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.D')}}-{{ $delivery->id }} </a>
+                                                                        </span>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -173,7 +173,7 @@
 
                             @else
                                 <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                                    <strong class="mr-1">{{__('portal.Not Rated yet..!')}}</strong>
+                                    <strong class="mr-3">{{__('portal.Not Rated yet..!')}}</strong>
                                     <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                                         <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                                     </button>

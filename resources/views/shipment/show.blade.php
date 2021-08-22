@@ -80,7 +80,7 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600" target="_blank">{{$shipmentDetail->delivery_id}}</a>
+                                                <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600" target="_blank">{{__('portal.D')}}-{{$shipmentDetail->delivery_id}}</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -178,7 +178,7 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600" target="_blank">{{$shipmentDetail->delivery_id}}</a>
+                                                <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600" target="_blank">{{__('portal.D')}}-{{$shipmentDetail->delivery_id}}</a>
                                             </td>
                                         </tr>
                                     @endforeach

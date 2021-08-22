@@ -62,9 +62,9 @@
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if (auth()->user()->registration_type == 'Buyer')
-                                                <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{$item->id}}</a>
+                                                <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
                                             @elseif(auth()->user()->registration_type == 'Supplier')
-                                                <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{$item->id}}</a>
+                                                <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
@@ -198,9 +198,9 @@
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if (auth()->user()->registration_type == 'Buyer')
-                                                <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{$item->id}}</a>
+                                                <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-{{$item->id}}</a>
                                             @elseif(auth()->user()->registration_type == 'Supplier')
-                                                <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Emdad')}}-{{$item->id}}</a>
+                                                <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-{{$item->id}}</a>
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
