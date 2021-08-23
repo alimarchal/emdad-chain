@@ -88,6 +88,32 @@ class DashboardController extends Controller
         return redirect()->route('packages.index');
     }
 
+    /* redirecting to index page because of post method */
+    public function languageChangeForIREEdit($lang, $rtl_value)
+    {
+        if (array_key_exists($lang, \Config::get('languages'))) {
+            \Session::put('applocale', $lang);
+        }
+        User::where('id', \auth()->user()->id)->update([
+            'rtl' => $rtl_value,
+        ]);
+
+        return redirect()->route('adminIres');
+    }
+
+    /* redirecting to index page because of post method */
+    public function languageChangeForCommissionPercentage($lang, $rtl_value)
+    {
+        if (array_key_exists($lang, \Config::get('languages'))) {
+            \Session::put('applocale', $lang);
+        }
+        User::where('id', \auth()->user()->id)->update([
+            'rtl' => $rtl_value,
+        ]);
+
+        return redirect()->route('adminPercentage');
+    }
+
     public function logistic_dashboard(Request $request)
     {
         return view('logistic.dashboard');

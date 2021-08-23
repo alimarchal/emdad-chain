@@ -1,8 +1,14 @@
 <ul class="list-decimal ml-6">
     @foreach ($categories as $category)
 
-        <li><a @if(auth()->user()->hasRole('SuperAdmin')) href="{{route('category.edit',$category->id)}}" @endif class="text-blue-900 hover:text-red-900 hover:underline">
-                {{ $category->name . ' - ' . $category->name_ar . ' - ' .  $category->name_ur }}</a>
+        <li>
+            <a @if(auth()->user()->hasRole('SuperAdmin')) href="{{route('category.edit',$category->id)}}" @endif class="text-blue-900 hover:text-red-900 hover:underline">
+                @if (auth()->user()->rtl == 0)
+                    {{ $category->name . ' - ' . $category->name_ar . ' - ' .  $category->name_ur }}
+                @else
+                    {{ $category->name_ar . ' - ' .  $category->name_ur }}
+                @endif
+            </a>
 
             --
 {{--            @php $count = \App\Models\BusinessCategory::where('category_number', $category->id)->count(); @endphp--}}
@@ -15,8 +21,8 @@
             @endphp
             <a @if(count($businessCategorires) > 0) class="text-green-600 hover:underline" href="{{route('categoryRelatedBusiness', encrypt($category->id))}}"  @else class="text-red-600 hover:underline" style="cursor: no-drop" @endif >
 
-                Buyer  -- {{$buyerBusinesses}} --
-                Supplier {{$supplierBusinesses}}
+                {{__('portal.Buyer')}}  -- {{$buyerBusinesses}} --
+                {{__('portal.Supplier')}} {{$supplierBusinesses}}
 
             </a>
 
@@ -26,7 +32,7 @@
                 $RFQCounts = \App\Models\EOrderItems::where(['item_code' => $category->id, 'bypass' => 0])->where( 'quotation_time', '>=', \Carbon\Carbon::now())->get();
             @endphp
             <a @if(count($RFQCounts) > 0) class="text-green-600 hover:underline" href="{{route('activeRFQs', encrypt($category->id))}}"  @else class="text-red-600 hover:underline" style="cursor: no-drop" @endif >
-                Active RFQs {{count($RFQCounts)}} </a>
+                {{__('portal.Active Requisitions')}} {{count($RFQCounts)}} </a>
 
             @if(auth()->user()->hasRole('SuperAdmin'))
                 --

@@ -42,4 +42,6 @@ return [
     'Create New Team' => 'Create New Team',
     'Switch Teams' => 'Switch Teams',
     'Info' => 'Info',
+    'Requisitions(s) with no Quotations' => 'Requisitions(s) with no Quotations',
+    'Number of Requisitions which received no quotations' => 'Number of Requisitions which received no quotations',
 ];

@@ -42,4 +42,6 @@ return [
     'Create New Team' => 'إنشاء فريق جديد',
     'Switch Teams' => 'تبديل الفِرق',
     'Info' => 'معلومات',
+    'Requisitions(s) with no Quotations' => 'الطلبات من دون عروض',
+    'Number of Requisitions which received no quotations' => 'Number of Requisitions which received no quotations',
 ];

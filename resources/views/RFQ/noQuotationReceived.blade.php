@@ -100,7 +100,7 @@
                                                                     $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                                 @endphp
 
-                                                                {{ $rfq->item_name}} , {{ $parent->name}}
+                                                                {{ $rfq->item_name}} @if(isset($parent)), {{ $parent->name}} @endif
                                                             </div>
                                                         </div>
                                                     </td>
