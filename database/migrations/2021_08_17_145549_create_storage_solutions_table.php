@@ -19,26 +19,25 @@ class CreateStorageSolutionsTable extends Migration
             $table->integer('logistics_businesse_id');
             $table->integer('box_quantity_pieces')->nullable();
             $table->unsignedDouble('weight_piece')->default(0);
-            $table->boolean('forklift')->nullable(); //
-            $table->decimal('length',11,2)->nullable();
-            $table->decimal('width',11,2)->nullable();
-            $table->decimal('height',11,2)->nullable();
             $table->boolean('temprature_ctrl')->default(0);
             $table->integer('temprature_ctrl_max')->default(0);
             $table->integer('temprature_ctrl_min')->default(0);
-            $table->string('commodity_type',191)->nullable();
-            $table->string('commodity_information',191)->nullable();
-            $table->string('msds',191)->nullable();
-            $table->string('msds_information',191)->nullable();
-            $table->string('latitude',25)->nullable();
-            $table->string('longitude',25)->nullable();
-            $table->string('address',191)->nullable();
+            $table->decimal('length',11,2)->nullable();
+            $table->decimal('width',11,2)->nullable();
+            $table->decimal('height',11,2)->nullable();
             $table->decimal('per_day',14,2)->default(0.00);
             $table->decimal('per_week',14,2)->default(0.00);
             $table->decimal('month',14,2)->default(0.00);
             $table->decimal('quarter',14,2)->default(0.00);
             $table->decimal('half_year',14,2)->default(0.00);
             $table->decimal('one_year',14,2)->default(0.00);
+            $table->string('commodity_type',191)->nullable();
+            $table->string('commodity_information',191)->nullable();
+            $table->string('msds',191)->nullable();
+            $table->string('msds_information',191)->nullable();
+            $table->string('latitude',25)->nullable();
+            $table->string('longitude',25)->nullable();
+            $table->text('address')->nullable();
             $table->timestamps();
         });
     }

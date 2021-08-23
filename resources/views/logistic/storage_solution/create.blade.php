@@ -36,7 +36,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
-                    <form action="{{route('packagingSolution.store')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
+                    <form action="{{route('storageSolution.store')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         <x-jet-validation-errors class="mb-4"/>
                         @csrf
                         <h3 class="text-2xl text-gray-900 font-semibold text-center">Storage Solution</h3>
@@ -55,10 +55,10 @@
                                 Temperature Control @include('misc.required')
                             </label>
                             <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="temprature_ctrl_max">
-                                Min @include('misc.required')
+                                Max &#8451; @include('misc.required')
                             </label>
                             <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="temprature_ctrl_min">
-                                Max @include('misc.required')
+                                Min &#8451; @include('misc.required')
                             </label>
 
                         </div>
@@ -127,15 +127,15 @@
                         </div>
 
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="Per Day Charges" name="per_day" class="border p-2 w-1/4" value="{{old('per_day')}}">
+                            <x-jet-input id="per_day" type="number" step="0.01" min="0" placeholder="Per Day Charges" name="per_day" class="border p-2 w-1/4" value="{{old('per_day')}}">
                             </x-jet-input>
-                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="Per Week Charges" name="per_week" class="border p-2 w-1/4" value="{{old('per_week')}}">
+                            <x-jet-input id="per_week" type="number" step="0.01" min="0" placeholder="Per Week Charges" name="per_week" class="border p-2 w-1/4" value="{{old('per_week')}}">
                             </x-jet-input>
-                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="1 Month Charges" name="month" class="border p-2 w-1/4" value="{{old('month')}}">
+                            <x-jet-input id="month" type="number" step="0.01" min="0" placeholder="1 Month Charges" name="month" class="border p-2 w-1/4" value="{{old('month')}}">
                             </x-jet-input>
-                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="3 Month Charges" name="quarter" class="border p-2 w-1/4" value="{{old('quarter')}}">
+                            <x-jet-input id="quarter" type="number" step="0.01" min="0" placeholder="3 Month Charges" name="quarter" class="border p-2 w-1/4" value="{{old('quarter')}}">
                             </x-jet-input>
-                            <x-jet-input id="width" type="number" step="0.01" min="0" placeholder="6 Month Charges" name="half_year" class="border p-2 w-1/4" value="{{old('half_year')}}">
+                            <x-jet-input id="half_year" type="number" step="0.01" min="0" placeholder="6 Month Charges" name="half_year" class="border p-2 w-1/4" value="{{old('half_year')}}">
                             </x-jet-input>
 
                         </div>

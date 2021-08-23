@@ -17,10 +17,10 @@ class StorageSolutionController extends Controller
     public function index()
     {
         $storageSolution = QueryBuilder::for(StorageSolution::class)
-//            ->allowedFilters(['business_name', 'vat_reg_certificate_number', 'phone'])
+            ->allowedFilters(['temprature_ctrl', 'logistics_businesse_id'])
             ->where('user_id', auth()->user()->id)
             ->get();
-        return view('logistic.storage_solution.index',compact('storageSolution'));
+        return view('logistic.storage_solution.index', compact('storageSolution'));
     }
 
     /**
@@ -42,7 +42,7 @@ class StorageSolutionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -52,11 +52,18 @@ class StorageSolutionController extends Controller
             'logistics_businesse_id' => 'required',
             'box_quantity_pieces' => 'required',
             'weight_piece' => 'required',
+            'temprature_ctrl' => 'required',
+            'temprature_ctrl_max' => 'required',
+            'temprature_ctrl_min' => 'required',
             'length' => 'required',
             'width' => 'required',
             'height' => 'required',
-            'printing' => 'required|boolean',
-            'printing_design_1' => 'exclude_if:printing,false|required|mimes:jpeg,jpg,png,JPEG,JPG,PNG',
+            'per_day' => 'required|min:0',
+            'per_week' => 'required|min:0',
+            'month' => 'required|min:0',
+            'quarter' => 'required|min:0',
+            'half_year' => 'required|min:0',
+            'one_year' => 'required|min:0',
             'commodity_type' => 'required',
             'commodity_information' => 'required',
             'msds_1' => 'exclude_if:printing,false|required|mimes:jpeg,jpg,png,JPEG,JPG,PNG',
@@ -64,20 +71,12 @@ class StorageSolutionController extends Controller
             'latitude' => 'required',
             'longitude' => 'required',
             'address' => 'required',
-            'per_day' => 'required|min:0',
-            'month' => 'required|min:0',
-            'quarter' => 'required|min:0',
-            'half_year' => 'required|min:0',
-            'one_year' => 'required|min:0',
+
         ]);
 
         $request->merge(['user_id' => auth()->user()->id]);
         $request->merge(['logistics_businesse_id' => auth()->user()->logistics_business_id]);
 
-        if ($request->has('printing_design_1')) {
-            $path = $request->file('printing_design_1')->store('', 'public');
-            $request->merge(['printing_design' => $path]);
-        }
         if ($request->has('msds_1')) {
             $path = $request->file('msds_1')->store('', 'public');
             $request->merge(['msds' => $path]);
@@ -85,13 +84,14 @@ class StorageSolutionController extends Controller
 
         $packagingSolution = StorageSolution::create($request->all());
         session()->flash('message', 'Storage Solution created successfully.');
-        return redirect()->route('packagingSolution.index');
+
+        return redirect()->route('storageSolution.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\StorageSolution  $storageSolution
+     * @param \App\Models\StorageSolution $storageSolution
      * @return \Illuminate\Http\Response
      */
     public function show(StorageSolution $storageSolution)
@@ -102,19 +102,20 @@ class StorageSolutionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\StorageSolution  $storageSolution
+     * @param \App\Models\StorageSolution $storageSolution
      * @return \Illuminate\Http\Response
      */
     public function edit(StorageSolution $storageSolution)
     {
+
         return view('logistic.storage_solution.edit', compact('storageSolution'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\StorageSolution  $storageSolution
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\StorageSolution $storageSolution
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, StorageSolution $storageSolution)
@@ -124,42 +125,45 @@ class StorageSolutionController extends Controller
             'logistics_businesse_id' => 'required',
             'box_quantity_pieces' => 'required',
             'weight_piece' => 'required',
-            'forklift' => 'required',
+            'temprature_ctrl' => 'required',
+            'temprature_ctrl_max' => 'required',
+            'temprature_ctrl_min' => 'required',
             'length' => 'required',
             'width' => 'required',
             'height' => 'required',
-            'printing' => 'required|boolean',
-            'printing_design_1' => 'exclude_if:printing,false|required|mimes:jpeg,jpg,png,JPEG,JPG,PNG',
+            'per_day' => 'required|min:0',
+            'per_week' => 'required|min:0',
+            'month' => 'required|min:0',
+            'quarter' => 'required|min:0',
+            'half_year' => 'required|min:0',
+            'one_year' => 'required|min:0',
             'commodity_type' => 'required',
             'commodity_information' => 'required',
-            'msds_1' => 'exclude_if:printing,false|required|mimes:jpeg,jpg,png,JPEG,JPG,PNG',
+            'msds_1' => 'mimes:jpeg,jpg,png,JPEG,JPG,PNG',
             'msds_information' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
             'address' => 'required',
+
         ]);
 
         $request->merge(['user_id' => auth()->user()->id]);
         $request->merge(['logistics_businesse_id' => auth()->user()->logistics_business_id]);
 
-        if ($request->has('printing_design_1')) {
-            $path = $request->file('printing_design_1')->store('', 'public');
-            $request->merge(['printing_design' => $path]);
-        }
         if ($request->has('msds_1')) {
             $path = $request->file('msds_1')->store('', 'public');
             $request->merge(['msds' => $path]);
         }
 
         $storageSolution->update($request->all());
-        session()->flash('message', 'Packaging info successfully updated...');
+        session()->flash('message', 'Storage solution info successfully updated...');
         return redirect()->route('storageSolution.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\StorageSolution  $storageSolution
+     * @param \App\Models\StorageSolution $storageSolution
      * @return \Illuminate\Http\Response
      */
     public function destroy(StorageSolution $storageSolution)

@@ -36,11 +36,11 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
-                    <form action="{{route('packagingSolution.update',$packagingSolution->id)}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
+                    <form action="{{route('storageSolution.update',$storageSolution->id)}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                         <x-jet-validation-errors class="mb-4"/>
-                        @csrf
                         @method('PUT')
-                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Packaging Solution</h3>
+                        @csrf
+                        <h3 class="text-2xl text-gray-900 font-semibold text-center">Storage Solution</h3>
                         <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                         <input type="hidden" name="logistics_businesse_id" value="{{auth()->user()->logistics_business_id}}">
                         <div class="flex space-x-5 mt-3">
@@ -52,19 +52,31 @@
                                 Weight/Piece (Kg) @include('misc.required')
                             </label>
 
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="forklift">
-                                Forklift / Manual @include('misc.required')
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="temprature_ctrl">
+                                Temperature Control @include('misc.required')
                             </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="temprature_ctrl_max">
+                                Max &#8451; @include('misc.required')
+                            </label>
+                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/2" for="temprature_ctrl_min">
+                                Min &#8451; @include('misc.required')
+                            </label>
+
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="box_quantity_pieces" type="number" step="0" min="1" placeholder="e.g 500" name="box_quantity_pieces" class="border p-2 w-1/2" value="{{$packagingSolution->box_quantity_pieces}}" required></x-jet-input>
-                            <x-jet-input id="weight_piece" type="number" step="0" min="1" placeholder="Weight/Piece (Kg)" name="weight_piece" class="border p-2 w-1/2" value="{{$packagingSolution->weight_piece}}" required></x-jet-input>
-
-                            <select id="forklift" name="forklift" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
+                            <x-jet-input id="box_quantity_pieces" type="number" step="0" min="1" placeholder="e.g 500" name="box_quantity_pieces" class="border p-2 w-1/2" value="{{$storageSolution->box_quantity_pieces}}" required></x-jet-input>
+                            <x-jet-input id="weight_piece" type="number" step="0" min="1" placeholder="Weight/Piece (Kg)" name="weight_piece" class="border p-2 w-1/2" value="{{$storageSolution->box_quantity_pieces}}" required></x-jet-input>
+                            <select id="temprature_ctrl" name="temprature_ctrl" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
                                 <option value="">None</option>
-                                <option value="1" @if($packagingSolution->forklift == 1) selected @endif >Yes</option>
-                                <option value="0" @if($packagingSolution->forklift == 0) selected @endif >No</option>
+                                <option value="1" @if($storageSolution->temprature_ctrl == "1") selected @endif >Yes</option>
+                                <option value="0" @if($storageSolution->temprature_ctrl == "0") selected @endif >No</option>
                             </select>
+                            <x-jet-input id="temprature_ctrl_max" type="number" step="0.01" min="0" placeholder="MAX" name="temprature_ctrl_max" class="border p-2 w-1/2" value="{{$storageSolution->temprature_ctrl_max}}">
+                            </x-jet-input>
+
+                            <x-jet-input id="temprature_ctrl_min" type="number" step="0.01" min="0" placeholder="MIN" name="temprature_ctrl_min" class="border p-2 w-1/2" value="{{$storageSolution->one_year}}">
+                            </x-jet-input>
+
                         </div>
 
                         <div class="flex space-x-5 mt-3">
@@ -83,13 +95,13 @@
                         </div>
                         <div class="flex space-x-5 mt-3">
                             <label class="block font-medium text-lg font-bold text-gray-700 p-2 w-1/4" for="length">
-                                Dimensions (cm)
+                                Dimensions (cm)<sup>3<sup>
                             </label>
-                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="Length" name="length" class="border p-2 w-1/4" value="{{$packagingSolution->length}}">
+                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="Length" name="length" class="border p-2 w-1/4" value="{{$storageSolution->length}}">
                             </x-jet-input>
-                            <x-jet-input id="width" type="number" step="0.01" min="0" placeholder="Width" name="width" class="border p-2 w-1/4" value="{{$packagingSolution->width}}">
+                            <x-jet-input id="width" type="number" step="0.01" min="0" placeholder="Width" name="width" class="border p-2 w-1/4" value="{{$storageSolution->width}}">
                             </x-jet-input>
-                            <x-jet-input id="height" type="number" step="0.01" min="0" placeholder="Height" name="height" class="border p-2 w-1/4" value="{{$packagingSolution->height}}">
+                            <x-jet-input id="height" type="number" step="0.01" min="0" placeholder="Height" name="height" class="border p-2 w-1/4" value="{{$storageSolution->height}}">
                             </x-jet-input>
                         </div>
 
@@ -112,32 +124,28 @@
                             <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="half_year">
                                 6 Month Charges (cm)<sup>3<sup> @include('misc.required')
                             </label>
+
                         </div>
 
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="Per Day Charges" name="per_day" class="border p-2 w-1/4" value="{{$packagingSolution->per_day}}">
+                            <x-jet-input id="per_day" type="number" step="0.01" min="0" placeholder="Per Day Charges" name="per_day" class="border p-2 w-1/4" value="{{$storageSolution->per_day}}">
                             </x-jet-input>
-                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="Per Week Charges" name="per_week" class="border p-2 w-1/4" value="{{$packagingSolution->per_week}}">
+                            <x-jet-input id="per_week" type="number" step="0.01" min="0" placeholder="Per Week Charges" name="per_week" class="border p-2 w-1/4" value="{{$storageSolution->per_week}}">
                             </x-jet-input>
-                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="1 Month Charges" name="month" class="border p-2 w-1/4" value="{{$packagingSolution->month}}">
+                            <x-jet-input id="month" type="number" step="0.01" min="0" placeholder="1 Month Charges" name="month" class="border p-2 w-1/4" value="{{$storageSolution->month}}">
                             </x-jet-input>
-                            <x-jet-input id="length" type="number" step="0.01" min="0" placeholder="3 Month Charges" name="quarter" class="border p-2 w-1/4" value="{{$packagingSolution->quarter}}">
+                            <x-jet-input id="quarter" type="number" step="0.01" min="0" placeholder="3 Month Charges" name="quarter" class="border p-2 w-1/4" value="{{$storageSolution->quarter}}">
                             </x-jet-input>
-                            <x-jet-input id="width" type="number" step="0.01" min="0" placeholder="6 Month Charges" name="half_year" class="border p-2 w-1/4" value="{{$packagingSolution->half_year}}">
+                            <x-jet-input id="half_year" type="number" step="0.01" min="0" placeholder="6 Month Charges" name="half_year" class="border p-2 w-1/4" value="{{$storageSolution->half_year}}">
                             </x-jet-input>
+
                         </div>
 
                         <div class="flex space-x-5 mt-3">
                             <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="one_year">
                                 1 Year Charges (cm)<sup>3<sup> @include('misc.required')
                             </label>
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="printing">
-                                Printing @include('misc.required')
-                            </label>
-                            <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="printing_design">
-                                <a href="{{$packagingSolution->printing_design ? Storage::url($packagingSolution->printing_design) : '#'}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Printing Design (if yes)</a>
 
-                            </label>
                             <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="commodity_type">
                                 Commodity Type @include('misc.required')
                             </label>
@@ -148,37 +156,30 @@
 
 
                         <div class="flex space-x-5 mt-3">
-                            <x-jet-input id="height" type="number" step="0.01" min="0" placeholder="Half Year" name="one_year" class="border p-2 w-1/2" value="{{$packagingSolution->one_year}}">
+
+
+                            <x-jet-input id="height" type="number" step="0.01" min="0" placeholder="1 Year" name="one_year" class="border p-2 w-1/2" value="{{$storageSolution->one_year}}">
                             </x-jet-input>
-                            <select id="printing" name="printing" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
-                                <option value="">None</option>
-                                <option value="1" @if($packagingSolution->printing == 1) selected @endif >Yes</option>
-                                <option value="0" @if($packagingSolution->printing == 0) selected @endif >No</option>
-                            </select>
-
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="printing_design" type="file" name="printing_design_1">
-
                             <select id="commodity_type" name="commodity_type" class="form-input rounded-md shadow-sm border p-1 w-1/2" required>
                                 <option value="">None</option>
-                                <option value="General" @if($packagingSolution->commodity_type ==  "General") selected @endif>General</option>
-                                <option value="Dangerous Good" @if($packagingSolution->commodity_type ==  "Dangerous Good") selected @endif>Dangerous Good</option>
-                                <option value="Energy: Gas, Oil etc." @if($packagingSolution->commodity_type == "Energy: Gas, Oil etc." ) selected @endif>Energy: Gas, Oil etc.</option>
-                                <option value="Medical" @if($packagingSolution->commodity_type == "Medical" ) selected @endif>Medical</option>
-                                <option value="Other" @if($packagingSolution->commodity_type ==  "Other") selected @endif>Other</option>
+                                <option value="General" @if($storageSolution->commodity_type == "General") selected @endif>General</option>
+                                <option value="Dangerous Good" @if($storageSolution->commodity_type == "Dangerous Good") selected @endif>Dangerous Good</option>
+                                <option value="Energy: Gas, Oil etc." @if($storageSolution->commodity_type == "Energy: Gas, Oil etc.") selected @endif>Energy: Gas, Oil etc.</option>
+                                <option value="Medical" @if($storageSolution->commodity_type == "Medical") selected @endif>Medical</option>
+                                <option value="Other" @if($storageSolution->commodity_type == "Other") selected @endif>Other</option>
                             </select>
 
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="commodity_information" value="{{$packagingSolution->commodity_information}}" type="text" placeholder="What's inside commodity type" name="commodity_information" required="required">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$storageSolution->commodity_information}}" id="commodity_information" type="text" placeholder="What's inside commodity type" name="commodity_information" required="required">
 
                         </div>
 
 
                         <div class="flex space-x-5 mt-3">
                             <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="msds">
-                                <a href="{{$packagingSolution->msds ? Storage::url($packagingSolution->msds) : '#'}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">
+                                <a href="{{$storageSolution->msds ? Storage::url($storageSolution->msds) : '#'}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">
                                     MSDS <abbr title="If the shipment include DG items"> ? Upload the document</abbr>
                                     @include('misc.required')
                                 </a>
-
                             </label>
                             <label class="block font-medium text-sm text-gray-700 font-bold w-1/3" for="msds_information">
                                 Additional Information (MSDS)
@@ -194,14 +195,14 @@
                         <div class="flex space-x-5 mt-3">
 
                             <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="msds" type="file" name="msds_1">
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$packagingSolution->msds_information}}" id="msds_information" type="text" placeholder="If the shipment include DG items" name="msds_information" required="required">
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$packagingSolution->latitude}}" id="latitude" placeholder="Please use map marker" required readonly type="text" name="latitude">
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$packagingSolution->longitude}}" id="longitude" placeholder="Please use map marker" required readonly type="text" name="longitude">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$storageSolution->msds_information}}" id="msds_information" type="text" placeholder="If the shipment include DG items" name="msds_information" required="required">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$storageSolution->latitude}}" id="latitude" placeholder="Please use map marker" required readonly type="text" name="latitude">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{$storageSolution->longitude}}" id="longitude" placeholder="Please use map marker" required readonly type="text" name="longitude">
                         </div>
 
 
                         <br>
-                        <p>Please use the map marker for your solution location.</p>
+                        <p>Please use the map marker for location pickup.</p>
                         <br>
                         <div id="map" style="width:100%;height:400px; ">
                             <div style="width: 100%; height: 100%" id="address-map"></div>
@@ -214,7 +215,7 @@
                             </label>
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <textarea id="address" type="text" name="address" placeholder="Please type your full address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>{{$packagingSolution->address}}</textarea>
+                            <textarea id="address" type="text" name="address" placeholder="Please type your full address" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>{{$storageSolution->address}}</textarea>
                         </div>
                         <br>
 

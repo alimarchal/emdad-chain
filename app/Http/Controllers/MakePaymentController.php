@@ -185,24 +185,23 @@ class MakePaymentController extends Controller
 
 
         // *********************************************
-
-        $paymentService = new \Moyasar\Providers\PaymentService();
-        $payment = $paymentService->fetch($request->id);
-        $request->merge(['invoice_id' => $payment->description]);
-//        dd($payment->description);
-        $paymentInfoSave = MakePayment::create($request->all());
-        if ($payment->status == 'paid')
-        {
-            $invoice = Invoice::where('id', $payment->description)->first();
-            $invoice->invoice_status = 3;
-            $invoice->save();
-            session()->flash('message', 'You have successfully paid the amount.');
-            return redirect('bank-payments');
-        } else
-        {
-            session()->flash('message', $request->message);
-            return redirect('bank-payments');
-        }
+//        $paymentService = new \Moyasar\Providers\PaymentService();
+//        $payment = $paymentService->fetch($request->id);
+//        $request->merge(['invoice_id' => $payment->description]);
+////        dd($payment->description);
+//        $paymentInfoSave = MakePayment::create($request->all());
+//        if ($payment->status == 'paid')
+//        {
+//            $invoice = Invoice::where('id', $payment->description)->first();
+//            $invoice->invoice_status = 3;
+//            $invoice->save();
+//            session()->flash('message', 'You have successfully paid the amount.');
+//            return redirect('bank-payments');
+//        } else
+//        {
+//            session()->flash('message', $request->message);
+//            return redirect('bank-payments');
+//        }
     }
 
 
@@ -255,7 +254,7 @@ class MakePaymentController extends Controller
                     }
                 }
                 session()->flash('message', $failed_msg);
-                return redirect('bank-payments');;
+                return route('bank-payments.index');;
             }
         }
     }

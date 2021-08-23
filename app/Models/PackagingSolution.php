@@ -11,4 +11,9 @@ class PackagingSolution extends Model
 
     protected $fillable = ['user_id', 'logistics_businesse_id', 'box_quantity_pieces', 'weight_piece', 'forklift', 'length', 'width', 'height', 'printing', 'printing_design', 'commodity_type', 'commodity_information', 'msds', 'msds_information', 'latitude', 'longitude', 'address', 'per_day','month','quarter','half_year','one_year',];
 
+    public function logistics_business()
+    {
+        return $this->belongsTo(LogisticsBusiness::class,'logistics_businesse_id');
+    }
+
 }

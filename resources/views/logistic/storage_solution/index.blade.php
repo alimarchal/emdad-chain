@@ -42,22 +42,23 @@
         <br>
 
         <div class="max-w-7xl mx-auto sm:px-3 lg:px-6" id="myDIV" style="display: none;">
-            <form action="{{route('logistics.index')}}" method="get">
+            <form action="{{route('storageSolution.index')}}" method="get">
                 <div class="mb-3 -mx-2 flex items-end">
                     <div class="px-2 w-1/2">
                         <div>
-                            <label class="font-bold text-sm mb-2 ml-1">Business Name</label>
-                            <input name="filter[business_name]" value="" class="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
+                            <label class="font-bold text-sm mb-2 ml-1">Temperature Ctrl</label>
+                            <select id="temprature_ctrl" name="filter[temprature_ctrl]" class="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer" required>
+                                <option value="">None</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+
+
                         </div>
                     </div>
                     <div class="px-2 w-1/2">
-                        <label class="font-bold text-sm mb-2 ml-1">Phone</label>
-                        <input name="filter[vat_reg_certificate_number]" value="" class="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
-                    </div>
-                    <div class="px-2 w-1/2">
-                        <label class="font-bold text-sm mb-2 ml-1">Chamber VAT</label>
-                        <input name="filter[phone]" value="" class="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
-
+                        <label class="font-bold text-sm mb-2 ml-1">Logistics Business ID</label>
+                        <input name="filter[logistics_businesse_id]" value="" class="form-select w-full px-3 py-2 mb-1 border-2 border-gray-200 rounded-md focus:outline-none focus:border-indigo-500 transition-colors cursor-pointer">
                     </div>
                 </div>
 
@@ -81,17 +82,10 @@
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Boxes & Weight (Kg)
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Size (cm)
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500  tracking-wider">
+                                    Size (cm<sup>3</sup>)
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                   Printing
-                                </th>
-
-                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Commodity
-                                </th>
 
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     MSDS
@@ -105,7 +99,7 @@
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach($packagingSolution as $lb)
+                            @foreach($storageSolution as $lb)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
@@ -114,13 +108,15 @@
                                                 <div class="text-sm font-medium text-gray-900">
                                                     Quantity of Boxes / Pieces: {{$lb->box_quantity_pieces}}
                                                 </div>
-                                                <div class="text-sm text-gray-500">
+                                                <div class="text-sm text-black">
                                                     Weight/Piece (Kg): {{$lb->weight_piece}}
                                                 </div>
 
-                                                <div class="text-sm font-medium text-gray-900">
-                                                    Forklift / Manual:
-                                                    @if($lb->forklift == 1) Yes - Automatic @else No - Manual @endif
+                                                <div class="text-sm text-black">
+                                                    Temperature: @if($lb->temprature_ctrl) Yes @else No @endif
+                                                    <br>
+                                                    Min: {{$lb->temprature_ctrl_min}} &#8451;<br>
+                                                    Max: {{$lb->temprature_ctrl_max}} &#8451;
                                                 </div>
                                             </div>
                                         </div>
@@ -128,7 +124,6 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
                                             Length:&nbsp;&nbsp;{{$lb->length}}
-{{--                                            Chamber: <a href="{{$lb->chamber_reg_path ? Storage::url($lb->chamber_reg_path) : '#'}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">{{$lb->chamber_reg_number}}</a>--}}
                                         </div>
                                         <div class="text-sm text-gray-900">
                                             Width:&nbsp;&nbsp;&nbsp;{{$lb->width}}
@@ -138,26 +133,6 @@
                                             Height:&nbsp;&nbsp;{{$lb->height}}
                                         </div>
                                     </td>
-
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">
-                                            Printing: &nbsp; @if($lb->printing == 1) Yes @else No @endif
-                                        </div>
-                                        <div class="text-sm text-gray-500">
-                                            <a href="{{$lb->printing_design ? Storage::url($lb->printing_design) : '#'}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">Printing Design</a>
-                                        </div>
-                                    </td>
-
-
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">
-                                            Commodity Type: &nbsp;{{$lb->commodity_type}}
-                                        </div>
-                                        <div class="text-sm text-gray-500">
-                                            Commodity Info: &nbsp;{{$lb->commodity_information}}
-                                        </div>
-                                    </td>
-
 
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">
@@ -171,7 +146,7 @@
                                         <a href="https://maps.google.com/?q={{$lb->latitude}},{{$lb->longitude}}" target="_blank" class="text-indigo-600 hover:text-indigo-900">View On Map</a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a href="{{route('packagingSolution.edit',$lb->id)}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                        <a href="{{route('storageSolution.edit',$lb->id)}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                     </td>
                                 </tr>
                             @endforeach
