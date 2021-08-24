@@ -155,11 +155,10 @@
                                                                 {{__('portal.Emdad verification pending')}}
                                                             @elseif($dn->invoice_status == '2')
                                                                 {{__('portal.Emdad rejected manual payment')}}
-
                                                             @elseif($dn->invoice_status == '3')
                                                                 {{__('portal.Payment in Transit, on hold, with Emdad')}}
-                                                            @elseif($dn->bankPayment->supplier_payment_status == 3)
-                                                                {{__('portal.Payment received by supplier')}}
+{{--                                                            @elseif($dn->bankPayment->supplier_payment_status == 3)--}}
+{{--                                                                {{__('portal.Payment received by supplier')}}--}}
                                                             @endif
 
                                                         @elseif(auth()->user()->registration_type == 'Supplier')
@@ -375,11 +374,10 @@
                                                                 {{__('portal.Emdad verification pending')}}
                                                             @elseif($dn->invoice_status == '2')
                                                                 {{__('portal.Emdad rejected manual payment')}}
-
                                                             @elseif($dn->invoice_status == '3')
                                                                 {{__('portal.Payment in Transit, on hold, with Emdad')}}
-                                                            @elseif($dn->bankPayment->supplier_payment_status == 3)
-                                                                {{__('portal.Payment received by supplier')}}
+{{--                                                            @elseif($dn->bankPayment->supplier_payment_status == 3)--}}
+{{--                                                                {{__('portal.Payment received by supplier')}}--}}
                                                             @endif
 
                                                         @elseif(auth()->user()->registration_type == 'Supplier')
