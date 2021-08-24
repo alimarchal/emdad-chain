@@ -266,7 +266,7 @@
                                 </div>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quote_quantity" min="0" value="{{ $collection->quote_quantity }}" min="0" step="any" autocomplete="quantity" required  placeholder="{{__('portal.Qty')}}">
+                                           name="quote_quantity" min="0" value="{{ $collection->quote_quantity }}" min="0" step="any" autocomplete="quantity" required  placeholder="{{__('portal.Qty')}}" readonly>
                                 </td>
 
                                 <td>
@@ -367,7 +367,7 @@
                                 </div>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quote_quantity" min="0" step="any" autocomplete="quantity" required  placeholder="{{__('portal.Qty')}}" >
+                                           name="quote_quantity" min="0" step="any" autocomplete="quantity" required  placeholder="{{__('portal.Qty')}}" value="{{$eOrderItems->quantity}}" readonly>
                                 </td>
 
                                 <td>
@@ -736,7 +736,7 @@
                                 </div>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quote_quantity" min="0" value="{{ $collection->quote_quantity }}" min="0" step="any" autocomplete="quantity" required  placeholder="{{__('portal.Qty')}}">
+                                           name="quote_quantity" min="0" value="{{ $collection->quote_quantity }}" min="0" step="any" autocomplete="quantity" required  placeholder="{{__('portal.Qty')}}" readonly>
                                 </td>
 
                                 <td>
@@ -838,7 +838,7 @@
                                 </div>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quote_quantity" min="0" step="any" autocomplete="quantity" required  placeholder="{{__('portal.Qty')}}" >
+                                           name="quote_quantity" min="0" step="any" autocomplete="quantity" required  placeholder="{{__('portal.Qty')}}"  value="{{$eOrderItems->quantity}}" readonly>
                                 </td>
 
                                 <td>

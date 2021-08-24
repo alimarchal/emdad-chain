@@ -24,10 +24,10 @@
                 <div class="my-0 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <x-jet-label for="gender" value="{{ __('Mr/Ms/Mrs') }}" class="mb-1" />
                     <select name="gender" id="gender" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="gender">
-                        <option disabled selected value="">Select</option>
-                        <option value="0">Mr.</option>
-                        <option value="1">Ms.</option>
-                        <option value="1">Mrs.</option>
+                        <option disabled selected value="">{{__('ire/register.Select')}}</option>
+                        <option value="0">{{__('ire/register.Mr.')}}</option>
+                        <option value="1">{{__('ire/register.Ms.')}}</option>
+                        <option value="1">{{__('ire/register.Mrs.')}}</option>
                     </select>
                 </div>
 
@@ -37,32 +37,34 @@
 
                 <div class="my-0 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <!-- Column Content -->
-                    <x-jet-label for="firstName" value="{{ __('First Name') }}" />
+                    <x-jet-label for="firstName" value="{{ __('ire/register.First Name') }}" />
                     <x-jet-input id="firstName" class="block mt-2 w-full" type="text" name="firstName" :value="old('firstName')" required autofocus autocomplete="firstName" />
                 </div>
 
                 <div class="my-0 px-2 w-full overflow-hidden pb-2 sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <!-- Column Content -->
-                    <x-jet-label for="lastName" value="{{ __('Last Name') }}" />
+                    <x-jet-label for="lastName" value="{{ __('ire/register.Last Name') }}" />
                     <x-jet-input id="lastName" class="block mt-2 w-full" type="text" name="lastName" :value="old('lastName')" required autofocus autocomplete="lastName" />
-                </div>
-
-                <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <x-jet-label for="mobile_number" value="{{ __('Mobile Number') }}"  class="mb-2"  />
-                    <x-jet-input id="phone" class="block mt-1 w-full" type="tel" required name="mobile_number" :value="old('mobile_number')"  />
                 </div>
 
             </div>
 
             <div class="mt-2">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
+{{--                <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">--}}
+                    <x-jet-label for="mobile_number" value="{{ __('ire/register.Mobile Number') }}"  class="mb-2"  />
+                    <x-jet-input id="phone" class="block mt-1 w-full" type="tel" required name="mobile_number" :value="old('mobile_number')"  />
+{{--                </div>--}}
+            </div>
+
+            <div class="mt-2">
+                <x-jet-label for="email" value="{{ __('ire/register.Email') }}" />
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
             <div class="mt-4">
-                <div class="mx-auto max-w-lg">
+{{--                <div class="mx-auto max-w-lg">--}}
                     <div class="py-2" x-data="{ show: true }">
-                        <x-jet-label for="password" value="{{ __('Password') }}" />
+                        <x-jet-label for="password" value="{{ __('ire/register.Password') }}" />
                         <div class="relative">
                             <input name="password" id="password" required autocomplete="new-password" :type="show ? 'password' : 'text'" class="form-input rounded-md shadow-sm block mt-1 w-full">
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mr-2">
@@ -75,14 +77,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
+{{--                </div>--}}
             </div>
 
             <div class="mt-4">
-                <div class="mx-auto max-w-lg">
+{{--                <div class="mx-auto max-w-lg">--}}
                     <div class="py-2" x-data="{ show: true }">
 
-                        <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
+                        <x-jet-label for="password_confirmation" value="{{ __('ire/register.Confirm Password') }}" />
                         <div class="py-2" x-data="{ show: true }">
                             <div class="relative">
                                 <input id="password_confirmation" name="password_confirmation" required autocomplete="new-password" :type="show ? 'password' : 'text'" class="form-input rounded-md shadow-sm block mt-1 w-full">
@@ -102,20 +104,20 @@
                     <div class="block mt-4">
                         <label for="policy_procedure" class="flex items-center">
                             <input id="policy_procedure" type="checkbox" class="form-checkbox" name="policy_procedure" required>
-                            <span class="ml-2 text-sm text-gray-600">I agree</span> <a href="{{route('policyProcedure.ire')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('Policy and Procedures') }}</u></a>
+                            <span class="ml-2 text-sm text-gray-600">{{__('ire/register.I agree')}}</span> <a href="{{route('policyProcedure.ire')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('ire/register.Policy and Procedures') }}</u></a>
                         </label>
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
                         <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{route('ireLogin')}}">
-                            {{ __('Already registered?') }}
+                            {{ __('ire/register.Already registered?') }}
                         </a>
 
                         <x-jet-button class="ml-4">
-                            {{ __('Register') }}
+                            {{ __('ire/register.Register') }}
                         </x-jet-button>
                     </div>
-                </div>
+{{--                </div>--}}
             </div>
 
         </form>

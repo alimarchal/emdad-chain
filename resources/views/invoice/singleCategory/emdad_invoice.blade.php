@@ -82,7 +82,7 @@
                                                                 </td>
 
                                                                 <td class="px-6 py-4 whitespace-nowrap ml-10" style="text-align:center;">
-                                                                    <a href="{{route('singleCategoryView', $emdadInvoice->rfq_no)}}" class="hover:underline text-blue-600" target="_blank">{{$emdadInvoice->invoice->id}}</a>
+                                                                    <a href="{{route('singleCategoryView', $emdadInvoice->rfq_no)}}" class="hover:underline text-blue-600" target="_blank">{{__('portal.Inv.')}} -{{$emdadInvoice->invoice->id}}</a>
                                                                 </td>
 
                                                                 <td class="whitespace-nowrap ml-10" style="text-align:center;">
@@ -234,7 +234,7 @@
                                                                 </td>
 
                                                                 <td class="px-6 py-4 whitespace-nowrap ml-10" style="text-align:center;">
-                                                                    <a href="{{route('singleCategoryView', $emdadInvoice->rfq_no)}}" class="hover:underline text-blue-600" target="_blank">{{$emdadInvoice->invoice->id}}</a>
+                                                                    <a href="{{route('singleCategoryView', $emdadInvoice->rfq_no)}}" class="hover:underline text-blue-600" target="_blank">{{__('portal.Inv.')}}-{{$emdadInvoice->invoice->id}}</a>
                                                                 </td>
 
                                                                 <td class="whitespace-nowrap ml-10" style="text-align:center;">

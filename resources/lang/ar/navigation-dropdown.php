@@ -28,7 +28,7 @@ return [
     'Dashboard' => 'الملفات',
     'Profile' => 'الملف الشخصي',
     'Log Viewer' => 'مستعرض العمليات',
-    'User Logs' => 'سجلات الدخول',
+    'User Logs' => 'تسجيلات الدخول',
     'Business' => 'نشاط تجاري',
     'Update Certificates' => 'تحديث المستندات',
     'P.O. Info' => 'معلومات الطلب',
@@ -43,5 +43,5 @@ return [
     'Switch Teams' => 'تبديل الفِرق',
     'Info' => 'معلومات',
     'Requisitions(s) with no Quotations' => 'الطلبات من دون عروض',
-    'Number of Requisitions which received no quotations' => 'Number of Requisitions which received no quotations',
+    'Number of Requisitions which received no quotations' => 'عدد الطلبات التي لم تتلقى عرضاً',
 ];

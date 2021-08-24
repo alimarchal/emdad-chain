@@ -66,7 +66,7 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-black">
-                                                            {{ $payment->invoice_id }}
+                                                            {{__('portal.Inv.')}} -{{ $payment->invoice_id }}
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
@@ -206,7 +206,7 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-black">
-                                                            {{ $payment->invoice_id }}
+                                                            {{__('portal.Inv.')}}-{{ $payment->invoice_id }}
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
