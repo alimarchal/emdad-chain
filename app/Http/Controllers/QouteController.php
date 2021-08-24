@@ -439,6 +439,7 @@ class QouteController extends Controller
             DB::beginTransaction();
             $dpo = null;
             $dpoCheck = DraftPurchaseOrder::where('qoute_no',$request->qoute_no)->first();
+
             if (isset($dpoCheck))
             {
                 $qoute_status = 'accepted';

@@ -38,16 +38,12 @@ class BankPaymentController extends Controller
 
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+
+        $validator = $request->validate([
             'amount_date' => 'required',
-            'file_path_1' => 'required|mimes: jpeg.jpg,png,',
+            'file_path_1' => 'required|mimes:jpg,bmp,png,jpeg,JPEG,JPG',
         ]);
 
-        if ($validator->fails())
-        {
-            session()->flash('error', 'All Fields are required');
-            return redirect()->back();
-        }
 
         $time = strtotime($request->amount_date);
         $newformat = date('Y-m-d',$time);

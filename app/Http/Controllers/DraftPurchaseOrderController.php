@@ -41,6 +41,7 @@ class DraftPurchaseOrderController extends Controller
 
     public function show(DraftPurchaseOrder $draftPurchaseOrder)
     {
+
         return view('draftPurchaseOrder.show', compact('draftPurchaseOrder'));
     }
 
@@ -86,7 +87,9 @@ class DraftPurchaseOrderController extends Controller
                     'rfq_type' => 1,
                 ];
 
+
                 $invoiceProforma = Invoice::create($proformaInvoice);
+
                 //      Calculating total cost w/o VAT
                 $quote = Qoute::where('id', $invoiceProforma->quote->id)->first();
                 $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;

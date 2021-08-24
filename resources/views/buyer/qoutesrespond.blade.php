@@ -206,6 +206,7 @@
                                 <div style="display: inline">
                                     <input type="submit" value="{{__('portal.Accept')}}" style="cursor: pointer"
                                            class="inline-flex items-center justify-center px-4 my-5 py-2 bg-green-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
+
                                 </div>
                             </div>
 

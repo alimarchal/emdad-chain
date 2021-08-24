@@ -51,7 +51,7 @@ class BusinessPackageController extends Controller
     {
 
         //after payment add payment details to payment table after that insert that payment id to BusinessPackage table
-        $package = Package::where('id', $request->package_id)->first();
+        $package = Package::where('id', decrypt($request->package_id))->first();
         $merchant_id = null;
         // if price exist then return to new view else it's free one
         if ($request->package_id == 2 || $request->package_id == 3 || $request->package_id == 6 || $request->package_id == 7) {

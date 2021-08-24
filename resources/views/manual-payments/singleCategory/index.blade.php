@@ -251,7 +251,7 @@
                                                     {{__('portal.Proceed')}}
                                                 </a> |
                                                 @if($item->invoice_status == '0')
-                                                    <form action="{{route('make.payment')}}" method="post">
+                                                    <form action="{{route('getPaymentCheckOutId')}}" method="post">
                                                         @csrf
                                                         <input type="hidden" name="invoice_id" value="{{$item->id}}">
                                                         <button type="submit" class="text-blue-600 hover:underline" target="_blank">

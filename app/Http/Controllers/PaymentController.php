@@ -292,6 +292,7 @@ class PaymentController extends Controller
 
     public function invoices()
     {
+        $proformaInvoices = null;
         if (auth()->user()->registration_type == "Supplier")
         {
             $proformaInvoices = Invoice::with('purchase_order')->where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->get();
@@ -303,6 +304,7 @@ class PaymentController extends Controller
         else{
             $proformaInvoices = Invoice::with('purchase_order')->where(['rfq_type' => 1])->get();
         }
+
         return view('payment.invoice', compact('proformaInvoices'));
     }
 
