@@ -1556,9 +1556,9 @@
                     <img src="{{ url('logo.png') }}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto"/>
                 </a>
                 <a href="{{ route('dashboard') }}"
-                   @if(auth()->user()->hasRole('SuperAdmin'))  title=" {{__('sidebar.SuperAdmin')}} {{ __('sidebar.Virtual office') }}"
-                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer') title="{{__('sidebar.Buyer')}} {{ __('sidebar.Virtual office') }}"
-                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier') title="{{__('sidebar.Supplier')}} {{ __('sidebar.Virtual office') }}"
+                   @if(auth()->user()->hasRole('SuperAdmin'))  title=" {{__('sidebar.Super Admin Virtual office')}}"
+                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer') title="{{__('sidebar.Buyer Virtual office')}}"
+                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier') title="{{__('sidebar.Supplier Virtual office')}}"
                    @else
                    @php $roleName = auth()->user()->roles()->pluck('name'); @endphp
                    title="{{$roleName[0]}} {{ __('sidebar.Virtual office') }}"

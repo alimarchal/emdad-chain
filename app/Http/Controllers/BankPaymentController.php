@@ -7,6 +7,7 @@ use App\Models\BankPayment;
 use App\Models\Delivery;
 use App\Models\Invoice;
 use App\Models\SupplierBankPayment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BankPaymentController extends Controller
@@ -341,11 +342,12 @@ class BankPaymentController extends Controller
         /* Checking whether to update or to create */
         $supplierBankPayment = SupplierBankPayment::where('rfq_no', $rfqNo)->first();
 
+        $amount_date = Carbon::parse($request->amount_date)->format('Y-m-d');
         if (isset($supplierBankPayment))
         {
             SupplierBankPayment::where('rfq_no', $rfqNo)->update([
                 'amount_received' => $request->amount_received,
-                'amount_date' => $request->amount_date,
+                'amount_date' => $amount_date,
                 'file_path' => $request->file_path,
                 'status' => 1,
                 ]);
@@ -359,8 +361,9 @@ class BankPaymentController extends Controller
                     'bank_payment_id' => $bankPayment->id,
                     'bank_name' => $bankPayment->bank_name,
                     'rfq_no' => $bankPayment->rfq_no,
-                    'amount_received' => $request->rfq_no,
+                    'amount_received' => $request->amount_received,
                     'account_number' => $request->account_number,
+                    'amount_date' => $amount_date,
                     'file_path' => $request->file_path,
                     'supplier_business_id' => $bankPayment->supplier_business_id,
                     'supplier_user_id' => $bankPayment->supplier_user_id,
