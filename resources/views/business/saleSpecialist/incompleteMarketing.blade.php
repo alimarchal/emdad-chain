@@ -191,6 +191,10 @@
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             {{__('portal.Registered duration')}}
                                         </th>
+
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                            {{__('B. Type')}}
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -216,6 +220,17 @@
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900">
                                                 <span class="text-blue-900 ">{{ \Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</span>
+                                            </td>
+
+
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900">
+                                                <span class="text-blue-900 ">
+                                                @if(empty($user->registration_type))
+                                                     N/A
+                                                @else
+                                                    {{ $user->registration_type }}
+                                                @endif
+                                                </span>
                                             </td>
 
                                         </tr>
@@ -426,6 +441,10 @@
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             {{__('portal.Registered duration')}}
                                         </th>
+
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                            {{__('B. Type')}}
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -451,6 +470,16 @@
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900">
                                                 <span class="text-blue-900 ">{{ \Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</span>
+                                            </td>
+
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900">
+                                                <span class="text-blue-900 ">
+                                                @if(empty($user->registration_type))
+                                                        N/A
+                                                    @else
+                                                        {{ $user->registration_type }}
+                                                    @endif
+                                                </span>
                                             </td>
 
                                         </tr>

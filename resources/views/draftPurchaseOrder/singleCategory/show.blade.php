@@ -357,7 +357,7 @@
                                     {{__('portal.agrees to deal with')}} {{$draftPurchaseOrders[0]->supplier_business->business_name}}. <br>
                                 {{__('portal.Emdad has no responsibility with the kind of delivery and the source of finance for this delivery.')}}</span> <br>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
+                                    <input class="form-check-input" type="checkbox" value="1" name="note" id="acknowledge" required>
                                     <label class="form-check-label" for="flexCheckDefault">
                                         {{__('portal.Please Check to acknowledge')}}
                                     </label>
