@@ -179,6 +179,33 @@
                         <h2 class="text-center text-2xl">{{__('portal.You have already quoted.')}}</h2>
 
                     @elseif($collection && $collection->qoute_status == 'ModificationNeeded')
+
+                        {{-- Retrieving Supplier Messages using e_order_items_id --}}
+                        @php
+                            $quote = \App\Models\QouteMessage::where('qoute_id', $eOrderItems[0]->id )->get();
+                        @endphp
+                        @if(isset($quote) && $quote->isNotEmpty())
+
+                            <div class="border-2 p-2 m-2">
+                                @foreach ($quote as $msg)
+                                    {{--@php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp--}}
+                                    @php
+                                        $user = \App\Models\User::where('id', $msg->user_id)->first();
+                                        $business = \App\Models\Business::where('id', $user->business_id)->first();
+                                    @endphp
+
+                                    <span class="text-gray-600">
+                                        <span class="text-blue-700 text-left">
+                                            {{__('portal.Message you send')}}
+                                        </span>
+                                        : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
+                                    </span>
+                                    <br> <br>
+                                @endforeach
+                            </div>
+                            <br>
+                        @endif
+
                         @php
                             $quote = \App\Models\QouteMessage::where('qoute_id', $collection->id )->get();
                         @endphp
@@ -192,17 +219,50 @@
                                         $business = \App\Models\Business::where('id', $user->business_id)->first();
                                     @endphp
 
-                                    <span class="text-blue-700">
-                                            <span class="text-gray-600 text-left">
-                                                {{__('portal.Message from')}} {{$business->business_name}}
-                                            </span>
-                                            : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
+                                    <span class="text-gray-600">
+                                        <span class="text-blue-700 text-left">
+                                            {{__('portal.Message from')}} @if($eOrderItems[0]->company_name_check == 1) {{$business->business_name}} @else {{__('portal.Buyer')}} @endif
                                         </span>
+                                        : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
+                                    </span>
                                     <br> <br>
                                 @endforeach
                             </div>
                             <br>
                         @endif
+
+                        <hr>
+                        {{-- Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message --}}
+                        <form action="{{ route('QuotationMessage.store') }}" class="rounded shadow-md" method="post">
+                            @csrf
+                            @php $business = \App\Models\Business::where('user_id', $eOrderItems[0]->user_id)->first(); @endphp
+                            <h1 class="text-center text-2xl mt-4">{{__('portal.Message to')}}
+                                <span class="text-blue-600">@if($eOrderItems[0]->company_name_check == 1) {{$business->business_name}} @else {{__('portal.Buyer')}} @endif</span>
+                                <span style="font-size: 20px;">({{__('portal.Buyer')}})</span></h1>
+                            <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Message')}}..." required></textarea>
+                            <x-jet-input-error for="message" class="mt-2" />
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                            <input type="hidden" name="qoute_id" value="{{ $eOrderItems[0]->id }}">
+                            <input type="hidden" name="usertype" value="{{ auth()->user()->business->business_type }}">
+
+                            <br>
+
+                            <div class="justify-between p-2 m-2">
+                                <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150">
+                                    {{__('portal.Send')}}
+                                </button>
+                                {{-- <a href="{{ route('updateQoute', $QouteItem->id) }}" style="margin-left: 70px;"
+                                    class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">
+                                     Qoute Again
+                                 </a>
+
+                                 <a href="{{ route('updateRejected', $QouteItem->id) }}" style="margin-left: 70px;"
+                                    class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">Reject
+                                     Request</a>--}}
+                            </div>
+                            <br>
+                        </form>
+
                         <div class="text-center">
                             <span class="text-2xl font-bold text-red-700">{{__('portal.Modification Needed')}}</span>
                         </div>
@@ -342,6 +402,63 @@
                             </tr>
                         </form>
                     @else
+
+                        {{-- Retrieving Supplier Messages using e_order_items_id --}}
+                        @php
+                            $quote = \App\Models\QouteMessage::where('qoute_id', $eOrderItems[0]->id )->get();
+                        @endphp
+                        @if(isset($quote) && $quote->isNotEmpty())
+
+                            <div class="border-2 p-2 m-2">
+                                @foreach ($quote as $msg)
+                                    {{--@php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp--}}
+                                    @php
+                                        $user = \App\Models\User::where('id', $msg->user_id)->first();
+                                        $business = \App\Models\Business::where('id', $user->business_id)->first();
+                                    @endphp
+
+                                    <span class="text-gray-600">
+                                        <span class="text-blue-700 text-left">
+                                            {{__('portal.Message you send')}}
+                                        </span>
+                                        : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
+                                    </span>
+                                    <br> <br>
+                                @endforeach
+                            </div>
+                            <br>
+                        @endif
+                        <hr>
+                        {{-- Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message --}}
+                        <form action="{{ route('QuotationMessage.store') }}" class="rounded shadow-md" method="post">
+                            @csrf
+                            @php $business = \App\Models\Business::where('user_id', $eOrderItems[0]->user_id)->first(); @endphp
+                            <h1 class="text-center text-2xl mt-4">{{__('portal.Message to')}}
+                                <span class="text-blue-600">@if($eOrderItems[0]->company_name_check == 1) {{$business->business_name}} @else {{__('portal.Buyer')}} @endif</span>
+                                <span style="font-size: 20px;">({{__('portal.Buyer')}})</span></h1>
+                            <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Message')}}..." required></textarea>
+                            <x-jet-input-error for="message" class="mt-2" />
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                            <input type="hidden" name="qoute_id" value="{{ $eOrderItems[0]->id }}">
+                            <input type="hidden" name="usertype" value="{{ auth()->user()->business->business_type }}">
+
+                            <br>
+
+                            <div class="justify-between p-2 m-2">
+                                <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150">
+                                    {{__('portal.Send')}}
+                                </button>
+                                {{-- <a href="{{ route('updateQoute', $QouteItem->id) }}" style="margin-left: 70px;"
+                                    class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">
+                                     Qoute Again
+                                 </a>
+
+                                 <a href="{{ route('updateRejected', $QouteItem->id) }}" style="margin-left: 70px;"
+                                    class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">Reject
+                                     Request</a>--}}
+                            </div>
+                            <br>
+                        </form>
 
                         <form name="form" method="POST" action="{{ route('singleRFQQuotationStore') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
@@ -666,6 +783,33 @@
                         <h2 class="text-center text-2xl">{{__('portal.You have already quoted.')}}</h2>
 
                     @elseif($collection && $collection->qoute_status == 'ModificationNeeded')
+
+                        {{-- Retrieving Supplier Messages using e_order_items_id --}}
+                        @php
+                            $quote = \App\Models\QouteMessage::where('qoute_id', $eOrderItems[0]->id )->get();
+                        @endphp
+                        @if(isset($quote) && $quote->isNotEmpty())
+
+                            <div class="border-2 p-2 m-2">
+                                @foreach ($quote as $msg)
+                                    {{--@php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp--}}
+                                    @php
+                                        $user = \App\Models\User::where('id', $msg->user_id)->first();
+                                        $business = \App\Models\Business::where('id', $user->business_id)->first();
+                                    @endphp
+
+                                    <span class="text-gray-600">
+                                        <span class="text-blue-700 text-left">
+                                            {{__('portal.Message you send')}}
+                                        </span>
+                                        : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
+                                    </span>
+                                    <br> <br>
+                                @endforeach
+                            </div>
+                            <br>
+                        @endif
+
                         @php
                             $quote = \App\Models\QouteMessage::where('qoute_id', $collection->id )->get();
                         @endphp
@@ -679,9 +823,9 @@
                                         $business = \App\Models\Business::where('id', $user->business_id)->first();
                                     @endphp
 
-                                    <span class="text-blue-700">
-                                            <span class="text-gray-600 text-left">
-                                                {{__('portal.Message from')}} {{$business->business_name}}
+                                    <span class="text-gray-600">
+                                            <span class="text-blue-700 text-left">
+                                                {{__('portal.Message from')}} @if($eOrderItems[0]->company_name_check == 1) {{$business->business_name}} @else {{__('portal.Buyer')}} @endif
                                             </span>
                                             : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
                                         </span>
@@ -690,6 +834,40 @@
                             </div>
                             <br>
                         @endif
+
+
+                        <hr>
+                        {{-- Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message --}}
+                        <form action="{{ route('QuotationMessage.store') }}" class="rounded shadow-md" method="post">
+                            @csrf
+                            @php $business = \App\Models\Business::where('user_id', $eOrderItems[0]->user_id)->first(); @endphp
+                            <h1 class="text-center text-2xl mt-4">{{__('portal.Message to')}}
+                                <span class="text-blue-600">@if($eOrderItems[0]->company_name_check == 1) {{$business->business_name}} @else {{__('portal.Buyer')}} @endif</span>
+                                <span style="font-size: 20px;">({{__('portal.Buyer')}})</span></h1>
+                            <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Message')}}..." required></textarea>
+                            <x-jet-input-error for="message" class="mt-2" />
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                            <input type="hidden" name="qoute_id" value="{{ $eOrderItems[0]->id }}">
+                            <input type="hidden" name="usertype" value="{{ auth()->user()->business->business_type }}">
+
+                            <br>
+
+                            <div class="justify-between p-2 m-2">
+                                <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150">
+                                    {{__('portal.Send')}}
+                                </button>
+                                {{-- <a href="{{ route('updateQoute', $QouteItem->id) }}" style="margin-left: 70px;"
+                                    class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">
+                                     Qoute Again
+                                 </a>
+
+                                 <a href="{{ route('updateRejected', $QouteItem->id) }}" style="margin-left: 70px;"
+                                    class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">Reject
+                                     Request</a>--}}
+                            </div>
+                            <br>
+                        </form>
+
                         <div class="text-center">
                             <span class="text-2xl font-bold text-red-700">{{__('portal.Modification Needed')}}</span>
                         </div>

@@ -68,25 +68,25 @@
                         <table class="min-w-full divide-y divide-black ">
                             <thead>
                             <tr>
-                                <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                     #
                                 </th>
-                                <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Quantity')}}
                                 </th>
-                                <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Unit Price')}}
                                 </th>
-                                <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.UOM')}}
                                 </th>
-                                <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Brand')}}
                                 </th>
-                                <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Remarks')}}
                                 </th>
-                                <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Amount')}}
                                 </th>
                             </tr>
@@ -153,7 +153,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
                                     <label class="form-check-label" for="flexCheckDefault">
-                                        {{__('portal.Please Check to acknowledge')}}
+                                        {{__('portal.Please read the note and check if you agree to proceed')}}
                                     </label>
                                 </div>
                             </div>
@@ -204,6 +204,35 @@
             </div>
         </div>
     </x-app-layout>
+
+    <script>
+
+        $('.confirm').on('click', function (e) {
+            if (!$("#acknowledge").is(":checked")) {
+                // do something if the checkbox is NOT checked
+                alert('Please read the note and check if you agree to proceed')
+                event.preventDefault();
+            }
+            else if ($("#acknowledge").is(":checked")) {
+                if(!confirm('Are you sure?')){
+                    e.preventDefault();
+                }
+            }
+        });
+
+        $('.confirm-delete').on('click', function (e) {
+            if(!confirm('Are you sure?')){
+                e.preventDefault();
+            }
+        });
+
+        /*function checkbox() {
+            if (!$("#acknowledge").is(":checked")) {
+                alert('Please check NOTE to acknowledge')
+                event.preventDefault();
+            }
+        }*/
+    </script>
 @else
     <x-app-layout>
         <div class="py-12">
@@ -274,25 +303,25 @@
                         <table class="min-w-full divide-y divide-black ">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         #
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Quantity')}}
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Unit Price')}}
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.UOM')}}
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Brand')}}
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Remarks')}}
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Amount')}}
                                     </th>
                                 </tr>
@@ -359,7 +388,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
                                     <label class="form-check-label" for="flexCheckDefault">
-                                        {{__('portal.Please Check to acknowledge')}}
+                                        {{__('portal.Please read the note and check if you agree to proceed')}}
                                     </label>
                                 </div>
                             </div>
@@ -410,33 +439,33 @@
             </div>
         </div>
     </x-app-layout>
-@endif
 
-<script>
+    <script>
 
-    $('.confirm').on('click', function (e) {
-        if (!$("#acknowledge").is(":checked")) {
-            // do something if the checkbox is NOT checked
-            alert('Please check NOTE to acknowledge')
-            event.preventDefault();
-        }
-        else if ($("#acknowledge").is(":checked")) {
-            if(!confirm('Are you sure?')){
+        $('.confirm').on('click', function (e) {
+            if (!$("#acknowledge").is(":checked")) {
+                // do something if the checkbox is NOT checked
+                alert('يرجى قراءة الملاحظة والتأكيد في حال الموافقة للمتابعة')
+                event.preventDefault();
+            }
+            else if ($("#acknowledge").is(":checked")) {
+                if(!confirm('هل أنت متأكد؟')){
+                    e.preventDefault();
+                }
+            }
+        });
+
+        $('.confirm-delete').on('click', function (e) {
+            if(!confirm('هل أنت متأكد؟')){
                 e.preventDefault();
             }
-        }
-    });
+        });
 
-    $('.confirm-delete').on('click', function (e) {
-        if(!confirm('Are you sure?')){
-            e.preventDefault();
-        }
-    });
-
-    /*function checkbox() {
-        if (!$("#acknowledge").is(":checked")) {
-            alert('Please check NOTE to acknowledge')
-            event.preventDefault();
-        }
-    }*/
-</script>
+        /*function checkbox() {
+            if (!$("#acknowledge").is(":checked")) {
+                alert('Please check NOTE to acknowledge')
+                event.preventDefault();
+            }
+        }*/
+    </script>
+@endif

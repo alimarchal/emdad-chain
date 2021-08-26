@@ -100,18 +100,21 @@
                                 @endphp
 
                                 {{-- Checking if any Quotation present for Single Category RFQ --}}
-                                @php
+                                {{--@php
                                     if (count($eOrders) > 0)
                                     {
                                          $quote = \App\Models\Qoute::where(['e_order_id' => $eOrders[0]->id, 'supplier_business_id' => auth()->user()->business_id])->first();
                                     }
-                                @endphp
+                                @endphp--}}
 
-                                @if(isset($quote) && $quote != null)
-                                @else
-                                    @foreach (array_unique($eOrders) as $order)
-                                        {{--                                @foreach ($eOrders->unique('id') as $order)--}}
+                                {{--@if(isset($quote) && $quote != null)
+                                @else--}}
+                                @foreach (array_unique($eOrders) as $order)
+                                    {{--                                @foreach ($eOrders->unique('id') as $order)--}}
 
+                                    {{-- Checking if any Quotation present for Single Category RFQ --}}
+                                    @if(\App\Models\Qoute::where(['e_order_id' => $order->id, 'supplier_business_id' => auth()->user()->business_id])->first())
+                                    @else
                                         @if(isset($quotationCount) && $quotationCount > 0))
                                         <tr>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -179,9 +182,9 @@
                                                 </div>
                                             </div>
                                         @endif
-
-                                    @endforeach
-                                @endif
+                                    @endif
+                                @endforeach
+                                {{--@endif--}}
                                 </tbody>
                             </table>
                         </div>

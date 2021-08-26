@@ -94,6 +94,33 @@
                             </div>
                         @endforeach
 
+                        {{-- Retrieving eOrderItemsID in qoute_id while Storing Supplier message and Retrieving QuoteID in qoute_id while storing Buyer message --}}
+                        @php
+                            $quote = \App\Models\QouteMessage::where('qoute_id', $quotes[0]->e_order_items_id)->where('user_id', '!=', auth()->id())->get();
+                        @endphp
+                        @if(isset($quote) && $quote->isNotEmpty())
+
+                            <div class="border-2 p-2 m-2">
+                                @foreach ($quote as $msg)
+                                    {{--@php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp--}}
+                                    @php
+                                        $user = \App\Models\User::where('id', $msg->user_id)->first();
+                                        $business = \App\Models\Business::where('id', $user->business_id)->first();
+                                    @endphp
+
+                                    <span class="text-gray-600">
+                                        <span class="text-blue-700 text-left">
+                                            {{__('portal.Message from')}} {{$business->business_name}}
+                                        </span>
+                                        : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
+                                    </span>
+                                    <br> <br>
+                                @endforeach
+                            </div>
+                            <br>
+                        @endif
+                        <hr>
+
                         @if($quotes[0]->messages->isNotEmpty())
                             <div class="border-2 p-2 m-2">
                                 @foreach ($quotes[0]->messages as $msg)
@@ -108,7 +135,7 @@
                             @php $business = \App\Models\Business::where('user_id', $quotes[0]->supplier_user_id)->first(); @endphp
                             <h1 class="text-center text-2xl mt-4">{{__('portal.Message to')}} <span class="text-blue-600">{{$business->business_name}}</span>
                                 <span style="font-size: 20px;">({{__('portal.supplier')}})</span></h1>
-                            <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="Enter Message..." required></textarea>
+                            <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Message')}}..." required></textarea>
                             <x-jet-input-error for="message" class="mt-2" />
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                             <input type="hidden" name="qoute_id" value="{{ $quotes[0]->id }}">
@@ -299,6 +326,33 @@
                                 </div>
                             </div>
                         @endforeach
+
+                        {{-- Retrieving eOrderItemsID in qoute_id while Storing Supplier message and Retrieving QuoteID in qoute_id while storing Buyer message --}}
+                        @php
+                            $quote = \App\Models\QouteMessage::where('qoute_id', $quotes[0]->e_order_items_id)->where('user_id', '!=', auth()->id())->get();
+                        @endphp
+                        @if(isset($quote) && $quote->isNotEmpty())
+
+                            <div class="border-2 p-2 m-2">
+                                @foreach ($quote as $msg)
+                                    {{--@php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp--}}
+                                    @php
+                                        $user = \App\Models\User::where('id', $msg->user_id)->first();
+                                        $business = \App\Models\Business::where('id', $user->business_id)->first();
+                                    @endphp
+
+                                    <span class="text-gray-600">
+                                        <span class="text-blue-700 text-left" style="float: right">
+                                            {{__('portal.Message from')}} {{$business->business_name}}
+                                        </span>
+                                        : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
+                                    </span>
+                                    <br> <br>
+                                @endforeach
+                            </div>
+                            <br>
+                        @endif
+                        <hr>
 
                         @if($quotes[0]->messages->isNotEmpty())
                             <div class="border-2 p-2 m-2">

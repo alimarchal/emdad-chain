@@ -66,28 +66,28 @@
                         <table class="min-w-full divide-y divide-black ">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         #
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Quantity')}}
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Unit Price')}}
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.UOM')}}
                                     </th>
 
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Brand')}}
                                     </th>
 
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Remarks')}}
                                     </th>
 
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Amount')}}
                                     </th>
                                 </tr>
@@ -195,10 +195,12 @@
                                             <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">Approve DPO</button>
                                         </form>
                                     @else
-                                        <a href="{{ route('dpo.approved', $draftPurchaseOrder->id) }}" onclick="checkbox()"
-                                           class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
-                                            {{__('portal.Approve DPO')}}
-                                        </a>
+                                        <form method="POST" action="{{route('dpo.approved', $draftPurchaseOrder->id) }}" class="confirm">
+                                            @csrf
+                                            <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                {{__('portal.Approve DPO')}}
+                                            </button>
+                                        </form>
                                     @endif
                                         <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}" onclick="cancel()"
                                            class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
@@ -222,6 +224,28 @@
             </div>
         </div>
     </x-app-layout>
+
+    <script>
+
+        $('.confirm').on('click', function (e) {
+            if (!$("#acknowledge").is(":checked")) {
+                // do something if the checkbox is NOT checked
+                alert('Please read the note and check if you agree to proceed')
+                event.preventDefault();
+            }
+            else if ($("#acknowledge").is(":checked")) {
+                if(!confirm('Are you sure?')){
+                    e.preventDefault();
+                }
+            }
+        });
+
+        function cancel() {
+            if(!confirm('Are you sure?')){
+                event.preventDefault();
+            }
+        }
+    </script>
 @else
     <x-app-layout>
         <div class="py-12">
@@ -290,28 +314,28 @@
                         <table class="min-w-full divide-y divide-black ">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         #
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Quantity')}}
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Unit Price')}}
                                     </th>
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.UOM')}}
                                     </th>
 
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Brand')}}
                                     </th>
 
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Remarks')}}
                                     </th>
 
-                                    <th scope="col" class="px-2 py-2 border border-black bg-blue-500 text-center text-xs font-medium text-black uppercase tracking-wider">
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Amount')}}
                                     </th>
                                 </tr>
@@ -419,10 +443,12 @@
                                             <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">Approve DPO</button>
                                         </form>
                                     @else
-                                        <a href="{{ route('dpo.approved', $draftPurchaseOrder->id) }}" onclick="checkbox()"
-                                           class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
-                                            {{__('portal.Approve DPO')}}
-                                        </a>
+                                        <form method="POST" action="{{route('dpo.approved', $draftPurchaseOrder->id) }}" class="confirm">
+                                            @csrf
+                                            <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                {{__('portal.Approve DPO')}}
+                                            </button>
+                                        </form>
                                     @endif
                                     <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}" onclick="cancel()"
                                        class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
@@ -446,27 +472,26 @@
             </div>
         </div>
     </x-app-layout>
-@endif
 
-<script>
+    <script>
 
-    function checkbox() {
-        // $('#acknowledge').val(this.checked);
-        if (!$("#acknowledge").is(":checked")) {
-            // do something if the checkbox is NOT checked
-            alert('Please check NOTE to acknowledge')
-            event.preventDefault();
-        }
-        else if ($("#acknowledge").is(":checked")) {
-            if(!confirm('Are you sure?')){
+        $('.confirm').on('click', function (e) {
+            if (!$("#acknowledge").is(":checked")) {
+                // do something if the checkbox is NOT checked
+                alert('يرجى قراءة الملاحظة والتأكيد في حال الموافقة للمتابعة')
+                event.preventDefault();
+            }
+            else if ($("#acknowledge").is(":checked")) {
+                if(!confirm('هل أنت متأكد؟')){
+                    e.preventDefault();
+                }
+            }
+        });
+
+        function cancel() {
+            if(!confirm('هل أنت متأكد؟')){
                 event.preventDefault();
             }
         }
-    }
-
-    function cancel() {
-        if(!confirm('Are you sure?')){
-            event.preventDefault();
-        }
-    }
-</script>
+    </script>
+@endif

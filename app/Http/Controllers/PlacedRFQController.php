@@ -109,7 +109,7 @@ class PlacedRFQController extends Controller
 
     public function RFQsWithNoQuotations()
     {
-        $rfqs = \App\Models\EOrderItems::with('qoutes')->doesntHave('qoutes')->get();
+        $rfqs = EOrderItems::with('qoutes')->doesntHave('qoutes')->get();
         return view('RFQ.noQuotationReceived', compact('rfqs'));
     }
 

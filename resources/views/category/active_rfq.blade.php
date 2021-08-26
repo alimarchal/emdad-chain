@@ -49,9 +49,9 @@
                         </a>
                     </div>
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <h2 class="text-2xl font-bold text-center">List of Active RFQs</h2>
+                        <h2 class="text-2xl font-bold text-center">List of Active Requisitions</h2>
                         <x-jet-validation-errors class="mb-4" />
-                        <!-- This example requires Tailwind CSS v2.0+ -->
+
                         <div class="flex flex-col">
                             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -66,7 +66,7 @@
                                                     Business Name
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                    RFQ No.
+                                                    Requisition No.
                                                 </th>
 
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
@@ -97,14 +97,20 @@
                                                     <td class="px-6 py-4 whitespace-nowrap text-center">
                                                         <div class="ml-4">
                                                             <div class="text-sm font-medium text-gray-900">
-                                                                <a href="{{route('activeRFQView', $activeRFQ->id)}}" class="text-decoration-underline text-blue-600 hover:underline">{{$activeRFQ->id}}</a>
+                                                                <a href="{{route('activeRFQView', $activeRFQ->id)}}" class="text-decoration-underline text-blue-600 hover:underline">{{__('portal.RFQ')}}-{{$activeRFQ->id}}</a>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
                                                         <div class="ml-4">
                                                             <div class="text-sm font-medium text-gray-900">
-                                                                {{$activeRFQ->category->name}}
+                                                                @php
+                                                                    $record = \App\Models\Category::where('id',$activeRFQ->category->id)->first();
+                                                                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                                @endphp
+
+                                                                {{ $record->name}} @if(isset($parent)), {{ $parent->name}} @endif
+{{--                                                                {{$activeRFQ->category->name}}--}}
                                                             </div>
                                                         </div>
                                                     </td>

@@ -82,6 +82,32 @@
                         </div>
 
 
+                        {{-- Retrieving eOrderItemsID in qoute_id while Storing Supplier message and Retrieving QuoteID in qoute_id while storing Buyer message --}}
+                        @php
+                            $quote = \App\Models\QouteMessage::where('qoute_id', $QouteItem->e_order_items_id)->where('user_id', '!=', auth()->id())->get();
+                        @endphp
+                        @if(isset($quote) && $quote->isNotEmpty())
+
+                            <div class="border-2 p-2 m-2">
+                                @foreach ($quote as $msg)
+                                    {{--@php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp--}}
+                                    @php
+                                        $user = \App\Models\User::where('id', $msg->user_id)->first();
+                                        $business = \App\Models\Business::where('id', $user->business_id)->first();
+                                    @endphp
+
+                                    <span class="text-gray-600">
+                                        <span class="text-blue-700 text-left">
+                                            {{__('portal.Message from')}} {{$business->business_name}}
+                                        </span>
+                                        : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
+                                    </span>
+                                    <br> <br>
+                                @endforeach
+                            </div>
+                            <br>
+                        @endif
+                        <hr>
 
                         @if($QouteItem->messages->isNotEmpty())
                             <div class="border-2 p-2 m-2">
@@ -92,6 +118,7 @@
                         @endif
 
                         <hr>
+                        {{-- Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message --}}
                         <form action="{{ route('QuotationMessage.store') }}" class="rounded shadow-md" method="post">
                             @csrf
                             @php $business = \App\Models\Business::where('user_id', $QouteItem->supplier_user_id)->first(); @endphp
@@ -308,7 +335,32 @@
                             </div>
                         </div>
 
+                        {{-- Retrieving eOrderItemsID in qoute_id while Storing Supplier message and Retrieving QuoteID in qoute_id while storing Buyer message --}}
+                        @php
+                            $quote = \App\Models\QouteMessage::where('qoute_id', $QouteItem->e_order_items_id)->where('user_id', '!=', auth()->id())->get();
+                        @endphp
+                        @if(isset($quote) && $quote->isNotEmpty())
 
+                            <div class="border-2 p-2 m-2">
+                                @foreach ($quote as $msg)
+                                    {{--@php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp--}}
+                                    @php
+                                        $user = \App\Models\User::where('id', $msg->user_id)->first();
+                                        $business = \App\Models\Business::where('id', $user->business_id)->first();
+                                    @endphp
+
+                                    <span class="text-gray-600">
+                                        <span class="text-blue-700 text-left" style="float: right">
+                                            {{__('portal.Message from')}} {{$business->business_name}}
+                                        </span>
+                                        : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
+                                    </span>
+                                    <br> <br>
+                                @endforeach
+                            </div>
+                            <br>
+                        @endif
+                        <hr>
 
                         @if($QouteItem->messages->isNotEmpty())
                             <div class="border-2 p-2 m-2">
@@ -319,6 +371,7 @@
                         @endif
 
                         <hr>
+                        {{-- Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message --}}
                         <form action="{{ route('QuotationMessage.store') }}" class="rounded shadow-md" method="post">
                             @csrf
                             @php $business = \App\Models\Business::where('user_id', $QouteItem->supplier_user_id)->first(); @endphp
