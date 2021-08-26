@@ -16,7 +16,9 @@
 
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-
+                <x-jet-button class="float-right mb-2">
+                    <a href="{{route('registerAr', 'ar')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
+                </x-jet-button>
                 <div>
                     <x-jet-label for="email" value="{{ __('login.Email') }}" />
                     <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />

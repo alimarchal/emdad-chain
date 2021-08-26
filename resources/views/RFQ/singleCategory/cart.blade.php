@@ -43,49 +43,49 @@
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200" id="cart">
-                            <thead class="bg-gray-50">
+                            <thead style="background-color: #fffdd0;">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium  tracking-wider" >
                                     #
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium tracking-wider" >
                                     {{__('portal.Category Name')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium  tracking-wider" >
                                     {{__('portal.Brand')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium  tracking-wider" >
                                     {{__('portal.Description')}}
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium  tracking-wider" >
                                     {{__('portal.Unit')}}
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium  tracking-wider" >
                                     {{__('portal.Size')}}
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium  tracking-wider" >
                                     {{__('portal.Quantity')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium  tracking-wider" >
                                     {{__('portal.Last Price')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium  tracking-wider" >
                                     {{__('portal.Delivery Period')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium  tracking-wider" >
                                     {{__('portal.Payment Mode')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium  tracking-wider" >
                                     {{__('portal.Remarks')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="{{__('portal.Display')}} {{auth()->user()->business->business_name}} {{__('portal.in the Requisition')}}">
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium  tracking-wider"  title="{{__('portal.Display')}} {{auth()->user()->business->business_name}} {{__('portal.in the Requisition')}}">
                                     {{__('portal.Display Company Name')}}
                                 </th>
 
@@ -254,7 +254,7 @@
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200" id="cart">
-                            <thead class="bg-gray-50">
+                            <thead  style="background-color: #fffdd0;">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         #

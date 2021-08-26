@@ -53,7 +53,7 @@
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        {{__('portal.View')}}
+                                                        {{__('portal.Action')}}
                                                     </th>
 
 
@@ -177,7 +177,7 @@
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        {{__('portal.View')}}
+                                                        {{__('portal.Action')}}
                                                     </th>
 
 

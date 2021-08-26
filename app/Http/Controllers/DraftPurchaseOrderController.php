@@ -395,7 +395,7 @@ class DraftPurchaseOrderController extends Controller
         return view('draftPurchaseOrder.singleCategory.show', compact('draftPurchaseOrders'));
     }
 
-    public function singleCategoryApproved($rfqNo,$supplierBusinessID)
+    public function singleCategoryApproved(Request $request, $rfqNo,$supplierBusinessID)
     {
         try {
             DB::beginTransaction();
