@@ -10,6 +10,7 @@ class QouteMessageController extends Controller
 {
     public function store(Request $request)
     {
+        /* Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message */
         $message = QouteMessage::create($request->all());
         session()->flash('message', 'Message successfully send.');
         return redirect()->back();

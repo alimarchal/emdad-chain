@@ -84,6 +84,29 @@ class BusinessController extends Controller
             $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
             return view('business.legalOfficer.legalBusinessesInfo', compact('businesses'));
         }
+        elseif (\auth()->user()->hasRole('SC Specialist'))
+        {
+            if ($request->has('status')) {
+                if ($request->status == 3) {
+                    $status = $request->status;
+                    $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
+
+                    return view('business.scSpecialist.info', compact('businesses', 'status'));
+                } elseif ($request->status == 1) {
+                    $status = $request->status;
+                    $businesses = Business::where('status', 1)->orderBy('id','desc')->paginate(10);
+
+                    return view('business.scSpecialist.info', compact('businesses', 'status'));
+                } elseif ($request->status == 2) {
+                    $users = User::where('usertype', 'CEO')->where('business_id', null)->orderBy('id','desc')->paginate(10);
+
+                    return view('business.scSpecialist.info', compact('users'));
+                }
+            }
+
+            $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
+            return view('business.scSpecialist.info', compact('businesses'));
+        }
         elseif (\auth()->user()->hasRole('IT Admin'))
         {
             if ($request->has('status')) {

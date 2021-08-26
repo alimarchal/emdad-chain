@@ -19,7 +19,7 @@ class PackageCheck
     {
         if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasRole('Sales Specialist')
             || Auth::user()->hasRole('Legal Approval Officer 1') || Auth::user()->hasRole('Finance Officer 1')
-            || Auth::user()->hasRole('SC Supervisor') || Auth::user()->hasRole('IT Admin') )
+            || Auth::user()->hasRole('SC Supervisor')|| Auth::user()->hasRole('SC Specialist') || Auth::user()->hasRole('IT Admin') )
         {
             return $next($request);
         }

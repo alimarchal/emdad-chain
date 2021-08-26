@@ -42,7 +42,7 @@
                                                         #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        {{__('portal.Delivery Note')}}
+                                                        {{__('portal.Invoice Number')}}
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         {{__('portal.P.O.')}}
@@ -81,7 +81,7 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            {{__('portal.D.N.')}} -{{ $dn->id }}
+                                                            {{__('portal.Inv.')}} -{{ $dn->id }}
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -156,7 +156,7 @@
                                                                 {{__('portal.Emdad verification pending')}}
                                                             @elseif($dn->invoice_status == '2')
                                                                 {{__('portal.Emdad rejected manual payment')}}
-                                                            @elseif($dn->bankPayment->supplier_payment_status == 3)
+                                                            @elseif($dn->invoice_status == '3' && $dn->bankPayment->supplier_payment_status == 3)
                                                                 {{__('portal.Payment received by supplier')}}
                                                             @elseif($dn->invoice_status == '3')
                                                                 {{__('portal.Payment in Transit, on hold, with Emdad')}}
@@ -170,6 +170,8 @@
                                                                 {{__('portal.Emdad verification pending')}}
                                                             @elseif($dn->invoice_status == '2')
                                                                 {{__('portal.Manual payment rejected')}}
+                                                            @elseif($dn->invoice_status == '3' && $dn->bankPayment->supplier_payment_status == 3)
+                                                                {{__('portal.Payment received')}}
                                                             @elseif($dn->invoice_status == '3')
                                                                 {{__('portal.Payment in Transit, Received by Emdad')}}
                                                             @endif
@@ -195,9 +197,7 @@
                                         </table>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
 
                     @else
@@ -210,12 +210,8 @@
                     @endif
 
                 </div>
-
-
             </div>
         </div>
-
-
     </x-app-layout>
 
     <script>
@@ -261,7 +257,7 @@
                                                     #
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    {{__('portal.Delivery Note')}}
+                                                    {{__('portal.Invoice Number')}}
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     {{__('portal.P.O.')}}
@@ -300,7 +296,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.D.N.')}}-{{ $dn->id }}
+                                                        {{__('portal.Inv.')}}-{{ $dn->id }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -375,7 +371,7 @@
                                                                 {{__('portal.Emdad verification pending')}}
                                                             @elseif($dn->invoice_status == '2')
                                                                 {{__('portal.Emdad rejected manual payment')}}
-                                                            @elseif($dn->bankPayment->supplier_payment_status == 3)
+                                                            @elseif($dn->invoice_status == '3' && $dn->bankPayment->supplier_payment_status == 3)
                                                                 {{__('portal.Payment received by supplier')}}
                                                             @elseif($dn->invoice_status == '3')
                                                                 {{__('portal.Payment in Transit, on hold, with Emdad')}}
@@ -389,6 +385,8 @@
                                                                 {{__('portal.Emdad verification pending')}}
                                                             @elseif($dn->invoice_status == '2')
                                                                 {{__('portal.Manual payment rejected')}}
+                                                            @elseif($dn->invoice_status == '3' && $dn->bankPayment->supplier_payment_status == 3)
+                                                                {{__('portal.Payment received')}}
                                                             @elseif($dn->invoice_status == '3')
                                                                 {{__('portal.Payment in Transit, Received by Emdad')}}
                                                             @endif
@@ -429,12 +427,8 @@
                     @endif
 
                 </div>
-
-
             </div>
         </div>
-
-
     </x-app-layout>
 
     <script>
