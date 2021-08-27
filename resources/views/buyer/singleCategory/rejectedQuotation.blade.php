@@ -75,7 +75,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->quote_price_per_quantity }}
+                                            {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
                                         </td>
 
 
@@ -84,7 +84,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ strip_tags($rfp->total_cost) }}
+                                            {{ strip_tags($rfp->total_cost) }} {{__('portal.SAR')}}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -194,7 +194,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->quote_price_per_quantity }}
+                                            {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
                                         </td>
 
 
@@ -203,7 +203,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ strip_tags($rfp->total_cost) }}
+                                            {{ strip_tags($rfp->total_cost) }} {{__('portal.SAR')}}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">

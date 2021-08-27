@@ -28,7 +28,7 @@
                         <hr>
 
                         <div class="flex flex-wrap overflow-hidden bg-white p-4">
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-2/3">
                                 @php
                                     $startDate = \Carbon\Carbon::parse($businessPackage->subscription_start_date);
                                     $now = \Carbon\Carbon::now();
@@ -45,15 +45,15 @@
 
                                 @endphp
                                 <strong>{{__('portal.Current days used')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{$usedDays}}<br>
-                                <strong>{{__('portal.Current amount used')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($currentAmountUsed, 2)}}<br>
-                                <strong>{{__('portal.Balance of the subscription amount')}}: &nbsp;</strong>{{ number_format($balance, 2) }}<br>
-                                <strong>{{__('portal.New Package Charges')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($package->charges, 2) }}<br>
+                                <strong>{{__('portal.Current amount used')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($currentAmountUsed, 2)}} {{__('portal.SAR')}}<br>
+                                <strong>{{__('portal.Balance of the subscription amount')}}: &nbsp;</strong>{{ number_format($balance, 2) }} {{__('portal.SAR')}}<br>
+                                <strong>{{__('portal.New Package Charges')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($package->charges, 2) }} {{__('portal.SAR')}}<br>
                                 <hr>
                                 <strong>{{__('portal.Amount to be paid')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                 @if($businessPackage->package->id != 1 && $businessPackage->package->id != 5)
-                                    {{ number_format($amountToPay, 2) }}
+                                    {{ number_format($amountToPay, 2) }} {{__('portal.SAR')}}
                                 @else
-                                    {{number_format($package->charges, 2)}}
+                                    {{number_format($package->charges, 2)}} {{__('portal.SAR')}}
                                 @endif
                                 <br>
                                 <hr>
@@ -135,7 +135,7 @@
                         <hr>
 
                         <div class="flex flex-wrap overflow-hidden bg-white p-4">
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-2/3">
                                 @php
                                     $startDate = \Carbon\Carbon::parse($businessPackage->subscription_start_date);
                                     $now = \Carbon\Carbon::now();
@@ -151,13 +151,13 @@
                                         }
                                 @endphp
                                 <strong>{{__('portal.Current days used')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{$usedDays}}<br>
-                                <strong>{{__('portal.Current amount used')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($currentAmountUsed, 2)}}<br>
-                                <strong>{{__('portal.Balance of the subscription amount')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($balance, 2) }}<br>
-                                <strong>{{__('portal.New Package Charges')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($package->charges, 2) }}<br>
+                                <strong>{{__('portal.Current amount used')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($currentAmountUsed, 2)}} {{__('portal.SAR')}}<br>
+                                <strong>{{__('portal.Balance of the subscription amount')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($balance, 2) }} {{__('portal.SAR')}}<br>
+                                <strong>{{__('portal.New Package Charges')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($package->charges, 2) }} {{__('portal.SAR')}}<br>
                                 <hr>
-                                <strong>{{__('portal.Amount to be paid')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-                                @if($businessPackage->package->id != 1) {{ number_format($amountToPay, 2) }}
-                                @else {{number_format($package->charges, 2)}}
+                                <strong>{{__('portal.Amount to be paid')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                @if($businessPackage->package->id != 1) {{ number_format($amountToPay, 2) }} {{__('portal.SAR')}}
+                                @else {{number_format($package->charges, 2)}} {{__('portal.SAR')}}
                                 @endif
                                 <br>
                                 <hr>

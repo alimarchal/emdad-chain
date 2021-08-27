@@ -34,11 +34,19 @@
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Category Name')}}
+                                        </th>
+
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                             {{__('portal.Quantity')}}
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                             {{__('portal.Price Per Quantity')}}
+                                        </th>
+
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Size')}}
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
@@ -89,12 +97,24 @@
                                                     {{ $loop->iteration }}
                                                 </td>
 
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    @php
+                                                        $categoryName = \App\Models\Category::where('id', $quote->orderItem->item_code)->first();
+                                                        $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+                                                    @endphp
+                                                    {{ $categoryName->name }} @if(isset($parentName)), {{$parentName}} @endif
+                                                </td>
+
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $quote->quote_quantity }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_price_per_quantity }}
+                                                    {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                </td>
+
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ $quote->orderItem->size }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -102,7 +122,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->total_cost }}
+                                                    {{ $quote->total_cost }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -153,12 +173,24 @@
                                                     {{ $loop->iteration }}
                                                 </td>
 
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    @php
+                                                        $categoryName = \App\Models\Category::where('id', $quote->orderItem->item_code)->first();
+                                                        $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+                                                    @endphp
+                                                    {{ $categoryName->name }} @if(isset($parentName)), {{$parentName}} @endif
+                                                </td>
+
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $quote->quote_quantity }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_price_per_quantity }}
+                                                    {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                </td>
+
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ $quote->orderItem->size }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -166,7 +198,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->total_cost }}
+                                                    {{ $quote->total_cost }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -217,12 +249,24 @@
                                                     {{ $loop->iteration }}
                                                 </td>
 
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    @php
+                                                        $categoryName = \App\Models\Category::where('id', $quote->orderItem->item_code)->first();
+                                                        $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+                                                    @endphp
+                                                    {{ $categoryName->name }} @if(isset($parentName)), {{$parentName}} @endif
+                                                </td>
+
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $quote->quote_quantity }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_price_per_quantity }}
+                                                    {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                </td>
+
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ $quote->orderItem->size }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -230,7 +274,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->total_cost }}
+                                                    {{ $quote->total_cost }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -307,11 +351,19 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Category Name')}}
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Quantity')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Price Per Quantity')}}
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Size')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
@@ -362,12 +414,24 @@
                                                     {{ $loop->iteration }}
                                                 </td>
 
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    @php
+                                                        $categoryName = \App\Models\Category::where('id', $quote->orderItem->item_code)->first();
+                                                        $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name_ar')->first();
+                                                    @endphp
+                                                    {{ $categoryName->name_ar }} @if(isset($parentName)), {{$parentName}} @endif
+                                                </td>
+
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $quote->quote_quantity }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_price_per_quantity }}
+                                                    {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                </td>
+
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ $quote->orderItem->size }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -375,7 +439,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->total_cost }}
+                                                    {{ $quote->total_cost }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -426,12 +490,24 @@
                                                     {{ $loop->iteration }}
                                                 </td>
 
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    @php
+                                                        $categoryName = \App\Models\Category::where('id', $quote->orderItem->item_code)->first();
+                                                        $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name_ar')->first();
+                                                    @endphp
+                                                    {{ $categoryName->name_ar }} @if(isset($parentName)), {{$parentName}} @endif
+                                                </td>
+
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $quote->quote_quantity }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_price_per_quantity }}
+                                                    {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                </td>
+
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ $quote->orderItem->size }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -439,7 +515,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->total_cost }}
+                                                    {{ $quote->total_cost }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -490,12 +566,24 @@
                                                     {{ $loop->iteration }}
                                                 </td>
 
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    @php
+                                                        $categoryName = \App\Models\Category::where('id', $quote->orderItem->item_code)->first();
+                                                        $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name_ar')->first();
+                                                    @endphp
+                                                    {{ $categoryName->name_ar }} @if(isset($parentName)), {{$parentName}} @endif
+                                                </td>
+
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{ $quote->quote_quantity }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_price_per_quantity }}
+                                                    {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                </td>
+
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ $quote->orderItem->size }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -503,7 +591,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->total_cost }}
+                                                    {{ $quote->total_cost }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">

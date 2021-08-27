@@ -26,7 +26,7 @@
                             </div>
 
                             <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <p><strong>{{__('portal.Amount Received')}}:</strong> {{ number_format($supplierBankPayment->amount_received,2) }} </p>
+                                <p><strong>{{__('portal.Amount Received')}}:</strong> {{ number_format($supplierBankPayment->amount_received,2) }} {{__('portal.SAR')}} </p>
                             </div>
 
                             <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
@@ -112,7 +112,7 @@
                             </div>
 
                             <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <p><strong>{{__('portal.Amount Received')}}:</strong> {{ number_format($supplierBankPayment->amount_received,2) }} </p>
+                                <p><strong>{{__('portal.Amount Received')}}:</strong> {{ number_format($supplierBankPayment->amount_received,2) }} {{__('portal.SAR')}} </p>
                             </div>
 
                             <div class="my-1 px-1 w-full overflow-hidden sm:my-px sm:px-px md:my-1 md:px-1 lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">

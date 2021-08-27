@@ -12,7 +12,7 @@ return [
     'Dashboard' => 'لوحة القيادة',
     'Total RFQs' => 'مجموع الطلبات المرسلة',
     'Total Quotation(s)' => 'العروض المستلمة',
-    'Total Purchase Order(s)' => 'أوامر الشراء',
+    'Total Purchase Order(s)' => 'اوامر الشراء',
     'Total Shipments Delivered' => 'الشحنات المستلمة',
     'Total User' => 'مجموع المستخدمين',
     'Total Business' => 'مجموع الأنشطة التجارية',

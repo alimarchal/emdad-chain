@@ -34,11 +34,19 @@
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Category Name')}}
+                                        </th>
+
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                             {{__('portal.Quantity')}}
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                             {{__('portal.Price Per Quantity')}}
+                                        </th>
+
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Size')}}
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
@@ -84,7 +92,11 @@
                                                     </td>
 
                                                     <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                        {{ $rfp->quote_price_per_quantity }}
+                                                        {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                    </td>
+
+                                                    <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                        {{ $rfp->orderItem->size }}
                                                     </td>
 
                                                     <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -97,7 +109,7 @@
                                                     </td>
 
                                                     <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                        {{ $rfp->total_cost }}
+                                                        {{ $rfp->total_cost }} {{__('portal.SAR')}}
                                                     </td>
 
                                                     <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -126,11 +138,23 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    @php
+                                                        $categoryName = \App\Models\Category::where('id', $rfp->orderItem->item_code)->first();
+                                                        $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+                                                    @endphp
+                                                    {{ $categoryName->name }} @if(isset($parentName)), {{$parentName}} @endif
+                                                </td>
+
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
                                                     {{ $rfp->quote_quantity }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_price_per_quantity }}
+                                                    {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                </td>
+
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    {{ $rfp->orderItem->size }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -138,7 +162,7 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->total_cost }}
+                                                    {{ $rfp->total_cost }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -181,11 +205,23 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    @php
+                                                        $categoryName = \App\Models\Category::where('id', $rfp->orderItem->item_code)->first();
+                                                        $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+                                                    @endphp
+                                                    {{ $categoryName->name }} @if(isset($parentName)), {{$parentName}} @endif
+                                                </td>
+
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
                                                     {{ $rfp->quote_quantity }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_price_per_quantity }}
+                                                    {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                </td>
+
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    {{ $rfp->orderItem->size }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -193,7 +229,7 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->total_cost }}
+                                                    {{ $rfp->total_cost }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -235,11 +271,23 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    @php
+                                                        $categoryName = \App\Models\Category::where('id', $rfp->orderItem->item_code)->first();
+                                                        $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+                                                    @endphp
+                                                    {{ $categoryName->name }} @if(isset($parentName)), {{$parentName}} @endif
+                                                </td>
+
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
                                                     {{ $rfp->quote_quantity }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_price_per_quantity }}
+                                                    {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                </td>
+
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    {{ $rfp->orderItem->size }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -247,7 +295,7 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->total_cost }}
+                                                    {{ $rfp->total_cost }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -325,11 +373,19 @@
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Category Name')}}
+                                        </th>
+
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                             {{__('portal.Quantity')}}
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                             {{__('portal.Price Per Quantity')}}
+                                        </th>
+
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                            {{__('portal.Size')}}
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
@@ -375,20 +431,23 @@
                                                  </td>
 
                                                  <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                     {{ $rfp->quote_price_per_quantity }}
+                                                     {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                 </td>
+
+                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                     {{ $rfp->orderItem->size }}
                                                  </td>
 
                                                  <td class="px-6 text-center py-4 whitespace-nowrap">
                                                      {{ $rfp->sample_information }}
                                                  </td>
 
-
                                                  <td class="px-6 text-center py-4 whitespace-nowrap">
                                                      {{ $rfp->shipping_time_in_days }}
                                                  </td>
 
                                                  <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                     {{ $rfp->total_cost }}
+                                                     {{ $rfp->total_cost }} {{__('portal.SAR')}}
                                                  </td>
 
                                                  <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -417,11 +476,23 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    @php
+                                                        $categoryName = \App\Models\Category::where('id', $rfp->orderItem->item_code)->first();
+                                                        $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name_ar')->first();
+                                                    @endphp
+                                                    {{ $categoryName->name_ar }} @if(isset($parentName)), {{$parentName}} @endif
+                                                </td>
+
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
                                                     {{ $rfp->quote_quantity }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_price_per_quantity }}
+                                                    {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                </td>
+
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    {{ $rfp->orderItem->size }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -429,7 +500,7 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->total_cost }}
+                                                    {{ $rfp->total_cost }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -472,11 +543,23 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    @php
+                                                        $categoryName = \App\Models\Category::where('id', $rfp->orderItem->item_code)->first();
+                                                        $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name_ar')->first();
+                                                    @endphp
+                                                    {{ $categoryName->name_ar }} @if(isset($parentName)), {{$parentName}} @endif
+                                                </td>
+
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
                                                     {{ $rfp->quote_quantity }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_price_per_quantity }}
+                                                    {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                </td>
+
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    {{ $rfp->orderItem->size }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -484,7 +567,7 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->total_cost }}
+                                                    {{ $rfp->total_cost }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -526,11 +609,23 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    @php
+                                                        $categoryName = \App\Models\Category::where('id', $rfp->orderItem->item_code)->first();
+                                                        $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name_ar')->first();
+                                                    @endphp
+                                                    {{ $categoryName->name_ar }} @if(isset($parentName)), {{$parentName}} @endif
+                                                </td>
+
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
                                                     {{ $rfp->quote_quantity }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_price_per_quantity }}
+                                                    {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                </td>
+
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    {{ $rfp->orderItem->size }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -538,7 +633,7 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->total_cost }}
+                                                    {{ $rfp->total_cost }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">

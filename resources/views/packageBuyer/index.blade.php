@@ -146,7 +146,7 @@
                                 <td class="px-4 py-3 text-center">
                                     @if($package->charges == 'Free') {{__('portal.Free')}}
                                     @elseif($package->charges == '(Purchases above SR 5 million/month )') {{__('portal.(Purchases above SR 5 million/month )')}}
-                                    @else {{$package->charges}}
+                                    @else {{$package->charges}}  {{__('portal.SAR')}}
                                     @endif
                                 </td>
                             @endforeach
@@ -415,7 +415,7 @@
                                 <td class="px-4 py-3 text-center">
                                     @if($package->charges == 'Free') {{__('portal.Free')}}
                                     @elseif($package->charges == '(Purchases above SR 5 million/month )') {{__('portal.(Purchases above SR 5 million/month )')}}
-                                    @else {{$package->charges}}
+                                    @else {{$package->charges}} {{__('portal.SAR')}}
                                     @endif
                                 </td>
                             @endforeach

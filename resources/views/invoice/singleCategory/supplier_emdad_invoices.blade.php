@@ -66,10 +66,10 @@
                                             {{ $emdadInvoice->invoice->id }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ number_format($totalAmount,2)}}
+                                            {{ number_format($totalAmount,2)}} {{__('portal.SAR')}}
                                         </td>
                                         <td class="px-7 py-4 text-center whitespace-nowrap">
-                                            {{ number_format($totalEmdadCharges,2) }}
+                                            {{ number_format($totalEmdadCharges,2) }} {{__('portal.SAR')}}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -159,10 +159,10 @@
                                             {{ $emdadInvoice->invoice->id }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ number_format($totalAmount,2)}}
+                                            {{ number_format($totalAmount,2)}} {{__('portal.SAR')}}
                                         </td>
                                         <td class="px-7 py-4 text-center whitespace-nowrap">
-                                            {{ number_format($totalEmdadCharges,2) }}
+                                            {{ number_format($totalEmdadCharges,2) }} {{__('portal.SAR')}}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">

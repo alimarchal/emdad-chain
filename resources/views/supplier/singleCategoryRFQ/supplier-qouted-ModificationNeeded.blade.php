@@ -81,7 +81,7 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{ $quote->total_cost }}
+                                                {{ $quote->total_cost }} {{__('portal.SAR')}}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -188,7 +188,7 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{ $quote->total_cost }}
+                                                {{ $quote->total_cost }} {{__('portal.SAR')}}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">

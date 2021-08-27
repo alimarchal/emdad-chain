@@ -69,7 +69,7 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{__('portal.Emdad')}}-{{ $rfp->RFQ->id }}
+                                                {{__('portal.RFQ')}}-{{ $rfp->RFQ->id }}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -159,7 +159,7 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{__('portal.Emdad')}}-{{ $rfp->RFQ->id }}
+                                                {{__('portal.RFQ')}}-{{ $rfp->RFQ->id }}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">

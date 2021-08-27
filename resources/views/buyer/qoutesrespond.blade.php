@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Quote Price Per Quantity')}}: {{ $QouteItem->quote_price_per_quantity }}</strong>
+                                <strong>{{__('portal.Quote Price Per Quantity')}}: {{ $QouteItem->quote_price_per_quantity }} {{__('portal.SAR')}}</strong>
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <strong>{{__('portal.Shipping Time In Days')}}:</strong> {{ $QouteItem->shipping_time_in_days }}
@@ -71,13 +71,13 @@
                                 <strong>{{__('portal.Note')}}:</strong> @if(isset($QouteItem->note_for_customer)) {{ strip_tags($QouteItem->note_for_customer) }} @else N/A @endif
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Shipment Cost')}}:</strong> {{ $QouteItem->shipment_cost }}
+                                <strong>{{__('portal.Shipment Cost')}}:</strong> {{ $QouteItem->shipment_cost }} {{__('portal.SAR')}}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <strong>{{__('portal.VAT')}} (%):</strong> {{ $QouteItem->VAT }}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Total Cost')}}:</strong> {{ $QouteItem->total_cost }}
+                                <strong>{{__('portal.Total Cost')}}:</strong> {{ $QouteItem->total_cost }} {{__('portal.SAR')}}
                             </div>
                         </div>
 
@@ -316,7 +316,7 @@
                             </div>
 
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Quote Price Per Quantity')}}: {{ $QouteItem->quote_price_per_quantity }}</strong>
+                                <strong>{{__('portal.Quote Price Per Quantity')}}: {{ $QouteItem->quote_price_per_quantity }} {{__('portal.SAR')}}</strong>
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <strong>{{__('portal.Shipping Time In Days')}}:</strong> {{ $QouteItem->shipping_time_in_days }}
@@ -325,13 +325,13 @@
                                 <strong>{{__('portal.Note')}}:</strong> @if(isset($QouteItem->note_for_customer)) {{ strip_tags($QouteItem->note_for_customer) }} @else N/A @endif
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Shipment Cost')}}:</strong> {{ $QouteItem->shipment_cost }}
+                                <strong>{{__('portal.Shipment Cost')}}:</strong> {{ $QouteItem->shipment_cost }} {{__('portal.SAR')}}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <strong>{{__('portal.VAT')}} (%):</strong> {{ $QouteItem->VAT }}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Total Cost')}}:</strong> {{ $QouteItem->total_cost }}
+                                <strong>{{__('portal.Total Cost')}}:</strong> {{ $QouteItem->total_cost }} {{__('portal.SAR')}}
                             </div>
                         </div>
 

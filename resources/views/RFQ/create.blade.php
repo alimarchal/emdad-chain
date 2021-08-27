@@ -186,7 +186,7 @@
                                                         {{ $rfp->quantity }}
                                                     </td>
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        {{ number_format($rfp->last_price, 2) }} <br>
+                                                        {{ number_format($rfp->last_price, 2) }}  {{__('portal.SAR')}} <br>
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -567,7 +567,7 @@
                                         {{$item->brand}}
                                     </td>
 
-                                    <td> {{ number_format($rfp->last_price, 2) }}</td>
+                                    <td> {{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}}</td>
                                     <td>
                                         {{$item->remarks}}
                                     </td>
@@ -774,7 +774,7 @@
                                                         {{ $rfp->quantity }}
                                                     </td>
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        {{ number_format($rfp->last_price, 2) }} <br>
+                                                        {{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}} <br>
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -1147,7 +1147,7 @@
                                         {{$item->brand}}
                                     </td>
 
-                                    <td> {{ number_format($rfp->last_price, 2) }}</td>
+                                    <td> {{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}}</td>
                                     <td>
                                         {{$item->remarks}}
                                     </td>
@@ -1443,7 +1443,7 @@
                                                         {{ $rfp->quantity }}
                                                     </td>
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        {{ number_format($rfp->last_price, 2) }} <br>
+                                                        {{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}} <br>
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -1824,7 +1824,7 @@
                                         {{$item->brand}}
                                     </td>
 
-                                    <td> {{ number_format($rfp->last_price, 2) }}</td>
+                                    <td> {{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}}</td>
                                     <td>
                                         {{$item->remarks}}
                                     </td>
@@ -2031,7 +2031,7 @@
                                                         {{ $rfp->quantity }}
                                                     </td>
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        {{ number_format($rfp->last_price, 2) }} <br>
+                                                        {{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}} <br>
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -2402,7 +2402,7 @@
                                         {{$item->brand}}
                                     </td>
 
-                                    <td> {{ number_format($rfp->last_price, 2) }}</td>
+                                    <td> {{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}}</td>
                                     <td>
                                         {{$item->remarks}}
                                     </td>

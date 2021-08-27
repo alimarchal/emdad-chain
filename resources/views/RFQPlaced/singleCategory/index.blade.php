@@ -77,11 +77,11 @@
                                     <td class="px-6 py-4 text-center whitespace-nowrap" >
                                         @if ($item->business_id)
                                             <a href="{{route('single_category_rfq_view',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                {{__('portal.Emdad')}}-{{$item->id}}
+                                                {{__('portal.RFQ')}}-{{$item->id}}
                                             </a>
                                         @else
                                             <a href="{{route('single_category_rfq_view',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                {{ $item->business_id }}-{{__('portal.Emdad')}}-{{$item->id}}
+                                                {{ $item->business_id }}-{{__('portal.RFQ')}}-{{$item->id}}
                                             </a>
                                         @endif
                                     </td>
@@ -214,11 +214,11 @@
                                     <td class="px-6 py-4 text-center whitespace-nowrap" >
                                         @if ($item->business_id)
                                             <a href="{{route('single_category_rfq_view',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                {{__('portal.Emdad')}}-{{$item->id}}
+                                                {{__('portal.RFQ')}}-{{$item->id}}
                                             </a>
                                         @else
                                             <a href="{{route('single_category_rfq_view',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                {{ $item->business_id }}-{{__('portal.Emdad')}}-{{$item->id}}
+                                                {{ $item->business_id }}-{{__('portal.RFQ')}}-{{$item->id}}
                                             </a>
                                         @endif
                                     </td>

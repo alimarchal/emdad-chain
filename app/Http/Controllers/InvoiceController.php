@@ -143,7 +143,7 @@ class InvoiceController extends Controller
         $invoice = Invoice::where('id', $invoiceID)->first();
         $draftPurchaseOrders = DraftPurchaseOrder::where('rfq_no',$invoice->rfq_no)->get();
 
-        return view('invoice.singleCategory.show', compact('draftPurchaseOrders','invoiceID'));
+        return view('invoice.singleCategory.show', compact('draftPurchaseOrders','invoiceID', 'invoice'));
     }
 
     public function singleCategoryInvoiceGenerate(Request $request)
