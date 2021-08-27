@@ -126,7 +126,7 @@
                             @foreach($packages as $package)
                                 <td class="px-4 py-3 text-center">
                                     @if($package->charges == 'Free') {{__('portal.Free')}}
-                                    @else {{$package->charges}}
+                                    @else {{$package->charges}} {{__('portal.SAR')}}
                                     @endif
                                 </td>
                             @endforeach
@@ -371,7 +371,7 @@
                             @foreach($packages as $package)
                                 <td class="px-4 py-3 text-center">
                                     @if($package->charges == 'Free') {{__('portal.Free')}}
-                                    @else {{$package->charges}}
+                                    @else {{$package->charges}} {{__('portal.SAR')}}
                                     @endif
                                 </td>
                             @endforeach

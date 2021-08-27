@@ -522,7 +522,7 @@ class QouteController extends Controller
 
     public function singleCategoryRFQQuotationsBuyerReceived($eOrderID, $bypass_id)
     {
-        $quotes = Qoute::where('e_order_id', $eOrderID)->orderBy('created_at', 'DESC')->get();
+        $quotes = Qoute::with('orderItem')->where('e_order_id', $eOrderID)->orderBy('created_at', 'DESC')->get();
         $collection = $quotes->unique('supplier_user_id');
 
         if($bypass_id == 1)

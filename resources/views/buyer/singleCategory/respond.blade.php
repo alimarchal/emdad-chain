@@ -63,13 +63,13 @@
                                 <strong>{{__('portal.Shipping Time In Days')}}:</strong> {{ $quotes[0]->shipping_time_in_days }}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Shipment Cost')}}:</strong> {{ $quotes[0]->shipment_cost }}
+                                <strong>{{__('portal.Shipment Cost')}}:</strong> {{ $quotes[0]->shipment_cost }} {{__('portal.SAR')}}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <strong>{{__('portal.VAT')}} (%):</strong> {{ $quotes[0]->VAT }}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Total Cost')}}:</strong> {{ $quotes[0]->total_cost }}
+                                <strong>{{__('portal.Total Cost')}}:</strong> {{ $quotes[0]->total_cost }} {{__('portal.SAR')}}
                             </div>
                         </div>
 
@@ -296,13 +296,13 @@
                                 <strong>{{__('portal.Shipping Time In Days')}}:</strong> {{ $quotes[0]->shipping_time_in_days }}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Shipment Cost')}}:</strong> {{ $quotes[0]->shipment_cost }}
+                                <strong>{{__('portal.Shipment Cost')}}:</strong> {{ $quotes[0]->shipment_cost }} {{__('portal.SAR')}}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                                 <strong>{{__('portal.VAT')}} (%):</strong> {{ $quotes[0]->VAT }}
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Total Cost')}}:</strong> {{ $quotes[0]->total_cost }}
+                                <strong>{{__('portal.Total Cost')}}:</strong> {{ $quotes[0]->total_cost }} {{__('portal.SAR')}}
                             </div>
                         </div>
 

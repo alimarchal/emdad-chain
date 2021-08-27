@@ -54,10 +54,6 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium font-bold tracking-wider">
-                                        {{__('portal.Brand')}}
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium font-bold tracking-wider">
                                         {{__('portal.Description')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium font-bold tracking-wider">
@@ -72,6 +68,10 @@
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium font-bold tracking-wider">
                                         {{__('portal.Last Price')}}
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium font-bold tracking-wider">
+                                        {{__('portal.Brand')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium font-bold tracking-wider">
@@ -119,10 +119,6 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->brand }}
-                                        </td>
-
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ strip_tags($rfp->description) }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -136,9 +132,12 @@
                                             {{ $rfp->quantity }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ number_format($rfp->last_price, 2) }} <br>
+                                            {{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}} <br>
                                         </td>
 
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            {{ $rfp->brand }}
+                                        </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $rfp->delivery_period }}
@@ -262,10 +261,6 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        {{__('portal.Brand')}}
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Description')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
@@ -280,6 +275,10 @@
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Last Price')}}
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Brand')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
@@ -306,7 +305,7 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        Action
+                                        {{__('portal.Action')}}
                                     </th>
 
 
@@ -329,10 +328,6 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->brand }}
-                                        </td>
-
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ strip_tags($rfp->description) }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -346,9 +341,12 @@
                                             {{ $rfp->quantity }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ number_format($rfp->last_price, 2) }} <br>
+                                            {{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}} <br>
                                         </td>
 
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            {{ $rfp->brand }}
+                                        </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}

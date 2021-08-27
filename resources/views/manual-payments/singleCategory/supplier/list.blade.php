@@ -78,7 +78,7 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
-                                                            {{ $supplierPayment->amount_received }}
+                                                            {{ $supplierPayment->amount_received }} {{__('portal.SAR')}}
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
@@ -219,7 +219,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
-                                                        {{ $supplierPayment->amount_received }}
+                                                        {{ $supplierPayment->amount_received }} {{__('portal.SAR')}}
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">

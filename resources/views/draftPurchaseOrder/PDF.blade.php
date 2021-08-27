@@ -149,16 +149,16 @@
                     {{ $draftPurchaseOrder->uom }}
                 </td>
                 <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                    {{ $draftPurchaseOrder->unit_price }}
+                    {{ $draftPurchaseOrder->unit_price }} SAR
                 </td>
                 <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                     {{ $draftPurchaseOrder->brand }}
                 </td>
                 <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                    {{ $draftPurchaseOrder->unit_price }}
+                    {{ $draftPurchaseOrder->unit_price }} SAR
                 </td>
                 <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                    {{ number_format($draftPurchaseOrder->sub_total, 2) }}
+                    {{ number_format($draftPurchaseOrder->sub_total, 2) }} SAR
                 </td>
             </tr>
             <tr>
@@ -168,7 +168,7 @@
                     Sub Total
                 </td>
                 <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                    {{ number_format($draftPurchaseOrder->sub_total, 2) }}
+                    {{ number_format($draftPurchaseOrder->sub_total, 2) }} SAR
                 </td>
             </tr>
             <tr>
@@ -184,7 +184,7 @@
                     Shipment cost
                 </td>
                 <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                    {{ number_format($draftPurchaseOrder->shipment_cost, 2) }}
+                    {{ number_format($draftPurchaseOrder->shipment_cost, 2) }} SAR
                 </td>
             </tr>
             <tr>
@@ -192,7 +192,7 @@
                     P.O Total
                 </td>
                 <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                    {{ number_format($draftPurchaseOrder->sub_total * 0.15 + $draftPurchaseOrder->sub_total + $draftPurchaseOrder->shipment_cost, 2) }}
+                    {{ number_format($draftPurchaseOrder->sub_total * 0.15 + $draftPurchaseOrder->sub_total + $draftPurchaseOrder->shipment_cost, 2) }} SAR
                 </td>
             </tr>
         </tbody>

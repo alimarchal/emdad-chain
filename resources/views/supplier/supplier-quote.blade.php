@@ -67,9 +67,9 @@
                 <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
                     <div class="flex-1 py-5">
                         <div class="my-5 pl-5">
-                            {{-- <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo"
-                            style="height: 80px;width: 200px;" /> --}}
-                            <img src="{{ url('imp_img.jpg') }}" alt="logo" style="height: 80px;width: 200px;" />
+                             <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo"
+                            style="height: 80px;width: 200px;" />
+{{--                            <img src="{{ url('imp_img.jpg') }}" alt="logo" style="height: 80px;width: 200px;" />--}}
                         </div>
                         @php
                             $user_business_details=auth()->user()->business;
@@ -106,10 +106,6 @@
                                 <strong>{{__('portal.Buyer Name')}}:</strong> @if($eOrderItems->company_name_check == 1) {{$eOrderItems->business->business_name}} @else {{__('portal.N/A')}} @endif
                                 <br>
                                 <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-{{$eOrderItems->id}}
-                                <br>
-                                <strong>{{__('portal.User Quoted')}}:</strong> @if($eOrderItems->company_name_check == 1) {{$eOrderItems->user->name}} @else {{__('portal.N/A')}} @endif
-                                <br>
-                                <strong>{{__('portal.Category Code')}}: </strong> {{$eOrderItems->item_code}}
                                 <br>
                                 <strong>{{__('portal.Remarks')}}: </strong>{{$eOrderItems->remarks}}
                                 <br>
@@ -202,7 +198,7 @@
                                 {{$collection->quote_quantity}}
                             </td>
                             <td>
-                                {{$collection->quote_price_per_quantity}}
+                                {{$collection->quote_price_per_quantity}} {{__('portal.SAR')}}
                             </td>
                             <td>
                                 {{$collection->shipping_time_in_days}}
@@ -214,7 +210,7 @@
                                 {{$collection->VAT}}%
                             </td>
                             <td>
-                                {{$collection->shipment_cost}}
+                                {{$collection->shipment_cost}} {{__('portal.SAR')}}
                             </td>
                         </tr>
                     @endif
@@ -654,9 +650,9 @@
                 <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
                     <div class="flex-1 py-5">
                         <div class="my-5 pl-5">
-                            {{-- <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo"
-                            style="height: 80px;width: 200px;" /> --}}
-                            <img src="{{ url('imp_img.jpg') }}" alt="logo" style="height: 80px;width: 200px;" />
+                             <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo"
+                            style="height: 80px;width: 200px;" />
+{{--                            <img src="{{ url('imp_img.jpg') }}" alt="logo" style="height: 80px;width: 200px;" />--}}
                         </div>
                         @php
                             $user_business_details=auth()->user()->business;
@@ -693,10 +689,6 @@
                                 <strong>{{__('portal.Buyer Name')}}:</strong> @if($eOrderItems->company_name_check == 1) {{$eOrderItems->business->business_name}} @else {{__('portal.N/A')}} @endif
                                 <br>
                                 <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-{{$eOrderItems->id}}
-                                <br>
-                                <strong>{{__('portal.User Quoted')}}:</strong> @if($eOrderItems->company_name_check == 1) {{$eOrderItems->user->name}} @else {{__('portal.N/A')}} @endif
-                                <br>
-                                <strong>{{__('portal.Category Code')}}: </strong> {{$eOrderItems->item_code}}
                                 <br>
                                 <strong>{{__('portal.Remarks')}}: </strong>{{$eOrderItems->remarks}}
                                 <br>
@@ -789,7 +781,7 @@
                                 {{$collection->quote_quantity}}
                             </td>
                             <td>
-                                {{$collection->quote_price_per_quantity}}
+                                {{$collection->quote_price_per_quantity}} {{__('portal.SAR')}}
                             </td>
                             <td>
                                 {{$collection->shipping_time_in_days}}
@@ -801,7 +793,7 @@
                                 {{$collection->VAT}}%
                             </td>
                             <td>
-                                {{$collection->shipment_cost}}
+                                {{$collection->shipment_cost}} {{__('portal.SAR')}}
                             </td>
                         </tr>
                     @endif

@@ -52,12 +52,12 @@
                                     {{--<th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Unit')}}
                                     </th>--}}
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{--<th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Size')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Quantity')}}
-                                    </th>
+                                    </th>--}}
 
                                     {{--<th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Last Price')}}
@@ -72,10 +72,8 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        {{__('portal.Override')}}
+                                        {{__('portal.Action')}}
                                     </th>
-
-
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -100,12 +98,12 @@
                                             {{ $rfp->unit_of_measurement }}
                                         </td>--}}
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        {{--<td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $rfp->size }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $rfp->quantity }}
-                                        </td>
+                                        </td>--}}
                                         {{--<td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ number_format($rfp->last_price, 2) }} <br>
                                         </td>--}}
@@ -244,12 +242,12 @@
                                     {{--<th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Unit')}}
                                     </th>--}}
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{--<th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Size')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Quantity')}}
-                                    </th>
+                                    </th>--}}
 
                                     {{--<th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Last Price')}}
@@ -264,7 +262,7 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        {{__('portal.Override')}}
+                                        {{__('portal.Action')}}
                                     </th>
                                 </tr>
                             </thead>
@@ -290,12 +288,12 @@
                                                 {{ $rfp->unit_of_measurement }}
                                             </td>--}}
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            {{--<td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $rfp->size }}
                                             </td>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $rfp->quantity }}
-                                            </td>
+                                            </td>--}}
                                             {{--<td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ number_format($rfp->last_price, 2) }} <br>
                                             </td>--}}
