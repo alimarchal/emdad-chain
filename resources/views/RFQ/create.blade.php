@@ -4,6 +4,39 @@
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script src="{{ url('select2/src/select2totree.js') }}"></script>
+
+    <style>
+        #datepicker {
+            width: 100%;
+            padding: 10px;
+            cursor: default;
+            /*text-transform: uppercase;*/
+            font-size: 13px;
+            background: #FFFFFF;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            border: solid 1px #d2d6dc;
+            box-shadow: none;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+{{--    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true,
+                minDate: 0,
+                clear: true,
+            });
+        } );
+    </script>
+
 @endsection
 
 @if (auth()->user()->rtl == 0)
@@ -190,6 +223,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
+{{--                                                        {{\Carbon\Carbon::parse($rfp->delivery_period)->format('d-m-y')}}--}}
                                                         @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}
                                                         @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
                                                         @elseif($rfp->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
@@ -451,6 +485,9 @@
                                                     d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
                                                     fill="#000000" fill-rule="nonzero"/>
                                             </svg>
+
+{{--                                            <input type="text" id="datepicker" class="block mt-1 w-full" name="delivery_period" value="{{old('delivery_period')}}" placeholder="{{__('portal.Select Delivery Period')}}" readonly>--}}
+
                                             <select
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 name="delivery_period" id="delivery_period" required>

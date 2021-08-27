@@ -1,19 +1,3 @@
-<style>
-    #datepicker {
-        width: 100%;
-        padding: 10px;
-        cursor: default;
-        /*text-transform: uppercase;*/
-        font-size: 13px;
-        background: #FFFFFF;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
-        border: solid 1px #d2d6dc;
-        box-shadow: none;
-    }
-</style>
-
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
@@ -215,16 +199,16 @@
 </x-guest-layout>
 
 <script>
-    $(function () {
-        $("#datepicker").datepicker({
-            dateFormat: 'mm/dd/yy',
-            changeMonth: true,
-            changeYear: true,
-            yearRange: '-100y:c+nn',
-            // maxDate: '-1d'
-            clear: true,
-        });
-    });
+    // $(function () {
+    //     $("#datepicker").datepicker({
+    //         dateFormat: 'mm/dd/yy',
+    //         changeMonth: true,
+    //         changeYear: true,
+    //         yearRange: '-100y:c+nn',
+    //         // maxDate: '-1d'
+    //         clear: true,
+    //     });
+    // });
 
     $('#referred_no').on('keyup', function () {
         $value = $(this).val();
