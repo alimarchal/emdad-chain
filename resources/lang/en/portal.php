@@ -746,5 +746,6 @@ return [
     'Category Name Arabic' => 'Category Name Arabic',
     'Category Name Urdu' => 'Category Name Urdu',
     'show all Categories' => 'show all Categories',
+    'B.Type' => 'B.Type',
 
 ];

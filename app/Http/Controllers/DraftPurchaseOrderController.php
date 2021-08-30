@@ -15,11 +15,13 @@ use App\Models\Qoute;
 use App\Models\User;
 //use Barryvdh\DomPDF\PDF as PDF;
 use App\Notifications\DpoApproved;
+use App\Notifications\PurchaseOrderGenerated;
 use App\Notifications\QuoteAccepted;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use League\CommonMark\Extension\SmartPunct\Quote;
 
 class DraftPurchaseOrderController extends Controller
@@ -272,6 +274,17 @@ class DraftPurchaseOrderController extends Controller
 
         User::find($qoute->supplier_user_id)->notify(new QuoteAccepted($qoute));
         User::find(auth()->user()->id)->notify(new DpoApproved($draftPurchaseOrder));
+
+        /* Notifying business@emdad-chain.com for Purchase order created */
+        $userGenerated =  User::find(auth()->user()->id);
+        Notification::route('mail', 'business@emdad-chain.com')
+            ->notify(new PurchaseOrderGenerated($userGenerated));
+
+        /* Sending message to business email ID */
+        User::send_sms('+966 58 138 2822', 'Purchase order generated');
+        User::send_sms('+966 55 539 0920', 'Purchase order generated');
+        User::send_sms('+966 59 338 8833', 'Purchase order generated');
+
         session()->flash('message', 'DPO Accepted.');
 //        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
         if ($request->payment_method == 'Cash')
@@ -648,6 +661,16 @@ class DraftPurchaseOrderController extends Controller
 
         User::find($qoute->supplier_user_id)->notify(new QuoteAccepted($qoute));
         User::find(auth()->user()->id)->notify(new DpoApproved($draftPurchaseOrders[0]));
+
+        /* Notifying business@emdad-chain.com for Purchase order created */
+        $userGenerated =  User::find(auth()->user()->id);
+        Notification::route('mail', 'business@emdad-chain.com')
+            ->notify(new PurchaseOrderGenerated($userGenerated));
+
+        /* Sending message to business email ID */
+        User::send_sms('+966 58 138 2822', 'Purchase order generated');
+        User::send_sms('+966 55 539 0920', 'Purchase order generated');
+        User::send_sms('+966 59 338 8833', 'Purchase order generated');
 
         session()->flash('message', 'DPO Accepted and PO generated.');
         if ($draftPurchaseOrders[0]->payment_term == 'Cash')

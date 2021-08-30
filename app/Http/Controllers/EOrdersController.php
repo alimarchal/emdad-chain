@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\BusinessPackage;
+use App\Models\Category;
 use App\Models\ECart;
 use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Item;
+use App\Models\SmsMessages;
 use App\Models\User;
 use App\Notifications\RFQBusinessEmail;
+use App\Notifications\RFQCreatedByUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -56,6 +59,14 @@ class EOrdersController extends Controller
                         $eOrderItem->quotation_time = Carbon::now()->addDays(3);
                         $eOrderItem->rfq_type = $item->rfq_type;
                         $eOrderItem->save();
+
+                        $categoryName = Category::where('id', $eOrderItem->item_code)->first();
+                        $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+
+                        /* Sending message to business email ID */
+                        User::send_sms('+966581382822', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
+                        User::send_sms('+966555390920', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
+                        User::send_sms('+966593388833', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
                     }
                     foreach ($eCartItems as $item) {
                         $item->delete();
@@ -69,7 +80,15 @@ class EOrdersController extends Controller
                 User::send_sms('+966593388833',$message);
                 $user->notify(new \App\Notifications\RfqCreated());
 
-//                Notification::send($users, new RFQBusinessEmail($invoice));
+                /* Notifying business@emdad-chain.com for RFQ created by user */
+                Notification::route('mail', 'business@emdad-chain.com')
+                            ->notify(new RFQCreatedByUser($user));
+
+                /* Sending message to business email ID */
+                /*User::send_sms('+966 58 138 2822', 'Requisition generated');
+                User::send_sms('+966 55 539 0920', 'Requisition generated');
+                User::send_sms('+966 59 338 8833', 'Requisition generated');*/
+
                 session()->flash('message', 'RFQ placed successfully');
                 return redirect()->route('QoutationsBuyerReceived');
             }
@@ -107,6 +126,14 @@ class EOrdersController extends Controller
                         $eOrderItem->quotation_time = Carbon::now()->addDays(3);
                         $eOrderItem->rfq_type = $item->rfq_type;
                         $eOrderItem->save();
+
+                        $categoryName = Category::where('id', $eOrderItem->item_code)->first();
+                        $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+
+                        /* Sending message to business email ID */
+                        User::send_sms('+966 58 138 2822', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
+                        User::send_sms('+966 55 539 0920', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
+                        User::send_sms('+966 59 338 8833', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
                     }
                     foreach ($eCartItems as $item) {
                         $item->delete();
@@ -115,6 +142,16 @@ class EOrdersController extends Controller
 
                 $user = User::find(auth()->user()->id);
                 $user->notify(new \App\Notifications\RfqCreated());
+
+                /* Notifying business@emdad-chain.com for RFQ created by user */
+                Notification::route('mail', 'business@emdad-chain.com')
+                            ->notify(new RFQCreatedByUser($user));
+
+                /* Sending message to business email ID */
+                /*User::send_sms('+966 58 138 2822', 'Requisition generated');
+                User::send_sms('+966 55 539 0920', 'Requisition generated');
+                User::send_sms('+966 59 338 8833', 'Requisition generated');*/
+
                 session()->flash('message', 'RFQ placed successfully');
                 return redirect()->route('QoutationsBuyerReceived');
             }
@@ -148,6 +185,14 @@ class EOrdersController extends Controller
                     $eOrderItem->quotation_time = Carbon::now()->addDays(3);
                     $eOrderItem->rfq_type = $item->rfq_type;
                     $eOrderItem->save();
+
+                    $categoryName = Category::where('id', $eOrderItem->item_code)->first();
+                    $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+
+                    /* Sending message to business email ID */
+                    User::send_sms('+966 58 138 2822', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
+                    User::send_sms('+966 55 539 0920', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
+                    User::send_sms('+966 59 338 8833', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
                 }
                 foreach ($eCartItems as $item) {
                     $item->delete();
@@ -156,6 +201,15 @@ class EOrdersController extends Controller
 
             $user = User::find(auth()->user()->id);
             $user->notify(new \App\Notifications\RfqCreated());
+
+            /* Notifying business@emdad-chain.com for RFQ created by user */
+            Notification::route('mail', 'business@emdad-chain.com')
+                            ->notify(new RFQCreatedByUser($user));
+
+            /*User::send_sms('+966 58 138 2822', 'Requisition generated');
+                User::send_sms('+966 55 539 0920', 'Requisition generated');
+                User::send_sms('+966 59 338 8833', 'Requisition generated');*/
+
             session()->flash('message', 'RFQ placed successfully');
             return redirect()->route('QoutationsBuyerReceived');
         }
@@ -208,6 +262,14 @@ class EOrdersController extends Controller
                         $eOrderItem->quotation_time = Carbon::now()->addDays(3);
                         $eOrderItem->rfq_type = $item->rfq_type;
                         $eOrderItem->save();
+
+                        $categoryName = Category::where('id', $eOrderItem->item_code)->first();
+                        $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+
+                        /* Sending message to business email ID */
+                        User::send_sms('+966 58 138 2822', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
+                        User::send_sms('+966 55 539 0920', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
+                        User::send_sms('+966 59 338 8833', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
                     }
                     foreach ($eCartItems as $item) {
                         $item->delete();
@@ -216,6 +278,16 @@ class EOrdersController extends Controller
 
                 $user = User::find(auth()->user()->id);
                 $user->notify(new \App\Notifications\RfqCreated());
+
+                /* Notifying business@emdad-chain.com for RFQ created by user */
+                Notification::route('mail', 'business@emdad-chain.com')
+                            ->notify(new RFQCreatedByUser($user));
+
+                /* Sending message to business email ID */
+                /*User::send_sms('+966 58 138 2822', 'Requisition generated');
+                User::send_sms('+966 55 539 0920', 'Requisition generated');
+                User::send_sms('+966 59 338 8833', 'Requisition generated');*/
+
                 session()->flash('message', 'RFQ placed successfully');
                 return redirect()->route('singleCategoryBuyerRFQs');
             }
@@ -253,6 +325,15 @@ class EOrdersController extends Controller
                         $eOrderItem->quotation_time = Carbon::now()->addDays(3);
                         $eOrderItem->rfq_type = $item->rfq_type;
                         $eOrderItem->save();
+
+                        $categoryName = Category::where('id', $eOrderItem->item_code)->first();
+                        $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+
+                        /* Sending message to business email ID */
+                        User::send_sms('+966 58 138 2822', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
+                        User::send_sms('+966 55 539 0920', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
+                        User::send_sms('+966 59 338 8833', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
+
                     }
                     foreach ($eCartItems as $item) {
                         $item->delete();
@@ -261,6 +342,16 @@ class EOrdersController extends Controller
 
                 $user = User::find(auth()->user()->id);
                 $user->notify(new \App\Notifications\RfqCreated());
+
+                /* Notifying business@emdad-chain.com for RFQ created by user */
+                Notification::route('mail', 'business@emdad-chain.com')
+                            ->notify(new RFQCreatedByUser($user));
+
+                /* Sending message to business email ID */
+                /*User::send_sms('+966 58 138 2822', 'Requisition generated');
+                User::send_sms('+966 55 539 0920', 'Requisition generated');
+                User::send_sms('+966 59 338 8833', 'Requisition generated');*/
+
                 session()->flash('message', 'RFQ placed successfully');
                 return redirect()->route('singleCategoryBuyerRFQs');
             }
@@ -294,6 +385,14 @@ class EOrdersController extends Controller
                     $eOrderItem->quotation_time = Carbon::now()->addDays(3);
                     $eOrderItem->rfq_type = $item->rfq_type;
                     $eOrderItem->save();
+
+                    $categoryName = Category::where('id', $eOrderItem->item_code)->first();
+                    $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+
+                    /* Sending message to business email ID */
+                    User::send_sms('+966 58 138 2822', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
+                    User::send_sms('+966 55 539 0920', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
+                    User::send_sms('+966 59 338 8833', 'Requisition generated.'. ' ' . 'Category Name: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand Name: ' . $eOrderItem->brand . ' , ' . 'Description: ' . $eOrderItem->description . ' , ' . 'Unit: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Quantity: ' . $eOrderItem->quantity . ' , ' . 'Last Price: ' . $eOrderItem->last_price . ' , '  . 'Delivery Period: ' . $eOrderItem->delivery_period . ' , ' . 'Payment Mode: ' . $eOrderItem->payment_mode . ' , ' . 'Remarks: ' . $eOrderItem->remarks);
                 }
                 foreach ($eCartItems as $item) {
                     $item->delete();
@@ -302,6 +401,16 @@ class EOrdersController extends Controller
 
             $user = User::find(auth()->user()->id);
             $user->notify(new \App\Notifications\RfqCreated());
+
+            /* Notifying business@emdad-chain.com for RFQ created by user */
+            Notification::route('mail', 'business@emdad-chain.com')
+                        ->notify(new RFQCreatedByUser($user));
+
+            /* Sending message to business email ID */
+            /*User::send_sms('+966 58 138 2822', 'Requisition generated');
+            User::send_sms('+966 55 539 0920', 'Requisition generated');
+            User::send_sms('+966 59 338 8833', 'Requisition generated');*/
+
             session()->flash('message', 'RFQ placed successfully');
             return redirect()->route('singleCategoryBuyerRFQs');
         }

@@ -746,5 +746,6 @@ return [
     'Category Name Arabic' => 'اسم التصنيف بالعربي',
     'Category Name Urdu' => 'قسم کا نام (اردو)',
     'show all Categories' => 'استعراض جميع الفئات',
+    'B.Type' => 'B.Type',
 
 ];
