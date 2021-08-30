@@ -78,10 +78,10 @@ class ECartController extends Controller
         $request->merge(['item_name' => Category::where('id', $request->item_code)->first()->name]);
         $request->merge(['rfq_type' => 0]);
         $ecart = ECart::create($request->all());
-        $message = "New RFQ has been created by User ID: " . $ecart->user_id;
-        User::send_sms('+966552840506',$message);
-        User::send_sms('+966555390920',$message);
-        User::send_sms('+966593388833',$message);
+//        $message = "New RFQ has been created by User ID: " . $ecart->user_id;
+//        User::send_sms('+966552840506',$message);
+//        User::send_sms('+966555390920',$message);
+//        User::send_sms('+966593388833',$message);
         session()->flash('message', 'RFQ successfully created.');
 
         return redirect()->route('create_single_rfq');
