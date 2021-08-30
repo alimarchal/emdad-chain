@@ -8,9 +8,11 @@ use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Item;
 use App\Models\User;
+use App\Notifications\RFQBusinessEmail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 
 class EOrdersController extends Controller
 {
@@ -61,7 +63,13 @@ class EOrdersController extends Controller
                 });
 
                 $user = User::find(auth()->user()->id);
+                $message = "New RFQ has been created by " . $user->name . "User ID: " . $user->id;
+                User::send_sms('+966552840506',$message);
+                User::send_sms('+966555390920',$message);
+                User::send_sms('+966593388833',$message);
                 $user->notify(new \App\Notifications\RfqCreated());
+
+//                Notification::send($users, new RFQBusinessEmail($invoice));
                 session()->flash('message', 'RFQ placed successfully');
                 return redirect()->route('QoutationsBuyerReceived');
             }
