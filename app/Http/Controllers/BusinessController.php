@@ -114,6 +114,10 @@ class BusinessController extends Controller
                     $status = $request->status;
                     $businesses = Business::where('status', 3)->orderBy('id','desc')->paginate(10);
                     return view('business.itAdmin.business', compact('businesses', 'status'));
+                } elseif ($request->status == 2) {
+                    $users = User::where('usertype', 'CEO')->where('business_id', null)->orderBy('id','desc')->paginate(10);
+
+                    return view('business.itAdmin.business', compact('users'));
                 } elseif ($request->status == 1) {
                     $status = $request->status;
                     $businesses = Business::where('status', 1)->orderBy('id','desc')->paginate(10);

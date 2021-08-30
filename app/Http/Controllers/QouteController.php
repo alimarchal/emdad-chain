@@ -7,9 +7,11 @@ use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Qoute;
 use App\Models\User;
+use App\Notifications\QuotationSend;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use League\CommonMark\Extension\SmartPunct\Quote;
 
 class QouteController extends Controller
@@ -42,6 +44,12 @@ class QouteController extends Controller
         $buyer_user_id = $quote->RFQ->user_id;
         // send mail to buyer also for receiving email
         $buyer_user = User::find($buyer_user_id)->notify(new \App\Notifications\QuoteReceivedBuyer());
+
+        /* Notifying business@emdad-chain.com for Purchase order created */
+        $userQuoted =  User::find(auth()->user()->id);
+        Notification::route('mail', 'business@emdad-chain.com')
+            ->notify(new QuotationSend($userQuoted));
+
         session()->flash('message', 'You have successfully qouted.');
         if (isset($request->single_rfq))
         {
