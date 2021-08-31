@@ -16,6 +16,7 @@ class DeliveryCommentController extends Controller
      */
     public function index(Request $request)
     {
+
         $token = env('API_TOKEN');
         if ($token == "RRNirxFh4j9Ftd") {
             if ($request->has('status')) {
@@ -70,7 +71,6 @@ class DeliveryCommentController extends Controller
         if ($token == $request->code) {
 
             $collection = null;
-
             if ($request->has('delivery_id') && $request->has('comment_type')) {
                 $ct = str_replace('[', '', $request->comment_type);
                 $ct = str_replace(']', '', $ct);
