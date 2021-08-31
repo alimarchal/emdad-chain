@@ -156,7 +156,7 @@
                                                                 {{__('portal.Emdad verification pending')}}
                                                             @elseif($dn->invoice_status == '2')
                                                                 {{__('portal.Emdad rejected manual payment')}}
-                                                            @elseif($dn->invoice_status == '3' && $dn->bankPayment->supplier_payment_status == 3)
+                                                                @elseif($dn->invoice_status == '3' && isset($dn->bankPayment->supplier_payment_status) && $dn->bankPayment->supplier_payment_status == 3)
                                                                 {{__('portal.Payment received by supplier')}}
                                                             @elseif($dn->invoice_status == '3')
                                                                 {{__('portal.Payment in Transit, on hold, with Emdad')}}
@@ -170,7 +170,7 @@
                                                                 {{__('portal.Emdad verification pending')}}
                                                             @elseif($dn->invoice_status == '2')
                                                                 {{__('portal.Manual payment rejected')}}
-                                                            @elseif($dn->invoice_status == '3' && $dn->bankPayment->supplier_payment_status == 3)
+                                                                @elseif($dn->invoice_status == '3' && isset($dn->bankPayment->supplier_payment_status) && $dn->bankPayment->supplier_payment_status == 3)
                                                                 {{__('portal.Payment received')}}
                                                             @elseif($dn->invoice_status == '3')
                                                                 {{__('portal.Payment in Transit, Received by Emdad')}}
@@ -371,7 +371,7 @@
                                                                 {{__('portal.Emdad verification pending')}}
                                                             @elseif($dn->invoice_status == '2')
                                                                 {{__('portal.Emdad rejected manual payment')}}
-                                                            @elseif($dn->invoice_status == '3' && $dn->bankPayment->supplier_payment_status == 3)
+                                                            @elseif($dn->invoice_status == '3' && isset($dn->bankPayment->supplier_payment_status) && $dn->bankPayment->supplier_payment_status == 3)
                                                                 {{__('portal.Payment received by supplier')}}
                                                             @elseif($dn->invoice_status == '3')
                                                                 {{__('portal.Payment in Transit, on hold, with Emdad')}}
@@ -385,7 +385,7 @@
                                                                 {{__('portal.Emdad verification pending')}}
                                                             @elseif($dn->invoice_status == '2')
                                                                 {{__('portal.Manual payment rejected')}}
-                                                            @elseif($dn->invoice_status == '3' && $dn->bankPayment->supplier_payment_status == 3)
+                                                            @elseif($dn->invoice_status == '3' && isset($dn->bankPayment->supplier_payment_status) && $dn->bankPayment->supplier_payment_status == 3)
                                                                 {{__('portal.Payment received')}}
                                                             @elseif($dn->invoice_status == '3')
                                                                 {{__('portal.Payment in Transit, Received by Emdad')}}

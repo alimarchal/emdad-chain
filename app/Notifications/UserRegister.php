@@ -2,24 +2,28 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class QuotationSend extends Notification
+class UserRegister extends Notification
 {
     use Queueable;
 
-    private $quotationSendByUser;
     /**
      * Create a new notification instance.
      *
      * @return void
+     *
      */
-    public function __construct($quotationSendByUser)
+
+    private $user;
+
+    public function __construct($user_id)
     {
-        $this->quotationSendByUser = $quotationSendByUser;
+        $this->user = User::find($user_id);
     }
 
     /**
@@ -41,9 +45,7 @@ class QuotationSend extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->greeting('Hi!')
-                    ->line('Main domain - '. $this->quotationSendByUser->business->business_name .' responded to a requisition');
+        return (new MailMessage)->markdown('mail.user.userRegister', ['user' => $this->user]);
     }
 
     /**

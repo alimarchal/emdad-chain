@@ -145,7 +145,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
                                     <label class="form-check-label" for="flexCheckDefault">
-                                        {{__('portal.Please Check to acknowledge')}}
+                                        {{__('portal.Please read the note and check if you agree to proceed')}}
                                     </label>
                                 </div>
                             </div>
@@ -393,7 +393,7 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
                                     <label class="form-check-label" for="flexCheckDefault">
-                                        {{__('portal.Please Check to acknowledge')}}
+                                        {{__('portal.Please read the note and check if you agree to proceed')}}
                                     </label>
                                 </div>
                             </div>

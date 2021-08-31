@@ -83,7 +83,7 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
-                                                            {{ number_format($payment->amount_received,2,'.') }}
+                                                            {{ number_format($payment->amount_received,2) }}
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
@@ -95,7 +95,7 @@
                                                                $total_vat = ($total_amount * ($dpo->vat / 100));
                                                                $sum = ($total_amount + $total_vat) - $emdadCharges ;
                                                             @endphp
-                                                            {{ number_format($sum,2,'.') }}
+                                                            {{ number_format($sum,2) }}
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">

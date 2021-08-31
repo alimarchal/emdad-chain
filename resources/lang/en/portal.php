@@ -246,7 +246,7 @@ return [
     'We acknowledge that' => 'We acknowledge that',
     'agrees to deal with' => 'agrees to deal with',
     'Emdad has no responsibility with the kind of delivery and the source of finance for this delivery.' => 'Emdad is not responsible for the kind of delivery or the financial source for this delivery.',
-    'Please Check to acknowledge' => 'Please Check to acknowledge',
+    'Please read the note and check if you agree to proceed' => 'Please read the note and check if you agree to proceed',
     'Approve' => 'Approve',
     'Cancel DPO' => 'Cancel DPO',
     'Approve DPO' => 'Approve DPO',
