@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Business;
+use App\Models\Category;
 use App\Models\CommissionPercentage;
 use App\Models\DeliveryNote;
 use App\Models\DraftPurchaseOrder;
@@ -280,10 +282,16 @@ class DraftPurchaseOrderController extends Controller
         Notification::route('mail', 'business@emdad-chain.com')
             ->notify(new PurchaseOrderGenerated($userGenerated));
 
-        /* Sending message to business email ID */
-        User::send_sms('+966 58 138 2822', 'Purchase order generated');
-        User::send_sms('+966 55 539 0920', 'Purchase order generated');
-        User::send_sms('+966 59 338 8833', 'Purchase order generated');
+        /* Sending SMS to business email ID */
+        $from = Business::where('id', $qoute->business_id)->pluck('business_name')->first();
+        $to = Business::where('id', $qoute->supplier_business_id)->pluck('business_name')->first();
+
+        $categoryName = Category::where('id', $draftPurchaseOrder->item_code)->first();
+        $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+
+        User::send_sms('+966581382822', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrder->payment_term);
+        User::send_sms('+966555390920', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrder->payment_term);
+        User::send_sms('+966593388833', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrder->payment_term);
 
         session()->flash('message', 'DPO Accepted.');
 //        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
@@ -667,10 +675,16 @@ class DraftPurchaseOrderController extends Controller
         Notification::route('mail', 'business@emdad-chain.com')
             ->notify(new PurchaseOrderGenerated($userGenerated));
 
-        /* Sending message to business email ID */
-        User::send_sms('+966 58 138 2822', 'Purchase order generated');
-        User::send_sms('+966 55 539 0920', 'Purchase order generated');
-        User::send_sms('+966 59 338 8833', 'Purchase order generated');
+        /* Sending SMS to business email ID */
+        $from = Business::where('id', $qoute->business_id)->pluck('business_name')->first();
+        $to = Business::where('id', $qoute->supplier_business_id)->pluck('business_name')->first();
+
+        $categoryName = Category::where('id', $draftPurchaseOrders[0]->item_code)->first();
+        $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+
+        User::send_sms('+966581382822', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrders[0]->payment_term);
+        User::send_sms('+966555390920', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrders[0]->payment_term);
+        User::send_sms('+966593388833', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrders[0]->payment_term);
 
         session()->flash('message', 'DPO Accepted and PO generated.');
         if ($draftPurchaseOrders[0]->payment_term == 'Cash')

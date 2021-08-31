@@ -246,7 +246,7 @@ return [
     'We acknowledge that' => 'نقرّ بأن',
     'agrees to deal with' => 'موافق على التعامل مع',
     'Emdad has no responsibility with the kind of delivery and the source of finance for this delivery.' => 'وعليه فإن إمداد غير مسؤولة عن نوع التوصيل أو المصدر المموّل لعملية التوصيل.',
-    'Please Check to acknowledge' => 'يرجى الضغط للإقرار',
+    'Please read the note and check if you agree to proceed' => 'يرجى قراءة الملاحظة والتأكيد في حال الموافقة للمتابعة',
     'Approve' => 'تأكيد',
     'Cancel DPO' => 'إلغاء مسودّة الشراء',
     'Approve DPO' => 'تأكيد عملية الشراء',

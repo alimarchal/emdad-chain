@@ -7,11 +7,12 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class QuotationSend extends Notification
+class QuotationSent extends Notification
 {
     use Queueable;
 
     private $quotationSendByUser;
+
     /**
      * Create a new notification instance.
      *

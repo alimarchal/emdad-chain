@@ -7,7 +7,7 @@ use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Qoute;
 use App\Models\User;
-use App\Notifications\QuotationSend;
+use App\Notifications\QuotationSent;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,14 +29,7 @@ class QouteController extends Controller
         $request->merge(['total_cost' => $sum]);
 
         /* Setting RFQ Type */
-        if (isset($request->single_rfq))
-        {
-            $request->merge(['rfq_type' => 0]);
-        }
-        else
-        {
-            $request->merge(['rfq_type' => 1]);
-        }
+        $request->merge(['rfq_type' => 1]);
 
         $quote = Qoute::create($request->all());
         // sending mail for confirmation
@@ -48,13 +41,10 @@ class QouteController extends Controller
         /* Notifying business@emdad-chain.com for Purchase order created */
         $userQuoted =  User::find(auth()->user()->id);
         Notification::route('mail', 'business@emdad-chain.com')
-            ->notify(new QuotationSend($userQuoted));
+            ->notify(new QuotationSent($userQuoted));
 
-        session()->flash('message', 'You have successfully qouted.');
-        if (isset($request->single_rfq))
-        {
-            return redirect()->route('singleCategoryQuotedRFQQuoted');
-        }
+        session()->flash('message', 'You have successfully quoted.');
+
         return redirect()->route('QoutedRFQQouted');
     }
 
@@ -145,6 +135,12 @@ class QouteController extends Controller
         $buyer_user_id = $quote->RFQ->user_id;
         // send mail to buyer also for receiving email
         User::find($buyer_user_id)->notify(new \App\Notifications\QuoteReceivedBuyer());
+
+        /* Notifying business@emdad-chain.com for Purchase order created */
+        $userQuoted =  User::find(auth()->user()->id);
+        Notification::route('mail', 'business@emdad-chain.com')
+            ->notify(new QuotationSent($userQuoted));
+
         session()->flash('message', 'You have successfully quoted.');
 
         return redirect()->route('singleCategoryQuotedRFQQuoted');
