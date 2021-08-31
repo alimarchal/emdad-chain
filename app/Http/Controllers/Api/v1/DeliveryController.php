@@ -11,7 +11,9 @@ use App\Models\Shipment;
 use App\Models\ShipmentItem;
 use App\Models\User;
 use App\Models\Vehicle;
+use App\Notifications\DeliveryCompleted;
 use App\Notifications\OTP;
+use App\Notifications\UserRegister;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
@@ -206,6 +208,9 @@ class DeliveryController extends Controller
                 $user->save();
                 $shipment->status = 1;
                 $shipment->save();
+
+//                Notification::route('mail', 'business@emdad-chain.com')
+//                    ->notify(new DeliveryCompleted($user));
                 return response()->json(['message' => 'Updated...'], 200);
             } else {
                 return response()->json(['message' => 'Error some model not found please check your uid, sid, vid'], 404);
