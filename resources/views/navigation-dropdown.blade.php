@@ -119,17 +119,26 @@
                             foreach ($eOrderItems as $eOrderItem)
                             {
                                 $eOrderPresent[] = \App\Models\EOrders::where(['id' => $eOrderItem->e_order_id])->first();
+                                /*$eOrderPresent[] = \App\Models\EOrders::where(['id' => $eOrderItem->e_order_id, 'rfq_type' => 1])->first();*/
                                 $eOrders = $eOrderPresent;
                             }
-                            if (count($eOrders) > 0)
+                            /*if (count($eOrders) > 0)
                             {
                                 $quote = \App\Models\Qoute::where(['e_order_id' => $eOrders[0]->id, 'supplier_business_id' => auth()->user()->business_id])->first();
+                            }*/
+                            $quotes = array();
+                            if (count($eOrders) > 0)
+                            {
+                                foreach($eOrders as $eOrder)
+                                    {
+                                        $quotes = \App\Models\EOrders::where(['id' => $eOrder->id])->withCount('quotes')->get();
+                                    }
                             }
                         @endphp
                         <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span @if($rfqCount > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                      @else class="text-red-600 hover:underline" @endif>{{$rfqCount}}</span></a></span>
-                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against single category')}}">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0 && !empty($quote)) class="text-green-600 hover:underline"
-                                                                                                                                                                                                         @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && !empty($quote)) {{count(array_unique($eOrders))}} @else 0 @endif</span></a></span>
+                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against single category')}}">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0 && count($quotes)> 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                         @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && count($quotes)> 0) {{count($quotes)}}  @else 0 @endif</span></a></span>
                     @endif
 
                     @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
@@ -381,9 +390,9 @@
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('viewRFQs') }}">
                         {{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp; {{ $rfqCount }}
                     </a>
-                    <a @if(count($eOrders) > 0 && !isset($quote)) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                    <a @if(count($eOrders) > 0 && count($quotes)> 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryRFQs') }}">
-                        {{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp; @if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else 0 @endif
+                        {{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp; @if(count($eOrders) > 0 && count($quotes)> 0) {{count($quotes)}} @else 0 @endif
                     </a>
                 @endif
 
@@ -681,15 +690,23 @@
                                 $eOrderPresent[] = \App\Models\EOrders::where(['id' => $eOrderItem->e_order_id])->first();
                                 $eOrders = $eOrderPresent;
                             }
-                            if (count($eOrders) > 0)
+                            /*if (count($eOrders) > 0)
                             {
                                 $quote = \App\Models\Qoute::where(['e_order_id' => $eOrders[0]->id, 'supplier_business_id' => auth()->user()->business_id])->first();
+                            }*/
+                            $quotes = array();
+                            if (count($eOrders) > 0)
+                            {
+                                foreach($eOrders as $eOrder)
+                                    {
+                                        $quotes = \App\Models\EOrders::where(['id' => $eOrder->id])->withCount('quotes')->get();
+                                    }
                             }
                         @endphp
                         <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp;<a href="{{route('viewRFQs')}}"><span style="padding-left: 7px;" @if($rfqCount > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                   @else class="text-red-600 hover:underline" @endif>{{$rfqCount}}</span></a></span>
-                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against single category')}}">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}"><span style="padding-left: 7px;" @if(count($eOrders) > 0 && !empty($quote)) class="text-green-600 hover:underline"
-                                                                                                                                                                                                    @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && !empty($quote)) {{count(array_unique($eOrders))}} @else 0 @endif</span></a></span>
+                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against single category')}}">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}"><span style="padding-left: 7px;" @if(count($eOrders) > 0 && count($quotes)> 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                    @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && count($quotes)> 0) {{count($quotes)}} @else 0 @endif</span></a></span>
                     @endif
 
                     @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
@@ -954,9 +971,9 @@
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('viewRFQs') }}">
                         {{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp; {{ $rfqCount }}
                     </a>
-                    <a @if(count($eOrders) > 0 && !isset($quote)) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                    <a @if(count($eOrders) > 0 && count($quotes)> 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryRFQs') }}">
-                        {{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp; @if(count($eOrders) > 0 && !isset($quote)) {{count(array_unique($eOrders))}} @else 0 @endif
+                        {{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp; @if(count($eOrders) > 0 && count($quotes)> 0) {{count($quotes)}} @else 0 @endif
                     </a>
                 @endif
 

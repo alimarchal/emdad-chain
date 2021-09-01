@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Business;
+use App\Models\Category;
 use App\Models\DraftPurchaseOrder;
 use App\Models\EOrderItems;
 use App\Models\EOrders;
@@ -33,15 +35,26 @@ class QouteController extends Controller
 
         $quote = Qoute::create($request->all());
         // sending mail for confirmation
-        $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
+        User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
         $buyer_user_id = $quote->RFQ->user_id;
         // send mail to buyer also for receiving email
-        $buyer_user = User::find($buyer_user_id)->notify(new \App\Notifications\QuoteReceivedBuyer());
+        User::find($buyer_user_id)->notify(new \App\Notifications\QuoteReceivedBuyer());
+
+        /* Sending SMS to business email ID */
+        $from = Business::where('id', $quote->business_id)->pluck('business_name')->first();
+        $to = Business::where('id', $quote->supplier_business_id)->pluck('business_name')->first();
+
+        $categoryName = Category::where('id', $quote->orderItem->item_code)->first();
+        $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+
+        User::send_sms('+966581382822', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
+        User::send_sms('+966555390920', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
+        User::send_sms('+966593388833', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
 
         /* Notifying business@emdad-chain.com for Purchase order created */
         $userQuoted =  User::find(auth()->user()->id);
         Notification::route('mail', 'business@emdad-chain.com')
-            ->notify(new QuotationSent($userQuoted));
+            ->notify(new QuotationSent($userQuoted, $quote));
 
         session()->flash('message', 'You have successfully quoted.');
 
@@ -136,10 +149,22 @@ class QouteController extends Controller
         // send mail to buyer also for receiving email
         User::find($buyer_user_id)->notify(new \App\Notifications\QuoteReceivedBuyer());
 
+
+        /* Sending SMS to business email ID */
+        $from = Business::where('id', $quote->business_id)->pluck('business_name')->first();
+        $to = Business::where('id', $quote->supplier_business_id)->pluck('business_name')->first();
+
+        $categoryName = Category::where('id', $quote->orderItem->item_code)->first();
+        $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
+
+        User::send_sms('+966581382822', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
+        User::send_sms('+966555390920', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
+        User::send_sms('+966593388833', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
+
         /* Notifying business@emdad-chain.com for Purchase order created */
         $userQuoted =  User::find(auth()->user()->id);
         Notification::route('mail', 'business@emdad-chain.com')
-            ->notify(new QuotationSent($userQuoted));
+            ->notify(new QuotationSent($userQuoted, $quote));
 
         session()->flash('message', 'You have successfully quoted.');
 

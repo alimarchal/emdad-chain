@@ -12,15 +12,17 @@ class QuotationSent extends Notification
     use Queueable;
 
     private $quotationSendByUser;
+    private $quote;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($quotationSendByUser)
+    public function __construct($quotationSendByUser, $quote)
     {
         $this->quotationSendByUser = $quotationSendByUser;
+        $this->quote = $quote;
     }
 
     /**
@@ -42,9 +44,7 @@ class QuotationSent extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->greeting('Hi!')
-                    ->line('Main domain - '. $this->quotationSendByUser->business->business_name .' responded to a requisition');
+        return (new MailMessage)->markdown('mail.quote.mailForBusiness', ['quotationSendByUser' => $this->quotationSendByUser , 'quote' => $this->quote]);
     }
 
     /**

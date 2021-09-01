@@ -19,6 +19,7 @@ use App\Models\User;
 use App\Notifications\DpoApproved;
 use App\Notifications\PurchaseOrderGenerated;
 use App\Notifications\QuoteAccepted;
+use App\Notifications\SingleCategoryPurchaseOrderGenerated;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -277,10 +278,10 @@ class DraftPurchaseOrderController extends Controller
         User::find($qoute->supplier_user_id)->notify(new QuoteAccepted($qoute));
         User::find(auth()->user()->id)->notify(new DpoApproved($draftPurchaseOrder));
 
-        /* Notifying business@emdad-chain.com for Purchase order created */
+        /* Notifying business@emdad-chain.com for Purchase order created for multiple categories RFQ */
         $userGenerated =  User::find(auth()->user()->id);
         Notification::route('mail', 'business@emdad-chain.com')
-            ->notify(new PurchaseOrderGenerated($userGenerated));
+            ->notify(new PurchaseOrderGenerated($userGenerated, $draftPurchaseOrder));
 
         /* Sending SMS to business email ID */
         $from = Business::where('id', $qoute->business_id)->pluck('business_name')->first();
@@ -295,6 +296,8 @@ class DraftPurchaseOrderController extends Controller
 
         session()->flash('message', 'DPO Accepted.');
 //        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
+
+        /* Redirecting to proforma invoices route in case payment_term is equal to Cash */
         if ($request->payment_method == 'Cash')
         {
             return redirect()->route('proforma_invoices');
@@ -673,7 +676,7 @@ class DraftPurchaseOrderController extends Controller
         /* Notifying business@emdad-chain.com for Purchase order created */
         $userGenerated =  User::find(auth()->user()->id);
         Notification::route('mail', 'business@emdad-chain.com')
-            ->notify(new PurchaseOrderGenerated($userGenerated));
+            ->notify(new SingleCategoryPurchaseOrderGenerated($userGenerated, $draftPurchaseOrders));
 
         /* Sending SMS to business email ID */
         $from = Business::where('id', $qoute->business_id)->pluck('business_name')->first();
@@ -687,6 +690,8 @@ class DraftPurchaseOrderController extends Controller
         User::send_sms('+966593388833', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrders[0]->payment_term);
 
         session()->flash('message', 'DPO Accepted and PO generated.');
+
+        /* Redirecting to proforma invoices route in case payment_term is equal to Cash */
         if ($draftPurchaseOrders[0]->payment_term == 'Cash')
         {
             return redirect()->route('singleCategoryProformaInvoices');

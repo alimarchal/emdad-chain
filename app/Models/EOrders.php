@@ -20,4 +20,9 @@ class EOrders extends Model
     {
         return $this->hasMany(User::class,'id','user_id');
     }
+
+    public function quotes()
+    {
+        return $this->hasMany(Qoute::class,'e_order_id');
+    }
 }

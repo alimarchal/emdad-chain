@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\EOrderItems;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -12,15 +13,17 @@ class RFQCreatedByUser extends Notification
     use Queueable;
 
     private $user;
+    private $eOrderItems;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user, $eOrders)
     {
         $this->user = $user;
+        $this->eOrderItems = EOrderItems::where('e_order_id', $eOrders->id)->get();
     }
 
     /**
@@ -42,9 +45,7 @@ class RFQCreatedByUser extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->greeting('Hi!')
-                    ->line('Main domain - '. $this->user->business->business_name .' generated a Requisition');
+        return (new MailMessage)->markdown('mail.rfq.createdMailForBusiness', ['user' => $this->user, 'eOrderItems' => $this->eOrderItems]);
     }
 
     /**

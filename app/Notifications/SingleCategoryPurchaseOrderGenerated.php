@@ -7,22 +7,22 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PurchaseOrderGenerated extends Notification
+class SingleCategoryPurchaseOrderGenerated extends Notification
 {
     use Queueable;
 
     private $userGenerated;
-    private $dpo;
+    private $DPOs;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($userGenerated, $dpo)
+    public function __construct($userGenerated, $DPOs)
     {
         $this->userGenerated = $userGenerated;
-        $this->dpo = $dpo;
+        $this->DPOs = $DPOs;
     }
 
     /**
@@ -40,11 +40,11 @@ class PurchaseOrderGenerated extends Notification
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
-     * @return MailMessage
+     * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.dpo.mailForBusiness', ['userGenerated' => $this->userGenerated, 'dpo' => $this->dpo]);
+        return (new MailMessage)->markdown('mail.dpo.mailForBusinessSingleCategory', ['userGenerated' =>  $this->userGenerated,'DPOs' => $this->DPOs]);
     }
 
     /**

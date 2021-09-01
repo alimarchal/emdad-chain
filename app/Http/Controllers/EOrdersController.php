@@ -70,6 +70,11 @@ class EOrdersController extends Controller
                     foreach ($eCartItems as $item) {
                         $item->delete();
                     }
+
+                    $user = User::find(auth()->user()->id);
+                    /* Notifying business@emdad-chain.com for RFQ created by user */
+                    Notification::route('mail', 'business@emdad-chain.com')
+                        ->notify(new RFQCreatedByUser($user, $eOrders));
                 });
 
                 $user = User::find(auth()->user()->id);
@@ -80,13 +85,8 @@ class EOrdersController extends Controller
                 $user->notify(new \App\Notifications\RfqCreated());
 
                 /* Notifying business@emdad-chain.com for RFQ created by user */
-                Notification::route('mail', 'business@emdad-chain.com')
-                            ->notify(new RFQCreatedByUser($user));
-
-                /* Sending message to business email ID */
-                /*User::send_sms('+966 58 138 2822', 'Requisition generated');
-                User::send_sms('+966 55 539 0920', 'Requisition generated');
-                User::send_sms('+966 59 338 8833', 'Requisition generated');*/
+                /*Notification::route('mail', 'business@emdad-chain.com')
+                            ->notify(new RFQCreatedByUser($user, $eOrders));*/
 
                 session()->flash('message', 'RFQ placed successfully');
                 return redirect()->route('QoutationsBuyerReceived');
@@ -137,19 +137,19 @@ class EOrdersController extends Controller
                     foreach ($eCartItems as $item) {
                         $item->delete();
                     }
+
+                    $user = User::find(auth()->user()->id);
+                    /* Notifying business@emdad-chain.com for RFQ created by user */
+                    Notification::route('mail', 'business@emdad-chain.com')
+                        ->notify(new RFQCreatedByUser($user, $eOrders));
                 });
 
                 $user = User::find(auth()->user()->id);
                 $user->notify(new \App\Notifications\RfqCreated());
 
                 /* Notifying business@emdad-chain.com for RFQ created by user */
-                Notification::route('mail', 'business@emdad-chain.com')
-                            ->notify(new RFQCreatedByUser($user));
-
-                /* Sending message to business email ID */
-                /*User::send_sms('+966 58 138 2822', 'Requisition generated');
-                User::send_sms('+966 55 539 0920', 'Requisition generated');
-                User::send_sms('+966 59 338 8833', 'Requisition generated');*/
+                /*Notification::route('mail', 'business@emdad-chain.com')
+                            ->notify(new RFQCreatedByUser($user));*/
 
                 session()->flash('message', 'RFQ placed successfully');
                 return redirect()->route('QoutationsBuyerReceived');
@@ -196,18 +196,20 @@ class EOrdersController extends Controller
                 foreach ($eCartItems as $item) {
                     $item->delete();
                 }
+
+                $user = User::find(auth()->user()->id);
+                /* Notifying business@emdad-chain.com for RFQ created by user */
+                Notification::route('mail', 'business@emdad-chain.com')
+                    ->notify(new RFQCreatedByUser($user, $eOrders));
             });
 
             $user = User::find(auth()->user()->id);
             $user->notify(new \App\Notifications\RfqCreated());
 
             /* Notifying business@emdad-chain.com for RFQ created by user */
-            Notification::route('mail', 'business@emdad-chain.com')
-                            ->notify(new RFQCreatedByUser($user));
+            /*Notification::route('mail', 'business@emdad-chain.com')
+                            ->notify(new RFQCreatedByUser($user, $eOrdersArray));*/
 
-            /*User::send_sms('+966 58 138 2822', 'Requisition generated');
-                User::send_sms('+966 55 539 0920', 'Requisition generated');
-                User::send_sms('+966 59 338 8833', 'Requisition generated');*/
 
             session()->flash('message', 'RFQ placed successfully');
             return redirect()->route('QoutationsBuyerReceived');
@@ -273,19 +275,18 @@ class EOrdersController extends Controller
                     foreach ($eCartItems as $item) {
                         $item->delete();
                     }
+
+                    $user = User::find(auth()->user()->id);
+                    Notification::route('mail', 'business@emdad-chain.com')
+                        ->notify(new RFQCreatedByUser($user, $eOrders));
                 });
 
                 $user = User::find(auth()->user()->id);
                 $user->notify(new \App\Notifications\RfqCreated());
 
                 /* Notifying business@emdad-chain.com for RFQ created by user */
-                Notification::route('mail', 'business@emdad-chain.com')
-                            ->notify(new RFQCreatedByUser($user));
-
-                /* Sending message to business email ID */
-                /*User::send_sms('+966 58 138 2822', 'Requisition generated');
-                User::send_sms('+966 55 539 0920', 'Requisition generated');
-                User::send_sms('+966 59 338 8833', 'Requisition generated');*/
+                /*Notification::route('mail', 'business@emdad-chain.com')
+                            ->notify(new RFQCreatedByUser($user));*/
 
                 session()->flash('message', 'RFQ placed successfully');
                 return redirect()->route('singleCategoryBuyerRFQs');
@@ -337,19 +338,18 @@ class EOrdersController extends Controller
                     foreach ($eCartItems as $item) {
                         $item->delete();
                     }
+
+                    $user = User::find(auth()->user()->id);
+                    Notification::route('mail', 'business@emdad-chain.com')
+                        ->notify(new RFQCreatedByUser($user, $eOrders));
                 });
 
                 $user = User::find(auth()->user()->id);
                 $user->notify(new \App\Notifications\RfqCreated());
 
                 /* Notifying business@emdad-chain.com for RFQ created by user */
-                Notification::route('mail', 'business@emdad-chain.com')
-                            ->notify(new RFQCreatedByUser($user));
-
-                /* Sending message to business email ID */
-                /*User::send_sms('+966 58 138 2822', 'Requisition generated');
-                User::send_sms('+966 55 539 0920', 'Requisition generated');
-                User::send_sms('+966 59 338 8833', 'Requisition generated');*/
+                /*Notification::route('mail', 'business@emdad-chain.com')
+                            ->notify(new RFQCreatedByUser($user));*/
 
                 session()->flash('message', 'RFQ placed successfully');
                 return redirect()->route('singleCategoryBuyerRFQs');
@@ -396,19 +396,18 @@ class EOrdersController extends Controller
                 foreach ($eCartItems as $item) {
                     $item->delete();
                 }
+
+                $user = User::find(auth()->user()->id);
+                Notification::route('mail', 'business@emdad-chain.com')
+                    ->notify(new RFQCreatedByUser($user, $eOrders));
             });
 
             $user = User::find(auth()->user()->id);
             $user->notify(new \App\Notifications\RfqCreated());
 
             /* Notifying business@emdad-chain.com for RFQ created by user */
-            Notification::route('mail', 'business@emdad-chain.com')
-                        ->notify(new RFQCreatedByUser($user));
-
-            /* Sending message to business email ID */
-            /*User::send_sms('+966 58 138 2822', 'Requisition generated');
-            User::send_sms('+966 55 539 0920', 'Requisition generated');
-            User::send_sms('+966 59 338 8833', 'Requisition generated');*/
+            /*Notification::route('mail', 'business@emdad-chain.com')
+                        ->notify(new RFQCreatedByUser($user));*/
 
             session()->flash('message', 'RFQ placed successfully');
             return redirect()->route('singleCategoryBuyerRFQs');
