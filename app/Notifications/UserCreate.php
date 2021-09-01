@@ -43,7 +43,7 @@ class UserCreate extends Notification
     public function toMail($notifiable)
     {
         $password = $this->pass;
-        return (new MailMessage)->markdown('mail.user.created', ['pass' => $password, 'user' => $notifiable]);
+        return (new MailMessage)->subject('User Created')->markdown('mail.user.created', ['pass' => $password, 'user' => $notifiable]);
     }
 
     /**

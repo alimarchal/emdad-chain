@@ -21,6 +21,7 @@ class ShipmentItemController extends Controller
      */
     public function index(Request $request)
     {
+
         $shipment_item = new ShipmentItem();
         if ($request->has('driver_id') || $request->has('status') || $request->has('supplier_business_id')) {
             if ($request->input('driver_id')) {
@@ -40,6 +41,9 @@ class ShipmentItemController extends Controller
             } else {
                 return $shipment_item;
             }
+        } elseif ($request->has('delivery_id')) {
+            $shipment_item = $shipment_item->where('delivery_id', $request->delivery_id)->get();
+            return $shipment_item;
         } else {
             $shipment_item = $shipment_item->paginate(20);
             return $shipment_item;
@@ -78,7 +82,6 @@ class ShipmentItemController extends Controller
 
         $token = $request->code;
         if ($token == "RRNirxFh4j9Ftd") {
-
             if ($request->has('driver_id')) {
                 $ShipmentItem = [];
                 $item = ShipmentItem::where('driver_id', $request->driver_id)->get();

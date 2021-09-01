@@ -20,7 +20,7 @@ class QuoteAccepted extends Notification
      */
     public function __construct(Qoute $qoute)
     {
-        
+
         $this->item = EOrderItems::find($qoute->e_order_items_id);
     }
 
@@ -43,7 +43,7 @@ class QuoteAccepted extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.quote.quoteAccepted', ['item' => $this->item]);
+        return (new MailMessage)->subject('Quotation accepted')->markdown('mail.quote.quoteAccepted', ['item' => $this->item]);
     }
 
     /**

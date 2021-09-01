@@ -40,7 +40,7 @@ class DeliveryCompleted extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.delivery.completed');
+        return (new MailMessage)->subject('Your delivery is completed')->markdown('mail.delivery.completed');
     }
 
     /**

@@ -45,7 +45,7 @@ class UserRegister extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.user.userRegister', ['user' => $this->user]);
+        return (new MailMessage)->subject('New CEO Registered')->markdown('mail.user.userRegister', ['user' => $this->user]);
     }
 
     /**

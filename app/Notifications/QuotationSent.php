@@ -44,7 +44,7 @@ class QuotationSent extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.quote.mailForBusiness', ['quotationSendByUser' => $this->quotationSendByUser , 'quote' => $this->quote]);
+        return (new MailMessage)->subject('Requisition Response')->markdown('mail.quote.mailForBusiness', ['quotationSendByUser' => $this->quotationSendByUser , 'quote' => $this->quote]);
     }
 
     /**

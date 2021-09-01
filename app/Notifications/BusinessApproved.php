@@ -40,7 +40,7 @@ class BusinessApproved extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.business.approved');
+        return (new MailMessage)->subject('Your business has been approved by EMDAD')->markdown('mail.business.approved');
     }
 
     /**

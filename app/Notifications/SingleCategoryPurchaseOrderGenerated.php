@@ -44,7 +44,7 @@ class SingleCategoryPurchaseOrderGenerated extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.dpo.mailForBusinessSingleCategory', ['userGenerated' =>  $this->userGenerated,'DPOs' => $this->DPOs]);
+        return (new MailMessage)->subject('Generated a Purchase Order')->markdown('mail.dpo.mailForBusinessSingleCategory', ['userGenerated' =>  $this->userGenerated,'DPOs' => $this->DPOs]);
     }
 
     /**

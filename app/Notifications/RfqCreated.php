@@ -40,7 +40,7 @@ class RfqCreated extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.rfq.created');
+        return (new MailMessage)->subject('New RFQ Created Successfully')->markdown('mail.rfq.created');
     }
 
     /**

@@ -14,6 +14,7 @@ class RFQCreatedByUser extends Notification
 
     private $user;
     private $eOrderItems;
+    public $subject;
 
     /**
      * Create a new notification instance.
@@ -23,6 +24,7 @@ class RFQCreatedByUser extends Notification
     public function __construct($user, $eOrders)
     {
         $this->user = $user;
+        $this->subject = "test";
         $this->eOrderItems = EOrderItems::where('e_order_id', $eOrders->id)->get();
     }
 
@@ -45,7 +47,7 @@ class RFQCreatedByUser extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.rfq.createdMailForBusiness', ['user' => $this->user, 'eOrderItems' => $this->eOrderItems]);
+        return (new MailMessage)->subject('New RFQ Received')->markdown('mail.rfq.createdMailForBusiness', ['user' => $this->user, 'eOrderItems' => $this->eOrderItems]);
     }
 
     /**

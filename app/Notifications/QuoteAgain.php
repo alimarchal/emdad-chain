@@ -44,7 +44,7 @@ class QuoteAgain extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.quote.quoteAgain',['item' => $this->item]);
+        return (new MailMessage)->subject('Quotation requires some modification')->markdown('mail.quote.quoteAgain',['item' => $this->item]);
     }
 
     /**

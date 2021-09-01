@@ -40,7 +40,7 @@ class RFQBusinessEmail extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.business.rfq');
+        return (new MailMessage)->subject('New business RFQ has been created')->markdown('mail.business.rfq');
     }
 
     /**

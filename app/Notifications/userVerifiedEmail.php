@@ -44,7 +44,8 @@ class userVerifiedEmail extends Notification
     {
         return (new MailMessage)
                     ->greeting('Hi!')
-                    ->line('Main domain - CEO '. $this->user->name .' registered as ' .  $this->user->registration_type);
+                    ->subject('New CEO registered')
+                    ->line(config('app.url') . ' - CEO '. $this->user->name .' registered as ' .  $this->user->registration_type);
     }
 
     /**

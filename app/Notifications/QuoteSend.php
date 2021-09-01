@@ -43,7 +43,7 @@ class QuoteSend extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.quote.send', ['quote' => $this->quote]);
+        return (new MailMessage)->subject('You have successfully sent a quotation')->markdown('mail.quote.send', ['quote' => $this->quote]);
     }
 
     /**

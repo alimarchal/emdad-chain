@@ -40,7 +40,7 @@ class QuoteReceivedBuyer extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.quote.buyerReceived');
+        return (new MailMessage)->subject('You have received a quotation')->markdown('mail.quote.buyerReceived');
     }
 
     /**

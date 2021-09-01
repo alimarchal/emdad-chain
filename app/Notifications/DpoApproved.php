@@ -41,7 +41,7 @@ class DpoApproved extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.dpo.approved',  ['dpo' => $this->dpo]);
+        return (new MailMessage)->subject('Congratulations! You have accepted the Quote.')->markdown('mail.dpo.approved',  ['dpo' => $this->dpo]);
     }
 
     /**

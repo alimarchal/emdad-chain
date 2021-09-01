@@ -42,7 +42,7 @@ class QuoteRejected extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.quote.quoteRejected', ['item' => $this->item]);
+        return (new MailMessage)->subject('You quotation rejected')->markdown('mail.quote.quoteRejected', ['item' => $this->item]);
     }
 
     /**

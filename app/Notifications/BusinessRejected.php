@@ -40,7 +40,7 @@ class BusinessRejected extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.business.rejected');
+        return (new MailMessage)->subject('Your business registration is not approved.')->markdown('mail.business.rejected');
     }
 
     /**
