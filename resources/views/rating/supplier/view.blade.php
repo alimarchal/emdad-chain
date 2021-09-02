@@ -27,10 +27,10 @@
 
                         <div class="mx-5">
                             <div class="text-gray-500" >
-                                <a href="{{route('supplierDeliveryRatingListIndex')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
+                                <a href="{{route('supplierDeliveryRatingListIndex')}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
                                                border-transparent rounded-md font-semibold text-xs text-white uppercase
                                                tracking-widest hover:bg-red-500  focus:outline-none focus:border-blue-700
-                                               focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                               active:bg-blue-600 transition ease-in-out duration-150">
                                     {{__('portal.All Deliveries')}}
                                 </a>
                             </div>
@@ -43,10 +43,10 @@
 
                         <div class="mx-5">
                             <div class="text-gray-500" >
-                                <a href="{{route('supplierRatedToDeliveries')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
+                                <a href="{{route('supplierRatedToDeliveries')}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
                                                border-transparent rounded-md font-semibold text-xs text-white uppercase
                                                tracking-widest hover:bg-red-500  focus:outline-none focus:border-blue-700
-                                               focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                               active:bg-blue-600 transition ease-in-out duration-150">
                                     {{__('portal.My Rated Deliveries')}}
                                 </a>
                             </div>
@@ -59,10 +59,10 @@
 
                         <div class="mx-5">
                             <div class="text-gray-500" >
-                                <a href="{{route('supplierUnRatedDeliveries')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
+                                <a href="{{route('supplierUnRatedDeliveries')}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
                                                border-transparent rounded-md font-semibold text-xs text-white uppercase
                                                tracking-widest hover:bg-red-500  focus:outline-none focus:border-blue-700
-                                               focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                               active:bg-blue-600 transition ease-in-out duration-150">
                                     {{__('portal.My Un-Rated Deliveries')}}
                                 </a>
                             </div>
@@ -75,10 +75,10 @@
 
                         <div class="mx-5">
                             <div class="text-gray-500">
-                                <a href="{{route('supplierDeliveriesListToRate')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
+                                <a href="{{route('supplierDeliveriesListToRate')}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
                                                border-transparent rounded-md font-semibold text-xs text-white uppercase
                                                tracking-widest hover:bg-red-500  focus:outline-none focus:border-blue-700
-                                               focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                               active:bg-blue-600 transition ease-in-out duration-150">
                                     {{__('portal.Rate Deliveries')}}
                                 </a>
                             </div>
@@ -120,7 +120,7 @@
 
                         <div class="mx-5">
                             <div class="text-gray-500" >
-                                <a href="{{route('supplierDeliveryRatingListIndex')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
+                                <a href="{{route('supplierDeliveryRatingListIndex')}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
                                                border-transparent rounded-md font-semibold text-xs text-white uppercase
                                                tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
                                     {{__('portal.All Deliveries')}}
@@ -135,7 +135,7 @@
 
                         <div class="mx-5">
                             <div class="text-gray-500" >
-                                <a href="{{route('supplierRatedToDeliveries')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
+                                <a href="{{route('supplierRatedToDeliveries')}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
                                                border-transparent rounded-md font-semibold text-xs text-white uppercase
                                                tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
                                     {{__('portal.My Rated Deliveries')}}
@@ -150,7 +150,7 @@
 
                         <div class="mx-5">
                             <div class="text-gray-500" >
-                                <a href="{{route('supplierUnRatedDeliveries')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
+                                <a href="{{route('supplierUnRatedDeliveries')}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
                                                border-transparent rounded-md font-semibold text-xs text-white uppercase
                                                tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
                                     {{__('portal.My Un-Rated Deliveries')}}
@@ -165,7 +165,7 @@
 
                         <div class="mx-5">
                             <div class="text-gray-500">
-                                <a href="{{route('supplierDeliveriesListToRate')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
+                                <a href="{{route('supplierDeliveriesListToRate')}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border
                                                border-transparent rounded-md font-semibold text-xs text-white uppercase
                                                tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
                                     {{__('portal.Rate Deliveries')}}

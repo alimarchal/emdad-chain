@@ -32,8 +32,8 @@
 
                                     <div class="mx-5">
                                         <div class="text-gray-500">
-                                            <a href="{{route('dpo.index')}}"
-                                               class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                            <a href="{{route('dpo.index')}}" style="background-color: #145EA8"
+                                               class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 active:bg-blue-600 transition ease-in-out duration-150">
                                                 {{__('portal.Multiple Categories')}}
                                             </a>
                                         </div>
@@ -46,8 +46,8 @@
 
                                     <div class="mx-5">
                                         <div class="text-gray-500">
-                                            <a href="{{route('singleCategoryDPOIndex')}}"
-                                               class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                            <a href="{{route('singleCategoryDPOIndex')}}" style="background-color: #145EA8"
+                                               class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 active:bg-blue-600 transition ease-in-out duration-150">
                                             <span class="mx-3 ">
                                                 {{__('portal.Single Category')}}
                                             </span>
@@ -70,8 +70,8 @@
 
                                 <div class="mx-5">
                                     <div class="text-gray-500">
-                                        <a href="{{route('po.po')}}"
-                                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                        <a href="{{route('po.po')}}" style="background-color: #145EA8"
+                                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 active:bg-blue-600 transition ease-in-out duration-150">
                                             {{__('portal.Multiple Categories')}}
                                         </a>
                                     </div>
@@ -84,8 +84,8 @@
 
                                 <div class="mx-5">
                                     <div class="text-gray-500">
-                                        <a href="{{route('singleCategoryPO')}}"
-                                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                        <a href="{{route('singleCategoryPO')}}" style="background-color: #145EA8"
+                                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 active:bg-blue-600 transition ease-in-out duration-150">
                                         <span class="mx-3 ">
                                             {{__('portal.Single Category')}}
                                         </span>
@@ -136,7 +136,7 @@
 
                                     <div class="mx-5">
                                         <div class="text-gray-500">
-                                            <a href="{{route('dpo.index')}}"
+                                            <a href="{{route('dpo.index')}}" style="background-color: #145EA8"
                                                class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
                                                 {{__('portal.Multiple Categories')}}
                                             </a>
@@ -150,7 +150,7 @@
 
                                     <div class="mx-5">
                                         <div class="text-gray-500">
-                                            <a href="{{route('singleCategoryDPOIndex')}}"
+                                            <a href="{{route('singleCategoryDPOIndex')}}" style="background-color: #145EA8"
                                                class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
                                             <span class="mx-3 ">
                                                 {{__('portal.Single Category')}}
@@ -174,7 +174,7 @@
 
                                 <div class="mx-5">
                                     <div class="text-gray-500">
-                                        <a href="{{route('po.po')}}"
+                                        <a href="{{route('po.po')}}" style="background-color: #145EA8"
                                            class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
                                             {{__('portal.Multiple Categories')}}
                                         </a>
@@ -188,7 +188,7 @@
 
                                 <div class="mx-5">
                                     <div class="text-gray-500">
-                                        <a href="{{route('singleCategoryPO')}}"
+                                        <a href="{{route('singleCategoryPO')}}" style="background-color: #145EA8"
                                            class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
                                         <span class="mx-3 ">
                                             {{__('portal.Single Category')}}

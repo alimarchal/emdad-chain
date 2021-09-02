@@ -91,8 +91,8 @@
                         @if(auth()->user()->registration_type == 'Supplier')
                             @if($userRemaining != 0 || $driverRemaining != 0)
                                 <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
-                                    <a href="{{ route('users.create') }}"
-                                       class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                    <a href="{{ route('users.create') }}" style="background-color: #145EA8"
+                                       class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none active:bg-red-600 transition ease-in-out duration-150">
                                         {{__('portal.Add User')}}
                                     </a>
                                 </div>
@@ -101,8 +101,8 @@
                             @if(auth()->user()->usertype != 'SuperAdmin')
                                 @if($userRemaining != 0)
                                     <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
-                                        <a href="{{ route('users.create') }}"
-                                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                        <a href="{{ route('users.create') }}" style="background-color: #145EA8"
+                                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none active:bg-red-600 transition ease-in-out duration-150">
                                             {{__('portal.Add User')}}
                                         </a>
                                     </div>
@@ -354,8 +354,8 @@
                         @if(auth()->user()->registration_type == 'Supplier')
                             @if($userRemaining != 0 || $driverRemaining != 0)
                                 <div class="mt-5" style=" margin-right: 30px; margin-bottom: 10px ">
-                                    <a href="{{ route('users.create') }}"
-                                       class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                    <a href="{{ route('users.create') }}" style="background-color: #145EA8"
+                                       class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none active:bg-red-600 transition ease-in-out duration-150">
                                         {{__('portal.Add User')}}
                                     </a>
                                 </div>
@@ -364,8 +364,8 @@
                             @if(auth()->user()->usertype != 'SuperAdmin')
                                 @if($userRemaining != 0)
                                     <div class="mt-5" style=" margin-right: 30px; margin-bottom: 10px ">
-                                        <a href="{{ route('users.create') }}"
-                                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                        <a href="{{ route('users.create') }}" style="background-color: #145EA8"
+                                           class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none active:bg-red-600 transition ease-in-out duration-150">
                                             {{__('portal.Add User')}}
                                         </a>
                                     </div>

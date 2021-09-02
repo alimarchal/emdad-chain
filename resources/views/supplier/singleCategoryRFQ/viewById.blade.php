@@ -390,7 +390,7 @@
                             <tr style="border: none !important;">
                                 <td colspan="12" class="px-10 text-left">
                                     <div class="my-4">
-                                        <button class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                        <button style="background-color: #145EA8" class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 active:bg-blue-600 transition ease-in-out duration-150">
                                             {{__('portal.Send Updated Quotation')}}
                                         </button>
                                     </div>
@@ -584,7 +584,7 @@
 
                             <tr style="border: none !important;">
                                 <td colspan="6" class="px-10 text-left">
-                                    <button class="px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                    <button style="background-color: #145EA8" class="px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 active:bg-blue-600 transition ease-in-out duration-150">
                                         {{__('portal.Send Quote')}}
                                     </button>
                                     <br>
@@ -991,7 +991,7 @@
                             <tr style="border: none !important;">
                                 <td colspan="12" class="px-10 text-left">
                                     <div class="my-4">
-                                        <button class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                        <button style="background-color: #145EA8" class=" px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 active:bg-blue-600 transition ease-in-out duration-150">
                                             {{__('portal.Send Updated Quotation')}}
                                         </button>
                                     </div>
@@ -1128,7 +1128,7 @@
 
                             <tr style="border: none !important;">
                                 <td colspan="6" class="px-10 text-left">
-                                    <button class="px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-red active:bg-blue-600 transition ease-in-out duration-150">
+                                    <button style="background-color: #145EA8" class="px-4 float-right py-2 mt-4 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 active:bg-blue-600 transition ease-in-out duration-150">
                                         {{__('portal.Send Quote')}}
                                     </button>
                                     <br>

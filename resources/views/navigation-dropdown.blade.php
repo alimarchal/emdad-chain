@@ -108,7 +108,18 @@
                             }
                             sort($business_categories);
                             // Counting NEW RFQs for multiple categories for supplier
-                            $rfqCount = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->count();
+                            /*$rfqCount = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->count();*/
+                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->get();
+                            $noMultiCategoryQuotationPresent = array();
+                            foreach ($multiEOrderItems as $multiEOrderItem)
+                                {
+                                    $quotes = \App\Models\Qoute::where(['e_order_items_id' => $multiEOrderItem->id, 'supplier_business_id' => auth()->user()->business_id])->first();
+                                        if (!($quotes))
+                                            {
+                                                $noMultiCategoryQuotationPresent[] = $multiEOrderItem->id;
+                                            }
+                                }
+
                             // Counting NEW RFQs for single category for supplier
                             $eOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 0])
                                                                             ->where('bypass', 0)
@@ -122,23 +133,25 @@
                                 /*$eOrderPresent[] = \App\Models\EOrders::where(['id' => $eOrderItem->e_order_id, 'rfq_type' => 1])->first();*/
                                 $eOrders = $eOrderPresent;
                             }
-                            /*if (count($eOrders) > 0)
-                            {
-                                $quote = \App\Models\Qoute::where(['e_order_id' => $eOrders[0]->id, 'supplier_business_id' => auth()->user()->business_id])->first();
-                            }*/
                             $quotes = array();
+                            $quotesNotPresent = array(); /* For saving and counting eOrders having no Quotes */
                             if (count($eOrders) > 0)
                             {
                                 foreach($eOrders as $eOrder)
                                     {
-                                        $quotes = \App\Models\EOrders::where(['id' => $eOrder->id])->withCount('quotes')->get();
+                                        /*$quotes = \App\Models\EOrders::where(['id' => $eOrder->id])->withCount('quotes')->get();*/
+                                        $quotes = \App\Models\Qoute::where(['e_order_id' => $eOrder->id, 'supplier_business_id' => auth()->user()->business_id])->first();
+                                        if (!($quotes))
+                                            {
+                                                $quotesNotPresent[] = $eOrder->id;
+                                            }
                                     }
                             }
                         @endphp
-                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span @if($rfqCount > 0) class="text-green-600 hover:underline"
-                                                                                                                                                                                                     @else class="text-red-600 hover:underline" @endif>{{$rfqCount}}</span></a></span>
-                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against single category')}}">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0 && count($quotes)> 0) class="text-green-600 hover:underline"
-                                                                                                                                                                                                         @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && count($quotes)> 0) {{count($quotes)}}  @else 0 @endif</span></a></span>
+                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp;<a href="{{route('viewRFQs')}}" style="padding-right: 10px;"><span @if(count($noMultiCategoryQuotationPresent) > 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                     @else class="text-red-600 hover:underline" @endif>{{count($noMultiCategoryQuotationPresent)}}</span></a></span>
+                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against single category')}}">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}" style="padding-right: 10px;"><span @if(count($eOrders) > 0 && count($quotesNotPresent)> 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                         @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && count($quotesNotPresent)> 0) {{count(array_unique($quotesNotPresent))}}  @else 0 @endif</span></a></span>
                     @endif
 
                     @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
@@ -386,13 +399,13 @@
                 </x-jet-responsive-nav-link>
 
                 @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
-                    <a @if($rfqCount > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                    <a @if(count($noMultiCategoryQuotationPresent) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('viewRFQs') }}">
-                        {{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp; {{ $rfqCount }}
+                        {{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp; {{ count($noMultiCategoryQuotationPresent) }}
                     </a>
-                    <a @if(count($eOrders) > 0 && count($quotes)> 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                    <a @if(count($eOrders) > 0 && count($quotesNotPresent)> 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryRFQs') }}">
-                        {{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp; @if(count($eOrders) > 0 && count($quotes)> 0) {{count($quotes)}} @else 0 @endif
+                        {{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp; @if(count($eOrders) > 0 && count($quotesNotPresent)> 0) {{count(array_unique($quotesNotPresent))}} @else 0 @endif
                     </a>
                 @endif
 
@@ -677,7 +690,18 @@
                             }
                             sort($business_categories);
                             // Counting NEW RFQs for multiple categories for supplier
-                            $rfqCount = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->count();
+                            /*$rfqCount = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->count();*/
+                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->get();
+                            $noMultiCategoryQuotationPresent = array();
+                            foreach ($multiEOrderItems as $multiEOrderItem)
+                                {
+                                    $quotes = \App\Models\Qoute::where(['e_order_items_id' => $multiEOrderItem->id, 'supplier_business_id' => auth()->user()->business_id])->first();
+                                        if (!($quotes))
+                                            {
+                                                $noMultiCategoryQuotationPresent[] = $multiEOrderItem->id;
+                                            }
+                                }
+
                             // Counting NEW RFQs for single category for supplier
                             $eOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 0])
                                                                             ->where('bypass', 0)
@@ -695,18 +719,24 @@
                                 $quote = \App\Models\Qoute::where(['e_order_id' => $eOrders[0]->id, 'supplier_business_id' => auth()->user()->business_id])->first();
                             }*/
                             $quotes = array();
+                            $quotesNotPresent = array(); /* For saving and counting eOrders having no Quotes */
                             if (count($eOrders) > 0)
                             {
                                 foreach($eOrders as $eOrder)
                                     {
-                                        $quotes = \App\Models\EOrders::where(['id' => $eOrder->id])->withCount('quotes')->get();
+                                        /*$quotes = \App\Models\EOrders::where(['id' => $eOrder->id])->withCount('quotes')->get();*/
+                                        $quotes = \App\Models\Qoute::where(['e_order_id' => $eOrder->id, 'supplier_business_id' => auth()->user()->business_id])->first();
+                                        if (!($quotes))
+                                            {
+                                                $quotesNotPresent[] = $eOrder->id;
+                                            }
                                     }
                             }
                         @endphp
-                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp;<a href="{{route('viewRFQs')}}"><span style="padding-left: 7px;" @if($rfqCount > 0) class="text-green-600 hover:underline"
-                                                                                                                                                                                                  @else class="text-red-600 hover:underline" @endif>{{$rfqCount}}</span></a></span>
-                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against single category')}}">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}"><span style="padding-left: 7px;" @if(count($eOrders) > 0 && count($quotes)> 0) class="text-green-600 hover:underline"
-                                                                                                                                                                                                    @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && count($quotes)> 0) {{count($quotes)}} @else 0 @endif</span></a></span>
+                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp;<a href="{{route('viewRFQs')}}"><span style="padding-left: 7px;" @if(count($noMultiCategoryQuotationPresent) > 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                  @else class="text-red-600 hover:underline" @endif>{{count($noMultiCategoryQuotationPresent)}}</span></a></span>
+                        <span title="{{__('navigation-dropdown.Number of New Requisitions(s) received against single category')}}">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a href="{{route('singleCategoryRFQs')}}"><span style="padding-left: 7px;" @if(count($eOrders) > 0 && count($quotesNotPresent)> 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                    @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && count($quotesNotPresent)> 0) {{count(array_unique($quotesNotPresent))}} @else 0 @endif</span></a></span>
                     @endif
 
                     @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
@@ -967,13 +997,13 @@
                 </x-jet-responsive-nav-link>
 
                 @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
-                    <a @if($rfqCount > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                    <a @if(count($noMultiCategoryQuotationPresent) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('viewRFQs') }}">
-                        {{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp; {{ $rfqCount }}
+                        {{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp; {{ count($noMultiCategoryQuotationPresent) }}
                     </a>
-                    <a @if(count($eOrders) > 0 && count($quotes)> 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                    <a @if(count($eOrders) > 0 && count($quotesNotPresent)> 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryRFQs') }}">
-                        {{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp; @if(count($eOrders) > 0 && count($quotes)> 0) {{count($quotes)}} @else 0 @endif
+                        {{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp; @if(count($eOrders) > 0 && count($quotesNotPresent)> 0) {{count(array_unique($quotesNotPresent))}} @else 0 @endif
                     </a>
                 @endif
 
