@@ -209,8 +209,8 @@ class DeliveryController extends Controller
                 $shipment->status = 1;
                 $shipment->save();
 
-//                Notification::route('mail', 'business@emdad-chain.com')
-//                    ->notify(new DeliveryCompleted($user));
+                Notification::route('mail', 'business@emdad-chain.com')
+                    ->notify(new DeliveryCompleted($user));
                 return response()->json(['message' => 'Updated...'], 200);
             } else {
                 return response()->json(['message' => 'Error some model not found please check your uid, sid, vid'], 404);

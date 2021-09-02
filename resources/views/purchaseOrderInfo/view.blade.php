@@ -41,21 +41,21 @@
                                 </div>
                             </div>
 
-                            <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 sm:mt-0">
-                                <div class="items-center text-center px-2 py-6 ">
+{{--                            <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 sm:mt-0">--}}
+{{--                                <div class="items-center text-center px-2 py-6 ">--}}
 
-                                    <div class="mx-5">
-                                        <div class="text-gray-500">
-                                            <a href="{{route('singleCategoryDPOIndex')}}" style="background-color: #145EA8"
-                                               class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 active:bg-blue-600 transition ease-in-out duration-150">
-                                            <span class="mx-3 ">
-                                                {{__('portal.Single Category')}}
-                                            </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+{{--                                    <div class="mx-5">--}}
+{{--                                        <div class="text-gray-500">--}}
+{{--                                            <a href="{{route('singleCategoryDPOIndex')}}" style="background-color: #145EA8"--}}
+{{--                                               class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-700 active:bg-blue-600 transition ease-in-out duration-150">--}}
+{{--                                            <span class="mx-3 ">--}}
+{{--                                                {{__('portal.Single Category')}}--}}
+{{--                                            </span>--}}
+{{--                                            </a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                 @endif
@@ -145,21 +145,21 @@
                                 </div>
                             </div>
 
-                            <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 sm:mt-0">
-                                <div class="items-center text-center px-2 py-6 ">
+{{--                            <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 sm:mt-0">--}}
+{{--                                <div class="items-center text-center px-2 py-6 ">--}}
 
-                                    <div class="mx-5">
-                                        <div class="text-gray-500">
-                                            <a href="{{route('singleCategoryDPOIndex')}}" style="background-color: #145EA8"
-                                               class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
-                                            <span class="mx-3 ">
-                                                {{__('portal.Single Category')}}
-                                            </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+{{--                                    <div class="mx-5">--}}
+{{--                                        <div class="text-gray-500">--}}
+{{--                                            <a href="{{route('singleCategoryDPOIndex')}}" style="background-color: #145EA8"--}}
+{{--                                               class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">--}}
+{{--                                            <span class="mx-3 ">--}}
+{{--                                                {{__('portal.Single Category')}}--}}
+{{--                                            </span>--}}
+{{--                                            </a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                 @endif
