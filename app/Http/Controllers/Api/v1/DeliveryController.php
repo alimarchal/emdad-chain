@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Vehicle;
 use App\Notifications\DeliveryCompleted;
 use App\Notifications\OTP;
+use App\Notifications\SingleCategoryDeliveryCompleted;
 use App\Notifications\UserRegister;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
@@ -221,17 +222,33 @@ class DeliveryController extends Controller
     }
 
 
-    public function delivery_shipment($did, $sitm, Request $request)
+    public function delivery_shipment($rfq_no, $sitm, Request $request)
     {
         $token = $request->code;
         if ($token == "RRNirxFh4j9Ftd") {
-            $delivery = Delivery::find($did);
+            $deliveries = Delivery::with('eOrderItems')->where('rfq_no', $rfq_no)->get();  /* Bring rfq_no of delivery instead of deliveryID */
             $shipment_item = ShipmentItem::find($sitm);
-            if ($delivery != null && $shipment_item != null) {
-                $delivery->status = 1;
-                $delivery->save();
+
+            if (isset($deliveries) && $shipment_item != null) {
+                foreach ($deliveries as $delivery)
+                {
+                    $delivery->status = 1;
+                    $delivery->save();
+                }
                 $shipment_item->status = 1;
                 $shipment_item->save();
+
+                if ($deliveries[0]->rfq_type == 1)
+                {
+                    Notification::route('mail', 'business@emdad-chain.com')
+                        ->notify(new DeliveryCompleted($deliveries, $deliveries[0]->id));
+                }
+                if ($deliveries[0]->rfq_type == 0)
+                {
+                    Notification::route('mail', 'business@emdad-chain.com')
+                        ->notify(new SingleCategoryDeliveryCompleted($deliveries, $deliveries[0]->id));
+                }
+
                 return response()->json(['message' => 'Updated...'], 200);
             } else {
                 return response()->json(['message' => 'Error some model not found please check your uid, sid, vid'], 404);

@@ -10,16 +10,18 @@
     {{ $slot }}
 
     @php $categoryName = \App\Models\Category::firstWhere('id', $dpo->item_code); $parent = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name')->first(); @endphp
-    @php $warehouseName = \App\Models\BusinessWarehouse::where('id', $dpo->warehouse_id)->pluck('address')->first(); @endphp
 
-    DPO # : DPO-{{$dpo->id}}
+    PO # : PO-{{$dpo->id}}
+    RFQ # : RFQ-{{$dpo->rfq_no}}
+    Quotation # : Q-{{$dpo->qoute_no}}
     Category Name :  {{ $categoryName->name }} , {{ $parent }}
+    Description :  {{ $dpo->eOrderItem->description }}
     Quantity : {{ $dpo->quantity }}
     Unit : {{ $dpo->uom }}
     Payment Mode : {{ $dpo->payment_term }}
-    Remarks : {{ $dpo->remarks }}
+    Remarks : @if(isset($dpo->remarks)) {{ $dpo->remarks }} @else N/A @endif
     Total cost : {{ number_format($dpo->sub_total * 0.15 + $dpo->sub_total + $dpo->shipment_cost, 2) }} {{__('portal.SAR')}}
-    Warehouse Address : {{ $warehouseName }}
+    Delivery Address : {{ $dpo->delivery_address }}
 
 
     Thanks,
