@@ -328,34 +328,44 @@ class DraftPurchaseOrderController extends Controller
     {
         $business_type = auth()->user()->business->business_type;
         if ($business_type == "Buyer" || auth()->user()->can('Buyer DPO Approval')) {
-//            $dpos = DraftPurchaseOrder::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->where('status', 'approved')->orWhere('status', 'prepareDelivery')->orWhere('status', 'completed')->get(); //->where('status','approved')
-//            $dpos = DraftPurchaseOrder::where(['user_id'=> auth()->user()->id],['business_id' => auth()->user()->business_id],['status' => 'approved'])->orWhere(['status' => 'prepareDelivery'],['status' => 'completed'])->get(); //->where('status','approved')
-            $dpos = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id], ['status' => 'approved'], ['rfq_type' => 1])
-                ->where(function ($query) {
-                    $query->where(['rfq_type' => 1], ['status' => 'prepareDelivery'])->where(['business_id' => auth()->user()->business_id]);
-                })
-                ->where(function ($query) {
-                    $query->where(['rfq_type' => 1], ['status' => 'completed'])->where(['business_id' => auth()->user()->business_id]);
-                })
-                ->where(function ($query) {
-                    $query->where('status', '!=', 'pending');
-                })
-                ->get(); //->where('status','approved')
-        } else {
-//            $dpos = DraftPurchaseOrder::where('supplier_business_id', auth()->user()->business_id)->where('status', 'approved')->orWhere('status', 'prepareDelivery')->orWhere('status', 'completed')->get(); //
-//            $dpos = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id],['status' => 'approved'])->orWhere(['status' => 'prepareDelivery'], ['status' => 'completed'])->get(); //
-            $dpos = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id], ['status' => 'approved'], ['rfq_type' => 1]) //
-            ->where(function ($query) {
-                $query->where(['rfq_type' => 1], ['status' => 'prepareDelivery'])->where(['supplier_business_id' => auth()->user()->business_id]);
-            })
-                ->where(function ($query) {
-                    $query->where(['rfq_type' => 1], ['status' => 'completed'])->where(['supplier_business_id' => auth()->user()->business_id]);
-                })
-                ->where(function ($query) {
-                    $query->where('status', '!=', 'pending');
-                })
+
+//            $dpos = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id], ['status' => 'approved'], ['rfq_type' => 1])
+//                ->where(function ($query) {
+//                    $query->where(['rfq_type' => 1], ['status' => 'prepareDelivery'])->where(['business_id' => auth()->user()->business_id]);
+//                })
+//                ->where(function ($query) {
+//                    $query->where(['rfq_type' => 1], ['status' => 'completed'])->where(['business_id' => auth()->user()->business_id]);
+//                })
+//                ->where(function ($query) {
+//                    $query->where('status', '!=', 'pending');
+//                })
+//                ->get(); //->where('status','approved')
+
+            // select * from `draft_purchase_orders` where `business_id` = ? and `rfq_type` in (?, ?) and `status` != ?
+            $dpos = DB::table('draft_purchase_orders')
+                ->where('business_id', auth()->user()->business_id)
+                ->whereIn('rfq_type', [0, 1])
+                ->where('status', '!=', 'pending')
                 ->get();
 
+        } else {
+
+//            $dpos = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id], ['status' => 'approved'], ['rfq_type' => 1]) //
+//            ->where(function ($query) {
+//                $query->where(['rfq_type' => 1], ['status' => 'prepareDelivery'])->where(['supplier_business_id' => auth()->user()->business_id]);
+//            })->where(function ($query) {
+//                $query->where(['rfq_type' => 1], ['status' => 'completed'])
+//                    ->where(['supplier_business_id' => auth()->user()->business_id]);
+//            })
+//                ->where(function ($query) {
+//                    $query->where('status', '!=', 'pending');
+//                })->get();
+
+            $dpos = DB::table('draft_purchase_orders')
+                ->where('supplier_business_id', auth()->user()->business_id)
+                ->whereIn('rfq_type', [0, 1])
+                ->where('status', '!=', 'pending')
+                ->get();
         }
 
         return view('draftPurchaseOrder.po', compact('dpos'));
@@ -661,6 +671,7 @@ class DraftPurchaseOrderController extends Controller
     {
         $business_type = auth()->user()->business->business_type;
         if ($business_type == "Buyer" || auth()->user()->can('Buyer DPO Approval')) {
+            DB::enableQueryLog();
             $data = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id], ['status' => 'approved'], ['rfq_type' => 0])
                 ->where(function ($query) {
                     $query->where(['rfq_type' => 0], ['status' => 'prepareDelivery'], ['status' <> 'pending'])->where(['business_id' => auth()->user()->business_id]);
@@ -672,9 +683,11 @@ class DraftPurchaseOrderController extends Controller
                     $query->where('status', '!=', 'pending');
                 })
                 ->get();
+
             $pos = $data->unique('rfq_no');
+//            dd(DB::getQueryLog($pos));
         } else {
-//            $pos = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id],['status' => 'approved'])->orWhere(['status' => 'prepareDelivery'], ['status' => 'completed'])->get(); //
+
             $data = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id], ['status' => 'approved'], ['rfq_type' => 0])
                 ->where(function ($query) {
                     $query->where(['rfq_type' => 0], ['status' => 'prepareDelivery'])->where(['supplier_business_id' => auth()->user()->business_id]);
@@ -686,6 +699,7 @@ class DraftPurchaseOrderController extends Controller
                     $query->where('status', '!=', 'pending');
                 })
                 ->get();
+
             $pos = $data->unique('rfq_no');
         }
 
