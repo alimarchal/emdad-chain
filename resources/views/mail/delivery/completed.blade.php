@@ -1,12 +1,5 @@
-@component('mail::message')
-# Introduction
+@component('mail::DeliveryCompleted', ['deliveries' => $deliveries])
+    # Hi!
 
-The body of your message.
-
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
-
-Thanks,<br>
-{{ config('app.name') }}
+    DN-{{$deliveryID}} has been delivery.
 @endcomponent

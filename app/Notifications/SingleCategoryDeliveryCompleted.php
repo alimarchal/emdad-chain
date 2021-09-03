@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class DeliveryCompleted extends Notification
+class SingleCategoryDeliveryCompleted extends Notification
 {
     use Queueable;
     private $deliveryID;
@@ -43,7 +43,7 @@ class DeliveryCompleted extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->subject('DN-'. $this->deliveryID . ' has been delivery')->markdown('mail.delivery.completed', [ 'deliveryID' => $this->deliveryID, 'deliveries' => $this->deliveries]);
+        return (new MailMessage)->subject('DN-'. $this->deliveryID . ' has been delivery')->markdown('mail.delivery.singleCategory', [ 'deliveryID' => $this->deliveryID, 'deliveries' => $this->deliveries]);
     }
 
     /**

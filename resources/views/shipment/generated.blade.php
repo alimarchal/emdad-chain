@@ -88,7 +88,7 @@
             </div>
             <br>
             <div class="p-4">
-                <form action="{{ route('shipmentItem.store') }}" method="POST">
+                <form action="{{ route('shipmentItem.store') }}" method="POST" class="inline confirm">
                     @csrf
                     <input type="hidden" name="delivery_id" value="{{encrypt($shipmentCart->delivery->id)}}">
                     <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
@@ -189,7 +189,7 @@
             </div>
             <br>
             <div class="p-4">
-                <form action="{{ route('shipmentItem.store') }}" method="POST">
+                <form action="{{ route('shipmentItem.store') }}" method="POST" class="inline confirm">
                     @csrf
                     <input type="hidden" name="delivery_id" value="{{encrypt($shipmentCart->delivery->id)}}">
                     <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
@@ -205,5 +205,9 @@
 <script>
     $(".delete").on("submit", function(){
         return confirm("Are you sure you want to delete?");
+    });
+
+    $(".confirm").on("submit", function(){
+        return confirm("Are you sure you want to place the shipment?");
     });
 </script>
