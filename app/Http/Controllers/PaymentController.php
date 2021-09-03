@@ -300,6 +300,8 @@ class PaymentController extends Controller
         elseif(auth()->user()->registration_type == "Buyer")
         {
             $proformaInvoices = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->get();
+            /*$collection = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id])->get();
+            $proformaInvoices = $collection->unique('rfq_no');*/
         }
         else{
             $proformaInvoices = Invoice::with('purchase_order')->where(['rfq_type' => 1])->get();
@@ -583,16 +585,16 @@ class PaymentController extends Controller
         if (auth()->user()->registration_type == "Supplier")
         {
             $collection = Invoice::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 0])->get();
-            $proformaInvoices = $collection->unique('rfq-no');
+            $proformaInvoices = $collection->unique('rfq_no');
         }
         elseif(auth()->user()->registration_type == "Buyer")
         {
             $collection = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 0])->get();
-            $proformaInvoices = $collection->unique('rfq-no');
+            $proformaInvoices = $collection->unique('rfq_no');
         }
         else{
             $collection = Invoice::where(['rfq_type' => 0])->get();
-            $proformaInvoices = $collection->unique('rfq-no');
+            $proformaInvoices = $collection->unique('rfq_no');
         }
         return view('payment.singleCategory.invoice', compact('proformaInvoices'));
     }
