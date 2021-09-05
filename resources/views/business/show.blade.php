@@ -305,7 +305,10 @@
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                    <p><strong>{{__('portal.City')}}:</strong> {{$business->city}}</p>
+                                    <p><strong>{{__('portal.City')}}:</strong>
+                                        @php $cityArabicName = \App\Models\City::where('name_en', $business->city)->pluck('name_ar')->first(); @endphp
+                                        {{$cityArabicName}}
+                                    </p>
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">

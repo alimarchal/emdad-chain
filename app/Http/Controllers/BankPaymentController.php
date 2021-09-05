@@ -16,12 +16,49 @@ class BankPaymentController extends Controller
     {
         $collection = null;
         if (auth()->user()->registration_type == 'Buyer') {
-//            $collection = BankPayment::where('buyer_business_id', auth()->user()->business_id)->get();
-            $collection = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_status', 0)->get();
+//            $collection = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_status', 0)->get();
+            $unPaidInvoices = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'invoice_status' => 0])->get();
+
+            $multiCategory = array();
+            $singleCategory = array();
+            foreach ($unPaidInvoices as $unPaidInvoice)
+            {
+                if ($unPaidInvoice['rfq_type'] == 1)
+                {
+                    $multiCategory[] = $unPaidInvoice;
+                }
+                if ($unPaidInvoice['rfq_type'] == 0)
+                {
+                    $singleCategory[] =$unPaidInvoice;
+                }
+            }
+            $multiCategoryCollection = collect($multiCategory);
+            $singleCategoryCollection = collect($singleCategory);
+            $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+            $collection = $multiCategoryCollection->merge($singleCategoryInvoices);
         }
         if (auth()->user()->registration_type == 'Supplier') {
-//            $collection = BankPayment::where('supplier_business_id', auth()->user()->business_id)->where('status', '!=' ,0)->get();
-            $collection = Invoice::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_status', 0)->get();
+//            $collection = Invoice::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_status', 0)->get();
+            $unPaidInvoices = Invoice::where(['supplier_business_id' => auth()->user()->business_id, 'invoice_status' => 0])->get();
+
+            $multiCategory = array();
+            $singleCategory = array();
+            foreach ($unPaidInvoices as $unPaidInvoice)
+            {
+                if ($unPaidInvoice['rfq_type'] == 1)
+                {
+                    $multiCategory[] = $unPaidInvoice;
+                }
+                if ($unPaidInvoice['rfq_type'] == 0)
+                {
+                    $singleCategory[] =$unPaidInvoice;
+                }
+            }
+            $multiCategoryCollection = collect($multiCategory);
+            $singleCategoryCollection = collect($singleCategory);
+            $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+            $collection = $multiCategoryCollection->merge($singleCategoryInvoices);
+
         }
         if (auth()->user()->hasRole('SuperAdmin|Finance Officer 1')) {
             return redirect()->route('emdad_payments');
@@ -214,6 +251,7 @@ class BankPaymentController extends Controller
     {
         $collections = Invoice::where('rfq_no', $rfq_no)->get();
         $invoices = $collections->unique('rfq_no');
+        /* Checking Delivery isset in view */
 
         return view('manual-payments.singleCategory.create', compact('invoices'));
     }

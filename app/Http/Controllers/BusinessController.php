@@ -287,7 +287,7 @@ class BusinessController extends Controller
                 ]);
             }
             session()->flash('message', 'Business information successfully updated.');
-            return redirect()->route('business.edit', $business->id);
+            return redirect()->route('business.show', $business->id);
         }
     }
 

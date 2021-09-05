@@ -1301,6 +1301,35 @@
         @endif
 
     </x-app-layout>
+
+    <script>
+        $('.company_name_check').change(function () {
+            // alert($(this).attr('data-id'));
+            // alert($(this).val());
+            let status = $(this).val();
+            let rfqId = $(this).attr('data-id');
+            // alert(rfqId);
+
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('companyCheck') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    'rfqNo': rfqId,
+                    'status': status
+                },
+                success: function (response) {
+                    if (response.status === 0) {
+                        alert('Not Updated Try again');
+                    } else if (response.status === 1) {
+                        alert('Updated Successfully!');
+                        // $('#status').show().delay(5000).fadeOut();
+                    }
+                }
+            });
+        });
+    </script>
 @else
     <x-app-layout>
         <style type="text/css">
@@ -2556,39 +2585,41 @@
         @endif
 
     </x-app-layout>
+
+    <script>
+        $('.company_name_check').change(function () {
+            // alert($(this).attr('data-id'));
+            // alert($(this).val());
+            let status = $(this).val();
+            let rfqId = $(this).attr('data-id');
+            // alert(rfqId);
+
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('companyCheck') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    'rfqNo': rfqId,
+                    'status': status
+                },
+                success: function (response) {
+                    if (response.status === 0) {
+                        alert('لم يتم التحديث، حاول مجدداً');
+                    } else if (response.status === 1) {
+                        alert('تم تحديث الحالة بنجاح!');
+                        // $('#status').show().delay(5000).fadeOut();
+                    }
+                }
+            });
+        });
+    </script>
 @endif
 
 <script>
 
     $('.confirm').on('click', function (e) {
         return confirm($(this).data('confirm'));
-    });
-
-    $('.company_name_check').change(function () {
-        // alert($(this).attr('data-id'));
-        // alert($(this).val());
-        let status = $(this).val();
-        let rfqId = $(this).attr('data-id');
-        // alert(rfqId);
-
-
-        $.ajax({
-            type: 'POST',
-            url: "{{ route('companyCheck') }}",
-            data: {
-                "_token": "{{ csrf_token() }}",
-                'rfqNo': rfqId,
-                'status': status
-            },
-            success: function (response) {
-                if (response.status === 0) {
-                    alert('Not Updated Try again');
-                } else if (response.status === 1) {
-                    alert('Updated Successfully!');
-                    // $('#status').show().delay(5000).fadeOut();
-                }
-            }
-        });
     });
 
 </script>

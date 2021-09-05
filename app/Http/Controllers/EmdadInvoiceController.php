@@ -20,7 +20,27 @@ class EmdadInvoiceController extends Controller
         }
         elseif(auth()->user()->registration_type == "Supplier")
         {
-            $emdadInvoices = EmdadInvoice::where([['supplier_business_id', auth()->user()->business_id],['send_status', 1]])->where('rfq_type', '=', 1)->get();
+//            $emdadInvoices = EmdadInvoice::where([['supplier_business_id', auth()->user()->business_id],['send_status', 1]])->where('rfq_type', '=', 1)->get();
+
+            $collection = EmdadInvoice::where([['supplier_business_id', auth()->user()->business_id],['send_status', 1]])->get();
+
+            $multiCategory = array();
+            $singleCategory = array();
+            foreach ($collection as $coll)
+            {
+                if ($coll['rfq_type'] == 1)
+                {
+                    $multiCategory[] = $coll;
+                }
+                if ($coll['rfq_type'] == 0)
+                {
+                    $singleCategory[] = $coll;
+                }
+            }
+            $multiCategoryCollection = collect($multiCategory);
+            $singleCategoryCollection = collect($singleCategory);
+            $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+            $emdadInvoices = $multiCategoryCollection->merge($singleCategoryInvoices);
 
             return view('invoice.supplier_emdad_invoices', compact('emdadInvoices'))->with('invoice');
         }
@@ -76,7 +96,7 @@ class EmdadInvoiceController extends Controller
             {
                 foreach ($collections as $collection)
                 {
-                    $quote = Qoute::where('id', $collection->invoice->quote->id)->first();
+                    $quote = Qoute::where(['id' => $collection->invoice->quote->id , 'supplier_business_id' => auth()->user()->business_id])->first();
                     $totalAmount += ($quote->quote_quantity * $quote->quote_price_per_quantity);
                 }
                 $totalAmount += $quote->shipment_cost;

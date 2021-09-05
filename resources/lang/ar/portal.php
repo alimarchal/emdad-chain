@@ -71,7 +71,7 @@ return [
     'Quantity' => 'الكمية',
     'Brand' => 'العلامة التجارية',
     'Last Price' => 'السعر الأخير',
-    'Delivery Period' => 'التوصيل',
+    'Delivery Period' => 'التوريد',
     'Display Company Name' => 'إخفاء اسم الشركة',
     'Show Company Name' => 'إظهار اسم الشركة',
     'Date' => 'التاريخ',
@@ -302,7 +302,7 @@ return [
     'User' => 'مستخدم',
     'Timestamp' => 'الطابع الزمني',
     'Role' => 'الوظيفة',
-    'Permissions' => 'التصريحات',
+    'Permissions' => 'الصلاحيات',
     'NULL' => 'باطل',
     'No users yet..!' => 'لا يوجد أي مستخدم بعد..!',
     'Designation' => 'المسمى الوظيفي',
@@ -746,6 +746,12 @@ return [
     'Category Name Arabic' => 'اسم التصنيف بالعربي',
     'Category Name Urdu' => 'قسم کا نام (اردو)',
     'show all Categories' => 'استعراض جميع الفئات',
-    'B.Type' => 'B.Type',
+    'B.Type' => 'نوع النشاط التجاري',
+
+    /* Alerts (messages) */
+    'You have reached daily rfq limit' => 'You have reached daily rfq limit',
+    'RFQ placed successfully' => 'RFQ placed successfully',
+    'Quotation Time Reset Successfully!' => 'Quotation Time Reset Successfully!',
+    'Quotation Discarded Successfully!' => 'Quotation Discarded Successfully!',
 
 ];

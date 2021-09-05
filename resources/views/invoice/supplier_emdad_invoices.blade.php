@@ -42,6 +42,10 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Requisition Type')}}
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Amount w/o VAT')}}
                                     </th>
 
@@ -62,32 +66,70 @@
                                             {{ $emdadInvoice->id }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $emdadInvoice->invoice->id }}
+                                            {{__('portal.Inv.')}} -{{ $emdadInvoice->invoice->id }}
                                         </td>
-                                        {{-- calculating total cost without VAT--}}
-                                        @php
-                                            $quote = \App\Models\Qoute::where('id', $emdadInvoice->invoice->quote->id)->first();
-                                            $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
-                                            $totalEmdadCharges = $totalCost * (1.5 / 100);
-                                        @endphp
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ number_format($totalCost,2,'.') }}
+                                            @if($emdadInvoice->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($emdadInvoice->rfq_type == 0) {{__('portal.Single Category')}} @endif
+                                        </td>
+                                        @if($emdadInvoice->rfq_type == 1)
+                                            {{-- calculating total cost without VAT--}}
+                                            @php
+                                                $quote = \App\Models\Qoute::where('id', $emdadInvoice->invoice->quote->id)->first();
+                                                $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
+                                                $totalEmdadCharges = $totalCost * (1.5 / 100);
+                                            @endphp
+                                        @elseif($emdadInvoice->rfq_type == 0)
+                                            {{-- calculating total cost without VAT for Single Category--}}
+                                            @php
+                                                $totalAmount = 0;
+                                                $totalEmdadCharges = 0;
+                                                $quotes = \App\Models\Qoute::where(['e_order_id' => $emdadInvoice->invoice->quote->e_order_id, 'supplier_business_id' => auth()->user()->business_id])->get();
+                                                    foreach ($quotes as $quote)
+                                                        {
+                                                            $totalAmount += ($quote->quote_quantity * $quote->quote_price_per_quantity);
+                                                        }
+                                                        $totalAmount += $quotes[0]->shipment_cost;
+                                                        $totalSingleCategoryEmdadCharges = $totalAmount * (1.5 / 100);
+                                            @endphp
+                                        @endif
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            @if($emdadInvoice->rfq_type == 1)
+                                                {{ number_format($totalCost,2,'.') }} {{__('portal.SAR')}}
+                                            @elseif($emdadInvoice->rfq_type == 0)
+                                                {{ number_format($totalAmount,2)}} {{__('portal.SAR')}}
+                                            @endif
                                         </td>
                                         <td class="px-7 py-4 text-center whitespace-nowrap">
-                                            {{ number_format($totalEmdadCharges,2) }}
+                                            @if($emdadInvoice->rfq_type == 1)
+                                                {{ number_format($totalEmdadCharges,2) }} {{__('portal.SAR')}}
+                                            @elseif($emdadInvoice->rfq_type == 0)
+                                                {{ number_format($totalSingleCategoryEmdadCharges,2) }} {{__('portal.SAR')}}
+                                            @endif
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            <a href="{{route('emdadInvoiceView', $emdadInvoice->id)}}"
-                                               class="hover:underline hover:text-blue-800 text-blue-500">
-                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                    </path>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                    </path>
-                                                </svg>
-                                            </a>
+                                            @if($emdadInvoice->rfq_type == 1)
+                                                <a href="{{route('emdadInvoiceView', $emdadInvoice->id)}}"
+                                                   class="hover:underline hover:text-blue-800 text-blue-500">
+                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                        </path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
+                                            @elseif($emdadInvoice->rfq_type == 0)
+                                                <a href="{{route('singleCategoryView', $emdadInvoice->rfq_no)}}" class="hover:underline hover:text-blue-800 text-blue-500">
+                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                        </path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
+                                            @endif
                                         </td>
 
                                     </tr>
@@ -143,6 +185,10 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        {{__('portal.Requisition Type')}}
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         {{__('portal.Amount w/o VAT')}}
                                     </th>
 
@@ -163,32 +209,72 @@
                                             {{ $emdadInvoice->id }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $emdadInvoice->invoice->id }}
-                                        </td>
-                                        {{-- calculating total cost without VAT--}}
-                                        @php
-                                            $quote = \App\Models\Qoute::where('id', $emdadInvoice->invoice->quote->id)->first();
-                                            $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
-                                            $totalEmdadCharges = $totalCost * (1.5 / 100);
-                                        @endphp
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ number_format($totalCost,2,'.') }}
-                                        </td>
-                                        <td class="px-7 py-4 text-center whitespace-nowrap">
-                                            {{ number_format($totalEmdadCharges,2) }}
+                                            {{__('portal.Inv.')}} -{{ $emdadInvoice->invoice->id }}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            <a href="{{route('emdadInvoiceView', $emdadInvoice->id)}}"
-                                               class="hover:underline hover:text-blue-800 text-blue-500">
-                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                    </path>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                    </path>
-                                                </svg>
-                                            </a>
+                                            @if($emdadInvoice->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($emdadInvoice->rfq_type == 0) {{__('portal.Single Category')}} @endif
+                                        </td>
+
+                                        @if($emdadInvoice->rfq_type == 1)
+                                            {{-- calculating total cost without VAT--}}
+                                            @php
+                                                $quote = \App\Models\Qoute::where('id', $emdadInvoice->invoice->quote->id)->first();
+                                                $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
+                                                $totalEmdadCharges = $totalCost * (1.5 / 100);
+                                            @endphp
+                                        @elseif($emdadInvoice->rfq_type == 0)
+                                            {{-- calculating total cost without VAT for Single Category--}}
+                                            @php
+                                                $totalAmount = 0;
+                                                $totalEmdadCharges = 0;
+                                                $quotes = \App\Models\Qoute::where(['e_order_id' => $emdadInvoice->invoice->quote->e_order_id, 'supplier_business_id' => auth()->user()->business_id])->get();
+                                                    foreach ($quotes as $quote)
+                                                        {
+                                                            $totalAmount += ($quote->quote_quantity * $quote->quote_price_per_quantity);
+                                                        }
+                                                        $totalAmount += $quotes[0]->shipment_cost;
+                                                        $totalSingleCategoryEmdadCharges = $totalAmount * (1.5 / 100);
+                                            @endphp
+                                        @endif
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            @if($emdadInvoice->rfq_type == 1)
+                                                {{ number_format($totalCost,2,'.') }} {{__('portal.SAR')}}
+                                            @elseif($emdadInvoice->rfq_type == 0)
+                                                {{ number_format($totalAmount,2)}} {{__('portal.SAR')}}
+                                            @endif
+                                        </td>
+                                        <td class="px-7 py-4 text-center whitespace-nowrap">
+                                            @if($emdadInvoice->rfq_type == 1)
+                                                {{ number_format($totalEmdadCharges,2) }} {{__('portal.SAR')}}
+                                            @elseif($emdadInvoice->rfq_type == 0)
+                                                {{ number_format($totalSingleCategoryEmdadCharges,2) }} {{__('portal.SAR')}}
+                                            @endif
+                                        </td>
+
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            @if($emdadInvoice->rfq_type == 1)
+                                                <a href="{{route('emdadInvoiceView', $emdadInvoice->id)}}"
+                                                   class="hover:underline hover:text-blue-800 text-blue-500">
+                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                        </path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
+                                            @elseif($emdadInvoice->rfq_type == 0)
+                                                <a href="{{route('singleCategoryView', $emdadInvoice->rfq_no)}}" class="hover:underline hover:text-blue-800 text-blue-500">
+                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                        </path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
+                                            @endif
                                         </td>
 
                                     </tr>

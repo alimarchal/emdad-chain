@@ -37,7 +37,7 @@
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="business_type">{{__('portal.Category (Select If you want to change)')}}</x-jet-label>
-                                <x-jet-label class="w-1/2" for="business_type">{{__('portal.Existing Category')}}:</x-jet-label>
+                                {{--<x-jet-label class="w-1/2" for="business_type">{{__('portal.Existing Category')}}:</x-jet-label>--}}
                             </div>
                             <div class="flex mt-3 mb-4">
                                 @include('category.category.index')
@@ -79,16 +79,16 @@
                                 <x-jet-input id="phone" type="text" name="phone" class="border p-2 w-1/2" value="{{ $business->phone }}"></x-jet-input>
                                 <x-jet-input id="mobile" type="text" name="mobile" class="border p-2 w-1/2" value="{{ $business->mobile }}"></x-jet-input>
 
-                                <select name="country" id="country" class="form-input rounded-md shadow-sm border p-2 w-1/2">
+                                <select name="country" id="country" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                     <option value="">{{__('portal.Select')}}</option>
                                     @foreach (\App\Models\User::countries() as $country)
                                         <option value="{{ $country }}" {{ $business->country == $country ? 'selected' : '' }}>{{ $country }}</option>
                                     @endforeach
                                 </select>
-                                <select name="city" id="city" class="form-input rounded-md shadow-sm border p-2 w-1/2">
+                                <select name="city" id="city" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                     <option value="">{{__('portal.Select')}}</option>
                                     @foreach (\App\Models\City::all() as $city)
-                                        <option value="{{ $city }}" {{ $business->city == $city ? 'selected' : '' }}>{{ $city->name_en }} - {{$city->name_ar}}</option>
+                                        <option value="{{ $city->name_en }}" {{ $business->city == $city->name_en ? 'selected' : '' }}>{{ $city->name_en }} - {{$city->name_ar}}</option>
                                     @endforeach
                                 </select>
                                 {{--                            <x-jet-input id="city" type="text" name="city" class="border p-2 w-1/2" value="{{ $business->city }}"></x-jet-input>--}}
@@ -101,7 +101,7 @@
                                 <x-jet-label class="w-1/2" for="bank_name">{{__('portal.Bank Name')}}</x-jet-label>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2">{{ $business->address }}</x-jet-input>
+                                <x-jet-input id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{ $business->address }}"></x-jet-input>
                                 <x-jet-input id="longitude" type="text" name="longitude"  required readonly  class="border p-2 w-1/2" value="{{ $business->longitude }}"></x-jet-input>
                                 <x-jet-input id="latitude" type="text" name="latitude"  required readonly  class="border p-2 w-1/2" value="{{ $business->latitude }}"></x-jet-input>
 
@@ -111,7 +111,7 @@
                                 <select id="bank_name" name="bank_name" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                     <option value="">{{__('portal.Select')}}</option>
                                     @foreach(\App\Models\Bank::all() as $bank_name)
-                                        <option value="{{ $bank_name->name }}" @if($business->bank_name == $bank_name) selected @endif>{{ $bank_name->name }} - {{ $bank_name->ar_name }} </option>
+                                        <option value="{{ $bank_name->name }}" @if($business->bank_name == $bank_name->name) selected @endif>{{ $bank_name->name }} - {{ $bank_name->ar_name }} </option>
                                     @endforeach
                                 </select>
 
@@ -132,20 +132,15 @@
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_photo_url">Company logo</label>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="business_photo_url" required type="file" name="business_photo_url_1" class="border p-2 w-1/2" value="{{ $business->business_photo_url }}"></x-jet-input>
+                                <x-jet-input id="business_photo_url" type="file" name="business_photo_url_1" class="border p-2 w-1/2" value="{{ $business->business_photo_url }}"></x-jet-input>
                             </div>
                             <x-jet-button class="float-right mt-4 mb-4">{{__('portal.Update')}}</x-jet-button>
 
                         </form>
 
-
                     </div>
                 </div>
-
-
             </div>
-
-
         </div>
     </x-app-layout>
 @else
@@ -182,7 +177,7 @@
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="business_type">{{__('portal.Category (Select If you want to change)')}}</x-jet-label>
-                                <x-jet-label class="w-1/2" for="business_type">{{__('portal.Existing Category')}}:</x-jet-label>
+                                {{--<x-jet-label class="w-1/2" for="business_type">{{__('portal.Existing Category')}}:</x-jet-label>--}}
                             </div>
                             <div class="flex mt-3 mb-4">
                                 @include('category.category.index')
@@ -224,16 +219,16 @@
                                 <x-jet-input id="phone" type="text" name="phone" class="border p-2 w-1/2" value="{{ $business->phone }}"></x-jet-input>
                                 <x-jet-input id="mobile" type="text" name="mobile" class="border p-2 w-1/2" value="{{ $business->mobile }}"></x-jet-input>
 
-                                <select name="country" id="country" class="form-input rounded-md shadow-sm border p-2 w-1/2">
+                                <select name="country" id="country" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                     <option value="">{{__('portal.Select')}}</option>
                                     @foreach (\App\Models\User::countries() as $country)
                                         <option value="{{ $country }}" {{ $business->country == $country ? 'selected' : '' }}>{{ $country }}</option>
                                     @endforeach
                                 </select>
-                                <select name="city" id="city" class="form-input rounded-md shadow-sm border p-2 w-1/2">
+                                <select name="city" id="city" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                     <option value="">{{__('portal.Select')}}</option>
                                     @foreach (\App\Models\City::all() as $city)
-                                        <option value="{{ $city }}" {{ $business->city == $city ? 'selected' : '' }}>{{ $city->name_en }} - {{$city->name_ar}}</option>
+                                        <option value="{{ $city->name_en }}" {{ $business->city == $city->name_en ? 'selected' : '' }}>{{ $city->name_en }} - {{$city->name_ar}}</option>
                                     @endforeach
                                 </select>
                                 {{--                            <x-jet-input id="city" type="text" name="city" class="border p-2 w-1/2" value="{{ $business->city }}"></x-jet-input>--}}
@@ -246,7 +241,7 @@
                                 <x-jet-label class="w-1/2" for="bank_name">{{__('portal.Bank Name')}}</x-jet-label>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2">{{ $business->address }}</x-jet-input>
+                                <x-jet-input id="address" type="text" name="address" class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{ $business->address }}"></x-jet-input>
                                 <x-jet-input id="longitude" type="text" name="longitude"  required readonly  class="border p-2 w-1/2" value="{{ $business->longitude }}"></x-jet-input>
                                 <x-jet-input id="latitude" type="text" name="latitude"  required readonly  class="border p-2 w-1/2" value="{{ $business->latitude }}"></x-jet-input>
 
@@ -256,7 +251,7 @@
                                 <select id="bank_name" name="bank_name" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                     <option value="">{{__('portal.Select')}}</option>
                                     @foreach(\App\Models\Bank::all() as $bank_name)
-                                        <option value="{{ $bank_name->name }}" @if($business->bank_name == $bank_name) selected @endif>{{ $bank_name->name }} - {{ $bank_name->ar_name }} </option>
+                                        <option value="{{ $bank_name->name }}" @if($business->bank_name == $bank_name->name) selected @endif>{{ $bank_name->name }} - {{ $bank_name->ar_name }} </option>
                                     @endforeach
                                 </select>
 
@@ -277,7 +272,7 @@
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_photo_url">Company logo</label>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="business_photo_url" required type="file" name="business_photo_url_1" class="border p-2 w-1/2" value="{{ $business->business_photo_url }}"></x-jet-input>
+                                <x-jet-input id="business_photo_url" type="file" name="business_photo_url_1" class="border p-2 w-1/2" value="{{ $business->business_photo_url }}"></x-jet-input>
                             </div>
                             <x-jet-button class="float-right mt-4 mb-4">{{__('portal.Update')}}</x-jet-button>
 

@@ -748,4 +748,10 @@ return [
     'show all Categories' => 'show all Categories',
     'B.Type' => 'B.Type',
 
+    /* Alerts (messages) */
+    'You have reached daily rfq limit' => 'You have reached daily rfq limit',
+    'RFQ placed successfully' => 'RFQ placed successfully',
+    'Quotation Time Reset Successfully!' => 'Quotation Time Reset Successfully!',
+    'Quotation Discarded Successfully!' => 'Quotation Discarded Successfully!',
+
 ];

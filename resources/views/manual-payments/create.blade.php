@@ -34,9 +34,7 @@
 @if(auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{__('portal.Bank Manual Payment for Buyer')}}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{__('portal.Bank Manual Payment for Buyer')}} </h2>
         </x-slot>
 
         <div class="py-12">
@@ -52,7 +50,6 @@
                         </ul>
                     </div>
                 @endif
-            <!-- component -->
 
                 <div class="text-center text-red-600 mr-5">
                     <span class="text-center text-red-600 mr-5">{{__('portal.Payment to be paid to Emdad')}}</span>
@@ -67,20 +64,14 @@
                                 <div class="flex space-x-5 mt-3">
                                     <x-jet-label class="w-1/3" for="bank_name">{{__('portal.Bank Name')}}</x-jet-label>
                                     <x-jet-label class="w-1/3" for="amount_received">{{__('portal.Amount to pay')}}</x-jet-label>
-                                    {{--@php $supplierBusinessName = \App\Models\Business::where('id', $invoice->supplier_business_id)->first(); @endphp--}}
-                                    {{--                                <x-jet-label class="w-1/3" for="account_number">{{$supplierBusinessName->business_name}}&nbsp;IBAN#</x-jet-label>--}}
                                     {{-- Emdad IBAN #--}}
                                     <x-jet-label class="w-1/3" for="account_number">{{__('portal.Emdad IBAN #')}}</x-jet-label>
                                 </div>
                                 <div class="flex space-x-5 mt-3">
-
-                                    {{--                                <x-jet-input id="bank_name" type="text" name="bank_name" class="border p-2 w-1/2" value="{{$supplierBusinessName->bank_name}}" required></x-jet-input>--}}
                                     <x-jet-input id="bank_name" type="text" name="bank_name" class="border p-2 w-1/2" value="Alinma Bank" readonly required></x-jet-input>
                                     <x-jet-input id="amount_received" type="text" name="amount_received" class="border p-2 w-1/2" value="{{$invoice->total_cost}}" readonly required></x-jet-input>
-                                    {{--                                <x-jet-input id="account_number" type="text" name="account_number" class="border p-2 w-1/2" value="{{$supplierBusinessName->iban}}" required></x-jet-input>--}}
                                     <x-jet-input id="account_number" type="text" name="account_number" class="border p-2 w-1/2" value="SA2605000068203048310001" readonly required></x-jet-input>
                                 </div>
-
 
                                 <div class="flex space-x-5 mt-3">
                                     <x-jet-label class="w-1/2" for="amount_date">{{__('portal.Deposit Date')}}</x-jet-label>
@@ -155,9 +146,7 @@
 @else
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{__('portal.Bank Manual Payment for Buyer')}}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{__('portal.Bank Manual Payment for Buyer')}} </h2>
         </x-slot>
 
         <div class="py-12">
@@ -177,17 +166,12 @@
                                 <div class="flex space-x-5 mt-3">
                                     <x-jet-label class="w-1/3" for="bank_name">{{__('portal.Bank Name')}}</x-jet-label>
                                     <x-jet-label class="w-1/3" for="amount_received">{{__('portal.Amount to pay')}}</x-jet-label>
-                                    {{--@php $supplierBusinessName = \App\Models\Business::where('id', $invoice->supplier_business_id)->first(); @endphp--}}
-                                    {{--                                <x-jet-label class="w-1/3" for="account_number">{{$supplierBusinessName->business_name}}&nbsp;IBAN#</x-jet-label>--}}
                                     {{-- Emdad IBAN #--}}
                                     <x-jet-label class="w-1/3" for="account_number">{{__('portal.Emdad IBAN #')}}</x-jet-label>
                                 </div>
                                 <div class="flex space-x-5 mt-3">
-
-                                    {{--                                <x-jet-input id="bank_name" type="text" name="bank_name" class="border p-2 w-1/2" value="{{$supplierBusinessName->bank_name}}" required></x-jet-input>--}}
                                     <x-jet-input id="bank_name" type="text" name="bank_name" class="border p-2 w-1/2" value="بنك الإنماء" readonly required></x-jet-input>
                                     <x-jet-input id="amount_received" type="text" name="amount_received" class="border p-2 w-1/2" value="{{$invoice->total_cost}}" readonly required></x-jet-input>
-                                    {{--                                <x-jet-input id="account_number" type="text" name="account_number" class="border p-2 w-1/2" value="{{$supplierBusinessName->iban}}" required></x-jet-input>--}}
                                     <x-jet-input id="account_number" type="text" name="account_number" class="border p-2 w-1/2" value="SA2605000068203048310001" readonly required></x-jet-input>
                                 </div>
 

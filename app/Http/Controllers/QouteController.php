@@ -368,7 +368,13 @@ class QouteController extends Controller
     {
         EOrderItems::where('id', $EOrderItemID)->update(['quotation_time' => Carbon::now()->addDays(3)]);
 
-        session()->flash('message', 'Quotation Time Reset Successfully!');
+        if (auth()->user()->rtl == 0)
+        {
+            session()->flash('message', __('portal.Quotation Time Reset Successfully!'));
+        }
+        else{
+            session()->flash('message', __('portal.Quotation Time Reset Successfully!'));
+        }
         return redirect()->route('QoutationsBuyerReceived');
     }
 
@@ -377,7 +383,13 @@ class QouteController extends Controller
     {
         EOrders::where('id', $EOrderID)->update(['discard' => 1]);
 
-        session()->flash('message', 'Quotation Discarded Successfully!');
+        if (auth()->user()->rtl == 0)
+        {
+            session()->flash('message', __('portal.Quotation Discarded Successfully!'));
+        }
+        else{
+            session()->flash('message', __('portal.Quotation Discarded Successfully!'));
+        }
         return redirect()->route('QoutationsBuyerReceived');
     }
 
