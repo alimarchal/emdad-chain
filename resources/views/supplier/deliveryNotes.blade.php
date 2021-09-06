@@ -13,9 +13,7 @@
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Draft Purchase Orders') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('Draft Purchase Orders') }} </h2>
         </x-slot>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -48,6 +46,10 @@
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         {{__('portal.Category Name')}}
+                                                    </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.Requisition Type')}}
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -89,6 +91,10 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            @if($dn->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dn->rfq_type == 0) {{__('portal.Single Category')}} @endif
+                                                        </td>
+
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                             {{ Carbon\Carbon::parse($dn->purchase_order->po_date)->format('d-m-Y') }}
                                                         </td>
 
@@ -107,15 +113,27 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            <a href="{{ route('viewNote',$dn->id) }}" class="hover:underline hover:text-blue-800 text-blue-500">
-                                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                                    </path>
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                                    </path>
-                                                                </svg>
-                                                            </a>
+                                                            @if($dn->rfq_type == 1)
+                                                                <a href="{{ route('viewNote',$dn->id) }}" class="hover:underline hover:text-blue-800 text-blue-500">
+                                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                        </path>
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                        </path>
+                                                                    </svg>
+                                                                </a>
+                                                            @elseif($dn->rfq_type == 0)
+                                                                <a href="{{ route('singleCategoryViewNote',$dn->rfq_no) }}" class="hover:underline hover:text-blue-800 text-blue-500">
+                                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                        </path>
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                        </path>
+                                                                    </svg>
+                                                                </a>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -123,9 +141,7 @@
                                         </table>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
 
                     @else
@@ -138,12 +154,8 @@
                     @endif
 
                 </div>
-
-
             </div>
         </div>
-
-
     </x-app-layout>
 
     <script>
@@ -160,16 +172,14 @@
 @else
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Draft Purchase Orders') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('Draft Purchase Orders') }} </h2>
         </x-slot>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     @if (session()->has('message'))
                         <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                            <strong class="mr-1">{{ session('message') }}</strong>
+                            <strong class="mr-3">{{ session('message') }}</strong>
                             <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                                 <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                             </button>
@@ -195,6 +205,10 @@
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         {{__('portal.Category Name')}}
+                                                    </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.Requisition Type')}}
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -225,7 +239,6 @@
                                                             {{__('portal.P.O.')}}-{{ $dn->purchase_order->id }}
                                                         </td>
 
-
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                             @php
                                                                 $record = \App\Models\Category::where('id',$dn->purchase_order->item_code)->first();
@@ -233,6 +246,10 @@
                                                             @endphp
                                                             {{ $record->name_ar }} , {{ $parent->name_ar }}
                                                             {{-- <a href="{{ route('po.show', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dn->item_name }}</a> --}}
+                                                        </td>
+
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            @if($dn->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dn->rfq_type == 0) {{__('portal.Single Category')}} @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -254,15 +271,27 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            <a href="{{ route('viewNote',$dn->id) }}" class="hover:underline hover:text-blue-800 text-blue-500">
-                                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                                    </path>
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                                    </path>
-                                                                </svg>
-                                                            </a>
+                                                            @if($dn->rfq_type == 1)
+                                                                <a href="{{ route('viewNote',$dn->id) }}" class="hover:underline hover:text-blue-800 text-blue-500">
+                                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                        </path>
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                        </path>
+                                                                    </svg>
+                                                                </a>
+                                                            @elseif($dn->rfq_type == 0)
+                                                                <a href="{{ route('singleCategoryViewNote',$dn->rfq_no) }}" class="hover:underline hover:text-blue-800 text-blue-500">
+                                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                        </path>
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                        </path>
+                                                                    </svg>
+                                                                </a>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -285,12 +314,8 @@
                     @endif
 
                 </div>
-
-
             </div>
         </div>
-
-
     </x-app-layout>
 
     <script>

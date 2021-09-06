@@ -42,6 +42,9 @@
                                         @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Supplier Business name')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Buyer Business name')}} @endif
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{__('portal.Requisition Type')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         {{__('portal.Status')}}
                                     </th>
                                     @if(auth()->user()->registration_type == 'Buyer')
@@ -64,10 +67,18 @@
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if (auth()->user()->registration_type == 'Buyer')
-                                                <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                @if($item->rfq_type == 1)
+                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                @elseif($item->rfq_type == 0)
+                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                @endif
                                             @elseif(auth()->user()->registration_type == 'Supplier')
                                                 {{--                                        <a href="{{ route('invoice.show',$item->invoice_id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->invoice_id}}</a>--}}
-                                                <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                @if($item->rfq_type == 1)
+                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                @elseif($item->rfq_type == 0)
+                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                @endif
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
@@ -89,44 +100,30 @@
                                             @if(isset($businessName->business_name)) {{$businessName->business_name}} @else {{__('portal.N/A')}} @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                            @if($item->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($item->rfq_type == 0) {{__('portal.Single Category')}} @endif
+                                        </td>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if (auth()->user()->registration_type == 'Buyer')
-                                                @if ($item->invoice_status == '0')
-                                                    <span class="text-blue-800">{{__('portal.Un-Paid')}}</span>
-                                                @elseif ($item->invoice_status == '1')
-                                                    <span style="color: #eb8e08;">{{__('portal.Supplier Verification Pending')}}</span>
-                                                @elseif ($item->invoice_status == '2')
-                                                    <span class="text-red-800">{{__('portal.Supplier Rejected')}}</span>
-                                                @elseif ($item->invoice_status == '3')
-                                                    <span class="text-green-500">{{__('portal.Supplier Confirmed')}}</span>
-                                                @endif
+                                                @if ($item->invoice_status == '0') <span class="text-red-800">{{__('portal.Un-Paid')}}</span> @endif
                                             @elseif(auth()->user()->registration_type == 'Supplier')
-                                                {{--                                        @if ($item->status == '0')--}}
-                                                @if ($item->invoice_status == '0')
-                                                    <span class="text-blue-800">{{__('portal.Un-Paid')}}</span>
-                                                    {{--                                        @elseif ($item->status == '1')--}}
-                                                @elseif ($item->invoice_status == '1')
-                                                    <span style="color: #eb8e08;">{{__('portal.Verification Pending')}}</span>
-                                                    {{--                                        @elseif ($item->status == '2')--}}
-                                                @elseif ($item->invoice_status == '2')
-                                                    <span class="text-red-800">{{__('portal.Rejected')}}</span>
-                                                    {{--                                        @elseif ($item->status == '3')--}}
-                                                @elseif ($item->invoice_status == '3')
-                                                    <span class="text-green-500">{{__('portal.Confirmed')}}</span>
-                                                @endif
+                                                @if ($item->invoice_status == '0') <span class="text-red-800">{{__('portal.Un-Paid')}}</span> @endif
                                             @endif
 
                                         </td>
                                         @if (auth()->user()->registration_type == 'Buyer')
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                                    {{--@if (auth()->user()->registration_type == 'Buyer')
-                                                        <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
-                                                    @elseif(auth()->user()->registration_type == 'Supplier')
-                                                        <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->invoice_id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
-                                                    @endif--}}
-                                                <a href="@if($item->invoice_status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
-                                                    {{__('portal.Proceed')}}
-                                                </a> |
+                                                @if($item->invoice_status == '0')
+                                                    @if($item->rfq_type == 1)
+                                                        <a href=" {{ route('bank-payments.create', $item->id) }} " class="text-blue-600 hover:underline" target="_blank">
+                                                            {{__('portal.Proceed')}}
+                                                        </a> |
+                                                    @elseif($item->rfq_type == 0)
+                                                        <a href=" {{ route('singleCategoryBankPaymentCreate', $item->rfq_no) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                            {{__('portal.Proceed')}}
+                                                        </a> |
+                                                    @endif
+                                                @endif
                                                 @if($item->invoice_status == '0')
                                                     <form action="{{route('getPaymentCheckOutId')}}" method="post">
                                                         @csrf
@@ -200,6 +197,9 @@
                                         @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Supplier Business name')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Buyer Business name')}} @endif
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        {{__('portal.Requisition Type')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         {{__('portal.Status')}}
                                     </th>
                                     @if(auth()->user()->registration_type == 'Buyer')
@@ -222,10 +222,18 @@
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if (auth()->user()->registration_type == 'Buyer')
-                                                <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-{{$item->id}}</a>
+                                                @if($item->rfq_type == 1)
+                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                @elseif($item->rfq_type == 0)
+                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                @endif
                                             @elseif(auth()->user()->registration_type == 'Supplier')
                                                 {{--                                        <a href="{{ route('invoice.show',$item->invoice_id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->invoice_id}}</a>--}}
-                                                <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-{{$item->id}}</a>
+                                                @if($item->rfq_type == 1)
+                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                @elseif($item->rfq_type == 0)
+                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                @endif
                                             @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
@@ -247,30 +255,13 @@
                                             @if(isset($businessName->business_name)) {{$businessName->business_name}} @else {{__('portal.N/A')}} @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                            @if($item->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($item->rfq_type == 0) {{__('portal.Single Category')}} @endif
+                                        </td>
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if (auth()->user()->registration_type == 'Buyer')
-                                                @if ($item->invoice_status == '0')
-                                                    <span class="text-blue-800">{{__('portal.Un-Paid')}}</span>
-                                                @elseif ($item->invoice_status == '1')
-                                                    <span style="color: #eb8e08;">{{__('portal.Supplier Verification Pending')}}</span>
-                                                @elseif ($item->invoice_status == '2')
-                                                    <span class="text-red-800">{{__('portal.Supplier Rejected')}}</span>
-                                                @elseif ($item->invoice_status == '3')
-                                                    <span class="text-green-500">{{__('portal.Supplier Confirmed')}}</span>
-                                                @endif
+                                                @if ($item->invoice_status == '0') <span class="text-red-800">{{__('portal.Un-Paid')}}</span> @endif
                                             @elseif(auth()->user()->registration_type == 'Supplier')
-                                                {{--                                        @if ($item->status == '0')--}}
-                                                @if ($item->invoice_status == '0')
-                                                    <span class="text-blue-800">{{__('portal.Un-Paid')}}</span>
-                                                    {{--                                        @elseif ($item->status == '1')--}}
-                                                @elseif ($item->invoice_status == '1')
-                                                    <span style="color: #eb8e08;">{{__('portal.Verification Pending')}}</span>
-                                                    {{--                                        @elseif ($item->status == '2')--}}
-                                                @elseif ($item->invoice_status == '2')
-                                                    <span class="text-red-800">{{__('portal.Rejected')}}</span>
-                                                    {{--                                        @elseif ($item->status == '3')--}}
-                                                @elseif ($item->invoice_status == '3')
-                                                    <span class="text-green-500">{{__('portal.Confirmed')}}</span>
-                                                @endif
+                                                @if ($item->invoice_status == '0') <span class="text-red-800">{{__('portal.Un-Paid')}}</span> @endif
                                             @endif
 
                                         </td>

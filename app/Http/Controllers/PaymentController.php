@@ -23,7 +23,28 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        $collection = DeliveryNote::where(['supplier_business_id' => auth()->user()->business->id, 'rfq_type' => 1])->get();
+//        $collection = DeliveryNote::where(['supplier_business_id' => auth()->user()->business->id, 'rfq_type' => 1])->get();
+
+        $generateInvoices = DeliveryNote::where(['supplier_business_id' => auth()->user()->business_id])->get();
+
+        $multiCategory = array();
+        $singleCategory = array();
+        foreach ($generateInvoices as $generateInvoice)
+        {
+            if ($generateInvoice['rfq_type'] == 1)
+            {
+                $multiCategory[] = $generateInvoice;
+            }
+            if ($generateInvoice['rfq_type'] == 0)
+            {
+                $singleCategory[] = $generateInvoice;
+            }
+        }
+        $multiCategoryCollection = collect($multiCategory);
+        $singleCategoryCollection = collect($singleCategory);
+        $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+        $collection = $multiCategoryCollection->merge($singleCategoryInvoices);
+
         return view('supplier.deliveryNotes', compact('collection'));
     }
 
@@ -281,7 +302,28 @@ class PaymentController extends Controller
     {
         if (auth()->user()->registration_type == "Buyer"){
 //            $proformaInvoices = Invoice::where('buyer_user_id', auth()->user()->id)->where('invoice_type', 1)->get();
-            $proformaInvoices = Invoice::with('bankPayment')->where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_type', 1)->get();
+//            $proformaInvoices = Invoice::with('bankPayment')->where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_type', 1)->get();
+            $collection = Invoice::with('bankPayment')->where(['buyer_business_id' => auth()->user()->business_id])->where('invoice_type', 1)->get();
+
+            $multiCategory = array();
+            $singleCategory = array();
+            /* Separating Single and Multi category Invoices  */
+            foreach ($collection as $col)
+            {
+                if ($col['rfq_type'] == 1)
+                {
+                    $multiCategory[] = $col;
+                }
+                if ($col['rfq_type'] == 0 )
+                {
+                    $singleCategory[] =$col;
+                }
+            }
+            $multiCategoryCollection = collect($multiCategory);
+            $singleCategoryCollection = collect($singleCategory);
+            $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+            /* Merging Single and Multi category Invoices  */
+            $proformaInvoices = $multiCategoryCollection->merge($singleCategoryInvoices);
         }
         elseif(auth()->user()->hasRole('SuperAdmin')){
             $proformaInvoices = Invoice::where('invoice_type', 1)->get();
@@ -295,13 +337,53 @@ class PaymentController extends Controller
         $proformaInvoices = null;
         if (auth()->user()->registration_type == "Supplier")
         {
-            $proformaInvoices = Invoice::with('purchase_order')->where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->get();
+            /*$proformaInvoices = Invoice::with('purchase_order')->where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->get();*/
+            $collection = Invoice::with('purchase_order')->where(['supplier_business_id' => auth()->user()->business_id])->get();
+
+            $multiCategory = array();
+            $singleCategory = array();
+            /* Separating Single and Multi category Invoices  */
+            foreach ($collection as $col)
+            {
+                if ($col['rfq_type'] == 1)
+                {
+                    $multiCategory[] = $col;
+                }
+                if ($col['rfq_type'] == 0 )
+                {
+                    $singleCategory[] =$col;
+                }
+            }
+            $multiCategoryCollection = collect($multiCategory);
+            $singleCategoryCollection = collect($singleCategory);
+            $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+            /* Merging Single and Multi category Invoices  */
+            $proformaInvoices = $multiCategoryCollection->merge($singleCategoryInvoices);
         }
         elseif(auth()->user()->registration_type == "Buyer")
         {
-            $proformaInvoices = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->get();
-            /*$collection = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id])->get();
-            $proformaInvoices = $collection->unique('rfq_no');*/
+            /*$proformaInvoices = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->get();*/
+            $collection = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id])->get();
+
+            $multiCategory = array();
+            $singleCategory = array();
+            /* Separating Single and Multi category Invoices  */
+            foreach ($collection as $col)
+            {
+                if ($col['rfq_type'] == 1)
+                {
+                    $multiCategory[] = $col;
+                }
+                if ($col['rfq_type'] == 0 )
+                {
+                    $singleCategory[] =$col;
+                }
+            }
+            $multiCategoryCollection = collect($multiCategory);
+            $singleCategoryCollection = collect($singleCategory);
+            $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+            /* Merging Single and Multi category Invoices  */
+            $proformaInvoices = $multiCategoryCollection->merge($singleCategoryInvoices);
         }
         else{
             $proformaInvoices = Invoice::with('purchase_order')->where(['rfq_type' => 1])->get();
@@ -344,7 +426,27 @@ class PaymentController extends Controller
     /* Manual Payments Supplier received from Emdad (For Supplier) */
     public function supplier_payment_received()
     {
-        $supplierPayments = SupplierBankPayment::with('bankPayment')->where(['rfq_type' => 1])->get();
+//        $supplierPayments = SupplierBankPayment::with('bankPayment')->where(['rfq_type' => 1])->get();
+
+        $collection = SupplierBankPayment::with('bankPayment')->get();
+
+        $multiCategory = array();
+        $singleCategory = array();
+        foreach ($collection as $coll)
+        {
+            if ($coll['rfq_type'] == 1)
+            {
+                $multiCategory[] = $coll;
+            }
+            if ($coll['rfq_type'] == 0)
+            {
+                $singleCategory[] = $coll;
+            }
+        }
+        $multiCategoryCollection = collect($multiCategory);
+        $singleCategoryCollection = collect($singleCategory);
+        $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+        $supplierPayments = $multiCategoryCollection->merge($singleCategoryInvoices);
 
         return view('manual-payments.supplier.list', compact('supplierPayments'));
     }
@@ -353,7 +455,9 @@ class PaymentController extends Controller
 
     public function singleCategoryIndex()
     {
-        $collection = DeliveryNote::where(['supplier_business_id' => auth()->user()->business->id, 'rfq_type' => 0])->get();
+        $data = DeliveryNote::where(['supplier_business_id' => auth()->user()->business->id, 'rfq_type' => 0])->get();
+        $collection = $data->unique('rfq_no');
+
         return view('supplier.singleCategoryRFQ.deliveryNotes', compact('collection'));
     }
 

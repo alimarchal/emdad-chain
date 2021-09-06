@@ -54,6 +54,10 @@
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.Requisition Type')}}
+                                                    </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         {{__('portal.Status')}}
                                                     </th>
 
@@ -78,11 +82,15 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
-                                                            {{ number_format($supplierPayment->amount_received,2) }}
+                                                            {{ $supplierPayment->amount_received }}
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
                                                             {{ Carbon\Carbon::parse($supplierPayment->amount_date)->format('d-m-Y') }}
+                                                        </td>
+
+                                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
+                                                            @if($supplierPayment->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($supplierPayment->rfq_type == 0) {{__('portal.Single Category')}}  @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
@@ -99,15 +107,27 @@
 
                                                         @if($supplierPayment->status == 1 || $supplierPayment->status == 3)
                                                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
-                                                                <a href="{{ route('supplier_payment_view',$supplierPayment->id) }}" class="hover:underline hover:text-blue-800 text-blue-500" target="_blank">
-                                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                                        </path>
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                                        </path>
-                                                                    </svg>
-                                                                </a>
+                                                                @if($supplierPayment->rfq_type == 1)
+                                                                    <a href="{{ route('supplier_payment_view',$supplierPayment->id) }}" class="hover:underline hover:text-blue-800 text-blue-500" target="_blank">
+                                                                        <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                            </path>
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </a>
+                                                                @elseif($supplierPayment->rfq_type == 0)
+                                                                    <a href="{{ route('singleCategorySupplierPaymentView',$supplierPayment->id) }}" class="hover:underline hover:text-blue-800 text-blue-500" target="_blank">
+                                                                        <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                            </path>
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </a>
+                                                                @endif
                                                             </td>
                                                         @endif
                                                     </tr>
@@ -116,9 +136,7 @@
                                         </table>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
 
                     @else
@@ -131,12 +149,8 @@
                     @endif
 
                 </div>
-
-
             </div>
         </div>
-
-
     </x-app-layout>
 
     <script>
@@ -160,7 +174,7 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     @if (session()->has('message'))
                         <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                            <strong class="mr-1">{{ session('message') }}</strong>
+                            <strong class="mr-3">{{ session('message') }}</strong>
                             <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                                 <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                             </button>
@@ -193,6 +207,10 @@
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        {{__('portal.Requisition Type')}}
+                                                    </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         {{__('portal.Status')}}
                                                     </th>
 
@@ -219,11 +237,15 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
-                                                        {{ number_format($supplierPayment->amount_received,2) }}
+                                                        {{ $supplierPayment->amount_received }}
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
                                                         {{ Carbon\Carbon::parse($supplierPayment->amount_date)->format('d-m-Y') }}
+                                                    </td>
+
+                                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
+                                                        @if($supplierPayment->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($supplierPayment->rfq_type == 0) {{__('portal.Single Category')}}  @endif
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
@@ -257,9 +279,7 @@
                                         </table>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
 
                     @else
@@ -272,12 +292,8 @@
                     @endif
 
                 </div>
-
-
             </div>
         </div>
-
-
     </x-app-layout>
 
     <script>

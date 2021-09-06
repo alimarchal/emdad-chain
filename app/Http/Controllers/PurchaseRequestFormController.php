@@ -78,7 +78,7 @@ class PurchaseRequestFormController extends Controller
         $request->merge(['item_code' => $request->item_name]);
         $request->merge(['item_name' => Category::find($request->item_name)->first()->name]);
         $rfq = PurchaseRequestForm::create($request->all());
-        session()->flash('message', 'Item added successfully.');
+        session()->flash('message', __('portal.Item added successfully.'));
 
 
         $user = User::findOrFail(auth()->user()->id);

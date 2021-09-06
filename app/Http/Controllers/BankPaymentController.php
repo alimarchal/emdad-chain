@@ -16,12 +16,49 @@ class BankPaymentController extends Controller
     {
         $collection = null;
         if (auth()->user()->registration_type == 'Buyer') {
-//            $collection = BankPayment::where('buyer_business_id', auth()->user()->business_id)->get();
-            $collection = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_status', 0)->get();
+//            $collection = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_status', 0)->get();
+            $unPaidInvoices = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'invoice_status' => 0])->get();
+
+            $multiCategory = array();
+            $singleCategory = array();
+            foreach ($unPaidInvoices as $unPaidInvoice)
+            {
+                if ($unPaidInvoice['rfq_type'] == 1)
+                {
+                    $multiCategory[] = $unPaidInvoice;
+                }
+                if ($unPaidInvoice['rfq_type'] == 0)
+                {
+                    $singleCategory[] =$unPaidInvoice;
+                }
+            }
+            $multiCategoryCollection = collect($multiCategory);
+            $singleCategoryCollection = collect($singleCategory);
+            $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+            $collection = $multiCategoryCollection->merge($singleCategoryInvoices);
         }
         if (auth()->user()->registration_type == 'Supplier') {
-//            $collection = BankPayment::where('supplier_business_id', auth()->user()->business_id)->where('status', '!=' ,0)->get();
-            $collection = Invoice::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_status', 0)->get();
+//            $collection = Invoice::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_status', 0)->get();
+            $unPaidInvoices = Invoice::where(['supplier_business_id' => auth()->user()->business_id, 'invoice_status' => 0])->get();
+
+            $multiCategory = array();
+            $singleCategory = array();
+            foreach ($unPaidInvoices as $unPaidInvoice)
+            {
+                if ($unPaidInvoice['rfq_type'] == 1)
+                {
+                    $multiCategory[] = $unPaidInvoice;
+                }
+                if ($unPaidInvoice['rfq_type'] == 0)
+                {
+                    $singleCategory[] =$unPaidInvoice;
+                }
+            }
+            $multiCategoryCollection = collect($multiCategory);
+            $singleCategoryCollection = collect($singleCategory);
+            $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+            $collection = $multiCategoryCollection->merge($singleCategoryInvoices);
+
         }
         if (auth()->user()->hasRole('SuperAdmin|Finance Officer 1')) {
             return redirect()->route('emdad_payments');
@@ -60,7 +97,7 @@ class BankPaymentController extends Controller
         $invoice = Invoice::where('id', $request->invoice_id)->first();
         $invoice->invoice_status = 1;
         $invoice->save();
-        session()->flash('message', 'You have successfully updated payment details');
+        session()->flash('message', __('portal.You have successfully updated payment details.'));
         return redirect('proforma-invoices');
     }
 
@@ -165,7 +202,7 @@ class BankPaymentController extends Controller
             SupplierBankPayment::create($request->all());
         }
 
-        session()->flash('message', 'Status updated Successfully!!');
+        session()->flash('message', __('portal.Status Updated successfully!'));
         return redirect()->route('supplier_payment');
     }
 
@@ -184,7 +221,7 @@ class BankPaymentController extends Controller
         BankPayment::where('id', $id)->update(['supplier_payment_status' => $request->status]);
         SupplierBankPayment::where('bank_payment_id', $id)->update(['status' => $request->status]);
 
-        session()->flash('message', 'Status updated Successfully!!');
+        session()->flash('message', __('portal.Status Updated successfully!'));
         return redirect()->route('supplier_payment_received');
     }
 
@@ -214,6 +251,7 @@ class BankPaymentController extends Controller
     {
         $collections = Invoice::where('rfq_no', $rfq_no)->get();
         $invoices = $collections->unique('rfq_no');
+        /* Checking Delivery isset in view */
 
         return view('manual-payments.singleCategory.create', compact('invoices'));
     }
@@ -267,7 +305,7 @@ class BankPaymentController extends Controller
             $invoice->invoice_status = 1;
             $invoice->save();
         }
-        session()->flash('message', 'You have successfully updated payment details');
+        session()->flash('message', __('portal.You have successfully updated payment details.'));
         return redirect()->route('singleCategoryProformaInvoices');
     }
 
@@ -389,7 +427,7 @@ class BankPaymentController extends Controller
         BankPayment::where('rfq_no', $rfq_no)->update(['supplier_payment_status' => $request->status]);
         SupplierBankPayment::where('rfq_no', $rfq_no)->update(['status' => $request->status]);
 
-        session()->flash('message', 'Status updated Successfully!!');
+        session()->flash('message', __('portal.Status Updated successfully!'));
         return redirect()->route('singleCategorySupplierPaymentsReceived');
     }
 
@@ -409,7 +447,7 @@ class BankPaymentController extends Controller
 
         if ($validator->fails())
         {
-            session()->flash('error', 'All Fields are required');
+            session()->flash('error', __('portal.All Fields are required.'));
             return redirect()->back();
         }
 

@@ -26,7 +26,7 @@ class EOrdersController extends Controller
         $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
         if ($business_package->package_id == 1) {
             if ($rfq == 3) {
-                session()->flash('error', 'You have reached daily rfq limit');
+                session()->flash('error', __('portal.You have reached daily rfq limit'));
                 return redirect()->back();
             } else {
                 DB::transaction(function () use ($request) {
@@ -88,12 +88,12 @@ class EOrdersController extends Controller
                 /*Notification::route('mail', 'business@emdad-chain.com')
                             ->notify(new RFQCreatedByUser($user, $eOrders));*/
 
-                session()->flash('message', 'RFQ placed successfully');
+                session()->flash('message', __('portal.RFQ placed successfully'));
                 return redirect()->route('QoutationsBuyerReceived');
             }
         } elseif ($business_package->package_id == 2) {
             if ($rfq == 10) {
-                session()->flash('error', 'You have reached daily rfq limit');
+                session()->flash('error', __('portal.You have reached daily rfq limit'));
                 return redirect()->back();
             } else {
                 DB::transaction(function () use ($request) {
@@ -151,7 +151,7 @@ class EOrdersController extends Controller
                 /*Notification::route('mail', 'business@emdad-chain.com')
                             ->notify(new RFQCreatedByUser($user));*/
 
-                session()->flash('message', 'RFQ placed successfully');
+                session()->flash('message', __('portal.RFQ placed successfully'));
                 return redirect()->route('QoutationsBuyerReceived');
             }
         } elseif ($business_package->package_id == 3 || $business_package->package_id == 4) {
@@ -211,7 +211,7 @@ class EOrdersController extends Controller
                             ->notify(new RFQCreatedByUser($user, $eOrdersArray));*/
 
 
-            session()->flash('message', 'RFQ placed successfully');
+            session()->flash('message', __('portal.RFQ placed successfully'));
             return redirect()->route('QoutationsBuyerReceived');
         }
 
@@ -228,7 +228,7 @@ class EOrdersController extends Controller
         if ($business_package->package_id == 1) {
 
             if ($rfq == 3) {
-                session()->flash('error', 'You have reached daily rfq limit');
+                session()->flash('error', __('portal.You have reached daily rfq limit'));
                 return redirect()->back();
             } else {
 
@@ -288,12 +288,12 @@ class EOrdersController extends Controller
                 /*Notification::route('mail', 'business@emdad-chain.com')
                             ->notify(new RFQCreatedByUser($user));*/
 
-                session()->flash('message', 'RFQ placed successfully');
+                session()->flash('message', __('portal.RFQ placed successfully'));
                 return redirect()->route('singleCategoryBuyerRFQs');
             }
         } elseif ($business_package->package_id == 2) {
             if ($rfq == 10) {
-                session()->flash('error', 'You have reached daily rfq limit');
+                session()->flash('error', __('portal.You have reached daily rfq limit'));
                 return redirect()->back();
             } else {
                 DB::transaction(function () use ($request) {
@@ -351,7 +351,7 @@ class EOrdersController extends Controller
                 /*Notification::route('mail', 'business@emdad-chain.com')
                             ->notify(new RFQCreatedByUser($user));*/
 
-                session()->flash('message', 'RFQ placed successfully');
+                session()->flash('message', __('portal.RFQ placed successfully'));
                 return redirect()->route('singleCategoryBuyerRFQs');
             }
         } elseif ($business_package->package_id == 3 || $business_package->package_id == 4) {
@@ -409,7 +409,7 @@ class EOrdersController extends Controller
             /*Notification::route('mail', 'business@emdad-chain.com')
                         ->notify(new RFQCreatedByUser($user));*/
 
-            session()->flash('message', 'RFQ placed successfully');
+            session()->flash('message', __('portal.RFQ placed successfully'));
             return redirect()->route('singleCategoryBuyerRFQs');
         }
 

@@ -45,7 +45,7 @@ class ShipmentCartController extends Controller
             ]);
             Delivery::where('rfq_no', (int)$delivery[1])->update(['shipment_status' => 1]);
 
-            session()->flash('message', 'Shipment successfully added to cart.');
+            session()->flash('message', __('portal.Shipment successfully added to cart.'));
         }
         else
             {
@@ -73,7 +73,8 @@ class ShipmentCartController extends Controller
                 $request->merge(['delivery_id' => (int)$delivery[0]]);
                 $shipmentCarts = ShipmentCart::create($request->all());
                 Delivery::where('rfq_no', $delivery[1])->update(['shipment_status' => 1]);
-                session()->flash('message', 'Shipment successfully added to cart.');
+
+                session()->flash('message', __('portal.Shipment successfully added to cart.'));
             }
 
         return redirect()->route('shipment.create', compact('shipmentCarts'));
@@ -84,7 +85,7 @@ class ShipmentCartController extends Controller
         Delivery::where('rfq_no', $rfq_no)->update(['shipment_status' => 0]);
         ShipmentCart::where('rfq_no', $rfq_no)->delete();
 
-        session()->flash('message', 'Item successfully deleted.');
+        session()->flash('message', __('portal.Item successfully deleted.'));
 
         return back();
     }

@@ -46,16 +46,17 @@ class UserController extends Controller
             //Checking users count for related packages
             $userCount = User::where([['business_id', \auth()->user()->business_id], ['id', '!=', \auth()->id()]])->count();
             if (\auth()->user()->business_package->package_id == 1 && $userCount == 2) {
-                session()->flash('error', 'Add Users limit reached');
+                session()->flash('error', __('portal.Add Users limit reached.'));
+
                 return redirect()->back();
             } elseif (\auth()->user()->business_package->package_id == 2 && $userCount == 5) {
-                session()->flash('error', 'Add Users limit reached');
+                session()->flash('error', __('portal.Add Users limit reached.'));
                 return redirect()->back();
             } elseif (\auth()->user()->business_package->package_id == 3 && $userCount == 100) {
-                session()->flash('error', 'Add Users limit reached');
+                session()->flash('error', __('portal.Add Users limit reached.'));
                 return redirect()->back();
             }elseif (\auth()->user()->business_package->package_id == 4 && $userCount == 100) {
-                session()->flash('error', 'Add Users limit reached');
+                session()->flash('error', __('portal.Add Users limit reached.'));
                 return redirect()->back();
             }
 
@@ -67,10 +68,12 @@ class UserController extends Controller
             $driverCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', 'Supplier Driver'], ['id', '!=', \auth()->id()]])->count();
 //            dd($driverCount);
             if (\auth()->user()->business_package->package_id == 5 && $userCount == 2 && $driverCount == 2) {
-                session()->flash('message', 'Add Users and Driver limit reached');
+                session()->flash('error', __('portal.Add Users and Driver limit reached.'));
+
                 return redirect()->back();
             } elseif (\auth()->user()->business_package->package_id == 6 && $userCount == 10 && $driverCount == 20) {
-                session()->flash('message', 'Add Users and Driver limit reached');
+                session()->flash('error', __('portal.Add Users and Driver limit reached.'));
+
                 return redirect()->back();
             }
 //            elseif (\auth()->user()->business_package->package_id == 7  && $userCount == 100 )
@@ -185,7 +188,7 @@ class UserController extends Controller
         $role = $request->input('role') ? $request->input('role') : [];
         $user->assignRole($role);
 
-        session()->flash('message', 'User added been successfully.');
+        session()->flash('message', __('portal.User added been successfully.'));
         return redirect()->route('users.index');
     }
 
@@ -234,7 +237,7 @@ class UserController extends Controller
         $user->syncRoles($roles);
         $user->syncPermissions($permissions);
 
-        session()->flash('message', 'User successfully updated.');
+        session()->flash('message', __('portal.User successfully updated.'));
         return redirect()->route('users.index');
     }
 
@@ -246,7 +249,8 @@ class UserController extends Controller
             return redirect()->back();
         }
         $user->delete();
-        session()->flash('message', 'Profile successfully deleted.');
+
+        session()->flash('message', __('portal.Profile successfully deleted.'));
         return redirect()->route('users.index');
     }
 
@@ -290,7 +294,9 @@ class UserController extends Controller
         ]);
         $role = $role->find($input['role']);
         $user->assignRole($role);
-        session()->flash('message', 'User has been successfully created.');
+
+        session()->flash('message', __('portal.User has been successfully created.'));
+
         //        if (isset($input['permission'])) {
         //            foreach ($input['permission'] as $permission) {
         //                $user->givePermissionTo($permission);
@@ -347,7 +353,7 @@ class UserController extends Controller
         $user->notify(new \App\Notifications\UserCreate($password));
         $user->assignRole('CEO');
 
-        session()->flash('message', 'Supplier added successfully.');
+        session()->flash('message', __('portal.Supplier added successfully.'));
         return redirect()->route('businessSuppliers');
     }
 
@@ -399,7 +405,7 @@ class UserController extends Controller
         $user->notify(new \App\Notifications\UserCreate($password));
         $user->assignRole('CEO');
 
-        session()->flash('message', 'Buyer added successfully.');
+        session()->flash('message', __('portal.Buyer added successfully.'));
         return redirect()->route('businessBuyers');
     }
 
@@ -409,7 +415,7 @@ class UserController extends Controller
         $user = User::where('id', $user_id)->first();
 
         if (!$user) {
-            session()->flash('error', 'User not found!');
+            session()->flash('error', __('portal.User not found!'));
             return redirect()->back();
         }
 
@@ -418,7 +424,7 @@ class UserController extends Controller
         ]);
 
         if ($validated->fails()) {
-            session()->flash('error', 'Photo is required!');
+            session()->flash('error', __('portal.Photo is required!'));
             return redirect()->back()->withErrors($validated->errors());
         }
 
@@ -427,7 +433,8 @@ class UserController extends Controller
         $user->update(['nid_photo' => $photo]);
         $user->save();
 
-        session()->flash('message', 'Photo added successfully.');
+        session()->flash('message', __('portal.Photo added successfully.'));
+
         return redirect()->back();
     }
 

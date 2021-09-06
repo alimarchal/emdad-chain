@@ -31,14 +31,14 @@ class ECartController extends Controller
         $request->merge(['item_name' => Category::where('id', $request->item_code)->first()->name]);
         $request->merge(['rfq_type' => 1]);
         ECart::create($request->all());
-        session()->flash('message', 'RFQ successfully created.');
+        session()->flash('message', __('portal.RFQ successfully created.'));
 
         return redirect('RFQ/create');
     }
 
     public function destroy(ECart $RFQCart)
     {
-        session()->flash('message', 'Item successfully deleted.');
+        session()->flash('message', __('portal.Item successfully deleted.'));
         $RFQCart->delete();
         return back();
     }
@@ -82,7 +82,7 @@ class ECartController extends Controller
 //        User::send_sms('+966552840506',$message);
 //        User::send_sms('+966555390920',$message);
 //        User::send_sms('+966593388833',$message);
-        session()->flash('message', 'RFQ successfully created.');
+        session()->flash('message', __('portal.RFQ successfully created.'));
 
         return redirect()->route('create_single_rfq');
     }
@@ -90,7 +90,7 @@ class ECartController extends Controller
     public function single_cart_destroy($id)
     {
         ECart::where('id', $id)->delete();
-        session()->flash('message', 'Item successfully deleted.');
+        session()->flash('message', __('portal.Item successfully deleted.'));
         return back();
     }
 

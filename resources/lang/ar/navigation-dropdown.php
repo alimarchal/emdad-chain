@@ -10,7 +10,7 @@ return [
     */
     'Multiple Categories Quotations' => 'عروض الفئات المتعددة',
     'Number of New Quotation(s) received against multiple categories' => 'عدد عروض الفئات المتعددة الجديدة المستلمة',
-    'Single Category Quotations' => 'عروض الفئة الاحادية',
+    'Single Category Quotations' => 'عروض الفئة الفردية',
     'Number of New Quotation(s) received against single category' => 'عدد عروض الفئة الفردية الجديدة المستلمة',
     'Multiple Categories RFQ' => 'عروض الفئات المتعددة',
     'Number of New Requisitions(s) received against multiple categories' => 'عدد طلبات الفئات المتعددة الجديدة المستلمة',
@@ -30,7 +30,7 @@ return [
     'Log Viewer' => 'مستعرض العمليات',
     'User Logs' => 'تسجيلات الدخول',
     'Business' => 'نشاط تجاري',
-    'Update Certificates' => 'الوثائق',
+    'Update Certificates' => 'تحديث الوثائق',
     'P.O. Info' => 'معلومات طلبات الشراء',
     'Current Users' => 'المستخدمون الحاليّون',
     'Add User' => 'إضافة مستخدم',

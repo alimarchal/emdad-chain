@@ -181,7 +181,7 @@ class CommissionPercentageController extends Controller
                 ['amount_type' => $request->amount_type, 'amount' => $request->amount,]
             );
 
-            session()->flash('message', 'Added successfully');
+            session()->flash('message', __('portal.Added successfully!'));
             return redirect()->route('adminPercentage');
         }
         elseif ($request->commission_type == 2 && $request->amount_type == 0 && $request->has('amount') )
@@ -200,7 +200,7 @@ class CommissionPercentageController extends Controller
                 ['amount_type' => $request->amount_type, 'amount' => $request->amount,]
             );
 
-            session()->flash('message', 'Added successfully');
+            session()->flash('message', __('portal.Added successfully!'));
             return redirect()->route('adminPercentage');
         }
         elseif ($request->commission_type == 0 && $request->has('amount'))
@@ -218,7 +218,7 @@ class CommissionPercentageController extends Controller
                 ['amount_type' => $request->amount_type, 'amount' => $request->amount,]
             );
 
-            session()->flash('message', 'Added successfully');
+            session()->flash('message', __('portal.Added successfully!'));
             return redirect()->route('adminPercentage');
         }
         elseif ($request->commission_type == 1 && $request->amount_type == 1 && $request->has('percentage_amount'))
@@ -242,7 +242,7 @@ class CommissionPercentageController extends Controller
                 ['amount_type' => $request->amount_type, 'amount' => $percentage_amount,]
             );
 
-            session()->flash('message', 'Added successfully');
+            session()->flash('message', __('portal.Added successfully!'));
             return redirect()->route('adminPercentage');
 
         }
@@ -267,7 +267,7 @@ class CommissionPercentageController extends Controller
                 ['amount_type' => $request->amount_type, 'amount' => $percentage_amount,]
             );
 
-            session()->flash('message', 'Added successfully');
+            session()->flash('message', __('portal.Added successfully!'));
             return redirect()->route('adminPercentage');
 
         }
@@ -288,7 +288,7 @@ class CommissionPercentageController extends Controller
                 ['amount_type' => $request->amount_type, 'amount' => $percentage_amount,]
             );
 
-            session()->flash('message', 'Added successfully');
+            session()->flash('message', __('portal.Added successfully!'));
             return redirect()->route('adminPercentage');
         }
     }
@@ -321,7 +321,7 @@ class CommissionPercentageController extends Controller
                 'amount' => $request->amount,
             ]);
 
-            session()->flash('message', 'Updated successfully');
+            session()->flash('message', __('portal.Updated successfully.'));
             return redirect()->route('adminPercentage');
         }
         elseif ($request->commission_type == 2 && $request->amount_type == 0 && $request->has('amount') )
@@ -343,7 +343,7 @@ class CommissionPercentageController extends Controller
                 'amount' => $request->amount,
             ]);
 
-            session()->flash('message', 'Updated successfully');
+            session()->flash('message', __('portal.Updated successfully.'));
             return redirect()->route('adminPercentage');
         }
         elseif ($request->amount_type == 0 && $request->has('amount'))
@@ -363,7 +363,7 @@ class CommissionPercentageController extends Controller
                 'amount' => $request->amount,
             ]);
 
-            session()->flash('message', 'Updated successfully');
+            session()->flash('message', __('portal.Updated successfully.'));
             return redirect()->route('adminPercentage');
         }
         elseif ($request->commission_type == 1 && $request->amount_type == 1 && $request->has('percentage_amount'))
@@ -390,7 +390,7 @@ class CommissionPercentageController extends Controller
                 'amount' => $percentage_amount,
             ]);
 
-            session()->flash('message', 'Updated successfully');
+            session()->flash('message', __('portal.Updated successfully.'));
             return redirect()->route('adminPercentage');
 
         }
@@ -418,7 +418,7 @@ class CommissionPercentageController extends Controller
                 'amount' => $percentage_amount,
             ]);
 
-            session()->flash('message', 'Updated successfully');
+            session()->flash('message', __('portal.Updated successfully.'));
             return redirect()->route('adminPercentage');
 
         }
@@ -444,7 +444,7 @@ class CommissionPercentageController extends Controller
                 'amount' => $percentage_amount,
             ]);
 
-            session()->flash('message', 'Updated successfully');
+            session()->flash('message', __('portal.Updated successfully.'));
             return redirect()->route('adminPercentage');
         }
     }
@@ -453,7 +453,7 @@ class CommissionPercentageController extends Controller
     {
         CommissionPercentage::where('id', decrypt($id))->delete();
 
-        session()->flash('message', 'Deleted Successfully');
+        session()->flash('message', __('portal.Deleted Successfully.'));
         return redirect()->route('adminPercentage');
     }
 }

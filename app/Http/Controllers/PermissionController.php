@@ -29,7 +29,7 @@ class PermissionController extends Controller
         ]);
 
         $role = Permission::create(['name' => $request->name]);
-        return redirect()->route('permission.index')->with('success', 'Permission created successfully!');
+        return redirect()->route('permission.index')->with('success', __('portal.Permission created successfully!'));
     }
 
     public function edit($id)
@@ -46,12 +46,12 @@ class PermissionController extends Controller
         $permission->guard_name = $request->get('guard_name');
         $permission->save();
 
-        return redirect()->route('permission.index')->with('success', 'Permission Updated successfully!');
+        return redirect()->route('permission.index')->with('success', __('portal.Permission Updated successfully!'));
     }
 
     public function destroy(Permission $permission)
     {
         $permission->delete();
-        return back()->with('success', 'Permission deleted successfully');
+        return back()->with('success', __('portal.Permission deleted successfully.'));
     }
 }

@@ -9,7 +9,6 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @include('users.sessionMessage')
-            <!-- component -->
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
                     <form action="{{ route('businessFinanceDetail.store') }}" method="post" class="form bg-white p-6 mb-4" enctype="multipart/form-data">

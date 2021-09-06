@@ -56,7 +56,7 @@ class QouteController extends Controller
         Notification::route('mail', 'business@emdad-chain.com')
             ->notify(new QuotationSent($userQuoted, $quote));
 
-        session()->flash('message', 'You have successfully quoted.');
+        session()->flash('message', __('portal.You have successfully quoted.'));
 
         return redirect()->route('QoutedRFQQouted');
     }
@@ -166,7 +166,7 @@ class QouteController extends Controller
         Notification::route('mail', 'business@emdad-chain.com')
             ->notify(new QuotationSent($userQuoted, $quote));
 
-        session()->flash('message', 'You have successfully quoted.');
+        session()->flash('message', __('portal.You have successfully quoted.'));
 
         return redirect()->route('singleCategoryQuotedRFQQuoted');
     }
@@ -184,10 +184,10 @@ class QouteController extends Controller
         $sum = ($total_cost + $total_vat);
         $request->merge(['total_cost' => $sum]);
 
-        session()->flash('message', 'You have updated the quote.');
+        session()->flash('message', __('portal.You have updated the quote.'));
         $qoute->update($request->all());
         $quote = $qoute;
-        $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
+        User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
         if (isset($request->single_rfq))
         {
             return redirect()->route('singleCategoryQuotedModifiedRFQ');
@@ -256,7 +256,7 @@ class QouteController extends Controller
             }
         }
 
-        session()->flash('message', 'You have updated the quote.');
+        session()->flash('message', __('portal.You have updated the quote.'));
         $quote = $qoute;
         User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
 
@@ -354,9 +354,6 @@ class QouteController extends Controller
         if (auth()->user()->hasRole('SuperAdmin')) {
             $PlacedRFQ = EOrders::orderBy('created_at', 'desc')->get();
         } else {
-//            $PlacedRFQ = EOrders::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
-//            $PlacedRFQ = EOrders::where('business_id', auth()->user()->business_id)->orderBy('created_at', 'desc')->get();
-//            $PlacedRFQ = EOrders::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->orderBy('created_at', 'desc')->get();
             $PlacedRFQ = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('discard',0)->orderBy('created_at', 'desc')->get();
         }
 
@@ -368,7 +365,7 @@ class QouteController extends Controller
     {
         EOrderItems::where('id', $EOrderItemID)->update(['quotation_time' => Carbon::now()->addDays(3)]);
 
-        session()->flash('message', 'Quotation Time Reset Successfully!');
+        session()->flash('message', __('portal.Quotation Time Reset Successfully!'));
         return redirect()->route('QoutationsBuyerReceived');
     }
 
@@ -377,7 +374,7 @@ class QouteController extends Controller
     {
         EOrders::where('id', $EOrderID)->update(['discard' => 1]);
 
-        session()->flash('message', 'Quotation Discarded Successfully!');
+        session()->flash('message', __('portal.Quotation Discarded Successfully!'));
         return redirect()->route('QoutationsBuyerReceived');
     }
 
@@ -434,8 +431,16 @@ class QouteController extends Controller
 
         $buyer_id = 0;
         // inform supplier user
-        $supplier_user = User::find($qoute->supplier_user_id)->notify(new \App\Notifications\QuoteAgain($qoute));
-        session()->flash('message', 'Quote status changed to ' . $qoute_status);
+        User::find($qoute->supplier_user_id)->notify(new \App\Notifications\QuoteAgain($qoute));
+
+        if (auth()->user()->rtl == 0)
+        {
+            session()->flash('message', 'Quote status changed to ' . $qoute_status);
+        }
+        else{
+            session()->flash('message', 'التعديل المطلوب' . 'تم تغيير حالة العرض إلى ');
+        }
+
         return redirect()->route('QoutationsBuyerReceivedModificationNeeded', [$qoute->e_order_id, $qoute->e_order_items_id, $buyer_id]);
     }
 
@@ -450,8 +455,16 @@ class QouteController extends Controller
         ]);
 
         $quote = $qoute;
-        $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteRejected($quote));
-        session()->flash('message', 'Qoute status changes to ' . $qoute_status);
+        User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteRejected($quote));
+
+        if (auth()->user()->rtl == 0)
+        {
+            session()->flash('message', 'Quote status changed to ' . $qoute_status);
+        }
+        else{
+            session()->flash('message', 'مرفوض' . 'تم تغيير حالة العرض إلى ');
+        }
+
         return redirect()->route('QoutationsBuyerReceived');
     }
 
@@ -504,7 +517,8 @@ class QouteController extends Controller
             DB::rollback();
             /* Transaction failed. */
         }
-        session()->flash('message', 'Draft purchase order has been generated');
+
+        session()->flash('message', __('portal.Draft purchase order has been generated.'));
         return redirect()->route('dpo.show', $dpo->id);
     }
 
@@ -522,7 +536,7 @@ class QouteController extends Controller
     {
         EOrderItems::where('e_order_id', $eOrderID)->update(['quotation_time' => Carbon::now()->addDays(3)]);
 
-        session()->flash('message', 'Quotation Time Reset Successfully!');
+        session()->flash('message', __('portal.Quotation Time Reset Successfully!'));
         return redirect()->route('singleCategoryBuyerRFQs');
     }
 
@@ -531,7 +545,7 @@ class QouteController extends Controller
     {
         EOrders::where('id', $eOrderID)->update(['discard' => 1]);
 
-        session()->flash('message', 'Quotation Discarded Successfully!');
+        session()->flash('message', __('portal.Quotation Discarded Successfully!'));
         return redirect()->route('singleCategoryBuyerRFQs');
     }
 
@@ -602,7 +616,15 @@ class QouteController extends Controller
         $buyer_id = 0;
         // inform supplier user
         User::find($quotes->supplier_user_id)->notify(new \App\Notifications\QuoteAgain($quotes));
-        session()->flash('message', 'Quote status changed to ' . $quote_status);
+
+        if (auth()->user()->rtl == 0)
+        {
+            session()->flash('message', 'Quote status changed to ' . $quote_status);
+        }
+        else{
+            session()->flash('message', 'التعديل المطلوب' . 'تم تغيير حالة العرض إلى ');
+        }
+
         return redirect()->route('singleCategoryRFQQuotationsModificationNeeded', [$quote->e_order_id, $buyer_id]);
 //        return redirect()->route('singleCategoryRFQQuotationsModificationNeeded', [$quote->e_order_items_id, $buyer_id]);
     }
@@ -623,7 +645,15 @@ class QouteController extends Controller
         }
 
         User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteRejected($quotes));
-        session()->flash('message', 'Quote status changes to ' . $quote_status);
+
+        if (auth()->user()->rtl == 0)
+        {
+            session()->flash('message', 'Quote status changed to ' . $quote_status);
+        }
+        else{
+            session()->flash('message', 'مرفوض' . 'تم تغيير حالة العرض إلى ');
+        }
+
         return redirect()->route('singleCategoryBuyerRFQs');
     }
 
@@ -710,7 +740,8 @@ class QouteController extends Controller
             DB::rollback();
             /* Transaction failed. */
         }
-        session()->flash('message', 'Draft purchase order has been generated');
+
+        session()->flash('message', __('portal.Draft purchase order has been generated.'));
 //        return redirect()->route('singleCategoryIndex');
         return redirect()->route('singleCategoryDPOIndex');
     }

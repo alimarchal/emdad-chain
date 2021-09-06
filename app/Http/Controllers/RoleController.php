@@ -36,7 +36,7 @@ class RoleController extends Controller
         $permissions = $request->input('permissions') ? $request->input('permissions') : [];
         $role->givePermissionTo($permissions);
 
-        return redirect('/role')->with('success', 'Role created successfully!');
+        return redirect('/role')->with('success', __('portal.Role created successfully!'));
     }
 
     public function show($id)
@@ -62,12 +62,12 @@ class RoleController extends Controller
         $permissions = $request->input('permissions') ? $request->input('permissions') : [];
         $role->syncPermissions($permissions);
 
-        return redirect('/role')->with('success', 'Role Updated successfully!');
+        return redirect('/role')->with('success', __('portal.Role Updated successfully!'));
     }
 
     public function destroy(Role $role)
     {
         $role->delete();
-        return back()->with('success', 'Role deleted successfully');
+        return back()->with('success', __('portal.Role deleted successfully.'));
     }
 }

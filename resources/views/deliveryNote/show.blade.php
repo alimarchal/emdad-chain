@@ -4,9 +4,6 @@
             <div class="max-w-7xl mx-auto sm:px-2 lg:2x-8">
                 <div class="bg-white overflow-hidden shadow-xl ">
                     <div class="px-4 py-5 sm:p-6 bg-white shadow ">
-
-
-
                         <div class="flex flex-wrap overflow-hidden bg-white p-4">
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                             </div>
@@ -239,9 +236,6 @@
             <div class="max-w-7xl mx-auto sm:px-2 lg:2x-8">
                 <div class="bg-white overflow-hidden shadow-xl ">
                     <div class="px-4 py-5 sm:p-6 bg-white shadow ">
-
-
-
                         <div class="flex flex-wrap overflow-hidden bg-white p-4">
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                             </div>

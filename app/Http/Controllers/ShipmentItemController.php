@@ -48,7 +48,7 @@ class ShipmentItemController extends Controller
             }
         });
 
-        session()->flash('message', 'Shipment Placed Successfully!');
+        session()->flash('message', __('portal.Shipment Placed Successfully!'));
         return redirect()->route('shipment.index');
     }
 }

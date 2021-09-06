@@ -64,7 +64,9 @@
                                         <label class="block font-medium text-sm text-gray-700" for="role">
                                             {{__('portal.Role')}}
                                         </label>
-                                        <select name="role" id="role" class="form-input rounded-md shadow-sm mt-1 block w-full js-example-basic-multiple1" multiple="multiple" required>
+{{--                                        <select name="role[]" id="role" class="form-input rounded-md shadow-sm mt-1 block w-full js-example-basic-multiple1" multiple="multiple" required>--}}
+                                        {{-- Uncomment above line inorder to assign a user more than one role --}}
+                                        <select name="role" id="role" class="form-input rounded-md shadow-sm mt-1 block w-full js-example-basic-multiple1" required>
                                             {{--                                        @foreach($roles as $role)--}}
                                             {{--                                            <option value="{{ $role->id }}" {{ ($userRole[0] == $role->id ? 'selected' : '')}}>{{ $role->name }}</option>--}}
                                             {{--                                        @endforeach--}}
@@ -178,7 +180,9 @@
                                         <label class="block font-medium text-sm text-gray-700" for="role">
                                             {{__('portal.Role')}}
                                         </label>
-                                        <select name="role" id="role" class="form-input rounded-md shadow-sm mt-1 block w-full js-example-basic-multiple1" multiple="multiple" required>
+{{--                                        <select name="role[]" id="role" class="form-input rounded-md shadow-sm mt-1 block w-full js-example-basic-multiple1" multiple="multiple" required>--}}
+                                        {{-- Uncomment above line inorder to assign a user more than one role --}}
+                                            <select name="role" id="role" class="form-input rounded-md shadow-sm mt-1 block w-full js-example-basic-multiple1" required>
                                             {{--                                        @foreach($roles as $role)--}}
                                             {{--                                            <option value="{{ $role->id }}" {{ ($userRole[0] == $role->id ? 'selected' : '')}}>{{ $role->name }}</option>--}}
                                             {{--                                        @endforeach--}}

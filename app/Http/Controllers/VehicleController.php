@@ -32,13 +32,13 @@ class VehicleController extends Controller
 
         if (\auth()->user()->business_package->package_id == 5 && $vehiclesCount == 2 )
         {
-            session()->flash('message', 'Add Vehicles limit reached');
+            session()->flash('message', __('portal.Add Vehicles limit reached.'));
             return redirect()->back();
         }
 
         elseif (\auth()->user()->business_package->package_id == 6 && $vehiclesCount == 20 )
         {
-            session()->flash('message', 'Add Vehicles limit reached');
+            session()->flash('message', __('portal.Add Vehicles limit reached.'));
             return redirect()->back();
         }
 
@@ -51,12 +51,12 @@ class VehicleController extends Controller
 
         if (\auth()->user()->business_package->package_id == 5 && $vehicleCount == 5 )
         {
-            session()->flash('message', 'Cannot Add because Add Vehicles limit has reached');
+            session()->flash('message', __('portal.Cannot Add because Add Vehicles limit has reached.'));
             return redirect()->back();
         }
         elseif (\auth()->user()->business_package->package_id == 6 && $vehicleCount == 20 )
         {
-            session()->flash('message', 'Cannot Add because Add Vehicles limit has reached');
+            session()->flash('message', __('portal.Cannot Add because Add Vehicles limit has reached.'));
             return redirect()->back();
         }
 
@@ -92,11 +92,11 @@ class VehicleController extends Controller
     {
         if ($vehicle->availability_status == 0)
         {
-            session()->flash('error', 'Vehicle cannot be deleted because it has a shipment assigned');
+            session()->flash('error', __('portal.Vehicle cannot be deleted because it has a shipment assigned.'));
             return redirect()->back();
         }
 
         $vehicle->delete();
-        return back()->with('success', 'Vehicle deleted successfully');
+        return back()->with('success', __('portal.Vehicle deleted successfully.'));
     }
 }

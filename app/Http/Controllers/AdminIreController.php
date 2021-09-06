@@ -69,7 +69,14 @@ class AdminIreController extends Controller
             ]);
         }
 
-        session()->flash('message', 'Edited successfully');
+        if (auth()->user()->rtl == 0)
+        {
+            session()->flash('message', 'Edited successfully');
+        }
+        else{
+            session()->flash('message', 'تم التعديل بنجاح');
+        }
+
         return redirect()->route('adminIres');
     }
 }

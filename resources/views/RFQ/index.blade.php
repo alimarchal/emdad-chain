@@ -13,9 +13,7 @@
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))
@@ -224,13 +222,39 @@
                 ]
             } );
         });
+
+        $('.company_name_check').change(function(){
+        // alert($(this).attr('data-id'));
+        // alert($(this).val());
+        let status = $(this).val();
+        let rfqId = $(this).attr('data-id');
+        // alert(rfqId);
+
+
+        $.ajax({
+            type : 'POST',
+            url:"{{ route('companyCheck') }}",
+            data:{
+                "_token": "{{ csrf_token() }}",
+                'rfqNo':rfqId,
+                'status':status
+            },
+            success: function (response) {
+                if(response.status === 0){
+                    alert('Not Updated Try again');
+                }
+                else if(response.status === 1) {
+                    alert('Updated Successfully!');
+                    // $('#status').show().delay(5000).fadeOut();
+                }
+            }
+        });
+    });
     </script>
 @else
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))
@@ -465,16 +489,8 @@
                 },
             } );
         });
-    </script>
-@endif
 
-<script>
-
-    $('.confirm').on('click', function (e) {
-        return confirm($(this).data('confirm'));
-    });
-
-    $('.company_name_check').change(function(){
+        $('.company_name_check').change(function(){
         // alert($(this).attr('data-id'));
         // alert($(this).val());
         let status = $(this).val();
@@ -492,14 +508,22 @@
             },
             success: function (response) {
                 if(response.status === 0){
-                    alert('Not Updated Try again');
+                    alert('لم يتم التحديث، حاول مجدداً');
                 }
                 else if(response.status === 1) {
-                    alert('Updated Successfully!');
+                    alert('تم تحديث الحالة بنجاح!');
                     // $('#status').show().delay(5000).fadeOut();
                 }
             }
         });
+    });
+    </script>
+@endif
+
+<script>
+
+    $('.confirm').on('click', function (e) {
+        return confirm($(this).data('confirm'));
     });
 
 </script>

@@ -32,7 +32,7 @@ class DeliveryNoteController extends Controller
             $po->save();
         }
         User::find($delivery->user_id)->notify(new \App\Notifications\PreparingDelivery());
-        session()->flash('message', 'Delivery note has been successfully created.');
+        session()->flash('message', __('portal.Delivery note has been successfully created.'));
         return redirect('notes');
     }
 
@@ -105,7 +105,7 @@ class DeliveryNoteController extends Controller
             $draftPurchaseOrder->save();
         }
         User::find($deliveryNoteUserId)->notify(new \App\Notifications\PreparingDelivery());
-        session()->flash('message', 'Delivery note has been successfully created.');
+        session()->flash('message', __('portal.Delivery note has been successfully created.'));
         return redirect()->route('singleCategoryNotes');
     }
 

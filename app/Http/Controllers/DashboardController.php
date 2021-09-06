@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Dashboard;
 use App\Models\EOrderItems;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
@@ -50,7 +51,7 @@ class DashboardController extends Controller
 //            App::setlocale($lang);
 //        }
     }*/
-    public function languageChange($lang, $rtl_value)
+    public function languageChange($lang, $rtl_value): RedirectResponse
     {
         if (array_key_exists($lang, \Config::get('languages'))) {
             \Session::put('applocale', $lang);
@@ -63,7 +64,7 @@ class DashboardController extends Controller
     }
 
     /* redirecting to index page because of post method */
-    public function languageChangeForPayment($lang, $rtl_value)
+    public function languageChangeForPayment($lang, $rtl_value): RedirectResponse
     {
         if (array_key_exists($lang, \Config::get('languages'))) {
             \Session::put('applocale', $lang);
@@ -76,7 +77,7 @@ class DashboardController extends Controller
     }
 
     /* redirecting to index page because of post method */
-    public function languageChangeForPackagePayment($lang, $rtl_value)
+    public function languageChangeForPackagePayment($lang, $rtl_value): RedirectResponse
     {
         if (array_key_exists($lang, \Config::get('languages'))) {
             \Session::put('applocale', $lang);
@@ -89,7 +90,7 @@ class DashboardController extends Controller
     }
 
     /* redirecting to index page because of post method */
-    public function languageChangeForIREEdit($lang, $rtl_value)
+    public function languageChangeForIREEdit($lang, $rtl_value): RedirectResponse
     {
         if (array_key_exists($lang, \Config::get('languages'))) {
             \Session::put('applocale', $lang);
@@ -102,7 +103,7 @@ class DashboardController extends Controller
     }
 
     /* redirecting to index page because of post method */
-    public function languageChangeForCommissionPercentage($lang, $rtl_value)
+    public function languageChangeForCommissionPercentage($lang, $rtl_value): RedirectResponse
     {
         if (array_key_exists($lang, \Config::get('languages'))) {
             \Session::put('applocale', $lang);
@@ -112,6 +113,19 @@ class DashboardController extends Controller
         ]);
 
         return redirect()->route('adminPercentage');
+    }
+
+    /* redirecting to index page because of post method */
+    public function languageChangeForDownloadableFiles($lang, $rtl_value): RedirectResponse
+    {
+        if (array_key_exists($lang, \Config::get('languages'))) {
+            \Session::put('applocale', $lang);
+        }
+        User::where('id', \auth()->user()->id)->update([
+            'rtl' => $rtl_value,
+        ]);
+
+        return redirect()->route('adminDownload');
     }
 
     public function logistic_dashboard(Request $request)
