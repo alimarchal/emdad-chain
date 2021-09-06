@@ -60,7 +60,7 @@ class EmdadInvoiceController extends Controller
             'send_status' => 1
         ]);
 
-        session()->flash('message', 'Invoice send successfully');
+        session()->flash('message', __('portal.Invoice send successfully.'));
         return redirect()->route('emdadInvoices');
     }
 
@@ -126,7 +126,7 @@ class EmdadInvoiceController extends Controller
             ]);
         }
 
-        session()->flash('message', 'Invoice send successfully');
+        session()->flash('message', __('portal.Invoice send successfully.'));
         return redirect()->route('singleCategoryEmdadInvoicesIndex');
     }
 }

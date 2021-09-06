@@ -6,9 +6,7 @@
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Business Information') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('Business Information') }} </h2>
         </x-slot>
 
         <div class="py-12">
@@ -146,9 +144,7 @@
 @else
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Business Information') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('Business Information') }} </h2>
         </x-slot>
 
         <div class="py-12">
@@ -277,15 +273,9 @@
                             <x-jet-button class="float-right mt-4 mb-4">{{__('portal.Update')}}</x-jet-button>
 
                         </form>
-
-
                     </div>
                 </div>
-
-
             </div>
-
-
         </div>
     </x-app-layout>
 @endif

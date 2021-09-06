@@ -32,7 +32,7 @@ class BusinessWarehouseController extends Controller
     {
         $business = Business::where('user_id', auth()->id())->get();
         if ($business->isEmpty()) {
-            session()->flash('message', 'Please enter business information first.');
+            session()->flash('message', __('portal.Please enter business information first.'));
             return redirect()->route('business.create');
         }
         else {
@@ -74,7 +74,8 @@ class BusinessWarehouseController extends Controller
         $merge_time = $request->working_time . " - " . $request->working_time_1;
         $request->merge(['working_time' => $merge_time]);
         $bw = BusinessWarehouse::create($request->all());
-        session()->flash('message', 'Business warehouse information successfully saved.');
+
+        session()->flash('message', __('portal.Business warehouse information successfully saved.'));
         return redirect()->route('purchaseOrderInfo.create');
     }
 
@@ -110,7 +111,8 @@ class BusinessWarehouseController extends Controller
             'working_time' => 'required',
         ]);
         $businessWarehouse->update($request->all());
-        session()->flash('message', 'Warehouse information successfully updated.');
+
+        session()->flash('message', __('portal.Warehouse information successfully updated.'));
         return redirect()->route('businessWarehouse.edit', $businessWarehouse->id);
     }
 

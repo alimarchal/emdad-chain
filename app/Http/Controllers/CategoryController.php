@@ -26,7 +26,14 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $created_category = Category::create($request->all());
-        session()->flash('message', $created_category->name  . ' category successfully created.');
+        if (auth()->user()->rtl == 0)
+        {
+            session()->flash('message', $created_category->name  . ' category successfully created.');
+        }
+        else{
+            session()->flash('message', $created_category->name  . ' category successfully created.');
+        }
+
         return redirect()->route('category.create');
     }
 
@@ -47,11 +54,11 @@ class CategoryController extends Controller
 
             // dd($request->all());
             $updated = $category->update($request->all());
-            session()->flash('message', 'Category updated successfully created.');
+            session()->flash('message', __('portal.Category updated successfully created.'));
             return redirect()->route('showAllCategory');
         } else {
             $updated = $category->update($request->all());
-            session()->flash('message', 'Category updated successfully created.');
+            session()->flash('message', __('portal.Category updated successfully created.'));
             return redirect()->route('showAllCategory');
         }
     }
@@ -59,7 +66,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        session()->flash('message', 'Category successfully deleted.');
+        session()->flash('message', __('portal.Category successfully deleted.'));
         return redirect('category/show');
     }
 

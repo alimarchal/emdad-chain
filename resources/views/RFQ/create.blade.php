@@ -2605,7 +2605,7 @@
                 },
                 success: function (response) {
                     if (response.status === 0) {
-                        alert('لم يتم التحديث، حاول مجدداً');
+                        alert('لم يتم التحديث، حاول مجدداً.');
                     } else if (response.status === 1) {
                         alert('تم تحديث الحالة بنجاح!');
                         // $('#status').show().delay(5000).fadeOut();

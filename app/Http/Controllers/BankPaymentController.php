@@ -97,7 +97,7 @@ class BankPaymentController extends Controller
         $invoice = Invoice::where('id', $request->invoice_id)->first();
         $invoice->invoice_status = 1;
         $invoice->save();
-        session()->flash('message', 'You have successfully updated payment details');
+        session()->flash('message', __('portal.You have successfully updated payment details.'));
         return redirect('proforma-invoices');
     }
 
@@ -202,7 +202,7 @@ class BankPaymentController extends Controller
             SupplierBankPayment::create($request->all());
         }
 
-        session()->flash('message', 'Status updated Successfully!!');
+        session()->flash('message', __('portal.Status Updated successfully!'));
         return redirect()->route('supplier_payment');
     }
 
@@ -221,7 +221,7 @@ class BankPaymentController extends Controller
         BankPayment::where('id', $id)->update(['supplier_payment_status' => $request->status]);
         SupplierBankPayment::where('bank_payment_id', $id)->update(['status' => $request->status]);
 
-        session()->flash('message', 'Status updated Successfully!!');
+        session()->flash('message', __('portal.Status Updated successfully!'));
         return redirect()->route('supplier_payment_received');
     }
 
@@ -305,7 +305,7 @@ class BankPaymentController extends Controller
             $invoice->invoice_status = 1;
             $invoice->save();
         }
-        session()->flash('message', 'You have successfully updated payment details');
+        session()->flash('message', __('portal.You have successfully updated payment details.'));
         return redirect()->route('singleCategoryProformaInvoices');
     }
 
@@ -427,7 +427,7 @@ class BankPaymentController extends Controller
         BankPayment::where('rfq_no', $rfq_no)->update(['supplier_payment_status' => $request->status]);
         SupplierBankPayment::where('rfq_no', $rfq_no)->update(['status' => $request->status]);
 
-        session()->flash('message', 'Status updated Successfully!!');
+        session()->flash('message', __('portal.Status Updated successfully!'));
         return redirect()->route('singleCategorySupplierPaymentsReceived');
     }
 
@@ -447,7 +447,7 @@ class BankPaymentController extends Controller
 
         if ($validator->fails())
         {
-            session()->flash('error', 'All Fields are required');
+            session()->flash('error', __('portal.All Fields are required.'));
             return redirect()->back();
         }
 

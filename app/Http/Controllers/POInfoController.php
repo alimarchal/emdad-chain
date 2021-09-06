@@ -18,11 +18,11 @@ class POInfoController extends Controller
         $business = Business::where('user_id', auth()->id())->get();
         $businessWarehouse = BusinessWarehouse::where('user_id', auth()->id())->get();
         if ($business->isEmpty()) {
-            session()->flash('message', 'Please enter business information first.');
+            session()->flash('message', __('portal.Please enter business information first.'));
             return redirect()->route('business.create');
         }
         elseif ($businessWarehouse->isEmpty()) {
-            session()->flash('message', 'Please enter warehouse information first.');
+            session()->flash('message', __('portal.Please enter warehouse information first.'));
             return redirect()->route('businessWarehouse.create');
         }
         else {
@@ -53,7 +53,7 @@ class POInfoController extends Controller
         $order_info = implode(', ', $order_info);
         $request->merge(['order_info' => $order_info]);
         $POInfo = POInfo::create($request->all());
-        session()->flash('message', 'P.O.Info information successfully saved.');
+        session()->flash('message', __('portal.P.O.Info information successfully saved.'));
         $business = Business::find($POInfo->business_id);
         $business->update(['status' => '1']);
         $user = User::find(auth()->user()->id);

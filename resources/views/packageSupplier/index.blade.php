@@ -248,7 +248,7 @@
         <section class="text-gray-600 body-font overflow-hidden">
             @if (session()->has('message'))
                 <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert" style="margin-top: 10px;">
-                    <strong class="mr-1">{{ session('message') }}</strong>
+                    <strong class="mr-3">{{ session('message') }}</strong>
                     <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                         <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                     </button>
@@ -256,7 +256,7 @@
             @endif
             @if (session()->has('error'))
                 <div class="block mt-3 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                    <strong class="mr-1">{{ session('error') }}</strong>
+                    <strong class="mr-3">{{ session('error') }}</strong>
                     <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                         <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                     </button>

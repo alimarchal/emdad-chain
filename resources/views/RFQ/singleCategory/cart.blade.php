@@ -13,9 +13,7 @@
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))
@@ -222,9 +220,7 @@
 @else
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))

@@ -294,7 +294,7 @@ class DraftPurchaseOrderController extends Controller
         User::send_sms('+966555390920', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrder->payment_term);
         User::send_sms('+966593388833', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrder->payment_term);
 
-        session()->flash('message', 'DPO Accepted.');
+        session()->flash('message', __('portal.DPO Accepted.'));
 //        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
 
         /* Redirecting to proforma invoices route in case payment_term is equal to Cash */
@@ -317,7 +317,8 @@ class DraftPurchaseOrderController extends Controller
             'po_status' => $status,
             'approval_details' => 'User_TYPE_' . $user_type . '_' . $user_type_id . '_Business_TYPE_' . $user_business_type . '_' . $user_business_type_id . '_' . date('Y-m-d h:m'),
         ]);
-        session()->flash('message', 'Business information successfully updated.');
+
+        session()->flash('message', __('portal.Business information successfully updated.'));
         return redirect()->route('dpo.show', $draftPurchaseOrder->id);
     }
 
@@ -339,7 +340,8 @@ class DraftPurchaseOrderController extends Controller
         $quotation->qoute_status_updated = 'Rejected';
         $quotation->qoute_status = 'Qouted';
         $quotation->save();
-        session()->flash('message', 'Business information successfully updated.');
+
+        session()->flash('message', __('portal.Business information successfully updated.'));
         return redirect()->route('dpo.show', $draftPurchaseOrder->id);
     }
 
@@ -689,7 +691,7 @@ class DraftPurchaseOrderController extends Controller
         User::send_sms('+966555390920', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrders[0]->payment_term);
         User::send_sms('+966593388833', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrders[0]->payment_term);
 
-        session()->flash('message', 'DPO Accepted and PO generated.');
+        session()->flash('message', __('portal.DPO Accepted and PO generated.'));
 
         /* Redirecting to proforma invoices route in case payment_term is equal to Cash */
         if ($draftPurchaseOrders[0]->payment_term == 'Cash')
@@ -719,7 +721,7 @@ class DraftPurchaseOrderController extends Controller
             ]);
         }
 
-        session()->flash('message', 'DPO Rejected');
+        session()->flash('message', __('portal.DPO Rejected.'));
         return redirect()->route('singleCategoryIndex');
     }
 

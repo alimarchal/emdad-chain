@@ -70,7 +70,7 @@ class RatingController extends Controller
         {
             if ($request->rating < 4 && $request->comment_content == null)
             {
-                session()->flash('error', 'Enter comments for rating under 4');
+                session()->flash('error', __('portal.Enter comments for rating under 4'));
                 return redirect()->back()->withInput();
             }
         }
@@ -83,7 +83,7 @@ class RatingController extends Controller
             'emdad_buyer_rating' => 1
         ]);
 
-        session()->flash('message', 'Rated Buyer Successfully!!');
+        session()->flash('message', __('portal.Rated Buyer Successfully!'));
         return redirect()->route('buyerList');
     }
 
@@ -125,7 +125,7 @@ class RatingController extends Controller
         {
             if ($request->rating < 4 && $request->comment_content == null)
             {
-                session()->flash('error', 'Enter comments for rating under 4');
+                session()->flash('error', __('portal.Enter comments for rating under 4'));
                 return redirect()->back()->withInput();
             }
         }
@@ -138,7 +138,7 @@ class RatingController extends Controller
             'emdad_supplier_rating' => 1
         ]);
 
-        session()->flash('message', 'Rated Supplier Successfully!!');
+        session()->flash('message', __('portal.Rated Supplier Successfully!'));
         return redirect()->route('supplierList');
     }
 
@@ -505,12 +505,12 @@ class RatingController extends Controller
         {
             if ($request->buyer_rating < 4 && $request->buyer_comment_content == null)
             {
-                session()->flash('error', 'Enter comments for rating under 4');
+                session()->flash('error', __('portal.Enter comments for rating under 4'));
                 return redirect()->back()->withInput();
             }
             if ($request->emdad_rating < 4 && $request->emdad_comment_content == null)
             {
-                session()->flash('error', 'Enter comments for rating under 4');
+                session()->flash('error', __('portal.Enter comments for rating under 4'));
                 return redirect()->back()->withInput();
             }
         }
@@ -536,7 +536,7 @@ class RatingController extends Controller
             'supplier_rating' => 1
         ]);
 
-        session()->flash('message', 'Rated Delivery Successfully!!');
+        session()->flash('message', __('portal.Rated Delivery Successfully!'));
         return redirect()->route('supplierDeliveriesListToRate');
     }
 

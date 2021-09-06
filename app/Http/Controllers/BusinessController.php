@@ -214,7 +214,7 @@ class BusinessController extends Controller
         $businessPackage->business_id = $business->id;
         $businessPackage->save();
 
-        session()->flash('message', 'Business information successfully saved.');
+        session()->flash('message', __('portal.Business information successfully saved.'));
         return redirect()->route('businessWarehouse.create');
     }
 
@@ -253,7 +253,7 @@ class BusinessController extends Controller
                 $request->merge(['business_photo_url' => $path]);
             }
             $business->update($array);
-            session()->flash('message', 'Business information successfully updated.');
+            session()->flash('message', __('portal.Business information successfully updated.'));
             return redirect()->route('business.edit', $business->id);
         } else {
 
@@ -286,7 +286,7 @@ class BusinessController extends Controller
                     'category_number' => $category,
                 ]);
             }
-            session()->flash('message', 'Business information successfully updated.');
+            session()->flash('message', __('portal.Business information successfully updated.'));
             return redirect()->route('business.show', $business->id);
         }
     }
@@ -343,10 +343,10 @@ class BusinessController extends Controller
             ]);
             $user->notify(new \App\Notifications\BusinessRejected());
         } else {
-            return redirect()->back()->with('message', 'Something went wrong');
+            return redirect()->back()->with('message', __('portal.Something went wrong.'));
         }
 
-        return redirect()->back()->with('message', 'Business status updated...');
+        return redirect()->back()->with('message', __('portal.Business status updated.'));
     }
 
     public function businessLegalFinanceStatus(Request $request)
@@ -365,7 +365,7 @@ class BusinessController extends Controller
                     'legal_status' => $request->status_id,
                 ]);
             } else {
-                return redirect()->back()->with('message', 'Something went wrong');
+                return redirect()->back()->with('message', __('portal.Something went wrong.'));
             }
         }
         elseif (\auth()->user()->hasRole('Finance Officer 1'))
@@ -380,7 +380,7 @@ class BusinessController extends Controller
                     'finance_status' => $request->status_id,
                 ]);
             } else {
-                return redirect()->back()->with('message', 'Something went wrong');
+                return redirect()->back()->with('message', __('portal.Something went wrong.'));
             }
         }
         elseif (\auth()->user()->hasRole('SC Supervisor'))
@@ -395,11 +395,11 @@ class BusinessController extends Controller
                     'sc_supervisor_status' => $request->status_id,
                 ]);
             } else {
-                return redirect()->back()->with('message', 'Something went wrong');
+                return redirect()->back()->with('message', __('portal.Something went wrong.'));
             }
         }
 
-        return redirect()->back()->with('message', 'Business response send');
+        return redirect()->back()->with('message', __('portal.Business response send.'));
     }
 
     public function suppliers()
@@ -466,11 +466,11 @@ class BusinessController extends Controller
                 'nid_photo' =>  $request->nid_photo,
 
             ]);
-            session()->flash('message', 'Respective Certificate Upload. Will be updated once emdad approves');
+            session()->flash('message', __('portal.Respective Certificate Upload. Will be updated once emdad approves.'));
             return redirect()->route('business.show', \auth()->user()->business_id);
         }
 
-        session()->flash('error', 'No Certificates were uploaded for updating');
+        session()->flash('error', __('portal.No Certificates were uploaded for updating.'));
         return redirect()->route('business.show', \auth()->user()->business_id);
     }
 
@@ -496,7 +496,7 @@ class BusinessController extends Controller
     {
         BusinessUpdateCertificate::where('id', $id)->update(['legal_officer_status' => $status]);
 
-        session()->flash('message', 'Status Updated successfully!!');
+        session()->flash('message', __('portal.Status Updated successfully!'));
         return redirect()->route('certificates');
     }
 
@@ -531,7 +531,7 @@ class BusinessController extends Controller
 
         $businessCertificates->delete();
 
-        session()->flash('message', 'Updated certificates successfully!!');
+        session()->flash('message', __('portal.Updated certificates successfully!'));
         return redirect()->route('certificates');
     }
 
