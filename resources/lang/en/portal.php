@@ -808,7 +808,7 @@ return [
     'Updated successfully.' => 'Updated successfully.',
     'Item added successfully.' => 'Item added successfully.',
     'RFQ successfully created.' => 'Requisition successfully created.',
-    'Category updated successfully created.' => 'Category updated successfully created.',
+    'Category updated successfully.' => 'Category updated successfully.',
     'Category successfully deleted.' => 'Category successfully deleted.',
     'Please enter warehouse information first.' => 'Please enter warehouse information first.',
     'P.O.Info information successfully saved.' => 'P.O.Info information successfully saved.',

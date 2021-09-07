@@ -6,6 +6,7 @@ use App\Models\Delivery;
 use App\Models\DeliveryNote;
 use App\Models\DraftPurchaseOrder;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class DeliveryNoteController extends Controller
@@ -13,7 +14,28 @@ class DeliveryNoteController extends Controller
 
     public function index()
     {
-        $dpos = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('status','approved')->get();
+//        $dpos = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('status','approved')->get();
+        $draftPurchaseOrders = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id, 'status' => 'approved'])->get();;
+
+        $multiCategory = array();
+        $singleCategory = array();
+        foreach ($draftPurchaseOrders as $draftPurchaseOrder)
+        {
+            if ($draftPurchaseOrder['rfq_type'] == 1)
+            {
+                $multiCategory[] = $draftPurchaseOrder;
+            }
+            if ($draftPurchaseOrder['rfq_type'] == 0)
+            {
+                $singleCategory[] = $draftPurchaseOrder;
+            }
+        }
+        $multiCategoryCollection = collect($multiCategory);
+        $singleCategoryCollection = collect($singleCategory);
+
+        $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+        $dpos = $multiCategoryCollection->merge($singleCategoryInvoices);
+
         return view('deliveryNote.index', compact('dpos'));
     }
 
@@ -50,7 +72,29 @@ class DeliveryNoteController extends Controller
 
     public function notes()
     {
-        $collection = DeliveryNote::where(['supplier_business_id' => auth()->user()->business->id, 'rfq_type' => 1])->get();
+//        $collection = DeliveryNote::where(['supplier_business_id' => auth()->user()->business->id, 'rfq_type' => 1])->get();
+
+        $deliveryNotes = DeliveryNote::where(['supplier_business_id' => auth()->user()->business->id])->get();
+
+        $multiCategory = array();
+        $singleCategory = array();
+        foreach ($deliveryNotes as $deliveryNote)
+        {
+            if ($deliveryNote['rfq_type'] == 1)
+            {
+                $multiCategory[] = $deliveryNote;
+            }
+            if ($deliveryNote['rfq_type'] == 0)
+            {
+                $singleCategory[] = $deliveryNote;
+            }
+        }
+        $multiCategoryCollection = collect($multiCategory);
+        $singleCategoryCollection = collect($singleCategory);
+
+        $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+        $collection = $multiCategoryCollection->merge($singleCategoryInvoices);
+
         return view('supplier.deliveryNotes', compact('collection'));
     }
 
@@ -59,6 +103,20 @@ class DeliveryNoteController extends Controller
         return view('deliveryNote.viewNote',compact('deliveryNote'));
     }
 
+    /**
+     * Generating PDF file for Delivery Note.
+     *
+     */
+    public function generatePDF(DeliveryNote $deliveryNote)
+    {
+        $pdf = PDF::loadView('deliveryNote.PDF', compact('deliveryNote'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('Delivery Note.pdf');
+    }
+
+    public function view()
+    {
+        return view('deliveryNote.view');
+    }
     ###################################################### Single Category Quotation Functions #########################################
 
     public function singleCategoryIndex()
@@ -135,6 +193,18 @@ class DeliveryNoteController extends Controller
         $deliveryNotes = DeliveryNote::with('purchase_order')->where('rfq_no', $rfq_no)->get();
 
         return view('deliveryNote.singleCategory.viewNote',compact('deliveryNotes'));
+    }
+
+    /**
+     * Generating PDF file for Single Category Delivery Note.
+     *
+     */
+    public function singleCategoryGeneratePDF($deliveryNoteRfqNo)
+    {
+        $deliveryNotes = DeliveryNote::where(['rfq_no' => $deliveryNoteRfqNo, 'supplier_business_id' => auth()->user()->business_id])->get();
+
+        $pdf = PDF::loadView('deliveryNote.singleCategory.PDF', compact('deliveryNotes'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('Delivery Note.pdf');
     }
 
 }
