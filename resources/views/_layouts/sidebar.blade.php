@@ -753,12 +753,17 @@
                         </svg>
                     </span>
                     </a>
+
+
                     <ul
                         x-show="open"
                         x-show.transition.in.duration.50ms.out.duration.100ms="open"
                         x-show.transition.in="open"
                         x-show.transition.out="open"
                         @click.away="open = false">
+
+
+                        @if(auth()->user()->registration_type != "Supplier")
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('purchaseOrderView') || request()->routeIs('dpo.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -773,6 +778,7 @@
 
 
                         </li>
+                        @endif
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('purchaseOrderView') || request()->routeIs('po.po') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path
