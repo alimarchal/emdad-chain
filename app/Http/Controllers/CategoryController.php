@@ -31,7 +31,7 @@ class CategoryController extends Controller
             session()->flash('message', $created_category->name  . ' category successfully created.');
         }
         else{
-            session()->flash('message', $created_category->name  . ' category successfully created.');
+            session()->flash('message', $created_category->name_ar  . ' تم إنشاء الفئة بنجاح.');
         }
 
         return redirect()->route('category.create');
@@ -54,11 +54,11 @@ class CategoryController extends Controller
 
             // dd($request->all());
             $updated = $category->update($request->all());
-            session()->flash('message', __('portal.Category updated successfully created.'));
+            session()->flash('message', __('portal.Category updated successfully.'));
             return redirect()->route('showAllCategory');
         } else {
             $updated = $category->update($request->all());
-            session()->flash('message', __('portal.Category updated successfully created.'));
+            session()->flash('message', __('portal.Category updated successfully.'));
             return redirect()->route('showAllCategory');
         }
     }

@@ -651,7 +651,7 @@
                                 <path
                                     d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
                             </svg>
-                            <a href="{{ route('singleCategoryRFQs') }}"><span class="mx-2 ">{{ __('sidebar.Single category') }} @if(count($eOrders) > 0 && count($quotesNotPresent) > 0) ({{count(array_unique($quotesNotPresent))}}) @else (0) @endif </span></a>
+                            <a href="{{ route('singleCategoryRFQs') }}"><span class="mx-2 ">{{ __('sidebar.Single category') }} @if(count($eOrders) > 0 && count($quotesNotPresent) > 0) ({{count(array_unique($quotesNotPresent))}}) @else {{ '('. 0 .')' }} @endif </span></a>
                         </li>
                     </ul>
                 </div>
@@ -921,114 +921,14 @@
             {{-- Delivery link --}}
             @if(auth()->user()->hasRole('CEO')  && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
 
-                <div x-data="{ open: false } ">
-                    <a @click="open = true"
-                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('deliveryNote.index') || request()->routeIs('notes') || request()->routeIs('singleCategoryIndex') || request()->routeIs('singleCategoryNotes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                       href="javascript:void(0);">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M17.638,6.181h-3.844C13.581,4.273,11.963,2.786,10,2.786c-1.962,0-3.581,1.487-3.793,3.395H2.362c-0.233,0-0.424,0.191-0.424,0.424v10.184c0,0.232,0.191,0.424,0.424,0.424h15.276c0.234,0,0.425-0.191,0.425-0.424V6.605C18.062,6.372,17.872,6.181,17.638,6.181 M13.395,9.151c0.234,0,0.425,0.191,0.425,0.424S13.629,10,13.395,10c-0.232,0-0.424-0.191-0.424-0.424S13.162,9.151,13.395,9.151 M10,3.635c1.493,0,2.729,1.109,2.936,2.546H7.064C7.271,4.744,8.506,3.635,10,3.635 M6.605,9.151c0.233,0,0.424,0.191,0.424,0.424S6.838,10,6.605,10c-0.233,0-0.424-0.191-0.424-0.424S6.372,9.151,6.605,9.151 M17.214,16.365H2.786V7.029h3.395v1.347C5.687,8.552,5.332,9.021,5.332,9.575c0,0.703,0.571,1.273,1.273,1.273c0.702,0,1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h5.941v1.347c-0.495,0.176-0.849,0.645-0.849,1.199c0,0.703,0.57,1.273,1.272,1.273s1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h3.395V16.365z"></path>
-                        </svg>
-                        <span class="mx-3 font-extrabold">{{ __('sidebar.Delivery Note') }}</span>
-                        <span x-show="open == false">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 2.1em;" viewBox="0 0 20 20" fill="currentColor">
-                          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                        </svg>
-                    </span>
-                        <span x-show="open == true">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 2.1em;" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                        </svg>
-                    </span>
-                    </a>
-                    <ul
-                        x-show="open"
-                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        x-show.transition.in="open"
-                        x-show.transition.out="open"
-                        @click.away="open = false"
-                        {{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('deliveryNote.index') || request()->routeIs('notes') || request()->routeIs('singleCategoryIndex') || request()->routeIs('singleCategoryNotes'))  x-data="{ open: true } " @endif--}}
-                    >
-
-                        {{-- Multi Categories Routes --}}
-                        <div x-data="{ open: false } ">
-                            <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('deliveryNote.index') || request()->routeIs('notes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                               href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                                    <path d="M19 15l-6 6l-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" fill="currentColor"/>
-                                </svg>
-                                <span class="mx-3">{{ __('sidebar.Multi categories') }}</span>
-                                <span x-show="open == false">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 1.2em;" viewBox="0 0 20 20" fill="currentColor">
-                                  <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                                </svg>
-                            </span>
-                                <span x-show="open == true">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 1.2em;" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                    </svg>
-                            </span>
-                            </a>
-                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('deliveryNote.index') || request()->routeIs('notes'))  x-data="{ open: true } " @endif>
-                                <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('deliveryNote.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                                    </svg>
-                                    <a href="{{ route('deliveryNote.index') }}"><span class="mx-3 ">{{ __('sidebar.Create Delivery Note') }}</span></a>
-                                </li>
-                                <li class="flex items-center mt-4 py-2 px-6 {{request()->routeIs('notes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                                    </svg>
-                                    <a href="{{ route('notes') }}"><span class="mx-3 ">{{ __('sidebar.DN history') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        {{-- Single Category Routes --}}
-                        <div x-data="{ open: false } ">
-                            <a @click="open = true"
-                               class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryIndex') || request()->routeIs('singleCategoryNotes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                               href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                                    <path d="M19 15l-6 6l-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" fill="currentColor"/>
-                                </svg>
-                                <span class="mx-3">{{__('sidebar.Single category')}}</span>
-                                <span x-show="open == false">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 1.2em;" viewBox="0 0 20 20" fill="currentColor">
-                                  <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                                </svg>
-                                </span>
-                                <span x-show="open == true">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 1.2em;" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                    </svg>
-                                </span>
-                            </a>
-                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('singleCategoryIndex') || request()->routeIs('singleCategoryNotes'))  x-data="{ open: true } " @endif>
-                                <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryIndex') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                                    </svg>
-                                    <a href="{{ route('singleCategoryIndex') }}"><span class="mx-3 ">{{ __('sidebar.Create Delivery Note') }}</span></a>
-                                </li>
-                                <li class="flex items-center mt-4 py-2 px-6 {{request()->routeIs('singleCategoryNotes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                                    </svg>
-                                    <a href="{{ route('singleCategoryNotes') }}"><span class="mx-3 ">{{__('sidebar.DN history')}}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </ul>
-                </div>
+                <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('deliveryView') ||request()->routeIs('deliveryNote.index') ||request()->routeIs('notes') ||request()->routeIs('singleCategoryIndex') ||request()->routeIs('singleCategoryNotes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{ route('deliveryView') }}">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M17.638,6.181h-3.844C13.581,4.273,11.963,2.786,10,2.786c-1.962,0-3.581,1.487-3.793,3.395H2.362c-0.233,0-0.424,0.191-0.424,0.424v10.184c0,0.232,0.191,0.424,0.424,0.424h15.276c0.234,0,0.425-0.191,0.425-0.424V6.605C18.062,6.372,17.872,6.181,17.638,6.181 M13.395,9.151c0.234,0,0.425,0.191,0.425,0.424S13.629,10,13.395,10c-0.232,0-0.424-0.191-0.424-0.424S13.162,9.151,13.395,9.151 M10,3.635c1.493,0,2.729,1.109,2.936,2.546H7.064C7.271,4.744,8.506,3.635,10,3.635 M6.605,9.151c0.233,0,0.424,0.191,0.424,0.424S6.838,10,6.605,10c-0.233,0-0.424-0.191-0.424-0.424S6.372,9.151,6.605,9.151 M17.214,16.365H2.786V7.029h3.395v1.347C5.687,8.552,5.332,9.021,5.332,9.575c0,0.703,0.571,1.273,1.273,1.273c0.702,0,1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h5.941v1.347c-0.495,0.176-0.849,0.645-0.849,1.199c0,0.703,0.57,1.273,1.272,1.273s1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h3.395V16.365z"></path>
+                    </svg>
+                    <span class="mx-3">{{ __('sidebar.Delivery Note') }}</span>
+                </a>
 
             @endif
 
@@ -2245,116 +2145,14 @@
             {{-- Delivery link --}}
             @if(auth()->user()->hasRole('CEO')  && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)
 
-                <div x-data="{ open: false } ">
-                    <a @click="open = true"
-                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('deliveryNote.index') || request()->routeIs('notes') || request()->routeIs('singleCategoryIndex') || request()->routeIs('singleCategoryNotes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                       href="javascript:void(0);">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M17.638,6.181h-3.844C13.581,4.273,11.963,2.786,10,2.786c-1.962,0-3.581,1.487-3.793,3.395H2.362c-0.233,0-0.424,0.191-0.424,0.424v10.184c0,0.232,0.191,0.424,0.424,0.424h15.276c0.234,0,0.425-0.191,0.425-0.424V6.605C18.062,6.372,17.872,6.181,17.638,6.181 M13.395,9.151c0.234,0,0.425,0.191,0.425,0.424S13.629,10,13.395,10c-0.232,0-0.424-0.191-0.424-0.424S13.162,9.151,13.395,9.151 M10,3.635c1.493,0,2.729,1.109,2.936,2.546H7.064C7.271,4.744,8.506,3.635,10,3.635 M6.605,9.151c0.233,0,0.424,0.191,0.424,0.424S6.838,10,6.605,10c-0.233,0-0.424-0.191-0.424-0.424S6.372,9.151,6.605,9.151 M17.214,16.365H2.786V7.029h3.395v1.347C5.687,8.552,5.332,9.021,5.332,9.575c0,0.703,0.571,1.273,1.273,1.273c0.702,0,1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h5.941v1.347c-0.495,0.176-0.849,0.645-0.849,1.199c0,0.703,0.57,1.273,1.272,1.273s1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h3.395V16.365z"></path>
-                        </svg>
-                        <span class="mx-3 font-extrabold">{{ __('sidebar.Delivery Note') }}</span>
-                        <span x-show="open == false">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 2em;" viewBox="0 0 20 20" fill="currentColor">
-                                <path
-                                    d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                            </svg>
-                        </span>
-                        <span x-show="open == true">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 2em;" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                            </svg>
-                        </span>
-                    </a>
-                    <ul
-                        x-show="open"
-                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        x-show.transition.in="open"
-                        x-show.transition.out="open"
-                        @click.away="open = false"
-                        {{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('deliveryNote.index') || request()->routeIs('notes') || request()->routeIs('singleCategoryIndex') || request()->routeIs('singleCategoryNotes'))  x-data="{ open: true } " @endif--}}
-                    >
-
-                        {{-- Multi Categories Routes --}}
-                        <div x-data="{ open: false } ">
-                            <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('deliveryNote.index') || request()->routeIs('notes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                               href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: scaleX(-1);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                                    <path d="M19 15l-6 6l-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" fill="currentColor"/>
-                                </svg>
-                                <span class="mx-3">{{ __('sidebar.Multi categories') }}</span>
-                                <span x-show="open == false">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 1.2em;" viewBox="0 0 20 20" fill="currentColor">
-                                        <path
-                                            d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                                    </svg>
-                                </span>
-                                <span x-show="open == true">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 1.2em;" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                    </svg>
-                                </span>
-                            </a>
-                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('deliveryNote.index') || request()->routeIs('notes'))  x-data="{ open: true } " @endif>
-                                <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('deliveryNote.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
-                                    </svg>
-                                    <a href="{{ route('deliveryNote.index') }}"><span class="mx-3 hover:text-white {{ request()->routeIs('deliveryNote.index') ? 'text-white' : 'text-gray-500' }}">{{ __('sidebar.Create Delivery Note') }}</span></a>
-                                </li>
-                                <li class="flex items-center mt-4 py-2 px-6 {{request()->routeIs('notes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
-                                    </svg>
-                                    <a href="{{ route('notes') }}"><span class="mx-3 hover:text-white {{ request()->routeIs('notes') ? 'text-white' : 'text-gray-500' }}">{{ __('sidebar.DN history') }}</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        {{-- Single Category Routes --}}
-                        <div x-data="{ open: false } ">
-                            <a @click="open = true"
-                               class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryIndex') || request()->routeIs('singleCategoryNotes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                               href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: scaleX(-1);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                                    <path d="M19 15l-6 6l-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" fill="currentColor"/>
-                                </svg>
-                                <span class="mx-3">{{__('sidebar.Single category')}}</span>
-                                <span x-show="open == false">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 1.2em;" viewBox="0 0 20 20" fill="currentColor">
-                                        <path
-                                            d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                                    </svg>
-                                </span>
-                                <span x-show="open == true">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 1.2em;" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                                    </svg>
-                                </span>
-                            </a>
-                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('singleCategoryIndex') || request()->routeIs('singleCategoryNotes'))  x-data="{ open: true } " @endif>
-                                <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryIndex') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
-                                    </svg>
-                                    <a href="{{ route('singleCategoryIndex') }}"><span class="mx-3 hover:text-white {{ request()->routeIs('singleCategoryIndex') ? 'text-white' : 'text-gray-500' }}">{{ __('sidebar.Create Delivery Note') }}</span></a>
-                                </li>
-                                <li class="flex items-center mt-4 py-2 px-6 {{request()->routeIs('singleCategoryNotes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
-                                    </svg>
-                                    <a href="{{ route('singleCategoryNotes') }}"><span class="mx-3 hover:text-white {{ request()->routeIs('singleCategoryNotes') ? 'text-white' : 'text-gray-500' }}">{{__('sidebar.DN history')}}</span></a>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </ul>
-                </div>
+                <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('deliveryView') ||request()->routeIs('deliveryNote.index') ||request()->routeIs('notes') ||request()->routeIs('singleCategoryIndex') ||request()->routeIs('singleCategoryNotes') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{ route('deliveryView') }}">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M17.638,6.181h-3.844C13.581,4.273,11.963,2.786,10,2.786c-1.962,0-3.581,1.487-3.793,3.395H2.362c-0.233,0-0.424,0.191-0.424,0.424v10.184c0,0.232,0.191,0.424,0.424,0.424h15.276c0.234,0,0.425-0.191,0.425-0.424V6.605C18.062,6.372,17.872,6.181,17.638,6.181 M13.395,9.151c0.234,0,0.425,0.191,0.425,0.424S13.629,10,13.395,10c-0.232,0-0.424-0.191-0.424-0.424S13.162,9.151,13.395,9.151 M10,3.635c1.493,0,2.729,1.109,2.936,2.546H7.064C7.271,4.744,8.506,3.635,10,3.635 M6.605,9.151c0.233,0,0.424,0.191,0.424,0.424S6.838,10,6.605,10c-0.233,0-0.424-0.191-0.424-0.424S6.372,9.151,6.605,9.151 M17.214,16.365H2.786V7.029h3.395v1.347C5.687,8.552,5.332,9.021,5.332,9.575c0,0.703,0.571,1.273,1.273,1.273c0.702,0,1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h5.941v1.347c-0.495,0.176-0.849,0.645-0.849,1.199c0,0.703,0.57,1.273,1.272,1.273s1.273-0.57,1.273-1.273c0-0.554-0.354-1.023-0.849-1.199V7.029h3.395V16.365z"></path>
+                    </svg>
+                    <span class="mx-3">{{ __('sidebar.Delivery Note') }}</span>
+                </a>
 
             @endif
 

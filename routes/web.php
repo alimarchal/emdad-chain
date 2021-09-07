@@ -381,14 +381,17 @@ Route::middleware(['auth:sanctum'])->get('/logviewer', function () {
 #################### END ##########################################
 
 #################### Delivery and Delivery Note ###################################################################################
+Route::middleware(['auth:sanctum'])->get('deliveries', [DeliveryNoteController::class, 'view'])->name('deliveryView');
 Route::middleware(['auth:sanctum'])->resource('delivery', DeliveryController::class);
 Route::middleware(['auth:sanctum'])->get('/deliveryNote/{draftPurchaseOrder}/view', [DeliveryNoteController::class, 'deliveryNoteView'])->name('deliveryNoteView');
 Route::middleware(['auth:sanctum'])->resource('deliveryNote', DeliveryNoteController::class);
+Route::middleware(['auth:sanctum'])->get('/generate-delivery-note-pdf/{deliveryNote}', [DeliveryNoteController::class, 'generatePDF'])->name('generateDeliveryNotePDF');
 
 ##################### Single Category RFQ Delivery and Delivery Note routes ####################################
 Route::middleware(['auth:sanctum'])->get('/single/category/delivery/notes', [DeliveryNoteController::class, 'singleCategoryIndex'])->name('singleCategoryIndex');
 Route::middleware(['auth:sanctum'])->get('/single/category/deliveryNote/{rfqNo}/view', [DeliveryNoteController::class, 'singleCategoryDeliveryNoteView'])->name('singleCategoryDeliveryNoteView');
 Route::middleware(['auth:sanctum'])->post('/single/category/deliveryNote/{rfqNo}/save', [DeliveryNoteController::class, 'singleCategoryStore'])->name('singleCategoryDeliveryNoteStore');
+Route::middleware(['auth:sanctum'])->get('/generate-single-category-delivery-note-pdf/{deliveryNoteRfqNo}', [DeliveryNoteController::class, 'singleCategoryGeneratePDF'])->name('singleCategoryDeliveryNoteGeneratePDF');
 ################################### END ################################################
 
 #################### END ###########################################################################################################

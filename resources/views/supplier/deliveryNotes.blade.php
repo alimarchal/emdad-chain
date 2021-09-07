@@ -80,14 +80,24 @@
                                                             {{__('portal.P.O.')}} -{{ $dn->purchase_order->id }}
                                                         </td>
 
-
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            @php
-                                                                $record = \App\Models\Category::where('id',$dn->purchase_order->item_code)->first();
-                                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                                            @endphp
-                                                            {{ $record->name }} , {{ $parent->name }}
-                                                            {{-- <a href="{{ route('po.show', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dn->item_name }}</a> --}}
+                                                            @if($dn->rfq_type == 1)
+                                                                @php
+                                                                    $record = \App\Models\Category::where('id',$dn->purchase_order->item_code)->first();
+                                                                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                                @endphp
+                                                                 <a href="{{ route('viewNote', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                     {{ $record->name }} , {{ $parent->name }}
+                                                                 </a>
+                                                            @else
+                                                                @php
+                                                                    $record = \App\Models\Category::where('id',$dn->purchase_order->item_code)->first();
+                                                                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                                @endphp
+                                                                <a href="{{ route('singleCategoryViewNote', $dn->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                    {{ $record->name }} , {{ $parent->name }}
+                                                                </a>
+                                                            @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -107,7 +117,6 @@
                                                                 @if($dn->status == 'completed') {{__('portal.Completed')}} @endif
                                                                 @if($dn->status == 'pending') {{__('portal.pending')}} @endif
                                                                 @if($dn->status == 'processing') {{__('portal.processing')}} @endif
-{{--                                                                {{ $dn->status }}--}}
                                                             @endif
 
                                                         </td>
@@ -192,116 +201,124 @@
                                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                                         <table class="min-w-full divide-y divide-gray-200" id="payment">
                                             <thead>
-                                                <tr>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        #
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        {{__('portal.Delivery Note')}}
-                                                    </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        {{__('portal.Purchase Order')}}
-                                                    </th>
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    #
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    {{__('portal.Delivery Note')}}
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    {{__('portal.Purchase Order')}}
+                                                </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        {{__('portal.Category Name')}}
-                                                    </th>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    {{__('portal.Category Name')}}
+                                                </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        {{__('portal.Requisition Type')}}
-                                                    </th>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    {{__('portal.Requisition Type')}}
+                                                </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        {{__('portal.P.O Date')}}
-                                                    </th>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    {{__('portal.P.O Date')}}
+                                                </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        {{__('portal.Status')}}
-                                                    </th>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    {{__('portal.Status')}}
+                                                </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        {{__('portal.View')}}
-                                                    </th>
-                                                </tr>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    {{__('portal.View')}}
+                                                </th>
+                                            </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y divide-gray-200">
-                                                @foreach ($collection as $dn)
-                                                    <tr>
-                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            {{ $loop->iteration }}
-                                                        </td>
+                                            @foreach ($collection as $dn)
+                                                <tr>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        {{ $loop->iteration }}
+                                                    </td>
 
-                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            {{__('portal.D.N.')}}-{{ $dn->id }}
-                                                        </td>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        {{__('portal.D.N.')}} -{{ $dn->id }}
+                                                    </td>
 
-                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            {{__('portal.P.O.')}}-{{ $dn->purchase_order->id }}
-                                                        </td>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        {{__('portal.P.O.')}} -{{ $dn->purchase_order->id }}
+                                                    </td>
 
-                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        @if($dn->rfq_type == 1)
                                                             @php
                                                                 $record = \App\Models\Category::where('id',$dn->purchase_order->item_code)->first();
                                                                 $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                             @endphp
-                                                            {{ $record->name_ar }} , {{ $parent->name_ar }}
-                                                            {{-- <a href="{{ route('po.show', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dn->item_name }}</a> --}}
-                                                        </td>
+                                                            <a href="{{ route('viewNote', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                {{ $record->name_ar }} , {{ $parent->name_ar }}
+                                                            </a>
+                                                        @else
+                                                            @php
+                                                                $record = \App\Models\Category::where('id',$dn->purchase_order->item_code)->first();
+                                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                            @endphp
+                                                            <a href="{{ route('singleCategoryViewNote', $dn->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                {{ $record->name_ar }} , {{ $parent->name_ar }}
+                                                            </a>
+                                                        @endif
+                                                    </td>
 
-                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            @if($dn->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dn->rfq_type == 0) {{__('portal.Single Category')}} @endif
-                                                        </td>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        @if($dn->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dn->rfq_type == 0) {{__('portal.Single Category')}} @endif
+                                                    </td>
 
-                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            {{ Carbon\Carbon::parse($dn->purchase_order->po_date)->format('d-m-Y') }}
-                                                        </td>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        {{ Carbon\Carbon::parse($dn->purchase_order->po_date)->format('d-m-Y') }}
+                                                    </td>
 
-                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            @if ($dn->status == 'prepareDelivery')
-                                                                {{__('portal.Preparing Delivery')}}
-                                                            @else
-                                                                @if($dn->status == 'cancel') {{__('portal.Cancel')}} @endif
-                                                                @if($dn->status == 'approved') {{__('portal.approved')}} @endif
-                                                                @if($dn->status == 'completed') {{__('portal.Completed')}} @endif
-                                                                @if($dn->status == 'pending') {{__('portal.pending')}} @endif
-                                                                @if($dn->status == 'processing') {{__('portal.processing')}} @endif
-                                                                {{--                                                                {{ $dn->status }}--}}
-                                                            @endif
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        @if ($dn->status == 'prepareDelivery')
+                                                            {{__('portal.Preparing Delivery')}}
+                                                        @else
+                                                            @if($dn->status == 'cancel') {{__('portal.Cancel')}} @endif
+                                                            @if($dn->status == 'approved') {{__('portal.approved')}} @endif
+                                                            @if($dn->status == 'completed') {{__('portal.Completed')}} @endif
+                                                            @if($dn->status == 'pending') {{__('portal.pending')}} @endif
+                                                            @if($dn->status == 'processing') {{__('portal.processing')}} @endif
+                                                        @endif
 
-                                                        </td>
+                                                    </td>
 
-                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            @if($dn->rfq_type == 1)
-                                                                <a href="{{ route('viewNote',$dn->id) }}" class="hover:underline hover:text-blue-800 text-blue-500">
-                                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                                        </path>
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                                        </path>
-                                                                    </svg>
-                                                                </a>
-                                                            @elseif($dn->rfq_type == 0)
-                                                                <a href="{{ route('singleCategoryViewNote',$dn->rfq_no) }}" class="hover:underline hover:text-blue-800 text-blue-500">
-                                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                                        </path>
-                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                                        </path>
-                                                                    </svg>
-                                                                </a>
-                                                            @endif
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        @if($dn->rfq_type == 1)
+                                                            <a href="{{ route('viewNote',$dn->id) }}" class="hover:underline hover:text-blue-800 text-blue-500">
+                                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                    </path>
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                    </path>
+                                                                </svg>
+                                                            </a>
+                                                        @elseif($dn->rfq_type == 0)
+                                                            <a href="{{ route('singleCategoryViewNote',$dn->rfq_no) }}" class="hover:underline hover:text-blue-800 text-blue-500">
+                                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                    </path>
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                    </path>
+                                                                </svg>
+                                                            </a>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
 
                     @else
