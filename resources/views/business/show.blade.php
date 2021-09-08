@@ -209,7 +209,7 @@
 
                                 <div class="w-full overflow-hidden">
 
-                                    @if(auth()->user()->hasRole('SuperAdmin'))
+                                    @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('SC Specialist'))
                                         <a href="{{route('business.edit',$business->id)}}"
                                            class="float-right inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                             {{__('portal.Edit')}}
@@ -217,7 +217,7 @@
 
                                     @endif
 
-                                    <a href="#" onclick="window.print();"
+                                    <a href="javascript:void (0)" onclick="window.print();"
                                        class="mr-3 float-right inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                         {{__('portal.Print')}}
                                     </a>
@@ -451,14 +451,14 @@
 
                                 <div class="w-full overflow-hidden">
 
-                                    @if(auth()->user()->hasRole('SuperAdmin'))
+                                    @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('SC Specialist'))
                                         <a href="{{route('business.edit',$business->id)}}"
-                                           class="float-left inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                           class="mr-3 float-left inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                             {{__('portal.Edit')}}
                                         </a>
                                     @endif
 
-                                    <a href="#" onclick="window.print();"
+                                    <a href="javascript:void (0)" onclick="window.print();"
                                        class="mr-3 float-left inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                         {{__('portal.Print')}}
                                     </a>

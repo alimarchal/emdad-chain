@@ -226,69 +226,88 @@ class BusinessController extends Controller
 
     public function edit(Business $business)
     {
-//        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-//        $categories = explode(',', auth()->user()->business_package->categories);
-        $businessPackage = BusinessPackage::where('user_id', \auth()->id())->first();
+        if (\auth()->user()->hasRole('SuperAdmin') || \auth()->user()->hasRole('SC Specialist'))
+        {
+            $businessPackage = BusinessPackage::where(['business_id' => $business->id, 'status' => 1 ])->first();
+            $categories = explode(',',$businessPackage->categories);
+            $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
+
+            /* Passing $businessPackage for calculating categories count in views/category/category/index */
+            return view('business.edit', compact('parentCategories', 'business','categories', 'businessPackage'));
+        }
+
+        return redirect()->back();
+
+        /* Commented below because User(CEO) cannot update Business Details */
+
+        /*$businessPackage = BusinessPackage::where(['user_id' => \auth()->id(), 'status' => 1 ])->first();
         $categories = explode(',',$businessPackage->categories);
         $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
-        return view('business.edit', compact('parentCategories', 'business','categories'));
+        return view('business.edit', compact('parentCategories', 'business','categories'));*/
     }
 
     public function update(Request $request, Business $business)
     {
+        /* Added condition because only SuperAdmin and SC Specialist can update Business Details */
+        if (\auth()->user()->hasRole('SuperAdmin') || \auth()->user()->hasRole('SC Specialist'))
+        {
+            if ($request->category === null) {
+                $array = $request->all();
+                unset($array["category_number"]);
+                if ($request->has('chamber_reg_path')) {
+                    $path = $request->file('chamber_reg_path')->store('', 'public');
+                    $request->merge(['chamber_reg_path' => $path]);
+                }
+                if ($request->has('vat_reg_certificate_path')) {
+                    $path = $request->file('vat_reg_certificate_path')->store('', 'public');
+                    $request->merge(['vat_reg_certificate_path' => $path]);
+                }
+                if ($request->has('business_photo_url')) {
+                    $path = $request->file('business_photo_url')->store('', 'public');
+                    $request->merge(['business_photo_url' => $path]);
+                }
+                $business->update($array);
 
-        if ($request->category === null) {
-            $array = $request->all();
-            unset($array["category_number"]);
-            if ($request->has('chamber_reg_path')) {
-                $path = $request->file('chamber_reg_path')->store('', 'public');
-                $request->merge(['chamber_reg_path' => $path]);
-            }
-            if ($request->has('vat_reg_certificate_path')) {
-                $path = $request->file('vat_reg_certificate_path')->store('', 'public');
-                $request->merge(['vat_reg_certificate_path' => $path]);
-            }
-            if ($request->has('business_photo_url')) {
-                $path = $request->file('business_photo_url')->store('', 'public');
-                $request->merge(['business_photo_url' => $path]);
-            }
-            $business->update($array);
-            session()->flash('message', __('portal.Business information successfully updated.'));
-            return redirect()->route('business.edit', $business->id);
-        } else {
+                session()->flash('message', __('portal.Business information successfully updated.'));
+                return redirect()->route('business.edit', $business->id);
+            } else {
 
-            $comma_separated = implode(",", $request->category);
-            $request->merge(['category_number' => $comma_separated]);
+                $comma_separated = implode(",", $request->category);
+                $request->merge(['category_number' => $comma_separated]);
 
-            if ($request->has('chamber_reg_path_1')) {
-                $path = $request->file('chamber_reg_path_1')->store('', 'public');
-                $request->merge(['chamber_reg_path' => $path]);
-            }
-            if ($request->has('vat_reg_certificate_path_1')) {
-                $path = $request->file('vat_reg_certificate_path_1')->store('', 'public');
-                $request->merge(['vat_reg_certificate_path' => $path]);
-            }
-            if ($request->has('business_photo_url_1')) {
-                $path = $request->file('business_photo_url_1')->store('', 'public');
-                $request->merge(['business_photo_url' => $path]);
-            }
-            $business->update($request->all());
+                if ($request->has('chamber_reg_path_1')) {
+                    $path = $request->file('chamber_reg_path_1')->store('', 'public');
+                    $request->merge(['chamber_reg_path' => $path]);
+                }
+                if ($request->has('vat_reg_certificate_path_1')) {
+                    $path = $request->file('vat_reg_certificate_path_1')->store('', 'public');
+                    $request->merge(['vat_reg_certificate_path' => $path]);
+                }
+                if ($request->has('business_photo_url_1')) {
+                    $path = $request->file('business_photo_url_1')->store('', 'public');
+                    $request->merge(['business_photo_url' => $path]);
+                }
+                $business->update($request->all());
 
-            $business_category = BusinessCategory::where('business_id', $business->id)->get();
-            foreach ($business_category as $biz) {
-                $biz = BusinessCategory::find($biz->id);
-                $biz->delete();
-            }
+                $business_category = BusinessCategory::where('business_id', $business->id)->get();
+                foreach ($business_category as $biz) {
+                    $biz = BusinessCategory::find($biz->id);
+                    $biz->delete();
+                }
 
-            foreach ($request->category as $category) {
-                BusinessCategory::create([
-                    'business_id' => $business->id,
-                    'category_number' => $category,
-                ]);
+                foreach ($request->category as $category) {
+                    BusinessCategory::create([
+                        'business_id' => $business->id,
+                        'category_number' => $category,
+                    ]);
+                }
+
+                session()->flash('message', __('portal.Business information successfully updated.'));
+                return redirect()->route('business.show', $business->id);
             }
-            session()->flash('message', __('portal.Business information successfully updated.'));
-            return redirect()->route('business.show', $business->id);
         }
+
+        return redirect()->back();
     }
 
     public function destroy(Business $business)

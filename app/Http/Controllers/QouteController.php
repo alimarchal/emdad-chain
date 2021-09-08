@@ -354,7 +354,8 @@ class QouteController extends Controller
         if (auth()->user()->hasRole('SuperAdmin')) {
             $PlacedRFQ = EOrders::orderBy('created_at', 'desc')->get();
         } else {
-            $PlacedRFQ = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('discard',0)->orderBy('created_at', 'desc')->get();
+//            $PlacedRFQ = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('discard',0)->orderBy('created_at', 'desc')->get();
+            $PlacedRFQ = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'discard' => 0])->orderBy('created_at', 'desc')->paginate(10);
         }
 
         return view('buyer.receivedQoutations', compact('PlacedRFQ'));
@@ -537,7 +538,9 @@ class QouteController extends Controller
         EOrderItems::where('e_order_id', $eOrderID)->update(['quotation_time' => Carbon::now()->addDays(3)]);
 
         session()->flash('message', __('portal.Quotation Time Reset Successfully!'));
-        return redirect()->route('singleCategoryBuyerRFQs');
+
+        /* Changed route 'singleCategoryBuyerRFQs to 'QoutationsBuyerReceived' because of merging into one view*/
+        return redirect()->route('QoutationsBuyerReceived');
     }
 
     /* Discarding expired single category RFQs */
@@ -546,7 +549,9 @@ class QouteController extends Controller
         EOrders::where('id', $eOrderID)->update(['discard' => 1]);
 
         session()->flash('message', __('portal.Quotation Discarded Successfully!'));
-        return redirect()->route('singleCategoryBuyerRFQs');
+
+        /* Changed route 'singleCategoryBuyerRFQs to 'QoutationsBuyerReceived' because of merging into one view*/
+        return redirect()->route('QoutationsBuyerReceived');
     }
 
     public function singleCategoryRFQItems($rfq_id)
@@ -654,7 +659,8 @@ class QouteController extends Controller
             session()->flash('message', 'مرفوض' . 'تم تغيير حالة العرض إلى ');
         }
 
-        return redirect()->route('singleCategoryBuyerRFQs');
+        /* Changed route 'singleCategoryBuyerRFQs to 'QoutationsBuyerReceived' because of merging into one view*/
+        return redirect()->route('QoutationsBuyerReceived');
     }
 
     public function singleCategoryQuoteAccepted(Request $request)

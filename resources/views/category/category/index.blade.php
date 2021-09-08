@@ -12,7 +12,7 @@
     }
 
 </style>
-<select id="sel_1" class="form-input rounded-md shadow-sm border p-2 w-1/2" style="width: 100%;" multiple name="category[]" required>
+<select id="sel_1" class="form-input rounded-md shadow-sm border p-2 w-1/2" style="width: 100%;" multiple name="category[]" @if(Route::currentRouteName() == 'business.create') required @endif >
 
 </select>
 <script>
@@ -62,6 +62,39 @@
 
     @elseif(auth()->user()->registration_type == 'Supplier')
         $("#sel_1").select2ToTree({
+            treeData: {
+                dataArr: mydata
+            },
+            // maximumSelectionLength: 25
+        });
+
+        /* Adding below conditions for Super Admin can update User's Categories/Business */
+    @elseif(auth()->user()->hasRole('SuperAdmin') && $businessPackage->business_type == 1)
+            @if(count($categories) == 1)
+            $("#sel_1").select2ToTree({
+                treeData: {
+                    dataArr: mydata
+                },
+                maximumSelectionLength: 5
+            });
+            @elseif(count($categories) > 1 || count($categories) <= 3)
+            $("#sel_1").select2ToTree({
+                treeData: {
+                    dataArr: mydata
+                },
+                maximumSelectionLength: 15
+            });
+            @elseif(count($categories) > 3 || count($categories) <= 5)
+            $("#sel_1").select2ToTree({
+                treeData: {
+                    dataArr: mydata
+                },
+                maximumSelectionLength: 50
+            });
+        @endif
+
+    @elseif(auth()->user()->hasRole('SuperAdmin') && $businessPackage->business_type == 2)
+            $("#sel_1").select2ToTree({
             treeData: {
                 dataArr: mydata
             },
