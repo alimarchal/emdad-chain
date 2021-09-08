@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
-        table,
-        td,
-        th {
-            border: 1px solid bredlarck;
+        table, td, th {
+            border: 1px solid black;
+        }
+        table {
+            width: 100%;
             border-collapse: collapse;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .header {
@@ -125,7 +125,9 @@
 <br>
 <br>
 <div style="vertical-align: middle;">
-    <div style="text-align: center;">Thank you for using Emdad platform as your business partner.</div><br><br>
+    <div style="text-align: center;">Thank you for using Emdad platform as your business partner.</div>
+    @php $img = asset('logo-full.png'); @endphp
+    <img src="@php echo $img @endphp" width="100" >
 </div>
 
 </body>

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="http://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
     <style>
+        body { font-family: DejaVu Sans, sans-serif; }
         table, td, th {
             border: 1px solid black;
         }
@@ -29,9 +28,7 @@
             float: left;
         }
 
-        div {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+
 
     </style>
 </head>
@@ -185,7 +182,7 @@
         <strong>Delivery Information: </strong><br>
         <strong>City: </strong> {{ $draftPurchaseOrder->buyer_business->city }}<br>
         @php $warehouse = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse_id)->first(); @endphp
-        <strong>Warehouse:</strong> {{$warehouse->address}} <br>
+        <strong>Warehouse:</strong> {{ $warehouse->address}} <br>
         {{--            <strong>Delivery Status: </strong><br>--}}
         {{--            <strong>Delivery Time: </strong><br>--}}
 
