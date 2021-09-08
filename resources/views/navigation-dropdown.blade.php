@@ -161,7 +161,7 @@
                         @endphp
                         <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                                                  @else class="text-red-600 hover:underline" @endif>{{$multiPlacedRFQ}}</span></a></span>
-                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against single category')}}">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('singleCategoryBuyerRFQs')}}" style="padding-right: 10px;"><span @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
+                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against single category')}}">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                                            @else class="text-red-600 hover:underline" @endif>{{count($singlePlacedRFQ->unique('e_order_id'))}}</span></a></span>
                     @endif
 
@@ -417,7 +417,7 @@
                         {{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp; {{ $multiPlacedRFQ }}
                     </a>
                     <a @if(count($singlePlacedRFQ) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
-                       @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryBuyerRFQs') }}">
+                       @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
                         {{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp; {{ count($singlePlacedRFQ->unique('e_order_id')) }}
                     </a>
                 @endif
@@ -748,7 +748,7 @@
                         @endphp
                         <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}"><span style="padding-left: 7px;" @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                                               @else class="text-red-600 hover:underline" @endif>{{$multiPlacedRFQ}}</span></a></span>
-                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against single category')}}">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('singleCategoryBuyerRFQs')}}"><span style="padding-left: 7px;" @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
+                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against single category')}}">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}"><span style="padding-left: 7px;" @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
                                                                                                                                                                                                                       @else class="text-red-600 hover:underline" @endif>{{count($singlePlacedRFQ->unique('e_order_id'))}}</span></a></span>
                     @endif
 {{--                    @cannot('all')--}}
@@ -1017,7 +1017,7 @@
                         {{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp; {{ $multiPlacedRFQ }}
                     </a>
                     <a @if(count($singlePlacedRFQ) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
-                       @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('singleCategoryBuyerRFQs') }}">
+                       @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
                         {{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp; {{ count($singlePlacedRFQ->unique('e_order_id')) }}
                     </a>
                 @endif

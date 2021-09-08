@@ -2,6 +2,8 @@
 
 namespace App\Notifications;
 
+use App\Models\SmsMessages;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -21,6 +23,23 @@ class userVerifiedEmail extends Notification
     public function __construct($user)
     {
         $this->user = $user;
+
+        $user_language = $user->rtl;
+        $domain = config('app.url');
+        $message = $domain ." New CEO " . $user->name ."Registered as " . $user->registration_type
+            . "\nMobile #: " . $user->mobile . "\nEmail: " . $user->email;
+
+        if ($user_language == 0) {
+            User::send_sms($user->mobile, SmsMessages::find(1)->english_message);
+            User::send_sms('+966581382822', $message);
+            User::send_sms('+966555390920', $message);
+            User::send_sms('+966593388833', $message);
+        } else if ($user_language == 1) {
+            User::send_sms('+966581382822', $message);
+            User::send_sms('+966555390920', $message);
+            User::send_sms('+966593388833', $message);
+            User::send_sms($user->mobile, SmsMessages::find(1)->arabic_message);
+        }
     }
 
     /**
@@ -42,10 +61,11 @@ class userVerifiedEmail extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        /*return (new MailMessage)
                     ->greeting('Hi!')
                     ->subject('New CEO registered')
-                    ->line(config('app.url') . ' - CEO '. $this->user->name .' registered as ' .  $this->user->registration_type);
+                    ->line(config('app.url') . ' - CEO '. $this->user->name .' registered as ' .  $this->user->registration_type);*/
+        return (new MailMessage)->subject('New CEO Registered')->markdown('mail.user.userRegister', ['user' => $this->user]);
     }
 
     /**
