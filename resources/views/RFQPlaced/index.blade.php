@@ -70,11 +70,11 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($PlacedRFQ as $item)
                                 <tr>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{$loop->iteration}}
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         @if ($item->business_id)
                                             <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
                                                 {{__('portal.RFQ')}}-{{$item->id}}
@@ -91,8 +91,8 @@
 
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
-{{--                                        {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}--}}
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        {{--                                        {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}--}}
                                         @if(isset($item->userName))
                                             {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}
                                         @else
@@ -100,7 +100,7 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         @if($item->rfq_type == 0)
                                             {{__('portal.Single Category')}}
                                         @elseif($item->rfq_type == 1)
@@ -108,14 +108,14 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{$item->status}}
                                     </td>
 
 
                                     <td class="px-6 py-4 text-center text-center whitespace-nowrap">
-                                        <a href="{{route('RFQItemsByID',$item->id)}}" >
-                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <a href="{{route('RFQItemsByID',$item->id)}}">
+                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
                                                 </path>
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -138,13 +138,13 @@
     </x-app-layout>
 
     <script>
-        $(document).ready(function() {
-            $('#requisition-table').DataTable( {
+        $(document).ready(function () {
+            $('#requisition-table').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     // 'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
-            } );
+            });
         });
 
     </script>
@@ -208,11 +208,11 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($PlacedRFQ as $item)
                                 <tr>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{$loop->iteration}}
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         @if ($item->business_id)
                                             <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
                                                 {{__('portal.RFQ')}}-{{$item->id}}
@@ -229,7 +229,7 @@
 
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{--                                        {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}--}}
                                         @if(isset($item->userName))
                                             {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}
@@ -238,7 +238,7 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         @if($item->rfq_type == 0)
                                             {{__('portal.Single Category')}}
                                         @elseif($item->rfq_type == 1)
@@ -246,14 +246,14 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{$item->status}}
                                     </td>
 
 
                                     <td class="px-6 py-4 text-center text-center whitespace-nowrap">
-                                        <a href="{{route('RFQItemsByID',$item->id)}}" >
-                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <a href="{{route('RFQItemsByID',$item->id)}}">
+                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
                                                 </path>
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -261,9 +261,7 @@
                                                 </path>
                                             </svg>
                                         </a>
-
                                     </td>
-
                                 </tr>
                             @endforeach
                             </tbody>
@@ -276,8 +274,8 @@
     </x-app-layout>
 
     <script>
-        $(document).ready(function() {
-            $('#requisition-table').DataTable( {
+        $(document).ready(function () {
+            $('#requisition-table').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     // 'copy', 'csv', 'excel', 'pdf', 'print'
@@ -285,14 +283,14 @@
                 "language": {
                     "sSearch": "بحث:",
                     "oPaginate": {
-                        "sFirst":    	"أولا",
-                        "sPrevious": 	"السابق",
-                        "sNext":     	"التالي",
-                        "sLast":     	"الاخير"
+                        "sFirst": "أولا",
+                        "sPrevious": "السابق",
+                        "sNext": "التالي",
+                        "sLast": "الاخير"
                     },
                     "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ المدخلات",
                 },
-            } );
+            });
         });
     </script>
 @endif

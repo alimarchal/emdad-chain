@@ -36,6 +36,7 @@ return [
     'Your Business is rejected' => 'Your Business is rejected',
     'Multiple Categories' => 'Multiple Categories',
     'Single Category' => 'Single Category',
+    'Both Types' => 'Both Types',
     'New Requisition' => 'Make New Requisition',
     'Requisition Cart' => 'Requisition Cart',
     'Requisitions History' => 'Requisitions History',
