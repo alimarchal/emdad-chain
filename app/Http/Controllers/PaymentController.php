@@ -16,6 +16,7 @@ use App\Models\ProformaInvoice;
 use App\Models\Qoute;
 use App\Models\SupplierBankPayment;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -451,6 +452,17 @@ class PaymentController extends Controller
         return view('manual-payments.supplier.list', compact('supplierPayments'));
     }
 
+    /**
+     * Generating PDF file for Invoice and also for Invoice show function present in InvoiceController
+     *
+     */
+    public function generatePDF($invoiceID)
+    {
+        $invoice = Invoice::where('id', decrypt($invoiceID))->first();
+        $pdf = PDF::loadView('payment.PDF', compact('invoice'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('Invoice.pdf');
+    }
+
     ######################################################### Single Category Quotations functions ############################################################
 
     public function singleCategoryIndex()
@@ -745,6 +757,19 @@ class PaymentController extends Controller
         $supplierPayments = $collection->unique('rfq_no');
 
         return view('manual-payments.singleCategory.supplier.list', compact('supplierPayments'));
+    }
+
+
+    /**
+     * Generating PDF file for Single Category Invoice and also for Invoice show function present in InvoiceController
+     *
+     */
+    public function singleCategoryGeneratePDF($invoiceRfqNo)
+    {
+        $invoices = Invoice::where('rfq_no' , decrypt($invoiceRfqNo))->get();
+
+        $pdf = PDF::loadView('payment.singleCategory.PDF', compact('invoices'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('Invoice.pdf');
     }
 
 }

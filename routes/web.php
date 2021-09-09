@@ -431,6 +431,7 @@ Route::middleware(['auth:sanctum'])->get('/invoice/{invoice}', [InvoiceControlle
 Route::middleware(['auth:sanctum'])->get('/emdad-invoices/', [EmdadInvoiceController::class, 'index'])->name('emdadInvoices');
 Route::middleware(['auth:sanctum'])->get('/emdad-invoice/{id}', [EmdadInvoiceController::class, 'view'])->name('emdadInvoiceView');
 Route::middleware(['auth:sanctum'])->get('/generate-emdad-invoice/{id}', [EmdadInvoiceController::class, 'generateInvoice'])->name('emdadGenerateInvoice');
+Route::middleware(['auth:sanctum'])->get('/generate-emdad-invoice-pdf/{invoiceID}', [EmdadInvoiceController::class, 'generatePDF'])->name('generateEmdadInvoicePDF');
 
 ########################## Single Category Invoice & Delivery Routes ####################
 Route::middleware(['auth:sanctum'])->get('single/category/invoice/{invoiceID}', [InvoiceController::class, 'singleCategoryShow'])->name('singleCategoryInvoiceShow');
@@ -461,6 +462,7 @@ Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/create', [Bank
 Route::middleware(['auth:sanctum'])->get('bank-payments/{invoice}/edit', [BankPaymentController::class, 'edit'])->name('bank-payments.edit');
 Route::middleware(['auth:sanctum'])->post('bank-payments/update', [BankPaymentController::class, 'update_payment'])->name('bank_payments_update');
 //Route::middleware(['auth:sanctum'])->resource('moyasar-payment', Moyas::class)->names('mps');
+Route::middleware(['auth:sanctum'])->get('/generate-invoice-pdf/{invoiceID}', [PaymentController::class, 'generatePDF'])->name('generateInvoicePDF');
 
 ####################### Single Category Quotation Payment routes ####################################
 Route::middleware(['auth:sanctum'])->get('single-category-rfq-payment', [PaymentController::class, 'singleCategoryIndex'])->name('singleCategoryPaymentIndex');
@@ -483,6 +485,7 @@ Route::middleware(['auth:sanctum'])->get('single-category-rfq-emdad-supplier-man
 Route::middleware(['auth:sanctum'])->post('single-category-rfq-emdad-update-supplier-manual-payment/{rfqNo}', [BankPaymentController::class, 'singleCategoryUpdateSupplierPaymentStatus'])->name('singleCategoryUpdateSupplierPaymentStatus');
 Route::middleware(['auth:sanctum'])->get('single-category-rfq-supplier-manual-payment/{id}', [BankPaymentController::class, 'singleCategorySupplierPaymentView'])->name('singleCategorySupplierPaymentView');
 Route::middleware(['auth:sanctum'])->post('single-category-rfq-supplier-manual-payment-update/{rfqNo}', [BankPaymentController::class, 'singleCategoryUpdateBankPayment'])->name('singleCategoryUpdateBankPayment');
+Route::middleware(['auth:sanctum'])->get('/generate-single-category-invoice-pdf/{invoiceRfqNo}', [PaymentController::class, 'singleCategoryGeneratePDF'])->name('singleCategoryInvoiceGeneratePDF');
 ################################################################### END ############################################################################################
 
 ################################################################# Rating routes ##########################################################################

@@ -1,6 +1,11 @@
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <div class="py-12">
+            <div class="mt-5" style=" margin-left: 8px; margin-bottom: 10px ">
+                <a href="{{ route('generateInvoicePDF', encrypt($invoice->id)) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-gray-800 focus:shadow-outline-gray active:bg-red-600 transition ease-in-out duration-150">
+                    {{__('portal.Create PDF')}}
+                </a>
+            </div>
             <div class="max-w-7xl mx-auto sm:px-2 lg:2x-8">
                 <div class="bg-white overflow-hidden shadow-xl ">
                     <div class="px-4 py-5 sm:p-6 bg-white shadow ">
@@ -188,6 +193,11 @@
 @else
     <x-app-layout>
         <div class="py-12">
+            <div class="mt-5" style=" margin-right: 8px; margin-bottom: 10px ">
+                <a href="{{ route('generateInvoicePDF', encrypt($invoice->id)) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-gray-800 focus:shadow-outline-gray active:bg-red-600 transition ease-in-out duration-150">
+                    {{__('portal.Create PDF')}}
+                </a>
+            </div>
             <div class="max-w-7xl mx-auto sm:px-2 lg:2x-8">
                 <div class="bg-white overflow-hidden shadow-xl ">
                     <div class="px-4 py-5 sm:p-6 bg-white shadow ">

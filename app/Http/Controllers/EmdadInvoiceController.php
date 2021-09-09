@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EmdadInvoice;
 use App\Models\Invoice;
 use App\Models\Qoute;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
 class EmdadInvoiceController extends Controller
@@ -62,6 +63,18 @@ class EmdadInvoiceController extends Controller
 
         session()->flash('message', __('portal.Invoice send successfully.'));
         return redirect()->route('emdadInvoices');
+    }
+
+    /**
+     * Generating PDF file for Emdad Invoice.
+     *
+     */
+    public function generatePDF($invoiceID)
+    {
+        $emdadInvoice = EmdadInvoice::where('id', decrypt($invoiceID))->first();
+
+        $pdf = PDF::loadView('invoice.emdadInvoicePDF', compact('emdadInvoice'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('Invoice.pdf');
     }
 
     ################################################## Single Category Functions ########################################################################
