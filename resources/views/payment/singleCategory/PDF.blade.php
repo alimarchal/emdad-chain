@@ -94,12 +94,12 @@
         <strong>Requisition #: </strong>RFQ-{{ $invoices[0]->purchase_order->rfq_no }}<br>
         <strong>Quote #: </strong>Q-{{ $invoices[0]->purchase_order->qoute_no }}<br>
         <strong>Payment Terms: </strong>
-        @if($invoices[0]->purchase_order->payment_term == 'Cash') {{__('portal.Cash')}}
-        @elseif($invoices[0]->purchase_order->payment_term == 'Credit') {{__('portal.Credit')}}
-        @elseif($invoices[0]->purchase_order->payment_term == 'Credit30days') {{__('portal.Credit (30 Days)')}}
-        @elseif($invoices[0]->purchase_order->payment_term == 'Credit60days') {{__('portal.Credit (60 Days)')}}
-        @elseif($invoices[0]->purchase_order->payment_term == 'Credit90days') {{__('portal.Credit (90 Days)')}}
-        @elseif($invoices[0]->purchase_order->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
+        @if($invoices[0]->purchase_order->payment_term == 'Cash') Cash
+        @elseif($invoices[0]->purchase_order->payment_term == 'Credit') Credit
+        @elseif($invoices[0]->purchase_order->payment_term == 'Credit30days') Credit (30 Days)
+        @elseif($invoices[0]->purchase_order->payment_term == 'Credit60days') Credit (60 Days)
+        @elseif($invoices[0]->purchase_order->payment_term == 'Credit90days') Credit (90 Days)
+        @elseif($invoices[0]->purchase_order->payment_term == 'Credit120days') Credit (120 Days)
         @endif
 
         <br>

@@ -96,7 +96,6 @@ Route::middleware(['auth:sanctum'])->get('/business-legal-finance-status/', [Bus
 Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
 Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', BusinessWarehouseController::class);
 Route::middleware(['auth:sanctum'])->get('/businessWarehouse/{id}/show', [BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
-Route::middleware(['auth:sanctum'])->get('/purchase-order', [POInfoController::class, 'view'])->name('purchaseOrderView');
 Route::middleware(['auth:sanctum'])->resource('/purchaseOrderInfo', POInfoController::class);
 
 ####################Admin IREs Controller###################
@@ -355,6 +354,7 @@ Route::middleware(['auth:sanctum'])->resource('QuotationMessage', \App\Http\Cont
 Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/ModificationNeeded', [QouteController::class, 'updateModificationNeeded'])->name('updateQoute');
 Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/Rejected', [QouteController::class, 'updateRejected'])->name('updateRejected');
 Route::middleware(['auth:sanctum'])->post('qoute/{qoute}/Accepted', [QouteController::class, 'qouteAccepted'])->name('qouteAccepted');
+Route::middleware(['auth:sanctum'])->get('/purchase-order', [DraftPurchaseOrderController::class, 'view'])->name('purchaseOrderView');
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'show'])->name('dpo.show');
 Route::middleware(['auth:sanctum'])->get('dpo', [DraftPurchaseOrderController::class, 'index'])->name('dpo.index');
 ##################################### Single Category DPO #######################################################
@@ -392,7 +392,7 @@ Route::middleware(['auth:sanctum'])->get('/single/category/delivery/notes', [Del
 Route::middleware(['auth:sanctum'])->get('/single/category/deliveryNote/{rfqNo}/view', [DeliveryNoteController::class, 'singleCategoryDeliveryNoteView'])->name('singleCategoryDeliveryNoteView');
 Route::middleware(['auth:sanctum'])->post('/single/category/deliveryNote/{rfqNo}/save', [DeliveryNoteController::class, 'singleCategoryStore'])->name('singleCategoryDeliveryNoteStore');
 Route::middleware(['auth:sanctum'])->get('/generate-single-category-delivery-note-pdf/{deliveryNoteRfqNo}', [DeliveryNoteController::class, 'singleCategoryGeneratePDF'])->name('singleCategoryDeliveryNoteGeneratePDF');
-################################### END ################################################
+################################### END ########################################################################
 
 #################### END ###########################################################################################################
 
@@ -431,7 +431,7 @@ Route::middleware(['auth:sanctum'])->get('/invoice/{invoice}', [InvoiceControlle
 Route::middleware(['auth:sanctum'])->get('/emdad-invoices/', [EmdadInvoiceController::class, 'index'])->name('emdadInvoices');
 Route::middleware(['auth:sanctum'])->get('/emdad-invoice/{id}', [EmdadInvoiceController::class, 'view'])->name('emdadInvoiceView');
 Route::middleware(['auth:sanctum'])->get('/generate-emdad-invoice/{id}', [EmdadInvoiceController::class, 'generateInvoice'])->name('emdadGenerateInvoice');
-Route::middleware(['auth:sanctum'])->get('/generate-emdad-invoice-pdf/{invoiceID}', [EmdadInvoiceController::class, 'generatePDF'])->name('generateEmdadInvoicePDF');
+Route::middleware(['auth:sanctum'])->get('/generate-emdad-invoice-pdf/{emdadInvoiceID}', [EmdadInvoiceController::class, 'generatePDF'])->name('generateEmdadInvoicePDF');
 
 ########################## Single Category Invoice & Delivery Routes ####################
 Route::middleware(['auth:sanctum'])->get('single/category/invoice/{invoiceID}', [InvoiceController::class, 'singleCategoryShow'])->name('singleCategoryInvoiceShow');
@@ -439,6 +439,7 @@ Route::middleware(['auth:sanctum'])->post('single/category/invoice/generate', [I
 Route::middleware(['auth:sanctum'])->get('/single/category/emdad-invoices/', [EmdadInvoiceController::class, 'singleCategoryIndex'])->name('singleCategoryEmdadInvoicesIndex');
 Route::middleware(['auth:sanctum'])->get('/single/category/emdad-invoice/{rfq_no}', [EmdadInvoiceController::class, 'singleCategoryView'])->name('singleCategoryView');
 Route::middleware(['auth:sanctum'])->post('/single/category/generate-emdad-invoice', [EmdadInvoiceController::class, 'singleCategoryGenerateInvoice'])->name('singleCategoryGenerateInvoice');
+Route::middleware(['auth:sanctum'])->get('/generate-single-category-emdad-invoice-pdf/{emdadInvoiceRFQNo}', [EmdadInvoiceController::class, 'singleCategoryGeneratePDF'])->name('singleCategoryEmadadInvoiceGeneratePDF');
 #################### END ##############################################################
 
 ########################################################## Payment routes #################################################################################

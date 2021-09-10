@@ -71,9 +71,4 @@ class POInfoController extends Controller
         $business = Business::find($purchaseOrderInfo->business_id);
         return view('purchaseOrderInfo.show', compact('purchaseOrderInfo', 'business'));
     }
-
-    public function view()
-    {
-        return view('purchaseOrderInfo.view');
-    }
 }

@@ -149,14 +149,13 @@
                                 {{__('portal.agrees to deal with')}} {{$draftPurchaseOrders[0]->supplier_business->business_name}}. <br>
                                 {{__('portal.Emdad has no responsibility with the kind of delivery and the source of finance for this delivery.')}}</span> <br>
 
-                                <div class="block mt-4 ml-4">
-                                    <label for="acknowledge" class="flex items-center">
-                                        <input id="acknowledge" type="checkbox" class="form-checkbox" name="note">
-                                        <span class="ml-2 text-sm text-gray-600">
-                                            {{__('portal.Please read the note and check if you agree to proceed')}}
-                                        </span>
-                                    </label>
-                                </div>
+                                <label for="acknowledge" class="flex items-center">
+                                    <input id="acknowledge" type="checkbox" class="form-checkbox" name="note">
+                                    <span class="ml-2">
+                                        {{__('portal.Please read the note and check if you agree to proceed')}}
+                                    </span>
+                                </label>
+
                             </div>
                         </div>
 
@@ -276,7 +275,7 @@
                                 <h3 class="text-2xl" style="padding-right: 55px;"><strong>{{__('portal.Draft P.O.')}}</strong></h3>
                                 <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.P.O.')}}-{{ $draftPurchaseOrders[0]->id }}<br>
                                 {{--                            <strong>Category Code: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->item_code }}<br>--}}
-                                <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                 @php
                                     $record = \App\Models\Category::where('id',$draftPurchaseOrders[0]->item_code)->first();
                                     $parent= \App\Models\Category::where('id',$record->parent_id)->first();
@@ -389,7 +388,7 @@
                                 <div class="block mt-4 ml-4">
                                     <label for="acknowledge" class="flex items-center">
                                         <input id="acknowledge" type="checkbox" class="form-checkbox" name="note">
-                                        <span class="ml-2 text-sm text-gray-600">
+                                        <span class="mr-2">
                                             {{__('portal.Please read the note and check if you agree to proceed')}}
                                         </span>
                                     </label>

@@ -39,7 +39,27 @@ class DraftPurchaseOrderController extends Controller
         elseif(auth()->user()->registration_type == 'Buyer' || auth()->user()->can('Buyer DPO Approval') || auth()->user()->can('Buyer View Purchase Orders'))
         {
 //            $dpos = DraftPurchaseOrder::where('user_id', $user)->where('business_id', auth()->user()->business_id)->where('status', 'pending')->get();
-            $dpos = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('status', 'pending')->get();
+//            $dpos = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('status', 'pending')->get();
+            $draftPurchaseOrders = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id, 'status' => 'pending'])->get();
+
+            $multiCategory = array();
+            $singleCategory = array();
+            foreach ($draftPurchaseOrders as $draftPurchaseOrder)
+            {
+                if ($draftPurchaseOrder['rfq_type'] == 1)
+                {
+                    $multiCategory[] = $draftPurchaseOrder;
+                }
+                if ($draftPurchaseOrder['rfq_type'] == 0)
+                {
+                    $singleCategory[] = $draftPurchaseOrder;
+                }
+            }
+            $multiCategoryCollection = collect($multiCategory);
+            $singleCategoryCollection = collect($singleCategory);
+
+            $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+            $dpos = $multiCategoryCollection->merge($singleCategoryInvoices);
         }
         return view('draftPurchaseOrder.index', compact('dpos'));
     }
@@ -48,6 +68,11 @@ class DraftPurchaseOrderController extends Controller
     {
 
         return view('draftPurchaseOrder.show', compact('draftPurchaseOrder'));
+    }
+
+    public function view()
+    {
+        return view('draftPurchaseOrder.view');
     }
 
     public function approved(Request $request, DraftPurchaseOrder $draftPurchaseOrder)
@@ -294,7 +319,7 @@ class DraftPurchaseOrderController extends Controller
         User::send_sms('+966555390920', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrder->payment_term);
         User::send_sms('+966593388833', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrder->payment_term);
 
-        session()->flash('message', __('portal.DPO Accepted.'));
+        session()->flash('message', __('portal.DPO Accepted and PO generated.'));
 //        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
 
         /* Redirecting to proforma invoices route in case payment_term is equal to Cash */
@@ -318,8 +343,9 @@ class DraftPurchaseOrderController extends Controller
             'approval_details' => 'User_TYPE_' . $user_type . '_' . $user_type_id . '_Business_TYPE_' . $user_business_type . '_' . $user_business_type_id . '_' . date('Y-m-d h:m'),
         ]);
 
-        session()->flash('message', __('portal.Business information successfully updated.'));
-        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
+        session()->flash('message', __('portal.DPO Rejected.'));
+//        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
+        return redirect()->route('po.po');
     }
 
     public function cancel(DraftPurchaseOrder $draftPurchaseOrder)
@@ -341,8 +367,77 @@ class DraftPurchaseOrderController extends Controller
         $quotation->qoute_status = 'Qouted';
         $quotation->save();
 
-        session()->flash('message', __('portal.Business information successfully updated.'));
-        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
+        session()->flash('message', __('portal.DPO Rejected.'));
+//        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
+        return redirect()->route('po.po');
+    }
+
+    /* PO for Multiple Categories Quotations */
+
+    public function po()
+    {
+        $business_type = auth()->user()->business->business_type;
+        if ($business_type == "Buyer" || auth()->user()->can('Buyer DPO Approval')) {
+            /* Below commented query is when multiple categories and single category DPOs show view were separate  */
+            /*$dpos = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id],['status' => 'approved'],['rfq_type' => 1])
+                    ->where(function($query) {
+                        $query->where(['rfq_type' => 1],['status' => 'prepareDelivery'])->where(['business_id' => auth()->user()->business_id]);
+                    })
+                    ->where(function($query) {
+                        $query->where(['rfq_type' => 1],['status' => 'completed'])->where(['business_id' => auth()->user()->business_id]);
+                    })
+                    ->where(function($query) {
+                        $query->where('status', '!=', 'pending');
+                    })
+                    ->get(); //->where('status','approved')*/
+            $draftPurchaseOrders = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id])->where('status', '!=', 'pending')->get();
+
+        } else {
+
+            /* Below commented query is when multiple categories and single category DPOs show view were separate  */
+            /*$dpos = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id],['status' => 'approved'],['rfq_type' => 1]) //
+                    ->where(function($query) {
+                    $query->where(['rfq_type' => 1],['status' => 'prepareDelivery'])->where(['supplier_business_id' => auth()->user()->business_id]);
+                      })
+                    ->where(function($query) {
+                        $query->where(['rfq_type' => 1],['status' => 'completed'])->where(['supplier_business_id' => auth()->user()->business_id]);
+                    })
+                    ->where(function($query) {
+                        $query->where('status', '!=', 'pending');
+                    })
+                    ->get();*/
+
+            $draftPurchaseOrders = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id])
+                    ->where('status', '!=', 'pending')
+                    ->where('status', '!=', 'cancel')
+                    ->get();
+
+        }
+
+        $multiCategory = array();
+        $singleCategory = array();
+        foreach ($draftPurchaseOrders as $draftPurchaseOrder)
+        {
+            if ($draftPurchaseOrder['rfq_type'] == 1)
+            {
+                $multiCategory[] = $draftPurchaseOrder;
+            }
+            if ($draftPurchaseOrder['rfq_type'] == 0)
+            {
+                $singleCategory[] = $draftPurchaseOrder;
+            }
+        }
+        $multiCategoryCollection = collect($multiCategory);
+        $singleCategoryCollection = collect($singleCategory);
+        $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+        $dpos = $multiCategoryCollection->merge($singleCategoryInvoices);
+
+        return view('draftPurchaseOrder.po', compact('dpos'));
+    }
+
+    public function poShow(DraftPurchaseOrder $draftPurchaseOrder)
+    {
+        return view('draftPurchaseOrder.poShow', compact('draftPurchaseOrder'));
     }
 
     /**
@@ -354,48 +449,6 @@ class DraftPurchaseOrderController extends Controller
         $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'))->setOptions(['defaultFont' => 'sans-serif']);
         //        $pdf = PDF::loadView('draftPurchaseOrder.PDF', $data);
         return $pdf->download('POs.pdf');
-    }
-
-    public function po()
-    {
-        $business_type = auth()->user()->business->business_type;
-        if ($business_type == "Buyer" || auth()->user()->can('Buyer DPO Approval')) {
-//            $dpos = DraftPurchaseOrder::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->where('status', 'approved')->orWhere('status', 'prepareDelivery')->orWhere('status', 'completed')->get(); //->where('status','approved')
-//            $dpos = DraftPurchaseOrder::where(['user_id'=> auth()->user()->id],['business_id' => auth()->user()->business_id],['status' => 'approved'])->orWhere(['status' => 'prepareDelivery'],['status' => 'completed'])->get(); //->where('status','approved')
-            $dpos = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id],['status' => 'approved'],['rfq_type' => 1])
-                    ->where(function($query) {
-                        $query->where(['rfq_type' => 1],['status' => 'prepareDelivery'])->where(['business_id' => auth()->user()->business_id]);
-                    })
-                    ->where(function($query) {
-                        $query->where(['rfq_type' => 1],['status' => 'completed'])->where(['business_id' => auth()->user()->business_id]);
-                    })
-                    ->where(function($query) {
-                        $query->where('status', '!=', 'pending');
-                    })
-                    ->get(); //->where('status','approved')
-        } else {
-//            $dpos = DraftPurchaseOrder::where('supplier_business_id', auth()->user()->business_id)->where('status', 'approved')->orWhere('status', 'prepareDelivery')->orWhere('status', 'completed')->get(); //
-//            $dpos = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id],['status' => 'approved'])->orWhere(['status' => 'prepareDelivery'], ['status' => 'completed'])->get(); //
-            $dpos = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id],['status' => 'approved'],['rfq_type' => 1]) //
-                    ->where(function($query) {
-                    $query->where(['rfq_type' => 1],['status' => 'prepareDelivery'])->where(['supplier_business_id' => auth()->user()->business_id]);
-                      })
-                    ->where(function($query) {
-                        $query->where(['rfq_type' => 1],['status' => 'completed'])->where(['supplier_business_id' => auth()->user()->business_id]);
-                    })
-                    ->where(function($query) {
-                        $query->where('status', '!=', 'pending');
-                    })
-                    ->get();
-
-        }
-
-        return view('draftPurchaseOrder.po', compact('dpos'));
-    }
-
-    public function poShow(DraftPurchaseOrder $draftPurchaseOrder)
-    {
-        return view('draftPurchaseOrder.poShow', compact('draftPurchaseOrder'));
     }
 
     /* DPO for Single Category Quotations */
@@ -421,7 +474,7 @@ class DraftPurchaseOrderController extends Controller
         return view('draftPurchaseOrder.singleCategory.show', compact('draftPurchaseOrders'));
     }
 
-    public function singleCategoryApproved(Request $request, $rfqNo,$supplierBusinessID)
+    public function singleCategoryApproved($rfqNo,$supplierBusinessID)
     {
         try {
             DB::beginTransaction();
@@ -696,9 +749,11 @@ class DraftPurchaseOrderController extends Controller
         /* Redirecting to proforma invoices route in case payment_term is equal to Cash */
         if ($draftPurchaseOrders[0]->payment_term == 'Cash')
         {
-            return redirect()->route('singleCategoryProformaInvoices');
+//            return redirect()->route('singleCategoryProformaInvoices');
+            return redirect()->route('proforma_invoices');
         }
-        return redirect()->route('singleCategoryPO');
+//        return redirect()->route('singleCategoryPO');
+        return redirect()->route('po.po');
     }
 
     public function singleCategoryCancel($rfqNo,$supplierBusinessID)
@@ -722,8 +777,11 @@ class DraftPurchaseOrderController extends Controller
         }
 
         session()->flash('message', __('portal.DPO Rejected.'));
-        return redirect()->route('singleCategoryIndex');
+//        return redirect()->route('singleCategoryIndex');
+        return redirect()->route('po.po');
     }
+
+    /* PO for Single Category Quotations */
 
     public function singleCategoryPO()
     {
