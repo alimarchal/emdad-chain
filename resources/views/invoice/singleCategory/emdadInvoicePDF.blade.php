@@ -42,7 +42,7 @@
     <div class="center"></div>
 
     <div class="center">
-        <h3 style="text-align: center; margin:0;">Emdad Invoice for invoice # {{ $emdadInvoice->invoice->id }} </h3>
+        <h3 style="text-align: center; margin:0;">Emdad Invoice for invoice # {{ $emdadInvoices[0]->invoice->id }} </h3>
     </div>
 
     <div class="center"></div>
@@ -74,40 +74,43 @@
     </tr>
     </thead>
 
-    @php $dpo = \App\Models\DraftPurchaseOrder::where('id', $emdadInvoice->invoice->purchase_order->id)->first(); @endphp
+    @php $deliveryItem = \App\Models\Delivery::where('draft_purchase_order_id', $emdadInvoices[0]->invoice->purchase_order->id)->first(); @endphp
     <tbody class="bg-white divide-y divide-black border-1 border-black">
-    <tr>
-        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
-            #
-        </td>
-        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
-            @php
-                $record = \App\Models\Category::where('id',$dpo->item_code)->first();
-                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-            @endphp
-            {{ $record->name }} @if(isset($parent->name)) , {{ $parent->name }} @endif
-        </td>
-        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
-            @if($dpo->payment_term == 'Cash') Cash
-            @elseif($dpo->payment_term == 'Credit') Credit
-            @elseif($dpo->payment_term == 'Credit30days') Credit (30 Days)
-            @elseif($dpo->payment_term == 'Credit60days') Credit (60 Days)
-            @elseif($dpo->payment_term == 'Credit90days') Credit (90 Days)
-            @elseif($dpo->payment_term == 'Credit120days') Credit (120 Days)
-            @endif
-        </td>
-        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
-            @php
-                $quote = \App\Models\Qoute::where('id', $emdadInvoice->invoice->quote->id)->first();
-                $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
-                $totalEmdadCharges = $totalCost * (1.5 / 100);
-            @endphp
-            {{ number_format($totalCost,2) }} SAR
-        </td>
-        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
-            {{ number_format($totalEmdadCharges,2) }} SAR
-        </td>
-    </tr>
+    @foreach($emdadInvoices as $emdadInvoice)
+        <tr>
+            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+                {{$loop->iteration}}
+            </td>
+            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+                @php
+                    $record = \App\Models\Category::where('id',$deliveryItem->item_code)->first();
+                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                @endphp
+                {{ $record->name }} @if(isset($parent->name)) , {{ $parent->name }} @endif
+            </td>
+            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+                @if($deliveryItem->payment_term == 'Cash') Cash
+                @elseif($deliveryItem->payment_term == 'Credit') Credit
+                @elseif($deliveryItem->payment_term == 'Credit30days') Credit (30 Days)
+                @elseif($deliveryItem->payment_term == 'Credit60days') Credit (60 Days)
+                @elseif($deliveryItem->payment_term == 'Credit90days') Credit (90 Days)
+                @elseif($deliveryItem->payment_term == 'Credit120days') Credit (120 Days)
+                @endif
+            </td>
+            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+                {{-- calculating total cost without VAT--}}
+                @php
+                    $quote = \App\Models\Qoute::where('id', $emdadInvoice->invoice->quote->id)->first();
+                    $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
+                    $totalEmdadCharges = $totalCost * (1.5 / 100);
+                @endphp
+                {{ number_format($totalCost,2) }} SAR
+            </td>
+            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+                {{ number_format($totalEmdadCharges,2) }} SAR
+            </td>
+        </tr>
+    @endforeach
     </tbody>
 </table>
 

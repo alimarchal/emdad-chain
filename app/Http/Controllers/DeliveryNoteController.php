@@ -164,7 +164,8 @@ class DeliveryNoteController extends Controller
         }
         User::find($deliveryNoteUserId)->notify(new \App\Notifications\PreparingDelivery());
         session()->flash('message', __('portal.Delivery note has been successfully created.'));
-        return redirect()->route('singleCategoryNotes');
+//        return redirect()->route('singleCategoryNotes');
+        return redirect()->route('notes');
     }
 
     public function singleCategoryDeliveryNoteView($rfqNo)

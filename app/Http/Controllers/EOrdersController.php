@@ -289,7 +289,8 @@ class EOrdersController extends Controller
                             ->notify(new RFQCreatedByUser($user));*/
 
                 session()->flash('message', __('portal.RFQ placed successfully'));
-                return redirect()->route('singleCategoryBuyerRFQs');
+//                return redirect()->route('singleCategoryBuyerRFQs');
+                return redirect()->route('QoutationsBuyerReceived');
             }
         } elseif ($business_package->package_id == 2) {
             if ($rfq == 10) {
@@ -352,7 +353,7 @@ class EOrdersController extends Controller
                             ->notify(new RFQCreatedByUser($user));*/
 
                 session()->flash('message', __('portal.RFQ placed successfully'));
-                return redirect()->route('singleCategoryBuyerRFQs');
+                return redirect()->route('QoutationsBuyerReceived');
             }
         } elseif ($business_package->package_id == 3 || $business_package->package_id == 4) {
             DB::transaction(function () use ($request) {
@@ -410,7 +411,7 @@ class EOrdersController extends Controller
                         ->notify(new RFQCreatedByUser($user));*/
 
             session()->flash('message', __('portal.RFQ placed successfully'));
-            return redirect()->route('singleCategoryBuyerRFQs');
+            return redirect()->route('QoutationsBuyerReceived');
         }
 
     }

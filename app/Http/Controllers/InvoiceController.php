@@ -106,7 +106,10 @@ class InvoiceController extends Controller
                 'charges' => $totalCharges,
                 'rfq_type' => 1,
             ]);
-            return redirect()->route('invoice.show',$inv->id);
+
+            session()->flash('message', __('portal.Final Invoice Generated'));
+//            return redirect()->route('invoice.show',$inv->id);
+            return redirect()->route('invoices');
         }
         elseif($del->payment_term == "Cash"){
 
@@ -133,7 +136,10 @@ class InvoiceController extends Controller
             $delivery_note->save();
             $purchase_order->status = 'completed';
             $purchase_order->save();
-            return redirect()->route('invoice.show',$invoice->id);
+
+            session()->flash('message', __('portal.Final Invoice Generated'));
+//            return redirect()->route('invoice.show',$invoice->id);
+            return redirect()->route('invoices');
         }
     }
 
@@ -261,6 +267,8 @@ class InvoiceController extends Controller
             }
         }
 
-        return redirect()->route('singleCategoryInvoices');
+        session()->flash('message', __('portal.Final Invoice Generated'));
+//        return redirect()->route('singleCategoryInvoices');
+        return redirect()->route('invoices');
     }
 }
