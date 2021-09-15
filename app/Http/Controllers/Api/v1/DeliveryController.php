@@ -210,8 +210,8 @@ class DeliveryController extends Controller
                 $shipment->status = 1;
                 $shipment->save();
 
-//                Notification::route('mail', 'business@emdad-chain.com')
-//                    ->notify(new DeliveryCompleted($user));
+                Notification::route('mail', 'business@emdad-chain.com')
+                    ->notify(new DeliveryCompleted($user));
                 return response()->json(['message' => 'Updated...'], 200);
             } else {
                 return response()->json(['message' => 'Error some model not found please check your uid, sid, vid'], 404);
@@ -228,7 +228,6 @@ class DeliveryController extends Controller
         if ($token == "RRNirxFh4j9Ftd") {
             $deliveries = Delivery::with('eOrderItems')->where('rfq_no', $rfq_no)->get();  /* Bring rfq_no of delivery instead of deliveryID */
             $shipment_item = ShipmentItem::find($sitm);
-
             if (isset($deliveries) && $shipment_item != null) {
                 foreach ($deliveries as $delivery)
                 {
@@ -243,6 +242,7 @@ class DeliveryController extends Controller
                     Notification::route('mail', 'business@emdad-chain.com')
                         ->notify(new DeliveryCompleted($deliveries, $deliveries[0]->id));
                 }
+
                 if ($deliveries[0]->rfq_type == 0)
                 {
                     Notification::route('mail', 'business@emdad-chain.com')
@@ -250,6 +250,7 @@ class DeliveryController extends Controller
                 }
 
                 return response()->json(['message' => 'Updated...'], 200);
+
             } else {
                 return response()->json(['message' => 'Error some model not found please check your uid, sid, vid'], 404);
             }

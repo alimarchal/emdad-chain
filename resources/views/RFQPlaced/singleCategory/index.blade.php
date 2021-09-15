@@ -35,46 +35,46 @@
 
                         <table class="min-w-full divide-y divide-gray-200" id="requisition-table">
                             <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        #
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        {{__('portal.Requisition No.')}}
-                                    </th>
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    #
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Requisition No.')}}
+                                </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        {{__('portal.Date')}}
-                                    </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Date')}}
+                                </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        {{__('portal.Requested by')}}
-                                    </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Requested by')}}
+                                </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        {{__('portal.Requisition Type')}}
-                                    </th>
-
-
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        {{__('portal.Status')}}
-                                    </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Requisition Type')}}
+                                </th>
 
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" width="120">
-                                        {{__('portal.View')}}
-                                    </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Status')}}
+                                </th>
 
-                                </tr>
+
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" width="120">
+                                    {{__('portal.View')}}
+                                </th>
+
+                            </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($PlacedRFQ as $item)
                                 <tr>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{$loop->iteration}}
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         @if ($item->business_id)
                                             <a href="{{route('single_category_rfq_view',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
                                                 {{__('portal.RFQ')}}-{{$item->id}}
@@ -90,8 +90,8 @@
                                         {{$item->created_at->format('d-m-Y')}}
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
-{{--                                        {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}--}}
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        {{--                                        {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}--}}
                                         @if(isset($item->userName))
                                             {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}
                                         @else
@@ -99,7 +99,7 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 text-center text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center text-center whitespace-nowrap">
                                         @if($item->rfq_type == 0)
                                             {{__('portal.Single Category')}}
                                         @elseif($item->rfq_type == 1)
@@ -107,14 +107,14 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{$item->status}}
                                     </td>
 
 
                                     <td class="px-6 py-4 text-center text-center whitespace-nowrap">
-                                        <a href="{{route('single_category_rfq_view',$item->id)}}" >
-                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <a href="{{route('single_category_rfq_view',$item->id)}}">
+                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
                                                 </path>
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -137,13 +137,13 @@
     </x-app-layout>
 
     <script>
-        $(document).ready(function() {
-            $('#requisition-table').DataTable( {
+        $(document).ready(function () {
+            $('#requisition-table').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     // 'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
-            } );
+            });
         });
 
     </script>
@@ -172,46 +172,46 @@
 
                         <table class="min-w-full divide-y divide-gray-200" id="requisition-table">
                             <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        #
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        {{__('portal.Requisition No.')}}
-                                    </th>
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    #
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Requisition No.')}}
+                                </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        {{__('portal.Date')}}
-                                    </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Date')}}
+                                </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        {{__('portal.Requested by')}}
-                                    </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Requested by')}}
+                                </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        {{__('portal.Requisition Type')}}
-                                    </th>
-
-
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                        {{__('portal.Status')}}
-                                    </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Requisition Type')}}
+                                </th>
 
 
-                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" width="120">
-                                        {{__('portal.View')}}
-                                    </th>
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                    {{__('portal.Status')}}
+                                </th>
 
-                                </tr>
+
+                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" width="120">
+                                    {{__('portal.View')}}
+                                </th>
+
+                            </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($PlacedRFQ as $item)
                                 <tr>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{$loop->iteration}}
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         @if ($item->business_id)
                                             <a href="{{route('single_category_rfq_view',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
                                                 {{__('portal.RFQ')}}-{{$item->id}}
@@ -227,7 +227,7 @@
                                         {{$item->created_at->format('d-m-Y')}}
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{--                                        {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}--}}
                                         @if(isset($item->userName))
                                             {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}
@@ -236,7 +236,7 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 text-center text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center text-center whitespace-nowrap">
                                         @if($item->rfq_type == 0)
                                             {{__('portal.Single Category')}}
                                         @elseif($item->rfq_type == 1)
@@ -244,14 +244,14 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" >
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {{$item->status}}
                                     </td>
 
 
                                     <td class="px-6 py-4 text-center text-center whitespace-nowrap">
-                                        <a href="{{route('single_category_rfq_view',$item->id)}}" >
-                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <a href="{{route('single_category_rfq_view',$item->id)}}">
+                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
                                                 </path>
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -274,8 +274,8 @@
     </x-app-layout>
 
     <script>
-        $(document).ready(function() {
-            $('#requisition-table').DataTable( {
+        $(document).ready(function () {
+            $('#requisition-table').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     // 'copy', 'csv', 'excel', 'pdf', 'print'
@@ -283,14 +283,14 @@
                 "language": {
                     "sSearch": "بحث:",
                     "oPaginate": {
-                        "sFirst":    	"أولا",
-                        "sPrevious": 	"السابق",
-                        "sNext":     	"التالي",
-                        "sLast":     	"الاخير"
+                        "sFirst": "أولا",
+                        "sPrevious": "السابق",
+                        "sNext": "التالي",
+                        "sLast": "الاخير"
                     },
                     "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ المدخلات",
                 },
-            } );
+            });
         });
     </script>
 @endif

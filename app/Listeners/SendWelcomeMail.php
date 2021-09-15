@@ -28,9 +28,8 @@ class SendWelcomeMail
     public function handle($event)
     {
         $user_language = $event->user->rtl;
-        $message = "New CEO Registered as " . $event->user->registration_type
+        $message = env('APP_URL') . "\nNew CEO Registered as " . $event->user->registration_type
             . "\nMobile #: " . $event->user->mobile . "\nEmail: " . $event->user->email;
-
         if ($user_language == 0) {
             User::send_sms($event->user->mobile, SmsMessages::find(1)->english_message);
             User::send_sms('+966581382822', $message);
