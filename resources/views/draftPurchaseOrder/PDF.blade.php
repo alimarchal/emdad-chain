@@ -71,12 +71,12 @@
     </div>
 
     <div class="center">
-        <h3 class="text-2xl text-center"><strong>Draft P.O</strong></h3>
-        <strong>P.O.No#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->id }}<br>
-        <strong>Date: &nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
-        <strong>RFQ#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->rfq_no }}<br>
-        <strong>Quote#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->qoute_no }}<br>
-        <strong>Payment Terms#: &nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->payment_term }}<br>
+        <h3 class="text-2xl text-center"><strong>P.O.</strong></h3>
+        <strong>P.O. #: </strong>P.O. -{{ $draftPurchaseOrder->id }}<br>
+        <strong>Date: </strong>{{ $draftPurchaseOrder->created_at }}<br>
+        <strong>Requisition #: </strong>RFQ-{{ $draftPurchaseOrder->rfq_no }}<br>
+        <strong>Quotation #: </strong>Q-{{ $draftPurchaseOrder->qoute_no }}<br>
+        <strong>Payment Terms: </strong>{{ $draftPurchaseOrder->payment_term }}<br>
     </div>
 </div>
 
@@ -111,61 +111,44 @@
     </thead>
     <tbody class="bg-white divide-y divide-black border-1 border-black">
 
-
     <tr>
-        <td>1</td>
-        <td>{{ $draftPurchaseOrder->quantity }}</td>
-        <td>{{ $draftPurchaseOrder->unit_price }} SAR</td>
-        <td>{{ $draftPurchaseOrder->uom }}</td>
-        <td>{{ $draftPurchaseOrder->brand }}</td>
-        <td>{{ $draftPurchaseOrder->remarks }}</td>
-        <td>{{ number_format($draftPurchaseOrder->sub_total, 2) }} SAR</td>
+        <td  style="text-align: center">1</td>
+        <td  style="text-align: center">{{ $draftPurchaseOrder->quantity }}</td>
+        <td  style="text-align: center">{{ $draftPurchaseOrder->unit_price }} SAR</td>
+        <td  style="text-align: center">{{ $draftPurchaseOrder->uom }}</td>
+        <td  style="text-align: center">{{ $draftPurchaseOrder->brand }}</td>
+        <td  style="text-align: center">{{ $draftPurchaseOrder->remarks }}</td>
+        <td  style="text-align: center">{{ number_format($draftPurchaseOrder->sub_total, 2) }} SAR</td>
     </tr>
     </tbody>
 </table>
 
 
-<table class="min-w-full divide-y divide-black">
-
-    <tr>
-        <td colspan="7" rowspan="4">
-        </td>
-        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-            Sub Total
-        </td>
-        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-            {{ number_format($draftPurchaseOrder->sub_total, 2) }} SAR
-        </td>
-    </tr>
-    <tr>
-        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-            VAT 15%
-        </td>
-        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-            {{ number_format($draftPurchaseOrder->sub_total * 0.15, 2) }}
-        </td>
-    </tr>
-    <tr>
-        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-            Shipment cost
-        </td>
-        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-            {{ number_format($draftPurchaseOrder->shipment_cost, 2) }} SAR
-        </td>
-    </tr>
-    <tr>
-        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-            P.O Total
-        </td>
-        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-            {{ number_format($draftPurchaseOrder->sub_total * 0.15 + $draftPurchaseOrder->sub_total + $draftPurchaseOrder->shipment_cost, 2) }} SAR
-        </td>
-    </tr>
-</table>
 <br>
+<div class="header">
+
+    <div style="width: 66.66%;float: left;"></div>
+
+    <div style="width: 33.33%;float: right">
+        <strong>Sub-total: </strong> {{ number_format($draftPurchaseOrder->sub_total, 2) }} SAR<br>
+        <strong>VAT %: </strong> {{ number_format($draftPurchaseOrder->sub_total * 0.15, 2) }}<br>
+        <strong>Shipment cost: </strong> {{ number_format($draftPurchaseOrder->shipment_cost, 2) }} SAR<br>
+        <hr>
+        <strong>P.O Total: </strong> {{ number_format($draftPurchaseOrder->sub_total * 0.15 + $draftPurchaseOrder->sub_total + $draftPurchaseOrder->shipment_cost, 2) }} SAR<br>
+        <hr>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+</div>
 <br>
+<br><br>
+<br><br>
+<br><br>
 
-
+<div class="header">
 <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
     <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
         <strong>Remarks: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br>
@@ -188,6 +171,7 @@
 
     </div>
 </div>
+</div>
 <br>
 <br>
 <br>
@@ -196,8 +180,6 @@
     {{--        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>--}}
 </div>
 
-<br>
-<br>
 <div class="flex justify-between px-2 py-2 mt-2 h-15">
     <div style="text-align: center; margin: auto;">
         <p style="text-align: center; ">Thank you for using Emdad platform as your business partner </p>

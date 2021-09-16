@@ -140,6 +140,7 @@ return [
     'DPO Number' => 'رقم مسودة أمر الشراء',
     'P.O Date' => 'تاريخ أمر الشراء',
     'No record found...!' => 'لم يتم العثور على أي سجلات...!',
+    'No draft purchase found...!' => 'لم يتم العثور على أي مذكرة طلب ...!',
     'Purchase Orders Center' => 'مركز المشتريات',
     'P.O Number' => 'رقم امر الشراء',
     'P.O Status' => 'حالة أمر الشراء',

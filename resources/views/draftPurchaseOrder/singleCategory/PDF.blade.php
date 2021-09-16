@@ -73,17 +73,17 @@
     </div>
 
     <div class="center">
-        <h3 class="text-2xl text-center"><strong>P.O</strong></h3>
-        <strong>P.O.No#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->id }}<br>
+        <h3 class="text-2xl text-center"><strong>P.O.</strong></h3>
+        <strong>P.O. #: </strong>P.O. -{{ $draftPurchaseOrders[0]->id }}<br>
 {{--        <strong>Category Code: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->item_code }}<br>--}}
-        <strong>Category Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->item_name }}<br>
-        <strong>Date: &nbsp;</strong>{{ $draftPurchaseOrders[0]->created_at }}<br>
-        <strong>RFQ#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->rfq_no }}<br>
-        <strong>Quote#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->qoute_no }}<br>
-        <strong>Payment Terms#: &nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->payment_term }}<br>
-        <strong>VAT %: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->vat, 2) }}<br>
-        <strong>Shipping Fees: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->shipment_cost, 2) }}<br>
-        <strong>Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->total_cost, 2) }}<br>
+        <strong>Category Name: </strong>{{ $draftPurchaseOrders[0]->item_name }}<br>
+        <strong>Date: </strong>{{ $draftPurchaseOrders[0]->created_at }}<br>
+        <strong>Requisition #: </strong>RFQ-{{ $draftPurchaseOrders[0]->rfq_no }}<br>
+        <strong>Quotation #: </strong>Q-{{ $draftPurchaseOrders[0]->qoute_no }}<br>
+        <strong>Payment Terms: </strong>{{ $draftPurchaseOrders[0]->payment_term }}<br>
+        <strong>VAT %: </strong>{{ number_format($draftPurchaseOrders[0]->vat, 2) }}<br>
+        <strong>Shipping Fees: </strong>{{ number_format($draftPurchaseOrders[0]->shipment_cost, 2) }}<br>
+        <strong>Total: </strong>{{ number_format($draftPurchaseOrders[0]->total_cost, 2) }}<br>
     </div>
 </div>
 
@@ -101,28 +101,28 @@
 <br>
 <br>
 
-<table class="min-w-full divide-y divide-black " style="margin-top: 4%;">
+<table style="margin-top: 4%;width: 100%">
     <thead>
     <tr>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th scope="col" style="text-align: center">
             #
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th scope="col" style="text-align: center">
             Quantity
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th scope="col" style="text-align: center">
             Unit Price
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th scope="col" style="text-align: center">
             UOM
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th scope="col" style="text-align: center">
             Brand
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th scope="col" style="text-align: center">
             Remarks
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th scope="col" style="text-align: center">
             Amount
         </th>
     </tr>
@@ -130,26 +130,26 @@
     @foreach($draftPurchaseOrders as $draftPurchaseOrder)
         <tbody class="bg-white divide-y divide-black border-1 border-black">
         <tr>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+            <td style="text-align: center">
                 {{$loop->iteration}}
             </td>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+            <td style="text-align: center">
                 {{ $draftPurchaseOrder->quantity }}
             </td>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+            <td style="text-align: center">
                 {{ $draftPurchaseOrder->unit_price }}
             </td>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+            <td style="text-align: center">
                 {{ $draftPurchaseOrder->uom }}
             </td>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+            <td style="text-align: center">
                 {{ $draftPurchaseOrder->brand }}
             </td>
 
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+            <td style="text-align: center">
                 @if(isset($draftPurchaseOrder->remarks)){{ strip_tags($draftPurchaseOrder->remarks) }} @else N/A @endif
             </td>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+            <td style="text-align: center">
                 {{ number_format($draftPurchaseOrder->sub_total, 2) }}
             </td>
         </tr>
@@ -179,11 +179,16 @@
     {{--        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>--}}
 </div>
 
-<br>
-<br>
 <div class="flex justify-between px-2 py-2 mt-2 h-15">
-    <div class="mt-3">Thanks for your Business</div><br><br>
-    {{--        <img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" />--}}
+    <div style="text-align: center; margin: auto;">
+        <p style="text-align: center; ">Thank you for using Emdad platform as your business partner </p>
+    <!--<img src="{{ url(Storage::url('logo-full.png')) }}" />-->
+        @php $img = asset('logo-full.png'); @endphp
+
+        <img src="@php echo $img @endphp" width="100" >
+
+    </div>
+
 </div>
 
 </body>
