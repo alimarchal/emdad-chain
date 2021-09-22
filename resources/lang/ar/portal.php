@@ -72,7 +72,7 @@ return [
     'Brand' => 'العلامة التجارية',
     'Last Price' => 'السعر الأخير',
     'Delivery Period' => 'التوريد',
-    'Display Company Name' => 'إخفاء اسم الشركة',
+    'Display Company Name' => 'استعراض اسم الشركة',
     'Show Company Name' => 'إظهار اسم الشركة',
     'Date' => 'التاريخ',
     'Payment Mode' => 'طريقة الدفع',
