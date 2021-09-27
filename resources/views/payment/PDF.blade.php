@@ -64,8 +64,6 @@
         <strong>Address: </strong> {{ $supplierBusiness->address }}<br>
     </div>
 
-{{--    <div class="center" style="width: 33.33%;float: left"></div>--}}
-
     <div class="center" style="width: 40%;float: right">
         <strong>Invoice #: </strong> Inv. -{{ $invoice->id }}<br>
         <strong>Date: </strong> {{ $invoice->created_at }}<br>
@@ -83,8 +81,6 @@
 
     </div>
 
-{{--    <div class="center" style="width: 33.33%;float: left;"></div>--}}
-
     <div class="center" style="width: 40%;float: right">
 
         <strong>Purchase Order #: </strong> P.O. -{{ $invoice->purchase_order->id }}<br>
@@ -98,12 +94,12 @@
         <strong>Requisition #: </strong>RFQ-{{ $invoice->purchase_order->rfq_no }}<br>
         <strong>Quote #: </strong>Q-{{ $invoice->purchase_order->qoute_no }}<br>
         <strong>Payment Terms: </strong>
-        @if($invoice->purchase_order->payment_term == 'Cash') {{__('portal.Cash')}}
-        @elseif($invoice->purchase_order->payment_term == 'Credit') {{__('portal.Credit')}}
-        @elseif($invoice->purchase_order->payment_term == 'Credit30days') {{__('portal.Credit (30 Days)')}}
-        @elseif($invoice->purchase_order->payment_term == 'Credit60days') {{__('portal.Credit (60 Days)')}}
-        @elseif($invoice->purchase_order->payment_term == 'Credit90days') {{__('portal.Credit (90 Days)')}}
-        @elseif($invoice->purchase_order->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
+        @if($invoice->purchase_order->payment_term == 'Cash') Cash
+        @elseif($invoice->purchase_order->payment_term == 'Credit') Credit
+        @elseif($invoice->purchase_order->payment_term == 'Credit30days') Credit (30 Days)
+        @elseif($invoice->purchase_order->payment_term == 'Credit60days') Credit (60 Days)
+        @elseif($invoice->purchase_order->payment_term == 'Credit90days') Credit (90 Days)
+        @elseif($invoice->purchase_order->payment_term == 'Credit120days') Credit (120 Days)
         @endif
 
         <br>

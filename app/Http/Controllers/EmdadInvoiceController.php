@@ -69,9 +69,9 @@ class EmdadInvoiceController extends Controller
      * Generating PDF file for Emdad Invoice.
      *
      */
-    public function generatePDF($invoiceID)
+    public function generatePDF($emdadInvoiceID)
     {
-        $emdadInvoice = EmdadInvoice::where('id', decrypt($invoiceID))->first();
+        $emdadInvoice = EmdadInvoice::where('id', decrypt($emdadInvoiceID))->first();
 
         $pdf = PDF::loadView('invoice.emdadInvoicePDF', compact('emdadInvoice'))->setOptions(['defaultFont' => 'sans-serif']);
         return $pdf->download('Invoice.pdf');
@@ -141,5 +141,17 @@ class EmdadInvoiceController extends Controller
 
         session()->flash('message', __('portal.Invoice send successfully.'));
         return redirect()->route('singleCategoryEmdadInvoicesIndex');
+    }
+
+    /**
+     * Generating PDF file for Single Category Emdad Invoice.
+     *
+     */
+    public function singleCategoryGeneratePDF($emdadInvoiceRFQNo)
+    {
+        $emdadInvoices = EmdadInvoice::where('rfq_no' , decrypt($emdadInvoiceRFQNo))->get();
+
+        $pdf = PDF::loadView('invoice.singleCategory.emdadInvoicePDF', compact('emdadInvoices'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('Invoice.pdf');
     }
 }

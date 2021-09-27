@@ -98,7 +98,8 @@ class BankPaymentController extends Controller
         $invoice->invoice_status = 1;
         $invoice->save();
         session()->flash('message', __('portal.You have successfully updated payment details.'));
-        return redirect('proforma-invoices');
+//        return redirect('proforma-invoices');
+        return redirect()->route('invoices');
     }
 
     public function show(BankPayment $bankPayment)
@@ -142,7 +143,8 @@ class BankPaymentController extends Controller
         $Invoice = Invoice::where('id', $request->invoice_id)->first();
         $Invoice->invoice_status = 1;
         $Invoice->save();
-        return redirect()->route('bank-payments.index');
+//        return redirect()->route('bank-payments.index');
+        return redirect()->route('invoices');
     }
 
     /* Bank payment show view (For Super Admin) */
@@ -306,7 +308,8 @@ class BankPaymentController extends Controller
             $invoice->save();
         }
         session()->flash('message', __('portal.You have successfully updated payment details.'));
-        return redirect()->route('singleCategoryProformaInvoices');
+//        return redirect()->route('singleCategoryProformaInvoices');
+        return redirect()->route('invoices');
     }
 
     // Function for Emdad
@@ -428,7 +431,8 @@ class BankPaymentController extends Controller
         SupplierBankPayment::where('rfq_no', $rfq_no)->update(['status' => $request->status]);
 
         session()->flash('message', __('portal.Status Updated successfully!'));
-        return redirect()->route('singleCategorySupplierPaymentsReceived');
+//        return redirect()->route('singleCategorySupplierPaymentsReceived');
+        return redirect()->route('supplier_payment_received');
     }
 
     public function singleCategoryEdit($id)
@@ -472,7 +476,9 @@ class BankPaymentController extends Controller
             ]);
         }
 
-        return redirect()->route('singleCategoryProformaInvoices');
+        session()->flash('message', __('portal.You have successfully updated payment details.'));
+//        return redirect()->route('singleCategoryProformaInvoices');
+        return redirect()->route('invoices');
     }
 
 }

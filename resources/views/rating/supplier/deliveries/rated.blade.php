@@ -45,13 +45,13 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 #
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Delivery ID')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.View')}}
                                                             </th>
                                                         </tr>
@@ -148,13 +148,13 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 #
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Delivery ID')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.View')}}
                                                             </th>
                                                         </tr>

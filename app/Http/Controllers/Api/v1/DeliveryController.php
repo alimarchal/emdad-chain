@@ -17,6 +17,8 @@ use App\Notifications\SingleCategoryDeliveryCompleted;
 use App\Notifications\UserRegister;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
+use App\Models\SmsMessages;
+
 
 
 class DeliveryController extends Controller
@@ -237,11 +239,11 @@ class DeliveryController extends Controller
                 $shipment_item->status = 1;
                 $shipment_item->save();
 
-                if ($deliveries[0]->rfq_type == 1)
-                {
-                    Notification::route('mail', 'business@emdad-chain.com')
-                        ->notify(new DeliveryCompleted($deliveries, $deliveries[0]->id));
-                }
+//                if ($deliveries[0]->rfq_type == 1)
+//                {
+//                    Notification::route('mail', 'business@emdad-chain.com')
+//                        ->notify(new DeliveryCompleted($deliveries, $deliveries[0]->id));
+//                }
 
                 if ($deliveries[0]->rfq_type == 0)
                 {

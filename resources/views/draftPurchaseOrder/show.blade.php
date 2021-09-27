@@ -30,12 +30,15 @@
                                 <p class="text-xl">{{ $draftPurchaseOrder->buyer_business->business_name }}</p><br>
 
                                 <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $draftPurchaseOrder->buyer_business->city }}</span> <br>
+                                <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $draftPurchaseOrder->buyer_business->vat_reg_certificate_number }}</span> <br>
+
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                 <strong class="text-xl">{{__('portal.Purchased From')}}: </strong><br>
                                 <p class="text-xl">{{ $draftPurchaseOrder->supplier_business->business_name }}</p><br>
 
                                 <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $draftPurchaseOrder->supplier_business->city }}</span> <br>
+                                <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $draftPurchaseOrder->supplier_business->vat_reg_certificate_number }}</span> <br>
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                 {{--<h3 class="text-2xl" style="padding-left: 55px"><strong>{{__('portal.Draft P.O.')}}</strong></h3>--}}
@@ -192,7 +195,7 @@
                                             <input type="hidden" value="{{ $draftPurchaseOrder->total_cost }}" name="total_cost">
                                             <input type="hidden" value="{{ $draftPurchaseOrder->ship_to_address }}" name="ship_to_address">
 
-                                            <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">Approve DPO</button>
+                                            <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">{{__('portal.Approve DPO')}}</button>
                                         </form>
                                     @else
                                         <form method="POST" action="{{route('dpo.approved', $draftPurchaseOrder->id) }}" class="confirm">
@@ -278,18 +281,20 @@
                                 <p class="text-xl">{{ $draftPurchaseOrder->buyer_business->business_name }}</p><br>
 
                                 <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $draftPurchaseOrder->buyer_business->city }}</span> <br>
+                                <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $draftPurchaseOrder->buyer_business->vat_reg_certificate_number }}</span> <br>
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                 <strong class="text-xl">{{__('portal.Purchased From')}}: </strong><br>
                                 <p class="text-xl">{{ $draftPurchaseOrder->supplier_business->business_name }}</p><br>
 
                                 <strong class="text-xl">{{__('portal.City')}}: </strong> <span class="text-xl">{{ $draftPurchaseOrder->supplier_business->city }}</span> <br>
+                                <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $draftPurchaseOrder->supplier_business->vat_reg_certificate_number }}</span> <br>
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                 {{--<h3 class="text-2xl" style="padding-right: 55px"><strong>{{__('portal.Draft P.O.')}}</strong></h3>--}}
                                 <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.P.O.')}}-{{ $draftPurchaseOrder->id }}<br>
                                 <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
-                                <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                 @php
                                     $record = \App\Models\Category::where('id',$draftPurchaseOrder->item_code)->first();
                                     $parent= \App\Models\Category::where('id',$record->parent_id)->first();
@@ -440,7 +445,7 @@
                                             <input type="hidden" value="{{ $draftPurchaseOrder->total_cost }}" name="total_cost">
                                             <input type="hidden" value="{{ $draftPurchaseOrder->ship_to_address }}" name="ship_to_address">
 
-                                            <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">Approve DPO</button>
+                                            <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">{{__('portal.Approve DPO')}}</button>
                                         </form>
                                     @else
                                         <form method="POST" action="{{route('dpo.approved', $draftPurchaseOrder->id) }}" class="confirm">

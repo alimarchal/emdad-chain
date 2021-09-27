@@ -19,110 +19,29 @@
 
         <div class="mt-4">
 
-            <div class="flex flex-wrap overflow-hidden lg:-mx-2 xl:-mx-1 ">
+            <div class="flex flex-wrap overflow-hidden lg:-mx-2 xl:-mx-1" style="justify-content: center;">
 
-                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3 ">
-                    <span>{{__('portal.Multiple Categories')}}</span>
-                    <div class="md:flex flex-1 rounded-md bg-white">
+                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3" style="justify-content: center;">
+                    <div class="md:flex flex-1 rounded-md bg-white" style="justify-content: center;">
 
-                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3">
+                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3" style="justify-content: center;">
                             <div class="items-center text-center px-2 py-6  ">
 
                                 <div class="mx-5">
                                     <div class="text-gray-500">
-                                        <a href="{{route('RFQ.create')}}" style="background-color: #145EA8"
-                                           class="inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 active:bg-blue-500 transition ease-in-out duration-150">
-                                            {{__('portal.New Requisition')}}
-                                        </a>
+                                        <label>
+                                            <select name="category_selection" class="form-select shadow-sm block w-full category_selection" required>
+                                                <option value="">{{__('portal.Select')}}</option>
+                                                <option value="1">{{__('portal.Multiple Categories')}}</option>
+                                                <option value="0">{{__('portal.Single Category')}}</option>
+                                            </select>
+                                        </label>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
 
-                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 sm:mt-0">
-                            <div class="items-center text-center px-2 py-6 ">
-
-                                <div class="mx-5">
-                                    <div class="text-gray-500">
-                                        @php $multipleCategoryCount = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->count(); @endphp
-                                        <a href="{{route('RFQCart.index')}}" style="background-color: #145EA8"
-                                           class="inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 active:bg-blue-500 transition ease-in-out duration-150">
-                                            <span>{{__('portal.Requisition Cart')}} @if($multipleCategoryCount > 0) ({{$multipleCategoryCount}}) @endif</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                    <span>{{__('portal.Single Category')}}</span>
-                    <div class="md:flex flex-1 rounded-md bg-white">
-
-                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3">
-                            <div class="items-center text-center px-2 py-6 ">
-
-                                <div class="mx-5">
-                                    <div class="text-gray-500">
-                                        <a href="{{route('create_single_rfq')}}" style="background-color: #145EA8"
-                                           class="inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 active:bg-blue-500 transition ease-in-out duration-150">
-                                            {{__('portal.New Requisition')}}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 sm:mt-0">
-                            <div class="items-center text-center px-2 py-6 ">
-
-                                <div class="mx-5">
-                                    <div class="text-gray-500">
-                                        @php $count = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->count(); @endphp
-                                        <a href="{{route('single_cart_index')}}" style="background-color: #145EA8"
-                                           class="inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 active:bg-blue-500 transition ease-in-out duration-150">
-                                            <span>{{__('portal.Requisition Cart')}} @if($count > 0) ({{$count}}) @endif</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{--                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 xl:mt-0">--}}
-                        {{--                            <div class="items-center text-center px-2 py-6 ">--}}
-                        {{--                                <div class="mx-5">--}}
-                        {{--                                    <div class="text-gray-500">--}}
-                        {{--                                        <a href="{{route('single_category_rfq_index')}}" style="background-color: #145EA8"  class="inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 active:bg-blue-500 transition ease-in-out duration-150">--}}
-                        {{--                                        <a href="{{route('PlacedRFQ.index')}}" style="background-color: #145EA8"  class="inline-flex items-center justify-center px-4 py-1 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 active:bg-blue-500 transition ease-in-out duration-150">--}}
-                        {{--                                            {{__('portal.Requisitions History')}}--}}
-                        {{--                                        </a>--}}
-                        {{--                                    </div>--}}
-                        {{--                                </div>--}}
-                        {{--                            </div>--}}
-                        {{--                        </div>--}}
-
-                    </div>
-                </div>
-
-
-                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/4 xl:my-1 xl:px-1 xl:w-1/4">
-                    <span>{{__('portal.Both Types')}}</span>
-
-                    <div class="md:flex flex-1 rounded-md bg-white">
-                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 xl:mt-0">
-                            <div class="items-center text-center px-2 py-6 mx-auto">
-                                <div class="mx-5">
-                                    <div class="text-gray-500">
-                                        <a href="{{route('PlacedRFQ.index')}}" style="background-color: #145EA8"
-                                           class="inline-flex items-center justify-center px-4 py-3 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-blue-500 active:bg-blue-500 transition ease-in-out duration-150">
-                                            {{__('portal.Requisitions History')}}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -130,6 +49,22 @@
         </div>
 
     </x-app-layout>
+
+    <script>
+        $('.category_selection').change(function () {
+
+            if ($(this).val() == 0 )
+            {
+                window.location.href = "{{route("create_single_rfq")}}";
+            }
+            if ( $(this).val() == 1 )
+            {
+                window.location.href = "{{route("RFQ.create")}}";
+            }
+
+        });
+    </script>
+
 @else
     <x-app-layout>
         @if (session()->has('error'))
@@ -151,101 +86,26 @@
 
         <div class="mt-4">
 
-            <div class="flex flex-wrap overflow-hidden lg:-mx-2 xl:-mx-1 ">
+            <div class="flex flex-wrap overflow-hidden lg:-mx-2 xl:-mx-1" style="justify-content: center;">
 
-                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2 ">
-                    <span>{{__('portal.Multiple Categories')}}</span>
-                    <div class="md:flex flex-1 rounded-md bg-white">
+                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3" style="justify-content: center;">
+                    <div class="md:flex flex-1 rounded-md bg-white" style="justify-content: center;">
 
-                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3">
+                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3" style="justify-content: center;">
                             <div class="items-center text-center px-2 py-6  ">
-                                <div class="mx-5">
-                                    <div class="text-gray-500">
-                                        <a href="{{route('RFQ.create')}}" style="background-color: #145EA8"
-                                           class="inline-flex items-center justify-center px-4 py-1
-                                            border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
-                                            {{__('portal.New Requisition')}}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 sm:mt-0">
-                            <div class="items-center text-center px-2 py-6 ">
 
                                 <div class="mx-5">
                                     <div class="text-gray-500">
-                                        @php $multipleCategoryCount = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->count(); @endphp
-                                        <a href="{{route('RFQCart.index')}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-1
-                                         border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
-                                            <span>{{__('portal.Requisition Cart')}} @if($multipleCategoryCount > 0) ({{$multipleCategoryCount}}) @endif</span>
-                                        </a>
+                                        <label>
+                                            <select name="category_selection" class="form-select shadow-sm block w-full category_selection" required>
+                                                <option value="">{{__('portal.Select')}}</option>
+                                                <option value="1">{{__('portal.Multiple Categories')}}</option>
+                                                <option value="0">{{__('portal.Single Category')}}</option>
+                                            </select>
+                                        </label>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 xl:mt-0">
-                            <div class="items-center text-center px-2 py-6 ">
-
-                                <div class="mx-5">
-                                    <div class="text-gray-500">
-                                        <a href="{{route('PlacedRFQ.index')}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-1
-                                         border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
-                                            {{__('portal.Requisitions History')}}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
-                    <span>{{__('portal.Single Category')}}</span>
-                    <div class="md:flex flex-1 rounded-md bg-white">
-
-                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3">
-                            <div class="items-center text-center px-2 py-6 ">
-
-                                <div class="mx-5">
-                                    <div class="text-gray-500">
-                                        <a href="{{route('create_single_rfq')}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-1
-                                         border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
-                                            {{__('portal.New Requisition')}}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 sm:mt-0">
-                            <div class="items-center text-center px-2 py-6 ">
-
-                                <div class="mx-5">
-                                    <div class="text-gray-500">
-                                        @php $count = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->count(); @endphp
-                                        <a href="{{route('single_cart_index')}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-1
-                                         border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
-                                            <span>{{__('portal.Requisition Cart')}} @if($count > 0) ({{$count}}) @endif</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="lg:flex flex-1 sm:w-1/2 xl:w-1/3 xl:mt-0">
-                            <div class="items-center text-center px-2 py-6 ">
-                                <div class="mx-5">
-                                    <div class="text-gray-500">
-                                        <a href="{{route('PlacedRFQ.index')}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-1
-                                         border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none transition ease-in-out duration-150">
-                                            {{__('portal.Requisitions History')}}
-                                        </a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -256,4 +116,19 @@
         </div>
 
     </x-app-layout>
+
+    <script>
+        $('.category_selection').change(function () {
+
+            if ($(this).val() == 0 )
+            {
+                window.location.href = "{{route("create_single_rfq")}}";
+            }
+            if ( $(this).val() == 1 )
+            {
+                window.location.href = "{{route("RFQ.create")}}";
+            }
+
+        });
+    </script>
 @endif

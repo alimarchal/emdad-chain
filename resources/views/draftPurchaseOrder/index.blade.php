@@ -18,15 +18,15 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                @if (session()->has('message'))
+                    <div class="mb-3 block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                        <strong class="mr-1">{{ session('message') }}</strong>
+                        <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                            <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    @if (session()->has('message'))
-                        <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                            <strong class="mr-1">{{ session('message') }}</strong>
-                            <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
-                                <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                    @endif
                     {{--                    <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
                                             <a href="{{route('generatePDF')}}"
                                                class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
@@ -42,21 +42,25 @@
                                         <table class="min-w-full divide-y divide-gray-200" id="dpo">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         #
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.DPO Number')}}
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Category Name')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                        {{__('portal.Requisition Type')}}
+                                                    </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.P.O Date')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.View')}}
                                                     </th>
 
@@ -74,14 +78,23 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                                @php
-                                                                    $record = \App\Models\Category::where('id',$dpo->item_code)->first();
-                                                                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                                                @endphp
-                                                                {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif
-    {{--                                                            {{ $dpo->item_name }}--}}
-                                                            </a>
+                                                            @php
+                                                                $record = \App\Models\Category::where('id',$dpo->item_code)->first();
+                                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                            @endphp
+                                                            @if($dpo->rfq_type == 1)
+                                                                <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                    {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif
+                                                                </a>
+                                                            @elseif($dpo->rfq_type == 0)
+                                                                <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                    {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif
+                                                                </a>
+                                                            @endif
+                                                        </td>
+
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            @if($dpo->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dpo->rfq_type == 0) {{__('portal.Single Category')}}@endif
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -89,15 +102,27 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-600 hover:underline text-blue-600">
-                                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                                    </path>
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                                    </path>
-                                                                </svg>
-                                                            </a>
+                                                            @if($dpo->rfq_type == 1)
+                                                                <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-600 hover:underline text-blue-600">
+                                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                        </path>
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                        </path>
+                                                                    </svg>
+                                                                </a>
+                                                            @elseif($dpo->rfq_type == 0)
+                                                                <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-600 hover:underline text-blue-600">
+                                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                        </path>
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                        </path>
+                                                                    </svg>
+                                                                </a>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -112,7 +137,7 @@
 
                     @else
                         <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                            <strong class="mr-1">No draft purchase found...!</strong>
+                            <strong class="mr-1">{{__('portal.No draft purchase found...!')}}</strong>
                             <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                                 <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                             </button>
@@ -139,22 +164,20 @@
 @else
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Draft Purchase Orders') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Draft Purchase Orders') }}</h2>
         </x-slot>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                @if (session()->has('message'))
+                    <div class="mb-3 block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                        <strong class="mr-3">{{ session('message') }}</strong>
+                        <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                            <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    @if (session()->has('message'))
-                        <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                            <strong class="mr-1">{{ session('message') }}</strong>
-                            <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
-                                <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                    @endif
 
                     @if ($dpos->count())
                         <div class="flex flex-col">
@@ -164,21 +187,25 @@
                                         <table class="min-w-full divide-y divide-gray-200" id="dpo">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         #
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.DPO Number')}}
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Category Name')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        {{__('portal.Requisition Type')}}
+                                                    </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.P.O Date')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.View')}}
                                                     </th>
 
@@ -196,13 +223,23 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                            @php
-                                                                $record = \App\Models\Category::where('id',$dpo->item_code)->first();
-                                                                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                                            @endphp
-                                                            {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif
-                                                        </a>
+                                                        @php
+                                                            $record = \App\Models\Category::where('id',$dpo->item_code)->first();
+                                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                        @endphp
+                                                        @if($dpo->rfq_type == 1)
+                                                            <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif
+                                                            </a>
+                                                        @elseif($dpo->rfq_type == 0)
+                                                            <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif
+                                                            </a>
+                                                        @endif
+                                                    </td>
+
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        @if($dpo->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dpo->rfq_type == 0) {{__('portal.Single Category')}}@endif
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -210,15 +247,27 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-600 hover:underline text-blue-600">
-                                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                                </path>
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                                </path>
-                                                            </svg>
-                                                        </a>
+                                                        @if($dpo->rfq_type == 1)
+                                                            <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-600 hover:underline text-blue-600">
+                                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                    </path>
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                    </path>
+                                                                </svg>
+                                                            </a>
+                                                        @elseif($dpo->rfq_type == 0)
+                                                            <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-600 hover:underline text-blue-600">
+                                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                    </path>
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                                    </path>
+                                                                </svg>
+                                                            </a>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -233,7 +282,7 @@
 
                     @else
                         <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                            <strong class="mr-4">{{__('portal.No record found...!')}}</strong>
+                            <strong class="mr-3">{{__('portal.No draft purchase found...!')}}</strong>
                             <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                                 <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                             </button>
