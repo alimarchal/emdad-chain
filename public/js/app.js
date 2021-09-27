@@ -3556,7 +3556,7 @@ var bind = __webpack_require__(/*! ./helpers/bind */ "./node_modules/axios/lib/h
 
 /*global toString:true*/
 
-// utils is a library of generic helper functions non-specific to axios
+// utils is a libr of generic helper functions non-specific to axios
 
 var toString = Object.prototype.toString;
 
@@ -18207,7 +18207,7 @@ module.exports = {
      * corresponding HTML entities.
      *
      * **Note:** No other characters are escaped. To escape additional
-     * characters use a third-party library like [_he_](https://mths.be/he).
+     * characters use a third-party libr like [_he_](https://mths.be/he).
      *
      * Though the ">" character is escaped for symmetry, characters like
      * ">" and "/" don't need escaping in HTML and have no special meaning
@@ -19119,7 +19119,7 @@ module.exports = {
      * their corresponding characters.
      *
      * **Note:** No other HTML entities are unescaped. To unescape additional
-     * HTML entities use a third-party library like [_he_](https://mths.be/he).
+     * HTML entities use a third-party libr like [_he_](https://mths.be/he).
      *
      * @static
      * @memberOf _
@@ -21410,8 +21410,8 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
 window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
+ * We'll load the axios HTTP libr which allows us to easily issue requests
+ * to our Laravel back-end. This libr automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 

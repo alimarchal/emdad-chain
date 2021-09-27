@@ -109,7 +109,7 @@ d[0].offsetTop||15===d[0].offsetTop;d.remove();a.fixedPosition=e}f.extend(b.defa
 
 /*!
  * Masonry PACKAGED v4.1.0
- * Cascading grid layout library
+ * Cascading grid layout libr
  * http://masonry.desandro.com
  * MIT License
  * by David DeSandro
