@@ -155,14 +155,39 @@
                     @endif
 
                     @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
+
+                        @php $multipleCategoryCount = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->count(); @endphp
+                        @php $count = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->count(); @endphp
+
+                        <img src="{{asset('cart.png')}}" style="margin-right: 10px;margin-bottom: 6px;">
+                        <a href="{{route('RFQCart.index')}}" title="{{__('navigation-dropdown.Multiple Categories Cart items')}}">
+                            <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                ({{$multipleCategoryCount}})
+                            </span>
+                        </a> &nbsp; |
+
+                        @include('RFQ.CartIcon') &nbsp;
+                        <a href="{{route('single_cart_index')}}" title="{{__('navigation-dropdown.Single Category Cart items')}}">
+                            <span @if($count > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                ({{$count}})
+                            </span>
+                        </a> &nbsp; |
+
                         @php
+                            $quotationCount = 0;
+
                             $multiPlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 1])->count();
                             $singlePlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 0])->get();
+
+                            /* $quotationCount added because of merging both single and multiple categories quotations count */
+                            $quotationCount = $multiPlacedRFQ + count($singlePlacedRFQ->unique('e_order_id'));
                         @endphp
-                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
-                                                                                                                                                                                                                                 @else class="text-red-600 hover:underline" @endif>{{$multiPlacedRFQ}}</span></a></span>
-                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against single category')}}">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
-                                                                                                                                                                                                                           @else class="text-red-600 hover:underline" @endif>{{count($singlePlacedRFQ->unique('e_order_id'))}}</span></a></span>
+                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received')}}" style="margin-left: 10px;">{{ __('navigation-dropdown.Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if($quotationCount > 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                                                 @else class="text-red-600 hover:underline" @endif>{{$quotationCount}}</span></a></span>
+                        {{--<span title="{{__('navigation-dropdown.Number of New Quotation(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                                                 @else class="text-red-600 hover:underline" @endif>{{$multiPlacedRFQ}}</span></a></span>--}}
+                        {{--<span title="{{__('navigation-dropdown.Number of New Quotation(s) received against single category')}}">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}" style="padding-right: 10px;"><span @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                                           @else class="text-red-600 hover:underline" @endif>{{count($singlePlacedRFQ->unique('e_order_id'))}}</span></a></span>--}}
                     @endif
 
 {{--                    @can('all')--}}
@@ -412,14 +437,43 @@
                 @endif
 
                 @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
-                    <a @if($multiPlacedRFQ > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                    @php $multipleCategoryCount = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->count(); @endphp
+                    @php $count = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->count(); @endphp
+
+                <div style="display: inline">
+                    <div style="float:left; text-align:left; display:inline;">
+                        <img src="{{asset('cart.png')}}" style="margin-left: 10px;margin-bottom: 4px;width: 32px; height: 32px;">
+                        <a href="{{route('RFQCart.index')}}" title="{{__('navigation-dropdown.Multiple Categories Cart items')}}" style="margin-left: 19px;">
+                                <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                    ({{$multipleCategoryCount}})
+                                </span>
+                        </a> &nbsp; |
+                    </div>
+
+                    <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="margin-left: 10px;">
+                        <path fill="none" d="M17.72,5.011H8.026c-0.271,0-0.49,0.219-0.49,0.489c0,0.271,0.219,0.489,0.49,0.489h8.962l-1.979,4.773H6.763L4.935,5.343C4.926,5.316,4.897,5.309,4.884,5.286c-0.011-0.024,0-0.051-0.017-0.074C4.833,5.166,4.025,4.081,2.33,3.908C2.068,3.883,1.822,4.075,1.795,4.344C1.767,4.612,1.962,4.853,2.231,4.88c1.143,0.118,1.703,0.738,1.808,0.866l1.91,5.661c0.066,0.199,0.252,0.333,0.463,0.333h8.924c0.116,0,0.22-0.053,0.308-0.128c0.027-0.023,0.042-0.048,0.063-0.076c0.026-0.034,0.063-0.058,0.08-0.099l2.384-5.75c0.062-0.151,0.046-0.323-0.045-0.458C18.036,5.092,17.883,5.011,17.72,5.011z"></path>
+                        <path fill="none" d="M8.251,12.386c-1.023,0-1.856,0.834-1.856,1.856s0.833,1.853,1.856,1.853c1.021,0,1.853-0.83,1.853-1.853S9.273,12.386,8.251,12.386z M8.251,15.116c-0.484,0-0.877-0.393-0.877-0.874c0-0.484,0.394-0.878,0.877-0.878c0.482,0,0.875,0.394,0.875,0.878C9.126,14.724,8.733,15.116,8.251,15.116z"></path>
+                        <path fill="none" d="M13.972,12.386c-1.022,0-1.855,0.834-1.855,1.856s0.833,1.853,1.855,1.853s1.854-0.83,1.854-1.853S14.994,12.386,13.972,12.386z M13.972,15.116c-0.484,0-0.878-0.393-0.878-0.874c0-0.484,0.394-0.878,0.878-0.878c0.482,0,0.875,0.394,0.875,0.878C14.847,14.724,14.454,15.116,13.972,15.116z"></path>
+                    </svg> &nbsp;
+                    <a href="{{route('single_cart_index')}}" title="{{__('navigation-dropdown.Single Category Cart items')}}">
+                            <span @if($count > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                ({{$count}})
+                            </span>
+                    </a> &nbsp; |
+                </div>
+
+                    <a @if($quotationCount > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                       @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
+                        {{ __('navigation-dropdown.Quotations')}}: &nbsp; {{ $quotationCount }}
+                    </a>
+                    {{--<a @if($multiPlacedRFQ > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
                         {{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp; {{ $multiPlacedRFQ }}
-                    </a>
-                    <a @if(count($singlePlacedRFQ) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                    </a>--}}
+                    {{--<a @if(count($singlePlacedRFQ) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
                         {{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp; {{ count($singlePlacedRFQ->unique('e_order_id')) }}
-                    </a>
+                    </a>--}}
                 @endif
             </div>
 
@@ -742,14 +796,46 @@
                     @endif
 
                     @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
+                        @php $multipleCategoryCount = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->count(); @endphp
+                        @php $count = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->count(); @endphp
+
+                        <img src="{{asset('cart.png')}}" style="transform: scaleX(-1) ;margin-left: 10px;margin-bottom: 6px;"> &nbsp;
+                        <a href="{{route('RFQCart.index')}}" title="{{__('navigation-dropdown.Multiple Categories Cart items')}}">
+                            <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                ({{$multipleCategoryCount}})
+                            </span>
+                        </a> &nbsp; |
+
+                        <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1) ;margin-right: 10px;">
+                            <path fill="none" d="M17.72,5.011H8.026c-0.271,0-0.49,0.219-0.49,0.489c0,0.271,0.219,0.489,0.49,0.489h8.962l-1.979,4.773H6.763L4.935,5.343C4.926,5.316,4.897,5.309,4.884,5.286c-0.011-0.024,0-0.051-0.017-0.074C4.833,5.166,4.025,4.081,2.33,3.908C2.068,3.883,1.822,4.075,1.795,4.344C1.767,4.612,1.962,4.853,2.231,4.88c1.143,0.118,1.703,0.738,1.808,0.866l1.91,5.661c0.066,0.199,0.252,0.333,0.463,0.333h8.924c0.116,0,0.22-0.053,0.308-0.128c0.027-0.023,0.042-0.048,0.063-0.076c0.026-0.034,0.063-0.058,0.08-0.099l2.384-5.75c0.062-0.151,0.046-0.323-0.045-0.458C18.036,5.092,17.883,5.011,17.72,5.011z"></path>
+                            <path fill="none" d="M8.251,12.386c-1.023,0-1.856,0.834-1.856,1.856s0.833,1.853,1.856,1.853c1.021,0,1.853-0.83,1.853-1.853S9.273,12.386,8.251,12.386z M8.251,15.116c-0.484,0-0.877-0.393-0.877-0.874c0-0.484,0.394-0.878,0.877-0.878c0.482,0,0.875,0.394,0.875,0.878C9.126,14.724,8.733,15.116,8.251,15.116z"></path>
+                            <path fill="none" d="M13.972,12.386c-1.022,0-1.855,0.834-1.855,1.856s0.833,1.853,1.855,1.853s1.854-0.83,1.854-1.853S14.994,12.386,13.972,12.386z M13.972,15.116c-0.484,0-0.878-0.393-0.878-0.874c0-0.484,0.394-0.878,0.878-0.878c0.482,0,0.875,0.394,0.875,0.878C14.847,14.724,14.454,15.116,13.972,15.116z"></path>
+                        </svg> &nbsp;
+                        <a href="{{route('single_cart_index')}}" title="{{__('navigation-dropdown.Single Category Cart items')}}">
+                            <span @if($count > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                ({{$count}})
+                            </span>
+                        </a> &nbsp; |
+
                         @php
+                            $quotationCount = 0;
+
                             $multiPlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 1])->count();
                             $singlePlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 0])->get();
+
+                            $quotationCount = $multiPlacedRFQ + count($singlePlacedRFQ->unique('e_order_id'));
                         @endphp
-                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}"><span style="padding-left: 7px;" @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
-                                                                                                                                                                                                                              @else class="text-red-600 hover:underline" @endif>{{$multiPlacedRFQ}}</span></a></span>
-                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received against single category')}}">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}"><span style="padding-left: 7px;" @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
-                                                                                                                                                                                                                      @else class="text-red-600 hover:underline" @endif>{{count($singlePlacedRFQ->unique('e_order_id'))}}</span></a></span>
+                        <span title="{{__('navigation-dropdown.Number of New Quotation(s) received')}}" style="margin-right: 10px;">
+                        <path fill="none" d="M17.72,5.011H8.026c-0.271,0-0.49,0.219-0.49,0.489c0,0.271,0.219,0.489,0.49,0.489h8.962l-1.979,4.773H6.763L4.935,5.343C4.926,5.316,4.897,5.309,4.884,5.286c-0.011-0.024,0-0.051-0.017-0.074C4.833,5.166,4.025,4.081,2.33,3.908C2.068,3.883,1.822,4.075,1.795,4.344C1.767,4.612,1.962,4.853,2.231,4.88c1.143,0.118,1.703,0.738,1.808,0.866l1.91,5.661c0.066,0.199,0.252,0.333,0.463,0.333h8.924c0.116,0,0.22-0.053,0.308-0.128c0.027-0.023,0.042-0.048,0.063-0.076c0.026-0.034,0.063-0.058,0.08-0.099l2.384-5.75c0.062-0.151,0.046-0.323-0.045-0.458C18.036,5.092,17.883,5.011,17.72,5.011z"></path>
+                        <path fill="none" d="M8.251,12.386c-1.023,0-1.856,0.834-1.856,1.856s0.833,1.853,1.856,1.853c1.021,0,1.853-0.83,1.853-1.853S9.273,12.386,8.251,12.386z M8.251,15.116c-0.484,0-0.877-0.393-0.877-0.874c0-0.484,0.394-0.878,0.877-0.878c0.482,0,0.875,0.394,0.875,0.878C9.126,14.724,8.733,15.116,8.251,15.116z"></path>
+                        <path fill="none" d="M13.972,12.386c-1.022,0-1.855,0.834-1.855,1.856s0.833,1.853,1.855,1.853s1.854-0.83,1.854-1.853S14.994,12.386,13.972,12.386z M13.972,15.116c-0.484,0-0.878-0.393-0.878-0.874c0-0.484,0.394-0.878,0.878-0.878c0.482,0,0.875,0.394,0.875,0.878C14.847,14.724,14.454,15.116,13.972,15.116z"></path>
+                        {{ __('navigation-dropdown.Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}"><span style="padding-left: 7px;" @if($quotationCount > 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                                                           @else class="text-red-600 hover:underline" @endif>{{$quotationCount}}</span></a></span>
+
+                        {{--<span title="{{__('navigation-dropdown.Number of New Quotation(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}"><span style="padding-left: 7px;" @if($multiPlacedRFQ > 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                                              @else class="text-red-600 hover:underline" @endif>{{$multiPlacedRFQ}}</span></a></span>--}}
+                        {{--<span title="{{__('navigation-dropdown.Number of New Quotation(s) received against single category')}}">{{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}"><span style="padding-left: 7px;" @if(count($singlePlacedRFQ) > 0) class="text-green-600 hover:underline"
+                                                                                                                                                                                                                      @else class="text-red-600 hover:underline" @endif>{{count($singlePlacedRFQ->unique('e_order_id'))}}</span></a></span>--}}
                     @endif
 {{--                    @cannot('all')--}}
 {{--                        <a onclick="language(0, 'en')" class="get-started-btn scrollto" style="cursor: pointer"><img alt="" src="{{url('us.png')}}" style="margin-right: 2px;margin-top: -4px;">English</a>--}}
@@ -1012,14 +1098,43 @@
                 @endif
 
                 @if(auth()->user()->hasRole('CEO|Buyer Create New RFQ') && auth()->user()->registration_type == 'Buyer' && auth()->user()->status == 3)
-                    <a @if($multiPlacedRFQ > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                    @php $multipleCategoryCount = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->count(); @endphp
+                    @php $count = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->count(); @endphp
+
+                    <div style="display: inline">
+                        <div style="float:right; text-align:left; display:inline;">
+                            <img src="{{asset('cart.png')}}" style="transform: scaleX(-1);margin-right: 10px;margin-bottom: 10px;width: 32px; height: 29px;">&nbsp;
+                            <a href="{{route('RFQCart.index')}}" title="{{__('navigation-dropdown.Multiple Categories Cart items')}}">
+                                <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                    ({{$multipleCategoryCount}})
+                                </span>
+                            </a> &nbsp; |
+                        </div>
+
+                        <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);margin-left: 10px;">
+                            <path fill="none" d="M17.72,5.011H8.026c-0.271,0-0.49,0.219-0.49,0.489c0,0.271,0.219,0.489,0.49,0.489h8.962l-1.979,4.773H6.763L4.935,5.343C4.926,5.316,4.897,5.309,4.884,5.286c-0.011-0.024,0-0.051-0.017-0.074C4.833,5.166,4.025,4.081,2.33,3.908C2.068,3.883,1.822,4.075,1.795,4.344C1.767,4.612,1.962,4.853,2.231,4.88c1.143,0.118,1.703,0.738,1.808,0.866l1.91,5.661c0.066,0.199,0.252,0.333,0.463,0.333h8.924c0.116,0,0.22-0.053,0.308-0.128c0.027-0.023,0.042-0.048,0.063-0.076c0.026-0.034,0.063-0.058,0.08-0.099l2.384-5.75c0.062-0.151,0.046-0.323-0.045-0.458C18.036,5.092,17.883,5.011,17.72,5.011z"></path>
+                            <path fill="none" d="M8.251,12.386c-1.023,0-1.856,0.834-1.856,1.856s0.833,1.853,1.856,1.853c1.021,0,1.853-0.83,1.853-1.853S9.273,12.386,8.251,12.386z M8.251,15.116c-0.484,0-0.877-0.393-0.877-0.874c0-0.484,0.394-0.878,0.877-0.878c0.482,0,0.875,0.394,0.875,0.878C9.126,14.724,8.733,15.116,8.251,15.116z"></path>
+                            <path fill="none" d="M13.972,12.386c-1.022,0-1.855,0.834-1.855,1.856s0.833,1.853,1.855,1.853s1.854-0.83,1.854-1.853S14.994,12.386,13.972,12.386z M13.972,15.116c-0.484,0-0.878-0.393-0.878-0.874c0-0.484,0.394-0.878,0.878-0.878c0.482,0,0.875,0.394,0.875,0.878C14.847,14.724,14.454,15.116,13.972,15.116z"></path>
+                        </svg> &nbsp;
+                        <a href="{{route('single_cart_index')}}" title="{{__('navigation-dropdown.Single Category Cart items')}}">
+                            <span @if($count > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                ({{$count}})
+                            </span>
+                        </a> &nbsp; |
+                    </div>
+
+                    <a @if($quotationCount > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
+                       @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
+                        {{ __('navigation-dropdown.Quotations')}}: &nbsp; {{ $quotationCount }}
+                    </a>
+                    {{--<a @if($multiPlacedRFQ > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
                         {{ __('navigation-dropdown.Multiple Categories Quotations')}}: &nbsp; {{ $multiPlacedRFQ }}
                     </a>
                     <a @if(count($singlePlacedRFQ) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
                         {{ __('navigation-dropdown.Single Category Quotations')}}: &nbsp; {{ count($singlePlacedRFQ->unique('e_order_id')) }}
-                    </a>
+                    </a>--}}
                 @endif
 
             </div>

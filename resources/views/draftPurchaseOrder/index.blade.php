@@ -42,25 +42,25 @@
                                         <table class="min-w-full divide-y divide-gray-200" id="dpo">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         #
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.DPO Number')}}
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Category Name')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Requisition Type')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.P.O Date')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.View')}}
                                                     </th>
 
@@ -137,7 +137,7 @@
 
                     @else
                         <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                            <strong class="mr-1">No draft purchase found...!</strong>
+                            <strong class="mr-1">{{__('portal.No draft purchase found...!')}}</strong>
                             <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                                 <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                             </button>
@@ -187,25 +187,25 @@
                                         <table class="min-w-full divide-y divide-gray-200" id="dpo">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         #
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.DPO Number')}}
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Category Name')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Requisition Type')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.P.O Date')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.View')}}
                                                     </th>
 
@@ -282,7 +282,7 @@
 
                     @else
                         <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                            <strong class="mr-3">{{__('portal.No record found...!')}}</strong>
+                            <strong class="mr-3">{{__('portal.No draft purchase found...!')}}</strong>
                             <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                                 <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                             </button>
