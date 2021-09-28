@@ -10,6 +10,7 @@ use App\Models\EOrders;
 use App\Models\Qoute;
 use App\Models\User;
 use App\Notifications\QuotationSent;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -523,6 +524,17 @@ class QouteController extends Controller
         return redirect()->route('dpo.show', $dpo->id);
     }
 
+    /**
+     * Generating PDF file for Multi Category Quotation buyer received.
+     *
+     */
+    public function quotationPDF($quote_supplier_business_id, $e_order_id)
+    {
+        $quote = Qoute::with('messages')->where(['supplier_business_id' => decrypt($quote_supplier_business_id)])->where( 'e_order_id' , decrypt($e_order_id))->first();
+        $pdf = PDF::loadView('buyer.quotationPDF', compact('quote'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('Quotation.pdf');
+    }
+
     ################### Functions For Single Category RFQ Type For Buyer ##################
 
     public function singleCategoryBuyerRFQs()
@@ -750,6 +762,17 @@ class QouteController extends Controller
         session()->flash('message', __('portal.Draft purchase order has been generated.'));
 //        return redirect()->route('singleCategoryIndex');
         return redirect()->route('singleCategoryDPOIndex');
+    }
+
+    /**
+     * Generating PDF file for Single Category Quotation buyer received.
+     *
+     */
+    public function singleCategoryQuotationPDF($quote_supplier_business_id,$e_order_id)
+    {
+        $quotes = Qoute::where(['supplier_business_id' => decrypt($quote_supplier_business_id)])->where( 'e_order_id' , decrypt($e_order_id))->get();
+        $pdf = PDF::loadView('buyer.singleCategory.quotationPDF', compact('quotes'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('Quotation.pdf');
     }
 
     ##########################################################################################

@@ -294,6 +294,9 @@ Route::middleware(['auth:sanctum'])->get('/quote-RFQs-for-single-category-{eOrde
 Route::middleware(['auth:sanctum'])->get('/modification-needed-quote-RFQs-for-single-category-{quote}', [PlacedRFQController::class, 'viewModifiedSingleCategoryRFQByID'])->name('viewModifiedSingleCategoryRFQByID');
 Route::middleware(['auth:sanctum'])->get('/RFQsQouted', [PlacedRFQController::class, 'RFQsQouted'])->name('RFQsQouted');
 
+/* Generating PDF file for Multi Category Quotation Supplier quoted. */
+Route::middleware(['auth:sanctum'])->get('/generate-pdf/{eOrderItemID}', [PlacedRFQController::class, 'quotedQuotationPDF'])->name('PDFForQuotation');
+
 #################### Roles display and update ##########################
 Route::resource('/role', RoleController::class);
 //Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'show'])->name('roles');
@@ -323,6 +326,9 @@ Route::middleware(['auth:sanctum'])->get('/single/category/quoted/modified/RFQs'
 Route::middleware(['auth:sanctum'])->get('/single/category/rejected-RFQs', [QouteController::class, 'singleCategoryQuotedRFQRejected'])->name('singleCategoryQuotedRFQRejected');
 Route::middleware(['auth:sanctum'])->get('/single/category/modification/needed/RFQs', [QouteController::class, 'singleCategoryQuotedRFQModificationNeeded'])->name('singleCategoryQuotedRFQModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('/single/category/pending/confirmation/RFQs', [QouteController::class, 'singleCategoryQuotedRFQPendingConfirmation'])->name('singleCategoryQuotedRFQPendingConfirmation');
+
+/* Generating PDF file for Single Category Quotation Supplier quoted */
+Route::middleware(['auth:sanctum'])->get('/generate-single-category-quotation-pdf/{quoteID}/{eOrderItemID}', [PlacedRFQController::class, 'singleCategoryQuotedQuotationPDF'])->name('PDFForSingleCategoryQuotation');
 #############################################################################################################
 
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived', [QouteController::class, 'QoutationsBuyerReceived'])->name('QoutationsBuyerReceived');
@@ -334,6 +340,9 @@ Route::middleware(['auth:sanctum'])->get('/QuotationDiscard/{EOrderID}/', [Qoute
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/rejected/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedRejected'])->name('QoutationsBuyerReceivedRejected');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/modification/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedModificationNeeded'])->name('QoutationsBuyerReceivedModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/accepted/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedAccepted'])->name('QoutationsBuyerReceivedAccepted');
+
+/* Generating PDF file for Multi Category Quotation buyer received */
+Route::middleware(['auth:sanctum'])->get('generate-quotation-pdf/{quote_supplier_business_id}/{e_order_id}', [QouteController::class, 'quotationPDF'])->name('quotationPDF');
 
 ######################## Single Category Quotations routes For Buyer ############################################
 Route::middleware(['auth:sanctum'])->get('/single/category/rfq', [QouteController::class, 'singleCategoryBuyerRFQs'])->name('singleCategoryBuyerRFQs');
@@ -347,6 +356,9 @@ Route::middleware(['auth:sanctum'])->get('/single/category/RFQ/modification/quot
 Route::middleware(['auth:sanctum'])->get('single-rfq-quote/{quotes}/ModificationNeeded', [QouteController::class, 'singleCategoryRFQUpdateStatusModificationNeeded'])->name('singleCategoryRFQUpdateStatusModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('single-rfq-quote/{quotes}/Rejected', [QouteController::class, 'singleCategoryRFQUpdateStatusRejected'])->name('singleCategoryRFQUpdateStatusRejected');
 Route::middleware(['auth:sanctum'])->post('singleCategoryQuote/Accepted', [QouteController::class, 'singleCategoryQuoteAccepted'])->name('singleCategoryQuoteAccepted');
+
+/* Generating PDF file for Single Category Quotation buyer received */
+Route::middleware(['auth:sanctum'])->get('single-rfq-quotation-pdf/{quote_supplier_business_id}/{e_order_id}', [QouteController::class, 'singleCategoryQuotationPDF'])->name('singleCategoryQuotationPDF');
 #################################################################################################################
 
 

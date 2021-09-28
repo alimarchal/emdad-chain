@@ -8,6 +8,7 @@ use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Package;
 use App\Models\Qoute;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -82,6 +83,32 @@ class PlacedRFQController extends Controller
         $user_business_id = auth()->user()->business_id;
         $collection = Qoute::where('e_order_items_id', $eOrderItems->id)->where('supplier_user_id', $user_id)->first();
         return view('supplier.supplier-quote', compact('eOrderItems', 'collection', 'user_business_id'));
+    }
+
+    /**
+     * Generating PDF file for Multi Category Quotation Supplier quoted.
+     *
+     */
+    public function quotedQuotationPDF($eOrderItemID)
+    {
+        $eOrderItem = EOrderItems::firstWhere('id', decrypt($eOrderItemID));
+        $quote = Qoute::with('business')->where('e_order_items_id', decrypt($eOrderItemID))->where('supplier_user_id', auth()->id())->first();
+
+        $pdf = PDF::loadView('supplier.quotationPDF', compact('quote', 'eOrderItem'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('Quotation.pdf');
+    }
+
+    /**
+     * Generating PDF file for Single Category Quotation Supplier quoted.
+     *
+     */
+    public function singleCategoryQuotedQuotationPDF($quoteID, $eOrderItemID)
+    {
+        $eOrderItem = EOrderItems::where('id', decrypt($eOrderItemID))->first();
+        $quotes = Qoute::where(['e_order_id' => decrypt($quoteID), 'supplier_business_id' => auth()->user()->business_id])->get();
+
+        $pdf = PDF::loadView('supplier.singleCategoryRFQ.quotationPDF', compact('quotes', 'eOrderItem'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->download('Quotation.pdf');
     }
 
     /* Supplier rejecting RFQ */
