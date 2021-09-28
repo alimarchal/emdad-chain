@@ -24,8 +24,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
-//use Barryvdh\DomPDF\PDF as PDF;
-
 class DraftPurchaseOrderController extends Controller
 {
     public function index()

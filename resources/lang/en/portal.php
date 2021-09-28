@@ -826,5 +826,6 @@ return [
     'Enter comments for rating under 4' => 'Enter comments for rating under 4',
     'Rated Supplier Successfully!' => 'Rated Supplier Successfully!',
     'Rated Delivery Successfully!' => 'Rated Delivery Successfully!',
+    'Library' => 'Library',
 
 ];

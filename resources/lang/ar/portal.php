@@ -826,5 +826,6 @@ return [
     'Enter comments for rating under 4' => 'أدخل تعليقك (للتقيم أقل من ٤)',
     'Rated Supplier Successfully!' => 'تم تقييم المورد بنجاح!',
     'Rated Delivery Successfully!' => 'تم تقييم الطلبية بنجاح!',
+    'Library' => 'المكتبة',
 
 ];
