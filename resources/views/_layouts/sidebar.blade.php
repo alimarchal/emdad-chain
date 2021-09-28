@@ -289,15 +289,6 @@
                 </a>
             @endif
 
-                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('showLibrary') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                   href="{{route('showLibrary')}}">
-
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                    </svg>
-                    <span class="mx-3">Library Tutorials</span>
-                </a>
-
             {{-- Business link --}}
             @if(auth()->user()->can('all') || auth()->user()->hasRole('Sales Specialist') || auth()->user()->hasRole('Legal Approval Officer 1') || auth()->user()->hasRole('Finance Officer 1') || auth()->user()->hasRole('SC Supervisor') || auth()->user()->hasRole('SC Specialist') || auth()->user()->hasRole('IT Admin'))
                 <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('business.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
@@ -1044,7 +1035,7 @@
             @endif
 
             {{-- Payments link for supplier --}}
-            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier'  && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO|Supplier Payment Admin') && auth()->user()->registration_type == 'Supplier'  && Auth::user()->status == 3)
 
                 <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('paymentView') ||request()->routeIs('payment.index') || request()->routeIs('generate_proforma_invoices')|| request()->routeIs('invoices')|| request()->routeIs('bank-payments.index')|| request()->routeIs('proforma_invoices')|| request()->routeIs('emdadInvoices')|| request()->routeIs('supplier_payment_received') || request()->routeIs('singleCategoryPaymentIndex') || request()->routeIs('singleCategoryGenerateProformaInvoiceView')|| request()->routeIs('singleCategoryInvoices')|| request()->routeIs('singleCategoryBankPaymentIndex')|| request()->routeIs('singleCategoryProformaInvoices')|| request()->routeIs('singleCategoryEmdadInvoicesIndex')|| request()->routeIs('singleCategorySupplierPaymentsReceived') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                    href="{{ route('paymentView') }}">
@@ -1328,7 +1319,7 @@
             @endif
 
             {{-- Payments link for Buyer --}}
-            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO|Buyer Payment Admin') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
@@ -1463,7 +1454,7 @@
                 <hr class="mt-4">
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
-                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow')|| request()->routeIs('users.create') || request()->routeIs('vehicle.create')|| request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow')|| request()->routeIs('vehicle.create')|| request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                        href="javascript:void(0);">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -1628,6 +1619,13 @@
                     </a>
                 @endif
             @endif
+
+            {{--<a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('showLibrary') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{route('showLibrary')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                <span class="mx-3">{{__('portal.Library')}}</span>
+            </a>--}}
 
         </nav>
     </div>
@@ -2357,7 +2355,7 @@
             @endif
 
             {{-- Payments link for supplier --}}
-            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier'  && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO|Supplier Payment Admin') && auth()->user()->registration_type == 'Supplier'  && Auth::user()->status == 3)
 
                 <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('paymentView') ||request()->routeIs('payment.index') || request()->routeIs('generate_proforma_invoices')|| request()->routeIs('invoices')|| request()->routeIs('bank-payments.index')|| request()->routeIs('proforma_invoices')|| request()->routeIs('emdadInvoices')|| request()->routeIs('supplier_payment_received') || request()->routeIs('singleCategoryPaymentIndex') || request()->routeIs('singleCategoryGenerateProformaInvoiceView')|| request()->routeIs('singleCategoryInvoices')|| request()->routeIs('singleCategoryBankPaymentIndex')|| request()->routeIs('singleCategoryProformaInvoices')|| request()->routeIs('singleCategoryEmdadInvoicesIndex')|| request()->routeIs('singleCategorySupplierPaymentsReceived') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                    href="{{ route('paymentView') }}">
@@ -2371,7 +2369,7 @@
             @endif
 
             {{-- Payments link for Buyer --}}
-            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO|Buyer Payment Admin') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
@@ -2497,7 +2495,7 @@
                 <hr class="mt-4">
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
-                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow')|| request()->routeIs('users.create') || request()->routeIs('vehicle.create')|| request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow')|| request()->routeIs('vehicle.create')|| request()->routeIs('vehicle.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                        href="javascript:void(0);">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -2655,6 +2653,13 @@
                     </a>
                 @endif
             @endif
+
+            {{--<a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('showLibrary') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{route('showLibrary')}}">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                <span class="mx-3">{{__('portal.Library')}}</span>
+            </a>--}}
 
         </nav>
     </div>

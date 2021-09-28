@@ -15,7 +15,7 @@ class BankPaymentController extends Controller
     public function index()
     {
         $collection = null;
-        if (auth()->user()->registration_type == 'Buyer') {
+        if (auth()->user()->registration_type == 'Buyer' || auth()->user()->hasRole('Buyer Payment Admin')) {
 //            $collection = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_status', 0)->get();
             $unPaidInvoices = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'invoice_status' => 0])->get();
 
@@ -37,7 +37,7 @@ class BankPaymentController extends Controller
             $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
             $collection = $multiCategoryCollection->merge($singleCategoryInvoices);
         }
-        if (auth()->user()->registration_type == 'Supplier') {
+        if (auth()->user()->registration_type == 'Supplier' || auth()->user()->hasRole('Supplier Payment Admin')) {
 //            $collection = Invoice::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_status', 0)->get();
             $unPaidInvoices = Invoice::where(['supplier_business_id' => auth()->user()->business_id, 'invoice_status' => 0])->get();
 
@@ -232,12 +232,12 @@ class BankPaymentController extends Controller
     public function singleCategoryIndex()
     {
         $collection = null;
-        if (auth()->user()->registration_type == 'Buyer') {
+        if (auth()->user()->registration_type == 'Buyer' || auth()->user()->hasRole('Buyer Payment Admin')) {
 //            $collection = BankPayment::where('buyer_business_id', auth()->user()->business_id)->get();
             $data = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 0])->where('invoice_status', 0)->get();
             $collection = $data->unique('rfq_no');
         }
-        if (auth()->user()->registration_type == 'Supplier') {
+        if (auth()->user()->registration_type == 'Supplier' || auth()->user()->hasRole('Supplier Payment Admin')) {
 //            $collection = BankPayment::where('supplier_business_id', auth()->user()->business_id)->where('status', '!=' ,0)->get();
             $data = Invoice::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 0])->where('invoice_status', 0)->get();
             $collection = $data->unique('rfq_no');

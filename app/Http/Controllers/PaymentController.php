@@ -301,7 +301,7 @@ class PaymentController extends Controller
     /* Function for Buyer */
     public function proforma_invoices()
     {
-        if (auth()->user()->registration_type == "Buyer"){
+        if (auth()->user()->registration_type == "Buyer" || auth()->user()->hasRole('Buyer Payment Admin')){
 //            $proformaInvoices = Invoice::where('buyer_user_id', auth()->user()->id)->where('invoice_type', 1)->get();
 //            $proformaInvoices = Invoice::with('bankPayment')->where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_type', 1)->get();
             $collection = Invoice::with('bankPayment')->where(['buyer_business_id' => auth()->user()->business_id])->where('invoice_type', 1)->get();
@@ -336,7 +336,7 @@ class PaymentController extends Controller
     public function invoices()
     {
         $proformaInvoices = null;
-        if (auth()->user()->registration_type == "Supplier")
+        if (auth()->user()->registration_type == "Supplier" || auth()->user()->hasRole('Supplier Payment Admin'))
         {
             /*$proformaInvoices = Invoice::with('purchase_order')->where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->get();*/
             $collection = Invoice::with('purchase_order')->where(['supplier_business_id' => auth()->user()->business_id])->get();
@@ -361,7 +361,7 @@ class PaymentController extends Controller
             /* Merging Single and Multi category Invoices  */
             $proformaInvoices = $multiCategoryCollection->merge($singleCategoryInvoices);
         }
-        elseif(auth()->user()->registration_type == "Buyer")
+        elseif(auth()->user()->registration_type == "Buyer" || auth()->user()->hasRole('Buyer Payment Admin'))
         {
             /*$proformaInvoices = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->get();*/
             $collection = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id])->get();
@@ -698,12 +698,12 @@ class PaymentController extends Controller
 
     public function singleCategoryInvoices()
     {
-        if (auth()->user()->registration_type == "Supplier")
+        if (auth()->user()->registration_type == "Supplier" || auth()->user()->hasRole('Supplier Payment Admin'))
         {
             $collection = Invoice::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 0])->get();
             $proformaInvoices = $collection->unique('rfq_no');
         }
-        elseif(auth()->user()->registration_type == "Buyer")
+        elseif(auth()->user()->registration_type == "Buyer" || auth()->user()->hasRole('Buyer Payment Admin'))
         {
             $collection = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 0])->get();
             $proformaInvoices = $collection->unique('rfq_no');
