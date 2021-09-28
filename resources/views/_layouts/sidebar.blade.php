@@ -260,7 +260,16 @@
             {{-- Roles & Permissions--}}
             @if(auth()->user()->can('all'))
 
-                {{-- Roles --}}
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('library.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{route('library.index')}}">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    <span class="mx-3">Library </span>
+                </a>
+
+                    {{-- Roles --}}
                 <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('role.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('role.index') }}">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM17.707 5.293L14 1.586v12.828l2.293 2.293A1 1 0 0018 16V6a1 1 0 00-.293-.707z" clip-rule="evenodd"></path>
@@ -279,6 +288,15 @@
                     <span class="mx-3">{{ __('sidebar.Permissions') }}</span>
                 </a>
             @endif
+
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('showLibrary') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{route('showLibrary')}}">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    <span class="mx-3">Library Tutorials</span>
+                </a>
 
             {{-- Business link --}}
             @if(auth()->user()->can('all') || auth()->user()->hasRole('Sales Specialist') || auth()->user()->hasRole('Legal Approval Officer 1') || auth()->user()->hasRole('Finance Officer 1') || auth()->user()->hasRole('SC Supervisor') || auth()->user()->hasRole('SC Specialist') || auth()->user()->hasRole('IT Admin'))
@@ -602,6 +620,7 @@
                 </div>
             @endif
 
+
             {{-- Qoutations (Buyer) link --}}
             @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
 
@@ -764,6 +783,8 @@
                     <span class="mx-3">{{ __('sidebar.Delivery Note') }}</span>
                 </a>
             @endif
+
+
 
             {{-- Delivery link --}}
             @if(auth()->user()->hasRole('CEO')  && auth()->user()->registration_type == "Supplier" && Auth::user()->status == 3)

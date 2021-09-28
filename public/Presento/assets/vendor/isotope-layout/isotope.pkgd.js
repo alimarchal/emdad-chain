@@ -1326,7 +1326,7 @@ return Item;
 
 /*!
  * Outlayer v2.1.1
- * the brains and guts of a layout library
+ * the brains and guts of a layout libr
  * MIT license
  */
 
@@ -2502,7 +2502,7 @@ return Item;
 
 /*!
  * Masonry v4.2.1
- * Cascading grid layout library
+ * Cascading grid layout libr
  * https://masonry.desandro.com
  * MIT License
  * by David DeSandro
