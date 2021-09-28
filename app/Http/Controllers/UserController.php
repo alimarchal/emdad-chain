@@ -24,11 +24,13 @@ class UserController extends Controller
             $users = User::where('id', '!=', Auth::user()->id)->get();
             $business = Business::orderBy('created_at', 'desc');
             return view('users.index', compact('users', 'business'));
+
         } elseif (auth()->user()->usertype == "CEO") {
             //Checking users & driver count for related packages
             $userCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', '!=', 'Supplier Driver'], ['id', '!=', \auth()->id()]])->count();
             $driverCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', 'Supplier Driver'], ['id', '!=', \auth()->id()]])->count();
             $users = User::where('business_id', auth()->user()->business_id)->where('id', '!=', Auth::user()->id)->get();
+
             return view('users.index', compact('users', 'userCount', 'driverCount'));
         } else {
             abort(404);
@@ -37,6 +39,7 @@ class UserController extends Controller
 
     public function create()
     {
+
         if (auth()->user()->hasRole('SuperAdmin')) {
 
             $roles = Role::where('id', '=', 1)->orWhere('id', '>=', 19)->get();
@@ -55,7 +58,7 @@ class UserController extends Controller
             } elseif (\auth()->user()->business_package->package_id == 3 && $userCount == 100) {
                 session()->flash('error', __('portal.Add Users limit reached.'));
                 return redirect()->back();
-            }elseif (\auth()->user()->business_package->package_id == 4 && $userCount == 100) {
+            } elseif (\auth()->user()->business_package->package_id == 4 && $userCount == 100) {
                 session()->flash('error', __('portal.Add Users limit reached.'));
                 return redirect()->back();
             }
@@ -114,6 +117,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+
         if (!Gate::allows('create user')) {
             return abort(401);
         }
@@ -121,6 +125,7 @@ class UserController extends Controller
 
         /* If Authenticated User is not SuperAdmin */
         if ($request->role == 1 || auth()->user()->hasRole('SuperAdmin')) {
+
             $validated = validator::make($request->all(), [
                 'email' => 'required|email|unique:users',
             ]);
@@ -139,6 +144,7 @@ class UserController extends Controller
                 'usertype' => ($role->name == "SuperAdmin" ? strtolower($role->name) : $role->name),
                 'status' => 3,
             ];
+
         } /* else if Authenticated User is not SuperAdmin */
         else {
             $validated = validator::make($request->all(), [
@@ -181,10 +187,13 @@ class UserController extends Controller
             }
         }
 
+
         $user = User::create($data);
         $password = $request->password;
+
         $user->notify(new \App\Notifications\UserCreate($password));
         $role = $request->input('role') ? $request->input('role') : [];
+
         $user->assignRole($role);
 
         session()->flash('message', __('portal.User added been successfully.'));

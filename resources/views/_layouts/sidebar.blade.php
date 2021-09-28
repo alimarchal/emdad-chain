@@ -53,16 +53,20 @@
 
 
                 @if(Auth::user()->logistics_business_id == 0)
-                    <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs(['logistics.index','logistics.business']) ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('logistics.business') }}">
+                    <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs(['logistics.index','logistics.business']) ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100"
+                       href="{{ route('logistics.business') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                         </svg>
                         <span class="mx-3">Business</span>
                     </a>
                 @else
-                    <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs(['logistics.index','logistics.business']) ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('logistics.index') }}">
+                    <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs(['logistics.index','logistics.business']) ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100"
+                       href="{{ route('logistics.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                         </svg>
                         <span class="mx-3">Business</span>
                     </a>
@@ -72,7 +76,8 @@
                     <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs(['packagingSolution.index','packagingSolution.create']) ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100"
                        href="{{ route('packagingSolution.create') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                         </svg>
                         <span class="mx-3">Packaging Solution</span>
                     </a>
@@ -80,7 +85,8 @@
                     <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs(['packagingSolution.index','packagingSolution.create']) ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100"
                        href="{{ route('packagingSolution.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                         </svg>
                         <span class="mx-3">Packaging Solution</span>
                     </a>
@@ -91,7 +97,8 @@
                     <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs(['storageSolution.index','storageSolution.create']) ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100"
                        href="{{ route('storageSolution.create') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
                         </svg>
                         <span class="mx-3">Storage Solution</span>
                     </a>
@@ -99,13 +106,15 @@
                     <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs(['storageSolution.index','storageSolution.create']) ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100"
                        href="{{ route('storageSolution.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
                         </svg>
                         <span class="mx-3">Storage Solution</span>
                     </a>
                 @endif
 
-                <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('logistics.setting') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('logistics.setting') }}">
+                <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('logistics.setting') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray 700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{ route('logistics.setting') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
@@ -141,7 +150,8 @@
                             <a @click="open = true"
                                class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment')|| request()->routeIs('emdadInvoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                                href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                     preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                                     <path d="M19 15l-6 6l-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" fill="currentColor"/>
                                 </svg>
                                 <span class="mx-3">{{__('sidebar.Multi categories')}}</span>
@@ -156,7 +166,8 @@
                                     </svg>
                             </span>
                             </a>
-                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment')|| request()->routeIs('emdadInvoices'))  x-data="{ open: true } " @endif>
+                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                                @if(request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment')|| request()->routeIs('emdadInvoices'))  x-data="{ open: true } " @endif>
                                 <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -188,7 +199,8 @@
                             <a @click="open = true"
                                class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                                href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                     preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                                     <path d="M19 15l-6 6l-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" fill="currentColor"/>
                                 </svg>
                                 <span class="mx-3">{{__('sidebar.Single category')}}</span>
@@ -203,7 +215,8 @@
                                     </svg>
                                 </span>
                             </a>
-                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex'))  x-data="{ open: true } " @endif>
+                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                                @if(request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex'))  x-data="{ open: true } " @endif>
                                 <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryPayments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -264,24 +277,30 @@
                    href="{{route('library.index')}}">
 
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                     </svg>
                     <span class="mx-3">Library </span>
                 </a>
 
-                    {{-- Roles --}}
-                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('role.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('role.index') }}">
+                {{-- Roles --}}
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('role.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{ route('role.index') }}">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM17.707 5.293L14 1.586v12.828l2.293 2.293A1 1 0 0018 16V6a1 1 0 00-.293-.707z" clip-rule="evenodd"></path>
+                        <path fill-rule="evenodd" d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM17.707 5.293L14 1.586v12.828l2.293 2.293A1 1 0 0018 16V6a1 1 0 00-.293-.707z"
+                              clip-rule="evenodd"></path>
                     </svg>
                     <span class="mx-3">{{ __('sidebar.Roles') }}</span>
                 </a>
 
                 {{-- Permissions --}}
-                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('permission.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('permission.index') }}">
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('permission.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{ route('permission.index') }}">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M6.625 2.655A9 9 0 0119 11a1 1 0 11-2 0 7 7 0 00-9.625-6.492 1 1 0 11-.75-1.853zM4.662 4.959A1 1 0 014.75 6.37 6.97 6.97 0 003 11a1 1 0 11-2 0 8.97 8.97 0 012.25-5.953 1 1 0 011.412-.088z" clip-rule="evenodd"></path>
-                        <path fill-rule="evenodd" d="M5 11a5 5 0 1110 0 1 1 0 11-2 0 3 3 0 10-6 0c0 1.677-.345 3.276-.968 4.729a1 1 0 11-1.838-.789A9.964 9.964 0 005 11zm8.921 2.012a1 1 0 01.831 1.145 19.86 19.86 0 01-.545 2.436 1 1 0 11-1.92-.558c.207-.713.371-1.445.49-2.192a1 1 0 011.144-.83z"
+                        <path fill-rule="evenodd"
+                              d="M6.625 2.655A9 9 0 0119 11a1 1 0 11-2 0 7 7 0 00-9.625-6.492 1 1 0 11-.75-1.853zM4.662 4.959A1 1 0 014.75 6.37 6.97 6.97 0 003 11a1 1 0 11-2 0 8.97 8.97 0 012.25-5.953 1 1 0 011.412-.088z"
+                              clip-rule="evenodd"></path>
+                        <path fill-rule="evenodd"
+                              d="M5 11a5 5 0 1110 0 1 1 0 11-2 0 3 3 0 10-6 0c0 1.677-.345 3.276-.968 4.729a1 1 0 11-1.838-.789A9.964 9.964 0 005 11zm8.921 2.012a1 1 0 01.831 1.145 19.86 19.86 0 01-.545 2.436 1 1 0 11-1.92-.558c.207-.713.371-1.445.49-2.192a1 1 0 011.144-.83z"
                               clip-rule="evenodd"></path>
                         <path fill-rule="evenodd" d="M10 10a1 1 0 011 1c0 2.236-.46 4.368-1.29 6.304a1 1 0 01-1.838-.789A13.952 13.952 0 009 11a1 1 0 011-1z" clip-rule="evenodd"></path>
                     </svg>
@@ -349,7 +368,8 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M9.634,10.633c0.116,0.113,0.265,0.168,0.414,0.168c0.153,0,0.308-0.06,0.422-0.177l4.015-4.111c0.229-0.235,0.225-0.608-0.009-0.836c-0.232-0.229-0.606-0.222-0.836,0.009l-3.604,3.689L6.35,5.772C6.115,5.543,5.744,5.55,5.514,5.781C5.285,6.015,5.29,6.39,5.522,6.617L9.634,10.633z"></path>
-                        <path d="M17.737,9.815c-0.327,0-0.592,0.265-0.592,0.591v2.903H2.855v-2.903c0-0.327-0.264-0.591-0.591-0.591c-0.327,0-0.591,0.265-0.591,0.591V13.9c0,0.328,0.264,0.592,0.591,0.592h15.473c0.327,0,0.591-0.264,0.591-0.592v-3.494C18.328,10.08,18.064,9.815,17.737,9.815z"></path>
+                        <path
+                            d="M17.737,9.815c-0.327,0-0.592,0.265-0.592,0.591v2.903H2.855v-2.903c0-0.327-0.264-0.591-0.591-0.591c-0.327,0-0.591,0.265-0.591,0.591V13.9c0,0.328,0.264,0.592,0.591,0.592h15.473c0.327,0,0.591-0.264,0.591-0.592v-3.494C18.328,10.08,18.064,9.815,17.737,9.815z"></path>
                     </svg>
                     <span class="mx-3">{{ __('sidebar.Downloads') }}</span>
                 </a>
@@ -379,6 +399,52 @@
                 </a>
             @endif
 
+            <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('showLibrary') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+               href="{{route('showLibrary')}}">
+{{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">--}}
+{{--                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>--}}
+{{--                </svg>--}}
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="h-6 w-6"  fill="none" viewBox="0 0 512.000000 512.000000"
+                     preserveAspectRatio="xMidYMid meet" stroke="currentColor" >
+
+                    <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
+                       fill="#ffffff" stroke="none">
+                        <path d="M2520 5113 c-8 -4 -103 -70 -210 -148 -1558 -1130 -2130 -1545 -2161
+-1570 -57 -45 -65 -107 -20 -157 l29 -33 2400 0 2400 0 26 24 c49 46 43 131
+-13 167 -14 10 -548 396 -1186 859 -638 463 -1170 847 -1182 853 -23 13 -58
+14 -83 5z m623 -656 c320 -233 764 -555 987 -716 223 -162 414 -302 425 -312
+19 -19 -30 -19 -2000 -19 l-2020 1 29 22 c57 42 1991 1447 1994 1447 1 0 264
+-190 585 -423z"/>
+                        <path d="M1860 3003 c-210 -23 -410 -97 -457 -170 -17 -25 -18 -86 -21 -943
+-2 -614 0 -927 7 -951 14 -47 40 -69 89 -76 34 -5 49 0 99 31 117 72 247 101
+448 100 195 0 338 -33 436 -101 63 -43 105 -51 153 -28 20 10 36 22 36 27 0
+15 105 57 199 80 68 17 118 22 236 22 195 1 286 -18 420 -84 120 -60 145 -62
+191 -16 l34 34 0 939 c-1 717 -4 943 -13 960 -60 107 -394 196 -671 179 -180
+-11 -309 -38 -418 -88 l-67 -30 -73 30 c-88 36 -161 57 -248 72 -67 11 -318
+20 -380 13z m432 -241 c42 -12 95 -30 117 -42 l41 -20 0 -505 c0 -303 4 -514
+10 -529 11 -30 65 -66 97 -66 34 0 71 20 90 49 17 24 18 68 20 536 2 281 3
+513 3 516 0 13 145 60 234 75 126 22 391 15 491 -14 39 -11 82 -24 98 -30 l27
+-12 0 -785 c0 -432 -3 -785 -8 -785 -4 0 -52 12 -107 27 -93 25 -115 27 -305
+27 -228 1 -304 -12 -466 -77 l-80 -33 -62 28 c-34 16 -106 40 -159 55 -92 25
+-110 27 -313 27 -203 0 -221 -2 -313 -27 -53 -15 -99 -27 -102 -27 -3 0 -4
+354 -3 787 l3 787 49 18 c98 37 192 48 381 44 142 -3 196 -8 257 -24z"/>
+                        <path d="M384 2976 c-69 -30 -64 46 -64 -1056 0 -904 1 -998 16 -1019 34 -48
+60 -51 411 -51 292 0 332 2 363 18 19 9 40 28 47 42 18 36 18 1984 0 2020 -7
+14 -28 33 -47 42 -31 16 -70 18 -365 18 -255 -1 -337 -4 -361 -14z m576 -1056
+l0 -850 -215 0 -215 0 0 850 0 850 215 0 215 0 0 -850z"/>
+                        <path d="M4015 2980 c-11 -4 -31 -20 -45 -35 l-25 -27 0 -999 0 -999 33 -32
+32 -33 345 -3 c389 -3 404 -1 430 62 22 53 22 1959 0 2012 -26 62 -42 64 -417
+63 -183 0 -342 -4 -353 -9z m565 -1060 l0 -850 -210 0 -210 0 0 850 0 850 210
+0 210 0 0 -850z"/>
+                        <path d="M153 621 c-21 -13 -35 -32 -42 -56 -12 -46 -12 -444 0 -490 7 -24 21
+-43 42 -55 31 -20 72 -20 2410 -20 l2379 0 34 34 34 34 0 251 0 251 -29 32
+-29 33 -2384 2 c-2346 3 -2383 3 -2415 -16z m4647 -301 l0 -110 -2240 0 -2240
+0 0 110 0 110 2240 0 2240 0 0 -110z"/>
+                    </g>
+                </svg>
+                <span class="mx-3">{{__('portal.Library')}}</span>
+            </a>
             @can('all')
 
                 {{-- Category link --}}
@@ -408,7 +474,8 @@
                    href="{{route('smsMessages.index')}}">
 
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
                     <span class="mx-3">{{ __('sidebar.SMS') }}</span>
                 </a>
@@ -417,7 +484,8 @@
                    href="javascript:void(0)">
 
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
                     <span class="mx-3">{{ __('sidebar.RFQs') }}</span>
                 </a>
@@ -427,53 +495,54 @@
             @if(auth()->user()->can('Buyer Create New RFQ') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
 
                 <div x-data="{ open: false } ">
-                        <a @click="open = true"
-                           class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('rfqView') || request()->routeIs('RFQ.create')|| request()->routeIs('RFQCart.index')|| request()->routeIs('PlacedRFQ.index')|| request()->routeIs('create_single_rfq')|| request()->routeIs('single_cart_index')|| request()->routeIs('single_category_rfq_index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                           href="javascript:void(0);">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                            </svg>
-                            <span class="mx-3 font-extrabold"> {{ __('sidebar.RFQs') }} </span>
-                            <span x-show="open == false">
+                    <a @click="open = true"
+                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('rfqView') || request()->routeIs('RFQ.create')|| request()->routeIs('RFQCart.index')|| request()->routeIs('PlacedRFQ.index')|| request()->routeIs('create_single_rfq')|| request()->routeIs('single_cart_index')|| request()->routeIs('single_category_rfq_index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                       href="javascript:void(0);">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                        <span class="mx-3 font-extrabold"> {{ __('sidebar.RFQs') }} </span>
+                        <span x-show="open == false">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 2.5em;" viewBox="0 0 20 20" fill="currentColor">
                                   <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                 </svg>
                             </span>
-                            <span x-show="open == true">
+                        <span x-show="open == true">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 2.5em;" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                                 </svg>
                             </span>
-                        </a>
+                    </a>
 
 
-                        <ul
-                            x-show="open"
-                            x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                            x-show.transition.in="open"
-                            x-show.transition.out="open"
-                            @click.away="open = false">
+                    <ul
+                        x-show="open"
+                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                        x-show.transition.in="open"
+                        x-show.transition.out="open"
+                        @click.away="open = false">
 
 
-                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('rfqView') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                                </svg>
+                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('rfqView') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                            </svg>
 
-                                <a href="{{ route('rfqView') }}"> <span class="ml-1 ">{{__('portal.New Requisition')}}</span> </a>
-                            </li>
+                            <a href="{{ route('rfqView') }}"> <span class="ml-1 ">{{__('portal.New Requisition')}}</span> </a>
+                        </li>
 
-                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('PlacedRFQ.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                                </svg>
+                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('PlacedRFQ.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                            </svg>
 
-                                <a href="{{ route('PlacedRFQ.index') }}"> <span class="ml-1">{{__('portal.Requisitions History')}}</span> </a>
-                            </li>
+                            <a href="{{ route('PlacedRFQ.index') }}"> <span class="ml-1">{{__('portal.Requisitions History')}}</span> </a>
+                        </li>
 
-                        </ul>
+                    </ul>
                 </div>
 
                 {{--<a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('rfqView') || request()->routeIs('RFQ.create')|| request()->routeIs('RFQCart.index')|| request()->routeIs('PlacedRFQ.index')|| request()->routeIs('create_single_rfq')|| request()->routeIs('single_cart_index')|| request()->routeIs('single_category_rfq_index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
@@ -506,7 +575,8 @@
                    href="javascript:void(0)">
 
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
                     <span class="mx-3 font-extrabold">{{ __('sidebar.Quotations') }}</span>
                 </a>
@@ -605,7 +675,8 @@
                                 <path
                                     d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
                             </svg>
-                            <a href="{{ route('singleCategoryRFQs') }}"><span class="mx-2 ">{{ __('sidebar.Single category') }} @if(count($eOrders) > 0 && count($quotesNotPresent) > 0) ({{count(array_unique($quotesNotPresent))}}) @else {{ '('. 0 .')' }} @endif </span></a>
+                            <a href="{{ route('singleCategoryRFQs') }}"><span class="mx-2 ">{{ __('sidebar.Single category') }} @if(count($eOrders) > 0 && count($quotesNotPresent) > 0) ({{count(array_unique($quotesNotPresent))}}
+                                    ) @else {{ '('. 0 .')' }} @endif </span></a>
                         </li>
                     </ul>
                 </div>
@@ -616,64 +687,64 @@
             @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
 
                 {{--<div x-data="{ open: false } ">--}}
-                    {{--<a @click="open = true"
-                       class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('QoutationsBuyerReceived') || request()->routeIs('singleCategoryBuyerRFQs') || request()->routeIs('singleCategoryRFQItems') || request()->routeIs('singleCategoryRFQQuotationsBuyerReceived') || request()->routeIs('singleCategoryRFQQuotationsBuyerRejected') || request()->routeIs('singleCategoryRFQQuotationsModificationNeeded') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                       href="javascript:void(0);">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M8.627,7.885C8.499,8.388,7.873,8.101,8.13,8.177L4.12,7.143c-0.218-0.057-0.351-0.28-0.293-0.498c0.057-0.218,0.279-0.351,0.497-0.294l4.011,1.037C8.552,7.444,8.685,7.667,8.627,7.885 M8.334,10.123L4.323,9.086C4.105,9.031,3.883,9.162,3.826,9.38C3.769,9.598,3.901,9.82,4.12,9.877l4.01,1.037c-0.262-0.062,0.373,0.192,0.497-0.294C8.685,10.401,8.552,10.18,8.334,10.123 M7.131,12.507L4.323,11.78c-0.218-0.057-0.44,0.076-0.497,0.295c-0.057,0.218,0.075,0.439,0.293,0.495l2.809,0.726c-0.265-0.062,0.37,0.193,0.495-0.293C7.48,12.784,7.35,12.562,7.131,12.507M18.159,3.677v10.701c0,0.186-0.126,0.348-0.306,0.393l-7.755,1.948c-0.07,0.016-0.134,0.016-0.204,0l-7.748-1.948c-0.179-0.045-0.306-0.207-0.306-0.393V3.677c0-0.267,0.249-0.461,0.509-0.396l7.646,1.921l7.654-1.921C17.91,3.216,18.159,3.41,18.159,3.677 M9.589,5.939L2.656,4.203v9.857l6.933,1.737V5.939z M17.344,4.203l-6.939,1.736v9.859l6.939-1.737V4.203z M16.168,6.645c-0.058-0.218-0.279-0.351-0.498-0.294l-4.011,1.037c-0.218,0.057-0.351,0.28-0.293,0.498c0.128,0.503,0.755,0.216,0.498,0.292l4.009-1.034C16.092,7.085,16.225,6.863,16.168,6.645 M16.168,9.38c-0.058-0.218-0.279-0.349-0.498-0.294l-4.011,1.036c-0.218,0.057-0.351,0.279-0.293,0.498c0.124,0.486,0.759,0.232,0.498,0.294l4.009-1.037C16.092,9.82,16.225,9.598,16.168,9.38 M14.963,12.385c-0.055-0.219-0.276-0.35-0.495-0.294l-2.809,0.726c-0.218,0.056-0.351,0.279-0.293,0.496c0.127,0.506,0.755,0.218,0.498,0.293l2.807-0.723C14.89,12.825,15.021,12.603,14.963,12.385"></path>
+                {{--<a @click="open = true"
+                   class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('QoutationsBuyerReceived') || request()->routeIs('singleCategoryBuyerRFQs') || request()->routeIs('singleCategoryRFQItems') || request()->routeIs('singleCategoryRFQQuotationsBuyerReceived') || request()->routeIs('singleCategoryRFQQuotationsBuyerRejected') || request()->routeIs('singleCategoryRFQQuotationsModificationNeeded') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="javascript:void(0);">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.627,7.885C8.499,8.388,7.873,8.101,8.13,8.177L4.12,7.143c-0.218-0.057-0.351-0.28-0.293-0.498c0.057-0.218,0.279-0.351,0.497-0.294l4.011,1.037C8.552,7.444,8.685,7.667,8.627,7.885 M8.334,10.123L4.323,9.086C4.105,9.031,3.883,9.162,3.826,9.38C3.769,9.598,3.901,9.82,4.12,9.877l4.01,1.037c-0.262-0.062,0.373,0.192,0.497-0.294C8.685,10.401,8.552,10.18,8.334,10.123 M7.131,12.507L4.323,11.78c-0.218-0.057-0.44,0.076-0.497,0.295c-0.057,0.218,0.075,0.439,0.293,0.495l2.809,0.726c-0.265-0.062,0.37,0.193,0.495-0.293C7.48,12.784,7.35,12.562,7.131,12.507M18.159,3.677v10.701c0,0.186-0.126,0.348-0.306,0.393l-7.755,1.948c-0.07,0.016-0.134,0.016-0.204,0l-7.748-1.948c-0.179-0.045-0.306-0.207-0.306-0.393V3.677c0-0.267,0.249-0.461,0.509-0.396l7.646,1.921l7.654-1.921C17.91,3.216,18.159,3.41,18.159,3.677 M9.589,5.939L2.656,4.203v9.857l6.933,1.737V5.939z M17.344,4.203l-6.939,1.736v9.859l6.939-1.737V4.203z M16.168,6.645c-0.058-0.218-0.279-0.351-0.498-0.294l-4.011,1.037c-0.218,0.057-0.351,0.28-0.293,0.498c0.128,0.503,0.755,0.216,0.498,0.292l4.009-1.034C16.092,7.085,16.225,6.863,16.168,6.645 M16.168,9.38c-0.058-0.218-0.279-0.349-0.498-0.294l-4.011,1.036c-0.218,0.057-0.351,0.279-0.293,0.498c0.124,0.486,0.759,0.232,0.498,0.294l4.009-1.037C16.092,9.82,16.225,9.598,16.168,9.38 M14.963,12.385c-0.055-0.219-0.276-0.35-0.495-0.294l-2.809,0.726c-0.218,0.056-0.351,0.279-0.293,0.496c0.127,0.506,0.755,0.218,0.498,0.293l2.807-0.723C14.89,12.825,15.021,12.603,14.963,12.385"></path>
+                    </svg>
+                    <span class="mx-3 font-extrabold">{{__('sidebar.Quotations')}}</span>
+                    <span x-show="open == false">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
                         </svg>
-                        <span class="mx-3 font-extrabold">{{__('sidebar.Quotations')}}</span>
-                        <span x-show="open == false">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
-                              <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                            </svg>
-                        </span>
-                        <span x-show="open == true">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                            </svg>
-                        </span>
-                    </a>
+                    </span>
+                    <span x-show="open == true">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" style="margin-left: 3.3em;" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </span>
+                </a>
 
-                    <ul
-                        x-show="open"
-                        x-show.transition.in.duration.50ms.out.duration.100ms="open"
-                        x-show.transition.in="open"
-                        x-show.transition.out="open"
-                        @click.away="open = false"
+                <ul
+                    x-show="open"
+                    x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                    x-show.transition.in="open"
+                    x-show.transition.out="open"
+                    @click.away="open = false"
 --}}{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}{{--
 --}}{{--                        @if(request()->routeIs('QoutationsBuyerReceived') || request()->routeIs('singleCategoryBuyerRFQs') || request()->routeIs('singleCategoryRFQItems') || request()->routeIs('singleCategoryRFQQuotationsBuyerReceived') || request()->routeIs('singleCategoryRFQQuotationsBuyerRejected') || request()->routeIs('singleCategoryRFQQuotationsModificationNeeded'))  x-data="{ open: true } " @endif--}}{{--
-                    >
-                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('QoutationsBuyerReceived') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                            </svg>
-                            @php
-                                $multiPlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 1])->count();
-                            @endphp
-                            <a href="{{ route('QoutationsBuyerReceived') }}"><span class="mx-2">{{ __('sidebar.Multi categories') }} ({{$multiPlacedRFQ}})</span></a>
-                        </li>
-                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryBuyerRFQs') || request()->routeIs('singleCategoryRFQItems') || request()->routeIs('singleCategoryRFQQuotationsBuyerReceived') || request()->routeIs('singleCategoryRFQQuotationsBuyerRejected') || request()->routeIs('singleCategoryRFQQuotationsModificationNeeded') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                            </svg>
-                            @php
-                                $singlePlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 0])->get();
-                            @endphp
-                            <a href="{{ route('singleCategoryBuyerRFQs') }}"><span class="mx-2">{{ __('sidebar.Single category') }} ({{count($singlePlacedRFQ->unique('e_order_id'))}})</span></a>
-                        </li>
-                    </ul>--}}
-                    <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('QoutationsBuyerReceived') || request()->routeIs('singleCategoryBuyerRFQs') || request()->routeIs('singleCategoryRFQItems') || request()->routeIs('singleCategoryRFQQuotationsBuyerReceived') || request()->routeIs('singleCategoryRFQQuotationsBuyerRejected') || request()->routeIs('singleCategoryRFQQuotationsModificationNeeded') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                       href="{{ route('QoutationsBuyerReceived') }}">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                >
+                    <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('QoutationsBuyerReceived') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path
-                                d="M8.627,7.885C8.499,8.388,7.873,8.101,8.13,8.177L4.12,7.143c-0.218-0.057-0.351-0.28-0.293-0.498c0.057-0.218,0.279-0.351,0.497-0.294l4.011,1.037C8.552,7.444,8.685,7.667,8.627,7.885 M8.334,10.123L4.323,9.086C4.105,9.031,3.883,9.162,3.826,9.38C3.769,9.598,3.901,9.82,4.12,9.877l4.01,1.037c-0.262-0.062,0.373,0.192,0.497-0.294C8.685,10.401,8.552,10.18,8.334,10.123 M7.131,12.507L4.323,11.78c-0.218-0.057-0.44,0.076-0.497,0.295c-0.057,0.218,0.075,0.439,0.293,0.495l2.809,0.726c-0.265-0.062,0.37,0.193,0.495-0.293C7.48,12.784,7.35,12.562,7.131,12.507M18.159,3.677v10.701c0,0.186-0.126,0.348-0.306,0.393l-7.755,1.948c-0.07,0.016-0.134,0.016-0.204,0l-7.748-1.948c-0.179-0.045-0.306-0.207-0.306-0.393V3.677c0-0.267,0.249-0.461,0.509-0.396l7.646,1.921l7.654-1.921C17.91,3.216,18.159,3.41,18.159,3.677 M9.589,5.939L2.656,4.203v9.857l6.933,1.737V5.939z M17.344,4.203l-6.939,1.736v9.859l6.939-1.737V4.203z M16.168,6.645c-0.058-0.218-0.279-0.351-0.498-0.294l-4.011,1.037c-0.218,0.057-0.351,0.28-0.293,0.498c0.128,0.503,0.755,0.216,0.498,0.292l4.009-1.034C16.092,7.085,16.225,6.863,16.168,6.645 M16.168,9.38c-0.058-0.218-0.279-0.349-0.498-0.294l-4.011,1.036c-0.218,0.057-0.351,0.279-0.293,0.498c0.124,0.486,0.759,0.232,0.498,0.294l4.009-1.037C16.092,9.82,16.225,9.598,16.168,9.38 M14.963,12.385c-0.055-0.219-0.276-0.35-0.495-0.294l-2.809,0.726c-0.218,0.056-0.351,0.279-0.293,0.496c0.127,0.506,0.755,0.218,0.498,0.293l2.807-0.723C14.89,12.825,15.021,12.603,14.963,12.385"></path>
+                                d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
                         </svg>
-                        <span class="mx-3">{{ __('sidebar.Quotations') }}</span>
-                    </a>
+                        @php
+                            $multiPlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 1])->count();
+                        @endphp
+                        <a href="{{ route('QoutationsBuyerReceived') }}"><span class="mx-2">{{ __('sidebar.Multi categories') }} ({{$multiPlacedRFQ}})</span></a>
+                    </li>
+                    <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryBuyerRFQs') || request()->routeIs('singleCategoryRFQItems') || request()->routeIs('singleCategoryRFQQuotationsBuyerReceived') || request()->routeIs('singleCategoryRFQQuotationsBuyerRejected') || request()->routeIs('singleCategoryRFQQuotationsModificationNeeded') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                        </svg>
+                        @php
+                            $singlePlacedRFQ = \App\Models\Qoute::where(['business_id' => auth()->user()->business_id, 'status' => 'pending' ,'rfq_type' => 0])->get();
+                        @endphp
+                        <a href="{{ route('singleCategoryBuyerRFQs') }}"><span class="mx-2">{{ __('sidebar.Single category') }} ({{count($singlePlacedRFQ->unique('e_order_id'))}})</span></a>
+                    </li>
+                </ul>--}}
+                <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('QoutationsBuyerReceived') || request()->routeIs('singleCategoryBuyerRFQs') || request()->routeIs('singleCategoryRFQItems') || request()->routeIs('singleCategoryRFQQuotationsBuyerReceived') || request()->routeIs('singleCategoryRFQQuotationsBuyerRejected') || request()->routeIs('singleCategoryRFQQuotationsModificationNeeded') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{ route('QoutationsBuyerReceived') }}">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M8.627,7.885C8.499,8.388,7.873,8.101,8.13,8.177L4.12,7.143c-0.218-0.057-0.351-0.28-0.293-0.498c0.057-0.218,0.279-0.351,0.497-0.294l4.011,1.037C8.552,7.444,8.685,7.667,8.627,7.885 M8.334,10.123L4.323,9.086C4.105,9.031,3.883,9.162,3.826,9.38C3.769,9.598,3.901,9.82,4.12,9.877l4.01,1.037c-0.262-0.062,0.373,0.192,0.497-0.294C8.685,10.401,8.552,10.18,8.334,10.123 M7.131,12.507L4.323,11.78c-0.218-0.057-0.44,0.076-0.497,0.295c-0.057,0.218,0.075,0.439,0.293,0.495l2.809,0.726c-0.265-0.062,0.37,0.193,0.495-0.293C7.48,12.784,7.35,12.562,7.131,12.507M18.159,3.677v10.701c0,0.186-0.126,0.348-0.306,0.393l-7.755,1.948c-0.07,0.016-0.134,0.016-0.204,0l-7.748-1.948c-0.179-0.045-0.306-0.207-0.306-0.393V3.677c0-0.267,0.249-0.461,0.509-0.396l7.646,1.921l7.654-1.921C17.91,3.216,18.159,3.41,18.159,3.677 M9.589,5.939L2.656,4.203v9.857l6.933,1.737V5.939z M17.344,4.203l-6.939,1.736v9.859l6.939-1.737V4.203z M16.168,6.645c-0.058-0.218-0.279-0.351-0.498-0.294l-4.011,1.037c-0.218,0.057-0.351,0.28-0.293,0.498c0.128,0.503,0.755,0.216,0.498,0.292l4.009-1.034C16.092,7.085,16.225,6.863,16.168,6.645 M16.168,9.38c-0.058-0.218-0.279-0.349-0.498-0.294l-4.011,1.036c-0.218,0.057-0.351,0.279-0.293,0.498c0.124,0.486,0.759,0.232,0.498,0.294l4.009-1.037C16.092,9.82,16.225,9.598,16.168,9.38 M14.963,12.385c-0.055-0.219-0.276-0.35-0.495-0.294l-2.809,0.726c-0.218,0.056-0.351,0.279-0.293,0.496c0.127,0.506,0.755,0.218,0.498,0.293l2.807-0.723C14.89,12.825,15.021,12.603,14.963,12.385"></path>
+                    </svg>
+                    <span class="mx-3">{{ __('sidebar.Quotations') }}</span>
+                </a>
                 {{--</div>--}}
             @endif
 
@@ -683,7 +754,8 @@
                    href="javascript:void(0)">
 
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
                     <span class="mx-3">{{ __('sidebar.Purchase Order') }}</span>
                 </a>
@@ -701,30 +773,37 @@
                              viewBox="0 0 172 172"
                              style=" fill:#000000;">
                             <g transform="">
-                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                   font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
                                     <path d="M0,172v-172h172v172z" fill="none"></path>
                                     <path d="" fill="none"></path>
                                     <g>
                                         <path d="M39.775,166.625v-161.25h126.85v140.825c0,11.18 -9.245,20.425 -20.425,20.425z"
-                                              @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff" @else fill="none" @endif
+                                              @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                              @else fill="none" @endif
                                         ></path>
                                         <path d="M165.55,6.45v139.75c0,10.75 -8.6,19.35 -19.35,19.35h-105.35v-159.1h124.7M167.7,4.3h-129v163.4h107.5c11.825,0 21.5,-9.675 21.5,-21.5v-141.9z" fill="#788b9c"></path>
                                         <path d="M25.8,166.625c-11.18,0 -20.425,-9.245 -20.425,-20.425v-16.125h120.4v16.125c0,10.965 8.6,19.78 19.35,20.425v0z"
-                                              @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#e1ebf2" @else fill="none" @endif
+                                              @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#e1ebf2"
+                                              @else fill="none" @endif
                                         ></path>
-                                        <path d="M124.7,131.15v15.05c0,8.6 4.945,15.91 12.04,19.35h-110.94c-10.75,0 -19.35,-8.6 -19.35,-19.35v-15.05h118.25M126.85,129h-122.55v17.2c0,11.825 9.675,21.5 21.5,21.5h120.4v-2.15c-10.75,0 -19.35,-8.6 -19.35,-19.35v-17.2zM86,40.85h55.9v2.15h-55.9zM64.5,40.85h8.6v2.15h-8.6zM86,62.35h55.9v2.15h-55.9zM64.5,62.35h8.6v2.15h-8.6zM86,83.85h55.9v2.15h-55.9zM64.5,83.85h8.6v2.15h-8.6zM86,105.35h55.9v2.15h-55.9zM64.5,105.35h8.6v2.15h-8.6z" fill="#788b9c"></path>
+                                        <path
+                                            d="M124.7,131.15v15.05c0,8.6 4.945,15.91 12.04,19.35h-110.94c-10.75,0 -19.35,-8.6 -19.35,-19.35v-15.05h118.25M126.85,129h-122.55v17.2c0,11.825 9.675,21.5 21.5,21.5h120.4v-2.15c-10.75,0 -19.35,-8.6 -19.35,-19.35v-17.2zM86,40.85h55.9v2.15h-55.9zM64.5,40.85h8.6v2.15h-8.6zM86,62.35h55.9v2.15h-55.9zM64.5,62.35h8.6v2.15h-8.6zM86,83.85h55.9v2.15h-55.9zM64.5,83.85h8.6v2.15h-8.6zM86,105.35h55.9v2.15h-55.9zM64.5,105.35h8.6v2.15h-8.6z"
+                                            fill="#788b9c"></path>
                                     </g>
                                 </g>
                             </g>
                         </svg>
-                        <span class="mx-3 font-extrabold">@if(auth()->user()->registration_type == "Supplier") {{ __('sidebar.Purchase Order') }} @elseif(auth()->user()->registration_type == "Buyer") {{ __('sidebar.Purchase Order') }} @endif</span>
+                        <span
+                            class="mx-3 font-extrabold">@if(auth()->user()->registration_type == "Supplier") {{ __('sidebar.Purchase Order') }} @elseif(auth()->user()->registration_type == "Buyer") {{ __('sidebar.Purchase Order') }} @endif</span>
                         <span x-show="open == false">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 1em;" @else style="margin-left: 1em;" @endif  viewBox="0 0 20 20" fill="currentColor">
                           <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
                         </svg>
                     </span>
                         <span x-show="open == true">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 1em;" @else style="margin-left: 1em;" @endif viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 1em;" @else style="margin-left: 1em;" @endif viewBox="0 0 20 20"
+                             fill="currentColor">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                         </svg>
                     </span>
@@ -740,14 +819,14 @@
 
 
                         @if(auth()->user()->registration_type != "Supplier")
-                        <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('purchaseOrderView') || request()->routeIs('dpo.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
-                            </svg>
+                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('purchaseOrderView') || request()->routeIs('dpo.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                                </svg>
 
-                            <a href="{{ route('dpo.index') }}"> <span class="ml-1 ">{{__('portal.DPO(s)')}}</span> </a>
-                        </li>
+                                <a href="{{ route('dpo.index') }}"> <span class="ml-1 ">{{__('portal.DPO(s)')}}</span> </a>
+                            </li>
                         @endif
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('purchaseOrderView') || request()->routeIs('po.po') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -769,7 +848,8 @@
                    href="javascript:void(0)">
 
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
                     <span class="mx-3">{{ __('sidebar.Delivery Note') }}</span>
                 </a>
@@ -797,7 +877,8 @@
                    href="javascript:void(0)">
 
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
                     <span class="mx-3 font-extrabold">{{__('sidebar.Shipments')}}</span>
                 </a>
@@ -814,7 +895,8 @@
                              class="w-6 h-6"
                              viewBox="0 0 172 172"
                              style=" fill:#000000;">
-                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                               font-weight="none" font-size="none" text-anchor="none"
                                style="mix-blend-mode: normal">
                                 <path d="M0,172v-172h172v172z" fill="none"></path>
                                 <g fill="currentColor">
@@ -912,7 +994,8 @@
                             <a @click="open = true"
                                class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment')|| request()->routeIs('emdadInvoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                                href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                     preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                                     <path d="M19 15l-6 6l-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" fill="currentColor"/>
                                 </svg>
                                 <span class="mx-3">{{__('sidebar.Multi categories')}}</span>
@@ -927,7 +1010,8 @@
                                     </svg>
                             </span>
                             </a>
-                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment')|| request()->routeIs('emdadInvoices'))  x-data="{ open: true } " @endif>
+                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                                @if(request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment')|| request()->routeIs('emdadInvoices'))  x-data="{ open: true } " @endif>
                                 <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -959,7 +1043,8 @@
                             <a @click="open = true"
                                class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                                href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                     preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                                     <path d="M19 15l-6 6l-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" fill="currentColor"/>
                                 </svg>
                                 <span class="mx-3">{{__('sidebar.Single category')}}</span>
@@ -974,7 +1059,8 @@
                                     </svg>
                                 </span>
                             </a>
-                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex'))  x-data="{ open: true } " @endif>
+                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                                @if(request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex'))  x-data="{ open: true } " @endif>
                                 <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryPayments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -1392,7 +1478,8 @@
                              class="w-6 h-6"
                              viewBox="0 0 172 172"
                              style=" fill:#000000;">
-                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                               font-weight="none" font-size="none" text-anchor="none"
                                style="mix-blend-mode: normal">
                                 <path d="M0,172v-172h172v172z" fill="none"></path>
                                 <g fill="currentColor">
@@ -1550,12 +1637,14 @@
                         </svg>
                         <span class="mx-3 font-extrabold">@if(auth()->user()->registration_type == "Supplier") {{__('sidebar.Buyers')}} @elseif(auth()->user()->registration_type == "Buyer") {{__('sidebar.Suppliers')}} @endif</span>
                         <span x-show="open == false">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 5.2em;" @else style="margin-left: 4em;" @endif  viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 5.2em;" @else style="margin-left: 4em;" @endif  viewBox="0 0 20 20"
+                             fill="currentColor">
                           <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
                         </svg>
                     </span>
                         <span x-show="open == true">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 5.2em;" @else style="margin-left: 4em;" @endif viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 5.2em;" @else style="margin-left: 4em;" @endif viewBox="0 0 20 20"
+                             fill="currentColor">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                         </svg>
                     </span>
@@ -1620,12 +1709,6 @@
                 @endif
             @endif
 
-            {{--<a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('showLibrary') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{route('showLibrary')}}">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-                <span class="mx-3">{{__('portal.Library')}}</span>
-            </a>--}}
 
         </nav>
     </div>
@@ -1702,18 +1785,24 @@
             @if(auth()->user()->can('all'))
 
                 {{-- Roles --}}
-                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('role.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('role.index') }}">
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('role.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{ route('role.index') }}">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM17.707 5.293L14 1.586v12.828l2.293 2.293A1 1 0 0018 16V6a1 1 0 00-.293-.707z" clip-rule="evenodd"></path>
+                        <path fill-rule="evenodd" d="M12 1.586l-4 4v12.828l4-4V1.586zM3.707 3.293A1 1 0 002 4v10a1 1 0 00.293.707L6 18.414V5.586L3.707 3.293zM17.707 5.293L14 1.586v12.828l2.293 2.293A1 1 0 0018 16V6a1 1 0 00-.293-.707z"
+                              clip-rule="evenodd"></path>
                     </svg>
                     <span class="mx-3">{{ __('sidebar.Roles') }}</span>
                 </a>
 
                 {{-- Permissions --}}
-                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('permission.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('permission.index') }}">
+                <a class="flex items-center mt-4 py-2 px-6  {{ request()->routeIs('permission.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }}   hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{ route('permission.index') }}">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M6.625 2.655A9 9 0 0119 11a1 1 0 11-2 0 7 7 0 00-9.625-6.492 1 1 0 11-.75-1.853zM4.662 4.959A1 1 0 014.75 6.37 6.97 6.97 0 003 11a1 1 0 11-2 0 8.97 8.97 0 012.25-5.953 1 1 0 011.412-.088z" clip-rule="evenodd"></path>
-                        <path fill-rule="evenodd" d="M5 11a5 5 0 1110 0 1 1 0 11-2 0 3 3 0 10-6 0c0 1.677-.345 3.276-.968 4.729a1 1 0 11-1.838-.789A9.964 9.964 0 005 11zm8.921 2.012a1 1 0 01.831 1.145 19.86 19.86 0 01-.545 2.436 1 1 0 11-1.92-.558c.207-.713.371-1.445.49-2.192a1 1 0 011.144-.83z"
+                        <path fill-rule="evenodd"
+                              d="M6.625 2.655A9 9 0 0119 11a1 1 0 11-2 0 7 7 0 00-9.625-6.492 1 1 0 11-.75-1.853zM4.662 4.959A1 1 0 014.75 6.37 6.97 6.97 0 003 11a1 1 0 11-2 0 8.97 8.97 0 012.25-5.953 1 1 0 011.412-.088z"
+                              clip-rule="evenodd"></path>
+                        <path fill-rule="evenodd"
+                              d="M5 11a5 5 0 1110 0 1 1 0 11-2 0 3 3 0 10-6 0c0 1.677-.345 3.276-.968 4.729a1 1 0 11-1.838-.789A9.964 9.964 0 005 11zm8.921 2.012a1 1 0 01.831 1.145 19.86 19.86 0 01-.545 2.436 1 1 0 11-1.92-.558c.207-.713.371-1.445.49-2.192a1 1 0 011.144-.83z"
                               clip-rule="evenodd"></path>
                         <path fill-rule="evenodd" d="M10 10a1 1 0 011 1c0 2.236-.46 4.368-1.29 6.304a1 1 0 01-1.838-.789A13.952 13.952 0 009 11a1 1 0 011-1z" clip-rule="evenodd"></path>
                     </svg>
@@ -1781,7 +1870,8 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M9.634,10.633c0.116,0.113,0.265,0.168,0.414,0.168c0.153,0,0.308-0.06,0.422-0.177l4.015-4.111c0.229-0.235,0.225-0.608-0.009-0.836c-0.232-0.229-0.606-0.222-0.836,0.009l-3.604,3.689L6.35,5.772C6.115,5.543,5.744,5.55,5.514,5.781C5.285,6.015,5.29,6.39,5.522,6.617L9.634,10.633z"></path>
-                        <path d="M17.737,9.815c-0.327,0-0.592,0.265-0.592,0.591v2.903H2.855v-2.903c0-0.327-0.264-0.591-0.591-0.591c-0.327,0-0.591,0.265-0.591,0.591V13.9c0,0.328,0.264,0.592,0.591,0.592h15.473c0.327,0,0.591-0.264,0.591-0.592v-3.494C18.328,10.08,18.064,9.815,17.737,9.815z"></path>
+                        <path
+                            d="M17.737,9.815c-0.327,0-0.592,0.265-0.592,0.591v2.903H2.855v-2.903c0-0.327-0.264-0.591-0.591-0.591c-0.327,0-0.591,0.265-0.591,0.591V13.9c0,0.328,0.264,0.592,0.591,0.592h15.473c0.327,0,0.591-0.264,0.591-0.592v-3.494C18.328,10.08,18.064,9.815,17.737,9.815z"></path>
                     </svg>
                     <span class="mx-3">{{ __('sidebar.Downloads') }}</span>
                 </a>
@@ -1818,7 +1908,8 @@
                    href="{{route('smsMessages.index')}}">
 
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
                     <span class="mx-3">{{ __('sidebar.SMS') }}</span>
                 </a>
@@ -1827,7 +1918,8 @@
                    href="javascript:void(0)">
 
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
                     <span class="mx-3">{{ __('sidebar.RFQs') }}</span>
                 </a>
@@ -1841,7 +1933,8 @@
                        class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('rfqView') || request()->routeIs('RFQ.create')|| request()->routeIs('RFQCart.index')|| request()->routeIs('PlacedRFQ.index')|| request()->routeIs('create_single_rfq')|| request()->routeIs('single_cart_index')|| request()->routeIs('single_category_rfq_index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                        href="javascript:void(0);">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                         </svg>
                         <span class="mx-3 font-extrabold"> {{ __('sidebar.RFQs') }} </span>
                         <span x-show="open == false">
@@ -1908,7 +2001,8 @@
                    href="javascript:void(0)">
 
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
                     <span class="mx-3 font-extrabold">{{ __('sidebar.Quotations') }}</span>
                 </a>
@@ -2006,7 +2100,8 @@
                                 <path
                                     d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
                             </svg>
-                            <a href="{{ route('singleCategoryRFQs') }}"><span class="mx-3 hover:text-white {{ request()->routeIs('singleCategoryRFQs') ? 'text-white' : 'text-gray-500' }}">{{ __('sidebar.Single category') }} @if(count($eOrders) > 0 && count($quotesNotPresent) > 0)
+                            <a href="{{ route('singleCategoryRFQs') }}"><span
+                                    class="mx-3 hover:text-white {{ request()->routeIs('singleCategoryRFQs') ? 'text-white' : 'text-gray-500' }}">{{ __('sidebar.Single category') }} @if(count($eOrders) > 0 && count($quotesNotPresent) > 0)
                                         ({{count(array_unique($quotesNotPresent))}}) @else (0) @endif </span></a>
                         </li>
                     </ul>
@@ -2032,7 +2127,8 @@
                    href="javascript:void(0)">
 
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
                     <span class="mx-3">{{ __('sidebar.Purchase Order') }}</span>
                 </a>
@@ -2050,30 +2146,38 @@
                              viewBox="0 0 172 172"
                              style=" fill:#000000;transform: scaleX(-1);">
                             <g transform="">
-                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                                   font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
                                     <path d="M0,172v-172h172v172z" fill="none"></path>
                                     <path d="" fill="none"></path>
                                     <g>
                                         <path d="M39.775,166.625v-161.25h126.85v140.825c0,11.18 -9.245,20.425 -20.425,20.425z"
-                                              @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff" @else fill="none" @endif
+                                              @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                              @else fill="none" @endif
                                         ></path>
                                         <path d="M165.55,6.45v139.75c0,10.75 -8.6,19.35 -19.35,19.35h-105.35v-159.1h124.7M167.7,4.3h-129v163.4h107.5c11.825,0 21.5,-9.675 21.5,-21.5v-141.9z" fill="#788b9c"></path>
                                         <path d="M25.8,166.625c-11.18,0 -20.425,-9.245 -20.425,-20.425v-16.125h120.4v16.125c0,10.965 8.6,19.78 19.35,20.425v0z"
-                                              @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#e1ebf2" @else fill="none" @endif
+                                              @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#e1ebf2"
+                                              @else fill="none" @endif
                                         ></path>
-                                        <path d="M124.7,131.15v15.05c0,8.6 4.945,15.91 12.04,19.35h-110.94c-10.75,0 -19.35,-8.6 -19.35,-19.35v-15.05h118.25M126.85,129h-122.55v17.2c0,11.825 9.675,21.5 21.5,21.5h120.4v-2.15c-10.75,0 -19.35,-8.6 -19.35,-19.35v-17.2zM86,40.85h55.9v2.15h-55.9zM64.5,40.85h8.6v2.15h-8.6zM86,62.35h55.9v2.15h-55.9zM64.5,62.35h8.6v2.15h-8.6zM86,83.85h55.9v2.15h-55.9zM64.5,83.85h8.6v2.15h-8.6zM86,105.35h55.9v2.15h-55.9zM64.5,105.35h8.6v2.15h-8.6z" fill="#788b9c"></path>
+                                        <path
+                                            d="M124.7,131.15v15.05c0,8.6 4.945,15.91 12.04,19.35h-110.94c-10.75,0 -19.35,-8.6 -19.35,-19.35v-15.05h118.25M126.85,129h-122.55v17.2c0,11.825 9.675,21.5 21.5,21.5h120.4v-2.15c-10.75,0 -19.35,-8.6 -19.35,-19.35v-17.2zM86,40.85h55.9v2.15h-55.9zM64.5,40.85h8.6v2.15h-8.6zM86,62.35h55.9v2.15h-55.9zM64.5,62.35h8.6v2.15h-8.6zM86,83.85h55.9v2.15h-55.9zM64.5,83.85h8.6v2.15h-8.6zM86,105.35h55.9v2.15h-55.9zM64.5,105.35h8.6v2.15h-8.6z"
+                                            fill="#788b9c"></path>
                                     </g>
                                 </g>
                             </g>
                         </svg>
-                        <span class="mx-3 font-extrabold">@if(auth()->user()->registration_type == "Supplier") {{ __('sidebar.Purchase Order') }} @elseif(auth()->user()->registration_type == "Buyer") {{ __('sidebar.Purchase Order') }} @endif</span>
+                        <span
+                            class="mx-3 font-extrabold">@if(auth()->user()->registration_type == "Supplier") {{ __('sidebar.Purchase Order') }} @elseif(auth()->user()->registration_type == "Buyer") {{ __('sidebar.Purchase Order') }} @endif</span>
                         <span x-show="open == false">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 1em;transform: scaleX(-1);" @else style="margin-left: 1em;transform: scaleX(-1);" @endif  viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 1em;transform: scaleX(-1);" @else style="margin-left: 1em;transform: scaleX(-1);"
+                             @endif  viewBox="0 0 20 20" fill="currentColor">
                           <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
                         </svg>
                     </span>
                         <span x-show="open == true">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 1em;" @else style="margin-left: 1em;" @endif viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 1em;" @else style="margin-left: 1em;" @endif viewBox="0 0 20 20"
+                             fill="currentColor">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                         </svg>
                     </span>
@@ -2091,9 +2195,9 @@
                         @if(auth()->user()->registration_type != "Supplier")
                             <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('dpo.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
-                            </svg>
+                                    <path
+                                        d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
+                                </svg>
 
                                 <a href="{{ route('dpo.index') }}"> <span class="mx-3 hover:text-white {{ request()->routeIs('dpo.index') ? 'text-white' : 'text-gray-500' }}">{{__('portal.DPO(s)')}}</span> </a>
                             </li>
@@ -2117,7 +2221,8 @@
                    href="javascript:void(0)">
 
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
                     <span class="mx-3">{{ __('sidebar.Delivery Note') }}</span>
                 </a>
@@ -2143,7 +2248,8 @@
                    href="javascript:void(0)">
 
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
                     <span class="mx-3 font-extrabold">{{__('sidebar.Shipments')}}</span>
                 </a>
@@ -2160,7 +2266,8 @@
                              class="w-6 h-6"
                              viewBox="0 0 172 172"
                              style=" fill:#000000;transform: scaleX(-1);">
-                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                               font-weight="none" font-size="none" text-anchor="none"
                                style="mix-blend-mode: normal">
                                 <path d="M0,172v-172h172v172z" fill="none"></path>
                                 <g fill="currentColor">
@@ -2259,7 +2366,8 @@
                             <a @click="open = true"
                                class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment')|| request()->routeIs('emdadInvoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                                href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: scaleX(-1);;" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: scaleX(-1);;"
+                                     preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                                     <path d="M19 15l-6 6l-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" fill="currentColor"/>
                                 </svg>
                                 <span class="mx-3">{{__('sidebar.Multi categories')}}</span>
@@ -2275,7 +2383,8 @@
                                     </svg>
                                 </span>
                             </a>
-                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment')|| request()->routeIs('emdadInvoices'))  x-data="{ open: true } " @endif>
+                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                                @if(request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment')|| request()->routeIs('emdadInvoices'))  x-data="{ open: true } " @endif>
                                 <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -2289,7 +2398,8 @@
                                         <path
                                             d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
                                     </svg>
-                                    <a href="{{ route('supplier_payment') }}"><span class="mx-3 hover:text-white {{ request()->routeIs('supplier_payment') ? 'text-white' : 'text-gray-500' }}">{{__('sidebar.Payments to supplier')}}</span></a>
+                                    <a href="{{ route('supplier_payment') }}"><span
+                                            class="mx-3 hover:text-white {{ request()->routeIs('supplier_payment') ? 'text-white' : 'text-gray-500' }}">{{__('sidebar.Payments to supplier')}}</span></a>
                                 </li>
 
                                 <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdadInvoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
@@ -2307,7 +2417,8 @@
                             <a @click="open = true"
                                class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                                href="javascript:void(0);">
-                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: scaleX(-1);;" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: scaleX(-1);;"
+                                     preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                                     <path d="M19 15l-6 6l-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" fill="currentColor"/>
                                 </svg>
                                 <span class="mx-3">{{__('sidebar.Single category')}}</span>
@@ -2323,13 +2434,15 @@
                                     </svg>
                                 </span>
                             </a>
-                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open" @if(request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex'))  x-data="{ open: true } " @endif>
+                            <ul x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                                @if(request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex'))  x-data="{ open: true } " @endif>
                                 <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryPayments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
                                     </svg>
-                                    <a href="{{ route('singleCategoryPayments') }}"><span class="mx-3 hover:text-white {{ request()->routeIs('singleCategoryPayments') ? 'text-white' : 'text-gray-500' }}">{{__('sidebar.Manual Payments')}}</span></a>
+                                    <a href="{{ route('singleCategoryPayments') }}"><span
+                                            class="mx-3 hover:text-white {{ request()->routeIs('singleCategoryPayments') ? 'text-white' : 'text-gray-500' }}">{{__('sidebar.Manual Payments')}}</span></a>
                                 </li>
 
                                 <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategorySupplierPayment') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
@@ -2337,7 +2450,8 @@
                                         <path
                                             d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
                                     </svg>
-                                    <a href="{{ route('singleCategorySupplierPayment') }}"><span class="mx-3 hover:text-white {{ request()->routeIs('singleCategorySupplierPayment') ? 'text-white' : 'text-gray-500' }}">{{__('sidebar.Payments to supplier')}}</span></a>
+                                    <a href="{{ route('singleCategorySupplierPayment') }}"><span
+                                            class="mx-3 hover:text-white {{ request()->routeIs('singleCategorySupplierPayment') ? 'text-white' : 'text-gray-500' }}">{{__('sidebar.Payments to supplier')}}</span></a>
                                 </li>
 
                                 <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('singleCategoryEmdadInvoicesIndex') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
@@ -2345,7 +2459,8 @@
                                         <path
                                             d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
                                     </svg>
-                                    <a href="{{ route('singleCategoryEmdadInvoicesIndex') }}"><span class="mx-3 hover:text-white {{ request()->routeIs('singleCategoryEmdadInvoicesIndex') ? 'text-white' : 'text-gray-500' }}">{{ __('sidebar.Emdad Invoices') }}</span></a>
+                                    <a href="{{ route('singleCategoryEmdadInvoicesIndex') }}"><span
+                                            class="mx-3 hover:text-white {{ request()->routeIs('singleCategoryEmdadInvoicesIndex') ? 'text-white' : 'text-gray-500' }}">{{ __('sidebar.Emdad Invoices') }}</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -2433,7 +2548,8 @@
                              class="w-6 h-6"
                              viewBox="0 0 172 172"
                              style=" fill:#000000;transform: scaleX(-1);">
-                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                            <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                               font-weight="none" font-size="none" text-anchor="none"
                                style="mix-blend-mode: normal">
                                 <path d="M0,172v-172h172v172z" fill="none"></path>
                                 <g fill="currentColor">
@@ -2537,9 +2653,11 @@
                                     d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
                             </svg>
                             @if (isset($isBusinessWarehouseDataExist))
-                                <a href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}" class="hover:text-white {{ request()->routeIs('businessWarehouseShow') ? 'text-white' : 'text-gray-500' }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
+                                <a href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}" class="hover:text-white {{ request()->routeIs('businessWarehouseShow') ? 'text-white' : 'text-gray-500' }}"><span
+                                        class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
                             @else
-                                <a href="{{ route('businessWarehouse.create') }}" class="hover:text-white {{ request()->routeIs('businessWarehouse.create') ? 'text-white' : 'text-gray-500' }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
+                                <a href="{{ route('businessWarehouse.create') }}" class="hover:text-white {{ request()->routeIs('businessWarehouse.create') ? 'text-white' : 'text-gray-500' }}"><span
+                                        class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
                             @endif
                         </li>
 
@@ -2583,13 +2701,15 @@
                         </svg>
                         <span class="mx-3 font-extrabold">@if(auth()->user()->registration_type == "Supplier") {{__('sidebar.Buyers')}} @elseif(auth()->user()->registration_type == "Buyer") {{__('sidebar.Suppliers')}} @endif</span>
                         <span x-show="open == false">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 5.2em;" @else style="margin-left: 4em;" @endif  viewBox="0 0 20 20" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 5.2em;" @else style="margin-left: 4em;" @endif  viewBox="0 0 20 20"
+                                 fill="currentColor">
                               <path
                                   d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
                             </svg>
                         </span>
                         <span x-show="open == true">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 5.2em;" @else style="margin-left: 4em;" @endif viewBox="0 0 20 20" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 5.2em;" @else style="margin-left: 4em;" @endif viewBox="0 0 20 20"
+                                 fill="currentColor">
                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                             </svg>
                         </span>

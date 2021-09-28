@@ -67,10 +67,18 @@
                     <!-- Remaining User count for respective packages -->
                         @php
                             $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
-                            $package = \App\Models\Package::where('id', $business_package->package_id)->first();
+                            $package = null;
+                            if(auth()->user()->hasRole('SuperAdmin'))
+                            {
+                                $package = null;
+                            } else {
+                                $package = \App\Models\Package::where('id', $business_package->package_id)->first();
+                            }
                             if(auth()->user()->usertype != 'SuperAdmin')
                             {
                                 $userRemaining = $package->users - $userCount;
+                            } else {
+
                             }
                         @endphp
                         @if(auth()->user()->usertype != 'SuperAdmin')
