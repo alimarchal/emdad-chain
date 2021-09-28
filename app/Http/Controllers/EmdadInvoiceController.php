@@ -19,7 +19,7 @@ class EmdadInvoiceController extends Controller
             return view('invoice.emdad_invoice', compact('emdadInvoices'))->with('invoice');
 
         }
-        elseif(auth()->user()->registration_type == "Supplier")
+        elseif(auth()->user()->registration_type == "Supplier" || auth()->user()->hasRole('Supplier Payment Admin'))
         {
 //            $emdadInvoices = EmdadInvoice::where([['supplier_business_id', auth()->user()->business_id],['send_status', 1]])->where('rfq_type', '=', 1)->get();
 
@@ -98,7 +98,7 @@ class EmdadInvoiceController extends Controller
 
         }
 
-        elseif(auth()->user()->registration_type == "Supplier")
+        elseif(auth()->user()->registration_type == "Supplier" || auth()->user()->hasRole('Supplier Payment Admin'))
         {
             $totalAmount = 0;  /* For Calculating Total Amount W/O VAT */
             $totalEmdadCharges = 0; /* Total Emdad Charged */

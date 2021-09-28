@@ -114,7 +114,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-//        dd($request->all());
         if (!Gate::allows('create user')) {
             return abort(401);
         }
@@ -161,7 +160,7 @@ class UserController extends Controller
                     'email_verified_at' => Carbon::now(),
                     'business_id' => auth()->user()->business_id,
                     'usertype' => $role->name,
-                    'status' => 1,
+                    'status' => 3,              /* Changed from 1 to 3 (3 => verified) */
                     'added_by' => 1,           /* 1 for buyer*/
                     'added_by_userId' => \auth()->id(),
                 ];
@@ -175,7 +174,7 @@ class UserController extends Controller
                     'email_verified_at' => Carbon::now(),
                     'business_id' => auth()->user()->business_id,
                     'usertype' => $role->name,
-                    'status' => 1,
+                    'status' => 3,              /* Changed from 1 to 3 (3 => verified) */
                     'added_by' => 2,           /* 2 for supplier*/
                     'added_by_userId' => \auth()->id(),
                 ];
