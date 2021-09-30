@@ -11,35 +11,32 @@
                 </button>
             </div>
         @endif
-        <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded">
-            <div class="w-full overflow-hidden lg:w-3/6 xl:my-1 xl:px-1 xl:w-3/6">
-                <div class="mt-5">
-                    <a href="{{ url()->previous() }}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                        {{__('portal.Go Back')}}
-                    </a>
-                </div>
-            </div>
-            <div class="w-full overflow-hidden lg:w-3/6 xl:my-1 xl:px-1 xl:w-3/6">
-                <div class="mt-5 lg:float-right">
-                    <a href="{{ route('quotationPDF', [ 'quote_supplier_business_id' => encrypt($QouteItem->supplier_business_id), 'e_order_id' => encrypt($QouteItem->id) ]) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none active:bg-red-600 transition ease-in-out duration-150">
-                        {{__('portal.Create PDF')}}
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="flex flex-col bg-white rounded mt-2">
-            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg p-4">
-
-                        <div class="mt-5 d-flex">
-                            <div>
-                                <h2 class="text-center text-2xl font-bold py-2 text-center">{{__('portal.Quotation')}}</h2>
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-2 lg:2x-8">
+                <div class="bg-white overflow-hidden shadow-xl ">
+                    <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
+                        <a href="{{ route('quotationPDF', [ 'quote_supplier_business_id' => encrypt($QouteItem->supplier_business_id), 'e_order_id' => encrypt($QouteItem->id) ]) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                            {{__('portal.Create PDF')}}
+                        </a>
+                    </div>
+                    <div class="px-4 py-5 sm:p-6 bg-white shadow ">
+                        <div class="flex flex-wrap overflow-hidden bg-gray-300 p-4">
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <img class="h-20 w-20 rounded-full object-cover" src="{{ $QouteItem->buyer_business->business_photo_url }}" alt="{{ $QouteItem->buyer_business->business_name }}" />
+                                <h1 class="text-center text-2xl">{{ $QouteItem->buyer_business->business_name }}</h1>
                             </div>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <h1 class="text-center text-3xl">{{__('portal.Quotation')}}</h1>
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <img class="h-20 w-20 rounded-full object-cover" src="{{ $QouteItem->supplier_business->business_photo_url }}" alt="{{ $QouteItem->supplier_business->business_name }}" />
+                                <h1 class="text-center text-2xl">{{ $QouteItem->supplier_business->business_name }}</h1>
+                            </div>
+                        </div>
 
-                            <div>
-                                <h2 class="text-left lg:text-2xl font-bold py-2">
-                                    {{__('portal.Status')}}:
+                        <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                            <div class="w-full overflow-hidden">
+                                <h1 class="text-center text-3xl">{{__('portal.Status')}}:
                                     @if ($QouteItem->qoute_status == 'Modified')
                                         <span class="bg-gray-400">{{__('portal.You have asked for a modification for this quotation.')}}</span>
                                     @elseif($QouteItem->qoute_status == 'Qouted')
@@ -47,48 +44,92 @@
                                     @elseif($QouteItem->qoute_status == 'Rejected')
                                         <span class="bg-red-600">{{__('portal.You have rejected this quotation.')}}</span>
                                     @endif
-                                </h2>
+                                </h1>
                             </div>
                         </div>
 
-                        <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded shadow-md ">
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Quote Request')}} #: {{__('portal.Q')}}-{{ $QouteItem->id }}</strong>
+                        <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <strong class="text-xl">{{__('portal.Generated By')}}: </strong><br>
+                                <p class="text-xl">{{ $QouteItem->buyer_business->business_name }}</p><br>
+                                <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $QouteItem->buyer_business->city }}</span><br>
+                                <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $QouteItem->buyer_business->vat_reg_certificate_number }}</span><br>
                             </div>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <strong class="text-xl">{{__('portal.User Quoted')}}: </strong><br>
+                                <p class="text-xl">{{ $QouteItem->supplier_business->business_name }}</p><br>
 
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Category Name')}}:</strong>
+                                <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $QouteItem->supplier_business->city }}</span><br>
+                                <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $QouteItem->supplier_business->vat_reg_certificate_number }}</span><br>
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
+                                <strong>{{__('portal.Quote Request')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $QouteItem->id }}<br>
+                                <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                 @php
                                     $record = \App\Models\Category::where('id',$QouteItem->orderItem->item_code)->first();
                                     $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                 @endphp
-                                {{ $record->name }} @if(isset($parent)), {{$parent->name}} @endif
-                            </div>
-
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Quote Quantity')}}:</strong> {{ $QouteItem->quote_quantity }}
-                            </div>
-
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Quote Price Per Quantity')}}: {{ $QouteItem->quote_price_per_quantity }} {{__('portal.SAR')}}</strong>
-                            </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Shipping Time In Days')}}:</strong> {{ $QouteItem->shipping_time_in_days }}
-                            </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Note')}}:</strong> @if(isset($QouteItem->note_for_customer)) {{ strip_tags($QouteItem->note_for_customer) }} @else N/A @endif
-                            </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Shipment Cost')}}:</strong> {{ $QouteItem->shipment_cost }} {{__('portal.SAR')}}
-                            </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.VAT')}} (%):</strong> {{ $QouteItem->VAT }}
-                            </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Total Cost')}}:</strong> {{ $QouteItem->total_cost }} {{__('portal.SAR')}}
+                                {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif
+                                <br>
+                                <strong>{{__('portal.Payment Term')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> @if ($QouteItem->orderItem->payment_mode == 'Cash') {{__('portal.Cash')}} @else {{__('portal.Credit')}} @endif
                             </div>
                         </div>
+                        <table class="min-w-full divide-y divide-black">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                    #
+                                </th>
+                                <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                    {{__('portal.Note')}}
+                                </th>
+                                <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                    {{__('portal.Unit Price')}}
+                                </th>
+                                <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                    {{__('portal.Quantity')}}
+                                </th>
 
+                                <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                    {{__('portal.Amount')}}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-black border-1 border-black">
+                            <tr>
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                    1
+                                </td>
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                    @if(isset($QouteItem->note_for_customer)) {{ strip_tags($QouteItem->note_for_customer) }} @else N/A @endif
+                                </td>
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                    {{ $QouteItem->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                </td>
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                    {{ $QouteItem->quote_quantity }}
+                                </td>
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                    {{ number_format($QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}<br>
+                                <strong>{{__('portal.VAT')}} %: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $QouteItem->VAT }} <br>
+                                <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->shipment_cost) }} {{__('portal.SAR')}}<br>
+                                <hr>
+                                <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->total_cost) }} {{__('portal.SAR')}} <br>
+                                <hr>
+                            </div>
+                        </div>
 
                         {{-- Retrieving eOrderItemsID in qoute_id while Storing Supplier message and Retrieving QuoteID in qoute_id while storing Buyer message --}}
                         @php
@@ -144,14 +185,6 @@
                                 <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150">
                                     {{__('portal.Send')}}
                                 </button>
-                                   {{-- <a href="{{ route('updateQoute', $QouteItem->id) }}" style="margin-left: 70px;"
-                                       class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">
-                                        Qoute Again
-                                    </a>
-
-                                    <a href="{{ route('updateRejected', $QouteItem->id) }}" style="margin-left: 70px;"
-                                       class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">Reject
-                                        Request</a>--}}
                             </div>
                             <br>
                         </form>
@@ -203,6 +236,7 @@
                             <input type="hidden" name="shipment_cost" value="{{ $QouteItem->shipment_cost }}">
                             <input type="hidden" name="vat" value="{{ $QouteItem->VAT }}">
                             <input type="hidden" name="total_cost" value="{{ $QouteItem->total_cost }}">
+                            <input type="hidden" name="payment_term" value="{{ $QouteItem->orderItem->payment_mode }}">
 
                             <x-jet-label for="warehouse" class="my-2" value="{{ __('portal.Warehouse delivery address') }}" class="text-black"  />
 
@@ -222,15 +256,6 @@
                             <x-jet-label for="Remarks" value="{{ __('portal.Remarks') }}" class="text-black"  />
                             <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Remarks')}}.."></textarea>
 
-                            <x-jet-label for="payment_term" class="my-2" value="{{ __('portal.Payment Term') }}" class="text-black"  />
-                            <select name="payment_term" id="payment_term" class="form-input rounded-md shadow-sm border p-2 w-full" readonly>
-                                @if ($QouteItem->orderItem->payment_mode == 'Cash')
-                                    <option selected value="Cash">{{__('portal.Cash')}}</option>
-                                @else
-                                    <option selected value="Credit">{{__('portal.Credit')}}</option>
-                                @endif
-                            </select>
-
                             <div class="mt-5 d-flex">
                                 <div style="display: inline">
                                     <a href="{{ url()->previous() }}"
@@ -247,7 +272,6 @@
 
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -265,36 +289,33 @@
                 </button>
             </div>
         @endif
-        <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded">
-            <div class="w-full overflow-hidden lg:w-3/6 xl:my-1 xl:px-1 xl:w-3/6">
-                <div class="mt-5">
-                    <a href="{{ url()->previous() }}"
-                       class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                        {{__('portal.Go Back')}}
-                    </a>
-                </div>
-            </div>
-            <div class="w-full overflow-hidden lg:w-3/6 xl:my-1 xl:px-1 xl:w-3/6">
-                <div class="mt-5 lg:float-left">
-                    <a href="{{ route('quotationPDF', [ 'quote_supplier_business_id' => encrypt($QouteItem->supplier_business_id), 'e_order_id' => encrypt($QouteItem->id) ]) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:text-white hover:bg-red-500 focus:outline-none active:bg-red-600 transition ease-in-out duration-150">
-                        {{__('portal.Create PDF')}}
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="flex flex-col bg-white rounded mt-2">
-            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg p-4">
 
-                        <div class="mt-5 d-flex">
-                            <div>
-                                <h2 class="text-center text-2xl font-bold py-2 text-center">{{__('portal.Quotation')}}</h2>
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-2 lg:2x-8">
+                <div class="bg-white overflow-hidden shadow-xl ">
+                    <div class="mt-5" style=" margin-right: 30px; margin-bottom: 10px ">
+                        <a href="{{ route('quotationPDF', [ 'quote_supplier_business_id' => encrypt($QouteItem->supplier_business_id), 'e_order_id' => encrypt($QouteItem->id) ]) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                            {{__('portal.Create PDF')}}
+                        </a>
+                    </div>
+                    <div class="px-4 py-5 sm:p-6 bg-white shadow ">
+                        <div class="flex flex-wrap overflow-hidden bg-gray-300 p-4">
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <img class="h-20 w-20 rounded-full object-cover" src="{{ $QouteItem->buyer_business->business_photo_url }}" alt="{{ $QouteItem->buyer_business->business_name }}" />
+                                <h1 class="text-center text-2xl">{{ $QouteItem->buyer_business->business_name }}</h1>
                             </div>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <h1 class="text-center text-3xl">{{__('portal.Quotation')}}</h1>
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <img class="h-20 w-20 rounded-full object-cover" src="{{ $QouteItem->supplier_business->business_photo_url }}" alt="{{ $QouteItem->supplier_business->business_name }}" />
+                                <h1 class="text-center text-2xl">{{ $QouteItem->supplier_business->business_name }}</h1>
+                            </div>
+                        </div>
 
-                            <div>
-                                <h2 class="text-right lg:text-2xl font-bold py-2">
-                                    {{__('portal.Status')}}:
+                        <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                            <div class="w-full overflow-hidden">
+                                <h1 class="text-center text-3xl">{{__('portal.Status')}}:
                                     @if ($QouteItem->qoute_status == 'Modified')
                                         <span class="bg-gray-400">{{__('portal.You have asked for a modification for this quotation.')}}</span>
                                     @elseif($QouteItem->qoute_status == 'Qouted')
@@ -302,45 +323,90 @@
                                     @elseif($QouteItem->qoute_status == 'Rejected')
                                         <span class="bg-red-600">{{__('portal.You have rejected this quotation.')}}</span>
                                     @endif
-                                </h2>
+                                </h1>
                             </div>
                         </div>
 
-                        <div class="flex flex-wrap overflow-hidden xl:-mx-1 p-4 rounded shadow-md ">
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Quote Request')}} #: {{__('portal.Q')}}-{{ $QouteItem->id }}</strong>
+                        <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <strong class="text-xl">{{__('portal.Generated By')}}: </strong><br>
+                                <p class="text-xl">{{ $QouteItem->buyer_business->business_name }}</p><br>
+                                <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $QouteItem->buyer_business->city }}</span><br>
+                                <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $QouteItem->buyer_business->vat_reg_certificate_number }}</span><br>
                             </div>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <strong class="text-xl">{{__('portal.User Quoted')}}: </strong><br>
+                                <p class="text-xl">{{ $QouteItem->supplier_business->business_name }}</p><br>
 
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Category Name')}}:</strong>
+                                <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $QouteItem->supplier_business->city }}</span><br>
+                                <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $QouteItem->supplier_business->vat_reg_certificate_number }}</span><br>
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
+                                <strong>{{__('portal.Quote Request')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $QouteItem->id }}<br>
+                                <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                 @php
                                     $record = \App\Models\Category::where('id',$QouteItem->orderItem->item_code)->first();
                                     $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                 @endphp
-                                {{ $record->name_ar }} @if(isset($parent)), {{$parent->name_ar}} @endif
+                                {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif
+                                <br>
+                                <strong>{{__('portal.Payment Term')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> @if ($QouteItem->orderItem->payment_mode == 'Cash') {{__('portal.Cash')}} @else {{__('portal.Credit')}} @endif
                             </div>
+                        </div>
+                        <table class="min-w-full divide-y divide-black">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                    #
+                                </th>
+                                <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                    {{__('portal.Note')}}
+                                </th>
+                                <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                    {{__('portal.Unit Price')}}
+                                </th>
+                                <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                    {{__('portal.Quantity')}}
+                                </th>
 
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Quote Quantity')}}:</strong> {{ $QouteItem->quote_quantity }}
-                            </div>
+                                <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                    {{__('portal.Amount')}}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-black border-1 border-black">
+                            <tr>
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                    1
+                                </td>
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                    @if(isset($QouteItem->note_for_customer)) {{ strip_tags($QouteItem->note_for_customer) }} @else N/A @endif
+                                </td>
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                    {{ $QouteItem->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                </td>
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                    {{ $QouteItem->quote_quantity }}
+                                </td>
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                    {{ number_format($QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Quote Price Per Quantity')}}: {{ $QouteItem->quote_price_per_quantity }} {{__('portal.SAR')}}</strong>
+                        <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                             </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Shipping Time In Days')}}:</strong> {{ $QouteItem->shipping_time_in_days }}
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                             </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Note')}}:</strong> @if(isset($QouteItem->note_for_customer)) {{ strip_tags($QouteItem->note_for_customer) }} @else N/A @endif
-                            </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Shipment Cost')}}:</strong> {{ $QouteItem->shipment_cost }} {{__('portal.SAR')}}
-                            </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.VAT')}} (%):</strong> {{ $QouteItem->VAT }}
-                            </div>
-                            <div class="w-full overflow-hidden lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
-                                <strong>{{__('portal.Total Cost')}}:</strong> {{ $QouteItem->total_cost }} {{__('portal.SAR')}}
+                            <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}<br>
+                                <strong>{{__('portal.VAT')}} %: &nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $QouteItem->VAT }} <br>
+                                <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->shipment_cost) }} {{__('portal.SAR')}}<br>
+                                <hr>
+                                <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->total_cost) }} {{__('portal.SAR')}} <br>
+                                <hr>
                             </div>
                         </div>
 
@@ -359,7 +425,7 @@
                                     @endphp
 
                                     <span class="text-gray-600">
-                                        <span class="text-blue-700 text-left" style="float: right">
+                                        <span class="text-blue-700 text-left">
                                             {{__('portal.Message from')}} {{$business->business_name}}
                                         </span>
                                         : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
@@ -398,14 +464,6 @@
                                 <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150">
                                     {{__('portal.Send')}}
                                 </button>
-                                {{-- <a href="{{ route('updateQoute', $QouteItem->id) }}" style="margin-left: 70px;"
-                                    class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">
-                                     Qoute Again
-                                 </a>
-
-                                 <a href="{{ route('updateRejected', $QouteItem->id) }}" style="margin-left: 70px;"
-                                    class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">Reject
-                                     Request</a>--}}
                             </div>
                             <br>
                         </form>
@@ -457,6 +515,7 @@
                             <input type="hidden" name="shipment_cost" value="{{ $QouteItem->shipment_cost }}">
                             <input type="hidden" name="vat" value="{{ $QouteItem->VAT }}">
                             <input type="hidden" name="total_cost" value="{{ $QouteItem->total_cost }}">
+                            <input type="hidden" name="payment_term" value="{{ $QouteItem->orderItem->payment_mode }}">
 
                             <x-jet-label for="warehouse" class="my-2" value="{{ __('portal.Warehouse delivery address') }}" class="text-black"  />
 
@@ -476,15 +535,6 @@
                             <x-jet-label for="Remarks" value="{{ __('portal.Remarks') }}" class="text-black"  />
                             <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Remarks')}}.."></textarea>
 
-                            <x-jet-label for="payment_term" class="my-2" value="{{ __('portal.Payment Term') }}" class="text-black"  />
-                            <select name="payment_term" id="payment_term" class="form-input rounded-md shadow-sm border p-2 w-full" readonly>
-                                @if ($QouteItem->orderItem->payment_mode == 'Cash')
-                                    <option selected value="Cash">{{__('portal.Cash')}}</option>
-                                @else
-                                    <option selected value="Credit">{{__('portal.Credit')}}</option>
-                                @endif
-                            </select>
-
                             <div class="mt-5 d-flex">
                                 <div style="display: inline">
                                     <a href="{{ url()->previous() }}"
@@ -500,7 +550,6 @@
 
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>

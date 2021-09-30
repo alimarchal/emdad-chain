@@ -440,7 +440,7 @@ return [
     'Reject Quotation' => 'Reject Quotation',
     'If you want to accept request please fill out below form.' => 'If you want to accept request please fill out below form.',
     'Warehouse delivery address' => 'Warehouse delivery address',
-    'OTP FOR Receiving Delivery Mobile Number (We will send One Time Password when you receive delivery)' => 'OTP FOR Receiving Delivery Mobile Number (We will send One Time Password when you receive delivery)',
+    'OTP FOR Receiving Delivery Mobile Number (We will send One Time Password when you receive delivery)' => 'Mobile Number to Receive OTP for this Delivery (System will send One Time Password when you receive this delivery)',
     'Payment Term' => 'Payment Term',
     'Accept' => 'Accept',
     'Received' => 'Received',

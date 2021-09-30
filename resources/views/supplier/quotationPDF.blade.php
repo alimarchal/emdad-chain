@@ -53,7 +53,7 @@
             @elseif($quote->qoute_status == 'Qouted')
                 <span style="color: black; background-color: #e3a008">Quoted.</span>
             @elseif($quote->qoute_status == 'Rejected')
-                <span style="color: black; background-color: darkred">Rejected.</span>
+                <span style="color: black; background-color: red">Rejected.</span>
             @endif
         </h3>
     </div>

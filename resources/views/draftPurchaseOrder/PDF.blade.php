@@ -100,11 +100,11 @@
 
     <tr>
         <th>#</th>
-        <th>QUANTITY</th>
-        <th>UNIT PRICE</th>
-        <th>UOM</th>
         <th>BRAND</th>
+        <th>UOM</th>
         <th>REMARKS</th>
+        <th>UNIT PRICE</th>
+        <th>QUANTITY</th>
         <th>AMOUNT</th>
     </tr>
 
@@ -113,11 +113,11 @@
 
     <tr>
         <td  style="text-align: center">1</td>
-        <td  style="text-align: center">{{ $draftPurchaseOrder->quantity }}</td>
-        <td  style="text-align: center">{{ $draftPurchaseOrder->unit_price }} SAR</td>
-        <td  style="text-align: center">{{ $draftPurchaseOrder->uom }}</td>
         <td  style="text-align: center">{{ $draftPurchaseOrder->brand }}</td>
+        <td  style="text-align: center">{{ $draftPurchaseOrder->uom }}</td>
         <td  style="text-align: center">{{ $draftPurchaseOrder->remarks }}</td>
+        <td  style="text-align: center">{{ $draftPurchaseOrder->unit_price }} SAR</td>
+        <td  style="text-align: center">{{ $draftPurchaseOrder->quantity }}</td>
         <td  style="text-align: center">{{ number_format($draftPurchaseOrder->sub_total, 2) }} SAR</td>
     </tr>
     </tbody>

@@ -16,6 +16,16 @@ class Qoute extends Model
         return $this->belongsTo(EOrderItems::class, 'e_order_items_id', 'id');
     }
 
+    public function buyer_business()
+    {
+        return $this->belongsTo(Business::class, 'business_id', 'id');
+    }
+
+    public function supplier_business()
+    {
+        return $this->belongsTo(Business::class, 'supplier_business_id', 'id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

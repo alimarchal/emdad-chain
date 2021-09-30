@@ -108,19 +108,19 @@
             #
         </th>
         <th scope="col" style="text-align: center">
-            Quantity
-        </th>
-        <th scope="col" style="text-align: center">
-            Unit Price
+            Brand
         </th>
         <th scope="col" style="text-align: center">
             UOM
         </th>
         <th scope="col" style="text-align: center">
-            Brand
+            Remarks
         </th>
         <th scope="col" style="text-align: center">
-            Remarks
+            Unit Price
+        </th>
+        <th scope="col" style="text-align: center">
+            Quantity
         </th>
         <th scope="col" style="text-align: center">
             Amount
@@ -134,20 +134,20 @@
                 {{$loop->iteration}}
             </td>
             <td style="text-align: center">
-                {{ $draftPurchaseOrder->quantity }}
-            </td>
-            <td style="text-align: center">
-                {{ $draftPurchaseOrder->unit_price }}
+                {{ $draftPurchaseOrder->brand }}
             </td>
             <td style="text-align: center">
                 {{ $draftPurchaseOrder->uom }}
             </td>
             <td style="text-align: center">
-                {{ $draftPurchaseOrder->brand }}
+                @if(isset($draftPurchaseOrder->remarks)){{ strip_tags($draftPurchaseOrder->remarks) }} @else N/A @endif
+            </td>
+            <td style="text-align: center">
+                {{ $draftPurchaseOrder->unit_price }}
             </td>
 
             <td style="text-align: center">
-                @if(isset($draftPurchaseOrder->remarks)){{ strip_tags($draftPurchaseOrder->remarks) }} @else N/A @endif
+                {{ $draftPurchaseOrder->quantity }}
             </td>
             <td style="text-align: center">
                 {{ number_format($draftPurchaseOrder->sub_total, 2) }}

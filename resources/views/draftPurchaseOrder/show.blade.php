@@ -73,21 +73,21 @@
                                         #
                                     </th>
                                     <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                        {{__('portal.Quantity')}}
-                                    </th>
-                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                        {{__('portal.Unit Price')}}
+                                        {{__('portal.Brand')}}
                                     </th>
                                     <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.UOM')}}
                                     </th>
-
                                     <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                        {{__('portal.Brand')}}
+                                        {{__('portal.Remarks')}}
                                     </th>
 
                                     <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                        {{__('portal.Remarks')}}
+                                        {{__('portal.Unit Price')}}
+                                    </th>
+
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        {{__('portal.Quantity')}}
                                     </th>
 
                                     <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
@@ -101,19 +101,19 @@
                                     1
                                 </td>
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
-                                    {{ $draftPurchaseOrder->quantity }}
-                                </td>
-                                <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
-                                    {{ $draftPurchaseOrder->unit_price }} {{__('portal.SAR')}}
+                                    {{ $draftPurchaseOrder->brand }}
                                 </td>
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
                                     {{ $draftPurchaseOrder->uom }}
                                 </td>
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
-                                    {{ $draftPurchaseOrder->brand }}
+                                    @if(isset($draftPurchaseOrder->remarks)) {{ strip_tags($draftPurchaseOrder->remarks) }} @else {{__('portal.N/A')}} @endif
                                 </td>
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
-                                    @if(isset($draftPurchaseOrder->remarks)) {{ strip_tags($draftPurchaseOrder->remarks) }} @else {{__('portal.N/A')}} @endif
+                                    {{ $draftPurchaseOrder->unit_price }} {{__('portal.SAR')}}
+                                </td>
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
+                                    {{ $draftPurchaseOrder->quantity }}
                                 </td>
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
                                     {{ number_format($draftPurchaseOrder->sub_total, 2) }} {{__('portal.SAR')}}
@@ -323,21 +323,21 @@
                                         #
                                     </th>
                                     <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                        {{__('portal.Quantity')}}
-                                    </th>
-                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                        {{__('portal.Unit Price')}}
+                                        {{__('portal.Brand')}}
                                     </th>
                                     <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.UOM')}}
                                     </th>
-
                                     <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                        {{__('portal.Brand')}}
+                                        {{__('portal.Remarks')}}
                                     </th>
 
                                     <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                        {{__('portal.Remarks')}}
+                                        {{__('portal.Unit Price')}}
+                                    </th>
+
+                                    <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        {{__('portal.Quantity')}}
                                     </th>
 
                                     <th scope="col" class="px-2 py-2 border border-black text-center text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
@@ -351,19 +351,19 @@
                                     1
                                 </td>
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
-                                    {{ $draftPurchaseOrder->quantity }}
-                                </td>
-                                <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
-                                    {{ $draftPurchaseOrder->unit_price }} {{__('portal.SAR')}}
+                                    {{ $draftPurchaseOrder->brand }}
                                 </td>
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
                                     {{ $draftPurchaseOrder->uom }}
                                 </td>
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
-                                    {{ $draftPurchaseOrder->brand }}
+                                    @if(isset($draftPurchaseOrder->remarks)) {{ strip_tags($draftPurchaseOrder->remarks) }} @else {{__('portal.N/A')}} @endif
                                 </td>
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
-                                    @if(isset($draftPurchaseOrder->remarks)) {{ strip_tags($draftPurchaseOrder->remarks) }} @else {{__('portal.N/A')}} @endif
+                                    {{ $draftPurchaseOrder->unit_price }} {{__('portal.SAR')}}
+                                </td>
+                                <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
+                                    {{ $draftPurchaseOrder->quantity }}
                                 </td>
                                 <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
                                     {{ number_format($draftPurchaseOrder->sub_total, 2) }} {{__('portal.SAR')}}
