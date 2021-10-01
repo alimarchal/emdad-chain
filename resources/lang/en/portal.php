@@ -402,7 +402,7 @@ return [
     'Purchase Order Information of' => 'Purchase Order Information of',
     'Quotations List' => 'Quotation Center',
     'Requisition Item' => 'Requisition Item',
-    'Time left' => 'Time left',
+    'Time left' => 'Time Remaining',
     'Quotations' => 'Quotations',
     'Override' => 'Override',
     'Overrode' => 'Overrode',
@@ -827,5 +827,6 @@ return [
     'Rated Supplier Successfully!' => 'Rated Supplier Successfully!',
     'Rated Delivery Successfully!' => 'Rated Delivery Successfully!',
     'Library' => 'Library',
+    'Quotations/Status' => 'Quotations/Status',
 
 ];
