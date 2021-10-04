@@ -228,6 +228,7 @@ class DeliveryController extends Controller
     {
         $token = $request->code;
         if ($token == "RRNirxFh4j9Ftd") {
+
             $deliveries = Delivery::with('eOrderItems')->where('rfq_no', $rfq_no)->get();  /* Bring rfq_no of delivery instead of deliveryID */
             $shipment_item = ShipmentItem::find($sitm);
             if (isset($deliveries) && $shipment_item != null) {
@@ -238,6 +239,7 @@ class DeliveryController extends Controller
                 }
                 $shipment_item->status = 1;
                 $shipment_item->save();
+
 
 //                if ($deliveries[0]->rfq_type == 1)
 //                {
