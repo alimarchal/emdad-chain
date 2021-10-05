@@ -24,14 +24,14 @@
                             <div class="px-4 py-5 sm:p-6 bg-white shadow ">
                                 <div class="flex flex-wrap overflow-hidden bg-gray-300 p-4">
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        <img class="h-20 w-20 rounded-full object-cover" src="{{ $draftPurchaseOrder->buyer_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->buyer_business->business_name }}" />
+                                        <img class="h-20 w-20 rounded-full object-cover" src="{{ Storage::url($draftPurchaseOrder->buyer_business->business_photo_url) }}" alt="{{ $draftPurchaseOrder->buyer_business->business_name }}" />
                                         <h1 class="text-center text-2xl">{{ $draftPurchaseOrder->buyer_business->business_name }}</h1>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                         <h1 class="text-center text-3xl">{{__('portal.Purchase Order')}}</h1>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        <img class="h-20 w-20 rounded-full object-cover" src="{{ $draftPurchaseOrder->supplier_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->supplier_business->business_name }}" />
+                                        <img class="h-20 w-20 rounded-full object-cover" src="{{ Storage::url($draftPurchaseOrder->supplier_business->business_photo_url) }}" alt="{{ $draftPurchaseOrder->supplier_business->business_name }}" />
                                         <h1 class="text-center text-2xl">{{ $draftPurchaseOrder->supplier_business->business_name }}</h1>
                                     </div>
                                 </div>

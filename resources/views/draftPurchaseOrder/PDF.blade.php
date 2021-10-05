@@ -38,6 +38,8 @@
 
 <div class="header">
     <div class="center">
+        @php $logo_first = asset(Storage::url($draftPurchaseOrder->buyer_business->business_photo_url)); @endphp
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem;"/>
         {{--            <img src="{{ $draftPurchaseOrder->buyer_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->buyer_business->business_name }}" />--}}
         <h5 style="text-align: center; margin:0px;">{{ $draftPurchaseOrder->buyer_business->business_name }}</h5>
     </div>
@@ -47,6 +49,8 @@
     </div>
 
     <div class="center">
+        @php $logo_second = asset(Storage::url($draftPurchaseOrder->supplier_business->business_photo_url)); @endphp
+        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;" />
         {{--        <img src="{{ $draftPurchaseOrder->supplier_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->supplier_business->business_name }}" />--}}
         <h5 style="text-align: center; margin:0px;">{{ $draftPurchaseOrder->supplier_business->business_name }}</h5>
     </div>

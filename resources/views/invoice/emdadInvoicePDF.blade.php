@@ -10,6 +10,9 @@
         td,
         th {
             border: 1px solid bredlarck;
+            width:100%;
+            table-layout: fixed;
+            overflow-wrap: break-word;
             border-collapse: collapse;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -142,7 +145,8 @@
 
     <div class="center" style="width: 33.33%; float: right">
         <div style="margin-top: 2px;">Copied to Emdad records</div>
-        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" style="height: 10px; width: auto; margin-left: auto; margin-right: auto;"/></div>
+        @php $img = asset('logo-full.png'); @endphp
+        <img src="{{$img}}" width="100" >
     </div>
 
 </div>

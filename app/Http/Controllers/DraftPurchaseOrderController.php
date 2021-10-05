@@ -419,7 +419,7 @@ class DraftPurchaseOrderController extends Controller
      */
     public function generatePDF(DraftPurchaseOrder $draftPurchaseOrder)
     {
-        $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'))->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'));
         //        $pdf = PDF::loadView('draftPurchaseOrder.PDF', $data);
         return $pdf->download('POs.pdf');
     }
@@ -760,14 +760,12 @@ class DraftPurchaseOrderController extends Controller
 
             $pos = $data->unique('rfq_no');
         }
-
         return view('draftPurchaseOrder.singleCategory.po', compact('pos'));
     }
 
     public function singleCategoryPOShow($rfqNo)
     {
         $draftPurchaseOrders = DraftPurchaseOrder::where('rfq_no', $rfqNo)->get();
-
         return view('draftPurchaseOrder.singleCategory.poShow', compact('draftPurchaseOrders'));
     }
 
@@ -777,8 +775,9 @@ class DraftPurchaseOrderController extends Controller
      */
     public function singleCategoryGeneratePDF($rfqNo)
     {
+
         $draftPurchaseOrders = DraftPurchaseOrder::with('buyer_business')->where(['rfq_no' => $rfqNo])->get();
-        $pdf = PDF::loadView('draftPurchaseOrder.singleCategory.PDF', compact('draftPurchaseOrders'))->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('draftPurchaseOrder.singleCategory.PDF', compact('draftPurchaseOrders'));
         return $pdf->download('POs.pdf');
     }
 

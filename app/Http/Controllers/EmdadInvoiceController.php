@@ -72,8 +72,7 @@ class EmdadInvoiceController extends Controller
     public function generatePDF($emdadInvoiceID)
     {
         $emdadInvoice = EmdadInvoice::where('id', decrypt($emdadInvoiceID))->first();
-
-        $pdf = PDF::loadView('invoice.emdadInvoicePDF', compact('emdadInvoice'))->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.emdadInvoicePDF', compact('emdadInvoice'))->setOptions(['defaultFont' => 'sans-serif']);
         return $pdf->download('Invoice.pdf');
     }
 

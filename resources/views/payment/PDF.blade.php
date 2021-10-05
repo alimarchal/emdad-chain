@@ -50,7 +50,9 @@
             $supplierBusiness = \App\Models\Business::where('id', $invoice->supplier_business_id)->first();
             $buyerBusiness = \App\Models\Business::where('id', $invoice->buyer_business_id)->first();
         @endphp
-        <img src="{{(isset($supplierBusiness->business_photo_url)?Storage::url($supplierBusiness->business_photo_url):'#')}}" alt="{{$supplierBusiness->business_name}}" style="height: 80px;width: 200px;"/>
+        @php $logo_first = asset(Storage::url($supplierBusiness->business_photo_url)); @endphp
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem;"/>
+{{--        <img src="{{(isset($supplierBusiness->business_photo_url)?Storage::url($supplierBusiness->business_photo_url):'#')}}" alt="{{$supplierBusiness->business_name}}" style="height: 80px;width: 200px;"/>--}}
     </div>
 
     <br>
@@ -218,7 +220,8 @@
 
     <div class="center" style="width: 33.33%; float: right">
         <div style="margin-top: 2px;">Copied to Emdad records</div>
-        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" style="height: 10px; width: auto; margin-left: auto; margin-right: auto;"/></div>
+        @php $img = asset('logo-full.png'); @endphp
+        <img src="{{$img}}" width="100" >
     </div>
 
 </div>

@@ -40,7 +40,8 @@
 
 <div class="header">
     <div class="center">
-        <img src="{{ $draftPurchaseOrders[0]->buyer_business->business_photo_url }}" alt="{{ $draftPurchaseOrders[0]->buyer_business->business_name }}" />
+        @php $logo_first = asset(Storage::url($draftPurchaseOrders[0]->buyer_business->business_photo_url)); @endphp
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem;"/>
         <h5 style="text-align: center; margin:0px;">{{ $draftPurchaseOrders[0]->buyer_business->business_name }}</h5>
     </div>
 
@@ -49,7 +50,8 @@
     </div>
 
     <div class="center">
-        <img src="{{ $draftPurchaseOrders[0]->supplier_business->business_photo_url }}" alt="{{ $draftPurchaseOrders[0]->supplier_business->business_name }}" />
+        @php $logo_second = asset(Storage::url($draftPurchaseOrders[0]->supplier_business->business_photo_url)); @endphp
+        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;" />
         <h5 style="text-align: center; margin:0px;">{{ $draftPurchaseOrders[0]->supplier_business->business_name }}</h5>
     </div>
 
@@ -185,7 +187,7 @@
     <!--<img src="{{ url(Storage::url('logo-full.png')) }}" />-->
         @php $img = asset('logo-full.png'); @endphp
 
-        <img src="@php echo $img @endphp" width="100" >
+        <img src="{{$img}}" width="100" >
 
     </div>
 

@@ -44,14 +44,14 @@
                             <div class="px-4 py-5 sm:p-6 bg-white shadow ">
                                 <div class="flex flex-wrap overflow-hidden bg-gray-300 p-4">
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        <img class="h-20 w-20 rounded-full object-cover" src="{{ $quotes[0]->buyer_business->business_photo_url }}" alt="{{ $quotes[0]->buyer_business->business_name }}" />
+                                        <img class="h-20 w-20 rounded-full object-cover" src="{{ Storage::url($quotes[0]->buyer_business->business_photo_url) }}"  />
                                         <h1 class="text-center text-2xl">{{ $quotes[0]->buyer_business->business_name }}</h1>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                         <h1 class="text-center text-3xl">{{__('portal.Quotation')}}</h1>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        <img class="h-20 w-20 rounded-full object-cover" src="{{ $quotes[0]->supplier_business->business_photo_url }}" alt="{{ $quotes[0]->supplier_business->business_name }}" />
+                                        <img class="h-20 w-20 rounded-full object-cover" src="{{ Storage::url($quotes[0]->supplier_business->business_photo_url) }}" />
                                         <h1 class="text-center text-2xl">{{ $quotes[0]->supplier_business->business_name }}</h1>
                                     </div>
                                 </div>

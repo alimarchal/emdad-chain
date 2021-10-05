@@ -33,6 +33,8 @@
         }
 
     </style>
+
+    </style>
 </head>
 
 <body>
@@ -104,28 +106,53 @@
     <br>
     <br>
 
-    <table class="min-w-full divide-y divide-black">
+
+    <table class="min-w-full divide-y divide-black " style="margin-top: 4%;">
         <thead>
-
         <tr>
-            <th>#</th>
-            <th>DESCRIPTION</th>
-            <th>NOTE</th>
-            <th>UNIT PRICE</th>
-            <th>QUANTITY</th>
-            <th>AMOUNT</th>
+            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                #
+            </th>
+            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+               DESCRIPTION
+            </th>
+            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+               NOTE
+            </th>
+            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                UNIT PRICE
+            </th>
+            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                QUANTITY
+            </th>
+            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                AMOUNT
+            </th>
         </tr>
-
         </thead>
+
         <tbody class="bg-white divide-y divide-black border-1 border-black">
         @foreach($quotes as $quote)
         <tr>
-            <td  style="text-align: center">1</td>
-            <td  style="text-align: center">{{ $quote->orderItem->description }}</td>
-            <td  style="text-align: center">{{ $quote->note_for_customer }}</td>
-            <td  style="text-align: center">{{ $quote->quote_price_per_quantity }} SAR</td>
-            <td  style="text-align: center">{{ $quote->quote_quantity }}</td>
-            <td  style="text-align: center">{{ $quote->total_cost }} SAR</td>
+            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+                {{$loop->iteration}}
+            </td>
+            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+               {{ $quote->orderItem->description }}
+            </td>
+            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+               {{ $quote->note_for_customer }}
+            </td>
+            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+               {{ $quote->quote_price_per_quantity }} SAR
+            </td>
+            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+               {{ $quote->quote_quantity }}
+            </td>
+            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+                {{ number_format($quote->quote_price_per_quantity * $quote->quote_quantity,2) }} SAR
+            </td>
+
         </tr>
         @endforeach
         </tbody>
@@ -224,7 +251,7 @@
         <p style="text-align: center; ">Thank you for using Emdad platform as your business partner </p>
         @php $img = asset('logo-full.png'); @endphp
 
-        <img src="@php echo $img @endphp" width="100" >
+        <img src="{{$img}}" width="100" >
 
     </div>
 

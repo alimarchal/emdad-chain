@@ -459,7 +459,7 @@ class PaymentController extends Controller
     public function generatePDF($invoiceID)
     {
         $invoice = Invoice::where('id', decrypt($invoiceID))->first();
-        $pdf = PDF::loadView('payment.PDF', compact('invoice'))->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('payment.PDF', compact('invoice'));
         return $pdf->download('Invoice.pdf');
     }
 

@@ -338,7 +338,8 @@
                                 </div>
                                 <div class="flex justify-end px-2 py-2 h-15">
                                     <div class="mt-2">{{__('portal.Copied to Emdad records')}}</div>
-                                    <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" style="margin-left: auto; margin-right: auto;"/></div>
+                                    @php $img = asset('logo-full.png'); @endphp
+                                    <div> <img src="{{$img}}" width="100" ></div>
                                 </div>
 
                             </div>

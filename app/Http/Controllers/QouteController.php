@@ -771,7 +771,7 @@ class QouteController extends Controller
     public function singleCategoryQuotationPDF($quote_supplier_business_id,$e_order_id)
     {
         $quotes = Qoute::where(['supplier_business_id' => decrypt($quote_supplier_business_id)])->where( 'e_order_id' , decrypt($e_order_id))->get();
-        $pdf = PDF::loadView('buyer.singleCategory.quotationPDF', compact('quotes'))->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('buyer.singleCategory.quotationPDF', compact('quotes'));
         return $pdf->download('Quotation.pdf');
     }
 
