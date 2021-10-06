@@ -342,6 +342,12 @@ Route::middleware(['auth:sanctum'])->get('/QuotationDiscard/{EOrderID}/', [Qoute
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/rejected/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedRejected'])->name('QoutationsBuyerReceivedRejected');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/modification/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedModificationNeeded'])->name('QoutationsBuyerReceivedModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/accepted/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedAccepted'])->name('QoutationsBuyerReceivedAccepted');
+Route::middleware(['auth:sanctum'])->get('/Quotation/expired/status/{quoteID}', [QouteController::class, 'quotationExpiredStatusUpdate'])->name('QuotationExpiredStatusUpdate');
+Route::middleware(['auth:sanctum'])->post('/Quotation/expired/response/', [QouteController::class, 'quotationExpiredStatusResponse'])->name('QuotationExpiredStatusResponse');
+Route::middleware(['auth:sanctum'])->get('/Quotation/expired/reject/response/{quoteID}', [QouteController::class, 'quotationExpiredStatusRejectResponse'])->name('quotationExpiredStatusRejectResponse');
+Route::middleware(['auth:sanctum'])->get('/single/category/quotation/expired/status/{quoteEOrderID}', [QouteController::class, 'quotationExpiredStatusUpdateSingleCategory'])->name('quotationExpiredStatusUpdateSingleCategory');
+Route::middleware(['auth:sanctum'])->post('/single/category/quotation/expired/response/', [QouteController::class, 'quotationExpiredStatusResponseSingleCategory'])->name('quotationExpiredStatusResponseSingleCategory');
+Route::middleware(['auth:sanctum'])->get('/single/category/quotation/expired/reject/response/{quoteEOrderID}', [QouteController::class, 'quotationExpiredStatusRejectResponseSingleCategory'])->name('quotationExpiredStatusRejectResponseSingleCategory');
 
 /* Generating PDF file for Multi Category Quotation buyer received */
 Route::middleware(['auth:sanctum'])->get('generate-quotation-pdf/{quote_supplier_business_id}/{e_order_id}', [QouteController::class, 'quotationPDF'])->name('quotationPDF');
@@ -371,6 +377,9 @@ Route::middleware(['auth:sanctum'])->post('qoute/{qoute}/Accepted', [QouteContro
 Route::middleware(['auth:sanctum'])->get('/purchase-order', [DraftPurchaseOrderController::class, 'view'])->name('purchaseOrderView');
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'show'])->name('dpo.show');
 Route::middleware(['auth:sanctum'])->get('dpo', [DraftPurchaseOrderController::class, 'index'])->name('dpo.index');
+Route::middleware(['auth:sanctum'])->get('/Quotation/expired/status/DPO/{quoteID}', [DraftPurchaseOrderController::class, 'quotationExpiredStatusUpdate'])->name('DPOExpiredStatusUpdate');
+Route::middleware(['auth:sanctum'])->get('/Quotation/expired/status/reject/DPO/{quoteID}', [DraftPurchaseOrderController::class, 'quotationExpiredReject'])->name('DPOExpiredStatusReject');
+Route::middleware(['auth:sanctum'])->get('/single/category/quotation/expired/status/DPO/{quoteEOrderID}', [DraftPurchaseOrderController::class, 'quotationExpiredStatusUpdateSingleCategory'])->name('DPOExpiredStatusUpdateSingleCategory');
 ##################################### Single Category DPO #######################################################
 Route::middleware(['auth:sanctum'])->get('single/category/dpo', [DraftPurchaseOrderController::class, 'singleCategoryDPOIndex'])->name('singleCategoryDPOIndex');
 Route::middleware(['auth:sanctum'])->get('single/category/dpo-{eOrderID}', [DraftPurchaseOrderController::class, 'singleCategoryDPOShow'])->name('singleCategoryDPOShow');

@@ -30,4 +30,9 @@ class DraftPurchaseOrder extends Model
     {
         return $this->belongsTo(EOrderItems::class, 'rfq_item_no', 'id');
     }
+
+    public function quote()
+    {
+        return $this->belongsTo(Qoute::class, 'qoute_no', 'id');
+    }
 }

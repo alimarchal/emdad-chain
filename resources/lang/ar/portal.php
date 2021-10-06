@@ -828,5 +828,13 @@ return [
     'Rated Delivery Successfully!' => 'تم تقييم الطلبية بنجاح!',
     'Library' => 'المكتبة',
     'Quotations/Status' => 'العروض / الحالة',
+    'Quotation valid upto' => 'Quotation valid upto',
+    'Minimum expiry date for quotation will be 5 days from the date of quotation quoted.' => 'Minimum expiry date for quotation will be 5 days from the date of quotation quoted.',
+    'Quotation Expired' => 'Quotation Expired',
+    'Request to extend quotation expiry date' => 'Request to extend quotation expiry date',
+    'Valid upto' => 'Valid upto',
+    'Expired' => 'Expired',
+    'Valid' => 'Valid',
+    'Request sent to extend expiry date' => 'Request sent to extend expiry date',
 
 ];

@@ -20,6 +20,7 @@ use App\Notifications\QuoteAccepted;
 use App\Notifications\SingleCategoryPurchaseOrderGenerated;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -32,9 +33,13 @@ class DraftPurchaseOrderController extends Controller
         if (auth()->user()->registration_type == 'Supplier') {
             $dpos = DraftPurchaseOrder::where('supplier_user_id', $user)->where('supplier_business_id', auth()->user()->business_id)->where('status', 'approved')->get();
         } elseif (auth()->user()->registration_type == 'Buyer' || auth()->user()->can('Buyer DPO Approval') || auth()->user()->can('Buyer View Purchase Orders')) {
-//            $dpos = DraftPurchaseOrder::where('user_id', $user)->where('business_id', auth()->user()->business_id)->where('status', 'pending')->get();
 //            $dpos = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('status', 'pending')->get();
-            $draftPurchaseOrders = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id, 'status' => 'pending'])->get();
+//            $draftPurchaseOrders = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id, 'status' => 'pending'])->get();
+            $draftPurchaseOrders = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id])
+                ->where(function ($query){
+                $query->where('status', 'pending');
+                $query->orWhere('status', 'cancel');
+                })->get();
 
             $multiCategory = array();
             $singleCategory = array();
@@ -411,6 +416,28 @@ class DraftPurchaseOrderController extends Controller
     public function poShow(DraftPurchaseOrder $draftPurchaseOrder)
     {
         return view('draftPurchaseOrder.poShow', compact('draftPurchaseOrder'));
+    }
+
+    /* Function for buyer MULTI CATEGORIES (buyer requests for quotation expiry date extension through DPO index page) */
+    public function quotationExpiredStatusUpdate($quoteID): RedirectResponse
+    {
+        Qoute::where(['id' => $quoteID, 'business_id' => auth()->user()->business_id])->update([
+            'request_status' => 1
+        ]);
+        session()->flash('message', __('portal.Request sent to extend expiry date'));
+
+        return redirect()->route('dpo.index');
+    }
+
+    /* Function for buyer SINGLE CATEGORY (buyer requests for quotation expiry date extension through DPO index page) */
+    public function quotationExpiredStatusUpdateSingleCategory($quoteEOrderID): RedirectResponse
+    {
+        Qoute::where(['e_order_id' => $quoteEOrderID, 'business_id' => auth()->user()->business_id])->update([
+            'request_status' => 1
+        ]);
+        session()->flash('message', __('portal.Request sent to extend expiry date'));
+
+        return redirect()->route('dpo.index');
     }
 
     /**

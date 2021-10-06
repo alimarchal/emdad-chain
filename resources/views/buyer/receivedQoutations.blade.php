@@ -205,7 +205,7 @@
                                     @else
                                         <tr>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{__('portal.RFQ')}}-{{ $placedRFQ->id }}
+                                                {{__('portal.RFQ')}}-{{ $placedRFQ->OrderItems[0]->id }}
                                             </td>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @php
@@ -497,7 +497,7 @@
                                         @else
                                             <tr>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{__('portal.RFQ')}}-{{ $placedRFQ->id }}
+                                                    {{__('portal.RFQ')}}-{{ $placedRFQ->OrderItems[0]->id }}
                                                 </td>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @php
