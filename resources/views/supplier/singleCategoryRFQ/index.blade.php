@@ -115,7 +115,7 @@
                                     {{-- Checking if any Quotation present for Single Category RFQ --}}
                                     @if(\App\Models\Qoute::where(['e_order_id' => $order->id, 'supplier_business_id' => auth()->user()->business_id])->first())
                                     @else
-                                        @if(isset($quotationCount) && $quotationCount > 0))
+                                        @if(isset($quotationCount) && $quotationCount > 0)
                                         <tr>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $loop->iteration }}

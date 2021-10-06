@@ -12,15 +12,25 @@ use App\Models\User;
 use App\Notifications\QuotationSent;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Validator;
 use League\CommonMark\Extension\SmartPunct\Quote;
 
 class QouteController extends Controller
 {
     public function store(Request $request)
     {
+        $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
+        Validator::make($request->all(), [
+            'expiry_date' => 'required|date|after_or_equal:'.$min5days
+        ])->validate();
+
+        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d h:i:s');
+        $request->merge(['expiry_date' => $expiryDate]);
+
         $buyer_id = User::where('business_id', $request->business_id)->first();
         $request->merge(['user_id' => $buyer_id->id]);
         $request->merge(['qoute_status' => 'Qouted']);
@@ -65,6 +75,14 @@ class QouteController extends Controller
     /* Saving Quotation response for Single Category RFQ */
     public function singleRFQQuotationStore(Request $request)
     {
+        $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
+        Validator::make($request->all(), [
+            'expiry_date' => 'required|date|after_or_equal:'.$min5days
+        ])->validate();
+
+        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d h:i:s');
+        $request->merge(['expiry_date' => $expiryDate]);
+
         $buyer_id = User::where('business_id', $request->business_id)->first();
         $request->merge(['user_id' => $buyer_id->id]);
         $request->merge(['qoute_status' => 'Qouted']);
@@ -108,6 +126,7 @@ class QouteController extends Controller
                     'total_cost' => $request->total_cost,
                     'note_for_customer' => $request->note_for_customer[$i],
                     'qoute_status' => $request->qoute_status,
+                    'expiry_date' => $request->expiry_date,
                     'warehouse_id' => $request->warehouse_id,
                     'rfq_type' => $request->rfq_type,
                     'status' => $request->status,
@@ -135,6 +154,7 @@ class QouteController extends Controller
                     'total_cost' => $request->total_cost,
                     'note_for_customer' => $request->note_for_customer[$i],
                     'qoute_status' => $request->qoute_status,
+                    'expiry_date' => $request->expiry_date,
                     'warehouse_id' => $request->warehouse_id,
                     'rfq_type' => $request->rfq_type,
                     'status' => $request->status,
@@ -268,7 +288,42 @@ class QouteController extends Controller
     {
         $user_id = auth()->user()->id;
 //        $collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 1])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->orWhere('qoute_status', 'Modified')->get();
-        $collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 1])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->get();
+//        $collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 1])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->get();
+        $collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 1])
+                            ->where(function ($query){
+                                $query->where(['qoute_status' => 'Qouted'])->where(['qoute_status_updated' => null])->orWhere(['qoute_status' => 'accepted']);
+                            })->get();
+
+        $quoted = array();
+        $accepted = array();
+        /* Separating Quotes which have dpo created  */
+        foreach ($collection as $col)
+        {
+            if ($col['qoute_status'] == 'Qouted')
+            {
+                $quoted[] = $col;
+            }
+            if ($col['qoute_status'] == 'accepted' )
+            {
+                $accepted[] = $col;
+            }
+        }
+        $quotedCollection = collect($quoted);
+        $acceptedCollection = collect($accepted);
+
+        $dpo = array();
+        /* Checking where quotes have DPO with pending status */
+        foreach ($acceptedCollection as $acceptedCol)
+        {
+            $dpoPresent = DraftPurchaseOrder::where('id', $acceptedCol->dpo)->where('status', 'pending')->first();
+            if ($dpoPresent)
+            {
+                $dpo[] = $acceptedCol;
+            }
+        }
+        $pendingDpo = collect($dpo);
+        $quotedQuotes = collect($quotedCollection->merge($pendingDpo));
+        $collection = $quotedQuotes;
 
         return view('supplier.supplier-qouted', compact('collection'));
     }
@@ -302,13 +357,156 @@ class QouteController extends Controller
         return view('supplier.supplier-qouted-PendingConfirmation', compact('collection'));
     }
 
+    /* Function for buyer MULTI CATEGORIES (buyer requests for quotation expiry date extension) */
+    public function quotationExpiredStatusUpdate($quoteID): RedirectResponse
+    {
+        Qoute::where(['id' => $quoteID, 'business_id' => auth()->user()->business_id])->update([
+            'request_status' => 1
+        ]);
+        session()->flash('message', __('portal.Request sent to extend expiry date'));
+
+        return redirect()->route('QoutationsBuyerReceived');
+    }
+
+    /* Function for Supplier MULTI CATEGORIES (supplier updates quotation response and accepts request for respective quotation expiry date extension) */
+    public function quotationExpiredStatusResponse(Request $request): RedirectResponse
+    {
+        $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
+        Validator::make($request->all(), [
+            'expiry_date' => 'required|date|after_or_equal:'.$min5days
+        ])->validate();
+
+        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d h:i:s');
+        Qoute::where(['id' => $request->quoteID, 'supplier_business_id' => auth()->user()->business_id])->update([
+            'expiry_date' => $expiryDate,
+            'request_status' => 0
+        ]);
+        session()->flash('message', __('portal.Expiry date extended successfully'));
+
+        return redirect()->route('QoutedRFQQouted');
+    }
+
+    /* Function for Supplier MULTI CATEGORIES (supplier updates quotation response and rejects request for respective quotation expiry date extension) */
+    public function quotationExpiredStatusRejectResponse($quoteID): RedirectResponse
+    {
+        /* Updating "qoute_updated_user_id" column inorder to keep a track record who rejected the extension request */
+        Qoute::where(['id' => decrypt($quoteID), 'supplier_business_id' => auth()->user()->business_id])->update([
+            'qoute_updated_user_id' => auth()->id(),
+            'qoute_status_updated' => 'Rejected',
+            'status' => 'expired'
+        ]);
+
+        $dpo = DraftPurchaseOrder::where('qoute_no', decrypt($quoteID))->first();
+        if (isset($dpo))
+        {
+            DraftPurchaseOrder::where('qoute_no', decrypt($quoteID))->update([
+                'po_status' => 'cancel',
+                'status' => 'cancel'
+            ]);
+        }
+
+        session()->flash('message', __('portal.Rejected request for expiry date extension'));
+
+        return redirect()->route('QoutedRFQQouted');
+    }
+
+    /* Function for buyer SINGLE CATEGORY (buyer requests for quotation expiry date extension) */
+    public function quotationExpiredStatusUpdateSingleCategory($quoteEOrderID): RedirectResponse
+    {
+        Qoute::where(['e_order_id' => $quoteEOrderID, 'business_id' => auth()->user()->business_id])->update([
+            'request_status' => 1
+        ]);
+        session()->flash('message', __('portal.Request sent to extend expiry date'));
+
+        return redirect()->route('QoutationsBuyerReceived');
+    }
+
+    /* Function for Supplier SINGLE CATEGORY (supplier updates quotation response and accepts request for respective quotation expiry date extension) */
+    public function quotationExpiredStatusResponseSingleCategory(Request $request): RedirectResponse
+    {
+        $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
+        Validator::make($request->all(), [
+            'expiry_date' => 'required|date|after_or_equal:'.$min5days
+        ])->validate();
+
+        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d h:i:s');
+        Qoute::where(['e_order_id' => $request->quoteEOrderID, 'supplier_business_id' => auth()->user()->business_id])->update([
+            'expiry_date' => $expiryDate,
+            'request_status' => 0
+        ]);
+        session()->flash('message', __('portal.Expiry date extended successfully'));
+
+        return redirect()->route('singleCategoryQuotedRFQQuoted');
+    }
+
+    /* Function for Supplier SINGLE CATEGORY (supplier updates quotation response and rejects request for respective quotation expiry date extension) */
+    public function quotationExpiredStatusRejectResponseSingleCategory($quoteEOrderID): RedirectResponse
+    {
+        /* Updating "qoute_updated_user_id" column inorder to keep a track record who rejected the extension request */
+        Qoute::where(['e_order_id' => decrypt($quoteEOrderID), 'supplier_business_id' => auth()->user()->business_id])->update([
+            'qoute_updated_user_id' => auth()->id(),
+            'qoute_status_updated' => 'Rejected',
+            'status' => 'expired'
+        ]);
+
+        $dpo = DraftPurchaseOrder::where('rfq_no', decrypt($quoteEOrderID))->first();
+        if (isset($dpo))
+        {
+            DraftPurchaseOrder::where('rfq_no', decrypt($quoteEOrderID))->update([
+                'po_status' => 'cancel',
+                'status' => 'cancel'
+            ]);
+        }
+        session()->flash('message', __('portal.Rejected request for expiry date extension'));
+
+        return redirect()->route('singleCategoryQuotedRFQQuoted');
+    }
+
     ################### Functions For Single Category RFQ Type For Supplier ##################
 
     public function singleCategoryQuotedRFQQuoted()
     {
         $user_id = auth()->user()->id;
-        $quoted = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->get();
+//        $quoted = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->get();
+//        $collection = $quoted->unique('e_order_id');
+
+        $quoted = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 0])
+                    ->where(function ($query){
+                        $query->where(['qoute_status' => 'Qouted'])->where(['qoute_status_updated' => null])->orWhere(['qoute_status' => 'accepted']);
+                    })->get();
+
         $collection = $quoted->unique('e_order_id');
+
+        $quoted = array();
+        $accepted = array();
+        /* Separating Quotes which have dpo created SINGLE CATEGORY */
+        foreach ($collection as $col)
+        {
+            if ($col['qoute_status'] == 'Qouted')
+            {
+                $quoted[] = $col;
+            }
+            if ($col['qoute_status'] == 'accepted' )
+            {
+                $accepted[] = $col;
+            }
+        }
+        $quotedCollection = collect($quoted);
+        $acceptedCollection = collect($accepted);
+
+        $dpo = array();
+        /* Checking where quotes have DPO with pending status SINGLE CATEGORY */
+        foreach ($acceptedCollection as $acceptedCol)
+        {
+            $dpoPresent = DraftPurchaseOrder::where('id', $acceptedCol->dpo)->where('status', 'pending')->first();
+            if ($dpoPresent)
+            {
+                $dpo[] = $acceptedCol;
+            }
+        }
+        $pendingDpo = collect($dpo);
+        $quotedQuotes = collect($quotedCollection->merge($pendingDpo));
+        $collection = $quotedQuotes;
 
         return view('supplier.singleCategoryRFQ.supplier-qouted', compact('collection'));
     }

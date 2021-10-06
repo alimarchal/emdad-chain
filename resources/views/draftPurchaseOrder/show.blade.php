@@ -158,12 +158,14 @@
                                 {{__('portal.We acknowledge that')}} {{$draftPurchaseOrder->buyer_business->business_name }}
                                             {{__('portal.agrees to deal with')}} {{$draftPurchaseOrder->supplier_business->business_name}}. <br>
                                 {{__('portal.Emdad has no responsibility with the kind of delivery and the source of finance for this delivery.')}}</span> <br>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                {{__('portal.Please read the note and check if you agree to proceed')}}
-                                            </label>
-                                        </div>
+                                        @if($draftPurchaseOrder->quote->expiry_date >= \Carbon\Carbon::now() && $draftPurchaseOrder->status != 'cancel')
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    {{__('portal.Please read the note and check if you agree to proceed')}}
+                                                </label>
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
                                         {{-- <strong>Delivery Information</strong><br>
@@ -192,6 +194,7 @@
                                     @else
                                         @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
                                             @if($draftPurchaseOrder->payment_term == 'Cash')
+                                                @if($draftPurchaseOrder->quote->expiry_date >= \Carbon\Carbon::now())
                                                 <form method="post" action="{{route('cashDpo.approved', $draftPurchaseOrder->id)}}" class="confirm">
                                                     @csrf
                                                     <input type="hidden" value="{{ $draftPurchaseOrder->rfq_no }}" name="rfq_no">
@@ -210,18 +213,23 @@
 
                                                     <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">{{__('portal.Approve DPO')}}</button>
                                                 </form>
+                                                @endif
                                             @else
+                                                @if($draftPurchaseOrder->quote->expiry_date >= \Carbon\Carbon::now())
                                                 <form method="POST" action="{{route('dpo.approved', $draftPurchaseOrder->id) }}" class="confirm">
                                                     @csrf
                                                     <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
                                                         {{__('portal.Approve DPO')}}
                                                     </button>
                                                 </form>
+                                                @endif
                                             @endif
-                                            <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}" onclick="cancel()"
-                                               class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                {{__('portal.Cancel DPO')}}
-                                            </a>
+                                            @if($draftPurchaseOrder->quote->expiry_date >= \Carbon\Carbon::now())
+                                                <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}" onclick="cancel()"
+                                                   class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                    {{__('portal.Cancel DPO')}}
+                                                </a>
+                                            @endif
                                         @endif
                                         {{-- <a href="{{ route('dpo.rejected', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Reject to Edit</a> --}}
                                     @endif
@@ -420,15 +428,17 @@
                                         <strong>{{__('portal.Mobile Number for OTP')}}: </strong> {{ $draftPurchaseOrder->otp_mobile_number }} <br>
                                         <strong>{{__('portal.Delivery Address')}}: </strong> {{ strip_tags($draftPurchaseOrder->delivery_address) }} <br>
                                         <strong class="text-red-900">{{__('portal.Note')}}: </strong> <span class="text-red-700">
-                                {{__('portal.We acknowledge that')}} {{$draftPurchaseOrder->buyer_business->business_name }}
-                                            {{__('portal.agrees to deal with')}} {{$draftPurchaseOrder->supplier_business->business_name}}. <br>
-                                {{__('portal.Emdad has no responsibility with the kind of delivery and the source of finance for this delivery.')}}</span> <br>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                {{__('portal.Please read the note and check if you agree to proceed')}}
-                                            </label>
-                                        </div>
+                                            {{__('portal.We acknowledge that')}} {{$draftPurchaseOrder->buyer_business->business_name }}
+                                                        {{__('portal.agrees to deal with')}} {{$draftPurchaseOrder->supplier_business->business_name}}. <br>
+                                            {{__('portal.Emdad has no responsibility with the kind of delivery and the source of finance for this delivery.')}}</span> <br>
+                                        @if($draftPurchaseOrder->quote->expiry_date >= \Carbon\Carbon::now() && $draftPurchaseOrder->status != 'cancel')
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    {{__('portal.Please read the note and check if you agree to proceed')}}
+                                                </label>
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
                                         {{-- <strong>Delivery Information</strong><br>
@@ -457,36 +467,42 @@
                                     @else
                                         @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
                                             @if($draftPurchaseOrder->payment_term == 'Cash')
-                                                <form method="post" action="{{route('cashDpo.approved', $draftPurchaseOrder->id)}}" class="confirm">
-                                                    @csrf
-                                                    <input type="hidden" value="{{ $draftPurchaseOrder->rfq_no }}" name="rfq_no">
-                                                    <input type="hidden" value="{{ $draftPurchaseOrder->rfq_item_no }}" name="rfq_item_no">
-                                                    <input type="hidden" value="{{ $draftPurchaseOrder->qoute_no }}" name="qoute_no">
-                                                    <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
-                                                    <input type="hidden" value="{{ $draftPurchaseOrder->user_id }}" name="buyer_user_id">
-                                                    <input type="hidden" value="{{ $draftPurchaseOrder->business_id }}" name="buyer_business_id">
-                                                    <input type="hidden" value="{{ $draftPurchaseOrder->supplier_user_id }}" name="supplier_user_id">
-                                                    <input type="hidden" value="{{ $draftPurchaseOrder->supplier_business_id }}" name="supplier_business_id">
-                                                    <input type="hidden" value="{{ $draftPurchaseOrder->payment_term }}" name="payment_method">
-                                                    <input type="hidden" value="{{ $draftPurchaseOrder->shipment_cost }}" name="shipment_cost">
-                                                    <input type="hidden" value="{{ $draftPurchaseOrder->vat }}" name="vat">
-                                                    <input type="hidden" value="{{ $draftPurchaseOrder->total_cost }}" name="total_cost">
-                                                    <input type="hidden" value="{{ $draftPurchaseOrder->ship_to_address }}" name="ship_to_address">
+                                                @if($draftPurchaseOrder->quote->expiry_date >= \Carbon\Carbon::now())
+                                                    <form method="post" action="{{route('cashDpo.approved', $draftPurchaseOrder->id)}}" class="confirm">
+                                                        @csrf
+                                                        <input type="hidden" value="{{ $draftPurchaseOrder->rfq_no }}" name="rfq_no">
+                                                        <input type="hidden" value="{{ $draftPurchaseOrder->rfq_item_no }}" name="rfq_item_no">
+                                                        <input type="hidden" value="{{ $draftPurchaseOrder->qoute_no }}" name="qoute_no">
+                                                        <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
+                                                        <input type="hidden" value="{{ $draftPurchaseOrder->user_id }}" name="buyer_user_id">
+                                                        <input type="hidden" value="{{ $draftPurchaseOrder->business_id }}" name="buyer_business_id">
+                                                        <input type="hidden" value="{{ $draftPurchaseOrder->supplier_user_id }}" name="supplier_user_id">
+                                                        <input type="hidden" value="{{ $draftPurchaseOrder->supplier_business_id }}" name="supplier_business_id">
+                                                        <input type="hidden" value="{{ $draftPurchaseOrder->payment_term }}" name="payment_method">
+                                                        <input type="hidden" value="{{ $draftPurchaseOrder->shipment_cost }}" name="shipment_cost">
+                                                        <input type="hidden" value="{{ $draftPurchaseOrder->vat }}" name="vat">
+                                                        <input type="hidden" value="{{ $draftPurchaseOrder->total_cost }}" name="total_cost">
+                                                        <input type="hidden" value="{{ $draftPurchaseOrder->ship_to_address }}" name="ship_to_address">
 
-                                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">{{__('portal.Approve DPO')}}</button>
-                                                </form>
+                                                        <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">{{__('portal.Approve DPO')}}</button>
+                                                    </form>
+                                                @endif
                                             @else
-                                                <form method="POST" action="{{route('dpo.approved', $draftPurchaseOrder->id) }}" class="confirm">
-                                                    @csrf
-                                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
-                                                        {{__('portal.Approve DPO')}}
-                                                    </button>
-                                                </form>
+                                                @if($draftPurchaseOrder->quote->expiry_date >= \Carbon\Carbon::now())
+                                                    <form method="POST" action="{{route('dpo.approved', $draftPurchaseOrder->id) }}" class="confirm">
+                                                        @csrf
+                                                        <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                            {{__('portal.Approve DPO')}}
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             @endif
-                                            <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}" onclick="cancel()"
-                                               class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                {{__('portal.Cancel DPO')}}
-                                            </a>
+                                            @if($draftPurchaseOrder->quote->expiry_date >= \Carbon\Carbon::now())
+                                                <a href="{{ route('dpo.cancel', $draftPurchaseOrder->id) }}" onclick="cancel()"
+                                                   class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                    {{__('portal.Cancel DPO')}}
+                                                </a>
+                                            @endif
                                         @endif
                                         {{-- <a href="{{ route('dpo.rejected', $draftPurchaseOrder->id) }}" class="inline-flex  mx-4  items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">Reject to Edit</a> --}}
                                     @endif

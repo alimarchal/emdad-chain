@@ -1,3 +1,22 @@
+@section('headerScripts')
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        #datepicker {
+            width: 100%;
+            padding: 10px;
+            cursor: default;
+            /*text-transform: uppercase;*/
+            font-size: 13px;
+            background: #FFFFFF;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            border: solid 1px #d2d6dc;
+            box-shadow: none;
+        }
+    </style>
+@endsection
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <style type="text/css">
@@ -47,12 +66,21 @@
 
         @if (session()->has('message'))
             <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                <strong class="mr-1">{{ session('message') }}</strong>
+                <strong class="mr-3">{{ session('message') }}</strong>
                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                     <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                 </button>
             </div>
         @endif
+
+        @foreach ($errors->get('expiry_date') as $error)
+            <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                <strong class="mr-1">{{ $error }}</strong>
+                <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                    <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                </button>
+            </div>
+        @endforeach
 
         <div class="flex flex-col bg-white rounded">
             <div class="p-4"
@@ -325,41 +353,6 @@
                                     </td>
 
                                 </tr>
-
-                                {{--@if($eOrderItem->required_sample == 'Yes')
-                                    <tr>
-                                        <td colspan="9">
-                                            <p class="py-2 font-bold text-center text-2xl">Sample Information {{$loop->iteration}}</p>
-                                            <div class="flex flex-wrap overflow-hidden xl:-mx-1">
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Samples
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="sample_information[]"  min="0" step="any" autocomplete="size" value="{{$quoteInfo->sample_information}}" required>
-                                                </div>
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Sample Unit
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_unit[]"  min="0" autocomplete="size" value="{{$quoteInfo->sample_unit}}" required>
-                                                </div>
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Quantity
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_security_charges[]"  min="0" autocomplete="size" value="{{$quoteInfo->sample_security_charges}}" required>
-                                                </div>
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Sample Charges Per Unit
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_charges_per_unit[]"  min="0" autocomplete="size" value="{{$quoteInfo->sample_charges_per_unit}}" required>
-                                                </div>
-                                            </div>
-
-                                        </td>
-                                    </tr>
-                                @endif--}}
                             @endforeach
                             <tr class="mt-2">
                                 <td colspan="12">
@@ -377,13 +370,27 @@
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="{{__('portal.Total Cost')}}">
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size"  value="{{$collection->total_cost}}" readonly placeholder="{{__('portal.Total Cost')}}">
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                             {{__('portal.Calculate Total Cost')}}
                                         </a>
                                     </div>
+                                </td>
+                            </tr>
+
+                            <tr class="mt-2">
+                                <td colspan="12">
+                                    <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
+                                </td>
+                            </tr>
+                            <tr class="mt-2">
+                                <td colspan="3">
+                                    <label class="block font-medium text-sm text-gray-700" for="datepicker">
+                                        {{__('portal.Quotation valid upto')}} @include('misc.required')
+                                    </label>
+                                    <input type="text" id="datepicker" class="block mt-1 w-full" name="expiry_date" value="{{$collection->expiry_date}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)">
                                 </td>
                             </tr>
 
@@ -458,6 +465,7 @@
 
                         <form name="form" method="POST" action="{{ route('singleRFQQuotationStore') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
+                            @php $loopIndex = 0; @endphp
                             @foreach($eOrderItems as $eOrderItem)
                                 <tr>
                                     <div class="hidden_fields">
@@ -509,49 +517,16 @@
 
                                     <td>
                                         <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
-                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit" required>
+                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit" value="{{old('quote_price_per_quantity.'.$loopIndex)}}" required>
                                         {{--                                    <span class="text-red-800 priceError" style="display: none">Required</span>--}}
                                     </td>
 
                                     <td>
-                                        <textarea name="note_for_customer[]" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}"></textarea>
+                                        <textarea name="note_for_customer[]" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}">{{old('note_for_customer.'.$loopIndex)}}</textarea>
                                     </td>
 
                                 </tr>
-                                {{--@if($eOrderItem->required_sample == 'Yes')
-                                    <tr>
-                                        <td colspan="9">
-                                            <p class="py-2 font-bold text-center text-2xl">Sample Information {{$loop->iteration}}</p>
-                                            <div class="flex flex-wrap overflow-hidden xl:-mx-1">
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Samples
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="sample_information[]"  min="0" step="any" autocomplete="size" required>
-                                                </div>
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Sample Unit
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_unit[]"  min="0" autocomplete="size" required>
-                                                </div>
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Quantity
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_security_charges[]"  min="0" autocomplete="size" required>
-                                                </div>
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Sample Charges Per Unit
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_charges_per_unit[]"  min="0" autocomplete="size" required>
-                                                </div>
-                                            </div>
-
-                                        </td>
-                                    </tr>
-                                @endif--}}
+                                @php $loopIndex++; @endphp
                             @endforeach
 
                             <tr class="mt-2">
@@ -559,15 +534,15 @@
                                     {{--                                <div class="flex flex-wrap overflow-hidden xl:-mx-1">--}}
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time (In Days)')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days"  min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Time')}}" >
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days" value="{{old('shipping_time_in_days')}}" min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Time')}}" >
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Cost')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost"  min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Cost')}}" >
+                                        <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost" value="{{old('shipment_cost')}}" min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Cost')}}" >
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.VAT (in %)')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15"  autocomplete="size" required placeholder="{{__('portal.VAT (in %)')}}">
+                                        <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15"  value="{{old('VAT')}}" autocomplete="size" required placeholder="{{__('portal.VAT (in %)')}}">
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
@@ -579,6 +554,20 @@
                                         </a>
                                     </div>
                                     {{--                                </div>--}}
+                                </td>
+                            </tr>
+
+                            <tr class="mt-2">
+                                <td colspan="12">
+                                    <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
+                                </td>
+                            </tr>
+                            <tr class="mt-2">
+                                <td colspan="3">
+                                    <label class="block font-medium text-sm text-gray-700" for="datepicker">
+                                        {{__('portal.Quotation valid upto')}} @include('misc.required')
+                                    </label>
+                                    <input type="text" id="datepicker" class="block mt-1 w-full" name="expiry_date" value="{{old('expiry_date')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)">
                                 </td>
                             </tr>
 
@@ -655,6 +644,15 @@
                 </button>
             </div>
         @endif
+
+        @foreach ($errors->get('expiry_date') as $error)
+            <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                <strong class="mr-1">{{ $error }}</strong>
+                <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                    <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                </button>
+            </div>
+        @endforeach
 
         <div class="flex flex-col bg-white rounded">
             <div class="p-4"
@@ -926,41 +924,6 @@
                                     </td>
 
                                 </tr>
-
-                                {{--@if($eOrderItem->required_sample == 'Yes')
-                                    <tr>
-                                        <td colspan="9">
-                                            <p class="py-2 font-bold text-center text-2xl">Sample Information {{$loop->iteration}}</p>
-                                            <div class="flex flex-wrap overflow-hidden xl:-mx-1">
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Samples
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="sample_information[]"  min="0" step="any" autocomplete="size" value="{{$quoteInfo->sample_information}}" required>
-                                                </div>
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Sample Unit
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_unit[]"  min="0" autocomplete="size" value="{{$quoteInfo->sample_unit}}" required>
-                                                </div>
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Quantity
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_security_charges[]"  min="0" autocomplete="size" value="{{$quoteInfo->sample_security_charges}}" required>
-                                                </div>
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Sample Charges Per Unit
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_charges_per_unit[]"  min="0" autocomplete="size" value="{{$quoteInfo->sample_charges_per_unit}}" required>
-                                                </div>
-                                            </div>
-
-                                        </td>
-                                    </tr>
-                                @endif--}}
                             @endforeach
                             <tr class="mt-2">
                                 <td colspan="12">
@@ -978,13 +941,27 @@
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="{{__('portal.Total Cost')}}">
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly value="{{$collection->total_cost}}" placeholder="{{__('portal.Total Cost')}}">
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 hover:text-white active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                             {{__('portal.Calculate Total Cost')}}
                                         </a>
                                     </div>
+                                </td>
+                            </tr>
+
+                            <tr class="mt-2">
+                                <td colspan="12">
+                                    <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
+                                </td>
+                            </tr>
+                            <tr class="mt-2">
+                                <td colspan="3">
+                                    <label class="block font-medium text-sm text-gray-700" for="datepicker">
+                                        {{__('portal.Quotation valid upto')}} @include('misc.required')
+                                    </label>
+                                    <input type="text" id="datepicker" class="block mt-1 w-full" name="expiry_date" value="{{$collection->expiry_date}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)">
                                 </td>
                             </tr>
 
@@ -1002,6 +979,7 @@
 
                         <form name="form" method="POST" action="{{ route('singleRFQQuotationStore') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
+                            @php $loopIndex = 0; @endphp
                             @foreach($eOrderItems as $eOrderItem)
                                 <tr>
                                     <div class="hidden_fields">
@@ -1053,49 +1031,16 @@
 
                                     <td>
                                         <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
-                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit" required>
+                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit"  value="{{old('quote_price_per_quantity.'.$loopIndex)}}" required>
                                         {{--                                    <span class="text-red-800 priceError" style="display: none">Required</span>--}}
                                     </td>
 
                                     <td>
-                                        <textarea name="note_for_customer[]" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}"></textarea>
+                                        <textarea name="note_for_customer[]" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}">{{old('note_for_customer.'.$loopIndex)}}</textarea>
                                     </td>
 
                                 </tr>
-                                {{--@if($eOrderItem->required_sample == 'Yes')
-                                    <tr>
-                                        <td colspan="9">
-                                            <p class="py-2 font-bold text-center text-2xl">Sample Information {{$loop->iteration}}</p>
-                                            <div class="flex flex-wrap overflow-hidden xl:-mx-1">
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Samples
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="number" name="sample_information[]"  min="0" step="any" autocomplete="size" required>
-                                                </div>
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Sample Unit
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_unit[]"  min="0" autocomplete="size" required>
-                                                </div>
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Quantity
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_security_charges[]"  min="0" autocomplete="size" required>
-                                                </div>
-                                                <div class="w-full overflow-hidden lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                                    <label class="block font-medium text-sm text-gray-700 mb-1" for="size">
-                                                        Sample Charges Per Unit
-                                                    </label>
-                                                    <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" name="sample_charges_per_unit[]"  min="0" autocomplete="size" required>
-                                                </div>
-                                            </div>
-
-                                        </td>
-                                    </tr>
-                                @endif--}}
+                                @php $loopIndex++; @endphp
                             @endforeach
 
                             <tr class="mt-2">
@@ -1103,15 +1048,15 @@
                                     {{--                                <div class="flex flex-wrap overflow-hidden xl:-mx-1">--}}
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time (In Days)')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days"  min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Time')}}" >
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days" value="{{old('shipping_time_in_days')}}"  min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Time')}}" >
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Cost')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost"  min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Cost')}}" >
+                                        <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost" value="{{old('shipment_cost')}}"  min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Cost')}}" >
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.VAT (in %)')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15"  autocomplete="size" required placeholder="{{__('portal.VAT (in %)')}}">
+                                        <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15"  value="{{old('VAT')}}" autocomplete="size" required placeholder="{{__('portal.VAT (in %)')}}">
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
@@ -1123,6 +1068,20 @@
                                         </a>
                                     </div>
                                     {{--                                </div>--}}
+                                </td>
+                            </tr>
+
+                            <tr class="mt-2">
+                                <td colspan="12">
+                                    <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
+                                </td>
+                            </tr>
+                            <tr class="mt-2">
+                                <td colspan="3">
+                                    <label class="block font-medium text-sm text-gray-700" for="datepicker">
+                                        {{__('portal.Quotation valid upto')}} @include('misc.required')
+                                    </label>
+                                    <input type="text" id="datepicker" class="block mt-1 w-full" name="expiry_date" value="{{old('expiry_date')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)">
                                 </td>
                             </tr>
 
@@ -1237,4 +1196,15 @@
         });
 
     }
+
+    $( function() {
+        $( "#datepicker" ).datepicker({
+            dateFormat: 'mm/dd/yy',
+            changeMonth: true,
+            changeYear: true,
+            minDate: +5,
+            maxDate: +90,
+            clear: true,
+        }).attr('readonly', 'readonly');
+    } );
 </script>

@@ -120,12 +120,12 @@
         <tbody class="bg-white divide-y divide-black border-1 border-black">
         @foreach($quotes as $quote)
         <tr>
-            <td  style="text-align: center">1</td>
+            <td  style="text-align: center">{{$loop->iteration}}</td>
             <td  style="text-align: center">{{ $quote->orderItem->description }}</td>
-            <td  style="text-align: center">{{ $quote->note_for_customer }}</td>
+            <td  style="text-align: center"> @if(isset($quote->note_for_customer)) {{ $quote->note_for_customer }} @else N/A @endif </td>
             <td  style="text-align: center">{{ $quote->quote_price_per_quantity }} SAR</td>
             <td  style="text-align: center">{{ $quote->quote_quantity }}</td>
-            <td  style="text-align: center">{{ $quote->total_cost }} SAR</td>
+            <td  style="text-align: center">{{ number_format($quote->quote_price_per_quantity * $quote->quote_quantity) }} SAR</td>
         </tr>
         @endforeach
         </tbody>

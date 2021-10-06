@@ -21,7 +21,7 @@
         </div>
 
         @if ($collection->count())
-            <div class="flex flex-col bg-white ">
+            <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -63,6 +63,11 @@
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Created At')}}
                                         </th>
+
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Quotation valid upto')}}
+                                        </th>
+
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Action')}}
                                         </th>
@@ -133,15 +138,33 @@
                                                     {{ $quote->created_at->format('d-m-Y') }}
                                                 </td>
 
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    {{ \Carbon\Carbon::parse($quote->expiry_date)->format('d-m-Y') }}
+                                                </td>
+
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if($quote->qoute_status_updated == 'Rejected')
                                                         <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                             {{__('portal.Rejected')}}
                                                         </a>
                                                     @else
-                                                        <a href="{{ route('singleCategoryRFQItemByID', $quote) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
-                                                            {{__('portal.Respond')}}
-                                                        </a>
+                                                        @if($quote->expiry_date < \Carbon\Carbon::now() && $quote->request_status == 1)
+                                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                                {{__('portal.You have asked for extension in expiry date for this quotation.')}}
+                                                            </a>
+                                                        @elseif($quote->expiry_date >= \Carbon\Carbon::now())
+                                                            {{-- Below php tag is checking whether any extension request is send to supplier for any quotation or not if yes buyer cannot respond to any quotation --}}
+                                                            @php $requestStatus = $collection->sortBy('total_cost')->take(2)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
+                                                            @if(!$present)
+                                                                <a href="{{ route('singleCategoryRFQItemByID', $quote) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
+                                                                    {{__('portal.Respond')}}
+                                                                </a>
+                                                            @endif
+                                                        @elseif($quote->expiry_date < \Carbon\Carbon::now() && $quote->request_status == 0)
+                                                            <a href="{{ route('quotationExpiredStatusUpdateSingleCategory', $quote->e_order_id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                {{__('portal.Quotation Expired')}}
+                                                            </a>
+                                                        @endif
                                                     @endif
                                                 </td>
 
@@ -209,15 +232,33 @@
                                                     {{ $quote->created_at->format('d-m-Y') }}
                                                 </td>
 
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    {{ \Carbon\Carbon::parse($quote->expiry_date)->format('d-m-Y') }}
+                                                </td>
+
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if($quote->qoute_status_updated == 'Rejected')
                                                         <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                             {{__('portal.Rejected')}}
                                                         </a>
                                                     @else
-                                                        <a href="{{ route('singleCategoryRFQItemByID', $quote) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
-                                                            {{__('portal.Respond')}}
-                                                        </a>
+                                                        @if($quote->expiry_date < \Carbon\Carbon::now() && $quote->request_status == 1)
+                                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                                {{__('portal.You have asked for extension in expiry date for this quotation.')}}
+                                                            </a>
+                                                        @elseif($quote->expiry_date >= \Carbon\Carbon::now())
+                                                            {{-- Below php tag is checking whether any extension request is send to supplier for any quotation or not if yes buyer cannot respond to any quotation --}}
+                                                            @php $requestStatus = $collection->sortBy('total_cost')->take(3)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
+                                                            @if(!$present)
+                                                                <a href="{{ route('singleCategoryRFQItemByID', $quote) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
+                                                                    {{__('portal.Respond')}}
+                                                                </a>
+                                                            @endif
+                                                        @elseif($quote->expiry_date < \Carbon\Carbon::now() && $quote->request_status == 0)
+                                                            <a href="{{ route('quotationExpiredStatusUpdateSingleCategory', $quote->e_order_id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                {{__('portal.Quotation Expired')}}
+                                                            </a>
+                                                        @endif
                                                     @endif
                                                 </td>
 
@@ -285,15 +326,33 @@
                                                     {{ $quote->created_at->format('d-m-Y') }}
                                                 </td>
 
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    {{ \Carbon\Carbon::parse($quote->expiry_date)->format('d-m-Y') }}
+                                                </td>
+
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if($quote->qoute_status_updated == 'Rejected')
                                                         <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                             {{__('portal.Rejected')}}
                                                         </a>
                                                     @else
-                                                        <a href="{{ route('singleCategoryRFQItemByID', $quote) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
-                                                            {{__('portal.Respond')}}
-                                                        </a>
+                                                        @if($quote->expiry_date < \Carbon\Carbon::now() && $quote->request_status == 1)
+                                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                                {{__('portal.You have asked for extension in expiry date for this quotation.')}}
+                                                            </a>
+                                                        @elseif($quote->expiry_date >= \Carbon\Carbon::now())
+                                                            {{-- Below php tag is checking whether any extension request is send to supplier for any quotation or not if yes buyer cannot respond to any quotation --}}
+                                                            @php $requestStatus = $collection->sortBy('total_cost')->take(5)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
+                                                            @if(!$present)
+                                                                <a href="{{ route('singleCategoryRFQItemByID', $quote) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
+                                                                    {{__('portal.Respond')}}
+                                                                </a>
+                                                            @endif
+                                                        @elseif($quote->expiry_date < \Carbon\Carbon::now() && $quote->request_status == 0)
+                                                            <a href="{{ route('quotationExpiredStatusUpdateSingleCategory', $quote->e_order_id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                {{__('portal.Quotation Expired')}}
+                                                            </a>
+                                                        @endif
                                                     @endif
                                                 </td>
 
@@ -315,6 +374,14 @@
             </a>
         </div>
     </x-app-layout>
+
+    <script>
+        function request() {
+            if(!confirm('Are you sure to request Quotation extension?')){
+                event.preventDefault();
+            }
+        }
+    </script>
 @else
     <x-app-layout>
         <x-slot name="header">
@@ -338,7 +405,7 @@
         </div>
 
         @if ($collection->count())
-            <div class="flex flex-col bg-white ">
+            <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -380,6 +447,11 @@
                                     <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Created At')}}
                                     </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Quotation valid upto')}}
+                                    </th>
+
                                     <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Action')}}
                                     </th>
@@ -450,15 +522,33 @@
                                                     {{ $quote->created_at->format('d-m-Y') }}
                                                 </td>
 
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    {{ \Carbon\Carbon::parse($quote->expiry_date)->format('d-m-Y') }}
+                                                </td>
+
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if($quote->qoute_status_updated == 'Rejected')
                                                         <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                             {{__('portal.Rejected')}}
                                                         </a>
                                                     @else
-                                                        <a href="{{ route('singleCategoryRFQItemByID', $quote) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 hover:text-white focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
-                                                            {{__('portal.Respond')}}
-                                                        </a>
+                                                        @if($quote->expiry_date < \Carbon\Carbon::now() && $quote->request_status == 1)
+                                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                                {{__('portal.You have asked for extension in expiry date for this quotation.')}}
+                                                            </a>
+                                                        @elseif($quote->expiry_date >= \Carbon\Carbon::now())
+                                                            {{-- Below php tag is checking whether any extension request is send to supplier for any quotation or not if yes buyer cannot respond to any quotation --}}
+                                                            @php $requestStatus = $collection->sortBy('total_cost')->take(2)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
+                                                            @if(!$present)
+                                                                <a href="{{ route('singleCategoryRFQItemByID', $quote) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 hover:text-white focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
+                                                                    {{__('portal.Respond')}}
+                                                                </a>
+                                                            @endif
+                                                        @elseif($quote->expiry_date < \Carbon\Carbon::now() && $quote->request_status == 0)
+                                                            <a href="{{ route('quotationExpiredStatusUpdateSingleCategory', $quote->e_order_id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                {{__('portal.Quotation Expired')}}
+                                                            </a>
+                                                        @endif
                                                     @endif
                                                 </td>
 
@@ -526,15 +616,33 @@
                                                     {{ $quote->created_at->format('d-m-Y') }}
                                                 </td>
 
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    {{ \Carbon\Carbon::parse($quote->expiry_date)->format('d-m-Y') }}
+                                                </td>
+
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if($quote->qoute_status_updated == 'Rejected')
-                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white  focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                             {{__('portal.Rejected')}}
                                                         </a>
                                                     @else
-                                                        <a href="{{ route('singleCategoryRFQItemByID', $quote) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 hover:text-white focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
-                                                            {{__('portal.Respond')}}
-                                                        </a>
+                                                        @if($quote->expiry_date < \Carbon\Carbon::now() && $quote->request_status == 1)
+                                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                                {{__('portal.You have asked for extension in expiry date for this quotation.')}}
+                                                            </a>
+                                                        @elseif($quote->expiry_date >= \Carbon\Carbon::now())
+                                                            {{-- Below php tag is checking whether any extension request is send to supplier for any quotation or not if yes buyer cannot respond to any quotation --}}
+                                                            @php $requestStatus = $collection->sortBy('total_cost')->take(3)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
+                                                            @if(!$present)
+                                                                <a href="{{ route('singleCategoryRFQItemByID', $quote) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 hover:text-white focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
+                                                                    {{__('portal.Respond')}}
+                                                                </a>
+                                                            @endif
+                                                        @elseif($quote->expiry_date < \Carbon\Carbon::now() && $quote->request_status == 0)
+                                                            <a href="{{ route('quotationExpiredStatusUpdateSingleCategory', $quote->e_order_id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                {{__('portal.Quotation Expired')}}
+                                                            </a>
+                                                        @endif
                                                     @endif
                                                 </td>
 
@@ -602,15 +710,33 @@
                                                     {{ $quote->created_at->format('d-m-Y') }}
                                                 </td>
 
+                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                    {{ \Carbon\Carbon::parse($quote->expiry_date)->format('d-m-Y') }}
+                                                </td>
+
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if($quote->qoute_status_updated == 'Rejected')
                                                         <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                             {{__('portal.Rejected')}}
                                                         </a>
                                                     @else
-                                                        <a href="{{ route('singleCategoryRFQItemByID', $quote) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 hover:text-white focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
-                                                            {{__('portal.Respond')}}
-                                                        </a>
+                                                        @if($quote->expiry_date < \Carbon\Carbon::now() && $quote->request_status == 1)
+                                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                                {{__('portal.You have asked for extension in expiry date for this quotation.')}}
+                                                            </a>
+                                                        @elseif($quote->expiry_date >= \Carbon\Carbon::now())
+                                                            {{-- Below php tag is checking whether any extension request is send to supplier for any quotation or not if yes buyer cannot respond to any quotation --}}
+                                                            @php $requestStatus = $collection->sortBy('total_cost')->take(5)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
+                                                            @if(!$present)
+                                                                <a href="{{ route('singleCategoryRFQItemByID', $quote) }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 hover:text-white focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150">
+                                                                    {{__('portal.Respond')}}
+                                                                </a>
+                                                            @endif
+                                                        @elseif($quote->expiry_date < \Carbon\Carbon::now() && $quote->request_status == 0)
+                                                            <a href="{{ route('quotationExpiredStatusUpdateSingleCategory', $quote->e_order_id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                {{__('portal.Quotation Expired')}}
+                                                            </a>
+                                                        @endif
                                                     @endif
                                                 </td>
 
@@ -632,4 +758,12 @@
             </a>
         </div>
     </x-app-layout>
+
+    <script>
+        function request() {
+            if(!confirm('Are you sure to request Quotation extension?')){
+                event.preventDefault();
+            }
+        }
+    </script>
 @endif

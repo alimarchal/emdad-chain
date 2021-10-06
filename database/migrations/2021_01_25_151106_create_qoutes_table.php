@@ -29,6 +29,8 @@ class CreateQoutesTable extends Migration
             $table->string('VAT')->nullable();
             $table->string('total_cost')->nullable();
             $table->text('note_for_customer')->nullable();
+            $table->dateTime('expiry_date');
+            $table->integer('request_status')->default(0);  /* 0 for not requested and 1 for requested */
             $table->string('qoute_status')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();

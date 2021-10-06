@@ -162,13 +162,14 @@
                                             {{__('portal.agrees to deal with')}} {{$draftPurchaseOrders[0]->supplier_business->business_name}}. <br>
                                 {{__('portal.Emdad has no responsibility with the kind of delivery and the source of finance for this delivery.')}}</span> <br>
 
-                                        <label for="acknowledge" class="flex items-center">
-                                            <input id="acknowledge" type="checkbox" class="form-checkbox" name="note">
-                                            <span class="ml-2">
-                                        {{__('portal.Please read the note and check if you agree to proceed')}}
-                                    </span>
-                                        </label>
-
+                                        @if($draftPurchaseOrders[0]->quote->expiry_date >= \Carbon\Carbon::now() && $draftPurchaseOrders[0]->status != 'cancel')
+                                            <label for="acknowledge" class="flex items-center">
+                                                <input id="acknowledge" type="checkbox" class="form-checkbox" name="note">
+                                                <span class="ml-2">
+                                                    {{__('portal.Please read the note and check if you agree to proceed')}}
+                                                </span>
+                                            </label>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -188,18 +189,23 @@
                                         <span class="px-3 py-3 bg-red-600 text-white rounded uppercase">{{__('portal.Rejected for Edit')}}</span>
                                     @else
                                         @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
-                                            <form method="POST" action="{{route('singleCategoryApproved', [ 'rfqNo' => $draftPurchaseOrders[0]->rfq_no, 'supplierBusinessID' => $draftPurchaseOrders[0]->supplier_business_id]) }}" class="confirm">
-                                                @csrf
-                                                <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
-                                                    {{__('portal.Approve DPO')}}
-                                                </button>
-                                            </form>
-                                            <form method="POST" action="{{route('singleCategoryCancel', [ 'rfqNo' => $draftPurchaseOrders[0]->rfq_no, 'supplierBusinessID' => $draftPurchaseOrders[0]->supplier_business_id]) }}"  class="confirm-delete">
-                                                @csrf
-                                                <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                    {{__('portal.Cancel DPO')}}
-                                                </button>
-                                            </form>
+                                            @if($draftPurchaseOrder->quote->expiry_date >= \Carbon\Carbon::now())
+                                                <form method="POST" action="{{route('singleCategoryApproved', [ 'rfqNo' => $draftPurchaseOrders[0]->rfq_no, 'supplierBusinessID' => $draftPurchaseOrders[0]->supplier_business_id]) }}" class="confirm">
+                                                    @csrf
+                                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                        {{__('portal.Approve DPO')}}
+                                                    </button>
+                                                </form>
+                                            @endif
+
+                                            @if($draftPurchaseOrder->quote->expiry_date >= \Carbon\Carbon::now())
+                                                <form method="POST" action="{{route('singleCategoryCancel', [ 'rfqNo' => $draftPurchaseOrders[0]->rfq_no, 'supplierBusinessID' => $draftPurchaseOrders[0]->supplier_business_id]) }}"  class="confirm-delete">
+                                                    @csrf
+                                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                        {{__('portal.Cancel DPO')}}
+                                                    </button>
+                                                </form>
+                                            @endif
                                         @endif
                                     @endif
 
@@ -391,10 +397,10 @@
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                         @php $subtotal = 0;
-                                foreach ($draftPurchaseOrders as $draftPurchaseOrder)
-                                {
-                                    $subtotal += $draftPurchaseOrder->quantity * $draftPurchaseOrder->unit_price;
-                                }
+                                            foreach ($draftPurchaseOrders as $draftPurchaseOrder)
+                                            {
+                                                $subtotal += $draftPurchaseOrder->quantity * $draftPurchaseOrder->unit_price;
+                                            }
                                         @endphp
                                         <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($subtotal, 2) }} {{__('portal.SAR')}}<br>
                                         <strong>{{__('portal.VAT')}} %: &nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->vat, 2) }} {{__('portal.SAR')}}<br>
@@ -413,14 +419,16 @@
                                 {{__('portal.We acknowledge that')}} {{$draftPurchaseOrders[0]->buyer_business->business_name }}
                                             {{__('portal.agrees to deal with')}} {{$draftPurchaseOrders[0]->supplier_business->business_name}}. <br>
                                 {{__('portal.Emdad has no responsibility with the kind of delivery and the source of finance for this delivery.')}}</span> <br>
-                                        <div class="block mt-4 ml-4">
-                                            <label for="acknowledge" class="flex items-center">
-                                                <input id="acknowledge" type="checkbox" class="form-checkbox" name="note">
-                                                <span class="mr-2">
-                                            {{__('portal.Please read the note and check if you agree to proceed')}}
-                                        </span>
-                                            </label>
-                                        </div>
+                                        @if($draftPurchaseOrders[0]->quote->expiry_date >= \Carbon\Carbon::now() && $draftPurchaseOrders[0]->status != 'cancel')
+                                            <div class="block mt-4 ml-4">
+                                                <label for="acknowledge" class="flex items-center">
+                                                    <input id="acknowledge" type="checkbox" class="form-checkbox" name="note">
+                                                    <span class="mr-2">
+                                                        {{__('portal.Please read the note and check if you agree to proceed')}}
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -440,18 +448,23 @@
                                         <span class="px-3 py-3 bg-red-600 text-white rounded uppercase">{{__('portal.Rejected for Edit')}}</span>
                                     @else
                                         @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
-                                            <form method="POST" action="{{route('singleCategoryApproved', [ 'rfqNo' => $draftPurchaseOrders[0]->rfq_no, 'supplierBusinessID' => $draftPurchaseOrders[0]->supplier_business_id]) }}" class="confirm">
-                                                @csrf
-                                                <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
-                                                    {{__('portal.Approve DPO')}}
-                                                </button>
-                                            </form>
-                                            <form method="POST" action="{{route('singleCategoryCancel', [ 'rfqNo' => $draftPurchaseOrders[0]->rfq_no, 'supplierBusinessID' => $draftPurchaseOrders[0]->supplier_business_id]) }}"  class="confirm-delete">
-                                                @csrf
-                                                <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                    {{__('portal.Cancel DPO')}}
-                                                </button>
-                                            </form>
+                                            @if($draftPurchaseOrder->quote->expiry_date >= \Carbon\Carbon::now())
+                                                <form method="POST" action="{{route('singleCategoryApproved', [ 'rfqNo' => $draftPurchaseOrders[0]->rfq_no, 'supplierBusinessID' => $draftPurchaseOrders[0]->supplier_business_id]) }}" class="confirm">
+                                                    @csrf
+                                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                        {{__('portal.Approve DPO')}}
+                                                    </button>
+                                                </form>
+                                            @endif
+
+                                            @if($draftPurchaseOrder->quote->expiry_date >= \Carbon\Carbon::now())
+                                                <form method="POST" action="{{route('singleCategoryCancel', [ 'rfqNo' => $draftPurchaseOrders[0]->rfq_no, 'supplierBusinessID' => $draftPurchaseOrders[0]->supplier_business_id]) }}"  class="confirm-delete">
+                                                    @csrf
+                                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                        {{__('portal.Cancel DPO')}}
+                                                    </button>
+                                                </form>
+                                            @endif
                                         @endif
                                     @endif
 

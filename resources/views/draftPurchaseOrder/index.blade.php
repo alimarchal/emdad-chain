@@ -57,7 +57,19 @@
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
-                                                        {{__('portal.P.O Date')}}
+                                                        {{__('portal.Date')}}
+                                                    </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                        {{__('portal.Valid upto')}}
+                                                    </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                        {{__('portal.Status')}}
+                                                    </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                        {{__('portal.Action')}}
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
@@ -99,6 +111,50 @@
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                             {{ $dpo->po_date }}
+                                                        </td>
+
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            {{ \Carbon\Carbon::parse($dpo->quote->expiry_date)->format('Y-m-d') }}
+                                                        </td>
+
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            @if($dpo->quote->expiry_date >= \Carbon\Carbon::now())
+                                                                <span class="text-green-700">{{__('portal.Valid')}}</span>
+                                                            @elseif($dpo->status == 'cancel')
+                                                                <span class="text-red-800">{{__('portal.canceled')}}</span>
+                                                            @elseif($dpo->quote->expiry_date < \Carbon\Carbon::now() && $dpo->quote->request_status == 1)
+                                                                <span class="text-yellow-800">{{__('portal.You have asked for extension in expiry date for this DPO.')}}</span>
+                                                            @else
+                                                                <span class="text-red-700">{{__('portal.Expired')}}</span>
+                                                            @endif
+                                                        </td>
+
+                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                            @if($dpo->quote->expiry_date >= \Carbon\Carbon::now())
+                                                                {{__('portal.N/A')}}
+                                                            @else
+                                                                @if($dpo->quote->request_status == 0)
+                                                                    @if($dpo->rfq_type == 1)
+                                                                        @if($dpo->status == 'cancel')
+                                                                            {{__('portal.N/A')}}
+                                                                        @else
+                                                                            <a href="{{route('DPOExpiredStatusUpdate', $dpo->qoute_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150" style="background-color: #145EA8">
+                                                                                {{__('portal.Request to extend expiry date')}}
+                                                                            </a>
+                                                                        @endif
+                                                                    @elseif($dpo->rfq_type == 0)
+                                                                        @if($dpo->status == 'cancel')
+                                                                            {{__('portal.N/A')}}
+                                                                        @else
+                                                                            <a href="{{route('DPOExpiredStatusUpdateSingleCategory', $dpo->rfq_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150" style="background-color: #145EA8">
+                                                                                {{__('portal.Request to extend expiry date')}}
+                                                                            </a>
+                                                                        @endif
+                                                                    @endif
+                                                                @else
+                                                                    {{__('portal.N/A')}}
+                                                                @endif
+                                                            @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -160,6 +216,11 @@
             } );
         });
 
+        function request() {
+            if(!confirm('Are you sure to request for extension?')){
+                event.preventDefault();
+            }
+        }
     </script>
 @else
     <x-app-layout>
@@ -201,8 +262,20 @@
                                                         {{__('portal.Requisition Type')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                                        {{__('portal.P.O Date')}}
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                        {{__('portal.Date')}}
+                                                    </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                        {{__('portal.Valid upto')}}
+                                                    </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                        {{__('portal.Status')}}
+                                                    </th>
+
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                        {{__('portal.Action')}}
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
@@ -244,6 +317,50 @@
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         {{ $dpo->po_date }}
+                                                    </td>
+
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        {{ \Carbon\Carbon::parse($dpo->quote->expiry_date)->format('Y-m-d') }}
+                                                    </td>
+
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        @if($dpo->quote->expiry_date >= \Carbon\Carbon::now())
+                                                            <span class="text-green-700">{{__('portal.Valid')}}</span>
+                                                        @elseif($dpo->status == 'cancel')
+                                                            <span class="text-red-800">{{__('portal.canceled')}}</span>
+                                                        @elseif($dpo->quote->expiry_date < \Carbon\Carbon::now() && $dpo->quote->request_status == 1)
+                                                            <span class="text-yellow-800">{{__('portal.You have asked for extension in expiry date for this DPO.')}}</span>
+                                                        @else
+                                                            <span class="text-red-700">{{__('portal.Expired')}}</span>
+                                                        @endif
+                                                    </td>
+
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        @if($dpo->quote->expiry_date >= \Carbon\Carbon::now())
+                                                            {{__('portal.N/A')}}
+                                                        @else
+                                                            @if($dpo->quote->request_status == 0)
+                                                                @if($dpo->rfq_type == 1)
+                                                                    @if($dpo->status == 'cancel')
+                                                                        {{__('portal.N/A')}}
+                                                                    @else
+                                                                        <a href="{{route('DPOExpiredStatusUpdate', $dpo->qoute_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150" style="background-color: #145EA8">
+                                                                            {{__('portal.Request to extend expiry date')}}
+                                                                        </a>
+                                                                    @endif
+                                                                @elseif($dpo->rfq_type == 0)
+                                                                    @if($dpo->status == 'cancel')
+                                                                        {{__('portal.N/A')}}
+                                                                    @else
+                                                                        <a href="{{route('DPOExpiredStatusUpdateSingleCategory', $dpo->rfq_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150" style="background-color: #145EA8">
+                                                                            {{__('portal.Request to extend expiry date')}}
+                                                                        </a>
+                                                                    @endif
+                                                                @endif
+                                                            @else
+                                                                {{__('portal.N/A')}}
+                                                            @endif
+                                                        @endif
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -314,5 +431,11 @@
                 },
             } );
         });
+
+        function request() {
+            if(!confirm('Are you sure to request for extension?')){
+                event.preventDefault();
+            }
+        }
     </script>
 @endif
