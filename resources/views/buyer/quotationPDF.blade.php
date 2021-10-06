@@ -40,7 +40,11 @@
 
 <div class="header">
     <div class="center">
+        @php $logo_first = asset(Storage::url($quote->buyer_business->business_photo_url)); @endphp
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem;"/>
+
         <h5 style="text-align: center; margin:0px;">{{ $quote->buyer_business->business_name }}</h5>
+
     </div>
 
     <div class="center">
@@ -48,9 +52,14 @@
     </div>
 
     <div class="center">
+        @php $logo_second = asset(Storage::url($quote->supplier_business->business_photo_url)); @endphp
+        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;" />
         <h5 style="text-align: center; margin:0px;">{{ $quote->supplier_business->business_name }}</h5>
+
     </div>
 
+    <br><br>
+    <br><br>
     <br><br>
 
     <div style="width: 100%; text-align: center">
@@ -215,8 +224,7 @@
         <p style="text-align: center; ">Thank you for using Emdad platform as your business partner </p>
     <!--<img src="{{ url(Storage::url('logo-full.png')) }}" />-->
         @php $img = asset('logo-full.png'); @endphp
-
-        <img src="@php echo $img @endphp" width="100" >
+        <img src="{{$img}}" width="100" >
 
     </div>
 

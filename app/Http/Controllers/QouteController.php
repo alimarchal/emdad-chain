@@ -550,13 +550,15 @@ class QouteController extends Controller
 
     public function QoutationsBuyerReceived()
     {
+        $PlacedRFQ = null;
         if (auth()->user()->hasRole('SuperAdmin')) {
             $PlacedRFQ = EOrders::orderBy('created_at', 'desc')->get();
         } else {
 //            $PlacedRFQ = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('discard',0)->orderBy('created_at', 'desc')->get();
-            $PlacedRFQ = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'discard' => 0])->orderBy('created_at', 'desc')->paginate(10);
+            $PlacedRFQ = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'discard' => 0])->orderBy('created_at', 'desc')->get();
         }
 
+//dd($PlacedRFQ);
         return view('buyer.receivedQoutations', compact('PlacedRFQ'));
     }
 
@@ -728,8 +730,10 @@ class QouteController extends Controller
      */
     public function quotationPDF($quote_supplier_business_id, $e_order_id)
     {
-        $quote = Qoute::with('messages')->where(['supplier_business_id' => decrypt($quote_supplier_business_id)])->where( 'e_order_id' , decrypt($e_order_id))->first();
-        $pdf = PDF::loadView('buyer.quotationPDF', compact('quote'))->setOptions(['defaultFont' => 'sans-serif']);
+
+        $quote = Qoute::with('messages')->where(['supplier_business_id' => $quote_supplier_business_id])->where( 'e_order_id' , $e_order_id)->first();
+
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('buyer.quotationPDF', compact('quote'));
         return $pdf->download('Quotation.pdf');
     }
 
