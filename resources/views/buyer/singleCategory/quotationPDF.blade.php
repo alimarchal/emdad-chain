@@ -42,6 +42,8 @@
 
 <div class="header">
     <div class="center">
+        @php $logo_first = asset(Storage::url($quotes[0]->buyer_business->business_photo_url)); @endphp
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem; height: 5rem; border-radius: 50%;"/>
         <h5 style="text-align: center; margin:0px;">{{ $quotes[0]->buyer_business->business_name }}</h5>
     </div>
 
@@ -50,6 +52,8 @@
     </div>
 
     <div class="center">
+        @php $logo_second = asset(Storage::url($quotes[0]->supplier_business->business_photo_url)); @endphp
+        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem; height: 5rem; border-radius: 50%;" />
         <h5 style="text-align: center; margin:0px;">{{ $quotes[0]->supplier_business->business_name }}</h5>
     </div>
 
@@ -87,7 +91,8 @@
 
     <div class="center">
         <strong>Quotation #: </strong> Q-{{ $quotes[0]->id }}<br>
-        <strong>Category Name: </strong>@php
+        <strong>Category Name: </strong>
+        @php
             $record = \App\Models\Category::where('id',$quotes[0]->orderItem->item_code)->first();
             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
         @endphp
@@ -250,7 +255,6 @@
     <div style="text-align: center; margin: auto;">
         <p style="text-align: center; ">Thank you for using Emdad platform as your business partner </p>
         @php $img = asset('logo-full.png'); @endphp
-
         <img src="{{$img}}" width="100" >
 
     </div>

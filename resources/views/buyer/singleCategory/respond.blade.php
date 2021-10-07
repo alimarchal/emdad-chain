@@ -124,7 +124,7 @@
                                     @foreach($quotes as $quote)
                                         <tr>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                                1
+                                                {{$loop->iteration}}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                                 {{ $quote->orderItem->description }}
@@ -426,7 +426,7 @@
                                     @foreach($quotes as $quote)
                                         <tr>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                                1
+                                                {{$loop->iteration}}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                                 {{ $quote->orderItem->description }}

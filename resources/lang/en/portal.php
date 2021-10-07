@@ -254,6 +254,7 @@ return [
     'Approve' => 'Approve',
     'Cancel DPO' => 'Cancel DPO',
     'Approve DPO' => 'Approve DPO',
+    'Generate PO' => 'Generate PO',
     'Thanks for your Business' => 'Thanks for your Business',
     'Shipment' => 'Shipment',
     'Delivered' => 'Delivered',

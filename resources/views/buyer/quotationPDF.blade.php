@@ -41,7 +41,7 @@
 <div class="header">
     <div class="center">
         @php $logo_first = asset(Storage::url($quote->buyer_business->business_photo_url)); @endphp
-        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem;"/>
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem; height: 5rem; border-radius: 50%;"/>
 
         <h5 style="text-align: center; margin:0px;">{{ $quote->buyer_business->business_name }}</h5>
 
@@ -53,7 +53,7 @@
 
     <div class="center">
         @php $logo_second = asset(Storage::url($quote->supplier_business->business_photo_url)); @endphp
-        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;" />
+        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem; height: 5rem; border-radius: 50%;" />
         <h5 style="text-align: center; margin:0px;">{{ $quote->supplier_business->business_name }}</h5>
 
     </div>
@@ -130,7 +130,7 @@
             <td  style="text-align: center"> @if(isset($quote->note_for_customer)) {{ $quote->note_for_customer }} @else N/A @endif </td>
             <td  style="text-align: center">{{ $quote->quote_price_per_quantity }} SAR</td>
             <td  style="text-align: center">{{ $quote->quote_quantity }}</td>
-            <td  style="text-align: center">{{ $quote->total_cost }} SAR</td>
+            <td  style="text-align: center">{{ number_format($quote->quote_price_per_quantity * $quote->quote_quantity,2) }} SAR</td>
         </tr>
         </tbody>
     </table>

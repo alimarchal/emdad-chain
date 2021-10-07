@@ -21,6 +21,10 @@ use League\CommonMark\Extension\SmartPunct\Quote;
 
 class QouteController extends Controller
 {
+    public function __construct()
+    {
+        ini_set('max_execution_time', 300);
+    }
     public function store(Request $request)
     {
         $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
@@ -550,15 +554,13 @@ class QouteController extends Controller
 
     public function QoutationsBuyerReceived()
     {
-        $PlacedRFQ = null;
         if (auth()->user()->hasRole('SuperAdmin')) {
             $PlacedRFQ = EOrders::orderBy('created_at', 'desc')->get();
         } else {
 //            $PlacedRFQ = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('discard',0)->orderBy('created_at', 'desc')->get();
-            $PlacedRFQ = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'discard' => 0])->orderBy('created_at', 'desc')->get();
+            $PlacedRFQ = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'discard' => 0])->orderBy('created_at', 'desc')->paginate(10);
         }
 
-//dd($PlacedRFQ);
         return view('buyer.receivedQoutations', compact('PlacedRFQ'));
     }
 
