@@ -55,25 +55,25 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 #
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Rated By')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Delivery ID')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Name')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Business Name')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Comment')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Rating')}}
                                                             </th>
                                                         </tr>
@@ -94,7 +94,7 @@
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
                                                                 @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
-                                                                <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.D')}}-{{ $delivery->id }} </a>
+                                                                <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" rel="noreferrer">{{__('portal.D')}}-{{ $delivery->id }} </a>
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
                                                                 <span class="badge badge-info">@if($deliveryComment->user->registration_type == 'SuperAdmin') {{__('portal.Emdad')}} @else {{ $deliveryComment->user->name }} @endif</span>
@@ -191,25 +191,25 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                     <tr>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             #
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Rated By')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Delivery ID')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Name')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Business Name')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Comment')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-orange-500 uppercase tracking-wider">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Rating')}}
                                                         </th>
                                                     </tr>
@@ -230,7 +230,7 @@
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-500">
                                                                 @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
-                                                                <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.D')}}-{{ $delivery->id }} </a>
+                                                                <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" rel="noreferrer">{{__('portal.D')}}-{{ $delivery->id }} </a>
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-500">
                                                                 <span class="badge badge-info">@if($deliveryComment->user->registration_type == 'SuperAdmin') {{__('portal.Emdad')}} @else {{ $deliveryComment->user->name }} @endif</span>

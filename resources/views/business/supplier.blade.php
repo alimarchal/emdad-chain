@@ -48,19 +48,19 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 #
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Name')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Email')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Mobile')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Business Name')}}
                                                             </th>
                                                         </tr>
@@ -179,19 +179,19 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                     <tr>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             #
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Name')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Email')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Mobile')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Business Name')}}
                                                         </th>
                                                     </tr>

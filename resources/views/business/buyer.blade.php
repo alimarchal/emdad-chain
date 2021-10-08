@@ -46,19 +46,19 @@
                                                         <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                         #
                                                                     </th>
-                                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                         {{__('portal.Name')}}
                                                                     </th>
-                                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                         {{__('portal.Email')}}
                                                                     </th>
-                                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                         {{__('portal.Mobile')}}
                                                                     </th>
-                                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                         {{__('portal.Business Name')}}
                                                                     </th>
                                                                 </tr>
@@ -165,19 +165,19 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                     <tr>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             #
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Name')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Email')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Mobile')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Business Name')}}
                                                         </th>
                                                     </tr>
@@ -192,23 +192,23 @@
                                                                 <span class="badge badge-info">{{ $buyer->name }}</span>
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100  text-green-800">
-                                                                                {{$buyer->email }}
-                                                                            </span>
+                                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100  text-green-800">
+                                                                    {{$buyer->email }}
+                                                                </span>
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100  text-green-800">
-                                                                                {{$buyer->mobile }}
-                                                                            </span>
+                                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100  text-green-800">
+                                                                    {{$buyer->mobile }}
+                                                                </span>
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full @if(isset($buyer->business_id)) bg-green-100  text-green-800 @else bg-red-100  text-red-800 @endif">
-                                                                                @if(isset($buyer->business_id))
-                                                                                    {{$buyer->business->business_name }}
-                                                                                @else
-                                                                                    {{__('portal.Not business yet registered')}}
-                                                                                @endif
-                                                                            </span>
+                                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full @if(isset($buyer->business_id)) bg-green-100  text-green-800 @else bg-red-100  text-red-800 @endif">
+                                                                    @if(isset($buyer->business_id))
+                                                                        {{$buyer->business->business_name }}
+                                                                    @else
+                                                                        {{__('portal.Not business yet registered')}}
+                                                                    @endif
+                                                                </span>
                                                             </td>
                                                         </tr>
                                                     @endforeach

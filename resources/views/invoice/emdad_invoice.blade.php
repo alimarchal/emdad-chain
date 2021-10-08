@@ -48,25 +48,25 @@
                                                 <table class="min-w-full divide-y divide-gray-200 " id="roles-table">
                                                     <thead class="bg-gray-50">
                                                         <tr>
-                                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 #
                                                             </th>
-                                                            <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-30 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 {{__('portal.Supplier Business Name')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-30 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 {{__('portal.Invoice')}} #
                                                             </th>
-                                                            <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-30 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 {{__('portal.Type')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-30 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 {{__('portal.Status')}}
                                                             </th>
-                                                            {{--<th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            {{--<th scope="col" class="px-6 py-30 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 Emdad Invoice status
                                                             </th>--}}
-                                                            <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-30 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 {{__('portal.Action')}}
                                                             </th>
 
@@ -199,25 +199,25 @@
                                                 <table class="min-w-full divide-y divide-gray-200 " id="roles-table">
                                                     <thead class="bg-gray-50">
                                                         <tr>
-                                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 #
                                                             </th>
-                                                            <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-30 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 {{__('portal.Supplier Business Name')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-30 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 {{__('portal.Invoice')}} #
                                                             </th>
-                                                            <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-30 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 {{__('portal.Type')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-30 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 {{__('portal.Status')}}
                                                             </th>
-                                                            {{--<th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            {{--<th scope="col" class="px-6 py-30 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 Emdad Invoice status
                                                             </th>--}}
-                                                            <th scope="col" class="px-6 py-30 text-left text-xs font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-30 text-left text-sm font-medium text-gray-500 tracking-wider" style="text-align:center; background-color: #FCE5CD;">
                                                                 {{__('portal.Action')}}
                                                             </th>
 

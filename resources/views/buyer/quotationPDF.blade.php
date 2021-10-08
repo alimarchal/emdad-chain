@@ -115,11 +115,11 @@
         <thead>
 
         <tr>
-            <th>#</th>
-            <th>NOTE</th>
-            <th>UNIT PRICE</th>
-            <th>QUANTITY</th>
-            <th>AMOUNT</th>
+            <th style="text-align: center; background-color: #FCE5CD">#</th>
+            <th style="text-align: center; background-color: #FCE5CD">NOTE</th>
+            <th style="text-align: center; background-color: #FCE5CD">UNIT PRICE</th>
+            <th style="text-align: center; background-color: #FCE5CD">QUANTITY</th>
+            <th style="text-align: center; background-color: #FCE5CD">AMOUNT</th>
         </tr>
 
         </thead>
@@ -144,7 +144,7 @@
 
         <div style="width: 33.33%;float: right">
             <strong>Sub-total: </strong> {{ number_format($quote->quote_quantity * $quote->quote_price_per_quantity, 2) }} SAR<br>
-            <strong>VAT %: </strong> {{ $quote->VAT }}<br>
+            <strong>VAT: </strong> {{ $quote->VAT }} %<br>
             <strong>Shipment cost: </strong> {{ number_format($quote->shipment_cost, 2) }} SAR<br>
             <hr>
             <strong>Total: </strong> {{$quote->total_cost }} SAR<br>

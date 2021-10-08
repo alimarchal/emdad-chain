@@ -40,7 +40,6 @@
     <div class="center">
         @php $logo_first = asset(Storage::url($draftPurchaseOrder->buyer_business->business_photo_url)); @endphp
         <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem;"/>
-        {{--            <img src="{{ $draftPurchaseOrder->buyer_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->buyer_business->business_name }}" />--}}
         <h5 style="text-align: center; margin:0px;">{{ $draftPurchaseOrder->buyer_business->business_name }}</h5>
     </div>
 
@@ -51,7 +50,6 @@
     <div class="center">
         @php $logo_second = asset(Storage::url($draftPurchaseOrder->supplier_business->business_photo_url)); @endphp
         <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;" />
-        {{--        <img src="{{ $draftPurchaseOrder->supplier_business->business_photo_url }}" alt="{{ $draftPurchaseOrder->supplier_business->business_name }}" />--}}
         <h5 style="text-align: center; margin:0px;">{{ $draftPurchaseOrder->supplier_business->business_name }}</h5>
     </div>
 
@@ -78,6 +76,12 @@
         <h3 class="text-2xl text-center"><strong>P.O.</strong></h3>
         <strong>P.O. #: </strong>P.O. -{{ $draftPurchaseOrder->id }}<br>
         <strong>Date: </strong>{{ $draftPurchaseOrder->created_at }}<br>
+        <strong>Category Name: </strong>
+        @php
+            $record = \App\Models\Category::where('id',$draftPurchaseOrder->item_code)->first();
+            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+        @endphp
+        <span style="color: #145ea8;"> {{ $record->name }} @if(isset($parent)), {{$parent->name}} @endif </span> <br>
         <strong>Requisition #: </strong>RFQ-{{ $draftPurchaseOrder->rfq_no }}<br>
         <strong>Quotation #: </strong>Q-{{ $draftPurchaseOrder->qoute_no }}<br>
         <strong>Payment Terms: </strong>{{ $draftPurchaseOrder->payment_term }}<br>
@@ -98,18 +102,22 @@
 <br>
 <br>
 
+<div style="width: 100%; text-align: left">
+    <strong>Quote Description: </strong><br>
+    <p>{{ strip_tags($draftPurchaseOrder->eOrderItem->description) }}</p>
+</div>
 
 <table class="min-w-full divide-y divide-black">
     <thead>
 
     <tr>
-        <th>#</th>
-        <th>BRAND</th>
-        <th>UOM</th>
-        <th>REMARKS</th>
-        <th>UNIT PRICE</th>
-        <th>QUANTITY</th>
-        <th>AMOUNT</th>
+        <th style="text-align: center;background-color: #FCE5CD">#</th>
+        <th style="text-align: center;background-color: #FCE5CD">BRAND</th>
+        <th style="text-align: center;background-color: #FCE5CD">UOM</th>
+        <th style="text-align: center;background-color: #FCE5CD">REMARKS</th>
+        <th style="text-align: center;background-color: #FCE5CD">UNIT PRICE</th>
+        <th style="text-align: center;background-color: #FCE5CD">QUANTITY</th>
+        <th style="text-align: center;background-color: #FCE5CD">AMOUNT</th>
     </tr>
 
     </thead>
@@ -119,10 +127,10 @@
         <td  style="text-align: center">1</td>
         <td  style="text-align: center">{{ $draftPurchaseOrder->brand }}</td>
         <td  style="text-align: center">{{ $draftPurchaseOrder->uom }}</td>
-        <td  style="text-align: center">{{ $draftPurchaseOrder->remarks }}</td>
+        <td  style="text-align: center">@if(isset($draftPurchaseOrder->remarks)){{ $draftPurchaseOrder->remarks }} @else N/A @endif</td>
         <td  style="text-align: center">{{ $draftPurchaseOrder->unit_price }} SAR</td>
         <td  style="text-align: center">{{ $draftPurchaseOrder->quantity }}</td>
-        <td  style="text-align: center">{{ number_format($draftPurchaseOrder->sub_total, 2) }} SAR</td>
+        <td  style="text-align: center">{{ number_format($draftPurchaseOrder->sub_total) }} SAR</td>
     </tr>
     </tbody>
 </table>
@@ -135,10 +143,10 @@
 
     <div style="width: 33.33%;float: right">
         <strong>Sub-total: </strong> {{ number_format($draftPurchaseOrder->sub_total, 2) }} SAR<br>
-        <strong>VAT %: </strong> {{ number_format($draftPurchaseOrder->sub_total * 0.15, 2) }}<br>
+        <strong>VAT: </strong> {{ number_format($draftPurchaseOrder->vat)}} %<br>
         <strong>Shipment cost: </strong> {{ number_format($draftPurchaseOrder->shipment_cost, 2) }} SAR<br>
         <hr>
-        <strong>P.O Total: </strong> {{ number_format($draftPurchaseOrder->sub_total * 0.15 + $draftPurchaseOrder->sub_total + $draftPurchaseOrder->shipment_cost, 2) }} SAR<br>
+        <strong>Total: </strong> {{ number_format($draftPurchaseOrder->sub_total * 0.15 + $draftPurchaseOrder->sub_total + $draftPurchaseOrder->shipment_cost, 2) }} SAR<br>
         <hr>
         <br>
         <br>
@@ -153,35 +161,21 @@
 <br><br>
 
 <div class="header">
-<div class="flex flex-wrap overflow-hidden  p-4 mt-4">
-    <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
-        <strong>Remarks: </strong> {{ strip_tags($draftPurchaseOrder->remarks) }} <br>
-        <strong>Warranty: </strong> {{ $draftPurchaseOrder->warranty }} <br>
-        <strong>Terms & Conditions: </strong> None <br>
-    </div>
-
-
-    <br>
-    <br>
-
-
-    <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
-        <strong>Delivery Information: </strong><br>
-        <strong>City: </strong> {{ $draftPurchaseOrder->buyer_business->city }}<br>
-        @php $warehouse = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse_id)->first(); @endphp
-        <strong>Warehouse:</strong> {{ $warehouse->address}} <br>
-        {{--            <strong>Delivery Status: </strong><br>--}}
-        {{--            <strong>Delivery Time: </strong><br>--}}
-
+    <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
+        <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
+            <strong>Mobile Number (for one time password): </strong> {{ strip_tags($draftPurchaseOrder->otp_mobile_number) }} <br>
+            <strong>Delivery Address: </strong> {{ strip_tags($draftPurchaseOrder->delivery_address) }} <br>
+        </div>
     </div>
 </div>
-</div>
 <br>
 <br>
 <br>
 
-<div class="flex justify-center">
-    {{--        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" /></div>--}}
+<div style="width: 100%; text-align: left">
+    @if ($draftPurchaseOrder->status == 'approved')
+        <img src="{{url('images/stamps/Artboard-9@8x.png')}}" alt="P.O. APPROVED" class="block h-10 w-auto" />
+    @endif
 </div>
 
 <div class="flex justify-between px-2 py-2 mt-2 h-15">

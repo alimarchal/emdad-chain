@@ -22,6 +22,11 @@ use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+        ini_set('max_execution_time', 300);
+    }
+
     public function index()
     {
 //        $collection = DeliveryNote::where(['supplier_business_id' => auth()->user()->business->id, 'rfq_type' => 1])->get();
@@ -768,7 +773,7 @@ class PaymentController extends Controller
     {
         $invoices = Invoice::where('rfq_no' , decrypt($invoiceRfqNo))->get();
 
-        $pdf = PDF::loadView('payment.singleCategory.PDF', compact('invoices'))->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('payment.singleCategory.PDF', compact('invoices'));
         return $pdf->download('Invoice.pdf');
     }
 

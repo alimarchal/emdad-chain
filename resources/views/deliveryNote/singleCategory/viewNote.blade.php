@@ -31,7 +31,7 @@
                                         $record = \App\Models\Category::where('id',$deliveryNotes[0]->purchase_order->item_code)->first();
                                         $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                     @endphp
-                                    {{ $record->name }} , {{ $parent->name }}
+                                    <span class="text-blue-600"> {{ $record->name }} , {{ $parent->name }} </span>
                                     <br>
                                 <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->purchase_order->created_at }}<br>
                                 <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveryNotes[0]->purchase_order->rfq_no }}<br>
@@ -170,7 +170,7 @@
                                     $record = \App\Models\Category::where('id',$deliveryNotes[0]->purchase_order->item_code)->first();
                                     $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                 @endphp
-                                {{ $record->name_ar }} , {{ $parent->name_ar }}
+                                <span class="text-blue-600"> {{ $record->name_ar }} , {{ $parent->name_ar }} </span>
                                 <br>
                                 <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNotes[0]->purchase_order->created_at }}<br>
                                 <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveryNotes[0]->purchase_order->rfq_no }}<br>

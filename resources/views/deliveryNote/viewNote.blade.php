@@ -31,7 +31,7 @@
                                         $record = \App\Models\Category::where('id',$deliveryNote->purchase_order->item_code)->first();
                                         $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                     @endphp
-                                    {{ $record->name }} , {{ $parent->name }}
+                                    <span class="text-blue-600"> {{ $record->name }} , {{ $parent->name }} </span>
                                     <br>
                                 <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->purchase_order->created_at }}<br>
                                 <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveryNote->purchase_order->rfq_no }}<br>
@@ -168,7 +168,7 @@
                                     $record = \App\Models\Category::where('id',$deliveryNote->purchase_order->item_code)->first();
                                     $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                 @endphp
-                                {{ $record->name_ar }} , {{ $parent->name_ar }}
+                                <span class="text-blue-600"> {{ $record->name_ar }} , {{ $parent->name_ar }} </span>
                                 <br>
                                 <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->purchase_order->created_at }}<br>
                                 <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveryNote->purchase_order->rfq_no }}<br>

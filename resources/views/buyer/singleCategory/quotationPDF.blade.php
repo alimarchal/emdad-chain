@@ -115,22 +115,22 @@
     <table class="min-w-full divide-y divide-black " style="margin-top: 4%;">
         <thead>
         <tr>
-            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+            <th style="text-align: center; background-color: #FCE5CD">
                 #
             </th>
-            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+            <th style="text-align: center; background-color: #FCE5CD">
                DESCRIPTION
             </th>
-            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+            <th style="text-align: center; background-color: #FCE5CD">
                NOTE
             </th>
-            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+            <th style="text-align: center; background-color: #FCE5CD">
                 UNIT PRICE
             </th>
-            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+            <th style="text-align: center; background-color: #FCE5CD">
                 QUANTITY
             </th>
-            <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+            <th style="text-align: center; background-color: #FCE5CD">
                 AMOUNT
             </th>
         </tr>
@@ -139,22 +139,22 @@
         <tbody class="bg-white divide-y divide-black border-1 border-black">
         @foreach($quotes as $quote)
         <tr>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+            <td style="text-align: center;">
                 {{$loop->iteration}}
             </td>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+            <td style="text-align: center;">
                {{ $quote->orderItem->description }}
             </td>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+            <td style="text-align: center;">
                {{ $quote->note_for_customer }}
             </td>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+            <td style="text-align: center;">
                {{ $quote->quote_price_per_quantity }} SAR
             </td>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+            <td style="text-align: center;">
                {{ $quote->quote_quantity }}
             </td>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+            <td style="text-align: center;">
                 {{ number_format($quote->quote_price_per_quantity * $quote->quote_quantity,2) }} SAR
             </td>
 
@@ -179,7 +179,7 @@
                     }
             @endphp
             <strong>Sub-total: </strong> {{ number_format($subtotal, 2) }} SAR<br>
-            <strong>VAT %: </strong> {{ $quotes[0]->VAT }}<br>
+            <strong>VAT: </strong> {{ $quotes[0]->VAT }} %<br>
             <strong>Shipment cost: </strong> {{ number_format($quotes[0]->shipment_cost, 2) }} SAR<br>
             <hr>
             <strong>Total: </strong> {{ number_format($quotes[0]->total_cost) }} SAR<br>

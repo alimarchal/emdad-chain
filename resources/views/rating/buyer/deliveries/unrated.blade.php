@@ -47,10 +47,10 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 #
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Delivery ID')}}
                                                             </th>
                                                         </tr>
@@ -63,7 +63,7 @@
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     <span class="badge badge-info">
-                                                                        <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.D')}}-{{ $delivery->id }} </a>
+                                                                        <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline">{{__('portal.D')}}-{{ $delivery->id }} </a>
                                                                     </span>
                                                                 </td>
                                                             </tr>
@@ -141,10 +141,10 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 #
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Delivery ID')}}
                                                             </th>
                                                         </tr>
@@ -156,9 +156,9 @@
                                                                     <span class="badge badge-info">{{ $loop->iteration }}</span>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                        <span class="badge badge-info">
-                                                                            <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.D')}}-{{ $delivery->id }} </a>
-                                                                        </span>
+                                                                    <span class="badge badge-info">
+                                                                        <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline">{{__('portal.D')}}-{{ $delivery->id }} </a>
+                                                                    </span>
                                                                 </td>
                                                             </tr>
                                                         @endforeach

@@ -19,22 +19,22 @@
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead>
                                     <tr>
-                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Sr. No')}}
                                         </th>
-                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Business Name')}}
                                         </th>
-                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Designation')}}
                                         </th>
-                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Warehouse Focal Person')}}
                                         </th>
-                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Landline')}}
                                         </th>
-                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Actions')}}
                                         </th>
                                     </tr>
@@ -121,22 +121,22 @@
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead>
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Sr. No')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Business Name')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Designation')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Warehouse Focal Person')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Landline')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Actions')}}
                                     </th>
                                 </tr>

@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 
 class DeliveryNoteController extends Controller
 {
+    public function __construct()
+    {
+        ini_set('max_execution_time', 300);
+    }
 
     public function index()
     {
@@ -109,7 +113,7 @@ class DeliveryNoteController extends Controller
      */
     public function generatePDF(DeliveryNote $deliveryNote)
     {
-        $pdf = PDF::loadView('deliveryNote.PDF', compact('deliveryNote'))->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('deliveryNote.PDF', compact('deliveryNote'));
         return $pdf->download('Delivery Note.pdf');
     }
 
@@ -204,7 +208,7 @@ class DeliveryNoteController extends Controller
     {
         $deliveryNotes = DeliveryNote::where(['rfq_no' => $deliveryNoteRfqNo, 'supplier_business_id' => auth()->user()->business_id])->get();
 
-        $pdf = PDF::loadView('deliveryNote.singleCategory.PDF', compact('deliveryNotes'))->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('deliveryNote.singleCategory.PDF', compact('deliveryNotes'));
         return $pdf->download('Delivery Note.pdf');
     }
 

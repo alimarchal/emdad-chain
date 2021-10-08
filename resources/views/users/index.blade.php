@@ -119,23 +119,23 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.User')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Timestamp')}}
                                                             </th>
 
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Business Name')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Role')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Permissions')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Action')}}
                                                             </th>
                                                         </tr>
@@ -380,23 +380,23 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                     <tr>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.User')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Timestamp')}}
                                                         </th>
 
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Business Name')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Role')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Permissions')}}
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Action')}}
                                                         </th>
                                                     </tr>

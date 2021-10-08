@@ -37,44 +37,31 @@
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Requisition')}} #
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Category Name')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Requisition Type')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Date')}}
                                     </th>
 
-                                    {{--<th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
-                                        {{__('portal.Unit')}}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
-                                        {{__('portal.Size')}}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
-                                        {{__('portal.Quantity')}}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
-                                        {{__('portal.Last Price')}}
-                                    </th>--}}
-
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Time left')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Quotations/Status')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Action')}}
                                     </th>
                                 </tr>
@@ -341,31 +328,31 @@
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Requisition')}} #
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Category Name')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Requisition Type')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Date')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Time left')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Quotations/Status')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Action')}}
                                     </th>
                                 </tr>

@@ -12,6 +12,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .header {
@@ -52,14 +53,16 @@
     <br>
 
     <div style="width: 66.66%;float: left;">
+        @if ($deliveryNote->status == 'completed')
         <strong>Invoice #: </strong> Inv. -{{ $deliveryNote->delivery->invoice_id }}<br>
+        @endif
         <strong>Purchase Order #: </strong> P.O. -{{ $deliveryNote->purchase_order->id }}<br>
         <strong>Category Name: </strong>
             @php
                 $record = \App\Models\Category::where('id',$deliveryNote->purchase_order->item_code)->first();
                 $parent= \App\Models\Category::where('id',$record->parent_id)->first();
             @endphp
-            {{ $record->name }} , {{ $parent->name }}
+            <span style="color: #145ea8;"> {{ $record->name }} , {{ $parent->name }} </span>
         <br>
         <strong>Date: </strong>{{ $deliveryNote->purchase_order->created_at }}<br>
         <strong>Requisition #: </strong>RFQ-{{ $deliveryNote->purchase_order->rfq_no }}<br>
@@ -71,7 +74,8 @@
         @php
             $supplierBusiness = \App\Models\Business::where('id', $deliveryNote->supplier_business_id)->first();
         @endphp
-        <img src="{{(isset($supplierBusiness->business_photo_url) ? Storage::url($supplierBusiness->business_photo_url):' ')}}" alt="{{$supplierBusiness->business_name}}" style="height: 80px;width: 200px;"/>
+        @php $logo_first = asset(Storage::url($supplierBusiness->business_photo_url)); @endphp
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem; height: 5rem; border-radius: 50%;"/>
     </div>
 </div>
 
@@ -85,38 +89,37 @@
 <table class="min-w-full divide-y divide-black " style="margin-top: 4%;">
     <thead>
     <tr>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th style="background-color: #FCE5CD">
             #
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th style="background-color: #FCE5CD">
             Description
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th style="background-color: #FCE5CD">
             UOM
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th style="background-color: #FCE5CD">
             Quantity
         </th>
     </tr>
     </thead>
-{{--    @foreach($deliveryNote as $dn)--}}
-        <tbody class="bg-white divide-y divide-black border-1 border-black">
-        <tr>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
-                #
-            </td>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
-                {{ $deliveryNote->purchase_order->eOrderItem->description }}
-            </td>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
-                {{ $deliveryNote->purchase_order->uom }}
-            </td>
-            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
-                {{ $deliveryNote->purchase_order->quantity }}
-            </td>
-        </tr>
-        </tbody>
-{{--    @endforeach--}}
+
+    <tbody class="bg-white divide-y divide-black border-1 border-black">
+    <tr>
+        <td style="text-align: center;">
+            1
+        </td>
+        <td style="text-align: center;">
+            {{ $deliveryNote->purchase_order->eOrderItem->description }}
+        </td>
+        <td style="text-align: center;">
+            {{ $deliveryNote->purchase_order->uom }}
+        </td>
+        <td style="text-align: center;">
+            {{ $deliveryNote->purchase_order->quantity }}
+        </td>
+    </tr>
+    </tbody>
 </table>
 
 
@@ -124,10 +127,15 @@
 <br>
 <br>
 <br>
-<div style="vertical-align: middle;">
-    <div style="text-align: center;">Thank you for using Emdad platform as your business partner.</div>
-    @php $img = asset('logo-full.png'); @endphp
-    <img src="@php echo $img @endphp" width="100" >
+
+<div class="flex justify-between px-2 py-2 mt-2 h-15">
+    <div style="text-align: center; margin: auto;">
+        <p style="text-align: center; ">Thank you for using Emdad platform as your business partner </p>
+        @php $img = asset('logo-full.png'); @endphp
+        <img src="{{$img}}" width="100" >
+
+    </div>
+
 </div>
 
 </body>

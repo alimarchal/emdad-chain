@@ -150,7 +150,7 @@ class EmdadInvoiceController extends Controller
     {
         $emdadInvoices = EmdadInvoice::where('rfq_no' , decrypt($emdadInvoiceRFQNo))->get();
 
-        $pdf = PDF::loadView('invoice.singleCategory.emdadInvoicePDF', compact('emdadInvoices'))->setOptions(['defaultFont' => 'sans-serif']);
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.singleCategory.emdadInvoicePDF', compact('emdadInvoices'))->setOptions(['defaultFont' => 'sans-serif']);
         return $pdf->download('Invoice.pdf');
     }
 }

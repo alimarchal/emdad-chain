@@ -268,21 +268,21 @@
                                 <input type="hidden" name="total_cost" value="{{ $QouteItem->total_cost }}">
                                 <input type="hidden" name="payment_term" value="{{ $QouteItem->orderItem->payment_mode }}">
 
-                                <x-jet-label for="warehouse" class="my-2" value="{{ __('portal.Warehouse delivery address') }}" class="text-black"/>
+{{--                                <x-jet-label for="warehouse" class="my-2" value="{{ __('portal.Warehouse delivery address') }}" class="text-black"/>--}}
 
                                 @php
                                     $orderItemID =  \App\Models\EOrderItems::where('id', $QouteItem->e_order_items_id)->first();
                                     $warehouseAddress = \App\Models\BusinessWarehouse::where('id', $orderItemID->warehouse_id)->first();
                                 @endphp
-                                <input type="text" name="delivery_address" class="form-input rounded-md shadow-sm border p-2 w-full" readonly value="{{$warehouseAddress->address}}">
+                                {{--<input type="text" name="delivery_address" class="form-input rounded-md shadow-sm border p-2 w-full" readonly value="{{$warehouseAddress->address}}">
                                 <br>
-                                <br>
+                                <br>--}}
                                 <x-jet-label for="Remarks" value="{{ __('portal.OTP FOR Receiving Delivery Mobile Number (We will send One Time Password when you receive delivery)') }}"
                                              class="text-center text-black font-bold text-red-600"/>
                                 <input type="text" name="otp_mobile_number" class="form-input rounded-md shadow-sm border p-2 w-full" value="{{$warehouseAddress->mobile}}">
                                 <br>
                                 <br>
-                                <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" name="address" value="{{$warehouseAddress->address}}" readonly>
+{{--                                <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" name="address" value="{{$warehouseAddress->address}}" readonly>--}}
 
                                 <x-jet-label for="Remarks" value="{{ __('portal.Remarks') }}" class="text-black"/>
                                 <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Remarks')}}.."></textarea>
@@ -578,21 +578,21 @@
                                 <input type="hidden" name="total_cost" value="{{ $QouteItem->total_cost }}">
                                 <input type="hidden" name="payment_term" value="{{ $QouteItem->orderItem->payment_mode }}">
 
-                                <x-jet-label for="warehouse" class="my-2" value="{{ __('portal.Warehouse delivery address') }}" class="text-black"/>
+{{--                                <x-jet-label for="warehouse" class="my-2" value="{{ __('portal.Warehouse delivery address') }}" class="text-black"/>--}}
 
                                 @php
                                     $orderItemID =  \App\Models\EOrderItems::where('id', $QouteItem->e_order_items_id)->first();
                                     $warehouseAddress = \App\Models\BusinessWarehouse::where('id', $orderItemID->warehouse_id)->first();
                                 @endphp
-                                <input type="text" name="delivery_address" class="form-input rounded-md shadow-sm border p-2 w-full" readonly value="{{$warehouseAddress->address}}">
+                                {{--<input type="text" name="delivery_address" class="form-input rounded-md shadow-sm border p-2 w-full" readonly value="{{$warehouseAddress->address}}">
                                 <br>
-                                <br>
+                                <br>--}}
                                 <x-jet-label for="Remarks" value="{{ __('portal.OTP FOR Receiving Delivery Mobile Number (We will send One Time Password when you receive delivery)') }}"
                                              class="text-center text-black font-bold text-red-600"/>
                                 <input type="text" name="otp_mobile_number" class="form-input rounded-md shadow-sm border p-2 w-full" value="{{$warehouseAddress->mobile}}">
                                 <br>
                                 <br>
-                                <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" name="address" value="{{$warehouseAddress->address}}" readonly>
+{{--                                <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" name="address" value="{{$warehouseAddress->address}}" readonly>--}}
 
                                 <x-jet-label for="Remarks" value="{{ __('portal.Remarks') }}" class="text-black"/>
                                 <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Remarks')}}.."></textarea>

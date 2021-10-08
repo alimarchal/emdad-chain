@@ -27,6 +27,11 @@ use Illuminate\Support\Facades\Notification;
 
 class DraftPurchaseOrderController extends Controller
 {
+    public function __construct()
+    {
+        ini_set('max_execution_time', 300);
+    }
+
     public function index()
     {
         $user = auth()->user()->id;
@@ -446,9 +451,8 @@ class DraftPurchaseOrderController extends Controller
      */
     public function generatePDF(DraftPurchaseOrder $draftPurchaseOrder)
     {
-        $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'));
-        //        $pdf = PDF::loadView('draftPurchaseOrder.PDF', $data);
-        return $pdf->download('POs.pdf');
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'));
+        return $pdf->download('PO.pdf');
     }
 
     /* DPO for Single Category Quotations */
@@ -802,7 +806,6 @@ class DraftPurchaseOrderController extends Controller
      */
     public function singleCategoryGeneratePDF($rfqNo)
     {
-
         $draftPurchaseOrders = DraftPurchaseOrder::with('buyer_business')->where(['rfq_no' => $rfqNo])->get();
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('draftPurchaseOrder.singleCategory.PDF', compact('draftPurchaseOrders'));
         return $pdf->download('POs.pdf');

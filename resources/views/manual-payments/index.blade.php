@@ -29,26 +29,26 @@
                         <table class="min-w-full divide-y divide-gray-200" id="manual-payments">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         #
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Invoice Number')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Invoice Date')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Supplier Business name')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Buyer Business name')}} @endif
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Requisition Type')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Status')}}
                                     </th>
                                     @if(auth()->user()->registration_type == 'Buyer')
-                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Claim')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Confirm')}} @endif {{__('portal.Manual Payment')}}
                                         </th>
                                     @endif
@@ -68,16 +68,16 @@
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if (auth()->user()->registration_type == 'Buyer')
                                                 @if($item->rfq_type == 1)
-                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline">{{__('portal.Inv.')}} -{{$item->id}}</a>
                                                 @elseif($item->rfq_type == 0)
-                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline">{{__('portal.Inv.')}} -{{$item->id}}</a>
                                                 @endif
                                             @elseif(auth()->user()->registration_type == 'Supplier')
                                                 {{--                                        <a href="{{ route('invoice.show',$item->invoice_id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->invoice_id}}</a>--}}
                                                 @if($item->rfq_type == 1)
-                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline">{{__('portal.Inv.')}} -{{$item->id}}</a>
                                                 @elseif($item->rfq_type == 0)
-                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline">{{__('portal.Inv.')}} -{{$item->id}}</a>
                                                 @endif
                                             @endif
                                         </td>
@@ -115,11 +115,11 @@
                                             <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                                 @if($item->invoice_status == '0')
                                                     @if($item->rfq_type == 1)
-                                                        <a href=" {{ route('bank-payments.create', $item->id) }} " class="text-blue-600 hover:underline" target="_blank">
+                                                        <a href=" {{ route('bank-payments.create', $item->id) }} " class="text-blue-600 hover:underline">
                                                             {{__('portal.Proceed')}}
                                                         </a> |
                                                     @elseif($item->rfq_type == 0)
-                                                        <a href=" {{ route('singleCategoryBankPaymentCreate', $item->rfq_no) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                        <a href=" {{ route('singleCategoryBankPaymentCreate', $item->rfq_no) }}" class="text-blue-600 hover:underline">
                                                             {{__('portal.Proceed')}}
                                                         </a> |
                                                     @endif
@@ -184,26 +184,26 @@
                         <table class="min-w-full divide-y divide-gray-200" id="manual-payments">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         #
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Invoice Number')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Invoice Date')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Supplier Business name')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Buyer Business name')}} @endif
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Requisition Type')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Status')}}
                                     </th>
                                     @if(auth()->user()->registration_type == 'Buyer')
-                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Claim')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Confirm')}} @endif {{__('portal.Manual Payment')}}
                                         </th>
                                     @endif
@@ -268,14 +268,17 @@
                                         @if (auth()->user()->registration_type == 'Buyer')
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                                {{--@if (auth()->user()->registration_type == 'Buyer')
-                                                    <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
-                                                @elseif(auth()->user()->registration_type == 'Supplier')
-                                                    <a href="@if($item->status == '0') {{ route('bank-payments.create', $item->invoice_id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
-                                                @endif--}}
-                                                <a href="@if($item->invoice_status == '0') {{ route('bank-payments.create', $item->id) }} @endif" class="text-blue-600 hover:underline" target="_blank">
-                                                    {{__('portal.Proceed')}}
-                                                </a> |
+                                                @if($item->invoice_status == '0')
+                                                    @if($item->rfq_type == 1)
+                                                        <a href=" {{ route('bank-payments.create', $item->id) }} " class="text-blue-600 hover:underline">
+                                                            {{__('portal.Proceed')}}
+                                                        </a> |
+                                                    @elseif($item->rfq_type == 0)
+                                                        <a href=" {{ route('singleCategoryBankPaymentCreate', $item->rfq_no) }}" class="text-blue-600 hover:underline">
+                                                            {{__('portal.Proceed')}}
+                                                        </a> |
+                                                    @endif
+                                                @endif
                                                 @if($item->invoice_status == '0')
                                                     <form action="{{route('getPaymentCheckOutId')}}" method="post">
                                                         @csrf

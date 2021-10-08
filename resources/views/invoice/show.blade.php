@@ -66,7 +66,7 @@
                                             $record = \App\Models\Category::where('id',$draftPurchaseOrder->item_code)->first();
                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                         @endphp
-                                        {{ $record->name }} , {{ $parent->name }}
+                                        <span class="text-blue-600">{{ $record->name }} , {{ $parent->name }}</span>
                                         {{--                                {{ $draftPurchaseOrder->item_name }}--}}
                                         <br>
                                         <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $draftPurchaseOrder->rfq_no }}<br>
@@ -138,41 +138,6 @@
                                             {{ number_format($draftPurchaseOrder->sub_total, 2) }} {{__('portal.SAR')}}
                                         </td>
                                     </tr>
-
-                                    {{--<tr>
-                                        <td colspan="7" rowspan="4">
-                                        </td>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            Sub Total
-                                        </td>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            {{ number_format($draftPurchaseOrder->sub_total, 2) }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            VAT {{$draftPurchaseOrder->vat}}%
-                                        </td>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            {{ number_format($draftPurchaseOrder->sub_total * ($draftPurchaseOrder->vat/100), 2) }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            Shipment
-                                        </td>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            {{ number_format($draftPurchaseOrder->shipment_cost, 2) }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            P.O Total
-                                        </td>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            {{ number_format(($draftPurchaseOrder->sub_total * ($draftPurchaseOrder->vat/100)) + ($draftPurchaseOrder->sub_total + $draftPurchaseOrder->shipment_cost), 2) }}
-                                        </td>
-                                    </tr>--}}
                                     </tbody>
                                 </table>
 
@@ -183,7 +148,7 @@
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                         <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format(($draftPurchaseOrder->sub_total), 2) }} {{__('portal.SAR')}}<br>
-                                        <strong>{{__('portal.VAT')}} %: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->vat, 2) }}<br>
+                                        <strong>{{__('portal.VAT')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->vat, 2) }} %<br>
                                         <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->shipment_cost, 2) }} {{__('portal.SAR')}}<br>
                                         <hr>
                                         <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->total_cost, 2) }} {{__('portal.SAR')}}<br>
@@ -275,7 +240,7 @@
                                             $record = \App\Models\Category::where('id',$draftPurchaseOrder->item_code)->first();
                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                         @endphp
-                                        {{ $record->name_ar }} , {{ $parent->name_ar }}
+                                        <span class="text-blue-600">{{ $record->name_ar }} , {{ $parent->name_ar }}</span>
                                         <br>
                                         <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $draftPurchaseOrder->rfq_no }}<br>
                                         {{--                            <strong>RFQ Item #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->rfq_no }}<br>--}}
@@ -350,7 +315,7 @@
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                         <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format(($draftPurchaseOrder->sub_total), 2) }} {{__('portal.SAR')}}<br>
-                                        <strong>{{__('portal.VAT')}} %: &nbsp;</strong>{{ number_format($draftPurchaseOrder->vat, 2) }}<br>
+                                        <strong>{{__('portal.VAT')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->vat, 2) }} %<br>
                                         <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->shipment_cost, 2) }} {{__('portal.SAR')}}<br>
                                         <hr>
                                         <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->total_cost, 2) }} {{__('portal.SAR')}}<br>

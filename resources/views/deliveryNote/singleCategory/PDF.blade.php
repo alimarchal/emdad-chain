@@ -52,14 +52,16 @@
     <br>
 
     <div style="width: 66.66%;float: left;">
+        @if ($deliveryNotes[0]->status == 'completed')
         <strong>Invoice #: </strong> Inv. -{{ $deliveryNotes[0]->delivery->invoice_id }}<br>
+        @endif
         <strong>Purchase Order #: </strong> P.O. -{{ $deliveryNotes[0]->purchase_order->id }}<br>
         <strong>Category Name: </strong>
             @php
                 $record = \App\Models\Category::where('id',$deliveryNotes[0]->purchase_order->item_code)->first();
                 $parent= \App\Models\Category::where('id',$record->parent_id)->first();
             @endphp
-            {{ $record->name }} , {{ $parent->name }}
+            <span style="color: #145ea8;">{{ $record->name }}, {{ $parent->name }}</span>
         <br>
         <strong>Date: </strong>{{ $deliveryNotes[0]->purchase_order->created_at }}<br>
         <strong>Requisition #: </strong>RFQ-{{ $deliveryNotes[0]->purchase_order->rfq_no }}<br>
@@ -71,7 +73,8 @@
         @php
             $supplierBusiness = \App\Models\Business::where('id', $deliveryNotes[0]->supplier_business_id)->first();
         @endphp
-        <img src="{{(isset($supplierBusiness->business_photo_url) ? Storage::url($supplierBusiness->business_photo_url):' ')}}" alt="{{$supplierBusiness->business_name}}" style="height: 80px;width: 200px;"/>
+        @php $logo_first = asset(Storage::url($supplierBusiness->business_photo_url)); @endphp
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem; height: 5rem; border-radius: 50%;"/>
     </div>
 </div>
 
@@ -85,16 +88,16 @@
 <table class="min-w-full divide-y divide-black " style="margin-top: 4%;width: 100%">
     <thead>
     <tr>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th style="background-color: #FCE5CD">
             #
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th style="background-color: #FCE5CD">
             Description
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th style="background-color: #FCE5CD">
             UOM
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th style="background-color: #FCE5CD">
             Quantity
         </th>
     </tr>
@@ -102,16 +105,16 @@
     <tbody class="bg-white divide-y divide-black border-1 border-black">
         @foreach($deliveryNotes as $deliveryNote)
             <tr>
-                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+                <td style="text-align: center;">
                     {{$loop->iteration}}
                 </td>
-                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+                <td style="text-align: center;">
                     {{ $deliveryNote->purchase_order->eOrderItem->description }}
                 </td>
-                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+                <td style="text-align: center;">
                     {{ $deliveryNote->purchase_order->uom }}
                 </td>
-                <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+                <td style="text-align: center;">
                     {{ $deliveryNote->purchase_order->quantity }}
                 </td>
             </tr>
@@ -124,8 +127,15 @@
 <br>
 <br>
 <br>
-<div style="vertical-align: middle;">
-    <div style="text-align: center;">Thank you for using Emdad platform as your business partner.</div><br><br>
+
+<div class="flex justify-between px-2 py-2 mt-2 h-15">
+    <div style="text-align: center; margin: auto;">
+        <p style="text-align: center; ">Thank you for using Emdad platform as your business partner </p>
+        @php $img = asset('logo-full.png'); @endphp
+        <img src="{{$img}}" width="100" >
+
+    </div>
+
 </div>
 
 </body>

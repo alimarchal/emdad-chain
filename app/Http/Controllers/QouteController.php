@@ -25,6 +25,7 @@ class QouteController extends Controller
     {
         ini_set('max_execution_time', 300);
     }
+
     public function store(Request $request)
     {
         $min5days = Carbon::now()->addDays(5)->format('Y-m-d');

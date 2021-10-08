@@ -45,7 +45,7 @@
     <div class="center"></div>
 
     <div class="center">
-        <h3 style="text-align: center; margin:0;">Emdad Invoice for invoice # {{ $emdadInvoice->invoice->id }} </h3>
+        <h3 style="text-align: center; margin:0;">Emdad Invoice for invoice # Inv. -{{ $emdadInvoice->invoice->id }} </h3>
     </div>
 
     <div class="center"></div>
@@ -59,19 +59,19 @@
 <table class="min-w-full divide-y divide-black " style="margin-top: 4%;">
     <thead>
     <tr>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th style="text-align: center;width: 10%; background-color: #FCE5CD">
             #
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th style="text-align: center; background-color: #FCE5CD">
             DELIVERY ITEM
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th style="text-align: center; background-color: #FCE5CD">
             PAYMENT TYPE
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th style="text-align: center; background-color: #FCE5CD">
             AMOUNT W/O VAT
         </th>
-        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+        <th style="text-align: center; background-color: #FCE5CD">
             EMDAD INVOICE AMOUNT (1.5 %)
         </th>
     </tr>
@@ -80,17 +80,17 @@
     @php $dpo = \App\Models\DraftPurchaseOrder::where('id', $emdadInvoice->invoice->purchase_order->id)->first(); @endphp
     <tbody class="bg-white divide-y divide-black border-1 border-black">
     <tr>
-        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
-            #
+        <td style="text-align: center;width: 10%;">
+            1
         </td>
-        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+        <td style="text-align: center;">
             @php
                 $record = \App\Models\Category::where('id',$dpo->item_code)->first();
                 $parent= \App\Models\Category::where('id',$record->parent_id)->first();
             @endphp
             {{ $record->name }} @if(isset($parent->name)) , {{ $parent->name }} @endif
         </td>
-        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+        <td style="text-align: center;">
             @if($dpo->payment_term == 'Cash') Cash
             @elseif($dpo->payment_term == 'Credit') Credit
             @elseif($dpo->payment_term == 'Credit30days') Credit (30 Days)
@@ -99,7 +99,7 @@
             @elseif($dpo->payment_term == 'Credit120days') Credit (120 Days)
             @endif
         </td>
-        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+        <td style="text-align: center;">
             @php
                 $quote = \App\Models\Qoute::where('id', $emdadInvoice->invoice->quote->id)->first();
                 $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
@@ -107,7 +107,7 @@
             @endphp
             {{ number_format($totalCost,2) }} SAR
         </td>
-        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
+        <td style="text-align: center;">
             {{ number_format($totalEmdadCharges,2) }} SAR
         </td>
     </tr>
@@ -145,8 +145,10 @@
 
     <div class="center" style="width: 33.33%; float: right">
         <div style="margin-top: 2px;">Copied to Emdad records</div>
-        @php $img = asset('logo-full.png'); @endphp
-        <img src="{{$img}}" width="100" >
+        <div>
+            @php $img = asset('logo-full.png'); @endphp
+            <img src="{{$img}}" style="height: 10px; width: auto; margin-left: auto; margin-right: auto;">
+        </div>
     </div>
 
 </div>

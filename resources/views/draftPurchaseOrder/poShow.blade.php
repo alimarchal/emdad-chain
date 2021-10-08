@@ -60,7 +60,7 @@
                                             $record = \App\Models\Category::where('id',$draftPurchaseOrder->item_code)->first();
                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                         @endphp
-                                        {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif
+                                        <span class="text-blue-600">{{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif</span>
                                         <br>
                                         <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $draftPurchaseOrder->rfq_no }}<br>
                                         <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $draftPurchaseOrder->qoute_no }}<br>
@@ -143,40 +143,6 @@
                                             {{ number_format($draftPurchaseOrder->sub_total, 2) }} {{__('portal.SAR')}}
                                         </td>
                                     </tr>
-                                    {{--<tr>
-                                        <td colspan="7" rowspan="4">
-                                        </td>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            Sub Total
-                                        </td>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            {{ number_format($draftPurchaseOrder->sub_total, 2) }} {{__('portal.SAR')}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            VAT 15%
-                                        </td>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            {{ number_format($draftPurchaseOrder->sub_total * 0.15, 2) }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            Shipping Fees
-                                        </td>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            {{ number_format($draftPurchaseOrder->shipment_cost, 2) }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            P.O Total
-                                        </td>
-                                        <td class="px-1 py-1 whitespace-nowrap text-sm text-black border border-black">
-                                            {{ number_format($draftPurchaseOrder->sub_total * 0.15 + $draftPurchaseOrder->sub_total + $draftPurchaseOrder->shipment_cost, 2) }}
-                                        </td>
-                                    </tr>--}}
                                     </tbody>
                                 </table>
 
@@ -314,7 +280,7 @@
                                             $record = \App\Models\Category::where('id',$draftPurchaseOrder->item_code)->first();
                                             $parent = \App\Models\Category::where('id',$record->parent_id)->first();
                                         @endphp
-                                        {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif
+                                        <span class="text-blue-600">{{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif</span>
                                         <br>
                                         <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $draftPurchaseOrder->rfq_no }}<br>
                                         <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $draftPurchaseOrder->qoute_no }}<br>

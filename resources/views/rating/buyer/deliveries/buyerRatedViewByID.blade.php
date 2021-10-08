@@ -42,25 +42,25 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 #
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Rated To')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Delivery ID')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Name')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Business Name')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Comment')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Rated')}}
                                                             </th>
                                                         </tr>
@@ -81,7 +81,7 @@
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
-                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.D')}}-{{ $delivery->id }} </a>
+                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" rel="noreferrer">{{__('portal.D')}}-{{ $delivery->id }} </a>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     @php
@@ -171,25 +171,25 @@
                                                 <table class="min-w-full divide-y divide-gray-200" id="roles-table">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 #
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Rated To')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Delivery ID')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Name')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Business Name')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Comment')}}
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Rated')}}
                                                             </th>
                                                         </tr>
@@ -210,7 +210,7 @@
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
-                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.D')}}-{{ $delivery->id }} </a>
+                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" rel="noreferrer">{{__('portal.D')}}-{{ $delivery->id }} </a>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     @php
