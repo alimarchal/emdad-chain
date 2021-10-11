@@ -26,7 +26,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Items List')}} @if (!$shipments->count()) {{__('portal.seems empty')}} @endif </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Shipments')}} </h2>
 
         @if ($shipments->count())
             @php $total = 0; @endphp
@@ -72,12 +72,12 @@
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @if($shipment->status == 1 )
-                                                <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    {{__('portal.Delivered')}}
+                                                <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Received')}}
                                                 </span>
                                             @else
-                                                <span class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    {{__('portal.Not Delivered yet')}}
+                                                <span class="text-orange-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Not received')}}
                                                 </span>
                                             @endif
                                         </td>
@@ -121,7 +121,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Items List')}} @if (!$shipments->count()) {{__('portal.seems empty')}} @endif </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Shipments')}} </h2>
 
         @if ($shipments->count())
             @php $total = 0; @endphp
@@ -167,12 +167,12 @@
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @if($shipment->status == 1 )
-                                                <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    {{__('portal.Delivered')}}
+                                                <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Received')}}
                                                 </span>
                                             @else
-                                                <span class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    {{__('portal.Not Delivered yet')}}
+                                                <span class="text-orange-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Not received')}}
                                                 </span>
                                             @endif
                                         </td>

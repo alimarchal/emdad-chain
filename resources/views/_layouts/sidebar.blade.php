@@ -722,31 +722,19 @@
                     <a @click="open = true"
                        class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                        href="javascript:void(0);">
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                             class="w-6 h-5"
-                             viewBox="0 0 172 172"
-                             style=" fill:#000000;">
-                            <g transform="">
-                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
-                                   font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-                                    <path d="M0,172v-172h172v172z" fill="none"></path>
-                                    <path d="" fill="none"></path>
-                                    <g>
-                                        <path d="M39.775,166.625v-161.25h126.85v140.825c0,11.18 -9.245,20.425 -20.425,20.425z"
-                                              @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
-                                              @else fill="none" @endif
-                                        ></path>
-                                        <path d="M165.55,6.45v139.75c0,10.75 -8.6,19.35 -19.35,19.35h-105.35v-159.1h124.7M167.7,4.3h-129v163.4h107.5c11.825,0 21.5,-9.675 21.5,-21.5v-141.9z" fill="#788b9c"></path>
-                                        <path d="M25.8,166.625c-11.18,0 -20.425,-9.245 -20.425,-20.425v-16.125h120.4v16.125c0,10.965 8.6,19.78 19.35,20.425v0z"
-                                              @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#e1ebf2"
-                                              @else fill="none" @endif
-                                        ></path>
-                                        <path
-                                            d="M124.7,131.15v15.05c0,8.6 4.945,15.91 12.04,19.35h-110.94c-10.75,0 -19.35,-8.6 -19.35,-19.35v-15.05h118.25M126.85,129h-122.55v17.2c0,11.825 9.675,21.5 21.5,21.5h120.4v-2.15c-10.75,0 -19.35,-8.6 -19.35,-19.35v-17.2zM86,40.85h55.9v2.15h-55.9zM64.5,40.85h8.6v2.15h-8.6zM86,62.35h55.9v2.15h-55.9zM64.5,62.35h8.6v2.15h-8.6zM86,83.85h55.9v2.15h-55.9zM64.5,83.85h8.6v2.15h-8.6zM86,105.35h55.9v2.15h-55.9zM64.5,105.35h8.6v2.15h-8.6z"
-                                            fill="#788b9c"></path>
-                                    </g>
-                                </g>
-                            </g>
+                        <svg class="svg-icon w-6 h-6" viewBox="0 0 20 20" >
+                            <path @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                              @else fill="#788b9c" @endif d="M17.222,5.041l-4.443-4.414c-0.152-0.151-0.356-0.235-0.571-0.235h-8.86c-0.444,0-0.807,0.361-0.807,0.808v17.602c0,0.448,0.363,0.808,0.807,0.808h13.303c0.448,0,0.808-0.36,0.808-0.808V5.615C17.459,5.399,17.373,5.192,17.222,5.041zM15.843,17.993H4.157V2.007h7.72l3.966,3.942V17.993z"></path>
+                            <path @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                              @else fill="#788b9c" @endif d="M5.112,7.3c0,0.446,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808c0-0.447-0.363-0.808-0.808-0.808H5.92C5.475,6.492,5.112,6.853,5.112,7.3z"></path>
+                            <path @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                              @else fill="#788b9c" @endif d="M5.92,5.331h4.342c0.445,0,0.808-0.361,0.808-0.808c0-0.446-0.363-0.808-0.808-0.808H5.92c-0.444,0-0.808,0.361-0.808,0.808C5.112,4.97,5.475,5.331,5.92,5.331z"></path>
+                            <path @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                              @else fill="#788b9c" @endif d="M13.997,9.218H5.92c-0.444,0-0.808,0.361-0.808,0.808c0,0.446,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808C14.805,9.58,14.442,9.218,13.997,9.218z"></path>
+                            <path @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                              @else fill="#788b9c" @endif d="M13.997,11.944H5.92c-0.444,0-0.808,0.361-0.808,0.808c0,0.446,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808C14.805,12.306,14.442,11.944,13.997,11.944z"></path>
+                            <path @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                              @else fill="#788b9c" @endif d="M13.997,14.67H5.92c-0.444,0-0.808,0.361-0.808,0.808c0,0.447,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808C14.805,15.032,14.442,14.67,13.997,14.67z"></path>
                         </svg>
                         <span
                             class="mx-3 font-extrabold">@if(auth()->user()->registration_type == "Supplier") {{ __('sidebar.Purchase Order') }} @elseif(auth()->user()->registration_type == "Buyer") {{ __('sidebar.Purchase Order') }} @endif</span>
@@ -1473,7 +1461,7 @@
                                 <path
                                     d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
                             </svg>
-                            <a href="{{ route('deliveredShipments') }}"><span class="mx-3 ">{{__('sidebar.Delivered Shipments')}}</span></a>
+                            <a href="{{ route('deliveredShipments') }}"><span class="mx-3 ">{{__('sidebar.Received Shipments')}}</span></a>
                         </li>
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('shipment.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -2110,31 +2098,19 @@
                     <a @click="open = true"
                        class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                        href="javascript:void(0);">
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                             class="w-6 h-5"
-                             viewBox="0 0 172 172"
-                             style=" fill:#000000;transform: scaleX(-1);">
-                            <g transform="">
-                                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
-                                   font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-                                    <path d="M0,172v-172h172v172z" fill="none"></path>
-                                    <path d="" fill="none"></path>
-                                    <g>
-                                        <path d="M39.775,166.625v-161.25h126.85v140.825c0,11.18 -9.245,20.425 -20.425,20.425z"
-                                              @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
-                                              @else fill="none" @endif
-                                        ></path>
-                                        <path d="M165.55,6.45v139.75c0,10.75 -8.6,19.35 -19.35,19.35h-105.35v-159.1h124.7M167.7,4.3h-129v163.4h107.5c11.825,0 21.5,-9.675 21.5,-21.5v-141.9z" fill="#788b9c"></path>
-                                        <path d="M25.8,166.625c-11.18,0 -20.425,-9.245 -20.425,-20.425v-16.125h120.4v16.125c0,10.965 8.6,19.78 19.35,20.425v0z"
-                                              @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#e1ebf2"
-                                              @else fill="none" @endif
-                                        ></path>
-                                        <path
-                                            d="M124.7,131.15v15.05c0,8.6 4.945,15.91 12.04,19.35h-110.94c-10.75,0 -19.35,-8.6 -19.35,-19.35v-15.05h118.25M126.85,129h-122.55v17.2c0,11.825 9.675,21.5 21.5,21.5h120.4v-2.15c-10.75,0 -19.35,-8.6 -19.35,-19.35v-17.2zM86,40.85h55.9v2.15h-55.9zM64.5,40.85h8.6v2.15h-8.6zM86,62.35h55.9v2.15h-55.9zM64.5,62.35h8.6v2.15h-8.6zM86,83.85h55.9v2.15h-55.9zM64.5,83.85h8.6v2.15h-8.6zM86,105.35h55.9v2.15h-55.9zM64.5,105.35h8.6v2.15h-8.6z"
-                                            fill="#788b9c"></path>
-                                    </g>
-                                </g>
-                            </g>
+                        <svg class="svg-icon w-6 h-6" viewBox="0 0 20 20" style="transform: scaleX(-1);">
+                            <path @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                  @else fill="#788b9c" @endif d="M17.222,5.041l-4.443-4.414c-0.152-0.151-0.356-0.235-0.571-0.235h-8.86c-0.444,0-0.807,0.361-0.807,0.808v17.602c0,0.448,0.363,0.808,0.807,0.808h13.303c0.448,0,0.808-0.36,0.808-0.808V5.615C17.459,5.399,17.373,5.192,17.222,5.041zM15.843,17.993H4.157V2.007h7.72l3.966,3.942V17.993z"></path>
+                            <path @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                  @else fill="#788b9c" @endif d="M5.112,7.3c0,0.446,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808c0-0.447-0.363-0.808-0.808-0.808H5.92C5.475,6.492,5.112,6.853,5.112,7.3z"></path>
+                            <path @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                  @else fill="#788b9c" @endif d="M5.92,5.331h4.342c0.445,0,0.808-0.361,0.808-0.808c0-0.446-0.363-0.808-0.808-0.808H5.92c-0.444,0-0.808,0.361-0.808,0.808C5.112,4.97,5.475,5.331,5.92,5.331z"></path>
+                            <path @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                  @else fill="#788b9c" @endif d="M13.997,9.218H5.92c-0.444,0-0.808,0.361-0.808,0.808c0,0.446,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808C14.805,9.58,14.442,9.218,13.997,9.218z"></path>
+                            <path @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                  @else fill="#788b9c" @endif d="M13.997,11.944H5.92c-0.444,0-0.808,0.361-0.808,0.808c0,0.446,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808C14.805,12.306,14.442,11.944,13.997,11.944z"></path>
+                            <path @if(request()->routeIs('purchaseOrderView') ||request()->routeIs('dpo.index') ||request()->routeIs('singleCategoryDPOIndex') ||request()->routeIs('singleCategoryPO') || request()->routeIs('po.po') || request()->routeIs('singleCategoryPO')) fill="#ffffff"
+                                  @else fill="#788b9c" @endif d="M13.997,14.67H5.92c-0.444,0-0.808,0.361-0.808,0.808c0,0.447,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808C14.805,15.032,14.442,14.67,13.997,14.67z"></path>
                         </svg>
                         <span
                             class="mx-3 font-extrabold">@if(auth()->user()->registration_type == "Supplier") {{ __('sidebar.Purchase Order') }} @elseif(auth()->user()->registration_type == "Buyer") {{ __('sidebar.Purchase Order') }} @endif</span>
@@ -2561,7 +2537,7 @@
                                 <path
                                     d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
                             </svg>
-                            <a href="{{ route('deliveredShipments') }}"><span class="mx-3 hover:text-white {{ request()->routeIs('deliveredShipments') ? 'text-white' : 'text-gray-500' }}">{{__('sidebar.Delivered Shipments')}}</span></a>
+                            <a href="{{ route('deliveredShipments') }}"><span class="mx-3 hover:text-white {{ request()->routeIs('deliveredShipments') ? 'text-white' : 'text-gray-500' }}">{{__('sidebar.Received Shipments')}}</span></a>
                         </li>
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('shipment.index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

@@ -57,5 +57,6 @@ return [
     'List of Suppliers' => 'قائمة المورّدين',
     'Delivery Note' => 'مذكرة توصيل',
     'Add Driver' => 'إضافة سائق',
+    'Received Shipments' => 'Received Shipments',
 
 ];

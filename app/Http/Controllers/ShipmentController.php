@@ -62,7 +62,7 @@ class ShipmentController extends Controller
     /* on going deliveries of Buyers */
     public function ongoingShipment()
     {
-        $shipments = Shipment::where(['buyer_business_id' => auth()->user()->business_id, 'status' => 0])->get();
+        $shipments = Shipment::with('shipmentItems')->where(['buyer_business_id' => auth()->user()->business_id, 'status' => 0])->get();
         return view('shipment.buyer.notdelivered', compact('shipments'));
     }
 }

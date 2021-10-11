@@ -74,12 +74,12 @@
 
                                             <td class="px-6 text-center py-4 whitespace-nowrap">
                                                 @if($shipmentDetail->status == 1 )
-                                                    <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                        {{__('portal.Delivered')}}
+                                                    <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                        {{__('portal.Received')}}
                                                     </span>
                                                 @else
-                                                    <span class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                        {{__('portal.Not Delivered yet')}}
+                                                    <span class="text-orange-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                        {{__('portal.Not received')}}
                                                     </span>
                                                 @endif
                                             </td>
@@ -93,7 +93,7 @@
             </div>
         @endif
         <div class="mt-5">
-            <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+            <a href="{{url()->previous()}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                 {{__('portal.Back')}}
             </a>
         </div>
@@ -175,12 +175,12 @@
 
                                         <td class="px-6 text-center py-4 whitespace-nowrap">
                                             @if($shipmentDetail->status == 1 )
-                                                <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    {{__('portal.Delivered')}}
+                                                <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Received')}}
                                                 </span>
                                             @else
-                                                <span class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    {{__('portal.Not Delivered yet')}}
+                                                <span class="text-orange-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Not received')}}
                                                 </span>
                                             @endif
                                         </td>
@@ -194,7 +194,7 @@
             </div>
         @endif
         <div class="mt-5">
-            <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+            <a href="{{url()->previous()}}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                 {{__('portal.Back')}}
             </a>
         </div>

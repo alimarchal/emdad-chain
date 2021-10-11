@@ -74,7 +74,15 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 170px;">
-                                        @if($shipment->status == 1) {{__('portal.Delivered')}} @elseif($shipment->status == 0) {{__('portal.Not Delivered yet')}} @endif
+                                        @if($shipment->status == 1)
+                                            <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                {{__('portal.Received')}}
+                                            </span>
+                                        @elseif($shipment->status == 0)
+                                            <span class="text-orange-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                {{__('portal.Not received')}}
+                                            </span>
+                                        @endif
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap text-center">
@@ -175,7 +183,15 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 170px;">
-                                        @if($shipment->status == 1) {{__('portal.Delivered')}} @elseif($shipment->status == 0) {{__('portal.Not Delivered yet')}} @endif
+                                        @if($shipment->status == 1)
+                                            <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                {{__('portal.Received')}}
+                                            </span>
+                                        @elseif($shipment->status == 0)
+                                            <span class="text-orange-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                {{__('portal.Not received')}}
+                                            </span>
+                                        @endif
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap text-center">

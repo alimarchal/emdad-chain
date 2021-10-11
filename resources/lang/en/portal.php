@@ -158,6 +158,7 @@ return [
     'Approved' => 'Approved',
     'Delivery Note' => 'Delivery Note',
     'P.O.' => 'P.O.',
+    'PO' => 'PO',
     'Waiting for Emdad confirmation' => 'Waiting for Emdad confirmation',
     'Manual payment Confirmed' => 'Manual payment Confirmed',
     'Payment rejected' => 'Payment rejected',
@@ -848,5 +849,8 @@ return [
     'Buyer Requested to extend expiry date.' => 'Buyer Requested to extend expiry date.',
     'Request to extend expiry date' => 'Request to extend expiry date',
     'You have asked for extension in expiry date for this DPO.' => 'You have asked for extension in expiry date for this DPO.',
+    'No. of deliveries' => 'No. of deliveries',
+    'Shipments' => 'Shipments',
+    'Not received' => 'Not received',
 
 ];

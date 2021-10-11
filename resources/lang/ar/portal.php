@@ -158,6 +158,7 @@ return [
     'Approved' => 'معتمَد',
     'Delivery Note' => 'مذكرة توصيل',
     'P.O.' => 'أمر الشراء',
+    'PO' => 'أمر الشراء',
     'Waiting for Emdad confirmation' => 'بانتظار التأكيد من قِبل إمداد',
     'Manual payment Confirmed' => 'تم تأكيد الدفع الذاتي ',
     'Payment rejected' => 'تم رفض عملية الدفع',
@@ -848,5 +849,8 @@ return [
     'Buyer Requested to extend expiry date.' => 'Buyer Requested to extend expiry date.',
     'Request to extend expiry date' => 'Request to extend expiry date',
     'You have asked for extension in expiry date for this DPO.' => 'You have asked for extension in expiry date for this DPO.',
+    'No. of deliveries' => 'No. of deliveries',
+    'Shipments' => 'Shipments',
+    'Not received' => 'Not received',
 
 ];
