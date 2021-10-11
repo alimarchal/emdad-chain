@@ -246,11 +246,11 @@ class DeliveryController extends Controller
 //                        ->notify(new DeliveryCompleted($deliveries, $deliveries[0]->id));
 //                }
 
-                if ($deliveries[0]->rfq_type == 0)
-                {
-                    Notification::route('mail', 'business@emdad-chain.com')
-                        ->notify(new SingleCategoryDeliveryCompleted($deliveries, $deliveries[0]->id));
-                }
+//                if ($deliveries[0]->rfq_type == 0)
+//                {
+//                    Notification::route('mail', 'business@emdad-chain.com')
+//                        ->notify(new SingleCategoryDeliveryCompleted($deliveries, $deliveries[0]->id));
+//                }
 
                 return response()->json(['message' => 'Updated...'], 200);
 

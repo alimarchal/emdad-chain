@@ -15,6 +15,7 @@ class CreateLibrariesTable extends Migration
     {
         Schema::create('libraries', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
             $table->string('url')->nullable();
             $table->string('attachment_url')->nullable();
             $table->enum('language', ['Arabic', 'English','Urdu'])->default('English');

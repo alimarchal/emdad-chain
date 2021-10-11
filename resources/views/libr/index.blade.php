@@ -40,6 +40,9 @@
                                             <thead>
                                             <tr>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Title
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                     Video URL
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -63,10 +66,18 @@
                                             @foreach ($lib as $sm)
                                                 <tr>
                                                     <td class="px-6 py-4 whitespace-nowrap">
+                                                        {{ $sm->title }}
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap">
                                                         <a href="{{ $sm->url }}" class="hover:underline text-blue-900" target="_blank">Video Link ({{$loop->iteration}})</a>
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap ">
-                                                        <a href="{{ Storage::url($sm->attachment_url) }}" target="_blank" class="hover:underline text-blue-900">View Attachment</a>
+                                                        @if(empty($sm->attachment_url))
+                                                            No attachment found
+                                                            @else
+                                                            <a href="{{ Storage::url($sm->attachment_url) }}" target="_blank" class="hover:underline text-blue-900">View Attachment</a>
+                                                            @endif
+
                                                     </td>
                                                     <td class="px-6 py-4 whitespace-nowrap">
                                                         {{ $sm->language }}

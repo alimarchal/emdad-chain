@@ -86,6 +86,7 @@ class LibraryController extends Controller
     {
         $request->validate([
             'url' => 'required',
+            'title' => 'required',
             'language' => 'required',
             'user_type' => 'required',
             'order' => 'required',
@@ -114,14 +115,17 @@ class LibraryController extends Controller
 
     public function showLibrary(Request $request)
     {
-        $library = null;
+
         if (auth()->user()->usertype == 'SuperAdmin') {
             $library = Library::all();
+            return view('libr.showLibrary', compact('library'));
         } elseif (auth()->user()->registration_type == 'Buyer' || auth()->user()->registration_type == NULL) {
-            $library = Library::where('user_type', 'Buyer')->get();
+            $library = Library::where('user_type', 'Buyer')->where('language', '=', (auth()->user()->rtl == 0 ? 'English' : 'Arabic'))->get();
+            return view('libr.showLibrary', compact('library'));
         } else {
-            $library = Library::where('user_type', 'Supplier')->get();
+            $library = Library::where('user_type', 'Supplier')->where('language', '=', (auth()->user()->rtl == 0 ? 'English' : 'Arabic'))->get();
+            return view('libr.showLibrary', compact('library'));
         }
-        return view('libr.showLibrary', compact('library'));
+
     }
 }

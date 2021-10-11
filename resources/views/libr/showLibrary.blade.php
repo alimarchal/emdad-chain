@@ -13,7 +13,7 @@
             margin: 5px;
             border: 1px solid #ccc;
             float: left;
-            width: 353px;
+            width: 706px;
         }
 
         div.gallery:hover {
@@ -58,15 +58,16 @@
                     @foreach($library as $lib)
 
                     <div class="gallery">
-                        <iframe width="350" height="200" src="https://www.youtube.com/embed/{{$lib->url}}">
+                        <iframe width="703" height="400" src="https://www.youtube.com/embed/{{$lib->url}}">
                         </iframe>
                         <div class="desc">
+                            {{$lib->title}}<br>
                             @if(!empty($lib->attachment_url))
                             <a href="{{Storage::url($lib->attachment_url)}}" class="hover:underline text-blue-900">
-                                Download Attachment
+                                Download attachment
                             </a>
                             @else
-                                No Attachment Available For Download
+                                No attachment available for download
                             @endif
                         </div>
                     </div>

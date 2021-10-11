@@ -17,6 +17,11 @@
                         <div class="grid grid-cols-12 gap-6">
 
                             <div class="col-span-12">
+                                <label class="block font-medium text-sm text-gray-700 mt-4" for="title">
+                                    Title of Video
+                                </label>
+                                <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="title" type="text" name="title" value="{{$library->title}}">
+
                                 <label class="block font-medium text-sm text-gray-700 mt-4" for="url">
                                     Video URL
                                 </label>

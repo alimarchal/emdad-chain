@@ -9,5 +9,5 @@ class Library extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['url', 'attachment_url', 'language', 'user_type', 'order'];
+    protected $fillable = ['url', 'attachment_url', 'language', 'user_type', 'order','title'];
 }

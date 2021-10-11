@@ -36,18 +36,18 @@ Route::prefix('v1')->group(function () {
     Route::get('Delivery/Deliveries/{id}', [DeliveryController::class, 'getAllDeliveries']);
 
     Route::get('veh/{vid}/usr/{uid}/shp/{sid}', [DeliveryController::class, 'vehicle_user_shipment_update']);
-    /*
-    Route::get('rfq/{rfq_no}/shpitem/{sitm}', [DeliveryController::class, 'delivery_shipment']);
-    */
-    Route::get('del/{rfq_no}/shpitem/{sitm}', [DeliveryController::class, 'delivery_shipment']);
 
+    Route::get('rfq/{rfq_no}/shpitem/{sitm}', [DeliveryController::class, 'delivery_shipment']);
+    /*
+     Route::get('del/{rfq_no}/shpitem/{sitm}', [DeliveryController::class, 'delivery_shipment']);
+     */
     Route::apiResource('ShipmentItems', ShipmentItemController::class);
     Route::apiResource('Shipment', ShipmentController::class);
     Route::apiResource('DeliveryNote', \App\Http\Controllers\Api\v1\DeliveryNoteController::class);
     Route::apiResource('User', \App\Http\Controllers\Api\v1\UserController::class);
     Route::apiResource('Vehicle', \App\Http\Controllers\Api\v1\VehicleController::class);
     Route::apiResource('DeliveryComment', \App\Http\Controllers\Api\v1\DeliveryCommentController::class);
-    Route::get('DeliveryComment/{user_id}/{delivery_id}', [\App\Http\Controllers\Api\v1\DeliveryCommentController::class,'getRatingByUserID']);
+    Route::get('DeliveryComment/{user_id}/{delivery_id}', [\App\Http\Controllers\Api\v1\DeliveryCommentController::class, 'getRatingByUserID']);
     Route::apiResource('Business', \App\Http\Controllers\Api\v1\BusinessController::class);
 
 
@@ -71,7 +71,7 @@ Route::prefix('v1')->group(function () {
     *
     */
     # change password
-    Route::post('User/changePassword', [\App\Http\Controllers\Api\v1\UserController::class,'change_password']);
+    Route::post('User/changePassword', [\App\Http\Controllers\Api\v1\UserController::class, 'change_password']);
 });
 
 
