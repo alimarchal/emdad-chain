@@ -246,6 +246,7 @@ return [
     'Rejected for Edit' => 'Rejected for Edit',
     'Draft Purchase Order' => 'Draft Purchase Order',
     'D.P.O.' => 'D.P.O.',
+    'DPO' => 'DPO',
     'Draft P.O.' => 'Draft P.O.',
     'Note' => 'Note',
     'We acknowledge that' => 'We acknowledge that',

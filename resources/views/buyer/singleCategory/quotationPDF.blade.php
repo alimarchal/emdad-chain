@@ -57,7 +57,7 @@
         <h5 style="text-align: center; margin:0px;">{{ $quotes[0]->supplier_business->business_name }}</h5>
     </div>
 
-    <br><br>
+    <br><br><br><br><br><br>
 
     <div style="width: 100%; text-align: center">
         <h3 style="text-align: center; margin: 0px;">Status:

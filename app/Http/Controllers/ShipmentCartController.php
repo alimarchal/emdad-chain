@@ -36,10 +36,13 @@ class ShipmentCartController extends Controller
             /* Exploding concatenated delivery and rfq IDs */
             $delivery = explode(',',$request->delivery_id);
 
+            $buyerBusinessID = Delivery::where('id', (int)$delivery[0])->pluck('business_id')->first();
+
             $shipmentCarts = ShipmentCart::create([
                 'driver_id'  =>  $cartCheck->driver_id,
                 'vehicle_id'  =>  $cartCheck->vehicle_id,
                 'supplier_business_id'  =>  $cartCheck->supplier_business_id,
+                'buyer_business_id'  =>  $buyerBusinessID,
                 'rfq_no'  =>  (int)$delivery[1],
                 'delivery_id'  =>  (int)$delivery[0],
             ]);
@@ -66,9 +69,12 @@ class ShipmentCartController extends Controller
                 /* Exploding concatenated delivery and rfq IDs */
                 $delivery = explode(',',$request->delivery_id);
 
+                $buyerBusinessID = Delivery::where('id', (int)$delivery[0])->pluck('business_id')->first();
+
                 $request->merge(['driver_id' => $request->driver_id]);
                 $request->merge(['vehicle_id' => $request->vehicle_id]);
                 $request->merge(['supplier_business_id' => auth()->user()->business_id]);
+                $request->merge(['buyer_business_id' => $buyerBusinessID]);
                 $request->merge(['rfq_no' => (int)$delivery[1]]);
                 $request->merge(['delivery_id' => (int)$delivery[0]]);
                 $shipmentCarts = ShipmentCart::create($request->all());

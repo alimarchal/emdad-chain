@@ -67,7 +67,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            <form method="POST" action="{{ route('shipmentCart.destroy', $shipmentCart->id) }}" class="inline delete">
+                                            <form method="POST" action="{{ route('shipmentCart.destroy', $shipmentCart->rfq_no) }}" class="inline delete">
                                                 @csrf
                                                 @method('delete')
 
@@ -90,7 +90,6 @@
             <div class="p-4">
                 <form action="{{ route('shipmentItem.store') }}" method="POST" class="inline confirm">
                     @csrf
-                    <input type="hidden" name="delivery_id" value="{{encrypt($shipmentCart->delivery->id)}}">
                     <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                         {{__('portal.Place Shipment')}}
                     </button>
@@ -168,7 +167,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        <form method="POST" action="{{ route('shipmentCart.destroy', $shipmentCart->id) }}" class="inline delete">
+                                        <form method="POST" action="{{ route('shipmentCart.destroy', $shipmentCart->rfq_no) }}" class="inline delete">
                                             @csrf
                                             @method('delete')
 
@@ -191,7 +190,6 @@
             <div class="p-4">
                 <form action="{{ route('shipmentItem.store') }}" method="POST" class="inline confirm">
                     @csrf
-                    <input type="hidden" name="delivery_id" value="{{encrypt($shipmentCart->delivery->id)}}">
                     <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                         {{__('portal.Place Shipment')}}
                     </button>

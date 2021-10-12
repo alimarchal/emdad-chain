@@ -256,15 +256,6 @@ class UserController extends Controller
             session()->flash('error', 'Driver cannot be deleted because he has a shipment assigned');
             return redirect()->back();
         }
-        dd('stop');
-        $userRoles = $user->getRoleNames();
-        $userPermissions = $user->getAllPermissions();
-        $user->revokePermissionTo($userPermissions);
-
-        foreach ($userRoles as $userRole)
-        {
-            $user->removeRole($userRole);
-        }
 
         $user->delete();
 

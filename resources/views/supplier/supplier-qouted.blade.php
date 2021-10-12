@@ -211,7 +211,7 @@
                                                         <path d="M13.997,11.944H5.92c-0.444,0-0.808,0.361-0.808,0.808c0,0.446,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808C14.805,12.306,14.442,11.944,13.997,11.944z"></path>
                                                         <path d="M13.997,14.67H5.92c-0.444,0-0.808,0.361-0.808,0.808c0,0.447,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808C14.805,15.032,14.442,14.67,13.997,14.67z"></path>
                                                     </svg>--}}
-                                                    <img src="https://img.icons8.com/external-prettycons-flat-prettycons/47/000000/external-file-file-types-prettycons-flat-prettycons.png" style="padding-left: 26%;"/>
+                                                    <img src="{{url('pdf.png')}}" style="height: 40px; padding-left: 26%;">
                                                 </a>
                                             </td>
 
@@ -465,7 +465,7 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 <a href="{{route('PDFForQuotation', encrypt($rfp->orderItem->id))}}">
-                                                    <img src="https://img.icons8.com/external-prettycons-flat-prettycons/47/000000/external-file-file-types-prettycons-flat-prettycons.png" style="padding-right: 22%"/>
+                                                    <img src="{{url('pdf.png')}}" style="height: 40px; padding-right: 22%;">
                                                 </a>
                                             </td>
 

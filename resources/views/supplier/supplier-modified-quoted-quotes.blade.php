@@ -122,7 +122,7 @@
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             <a href="{{route('PDFForQuotation', encrypt($rfp->orderItem->id))}}">
-                                                <img src="https://img.icons8.com/external-prettycons-flat-prettycons/47/000000/external-file-file-types-prettycons-flat-prettycons.png" style="padding-left: 35%;"/>
+                                                <img src="{{url('pdf.png')}}" style="height: 40px; padding-left: 35%;">
                                             </a>
                                         </td>
                                     </tr>
@@ -263,7 +263,7 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 <a href="{{route('PDFForQuotation', encrypt($rfp->orderItem->id))}}">
-                                                    <img src="https://img.icons8.com/external-prettycons-flat-prettycons/47/000000/external-file-file-types-prettycons-flat-prettycons.png" style="padding-right: 35%"/>
+                                                    <img src="{{url('pdf.png')}}" style="height: 40px; padding-right: 35%;">
                                                 </a>
                                             </td>
                                         </tr>

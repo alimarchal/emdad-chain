@@ -163,7 +163,7 @@
         <h4 style="text-align: center;">{{ $loop->iteration }}</h4>
     </div>
     <hr>
-        <span class="font-style"> <strong>Brand: </strong> {{ $quote->orderItem->brand }}<br> </span>
+        <span class="font-style"> <strong>Brand: </strong> @if(isset($quote->orderItem->brand)) {{ $quote->orderItem->brand }} @else N/A @endif <br> </span>
         <span class="font-style"> <strong>Remarks: </strong> {{ $quote->orderItem->remarks }}<br> </span>
         <span class="font-style"> <strong>UMO: </strong> {{ $quote->orderItem->unit_of_measurement }}<br> </span>
         <span class="font-style"> <strong>Size: </strong> {{ $quote->orderItem->size }}<br> </span>
@@ -205,7 +205,10 @@
     <div class="center" style="width: 33.33%"></div>
 
     <div class="center" style="width: 33.33%; float: right">
-        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" style="height: 10px; width: auto; margin-left: auto; margin-right: auto;"/></div>
+        <div>
+            @php $img = asset('logo-full.png'); @endphp
+            <img src="{{$img}}" style="height: 10px; width: auto; margin-left: auto; margin-right: auto;" >
+        </div>
     </div>
 
 </div>

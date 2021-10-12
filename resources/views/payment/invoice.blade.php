@@ -36,33 +36,33 @@
                                         <table id="proforma-table" class="min-w-full divide-y divide-gray-200">
                                             <thead>
                                             <tr>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     #
                                                 </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.Invoice Number')}}
                                                 </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.P.O.')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.Category Name')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.P.O Date')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.Requisition Type')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.Status')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     @if (auth()->user()->registration_type == 'Buyer')
                                                         {{__('portal.Claim manual payment')}}
                                                     @elseif(auth()->user()->registration_type == 'Supplier')
@@ -70,7 +70,7 @@
                                                     @endif
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.View')}}
                                                 </th>
                                             </tr>
@@ -87,7 +87,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.P.O.')}} -{{ $dn->purchase_order->id }}
+                                                        {{__('portal.PO')}}-{{ $dn->purchase_order->id }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -142,11 +142,11 @@
                                                                 @if($dn->invoice_status == '0')
 
                                                                     @if($dn->rfq_type == 1)
-                                                                        <a href=" {{ route('bank-payments.create', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                                        <a href=" {{ route('bank-payments.create', $dn->id) }}" class="text-blue-600 hover:underline">
                                                                             {{__('portal.Manual Payment')}}
                                                                         </a> |
                                                                     @elseif($dn->rfq_type == 0)
-                                                                        <a href=" {{ route('singleCategoryBankPaymentCreate', $dn->rfq_no) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                                        <a href=" {{ route('singleCategoryBankPaymentCreate', $dn->rfq_no) }}" class="text-blue-600 hover:underline">
                                                                             {{__('portal.Manual Payment')}}
                                                                         </a> |
                                                                     @endif
@@ -160,11 +160,11 @@
 
                                                                 @elseif($dn->invoice_status == '2')
                                                                     @if($dn->rfq_type == 1 )
-                                                                        <a href=" {{ route('bank-payments.edit', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                                        <a href=" {{ route('bank-payments.edit', $dn->id) }}" class="text-blue-600 hover:underline">
                                                                             {{__('portal.Proceed')}}
                                                                         </a>
                                                                     @elseif($dn->rfq_type == 0)
-                                                                        <a href=" {{ route('singleCategoryBankPaymentEdit', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                                        <a href=" {{ route('singleCategoryBankPaymentEdit', $dn->id) }}" class="text-blue-600 hover:underline">
                                                                             {{__('portal.Proceed')}}
                                                                         </a>
                                                                     @endif
@@ -184,7 +184,7 @@
                                                                 {{__('portal.Waiting for payment')}}
                                                             @elseif($dn->invoice_status == '1')
                                                                 @php $bankPaymentId = \App\Models\BankPayment::where('invoice_id', $dn->id)->first(); @endphp
-                                                                {{--                                                        <a href="{{ route('bank-payments.show', $bankPaymentId->id) }}" class="text-blue-600 hover:underline" target="_blank">--}}
+                                                                {{--                                                        <a href="{{ route('bank-payments.show', $bankPaymentId->id) }}" class="text-blue-600 hover:underline">--}}
                                                                 {{--                                                            View Payment--}}
                                                                 {{__('portal.Emdad verification pending')}}
                                                             @elseif($dn->invoice_status == '2')
@@ -284,33 +284,33 @@
                                         <table id="proforma-table" class="min-w-full divide-y divide-gray-200">
                                             <thead>
                                             <tr>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     #
                                                 </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.Invoice Number')}}
                                                 </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.P.O.')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.Category Name')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.P.O Date')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.Requisition Type')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.Status')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     @if (auth()->user()->registration_type == 'Buyer')
                                                         {{__('portal.Claim manual payment')}}
                                                     @elseif(auth()->user()->registration_type == 'Supplier')
@@ -318,7 +318,7 @@
                                                     @endif
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.View')}}
                                                 </th>
                                             </tr>
@@ -335,7 +335,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.P.O.')}}-{{ $dn->purchase_order->id }}
+                                                        {{__('portal.PO')}}-{{ $dn->purchase_order->id }}
                                                     </td>
 
 
@@ -391,11 +391,11 @@
                                                                 @if($dn->invoice_status == '0')
 
                                                                     @if($dn->rfq_type == 0)
-                                                                        <a href=" {{ route('bank-payments.create', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                                        <a href=" {{ route('bank-payments.create', $dn->id) }}" class="text-blue-600 hover:underline">
                                                                             {{__('portal.Manual Payment')}}
                                                                         </a> |
                                                                     @elseif($dn->rfq_type == 1)
-                                                                        <a href=" {{ route('singleCategoryBankPaymentCreate', $dn->rfq_no) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                                        <a href=" {{ route('singleCategoryBankPaymentCreate', $dn->rfq_no) }}" class="text-blue-600 hover:underline">
                                                                             {{__('portal.Manual Payment')}}
                                                                         </a> |
                                                                     @endif
@@ -409,11 +409,11 @@
 
                                                                 @elseif($dn->invoice_status == '2')
                                                                     @if($dn->rfq_type == 1 )
-                                                                        <a href=" {{ route('bank-payments.edit', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                                        <a href=" {{ route('bank-payments.edit', $dn->id) }}" class="text-blue-600 hover:underline">
                                                                             {{__('portal.Proceed')}}
                                                                         </a>
                                                                     @elseif($dn->rfq_type == 0)
-                                                                        <a href=" {{ route('singleCategoryBankPaymentEdit', $dn->id) }}" class="text-blue-600 hover:underline" target="_blank">
+                                                                        <a href=" {{ route('singleCategoryBankPaymentEdit', $dn->id) }}" class="text-blue-600 hover:underline">
                                                                             {{__('portal.Proceed')}}
                                                                         </a>
                                                                     @endif
@@ -433,7 +433,7 @@
                                                                 {{__('portal.Waiting for payment')}}
                                                             @elseif($dn->invoice_status == '1')
                                                                 @php $bankPaymentId = \App\Models\BankPayment::where('invoice_id', $dn->id)->first(); @endphp
-                                                                {{--                                                        <a href="{{ route('bank-payments.show', $bankPaymentId->id) }}" class="text-blue-600 hover:underline" target="_blank">--}}
+                                                                {{--                                                        <a href="{{ route('bank-payments.show', $bankPaymentId->id) }}" class="text-blue-600 hover:underline">--}}
                                                                 {{--                                                            View Payment--}}
                                                                 {{__('portal.Emdad verification pending')}}
                                                             @elseif($dn->invoice_status == '2')

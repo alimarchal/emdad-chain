@@ -17,15 +17,19 @@ class ShipmentItemController extends Controller
     {
         DB::transaction(function () use ($request) {
 
-            $delivery = Delivery::where('id', decrypt($request->delivery_id))->first();
+            $shipmentCart = ShipmentCart::where('supplier_business_id', auth()->user()->business_id)->get();
+
+            $buyerBusinessIDArray = array();
+            foreach ($shipmentCart as $item) {
+                $buyerBusinessIDArray[] = $item->buyer_business_id;
+            }
+            $buyerBusinessIDs = implode(',', array_unique($buyerBusinessIDArray));
 
             $shipmentId = Shipment::insertGetId([
                 'supplier_id' => auth()->user()->id,
                 'supplier_business_id' => auth()->user()->business_id,
-                'buyer_business_id' => $delivery->business_id,
+                'buyer_business_id' => $buyerBusinessIDs,
             ]);
-
-            $shipmentCart = ShipmentCart::where('supplier_business_id', auth()->user()->business_id)->get();
 
             foreach ($shipmentCart as $item) {
                 $shipmentItem = new ShipmentItem;
@@ -33,6 +37,7 @@ class ShipmentItemController extends Controller
                 $shipmentItem->driver_id = $item->driver_id;
                 $shipmentItem->vehicle_id = $item->vehicle_id;
                 $shipmentItem->supplier_business_id = $item->supplier_business_id;
+                $shipmentItem->buyer_business_id = (int)$item->buyer_business_id;
                 $shipmentItem->rfq_no = $item->rfq_no;
                 $shipmentItem->delivery_id = $item->delivery_id;
                 $shipmentItem->save();

@@ -50,7 +50,11 @@
             $supplierBusiness = \App\Models\Business::where('id', $invoice->supplier_business_id)->first();
             $buyerBusiness = \App\Models\Business::where('id', $invoice->buyer_business_id)->first();
         @endphp
-        <img src="{{(isset($supplierBusiness->business_photo_url)?Storage::url($supplierBusiness->business_photo_url):'#')}}" alt="{{$supplierBusiness->business_name}}" style="height: 80px;width: 200px;"/>
+{{--        <img src="{{(isset($supplierBusiness->business_photo_url)?Storage::url($supplierBusiness->business_photo_url):'#')}}" alt="{{$supplierBusiness->business_name}}" style="height: 80px;width: 200px;"/>--}}
+        @php $logo_first = asset(Storage::url($supplierBusiness->business_photo_url)); @endphp
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem; height: 5rem; border-radius: 50%;"/>
+
+        <h5 style="text-align: center; margin:0px;">{{ $quote->buyer_business->business_name }}</h5>
     </div>
 
     <br>
@@ -87,7 +91,7 @@
 
     <div class="center" style="width: 40%;float: right">
 
-        <strong>Purchase Order #: </strong> P.O. -{{ $invoice->purchase_order->id }}<br>
+        <strong>Purchase Order #: </strong> PO-{{ $invoice->purchase_order->id }}<br>
         <strong>Category Name: </strong>
         @php
             $record = \App\Models\Category::where('id',$invoice->purchase_order->item_code)->first();
@@ -145,7 +149,7 @@
     <tbody class="bg-white divide-y divide-black border-1 border-black">
     <tr>
         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
-            #
+            1
         </td>
         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="text-align: center;">
             {{ $invoice->eOrderItem->description }}
@@ -179,7 +183,7 @@
 
     <div style="width: 33.33%;float: right">
         <strong>Sub-total: </strong> {{ number_format(($invoice->purchase_order->quantity * $invoice->purchase_order->unit_price), 2) }} SAR<br>
-        <strong>VAT %: </strong> {{ $invoice->vat }}<br>
+        <strong>VAT: </strong> {{ $invoice->vat }} %<br>
         <strong>Shipment cost: </strong> {{ $invoice->purchase_order->shipment_cost }} SAR<br>
         <hr>
         <strong>Total: </strong> {{ number_format($invoice->total_cost, 2) }} SAR<br>
@@ -222,7 +226,9 @@
 
     <div class="center" style="width: 33.33%; float: right">
         <div style="margin-top: 2px;">Copied to Emdad records</div>
-        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" style="height: 10px; width: auto; margin-left: auto; margin-right: auto;"/></div>
+        <div>
+            @php $img = asset('logo-full.png'); @endphp
+            <img src="{{$img}}" style="height: 10px; width: auto; margin-left: auto; margin-right: auto;"></div>
     </div>
 
 </div>

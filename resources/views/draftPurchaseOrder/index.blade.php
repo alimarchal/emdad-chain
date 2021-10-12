@@ -42,37 +42,37 @@
                                         <table class="min-w-full divide-y divide-gray-200" id="dpo">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         #
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.DPO Number')}}
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Category Name')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Requisition Type')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Date')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Valid upto')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Status')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Action')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.View')}}
                                                     </th>
 
@@ -88,11 +88,11 @@
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                             @if($dpo->rfq_type == 1)
                                                                 <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                                    {{__('portal.D.P.O.')}} -{{ $dpo->id }}
+                                                                    {{__('portal.DPO')}}-{{ $dpo->id }}
                                                                 </a>
                                                             @elseif($dpo->rfq_type == 0)
                                                                 <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                                    {{__('portal.D.P.O.')}} -{{ $dpo->id }}
+                                                                    {{__('portal.DPO')}}-{{ $dpo->id }}
                                                                 </a>
                                                             @endif
                                                         </td>
@@ -248,37 +248,37 @@
                                         <table class="min-w-full divide-y divide-gray-200" id="dpo">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         #
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.DPO Number')}}
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Category Name')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Requisition Type')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Date')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Valid upto')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Status')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Action')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.View')}}
                                                     </th>
 
@@ -294,11 +294,11 @@
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if($dpo->rfq_type == 1)
                                                             <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                                {{__('portal.D.P.O.')}}-{{ $dpo->id }}
+                                                                {{__('portal.DPO')}}-{{ $dpo->id }}
                                                             </a>
                                                         @elseif($dpo->rfq_type == 0)
                                                             <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                                {{__('portal.D.P.O.')}}-{{ $dpo->id }}
+                                                                {{__('portal.DPO')}}-{{ $dpo->id }}
                                                             </a>
                                                         @endif
                                                     </td>

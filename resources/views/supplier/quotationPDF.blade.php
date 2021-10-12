@@ -83,7 +83,7 @@
             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
         @endphp
         {{ $record->name }} @if(isset($parent)), {{$parent->name}} @endif<br>
-        <strong>Brand: </strong> {{ $eOrderItem->brand }}<br>
+        <strong>Brand: </strong> @if(isset($eOrderItem->brand)) {{ $eOrderItem->brand }} @else N/A @endif <br>
         <strong>Quantity: </strong> {{ $eOrderItem->quantity }}<br>
         <strong>Unit of Measurement: </strong> {{ $eOrderItem->unit_of_measurement }}<br>
         <strong>Size: </strong> {{ $eOrderItem->size }}<br>
@@ -195,10 +195,10 @@
 
 <br><br><br><br>
 <div class="center" style="width: 33.33%;">
-    <strong>Note: </strong> {{ $quote->note_for_customer }}<br>
+    <strong>Note: </strong> @if(isset($quote->note_for_customer)) {{ $quote->note_for_customer }} @else N/A @endif <br>
 </div>
 <div class="center" style="width: 33.33%;">
-    <strong>VAT %: </strong> {{ $quote->VAT }} %<br>
+    <strong>VAT: </strong> {{ $quote->VAT }} %<br>
     <br>
 </div>
 <div class="center" style="width: 33.33%;">
@@ -247,7 +247,10 @@
     <div class="center" style="width: 33.33%"></div>
 
     <div class="center" style="width: 33.33%; float: right">
-        <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" style="height: 10px; width: auto; margin-left: auto; margin-right: auto;"/></div>
+        <div>
+            @php $img = asset('logo-full.png'); @endphp
+            <img src="{{$img}}" style="height: 10px; width: auto; margin-left: auto; margin-right: auto;" >
+        </div>
     </div>
 
 </div>

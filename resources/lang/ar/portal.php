@@ -246,6 +246,7 @@ return [
     'Rejected for Edit' => 'مرفوض للتعديل',
     'Draft Purchase Order' => 'مسودّة الشراء',
     'D.P.O.' => 'مسودّة الشراء',
+    'DPO' => 'مسودّة الشراء',
     'Draft P.O.' => 'مسودّة الشراء',
     'Note' => 'الملاحظات',
     'We acknowledge that' => 'نقرّ بأن',

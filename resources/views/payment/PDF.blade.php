@@ -85,7 +85,7 @@
 
     <div class="center" style="width: 40%;float: right">
 
-        <strong>Purchase Order #: </strong> P.O. -{{ $invoice->purchase_order->id }}<br>
+        <strong>Purchase Order #: </strong> PO-{{ $invoice->purchase_order->id }}<br>
         <strong>Category Name: </strong>
         @php
             $record = \App\Models\Category::where('id',$invoice->purchase_order->item_code)->first();

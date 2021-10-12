@@ -55,16 +55,8 @@
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                         {{--<h3 class="text-2xl" style="padding-left: 55px"><strong>{{__('portal.Draft P.O.')}}</strong></h3>--}}
-                                        <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.P.O.')}} -{{ $draftPurchaseOrder->id }}<br>
+                                        <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.DPO')}}-{{ $draftPurchaseOrder->id }}<br>
                                         <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
-                                        <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;</strong>
-                                        @php
-                                            $record = \App\Models\Category::where('id',$draftPurchaseOrder->item_code)->first();
-                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                        @endphp
-                                         <span class="text-blue-600">{{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif</span>
-                                        {{--                                    {{ $draftPurchaseOrder->item_name }}--}}
-                                        <br>
                                         <strong>{{__('portal.Requisition')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $draftPurchaseOrder->rfq_no }}<br>
                                         <strong>{{__('portal.Quote')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $draftPurchaseOrder->qoute_no }}<br>
                                         <strong>{{__('portal.Payment Terms')}}: &nbsp;&nbsp;&nbsp;</strong>
@@ -82,8 +74,19 @@
 
                                 <div class="flex flex-wrap overflow-hidden bg-white p-4">
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
-                                        <strong class="text-xl">{{__('portal.Quote Description')}}: </strong><br>
-                                        <p class="text-xl">{{ strip_tags($draftPurchaseOrder->eOrderItem->description) }}</p><br>
+                                        <strong class="text-xl">{{__('portal.Category Name')}}: </strong>
+                                        @php
+                                            $record = \App\Models\Category::where('id',$draftPurchaseOrder->item_code)->first();
+                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                        @endphp
+                                        <span class="text-xl text-blue-600">{{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                                    <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
+                                        <strong class="text-xl">{{__('portal.Item Description')}}: </strong>
+                                        <span class="text-xl">{{ strip_tags($draftPurchaseOrder->eOrderItem->description) }}</span><br>
                                     </div>
                                 </div>
 
@@ -336,16 +339,8 @@
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                         {{--<h3 class="text-2xl" style="padding-right: 55px"><strong>{{__('portal.Draft P.O.')}}</strong></h3>--}}
-                                        <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.P.O.')}}-{{ $draftPurchaseOrder->id }}<br>
+                                        <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.DPO')}}-{{ $draftPurchaseOrder->id }}<br>
                                         <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
-                                        <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-                                        @php
-                                            $record = \App\Models\Category::where('id',$draftPurchaseOrder->item_code)->first();
-                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                        @endphp
-                                        <span class="text-blue-600"> {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif</span>
-                                        {{--                                    {{ $draftPurchaseOrder->item_name }}--}}
-                                        <br>
                                         <strong>{{__('portal.Requisition')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $draftPurchaseOrder->rfq_no }}<br>
                                         <strong>{{__('portal.Quote')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $draftPurchaseOrder->qoute_no }}<br>
                                         <strong>{{__('portal.Payment Terms')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
@@ -362,8 +357,18 @@
                                 </div>
                                 <div class="flex flex-wrap overflow-hidden bg-white p-4">
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
-                                        <strong class="text-xl">{{__('portal.Quote Description')}}: </strong><br>
-                                        <p class="text-xl">{{ strip_tags($draftPurchaseOrder->eOrderItem->description) }}</p><br>
+                                        <strong class="text-xl">{{__('portal.Category Name')}}: </strong>
+                                        @php
+                                            $record = \App\Models\Category::where('id',$draftPurchaseOrder->item_code)->first();
+                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                        @endphp
+                                        <span class="text-xl text-blue-600"> {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                                    <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
+                                        <strong class="text-xl">{{__('portal.Item Description')}}: </strong>
+                                        <span class="text-xl">{{ strip_tags($draftPurchaseOrder->eOrderItem->description) }}</span><br>
                                     </div>
                                 </div>
                                 <table class="min-w-full divide-y divide-black ">

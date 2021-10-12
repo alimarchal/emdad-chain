@@ -50,17 +50,8 @@
                                         <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $draftPurchaseOrders[0]->supplier_business->city }}</span><br>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                                        {{--<h3 class="text-2xl" style="padding-left: 55px;"><strong>{{__('portal.Draft P.O.')}}</strong></h3>--}}
-                                        <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.P.O.')}} -{{ $draftPurchaseOrders[0]->id }}<br>
-                                        {{--                            <strong>Category Code: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->item_code }}<br>--}}
+                                        <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.DPO')}}-{{ $draftPurchaseOrders[0]->id }}<br>
                                         <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->created_at }}<br>
-                                        <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong>
-                                        @php
-                                            $record = \App\Models\Category::where('id',$draftPurchaseOrders[0]->item_code)->first();
-                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                        @endphp
-                                        <span class="text-blue-600">{{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif</span>
-                                        <br>
                                         <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $draftPurchaseOrders[0]->rfq_no }}<br>
                                         <strong>{{__('portal.Quote')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $draftPurchaseOrders[0]->qoute_no }}<br>
                                         <strong>{{__('portal.Payment Terms')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong>
@@ -73,6 +64,17 @@
                                         @endif
                                         <br>
 
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                                    <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
+                                        <strong class="text-xl">{{__('portal.Category Name')}}: </strong>
+                                        @php
+                                            $record = \App\Models\Category::where('id',$draftPurchaseOrders[0]->item_code)->first();
+                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                        @endphp
+                                        <span class="text-xl text-blue-600">{{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif</span>
                                     </div>
                                 </div>
 
@@ -314,15 +316,7 @@
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                         <h3 class="text-2xl" style="padding-right: 55px;"><strong>{{__('portal.Draft P.O.')}}</strong></h3>
-                                        <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.P.O.')}}-{{ $draftPurchaseOrders[0]->id }}<br>
-                                        {{--                            <strong>Category Code: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->item_code }}<br>--}}
-                                        <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-                                        @php
-                                            $record = \App\Models\Category::where('id',$draftPurchaseOrders[0]->item_code)->first();
-                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                        @endphp
-                                        <span class="text-blue-600"> {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif</span>
-                                        <br>
+                                        <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.DPO')}}-{{ $draftPurchaseOrders[0]->id }}<br>
                                         <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->created_at }}<br>
                                         <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $draftPurchaseOrders[0]->rfq_no }}<br>
                                         <strong>{{__('portal.Quote')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $draftPurchaseOrders[0]->qoute_no }}<br>
@@ -335,9 +329,17 @@
                                         @elseif($draftPurchaseOrders[0]->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
                                         @endif
                                         <br>
-                                        {{--<strong>VAT %: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->vat, 2) }}<br>
-                                        <strong>Shipping Fees: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->shipment_cost, 2) }}<br>
-                                        <strong>Total: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrders[0]->total_cost, 2) }}<br>--}}
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                                    <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
+                                        <strong class="text-xl">{{__('portal.Category Name')}}: </strong>
+                                        @php
+                                            $record = \App\Models\Category::where('id',$draftPurchaseOrders[0]->item_code)->first();
+                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                        @endphp
+                                        <span class="text-xl text-blue-600"> {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif</span>
                                     </div>
                                 </div>
 

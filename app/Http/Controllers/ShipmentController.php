@@ -14,12 +14,29 @@ class ShipmentController extends Controller
     {
         if (auth()->user()->registration_type == 'Supplier')
         {
-            $shipments = Shipment::where('supplier_id', auth()->user()->id)->get();
+            $shipments = Shipment::where('supplier_business_id', auth()->user()->business_id)->get();
             return view('shipment.index', compact('shipments'));
         }
         elseif (auth()->user()->registration_type == 'Buyer')
         {
-            $shipments = Shipment::where('buyer_business_id', auth()->user()->business_id)->get();
+//            $shipments = Shipment::where('buyer_business_id', auth()->user()->business_id)->get();
+            $collections = Shipment::all();
+
+            $shipments = array();
+
+            foreach ($collections as $collection)
+            {
+                $businessIds = explode(',', $collection->buyer_business_id);
+
+                for ($i=0; $i< count($businessIds); $i++)
+                {
+                    if ($businessIds[$i] == auth()->user()->business_id)
+                    {
+                        $shipments[] =  $collection;
+                    }
+                }
+            }
+            $shipments = array_unique($shipments);
             return view('shipment.buyer.index', compact('shipments'));
         }
 
@@ -46,7 +63,8 @@ class ShipmentController extends Controller
         }
         elseif (auth()->user()->registration_type == 'Buyer')
         {
-            $shipmentDetails = ShipmentItem::where('shipment_id', $shipment->id)->get();
+//            $shipmentDetails = ShipmentItem::where('shipment_id', $shipment->id)->get();
+            $shipmentDetails = ShipmentItem::where(['shipment_id' => $shipment->id, 'buyer_business_id' => auth()->user()->business_id])->get();
             return view('shipment.buyer.show', compact('shipmentDetails'));
         }
 
@@ -55,14 +73,48 @@ class ShipmentController extends Controller
     /* Delivered delivery of Buyers */
     public function delivered()
     {
-        $shipments = Shipment::where(['buyer_business_id' => auth()->user()->business_id, 'status' => 1])->get();
+//        $shipments = Shipment::where(['buyer_business_id' => auth()->user()->business_id, 'status' => 1])->get();
+        $collections = Shipment::where(['status' => 1])->get();
+        $shipments = array();
+
+        foreach ($collections as $collection)
+        {
+            $businessIds = explode(',', $collection->buyer_business_id);
+
+            for ($i=0; $i< count($businessIds); $i++)
+            {
+                if ($businessIds[$i] == auth()->user()->business_id)
+                {
+                    $shipments[] =  $collection;
+                }
+            }
+        }
+        $shipments = array_unique($shipments);
         return view('shipment.buyer.delivered', compact('shipments'));
     }
 
     /* on going deliveries of Buyers */
     public function ongoingShipment()
     {
-        $shipments = Shipment::with('shipmentItems')->where(['buyer_business_id' => auth()->user()->business_id, 'status' => 0])->get();
+//        $shipments = Shipment::with('shipmentItems')->where(['buyer_business_id' => auth()->user()->business_id, 'status' => 0])->get();
+        $collections = Shipment::with('shipmentItems')->where(['status' => 0])->get();
+
+        $shipments = array();
+
+        foreach ($collections as $collection)
+        {
+            $businessIds = explode(',', $collection->buyer_business_id);
+
+                for ($i=0; $i< count($businessIds); $i++)
+                {
+                    if ($businessIds[$i] == auth()->user()->business_id)
+                    {
+                        $shipments[] =  $collection;
+                    }
+                }
+        }
+
+        $shipments = array_unique($shipments);
         return view('shipment.buyer.notdelivered', compact('shipments'));
     }
 }
