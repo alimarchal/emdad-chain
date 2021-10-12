@@ -51,6 +51,10 @@ use \App\Http\Controllers\LibraryController;
 |
 */
 
+Route::get('/register-view', function () {
+    return view('auth.register-view');
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 //Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [DashboardController::class, 'languageChange'])->name('languageChange');
 Route::middleware(['auth:sanctum', 'verified'])->get('languageChange/{lang}/{rtl_value}', [DashboardController::class, 'languageChange'])->name('languageChange');
@@ -76,6 +80,8 @@ Route::middleware(['auth:sanctum', 'verified'])->post('store-buyer', [UserContro
 Route::middleware(['auth:sanctum'])->get('/business-suppliers/', [BusinessController::class, 'suppliers'])->name('businessSuppliers');
 Route::middleware(['auth:sanctum'])->get('/business-buyers/', [BusinessController::class, 'buyers'])->name('businessBuyers');
 ###################################################### Buyer and Supplier Adding each other ##########################################
+
+
 
 Route::middleware(['packageCheck', 'categoryCheck'])->group(function () {
     Route::middleware(['auth:sanctum'])->resource('/business', BusinessController::class);
