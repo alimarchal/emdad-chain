@@ -180,19 +180,19 @@
             <div class="p4 mb-5 overflow-x-auto">
 
                 <table class="table-fixed  min-w-full text-center ">
-                    <thead style="background-color:#8EAADB" class="text-white">
+                    <thead style="background-color:#8EAADB" class="text-white text-left p-2">
 
                     <tr>
                         <th style="width:2%;">#</th>
-                        <th style="width:11%;">{{__('portal.Brand')}} @include('misc.required') </th>
-                        <th style="width:11%;">{{__('portal.Remarks')}} @include('misc.required') </th>
-                        <th style="width:9%;">{{__('portal.UOM')}} @include('misc.required') </th>
-                        <th style="width:7%;">{{__('portal.Size')}} @include('misc.required') </th>
-                        <th style="width:11%;">{{__('portal.Description')}} @include('misc.required') </th>
-                        <th style="width:3%;">{{__('portal.Attachments')}}</th>
-                        <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
-                        <th style="width:7%;">{{__('portal.Price Per Unit')}} @include('misc.required') </th>
-                        <th style="width:20%;">{{__('portal.Note')}}</th>
+                        <th >{{__('portal.Brand')}} @include('misc.required') </th>
+                        <th >{{__('portal.Remarks')}} @include('misc.required') </th>
+                        <th >{{__('portal.UOM')}} @include('misc.required') </th>
+                        <th >{{__('portal.Size')}} @include('misc.required') </th>
+                        <th >{{__('portal.Description')}} @include('misc.required') </th>
+                        <th >{{__('portal.Attachments')}}</th>
+                        <th >{{__('portal.Quantity')}} @include('misc.required')</th>
+                        <th>{{__('portal.Price Per Unit')}} @include('misc.required') </th>
+                        <th >{{__('portal.Note')}}</th>
 
                     </tr>
                     </thead>
@@ -755,14 +755,14 @@
                     <tr>
                         <th style="width:2%;">#</th>
                         <th style="width:11%;">{{__('portal.Brand')}} @include('misc.required') </th>
-                        <th style="width:11%;">{{__('portal.Remarks')}} @include('misc.required') </th>
-                        <th style="width:9%;">{{__('portal.UOM')}} @include('misc.required') </th>
-                        <th style="width:7%;">{{__('portal.Size')}} @include('misc.required') </th>
-                        <th style="width:11%;">{{__('portal.Description')}} @include('misc.required') </th>
-                        <th style="width:3%;">{{__('portal.Attachments')}}</th>
-                        <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
-                        <th style="width:7%;">{{__('portal.Price Per Unit')}} @include('misc.required') </th>
-                        <th style="width:20%;">{{__('portal.Note')}}</th>
+                        <th >{{__('portal.Remarks')}} @include('misc.required') </th>
+                        <th >{{__('portal.UOM')}} @include('misc.required') </th>
+                        <th >{{__('portal.Size')}} @include('misc.required') </th>
+                        <th >{{__('portal.Description')}} @include('misc.required') </th>
+                        <th >{{__('portal.Attachments')}}</th>
+                        <th >{{__('portal.Quantity')}} @include('misc.required')</th>
+                        <th >{{__('portal.Price Per Unit')}} @include('misc.required') </th>
+                        <th>{{__('portal.Note')}}</th>
 
                     </tr>
                     </thead>

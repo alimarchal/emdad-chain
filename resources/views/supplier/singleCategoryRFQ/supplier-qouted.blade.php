@@ -66,13 +66,13 @@
                                             #
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{__('portal.Quotation')}} #
+                                            {{__('portal.Quotation')}}#
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Category Name')}}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{ ucwords(str_replace("_", " ", __('portal.Requisition'))) }} #
+                                            {{ ucwords(str_replace("_", " ", __('portal.Requisition'))) }}#
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{ ucwords(str_replace("_", " ", __('portal.Shipping Time In Days'))) }}
