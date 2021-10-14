@@ -291,75 +291,52 @@ class QouteController extends Controller
 
     public function QoutedRFQQouted()
     {
-        $user_id = auth()->user()->id;
 //        $collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 1])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->orWhere('qoute_status', 'Modified')->get();
 //        $collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 1])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->get();
-        $collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 1])
+        /*$collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 1])
                             ->where(function ($query){
                                 $query->where(['qoute_status' => 'Qouted'])->where(['qoute_status_updated' => null])->orWhere(['qoute_status' => 'accepted']);
-                            })->get();
-
-        $quoted = array();
-        $accepted = array();
-        /* Separating Quotes which have dpo created  */
-        foreach ($collection as $col)
-        {
-            if ($col['qoute_status'] == 'Qouted')
-            {
-                $quoted[] = $col;
-            }
-            if ($col['qoute_status'] == 'accepted' )
-            {
-                $accepted[] = $col;
-            }
-        }
-        $quotedCollection = collect($quoted);
-        $acceptedCollection = collect($accepted);
-
-        $dpo = array();
-        /* Checking where quotes have DPO with pending status */
-        foreach ($acceptedCollection as $acceptedCol)
-        {
-            $dpoPresent = DraftPurchaseOrder::where('id', $acceptedCol->dpo)->where('status', 'pending')->first();
-            if ($dpoPresent)
-            {
-                $dpo[] = $acceptedCol;
-            }
-        }
-        $pendingDpo = collect($dpo);
-        $quotedQuotes = collect($quotedCollection->merge($pendingDpo));
-        $collection = $quotedQuotes;
+                            })->get();*/
+        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1])
+                            ->where('qoute_status' , '!=' ,'ModificationNeeded')
+                            ->where('qoute_status' , '!=' ,'RFQPendingConfirmation')
+                            ->get();
 
         return view('supplier.supplier-qouted', compact('collection'));
     }
 
     public function QuotedModifiedRFQ()
     {
-        $user_id = auth()->user()->id;
-        $collection = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 1])->where(['qoute_status' => 'Modified'])->get();
+        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where(['qoute_status' => 'Modified'])->get();
 
         return view('supplier.supplier-modified-quoted-quotes', compact('collection'));
     }
 
     public function QoutedRFQRejected()
     {
-        $user_id = auth()->user()->id;
-        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 1])->where('qoute_status_updated', 'Rejected')->get();
+        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id ,'rfq_type' => 1])->where('qoute_status_updated', 'Rejected')->get();
         return view('supplier.supplier-qouted-Rejected', compact('collection'));
     }
 
     public function QoutedRFQModificationNeeded()
     {
-        $user_id = auth()->user()->id;
-        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 1])->where('qoute_status_updated', 'ModificationNeeded')->get();
+        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id,'rfq_type' => 1])->where('qoute_status_updated', 'ModificationNeeded')->get();
         return view('supplier.supplier-qouted-ModificationNeeded', compact('collection'));
     }
 
     public function QoutedRFQQoutedRFQPendingConfirmation()
     {
-        $user_id = auth()->user()->id;
-        $collection = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 1])->where('qoute_status', 'RFQPendingConfirmation')->get();
+        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id ,'rfq_type' => 1])->where('qoute_status', 'RFQPendingConfirmation')->get();
         return view('supplier.supplier-qouted-PendingConfirmation', compact('collection'));
+    }
+
+    public function QoutedRFQQoutedExpired()
+    {
+        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1, 'request_status' => 1])
+                            ->where(function ($query){
+                                $query->where(['qoute_status' => 'Qouted'])->orWhere(['qoute_status' => 'accepted']);
+                            })->get();
+        return view('supplier.supplier-qouted-expired', compact('collection'));
     }
 
     /* Function for buyer MULTI CATEGORIES (buyer requests for quotation expiry date extension) */
@@ -471,55 +448,19 @@ class QouteController extends Controller
 
     public function singleCategoryQuotedRFQQuoted()
     {
-        $user_id = auth()->user()->id;
-//        $quoted = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->get();
-//        $collection = $quoted->unique('e_order_id');
-
-        $quoted = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 0])
-                    ->where(function ($query){
-                        $query->where(['qoute_status' => 'Qouted'])->where(['qoute_status_updated' => null])->orWhere(['qoute_status' => 'accepted']);
-                    })->get();
+        $quoted = Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 0])
+                        ->where('qoute_status' , '!=' ,'ModificationNeeded')
+                        ->where('qoute_status' , '!=' ,'RFQPendingConfirmation')
+                        ->get();
 
         $collection = $quoted->unique('e_order_id');
-
-        $quoted = array();
-        $accepted = array();
-        /* Separating Quotes which have dpo created SINGLE CATEGORY */
-        foreach ($collection as $col)
-        {
-            if ($col['qoute_status'] == 'Qouted')
-            {
-                $quoted[] = $col;
-            }
-            if ($col['qoute_status'] == 'accepted' )
-            {
-                $accepted[] = $col;
-            }
-        }
-        $quotedCollection = collect($quoted);
-        $acceptedCollection = collect($accepted);
-
-        $dpo = array();
-        /* Checking where quotes have DPO with pending status SINGLE CATEGORY */
-        foreach ($acceptedCollection as $acceptedCol)
-        {
-            $dpoPresent = DraftPurchaseOrder::where('id', $acceptedCol->dpo)->where('status', 'pending')->first();
-            if ($dpoPresent)
-            {
-                $dpo[] = $acceptedCol;
-            }
-        }
-        $pendingDpo = collect($dpo);
-        $quotedQuotes = collect($quotedCollection->merge($pendingDpo));
-        $collection = $quotedQuotes;
 
         return view('supplier.singleCategoryRFQ.supplier-qouted', compact('collection'));
     }
 
     public function singleCategoryQuotedModifiedRFQ()
     {
-        $user_id = auth()->user()->id;
-        $modified = Qoute::where(['supplier_user_id' => $user_id , 'rfq_type' => 0])->where(['qoute_status' => 'Modified'])->get();
+        $modified = Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 0])->where(['qoute_status' => 'Modified'])->get();
         $collection = $modified->unique('e_order_id');
 
         return view('supplier.singleCategoryRFQ.supplier-modified-quoted-quotes', compact('collection'));
@@ -527,8 +468,7 @@ class QouteController extends Controller
 
     public function singleCategoryQuotedRFQRejected()
     {
-        $user_id = auth()->user()->id;
-        $rejected = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where('qoute_status_updated', 'Rejected')->get();
+        $rejected = Qoute::where(['supplier_business_id' => auth()->user()->business_id ,'rfq_type' => 0])->where('qoute_status_updated', 'Rejected')->get();
         $collection = $rejected->unique('e_order_id');
 
         return view('supplier.singleCategoryRFQ.supplier-qouted-Rejected', compact('collection'));
@@ -536,19 +476,30 @@ class QouteController extends Controller
 
     public function singleCategoryQuotedRFQModificationNeeded()
     {
-        $user_id = auth()->user()->id;
-        $modificationQuotes = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where('qoute_status_updated', 'ModificationNeeded')->get();
+        $modificationQuotes = Qoute::where(['supplier_business_id' => auth()->user()->business_id ,'rfq_type' => 0])->where('qoute_status_updated', 'ModificationNeeded')->get();
         $collection = $modificationQuotes->unique('e_order_id');
         return view('supplier.singleCategoryRFQ.supplier-qouted-ModificationNeeded', compact('collection'));
     }
 
     public function singleCategoryQuotedRFQPendingConfirmation()
     {
-        $user_id = auth()->user()->id;
-        $pending = Qoute::where(['supplier_user_id' => $user_id ,'rfq_type' => 0])->where('qoute_status', 'RFQPendingConfirmation')->get();
+        $pending = Qoute::where(['supplier_business_id' => auth()->user()->business_id ,'rfq_type' => 0])->where('qoute_status', 'RFQPendingConfirmation')->get();
         $collection = $pending->unique('e_order_id');
 
         return view('supplier.singleCategoryRFQ.supplier-qouted-PendingConfirmation', compact('collection'));
+    }
+
+    public function singleCategoryRFQExpired()
+    {
+        $expired = Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 0, 'request_status' => 1])
+                            ->where(function ($query){
+                                $query->where(['qoute_status' => 'Qouted'])->orWhere(['qoute_status' => 'accepted']);
+                            })
+                            ->get();
+
+        $collection = $expired->unique('e_order_id');
+
+        return view('supplier.singleCategoryRFQ.supplier-qouted-expired', compact('collection'));
     }
 
     ##########################################################################################

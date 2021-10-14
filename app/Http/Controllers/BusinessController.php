@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\IreCommission;
 use App\Models\User;
 use App\Models\UserLog;
+use App\Notifications\BusinessRejected;
 use Illuminate\Http\Request;
 
 class BusinessController extends Controller
@@ -357,10 +358,13 @@ class BusinessController extends Controller
                 'status' => 4,
                 'is_active' => 1,
             ]);
-            $ireCommission->update([
-                'status' => 2,
-            ]);
-            $user->notify(new \App\Notifications\BusinessRejected());
+            if (isset($ireCommission))
+            {
+                $ireCommission->update([
+                    'status' => 2,
+                ]);
+            }
+            $user->notify(new BusinessRejected());
         } else {
             return redirect()->back()->with('message', __('portal.Something went wrong.'));
         }

@@ -181,6 +181,10 @@
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                            {{__('portal.Email Verified')}}
+                                        </th>
+
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             {{__('portal.Mobile')}}
                                         </th>
 
@@ -209,6 +213,9 @@
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                                 <span class="text-blue-900 ">{{ $user->email }}</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                <span class="text-blue-900 "> @if($user->email_verified_at) {{ $user->email_verified_at }} @else {{__('portal.No')}} @endif </span>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900">
                                                 <span class="text-blue-900 ">{{ $user->mobile }}</span>
@@ -429,6 +436,9 @@
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             {{__('portal.Email')}}
                                         </th>
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
+                                            {{__('portal.Email Verified')}}
+                                        </th>
 
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider">
                                             {{__('portal.Mobile')}}
@@ -459,6 +469,9 @@
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
                                                 <span class="text-blue-900 ">{{ $user->email }}</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                <span class="text-blue-900 "> @if($user->email_verified_at) {{ $user->email_verified_at }} @else {{__('portal.No')}} @endif </span>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900">
                                                 <span class="text-blue-900 ">{{ $user->mobile }}</span>

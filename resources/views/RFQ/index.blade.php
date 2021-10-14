@@ -355,7 +355,7 @@
                                             {{ strip_tags($rfp->description) }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->unit_of_measurement }}
+                                            @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $rfp->unit_of_measurement); @endphp {{$UOM->uom_ar}}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
