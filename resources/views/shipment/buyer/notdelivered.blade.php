@@ -26,7 +26,6 @@
         @endif
         <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Shipments')}} </h2>
 
-{{--        @if ($shipments->count())--}}
         @if (count($shipments) > 0)
             @php $total = 0; @endphp
             <div class="flex flex-col bg-white rounded ">
@@ -71,7 +70,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $shipment->id }}
+                                            {{__('portal.SHPN')}}-{{ $shipment->id }}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -192,7 +191,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $shipment->id }}
+                                            {{__('portal.SHPN')}}-{{ $shipment->id }}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">

@@ -42,6 +42,9 @@
                                             #
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Quotation')}}&nbsp;#
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Category Name')}}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
@@ -66,6 +69,10 @@
                                         <tr>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $loop->iteration }}
+                                            </td>
+
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                {{__('portal.Q')}}-{{ $quote->id }}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -145,6 +152,9 @@
                                             #
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Quotation')}}&nbsp;#
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Category Name')}}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
@@ -169,6 +179,10 @@
                                         <tr>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $loop->iteration }}
+                                            </td>
+
+                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                {{ __('portal.Q') }}-{{ $quote->id  }}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">

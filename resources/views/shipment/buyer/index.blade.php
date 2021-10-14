@@ -65,8 +65,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 130px;">
-                                        <a href="{{route('shipment.show',$shipment->id)}}" class="hover:underline text-blue-600">{{$shipment->id}}</a>
-
+                                        <a href="{{route('shipment.show',$shipment->id)}}" class="hover:underline text-blue-600"> {{__('portal.SHPN')}}-{{$shipment->id}}</a>
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 140px;">
@@ -174,7 +173,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 130px;">
-                                        <a href="{{route('shipment.show',$shipment->id)}}" class="hover:underline text-blue-600">{{$shipment->id}}</a>
+                                        <a href="{{route('shipment.show',$shipment->id)}}" class="hover:underline text-blue-600">{{__('portal.SHPN')}}-{{$shipment->id}}</a>
 
                                     </td>
 

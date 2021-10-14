@@ -585,9 +585,7 @@
                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                         @endphp
 
-                                        {{$parent != '' ? $parent->name :'' }}
-
-                                        {{ $item->item_name}} , {{ $parent->name}}
+                                        {{ $record->name}} @if(isset($parent)), {{ $parent->name}} @endif
 
                                     </td>
                                     <td>
@@ -1173,9 +1171,7 @@
                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                         @endphp
 
-                                        {{$parent != '' ? $parent->name :'' }}
-
-                                        {{ $item->item_name}} , {{ $parent->name}}
+                                        {{ $record->name}} @if(isset($parent)), {{ $parent->name}} @endif
 
                                     </td>
                                     <td>
@@ -1515,7 +1511,7 @@
                                                         {{ strip_tags($rfp->description) }}
                                                     </td>
                                                     <td class="px-6 py- text-center4 whitespace-nowrap text-sm text-gray-500">
-                                                        {{ $rfp->unit_of_measurement }}
+                                                        @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $rfp->unit_of_measurement); @endphp {{$UOM->uom_ar}}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -1887,15 +1883,13 @@
                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                         @endphp
 
-                                        {{$parent != '' ? $parent->name :'' }}
-
-                                        {{ $item->item_name}} , {{ $parent->name}}
+                                        {{ $record->name_ar}} @if(isset($parent)), {{ $parent->name_ar}} @endif
 
                                     </td>
                                     <td>
                                         {{strip_tags($item->description)}}
                                     </td>
-                                    <td>{{$item->unit_of_measurement}}</td>
+                                    <td> @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}}</td>
                                     <td>
                                         {{$item->quantity}}
                                     </td>
@@ -1955,7 +1949,7 @@
                                             required name="unit_of_measurement" id="unit_of_measurement" style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
                                             @foreach (\App\Models\UnitMeasurement::all() as $item)
-                                                <option value="{{$item->uom_en}}">{{$item->uom_en}}</option>
+                                                <option value="{{$item->uom_ar}}">{{$item->uom_ar}}</option>
                                             @endforeach
 
                                         </select>
@@ -2111,7 +2105,7 @@
                                                         {{ strip_tags($rfp->description) }}
                                                     </td>
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
-                                                        {{ $rfp->unit_of_measurement }}
+                                                        @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $rfp->unit_of_measurement); @endphp {{$UOM->uom_ar}}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -2473,15 +2467,13 @@
                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                         @endphp
 
-                                        {{$parent != '' ? $parent->name :'' }}
-
-                                        {{ $item->item_name}} , {{ $parent->name}}
+                                        {{ $record->name_ar}} @if(isset($parent)), {{ $parent->name_ar}} @endif
 
                                     </td>
                                     <td>
                                         {{strip_tags($item->description)}}
                                     </td>
-                                    <td>{{$item->unit_of_measurement}}</td>
+                                    <td> @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}}</td>
                                     <td>
                                         {{$item->quantity}}
                                     </td>
@@ -2542,7 +2534,7 @@
                                             required name="unit_of_measurement" id="unit_of_measurement" style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
                                             @foreach (\App\Models\UnitMeasurement::all() as $item)
-                                                <option value="{{$item->uom_en}}">{{$item->uom_en}}</option>
+                                                <option value="{{$item->uom_ar}}">{{$item->uom_ar}}</option>
                                             @endforeach
 
                                         </select>

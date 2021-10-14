@@ -154,8 +154,11 @@
                                     </div>
                                 </div>
 
-                                <br>
-                                <br>
+                                @if(auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin']) && $invoice->invoice_status == 3)
+                                    <div class="flex justify-between mt-4 mb-4">
+                                        <img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-6@8x.png')}}" alt="{{__('portal.Paid')}}">
+                                    </div>
+                                @endif
 
                                 <div class="flex justify-between px-2 py-2 mt-2 h-15">
                                     <div></div>
@@ -328,8 +331,11 @@
                                     </div>
                                 </div>
 
-                                <br>
-                                <br>
+                                @if(auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin']) && $invoice->invoice_status == 3)
+                                    <div class="flex justify-between mt-4 mb-4">
+                                        <img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-6@8x.png')}}" alt="{{__('portal.Paid')}}">
+                                    </div>
+                                @endif
 
                                 <div class="flex justify-between px-2 py-2 mt-2 h-15">
                                     <div></div>

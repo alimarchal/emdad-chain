@@ -66,7 +66,11 @@
                                             #
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+<<<<<<< HEAD
                                             {{__('portal.Quotation')}}#
+=======
+                                            {{__('portal.Quotation')}}&nbsp;#
+>>>>>>> umair
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Category Name')}}
@@ -119,7 +123,23 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                @if($rfp->qoute_status == 'Qouted' && $rfp->request_status == 1 || $rfp->qoute_status == 'accepted' && $rfp->request_status == 1) {{__('portal.Buyer Requested to extend expiry date.')}}
+                                               {{-- @if($rfp->qoute_status == 'Qouted' && $rfp->request_status == 1 || $rfp->qoute_status == 'accepted' && $rfp->request_status == 1) {{__('portal.Buyer Requested to extend expiry date.')}}
+                                                @elseif($rfp->qoute_status == 'Qouted') {{__('portal.Quoted')}}
+                                                --}}{{-- Have to show Supplier status quotes only if dpo is created and has status pending --}}{{--
+                                                @else {{__('portal.Quoted')}}
+                                                @endif--}}
+                                                @if($rfp->dpo != null)
+                                                    @php $po = \App\Models\DraftPurchaseOrder::firstWhere('id', $rfp->dpo); @endphp
+
+                                                    @if(isset($po) && $po->status == 'approved') {{__('portal.P.O. APPROVED')}}
+                                                    @elseif(isset($po) && $po->status == 'cancel') {{__('portal.Canceled')}}
+                                                    @elseif(isset($po) && $po->status == 'completed') {{__('portal.Completed')}}
+                                                    @else {{__('portal.Quoted')}}
+                                                    @endif
+                                                @elseif($rfp->qoute_status == 'Qouted' && $rfp->request_status == 1 && $rfp->qoute_status_updated != 'Rejected' || $rfp->qoute_status == 'accepted' && $rfp->request_status == 1 && $rfp->qoute_status_updated != 'Rejected') {{__('portal.Buyer Requested to extend expiry date.')}}
+                                                @elseif($rfp->qoute_status == 'Modified') {{__('portal.Modified')}}
+                                                @elseif($rfp->qoute_status_updated == 'Rejected') {{__('portal.Rejected')}}
+                                                @elseif($rfp->qoute_status == 'RFQPendingConfirmation') {{__('portal.Pending Confirmation')}}
                                                 @elseif($rfp->qoute_status == 'Qouted') {{__('portal.Quoted')}}
                                                 {{-- Have to show Supplier status quotes only if dpo is created and has status pending --}}
                                                 @else {{__('portal.Quoted')}}
@@ -127,7 +147,15 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                @if($rfp->expiry_date >= \Carbon\Carbon::now()) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }} @else <span class="text-red-600"> {{ __('portal.Expired') }} </span> @endif
+{{--                                                @if($rfp->expiry_date >= \Carbon\Carbon::now()) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }} @else <span class="text-red-600"> {{ __('portal.Expired') }} </span> @endif--}}
+                                                @if($rfp->dpo != null)
+                                                    @if(isset($po) && $po->status == 'pending' && $rfp->expiry_date < \Carbon\Carbon::now()) <span class="text-red-600"> {{ __('portal.Expired') }} </span>
+                                                    @else {{__('portal.N/A')}}
+                                                    @endif
+                                                @elseif($rfp->status == 'completed' || $rfp->status == 'expired') {{__('portal.N/A')}}
+                                                @elseif($rfp->expiry_date >= \Carbon\Carbon::now()) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }}
+                                                @else <span class="text-red-600"> {{ __('portal.Expired') }} </span>
+                                                @endif
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -137,7 +165,7 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                @if($rfp->qoute_status == 'Qouted' && $rfp->request_status == 1 || $rfp->qoute_status == 'accepted' && $rfp->request_status == 1)
+                                                @if($rfp->qoute_status == 'Qouted' && $rfp->request_status == 1 && $rfp->qoute_status_updated != 'Rejected' || $rfp->qoute_status == 'accepted' && $rfp->request_status == 1 && $rfp->qoute_status_updated != 'Rejected')
                                                     <a href="javascript:void(0)" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150" onclick="toggleModal({{$rfp->e_order_id}})">
                                                         {{__('portal.Accept')}}
                                                     </a>
@@ -241,7 +269,7 @@
                                             #
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{__('portal.Quotation')}} #
+                                            {{__('portal.Quotation')}}&nbsp;#
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Category Name')}}
@@ -294,7 +322,18 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                @if($rfp->qoute_status == 'Qouted' && $rfp->request_status == 1 || $rfp->qoute_status == 'accepted' && $rfp->request_status == 1) {{__('portal.Buyer Requested to extend expiry date.')}}
+                                                @if($rfp->dpo != null)
+                                                    @php $po = \App\Models\DraftPurchaseOrder::firstWhere('id', $rfp->dpo); @endphp
+
+                                                    @if(isset($po) && $po->status == 'approved') {{__('portal.P.O. APPROVED')}}
+                                                    @elseif(isset($po) && $po->status == 'cancel') {{__('portal.Canceled')}}
+                                                    @elseif(isset($po) && $po->status == 'completed') {{__('portal.Completed')}}
+                                                    @else {{__('portal.Quoted')}}
+                                                    @endif
+                                                @elseif($rfp->qoute_status == 'Qouted' && $rfp->request_status == 1 && $rfp->qoute_status_updated != 'Rejected' || $rfp->qoute_status == 'accepted' && $rfp->request_status == 1 && $rfp->qoute_status_updated != 'Rejected') {{__('portal.Buyer Requested to extend expiry date.')}}
+                                                @elseif($rfp->qoute_status == 'Modified') {{__('portal.Modified')}}
+                                                @elseif($rfp->qoute_status_updated == 'Rejected') {{__('portal.Rejected')}}
+                                                @elseif($rfp->qoute_status == 'RFQPendingConfirmation') {{__('portal.Pending Confirmation')}}
                                                 @elseif($rfp->qoute_status == 'Qouted') {{__('portal.Quoted')}}
                                                 {{-- Have to show Supplier status quotes only if dpo is created and has status pending --}}
                                                 @else {{__('portal.Quoted')}}
@@ -302,7 +341,14 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                @if($rfp->expiry_date >= \Carbon\Carbon::now()) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }} @else <span class="text-red-600"> {{ __('portal.Expired') }} </span> @endif
+                                                @if($rfp->dpo != null)
+                                                    @if(isset($po) && $po->status == 'pending' && $rfp->expiry_date < \Carbon\Carbon::now()) <span class="text-red-600"> {{ __('portal.Expired') }} </span>
+                                                    @else {{__('portal.N/A')}}
+                                                    @endif
+                                                @elseif($rfp->status == 'completed' || $rfp->status == 'expired') {{__('portal.N/A')}}
+                                                @elseif($rfp->expiry_date >= \Carbon\Carbon::now()) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }}
+                                                @else <span class="text-red-600"> {{ __('portal.Expired') }} </span>
+                                                @endif
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -312,7 +358,7 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                @if($rfp->qoute_status == 'Qouted' && $rfp->request_status == 1 || $rfp->qoute_status == 'accepted' && $rfp->request_status == 1)
+                                                @if($rfp->qoute_status == 'Qouted' && $rfp->request_status == 1 && $rfp->qoute_status_updated != 'Rejected' || $rfp->qoute_status == 'accepted' && $rfp->request_status == 1 && $rfp->qoute_status_updated != 'Rejected')
                                                     <a href="javascript:void(0)" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150" onclick="toggleModal({{$rfp->e_order_id}})">
                                                         {{__('portal.Accept')}}
                                                     </a>

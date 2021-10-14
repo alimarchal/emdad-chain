@@ -73,23 +73,8 @@
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{ ucwords(str_replace("_", " ", __('portal.Price Per Quantity'))) }}
                                         </th>
-                                        {{--<th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                             {{ ucwords(str_replace("_", " ", "sample_information")) }}
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                             {{ ucwords(str_replace("_", " ", "sample_unit")) }}
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                             {{ ucwords(str_replace("_", " ", "sample_security_charges")) }}
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                             {{ ucwords(str_replace("_", " ", "sample_charges_per_unit")) }}
-                                        </th>--}}
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{ ucwords(str_replace("_", " ", __('portal.Shipping Time In Days'))) }}
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{ ucwords(str_replace("_", " ", __('portal.Note for Customer'))) }}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{ ucwords(str_replace("_", " ", __('portal.Quote status'))) }}
@@ -117,10 +102,6 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $rfp->shipping_time_in_days }}
-                                            </td>
-
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                @if(isset($rfp->note_for_customer)) {{ strip_tags($rfp->note_for_customer) }} @else {{__('portal.N/A')}} @endif
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -215,23 +196,8 @@
                                     <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{ ucwords(str_replace("_", " ", __('portal.Price Per Quantity'))) }}
                                     </th>
-                                    {{--<th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                         {{ ucwords(str_replace("_", " ", "sample_information")) }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                         {{ ucwords(str_replace("_", " ", "sample_unit")) }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                         {{ ucwords(str_replace("_", " ", "sample_security_charges")) }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                         {{ ucwords(str_replace("_", " ", "sample_charges_per_unit")) }}
-                                    </th>--}}
                                     <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{ ucwords(str_replace("_", " ", __('portal.Shipping Time In Days'))) }}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                        {{ ucwords(str_replace("_", " ", __('portal.Note for Customer'))) }}
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{ ucwords(str_replace("_", " ", __('portal.Quote status'))) }}
@@ -259,10 +225,6 @@
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $rfp->shipping_time_in_days }}
-                                        </td>
-
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            @if(isset($rfp->note_for_customer)) {{ strip_tags($rfp->note_for_customer) }} @else {{__('portal.N/A')}} @endif
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">

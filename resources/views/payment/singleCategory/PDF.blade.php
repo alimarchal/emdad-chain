@@ -197,6 +197,30 @@
 
 <br><br><br><br><br><br><br><br>
 
+@if(auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin']) && $invoice->invoice_status == 3)
+    <div class="header">
+
+        <div style="width: 66.66%;float: left;">
+            @php $paid = asset('images/stamps/Artboard-6@8x.png'); @endphp
+            <img src="{{$paid}}" width="100" >
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+
+        <div style="width: 33.33%;float: right"></div>
+
+    </div>
+    <br>
+    <br>
+    <br>
+    <br><br>
+    <br>
+    <br>
+    <br>
+@endif
+
 <div class="header">
 
     <div class="center" style="width: 16.67%"></div>

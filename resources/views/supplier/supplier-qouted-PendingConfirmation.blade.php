@@ -29,19 +29,36 @@
         <div class="bg-white">
             <nav class="flex flex-col sm:flex-row">
                 <a href="{{ route('viewRFQs') }}" class="py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none {{ request()->routeIs('viewRFQs') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    {{__('portal.New')}}
+                    @php
+                        $business_cate = \App\Models\BusinessCategory::where('business_id', auth()->user()->business_id)->get();
+                        if ($business_cate->isNotEmpty()) {
+                            foreach ($business_cate as $item) {
+                                $business_categories[] = (int)$item->category_number;
+                            }
+                        }
+                        sort($business_categories);
+                            // Counting NEW RFQs for multiple categories for supplier
+                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->get();
+                            $noMultiCategoryQuotationPresent = array();
+                            foreach ($multiEOrderItems as $multiEOrderItem)
+                                {
+                                    $quotes = \App\Models\Qoute::where(['e_order_items_id' => $multiEOrderItem->id, 'supplier_business_id' => auth()->user()->business_id])->first();
+                                        if (!($quotes))
+                                            {
+                                                $noMultiCategoryQuotationPresent[] = $multiEOrderItem->id;
+                                            }
+                                }
+                    @endphp
+                    {{__('portal.New RFQs')}} <span class="text-red-400">({{count($noMultiCategoryQuotationPresent)}})</span>
                 </a>
                 <a href="{{ route('QoutedRFQQouted') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQQouted') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
-                    @php $quotedCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->count(); @endphp
+                    @php
+                        $quotedCount = \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1])
+                                        ->where('qoute_status' , '!=' ,'ModificationNeeded')
+                                        ->where('qoute_status' , '!=' ,'RFQPendingConfirmation')
+                                        ->count();
+                    @endphp
                     {{__('portal.Quoted')}} <span class="text-red-400">({{$quotedCount}})</span>
-                </a>
-                <a href="{{ route('QuotedModifiedRFQ') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QuotedModifiedRFQ') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
-                    @php $quotedCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1, 'qoute_status' => 'Modified'])->count(); @endphp
-                    {{__('portal.Modified')}} <span class="text-red-400">({{$quotedCount}})</span>
-                </a>
-                <a href="{{ route('QoutedRFQRejected') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQRejected') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    @php $rejectedCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status_updated', 'Rejected')->count(); @endphp
-                    {{__('portal.Rejected')}} <span class="text-red-400">({{$rejectedCount}})</span>
                 </a>
                 <a href="{{ route('QoutedRFQModificationNeeded') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQModificationNeeded') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
                     @php $modificationCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status_updated', 'ModificationNeeded')->count(); @endphp
@@ -50,6 +67,23 @@
                 <a href="{{ route('QoutedRFQPendingConfirmation') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQPendingConfirmation') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
                     @php $pendingCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status', 'RFQPendingConfirmation')->count(); @endphp
                     {{__('portal.Pending Confirmation')}} <span class="text-red-400">({{$pendingCount}})</span>
+                </a>
+                <a href="{{ route('QoutedRFQQoutedExpired') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQQoutedExpired') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                    @php
+                        $data= \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1, 'request_status' => 1])
+                            ->where(function ($query){
+                                $query->where(['qoute_status' => 'Qouted'])->orWhere(['qoute_status' => 'accepted']);
+                            })->get();
+                        $expired = array();
+                        foreach($data as $da)
+                            {
+                                if($da->qoute_status_updated != 'Rejected')
+                                {
+                                    $expired[] = $da;
+                                }
+                            }
+                    @endphp
+                    {{__('portal.Expired')}} <span class="text-red-400">({{count($expired)}})</span>
                 </a>
             </nav>
         </div>
@@ -77,9 +111,6 @@
                                             {{ ucwords(str_replace("_", " ", __('portal.Shipping Time In Days'))) }}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{ ucwords(str_replace("_", " ", __('portal.Note for Customer'))) }}
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{ ucwords(str_replace("_", " ", __('portal.Quote status'))) }}
                                         </th>
                                     </tr>
@@ -105,11 +136,6 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $rfp->shipping_time_in_days }}
-                                            </td>
-
-
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                @if(isset($rfp->note_for_customer)) {{ strip_tags($rfp->note_for_customer) }} @else {{__('portal.N/A')}} @endif
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -161,19 +187,36 @@
         <div class="bg-white">
             <nav class="flex flex-col sm:flex-row">
                 <a href="{{ route('viewRFQs') }}" class="py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none {{ request()->routeIs('viewRFQs') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    {{__('portal.New')}}
+                    @php
+                        $business_cate = \App\Models\BusinessCategory::where('business_id', auth()->user()->business_id)->get();
+                        if ($business_cate->isNotEmpty()) {
+                            foreach ($business_cate as $item) {
+                                $business_categories[] = (int)$item->category_number;
+                            }
+                        }
+                        sort($business_categories);
+                            // Counting NEW RFQs for multiple categories for supplier
+                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->get();
+                            $noMultiCategoryQuotationPresent = array();
+                            foreach ($multiEOrderItems as $multiEOrderItem)
+                                {
+                                    $quotes = \App\Models\Qoute::where(['e_order_items_id' => $multiEOrderItem->id, 'supplier_business_id' => auth()->user()->business_id])->first();
+                                        if (!($quotes))
+                                            {
+                                                $noMultiCategoryQuotationPresent[] = $multiEOrderItem->id;
+                                            }
+                                }
+                    @endphp
+                    {{__('portal.New RFQs')}} <span class="text-red-400">({{count($noMultiCategoryQuotationPresent)}})</span>
                 </a>
                 <a href="{{ route('QoutedRFQQouted') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQQouted') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
-                    @php $quotedCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where([['qoute_status', 'Qouted'],['qoute_status_updated', null]])->count(); @endphp
+                    @php
+                        $quotedCount = \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1])
+                                        ->where('qoute_status' , '!=' ,'ModificationNeeded')
+                                        ->where('qoute_status' , '!=' ,'RFQPendingConfirmation')
+                                        ->count();
+                    @endphp
                     {{__('portal.Quoted')}} <span class="text-red-400">({{$quotedCount}})</span>
-                </a>
-                <a href="{{ route('QuotedModifiedRFQ') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QuotedModifiedRFQ') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
-                    @php $quotedCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1, 'qoute_status' => 'Modified'])->count(); @endphp
-                    {{__('portal.Modified')}} <span class="text-red-400">({{$quotedCount}})</span>
-                </a>
-                <a href="{{ route('QoutedRFQRejected') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQRejected') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    @php $rejectedCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status_updated', 'Rejected')->count(); @endphp
-                    {{__('portal.Rejected')}} <span class="text-red-400">({{$rejectedCount}})</span>
                 </a>
                 <a href="{{ route('QoutedRFQModificationNeeded') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQModificationNeeded') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
                     @php $modificationCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status_updated', 'ModificationNeeded')->count(); @endphp
@@ -182,6 +225,23 @@
                 <a href="{{ route('QoutedRFQPendingConfirmation') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQPendingConfirmation') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
                     @php $pendingCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status', 'RFQPendingConfirmation')->count(); @endphp
                     {{__('portal.Pending Confirmation')}} <span class="text-red-400">({{$pendingCount}})</span>
+                </a>
+                <a href="{{ route('QoutedRFQQoutedExpired') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQQoutedExpired') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                    @php
+                        $data= \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1, 'request_status' => 1])
+                            ->where(function ($query){
+                                $query->where(['qoute_status' => 'Qouted'])->orWhere(['qoute_status' => 'accepted']);
+                            })->get();
+                        $expired = array();
+                        foreach($data as $da)
+                            {
+                                if($da->qoute_status_updated != 'Rejected')
+                                {
+                                    $expired[] = $da;
+                                }
+                            }
+                    @endphp
+                    {{__('portal.Expired')}} <span class="text-red-400">({{count($expired)}})</span>
                 </a>
             </nav>
         </div>
@@ -209,9 +269,6 @@
                                             {{ ucwords(str_replace("_", " ", __('portal.Shipping Time In Days'))) }}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{ ucwords(str_replace("_", " ", __('portal.Note for Customer'))) }}
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{ ucwords(str_replace("_", " ", __('portal.Quote status'))) }}
                                         </th>
                                     </tr>
@@ -237,10 +294,6 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $rfp->shipping_time_in_days }}
-                                            </td>
-
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                @if(isset($rfp->note_for_customer)) {{ strip_tags($rfp->note_for_customer) }} @else {{__('portal.N/A')}} @endif
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
