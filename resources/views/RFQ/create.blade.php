@@ -406,10 +406,10 @@
 
                                                 {{--@if(auth()->user()->business_package->package_id != 1)--}}
                                                 @if($package->package_id != 1)
-                                                    <option value="Credit" @if (isset($latest_rfq))
+                                                    {{--<option value="Credit" @if (isset($latest_rfq))
                                                         {{$latest_rfq->payment_mode =='Credit' ? 'selected' : ''}} @endif>
                                                         {{__('portal.Credit')}}
-                                                    </option>
+                                                    </option>--}}
                                                     <option value="Credit30days" @if (isset($latest_rfq))
                                                         {{$latest_rfq->payment_mode =='Credit30days' ? 'selected' : ''}} @endif>
                                                         {{__('portal.Credit (30 Days)')}}
@@ -1251,10 +1251,10 @@
 
                                                 {{--@if(auth()->user()->business_package->package_id != 1)--}}
                                                 @if($package->package_id != 1)
-                                                    <option value="Credit" @if (isset($latest_rfq))
+                                                   {{-- <option value="Credit" @if (isset($latest_rfq))
                                                         {{$latest_rfq->payment_mode =='Credit' ? 'selected' : ''}} @endif>
                                                         {{__('portal.Credit')}}
-                                                    </option>
+                                                    </option>--}}
                                                     <option value="Credit30days" @if (isset($latest_rfq))
                                                         {{$latest_rfq->payment_mode =='Credit30days' ? 'selected' : ''}} @endif>
                                                         {{__('portal.Credit (30 Days)')}}
@@ -1992,10 +1992,10 @@
 
                                                 {{--@if(auth()->user()->business_package->package_id != 1)--}}
                                                 @if($package->package_id != 1)
-                                                    <option value="Credit" @if (isset($latest_rfq))
+                                                    {{--<option value="Credit" @if (isset($latest_rfq))
                                                         {{$latest_rfq->payment_mode =='Credit' ? 'selected' : ''}} @endif>
                                                         {{__('portal.Credit')}}
-                                                    </option>
+                                                    </option>--}}
                                                     <option value="Credit30days" @if (isset($latest_rfq))
                                                         {{$latest_rfq->payment_mode =='Credit30days' ? 'selected' : ''}} @endif>
                                                         {{__('portal.Credit (30 Days)')}}
@@ -2638,10 +2638,10 @@
 
                                                 {{--@if(auth()->user()->business_package->package_id != 1)--}}
                                                 @if($package->package_id != 1)
-                                                    <option value="Credit" @if (isset($latest_rfq))
+                                                    {{--<option value="Credit" @if (isset($latest_rfq))
                                                         {{$latest_rfq->payment_mode =='Credit' ? 'selected' : ''}} @endif>
                                                         {{__('portal.Credit')}}
-                                                    </option>
+                                                    </option>--}}
                                                     <option value="Credit30days" @if (isset($latest_rfq))
                                                         {{$latest_rfq->payment_mode =='Credit30days' ? 'selected' : ''}} @endif>
                                                         {{__('portal.Credit (30 Days)')}}

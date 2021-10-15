@@ -353,7 +353,7 @@ Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOr
 Route::middleware(['auth:sanctum'])->get('/Quotation/expired/status/{quoteID}', [QouteController::class, 'quotationExpiredStatusUpdate'])->name('QuotationExpiredStatusUpdate');
 Route::middleware(['auth:sanctum'])->post('/Quotation/expired/response/', [QouteController::class, 'quotationExpiredStatusResponse'])->name('QuotationExpiredStatusResponse');
 Route::middleware(['auth:sanctum'])->get('/Quotation/expired/reject/response/{quoteID}', [QouteController::class, 'quotationExpiredStatusRejectResponse'])->name('quotationExpiredStatusRejectResponse');
-Route::middleware(['auth:sanctum'])->get('/single/category/quotation/expired/status/{quoteEOrderID}', [QouteController::class, 'quotationExpiredStatusUpdateSingleCategory'])->name('quotationExpiredStatusUpdateSingleCategory');
+Route::middleware(['auth:sanctum'])->get('/single/category/quotation/expired/status/{quoteEOrderID}/{supplierBusinessID}', [QouteController::class, 'quotationExpiredStatusUpdateSingleCategory'])->name('quotationExpiredStatusUpdateSingleCategory');
 Route::middleware(['auth:sanctum'])->post('/single/category/quotation/expired/response/', [QouteController::class, 'quotationExpiredStatusResponseSingleCategory'])->name('quotationExpiredStatusResponseSingleCategory');
 Route::middleware(['auth:sanctum'])->get('/single/category/quotation/expired/reject/response/{quoteEOrderID}', [QouteController::class, 'quotationExpiredStatusRejectResponseSingleCategory'])->name('quotationExpiredStatusRejectResponseSingleCategory');
 
@@ -369,7 +369,7 @@ Route::middleware(['auth:sanctum'])->get('/SingleCategoryQuotationResetTime/{eOr
 Route::middleware(['auth:sanctum'])->get('/SingleCategoryQuotationDiscard/{eOrderID}/', [QouteController::class, 'discardSingleCategoryQuotation'])->name('discardSingleCategoryQuotation');
 Route::middleware(['auth:sanctum'])->get('/single/category/RFQ/rejected/quotations/{EOrderItemID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerRejected'])->name('singleCategoryRFQQuotationsBuyerRejected');
 Route::middleware(['auth:sanctum'])->get('/single/category/RFQ/modification/quotations/{eOrderID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsModificationNeeded'])->name('singleCategoryRFQQuotationsModificationNeeded');
-Route::middleware(['auth:sanctum'])->get('single-rfq-quote/{quotes}/ModificationNeeded', [QouteController::class, 'singleCategoryRFQUpdateStatusModificationNeeded'])->name('singleCategoryRFQUpdateStatusModificationNeeded');
+Route::middleware(['auth:sanctum'])->post('single-rfq-quote/{quotes}/ModificationNeeded', [QouteController::class, 'singleCategoryRFQUpdateStatusModificationNeeded'])->name('singleCategoryRFQUpdateStatusModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('single-rfq-quote/{quotes}/Rejected', [QouteController::class, 'singleCategoryRFQUpdateStatusRejected'])->name('singleCategoryRFQUpdateStatusRejected');
 Route::middleware(['auth:sanctum'])->post('singleCategoryQuote/Accepted', [QouteController::class, 'singleCategoryQuoteAccepted'])->name('singleCategoryQuoteAccepted');
 
@@ -379,7 +379,7 @@ Route::middleware(['auth:sanctum'])->get('single-rfq-quotation-pdf/{quote_suppli
 
 
 Route::middleware(['auth:sanctum'])->resource('QuotationMessage', \App\Http\Controllers\QouteMessageController::class);
-Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/ModificationNeeded', [QouteController::class, 'updateModificationNeeded'])->name('updateQoute');
+Route::middleware(['auth:sanctum'])->post('qoute/{qoute}/ModificationNeeded', [QouteController::class, 'updateModificationNeeded'])->name('updateQoute');
 Route::middleware(['auth:sanctum'])->get('qoute/{qoute}/Rejected', [QouteController::class, 'updateRejected'])->name('updateRejected');
 Route::middleware(['auth:sanctum'])->post('qoute/{qoute}/Accepted', [QouteController::class, 'qouteAccepted'])->name('qouteAccepted');
 Route::middleware(['auth:sanctum'])->get('/purchase-order', [DraftPurchaseOrderController::class, 'view'])->name('purchaseOrderView');

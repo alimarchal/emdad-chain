@@ -27,7 +27,6 @@ class InvoiceController extends Controller
 
     public function invoiceGenerate(Request $request)
     {
-//
         $delivery_note = DeliveryNote::where('id', $request->delivery_note)->first();
         $purchase_order = DraftPurchaseOrder::where('id', $request->draft_purchase_order_id)->first();
         $rfq_item = EOrderItems::where('id',$purchase_order->rfq_item_no)->first('warehouse_id');
@@ -62,7 +61,7 @@ class InvoiceController extends Controller
 
         $del = Delivery::create($delivery);
 
-        if($del->payment_term == "Credit")
+        if($del->payment_term != "Cash")
         {
             $invoice = [
                 'delivery_id' => $del->id,
@@ -195,7 +194,7 @@ class InvoiceController extends Controller
 
             $del = Delivery::create($delivery);
 
-            if($del->payment_term == "Credit")
+            if($del->payment_term != "Cash")
             {
                 $invoice = [
                     'delivery_id' => $del->id,
