@@ -417,7 +417,7 @@ return [
     'Completed' => 'مكتمل',
     'Quote List' => 'قائمة العروض',
     'Price Per Quantity' => 'سعر الوحدة',
-    'Shipping Time In Days' => 'تاريخ الشحن',
+    'Shipping Time In Days' => 'عدد أيام الشحن',
     'Total Cost' => 'مجموع التكاليف',
     'Created At' => 'تاريخ الإنشاء',
     'See Modification needed tab' => 'لمشاهدة التعديل المطلوب اضغط',

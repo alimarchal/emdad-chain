@@ -764,7 +764,7 @@
                                 <th style="width:10%;">{{__('portal.Price Per Unit')}} @include('misc.required') </th>
                                 <th style="width:11%;">{{__('portal.Shipping Time(In Days)')}} @include('misc.required') </th>
                                 <th style="width:20%;">{{__('portal.Note')}}</th>
-                                <th style="width:10%;">{{__('portal.VAT')}} % @include('misc.required') </th>
+                                <th style="width:12%;">{{__('portal.VAT')}} % @include('misc.required') </th>
                                 <th style="width:10%;">{{__('portal.Shipment Cost')}} @include('misc.required')</th>
 
                             </tr>

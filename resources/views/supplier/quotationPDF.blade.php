@@ -198,7 +198,8 @@
     <strong>Note: </strong> @if(isset($quote->note_for_customer)) {{ $quote->note_for_customer }} @else N/A @endif <br>
 </div>
 <div class="center" style="width: 33.33%;">
-    <strong>VAT: </strong> {{ $quote->VAT }} %<br>
+    @php $subtotal = $quote->quote_quantity * $quote->quote_price_per_quantity; $subtotal += $quote->shipment_cost; @endphp
+    <strong>VAT {{ number_format($quote->VAT) }}%: </strong>{{ number_format($subtotal * ($quote->VAT/100), 2) }} SAR<br>
     <br>
 </div>
 <div class="center" style="width: 33.33%;">

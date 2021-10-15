@@ -8,6 +8,7 @@ use App\Models\DraftPurchaseOrder;
 use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Qoute;
+use App\Models\QouteMessage;
 use App\Models\User;
 use App\Notifications\QuotationSent;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -393,9 +394,9 @@ class QouteController extends Controller
     }
 
     /* Function for buyer SINGLE CATEGORY (buyer requests for quotation expiry date extension) */
-    public function quotationExpiredStatusUpdateSingleCategory($quoteEOrderID): RedirectResponse
+    public function quotationExpiredStatusUpdateSingleCategory($quoteEOrderID, $supplierBusinessID): RedirectResponse
     {
-        Qoute::where(['e_order_id' => $quoteEOrderID, 'business_id' => auth()->user()->business_id])->update([
+        Qoute::where(['e_order_id' => $quoteEOrderID, 'business_id' => auth()->user()->business_id, 'supplier_business_id' => $supplierBusinessID])->update([
             'request_status' => 1
         ]);
         session()->flash('message', __('portal.Request sent to extend expiry date'));
@@ -575,8 +576,16 @@ class QouteController extends Controller
         return view('buyer.qoutesrespond', compact('QouteItem'));
     }
 
-    public function updateModificationNeeded(Qoute $qoute)
+    public function updateModificationNeeded(Qoute $qoute, Request $request)
     {
+
+        /* Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message */
+        /* Copied this form QouteMessageController because merging Send message and Quote Again Button  */
+        if ($request->message != null)
+        {
+            QouteMessage::create($request->all());
+        }
+
         $qoute_status = 'ModificationNeeded';
         $qoute->update([
             'qoute_status' => $qoute_status,
@@ -770,8 +779,15 @@ class QouteController extends Controller
         return view('buyer.singleCategory.modifiedQuotation', compact('collection',  'eOrderID', 'bypass_id'));
     }
 
-    public function singleCategoryRFQUpdateStatusModificationNeeded(Qoute $quotes)
+    public function singleCategoryRFQUpdateStatusModificationNeeded(Qoute $quotes, Request $request)
     {
+        /* Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message */
+        /* Copied this form QouteMessageController because merging Send message and Quote Again Button  */
+        if ($request->message != null)
+        {
+            QouteMessage::create($request->all());
+        }
+
         $quote_status = 'ModificationNeeded';
 
         $relatedQuotes = Qoute::where(['supplier_user_id' => $quotes->supplier_user_id, 'e_order_id' => $quotes->e_order_id])->get();

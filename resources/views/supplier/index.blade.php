@@ -158,7 +158,7 @@
                                             @if(isset($quotationCount) && $quotationCount > 0)
                                                 <tr>
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        {{ $rfp->id }}
+                                                        {{ $loop->iteration }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -198,7 +198,7 @@
                                             @elseif(is_null($quotationCount))
                                                 <tr>
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        {{ $rfp->id }}
+                                                        {{ $loop->iteration }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -415,7 +415,7 @@
                                         @if(isset($quotationCount) && $quotationCount > 0)
                                             <tr>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $rfp->id }}
+                                                    {{ $loop->iteration }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -455,7 +455,7 @@
                                         @elseif(is_null($quotationCount))
                                             <tr>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $rfp->id }}
+                                                    {{ $loop->iteration }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">

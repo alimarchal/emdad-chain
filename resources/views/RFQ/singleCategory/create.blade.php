@@ -364,7 +364,7 @@
                                                     @endphp
 
                                                     @if($package->package_id != 1)
-                                                        <option value="Credit">{{__('portal.Credit')}}</option>
+{{--                                                        <option value="Credit">{{__('portal.Credit')}}</option>--}}
                                                         <option value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
                                                         <option value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
                                                         <option value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
@@ -957,7 +957,7 @@
                                                     @endphp
 
                                                     @if($package->package_id != 1)
-                                                        <option value="Credit">{{__('portal.Credit')}}</option>
+{{--                                                        <option value="Credit">{{__('portal.Credit')}}</option>--}}
                                                         <option value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
                                                         <option value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
                                                         <option value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
@@ -1625,7 +1625,7 @@
                                                     @endphp
 
                                                     @if($package->package_id != 1)
-                                                        <option value="Credit">{{__('portal.Credit')}}</option>
+{{--                                                        <option value="Credit">{{__('portal.Credit')}}</option>--}}
                                                         <option value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
                                                         <option value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
                                                         <option value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
@@ -2220,7 +2220,7 @@
                                                     @endphp
 
                                                     @if($package->package_id != 1)
-                                                        <option value="Credit">{{__('portal.Credit')}}</option>
+{{--                                                        <option value="Credit">{{__('portal.Credit')}}</option>--}}
                                                         <option value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
                                                         <option value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
                                                         <option value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>

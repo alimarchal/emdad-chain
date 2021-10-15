@@ -203,9 +203,14 @@
                                                                 </a>
                                                             @endif
                                                         @elseif($rfp->expiry_date < \Carbon\Carbon::now() && $rfp->request_status == 0)
-                                                            <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                                {{__('portal.Quotation Expired')}}
-                                                            </a>
+                                                            @php $requestStatus = $collection->qoutes->where('qoute_status', 'Qouted')->where('qoute_status_updated', '!=', 'Rejected')->sortBy('total_cost')->take(5)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
+                                                            @if($present)
+                                                                {{--  Show Nothing if extension request is send against any quotation --}}
+                                                            @else
+                                                                <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                    {{__('portal.Quotation Expired')}}
+                                                                </a>
+                                                            @endif
                                                         @endif
                                                     @endif
                                                 </td>
@@ -288,9 +293,14 @@
                                                                 </a>
                                                             @endif
                                                         @elseif($rfp->expiry_date < \Carbon\Carbon::now() && $rfp->request_status == 0)
-                                                            <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                                {{__('portal.Quotation Expired')}}
-                                                            </a>
+                                                            @php $requestStatus = $collection->qoutes->where('qoute_status', 'Qouted')->where('qoute_status_updated', '!=', 'Rejected')->sortBy('total_cost')->take(5)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
+                                                            @if($present)
+                                                                {{--  Show Nothing if extension request is send against any quotation --}}
+                                                            @else
+                                                                <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                    {{__('portal.Quotation Expired')}}
+                                                                </a>
+                                                            @endif
                                                         @endif
                                                     @endif
                                                 </td>
@@ -372,9 +382,14 @@
                                                                 </a>
                                                             @endif
                                                         @elseif($rfp->expiry_date < \Carbon\Carbon::now() && $rfp->request_status == 0)
-                                                            <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                                {{__('portal.Quotation Expired')}}
-                                                            </a>
+                                                            @php $requestStatus = $collection->qoutes->where('qoute_status', 'Qouted')->where('qoute_status_updated', '!=', 'Rejected')->sortBy('total_cost')->take(5)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
+                                                            @if($present)
+                                                                {{--  Show Nothing if extension request is send against any quotation --}}
+                                                            @else
+                                                                <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                    {{__('portal.Quotation Expired')}}
+                                                                </a>
+                                                            @endif
                                                         @endif
                                                     @endif
                                                 </td>
@@ -609,9 +624,14 @@
                                                                 </a>
                                                             @endif
                                                         @elseif($rfp->expiry_date < \Carbon\Carbon::now() && $rfp->request_status == 0)
-                                                            <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                                {{__('portal.Quotation Expired')}}
-                                                            </a>
+                                                            @php $requestStatus = $collection->qoutes->where('qoute_status', 'Qouted')->where('qoute_status_updated', '!=', 'Rejected')->sortBy('total_cost')->take(5)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
+                                                            @if($present)
+                                                                {{--  Show Nothing if extension request is send against any quotation --}}
+                                                            @else
+                                                                <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                    {{__('portal.Quotation Expired')}}
+                                                                </a>
+                                                            @endif
                                                         @endif
                                                     @endif
                                                 </td>
@@ -694,9 +714,14 @@
                                                                 </a>
                                                             @endif
                                                         @elseif($rfp->expiry_date < \Carbon\Carbon::now() && $rfp->request_status == 0)
-                                                            <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                                {{__('portal.Quotation Expired')}}
-                                                            </a>
+                                                            @php $requestStatus = $collection->qoutes->where('qoute_status', 'Qouted')->where('qoute_status_updated', '!=', 'Rejected')->sortBy('total_cost')->take(5)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
+                                                            @if($present)
+                                                                {{--  Show Nothing if extension request is send against any quotation --}}
+                                                            @else
+                                                                <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                    {{__('portal.Quotation Expired')}}
+                                                                </a>
+                                                            @endif
                                                         @endif
                                                     @endif
                                                 </td>
@@ -778,9 +803,14 @@
                                                                 </a>
                                                             @endif
                                                         @elseif($rfp->expiry_date < \Carbon\Carbon::now() && $rfp->request_status == 0)
-                                                            <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                                {{__('portal.Quotation Expired')}}
-                                                            </a>
+                                                            @php $requestStatus = $collection->qoutes->where('qoute_status', 'Qouted')->where('qoute_status_updated', '!=', 'Rejected')->sortBy('total_cost')->take(5)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
+                                                            @if($present)
+                                                                {{--  Show Nothing if extension request is send against any quotation --}}
+                                                            @else
+                                                                <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                    {{__('portal.Quotation Expired')}}
+                                                                </a>
+                                                            @endif
                                                         @endif
                                                     @endif
                                                 </td>

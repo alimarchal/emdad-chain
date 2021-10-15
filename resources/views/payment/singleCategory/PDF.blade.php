@@ -182,7 +182,7 @@
             }
         @endphp
         <strong>Sub-total: </strong> {{ number_format(($subtotal), 2) }} SAR<br>
-        <strong>VAT: </strong> {{ $invoices[0]->vat }} %<br>
+        <strong>VAT: {{ number_format($invoices[0]->vat) }}%: </strong>{{ number_format(($subtotal + $invoices[0]->purchase_order->shipment_cost) * ($invoices[0]->vat/100), 2) }} SAR<br>
         <strong>Shipment cost: </strong> {{ $invoices[0]->purchase_order->shipment_cost }} SAR<br>
         <hr>
         <strong>Total: </strong> {{ number_format($invoices[0]->total_cost, 2) }} SAR<br>

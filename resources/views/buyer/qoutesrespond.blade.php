@@ -94,8 +94,7 @@
 
                             <div class="flex flex-wrap overflow-hidden bg-white p-4">
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
-                                    <strong class="text-xl">{{__('portal.Quote Description')}}: </strong><br>
-                                    <p class="text-xl">{{ strip_tags($QouteItem->orderItem->description) }}</p><br>
+                                    <strong class="text-xl">{{__('portal.Item Description')}}: </strong> <span class="text-xl">{{ strip_tags($QouteItem->orderItem->description) }}</span><br>
                                 </div>
                             </div>
 
@@ -150,11 +149,12 @@
                                     <strong>{{__('portal.Sub-total')}}:
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}
                                     <br>
-                                    <strong>{{__('portal.VAT')}} %: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $QouteItem->VAT }} <br>
+                                    @php $subtotal = $QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity; $subtotal += $QouteItem->shipment_cost; @endphp
+                                    <strong>{{__('portal.VAT')}} {{ $QouteItem->VAT }}%: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format(($subtotal * ($QouteItem->VAT/100)) , 2) }} {{__('portal.SAR')}} <br>
                                     <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->shipment_cost) }} {{__('portal.SAR')}}<br>
                                     <hr>
                                     <strong>{{__('portal.Total')}}:
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->total_cost) }} {{__('portal.SAR')}}
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->total_cost, 2) }} {{__('portal.SAR')}}
                                     <br>
                                     <hr>
                                 </div>
@@ -197,12 +197,12 @@
 
                             <hr>
                             {{-- Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message --}}
-                            <form action="{{ route('QuotationMessage.store') }}" class="rounded shadow-md" method="post">
+                            <form action="{{ route('updateQoute', $QouteItem->id) }}" class="rounded shadow-md" method="post">
                                 @csrf
                                 @php $business = \App\Models\Business::where('user_id', $QouteItem->supplier_user_id)->first(); @endphp
                                 <h1 class="text-center text-2xl mt-4">{{__('portal.Message to')}} <span class="text-blue-600">{{$business->business_name}}</span>
                                     <span style="font-size: 20px;">({{__('portal.supplier')}})</span></h1>
-                                <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Message')}}..." required></textarea>
+                                <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Message')}}..."></textarea>
                                 <x-jet-input-error for="message" class="mt-2"/>
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                 <input type="hidden" name="qoute_id" value="{{ $QouteItem->id }}">
@@ -212,8 +212,8 @@
 
                                 <div class="justify-between p-2 m-2">
                                     <button type="submit"
-                                            class="inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150">
-                                        {{__('portal.Send')}}
+                                            class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">
+                                        {{__('portal.Quote Again')}}
                                     </button>
                                 </div>
                                 <br>
@@ -222,12 +222,7 @@
                             <br>
                             <div class="justify-between p-2 m-2">
 
-                                <a href="{{ route('updateQoute', $QouteItem->id) }}"
-                                   class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">
-                                    {{__('portal.Quote Again')}}
-                                </a>
-
-                                <a href="{{ route('updateRejected', $QouteItem->id) }}" style="margin-left: 70px; margin-top: 20px;"
+                                <a href="{{ route('updateRejected', $QouteItem->id) }}"
                                    class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
                                     {{__('portal.Reject Quotation')}}
                                 </a>
@@ -403,8 +398,7 @@
 
                             <div class="flex flex-wrap overflow-hidden bg-white p-4">
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
-                                    <strong class="text-xl">{{__('portal.Quote Description')}}: </strong><br>
-                                    <p class="text-xl">{{ strip_tags($QouteItem->orderItem->description) }}</p><br>
+                                    <strong class="text-xl">{{__('portal.Item Description')}}: </strong> <span class="text-xl">{{ strip_tags($QouteItem->orderItem->description) }}</span><br>
                                 </div>
                             </div>
 
@@ -459,12 +453,13 @@
                                     <strong>{{__('portal.Sub-total')}}:
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}
                                     <br>
-                                    <strong>{{__('portal.VAT')}} %: &nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $QouteItem->VAT }} <br>
+                                    @php $subtotal = $QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity; $subtotal += $QouteItem->shipment_cost; @endphp
+                                    <strong>{{__('portal.VAT')}} {{ $QouteItem->VAT }}%: &nbsp;&nbsp;</strong>{{ number_format(($subtotal * ($QouteItem->VAT/100)) , 2) }} {{__('portal.SAR')}} <br>
                                     <strong>{{__('portal.Shipment cost')}}:
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->shipment_cost) }} {{__('portal.SAR')}}<br>
                                     <hr>
                                     <strong>{{__('portal.Total')}}:
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->total_cost) }} {{__('portal.SAR')}}
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->total_cost, 2) }} {{__('portal.SAR')}}
                                     <br>
                                     <hr>
                                 </div>
@@ -507,12 +502,12 @@
 
                             <hr>
                             {{-- Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message --}}
-                            <form action="{{ route('QuotationMessage.store') }}" class="rounded shadow-md" method="post">
+                            <form action="{{ route('updateQoute', $QouteItem->id) }}" class="rounded shadow-md" method="post">
                                 @csrf
                                 @php $business = \App\Models\Business::where('user_id', $QouteItem->supplier_user_id)->first(); @endphp
                                 <h1 class="text-center text-2xl mt-4">{{__('portal.Message to')}} <span class="text-blue-600">{{$business->business_name}}</span>
                                     <span style="font-size: 20px;">({{__('portal.supplier')}})</span></h1>
-                                <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Message')}}..." required></textarea>
+                                <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Message')}}..."></textarea>
                                 <x-jet-input-error for="message" class="mt-2"/>
                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                 <input type="hidden" name="qoute_id" value="{{ $QouteItem->id }}">
@@ -522,8 +517,8 @@
 
                                 <div class="justify-between p-2 m-2">
                                     <button type="submit"
-                                            class="inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150">
-                                        {{__('portal.Send')}}
+                                            class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">
+                                        {{__('portal.Quote Again')}}
                                     </button>
                                 </div>
                                 <br>
@@ -532,12 +527,7 @@
                             <br>
                             <div class="justify-between p-2 m-2">
 
-                                <a href="{{ route('updateQoute', $QouteItem->id) }}"
-                                   class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">
-                                    {{__('portal.Quote Again')}}
-                                </a>
-
-                                <a href="{{ route('updateRejected', $QouteItem->id) }}" style="margin-left: 70px; margin-top: 20px;"
+                                <a href="{{ route('updateRejected', $QouteItem->id) }}"
                                    class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
                                     {{__('portal.Reject Quotation')}}
                                 </a>

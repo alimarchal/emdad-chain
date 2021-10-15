@@ -176,7 +176,14 @@
 
     <span class="font-style"> <strong>Shipment Time (In Days): </strong> {{ $quotes[0]->shipping_time_in_days }}<br> </span>
     <span class="font-style"> <strong>Shipment Cost: </strong> {{ $quotes[0]->shipment_cost }} SAR<br> </span>
-    <span class="font-style"> <strong>VAT: </strong> {{ $quotes[0]->VAT }} %<br> </span>
+    @php
+        $subtotal = 0;
+            foreach($quotes as $quote)
+            {
+                $subtotal += $quote->quote_quantity * $quote->quote_price_per_quantity;
+            }
+    @endphp
+    <strong>VAT: {{ number_format($quotes[0]->VAT) }}%: </strong>{{ number_format(($subtotal + $quotes[0]->shipment_cost) * ($quotes[0]->VAT/100), 2) }} SAR<br>
     <span class="font-style"> <strong>Total Cost: </strong> {{ $quotes[0]->total_cost }} SAR<br> </span>
 
 <br>
