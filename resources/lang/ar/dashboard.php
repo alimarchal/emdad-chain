@@ -17,4 +17,6 @@ return [
     'Total User' => 'مجموع المستخدمين',
     'Total Business' => 'مجموع الأنشطة التجارية',
     'Received RFQ' => 'الطلبات المستلمة',
+    'Total P.O.(s)' => 'أوامر الشراء',
+    'Quotation(s) Rejected' => 'Quotation(s) Rejected',
 ];

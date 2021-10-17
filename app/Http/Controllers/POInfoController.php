@@ -41,17 +41,22 @@ class POInfoController extends Controller
             'business_id' => 'required',
             'order_info_1.*' => 'required|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,xlsx,doc,xls',
         ]);
-        // dd($request->all());
-        $files = $request->file('order_info_1');
-        $order_info = [];
+
+        /* Commented code is  */
+        /*$files = $request->file('order_info_1');
+        $order_info = [];*/
         if ($request->has('order_info_1')) {
-            foreach ($files as $file) {
+            /*foreach ($files as $file) {
                 $path = $file->store('', 'public');
                 $order_info[] = $path;
-            }
+            }*/
+
+            $path = $request->file('order_info_1')->store('', 'public');
+            $request->merge(['order_info' => $path]);
         }
-        $order_info = implode(', ', $order_info);
-        $request->merge(['order_info' => $order_info]);
+
+        /*$order_info = implode(', ', $order_info);
+        $request->merge(['order_info' => $order_info]);*/
         $POInfo = POInfo::create($request->all());
         session()->flash('message', __('portal.P.O.Info information successfully saved.'));
         $business = Business::find($POInfo->business_id);

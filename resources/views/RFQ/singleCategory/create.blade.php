@@ -271,7 +271,7 @@
             <div class="flex flex-col bg-white rounded">
                 <div class="p-4" style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
                     <div class="d-block text-center">
-                        <span class="text-2xl font-bold color-7f7f7f">{{__('portal.Request For Quotation')}}</span>
+                        <span class="text-2xl font-bold color-7f7f7f">{{__('portal.New RFQ')}}</span>
                     </div>
                     <hr>
                     <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
@@ -646,7 +646,7 @@
                             </tbody>
                         </table>
                         <div class="text-center my-4">
-                            <button type="submit" class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <button type="submit" style="height: 42px;" class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
                                 <svg class="svg-icon w-5 h-4" stroke="currentColor"  viewBox="0 0 20 20" style="margin-left: 5px;">
                                     <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
@@ -864,7 +864,7 @@
             <div class="flex flex-col bg-white rounded">
                 <div class="p-4" style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
                     <div class="d-block text-center">
-                        <span class="text-2xl font-bold color-7f7f7f">{{__('portal.Request For Quotation')}}</span>
+                        <span class="text-2xl font-bold color-7f7f7f">{{__('portal.New RFQ')}}</span>
                     </div>
                     <hr>
                     <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
@@ -1227,7 +1227,7 @@
                             </tbody>
                         </table>
                         <div class="text-center my-4">
-                            <button type="submit"
+                            <button type="submit" style="height: 42px;"
                                     class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
                                 <svg class="svg-icon w-5 h-4" stroke="currentColor"  viewBox="0 0 20 20" style="margin-left: 5px;">
@@ -1531,7 +1531,7 @@
             <div class="flex flex-col bg-white rounded">
                 <div class="p-4" style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
                     <div class="d-block text-center">
-                        <span class="text-2xl font-bold color-7f7f7f">{{__('portal.Request For Quotation')}}</span>
+                        <span class="text-2xl font-bold color-7f7f7f">{{__('portal.New RFQ')}}</span>
                     </div>
                     <hr>
                     <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
@@ -1867,7 +1867,7 @@
                                             required name="unit_of_measurement" id="unit_of_measurement" style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
                                             @foreach (\App\Models\UnitMeasurement::all() as $item)
-                                                <option value="{{$item->uom_en}}">{{$item->uom_en}}</option>
+                                                <option value="{{$item->uom_en}}">{{$item->uom_ar}}</option>
                                             @endforeach
 
                                         </select>
@@ -1907,7 +1907,7 @@
                             </tbody>
                         </table>
                         <div class="text-center my-4">
-                            <button type="submit"
+                            <button type="submit" style="height: 42px;"
                                     class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
                                 <svg class="svg-icon w-5 h-4" stroke="currentColor"  viewBox="0 0 20 20" style="margin-right: 5px;">
@@ -2126,7 +2126,7 @@
             <div class="flex flex-col bg-white rounded">
                 <div class="p-4" style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
                     <div class="d-block text-center">
-                        <span class="text-2xl font-bold color-7f7f7f">{{__('portal.Request For Quotation')}}</span>
+                        <span class="text-2xl font-bold color-7f7f7f">{{__('portal.New RFQ')}}</span>
                     </div>
                     <hr>
                     <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
@@ -2448,7 +2448,7 @@
                                             required name="unit_of_measurement" id="unit_of_measurement" style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
                                             @foreach (\App\Models\UnitMeasurement::all() as $item)
-                                                <option value="{{$item->uom_en}}">{{$item->uom_en}}</option>
+                                                <option value="{{$item->uom_en}}">{{$item->uom_ar}}</option>
                                             @endforeach
 
                                         </select>
@@ -2490,7 +2490,7 @@
                             </tbody>
                         </table>
                         <div class="text-center my-4">
-                            <button type="submit"
+                            <button type="submit" style="height: 42px;"
                                     class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
                                 <svg class="svg-icon w-5 h-4" stroke="currentColor"  viewBox="0 0 20 20" style="margin-right: 5px;">

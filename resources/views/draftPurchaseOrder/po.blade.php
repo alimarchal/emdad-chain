@@ -111,13 +111,13 @@
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if ($dpo->status == 'prepareDelivery')
-                                                            {{__('portal.Preparing Delivery')}}
+                                                            <span class="text-green-600"> {{__('portal.Preparing Delivery')}} </span>
                                                         @elseif ($dpo->status == 'cancel')
-                                                            {{__('portal.canceled')}}
+                                                            <span class="text-red-600"> {{__('portal.canceled')}} </span>
                                                         @elseif ($dpo->status == 'approved')
                                                             <span class="text-green-600"> {{__('portal.Approved')}} </span>
                                                         @elseif ($dpo->status == 'completed')
-                                                            {{__('portal.Completed')}}
+                                                            <span class="text-green-600"> {{__('portal.Completed')}} </span>
                                                         @else
                                                             {{ $dpo->status }}
                                                         @endif
@@ -327,13 +327,13 @@
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if ($dpo->status == 'prepareDelivery')
-                                                            {{__('portal.Preparing Delivery')}}
+                                                            <span class="text-green-600"> {{__('portal.Preparing Delivery')}} </span>
                                                         @elseif ($dpo->status == 'cancel')
-                                                            {{__('portal.canceled')}}
+                                                            <span class="text-red-600"> {{__('portal.canceled')}} </span>
                                                         @elseif ($dpo->status == 'approved')
                                                             <span class="text-green-600"> {{__('portal.Approved')}} </span>
                                                         @elseif ($dpo->status == 'completed')
-                                                            {{__('portal.Completed')}}
+                                                            <span class="text-green-600"> {{__('portal.Completed')}} </span>
                                                         @else
                                                             {{ $dpo->status }}
                                                         @endif

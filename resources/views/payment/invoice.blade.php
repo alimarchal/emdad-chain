@@ -111,23 +111,23 @@
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if (auth()->user()->registration_type == 'Buyer')
                                                             @if ($dn->invoice_status == 0)
-                                                                {{__('portal.Waiting for payment')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Waiting for payment')}} </span>
                                                             @elseif($dn->invoice_status == 1)
-                                                                {{__('portal.Waiting for Emdad confirmation')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Waiting for Emdad confirmation')}} </span>
                                                             @elseif($dn->invoice_status == 3)
-                                                                {{__('portal.Manual payment Confirmed')}}
+                                                                <span class="text-green-600"> {{__('portal.Manual payment Confirmed')}} </span>
                                                             @else
-                                                                {{__('portal.Payment rejected')}}
+                                                                <span class="text-red-600"> {{__('portal.Payment rejected')}} </span>
                                                             @endif
                                                         @elseif(auth()->user()->registration_type == 'Supplier')
                                                             @if ($dn->invoice_status == 0)
-                                                                {{__('portal.Waiting for payment')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Waiting for payment')}} </span>
                                                             @elseif($dn->invoice_status == 1)
-                                                                {{__('portal.Waiting for confirmation')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Waiting for confirmation')}} </span>
                                                             @elseif($dn->invoice_status == 3)
-                                                                {{__('portal.Create Delivery Note')}}
+                                                                <span class="text-green-600"> {{__('portal.Create Delivery Note')}} </span>
                                                             @else
-                                                                {{__('portal.Payment rejected')}}
+                                                                <span class="text-red-600"> {{__('portal.Payment rejected')}} </span>
                                                             @endif
                                                         @else
                                                             {{__('portal.N/A')}}
@@ -170,29 +170,29 @@
                                                                     @endif
                                                                 @endif
                                                             @elseif($dn->invoice_status == '1')
-                                                                {{__('portal.Emdad verification pending')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Emdad verification pending')}} </span>
                                                             @elseif($dn->invoice_status == '2')
-                                                                {{__('portal.Emdad rejected manual payment')}}
+                                                                <span class="text-red-700"> {{__('portal.Emdad rejected manual payment')}} </span>
                                                             @elseif($dn->invoice_status == '3' && isset($dn->bankPayment->supplier_payment_status) && $dn->bankPayment->supplier_payment_status == 3)
-                                                                {{__('portal.Payment received by supplier')}}
+                                                                <span class="text-green-600"> {{__('portal.Payment received by supplier')}} </span>
                                                             @elseif($dn->invoice_status == '3')
-                                                                {{__('portal.Payment in Transit, on hold, with Emdad')}}
+                                                                <span class="text-green-600"> {{__('portal.Payment in Transit, on hold, with Emdad')}} </span>
                                                             @endif
 
                                                         @elseif(auth()->user()->registration_type == 'Supplier')
                                                             @if($dn->invoice_status == '0')
-                                                                {{__('portal.Waiting for payment')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Waiting for payment')}} </span>
                                                             @elseif($dn->invoice_status == '1')
                                                                 @php $bankPaymentId = \App\Models\BankPayment::where('invoice_id', $dn->id)->first(); @endphp
                                                                 {{--                                                        <a href="{{ route('bank-payments.show', $bankPaymentId->id) }}" class="text-blue-600 hover:underline">--}}
                                                                 {{--                                                            View Payment--}}
-                                                                {{__('portal.Emdad verification pending')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Emdad verification pending')}} </span>
                                                             @elseif($dn->invoice_status == '2')
-                                                                {{__('portal.Manual payment rejected')}}
+                                                                <span class="text-red-700"> {{__('portal.Manual payment rejected')}} </span>
                                                             @elseif($dn->invoice_status == '3' && isset($dn->bankPayment->supplier_payment_status) && $dn->bankPayment->supplier_payment_status == 3)
-                                                                {{__('portal.Payment received')}}
+                                                                <span class="text-green-600"> {{__('portal.Payment received')}} </span>
                                                             @elseif($dn->invoice_status == '3')
-                                                                {{__('portal.Payment in Transit, Received by Emdad')}}
+                                                                <span class="text-green-600"> {{__('portal.Payment in Transit, Received by Emdad')}} </span>
                                                             @endif
                                                         @endif
 
@@ -360,23 +360,23 @@
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if (auth()->user()->registration_type == 'Buyer')
                                                             @if ($dn->invoice_status == 0)
-                                                                {{__('portal.Waiting for payment')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Waiting for payment')}} </span>
                                                             @elseif($dn->invoice_status == 1)
-                                                                {{__('portal.Waiting for Emdad confirmation')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Waiting for Emdad confirmation')}} </span>
                                                             @elseif($dn->invoice_status == 3)
-                                                                {{__('portal.Manual payment Confirmed')}}
+                                                                <span class="text-green-600"> {{__('portal.Manual payment Confirmed')}} </span>
                                                             @else
-                                                                {{__('portal.Payment rejected')}}
+                                                                <span class="text-red-600"> {{__('portal.Payment rejected')}} </span>
                                                             @endif
                                                         @elseif(auth()->user()->registration_type == 'Supplier')
                                                             @if ($dn->invoice_status == 0)
-                                                                {{__('portal.Waiting for payment')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Waiting for payment')}} </span>
                                                             @elseif($dn->invoice_status == 1)
-                                                                {{__('portal.Waiting for confirmation')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Waiting for confirmation')}} </span>
                                                             @elseif($dn->invoice_status == 3)
-                                                                {{__('portal.Create Delivery Note')}}
+                                                                <span class="text-green-600"> {{__('portal.Create Delivery Note')}} </span>
                                                             @else
-                                                                {{__('portal.Payment rejected')}}
+                                                                <span class="text-red-600"> {{__('portal.Payment rejected')}} </span>
                                                             @endif
                                                         @else
                                                             {{__('portal.N/A')}}
@@ -419,29 +419,29 @@
                                                                     @endif
                                                                 @endif
                                                             @elseif($dn->invoice_status == '1')
-                                                                {{__('portal.Emdad verification pending')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Emdad verification pending')}} </span>
                                                             @elseif($dn->invoice_status == '2')
-                                                                {{__('portal.Emdad rejected manual payment')}}
+                                                                <span class="text-red-700"> {{__('portal.Emdad rejected manual payment')}} </span>
                                                             @elseif($dn->invoice_status == '3' && isset($dn->bankPayment->supplier_payment_status) && $dn->bankPayment->supplier_payment_status == 3)
-                                                                {{__('portal.Payment received by supplier')}}
+                                                                <span class="text-green-600"> {{__('portal.Payment received by supplier')}} </span>
                                                             @elseif($dn->invoice_status == '3')
-                                                                {{__('portal.Payment in Transit, on hold, with Emdad')}}
+                                                                <span class="text-green-600"> {{__('portal.Payment in Transit, on hold, with Emdad')}} </span>
                                                             @endif
 
                                                         @elseif(auth()->user()->registration_type == 'Supplier')
                                                             @if($dn->invoice_status == '0')
-                                                                {{__('portal.Waiting for payment')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Waiting for payment')}} </span>
                                                             @elseif($dn->invoice_status == '1')
                                                                 @php $bankPaymentId = \App\Models\BankPayment::where('invoice_id', $dn->id)->first(); @endphp
                                                                 {{--                                                        <a href="{{ route('bank-payments.show', $bankPaymentId->id) }}" class="text-blue-600 hover:underline">--}}
                                                                 {{--                                                            View Payment--}}
-                                                                {{__('portal.Emdad verification pending')}}
+                                                                <span class="text-yellow-400"> {{__('portal.Emdad verification pending')}} </span>
                                                             @elseif($dn->invoice_status == '2')
-                                                                {{__('portal.Manual payment rejected')}}
+                                                                <span class="text-red-700"> {{__('portal.Manual payment rejected')}} </span>
                                                             @elseif($dn->invoice_status == '3' && isset($dn->bankPayment->supplier_payment_status) && $dn->bankPayment->supplier_payment_status == 3)
-                                                                {{__('portal.Payment received')}}
+                                                                <span class="text-green-600"> {{__('portal.Payment received')}} </span>
                                                             @elseif($dn->invoice_status == '3')
-                                                                {{__('portal.Payment in Transit, Received by Emdad')}}
+                                                                <span class="text-green-600"> {{__('portal.Payment in Transit, Received by Emdad')}} </span>
                                                             @endif
                                                         @endif
 

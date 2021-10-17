@@ -121,9 +121,9 @@
                                                             @if($dpo->quote->expiry_date >= \Carbon\Carbon::now())
                                                                 <span class="text-green-700">{{__('portal.Valid')}}</span>
                                                             @elseif($dpo->status == 'cancel')
-                                                                <span class="text-red-800">{{__('portal.canceled')}}</span>
+                                                                <span class="text-red-700">{{__('portal.canceled')}}</span>
                                                             @elseif($dpo->quote->expiry_date < \Carbon\Carbon::now() && $dpo->quote->request_status == 1)
-                                                                <span class="text-yellow-800">{{__('portal.You have asked for extension in expiry date for this DPO.')}}</span>
+                                                                <span class="text-yellow-400">{{__('portal.You have asked for extension in expiry date for this DPO.')}}</span>
                                                             @else
                                                                 <span class="text-red-700">{{__('portal.Expired')}}</span>
                                                             @endif
@@ -138,7 +138,7 @@
                                                                         @if($dpo->status == 'cancel')
                                                                             {{__('portal.N/A')}}
                                                                         @else
-                                                                            <a href="{{route('DPOExpiredStatusUpdate', $dpo->qoute_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150" style="background-color: #145EA8">
+                                                                            <a href="{{route('DPOExpiredStatusUpdate', $dpo->qoute_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
                                                                                 {{__('portal.Request to extend expiry date')}}
                                                                             </a>
                                                                         @endif
@@ -146,7 +146,7 @@
                                                                         @if($dpo->status == 'cancel')
                                                                             {{__('portal.N/A')}}
                                                                         @else
-                                                                            <a href="{{route('DPOExpiredStatusUpdateSingleCategory', $dpo->rfq_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150" style="background-color: #145EA8">
+                                                                            <a href="{{route('DPOExpiredStatusUpdateSingleCategory', $dpo->rfq_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
                                                                                 {{__('portal.Request to extend expiry date')}}
                                                                             </a>
                                                                         @endif
@@ -327,9 +327,9 @@
                                                         @if($dpo->quote->expiry_date >= \Carbon\Carbon::now())
                                                             <span class="text-green-700">{{__('portal.Valid')}}</span>
                                                         @elseif($dpo->status == 'cancel')
-                                                            <span class="text-red-800">{{__('portal.canceled')}}</span>
+                                                            <span class="text-red-700">{{__('portal.canceled')}}</span>
                                                         @elseif($dpo->quote->expiry_date < \Carbon\Carbon::now() && $dpo->quote->request_status == 1)
-                                                            <span class="text-yellow-800">{{__('portal.You have asked for extension in expiry date for this DPO.')}}</span>
+                                                            <span class="text-yellow-400">{{__('portal.You have asked for extension in expiry date for this DPO.')}}</span>
                                                         @else
                                                             <span class="text-red-700">{{__('portal.Expired')}}</span>
                                                         @endif
@@ -344,7 +344,7 @@
                                                                     @if($dpo->status == 'cancel')
                                                                         {{__('portal.N/A')}}
                                                                     @else
-                                                                        <a href="{{route('DPOExpiredStatusUpdate', $dpo->qoute_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150" style="background-color: #145EA8">
+                                                                        <a href="{{route('DPOExpiredStatusUpdate', $dpo->qoute_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
                                                                             {{__('portal.Request to extend expiry date')}}
                                                                         </a>
                                                                     @endif
@@ -352,7 +352,7 @@
                                                                     @if($dpo->status == 'cancel')
                                                                         {{__('portal.N/A')}}
                                                                     @else
-                                                                        <a href="{{route('DPOExpiredStatusUpdateSingleCategory', $dpo->rfq_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-600 transition ease-in-out duration-150" style="background-color: #145EA8">
+                                                                        <a href="{{route('DPOExpiredStatusUpdateSingleCategory', $dpo->rfq_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
                                                                             {{__('portal.Request to extend expiry date')}}
                                                                         </a>
                                                                     @endif
