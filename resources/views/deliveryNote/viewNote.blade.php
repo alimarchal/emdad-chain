@@ -112,7 +112,7 @@
                                     <input type="hidden" name="delivery_note" value="{{ $deliveryNote->id }}">
                                     <input type="hidden" name="draft_purchase_order_id" value="{{ $deliveryNote->purchase_order->id }}">
                                     <input type="hidden" name="otp_mobile_number" value="{{ $deliveryNote->otp_mobile_number }}">
-                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-gray active:bg-green-600 transition ease-in-out duration-150">
                                         {{__('portal.Generate Final Invoice')}}
                                     </button>
                                 </div>
@@ -246,7 +246,7 @@
                                     <input type="hidden" name="delivery_note" value="{{ $deliveryNote->id }}">
                                     <input type="hidden" name="draft_purchase_order_id" value="{{ $deliveryNote->purchase_order->id }}">
                                     <input type="hidden" name="otp_mobile_number" value="{{ $deliveryNote->otp_mobile_number }}">
-                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-gray active:bg-green-600 transition ease-in-out duration-150">
                                         {{__('portal.Generate Final Invoice')}}
                                     </button>
                                 </div>

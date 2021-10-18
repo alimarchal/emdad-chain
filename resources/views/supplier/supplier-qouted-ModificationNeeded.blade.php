@@ -153,7 +153,7 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                <a href="{{ route('viewRFQsID', $rfp->orderItem->id) }}" class=" px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                <a href="{{ route('viewRFQsID', $rfp->orderItem->id) }}" class=" px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                                                     {{__('portal.Response')}}
                                                 </a>
                                             </td>
@@ -167,7 +167,7 @@
             </div>
         @endif
         <div class="mt-5">
-            <a href="{{ route('dashboard') }}"
+            <a href="{{ route('dashboard') }}" style="background-color: #145EA8"
                class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                 {{__('portal.Back')}}
             </a>
@@ -326,7 +326,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            <a href="{{ route('viewRFQsID', $rfp->orderItem->id) }}" class=" px-4 py-1 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                            <a href="{{ route('viewRFQsID', $rfp->orderItem->id) }}" class=" px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                                                 {{__('portal.Response')}}
                                             </a>
                                         </td>
@@ -340,7 +340,7 @@
             </div>
         @endif
         <div class="mt-5">
-            <a href="{{ route('dashboard') }}"
+            <a href="{{ route('dashboard') }}" style="background-color: #145EA8"
                class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                 {{__('portal.Back')}}
             </a>

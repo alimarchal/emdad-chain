@@ -66,7 +66,7 @@
                                 @endif
                             </div>
 
-                            <x-jet-button class="float-right mt-4 mb-4 mr-4">{{__('portal.Send request to update Certificates')}}</x-jet-button>
+                            <button type="submit" class="float-right mt-4 mb-4 mr-4 inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150">{{__('portal.Send request to update Certificates')}}</button>
                         </form>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                                 @endif
                             </div>
 
-                            <x-jet-button class="float-right mt-4 mb-4 mr-4">{{__('portal.Send request to update Certificates')}}</x-jet-button>
+                            <button type="submit" class="float-left mt-4 mb-4 mr-4 inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150">{{__('portal.Send request to update Certificates')}}</button>
                         </form>
                     </div>
                 </div>

@@ -29,7 +29,7 @@
     <!-- section-section start -->
     <div class="section-area section-style-2 section-style-3" style="direction: rtl">
         <div class="container">
-            <div class="row">
+            {{--<div class="row">
                 <div class="col-lg-4 col-md-9 col-sm-12 col-d c-pd">
                     <div class="section-wrap">
                         <div class="section-item-2">
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--}}
 
 
             <div class="row">

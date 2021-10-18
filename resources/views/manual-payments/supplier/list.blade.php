@@ -95,13 +95,13 @@
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
                                                             @if($supplierPayment->status == 0)
-                                                                {{__('portal.Un-paid')}}
+                                                                <span class="text-yellow-400">{{__('portal.Un-paid')}}</span>
                                                             @elseif($supplierPayment->status == 1)
-                                                                {{__('portal.Verification pending')}}
+                                                                <span class="text-yellow-400">{{__('portal.Verification pending')}}</span>
                                                             @elseif($supplierPayment->status == 2)
-                                                                {{__('portal.You Rejected')}}
+                                                                <span class="text-red-700">{{__('portal.You Rejected')}}</span>
                                                             @elseif($supplierPayment->status == 3)
-                                                                {{__('portal.Confirmed')}}
+                                                                <span class="text-green-600">{{__('portal.Confirmed')}}</span>
                                                             @endif
                                                         </td>
 
@@ -250,13 +250,13 @@
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
                                                         @if($supplierPayment->status == 0)
-                                                            {{__('portal.Un-paid')}}
+                                                            <span class="text-yellow-400">{{__('portal.Un-paid')}}</span>
                                                         @elseif($supplierPayment->status == 1)
-                                                            {{__('portal.Verification pending')}}
+                                                            <span class="text-yellow-400">{{__('portal.Verification pending')}}</span>
                                                         @elseif($supplierPayment->status == 2)
-                                                            {{__('portal.You Rejected')}}
+                                                            <span class="text-red-700">{{__('portal.You Rejected')}}</span>
                                                         @elseif($supplierPayment->status == 3)
-                                                            {{__('portal.Confirmed')}}
+                                                            <span class="text-green-600">{{__('portal.Confirmed')}}</span>
                                                         @endif
                                                     </td>
 

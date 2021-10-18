@@ -42,7 +42,7 @@
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                             <table class="min-w-full divide-y divide-gray-200" id="cart">
-                                <thead  style="background-color: #fffdd0; ">
+                                <thead style="background-color: #FCE5CD;">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium font-bold tracking-wider">
                                         #
@@ -202,7 +202,7 @@
                         <input type="hidden" value="{{ auth()->id() }}" name="user_id">
 
                         <button type="submit"
-                                class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Select Ok to place requisition')}}'>
+                                class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Select Ok to place requisition')}}'>
                             {{__('portal.Place RFQ')}}
                         </button>
                     </form>
@@ -275,7 +275,7 @@
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
 
                             <table class="min-w-full divide-y divide-gray-200" id="cart">
-                                <thead class="bg-gray-50">
+                                <thead style="background-color: #FCE5CD;" class="bg-gray-50">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
                                         #
@@ -460,7 +460,7 @@
                         <input type="hidden" value="{{ auth()->user()->business->id }}" name="business_id">
                         <input type="hidden" value="{{ auth()->id() }}" name="user_id">
 
-                        <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Select Ok to place requisition')}}'>
+                        <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Select Ok to place requisition')}}'>
                             {{__('portal.Place RFQ')}}
                         </button>
                     </form>

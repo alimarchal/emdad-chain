@@ -125,7 +125,7 @@
                             <x-jet-button class="float-right mt-4 mb-4">{{__('portal.Update')}}</x-jet-button>
                             {{--                        @endif--}}
                             {{--                        <a href="{{url('businessWarehouse/'.$businessWarehouse->business_id . '/show')}}" class=" float-right mt-5 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">Back</a>--}}
-                            <a href="{{url('businessWarehouse/'.$businessWarehouse->business_id . '/show')}}" class="inline-flex float-right items-center mt-4 mr-2 px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                            <a href="{{url('businessWarehouse/'.$businessWarehouse->business_id . '/show')}}" style="background-color: #145EA8" class="inline-flex float-right items-center mt-4 mr-2 px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                 {{__('portal.Back')}}
                             </a>
                         </form>
@@ -272,7 +272,7 @@
                             <x-jet-button class="float-right mt-4 mb-4">{{__('portal.Update')}}</x-jet-button>
                             {{--                        @endif--}}
                             {{--                        <a href="{{url('businessWarehouse/'.$businessWarehouse->business_id . '/show')}}" class=" float-right mt-5 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700">Back</a>--}}
-                            <a href="{{url('businessWarehouse/'.$businessWarehouse->business_id . '/show')}}" class="inline-flex float-right items-center mt-4 mr-2 px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                            <a href="{{url('businessWarehouse/'.$businessWarehouse->business_id . '/show')}}" style="background-color: #145EA8" class="inline-flex float-right items-center mt-4 mr-2 px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                 {{__('portal.Back')}}
                             </a>
                         </form>

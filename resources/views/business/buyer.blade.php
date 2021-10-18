@@ -31,8 +31,8 @@
 
                     <div class="py-3">
                         <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
-                            <a href="{{ route('createBuyer') }}" style="background-color: #145EA8"
-                               class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none active:bg-red-600 transition ease-in-out duration-150">
+                            <a href="{{ route('createBuyer') }}"
+                               class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none active:bg-green-600 transition ease-in-out duration-150">
                                 {{__('portal.Add Buyer')}}
                             </a>
                         </div>
@@ -150,8 +150,8 @@
 
                     <div class="py-3">
                         <div class="mt-5" style=" margin-right: 30px; margin-bottom: 10px ">
-                            <a href="{{ route('createBuyer') }}" style="background-color: #145EA8"
-                               class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none active:bg-red-600 transition ease-in-out duration-150">
+                            <a href="{{ route('createBuyer') }}"
+                               class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none active:bg-green-600 transition ease-in-out duration-150">
                                 {{__('portal.Add Buyer')}}
                             </a>
                         </div>

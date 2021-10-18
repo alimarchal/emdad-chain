@@ -41,37 +41,37 @@
                                         <table class="min-w-full divide-y divide-gray-200" id="delivery-note">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         #
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.P.O Number')}}
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Category Name')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.P.O Date')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.P.O Type')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Requisition Type')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Invoice Status')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.P.O Status')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.View')}}
                                                     </th>
                                                 </tr>
@@ -131,27 +131,27 @@
                                                             @if($dpo->payment_term == 'Cash' || auth()->user()->can('all') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
                                                                 @php $proformaInvoice = \App\Models\Invoice::where('draft_purchase_order_id', $dpo->id)->where('invoice_type', 1)->first(); @endphp
                                                                 @if (isset($proformaInvoice) && $proformaInvoice->invoice_status == 3)
-                                                                    <a>{{__('portal.Create delivery Note')}}</a>
+                                                                    <a class="text-yellow-400">{{__('portal.Create delivery Note')}}</a>
                                                                 @elseif(isset($proformaInvoice))
-                                                                    <a>{{__('portal.Proforma invoice generated')}}</a>
+                                                                    <a class="text-green-600">{{__('portal.Proforma invoice generated')}}</a>
                                                                 @else
                                                                     @if($dpo->rfq_type == 1)
-                                                                        <a href="{{route('generateProforma', $dpo->id)}}" class="text-blue-900 hover:underline">{{__('portal.Generate proforma invoice')}}</a>
+                                                                        <a href="{{route('generateProforma', $dpo->id)}}" class="text-green-900 hover:underline">{{__('portal.Generate proforma invoice')}}</a>
                                                                     @else
-                                                                        <a href="{{route('singleCategoryGenerateProformaInvoice', $dpo->rfq_no)}}" class="text-blue-900 hover:underline">{{__('portal.Generate proforma invoice')}}</a>
+                                                                        <a href="{{route('singleCategoryGenerateProformaInvoice', $dpo->rfq_no)}}" class="text-green-900 hover:underline">{{__('portal.Generate proforma invoice')}}</a>
                                                                     @endif
                                                                 @endif
                                                             @else
                                                                 @if(auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
                                                                     @if($dpo->payment_term == 'Credit')
                                                                         @if($dpo->status == 'approved')
-                                                                            <span>{{__('portal.Create delivery Note')}}</span>
+                                                                            <span class="text-yellow-400">{{__('portal.Create delivery Note')}}</span>
                                                                         @elseif($dpo->status == 'completed')
-                                                                            <span>{{__('portal.Completed')}}</span>
+                                                                            <span class="text-green-600">{{__('portal.Completed')}}</span>
                                                                         @elseif($dpo->status == 'prepareDelivery')
-                                                                            <span>{{__('portal.Preparing delivery')}}</span>
+                                                                            <span class="text-yellow-400">{{__('portal.Preparing delivery')}}</span>
                                                                         @elseif($dpo->status == 'cancel')
-                                                                            <span>{{__('portal.Purchase Order Canceled')}}</span>
+                                                                            <span class="text-red-700">{{__('portal.Purchase Order Canceled')}}</span>
                                                                         @endif
                                                                     @endif
                                                                 @endif
@@ -160,11 +160,11 @@
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                             <a class="hover:text-blue-900 hover:underline text-blue-900">
-                                                                @if($dpo->status == 'cancel') {{__('portal.Cancel')}} @endif
-                                                                @if($dpo->status == 'approved') {{__('portal.approved')}} @endif
-                                                                @if($dpo->status == 'completed') {{__('portal.Completed')}} @endif
-                                                                @if($dpo->status == 'pending') {{__('portal.pending')}} @endif
-                                                                @if($dpo->status == 'processing') {{__('portal.processing')}} @endif
+                                                                @if($dpo->status == 'cancel') <span class="text-red-700">{{__('portal.Cancel')}}</span> @endif
+                                                                @if($dpo->status == 'approved') <span class="text-green-600">{{__('portal.approved')}}</span> @endif
+                                                                @if($dpo->status == 'completed') <span class="text-green-600">{{__('portal.Completed')}}</span> @endif
+                                                                @if($dpo->status == 'pending') <span class="text-yellow-400">{{__('portal.pending')}}</span> @endif
+                                                                @if($dpo->status == 'processing') <span class="text-yellow-400">{{__('portal.processing')}}</span> @endif
                                                             </a>
                                                         </td>
 
@@ -259,37 +259,37 @@
                                         <table class="min-w-full divide-y divide-gray-200" id="delivery-note">
                                             <thead>
                                             <tr>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     #
                                                 </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.P.O Number')}}
                                                 </th>
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.Category Name')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.P.O Date')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.P.O Type')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.Requisition Type')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.Invoice Status')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.P.O Status')}}
                                                 </th>
 
-                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.View')}}
                                                 </th>
                                             </tr>
@@ -349,27 +349,27 @@
                                                         @if($dpo->payment_term == 'Cash' || auth()->user()->can('all') && auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
                                                             @php $proformaInvoice = \App\Models\Invoice::where('draft_purchase_order_id', $dpo->id)->where('invoice_type', 1)->first(); @endphp
                                                             @if (isset($proformaInvoice) && $proformaInvoice->invoice_status == 3)
-                                                                <a>{{__('portal.Create delivery Note')}}</a>
+                                                                <a class="text-yellow-400">{{__('portal.Create delivery Note')}}</a>
                                                             @elseif(isset($proformaInvoice))
-                                                                <a>{{__('portal.Proforma invoice generated')}}</a>
+                                                                <a class="text-green-600">{{__('portal.Proforma invoice generated')}}</a>
                                                             @else
                                                                 @if($dpo->rfq_type == 1)
-                                                                    <a href="{{route('generateProforma', $dpo->id)}}" class="text-blue-900 hover:underline">{{__('portal.Generate proforma invoice')}}</a>
+                                                                    <a href="{{route('generateProforma', $dpo->id)}}" class="text-green-900 hover:underline">{{__('portal.Generate proforma invoice')}}</a>
                                                                 @else
-                                                                    <a href="{{route('singleCategoryGenerateProformaInvoice', $dpo->rfq_no)}}" class="text-blue-900 hover:underline">{{__('portal.Generate proforma invoice')}}</a>
+                                                                    <a href="{{route('singleCategoryGenerateProformaInvoice', $dpo->rfq_no)}}" class="text-green-900 hover:underline">{{__('portal.Generate proforma invoice')}}</a>
                                                                 @endif
                                                             @endif
                                                         @else
                                                             @if(auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
                                                                 @if($dpo->payment_term == 'Credit')
                                                                     @if($dpo->status == 'approved')
-                                                                        <span>{{__('portal.Create delivery Note')}}</span>
+                                                                        <span class="text-yellow-400">{{__('portal.Create delivery Note')}}</span>
                                                                     @elseif($dpo->status == 'completed')
-                                                                        <span>{{__('portal.Completed')}}</span>
+                                                                        <span class="text-green-600">{{__('portal.Completed')}}</span>
                                                                     @elseif($dpo->status == 'prepareDelivery')
-                                                                        <span>{{__('portal.Preparing delivery')}}</span>
+                                                                        <span class="text-yellow-400">{{__('portal.Preparing delivery')}}</span>
                                                                     @elseif($dpo->status == 'cancel')
-                                                                        <span>{{__('portal.Purchase Order Canceled')}}</span>
+                                                                        <span class="text-red-700">{{__('portal.Purchase Order Canceled')}}</span>
                                                                     @endif
                                                                 @endif
                                                             @endif
@@ -378,11 +378,11 @@
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         <a class="hover:text-blue-900 hover:underline text-blue-900">
-                                                            @if($dpo->status == 'cancel') {{__('portal.Cancel')}} @endif
-                                                            @if($dpo->status == 'approved') {{__('portal.approved')}} @endif
-                                                            @if($dpo->status == 'completed') {{__('portal.Completed')}} @endif
-                                                            @if($dpo->status == 'pending') {{__('portal.pending')}} @endif
-                                                            @if($dpo->status == 'processing') {{__('portal.processing')}} @endif
+                                                            @if($dpo->status == 'cancel') <span class="text-red-700">{{__('portal.Cancel')}}</span> @endif
+                                                            @if($dpo->status == 'approved') <span class="text-green-600">{{__('portal.approved')}}</span> @endif
+                                                            @if($dpo->status == 'completed') <span class="text-green-600">{{__('portal.Completed')}}</span> @endif
+                                                            @if($dpo->status == 'pending') <span class="text-yellow-400">{{__('portal.pending')}}</span> @endif
+                                                            @if($dpo->status == 'processing') <span class="text-yellow-400">{{__('portal.processing')}}</span> @endif
                                                         </a>
                                                     </td>
 

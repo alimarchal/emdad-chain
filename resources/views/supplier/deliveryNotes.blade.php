@@ -112,11 +112,11 @@
                                                             @if ($dn->status == 'prepareDelivery')
                                                                 {{__('portal.Preparing Delivery')}}
                                                             @else
-                                                                @if($dn->status == 'cancel') {{__('portal.Cancel')}} @endif
-                                                                @if($dn->status == 'approved') {{__('portal.approved')}} @endif
-                                                                @if($dn->status == 'completed') {{__('portal.Completed')}} @endif
-                                                                @if($dn->status == 'pending') {{__('portal.pending')}} @endif
-                                                                @if($dn->status == 'processing') {{__('portal.processing')}} @endif
+                                                                @if($dn->status == 'cancel') <span class="text-red-700">{{__('portal.Cancel')}}</span> @endif
+                                                                @if($dn->status == 'approved') <span class="text-green-700">{{__('portal.approved')}}</span> @endif
+                                                                @if($dn->status == 'completed') <span class="text-green-700">{{__('portal.Completed')}}</span> @endif
+                                                                @if($dn->status == 'pending') <span class="text-yellow-400">{{__('portal.pending')}}</span> @endif
+                                                                @if($dn->status == 'processing') <span class="text-yellow-400">{{__('portal.processing')}}</span> @endif
                                                             @endif
 
                                                         </td>
@@ -280,11 +280,11 @@
                                                         @if ($dn->status == 'prepareDelivery')
                                                             {{__('portal.Preparing Delivery')}}
                                                         @else
-                                                            @if($dn->status == 'cancel') {{__('portal.Cancel')}} @endif
-                                                            @if($dn->status == 'approved') {{__('portal.approved')}} @endif
-                                                            @if($dn->status == 'completed') {{__('portal.Completed')}} @endif
-                                                            @if($dn->status == 'pending') {{__('portal.pending')}} @endif
-                                                            @if($dn->status == 'processing') {{__('portal.processing')}} @endif
+                                                            @if($dn->status == 'cancel') <span class="text-red-700">{{__('portal.Cancel')}}</span> @endif
+                                                            @if($dn->status == 'approved') <span class="text-green-700">{{__('portal.approved')}}</span> @endif
+                                                            @if($dn->status == 'completed') <span class="text-green-700">{{__('portal.Completed')}}</span> @endif
+                                                            @if($dn->status == 'pending') <span class="text-yellow-400">{{__('portal.pending')}}</span> @endif
+                                                            @if($dn->status == 'processing') <span class="text-yellow-400">{{__('portal.processing')}}</span> @endif
                                                         @endif
 
                                                     </td>

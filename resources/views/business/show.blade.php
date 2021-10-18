@@ -10,14 +10,14 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @include('users.sessionMessage')
-                @if (session()->has('error'))
-                    <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                        <strong class="mr-1">{{ session('error') }}</strong>
-                        <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
-                            <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-green-900" aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                @endif
+{{--                @if (session()->has('error'))--}}
+{{--                    <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">--}}
+{{--                        <strong class="mr-1">{{ session('error') }}</strong>--}}
+{{--                        <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">--}}
+{{--                            <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-green-900" aria-hidden="true">×</span>--}}
+{{--                        </button>--}}
+{{--                    </div>--}}
+{{--                @endif--}}
 
                 @php $businessCertificate = \App\Models\BusinessUpdateCertificate::where('business_id', auth()->user()->business_id)->first(); @endphp
                 @if(isset($businessCertificate))
@@ -218,11 +218,11 @@
                                     @endif
 
                                     <a href="javascript:void (0)" onclick="window.print();"
-                                       class="mr-3 float-right inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                       class="mr-3 float-right inline-flex items-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-900 focus:outline-none focus:border-yellow-900 focus:shadow-outline-yellow disabled:opacity-25 transition ease-in-out duration-150">
                                         {{__('portal.Print')}}
                                     </a>
 
-                                    <a href="{{url()->previous()}}"
+                                    <a href="{{url()->previous()}}" style="background-color: #145EA8"
                                        class="mr-3 float-right inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                         {{__('portal.Back')}}
                                     </a>
@@ -249,14 +249,14 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @include('users.sessionMessage')
-                @if (session()->has('error'))
+                {{--@if (session()->has('error'))
                     <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
                         <strong class="mr-3">{{ session('error') }}</strong>
                         <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                             <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-green-900" aria-hidden="true">×</span>
                         </button>
                     </div>
-                @endif
+                @endif--}}
 
                 @php $businessCertificate = \App\Models\BusinessUpdateCertificate::where('business_id', auth()->user()->business_id)->first(); @endphp
                 @if(isset($businessCertificate))
@@ -459,11 +459,11 @@
                                     @endif
 
                                     <a href="javascript:void (0)" onclick="window.print();"
-                                       class="mr-3 float-left inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+                                       class="mr-3 float-left inline-flex items-center px-4 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white active:bg-yellow-900 focus:outline-none focus:border-yellow-900 focus:shadow-outline-yellow disabled:opacity-25 transition ease-in-out duration-150">
                                         {{__('portal.Print')}}
                                     </a>
 
-                                    <a href="{{url()->previous()}}"
+                                    <a href="{{url()->previous()}}" style="background-color: #145EA8"
                                        class="mr-3 float-left inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                         {{__('portal.Back')}}
                                     </a>
