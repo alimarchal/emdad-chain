@@ -71,7 +71,11 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 170px;">
-                                            @if($shipment->status == 1) {{__('portal.Delivered')}} @elseif($shipment->status == 0) {{__('portal.Not Delivered yet')}} @endif
+                                            @if($shipment->status == 1)
+                                                <span class="text-green-600">{{__('portal.Delivered')}}</span>
+                                            @elseif($shipment->status == 0)
+                                                <span class="text-red-600">{{__('portal.Not Delivered yet')}}</span>
+                                            @endif
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -168,7 +172,11 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 170px;">
-                                        @if($shipment->status == 1) {{__('portal.Delivered')}} @elseif($shipment->status == 0) {{__('portal.Not Delivered yet')}} @endif
+                                        @if($shipment->status == 1)
+                                            <span class="text-green-600">{{__('portal.Delivered')}}</span>
+                                        @elseif($shipment->status == 0)
+                                            <span class="text-red-600">{{__('portal.Not Delivered yet')}}</span>
+                                        @endif
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">

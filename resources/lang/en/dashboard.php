@@ -17,4 +17,6 @@ return [
     'Total User' => 'Total User',
     'Total Business' => 'Total Business',
     'Received RFQ' => 'Received Requisition(s)',
+    'Total P.O.(s)' => 'Total P.O.(s)',
+    'Quotation(s) Rejected' => 'Quotation(s) Rejected',
 ];

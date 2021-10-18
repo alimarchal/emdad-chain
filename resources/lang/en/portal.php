@@ -789,6 +789,7 @@ return [
     'Not received' => 'Not received',
     'SHPN' => 'SHPN',
     'New RFQs' => 'New Requisitions',
+    'New RFQ' => 'New Requisition',
     'Paid' => 'Paid',
     'Email Verified' => 'Email Verified',
 

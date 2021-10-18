@@ -174,7 +174,7 @@
                             <i class="fi flaticon-travel"></i>
                         </div>
                         <h2>What is Emdad Platform?</h2>
-                        <p>Is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing, selling, supplying and warehousing process.</p>
+                        <p>Is an online platform established with high level of experience and knowledge to help buyer with the purchasing, selling, supplying and warehousing process.</p>
                         <p>Emdad can provide the lowest costs yet the best technical and logistical standards.</p>
                         <span><strong>Our Vision:</strong> To become the largest, reliable online platform specialized in supply chains, to gain the biggest
                             number of suppliers and the largest logistical fleet while assuring the best international quality standards.</span>
@@ -527,7 +527,7 @@
                     </div>
                 </div>
             </div>
-            <div class="section-title text-center">
+            {{--<div class="section-title text-center">
                 <span>We Give You The Best</span>
                 <h2>Supplier Subscription Plan</h2>
             </div>
@@ -593,7 +593,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </div>
     <!-- pice-area end -->

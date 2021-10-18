@@ -40,7 +40,8 @@
                                 <option {{(old('type') == 'Credit' ? 'selected' : '')}} value="Credit">{{__('portal.Credit')}}</option>
                                 <option {{(old('type') == 'Cash' ? 'selected' : '')}} value="Cash">{{__('portal.Cash')}}</option>
                             </select>
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="order_info" type="file" name="order_info_1[]" multiple>
+{{--                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="order_info" type="file" name="order_info_1[]" multiple>--}}
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="order_info" type="file" name="order_info_1">
                             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                             <input type="hidden" name="business_id" value="{{Auth::user()->business->id}}">
                         </div>
@@ -115,7 +116,8 @@
                                     <option {{(old('type') == 'Credit' ? 'selected' : '')}} value="Credit">{{__('portal.Credit')}}</option>
                                     <option {{(old('type') == 'Cash' ? 'selected' : '')}} value="Cash">{{__('portal.Cash')}}</option>
                                 </select>
-                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="order_info" type="file" name="order_info_1[]" multiple>
+{{--                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="order_info" type="file" name="order_info_1[]" multiple>--}}
+                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="order_info" type="file" name="order_info_1">
                                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                                 <input type="hidden" name="business_id" value="{{Auth::user()->business->id}}">
                             </div>
