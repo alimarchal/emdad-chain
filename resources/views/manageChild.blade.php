@@ -4,7 +4,13 @@
         <li>
             <a @if(auth()->user()->hasRole('SuperAdmin')) href="{{route('category.edit',$category->id)}}" @endif class="text-blue-900 hover:text-red-900 hover:underline">
                 @if (auth()->user()->rtl == 0)
+                    @if($category->parent_id == 0)
+                        <strong>
+                            {{ $category->name . ' - ' . $category->name_ar . ' - ' .  $category->name_ur }}
+                        </strong>
+                    @else
                     {{ $category->name . ' - ' . $category->name_ar . ' - ' .  $category->name_ur }}
+                    @endif
                 @else
                     {{ $category->name_ar . ' - ' .  $category->name_ur }}
                 @endif

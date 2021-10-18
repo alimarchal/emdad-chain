@@ -19,7 +19,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+        $parentCategories = Category::where('parent_id', 0)->where('is_active',1)->orderBy('name', 'asc')->get();
         return view('category.create', compact('parentCategories'));
     }
 
@@ -78,7 +78,7 @@ class CategoryController extends Controller
 
     public function parentCategories()
     {
-        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+        $parentCategories = Category::where('parent_id', 0)->where('is_active',1)->orderBy('name', 'asc')->get();
         $businessPackage = BusinessPackage::where('user_id', auth()->id())->first();
 
         return view('category.show.categories', compact('parentCategories', 'businessPackage'));
@@ -86,7 +86,7 @@ class CategoryController extends Controller
 
     public function subCategories()
     {
-        $category = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();;
+        $category = Category::where('parent_id', 0)->where('is_active',1)->orderBy('name', 'asc')->get();;
         return view('category.show.subCategories', compact('category'));
     }
 

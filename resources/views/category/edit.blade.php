@@ -39,10 +39,19 @@
 
 
                                 <label class="block font-medium text-sm text-gray-700 mt-4" style="direction: rtl;" for="name_ur">
-                                    قسم کا نام (اردو) 
+                                    قسم کا نام (اردو)
                                 </label>
                                 <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name_ur" style="direction: rtl;" type="text" name="name_ur" required value="{{ $category->name_ur }}">
 
+
+
+                                <label class="block font-medium text-sm text-gray-700 mt-4"  for="is_active">
+                                    Is Active
+                                </label>
+                                <select class="form-input rounded-md shadow-sm mt-1 block w-full" name="is_active" required>
+                                    <option value="1" @if($category->is_active == 1) selected @endif >Yes</option>
+                                    <option value="0" @if($category->is_active == 0) selected @endif >No</option>
+                                </select>
                             </div>
                         </div>
 

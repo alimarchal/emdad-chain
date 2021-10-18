@@ -47,6 +47,14 @@
                                     </label>
                                     <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name_ar" style="direction: rtl;" type="text" name="name_ur" required>
 
+                                    <label class="block font-medium text-sm text-gray-700 mt-4"  for="is_active">
+                                        Is Active
+                                    </label>
+                                    <select class="form-input rounded-md shadow-sm mt-1 block w-full" name="is_active" required>
+                                        <option value="1" selected>Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+
                                 </div>
                             </div>
 
