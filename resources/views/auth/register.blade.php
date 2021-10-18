@@ -16,9 +16,30 @@
             <p class="text-center font-bold text-2xl mt-4">{{__('register.Step # 1: Registration')}}</p>
 
 
+            <div class="flex flex-wrap overflow-hidden">
+
+                <div class="w-full overflow-hidden lg:w-1/4 xl:w-1/4">
+                    <!-- Column Content -->
+                </div>
+
+                <div class="w-full overflow-hidden lg:w-1/4 xl:w-1/4">
+                    <!-- Column Content -->
+                </div>
+
+                <div class="w-full overflow-hidden lg:w-1/4 xl:w-1/4">
+                    <!-- Column Content -->
+                </div>
+
+                <div class="w-full overflow-hidden lg:w-1/4 xl:w-1/4">
+                    <!-- Column Content -->
+                </div>
+
+            </div>
+
+
             <div class="flex flex-wrap overflow-hidden lg:-mx-3 xl:-mx-3">
 
-                  <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/6 xl:my-1 xl:px-1 xl:w-1/6">
+                  <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/4 xl:my-1 xl:px-1 xl:w-1/4">
                     <x-jet-label for="referred_no" value="{{ __('register.Reference (If any)') }}" class="mb-2"/>
                     <x-jet-input id="referred_no" class="block mt-1 w-full" type="text" name="referred_no" :value="old('referred_no')" autofocus/>
 
@@ -27,7 +48,7 @@
 
                 </div>
 
-                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/6 xl:my-1 xl:px-1 xl:w-1/6">
+                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/4 xl:my-1 xl:px-1 xl:w-1/4">
                     <label class="block font-medium text-sm text-gray-700 mb-2" for="service">
                         Register as <span class="text-red-500">*</span>
                     </label>
@@ -41,7 +62,7 @@
                 </div>
 
 
-                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/6 xl:my-1 xl:px-1 xl:w-1/6">
+                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/4 xl:my-1 xl:px-1 xl:w-1/4">
                     <label class="block font-medium text-sm text-gray-700 mb-2" for="gender">
                         Title <span class="text-red-500">*</span>
                     </label>
@@ -54,7 +75,7 @@
                     </select>
                 </div>
 
-                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
+                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/4 xl:my-1 xl:px-1 xl:w-1/4">
                     <label class="block font-medium text-sm text-gray-700" for="name">
                         Name <span class="text-red-500">*</span>
                     </label>
@@ -68,6 +89,14 @@
 
             <div class="flex flex-wrap  lg:-mx-2 xl:-mx-2">
 
+                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
+
+                    <label class="block font-medium text-sm text-gray-700" for="family_name">
+                        Family Name <span class="text-red-500">*</span>
+                    </label>
+                    <x-jet-input id="family_name" class="block my-2 w-full" type="text" name="family_name" :value="old('family_name')" required autocomplete="family_name"/>
+                </div>
+
                 <div class="w-full lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
 
                     <label class="block font-medium text-sm text-gray-700 mb-2" for="mobile-number">
@@ -77,13 +106,7 @@
 
                 </div>
 
-                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
 
-                    <label class="block font-medium text-sm text-gray-700" for="family_name">
-                        Family Name <span class="text-red-500">*</span>
-                    </label>
-                    <x-jet-input id="family_name" class="block my-2 w-full" type="text" name="family_name" :value="old('family_name')" required autocomplete="family_name"/>
-                </div>
 
                 <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
                     <label class="block font-medium text-sm text-gray-700" for="email">
