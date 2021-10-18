@@ -15,28 +15,6 @@
             <img src="{{url('registration_step/E-1.png')}}" alt="User Registration" class="block w-auto m-auto" style="margin:auto;"/>
             <p class="text-center font-bold text-2xl mt-4">{{__('register.Step # 1: Registration')}}</p>
 
-
-            <div class="flex flex-wrap overflow-hidden">
-
-                <div class="w-full overflow-hidden lg:w-1/4 xl:w-1/4">
-                    <!-- Column Content -->
-                </div>
-
-                <div class="w-full overflow-hidden lg:w-1/4 xl:w-1/4">
-                    <!-- Column Content -->
-                </div>
-
-                <div class="w-full overflow-hidden lg:w-1/4 xl:w-1/4">
-                    <!-- Column Content -->
-                </div>
-
-                <div class="w-full overflow-hidden lg:w-1/4 xl:w-1/4">
-                    <!-- Column Content -->
-                </div>
-
-            </div>
-
-
             <div class="flex flex-wrap overflow-hidden lg:-mx-3 xl:-mx-3">
 
                   <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/4 xl:my-1 xl:px-1 xl:w-1/4">
