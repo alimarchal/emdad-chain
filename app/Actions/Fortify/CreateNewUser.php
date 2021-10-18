@@ -27,16 +27,16 @@ class CreateNewUser implements CreatesNewUsers
             'policy_procedure' => ['required'],
             'service' => ['required'],
             'name' => ['required', 'string', 'max:55'],
-            'nid_num' => ['required', 'string', 'max:10'],
-            'nid_exp_date' => ['required', 'date'],
+//            'nid_num' => ['required', 'string', 'max:10'],
+//            'nid_exp_date' => ['required', 'date'],
             'mobile' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
         ])->validate();
 
-        $time = strtotime($input['nid_exp_date']);
-        $newformat = date('Y-m-d', $time);
-        $input['nid_exp_date'] = $newformat;
+//        $time = strtotime($input['nid_exp_date']);
+//        $newformat = date('Y-m-d', $time);
+//        $input['nid_exp_date'] = $newformat;
         $input['mobile'] = str_replace(' ', '', $input['mobile']);
         $input['mobile'] = str_replace(')', '', $input['mobile']);
         $input['mobile'] = str_replace('(', '', $input['mobile']);
@@ -47,10 +47,7 @@ class CreateNewUser implements CreatesNewUsers
             $user = User::create([
                 'gender' => $input['gender'],
                 'name' => $input['name'],
-                'middle_initial' => $input['middle_initial'],
                 'family_name' => $input['family_name'],
-                'nid_num' => $input['nid_num'],
-                'nid_exp_date' => $input['nid_exp_date'],
                 'mobile' => $input['mobile'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
@@ -61,10 +58,7 @@ class CreateNewUser implements CreatesNewUsers
             $user = User::create([
                 'gender' => $input['gender'],
                 'name' => $input['name'],
-                'middle_initial' => $input['middle_initial'],
                 'family_name' => $input['family_name'],
-                'nid_num' => $input['nid_num'],
-                'nid_exp_date' => $input['nid_exp_date'],
                 'mobile' => $input['mobile'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
@@ -75,10 +69,7 @@ class CreateNewUser implements CreatesNewUsers
             $user = User::create([
                 'gender' => $input['gender'],
                 'name' => $input['name'],
-                'middle_initial' => $input['middle_initial'],
                 'family_name' => $input['family_name'],
-                'nid_num' => $input['nid_num'],
-                'nid_exp_date' => $input['nid_exp_date'],
                 'mobile' => $input['mobile'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
