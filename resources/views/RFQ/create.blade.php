@@ -604,7 +604,8 @@
                                 <th style="width:7%;">
                                     <svg style="margin: auto;" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg></th>
+                                    </svg>
+                                </th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200 myrow" >
@@ -656,16 +657,16 @@
                                     </td>
 
                                     <td>
-                                        <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}" class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
-                                            @csrf
-                                            @method('delete')
+{{--                                        <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}" class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>--}}
+{{--                                            @csrf--}}
+{{--                                            @method('delete')--}}
 
-                                            <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="red">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                            </button>
-                                        </form>
+{{--                                            <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE">--}}
+{{--                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="red">--}}
+{{--                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />--}}
+{{--                                                </svg>--}}
+{{--                                            </button>--}}
+{{--                                        </form>--}}
                                     </td>
 
                                 </tr>

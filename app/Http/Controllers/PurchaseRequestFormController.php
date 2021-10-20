@@ -24,8 +24,6 @@ class PurchaseRequestFormController extends Controller
 
     public function create()
     {
-//        $user = User::findOrFail(auth()->user()->id);
-//        $businessPackage = BusinessPackage::where('user_id', \auth()->id())->first();
         $businessPackage = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
         if (isset($businessPackage))
         {
@@ -33,13 +31,10 @@ class PurchaseRequestFormController extends Controller
             $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
         }
         else{
-//            $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
             session()->flash('error','No Business Package Found for you account! Contact Admin.');
             return redirect()->back();
         }
         $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-//        $eCart = ECart::where('user_id',auth()->user()->id)->where('business_id',auth()->user()->business_id)->get();
-//        $eCart = ECart::where('business_id',auth()->user()->business_id)->get();
         $eCart = ECart::where(['business_id' => auth()->user()->business_id,'rfq_type' => 1])->get();
 
         // Remaining RFQ count
@@ -55,7 +50,6 @@ class PurchaseRequestFormController extends Controller
         else{
             $rfqCount = null;
         }
-        // dd($latest_rfq);
 
         /* Below code added to redirect back if Requisition limit for day is reached Added because h-screen issue in App.css blade */
         if ($rfqCount <= 0 && $business_package->package_id != 3 && $business_package->package_id != 4)
@@ -63,8 +57,6 @@ class PurchaseRequestFormController extends Controller
             session()->flash('error', 'Your have reached daily requisition generate limit.');
             return redirect()->route('rfqView');
         }
-
-//        return view('RFQ.create', compact('parentCategories', 'childs', 'user','eCart','rfqCount'));
 
         return view('RFQ.create', compact('parentCategories', 'childs','eCart','rfqCount','latest_rfq'));
     }

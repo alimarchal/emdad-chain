@@ -3,12 +3,14 @@
         <x-slot name="logo">
         </x-slot>
         <x-jet-validation-errors class="mb-4"/>
-        <x-jet-button>
-            <a href="{{route('registerAr', 'ar')}}" class="get-started-btn scrollto">
-                <img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
-        </x-jet-button>
-        <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block w-16 mx-auto float-right " />
 
+        <a href="{{route('registerAr', 'ar')}}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+            <img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">
+            العربية
+        </a>
+
+
+        <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block w-16 mx-auto float-right " />
         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="mt-5">
             @csrf
 
@@ -17,7 +19,7 @@
 
             <div class="flex flex-wrap overflow-hidden lg:-mx-3 xl:-mx-3">
 
-                  <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/4 xl:my-1 xl:px-1 xl:w-1/4">
+                  <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
                     <x-jet-label for="referred_no" value="{{ __('register.Reference (If any)') }}" class="mb-2"/>
                     <x-jet-input id="referred_no" class="block mt-1 w-full" type="text" name="referred_no" :value="old('referred_no')" autofocus/>
 
@@ -26,7 +28,7 @@
 
                 </div>
 
-                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/4 xl:my-1 xl:px-1 xl:w-1/4">
+                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
                     <label class="block font-medium text-sm text-gray-700 mb-2" for="service">
                         Register as <span class="text-red-500">*</span>
                     </label>
@@ -40,7 +42,16 @@
                 </div>
 
 
-                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/4 xl:my-1 xl:px-1 xl:w-1/4">
+
+
+            </div>
+
+
+            <div class="flex flex-wrap  lg:-mx-2 xl:-mx-2">
+
+
+
+                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                     <label class="block font-medium text-sm text-gray-700 mb-2" for="gender">
                         Title <span class="text-red-500">*</span>
                     </label>
@@ -53,26 +64,33 @@
                     </select>
                 </div>
 
-                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/4 xl:my-1 xl:px-1 xl:w-1/4">
+                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                     <label class="block font-medium text-sm text-gray-700" for="name">
                         Name <span class="text-red-500">*</span>
                     </label>
                     <x-jet-input id="name" class="block mt-2 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name"/>
-
                 </div>
 
 
-            </div>
+                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                    <label class="block font-medium text-sm text-gray-700" for="family_name">
+                       Family Name <span class="text-red-500">*</span>
+                    </label>
+                    <x-jet-input id="family_name" class="block mt-2 w-full" type="text" name="family_name" :value="old('family_name')" required autocomplete="family_name"/>
+                </div>
 
+
+
+            </div>
 
             <div class="flex flex-wrap  lg:-mx-2 xl:-mx-2">
 
                 <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
 
-                    <label class="block font-medium text-sm text-gray-700" for="family_name">
-                        Family Name <span class="text-red-500">*</span>
+                    <label class="block font-medium text-sm text-gray-700" for="company_name">
+                        Company Name <span class="text-red-500">*</span>
                     </label>
-                    <x-jet-input id="family_name" class="block my-2 w-full" type="text" name="family_name" :value="old('family_name')" required autocomplete="family_name"/>
+                    <x-jet-input id="company_name" class="block my-2 w-full" type="text" name="company_name" :value="old('company_name')" required autocomplete="company_name"/>
                 </div>
 
                 <div class="w-full lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
@@ -80,7 +98,7 @@
                     <label class="block font-medium text-sm text-gray-700 mb-2" for="mobile-number">
                         Mobile Number <span class="text-red-500">*</span>
                     </label>
-                    <input type="tel" id="mobile-number" name="mobile" placeholder="e.g. +966 059 338 8833" class="form-input rounded-md shadow-sm block mt-1 w-full">
+                    <input type="tel" id="mobile-number" style="padding-top: 12px;padding-bottom: 12px;" name="mobile" placeholder="e.g. +966 059 338 8833" class="form-input rounded-md shadow-sm block my-2 w-full">
 
                 </div>
 
@@ -94,7 +112,6 @@
                 </div>
 
             </div>
-
 
 
             <div class="flex flex-wrap overflow-hidden lg:-mx-2 xl:-mx-2">
@@ -198,6 +215,12 @@
     //         clear: true,
     //     });
     // });
+
+    $(document).ready(function() {
+        $('.intl-tel-input input').css('height', '40px');
+        $('.selected-flag').css('padding-top', '12px');
+        $('.selected-flag').css('padding-bottom', '12px');
+    });
 
     $('#referred_no').on('keyup', function () {
         $value = $(this).val();

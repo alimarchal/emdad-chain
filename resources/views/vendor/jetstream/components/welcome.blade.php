@@ -8,6 +8,9 @@
                 {{--@if (auth()->user()->rtl == 0)--}}
                     <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto mb-4 m-auto"/>
                     {{__('portal.Thank you for signing up! Your email address has been verified.')}}
+                <livewire:sendsms />
+
+
                 @php
                     $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
                     if ($isBusinessDataExist) {
