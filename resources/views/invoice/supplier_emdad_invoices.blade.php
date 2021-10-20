@@ -63,7 +63,7 @@
                                 @foreach ($emdadInvoices as $emdadInvoice)
                                     <tr>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $emdadInvoice->id }}
+                                            {{__('portal.EmdInv')}}-{{ $emdadInvoice->id }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{__('portal.Inv.')}} -{{ $emdadInvoice->invoice->id }}
@@ -94,7 +94,7 @@
                                         @endif
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @if($emdadInvoice->rfq_type == 1)
-                                                {{ number_format($totalCost,2,'.') }} {{__('portal.SAR')}}
+                                                {{ number_format($totalCost,2) }} {{__('portal.SAR')}}
                                             @elseif($emdadInvoice->rfq_type == 0)
                                                 {{ number_format($totalAmount,2)}} {{__('portal.SAR')}}
                                             @endif
@@ -206,7 +206,7 @@
                                 @foreach ($emdadInvoices as $emdadInvoice)
                                     <tr>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $emdadInvoice->id }}
+                                            {{__('portal.EmdInv')}}-{{ $emdadInvoice->id }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{__('portal.Inv.')}} -{{ $emdadInvoice->invoice->id }}
@@ -239,7 +239,7 @@
                                         @endif
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @if($emdadInvoice->rfq_type == 1)
-                                                {{ number_format($totalCost,2,'.') }} {{__('portal.SAR')}}
+                                                {{ number_format($totalCost,2) }} {{__('portal.SAR')}}
                                             @elseif($emdadInvoice->rfq_type == 0)
                                                 {{ number_format($totalAmount,2)}} {{__('portal.SAR')}}
                                             @endif

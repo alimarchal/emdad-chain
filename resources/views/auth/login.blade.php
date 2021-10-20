@@ -14,11 +14,12 @@
                 </div>
             @endif
 
+            <div class="float-right mb-2">
+                <a href="{{route('loginAr', 'ar')}}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
+            </div>
+
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-                <x-jet-button class="float-right mb-2">
-                    <a href="{{route('registerAr', 'ar')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
-                </x-jet-button>
                 <div>
                     <x-jet-label for="email" value="{{ __('login.Email') }}" />
                     <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />

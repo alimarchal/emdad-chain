@@ -17,7 +17,7 @@ class CreateSupplierBankPaymentsTable extends Migration
             $table->id();
             $table->integer('bank_payment_id');
             $table->string('bank_name');
-            $table->integer('rfq_no');
+            $table->integer('rfq_no')->default(0);                              /* 0 means multi categories */
             $table->string('amount_received');
             $table->string('account_number');
             $table->string('amount_date');

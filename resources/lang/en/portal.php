@@ -792,6 +792,7 @@ return [
     'New RFQ' => 'New Requisition',
     'Paid' => 'Paid',
     'Email Verified' => 'Email Verified',
+    'EmdInv' => 'EmdInv',
 
     /* Alerts (messages) */
     'You have reached daily rfq limit' => 'You have reached daily requisitions limit',

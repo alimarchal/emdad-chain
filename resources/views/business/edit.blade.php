@@ -21,7 +21,8 @@
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="business_name">{{__('portal.Business Name')}}</x-jet-label>
                                 {{--                            <x-jet-label class="w-1/2" for="num_of_warehouse">Number of Warehouse</x-jet-label>--}}
-                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                {{-- Commented below line because Only SuperAdmin can update business details and to prevent user_id column to be replaced by SuperAdmin ID --}}
+{{--                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">--}}
                             </div>
 
                             <div class="flex space-x-5 mt-3">
@@ -159,7 +160,8 @@
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="business_name">{{__('portal.Business Name')}}</x-jet-label>
                                 {{--                            <x-jet-label class="w-1/2" for="num_of_warehouse">Number of Warehouse</x-jet-label>--}}
-                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                {{-- Commented below line because Only SuperAdmin can update business details and to prevent user_id column to be replaced by SuperAdmin ID --}}
+{{--                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">--}}
                             </div>
 
                             <div class="flex space-x-5 mt-3">

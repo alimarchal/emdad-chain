@@ -185,7 +185,7 @@ class BankPaymentController extends Controller
 
         $path = $request->file('file_path_1')->store('', 'public');
         $request->merge(['file_path' => $path]);
-        $request->merge(['rfq_no' => 1]);
+        $request->merge(['rfq_type' => 1]);
 
         /* Checking whether to update or to create */
         $supplierBankPayment = SupplierBankPayment::where('bank_payment_id', $request->bank_payment_id)->first();

@@ -1539,7 +1539,7 @@
                         </table>
                         <div class="text-center my-4">
                             <button type="submit"
-                                    class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                                    class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
                                 <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20"
                                      style="margin-left: 5px;">
@@ -2296,7 +2296,7 @@
                         </table>
                         <div class="text-center my-4">
                             <button type="submit"
-                                    class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                                    class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
                                 <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20"
                                      style="margin-right: 5px;">
@@ -2928,7 +2928,7 @@
                         </table>
                         <div class="text-center my-4">
                             <button type="submit"
-                                    class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                                    class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
                                 <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20"
                                      style="margin-right: 5px;">

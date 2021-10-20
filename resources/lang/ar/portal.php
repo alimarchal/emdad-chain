@@ -792,6 +792,7 @@ return [
     'New RFQ' => 'الطلبات الجديدة',
     'Paid' => 'مدفوعة',
     'Email Verified' => 'البريد الإلكتروني مفعّل',
+    'EmdInv' => 'EmdInv',
 
     /* Alerts (messages) */
     'You have reached daily rfq limit' => 'لقد تجاوزت الحد المسموح به من الطلبات اليومية',
