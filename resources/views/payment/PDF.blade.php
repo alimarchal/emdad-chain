@@ -58,6 +58,9 @@
     <br>
     <br>
     <br>
+    <br>
+    <br>
+    <br>
 
     <div class="center" style="width: 60%;float: left;">
         <strong>Supplier Business Name: </strong> {{ $supplierBusiness->business_name }}<br>
@@ -67,7 +70,7 @@
     </div>
 
     <div class="center" style="width: 40%;float: right">
-        <strong>Invoice #: </strong> Inv. -{{ $invoice->id }}<br>
+        <strong>Invoice #: </strong> Inv-{{ $invoice->id }}<br>
         <strong>Date: </strong> {{ $invoice->created_at }}<br>
     </div>
 
@@ -86,13 +89,6 @@
     <div class="center" style="width: 40%;float: right">
 
         <strong>Purchase Order #: </strong> PO-{{ $invoice->purchase_order->id }}<br>
-        <strong>Category Name: </strong>
-        @php
-            $record = \App\Models\Category::where('id',$invoice->purchase_order->item_code)->first();
-            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-        @endphp
-        <span style="color: #145ea8;">{{ $record->name }}, {{ $parent->name }}</span>
-        <br>
         <strong>Requisition #: </strong>RFQ-{{ $invoice->purchase_order->rfq_no }}<br>
         <strong>Quote #: </strong>Q-{{ $invoice->purchase_order->qoute_no }}<br>
         <strong>Payment Terms: </strong>
@@ -123,6 +119,9 @@
             #
         </th>
         <th style="background-color: #FCE5CD">
+            Category Name
+        </th>
+        <th style="background-color: #FCE5CD">
             Description
         </th>
         <th style="background-color: #FCE5CD">
@@ -144,6 +143,14 @@
         <td style="text-align: center;">
             1
         </td>
+        <td style="text-align: center;">
+            @php
+                $record = \App\Models\Category::where('id',$invoice->purchase_order->item_code)->first();
+                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+            @endphp
+            {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif
+        </td>
+
         <td style="text-align: center;">
             {{ $invoice->eOrderItem->description }}
         </td>
@@ -196,7 +203,7 @@
 <br>
 <br>
 
-@if(auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin']) && $invoice->invoice_status == 3)
+@if((auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin'])) && $invoice->invoice_status == 3)
 <div class="header">
 
     <div style="width: 66.66%;float: left;">

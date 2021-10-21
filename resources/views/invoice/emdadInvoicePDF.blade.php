@@ -45,7 +45,7 @@
     <div class="center"></div>
 
     <div class="center">
-        <h3 style="text-align: center; margin:0;">Emdad Invoice for invoice # Inv. -{{ $emdadInvoice->invoice->id }} </h3>
+        <h3 style="text-align: center; margin:0;">Emdad Invoice for invoice # Inv-{{ $emdadInvoice->invoice->id }} </h3>
     </div>
 
     <div class="center"></div>

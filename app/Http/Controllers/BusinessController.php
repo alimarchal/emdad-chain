@@ -270,7 +270,7 @@ class BusinessController extends Controller
                 $business->update($array);
 
                 session()->flash('message', __('portal.Business information successfully updated.'));
-                return redirect()->route('business.edit', $business->id);
+                return redirect()->route('business.show', $business->id);
             } else {
 
                 $comma_separated = implode(",", $request->category);

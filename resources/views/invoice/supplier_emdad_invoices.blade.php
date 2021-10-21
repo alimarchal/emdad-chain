@@ -66,7 +66,7 @@
                                             {{__('portal.EmdInv')}}-{{ $emdadInvoice->id }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{__('portal.Inv.')}} -{{ $emdadInvoice->invoice->id }}
+                                            {{__('portal.Inv.')}}-{{ $emdadInvoice->invoice->id }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @if($emdadInvoice->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($emdadInvoice->rfq_type == 0) {{__('portal.Single Category')}} @endif
@@ -209,7 +209,7 @@
                                             {{__('portal.EmdInv')}}-{{ $emdadInvoice->id }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{__('portal.Inv.')}} -{{ $emdadInvoice->invoice->id }}
+                                            {{__('portal.Inv.')}}-{{ $emdadInvoice->invoice->id }}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">

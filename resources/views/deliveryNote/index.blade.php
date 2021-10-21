@@ -120,7 +120,6 @@
                                                             @elseif($dpo->payment_term == 'Credit90days') {{__('portal.Credit (90 Days)')}}
                                                             @elseif($dpo->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
                                                             @endif
-{{--                                                            {{ $dpo->payment_term }}--}}
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -143,7 +142,7 @@
                                                                 @endif
                                                             @else
                                                                 @if(auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
-                                                                    @if($dpo->payment_term == 'Credit')
+                                                                    @if($dpo->payment_term != 'Cash')
                                                                         @if($dpo->status == 'approved')
                                                                             <span class="text-yellow-400">{{__('portal.Create delivery Note')}}</span>
                                                                         @elseif($dpo->status == 'completed')
@@ -338,7 +337,6 @@
                                                         @elseif($dpo->payment_term == 'Credit90days') {{__('portal.Credit (90 Days)')}}
                                                         @elseif($dpo->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
                                                         @endif
-                                                        {{--                                                            {{ $dpo->payment_term }}--}}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -361,7 +359,7 @@
                                                             @endif
                                                         @else
                                                             @if(auth()->user()->registration_type == 'Supplier' && auth()->user()->status == 3)
-                                                                @if($dpo->payment_term == 'Credit')
+                                                                @if($dpo->payment_term != 'Cash')
                                                                     @if($dpo->status == 'approved')
                                                                         <span class="text-yellow-400">{{__('portal.Create delivery Note')}}</span>
                                                                     @elseif($dpo->status == 'completed')

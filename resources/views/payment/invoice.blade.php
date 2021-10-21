@@ -83,7 +83,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.Inv.')}} -{{ $dn->id }}
+                                                        {{__('portal.Inv.')}}-{{ $dn->id }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">

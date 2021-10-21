@@ -57,6 +57,9 @@
     <br>
     <br>
     <br>
+    <br>
+    <br>
+    <br>
 
     <div class="center" style="width: 60%;float: left;">
         <strong>Supplier Business Name: </strong> {{ $supplierBusiness->business_name }}<br>
@@ -66,7 +69,7 @@
     </div>
 
     <div class="center" style="width: 40%;float: right">
-        <strong>Invoice #: </strong> Inv. -{{ $invoices[0]->id }}<br>
+        <strong>Invoice #: </strong> Inv-{{ $invoices[0]->id }}<br>
         <strong>Date: </strong> {{ $invoices[0]->created_at }}<br>
     </div>
 
@@ -182,7 +185,7 @@
             }
         @endphp
         <strong>Sub-total: </strong> {{ number_format(($subtotal), 2) }} SAR<br>
-        <strong>VAT: {{ number_format($invoices[0]->vat) }}%: </strong>{{ number_format(($subtotal + $invoices[0]->purchase_order->shipment_cost) * ($invoices[0]->vat/100), 2) }} SAR<br>
+        <strong>VAT {{ number_format($invoices[0]->vat) }}%: </strong>{{ number_format(($subtotal + $invoices[0]->purchase_order->shipment_cost) * ($invoices[0]->vat/100), 2) }} SAR<br>
         <strong>Shipment cost: </strong> {{ $invoices[0]->purchase_order->shipment_cost }} SAR<br>
         <hr>
         <strong>Total: </strong> {{ number_format($invoices[0]->total_cost, 2) }} SAR<br>
@@ -197,7 +200,7 @@
 
 <br><br><br><br><br><br><br><br>
 
-@if(auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin']) && $invoice->invoice_status == 3)
+@if((auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin'])) && $invoice->invoice_status == 3)
     <div class="header">
 
         <div style="width: 66.66%;float: left;">

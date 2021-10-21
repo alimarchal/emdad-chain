@@ -151,7 +151,7 @@
                                                         @else
 {{--                                                            @if(auth()->user()->registration_type == 'Supplier')--}}
                                                             @if(auth()->user()->hasRole('CEO') && auth()->user()->status == 3)
-                                                                @if($dpo->payment_term == 'Credit')
+                                                                @if($dpo->payment_term != 'Cash')
 {{--                                                                    <a href="{{ url('deliveryNote') }}" class="hover:text-blue-900 hover:underline text-blue-900"> {{__('portal.Generate delivery note')}} </a>--}}
 
                                                                     @php $invoice = \App\Models\Invoice::where('draft_purchase_order_id', $dpo->id)->first(); @endphp
@@ -366,7 +366,7 @@
                                                             @endif
                                                         @else
                                                             @if(auth()->user()->hasRole('CEO') && auth()->user()->status == 3 )
-                                                                @if($dpo->payment_term == 'Credit')
+                                                                @if($dpo->payment_term != 'Cash')
                                                                     @php $invoice = \App\Models\Invoice::where('draft_purchase_order_id', $dpo->id)->first(); @endphp
                                                                     @if($dpo->status == 'approved' && auth()->user()->registration_type == 'Supplier')
                                                                         <span> {{__('portal.Generate delivery note')}}</span>

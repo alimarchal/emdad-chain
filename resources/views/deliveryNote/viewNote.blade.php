@@ -23,7 +23,7 @@
                         <div class="flex flex-wrap overflow-hidden bg-white p-4">
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-2/3">
                                 @if ($deliveryNote->status == 'completed')
-                                <strong>{{__('portal.Invoice')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Inv.')}} -{{ $deliveryNote->delivery->invoice_id }}<br>
+                                <strong>{{__('portal.Invoice')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Inv.')}}-{{ $deliveryNote->delivery->invoice_id }}<br>
                                 @endif
                                 <strong>{{__('portal.Purchase Order')}} #: &nbsp;&nbsp;</strong>{{__('portal.P.O.')}} -{{ $deliveryNote->purchase_order->id }}<br>
                                 <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong>

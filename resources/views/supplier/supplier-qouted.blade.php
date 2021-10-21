@@ -498,7 +498,7 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 <a href="{{route('PDFForQuotation', encrypt($rfp->orderItem->id))}}">
-                                                    <img src="{{url('pdf.png')}}" style="height: 40px; padding-right: 22%;">
+                                                    <img src="{{url('pdf.png')}}" style="height: 40px; padding-right: 35%;">
                                                 </a>
                                             </td>
 

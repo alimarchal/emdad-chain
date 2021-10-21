@@ -540,7 +540,7 @@
                                     <tr style="border: none !important;">
                                         <td colspan="6" class="px-10 text-left"  >
                                             <button
-                                                class=" px-4 float-right py-2 mt-6 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-blue-700 active:bg-blue-600 transition ease-in-out duration-150">
+                                                class=" px-4 float-right py-2 mt-6 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 active:bg-green-600 transition ease-in-out duration-150">
                                                 {{__('portal.Send Quote')}}
                                             </button>
                                             <br>
@@ -1003,7 +1003,7 @@
                                     <tr style="border: none !important;">
                                         <td colspan="6" class="px-10 text-left"  >
                                             <button
-                                                class=" px-4 float-right py-2 mt-6 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-blue-700 active:bg-blue-600 transition ease-in-out duration-150">
+                                                class=" px-4 float-right py-2 mt-6 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 active:bg-green-600 transition ease-in-out duration-150">
                                                 {{__('portal.Send Quote')}}
                                             </button>
                                             <br>

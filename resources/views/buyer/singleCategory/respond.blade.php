@@ -94,7 +94,14 @@
                                         <span style="color: #145ea8;"> {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif </span>
                                         <br>
                                         <strong>{{__('portal.Shipment Time (In Days)')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong> {{ $quotes[0]->shipping_time_in_days }}<br>
-                                        <strong>{{__('portal.Payment Term')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> @if ($quotes[0]->orderItem->payment_mode == 'Cash') {{__('portal.Cash')}} @else {{__('portal.Credit')}} @endif<br>
+                                        <strong>{{__('portal.Payment Term')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                        @if($quotes[0]->orderItem->payment_mode == 'Cash') {{__('portal.Cash')}}
+                                        @elseif($quotes[0]->orderItem->payment_mode == 'Credit') {{__('portal.Credit')}}
+                                        @elseif($quotes[0]->orderItem->payment_mode == 'Credit30days') {{__('portal.Credit (30 Days)')}}
+                                        @elseif($quotes[0]->orderItem->payment_mode == 'Credit60days') {{__('portal.Credit (60 Days)')}}
+                                        @elseif($quotes[0]->orderItem->payment_mode == 'Credit90days') {{__('portal.Credit (90 Days)')}}
+                                        @elseif($quotes[0]->orderItem->payment_mode == 'Credit120days') {{__('portal.Credit (120 Days)')}}
+                                        @endif
                                     </div>
                                 </div>
                                 <table class="min-w-full divide-y divide-black">
@@ -393,7 +400,14 @@
                                         <span style="color: #145ea8;"> {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif </span>
                                         <br>
                                         <strong>{{__('portal.Shipment Time (In Days)')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> {{ $quotes[0]->shipping_time_in_days }}<br>
-                                        <strong>{{__('portal.Payment Term')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> @if ($quotes[0]->orderItem->payment_mode == 'Cash') {{__('portal.Cash')}} @else {{__('portal.Credit')}} @endif<br>
+                                        <strong>{{__('portal.Payment Term')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                        @if($quotes[0]->orderItem->payment_mode == 'Cash') {{__('portal.Cash')}}
+                                        @elseif($quotes[0]->orderItem->payment_mode == 'Credit') {{__('portal.Credit')}}
+                                        @elseif($quotes[0]->orderItem->payment_mode == 'Credit30days') {{__('portal.Credit (30 Days)')}}
+                                        @elseif($quotes[0]->orderItem->payment_mode == 'Credit60days') {{__('portal.Credit (60 Days)')}}
+                                        @elseif($quotes[0]->orderItem->payment_mode == 'Credit90days') {{__('portal.Credit (90 Days)')}}
+                                        @elseif($quotes[0]->orderItem->payment_mode == 'Credit120days') {{__('portal.Credit (120 Days)')}}
+                                        @endif
                                     </div>
                                 </div>
                                 <table class="min-w-full divide-y divide-black">

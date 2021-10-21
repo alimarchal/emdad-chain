@@ -933,7 +933,7 @@ class QouteController extends Controller
 
         session()->flash('message', __('portal.Draft purchase order has been generated.'));
 //        return redirect()->route('singleCategoryIndex');
-        return redirect()->route('singleCategoryDPOIndex');
+        return redirect()->route('dpo.index');
     }
 
     /**

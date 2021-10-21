@@ -68,16 +68,16 @@
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if (auth()->user()->registration_type == 'Buyer')
                                                 @if($item->rfq_type == 1)
-                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline">{{__('portal.Inv.')}}-{{$item->id}}</a>
                                                 @elseif($item->rfq_type == 0)
-                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline">{{__('portal.Inv.')}}-{{$item->id}}</a>
                                                 @endif
                                             @elseif(auth()->user()->registration_type == 'Supplier')
                                                 {{--                                        <a href="{{ route('invoice.show',$item->invoice_id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->invoice_id}}</a>--}}
                                                 @if($item->rfq_type == 1)
-                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline">{{__('portal.Inv.')}}-{{$item->id}}</a>
                                                 @elseif($item->rfq_type == 0)
-                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline">{{__('portal.Inv.')}}-{{$item->id}}</a>
                                                 @endif
                                             @endif
                                         </td>
@@ -223,16 +223,16 @@
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if (auth()->user()->registration_type == 'Buyer')
                                                 @if($item->rfq_type == 1)
-                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-{{$item->id}}</a>
                                                 @elseif($item->rfq_type == 0)
-                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-{{$item->id}}</a>
                                                 @endif
                                             @elseif(auth()->user()->registration_type == 'Supplier')
                                                 {{--                                        <a href="{{ route('invoice.show',$item->invoice_id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->invoice_id}}</a>--}}
                                                 @if($item->rfq_type == 1)
-                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-{{$item->id}}</a>
                                                 @elseif($item->rfq_type == 0)
-                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}} -{{$item->id}}</a>
+                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-{{$item->id}}</a>
                                                 @endif
                                             @endif
                                         </td>

@@ -677,7 +677,7 @@ return [
     'RFQ' => 'RFQ',
     'Q' => 'Q',
     'D.N.' => 'DN',
-    'Inv.' => 'Inv.',
+    'Inv.' => 'Inv',
     'D' => 'D',
     'IREs List' => 'IREs List',
     'IRE' => 'IRE',

@@ -130,6 +130,9 @@
                                         {{ ucwords(str_replace("_", " ", __('portal.Valid upto'))) }}
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                        {{ ucwords(str_replace("_", " ", __('portal.Generate PDF'))) }}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{ ucwords(str_replace("_", " ", __('portal.Action'))) }}
                                     </th>
                                 </tr>
@@ -143,7 +146,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->id }}
+                                            {{__('portal.Q')}}-{{ $rfp->id }}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -170,6 +173,12 @@
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             <span class="text-red-600"> {{ __('portal.Expired') }} </span>
+                                        </td>
+
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <a href="{{route('PDFForQuotation', encrypt($rfp->orderItem->id))}}">
+                                                <img src="{{url('pdf.png')}}" style="height: 40px; padding-left: 26%;">
+                                            </a>
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -363,6 +372,9 @@
                                         {{ ucwords(str_replace("_", " ", __('portal.Valid upto'))) }}
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                        {{ ucwords(str_replace("_", " ", __('portal.Generate PDF'))) }}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{ ucwords(str_replace("_", " ", __('portal.Action'))) }}
                                     </th>
                                 </tr>
@@ -376,7 +388,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->id }}
+                                            {{__('portal.Q')}}-{{ $rfp->id }}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -403,6 +415,12 @@
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             <span class="text-red-600"> {{ __('portal.Expired') }} </span>
+                                        </td>
+
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <a href="{{route('PDFForQuotation', encrypt($rfp->orderItem->id))}}">
+                                                <img src="{{url('pdf.png')}}" style="height: 40px; padding-right: 35%;">
+                                            </a>
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">

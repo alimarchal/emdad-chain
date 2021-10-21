@@ -45,7 +45,7 @@
                                         <strong>{{__('portal.Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $supplierBusiness->address }}<br>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                                        <strong>{{__('portal.Invoice')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Inv.')}} -{{ $invoices[0]->id }}<br>
+                                        <strong>{{__('portal.Invoice')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Inv.')}}-{{ $invoices[0]->id }}<br>
                                         <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $invoices[0]->created_at }}<br>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@
                                     </div>
                                 </div>
 
-                                @if(auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin']) && $invoice->invoice_status == 3)
+                                @if((auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin'])) && $invoice->invoice_status == 3)
                                     <div class="flex justify-between mt-4 mb-4">
                                         <img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-6@8x.png')}}" alt="{{__('portal.Paid')}}">
                                     </div>
@@ -331,7 +331,7 @@
                                     </div>
                                 </div>
 
-                                @if(auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin']) && $invoice->invoice_status == 3)
+                                @if((auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin'])) && $invoice->invoice_status == 3)
                                     <div class="flex justify-between mt-4 mb-4">
                                         <img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-6@8x.png')}}" alt="{{__('portal.Paid')}}">
                                     </div>

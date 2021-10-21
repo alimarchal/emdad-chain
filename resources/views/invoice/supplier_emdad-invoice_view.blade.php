@@ -27,7 +27,7 @@
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        <h1 class="text-center text-2xl">{{__('portal.Emdad Invoice for invoice')}} # &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>{{__('portal.Inv.')}} -{{ $emdadInvoice->invoice->id }}</strong></h1>
+                                        <h1 class="text-center text-2xl">{{__('portal.Emdad Invoice for invoice')}} # &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>{{__('portal.Inv.')}}-{{ $emdadInvoice->invoice->id }}</strong></h1>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                     </div>

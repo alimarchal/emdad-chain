@@ -37,22 +37,22 @@
                             <table class="min-w-full divide-y divide-gray-200" id="shipment-table">
                                 <thead class="bg-gray-50">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             #
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Driver Name')}}
                                         </th>
 
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Vehicle Type')}}
                                         </th>
 
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Licence Number')}}
                                         </th>
 
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Delivery ID')}}
                                         </th>
 
@@ -135,22 +135,22 @@
                             <table class="min-w-full divide-y divide-gray-200" id="shipment-table">
                                 <thead class="bg-gray-50">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             #
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Driver Name')}}
                                         </th>
 
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Vehicle Type')}}
                                         </th>
 
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Licence Number')}}
                                         </th>
 
-                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
+                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Delivery ID')}}
                                         </th>
 

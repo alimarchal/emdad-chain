@@ -88,7 +88,14 @@
                                     <span style="color: #145ea8;"> {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif </span>
                                     <br>
                                     <strong>{{__('portal.Payment Term')}}:
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> @if ($QouteItem->orderItem->payment_mode == 'Cash') {{__('portal.Cash')}} @else {{__('portal.Credit')}} @endif
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                    @if($QouteItem->orderItem->payment_mode == 'Cash') {{__('portal.Cash')}}
+                                    @elseif($QouteItem->orderItem->payment_mode == 'Credit') {{__('portal.Credit')}}
+                                    @elseif($QouteItem->orderItem->payment_mode == 'Credit30days') {{__('portal.Credit (30 Days)')}}
+                                    @elseif($QouteItem->orderItem->payment_mode == 'Credit60days') {{__('portal.Credit (60 Days)')}}
+                                    @elseif($QouteItem->orderItem->payment_mode == 'Credit90days') {{__('portal.Credit (90 Days)')}}
+                                    @elseif($QouteItem->orderItem->payment_mode == 'Credit120days') {{__('portal.Credit (120 Days)')}}
+                                    @endif
                                 </div>
                             </div>
 
@@ -392,7 +399,14 @@
                                     @endphp
                                     <span style="color: #145ea8;"> {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif </span>
                                     <br>
-                                    <strong>{{__('portal.Payment Term')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> @if ($QouteItem->orderItem->payment_mode == 'Cash') {{__('portal.Cash')}} @else {{__('portal.Credit')}} @endif
+                                    <strong>{{__('portal.Payment Term')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                    @if($QouteItem->orderItem->payment_mode == 'Cash') {{__('portal.Cash')}}
+                                    @elseif($QouteItem->orderItem->payment_mode == 'Credit') {{__('portal.Credit')}}
+                                    @elseif($QouteItem->orderItem->payment_mode == 'Credit30days') {{__('portal.Credit (30 Days)')}}
+                                    @elseif($QouteItem->orderItem->payment_mode == 'Credit60days') {{__('portal.Credit (60 Days)')}}
+                                    @elseif($QouteItem->orderItem->payment_mode == 'Credit90days') {{__('portal.Credit (90 Days)')}}
+                                    @elseif($QouteItem->orderItem->payment_mode == 'Credit120days') {{__('portal.Credit (120 Days)')}}
+                                    @endif
                                 </div>
                             </div>
 
