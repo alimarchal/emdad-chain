@@ -142,7 +142,7 @@
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                         <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format(($invoice->purchase_order->quantity * $invoice->purchase_order->unit_price), 2) }} {{__('portal.SAR')}}<br>
                                         @php $subtotal = $invoice->purchase_order->quantity * $invoice->purchase_order->unit_price; $subtotal += $invoice->purchase_order->shipment_cost; @endphp
-                                        <strong>{{__('portal.VAT')}} {{ number_format($invoice->vat) }}%: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($subtotal * ($invoice->vat/100), 2) }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.VAT')}} {{ number_format($invoice->vat) }}%: @if($invoice->vat > 9) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @else &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @endif </strong>{{ number_format($subtotal * ($invoice->vat/100), 2) }} {{__('portal.SAR')}}<br>
                                         <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $invoice->purchase_order->shipment_cost }} {{__('portal.SAR')}}<br>
                                         <hr>
                                         <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($invoice->total_cost, 2) }} {{__('portal.SAR')}}<br>
@@ -315,12 +315,12 @@
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format(($invoice->purchase_order->quantity * $invoice->purchase_order->unit_price), 2) }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format(($invoice->purchase_order->quantity * $invoice->purchase_order->unit_price), 2) }} {{__('portal.SAR')}}<br>
                                         @php $subtotal = $invoice->purchase_order->quantity * $invoice->purchase_order->unit_price; $subtotal += $invoice->purchase_order->shipment_cost; @endphp
-                                        <strong>{{__('portal.VAT')}} {{ number_format($invoice->vat) }}%: &nbsp;</strong>{{ number_format($subtotal * ($invoice->vat/100), 2) }} {{__('portal.SAR')}}<br>
-                                        <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $invoice->purchase_order->shipment_cost }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.VAT')}} {{ number_format($invoice->vat) }}%: @if($invoice->vat > 9) &nbsp; @else &nbsp;&nbsp; @endif  </strong>{{ number_format($subtotal * ($invoice->vat/100), 2) }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $invoice->purchase_order->shipment_cost }} {{__('portal.SAR')}}<br>
                                         <hr>
-                                        <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($invoice->total_cost, 2) }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($invoice->total_cost, 2) }} {{__('portal.SAR')}}<br>
                                         <hr>
                                     </div>
                                 </div>

@@ -53,10 +53,11 @@
     <br>
 
     <div style="width: 66.66%;float: left;">
+        <strong>Delivery Note #: </strong> DN-{{ $deliveryNote->id }}<br>
         @if ($deliveryNote->status == 'completed')
-        <strong>Invoice #: </strong> Inv. -{{ $deliveryNote->delivery->invoice_id }}<br>
+        <strong>Invoice #: </strong> Inv-{{ $deliveryNote->delivery->invoice_id }}<br>
         @endif
-        <strong>Purchase Order #: </strong> P.O. -{{ $deliveryNote->purchase_order->id }}<br>
+        <strong>Purchase Order #: </strong> PO-{{ $deliveryNote->purchase_order->id }}<br>
         <strong>Category Name: </strong>
             @php
                 $record = \App\Models\Category::where('id',$deliveryNote->purchase_order->item_code)->first();

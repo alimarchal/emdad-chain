@@ -31,7 +31,7 @@ class PaymentController extends Controller
     {
 //        $collection = DeliveryNote::where(['supplier_business_id' => auth()->user()->business->id, 'rfq_type' => 1])->get();
 
-        $generateInvoices = DeliveryNote::where(['supplier_business_id' => auth()->user()->business_id])->get();
+        $generateInvoices = DeliveryNote::where(['supplier_business_id' => auth()->user()->business_id])->orderByDesc('created_at')->get();
 
         $multiCategory = array();
         $singleCategory = array();
@@ -344,7 +344,7 @@ class PaymentController extends Controller
         if (auth()->user()->registration_type == "Supplier" || auth()->user()->hasRole('Supplier Payment Admin'))
         {
             /*$proformaInvoices = Invoice::with('purchase_order')->where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->get();*/
-            $collection = Invoice::with('purchase_order')->where(['supplier_business_id' => auth()->user()->business_id])->get();
+            $collection = Invoice::with('purchase_order')->where(['supplier_business_id' => auth()->user()->business_id])->orderByDesc('created_at')->get();
 
             $multiCategory = array();
             $singleCategory = array();
@@ -369,7 +369,7 @@ class PaymentController extends Controller
         elseif(auth()->user()->registration_type == "Buyer" || auth()->user()->hasRole('Buyer Payment Admin'))
         {
             /*$proformaInvoices = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->get();*/
-            $collection = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id])->get();
+            $collection = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id])->orderByDesc('created_at')->get();
 
             $multiCategory = array();
             $singleCategory = array();
@@ -416,7 +416,7 @@ class PaymentController extends Controller
     /* Manual Payments Emdad received from Buyer (For Emdad) */
     public function payments()
     {
-        $payments = BankPayment::where(['rfq_type' => 1])->get();
+        $payments = BankPayment::where(['rfq_type' => 1])->orderByDesc('created_at')->get();
 
         return view('payment.emdad.payment', compact('payments'));
     }
@@ -424,7 +424,7 @@ class PaymentController extends Controller
     /* Manual Payments Emdad has sent to Supplier (For Emdad) */
     public function supplier_payment()
     {
-        $payments = BankPayment::where(['rfq_type' => 1])->get();
+        $payments = BankPayment::where(['rfq_type' => 1])->orderByDesc('created_at')->get();
 
         return view('payment.emdad.supplierPayment', compact('payments'));
     }
@@ -434,7 +434,7 @@ class PaymentController extends Controller
     {
 //        $supplierPayments = SupplierBankPayment::with('bankPayment')->where(['rfq_type' => 1])->get();
 
-        $collection = SupplierBankPayment::with('bankPayment')->get();
+        $collection = SupplierBankPayment::with('bankPayment')->orderByDesc('created_at')->get();
 
         $multiCategory = array();
         $singleCategory = array();
@@ -740,7 +740,7 @@ class PaymentController extends Controller
     /* Manual Payments Emdad received from Buyer (For Emdad) */
     public function singleCategoryPayments()
     {
-        $collection = BankPayment::where(['rfq_type' => 0])->get();
+        $collection = BankPayment::where(['rfq_type' => 0])->orderByDesc('created_at')->get();
         $payments = $collection->unique('amount_received');
 
         return view('payment.singleCategory.emdad.payment', compact('payments'));

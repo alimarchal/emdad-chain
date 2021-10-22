@@ -31,6 +31,8 @@ class CreateUsersTable extends Migration
             $table->string('profile_approved')->nullable();
             $table->string('profile_approval_id')->nullable();
             $table->string('mobile')->nullable();
+            $table->string('mobile_verify_code')->nullable();
+            $table->tinyInteger('mobile_verify')->default(0);
             $table->string('mobile_verify_token')->nullable();
             $table->string('status')->nullable();
             $table->boolean('is_active')->default(0);

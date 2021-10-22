@@ -44,7 +44,9 @@ class DraftPurchaseOrderController extends Controller
                 ->where(function ($query){
                 $query->where('status', 'pending');
                 $query->orWhere('status', 'cancel');
-                })->get();
+                })
+                ->orderByDesc('created_at')
+                ->get();
 
             $multiCategory = array();
             $singleCategory = array();
@@ -372,7 +374,7 @@ class DraftPurchaseOrderController extends Controller
                         $query->where('status', '!=', 'pending');
                     })
                     ->get(); //->where('status','approved')*/
-            $draftPurchaseOrders = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id])->where('status', '!=', 'pending')->get();
+            $draftPurchaseOrders = DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id])->where('status', '!=', 'pending')->orderByDesc('created_at')->get();
 
         }
         else {
@@ -393,6 +395,7 @@ class DraftPurchaseOrderController extends Controller
             $draftPurchaseOrders = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id])
                     ->where('status', '!=', 'pending')
                     ->where('status', '!=', 'cancel')
+                    ->orderByDesc('created_at')
                     ->get();
 
         }

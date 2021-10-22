@@ -54,7 +54,8 @@
                                         </th>
                                     </tr>
                                     </thead>
-                                    @php $deliveryItem = \App\Models\Delivery::where('draft_purchase_order_id', $emdadInvoices[0]->invoice->purchase_order->id)->first(); @endphp
+                                    {{--@php $deliveryItem = \App\Models\Delivery::where('draft_purchase_order_id', $emdadInvoices[0]->invoice->purchase_order->id)->first(); @endphp--}}
+                                    @php $category = \App\Models\DraftPurchaseOrder::where('id', $emdadInvoices[0]->invoice->draft_purchase_order_id)->first(); @endphp
                                     <tbody class="bg-white divide-y divide-black border-1 border-black">
                                     @foreach($emdadInvoices as $emdadInvoice)
                                         <tr>
@@ -63,18 +64,18 @@
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
                                                 @php
-                                                    $record = \App\Models\Category::where('id',$deliveryItem->item_code)->first();
+                                                    $record = \App\Models\Category::where('id',$category->item_code)->first();
                                                     $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                 @endphp
                                                 {{ $record->name }} @if(isset($parent->name)) , {{ $parent->name }} @endif
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
-                                                @if($deliveryItem->payment_term == 'Cash') {{__('portal.Cash')}}
-                                                @elseif($deliveryItem->payment_term == 'Credit') {{__('portal.Credit')}}
-                                                @elseif($deliveryItem->payment_term == 'Credit30days') {{__('portal.Credit (30 Days)')}}
-                                                @elseif($deliveryItem->payment_term == 'Credit60days') {{__('portal.Credit (60 Days)')}}
-                                                @elseif($deliveryItem->payment_term == 'Credit90days') {{__('portal.Credit (90 Days)')}}
-                                                @elseif($deliveryItem->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
+                                                @if($category->payment_term == 'Cash') {{__('portal.Cash')}}
+                                                @elseif($category->payment_term == 'Credit') {{__('portal.Credit')}}
+                                                @elseif($category->payment_term == 'Credit30days') {{__('portal.Credit (30 Days)')}}
+                                                @elseif($category->payment_term == 'Credit60days') {{__('portal.Credit (60 Days)')}}
+                                                @elseif($category->payment_term == 'Credit90days') {{__('portal.Credit (90 Days)')}}
+                                                @elseif($category->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
                                                 @endif
                                             </td>
                                             {{-- calculating total cost without VAT--}}
@@ -178,7 +179,7 @@
                                         </th>
                                     </tr>
                                     </thead>
-                                    @php $deliveryItem = \App\Models\Delivery::where('draft_purchase_order_id', $emdadInvoices[0]->invoice->purchase_order->id)->first(); @endphp
+                                    @php $category = \App\Models\DraftPurchaseOrder::where('id', $emdadInvoices[0]->invoice->draft_purchase_order_id)->first(); @endphp
                                     <tbody class="bg-white divide-y divide-black border-1 border-black">
                                     @foreach($emdadInvoices as $emdadInvoice)
                                         <tr>
@@ -187,18 +188,18 @@
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
                                                 @php
-                                                    $record = \App\Models\Category::where('id',$deliveryItem->item_code)->first();
+                                                    $record = \App\Models\Category::where('id',$category->item_code)->first();
                                                     $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                 @endphp
                                                 {{ $record->name_ar }} @if(isset($parent->name)) , {{ $parent->name_ar }} @endif
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
-                                                @if($deliveryItem->payment_term == 'Cash') {{__('portal.Cash')}}
-                                                @elseif($deliveryItem->payment_term == 'Credit') {{__('portal.Credit')}}
-                                                @elseif($deliveryItem->payment_term == 'Credit30days') {{__('portal.Credit (30 Days)')}}
-                                                @elseif($deliveryItem->payment_term == 'Credit60days') {{__('portal.Credit (60 Days)')}}
-                                                @elseif($deliveryItem->payment_term == 'Credit90days') {{__('portal.Credit (90 Days)')}}
-                                                @elseif($deliveryItem->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
+                                                @if($category->payment_term == 'Cash') {{__('portal.Cash')}}
+                                                @elseif($category->payment_term == 'Credit') {{__('portal.Credit')}}
+                                                @elseif($category->payment_term == 'Credit30days') {{__('portal.Credit (30 Days)')}}
+                                                @elseif($category->payment_term == 'Credit60days') {{__('portal.Credit (60 Days)')}}
+                                                @elseif($category->payment_term == 'Credit90days') {{__('portal.Credit (90 Days)')}}
+                                                @elseif($category->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
                                                 @endif
                                             </td>
                                             {{-- calculating total cost without VAT--}}

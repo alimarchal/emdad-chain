@@ -14,7 +14,7 @@ class EmdadInvoiceController extends Controller
     {
         if (auth()->user()->hasRole('SuperAdmin|Finance Officer 1'))
         {
-            $emdadInvoices = EmdadInvoice::where('rfq_type','=',1)->get();
+            $emdadInvoices = EmdadInvoice::where('rfq_type','=',1)->orderByDesc('created_at')->get();
 
             return view('invoice.emdad_invoice', compact('emdadInvoices'))->with('invoice');
 
@@ -23,7 +23,7 @@ class EmdadInvoiceController extends Controller
         {
 //            $emdadInvoices = EmdadInvoice::where([['supplier_business_id', auth()->user()->business_id],['send_status', 1]])->where('rfq_type', '=', 1)->get();
 
-            $collection = EmdadInvoice::where([['supplier_business_id', auth()->user()->business_id],['send_status', 1]])->get();
+            $collection = EmdadInvoice::where([['supplier_business_id', auth()->user()->business_id],['send_status', 1]])->orderByDesc('created_at')->get();
 
             $multiCategory = array();
             $singleCategory = array();
@@ -91,7 +91,7 @@ class EmdadInvoiceController extends Controller
                 $IDs[] = $collectionID->invoice_id;
             }
 
-            $emdadInvoices = $collection->unique('rfq_type');
+            $emdadInvoices = $collection->unique('rfq_no');
 
             return view('invoice.singleCategory.emdad_invoice', compact('emdadInvoices', 'IDs'))->with('invoice');
 

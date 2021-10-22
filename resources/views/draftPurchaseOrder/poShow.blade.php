@@ -158,7 +158,7 @@
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                         <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->sub_total, 2) }} {{__('portal.SAR')}}<br>
                                         @php $subtotal = $draftPurchaseOrder->sub_total; $subtotal += $draftPurchaseOrder->shipment_cost; @endphp
-                                        <strong>{{__('portal.VAT')}} {{ number_format($draftPurchaseOrder->vat) }}%: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($subtotal * ($draftPurchaseOrder->vat/100), 2) }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.VAT')}} {{ number_format($draftPurchaseOrder->vat) }}%: @if($draftPurchaseOrder->vat > 9) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @else &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @endif</strong>{{ number_format($subtotal * ($draftPurchaseOrder->vat/100), 2) }} {{__('portal.SAR')}}<br>
                                         <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->shipment_cost, 2) }} {{__('portal.SAR')}}<br>
                                         <hr>
                                         <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->total_cost, 2) }} {{__('portal.SAR')}}<br>
@@ -416,7 +416,7 @@
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                         <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->sub_total, 2) }} {{__('portal.SAR')}}<br>
                                         @php $subtotal = $draftPurchaseOrder->sub_total; $subtotal += $draftPurchaseOrder->shipment_cost; @endphp
-                                        <strong>{{__('portal.VAT')}} {{ number_format($draftPurchaseOrder->vat) }}%: &nbsp;&nbsp;</strong>{{ number_format($subtotal * ($draftPurchaseOrder->vat/100), 2) }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.VAT')}} {{ number_format($draftPurchaseOrder->vat) }}%: @if($draftPurchaseOrder->vat > 9)  @else &nbsp;  @endif</strong>{{ number_format($subtotal * ($draftPurchaseOrder->vat/100), 2) }} {{__('portal.SAR')}}<br>
                                         <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->shipment_cost, 2) }} {{__('portal.SAR')}}<br>
                                         <hr>
                                         <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->total_cost, 2) }} {{__('portal.SAR')}}<br>
