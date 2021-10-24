@@ -115,6 +115,7 @@
 
             <h2 class="text-2xl font-bold py-2 text-center"></h2>
 
+        <!--
             <div class="flex flex-col mb-5 ">
                 <div class="cart">
                     @if ($eCart->count())
@@ -317,6 +318,8 @@
                     @endif
                 </div>
             </div>
+
+            -->
             <br>
 
             <div class="flex flex-col bg-white rounded">
@@ -780,7 +783,7 @@
 {{--                    </div>--}}
                 </form>
 
-                <div class="flex py-4 float-right mr-4">
+                <div class="mx-2 py-2">
                     <form action="{{ route('EOrders.store') }}" method="POST" >
                         @csrf
                         @foreach ($eCart as $rfp)
@@ -790,7 +793,7 @@
                         <input type="hidden" value="{{ auth()->user()->business->id }}" name="business_id">
                         <input type="hidden" value="{{ auth()->id() }}" name="user_id">
 
-                        <button  type="submit" class="inline-flex float-right items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150 confirm"
+                        <button  type="submit" class="inline-flex float-right items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-gray-600 transition ease-in-out duration-150 confirm"
                                 data-confirm='{{__('portal.Select Ok to place requisition')}}'>
                             {{__('portal.Place RFQ')}}
                         </button>

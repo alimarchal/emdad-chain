@@ -209,6 +209,7 @@ class BusinessController extends Controller
         }
         $user = User::find($business->user_id);
         $user->business_id = $business->id;
+        $user->company_name = $business->business_name;
         $user->save();
 
         $businessPackage = BusinessPackage::where('user_id', $business->user_id)->first();

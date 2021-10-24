@@ -228,8 +228,10 @@ class DeliveryController extends Controller
     {
         $token = $request->code;
         if ($token == "RRNirxFh4j9Ftd") {
+
             $deliveries = Delivery::with('eOrderItems')->where('rfq_no', $rfq_no)->get();  /* Bring rfq_no of delivery instead of deliveryID */
             $shipment_item = ShipmentItem::find($sitm);
+
             if (isset($deliveries) && $shipment_item != null) {
                 foreach ($deliveries as $delivery)
                 {
@@ -238,6 +240,7 @@ class DeliveryController extends Controller
                 }
                 $shipment_item->status = 1;
                 $shipment_item->save();
+
 
 
 //                if ($deliveries[0]->rfq_type == 1)
@@ -255,7 +258,7 @@ class DeliveryController extends Controller
                 return response()->json(['message' => 'Updated...'], 200);
 
             } else {
-                return response()->json(['message' => 'Error some model not found please check your uid, sid, vid'], 404);
+                return response()->json(['message' => 'Error some model not found please check your rfq, sid'], 404);
             }
         } else {
             return response()->json(['message' => 'Not Found!'], 404);

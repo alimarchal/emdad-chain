@@ -82,191 +82,191 @@
 
             <h2 class="text-2xl font-bold py-2 text-center"></h2>
 
-            <div class="flex flex-col mb-5 ">
-                <div class="cart">
-                    @if ($eCart->count())
-                        @php $total = 0; @endphp
-                        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+{{--            <div class="flex flex-col mb-5 ">--}}
+{{--                <div class="cart">--}}
+{{--                    @if ($eCart->count())--}}
+{{--                        @php $total = 0; @endphp--}}
+{{--                        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">--}}
+{{--                            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">--}}
+{{--                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">--}}
 
-                                    <table class="min-w-full divide-y divide-gray-200">
-                                        <thead class="bg-gray-50">
-                                            <tr>
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                                    #
-                                                </th>
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                                    {{__('portal.Category Name')}}
-                                                </th>
+{{--                                    <table class="min-w-full divide-y divide-gray-200">--}}
+{{--                                        <thead class="bg-gray-50">--}}
+{{--                                            <tr>--}}
+{{--                                                <th scope="col"--}}
+{{--                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">--}}
+{{--                                                    #--}}
+{{--                                                </th>--}}
+{{--                                                <th scope="col"--}}
+{{--                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">--}}
+{{--                                                    {{__('portal.Category Name')}}--}}
+{{--                                                </th>--}}
 
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                                    {{__('portal.Description')}}
-                                                </th>
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                                    {{__('portal.Unit')}}
-                                                </th>
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                                    {{__('portal.Size')}}
-                                                </th>
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                                    {{__('portal.Quantity')}}
-                                                </th>
+{{--                                                <th scope="col"--}}
+{{--                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">--}}
+{{--                                                    {{__('portal.Description')}}--}}
+{{--                                                </th>--}}
+{{--                                                <th scope="col"--}}
+{{--                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">--}}
+{{--                                                    {{__('portal.Unit')}}--}}
+{{--                                                </th>--}}
+{{--                                                <th scope="col"--}}
+{{--                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">--}}
+{{--                                                    {{__('portal.Size')}}--}}
+{{--                                                </th>--}}
+{{--                                                <th scope="col"--}}
+{{--                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">--}}
+{{--                                                    {{__('portal.Quantity')}}--}}
+{{--                                                </th>--}}
 
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                                    {{__('portal.Last Price')}}
-                                                </th>
+{{--                                                <th scope="col"--}}
+{{--                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">--}}
+{{--                                                    {{__('portal.Last Price')}}--}}
+{{--                                                </th>--}}
 
 
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                                    {{__('portal.Delivery Period')}}
-                                                </th>
+{{--                                                <th scope="col"--}}
+{{--                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">--}}
+{{--                                                    {{__('portal.Delivery Period')}}--}}
+{{--                                                </th>--}}
 
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                                    {{__('portal.Payment Mode')}}
-                                                </th>
+{{--                                                <th scope="col"--}}
+{{--                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">--}}
+{{--                                                    {{__('portal.Payment Mode')}}--}}
+{{--                                                </th>--}}
 
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                                    {{__('portal.Show Company Name')}}
-                                                </th>
+{{--                                                <th scope="col"--}}
+{{--                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">--}}
+{{--                                                    {{__('portal.Show Company Name')}}--}}
+{{--                                                </th>--}}
 
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Attachment">
-                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                         xmlns="http://www.w3.org/2000/svg">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                              d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
-                                                        </path>
-                                                    </svg>
-                                                </th>
+{{--                                                <th scope="col"--}}
+{{--                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" title="Attachment">--}}
+{{--                                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"--}}
+{{--                                                         xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
+{{--                                                              d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">--}}
+{{--                                                        </path>--}}
+{{--                                                    </svg>--}}
+{{--                                                </th>--}}
 
-                                                <th scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                                    {{__('portal.Action')}}
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="bg-white divide-y divide-gray-200">
-                                            @foreach ($eCart as $rfp)
-                                                <tr>
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        {{ $loop->iteration }}
-                                                    </td>
+{{--                                                <th scope="col"--}}
+{{--                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">--}}
+{{--                                                    {{__('portal.Action')}}--}}
+{{--                                                </th>--}}
+{{--                                            </tr>--}}
+{{--                                        </thead>--}}
+{{--                                        <tbody class="bg-white divide-y divide-gray-200">--}}
+{{--                                            @foreach ($eCart as $rfp)--}}
+{{--                                                <tr>--}}
+{{--                                                    <td class="px-6 py-4 text-center whitespace-nowrap">--}}
+{{--                                                        {{ $loop->iteration }}--}}
+{{--                                                    </td>--}}
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        @php
-                                                            $record = \App\Models\Category::where('id',$rfp->item_code)->first();
-                                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                                        @endphp
-                                                        {{ $rfp->item_name }}, {{ $parent->name}}
-                                                    </td>
+{{--                                                    <td class="px-6 py-4 text-center whitespace-nowrap">--}}
+{{--                                                        @php--}}
+{{--                                                            $record = \App\Models\Category::where('id',$rfp->item_code)->first();--}}
+{{--                                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();--}}
+{{--                                                        @endphp--}}
+{{--                                                        {{ $rfp->item_name }}, {{ $parent->name}}--}}
+{{--                                                    </td>--}}
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        {{ strip_tags($rfp->description) }}
-                                                    </td>
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
-                                                        {{ $rfp->unit_of_measurement }}
-                                                    </td>
+{{--                                                    <td class="px-6 py-4 text-center whitespace-nowrap">--}}
+{{--                                                        {{ strip_tags($rfp->description) }}--}}
+{{--                                                    </td>--}}
+{{--                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">--}}
+{{--                                                        {{ $rfp->unit_of_measurement }}--}}
+{{--                                                    </td>--}}
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        {{ $rfp->size }}
-                                                    </td>
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        {{ $rfp->quantity }}
-                                                    </td>
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        {{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}} <br>
-                                                    </td>
+{{--                                                    <td class="px-6 py-4 text-center whitespace-nowrap">--}}
+{{--                                                        {{ $rfp->size }}--}}
+{{--                                                    </td>--}}
+{{--                                                    <td class="px-6 py-4 text-center whitespace-nowrap">--}}
+{{--                                                        {{ $rfp->quantity }}--}}
+{{--                                                    </td>--}}
+{{--                                                    <td class="px-6 py-4 text-center whitespace-nowrap">--}}
+{{--                                                        {{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}} <br>--}}
+{{--                                                    </td>--}}
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}
-                                                        @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
-                                                        @elseif($rfp->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
-                                                        @elseif($rfp->delivery_period =='Within 90 Days') {{__('portal.90 Days')}}
-                                                        @elseif($rfp->delivery_period =='Standing Order - 2 per year') {{__('portal.Standing Order - 2 times / year')}}
-                                                        @elseif($rfp->delivery_period =='Standing Order - 3 per year') {{__('portal.Standing Order - 3 times / year')}}
-                                                        @elseif($rfp->delivery_period =='Standing Order - 4 per year') {{__('portal.Standing Order - 4 times / year')}}
-                                                        @elseif($rfp->delivery_period =='Standing Order - 6 per year') {{__('portal.Standing Order - 6 times / year')}}
-                                                        @elseif($rfp->delivery_period =='Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}
-                                                        @elseif($rfp->delivery_period =='Standing Order Open') {{__('portal.Standing Order - Open')}}
-                                                        @endif
-                                                    </td>
+{{--                                                    <td class="px-6 py-4 text-center whitespace-nowrap">--}}
+{{--                                                        @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}--}}
+{{--                                                        @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}--}}
+{{--                                                        @elseif($rfp->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}--}}
+{{--                                                        @elseif($rfp->delivery_period =='Within 90 Days') {{__('portal.90 Days')}}--}}
+{{--                                                        @elseif($rfp->delivery_period =='Standing Order - 2 per year') {{__('portal.Standing Order - 2 times / year')}}--}}
+{{--                                                        @elseif($rfp->delivery_period =='Standing Order - 3 per year') {{__('portal.Standing Order - 3 times / year')}}--}}
+{{--                                                        @elseif($rfp->delivery_period =='Standing Order - 4 per year') {{__('portal.Standing Order - 4 times / year')}}--}}
+{{--                                                        @elseif($rfp->delivery_period =='Standing Order - 6 per year') {{__('portal.Standing Order - 6 times / year')}}--}}
+{{--                                                        @elseif($rfp->delivery_period =='Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}--}}
+{{--                                                        @elseif($rfp->delivery_period =='Standing Order Open') {{__('portal.Standing Order - Open')}}--}}
+{{--                                                        @endif--}}
+{{--                                                    </td>--}}
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        @if($rfp->payment_mode == 'Cash')
-                                                            {{__('portal.Cash')}}
-                                                        @elseif($rfp->payment_mode == 'Credit')
-                                                            {{__('portal.Credit')}}
-                                                        @elseif($rfp->payment_mode == 'Credit30days')
-                                                            {{__('portal.Credit (30 Days)')}}
-                                                        @elseif($rfp->payment_mode == 'Credit60days')
-                                                            {{__('portal.Credit (60 Days)')}}
-                                                        @elseif($rfp->payment_mode == 'Credit90days')
-                                                            {{__('portal.Credit (90 Days)')}}
-                                                        @elseif($rfp->payment_mode == 'Credit120days')
-                                                            {{__('portal.Credit (120 Days)')}}
-                                                        @endif
-                                                    </td>
+{{--                                                    <td class="px-6 py-4 text-center whitespace-nowrap">--}}
+{{--                                                        @if($rfp->payment_mode == 'Cash')--}}
+{{--                                                            {{__('portal.Cash')}}--}}
+{{--                                                        @elseif($rfp->payment_mode == 'Credit')--}}
+{{--                                                            {{__('portal.Credit')}}--}}
+{{--                                                        @elseif($rfp->payment_mode == 'Credit30days')--}}
+{{--                                                            {{__('portal.Credit (30 Days)')}}--}}
+{{--                                                        @elseif($rfp->payment_mode == 'Credit60days')--}}
+{{--                                                            {{__('portal.Credit (60 Days)')}}--}}
+{{--                                                        @elseif($rfp->payment_mode == 'Credit90days')--}}
+{{--                                                            {{__('portal.Credit (90 Days)')}}--}}
+{{--                                                        @elseif($rfp->payment_mode == 'Credit120days')--}}
+{{--                                                            {{__('portal.Credit (120 Days)')}}--}}
+{{--                                                        @endif--}}
+{{--                                                    </td>--}}
 
-                                                    <td class="px-3 py-3 text-center whitespace-nowrap">
-                                                        @if($rfp->company_name_check == 0) {{__('portal.No')}} @elseif($rfp->company_name_check == 1){{__('portal.Yes')}} @endif
-                                                    </td>
+{{--                                                    <td class="px-3 py-3 text-center whitespace-nowrap">--}}
+{{--                                                        @if($rfp->company_name_check == 0) {{__('portal.No')}} @elseif($rfp->company_name_check == 1){{__('portal.Yes')}} @endif--}}
+{{--                                                    </td>--}}
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        @if ($rfp->file_path)
-                                                            <a href="{{ Storage::url($rfp->file_path) }}">
-                                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                                     xmlns="http://www.w3.org/2000/svg">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                          d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
-                                                                    </path>
-                                                                </svg>
-                                                            </a>
-                                                        @else
-                                                        {{__('portal.N/A')}}
-                                                        @endif
-                                                    </td>
+{{--                                                    <td class="px-6 py-4 text-center whitespace-nowrap">--}}
+{{--                                                        @if ($rfp->file_path)--}}
+{{--                                                            <a href="{{ Storage::url($rfp->file_path) }}">--}}
+{{--                                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"--}}
+{{--                                                                     xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
+{{--                                                                          d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">--}}
+{{--                                                                    </path>--}}
+{{--                                                                </svg>--}}
+{{--                                                            </a>--}}
+{{--                                                        @else--}}
+{{--                                                        {{__('portal.N/A')}}--}}
+{{--                                                        @endif--}}
+{{--                                                    </td>--}}
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                        <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"
-                                                              class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>
-                                                            @csrf
-                                                            @method('delete')
+{{--                                                    <td class="px-6 py-4 text-center whitespace-nowrap">--}}
+{{--                                                        <form method="POST" action="{{ route('RFQCart.destroy', $rfp->id) }}"--}}
+{{--                                                              class="inline confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}'>--}}
+{{--                                                            @csrf--}}
+{{--                                                            @method('delete')--}}
 
-                                                            <button type="submit"
-                                                                    class="text-indigo-600 inline-block hover:text-indigo-900"
-                                                                    title="{{__('portal.DELETE')}}" onsubmit="alert('Are you sure')">
-                                                                <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                                     fill="orange">
-                                                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>
-                                                                    <path fill-rule="evenodd"
-                                                                          d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
-                                                                          clip-rule="evenodd"/>
-                                                                </svg>
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            </div>
-            <br>
+{{--                                                            <button type="submit"--}}
+{{--                                                                    class="text-indigo-600 inline-block hover:text-indigo-900"--}}
+{{--                                                                    title="{{__('portal.DELETE')}}" onsubmit="alert('Are you sure')">--}}
+{{--                                                                <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"--}}
+{{--                                                                     fill="orange">--}}
+{{--                                                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"/>--}}
+{{--                                                                    <path fill-rule="evenodd"--}}
+{{--                                                                          d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"--}}
+{{--                                                                          clip-rule="evenodd"/>--}}
+{{--                                                                </svg>--}}
+{{--                                                            </button>--}}
+{{--                                                        </form>--}}
+{{--                                                    </td>--}}
+{{--                                                </tr>--}}
+{{--                                            @endforeach--}}
+{{--                                        </tbody>--}}
+{{--                                    </table>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <br>--}}
 
             <div class="flex flex-col bg-white rounded">
                 <div class="p-4" style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
@@ -668,6 +668,23 @@
                     </div>
 
                 </form>
+
+                <div class="p-4 float-right">
+                    <form action="{{ route('single_category_store') }}" method="POST">
+                        @csrf
+                        @foreach ($eCart as $rfp)
+                            <input type="hidden" name="item_number[]" value="{{ $rfp->id }}">
+                        @endforeach
+
+                        <input type="hidden" value="{{ auth()->user()->business->id }}" name="business_id">
+                        <input type="hidden" value="{{ auth()->id() }}" name="user_id">
+
+                        <button type="submit"
+                                class="float-right inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Select Ok to place requisition')}}'>
+                            {{__('portal.Place RFQ')}}
+                        </button>
+                    </form>
+                </div>
             </div>
 
         @elseif(is_null($rfqCount) )
@@ -2505,9 +2522,11 @@
                         </div>
 
                     </div>
-
                 </form>
             </div>
+
+
+
         @else
             <div class="py-12">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

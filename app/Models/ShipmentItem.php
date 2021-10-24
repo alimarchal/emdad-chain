@@ -9,9 +9,7 @@ class ShipmentItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'driver_id', 'vehicle_id', 'supplier_business_id', 'rfq_no', 'delivery_id','status',
-    ];
+    protected $fillable = ['driver_id', 'vehicle_id', 'supplier_business_id', 'rfq_no', 'delivery_id','status'];
 
     public function shipment()
     {
