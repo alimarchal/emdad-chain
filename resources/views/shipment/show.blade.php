@@ -53,7 +53,7 @@
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{__('portal.Delivery ID')}}
+                                            {{__('portal.Delivery Note')}}
                                         </th>
 
                                     </tr>
@@ -80,7 +80,11 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600" target="_blank">{{__('portal.D')}}-{{$shipmentDetail->delivery_id}}</a>
+{{--                                                <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600" target="_blank">D-{{$shipmentDetail->delivery_id}}</a>--}}
+                                                @php
+                                                    $delivery_id = \App\Models\Delivery::where('id',$shipmentDetail->delivery_id)->first()->delivery_note_id;
+                                                @endphp
+                                                <a href="{{route('viewNote', $delivery_id)}}" class="hover:underline text-blue-600" target="_blank">DN-{{\App\Models\Delivery::where('id',$shipmentDetail->delivery_id)->first()->delivery_note_id}}</a>
                                             </td>
                                         </tr>
                                     @endforeach

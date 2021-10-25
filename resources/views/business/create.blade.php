@@ -1,6 +1,28 @@
 @section('headerScripts')
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
     <script src="{{url('js/mapInput.js')}}"></script>
+
+    <style>
+        table {
+            font-size: 1em;
+        }
+        .ui-draggable, .ui-droppable {
+            background-position: top;
+        }
+
+        #datepicker {
+            padding: 10px;
+            cursor: default;
+            /*text-transform: uppercase;*/
+            font-size: 13px;
+            background: #FFFFFF;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            border: solid 1px #d2d6dc;
+            box-shadow: none;
+        }
+    </style>
 @endsection
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
@@ -22,14 +44,21 @@
                             @csrf
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">{{__('portal.Step # 2: Business Information')}}</h3>
                             <div class="flex space-x-5 mt-3">
-                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_name">{{__('portal.Business Name')}} @include('misc.required')</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/3" for="business_name">{{__('portal.Business Name')}} @include('misc.required')</label>
+                                <x-jet-label for="nid_num" class="block font-medium text-sm text-gray-700 w-1/3"  value="{{ __('register.National ID Number') }}"/>
+                               <x-jet-label for="nid_exp_date" class="block font-medium text-sm text-gray-700 w-1/3"  value="{{ __('register.National ID Expiry Date') }}"/>
+
+
 {{--                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="num_of_warehouse">Select the numbers of Warehouses @include('misc.required')</label>--}}
                                 <input type="hidden" name="business_type" value="{{ auth()->user()->registration_type }}">
                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2" value="{{auth()->user()->company_name}}" required></x-jet-input>
-{{--                                <select name="num_of_warehouse" id="num_of_warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>--}}
+                                <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/3" value="{{auth()->user()->company_name}}" required></x-jet-input>
+                                <x-jet-input id="nid_num" class="block mt-1  w-1/3" type="text" pattern="\d*" maxlength="10" name="nid_num" :value="old('nid_num')" required/>
+                                <input type="text" id="datepicker" class="block mt-1 w-1/3" name="nid_exp_date" value="{{old('nid_exp_date')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" readonly>
+
+                                {{--                                <select name="num_of_warehouse" id="num_of_warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>--}}
 {{--                                    <option value="">None</option>--}}
 {{--                                    @for ($count = 1; $count <= 100; $count++)--}}
 {{--                                        <option value="{{ $count }}">{{ $count }}</option>--}}

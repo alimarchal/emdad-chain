@@ -77,14 +77,16 @@ class ShipmentController extends Controller
 
     public function show(Shipment $shipment)
     {
+
         if (auth()->user()->registration_type == 'Supplier')
         {
             $shipmentDetails = ShipmentItem::where('shipment_id', $shipment->id)->get();
+//            dd($shipmentDetails);
             return view('shipment.show', compact('shipmentDetails'));
+
         }
         elseif (auth()->user()->registration_type == 'Buyer')
         {
-//            $shipmentDetails = ShipmentItem::where('shipment_id', $shipment->id)->get();
             $shipmentDetails = ShipmentItem::where(['shipment_id' => $shipment->id, 'buyer_business_id' => auth()->user()->business_id])->get();
             return view('shipment.buyer.show', compact('shipmentDetails'));
         }
