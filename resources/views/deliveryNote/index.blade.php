@@ -84,7 +84,7 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            {{__('portal.P.O.')}} -{{ $dpo->id }}
+                                                            {{__('portal.PO')}}-{{ $dpo->id }}
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -301,7 +301,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.P.O.')}} -{{ $dpo->id }}
+                                                        {{__('portal.PO')}}-{{ $dpo->id }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">

@@ -37,7 +37,7 @@ Route::prefix('v1')->group(function () {
 
     Route::get('veh/{vid}/usr/{uid}/shp/{sid}', [DeliveryController::class, 'vehicle_user_shipment_update']);
 
-    Route::get('rfq/{rfq_no}/shpitem/{sitm}', [DeliveryController::class, 'delivery_shipment']);
+    Route::get('rfq/{rfq_type}/{delivery_id}/{rfq_no}/shpitem/{sitm}', [DeliveryController::class, 'delivery_shipment']);
     /*
      Route::get('del/{rfq_no}/shpitem/{sitm}', [DeliveryController::class, 'delivery_shipment']);
      */

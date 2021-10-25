@@ -49,7 +49,13 @@ class ShipmentItemController extends Controller
             {
                 Vehicle::where('id', $item->vehicle_id)->update(['availability_status' => 0]);
                 User::where('id', $item->driver_id)->update(['driver_status' => 0]);
-                Delivery::where('rfq_no', $item->rfq_no)->update(['status' => 2]);
+                if ($item->delivery->rfq_type == 0)
+                {
+                    Delivery::where('rfq_no', $item->rfq_no)->update(['status' => 2]);
+                }
+                else{
+                    Delivery::where('id', $item->delivery_id)->update(['status' => 2]);
+                }
             }
         });
 

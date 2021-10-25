@@ -224,22 +224,24 @@ class DeliveryController extends Controller
     }
 
 
-    public function delivery_shipment($rfq_no, $sitm, Request $request)
+    public function delivery_shipment($rfq_type, $delivery_id, $rfq_no, $sitm, Request $request)
     {
         $token = $request->code;
         if ($token == "RRNirxFh4j9Ftd") {
 
-            $deliveries = Delivery::with('eOrderItems')->where('rfq_no', $rfq_no)->get();  /* Bring rfq_no of delivery instead of deliveryID */
-            $shipment_item = ShipmentItem::find($sitm);
+            if ($rfq_type == 0)     /* 0 for single category */
+            {
+                $deliveries = Delivery::where('rfq_no', $rfq_no)->get();  /* Retrieve delivery details by rfq_no for single category instead of delivery ID */
+                $shipment_item = ShipmentItem::find($sitm);
 
-            if (isset($deliveries) && $shipment_item != null) {
-                foreach ($deliveries as $delivery)
-                {
-                    $delivery->status = 1;
-                    $delivery->save();
-                }
-                $shipment_item->status = 1;
-                $shipment_item->save();
+                if (isset($deliveries) && $shipment_item != null) {
+                    foreach ($deliveries as $delivery)
+                    {
+                        $delivery->status = 1;
+                        $delivery->save();
+                    }
+                    $shipment_item->status = 1;
+                    $shipment_item->save();
 
 
 
@@ -255,9 +257,27 @@ class DeliveryController extends Controller
 //                        ->notify(new SingleCategoryDeliveryCompleted($deliveries, $deliveries[0]->id));
 //                }
 
-                return response()->json(['message' => 'Updated...'], 200);
+                    return response()->json(['message' => 'Updated...'], 200);
+                }
 
-            } else {
+            }
+
+            elseif ($rfq_type == 1){     /* 1 for multi category*/
+
+                $delivery = Delivery::where('id', $delivery_id)->first();       /* Retrieve delivery details by delivery_id for multiple category instead of delivery's rfq_no */
+                $shipment_item = ShipmentItem::find($sitm);
+
+                if (isset($delivery) && $shipment_item != null) {
+                    $delivery->status = 1;
+                    $delivery->save();
+                    $shipment_item->status = 1;
+                    $shipment_item->save();
+
+                    return response()->json(['message' => 'Updated...'], 200);
+                }
+            }
+
+            else {
                 return response()->json(['message' => 'Error some model not found please check your rfq, sid'], 404);
             }
         } else {

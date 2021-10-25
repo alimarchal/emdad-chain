@@ -64,7 +64,7 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{ $shipmentCart->vehicle->type }}
+                                                {{ $shipmentCart->vehicle->type }} -- {{ $shipmentCart->vehicle->licence_plate_No }}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -80,6 +80,9 @@
                                                 <form method="POST" action="{{ route('shipmentCart.destroy', $shipmentCart->rfq_no) }}" class="inline delete">
                                                     @csrf
                                                     @method('delete')
+
+                                                    <input type="hidden" name="rfq_type" value="{{$shipmentCart->delivery->rfq_type}}">
+                                                    <input type="hidden" name="delivery_id" value="{{$shipmentCart->delivery->id}}">
 
                                                     <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE">
                                                         <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red">
@@ -241,7 +244,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $shipmentCart->vehicle->type }}
+                                            {{ $shipmentCart->vehicle->type }} -- {{ $shipmentCart->vehicle->licence_plate_No }}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -256,6 +259,9 @@
                                             <form method="POST" action="{{ route('shipmentCart.destroy', $shipmentCart->rfq_no) }}" class="inline delete">
                                                 @csrf
                                                 @method('delete')
+
+                                                <input type="hidden" name="rfq_type" value="{{$shipmentCart->delivery->rfq_type}}">
+                                                <input type="hidden" name="delivery_id" value="{{$shipmentCart->delivery->id}}">
 
                                                 <button type="submit" class="text-indigo-600 inline-block hover:text-indigo-900" title="DELETE">
                                                     <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="red">

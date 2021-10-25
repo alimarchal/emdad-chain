@@ -12,7 +12,7 @@ class ShipmentCartController extends Controller
 {
     public function index()
     {
-        $shipmentCarts = ShipmentCart::where('supplier_business_id', auth()->user()->business_id)->get();
+        $shipmentCarts = ShipmentCart::where('supplier_business_id', auth()->user()->business_id)->orderByDesc('created_at')->get();
         return view('shipment.generated', compact(  'shipmentCarts'));
     }
 
@@ -36,17 +36,26 @@ class ShipmentCartController extends Controller
             /* Exploding concatenated delivery and rfq IDs */
             $delivery = explode(',',$request->delivery_id);
 
-            $buyerBusinessID = Delivery::where('id', (int)$delivery[0])->pluck('business_id')->first();
+//            $buyerBusinessID = Delivery::where('id', (int)$delivery[0])->pluck('business_id')->first();
+            $deliveryDetails = Delivery::where('id', (int)$delivery[0])->first();
 
             $shipmentCarts = ShipmentCart::create([
                 'driver_id'  =>  $cartCheck->driver_id,
                 'vehicle_id'  =>  $cartCheck->vehicle_id,
                 'supplier_business_id'  =>  $cartCheck->supplier_business_id,
-                'buyer_business_id'  =>  $buyerBusinessID,
+//                'buyer_business_id'  =>  $buyerBusinessID,
+                'buyer_business_id'  =>  $deliveryDetails->business_id,
                 'rfq_no'  =>  (int)$delivery[1],
                 'delivery_id'  =>  (int)$delivery[0],
             ]);
-            Delivery::where('rfq_no', (int)$delivery[1])->update(['shipment_status' => 1]);
+//            Delivery::where('rfq_no', (int)$delivery[1])->update(['shipment_status' => 1]);
+            if($deliveryDetails->rfq_type == 0)
+            {
+                Delivery::where('rfq_no', (int)$delivery[1])->update(['shipment_status' => 1]);
+            }
+            else {
+                Delivery::where('id', (int)$delivery[0])->update(['shipment_status' => 1]);
+            }
 
             session()->flash('message', __('portal.Shipment successfully added to cart.'));
         }
@@ -69,16 +78,26 @@ class ShipmentCartController extends Controller
                 /* Exploding concatenated delivery and rfq IDs */
                 $delivery = explode(',',$request->delivery_id);
 
-                $buyerBusinessID = Delivery::where('id', (int)$delivery[0])->pluck('business_id')->first();
+//                $buyerBusinessID = Delivery::where('id', (int)$delivery[0])->pluck('business_id')->first();
+                $deliveryDetails = Delivery::where('id', (int)$delivery[0])->first();
 
                 $request->merge(['driver_id' => $request->driver_id]);
                 $request->merge(['vehicle_id' => $request->vehicle_id]);
                 $request->merge(['supplier_business_id' => auth()->user()->business_id]);
-                $request->merge(['buyer_business_id' => $buyerBusinessID]);
+//                $request->merge(['buyer_business_id' => $buyerBusinessID]);
+                $request->merge(['buyer_business_id' => $deliveryDetails->business_id]);
                 $request->merge(['rfq_no' => (int)$delivery[1]]);
                 $request->merge(['delivery_id' => (int)$delivery[0]]);
                 $shipmentCarts = ShipmentCart::create($request->all());
-                Delivery::where('rfq_no', $delivery[1])->update(['shipment_status' => 1]);
+
+//                Delivery::where('rfq_no', $delivery[1])->update(['shipment_status' => 1]);
+                if($deliveryDetails->rfq_type == 0)
+                {
+                    Delivery::where('rfq_no', (int)$delivery[1])->update(['shipment_status' => 1]);
+                }
+                else {
+                    Delivery::where('id', (int)$delivery[0])->update(['shipment_status' => 1]);
+                }
 
                 session()->flash('message', __('portal.Shipment successfully added to cart.'));
             }
@@ -86,10 +105,17 @@ class ShipmentCartController extends Controller
         return redirect()->route('shipment.create', compact('shipmentCarts'));
     }
 
-    public function destroy($rfq_no)
+    public function destroy($rfq_no, Request $request)
     {
-        Delivery::where('rfq_no', $rfq_no)->update(['shipment_status' => 0]);
-        ShipmentCart::where('rfq_no', $rfq_no)->delete();
+        if ($request->rfq_type == 0)
+        {
+            Delivery::where('rfq_no', $rfq_no)->update(['shipment_status' => 0]);
+            ShipmentCart::where('rfq_no', $rfq_no)->delete();
+        }
+        else{
+            Delivery::where('id', $request->delivery_id)->update(['shipment_status' => 0]);
+            ShipmentCart::where('delivery_id', $request->delivery_id)->delete();
+        }
 
         session()->flash('message', __('portal.Item successfully deleted.'));
 
