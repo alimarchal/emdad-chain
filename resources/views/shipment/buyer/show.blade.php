@@ -43,7 +43,7 @@
                                             #
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{__('portal.Delivery ID')}}
+                                            {{__('portal.Delivery Note')}}
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
@@ -64,7 +64,12 @@
                                             </td>
 
                                             <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600">{{__('portal.D')}}-{{ $shipmentDetail->delivery_id }}</a>
+                                                @php $deliveryType = \App\Models\Delivery::where('id', $shipmentDetail->delivery_id)->first();  @endphp
+                                                @if($deliveryType->rfq_type == 0)
+                                                    <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($shipmentDetail->rfq_no), 'deliveryID' => encrypt($shipmentDetail->delivery_id), 'rfq_type' => $deliveryType->rfq_type])}}" class="hover:underline text-blue-600">{{__('portal.D.N.')}}-{{ $deliveryType->delivery_note_id }}</a>
+                                                @else
+                                                    <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($shipmentDetail->rfq_no), 'deliveryID' => encrypt($shipmentDetail->delivery_id), 'rfq_type' => $deliveryType->rfq_type])}}" class="hover:underline text-blue-600">{{__('portal.D.N.')}}-{{ $deliveryType->delivery_note_id }}</a>
+                                                @endif
                                             </td>
 
                                             <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -144,7 +149,7 @@
                                         #
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                        {{__('portal.Delivery ID')}}
+                                        {{__('portal.Delivery Note')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
@@ -165,7 +170,12 @@
                                         </td>
 
                                         <td class="px-6 text-center py-4 whitespace-nowrap">
-                                            <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600">{{__('portal.D')}}-{{ $shipmentDetail->delivery_id }}</a>
+                                            @php $deliveryType = \App\Models\Delivery::where('id', $shipmentDetail->delivery_id)->first();  @endphp
+                                            @if($deliveryType->rfq_type == 0)
+                                                <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($shipmentDetail->rfq_no), 'deliveryID' => encrypt($shipmentDetail->delivery_id), 'rfq_type' => $deliveryType->rfq_type])}}" class="hover:underline text-blue-600">{{__('portal.D.N.')}}-{{ $deliveryType->delivery_note_id }}</a>
+                                            @else
+                                                <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($shipmentDetail->rfq_no), 'deliveryID' => encrypt($shipmentDetail->delivery_id), 'rfq_type' => $deliveryType->rfq_type])}}" class="hover:underline text-blue-600">{{__('portal.D.N.')}}-{{ $deliveryType->delivery_note_id }}</a>
+                                            @endif
                                         </td>
 
                                         <td class="px-6 text-center py-4 whitespace-nowrap">

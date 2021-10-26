@@ -1,7 +1,7 @@
 @component('mail::message')
 # Congratulations
 
-You have accepted the Qoute #: {{ $dpo->qoute_no }} and Your purchase order number is: {{ $dpo->id }}.
+You have accepted the Quote #: {{ $dpo->qoute_no }} and Your purchase order number is: {{ $dpo->id }}.
 
 @component('mail::button', ['url' => config('app.url' . '/login' )])
 Login In

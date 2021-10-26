@@ -80,11 +80,16 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-{{--                                                <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600" target="_blank">D-{{$shipmentDetail->delivery_id}}</a>--}}
-                                                @php
+                                                @php $deliveryType = \App\Models\Delivery::where('id', $shipmentDetail->delivery_id)->first();  @endphp
+                                                @if($deliveryType->rfq_type == 0)
+                                                    <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($shipmentDetail->rfq_no), 'deliveryID' => encrypt($shipmentDetail->delivery_id), 'rfq_type' => $deliveryType->rfq_type])}}" class="hover:underline text-blue-600">{{__('portal.D.N.')}}-{{ $deliveryType->delivery_note_id }}</a>
+                                                @else
+                                                    <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($shipmentDetail->rfq_no), 'deliveryID' => encrypt($shipmentDetail->delivery_id), 'rfq_type' => $deliveryType->rfq_type])}}" class="hover:underline text-blue-600">{{__('portal.D.N.')}}-{{ $deliveryType->delivery_note_id }}</a>
+                                                @endif
+                                                {{--@php
                                                     $delivery_id = \App\Models\Delivery::where('id',$shipmentDetail->delivery_id)->first()->delivery_note_id;
                                                 @endphp
-                                                <a href="{{route('viewNote', $delivery_id)}}" class="hover:underline text-blue-600" target="_blank">DN-{{\App\Models\Delivery::where('id',$shipmentDetail->delivery_id)->first()->delivery_note_id}}</a>
+                                                <a href="{{route('viewNote', $delivery_id)}}" class="hover:underline text-blue-600" target="_blank">DN-{{\App\Models\Delivery::where('id',$shipmentDetail->delivery_id)->first()->delivery_note_id}}</a>--}}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -182,7 +187,12 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                <a href="{{route('delivery.show', encrypt($shipmentDetail->rfq_no))}}" class="hover:underline text-blue-600" target="_blank">{{__('portal.D')}}-{{$shipmentDetail->delivery_id}}</a>
+                                                @php $deliveryType = \App\Models\Delivery::where('id', $shipmentDetail->delivery_id)->first();  @endphp
+                                                @if($deliveryType->rfq_type == 0)
+                                                    <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($shipmentDetail->rfq_no), 'deliveryID' => encrypt($shipmentDetail->delivery_id), 'rfq_type' => $deliveryType->rfq_type])}}" class="hover:underline text-blue-600">{{__('portal.D.N.')}}-{{ $deliveryType->delivery_note_id }}</a>
+                                                @else
+                                                    <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($shipmentDetail->rfq_no), 'deliveryID' => encrypt($shipmentDetail->delivery_id), 'rfq_type' => $deliveryType->rfq_type])}}" class="hover:underline text-blue-600">{{__('portal.D.N.')}}-{{ $deliveryType->delivery_note_id }}</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

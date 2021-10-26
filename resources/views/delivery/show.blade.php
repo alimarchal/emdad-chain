@@ -47,15 +47,8 @@
                                         <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                                        <strong>{{__('portal.Delivery ID')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D')}}-{{ $deliveries[0]->id }}<br>
+                                        <strong>{{__('portal.Delivery Note')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.N.')}}-{{ $deliveries[0]->delivery_note_id }}<br>
                                         <strong>{{__('portal.Purchase Order')}} #: &nbsp;&nbsp;&nbsp;</strong>{{__('portal.PO')}}-{{ $deliveries[0]->draft_purchase_order_id }}<br>
-                                        <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-                                        @php
-                                            $record = \App\Models\Category::where('id',$deliveries[0]->item_code)->first();
-                                            $parent = \App\Models\Category::where('id',$record->parent_id)->first();
-                                        @endphp
-                                        {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif
-                                        <br>
                                         <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->created_at }}<br>
                                         <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveries[0]->rfq_no }}<br>
                                         <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $deliveries[0]->qoute_no }}<br>
@@ -78,16 +71,13 @@
                                             #
                                         </th>
                                         <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Category Name')}}
+                                        </th>
+                                        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Description')}}
                                         </th>
                                         <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Quantity')}}
-                                        </th>
-                                        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                            {{__('portal.Unit Price')}}
-                                        </th>
-                                        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                            {{__('portal.Total')}}
                                         </th>
 
                                     </tr>
@@ -98,43 +88,23 @@
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                                 {{$loop->iteration}}
                                             </td>
+                                            @php
+                                                $record = \App\Models\Category::where('id',$deliveries[0]->item_code)->first();
+                                                $parent = \App\Models\Category::where('id',$record->parent_id)->first();
+                                            @endphp
+                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                                {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif
+                                            </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                                 {{ $delivery->eOrderItems->description }}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                                 {{ $delivery->quantity }}
                                             </td>
-                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                                {{ $delivery->unit_price }} {{__('portal.SAR')}}
-                                            </td>
-                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                                {{ number_format($delivery->quantity * $delivery->unit_price, 2) }} {{__('portal.SAR')}}
-                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
-
-                                <div class="flex flex-wrap overflow-hidden bg-white p-4">
-                                    <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    </div>
-                                    <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    </div>
-                                    <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        @php $subtotal = 0;
-                                            foreach ($deliveries as $delivery)
-                                            {
-                                                $subtotal += $delivery->invoice->purchase_order->quantity * $delivery->invoice->purchase_order->unit_price;
-                                            }
-                                        @endphp
-                                        <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($subtotal, 2) }} {{__('portal.SAR')}}<br>
-                                        <strong>{{__('portal.VAT')}} {{ $deliveries[0]->vat }}%: @if($deliveries[0]->vat > 9) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @else &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @endif</strong> {{ number_format(($subtotal + $deliveries[0]->shipment_cost) * ($deliveries[0]->vat/100), 2) }} {{__('portal.SAR')}} <br>
-                                        <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->shipment_cost }} {{__('portal.SAR')}}<br>
-                                        <hr>
-                                        <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($deliveries[0]->total_cost, 2) }} {{__('portal.SAR')}}<br>
-                                        <hr>
-                                    </div>
-                                </div>
 
                                 {{-- Uncommet below lines after adding Delivery delivered stamp --}}
                                 {{--@if ($deliveries[0]->status == 1)
@@ -150,7 +120,7 @@
                                 </div>
                                 <div class="flex justify-end px-2 py-2 h-15">
                                     <div class="mt-2">{{__('portal.Copied to Emdad records')}}</div>
-                                    <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" style="margin-left: auto; margin-right: auto;"/></div>
+                                    <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-12 w-auto" style="margin-left: auto; margin-right: auto;"/></div>
                                 </div>
 
                             </div>
@@ -209,15 +179,8 @@
                                         <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                                        <strong>{{__('portal.Delivery ID')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D')}}-{{ $deliveries[0]->id }}<br>
+                                        <strong>{{__('portal.Delivery Note')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.N.')}}-{{ $deliveries[0]->delivery_note_id }}<br>
                                         <strong>{{__('portal.Purchase Order')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.PO')}}-{{ $deliveries[0]->draft_purchase_order_id }}<br>
-                                        <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-                                        @php
-                                            $record = \App\Models\Category::where('id',$deliveries[0]->item_code)->first();
-                                            $parent = \App\Models\Category::where('id',$record->parent_id)->first();
-                                        @endphp
-                                        {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif
-                                        <br>
                                         <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->created_at }}<br>
                                         <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveries[0]->rfq_no }}<br>
                                         <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $deliveries[0]->qoute_no }}<br>
@@ -240,16 +203,13 @@
                                             #
                                         </th>
                                         <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Category Name')}}
+                                        </th>
+                                        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Description')}}
                                         </th>
                                         <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Quantity')}}
-                                        </th>
-                                        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                            {{__('portal.Unit Price')}}
-                                        </th>
-                                        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                            {{__('portal.Total')}}
                                         </th>
 
                                     </tr>
@@ -260,43 +220,23 @@
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                                 {{$loop->iteration}}
                                             </td>
+                                            @php
+                                                $record = \App\Models\Category::where('id',$deliveries[0]->item_code)->first();
+                                                $parent = \App\Models\Category::where('id',$record->parent_id)->first();
+                                            @endphp
+                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                                {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif
+                                            </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                                 {{ $delivery->eOrderItems->description }}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                                 {{ $delivery->quantity }}
                                             </td>
-                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                                {{ $delivery->unit_price }} {{__('portal.SAR')}}
-                                            </td>
-                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                                {{ number_format($delivery->quantity * $delivery->unit_price, 2) }} {{__('portal.SAR')}}
-                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
-
-                                <div class="flex flex-wrap overflow-hidden bg-white p-4">
-                                    <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    </div>
-                                    <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    </div>
-                                    <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        @php $subtotal = 0;
-                                            foreach ($deliveries as $delivery)
-                                            {
-                                                $subtotal += $delivery->invoice->purchase_order->quantity * $delivery->invoice->purchase_order->unit_price;
-                                            }
-                                        @endphp
-                                        <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($subtotal, 2) }} {{__('portal.SAR')}}<br>
-                                        <strong>{{__('portal.VAT')}} {{ $deliveries[0]->vat }}%: @if($deliveries[0]->vat > 9) &nbsp; @else &nbsp;&nbsp;&nbsp; @endif</strong> {{ number_format(($subtotal + $deliveries[0]->shipment_cost) * ($deliveries[0]->vat/100), 2) }} {{__('portal.SAR')}} <br>
-                                        <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->shipment_cost }} {{__('portal.SAR')}}<br>
-                                        <hr>
-                                        <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($deliveries[0]->total_cost, 2) }} {{__('portal.SAR')}}<br>
-                                        <hr>
-                                    </div>
-                                </div>
 
                                 {{--@if ($deliveries[0]->status == 1)
                                     <div class="flex justify-between mt-4 mb-4">
@@ -311,7 +251,7 @@
                                 </div>
                                 <div class="flex justify-end px-2 py-2 h-15">
                                     <div class="mt-2">{{__('portal.Copied to Emdad records')}}</div>
-                                    <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" style="margin-left: auto; margin-right: auto;"/></div>
+                                    <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-12 w-auto" style="margin-left: auto; margin-right: auto;"/></div>
                                 </div>
 
                             </div>

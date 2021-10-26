@@ -81,9 +81,7 @@ class ShipmentController extends Controller
         if (auth()->user()->registration_type == 'Supplier')
         {
             $shipmentDetails = ShipmentItem::where('shipment_id', $shipment->id)->get();
-//            dd($shipmentDetails);
             return view('shipment.show', compact('shipmentDetails'));
-
         }
         elseif (auth()->user()->registration_type == 'Buyer')
         {

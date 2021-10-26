@@ -21,7 +21,4 @@ class ShipmentItem extends Model
         return $this->hasMany(Delivery::class,'deliveries.id','shipment_items.delivery_id');
     }
 
-
-
-
 }
