@@ -2,6 +2,11 @@
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
     <script src="{{url('js/mapInput.js')}}"></script>
 
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <style>
         table {
             font-size: 1em;
@@ -23,6 +28,20 @@
             box-shadow: none;
         }
     </style>
+
+    <script>
+
+        $(document).ready(function() {
+            var $j = jQuery.noConflict();
+            $( "#datepicker" ).datepicker({
+                dateFormat: 'mm/dd/yy',
+                changeMonth: true,
+                changeYear: true,
+                minDate: 0,
+                clear: true,
+            });
+        });
+    </script>
 @endsection
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
@@ -56,7 +75,7 @@
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/3" value="{{auth()->user()->company_name}}" required></x-jet-input>
                                 <x-jet-input id="nid_num" class="block mt-1  w-1/3" type="text" pattern="\d*" maxlength="10" name="nid_num" :value="old('nid_num')" required/>
-                                <input type="text" id="datepicker" class="block mt-1 w-1/3" name="nid_exp_date" value="{{old('nid_exp_date')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" readonly>
+                                <input type="text" id="datepicker" data-provide="datepicker" class="block mt-1 w-1/3" name="nid_exp_date" value="{{old('nid_exp_date')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" readonly>
 
                                 {{--                                <select name="num_of_warehouse" id="num_of_warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>--}}
 {{--                                    <option value="">None</option>--}}
