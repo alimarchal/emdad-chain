@@ -213,7 +213,7 @@ return [
     'Surname' => 'اللقب',
     'Amount: SAR' => 'المبلغ:  ريال',
     'Online Charges For MADA (1.75%)' => 'الرسوم الإلكترونية لمدى (١.٧٥٪)',
-    'Online Charges For VISA/MASTER (2.50%): SAR' => 'الرسوم الإلكترونية لفيزا/ماسترد (٢.٥٠٪)',
+    'Online Charges For VISA/MASTER (3%): SAR' => 'الرسوم الإلكترونية لفيزا/ماسترد (۳٪)',
     'Total MADA (If you choose MADA)' => 'المجموع مع مدى (في حال اختيار مدى)',
     'Total (If you choose VISA/MASTER)' => 'المجموع (في حال اختيار فيزا/ماسترد)',
     'Invoice' => 'الفاتورة',

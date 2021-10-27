@@ -89,7 +89,6 @@ class PurchaseRequestFormController extends Controller
             $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
         }
         else{
-//            $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
             session()->flash('error','No Business Package Found for you account! Contact Admin.');
             return redirect()->back();
         }

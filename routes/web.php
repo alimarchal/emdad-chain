@@ -51,9 +51,7 @@ use \App\Http\Controllers\LibraryController;
 |
 */
 
-Route::get('/register-view', function () {
-    return view('auth.register-view');
-});
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 //Route::middleware(['auth:sanctum', 'verified'])->post('languageChange', [DashboardController::class, 'languageChange'])->name('languageChange');

@@ -9,7 +9,6 @@
             العربية
         </a>
 
-
         <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block w-16 mx-auto float-right " />
         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="mt-5">
             @csrf

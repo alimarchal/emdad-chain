@@ -505,9 +505,9 @@ class BusinessPackageController extends Controller
         $merchant_id = null;
         $total_charges = 0;
         if ($request->gateway == "mada") {
-            $total_charges = round(($invoice->total_cost + ($invoice->total_cost * 0.0175)), 2);
+            $total_charges = round(($invoice->total_cost + ($invoice->total_cost * 0.02)), 2);
         } elseif ($request->gateway == "visa_master") {
-            $total_charges = round(($invoice->total_cost + ($invoice->total_cost * 0.0275) + 1), 2);
+            $total_charges = round(($invoice->total_cost + ($invoice->total_cost * 0.03) + 1), 2);
         }
 
         $merchant_id = CardPayment::create([
