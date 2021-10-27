@@ -43,6 +43,11 @@ class WebsiteEnglishController extends Controller
         return view('shipter_theme.survey.index');
     }
 
+    public function suppliers()
+    {
+        return view('shipter_theme.supplier');
+    }
+
     public function buyerSurvey()
     {
         return view('shipter_theme.survey.buyer');

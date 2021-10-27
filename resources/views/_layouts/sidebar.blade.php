@@ -446,7 +446,7 @@
             @endif
 
             {{-- RFQs link for Buyer --}}
-            @if(auth()->user()->can('Buyer Create New RFQ') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+            @if((auth()->user()->can('Buyer Create New RFQ') || auth()->user()->hasRole('CEO')) && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
@@ -509,7 +509,7 @@
                 </a>--}}
             @endif
 
-            @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+            @if((auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO')) && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3 && auth()->user()->business->status == 3)
                 {{--        @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && Auth::user()->status == 3)--}}
 
                 {{-- Placed RFQs link --}}
@@ -537,7 +537,7 @@
             @endif
 
             {{-- Qoutations (Supplier) link --}}
-            @if(auth()->user()->can('Supplier View New RFQs')|| auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && Auth::user()->status == 3)
+            @if((auth()->user()->can('Supplier View New RFQs')|| auth()->user()->hasRole('CEO')) && auth()->user()->registration_type == 'Supplier' && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6
@@ -638,7 +638,7 @@
 
 
             {{-- Qoutations (Buyer) link --}}
-            @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+            @if((auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO')) && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
                 {{--<div x-data="{ open: false } ">--}}
                 {{--<a @click="open = true"
@@ -716,7 +716,7 @@
             @endif
 
             {{-- Purchase Order link --}}
-            @if(auth()->user()->can('Buyer DPO Approval') || auth()->user()->can('Buyer View Purchase Orders') || auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
+            @if((auth()->user()->can('Buyer DPO Approval') || auth()->user()->can('Buyer View Purchase Orders') || auth()->user()->hasRole('CEO'))  && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
@@ -1061,7 +1061,7 @@
             @endif
 
             {{-- Payments link for supplier --}}
-            @if(auth()->user()->hasRole('CEO|Supplier Payment Admin') && auth()->user()->registration_type == 'Supplier'  && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO|Supplier Payment Admin') && auth()->user()->registration_type == 'Supplier'  && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
                 <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('paymentView') ||request()->routeIs('payment.index') || request()->routeIs('generate_proforma_invoices')|| request()->routeIs('invoices')|| request()->routeIs('bank-payments.index')|| request()->routeIs('proforma_invoices')|| request()->routeIs('emdadInvoices')|| request()->routeIs('supplier_payment_received') || request()->routeIs('singleCategoryPaymentIndex') || request()->routeIs('singleCategoryGenerateProformaInvoiceView')|| request()->routeIs('singleCategoryInvoices')|| request()->routeIs('singleCategoryBankPaymentIndex')|| request()->routeIs('singleCategoryProformaInvoices')|| request()->routeIs('singleCategoryEmdadInvoicesIndex')|| request()->routeIs('singleCategorySupplierPaymentsReceived') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                    href="{{ route('paymentView') }}">
@@ -1345,7 +1345,7 @@
             @endif
 
             {{-- Payments link for Buyer --}}
-            @if(auth()->user()->hasRole('CEO|Buyer Payment Admin') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO|Buyer Payment Admin') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
@@ -1883,7 +1883,7 @@
             @endif
 
             {{-- RFQs link for Buyer --}}
-            @if(auth()->user()->can('Buyer Create New RFQ') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+            @if((auth()->user()->can('Buyer Create New RFQ') || auth()->user()->hasRole('CEO')) && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
@@ -1938,7 +1938,7 @@
 
             @endif
 
-            @if(auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+            @if((auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO')) && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3 && auth()->user()->business->status == 3)
                 {{--        @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && Auth::user()->status == 3)--}}
 
                 {{-- Placed RFQs link --}}
@@ -1966,7 +1966,7 @@
             @endif
 
             {{-- Qoutations (Supplier) link --}}
-            @if(auth()->user()->can('Supplier View New RFQs')|| auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && Auth::user()->status == 3)
+            @if((auth()->user()->can('Supplier View New RFQs')|| auth()->user()->hasRole('CEO')) && auth()->user()->registration_type == 'Supplier' && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6
@@ -2066,7 +2066,7 @@
             @endif
 
             {{-- Qoutations (Buyer) link --}}
-            @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+            @if((auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO')) && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
                 <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('QoutationsBuyerReceived') || request()->routeIs('singleCategoryBuyerRFQs') || request()->routeIs('singleCategoryRFQItems') || request()->routeIs('singleCategoryRFQQuotationsBuyerReceived') || request()->routeIs('singleCategoryRFQQuotationsBuyerRejected') || request()->routeIs('singleCategoryRFQQuotationsModificationNeeded') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                    href="{{ route('QoutationsBuyerReceived') }}">
@@ -2092,7 +2092,7 @@
             @endif
 
             {{-- Purchase Order link --}}
-            @if(auth()->user()->can('Buyer DPO Approval') || auth()->user()->can('Buyer View Purchase Orders') || auth()->user()->hasRole('CEO')  && Auth::user()->status == 3)
+            @if((auth()->user()->can('Buyer DPO Approval') || auth()->user()->can('Buyer View Purchase Orders') || auth()->user()->hasRole('CEO'))  && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
@@ -2415,7 +2415,7 @@
             @endif
 
             {{-- Payments link for supplier --}}
-            @if(auth()->user()->hasRole('CEO|Supplier Payment Admin') && auth()->user()->registration_type == 'Supplier'  && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO|Supplier Payment Admin') && auth()->user()->registration_type == 'Supplier'  && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
                 <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('paymentView') ||request()->routeIs('payment.index') || request()->routeIs('generate_proforma_invoices')|| request()->routeIs('invoices')|| request()->routeIs('bank-payments.index')|| request()->routeIs('proforma_invoices')|| request()->routeIs('emdadInvoices')|| request()->routeIs('supplier_payment_received') || request()->routeIs('singleCategoryPaymentIndex') || request()->routeIs('singleCategoryGenerateProformaInvoiceView')|| request()->routeIs('singleCategoryInvoices')|| request()->routeIs('singleCategoryBankPaymentIndex')|| request()->routeIs('singleCategoryProformaInvoices')|| request()->routeIs('singleCategoryEmdadInvoicesIndex')|| request()->routeIs('singleCategorySupplierPaymentsReceived') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                    href="{{ route('paymentView') }}">
@@ -2429,7 +2429,7 @@
             @endif
 
             {{-- Payments link for Buyer --}}
-            @if(auth()->user()->hasRole('CEO|Buyer Payment Admin') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3)
+            @if(auth()->user()->hasRole('CEO|Buyer Payment Admin') && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
                 <div x-data="{ open: false } ">
                     <a @click="open = true"

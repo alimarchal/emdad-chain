@@ -1,7 +1,7 @@
 @extends('shipter.layout')
 
 @section('custom_header_image')
-background-image: url('images/Our sevices (photo no.4).jpg');
+    background-image: url('images/Our sevices (photo no.4).jpg');
 @endsection
 @section('title','Services')
 @section('custom-header')
@@ -23,7 +23,7 @@ background-image: url('images/Our sevices (photo no.4).jpg');
     <!-- section-section start -->
     <div class="section-area section-style-2 section-style-3">
         <div class="container">
-            {{--<div class="row">
+            <div class="row">
                 <div class="col-lg-4 col-md-9 col-sm-12 col-d c-pd">
                     <div class="section-wrap">
                         <div class="section-item-2">
@@ -68,23 +68,100 @@ background-image: url('images/Our sevices (photo no.4).jpg');
                         <div class="t-text">
                             <h2>Suppliers</h2>
                         </div>
-                        <div class="tr-s">
+                        <div class="tr-s ml-2">
+                            Suppliers are the strategic partners of the Emdad platform. The main objective of the partnership is to enhance the quality level of supply for customers, and provide fast, professional and unique service in which Emdad platform was built on.
                             <ul style="list-style-type: disc;line-height: 4em;">
-                                <li>The ability to request electronic reports at any time.</li>
-                                <li>Save all operations and documents in an electronic cloud as a reference.</li>
-                                <li>Monitor and follow up the authority of the sales team and the existing transactions.</li>
-                                <li>Enhancing and enabling the capabilities and expertise of employees with free training courses.</li>
-                                <li>The ability to approve quotations electronically.</li>
-                                <li>We guarantee you get the money on time</li>
+                                <li>Ensuring that all legal documents are valid.</li>
+                                <li>Ensuring that a partner is an authorized agent or distributor.</li>
+                                <li>Ensuring the eligibility and efficiency of the supply and adhering to the specified time.</li>
+                                <li>The partner's commitment to supply all regions of the Kingdom.</li>
+                                <li>The partner's commitment to provide the best and lowest price.</li>
+                                <li>The partner's commitment to follow up with the requests and submitting offers quickly.</li>
+                                <li>The partner's commitment to provide warranty for the products and abide by it.</li>
                             </ul>
-
+                            All information provided in the registration form will be studied and within a maximum period of 48 hours, you will be contacted to complete the registration process.
                         </div>
                     </div>
                 </div>
-            </div>--}}
+            </div>
+
+            <!-- pricing-area start -->
+            <div class="pricing-area pricing-area-2">
+                <div class="container">
+                    <div class="btn-style join_us"><a href="{{route('register')}}" class="join_us_font_size">Partner registeration</a></div>
+                    <div class="section-title text-center">
+                        <span>We Give You The Best</span>
+                        <h2>Supplier Subscription Plan</h2>
+                    </div>
+                    <div class="btns">
+                        <div class="btn-style"><a href="{{route('english.supplierPackage')}}" target="_blank">Details</a></div>
+                    </div>
+                    <div class="row" style="padding-top: 20px;">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="row">
+                                <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
+                                    <div class="price-item">
+                                        <div class="pricing-header" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                            <h3 style="color: white;">Basic</h3>
+                                            <span style="color: black;">ES-0000567373</span>
+                                        </div>
+                                        <div class="pricing-table">
+                                            <div class="price-sub-header">
+                                                <h4>Free</h4>
+                                            </div>
+                                            <div class="pricing-footer">
+                                                <div class="btns">
+                                                    <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
+                                    <div class="price-item">
+                                        <div class="pricing-header1" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                            <h3 style="color: white;">Silver</h3>
+                                            <span style="color: black;">ES-0000567373</span>
+                                        </div>
+                                        <div class="pricing-table">
+                                            <div class="price-sub-header">
+                                                <h4>1500 SAR</h4>
+                                            </div>
+                                            <div class="pricing-footer">
+                                                <div class="btns">
+                                                    <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
+                                    <div class="price-item">
+                                        <div class="pricing-header2" style="border-color: #023989; border-style: groove; border-width: thin;">
+                                            <h3 style="color: white;">Gold</h3>
+                                            <span style="color: black;">ES-0000567373</span>
+                                        </div>
+                                        <div class="pricing-table">
+                                            <div class="price-sub-header">
+                                                <h4>5000 SAR</h4>
+                                            </div>
+                                            <div class="pricing-footer">
+                                                <div class="btns">
+                                                    <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- pricing-area end -->
 
 
-            <div class="row">
+            {{--<div class="row">
                 <div class="col-lg-4 col-md-9 col-sm-12 col-d c-pd">
                     <div class="section-wrap">
                         <div class="section-item-2">
@@ -126,25 +203,25 @@ background-image: url('images/Our sevices (photo no.4).jpg');
                 </div>
 
                 <div class="col-lg-8 col-md-12 col-sm-12">
-                    <div class="tr-wrap ml-2" style="padding-top: 45px;">
+                    <div class="tr-wrap" style="padding-top: 45px;">
                         <div class="t-text">
                             <h2>Buyers</h2>
                         </div>
                         <div class="tr-s">
                             <ul style="list-style-type: disc;line-height: 4em;">
-                            <li>The possibility of safe payment.</li>
-                            <li>The possibility of tracking shipments.</li>
-                            <li>The possibility of dealing in cash or on credit.</li>
-                            <li>Guarantee of requesting quotations from the correct supplier.</li>
-                            <li>The ability to register suppliers and deal with them directly.</li>
-                            <li>Enhancing the search for an alternative or new product in an easy and fast way.</li>
-                            <li>Prevent financial fraud and secret dealings between seller and buyer.</li>
-                            <li>The ability to approve purchase orders electronically.</li>
+                                <li>The possibility of safe payment.</li>
+                                <li>The possibility of tracking shipments.</li>
+                                <li>The possibility of dealing in cash or on credit.</li>
+                                <li>Guarantee of requesting quotations from the correct supplier.</li>
+                                <li>The ability to register suppliers and deal with them directly.</li>
+                                <li>Enhancing the search for an alternative or new product in an easy and fast way.</li>
+                                <li>Prevent financial fraud and secret dealings between seller and buyer.</li>
+                                <li>The ability to approve purchase orders electronically.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </div>
     <!--section-section end -->

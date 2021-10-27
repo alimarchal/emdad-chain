@@ -26,7 +26,8 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Items List')}} @if (!$shipmentDetails->count()) {{__('portal.seems empty')}} @endif
+        <h2 class="text-2xl font-bold py-2 text-center m-15">
+            @if (!$shipmentDetails->count()) {{__('portal.No record found...!')}} @else {{__('portal.Shipment')}} # {{$shipmentDetails[0]->shipment_id}}-{{__('portal.No. of deliveries')}} @endif
         </h2>
 
         @if ($shipmentDetails->count())
@@ -132,7 +133,8 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Items List')}} @if (!$shipmentDetails->count()) {{__('portal.seems empty')}} @endif
+        <h2 class="text-2xl font-bold py-2 text-center m-15">
+            @if (!$shipmentDetails->count()) {{__('portal.No record found...!')}} @else {{__('portal.Shipment')}} # {{$shipmentDetails[0]->shipment_id}}-{{__('portal.No. of deliveries')}} @endif
         </h2>
 
         @if ($shipmentDetails->count())

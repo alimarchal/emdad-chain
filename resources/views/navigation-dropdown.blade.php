@@ -276,7 +276,7 @@
                             @endcan
 
                             @php
-                                $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
+                                $isBusinessDataExist = \App\Models\Business::where('id', Auth::user()->business_id)->first();
                                 if ($isBusinessDataExist) {
                                     $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
                                 }
@@ -322,12 +322,13 @@
                                     {{ __('navigation-dropdown.Create Users') }}
                                 </x-jet-dropdown-link>--}}
 
-                                <div class="border-t border-gray-100"></div>
+                                {{--<div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('users.index') }}">
                                     {{ __('navigation-dropdown.Current Users') }}
-                                </x-jet-dropdown-link>
+                                </x-jet-dropdown-link>--}}
 
-                                @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
+                                    {{-- Below code is when user (CEO) cannot add user unless completes his registeration and gets his business approved --}}
+                                {{--@if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
 
                                     @if (auth()->user()->business_id)
                                         <div class="border-t border-gray-100"></div>
@@ -335,7 +336,21 @@
                                             {{ __('navigation-dropdown.Add User') }}
                                         </x-jet-dropdown-link>
                                     @endif
-                                @endif
+                                @endif--}}
+                            @endif
+
+                            {{-- Below code is when user (CEO) can add user right after adding his business details --}}
+                            @if(auth()->user()->hasRole('SuperAdmin|CEO') && auth()->user()->mobile_verify == 1 && auth()->user()->business_id != null)
+
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('users.index') }}">
+                                        {{ __('navigation-dropdown.Current Users') }}
+                                    </x-jet-dropdown-link>
+
+                                    <div class="border-t border-gray-100"></div>
+                                    <x-jet-dropdown-link href="{{ route('users.create') }}">
+                                        {{ __('navigation-dropdown.Add User') }}
+                                    </x-jet-dropdown-link>
                             @endif
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -538,7 +553,7 @@
                             {{ __('navigation-dropdown.Subscription') }}
                         </x-jet-dropdown-link>
 
-                        <div class="border-t border-gray-100"></div>
+                        {{--<div class="border-t border-gray-100"></div>
                         <x-jet-dropdown-link href="{{ route('users.index') }}">
                             {{ __('navigation-dropdown.Current Users') }}
                         </x-jet-dropdown-link>
@@ -551,7 +566,21 @@
                                     {{ __('navigation-dropdown.Add User') }}
                                 </x-jet-dropdown-link>
                             @endif
-                        @endif
+                        @endif--}}
+                    @endif
+
+                    {{-- Below code is when user (CEO) can add user right after adding his business details --}}
+                    @if(auth()->user()->hasRole('SuperAdmin|CEO') && auth()->user()->mobile_verify == 1 && auth()->user()->business_id != null)
+
+                        <div class="border-t border-gray-100"></div>
+                        <x-jet-dropdown-link href="{{ route('users.index') }}">
+                            {{ __('navigation-dropdown.Current Users') }}
+                        </x-jet-dropdown-link>
+
+                        <div class="border-t border-gray-100"></div>
+                        <x-jet-dropdown-link href="{{ route('users.create') }}">
+                            {{ __('navigation-dropdown.Add User') }}
+                        </x-jet-dropdown-link>
                     @endif
 
 
@@ -935,7 +964,7 @@
                             @endcan
 
                             @php
-                                $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
+                                $isBusinessDataExist = \App\Models\Business::where('id', Auth::user()->business_id)->first();
                                 if ($isBusinessDataExist) {
                                     $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
                                 }
@@ -976,7 +1005,7 @@
                                     {{ __('navigation-dropdown.Subscription') }}
                                 </x-jet-dropdown-link>
 
-                                <div class="border-t border-gray-100"></div>
+                                {{--<div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('users.index') }}">
                                     {{ __('navigation-dropdown.Current Users') }}
                                 </x-jet-dropdown-link>
@@ -989,7 +1018,21 @@
                                             {{ __('navigation-dropdown.Add User') }}
                                         </x-jet-dropdown-link>
                                     @endif
-                                @endif
+                                @endif--}}
+                            @endif
+
+                            {{-- Below code is when user (CEO) can add user right after adding his business details --}}
+                            @if(auth()->user()->hasRole('SuperAdmin|CEO') && auth()->user()->mobile_verify == 1 && auth()->user()->business_id != null)
+
+                                <div class="border-t border-gray-100"></div>
+                                <x-jet-dropdown-link href="{{ route('users.index') }}">
+                                    {{ __('navigation-dropdown.Current Users') }}
+                                </x-jet-dropdown-link>
+
+                                <div class="border-t border-gray-100"></div>
+                                <x-jet-dropdown-link href="{{ route('users.create') }}">
+                                    {{ __('navigation-dropdown.Add User') }}
+                                </x-jet-dropdown-link>
                             @endif
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -1192,7 +1235,7 @@
                             {{ __('navigation-dropdown.Subscription') }}
                         </x-jet-dropdown-link>
 
-                        <div class="border-t border-gray-100"></div>
+                        {{--<div class="border-t border-gray-100"></div>
                         <x-jet-dropdown-link href="{{ route('users.index') }}">
                             {{ __('navigation-dropdown.Current Users') }}
                         </x-jet-dropdown-link>
@@ -1205,6 +1248,20 @@
                                     {{ __('navigation-dropdown.Add User') }}
                                 </x-jet-dropdown-link>
                             @endif
+                        @endif--}}
+
+                        {{-- Below code is when user (CEO) can add user right after adding his business details --}}
+                        @if(auth()->user()->hasRole('SuperAdmin|CEO') && auth()->user()->mobile_verify == 1 && auth()->user()->business_id != null)
+
+                            <div class="border-t border-gray-100"></div>
+                            <x-jet-dropdown-link href="{{ route('users.index') }}">
+                                {{ __('navigation-dropdown.Current Users') }}
+                            </x-jet-dropdown-link>
+
+                            <div class="border-t border-gray-100"></div>
+                            <x-jet-dropdown-link href="{{ route('users.create') }}">
+                                {{ __('navigation-dropdown.Add User') }}
+                            </x-jet-dropdown-link>
                         @endif
                     @endif
 

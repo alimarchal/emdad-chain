@@ -94,6 +94,7 @@ class ShipmentItemController extends Controller
 
                     $ShipmentItem[]['ShipmentItem'] = $itm->merge([
                         'Deliveries' => [$del_item],
+                        'buyer_logo_url' => config('app.url') . '/storage/' . Business::find($del_item->business_id)->business_photo_url,
                         'supplier_logo_url' => config('app.url') . '/storage/' . Business::find($del_item->supplier_business_id)->business_photo_url,
                         'buyer_business' => Business::find($del_item->business_id)->business_name,
                         'buyerRFQWarehouse' => BusinessWarehouse::find(DraftPurchaseOrder::find($del_item->draft_purchase_order_id)->warehouse_id),
@@ -133,6 +134,7 @@ class ShipmentItemController extends Controller
                         'Delivery' => [Delivery::find($col->delivery_id)],
                         'User' => [User::find($col->driver_id)],
                         'Vehicle' => [Vehicle::find($col->vehicle_id)],
+                        'buyer_logo_url' => config('app.url') . '/storage/' . Business::find($del_item->business_id)->business_photo_url,
                         'supplier_logo_url' => config('app.url') . '/storage/' . Business::find($del_item->supplier_business_id)->business_photo_url,
                         'buyer_business' => Business::find($del_item->business_id)->business_name,
                         'BuyerRFQWarehouse' => [BusinessWarehouse::find($warehouse_id)],

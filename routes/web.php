@@ -161,6 +161,7 @@ Route::get('/en-service', [\App\Http\Controllers\WebsiteEnglishController::class
 Route::get('/en-team', [\App\Http\Controllers\WebsiteEnglishController::class, 'team'])->name('english.team');
 Route::get('/en-contact', [\App\Http\Controllers\WebsiteEnglishController::class, 'contact'])->name('english.contact');
 Route::get('/en-survey', [\App\Http\Controllers\WebsiteEnglishController::class, 'survey'])->name('english.survey');
+Route::get('/en-suppliers', [\App\Http\Controllers\WebsiteEnglishController::class, 'suppliers'])->name('english.suppliers');
 Route::get('/en-buyer-survey', [\App\Http\Controllers\WebsiteEnglishController::class, 'buyerSurvey'])->name('english.buyerSurvey');
 Route::get('/en-supplier-survey', [\App\Http\Controllers\WebsiteEnglishController::class, 'supplierSurvey'])->name('english.supplierSurvey');
 Route::get('/en-buyer-package', [\App\Http\Controllers\WebsiteEnglishController::class, 'buyerPackage'])->name('english.buyerPackage');
@@ -173,6 +174,7 @@ Route::get('/ar-service', [WebsiteArabicController::class, 'service'])->name('ar
 Route::get('/ar-team', [WebsiteArabicController::class, 'team'])->name('arabic.team');
 Route::get('/ar-contact', [WebsiteArabicController::class, 'contact'])->name('arabic.contact');
 Route::get('/ar-survey', [WebsiteArabicController::class, 'survey'])->name('arabic.survey');
+Route::get('/ar-suppliers', [WebsiteArabicController::class, 'suppliers'])->name('arabic.suppliers');
 Route::get('/ar-buyer-survey', [WebsiteArabicController::class, 'buyerSurvey'])->name('arabic.buyerSurvey');
 Route::get('/ar-supplier-survey', [WebsiteArabicController::class, 'supplierSurvey'])->name('arabic.supplierSurvey');
 Route::get('/ar-buyer-package', [WebsiteArabicController::class, 'buyerPackage'])->name('arabic.buyerPackage');

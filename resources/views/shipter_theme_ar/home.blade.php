@@ -62,7 +62,7 @@
 {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
                             <h3 class="text-white emdad_description" style="font-family: arabicFont;direction: rtl;">إمداد هي منصة إلكترونية (B2B) تم إنشاؤها على أيدي فريق طموح وخبير وفي المجال التقني، بغرض تحويل عمليات البيع والشراء والتوريد والتخزين إلى منصة ذكية وموحدة، بأقل التكاليف وبأفضل المعايير التقنية واللوجستية. ولتصبح عمليات سلاسل الإمداد المحلية في المملكة العربية السعودية أكثر ذكاءً وتقدمًا واستدامةً وفقاً لرؤية ٢٠٣٠.</h3>
                             <div>
-                                <div class="btn-style join_us_ar"><a href="{{route('register')}}" class="join_us_font_size">انضم إلينا</a></div>
+                                <div class="btn-style join_us_ar"><a href="{{route('registerAr', 'ar')}}" class="join_us_font_size">انضم إلينا</a></div>
                             </div>
                             <div class="btns">
 {{--                                <div class="btn-style"><a href="{{route('arabic.about')}}">من إمداد</a></div>--}}
@@ -432,7 +432,7 @@
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
-                                        <h4>5000 SAR</h4>
+                                        <h4>5000 ريال</h4>
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
@@ -450,7 +450,7 @@
                                 </div>
                                 <div class="pricing-table">
                                     <div class="price-sub-header">
-                                        <h4>15000 SAR</h4>
+                                        <h4>15000 ريال</h4>
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">

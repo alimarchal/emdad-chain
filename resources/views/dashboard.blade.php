@@ -70,7 +70,7 @@
     </div>
 @endrole
 
-    @if(Auth::user()->status == 3 && Auth::user()->registration_type == "Buyer" || auth()->user()->can('Buyer View Quotations') || auth()->user()->can('Buyer View Quotations') || auth()->user()->can('Buyer DPO Approval') || auth()->user()->can('Buyer View Purchase Orders'))
+    @if(Auth::user()->status == 3 && (Auth::user()->registration_type == "Buyer" || auth()->user()->can('Buyer View Quotations') || auth()->user()->can('Buyer View Quotations') || auth()->user()->can('Buyer DPO Approval') || auth()->user()->can('Buyer View Purchase Orders')) && auth()->user()->business->status == 3)
 
         <div class="mt-4">
             <div class="flex flex-wrap -mx-6">
@@ -158,7 +158,7 @@
             </div>
         </div>
 
-    @elseif(Auth::user()->status == 3 && Auth::user()->registration_type == "Supplier")
+    @elseif(Auth::user()->status == 3 && Auth::user()->registration_type == "Supplier" && auth()->user()->business->status == 3)
 
             <div class="mt-4">
                 <div class="flex flex-wrap -mx-6">

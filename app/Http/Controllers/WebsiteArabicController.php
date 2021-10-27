@@ -36,6 +36,11 @@ class WebsiteArabicController extends Controller
         return view('shipter_theme_ar.survey.index');
     }
 
+    public function suppliers()
+    {
+        return view('shipter_theme_ar.supplier');
+    }
+
     public function buyerSurvey()
     {
         return view('shipter_theme_ar.survey.buyer');
