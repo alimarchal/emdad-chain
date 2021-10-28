@@ -69,6 +69,7 @@ return [
     'Unit' => 'Unit',
     'Size' => 'Size',
     'Quantity' => 'Quantity',
+    'Buyer Remarks' => 'Buyer Remarks',
     'Brand' => 'Brand',
     'Last Price' => 'Last Price',
     'Delivery Period' => 'Delivery Period',

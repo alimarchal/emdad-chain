@@ -69,6 +69,7 @@ return [
     'Unit' => 'الوحدة',
     'Size' => 'المقاس',
     'Quantity' => 'الكمية',
+    'Buyer Remarks' => 'ملاحظات المشتري',
     'Brand' => 'العلامة التجارية',
     'Last Price' => 'السعر الأخير',
     'Delivery Period' => 'التوريد',

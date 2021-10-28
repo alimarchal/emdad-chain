@@ -129,8 +129,8 @@
                                 <br>
                                 <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-{{$eOrderItems[0]->e_order_id}}
                                 <br>
-                                <strong>{{__('portal.Category Name')}}: </strong> {{ $eOrderItems[0]->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems[0]->item_code)->first()->parent_id))->first()->name }}
-                                <br>
+{{--                                <strong>{{__('portal.Category Name')}}: </strong> {{ $eOrderItems[0]->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems[0]->item_code)->first()->parent_id))->first()->name }}--}}
+{{--                                <br>--}}
                                 <strong>{{__('portal.Payment Mode')}}: </strong>
                                     @if($eOrderItems[0]->payment_mode == 'Cash') {{__('portal.Cash')}}
                                     @elseif($eOrderItems[0]->payment_mode == 'Credit') {{__('portal.Credit')}}
@@ -184,15 +184,15 @@
 
                     <tr>
                         <th style="width:2%;">#</th>
-                        <th >{{__('portal.Brand')}} @include('misc.required') </th>
-                        <th >{{__('portal.Remarks')}} @include('misc.required') </th>
-                        <th >{{__('portal.UOM')}} @include('misc.required') </th>
-                        <th >{{__('portal.Size')}} @include('misc.required') </th>
-                        <th >{{__('portal.Description')}} @include('misc.required') </th>
-                        <th >{{__('portal.Attachments')}}</th>
-                        <th >{{__('portal.Quantity')}} @include('misc.required')</th>
-                        <th>{{__('portal.Price Per Unit')}} @include('misc.required') </th>
+                        <th >{{__('portal.Description')}} </th>
+                        <th >{{__('portal.Brand')}} </th>
+                        <th >{{__('portal.Size')}} </th>
+                        <th >{{__('portal.UOM')}} </th>
+                        <th >{{__('portal.Quantity')}}</th>
+                        <th>{{__('portal.Unit Price')}} @include('misc.required') </th>
+                        <th >{{__('portal.Buyer Remarks')}} </th>
                         <th >{{__('portal.Note')}}</th>
+                        <th >{{__('portal.Attachments')}}</th>
 
                     </tr>
                     </thead>
@@ -291,6 +291,8 @@
                             <span class="text-2xl font-bold text-red-700">{{__('portal.Modification Needed')}}</span>
                         </div>
                         <br>
+                        <strong class="mb-2">{{__('portal.Category Name')}}: </strong> <span class="text-blue-600"> {{ $eOrderItems[0]->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems[0]->item_code)->first()->parent_id))->first()->name }} </span>
+
                         <form name="form" method="POST" action="{{ route('singleRFQQuotationUpdate') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
 
@@ -307,19 +309,34 @@
                                         {{$loop->iteration}}
                                     </td>
                                     <td>
+                                        <textarea class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" rows="3" readonly>{{$eOrderItem->description}}</textarea>
+                                    </td>
+                                    <td>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->brand}}">
-                                    </td>
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->remarks}}">
-                                    </td>
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->unit_of_measurement}}">
                                     </td>
                                     <td>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->size}}">
                                     </td>
                                     <td>
-                                        <textarea class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" rows="3" readonly>{{$eOrderItem->description}}</textarea>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->unit_of_measurement}}">
+                                    </td>
+                                    <td>
+                                        <input class="form-input rounded-md shadow-sm  w-full quantity" id="quantity_id" type="number"
+                                               name="quote_quantity[]" min="0" step="any" autocomplete="quantity" required readonly placeholder="{{__('portal.Qty')}}" value="{{$eOrderItem->quantity}}" >
+                                    </td>
+
+                                    <td>
+                                        @php $quoteInfo = \App\Models\Qoute::where('e_order_items_id', $eOrderItem->id)->first(); @endphp
+                                        <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
+                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit" value="{{$quoteInfo->quote_price_per_quantity}}" required>
+                                    </td>
+
+                                    <td>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->remarks}}">
+                                    </td>
+
+                                    <td>
+                                        <textarea name="note_for_customer[]" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}">{{$quoteInfo->note_for_customer}}</textarea>
                                     </td>
 
                                     <td>
@@ -335,21 +352,6 @@
                                         @else
                                             {{__('portal.N/A')}}
                                         @endif
-                                    </td>
-
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm  w-full quantity" id="quantity_id" type="number"
-                                               name="quote_quantity[]" min="0" step="any" autocomplete="quantity" required readonly placeholder="{{__('portal.Qty')}}" value="{{$eOrderItem->quantity}}" >
-                                    </td>
-
-                                    <td>
-                                        @php $quoteInfo = \App\Models\Qoute::where('e_order_items_id', $eOrderItem->id)->first(); @endphp
-                                        <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
-                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit" value="{{$quoteInfo->quote_price_per_quantity}}" required>
-                                    </td>
-
-                                    <td>
-                                        <textarea name="note_for_customer[]" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}">{{$quoteInfo->note_for_customer}}</textarea>
                                     </td>
 
                                 </tr>
@@ -463,6 +465,8 @@
                             <br>
                         </form>
 
+                        <strong class="mb-2">{{__('portal.Category Name')}}: </strong> <span class="text-blue-600"> {{ $eOrderItems[0]->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems[0]->item_code)->first()->parent_id))->first()->name }} </span>
+
                         <form name="form" method="POST" action="{{ route('singleRFQQuotationStore') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
                             @php $loopIndex = 0; @endphp
@@ -480,19 +484,34 @@
                                         {{$loop->iteration}}
                                     </td>
                                     <td>
+                                        <textarea class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" rows="3" readonly>{{$eOrderItem->description}}</textarea>
+                                    </td>
+                                    <td>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->brand}}">
-                                    </td>
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->remarks}}">
-                                    </td>
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->unit_of_measurement}}">
                                     </td>
                                     <td>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->size}}">
                                     </td>
                                     <td>
-                                        <textarea class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" rows="3" readonly>{{$eOrderItem->description}}</textarea>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->unit_of_measurement}}">
+                                    </td>
+                                    <td>
+                                        <input class="form-input rounded-md shadow-sm  w-full quantity" id="quantity_id" type="number"
+                                               name="quote_quantity[]" min="0" step="any" autocomplete="quantity" required readonly placeholder="Qty" value="{{$eOrderItem->quantity}}" >
+                                    </td>
+
+                                    <td>
+                                        <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
+                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit" value="{{old('quote_price_per_quantity.'.$loopIndex)}}" required>
+                                        {{--                                    <span class="text-red-800 priceError" style="display: none">Required</span>--}}
+                                    </td>
+
+                                    <td>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->remarks}}">
+                                    </td>
+
+                                    <td>
+                                        <textarea name="note_for_customer[]" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}">{{old('note_for_customer.'.$loopIndex)}}</textarea>
                                     </td>
 
                                     <td>
@@ -508,21 +527,6 @@
                                         @else
                                             {{__('portal.N/A')}}
                                         @endif
-                                    </td>
-
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm  w-full quantity" id="quantity_id" type="number"
-                                               name="quote_quantity[]" min="0" step="any" autocomplete="quantity" required readonly placeholder="Qty" value="{{$eOrderItem->quantity}}" >
-                                    </td>
-
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
-                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit" value="{{old('quote_price_per_quantity.'.$loopIndex)}}" required>
-                                        {{--                                    <span class="text-red-800 priceError" style="display: none">Required</span>--}}
-                                    </td>
-
-                                    <td>
-                                        <textarea name="note_for_customer[]" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}">{{old('note_for_customer.'.$loopIndex)}}</textarea>
                                     </td>
 
                                 </tr>
@@ -701,9 +705,9 @@
                                 <br>
                                 <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-{{$eOrderItems[0]->e_order_id}}
                                 <br>
-                                <strong>{{__('portal.Category Name')}}: </strong>
-                                {{ \App\Models\Category::where('id', $eOrderItems[0]->item_code)->first()->name_ar }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems[0]->item_code)->first()->parent_id))->first()->name_ar }}
-                                <br>
+{{--                                <strong>{{__('portal.Category Name')}}: </strong>--}}
+{{--                                {{ \App\Models\Category::where('id', $eOrderItems[0]->item_code)->first()->name_ar }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems[0]->item_code)->first()->parent_id))->first()->name_ar }}--}}
+{{--                                <br>--}}
                                 <strong>{{__('portal.Payment Mode')}}: </strong>
                                     @if($eOrderItems[0]->payment_mode == 'Cash') {{__('portal.Cash')}}
                                     @elseif($eOrderItems[0]->payment_mode == 'Credit') {{__('portal.Credit')}}
@@ -754,15 +758,15 @@
 
                     <tr>
                         <th style="width:2%;">#</th>
-                        <th style="width:11%;">{{__('portal.Brand')}} @include('misc.required') </th>
-                        <th >{{__('portal.Remarks')}} @include('misc.required') </th>
-                        <th >{{__('portal.UOM')}} @include('misc.required') </th>
-                        <th >{{__('portal.Size')}} @include('misc.required') </th>
-                        <th >{{__('portal.Description')}} @include('misc.required') </th>
-                        <th >{{__('portal.Attachments')}}</th>
-                        <th >{{__('portal.Quantity')}} @include('misc.required')</th>
-                        <th >{{__('portal.Price Per Unit')}} @include('misc.required') </th>
+                        <th >{{__('portal.Description')}} </th>
+                        <th style="width:11%;">{{__('portal.Brand')}} </th>
+                        <th >{{__('portal.Size')}} </th>
+                        <th >{{__('portal.UOM')}} </th>
+                        <th >{{__('portal.Quantity')}}</th>
+                        <th >{{__('portal.Unit Price')}} @include('misc.required') </th>
+                        <th >{{__('portal.Buyer Remarks')}} </th>
                         <th>{{__('portal.Note')}}</th>
+                        <th >{{__('portal.Attachments')}}</th>
 
                     </tr>
                     </thead>
@@ -862,6 +866,8 @@
                             <span class="text-2xl font-bold text-red-700">{{__('portal.Modification Needed')}}</span>
                         </div>
                         <br>
+                        <strong>{{__('portal.Category Name')}}: </strong> <span class="text-blue-600"> {{ \App\Models\Category::where('id', $eOrderItems[0]->item_code)->first()->name_ar }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems[0]->item_code)->first()->parent_id))->first()->name_ar }} </span>
+
                         <form name="form" method="POST" action="{{ route('singleRFQQuotationUpdate') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
 
@@ -878,19 +884,34 @@
                                         {{$loop->iteration}}
                                     </td>
                                     <td>
+                                        <textarea class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" rows="3" readonly>{{$eOrderItem->description}}</textarea>
+                                    </td>
+                                    <td>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->brand}}">
-                                    </td>
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->remarks}}">
-                                    </td>
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->unit_of_measurement}}">
                                     </td>
                                     <td>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->size}}">
                                     </td>
                                     <td>
-                                        <textarea class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" rows="3" readonly>{{$eOrderItem->description}}</textarea>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->unit_of_measurement}}">
+                                    </td>
+                                    <td>
+                                        <input class="form-input rounded-md shadow-sm  w-full quantity" id="quantity_id" type="number"
+                                               name="quote_quantity[]" min="0" step="any" autocomplete="quantity" required readonly placeholder="{{__('portal.Qty')}}" value="{{$eOrderItem->quantity}}" >
+                                    </td>
+
+                                    <td>
+                                        @php $quoteInfo = \App\Models\Qoute::where('e_order_items_id', $eOrderItem->id)->first(); @endphp
+                                        <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
+                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit" value="{{$quoteInfo->quote_price_per_quantity}}" required>
+                                    </td>
+
+                                    <td>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->remarks}}">
+                                    </td>
+
+                                    <td>
+                                        <textarea name="note_for_customer[]" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}">{{$quoteInfo->note_for_customer}}</textarea>
                                     </td>
 
                                     <td>
@@ -906,21 +927,6 @@
                                         @else
                                             {{__('portal.N/A')}}
                                         @endif
-                                    </td>
-
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm  w-full quantity" id="quantity_id" type="number"
-                                               name="quote_quantity[]" min="0" step="any" autocomplete="quantity" required readonly placeholder="{{__('portal.Qty')}}" value="{{$eOrderItem->quantity}}" >
-                                    </td>
-
-                                    <td>
-                                        @php $quoteInfo = \App\Models\Qoute::where('e_order_items_id', $eOrderItem->id)->first(); @endphp
-                                        <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
-                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit" value="{{$quoteInfo->quote_price_per_quantity}}" required>
-                                    </td>
-
-                                    <td>
-                                        <textarea name="note_for_customer[]" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}">{{$quoteInfo->note_for_customer}}</textarea>
                                     </td>
 
                                 </tr>
@@ -977,6 +983,65 @@
                         </form>
                     @else
 
+                        {{-- Retrieving Supplier Messages using e_order_items_id --}}
+                        @php
+                            $quote = \App\Models\QouteMessage::where('qoute_id', $eOrderItems[0]->id )->get();
+                        @endphp
+                        @if(isset($quote) && $quote->isNotEmpty())
+
+                            <div class="border-2 p-2 m-2">
+                                @foreach ($quote as $msg)
+                                    {{--@php $business = \App\Models\Business::where('user_id', $msg->user_id)->first(); @endphp--}}
+                                    @php
+                                        $user = \App\Models\User::where('id', $msg->user_id)->first();
+                                        $business = \App\Models\Business::where('id', $user->business_id)->first();
+                                    @endphp
+
+                                    <span class="text-gray-600">
+                                        <span class="text-blue-700 text-left">
+                                            {{__('portal.Message you send')}}
+                                        </span>
+                                        : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
+                                    </span>
+                                    <br> <br>
+                                @endforeach
+                            </div>
+                            <br>
+                        @endif
+                        <hr>
+                        {{-- Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message --}}
+                        <form action="{{ route('QuotationMessage.store') }}" class="rounded shadow-md" method="post">
+                            @csrf
+                            @php $business = \App\Models\Business::where('user_id', $eOrderItems[0]->user_id)->first(); @endphp
+                            <h1 class="text-center text-2xl mt-4">{{__('portal.Message to')}}
+                                <span class="text-blue-600">@if($eOrderItems[0]->company_name_check == 1) {{$business->business_name}} @else {{__('portal.Buyer')}} @endif</span>
+                                <span style="font-size: 20px;">({{__('portal.Buyer')}})</span></h1>
+                            <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Message')}}..." required></textarea>
+                            <x-jet-input-error for="message" class="mt-2" />
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                            <input type="hidden" name="qoute_id" value="{{ $eOrderItems[0]->id }}">
+                            <input type="hidden" name="usertype" value="{{ auth()->user()->business->business_type }}">
+
+                            <br>
+
+                            <div class="justify-between p-2 m-2">
+                                <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150">
+                                    {{__('portal.Send')}}
+                                </button>
+                                {{-- <a href="{{ route('updateQoute', $QouteItem->id) }}" style="margin-left: 70px;"
+                                    class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">
+                                     Qoute Again
+                                 </a>
+
+                                 <a href="{{ route('updateRejected', $QouteItem->id) }}" style="margin-left: 70px;"
+                                    class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">Reject
+                                     Request</a>--}}
+                            </div>
+                            <br>
+                        </form>
+
+                        <strong>{{__('portal.Category Name')}}: </strong> <span class="text-blue-600"> {{ \App\Models\Category::where('id', $eOrderItems[0]->item_code)->first()->name_ar }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems[0]->item_code)->first()->parent_id))->first()->name_ar }} </span>
+
                         <form name="form" method="POST" action="{{ route('singleRFQQuotationStore') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
                             @php $loopIndex = 0; @endphp
@@ -994,19 +1059,34 @@
                                         {{$loop->iteration}}
                                     </td>
                                     <td>
+                                        <textarea class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" rows="3" readonly>{{$eOrderItem->description}}</textarea>
+                                    </td>
+                                    <td>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->brand}}">
-                                    </td>
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->remarks}}">
-                                    </td>
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->unit_of_measurement}}">
                                     </td>
                                     <td>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->size}}">
                                     </td>
                                     <td>
-                                        <textarea class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" rows="3" readonly>{{$eOrderItem->description}}</textarea>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->unit_of_measurement}}">
+                                    </td>
+                                    <td>
+                                        <input class="form-input rounded-md shadow-sm  w-full quantity" id="quantity_id" type="number"
+                                               name="quote_quantity[]" min="0" step="any" autocomplete="quantity" required readonly placeholder="Qty" value="{{$eOrderItem->quantity}}" >
+                                    </td>
+
+                                    <td>
+                                        <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
+                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit"  value="{{old('quote_price_per_quantity.'.$loopIndex)}}" required>
+                                        {{--                                    <span class="text-red-800 priceError" style="display: none">Required</span>--}}
+                                    </td>
+
+                                    <td>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->remarks}}">
+                                    </td>
+
+                                    <td>
+                                        <textarea name="note_for_customer[]" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}">{{old('note_for_customer.'.$loopIndex)}}</textarea>
                                     </td>
 
                                     <td>
@@ -1022,21 +1102,6 @@
                                         @else
                                             {{__('portal.N/A')}}
                                         @endif
-                                    </td>
-
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm  w-full quantity" id="quantity_id" type="number"
-                                               name="quote_quantity[]" min="0" step="any" autocomplete="quantity" required readonly placeholder="Qty" value="{{$eOrderItem->quantity}}" >
-                                    </td>
-
-                                    <td>
-                                        <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
-                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit"  value="{{old('quote_price_per_quantity.'.$loopIndex)}}" required>
-                                        {{--                                    <span class="text-red-800 priceError" style="display: none">Required</span>--}}
-                                    </td>
-
-                                    <td>
-                                        <textarea name="note_for_customer[]" id="note_for_customer" class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Note (if any)')}}">{{old('note_for_customer.'.$loopIndex)}}</textarea>
                                     </td>
 
                                 </tr>

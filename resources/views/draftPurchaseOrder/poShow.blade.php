@@ -323,20 +323,20 @@
                                             Category Number
                                         </th>--}}
                                         <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                            {{__('portal.Quantity')}}
-                                        </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                            {{__('portal.Unit Price')}}
+                                            {{__('portal.Brand')}}
                                         </th>
                                         <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.UOM')}}
                                         </th>
                                         <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                            {{__('portal.Brand')}}
+                                            {{__('portal.Remarks')}}
+                                        </th>
+                                        <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                            {{__('portal.Unit Price')}}
                                         </th>
 
                                         <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                            {{__('portal.Remarks')}}
+                                            {{__('portal.Quantity')}}
                                         </th>
 
                                         <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
