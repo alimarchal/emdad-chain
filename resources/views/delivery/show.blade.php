@@ -67,7 +67,7 @@
                                                 <p class="text-xl">{{ $deliveries[0]->buyer->business->business_name }}</p><br>
                                             </div>
                                             <div class="flex-row mx-auto">
-                                                <img class="h-10 w-10 rounded-full object-cover" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
+                                                <img class="h-10 w-10" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
                                             </div>
                                         </div>
                                         <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $deliveries[0]->buyer->business->city }}</span><br>
@@ -208,7 +208,7 @@
                                                 <p class="text-xl">{{ $deliveries[0]->buyer->business->business_name }}</p><br>
                                             </div>
                                             <div class="flex-row mx-auto">
-                                                <img class="h-10 w-10 rounded-full object-cover" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
+                                                <img class="h-10 w-10" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
                                             </div>
                                         </div>
                                         <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $deliveries[0]->buyer->business->city }}</span><br>
