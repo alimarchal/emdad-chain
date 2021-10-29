@@ -65,17 +65,17 @@
 
                             <div class="flex flex-wrap overflow-hidden bg-white p-4">
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <strong class="text-xl">{{__('portal.Requested by')}}: </strong><br>
-                                    <p class="text-xl">{{ $QouteItem->buyer_business->business_name }}</p><br>
-                                    <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $QouteItem->buyer_business->city }}</span><br>
-                                    <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $QouteItem->buyer_business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.Requested by')}}: </strong><br>
+                                    <p>{{ $QouteItem->buyer_business->business_name }}</p><br>
+                                    <strong>{{__('portal.City')}}: </strong><span>{{ $QouteItem->buyer_business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $QouteItem->buyer_business->vat_reg_certificate_number }}</span><br>
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <strong class="text-xl">{{__('portal.Supplier')}}: </strong><br>
-                                    <p class="text-xl">{{ $QouteItem->supplier_business->business_name }}</p><br>
+                                    <strong>{{__('portal.Supplier')}}: </strong><br>
+                                    <p>{{ $QouteItem->supplier_business->business_name }}</p><br>
 
-                                    <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $QouteItem->supplier_business->city }}</span><br>
-                                    <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $QouteItem->supplier_business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.City')}}: </strong><span>{{ $QouteItem->supplier_business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $QouteItem->supplier_business->vat_reg_certificate_number }}</span><br>
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                     <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}
@@ -378,17 +378,17 @@
 
                             <div class="flex flex-wrap overflow-hidden bg-white p-4">
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <strong class="text-xl">{{__('portal.Requested by')}}: </strong><br>
-                                    <p class="text-xl">{{ $QouteItem->buyer_business->business_name }}</p><br>
-                                    <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $QouteItem->buyer_business->city }}</span><br>
-                                    <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $QouteItem->buyer_business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.Requested by')}}: </strong><br>
+                                    <p>{{ $QouteItem->buyer_business->business_name }}</p><br>
+                                    <strong>{{__('portal.City')}}: </strong><span>{{ $QouteItem->buyer_business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $QouteItem->buyer_business->vat_reg_certificate_number }}</span><br>
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <strong class="text-xl">{{__('portal.Supplier')}}: </strong><br>
-                                    <p class="text-xl">{{ $QouteItem->supplier_business->business_name }}</p><br>
+                                    <strong>{{__('portal.Supplier')}}: </strong><br>
+                                    <p>{{ $QouteItem->supplier_business->business_name }}</p><br>
 
-                                    <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $QouteItem->supplier_business->city }}</span><br>
-                                    <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $QouteItem->supplier_business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.City')}}: </strong><span>{{ $QouteItem->supplier_business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $QouteItem->supplier_business->vat_reg_certificate_number }}</span><br>
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                     <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $QouteItem->id }}<br>
