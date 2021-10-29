@@ -72,17 +72,17 @@
 
                                 <div class="flex flex-wrap overflow-hidden bg-white p-4">
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        <strong class="text-xl">{{__('portal.Requested by')}}: </strong><br>
-                                        <p class="text-xl">{{ $quotes[0]->buyer_business->business_name }}</p><br>
-                                        <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $quotes[0]->buyer_business->city }}</span><br>
-                                        <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $quotes[0]->buyer_business->vat_reg_certificate_number }}</span><br>
+                                        <strong>{{__('portal.Requested by')}}: </strong><br>
+                                        <p>{{ $quotes[0]->buyer_business->business_name }}</p><br>
+                                        <strong>{{__('portal.City')}}: </strong><span>{{ $quotes[0]->buyer_business->city }}</span><br>
+                                        <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $quotes[0]->buyer_business->vat_reg_certificate_number }}</span><br>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        <strong class="text-xl">{{__('portal.Supplier')}}: </strong><br>
-                                        <p class="text-xl">{{ $quotes[0]->supplier_business->business_name }}</p><br>
+                                        <strong>{{__('portal.Supplier')}}: </strong><br>
+                                        <p>{{ $quotes[0]->supplier_business->business_name }}</p><br>
 
-                                        <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $quotes[0]->supplier_business->city }}</span><br>
-                                        <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $quotes[0]->supplier_business->vat_reg_certificate_number }}</span><br>
+                                        <strong>{{__('portal.City')}}: </strong><span>{{ $quotes[0]->supplier_business->city }}</span><br>
+                                        <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $quotes[0]->supplier_business->vat_reg_certificate_number }}</span><br>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                         <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $quotes[0]->id }}<br>
@@ -378,17 +378,17 @@
 
                                 <div class="flex flex-wrap overflow-hidden bg-white p-4">
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        <strong class="text-xl">{{__('portal.Requested by')}}: </strong><br>
-                                        <p class="text-xl">{{ $quotes[0]->buyer_business->business_name }}</p><br>
-                                        <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $quotes[0]->buyer_business->city }}</span><br>
-                                        <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $quotes[0]->buyer_business->vat_reg_certificate_number }}</span><br>
+                                        <strong>{{__('portal.Requested by')}}: </strong><br>
+                                        <p>{{ $quotes[0]->buyer_business->business_name }}</p><br>
+                                        <strong>{{__('portal.City')}}: </strong><span>{{ $quotes[0]->buyer_business->city }}</span><br>
+                                        <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $quotes[0]->buyer_business->vat_reg_certificate_number }}</span><br>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        <strong class="text-xl">{{__('portal.Supplier')}}: </strong><br>
-                                        <p class="text-xl">{{ $quotes[0]->supplier_business->business_name }}</p><br>
+                                        <strong>{{__('portal.Supplier')}}: </strong><br>
+                                        <p>{{ $quotes[0]->supplier_business->business_name }}</p><br>
 
-                                        <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $quotes[0]->supplier_business->city }}</span><br>
-                                        <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $quotes[0]->supplier_business->vat_reg_certificate_number }}</span><br>
+                                        <strong>{{__('portal.City')}}: </strong><span>{{ $quotes[0]->supplier_business->city }}</span><br>
+                                        <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $quotes[0]->supplier_business->vat_reg_certificate_number }}</span><br>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                         <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $quotes[0]->id }}<br>
