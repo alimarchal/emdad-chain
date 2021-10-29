@@ -286,4 +286,20 @@ class DeliveryController extends Controller
     }
 
 
+    public function getDeliveries($rfq_no, $deliveryID, $rfq_type)
+    {
+        /* Previously delivery show page was one for both single and multiple categories (showOLD) but changed to two different views because of changes in showing the details  */
+        if ($rfq_type == 0)
+        {
+            $deliveries = Delivery::with('eOrderItems', 'invoice', 'buyer', 'supplier')->where('rfq_no', $rfq_no)->get();
+            return response()->json($deliveries, 200);
+        }
+        elseif($rfq_type == 1){
+            $deliveries = Delivery::with('eOrderItems', 'invoice', 'buyer', 'supplier')->where('id', $deliveryID)->get();
+            return response()->json($deliveries,200);
+        }
+        return response()->json(['message' => 'Not Found!'], 404);
+    }
+
+
 }
