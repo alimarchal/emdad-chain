@@ -336,6 +336,7 @@ return [
     'IBAN No' => 'IBAN No',
     'ID No' => 'ID No',
     'VAT Number' => 'VAT Number',
+    'Contact #' => 'Contact #',
     'Upload National ID Photo' => 'Upload National ID Photo',
     'Click to Upload' => 'Click to Upload',
     'Website' => 'Website',

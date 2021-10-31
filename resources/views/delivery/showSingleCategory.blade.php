@@ -53,27 +53,29 @@
                                     <strong class="text-xl">
 {{--                                        {{__('portal.Purchased From')}}: --}}
                                     </strong><br>
-                                    <p class="text-xl">{{ $deliveries[0]->supplier->business->business_name }}</p><br>
+                                    <p>{{ $deliveries[0]->supplier->business->business_name }}</p><br>
 
-                                    <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $deliveries[0]->supplier->business->city }}</span><br>
-                                    <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.City')}}: </strong><span>{{ $deliveries[0]->supplier->business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                                    <strong class="text-xl">{{__('portal.Buyer')}}: </strong><br>
+                                    <strong>{{__('portal.Buyer')}}: </strong><br>
                                     <div class="flex">
                                         <div class="flex-row">
-                                            <p class="text-xl">{{ $deliveries[0]->buyer->business->business_name }}</p><br>
+                                            <p>{{ $deliveries[0]->buyer->business->business_name }}</p><br>
                                         </div>
                                         <div class="flex-row mx-auto">
-                                            <img class="h-10 w-10" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
+                                            <img class="h-30 w-40" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
                                         </div>
                                     </div>
-                                    <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $deliveries[0]->buyer->business->city }}</span><br>
-                                    <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.City')}}: </strong><span>{{ $deliveries[0]->buyer->business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.Contact #')}}: </strong><span>{{ $deliveries[0]->otp_mobile_number }}</span><br>
+                                    <strong>{{__('portal.Delivery Address')}}: </strong><span>{{ $deliveries[0]->delivery_address }}</span><br>
                                 </div>
                             </div>
 
-                            <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                            {{--<div class="flex flex-wrap overflow-hidden bg-white p-4">
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
                                     <strong class="text-xl">{{__('portal.Category Name')}}: </strong>
                                     @php
@@ -82,13 +84,16 @@
                                     @endphp
                                     <span class="text-xl">{{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif</span>
                                 </div>
-                            </div>
+                            </div>--}}
 
                             <table class="min-w-full divide-y divide-black ">
                                 <thead>
                                 <tr>
                                     <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         #
+                                    </th>
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Category Name')}}
                                     </th>
                                     <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Description')}}
@@ -104,6 +109,13 @@
                                     <tr>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                             {{$loop->iteration}}
+                                        </td>
+                                        @php
+                                            $record = \App\Models\Category::where('id',$deliveries[0]->item_code)->first();
+                                            $parent = \App\Models\Category::where('id',$record->parent_id)->first();
+                                        @endphp
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                            <span>{{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif</span>
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                             {{ $delivery->eOrderItems->description }}
@@ -195,27 +207,29 @@
                                     <strong class="text-xl">
 {{--                                        {{__('portal.Purchased From')}}: --}}
                                     </strong><br>
-                                    <p class="text-xl">{{ $deliveries[0]->supplier->business->business_name }}</p><br>
+                                    <p>{{ $deliveries[0]->supplier->business->business_name }}</p><br>
 
-                                    <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $deliveries[0]->supplier->business->city }}</span><br>
-                                    <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.City')}}: </strong><span>{{ $deliveries[0]->supplier->business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                                    <strong class="text-xl">{{__('portal.Buyer')}}: </strong><br>
+                                    <strong>{{__('portal.Buyer')}}: </strong><br>
                                     <div class="flex">
                                         <div class="flex-row">
-                                            <p class="text-xl">{{ $deliveries[0]->buyer->business->business_name }}</p><br>
+                                            <p>{{ $deliveries[0]->buyer->business->business_name }}</p><br>
                                         </div>
                                         <div class="flex-row mx-auto">
-                                            <img class="h-10 w-10" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
+                                            <img class="h-30 w-40" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
                                         </div>
                                     </div>
-                                    <strong class="text-xl">{{__('portal.City')}}: </strong><span class="text-xl">{{ $deliveries[0]->buyer->business->city }}</span><br>
-                                    <strong class="text-xl">{{__('portal.VAT Number')}}: </strong><span class="text-xl">{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.City')}}: </strong><span>{{ $deliveries[0]->buyer->business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.Contact #')}}: </strong><span>{{ $deliveries[0]->otp_mobile_number }}</span><br>
+                                    <strong>{{__('portal.Delivery Address')}}: </strong><span>{{ $deliveries[0]->delivery_address }}</span><br>
                                 </div>
                             </div>
 
-                            <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                            {{--<div class="flex flex-wrap overflow-hidden bg-white p-4">
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
                                     <strong class="text-xl">{{__('portal.Category Name')}}: </strong>
                                     @php
@@ -224,13 +238,16 @@
                                     @endphp
                                     <span class="text-xl">{{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif</span>
                                 </div>
-                            </div>
+                            </div>--}}
 
                             <table class="min-w-full divide-y divide-black ">
                                 <thead>
                                 <tr>
                                     <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         #
+                                    </th>
+                                    <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Category Name')}}
                                     </th>
                                     <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Description')}}
@@ -246,6 +263,13 @@
                                     <tr>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                             {{$loop->iteration}}
+                                        </td>
+                                        @php
+                                            $record = \App\Models\Category::where('id',$deliveries[0]->item_code)->first();
+                                            $parent = \App\Models\Category::where('id',$record->parent_id)->first();
+                                        @endphp
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                            <span>{{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif</span>
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                             {{ $delivery->eOrderItems->description }}

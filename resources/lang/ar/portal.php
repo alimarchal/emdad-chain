@@ -336,6 +336,7 @@ return [
     'IBAN No' => 'رقم الآيبان',
     'ID No' => 'رقم الهوية الوطنية',
     'VAT Number' => 'الرقم الضريبي',
+    'Contact #' => 'رقم الاتصال',
     'Upload National ID Photo' => 'إرفاق صورة الهوية الوطنية',
     'Click to Upload' => 'إضغط للتحميل',
     'Website' => 'الموقع الإلكتروني',
