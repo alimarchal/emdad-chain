@@ -107,7 +107,7 @@
     <br><br><br><br><br><br><br><br><br>
 
     <div style="width: 100%; text-align: left">
-        <strong>Quote Description: </strong><br>
+        <strong>Item Description: </strong><br>
         <p>{{ strip_tags($quote->orderItem->description) }}</p>
     </div>
 

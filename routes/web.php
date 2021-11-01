@@ -414,6 +414,7 @@ Route::middleware(['auth:sanctum'])->get('/logviewer', function () {
 #################### Delivery and Delivery Note ###################################################################################
 Route::middleware(['auth:sanctum'])->get('deliveries', [DeliveryNoteController::class, 'view'])->name('deliveryView');
 Route::middleware(['auth:sanctum'])->get('delivery-details/{rfq_no}/{deliveryID}/{rfq_type}', [DeliveryController::class, 'show'])->name('deliveryDetails');
+Route::middleware(['auth:sanctum'])->get('delivery-note-pdf/{deliveryID}/{rfq_no}/{rfq_type}/', [DeliveryController::class, 'pdf'])->name('deliveryNotePDF');
 Route::middleware(['auth:sanctum'])->get('/deliveryNote/{draftPurchaseOrder}/view', [DeliveryNoteController::class, 'deliveryNoteView'])->name('deliveryNoteView');
 Route::middleware(['auth:sanctum'])->resource('deliveryNote', DeliveryNoteController::class);
 Route::middleware(['auth:sanctum'])->get('/generate-delivery-note-pdf/{deliveryNote}', [DeliveryNoteController::class, 'generatePDF'])->name('generateDeliveryNotePDF');

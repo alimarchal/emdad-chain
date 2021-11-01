@@ -447,7 +447,7 @@
                                                 fill="#000000" fill-rule="nonzero"/>
                                         </svg>
                                         <select
-                                            class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom"
+                                            class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom js-example-basic-single"
                                             required name="unit_of_measurement" id="unit_of_measurement"
                                             style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
@@ -912,7 +912,7 @@
                                                 fill="#000000" fill-rule="nonzero"/>
                                         </svg>
                                         <select
-                                            class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom"
+                                            class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom js-example-basic-single"
                                             required name="unit_of_measurement" id="unit_of_measurement"
                                             style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
@@ -1473,7 +1473,7 @@
                                                 fill="#000000" fill-rule="nonzero"/>
                                         </svg>
                                         <select
-                                            class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom"
+                                            class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom js-example-basic-single"
                                             required name="unit_of_measurement" id="unit_of_measurement"
                                             style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
@@ -1931,7 +1931,7 @@
                                                 fill="#000000" fill-rule="nonzero"/>
                                         </svg>
                                         <select
-                                            class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom"
+                                            class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom js-example-basic-single"
                                             required name="unit_of_measurement" id="unit_of_measurement"
                                             style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
@@ -2049,6 +2049,10 @@
 
     $('.confirm').on('click', function (e) {
         return confirm($(this).data('confirm'));
+    });
+
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
     });
 
 </script>
