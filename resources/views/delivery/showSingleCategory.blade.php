@@ -14,6 +14,11 @@
     <div class="-my-2 overflow-x-auto sm:overflow-hidden lg:-mx-8 scroll-bar-for-large-screen">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div class="py-12">
+                <div style=" margin-left: 8px; margin-bottom: 10px ">
+                    <a href="{{route('deliveryNotePDF', ['deliveryID' => $deliveries[0]->id, 'rfq_no' => $deliveries[0]->rfq_no, 'rfq_type' => $deliveries[0]->rfq_type])}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-gray-800 focus:shadow-outline-gray active:bg-red-600 transition ease-in-out duration-150">
+                        {{__('portal.Create PDF')}}
+                    </a>
+                </div>
                 <div class="max-w-7xl mx-auto sm:px-2 lg:2x-8">
                     <div class="bg-white overflow-hidden shadow-xl ">
                         <div class="px-4 py-5 sm:p-6 bg-white shadow ">
@@ -168,6 +173,11 @@
     <div class="-my-2 overflow-x-auto sm:overflow-hidden lg:-mx-8 scroll-bar-for-large-screen">
         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div class="py-12">
+                <div style=" margin-right: 8px; margin-bottom: 10px ">
+                    <a href="{{route('deliveryNotePDF', ['deliveryID' => $deliveries[0]->id, 'rfq_no' => $deliveries[0]->rfq_no, 'rfq_type' => $deliveries[0]->rfq_type])}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-gray-800 focus:shadow-outline-gray active:bg-red-600 transition ease-in-out duration-150">
+                        {{__('portal.Create PDF')}}
+                    </a>
+                </div>
                 <div class="max-w-7xl mx-auto sm:px-2 lg:2x-8">
                     <div class="bg-white overflow-hidden shadow-xl ">
                         <div class="px-4 py-5 sm:p-6 bg-white shadow ">

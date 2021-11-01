@@ -24,10 +24,22 @@ class Delivery extends Model
         return $this->belongsTo(User::class, 'user_id','id');
     }
 
+    /* Added for API */
+    public function buyerBusiness()
+    {
+        return $this->belongsTo(Business::class, 'business_id','id');
+    }
+
     /* For rating functions */
     public function supplier()
     {
         return $this->belongsTo(User::class, 'supplier_user_id','id');
+    }
+
+    /* Added for API */
+    public function supplierBusiness()
+    {
+        return $this->belongsTo(Business::class, 'supplier_business_id','id');
     }
 
     public function invoice()
