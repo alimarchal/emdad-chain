@@ -36,6 +36,7 @@ use App\Http\Controllers\ShipmentItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\WebsiteArabicController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\LibraryController;
 
@@ -673,3 +674,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 });
 
 
+Route::get('tree', function () {
+    $parentCategories = Category::where('parent_id', 0)->where('is_active',1)->orderBy('name', 'asc')->get();
+    return view('test.combotree',compact('parentCategories'));
+});
