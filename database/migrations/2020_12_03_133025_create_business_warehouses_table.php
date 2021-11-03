@@ -21,7 +21,9 @@ class CreateBusinessWarehousesTable extends Migration
             $table->string('name')->nullable();
             $table->string('warehouse_email')->nullable();
             $table->string('landline')->nullable();
-            $table->string('mobile')->nullable();
+            $table->integer('mobile')->nullable();
+            $table->tinyInteger('mobile_verified')->default(0);
+            $table->integer('mobile_verification_code')->nullable();
             $table->string('country')->nullable();
             $table->string('city')->nullable();
             $table->string('longitude')->nullable();

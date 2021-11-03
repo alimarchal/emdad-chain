@@ -795,6 +795,8 @@ return [
     'Paid' => 'Paid',
     'Email Verified' => 'Email Verified',
     'EmdInv' => 'EmdInv',
+    'Verify' => 'Verify',
+    'Send Code' => 'Send Code',
 
     /* Alerts (messages) */
     'You have reached daily rfq limit' => 'You have reached daily requisitions limit',
@@ -862,5 +864,10 @@ return [
     'Enter comments for rating under 4' => 'Enter comments for rating under 4',
     'Rated Supplier Successfully!' => 'Rated Supplier Successfully!',
     'Rated Delivery Successfully!' => 'Rated Delivery Successfully!',
+    'Please verify your mobile number inorder to proceed' => 'Please verify your mobile number inorder to proceed',
+    'Verification code is sent to your mobile number.' => 'Verification code is sent to your mobile number.',
+    'Wrong code entered. Try again.' => 'Wrong code entered. Try again.',
+    'New Number for OTP is added so please verify you new number first to proceed' => 'New Number for OTP is added so please verify you new number first to proceed',
+
 
 ];

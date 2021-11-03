@@ -15,7 +15,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
         @if (session()->has('message'))
-            <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+            <div class="block mt-2 text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
                 <strong class="mr-1">{{ session('message') }}</strong>
                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                     <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
@@ -23,8 +23,8 @@
             </div>
         @endif
         @if (session()->has('error'))
-            <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                <strong class="mr-1">{{ session('error') }}</strong>
+            <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                <strong class="mr-">{{ session('error') }}</strong>
                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                     <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                 </button>
@@ -275,12 +275,30 @@
                                     <br>
                                     <br>--}}
                                     <x-jet-label for="otp_mobile_number" value="{{ __('portal.OTP FOR Receiving Delivery Mobile Number (We will send One Time Password when you receive delivery)') }}" class="text-center text-black font-bold text-red-600"  />
-                                    <input type="text" name="otp_mobile_number" class="form-input rounded-md shadow-sm border p-2 w-full" value="{{$warehouseAddress->mobile}}">
+                                    <div class="flex mt-3" style="justify-content: center">
+                                        <div class="flex-row">
+                                            <input type="number" id="otp_mobile_number" name="otp_mobile_number" class="form-input rounded-md shadow-sm border p-2 w-full"
+                                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                   maxlength="9"
+                                                   value="{{$warehouseAddress->mobile}}">
+                                        </div>
+                                        <div class="flex-row">
+                                            @if($warehouseAddress->mobile_verified == 1)
+                                                <img src="{{url('complete_check.jpg')}}" class="ml-4 mt-2" style="height: 25px;">
+                                            @endif
+                                        </div>
+                                    </div>
+
+
+                                    <div class="flex text-center" id="mobile_verfication">
+                                        <livewire:mobile-verification />
+                                    </div>
+
                                     <br>
                                     <br>
 {{--                                    <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" name="address" value="{{$warehouseAddress->address}}" readonly>--}}
 
-                                    <x-jet-label for="Remarks" value="{{ __('portal.Remarks') }}" class="text-black"  />
+                                    <x-jet-label for="Remarks" value="{{ __('portal.Remarks') }}" class="text-black text-2xl"/>
                                     <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Remarks')}}.."></textarea>
 
                                     <div class="mt-5 d-flex">
@@ -289,9 +307,11 @@
                                                 {{__('portal.Go Back')}}
                                             </a>
                                         </div>
-                                        <div style="display: inline">
-                                            <input type="submit" value="{{__('portal.Approve')}}" style="cursor: pointer" class="inline-flex items-center justify-center px-4 my-5 py-2 bg-green-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
-                                        </div>
+                                        @if($warehouseAddress->mobile_verified == 1)
+                                            <div style="display: inline">
+                                                <input type="submit" value="{{__('portal.Approve')}}" style="cursor: pointer" class="inline-flex items-center justify-center px-4 my-5 py-2 bg-green-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
+                                            </div>
+                                        @endif
                                     </div>
 
                                 </form>
@@ -321,16 +341,16 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
         @if (session()->has('message'))
-            <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                <strong class="mr-1">{{ session('message') }}</strong>
+            <div class="block mt-2 text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                <strong class="mr-3">{{ session('message') }}</strong>
                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                     <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                 </button>
             </div>
         @endif
         @if (session()->has('error'))
-            <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                <strong class="mr-1">{{ session('error') }}</strong>
+            <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                <strong class="mr-3">{{ session('error') }}</strong>
                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                     <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                 </button>
@@ -581,12 +601,30 @@
                                     <br>
                                     <br>--}}
                                     <x-jet-label for="otp_mobile_number" value="{{ __('portal.OTP FOR Receiving Delivery Mobile Number (We will send One Time Password when you receive delivery)') }}" class="text-center text-black font-bold text-red-600"  />
-                                    <input type="text" name="otp_mobile_number" class="form-input rounded-md shadow-sm border p-2 w-full" value="{{$warehouseAddress->mobile}}">
+                                    <div class="flex mt-3" style="justify-content: center">
+                                        <div class="flex-row">
+                                            <input type="number" id="otp_mobile_number" name="otp_mobile_number" class="form-input rounded-md shadow-sm border p-2 w-full"
+                                                   oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                   maxlength="9"
+                                                   value="{{$warehouseAddress->mobile}}">
+                                        </div>
+                                        <div class="flex-row">
+                                            @if($warehouseAddress->mobile_verified == 1)
+                                                <img src="{{url('complete_check.jpg')}}" class="mr-4 mt-2" style="height: 25px;">
+                                            @endif
+                                        </div>
+                                    </div>
+
+
+                                    <div class="flex text-center" id="mobile_verfication">
+                                        <livewire:mobile-verification />
+                                    </div>
+
                                     <br>
                                     <br>
 {{--                                    <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" name="address" value="{{$warehouseAddress->address}}" readonly>--}}
 
-                                    <x-jet-label for="Remarks" value="{{ __('portal.Remarks') }}" class="text-black"  />
+                                    <x-jet-label for="Remarks" value="{{ __('portal.Remarks') }}" class="text-black text-2xl"/>
                                     <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Remarks')}}.."></textarea>
 
                                     <div class="mt-5 d-flex">
@@ -595,9 +633,11 @@
                                                 {{__('portal.Go Back')}}
                                             </a>
                                         </div>
-                                        <div style="display: inline">
-                                            <input type="submit" value="{{__('portal.Approve')}}" style="cursor: pointer" class="inline-flex items-center justify-center px-4 my-5 py-2 bg-green-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
-                                        </div>
+                                        @if($warehouseAddress->mobile_verified == 1)
+                                            <div style="display: inline">
+                                                <input type="submit" value="{{__('portal.Approve')}}" style="cursor: pointer" class="inline-flex items-center justify-center px-4 my-5 py-2 bg-green-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">
+                                            </div>
+                                        @endif
                                     </div>
 
                                 </form>
@@ -610,3 +650,27 @@
         </div>
     </x-app-layout>
 @endif
+
+<script>
+
+    $('#otp_mobile_number').on('keyup', function() {
+        if ($(this).val().length > 8)
+        {
+            $.ajax({
+                url: "{{route('warehouseNumberUpdate')}}",
+                method: 'get',
+                data: {
+                    'number' : $(this).val(),
+                },
+                success: function(response){
+                    if (response.data === 'success'){
+                        location.reload();
+                        // $("#mobile_verfication").load(" #mobile_verfication");
+                    }
+                },
+            })
+        }
+        // console.log($(this).val());
+    });
+
+</script>

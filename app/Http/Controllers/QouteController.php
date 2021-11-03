@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Livewire\BusinessWarehouse;
 use App\Models\Business;
 use App\Models\Category;
 use App\Models\DraftPurchaseOrder;
@@ -65,7 +66,6 @@ class QouteController extends Controller
         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
         User::send_sms('+966581382822', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
-        User::send_sms('+966555390920', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
         User::send_sms('+966593388833', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
 
         /* Notifying business@emdad-chain.com for Purchase order created */
@@ -185,7 +185,6 @@ class QouteController extends Controller
         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
         User::send_sms('+966581382822', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
-        User::send_sms('+966555390920', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
         User::send_sms('+966593388833', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
 
         /* Notifying business@emdad-chain.com for Purchase order created */
@@ -635,6 +634,18 @@ class QouteController extends Controller
 
     public function qouteAccepted(Request $request, Qoute $qoute)
     {
+        $warehouse = \App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->first();
+
+        if ($warehouse->mobile != $request->otp_mobile_number)
+        {
+            $warehouse->update([
+                'mobile' => $request->otp_mobile_number,
+                'mobile_verified' => 0,
+                'mobile_verification_code' => null,
+            ]);
+            session()->flash('error', __('portal.New Number for OTP is added so please verify you new number first to proceed'));
+            return redirect()->back();
+        }
 
         $request->merge(['po_date' => date('Y-m-d')]);
         $request->merge(['po_status' => 'pending']);
@@ -849,6 +860,18 @@ class QouteController extends Controller
 
     public function singleCategoryQuoteAccepted(Request $request)
     {
+        $warehouse = \App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->first();
+
+        if ($warehouse->mobile != $request->otp_mobile_number)
+        {
+            $warehouse->update([
+                'mobile' => $request->otp_mobile_number,
+                'mobile_verified' => 0,
+                'mobile_verification_code' => null,
+            ]);
+            session()->flash('error', __('portal.New Number for OTP is added so please verify you new number first to proceed'));
+            return redirect()->back();
+        }
 
         $request->merge(['po_date' => date('Y-m-d')]);
         $request->merge(['po_status' => 'pending']);

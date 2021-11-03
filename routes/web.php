@@ -100,6 +100,7 @@ Route::middleware(['auth:sanctum'])->get('/business-status/', [BusinessControlle
 Route::middleware(['auth:sanctum'])->get('/business-legal-finance-status/', [BusinessController::class, 'businessLegalFinanceStatus'])->name('businessLegalFinanceStatus');
 
 Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
+Route::middleware(['auth:sanctum'])->get('/businessWarehouse/number-update', [BusinessWarehouseController::class, 'updateNumber'])->name('warehouseNumberUpdate');
 Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', BusinessWarehouseController::class);
 Route::middleware(['auth:sanctum'])->get('/businessWarehouse/{id}/show', [BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
 Route::middleware(['auth:sanctum'])->resource('/purchaseOrderInfo', POInfoController::class);
@@ -387,13 +388,15 @@ Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}', [DraftPurch
 Route::middleware(['auth:sanctum'])->get('dpo', [DraftPurchaseOrderController::class, 'index'])->name('dpo.index');
 Route::middleware(['auth:sanctum'])->get('/Quotation/expired/status/DPO/{quoteID}', [DraftPurchaseOrderController::class, 'quotationExpiredStatusUpdate'])->name('DPOExpiredStatusUpdate');
 Route::middleware(['auth:sanctum'])->get('/Quotation/expired/status/reject/DPO/{quoteID}', [DraftPurchaseOrderController::class, 'quotationExpiredReject'])->name('DPOExpiredStatusReject');
-Route::middleware(['auth:sanctum'])->get('/single/category/quotation/expired/status/DPO/{quoteEOrderID}', [DraftPurchaseOrderController::class, 'quotationExpiredStatusUpdateSingleCategory'])->name('DPOExpiredStatusUpdateSingleCategory');
+Route::middleware(['auth:sanctum'])->get('/single/category/DPO/quotation/expired/status/{quoteEOrderID}', [DraftPurchaseOrderController::class, 'quotationExpiredStatusUpdateSingleCategory'])->name('DPOExpiredStatusUpdateSingleCategory');
 ##################################### Single Category DPO #######################################################
 Route::middleware(['auth:sanctum'])->get('single/category/dpo', [DraftPurchaseOrderController::class, 'singleCategoryDPOIndex'])->name('singleCategoryDPOIndex');
+Route::middleware(['auth:sanctum'])->post('single-category-dpo/file-upload', [DraftPurchaseOrderController::class, 'uploadSingleCategoryDPOFile'])->name('uploadSingleCategoryDPOFile');
 Route::middleware(['auth:sanctum'])->get('single/category/dpo-{eOrderID}', [DraftPurchaseOrderController::class, 'singleCategoryDPOShow'])->name('singleCategoryDPOShow');
 Route::middleware(['auth:sanctum'])->post('single/category/dpo/approved/{rfqNo}/{supplierBusinessID}', [DraftPurchaseOrderController::class, 'singleCategoryApproved'])->name('singleCategoryApproved');
 Route::middleware(['auth:sanctum'])->post('single/category/dpo/cancel/{rfqNo}/{supplierBusinessID}', [DraftPurchaseOrderController::class, 'singleCategoryCancel'])->name('singleCategoryCancel');
 #################################################################################################################
+Route::middleware(['auth:sanctum'])->post('dpo/file-upload', [DraftPurchaseOrderController::class, 'uploadDPOFile'])->name('uploadDPOFile');
 Route::middleware(['auth:sanctum'])->post('dpo/{draftPurchaseOrder}/approved', [DraftPurchaseOrderController::class, 'approved'])->name('dpo.approved');
 Route::middleware(['auth:sanctum'])->post('cash/dpo/{draftPurchaseOrder}/approved', [DraftPurchaseOrderController::class, 'approved'])->name('cashDpo.approved');
 Route::middleware(['auth:sanctum'])->get('dpo/{draftPurchaseOrder}/rejected', [DraftPurchaseOrderController::class, 'rejected'])->name('dpo.rejected');

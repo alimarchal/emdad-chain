@@ -39,7 +39,9 @@
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-input id="chamber_reg_number" type="text" name="landline" class="border p-2 w-1/2" value="{{$businessWarehouse->landline}}"></x-jet-input>
-                                <x-jet-input id="mobile" type="text" name="mobile" class="border p-2 w-1/2" value="{{$businessWarehouse->mobile}}"></x-jet-input>
+                                <x-jet-input id="mobile" type="number"
+                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                             name="mobile" class="border p-2 w-1/2" maxlength="9" value="{{$businessWarehouse->mobile}}" required></x-jet-input>
                                 <select name="country" id="country" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                     <option value="">{{__('portal.Select')}}</option>
                                     @foreach(\App\Models\User::countries() as $country)
@@ -186,7 +188,9 @@
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-input id="chamber_reg_number" type="text" name="landline" class="border p-2 w-1/2" value="{{$businessWarehouse->landline}}"></x-jet-input>
-                                <x-jet-input id="mobile" type="text" name="mobile" class="border p-2 w-1/2" value="{{$businessWarehouse->mobile}}" style="margin-right: 5px;"></x-jet-input>
+                                <x-jet-input id="mobile" type="number"
+                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                             name="mobile" class="border p-2 w-1/2" value="{{$businessWarehouse->mobile}}" maxlength="9"  style="margin-right: 5px;" required></x-jet-input>
                                 <select name="country" id="country" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                     <option value="">{{__('portal.Select')}}</option>
                                     @foreach(\App\Models\User::countries() as $country)
