@@ -102,7 +102,7 @@
 
     @livewireScripts
 
-
+    @yield('footerScripts')
 </body>
 
 </html>

@@ -7,6 +7,14 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+
+    {{--    Combo Tree --}}
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css">--}}
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="{{url('combo_tree_two/style.css')}}">
+
+
     <style>
         table {
             font-size: 1em;
@@ -88,6 +96,9 @@
 
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="business_type">{{__('portal.Select the Sub-Categories')}} @include('misc.required')</x-jet-label>
+                            </div>
+                            <div class="flex mt-3 ">
+                                <input type="text" id="justAnInputBox1"  placeholder="Select" autocomplete="off" style="width: 100%" />
                             </div>
                             <div class="flex mt-3 ">
                                 @include('category.category.index')
@@ -201,7 +212,41 @@
                 </div>
             </div>
         </div>
+
+    @section('footerScripts')
+        <!-- Combo Tree -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="{{url('combo_tree_two/comboTreePlugin.js')}}" type="text/javascript"></script>
+
+            <script type="text/javascript">
+
+
+                var SampleJSONData2 = [
+                    @include('test.get_category', ['categories' => $parentCategories])
+                ];
+
+
+                var comboTree1, comboTree2;
+
+                jQuery(document).ready(function ($) {
+
+                    comboTree3 = $('#justAnInputBox1').comboTree({
+                        source: SampleJSONData2,
+                        isMultiple: true,
+                        cascadeSelect: true,
+                        collapse: true
+                    });
+
+                    comboTree3.setSource(SampleJSONData2);
+
+
+                });
+
+
+            </script>
+        @endsection
     </x-app-layout>
+
 @else
     <x-app-layout>
         <x-slot name="header">
@@ -233,7 +278,8 @@
                                 <x-jet-label class="w-1/2" for="business_type">{{__('portal.Select the Sub-Categories')}} @include('misc.required')</x-jet-label>
                             </div>
                             <div class="flex mt-3 ">
-                                @include('category.category.index')
+                                <input type="text" id="justAnInputBox1" name="list" placeholder="Select" autocomplete="off"/>
+{{--                                @include('category.category.index')--}}
                             </div>
 
 
@@ -343,5 +389,38 @@
                 </div>
             </div>
         </div>
+    @section('footerScripts')
+        <!-- Combo Tree -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="{{url('combo_tree_two/comboTreePlugin.js')}}" type="text/javascript"></script>
+
+            <script type="text/javascript">
+
+
+                var SampleJSONData2 = [
+                    @include('test.get_category', ['categories' => $parentCategories])
+                ];
+
+
+                var comboTree1, comboTree2;
+
+                jQuery(document).ready(function ($) {
+
+                    comboTree3 = $('#justAnInputBox1').comboTree({
+                        source: SampleJSONData2,
+                        isMultiple: true,
+                        cascadeSelect: true,
+                        collapse: true
+                    });
+
+                    comboTree3.setSource(SampleJSONData2);
+
+
+                });
+
+
+            </script>
+        @endsection
     </x-app-layout>
 @endif
+
