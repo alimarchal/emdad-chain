@@ -70,6 +70,9 @@
                                                         {{__('portal.Invoice Status')}}
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                        {{__('portal.Attachments')}}
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.View')}}
                                                     </th>
                                                 </tr>
@@ -170,6 +173,25 @@
                                                                 @endif
                                                             @endif
                                                         @endif
+                                                    </td>
+
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        @if($dpo->file)
+                                                            <a href="{{ Storage::url($dpo->file) }}">
+                                                                <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor"
+                                                                     viewBox="0 0 24 24"
+                                                                     xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                          stroke-width="2"
+                                                                          d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
+                                                                    </path>
+                                                                </svg>
+                                                            </a>
+                                                        @else
+                                                                {{__('portal.N/A')}}
+                                                        @endif
+
+                                                        <br>
                                                     </td>
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if($dpo->rfq_type == 1)

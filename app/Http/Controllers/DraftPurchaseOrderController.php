@@ -24,6 +24,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Validator;
 
 class DraftPurchaseOrderController extends Controller
 {
@@ -79,6 +80,35 @@ class DraftPurchaseOrderController extends Controller
     public function view()
     {
         return view('draftPurchaseOrder.view');
+    }
+
+    /* Buyer adding file against a dpo */
+    public function uploadDPOFile(Request $request)
+    {
+        Validator::make($request->all(), [
+            'file_path_1' => 'required|mimes:jpeg,png,jpg,svg,pdf,',
+        ], [
+            'file_path_1.required' => 'Please choose a file',
+            'file_path_1.mimes' => 'File must be an image or a PDF',
+        ])->validate();
+
+        $dpo = DraftPurchaseOrder::where('id', decrypt($request->dpo_id))->first();
+
+        if (!isset($dpo))
+        {
+            session()->flash('error', 'Draft purchase order not found');
+            return redirect()->back();
+        }
+
+        if ($request->file('file_path_1')) {
+            $path = $request->file('file_path_1')->store('', 'public');
+            $request->merge(['file' => $path]);
+        }
+
+        $dpo->update([ 'file' => $request->file ]);
+
+        session()->flash('message', 'File uploaded successfully');
+        return redirect()->back();
     }
 
     public function approved(Request $request, DraftPurchaseOrder $draftPurchaseOrder)
@@ -301,7 +331,6 @@ class DraftPurchaseOrderController extends Controller
         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
         User::send_sms('+966581382822', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrder->payment_term);
-        User::send_sms('+966555390920', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrder->payment_term);
         User::send_sms('+966593388833', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrder->payment_term);
 
         session()->flash('message', __('portal.DPO Accepted and PO generated.'));
@@ -477,6 +506,37 @@ class DraftPurchaseOrderController extends Controller
         $draftPurchaseOrders = DraftPurchaseOrder::where('rfq_no', $eOrderID)->get();
 
         return view('draftPurchaseOrder.singleCategory.show', compact('draftPurchaseOrders'));
+    }
+
+    /* Buyer adding file against a single category dpo */
+    public function uploadSingleCategoryDPOFile(Request $request): RedirectResponse
+    {
+        Validator::make($request->all(), [
+            'file_path_1' => 'required|mimes:jpeg,png,jpg,svg,pdf,',
+        ], [
+            'file_path_1.required' => 'Please choose a file',
+            'file_path_1.mimes' => 'File must be an image or a PDF',
+        ])->validate();
+        $dpos = DraftPurchaseOrder::where('rfq_no', decrypt($request->dpo_rfq_no))->get();
+
+        if (count($dpos) < 1)
+        {
+            session()->flash('error', 'Draft purchase order not found');
+            return redirect()->back();
+        }
+
+        if ($request->file('file_path_1')) {
+            $path = $request->file('file_path_1')->store('', 'public');
+            $request->merge(['file' => $path]);
+        }
+
+        foreach ($dpos as $dpo)
+        {
+            $dpo->update([ 'file' => $request->file ]);
+        }
+
+        session()->flash('message', 'File uploaded successfully');
+        return redirect()->back();
     }
 
     public function singleCategoryApproved($rfqNo,$supplierBusinessID)
@@ -719,7 +779,6 @@ class DraftPurchaseOrderController extends Controller
         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
         User::send_sms('+966581382822', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrders[0]->payment_term);
-        User::send_sms('+966555390920', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrders[0]->payment_term);
         User::send_sms('+966593388833', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrders[0]->payment_term);
 
         session()->flash('message', __('portal.DPO Accepted and PO generated.'));

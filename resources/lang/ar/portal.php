@@ -795,6 +795,8 @@ return [
     'Paid' => 'مدفوعة',
     'Email Verified' => 'البريد الإلكتروني مفعّل',
     'EmdInv' => 'EmdInv',
+    'Verify' => 'تفعيل',
+    'Send Code' => 'أرسل الرمز',
 
     /* Alerts (messages) */
     'You have reached daily rfq limit' => 'لقد تجاوزت الحد المسموح به من الطلبات اليومية',
@@ -862,5 +864,9 @@ return [
     'Enter comments for rating under 4' => 'أدخل تعليقك (للتقيم أقل من ٤)',
     'Rated Supplier Successfully!' => 'تم تقييم المورد بنجاح!',
     'Rated Delivery Successfully!' => 'تم تقييم الطلبية بنجاح!',
+    'Please verify your mobile number inorder to proceed' => 'للمتابعة، يرجى التحقق أولاً من رقم الجوال.',
+    'Verification code is sent to your mobile number.' => 'تم إرسال رمز التفعيل إلى رقم الجوال',
+    'Wrong code entered. Try again.' => 'تم إدخال رمز خاطئ، يرجى المحاولة مجدداً',
+    'New Number for OTP is added so please verify you new number first to proceed' => 'تمت إضافة رقم جديد لكلمة السر المؤقتة، يرجى التحقق أولاً من الرقم الجديد للمتابعة',
 
 ];

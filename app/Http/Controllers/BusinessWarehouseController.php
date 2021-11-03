@@ -56,7 +56,7 @@ class BusinessWarehouseController extends Controller
             'designation' => 'required',
             'warehouse_email' => 'required',
             'landline' => 'required',
-            'mobile' => 'required',
+            'mobile' => 'required|numeric',
             'country' => 'required',
             'address' => 'required',
             'city' => 'required',
@@ -86,7 +86,6 @@ class BusinessWarehouseController extends Controller
 
     public function edit(BusinessWarehouse $businessWarehouse)
     {
-//        dd($businessWarehouse);
         return view('businessWarehouse.edit', compact('businessWarehouse'));
     }
 
@@ -99,7 +98,7 @@ class BusinessWarehouseController extends Controller
             'designation' => 'required',
             'warehouse_email' => 'required',
             'landline' => 'required',
-            'mobile' => 'required',
+            'mobile' => 'required|numeric',
             'country' => 'required',
             'address' => 'required',
             'warehouse_type' => 'required',
@@ -119,5 +118,26 @@ class BusinessWarehouseController extends Controller
     public function destroy(BusinessWarehouse $businessWarehouse)
     {
         //
+    }
+
+    /* Updating Buyer's warehouse number when he changes in responding to a quotation (OTP number) */
+    public function updateNumber(Request $request)
+    {
+        $warehouse = BusinessWarehouse::where('business_id', auth()->user()->business_id)->first();
+        if ($warehouse->mobile_verified == 0 && $warehouse->mobile_verification_code != null)
+        {
+            BusinessWarehouse::where('business_id', auth()->user()->business_id)->update([
+                'mobile' => $request->number,
+                'mobile_verification_code' => null,
+            ]);
+            return response()->json(['data' => 'success']);
+        }
+
+        if ($warehouse->mobile_verified == 0)
+        {
+            BusinessWarehouse::where('business_id', auth()->user()->business_id)->update([
+                'mobile' => $request->number,
+            ]);
+        }
     }
 }
