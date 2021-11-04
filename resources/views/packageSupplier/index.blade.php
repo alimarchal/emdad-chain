@@ -217,12 +217,12 @@
                                 </td>
                             @endforeach
                         </tr>
-                        <tr>
+                        {{--<tr>
                             <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{__('portal.You can use a discount code if found')}}</td>
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{__('portal.Discount Code')}}</td>
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{__('portal.Discount Code')}}</td>
-                        </tr>
+                        </tr>--}}
                         </tbody>
                     </table>
                 </div>
@@ -462,12 +462,12 @@
                                 </td>
                             @endforeach
                         </tr>
-                        <tr>
+                        {{--<tr>
                             <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">{{__('portal.You can use a discount code if found')}}</td>
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{__('portal.Discount Code')}}</td>
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{__('portal.Discount Code')}}</td>
-                        </tr>
+                        </tr>--}}
                         </tbody>
                     </table>
                 </div>

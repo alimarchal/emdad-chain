@@ -94,7 +94,7 @@
                 <form action="{{ route('shipmentItem.store') }}" method="POST" class="inline confirm">
                     @csrf
                     <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
-                        {{__('portal.Place Shipment')}}
+                        {{__('portal.Generate')}}
                     </button>
                 </form>
             </div>
@@ -197,7 +197,7 @@
                 <form action="{{ route('shipmentItem.store') }}" method="POST" class="inline confirm">
                     @csrf
                     <button type="submit" class="inline-flex items-center justify-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
-                        {{__('portal.Place Shipment')}}
+                        {{__('portal.Generate')}}
                     </button>
                 </form>
             </div>

@@ -400,9 +400,6 @@
                     باقات الاشتراكات (للمشتري)
                 </h2>
             </div>
-            <div class="btns">
-                <div class="btn-style"><a href="{{route('arabic.buyerPackage')}}" target="_blank">التفاصيل</a></div>
-            </div>
             <div class="row" style="padding-top: 20px;">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="row">
@@ -481,6 +478,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="btns">
+                <div class="btn-style"><a href="{{route('arabic.buyerPackage')}}" target="_blank">التفاصيل</a></div>
             </div>
             {{--<div class="section-title text-center">
                 <span>

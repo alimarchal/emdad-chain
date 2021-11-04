@@ -328,7 +328,7 @@
                                     <td>
                                         @php $quoteInfo = \App\Models\Qoute::where('e_order_items_id', $eOrderItem->id)->first(); @endphp
                                         <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
-                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit" value="{{$quoteInfo->quote_price_per_quantity}}" required>
+                                               name="quote_price_per_quantity[]"  min="0.01" step="any" autocomplete="price_per_unit" value="{{$quoteInfo->quote_price_per_quantity}}" required>
                                     </td>
 
                                     <td>
@@ -359,7 +359,7 @@
                             <tr class="mt-2">
                                 <td colspan="12">
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time (In Days)')}}</label>
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time')}}</label>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days"  min="0" step="any" autocomplete="size" required value="{{$collection->shipping_time_in_days}}" placeholder="{{__('portal.Shipment Time')}}" >
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
@@ -371,20 +371,20 @@
                                         <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15"  autocomplete="size" required value="{{$collection->VAT}}" placeholder="{{__('portal.VAT')}} %">
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size"  value="{{$collection->total_cost}}" readonly placeholder="{{__('portal.Total Cost')}}">
-                                    </div> <br><br><br><br>
-                                    <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                        <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-900 focus:outline-none focus:border-yellow-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                             {{__('portal.Calculate Total Cost')}}
                                         </a>
+                                    </div>  <br><br>
+                                    <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size"  value="{{$collection->total_cost}}" readonly placeholder="{{__('portal.Total Cost')}}">
                                     </div>
                                 </td>
                             </tr>
 
                             <tr class="mt-2">
                                 <td colspan="12">
-                                    <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
+                                    <h1 class="text-xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
                                 </td>
                             </tr>
                             <tr class="mt-2">
@@ -502,7 +502,7 @@
 
                                     <td>
                                         <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
-                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit" value="{{old('quote_price_per_quantity.'.$loopIndex)}}" required>
+                                               name="quote_price_per_quantity[]"  min="0.01" step="any" autocomplete="price_per_unit" value="{{old('quote_price_per_quantity.'.$loopIndex)}}" required>
                                         {{--                                    <span class="text-red-800 priceError" style="display: none">Required</span>--}}
                                     </td>
 
@@ -537,7 +537,7 @@
                                 <td colspan="12">
                                     {{--                                <div class="flex flex-wrap overflow-hidden xl:-mx-1">--}}
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time (In Days)')}}</label>
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time')}}</label>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days" value="{{old('shipping_time_in_days')}}" min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Time')}}" >
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
@@ -549,13 +549,13 @@
                                         <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15"  value="{{old('VAT')}}" autocomplete="size" required placeholder="{{__('portal.VAT (in %)')}}">
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="{{__('portal.Total Cost')}}">
-                                    </div> <br><br><br><br>
-                                    <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                        <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-900 focus:outline-none focus:border-yellow-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                             {{__('portal.Calculate Total Cost')}}
                                         </a>
+                                    </div> <br><br>
+                                    <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="{{__('portal.Total Cost')}}">
                                     </div>
                                     {{--                                </div>--}}
                                 </td>
@@ -563,7 +563,7 @@
 
                             <tr class="mt-2">
                                 <td colspan="12">
-                                    <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
+                                    <h1 class="text-xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
                                 </td>
                             </tr>
                             <tr class="mt-2">
@@ -903,7 +903,7 @@
                                     <td>
                                         @php $quoteInfo = \App\Models\Qoute::where('e_order_items_id', $eOrderItem->id)->first(); @endphp
                                         <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
-                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit" value="{{$quoteInfo->quote_price_per_quantity}}" required>
+                                               name="quote_price_per_quantity[]"  min="0.01" step="any" autocomplete="price_per_unit" value="{{$quoteInfo->quote_price_per_quantity}}" required>
                                     </td>
 
                                     <td>
@@ -934,7 +934,7 @@
                             <tr class="mt-2">
                                 <td colspan="12">
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time (In Days)')}}</label>
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time')}}</label>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days"  min="0" step="any" autocomplete="size" required value="{{$collection->shipping_time_in_days}}" placeholder="{{__('portal.Shipment Time')}}" >
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
@@ -946,20 +946,20 @@
                                         <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15"  autocomplete="size" required value="{{$collection->VAT}}" placeholder="{{__('portal.VAT')}} (%)">
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly value="{{$collection->total_cost}}" placeholder="{{__('portal.Total Cost')}}">
-                                    </div> <br><br><br><br>
-                                    <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                        <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white active:bg-yellow-900 focus:outline-none focus:border-yellow-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                             {{__('portal.Calculate Total Cost')}}
                                         </a>
+                                    </div> <br><br>
+                                    <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly value="{{$collection->total_cost}}" placeholder="{{__('portal.Total Cost')}}">
                                     </div>
                                 </td>
                             </tr>
 
                             <tr class="mt-2">
                                 <td colspan="12">
-                                    <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
+                                    <h1 class="text-xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
                                 </td>
                             </tr>
                             <tr class="mt-2">
@@ -1077,7 +1077,7 @@
 
                                     <td>
                                         <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
-                                               name="quote_price_per_quantity[]"  min="0" step="any" autocomplete="price_per_unit"  value="{{old('quote_price_per_quantity.'.$loopIndex)}}" required>
+                                               name="quote_price_per_quantity[]"  min="0.01" step="any" autocomplete="price_per_unit"  value="{{old('quote_price_per_quantity.'.$loopIndex)}}" required>
                                         {{--                                    <span class="text-red-800 priceError" style="display: none">Required</span>--}}
                                     </td>
 
@@ -1112,7 +1112,7 @@
                                 <td colspan="12">
                                     {{--                                <div class="flex flex-wrap overflow-hidden xl:-mx-1">--}}
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time (In Days)')}}</label>
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time')}}</label>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days" value="{{old('shipping_time_in_days')}}"  min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Time')}}" >
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
@@ -1124,13 +1124,13 @@
                                         <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15"  value="{{old('VAT')}}" autocomplete="size" required placeholder="{{__('portal.VAT (in %)')}}">
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="{{__('portal.Total Cost')}}">
-                                    </div> <br><br><br><br>
-                                    <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
-                                        <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                        <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white active:bg-yellow-900 focus:outline-none focus:border-yellow-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                             {{__('portal.Calculate Total Cost')}}
                                         </a>
+                                    </div> <br><br>
+                                    <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="{{__('portal.Total Cost')}}">
                                     </div>
                                     {{--                                </div>--}}
                                 </td>
@@ -1138,7 +1138,7 @@
 
                             <tr class="mt-2">
                                 <td colspan="12">
-                                    <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
+                                    <h1 class="text-xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
                                 </td>
                             </tr>
                             <tr class="mt-2">

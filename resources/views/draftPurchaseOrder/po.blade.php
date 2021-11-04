@@ -67,7 +67,7 @@
                                                         {{__('portal.Payment')}}
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                                        {{__('portal.Invoice Status')}}
+                                                        {{__('portal.Payment Status')}}
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Attachments')}}
@@ -143,13 +143,15 @@
                                                             @if (isset($proformaInvoice) && $proformaInvoice->invoice_status == 0)
                                                                 <a>{{__('portal.Waiting for payment')}}</a>
                                                             @elseif (isset($proformaInvoice) && $proformaInvoice->invoice_status == 2)
-                                                                <a>{{__('portal.Proforma invoice rejected by Emdad')}}</a>
+{{--                                                                <a>{{__('portal.Proforma invoice rejected by Emdad')}}</a>--}}
+                                                                <span class="text-red-600">{{__('portal.Payment not confirmed by Emdad')}}</span>
                                                             @elseif (isset($proformaInvoice) && $proformaInvoice->invoice_status == 3)
-                                                                <a>{{__('portal.Proforma invoice confirmed by Emdad')}}</a>
+{{--                                                                <a>{{__('portal.Proforma invoice confirmed by Emdad')}}</a>--}}
+                                                                <span class="text-green-600">{{__('portal.Payment received by Emdad')}}</span>
                                                             @elseif($dpo->status == 'pending')
                                                                 <a>{{__('portal.DPO not approved yet')}}</a>
                                                             @else
-                                                                <a>{{__('portal.Waiting for proforma invoice')}}</a>
+                                                                <a>{{__('portal.Waiting for payment')}}</a>
                                                             @endif
                                                         @else
 {{--                                                            @if(auth()->user()->registration_type == 'Supplier')--}}
@@ -305,7 +307,7 @@
                                                         {{__('portal.Payment')}}
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                                        {{__('portal.Invoice Status')}}
+                                                        {{__('portal.Payment Status')}}
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.View')}}
@@ -378,13 +380,15 @@
                                                             @if (isset($proformaInvoice) && $proformaInvoice->invoice_status == 0)
                                                                 <span>{{__('portal.Waiting for payment')}}</span>
                                                             @elseif (isset($proformaInvoice) && $proformaInvoice->invoice_status == 2)
-                                                                <span>{{__('portal.Proforma invoice rejected by Emdad')}}</span>
+{{--                                                                <span>{{__('portal.Proforma invoice rejected by Emdad')}}</span>--}}
+                                                                <span class="text-red-600">{{__('portal.Payment not confirmed by Emdad')}}</span>
                                                             @elseif (isset($proformaInvoice) && $proformaInvoice->invoice_status == 3)
-                                                                <span>{{__('portal.Proforma invoice confirmed by Emdad')}}</span>
+{{--                                                                <span>{{__('portal.Proforma invoice confirmed by Emdad')}}</span>--}}
+                                                                <span class="text-green-600">{{__('portal.Payment received by Emdad')}}</span>
                                                             @elseif($dpo->status == 'pending')
                                                                 <span>{{__('portal.DPO not approved yet')}}</span>
                                                             @else
-                                                                <span>{{__('portal.Waiting for proforma invoice')}}</span>
+                                                                <span>{{__('portal.Waiting for payment')}}</span>
                                                             @endif
                                                         @else
                                                             @if(auth()->user()->hasRole('CEO') && auth()->user()->status == 3 )

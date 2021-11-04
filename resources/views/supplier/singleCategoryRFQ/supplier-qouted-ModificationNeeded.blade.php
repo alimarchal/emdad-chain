@@ -48,7 +48,7 @@
                                             {{__('portal.Category Name')}}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{ ucwords(str_replace("_", " ", __('portal.Shipping Time In Days'))) }}
+                                            {{ ucwords(str_replace("_", " ", __('portal.Shipping Time'))) }}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{ ucwords(str_replace("_", " ", __('portal.VAT'))) }} %
@@ -158,7 +158,7 @@
                                             {{__('portal.Category Name')}}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{ ucwords(str_replace("_", " ", __('portal.Shipping Time In Days'))) }}
+                                            {{ ucwords(str_replace("_", " ", __('portal.Shipping Time'))) }}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{ ucwords(str_replace("_", " ", __('portal.VAT'))) }} %

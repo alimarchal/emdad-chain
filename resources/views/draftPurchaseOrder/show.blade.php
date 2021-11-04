@@ -194,7 +194,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
                                                 <label class="form-check-label" for="flexCheckDefault">
-                                                    {{__('portal.Please read the note and check if you agree to proceed')}}
+                                                    {{__('portal.Please read the note and check if you agree to proceed')}}.
                                                 </label>
                                             </div>
                                         @endif
@@ -318,7 +318,7 @@
         $('.confirm').on('click', function (e) {
             if (!$("#acknowledge").is(":checked")) {
                 // do something if the checkbox is NOT checked
-                alert('Please read the note and check if you agree to proceed')
+                alert('Please read the note and check if you agree to proceed. \nNote: We acknowledge that we agree to deal with this supplier. \nEmdad is not responsible for the kind of delivery or the financial source for this delivery.')
                 event.preventDefault();
             }
             else if ($("#acknowledge").is(":checked")) {
@@ -526,7 +526,7 @@
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" name="note" id="acknowledge" required>
                                                 <label class="form-check-label" for="flexCheckDefault">
-                                                    {{__('portal.Please read the note and check if you agree to proceed')}}
+                                                    {{__('portal.Please read the note and check if you agree to proceed')}}.
                                                 </label>
                                             </div>
                                         @endif
