@@ -13,8 +13,11 @@ class VehicleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('supplier_business_id')) {
+            return Vehicle::where('supplier_business_id', $request->supplier_business_id)->get();
+        }
         return Vehicle::paginate(10);
     }
 
@@ -45,7 +48,7 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         $vehicle = Vehicle::find($id);
         if (empty($vehicle)) {
