@@ -144,7 +144,7 @@
                                             {{ ucwords(str_replace("_", " ", __('portal.Price Per Quantity'))) }}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{ ucwords(str_replace("_", " ", __('portal.Shipping Time In Days'))) }}
+                                            {{ ucwords(str_replace("_", " ", __('portal.Shipping Time'))) }}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{ ucwords(str_replace("_", " ", __('portal.Quote status'))) }}
@@ -417,7 +417,7 @@
                                             {{ ucwords(str_replace("_", " ", __('portal.Price Per Quantity'))) }}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{ ucwords(str_replace("_", " ", __('portal.Shipping Time In Days'))) }}
+                                            {{ ucwords(str_replace("_", " ", __('portal.Shipping Time'))) }}
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                             {{ ucwords(str_replace("_", " ", __('portal.Quote status'))) }}

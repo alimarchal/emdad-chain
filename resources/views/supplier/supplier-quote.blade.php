@@ -209,7 +209,7 @@
 
                                 <th style="width:10%;">{{__('portal.Quantity')}} @include('misc.required')</th>
                                 <th style="width:10%;">{{__('portal.Price Per Unit')}} @include('misc.required') </th>
-                                <th style="width:11%;">{{__('portal.Shipping Time(In Days)')}} @include('misc.required') </th>
+                                <th style="width:11%;">{{__('portal.Shipping Time')}} @include('misc.required') </th>
                                 <th style="width:20%;">{{__('portal.Note')}}</th>
                                 <th style="width:10%;">{{__('portal.VAT')}} % @include('misc.required') </th>
                                 <th style="width:10%;">{{__('portal.Shipment Cost')}} @include('misc.required')</th>
@@ -354,7 +354,7 @@
 
                                         <td>
                                             <input class="form-input rounded-md shadow-sm  w-full" id="price_per_unit" type="number"
-                                                   name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
+                                                   name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0.01" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
                                         </td>
                                         <td>   <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" value="{{ $collection->shipping_time_in_days }}" name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">
                                         </td>
@@ -380,7 +380,7 @@
 
                                         </td>
                                         <td colspan="2" class="text-left">
-                                            <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                            <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-900 focus:outline-none focus:border-yellow-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                                 {{__('portal.Calculate Total Cost')}}
                                             </a>
                                         </td>
@@ -389,7 +389,7 @@
 
                                     <tr class="mt-2">
                                         <td colspan="12">
-                                            <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
+                                            <h1 class="text-xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
                                         </td>
                                     </tr>
                                     <tr class="mt-2">
@@ -491,7 +491,7 @@
 
                                         <td>
                                             <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit" type="number"
-                                                   name="quote_price_per_quantity"  min="0" step="any" autocomplete="price_per_unit" value="{{old('quote_price_per_quantity')}}" required placeholder="{{__('portal.Price Per Unit')}}">
+                                                   name="quote_price_per_quantity"  min="0.01" step="any" autocomplete="price_per_unit" value="{{old('quote_price_per_quantity')}}" required placeholder="{{__('portal.Price Per Unit')}}">
                                         </td>
                                         <td>
                                             <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  name="shipping_time_in_days" min="0" autocomplete="size" value="{{old('shipping_time_in_days')}}" required placeholder="{{__('portal.Shipment(Days)')}}">
@@ -516,7 +516,7 @@
                                             <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
                                         </td>
                                         <td colspan="2" class="text-left">
-                                            <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                            <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-900 focus:outline-none focus:border-yellow-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                                 {{__('portal.Calculate Total Cost')}}
                                             </a>
                                         </td>
@@ -525,7 +525,7 @@
 
                                     <tr class="mt-2">
                                         <td colspan="12">
-                                            <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
+                                            <h1 class="text-xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
                                         </td>
                                     </tr>
                                     <tr class="mt-2">
@@ -762,7 +762,7 @@
 
                                 <th style="width:10%;">{{__('portal.Quantity')}} @include('misc.required')</th>
                                 <th style="width:10%;">{{__('portal.Price Per Unit')}} @include('misc.required') </th>
-                                <th style="width:11%;">{{__('portal.Shipping Time(In Days)')}} @include('misc.required') </th>
+                                <th style="width:11%;">{{__('portal.Shipping Time')}} @include('misc.required') </th>
                                 <th style="width:20%;">{{__('portal.Note')}}</th>
                                 <th style="width:12%;">{{__('portal.VAT')}} % @include('misc.required') </th>
                                 <th style="width:10%;">{{__('portal.Shipment Cost')}} @include('misc.required')</th>
@@ -874,7 +874,7 @@
 
                                         <td>
                                             <input class="form-input rounded-md shadow-sm  w-full" id="price_per_unit" type="number"
-                                                   name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
+                                                   name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0.01" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
                                         </td>
                                         <td>
                                             <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" value="{{ $collection->shipping_time_in_days }}" name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">
@@ -901,7 +901,7 @@
 
                                         </td>
                                         <td colspan="2" class="text-right">
-                                            <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="mr-2 px-4 py-1 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                            <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="mr-2 px-4 py-1 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white active:bg-yellow-900 focus:outline-none focus:border-yellow-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                                 {{__('portal.Calculate Total Cost')}}
                                             </a>
                                         </td>
@@ -910,7 +910,7 @@
 
                                     <tr class="mt-2">
                                         <td colspan="12">
-                                            <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
+                                            <h1 class="text-xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
                                         </td>
                                     </tr>
                                     <tr class="mt-2">
@@ -954,7 +954,7 @@
 
                                         <td>
                                             <input class="form-input rounded-md shadow-sm  w-full" id="price_per_unit" type="number"
-                                                   name="quote_price_per_quantity"  min="0" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
+                                                   name="quote_price_per_quantity"  min="0.01" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
                                         </td>
                                         <td>
                                             <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">
@@ -979,7 +979,7 @@
                                             <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
                                         </td>
                                         <td colspan="2" class="text-right">
-                                            <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="mr-2 px-4 py-1 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
+                                            <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="mr-2 px-4 py-1 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white active:bg-yellow-900 focus:outline-none focus:border-yellow-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
                                                 {{__('portal.Calculate Total Cost')}}
                                             </a>
                                         </td>
@@ -988,7 +988,7 @@
 
                                     <tr class="mt-2">
                                         <td colspan="12">
-                                            <h1 class="text-2xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
+                                            <h1 class="text-xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
                                         </td>
                                     </tr>
                                     <tr class="mt-2">

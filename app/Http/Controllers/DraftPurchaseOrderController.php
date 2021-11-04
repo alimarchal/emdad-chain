@@ -333,13 +333,15 @@ class DraftPurchaseOrderController extends Controller
         User::send_sms('+966581382822', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrder->payment_term);
         User::send_sms('+966593388833', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrder->payment_term);
 
-        session()->flash('message', __('portal.DPO Accepted and PO generated.'));
-//        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
-
         /* Redirecting to proforma invoices route in case payment_term is equal to Cash */
         if ($request->payment_method == 'Cash') {
-            return redirect()->route('proforma_invoices');
+//            return redirect()->route('proforma_invoices');
+            session()->flash('message', __('portal.DPO Accepted and PO generated. Proceed for payment'));
+            return redirect()->route('invoices');
         }
+
+//        return redirect()->route('dpo.show', $draftPurchaseOrder->id);
+        session()->flash('message', __('portal.DPO Accepted and PO generated.'));
         return redirect()->route('po.po');
     }
 
@@ -781,15 +783,17 @@ class DraftPurchaseOrderController extends Controller
         User::send_sms('+966581382822', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrders[0]->payment_term);
         User::send_sms('+966593388833', 'Purchase order generated.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Quotation #: ' . $qoute->id . ', ' . 'Amount: ' . $qoute->total_cost . ', ' . 'PM: ' . $draftPurchaseOrders[0]->payment_term);
 
-        session()->flash('message', __('portal.DPO Accepted and PO generated.'));
-
         /* Redirecting to proforma invoices route in case payment_term is equal to Cash */
         if ($draftPurchaseOrders[0]->payment_term == 'Cash')
         {
 //            return redirect()->route('singleCategoryProformaInvoices');
-            return redirect()->route('proforma_invoices');
+//            return redirect()->route('proforma_invoices');
+            session()->flash('message', __('portal.DPO Accepted and PO generated. Proceed for payment'));
+            return redirect()->route('invoices');
         }
+
 //        return redirect()->route('singleCategoryPO');
+        session()->flash('message', __('portal.DPO Accepted and PO generated.'));
         return redirect()->route('po.po');
     }
 

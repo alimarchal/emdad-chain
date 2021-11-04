@@ -196,7 +196,7 @@
                                             <label for="acknowledge" class="flex items-center">
                                                 <input id="acknowledge" type="checkbox" class="form-checkbox" name="note">
                                                 <span class="ml-2">
-                                                    {{__('portal.Please read the note and check if you agree to proceed')}}
+                                                    {{__('portal.Please read the note and check if you agree to proceed')}}.
                                                 </span>
                                             </label>
                                         @endif
@@ -298,7 +298,7 @@
         $('.confirm').on('click', function (e) {
             if (!$("#acknowledge").is(":checked")) {
                 // do something if the checkbox is NOT checked
-                alert('Please read the note and check if you agree to proceed')
+                alert('Please read the note and check if you agree to proceed. \nNote: We acknowledge that we agree to deal with this supplier. \nEmdad is not responsible for the kind of delivery or the financial source for this delivery.')
                 event.preventDefault();
             }
             else if ($("#acknowledge").is(":checked")) {
@@ -517,7 +517,7 @@
                                                 <label for="acknowledge" class="flex items-center">
                                                     <input id="acknowledge" type="checkbox" class="form-checkbox" name="note">
                                                     <span class="mr-2">
-                                                        {{__('portal.Please read the note and check if you agree to proceed')}}
+                                                        {{__('portal.Please read the note and check if you agree to proceed')}}.
                                                     </span>
                                                 </label>
                                             </div>

@@ -42,11 +42,11 @@
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{__('portal.Price Per Quantity')}}
+                                            {{__('portal.Unit Price')}}
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                            {{__('portal.Shipping Time In Days')}}
+                                            {{__('portal.Shipping Time')}}
                                         </th>
 
                                         <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
@@ -171,11 +171,11 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                        {{__('portal.Price Per Quantity')}}
+                                        {{__('portal.Unit Price')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                        {{__('portal.Shipping Time In Days')}}
+                                        {{__('portal.Shipping Time')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
