@@ -320,7 +320,7 @@
                                                     <option value="Within 30 Days">{{__('portal.30 Days')}}</option>
                                                     <option value="Within 60 Days">{{__('portal.60 Days')}}</option>
                                                     <option value="Within 90 Days">{{__('portal.90 Days')}}</option>
-                                                    <option
+                                                    {{--<option
                                                         value="Standing Order - 2 per year">{{__('portal.Standing Order - 2 times / year')}}</option>
                                                     <option
                                                         value="Standing Order - 3 per year">{{__('portal.Standing Order - 3 times / year')}}</option>
@@ -331,7 +331,7 @@
                                                     <option
                                                         value="Standing Order - 12 per year">{{__('portal.Standing Order - 12 times / year')}}</option>
                                                     <option
-                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>
+                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>--}}
                                                 @endif
 
                                             </select>
@@ -801,7 +801,7 @@
                                                     <option value="Within 30 Days">{{__('portal.30 Days')}}</option>
                                                     <option value="Within 60 Days">{{__('portal.60 Days')}}</option>
                                                     <option value="Within 90 Days">{{__('portal.90 Days')}}</option>
-                                                    <option
+                                                    {{--<option
                                                         value="Standing Order - 2 per year">{{__('portal.Standing Order - 2 times / year')}}</option>
                                                     <option
                                                         value="Standing Order - 3 per year">{{__('portal.Standing Order - 3 times / year')}}</option>
@@ -812,7 +812,7 @@
                                                     <option
                                                         value="Standing Order - 12 per year">{{__('portal.Standing Order - 12 times / year')}}</option>
                                                     <option
-                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>
+                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>--}}
                                                 @endif
 
                                             </select>
@@ -1346,7 +1346,7 @@
                                                     <option value="Within 30 Days">{{__('portal.30 Days')}}</option>
                                                     <option value="Within 60 Days">{{__('portal.60 Days')}}</option>
                                                     <option value="Within 90 Days">{{__('portal.90 Days')}}</option>
-                                                    <option
+                                                    {{--<option
                                                         value="Standing Order - 2 per year">{{__('portal.Standing Order - 2 times / year')}}</option>
                                                     <option
                                                         value="Standing Order - 3 per year">{{__('portal.Standing Order - 3 times / year')}}</option>
@@ -1357,7 +1357,7 @@
                                                     <option
                                                         value="Standing Order - 12 per year">{{__('portal.Standing Order - 12 times / year')}}</option>
                                                     <option
-                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>
+                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>--}}
                                                 @endif
 
                                             </select>
@@ -1820,7 +1820,7 @@
                                                     <option value="Within 30 Days">{{__('portal.30 Days')}}</option>
                                                     <option value="Within 60 Days">{{__('portal.60 Days')}}</option>
                                                     <option value="Within 90 Days">{{__('portal.90 Days')}}</option>
-                                                    <option
+                                                    {{--<option
                                                         value="Standing Order - 2 per year">{{__('portal.Standing Order - 2 times / year')}}</option>
                                                     <option
                                                         value="Standing Order - 3 per year">{{__('portal.Standing Order - 3 times / year')}}</option>
@@ -1831,7 +1831,7 @@
                                                     <option
                                                         value="Standing Order - 12 per year">{{__('portal.Standing Order - 12 times / year')}}</option>
                                                     <option
-                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>
+                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>--}}
                                                 @endif
 
                                             </select>
