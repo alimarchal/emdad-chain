@@ -74,6 +74,14 @@
         @endif
 
         @foreach ($errors->get('expiry_date') as $error)
+            <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                <strong class="mr-1">{{ $error }}</strong>
+                <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                    <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                </button>
+            </div>
+        @endforeach
+        @foreach ($errors->get('shipping_time_in_days') as $error)
             <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
                 <strong class="mr-1">{{ $error }}</strong>
                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
@@ -360,7 +368,8 @@
                                 <td colspan="12">
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days"  min="0" step="any" autocomplete="size" required value="{{$collection->shipping_time_in_days}}" placeholder="{{__('portal.Shipment Time')}}" >
+                                        <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="shipping_time_in_days" value="{{$collection->shipping_time_in_days}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+{{--                                        <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days"  min="0" step="any" autocomplete="size" required value="{{$collection->shipping_time_in_days}}" placeholder="{{__('portal.Shipment Time')}}" >--}}
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Cost')}}</label>
@@ -538,7 +547,8 @@
                                     {{--                                <div class="flex flex-wrap overflow-hidden xl:-mx-1">--}}
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days" value="{{old('shipping_time_in_days')}}" min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Time')}}" >
+                                        <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="shipping_time_in_days" value="{{old('shipping_time_in_days')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+{{--                                        <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days" value="{{old('shipping_time_in_days')}}" min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Time')}}" >--}}
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Cost')}}</label>
@@ -650,8 +660,16 @@
         @endif
 
         @foreach ($errors->get('expiry_date') as $error)
+            <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                <strong class="mr-3">{{ $error }}</strong>
+                <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                    <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                </button>
+            </div>
+        @endforeach
+        @foreach ($errors->get('shipping_time_in_days') as $error)
             <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                <strong class="mr-1">{{ $error }}</strong>
+                <strong class="mr-3">{{ $error }}</strong>
                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                     <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                 </button>
@@ -935,7 +953,8 @@
                                 <td colspan="12">
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days"  min="0" step="any" autocomplete="size" required value="{{$collection->shipping_time_in_days}}" placeholder="{{__('portal.Shipment Time')}}" >
+                                        <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="shipping_time_in_days" value="{{$collection->shipping_time_in_days}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+{{--                                        <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days"  min="0" step="any" autocomplete="size" required value="{{$collection->shipping_time_in_days}}" placeholder="{{__('portal.Shipment Time')}}" >--}}
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Cost')}}</label>
@@ -1113,7 +1132,8 @@
                                     {{--                                <div class="flex flex-wrap overflow-hidden xl:-mx-1">--}}
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days" value="{{old('shipping_time_in_days')}}"  min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Time')}}" >
+                                        <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="shipping_time_in_days" value="{{old('shipping_time_in_days')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+{{--                                        <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days" value="{{old('shipping_time_in_days')}}"  min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Time')}}" >--}}
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Cost')}}</label>
@@ -1264,6 +1284,17 @@
 
     $( function() {
         $( "#datepicker" ).datepicker({
+            dateFormat: 'mm/dd/yy',
+            changeMonth: true,
+            changeYear: true,
+            minDate: +5,
+            maxDate: +90,
+            clear: true,
+        }).attr('readonly', 'readonly');
+    } );
+
+    $( function() {
+        $( "#datepicker1" ).datepicker({
             dateFormat: 'mm/dd/yy',
             changeMonth: true,
             changeYear: true,

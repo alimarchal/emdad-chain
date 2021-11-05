@@ -32,7 +32,11 @@ class QouteController extends Controller
     {
         $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
         Validator::make($request->all(), [
-            'expiry_date' => 'required|date|after_or_equal:'.$min5days
+            'expiry_date' => 'required|date|after_or_equal:'.$min5days,
+            'shipping_time_in_days' => 'required',
+        ],[
+            'expiry_date.required' => 'Quotation valid upto date is required.',
+            'shipping_time_in_days.required' => 'Shipping Time is required.'
         ])->validate();
 
         $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d h:i:s');
@@ -83,7 +87,11 @@ class QouteController extends Controller
     {
         $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
         Validator::make($request->all(), [
-            'expiry_date' => 'required|date|after_or_equal:'.$min5days
+            'expiry_date' => 'required|date|after_or_equal:'.$min5days,
+            'shipping_time_in_days' => 'required'
+        ],[
+            'expiry_date.required' => 'Quotation valid upto date is required.',
+            'shipping_time_in_days.required' => 'Shipping Time is required.'
         ])->validate();
 
         $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d h:i:s');
@@ -199,6 +207,12 @@ class QouteController extends Controller
 
     public function update(Request $request, Qoute $qoute)
     {
+        Validator::make($request->all(), [
+            'shipping_time_in_days' => 'required',
+        ],[
+            'shipping_time_in_days.required' => 'Shipping Time is required.'
+        ])->validate();
+
         $request->merge(['user_id' => auth()->user()->id]);
         $request->merge(['qoute_status' => 'Modified']);
         $request->merge(['status' => 'pending']);
@@ -224,6 +238,12 @@ class QouteController extends Controller
     /* Updating Quotation response for Single Category RFQ */
     public function singleRFQQuotationUpdate(Request $request, Qoute $qoute)
     {
+        Validator::make($request->all(), [
+            'shipping_time_in_days' => 'required',
+        ],[
+            'shipping_time_in_days.required' => 'Shipping Time is required.'
+        ])->validate();
+
         $request->merge(['qoute_status' => 'Modified']);
         $request->merge(['qoute_status_updated' => 'Modified']);
 

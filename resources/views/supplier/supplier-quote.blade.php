@@ -76,6 +76,14 @@
             </div>
         @endif
         @foreach ($errors->get('expiry_date') as $error)
+            <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                <strong class="mr-1">{{ $error }}</strong>
+                <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                    <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                </button>
+            </div>
+        @endforeach
+        @foreach ($errors->get('shipping_time_in_days') as $error)
             <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
                 <strong class="mr-1">{{ $error }}</strong>
                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
@@ -356,7 +364,9 @@
                                             <input class="form-input rounded-md shadow-sm  w-full" id="price_per_unit" type="number"
                                                    name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0.01" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
                                         </td>
-                                        <td>   <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" value="{{ $collection->shipping_time_in_days }}" name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">
+                                        <td>
+                                            <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="shipping_time_in_days" value="{{$collection->shipping_time_in_days}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+{{--                                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" value="{{ $collection->shipping_time_in_days }}" name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">--}}
                                         </td>
 
                                         <td>
@@ -494,7 +504,8 @@
                                                    name="quote_price_per_quantity"  min="0.01" step="any" autocomplete="price_per_unit" value="{{old('quote_price_per_quantity')}}" required placeholder="{{__('portal.Price Per Unit')}}">
                                         </td>
                                         <td>
-                                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  name="shipping_time_in_days" min="0" autocomplete="size" value="{{old('shipping_time_in_days')}}" required placeholder="{{__('portal.Shipment(Days)')}}">
+                                            <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="shipping_time_in_days" value="{{old('shipping_time_in_days')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+{{--                                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  name="shipping_time_in_days" min="0" autocomplete="size" value="{{old('shipping_time_in_days')}}" required placeholder="{{__('portal.Shipment(Days)')}}">--}}
                                         </td>
 
                                         <td>
@@ -634,6 +645,22 @@
                 </button>
             </div>
         @endif
+        @foreach ($errors->get('expiry_date') as $error)
+            <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                <strong class="mr-3">{{ $error }}</strong>
+                <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                    <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                </button>
+            </div>
+        @endforeach
+        @foreach ($errors->get('shipping_time_in_days') as $error)
+            <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                <strong class="mr-3">{{ $error }}</strong>
+                <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                    <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                </button>
+            </div>
+        @endforeach
 
         <div class="-my-2 overflow-x-auto sm:overflow-hidden lg:-mx-8 scroll-bar-for-large-screen">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -877,7 +904,8 @@
                                                    name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0.01" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
                                         </td>
                                         <td>
-                                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" value="{{ $collection->shipping_time_in_days }}" name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">
+                                            <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="shipping_time_in_days" value="{{$collection->shipping_time_in_days}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+{{--                                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" value="{{ $collection->shipping_time_in_days }}" name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">--}}
                                         </td>
 
                                         <td>
@@ -957,7 +985,8 @@
                                                    name="quote_price_per_quantity"  min="0.01" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
                                         </td>
                                         <td>
-                                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">
+                                            <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="shipping_time_in_days" value="{{old('shipping_time_in_days')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+{{--                                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">--}}
                                         </td>
 
                                         <td>
@@ -1073,6 +1102,16 @@
 
     $( function() {
         $( "#datepicker" ).datepicker({
+            dateFormat: 'mm/dd/yy',
+            changeMonth: true,
+            changeYear: true,
+            minDate: +5,
+            maxDate: +90,
+            clear: true,
+        }).attr('readonly', 'readonly');
+    } );
+    $( function() {
+        $( "#datepicker1" ).datepicker({
             dateFormat: 'mm/dd/yy',
             changeMonth: true,
             changeYear: true,

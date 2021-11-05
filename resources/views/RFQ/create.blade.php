@@ -325,7 +325,7 @@
                                                     {{$latest_rfq->delivery_period =='Within 90 Days' ? 'selected' : ''}}
                                                     @endif>{{__('portal.90 Days')}}
                                                 </option>
-                                                <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
+                                                {{--<option value="Standing Order - 2 per year" @if (isset($latest_rfq))
                                                     {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
                                                     @endif>{{__('portal.Standing Order - 2 times / year')}}
                                                 </option>
@@ -348,7 +348,7 @@
                                                 <option value="Standing Order Open" @if(isset($latest_rfq))
                                                     {{$latest_rfq->delivery_period =='Standing Order Open' ? 'selected' : ''}}
                                                     @endif>{{__('portal.Standing Order - Open')}}
-                                                </option>
+                                                </option>--}}
 
                                             </select>
                                         </div>
@@ -800,7 +800,7 @@
                                                     {{$latest_rfq->delivery_period =='Within 90 Days' ? 'selected' : ''}}
                                                     @endif>{{__('portal.90 Days')}}
                                                 </option>
-                                                <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
+                                                {{--<option value="Standing Order - 2 per year" @if (isset($latest_rfq))
                                                     {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
                                                     @endif>{{__('portal.Standing Order - 2 times / year')}}
                                                 </option>
@@ -823,7 +823,7 @@
                                                 <option value="Standing Order Open" @if(isset($latest_rfq))
                                                     {{$latest_rfq->delivery_period =='Standing Order Open' ? 'selected' : ''}}
                                                     @endif>{{__('portal.Standing Order - Open')}}
-                                                </option>
+                                                </option>--}}
 
                                             </select>
                                         </div>
@@ -1552,7 +1552,7 @@
                                                     {{$latest_rfq->delivery_period =='Within 90 Days' ? 'selected' : ''}}
                                                     @endif>{{__('portal.90 Days')}}
                                                 </option>
-                                                <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
+                                                {{--<option value="Standing Order - 2 per year" @if (isset($latest_rfq))
                                                     {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
                                                     @endif>{{__('portal.Standing Order - 2 times / year')}}
                                                 </option>
@@ -1575,7 +1575,7 @@
                                                 <option value="Standing Order Open" @if(isset($latest_rfq))
                                                     {{$latest_rfq->delivery_period =='Standing Order Open' ? 'selected' : ''}}
                                                     @endif>{{__('portal.Standing Order - Open')}}
-                                                </option>
+                                                </option>--}}
 
                                             </select>
                                         </div>
@@ -2028,7 +2028,7 @@
                                                     {{$latest_rfq->delivery_period =='Within 90 Days' ? 'selected' : ''}}
                                                     @endif>{{__('portal.90 Days')}}
                                                 </option>
-                                                <option value="Standing Order - 2 per year" @if (isset($latest_rfq))
+                                                {{--<option value="Standing Order - 2 per year" @if (isset($latest_rfq))
                                                     {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
                                                     @endif>{{__('portal.Standing Order - 2 times / year')}}
                                                 </option>
@@ -2051,7 +2051,7 @@
                                                 <option value="Standing Order Open" @if(isset($latest_rfq))
                                                     {{$latest_rfq->delivery_period =='Standing Order Open' ? 'selected' : ''}}
                                                     @endif>{{__('portal.Standing Order - Open')}}
-                                                </option>
+                                                </option>--}}
 
                                             </select>
                                         </div>
