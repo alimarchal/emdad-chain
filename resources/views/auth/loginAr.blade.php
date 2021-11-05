@@ -1,9 +1,8 @@
 <x-guest-layout>
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-        <x-slot name="logo">
-            <!-- <x-jet-authentication-card-logo /> -->
+        <div>
             <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-20 w-auto" />
-        </x-slot>
+        </div>
 
         <div class="w-full sm:max-w-lg mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
             <x-jet-validation-errors class="mb-4" />
