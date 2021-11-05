@@ -79,7 +79,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $shipment->shipmentItems->count() }}
+                                            {{ $shipment->shipmentItems->where('buyer_business_id', auth()->user()->business_id)->count() }}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -200,7 +200,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $shipment->shipmentItems->count() }}
+                                            {{ $shipment->shipmentItems->where('buyer_business_id', auth()->user()->business_id)->count() }}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
