@@ -682,7 +682,9 @@ Route::get('tree', function () {
     return view('test.combotree',compact('parentCategories'));
 });
 
+/*
 Route::get('/testSms', function () {
     $x = \App\Models\User::send_otp('1122','581382822');
     dd($x);
 });
+*/

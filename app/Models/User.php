@@ -536,7 +536,6 @@ class User extends Authenticatable implements MustVerifyEmail
             echo 'error:' . curl_error($ch);
         }
         curl_close($ch);
-        return $ch;
     }
 
     public static function send_otp($otp, $mobile_no)
