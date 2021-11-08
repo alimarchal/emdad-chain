@@ -524,7 +524,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public static function send_sms($mobile_no, $msg)
     {
         $mobile_no = trim($mobile_no);
-        $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=" . $mobile_no . "&sender=Emdad-Aid&unicode=e&randparams=1";
+//        $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=" . $mobile_no . "&sender=Emdad-Aid&unicode=e&randparams=1";
+//
+        $url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=" .  $mobile_no . "&Message=" . urlencode($msg);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -534,12 +536,14 @@ class User extends Authenticatable implements MustVerifyEmail
             echo 'error:' . curl_error($ch);
         }
         curl_close($ch);
+        return $ch;
     }
 
     public static function send_otp($otp, $mobile_no)
     {
         $msg = "Your delivery is here. \n\nPlease share the OTP code: " . $otp . " with the driver after unloading the delivery. \n\nThank you for using EMDAD Platform.\n";
-        $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=966" . $mobile_no . "&sender=Emdad-Aid&unicode=e&randparams=1";
+//        $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=966" . $mobile_no . "&sender=Emdad-Aid&unicode=e&randparams=1";
+        $url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=966" .  $mobile_no . "&Message=" . urlencode($msg);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -547,6 +551,7 @@ class User extends Authenticatable implements MustVerifyEmail
         if (curl_errno($ch)) {
             echo 'error:' . curl_error($c);
         }
+
         curl_close($ch);
         return $ch;
     }

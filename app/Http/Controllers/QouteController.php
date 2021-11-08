@@ -232,7 +232,8 @@ class QouteController extends Controller
         {
             return redirect()->route('singleCategoryQuotedModifiedRFQ');
         }
-        return redirect()->route('viewRFQs');
+//        return redirect()->route('viewRFQs');
+        return redirect()->route('QoutedRFQModificationNeeded');
     }
 
     /* Updating Quotation response for Single Category RFQ */
@@ -320,6 +321,7 @@ class QouteController extends Controller
         $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1])
                             ->where('qoute_status' , '!=' ,'ModificationNeeded')
                             ->where('qoute_status' , '!=' ,'RFQPendingConfirmation')
+                            ->orderByDesc('created_at')
                             ->get();
 
         return view('supplier.supplier-qouted', compact('collection'));
@@ -471,6 +473,7 @@ class QouteController extends Controller
         $quoted = Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 0])
                         ->where('qoute_status' , '!=' ,'ModificationNeeded')
                         ->where('qoute_status' , '!=' ,'RFQPendingConfirmation')
+                        ->orderByDesc('created_at')
                         ->get();
 
         $collection = $quoted->unique('e_order_id');

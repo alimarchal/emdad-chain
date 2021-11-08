@@ -681,3 +681,8 @@ Route::get('tree', function () {
     $parentCategories = Category::where('parent_id', 0)->where('is_active',1)->orderBy('name', 'asc')->get();
     return view('test.combotree',compact('parentCategories'));
 });
+
+Route::get('/testSms', function () {
+    $x = \App\Models\User::send_otp('1122','581382822');
+    dd($x);
+});

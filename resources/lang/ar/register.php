@@ -18,6 +18,7 @@ return [
     'Logistics Solution' => 'مقدم حلول لوجستية ',
     'Title' => 'اللقب',
     'Select' => 'اختر',
+    'Company Name' => 'اسم الشركة',
     'Mr.' => 'سيد',
     'Ms.' => 'آنسة',
     'Mrs.' => 'سيدة',
