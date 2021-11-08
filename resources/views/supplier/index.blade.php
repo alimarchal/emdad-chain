@@ -233,7 +233,7 @@
 
                                                 </tr>
                                             @else
-                                                <div class="py-12">
+                                                {{--<div class="py-12">
                                                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                                                         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                                             <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
@@ -243,11 +243,25 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>--}}
                                             @endif
                                         @endif
 
                                     @endforeach
+                                    {{-- Commented else part because if display's meassage as long as loop goes on --}}
+                                    @if(isset($quotationCount) && $quotationCount == 0)
+                                        <div class="py-12">
+                                            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                                                    <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                                                        <div class="text-black text-2xl" style="text-align: center">
+                                                            {{__('portal.Your have reached daily generate quotation limit.')}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -490,7 +504,7 @@
 
                                             </tr>
                                         @else
-                                            <div class="py-12">
+                                            {{--<div class="py-12">
                                                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                                                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                                                         <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
@@ -500,11 +514,27 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>--}}
                                         @endif
                                     @endif
 
                                 @endforeach
+
+                                {{-- Commented else part because if display's meassage as long as loop goes on --}}
+                                @if(isset($quotationCount) && $quotationCount == 0)
+                                    <div class="py-12">
+                                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                                                <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                                                    <div class="text-black text-2xl" style="text-align: center">
+                                                        {{__('portal.Your have reached daily generate quotation limit.')}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+
                                 </tbody>
                             </table>
                         </div>

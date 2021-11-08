@@ -18,6 +18,7 @@ return [
     'Logistics Solution' => 'Logistics Solution Provider',
     'Title' => 'Title',
     'Select' => 'Select',
+    'Company Name' => 'Company Name',
     'Mr.' => 'Mr.',
     'Ms.' => 'Ms.',
     'Mrs.' => 'Mrs.',

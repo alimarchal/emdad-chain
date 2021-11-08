@@ -361,7 +361,7 @@
                                         </td>
 
                                         <td>
-                                            <input class="form-input rounded-md shadow-sm  w-full" id="price_per_unit" type="number"
+                                            <input class="form-input rounded-md shadow-sm w-full price_per_unit" id="price_per_unit" type="number"
                                                    name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0.01" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
                                         </td>
                                         <td>

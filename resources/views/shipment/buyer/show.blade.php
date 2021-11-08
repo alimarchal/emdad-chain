@@ -13,9 +13,7 @@
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))
@@ -83,6 +81,10 @@
                                                     <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
                                                         {{__('portal.Received')}}
                                                     </span>
+                                                @elseif($shipmentDetail->status == 5 || $shipmentDetail->status == 6 )
+                                                    <span class="text-yellow-400 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                        {{__('portal.Returned')}}
+                                                    </span>
                                                 @else
                                                     <span class="text-orange-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
                                                         {{__('portal.Not received')}}
@@ -120,9 +122,7 @@
 @else
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))
@@ -190,6 +190,10 @@
                                                 <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
                                                     {{__('portal.Received')}}
                                                 </span>
+                                            @elseif($shipmentDetail->status == 5 || $shipmentDetail->status == 6 )
+                                                <span class="text-yellow-400 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                        {{__('portal.Returned')}}
+                                                    </span>
                                             @else
                                                 <span class="text-orange-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
                                                     {{__('portal.Not received')}}

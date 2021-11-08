@@ -4,12 +4,13 @@
         </x-slot>
         <x-jet-validation-errors class="mb-4"/>
 
-        <a href="{{route('registerAr', 'ar')}}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
-            <img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">
-            العربية
+        <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block w-16 mx-auto float-left " />
+
+        <a href="{{route('register', 'ar')}}" class="inline-flex items-center px-4 py-2 float-right bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+            <img alt="" src="{{url('us.png')}}" style="margin-right: 8px;margin-top:-4px;">
+            English
         </a>
 
-        <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block w-16 mx-auto float-right " />
         <form method="POST" action="{{ route('register') }}"  style="direction: rtl" enctype="multipart/form-data" class="mt-5">
             @csrf
 
@@ -29,7 +30,7 @@
 
                 <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
                     <label class="block font-medium text-sm text-gray-700 mb-2" for="service">
-                        Register as <span class="text-red-500">*</span>
+                        {{__('register.Register as')}} <span class="text-red-500">*</span>
                     </label>
 
                     <select name="service" id="service" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name">
@@ -39,16 +40,9 @@
                         {{--                        <option {{old('service') == 3 ? 'selected' : ''}} value="3">{{__('register.Logistics Solution')}}</option>--}}
                     </select>
                 </div>
-
-
-
-
             </div>
 
-
             <div class="flex flex-wrap  lg:-mx-2 xl:-mx-2">
-
-
 
                 <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
                     <label class="block font-medium text-sm text-gray-700 mb-2" for="gender">
@@ -78,8 +72,6 @@
                     <x-jet-input id="family_name" class="block mt-2 w-full" type="text" name="family_name" :value="old('family_name')" required autocomplete="family_name"/>
                 </div>
 
-
-
             </div>
 
             <div class="flex flex-wrap  lg:-mx-2 xl:-mx-2">
@@ -87,7 +79,7 @@
                 <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
 
                     <label class="block font-medium text-sm text-gray-700" for="company_name">
-                        Company Name <span class="text-red-500">*</span>
+                        {{__('register.Company Name')}} <span class="text-red-500">*</span>
                     </label>
                     <x-jet-input id="company_name" class="block my-2 w-full" type="text" name="company_name" :value="old('company_name')" required autocomplete="company_name"/>
                 </div>
@@ -100,7 +92,6 @@
                     <input type="tel" id="mobile-number" style="padding-top: 12px;padding-bottom: 12px; " name="mobile" placeholder="e.g. +966 059 338 8833" class="form-input rounded-md shadow-sm block my-2 w-full">
 
                 </div>
-
 
 
                 <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
@@ -122,7 +113,7 @@
                         </label>
                         <div class="relative">
                             <input name="password" id="password" required autocomplete="new-password" :type="show ? 'password' : 'text'" class="form-input rounded-md shadow-sm block my-2 w-full">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mr-2">
+                            <div class="absolute inset-y-0 left-0 pr-3 flex items-center text-sm leading-5 ml-4">
                                 <svg class="h-6 text-gray-700" fill="none" @click="show = !show" :class="{'hidden': !show, 'block':show }" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 576 512">
                                     <path fill="currentColor"
                                           d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"></path>
@@ -144,7 +135,7 @@
                         <div x-data="{ show: true }">
                             <div class="relative">
                                 <input id="password_confirmation" name="password_confirmation" required autocomplete="new-password" :type="show ? 'password' : 'text'" class="form-input rounded-md shadow-sm block my-2 w-full">
-                                <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mr-2">
+                                <div class="absolute inset-y-0 left-0 pr-3 flex items-center text-sm leading-5 ml-4">
                                     <svg class="h-6 text-gray-700" fill="none" @click="show = !show" :class="{'hidden': !show, 'block':show }" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 576 512">
                                         <path fill="currentColor"
                                               d="M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z"></path>
@@ -190,7 +181,7 @@
                         {{ __('register.Already registered?') }}
                     </a>
 
-                    <x-jet-button class="ml-4">
+                    <x-jet-button class="mr-4">
                         {{ __('register.Register') }}
                     </x-jet-button>
                 </div>
