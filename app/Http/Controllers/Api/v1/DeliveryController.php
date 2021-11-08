@@ -224,7 +224,7 @@ class DeliveryController extends Controller
     }
 
 
-    public function delivery_shipment($rfq_type, $delivery_id, $rfq_no, $sitm, Request $request)
+    public function delivery_shipment($rfq_type, $delivery_id, $rfq_no, $sitm, $status, Request $request)
     {
         $token = $request->code;
         if ($token == "RRNirxFh4j9Ftd") {
@@ -237,10 +237,10 @@ class DeliveryController extends Controller
                 if (isset($deliveries) && $shipment_item != null) {
                     foreach ($deliveries as $delivery)
                     {
-                        $delivery->status = 1;
+                        $delivery->status = $status;
                         $delivery->save();
                     }
-                    $shipment_item->status = 1;
+                    $shipment_item->status = $status;
                     $shipment_item->save();
 
 
@@ -268,9 +268,9 @@ class DeliveryController extends Controller
                 $shipment_item = ShipmentItem::find($sitm);
 
                 if (isset($delivery) && $shipment_item != null) {
-                    $delivery->status = 1;
+                    $delivery->status = $status;
                     $delivery->save();
-                    $shipment_item->status = 1;
+                    $shipment_item->status = $status;
                     $shipment_item->save();
 
                     return response()->json(['message' => 'Updated...'], 200);

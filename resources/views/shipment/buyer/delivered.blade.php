@@ -13,9 +13,7 @@
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))
@@ -75,7 +73,22 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            @php
+                                                /* Adding below code only for buyer view because of a shipment may have more than one buyer deliveries so if one buyer deliveries are delivered and other buyer's not we must change status to delivered to one buyer */
+                                            $shipmentsNotHavingStatusZero = []; $totalShipmentItemsCount = count($shipment->shipmentItems);
+                                            foreach ($shipment->shipmentItems as $shipmentItems)
+                                            {
+                                                if ($shipmentItems->status != 0)
+                                                {
+                                                    $shipmentsNotHavingStatusZero[] = $shipmentItems;
+                                                }
+                                            }
+                                            @endphp
                                             @if($shipment->status == 1 )
+                                                <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Received')}}
+                                                </span>
+                                            @elseif($totalShipmentItemsCount == count($shipmentsNotHavingStatusZero) )
                                                 <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
                                                     {{__('portal.Received')}}
                                                 </span>
@@ -125,9 +138,7 @@
 @else
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))
@@ -187,7 +198,20 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            @php $shipmentsNotHavingStatusZero = []; $totalShipmentItemsCount = count($shipment->shipmentItems);
+                                            foreach ($shipment->shipmentItems as $shipmentItems)
+                                            {
+                                                if ($shipmentItems->status != 0)
+                                                {
+                                                    $shipmentsNotHavingStatusZero[] = $shipmentItems;
+                                                }
+                                            }
+                                            @endphp
                                             @if($shipment->status == 1 )
+                                                <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Received')}}
+                                                </span>
+                                            @elseif($totalShipmentItemsCount == count($shipmentsNotHavingStatusZero) )
                                                 <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
                                                     {{__('portal.Received')}}
                                                 </span>
