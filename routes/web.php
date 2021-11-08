@@ -684,7 +684,7 @@ Route::get('tree', function () {
 
 /*
 Route::get('/testSms', function () {
-    $x = \App\Models\User::send_otp('1122','581382822');
+    $x = \App\Models\User::send_otp('6633','923008169924');
     dd($x);
 });
 */
