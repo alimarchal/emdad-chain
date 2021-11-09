@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Notifications\User\UserRegistration;
+use App\Notifications\UserRegister;
 use Illuminate\Http\Request;
 
 class WebsiteArabicController extends Controller

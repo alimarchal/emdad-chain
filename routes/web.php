@@ -663,6 +663,7 @@ Route::middleware(['auth:sanctum'])->get('invoice-payment/invoice_payment_status
 ############################################################## END ##########################################################################
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('showLibrary', [LibraryController::class,'showLibrary'])->name('showLibrary');
+    Route::get('markAsRead', [LibraryController::class,'markRead'])->name('markRead');
     Route::resource('library', LibraryController::class);
 
     Route::get('logistics-dashboard', [DashboardController::class, 'logistic_dashboard'])->name('logistics.dashboard');
@@ -688,3 +689,4 @@ Route::get('/testSms', function () {
     dd($x);
 });
 */
+//        User::find(5)->notify(new UserRegistration());

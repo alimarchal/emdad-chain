@@ -5,6 +5,7 @@ namespace App\Actions\Fortify;
 use App\Models\Ire;
 use App\Models\IreCommission;
 use App\Models\User;
+use App\Notifications\User\UserRegistration;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -123,6 +124,7 @@ class CreateNewUser implements CreatesNewUsers
             $user->assignRole($role);
         }
 
+        $user->notify(new UserRegistration());
         return $user;
     }
 }

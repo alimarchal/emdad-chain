@@ -128,4 +128,10 @@ class LibraryController extends Controller
         }
 
     }
+
+    public function markRead()
+    {
+        auth()->user()->unreadNotifications->markAsRead();
+        return redirect()->back();
+    }
 }
