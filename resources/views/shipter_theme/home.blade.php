@@ -63,7 +63,7 @@
                                 and warehousing processes into one intelligent and unified platform. It offers the lowest costs, yet the best technical and logistical standards.
                                 Emdad aims to make the local supply chain operations in the Kingdom of Saudi Arabia smarter, more advanced and sustainable, according to the Vision 2030.</h3>
                             <div>
-                                <div class="btn-style join_us"><a href="{{route('register')}}" class="join_us_font_size">Join us</a></div>
+{{--                                <div class="btn-style join_us"><a href="{{route('register')}}" class="join_us_font_size">Join us</a></div>--}}
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                                 and warehousing processes into one intelligent and unified platform. It offers the lowest costs, yet the best technical and logistical standards.
                                 Emdad aims to make the local supply chain operations in the Kingdom of Saudi Arabia smarter, more advanced and sustainable, according to the Vision 2030.</h3>
                             <div>
-                                <div class="btn-style join_us"><a href="{{route('register')}}" class="join_us_font_size">Join us</a></div>
+{{--                                <div class="btn-style join_us"><a href="{{route('register')}}" class="join_us_font_size">Join us</a></div>--}}
                             </div>
                         </div>
                     </div>
@@ -461,7 +461,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}" style="border-radius: 25px;">Order Now</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -479,7 +479,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}" style="border-radius: 25px;">Order Now</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -497,7 +497,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}" style="border-radius: 25px;">Order Now</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -515,7 +515,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}" style="border-radius: 25px;">Order Now</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -525,7 +525,9 @@
                 </div>
             </div>
             <div class="btns">
-                <div class="btn-style"><a href="{{route('english.buyerPackage')}}" target="_blank">Details</a></div>
+{{--                <div class="btn-style">--}}
+                    <a href="{{route('english.buyerPackage')}}" target="_blank" class="a_hover_class text-white">Details</a>
+{{--                </div>--}}
             </div>
             {{--<div class="section-title text-center">
                 <span>We Give You The Best</span>
@@ -720,7 +722,7 @@
                 </div>
             </div>
             <div class="btns text-center">
-                <div class="btn-style"><a href="{{route('english.team')}}">More</a></div>
+                <div class="btn-style"><a href="{{route('english.team')}}" style="border-radius: 25px;">More</a></div>
             </div>
         </div>
     </div>

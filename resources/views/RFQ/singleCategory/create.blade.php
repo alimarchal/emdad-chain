@@ -374,7 +374,7 @@
                                 <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
-                                <th style="width:15%;">{{__('portal.Shipment Remarks')}}</th>
+                                <th style="width:15%;">{{__('portal.Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
                             </thead>
@@ -838,7 +838,7 @@
                                 <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
-                                <th style="width:15%;"> {{__('portal.Shipment Remarks')}}</th>
+                                <th style="width:15%;"> {{__('portal.Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
                             </thead>
@@ -1400,7 +1400,7 @@
                                 <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
-                                <th style="width:15%;">{{__('portal.Shipment Remarks')}}</th>
+                                <th style="width:15%;">{{__('portal.Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
                             </thead>
@@ -1857,7 +1857,7 @@
                                 <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
-                                <th style="width:15%;"> {{__('portal.Shipment Remarks')}}</th>
+                                <th style="width:15%;"> {{__('portal.Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
                             </thead>

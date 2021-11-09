@@ -159,19 +159,23 @@
                         @php $multipleCategoryCount = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->count(); @endphp
                         @php $count = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->count(); @endphp
 
-                        <img src="{{asset('cart.png')}}" style="margin-right: 10px;margin-bottom: 6px;">
-                        <a href="{{route('RFQCart.index')}}" title="{{__('navigation-dropdown.Multiple Categories Cart items')}}">
-                            <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
-                                ({{$multipleCategoryCount}})
-                            </span>
-                        </a> &nbsp; |
+                        @if($multipleCategoryCount > 0)
+                            <img src="{{asset('cart.png')}}" style="margin-right: 10px;margin-bottom: 6px;">
+                            <a href="{{route('RFQCart.index')}}" title="{{__('navigation-dropdown.Multiple Categories Cart items')}}">
+                                <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                    ({{$multipleCategoryCount}})
+                                </span>
+                            </a> &nbsp; |
+                        @endif
 
-                        <img src="{{asset('cart2.png')}}" style="margin-left: 10px;margin-bottom: 4px;">&nbsp;
-                        <a href="{{route('single_cart_index')}}" title="{{__('navigation-dropdown.Single Category Cart items')}}">
-                            <span @if($count > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
-                                ({{$count}})
-                            </span>
-                        </a> &nbsp; |
+                        @if($count > 0)
+                            <img src="{{asset('cart2.png')}}" style="margin-left: 10px;margin-bottom: 4px;">&nbsp;
+                            <a href="{{route('single_cart_index')}}" title="{{__('navigation-dropdown.Single Category Cart items')}}">
+                                <span @if($count > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                    ({{$count}})
+                                </span>
+                            </a> &nbsp; |
+                        @endif
 
                         @php
                             $quotationCount = 0;
@@ -455,23 +459,29 @@
                     @php $multipleCategoryCount = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->count(); @endphp
                     @php $count = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->count(); @endphp
 
-                <div style="display: inline">
-                    <div style="float:left; text-align:left; display:inline;">
-                        <img src="{{asset('cart.png')}}" style="margin-left: 10px;margin-bottom: 4px;width: 32px; height: 32px;">
-                        <a href="{{route('RFQCart.index')}}" title="{{__('navigation-dropdown.Multiple Categories Cart items')}}" style="margin-left: 19px;">
-                                <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
-                                    ({{$multipleCategoryCount}})
-                                </span>
-                        </a> &nbsp; |
+                    <div style="display: inline">
+                        <div style="float:left; text-align:left; display:inline;">
+                            @if($multipleCategoryCount > 0)
+                                <img src="{{asset('cart.png')}}" style="margin-left: 10px;margin-bottom: 4px;width: 32px; height: 32px;">
+                                <a href="{{route('RFQCart.index')}}" title="{{__('navigation-dropdown.Multiple Categories Cart items')}}" style="margin-left: 19px;">
+                                        <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                            ({{$multipleCategoryCount}})
+                                        </span>
+                                </a> &nbsp; |
+                            @endif
+                        </div>
+
+                        @if($count > 0)
+                            <img src="{{asset('cart2.png')}}" style="margin-left: 10px;margin-bottom: 4px;width: 32px; height: 32px;">&nbsp;
+                            <a href="{{route('single_cart_index')}}" title="{{__('navigation-dropdown.Single Category Cart items')}}">
+                                    <span @if($count > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                        ({{$count}})
+                                    </span>
+                            </a> &nbsp; |
+                        @endif
                     </div>
 
-                    <img src="{{asset('cart2.png')}}" style="margin-left: 10px;margin-bottom: 4px;width: 32px; height: 32px;">&nbsp;
-                    <a href="{{route('single_cart_index')}}" title="{{__('navigation-dropdown.Single Category Cart items')}}">
-                            <span @if($count > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
-                                ({{$count}})
-                            </span>
-                    </a> &nbsp; |
-                </div>
+                    @if($multipleCategoryCount == 0 && $count == 0) @elseif($multipleCategoryCount == 0 || $count == 0) <br><br><br> @endif
 
                     <a @if($quotationCount > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
@@ -824,19 +834,23 @@
                         @php $multipleCategoryCount = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->count(); @endphp
                         @php $count = \App\Models\ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->count(); @endphp
 
-                        <img src="{{asset('cart.png')}}" style="transform: scaleX(-1) ;margin-left: 10px;margin-bottom: 6px;"> &nbsp;
-                        <a href="{{route('RFQCart.index')}}" title="{{__('navigation-dropdown.Multiple Categories Cart items')}}">
-                            <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
-                                ({{$multipleCategoryCount}})
-                            </span>
-                        </a> &nbsp; |
+                        @if($multipleCategoryCount > 0)
+                            <img src="{{asset('cart.png')}}" style="transform: scaleX(-1) ;margin-left: 10px;margin-bottom: 6px;"> &nbsp;
+                            <a href="{{route('RFQCart.index')}}" title="{{__('navigation-dropdown.Multiple Categories Cart items')}}">
+                                <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                    ({{$multipleCategoryCount}})
+                                </span>
+                            </a> &nbsp; |
+                        @endif
 
-                        <img src="{{asset('cart2.png')}}" style="transform: scaleX(-1) ;margin-right: 10px;margin-bottom: 4px;"> &nbsp;
-                        <a href="{{route('single_cart_index')}}" title="{{__('navigation-dropdown.Single Category Cart items')}}">
-                            <span @if($count > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
-                                ({{$count}})
-                            </span>
-                        </a> &nbsp; |
+                        @if($count > 0)
+                            <img src="{{asset('cart2.png')}}" style="transform: scaleX(-1) ;margin-right: 10px;margin-bottom: 4px;"> &nbsp;
+                            <a href="{{route('single_cart_index')}}" title="{{__('navigation-dropdown.Single Category Cart items')}}">
+                                <span @if($count > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                    ({{$count}})
+                                </span>
+                            </a> &nbsp; |
+                        @endif
 
                         @php
                             $quotationCount = 0;
@@ -1138,22 +1152,26 @@
 
                     <div style="display: inline">
                         <div style="float:right; text-align:left; display:inline;">
-                            <img src="{{asset('cart.png')}}" style="transform: scaleX(-1);margin-right: 10px;margin-bottom: 10px;width: 32px; height: 29px;">&nbsp;
-                            <a href="{{route('RFQCart.index')}}" title="{{__('navigation-dropdown.Multiple Categories Cart items')}}">
-                                <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
-                                    ({{$multipleCategoryCount}})
-                                </span>
-                            </a> &nbsp; |
+                            @if($multipleCategoryCount > 0)
+                                <img src="{{asset('cart.png')}}" style="transform: scaleX(-1);margin-right: 10px;margin-bottom: 10px;width: 32px; height: 29px;">&nbsp;
+                                <a href="{{route('RFQCart.index')}}" title="{{__('navigation-dropdown.Multiple Categories Cart items')}}">
+                                    <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                        ({{$multipleCategoryCount}})
+                                    </span>
+                                </a> &nbsp; |
+                            @endif
                         </div>
 
-                        <img src="{{asset('cart2.png')}}" style="transform: scaleX(-1) ;margin-right: 10px;margin-bottom: 4px;width: 32px; height: 29px;"> &nbsp;
-                        <a href="{{route('single_cart_index')}}" title="{{__('navigation-dropdown.Single Category Cart items')}}">
-                            <span @if($count > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
-                                ({{$count}})
-                            </span>
-                        </a> &nbsp; |
+                        @if($count > 0)
+                            <img src="{{asset('cart2.png')}}" style="transform: scaleX(-1) ;margin-right: 10px;margin-bottom: 4px;width: 32px; height: 29px;"> &nbsp;
+                            <a href="{{route('single_cart_index')}}" title="{{__('navigation-dropdown.Single Category Cart items')}}">
+                                <span @if($count > 0) class="text-green-600 hover:underline" @else class="text-red-600 hover:underline" @endif>
+                                    ({{$count}})
+                                </span>
+                            </a> &nbsp; |
+                        @endif
                     </div>
-
+                    @if($multipleCategoryCount == 0 && $count == 0) @elseif($multipleCategoryCount == 0 || $count == 0) <br><br><br> @endif
                     <a @if($quotationCount > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
                         {{ __('navigation-dropdown.Quotations')}}: &nbsp; {{ $quotationCount }}

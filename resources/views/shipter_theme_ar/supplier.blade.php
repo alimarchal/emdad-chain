@@ -107,7 +107,7 @@
             <!-- price-area start -->
             <div class="pricing-area pricing-area-2" style="direction: rtl">
                 <div class="container">
-                    <div class="btn-style join_us_ar"><a href="{{route('registerAr', 'ar')}}" class="join_us_font_size">تسجيل الشريك </a></div>
+                    <div class="btn-style join_us_ar"><a href="{{route('registerAr', 'ar')}}" class="join_us_font_size rounded-pill">تسجيل الشريك </a></div>
                     <div class="section-title text-center">
                 <span>
                     نقدم لكم الأفضل
@@ -133,7 +133,7 @@
                                             </div>
                                             <div class="pricing-footer">
                                                 <div class="btns">
-                                                    <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}">أطلب الآن</a></div>
+                                                    <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}" class="rounded-pill">أطلب الآن</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -151,7 +151,7 @@
                                             </div>
                                             <div class="pricing-footer">
                                                 <div class="btns">
-                                                    <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}">أطلب الآن</a></div>
+                                                    <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}" class="rounded-pill">أطلب الآن</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -169,7 +169,7 @@
                                             </div>
                                             <div class="pricing-footer">
                                                 <div class="btns">
-                                                    <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}">أطلب الآن</a></div>
+                                                    <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}" class="rounded-pill">أطلب الآن</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -179,7 +179,9 @@
                         </div>
                     </div>
                     <div class="btns">
-                        <div class="btn-style"><a href="{{route('arabic.supplierPackage')}}" target="_blank">التفاصيل</a></div>
+{{--                        <div class="btn-style">--}}
+                            <a href="{{route('arabic.supplierPackage')}}" target="_blank" class="a_hover_class text-white">التفاصيل</a>
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>

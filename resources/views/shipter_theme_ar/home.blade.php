@@ -62,7 +62,7 @@
 {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
                             <h3 class="text-white emdad_description" style="font-family: arabicFont;direction: rtl;">إمداد هي منصة إلكترونية (B2B) تم إنشاؤها على أيدي فريق طموح وخبير وفي المجال التقني، بغرض تحويل عمليات البيع والشراء والتوريد والتخزين إلى منصة ذكية وموحدة، بأقل التكاليف وبأفضل المعايير التقنية واللوجستية. ولتصبح عمليات سلاسل الإمداد المحلية في المملكة العربية السعودية أكثر ذكاءً وتقدمًا واستدامةً وفقاً لرؤية ٢٠٣٠.</h3>
                             <div>
-                                <div class="btn-style join_us_ar"><a href="{{route('registerAr', 'ar')}}" class="join_us_font_size">انضم إلينا</a></div>
+{{--                                <div class="btn-style join_us_ar"><a href="{{route('registerAr', 'ar')}}" class="join_us_font_size">انضم إلينا</a></div>--}}
                             </div>
                             <div class="btns">
 {{--                                <div class="btn-style"><a href="{{route('arabic.about')}}">من إمداد</a></div>--}}
@@ -79,7 +79,7 @@
                             {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
                             <h3 class="text-white emdad_description" style="font-family: arabicFont;direction: rtl;">إمداد هي منصة إلكترونية (B2B) تم إنشاؤها على أيدي فريق طموح وخبير وفي المجال التقني، بغرض تحويل عمليات البيع والشراء والتوريد والتخزين إلى منصة ذكية وموحدة، بأقل التكاليف وبأفضل المعايير التقنية واللوجستية. ولتصبح عمليات سلاسل الإمداد المحلية في المملكة العربية السعودية أكثر ذكاءً وتقدمًا واستدامةً وفقاً لرؤية ٢٠٣٠.</h3>
                             <div>
-                                <div class="btn-style join_us_ar"><a href="{{route('register')}}" class="join_us_font_size">انضم إلينا</a></div>
+{{--                                <div class="btn-style join_us_ar"><a href="{{route('register')}}" class="join_us_font_size">انضم إلينا</a></div>--}}
                             </div>
                             <div class="btns" style="font-family: arabicFont;direction: rtl;">
 {{--                                <div class="btn-style"><a href="{{route('arabic.about')}}">من إمداد</a></div>--}}
@@ -415,7 +415,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}">أطلب الآن</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}" class="rounded-pill">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -433,7 +433,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}">أطلب الآن</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}" class="rounded-pill">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -451,7 +451,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}">أطلب الآن</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}" class="rounded-pill">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -470,7 +470,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}">أطلب الآن</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}" class="rounded-pill">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -480,7 +480,9 @@
                 </div>
             </div>
             <div class="btns">
-                <div class="btn-style"><a href="{{route('arabic.buyerPackage')}}" target="_blank">التفاصيل</a></div>
+{{--                <div class="btn-style">--}}
+                    <a href="{{route('arabic.buyerPackage')}}" target="_blank" class="a_hover_class text-white">التفاصيل</a>
+{{--                </div>--}}
             </div>
             {{--<div class="section-title text-center">
                 <span>
@@ -690,7 +692,7 @@
                 </div>
             </div>
             <div class="btns text-center">
-                <div class="btn-style"><a href="{{route('arabic.team')}}">المزيد</a></div>
+                <div class="btn-style"><a href="{{route('arabic.team')}}" class="rounded-pill">المزيد</a></div>
             </div>
         </div>
     </div>

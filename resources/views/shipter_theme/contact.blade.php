@@ -78,7 +78,7 @@
                                         <textarea class="form-control" name="message"  id="message" placeholder="Your Message... *"></textarea>
                                     </div>
                                     <div class="submit-btn-wrapper">
-                                        <button type="submit" class="btn-primary">Send</button>
+                                        <button type="submit" class="btn-primary" style="border-radius: 25px;">Send</button>
                                     </div>
                                 </form>
                             </div>

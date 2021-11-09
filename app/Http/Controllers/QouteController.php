@@ -600,7 +600,11 @@ class QouteController extends Controller
 
     public function updateModificationNeeded(Qoute $qoute, Request $request)
     {
-
+        Validator::make($request->all(), [
+            'message' => ['required'],
+        ], [
+            'message.required' => 'Please provide modification reason(s)',
+        ])->validate();
         /* Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message */
         /* Copied this form QouteMessageController because merging Send message and Quote Again Button  */
         if ($request->message != null)
@@ -815,6 +819,12 @@ class QouteController extends Controller
 
     public function singleCategoryRFQUpdateStatusModificationNeeded(Qoute $quotes, Request $request)
     {
+        Validator::make($request->all(), [
+            'message' => ['required'],
+        ], [
+            'message.required' => 'Please provide modification reason(s)',
+        ])->validate();
+
         /* Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message */
         /* Copied this form QouteMessageController because merging Send message and Quote Again Button  */
         if ($request->message != null)

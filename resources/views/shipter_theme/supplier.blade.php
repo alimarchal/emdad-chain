@@ -88,7 +88,7 @@
             <!-- pricing-area start -->
             <div class="pricing-area pricing-area-2">
                 <div class="container">
-                    <div class="btn-style join_us"><a href="{{route('register')}}" class="join_us_font_size">Partner registeration</a></div>
+                    <div class="btn-style join_us"><a href="{{route('register')}}" class="join_us_font_size" style="border-radius: 25px;">Partner registration</a></div>
                     <div class="section-title text-center">
                         <span>We Give You The Best</span>
                         <h2>Supplier Subscription Plan</h2>
@@ -108,7 +108,7 @@
                                             </div>
                                             <div class="pricing-footer">
                                                 <div class="btns">
-                                                    <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                                    <div class="btn-style btn-style-4"><a href="{{route('register')}}" style="border-radius: 25px;">Order Now</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,7 +126,7 @@
                                             </div>
                                             <div class="pricing-footer">
                                                 <div class="btns">
-                                                    <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                                    <div class="btn-style btn-style-4"><a href="{{route('register')}}" style="border-radius: 25px;">Order Now</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -144,7 +144,7 @@
                                             </div>
                                             <div class="pricing-footer">
                                                 <div class="btns">
-                                                    <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                                    <div class="btn-style btn-style-4"><a href="{{route('register')}}" style="border-radius: 25px;">Order Now</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -154,7 +154,9 @@
                         </div>
                     </div>
                     <div class="btns">
-                        <div class="btn-style"><a href="{{route('english.supplierPackage')}}" target="_blank">Details</a></div>
+{{--                        <div class="btn-style">--}}
+                            <a href="{{route('english.supplierPackage')}}" target="_blank" class="text-white a_hover_class">Details</a>
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>

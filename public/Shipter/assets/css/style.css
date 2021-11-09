@@ -265,6 +265,42 @@ a:focus {
 .account_login-area .account-item-2{
  padding-left: 35px;
 }
+
+.a_hover_class{
+    background-color: lightslategray;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    padding: 7px 9px;
+    border: 2px solid lightslategray;
+    text-transform: capitalize;
+    display: inline-block;
+    margin-top: 3px;
+    border-radius:25px;
+}
+.a_hover_class:hover{
+    background-color: #515151;
+}
+.english{
+    background-color: #eb8e23;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    padding: 7px 27px;
+    border: 2px solid whitesmoke;
+    text-transform: capitalize;
+    display: inline-block;
+    margin-top: 3px;
+    border-radius:25px;
+}
+.english:hover{
+    background-color: #515151;
+}
+@media (min-width: 575px) {
+    .a_hover_class {
+        font-size: 15px;
+    }
+}
 @media (min-width: 575px) {
     .company {
         transform: scaleX(-1);

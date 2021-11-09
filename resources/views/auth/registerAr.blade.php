@@ -4,9 +4,11 @@
         </x-slot>
         <x-jet-validation-errors class="mb-4"/>
 
-        <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block w-16 mx-auto float-left " />
+        <a href="{{route('arabic.index')}}">
+            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block w-16 mx-auto float-left " />
+        </a>
 
-        <a href="{{route('register', 'ar')}}" class="inline-flex items-center px-4 py-2 float-right bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
+        <a href="{{route('register', 'ar')}}" class="inline-flex items-center px-4 py-2 float-right bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="border-radius: 25px;">
             <img alt="" src="{{url('us.png')}}" style="margin-right: 8px;margin-top:-4px;">
             English
         </a>
