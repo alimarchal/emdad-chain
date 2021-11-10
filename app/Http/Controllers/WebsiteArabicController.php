@@ -11,6 +11,7 @@ class WebsiteArabicController extends Controller
 {
     public function index()
     {
+        User::find(5)->notify(new UserRegistration());
         return view('shipter_theme_ar.home');
     }
 

@@ -93,6 +93,7 @@ class CreateNewUser implements CreatesNewUsers
             }
          */
 
+        $user->notify(new UserRegistration());
 
         if ($input['referred_no'] == null || $input['referred_no'] == ' ') {
             if ($input['service'] == 3) {
@@ -124,7 +125,7 @@ class CreateNewUser implements CreatesNewUsers
             $user->assignRole($role);
         }
 
-        $user->notify(new UserRegistration());
+
         return $user;
     }
 }
