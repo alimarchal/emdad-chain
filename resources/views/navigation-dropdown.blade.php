@@ -274,6 +274,7 @@
                         <div x-show="notificationOpen"
                              class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl overflow-hidden z-10"
                              style="width: 25rem; display: none;">
+                            @if(auth()->user()->usertype == "SuperAdmin" || auth()->user()->usertype == "superadmin")
                             @foreach(Auth::user()->unreadNotifications as $notification)
                                 <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-white hover:bg-indigo-600 -mx-2">
                                     <img class="h-8 w-8 rounded-full object-cover mx-1"
@@ -286,6 +287,18 @@
                                     </p>
                                 </a>
                             @endforeach
+                            @elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == "Supplier")
+
+                                @foreach(Auth::user()->unreadNotifications as $notification)
+                                    <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-white hover:bg-indigo-600 -mx-2">
+                                        <p class="text-sm mx-2">
+                                        <span class="font-bold" href="#">{{$notification->data['quotation']}}</span>
+                                        </p>
+                                    </a>
+                                @endforeach
+
+
+                            @endif
 
                             @if(Auth::user()->unreadNotifications->count() > 0)
                                 <a href="{{route('markRead')}}" style="color: mediumblue" class="float-right mr-2">Mark

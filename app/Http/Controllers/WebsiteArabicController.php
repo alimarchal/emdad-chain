@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Notifications\User\SendWelcomeNotificationToAdmin;
 use App\Notifications\User\UserRegistration;
 use App\Notifications\UserRegister;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class WebsiteArabicController extends Controller
 {
     public function index()
     {
-        User::find(5)->notify(new UserRegistration());
+//        User::find(5)->notify(new UserRegistration());
         return view('shipter_theme_ar.home');
     }
 
