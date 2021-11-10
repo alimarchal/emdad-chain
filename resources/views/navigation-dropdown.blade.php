@@ -226,28 +226,28 @@
                     {{-- Added below if condition because of POST method being used and POST is not able to redirect --}}
                     @if(request()->routeIs('invoicePayment.stepOne'))
                         <a href="{{route('languageChangeForPayment', ['lang' => 'ar', 'rtl_value' => 1])}}"
-                           class="inline-flex items-center px-4 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
-                                alt="" src="{{url('sa.png')}}" style="margin-right: -18px;margin-top:-28px;" id="lan">العربية</a>
+                           class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
+                                alt="" src="{{url('sa.png')}}" style="margin-right: 8px;" id="lan">العربية</a>
                     @elseif(request()->routeIs('businessPackage.stepOne'))
                         <a href="{{route('languageChangeForPackagePayment', ['lang' => 'ar', 'rtl_value' => 1])}}"
-                           class="inline-flex items-center px-4 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
-                                alt="" src="{{url('sa.png')}}" style="margin-right: -18px;margin-top:-28px;" id="lan">العربية</a>
+                           class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
+                                alt="" src="{{url('sa.png')}}" style="margin-right: 8px;" id="lan">العربية</a>
                     @elseif(request()->routeIs('adminIreEdit'))
                         <a href="{{route('languageChangeForIREEdit', ['lang' => 'ar', 'rtl_value' => 1])}}"
-                           class="inline-flex items-center px-4 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
-                                alt="" src="{{url('sa.png')}}" style="margin-right: -18px;margin-top:-28px;" id="lan">العربية</a>
+                           class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
+                                alt="" src="{{url('sa.png')}}" style="margin-right: 8px;" id="lan">العربية</a>
                     @elseif(request()->routeIs('adminPercentageEdit'))
                         <a href="{{route('languageChangeForCommissionPercentage', ['lang' => 'ar', 'rtl_value' => 1])}}"
-                           class="inline-flex items-center px-4 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
-                                alt="" src="{{url('sa.png')}}" style="margin-right: -18px;margin-top:-28px;" id="lan">العربية</a>
+                           class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
+                                alt="" src="{{url('sa.png')}}" style="margin-right: 8px;" id="lan">العربية</a>
                     @elseif(request()->routeIs('adminDownloadEdit'))
                         <a href="{{route('languageChangeForDownloadableFiles', ['lang' => 'ar', 'rtl_value' => 1])}}"
-                           class="inline-flex items-center px-4 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
-                                alt="" src="{{url('sa.png')}}" style="margin-right: -18px;margin-top:-28px;" id="lan">العربية</a>
+                           class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
+                                alt="" src="{{url('sa.png')}}" style="margin-right: 8px;" id="lan">العربية</a>
                     @else
                         <a href="{{route('languageChange', ['lang' => 'ar', 'rtl_value' => 1])}}"
-                           class="inline-flex items-center px-4 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
-                                alt="" src="{{url('sa.png')}}" id="lan">العربية</a>
+                           class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
+                                alt="" src="{{url('sa.png')}}" style="margin-right: 8px;" id="lan">العربية</a>
                     @endif
                     {{-- <a class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">قريباً</a>
                     </x-jet-button>
@@ -396,18 +396,18 @@
                                     {{ __('navigation-dropdown.Subscription') }}
                                 </x-jet-dropdown-link>
 
-                                <div class="border-t border-gray-100"></div>
+                                {{--<div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('users.create') }}">
-                                    {{ __('navigation-dropdown.Create Users') }}
+                                    {{ __('navigation-dropdown.Add User') }}
                                 </x-jet-dropdown-link>
 
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('users.index') }}">
                                     {{ __('navigation-dropdown.Current Users') }}
-                                </x-jet-dropdown-link>
+                                </x-jet-dropdown-link>--}}
 
-{{--                                --}}{{-- Below code is when user (CEO) cannot add user unless completes his registeration and gets his business approved --}}
-                                @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
+                                {{-- Below code is when user (CEO) cannot add user unless completes his registeration and gets his business approved --}}
+                                {{--@if(auth()->user()->hasRole('CEO|SuperAdmin') && auth()->user()->status == 3 && auth()->user()->status == null)
 
                                     @if (auth()->user()->business_id)
                                         <div class="border-t border-gray-100"></div>
@@ -415,7 +415,7 @@
                                             {{ __('navigation-dropdown.Add User') }}
                                         </x-jet-dropdown-link>
                                     @endif
-                                @endif
+                                @endif--}}
                             @endif
 
                             {{-- Below code is when user (CEO) can add user right after adding his business details --}}
@@ -670,7 +670,7 @@
                             {{ __('navigation-dropdown.Current Users') }}
                         </x-jet-dropdown-link>
 
-                        @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
+                        @if(auth()->user()->hasRole('CEO|SuperAdmin') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
 
                             @if (auth()->user()->business_id)
                                 <div class="border-t border-gray-100"></div>
@@ -1015,28 +1015,28 @@
                     {{-- Added below if condition because of POST method being used and POST is not able to redirect --}}
                     @if(request()->routeIs('invoicePayment.stepOne'))
                         <a href="{{route('languageChangeForPayment', ['lang' => 'en', 'rtl_value' => 0])}}"
-                           class="get-started-btn scrollto" style="cursor: pointer"><img alt="" src="{{url('us.png')}}"
-                                                                                         style="margin-right: 2px;margin-top: -4px;">English</a>
+                           class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md font-sans text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="cursor: pointer;"><img alt="" src="{{url('us.png')}}"
+                                                                                         style="margin-left: 10px;">English</a>
                     @elseif(request()->routeIs('businessPackage.stepOne'))
                         <a href="{{route('languageChangeForPackagePayment', ['lang' => 'en', 'rtl_value' => 0])}}"
-                           class="get-started-btn scrollto" style="cursor: pointer"><img alt="" src="{{url('us.png')}}"
-                                                                                         style="margin-right: 2px;margin-top: -4px;">English</a>
+                           class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md font-sans text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="cursor: pointer;"><img alt="" src="{{url('us.png')}}"
+                                                                                         style="margin-left: 10px;">English</a>
                     @elseif(request()->routeIs('adminIreEdit'))
                         <a href="{{route('languageChangeForIREEdit', ['lang' => 'en', 'rtl_value' => 0])}}"
-                           class="get-started-btn scrollto" style="cursor: pointer"><img alt="" src="{{url('us.png')}}"
-                                                                                         style="margin-right: 2px;margin-top: -4px;">English</a>
+                           class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md font-sans text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="cursor: pointer;"><img alt="" src="{{url('us.png')}}"
+                                                                                         style="margin-left: 10px;">English</a>
                     @elseif(request()->routeIs('adminPercentageEdit'))
                         <a href="{{route('languageChangeForCommissionPercentage', ['lang' => 'en', 'rtl_value' => 0])}}"
-                           class="get-started-btn scrollto" style="cursor: pointer"><img alt="" src="{{url('us.png')}}"
-                                                                                         style="margin-right: 2px;margin-top: -4px;">English</a>
+                           class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md font-sans text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="cursor: pointer;"><img alt="" src="{{url('us.png')}}"
+                                                                                         style="margin-left: 10px;">English</a>
                     @elseif(request()->routeIs('adminDownloadEdit'))
                         <a href="{{route('languageChangeForDownloadableFiles', ['lang' => 'en', 'rtl_value' => 0])}}"
-                           class="get-started-btn scrollto" style="cursor: pointer"><img alt="" src="{{url('us.png')}}"
-                                                                                         style="margin-right: 2px;margin-top: -4px;">English</a>
+                           class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md font-sans text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="cursor: pointer;"><img alt="" src="{{url('us.png')}}"
+                                                                                                                                                                                                                                                                                                                                                                                               style="margin-left: 10px;">English</a>
                     @else
                         <a href="{{route('languageChange', ['lang' => 'en', 'rtl_value' => 0])}}"
-                           class="get-started-btn scrollto" style="cursor: pointer"><img alt="" src="{{url('us.png')}}"
-                                                                                         style="margin-right: 2px;margin-top: -4px;">English</a>
+                           class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md font-sans text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="cursor: pointer;"><img alt="" src="{{url('us.png')}}"
+                                                                                         style="margin-left: 10px;">English</a>
                     @endif
                     {{--                    @endcannot--}}
                     <div x-data="{ notificationOpen: false }" class="relative">
@@ -1188,7 +1188,7 @@
                                     {{ __('navigation-dropdown.Current Users') }}
                                 </x-jet-dropdown-link>
 
-                                @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
+                                @if(auth()->user()->hasRole('CEO|SuperAdmin') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
 
                                     @if (auth()->user()->business_id)
                                         <div class="border-t border-gray-100"></div>
@@ -1452,7 +1452,7 @@
                             {{ __('navigation-dropdown.Current Users') }}
                         </x-jet-dropdown-link>
 
-                        @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('CEO') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
+                        @if(auth()->user()->hasRole('CEO|SuperAdmin') && auth()->user()->status == 3 || auth()->user()->hasRole('CEO') && auth()->user()->status == null)
 
                             @if (auth()->user()->business_id)
                                 <div class="border-t border-gray-100"></div>

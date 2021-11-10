@@ -49,7 +49,7 @@ class PaymentController extends Controller
         $multiCategoryCollection = collect($multiCategory);
         $singleCategoryCollection = collect($singleCategory);
         $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
-        $collection = $multiCategoryCollection->merge($singleCategoryInvoices);
+        $collection = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
 
         return view('supplier.deliveryNotes', compact('collection'));
     }
@@ -329,7 +329,7 @@ class PaymentController extends Controller
             $singleCategoryCollection = collect($singleCategory);
             $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
             /* Merging Single and Multi category Invoices  */
-            $proformaInvoices = $multiCategoryCollection->merge($singleCategoryInvoices);
+            $proformaInvoices = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
         }
         elseif(auth()->user()->hasRole('SuperAdmin')){
             $proformaInvoices = Invoice::where('invoice_type', 1)->get();
@@ -364,7 +364,7 @@ class PaymentController extends Controller
             $singleCategoryCollection = collect($singleCategory);
             $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
             /* Merging Single and Multi category Invoices  */
-            $proformaInvoices = $multiCategoryCollection->merge($singleCategoryInvoices);
+            $proformaInvoices = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
         }
         elseif(auth()->user()->registration_type == "Buyer" || auth()->user()->hasRole('Buyer Payment Admin'))
         {
@@ -389,7 +389,7 @@ class PaymentController extends Controller
             $singleCategoryCollection = collect($singleCategory);
             $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
             /* Merging Single and Multi category Invoices  */
-            $proformaInvoices = $multiCategoryCollection->merge($singleCategoryInvoices);
+            $proformaInvoices = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
         }
         else{
             $proformaInvoices = Invoice::with('purchase_order')->where(['rfq_type' => 1])->get();
@@ -452,7 +452,7 @@ class PaymentController extends Controller
         $multiCategoryCollection = collect($multiCategory);
         $singleCategoryCollection = collect($singleCategory);
         $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
-        $supplierPayments = $multiCategoryCollection->merge($singleCategoryInvoices);
+        $supplierPayments = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
 
         return view('manual-payments.supplier.list', compact('supplierPayments'));
     }

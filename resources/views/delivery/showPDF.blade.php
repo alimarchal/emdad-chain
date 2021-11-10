@@ -43,7 +43,7 @@
 
     <div class="center">
         @php $logo_second = asset(Storage::url($deliveries[0]->supplier->business->business_photo_url)); @endphp
-        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;" />
+        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;border-radius: 50%;;margin-left: 75px;" />
         <h3 style="text-align: center; margin:0px;">Delivery Note</h3>
     </div>
 
@@ -58,6 +58,9 @@
     <br>
     <div class="center">
         <strong>Delivery Note: </strong>{{ $deliveries[0]->delivery_note_id }}<br>
+        @if(isset($deliveries[0]->invoice))
+        <strong>Invoice #: </strong>{{ $deliveries[0]->invoice->id }}<br>
+        @endif
         <strong>Purchase Order #: </strong>PO-{{ $deliveries[0]->draft_purchase_order_id }}<br>
         <strong>Date: </strong>{{ $deliveries[0]->created_at }}<br>
         <strong>Requisition #: </strong>RFQ-{{ $deliveries[0]->rfq_no }}<br>
@@ -86,9 +89,9 @@
             <div class="flex-row">
                 <p>{{ $deliveries[0]->buyer->business->business_name }}</p><br>
             </div>
-            <div class="flex-row mx-auto">
+            <div class="flex-row">
                 @php $logo_first = asset(Storage::url($deliveries[0]->buyer->business->business_photo_url)); @endphp
-                <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem; margin: auto"/>
+                <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 40px;height: 40px;border-radius: 25px;"/>
             </div>
         </div>
         <strong>City: </strong>{{ $deliveries[0]->buyer->business->city }}<br>
@@ -107,6 +110,9 @@
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
 
 <table class="min-w-full divide-y divide-black">
     <thead>
@@ -115,6 +121,7 @@
         <th style="text-align: center;background-color: #FCE5CD">#</th>
         <th style="text-align: center;background-color: #FCE5CD">CATEGORY NAME</th>
         <th style="text-align: center;background-color: #FCE5CD">DESCRIPTION</th>
+        <th style="text-align: center;background-color: #FCE5CD">UOM</th>
         <th style="text-align: center;background-color: #FCE5CD">QUANTITY</th>
     </tr>
 
@@ -129,6 +136,7 @@
             @endphp
             <td  style="text-align: center">{{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif</td>
             <td  style="text-align: center">{{ $delivery->eOrderItems->description }}</td>
+            <td  style="text-align: center">{{ $delivery->eOrderItems->unit_of_measurement }}</td>
             <td  style="text-align: center">{{ $delivery->quantity }}</td>
         </tr>
     @endforeach

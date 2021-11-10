@@ -62,7 +62,7 @@
                                                                 {{__('portal.Rated By')}}
                                                             </th>
                                                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                                {{__('portal.Delivery ID')}}
+                                                                {{__('portal.Delivery Note')}} #
                                                             </th>
                                                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                                 {{__('portal.Name')}}
@@ -99,7 +99,7 @@
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
                                                                     @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
-                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.D')}}-{{ $delivery->id }} </a>
+                                                                    <a href="{{route('deliveryDetails', [ 'rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" class="text-blue-600 hover:underline">{{__('portal.D.N.')}}-{{ $delivery->delivery_note_id }} </a>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-left text-gray-500">
                                                                     <span class="badge badge-info">{{ $deliveryComment->user->name }}</span>
@@ -202,7 +202,7 @@
                                                             {{__('portal.Rated By')}}
                                                         </th>
                                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                            {{__('portal.Delivery ID')}}
+                                                            {{__('portal.Delivery Note')}} #
                                                         </th>
                                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                             {{__('portal.Name')}}
@@ -239,7 +239,7 @@
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-500">
                                                                 @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
-                                                                <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.D')}}-{{ $delivery->id }} </a>
+                                                                <a href="{{route('deliveryDetails', [ 'rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" class="text-blue-600 hover:underline">{{__('portal.D.N.')}}-{{ $delivery->delivery_note_id }} </a>
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-500">
                                                                 <span class="badge badge-info">{{ $deliveryComment->user->name }}</span>

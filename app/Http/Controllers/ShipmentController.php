@@ -70,7 +70,7 @@ class ShipmentController extends Controller
         $singleCategoryCollection = collect($singleCategory);
 
         $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
-        $deliveries = $multiCategoryCollection->merge($singleCategoryInvoices);
+        $deliveries = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
 
         return view('shipment.create', compact('shipmentCarts', 'deliveries'));
     }

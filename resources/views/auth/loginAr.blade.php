@@ -1,8 +1,8 @@
 <x-guest-layout>
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
         <div>
-            <a href="{{route('arabic.index')}}">
-                <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-20 w-auto" />
+            <a href="{{route('arabic.index')}}" title="{{__('sidebar.Home')}}">
+                <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-20 w-auto"/>
             </a>
         </div>
 
@@ -41,13 +41,13 @@
 
                 <div class="flex items-center justify-end mt-4">
                     @if (Route::has('password.request'))
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900 ml-2" href="{{ route('password.request') }}">
                             {{ __('login.Forgot your password?') }}
                         </a>
                     @endif
 
                     &nbsp;
-                    <x-jet-button class="ml-4">
+                    <x-jet-button class="ml-4" style="border-radius: 25px;">
                         {{ __('login.Login') }}
                     </x-jet-button>
                 </div>

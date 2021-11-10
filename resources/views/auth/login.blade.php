@@ -2,7 +2,7 @@
 
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
         <div>
-            <a href="{{route('english.index')}}">
+            <a href="{{route('english.index')}}" title="{{__('sidebar.Home')}}">
                 <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-20 w-auto" />
             </a>
         </div>
@@ -17,7 +17,7 @@
             @endif
 
             <div class="float-right mb-2">
-                <a href="{{route('loginAr', 'ar')}}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="border-radius: 25px;"><img alt="" src="{{url('sa.png')}}" style="margin-right: 7px;margin-top:-4px;">العربية</a>
+                <a href="{{route('loginAr', 'ar')}}" class="inline-flex items-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="border-radius: 25px;"><img alt="" src="{{url('sa.png')}}" style="margin-right: 7px;margin-top:-4px;">العربية</a>
             </div>
 
             <form method="POST" action="{{ route('login') }}">
@@ -58,7 +58,7 @@
                         </a>
                     @endif
 
-                    <x-jet-button class="ml-4">
+                    <x-jet-button class="ml-4" style="border-radius: 25px;">
                         {{ __('login.Login') }}
                     </x-jet-button>
                 </div>
