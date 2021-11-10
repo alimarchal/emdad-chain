@@ -49,7 +49,7 @@
                                                                 #
                                                             </th>
                                                             <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                                                {{__('portal.Delivery ID')}}
+                                                                {{__('portal.Delivery Note')}} #
                                                             </th>
                                                             <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                                 {{__('portal.Rate')}}
@@ -64,7 +64,7 @@
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     <span class="badge badge-info">
-                                                                        <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline">{{__('portal.D')}}-{{ $delivery->id }} </a>
+                                                                        <a href="{{route('deliveryDetails', [ 'rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" class="text-blue-600 hover:underline">{{__('portal.D.N.')}}-{{ $delivery->delivery_note_id }} </a>
                                                                     </span>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
@@ -156,7 +156,7 @@
                                                             #
                                                         </th>
                                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                                            {{__('portal.Delivery ID')}}
+                                                            {{__('portal.Delivery Note')}} #
                                                         </th>
                                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-orange-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                             {{__('portal.Rate')}}
@@ -171,7 +171,7 @@
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                 <span class="badge badge-info">
-                                                                    <a href="{{route('delivery.show', encrypt($delivery->rfq_no))}}" class="text-blue-600 hover:underline">{{__('portal.D')}}-{{ $delivery->id }} </a>
+                                                                    <a href="{{route('deliveryDetails', [ 'rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" class="text-blue-600 hover:underline">{{__('portal.D.N.')}}-{{ $delivery->delivery_note_id }} </a>
                                                                 </span>
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">

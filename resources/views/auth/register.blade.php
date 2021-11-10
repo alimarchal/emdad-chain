@@ -4,13 +4,13 @@
         </x-slot>
         <x-jet-validation-errors class="mb-4"/>
 
-        <a href="{{route('registerAr', 'ar')}}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="border-radius: 25px;">
-            <img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">
+        <a href="{{route('registerAr', 'ar')}}" class="inline-flex items-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="border-radius: 25px;">
+            <img alt="" src="{{url('sa.png')}}" style="margin-right: 9px;margin-top:-4px;">
             العربية
         </a>
 
         <a href="{{route('english.index')}}">
-            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block w-16 mx-auto float-right " />
+            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block w-16 mx-auto float-right " title="{{__('sidebar.Home')}}"/>
         </a>
         <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="mt-5">
             @csrf
@@ -192,7 +192,7 @@
                         {{ __('register.Already registered?') }}
                     </a>
 
-                    <x-jet-button class="ml-4">
+                    <x-jet-button class="ml-4" style="border-radius: 25px;">
                         {{ __('register.Register') }}
                     </x-jet-button>
                 </div>

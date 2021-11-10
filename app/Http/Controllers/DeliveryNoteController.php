@@ -38,7 +38,7 @@ class DeliveryNoteController extends Controller
         $singleCategoryCollection = collect($singleCategory);
 
         $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
-        $dpos = $multiCategoryCollection->merge($singleCategoryInvoices);
+        $dpos = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
 
         return view('deliveryNote.index', compact('dpos'));
     }
@@ -97,7 +97,7 @@ class DeliveryNoteController extends Controller
         $singleCategoryCollection = collect($singleCategory);
 
         $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
-        $collection = $multiCategoryCollection->merge($singleCategoryInvoices);
+        $collection = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
 
         return view('supplier.deliveryNotes', compact('collection'));
     }

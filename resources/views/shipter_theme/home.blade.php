@@ -526,7 +526,7 @@
             </div>
             <div class="btns">
 {{--                <div class="btn-style">--}}
-                    <a href="{{route('english.buyerPackage')}}" target="_blank" class="a_hover_class text-white">Details</a>
+                    <a href="{{route('english.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">Details</a>
 {{--                </div>--}}
             </div>
             {{--<div class="section-title text-center">

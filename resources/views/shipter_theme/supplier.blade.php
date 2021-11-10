@@ -155,7 +155,7 @@
                     </div>
                     <div class="btns">
 {{--                        <div class="btn-style">--}}
-                            <a href="{{route('english.supplierPackage')}}" target="_blank" class="text-white a_hover_class">Details</a>
+                            <a href="{{route('english.supplierPackage')}}" target="_blank" class="text-white a_hover_class" style="width: 120px;text-align: center">Details</a>
 {{--                        </div>--}}
                     </div>
                 </div>

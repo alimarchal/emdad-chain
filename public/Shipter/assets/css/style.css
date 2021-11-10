@@ -269,7 +269,7 @@ a:focus {
 .a_hover_class{
     background-color: lightslategray;
     font-size: 12px;
-    font-weight: 600;
+    /*font-weight: 600;*/
     color: white;
     padding: 7px 9px;
     border: 2px solid lightslategray;
@@ -299,6 +299,14 @@ a:focus {
 @media (min-width: 575px) {
     .a_hover_class {
         font-size: 15px;
+    }
+}
+@media (min-width: 575px) {
+    .login_button_nav_bar {
+        margin-top: 9px;
+    }
+    .register_button_nav_bar {
+        margin-top: 11px;
     }
 }
 @media (min-width: 575px) {

@@ -66,7 +66,7 @@ class DraftPurchaseOrderController extends Controller
             $singleCategoryCollection = collect($singleCategory);
 
             $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
-            $dpos = $multiCategoryCollection->merge($singleCategoryInvoices);
+            $dpos = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
         }
         return view('draftPurchaseOrder.index', compact('dpos'));
     }
@@ -447,7 +447,7 @@ class DraftPurchaseOrderController extends Controller
         $multiCategoryCollection = collect($multiCategory);
         $singleCategoryCollection = collect($singleCategory);
         $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
-        $dpos = $multiCategoryCollection->merge($singleCategoryInvoices);
+        $dpos = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
 
         return view('draftPurchaseOrder.po', compact('dpos'));
     }

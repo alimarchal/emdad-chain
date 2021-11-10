@@ -41,6 +41,9 @@
                                 <div class="flex flex-wrap overflow-hidden bg-white p-4">
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                         <strong>{{__('portal.Delivery Note')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.N.')}}-{{ $deliveries[0]->delivery_note_id }}<br>
+                                        @if(isset($deliveries[0]->invoice))
+                                            <strong>{{__('portal.Invoice')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Inv.')}}-{{ $deliveries[0]->invoice->id }}<br>
+                                        @endif
                                         <strong>{{__('portal.Purchase Order')}} #: &nbsp;&nbsp;&nbsp;</strong>{{__('portal.PO')}}-{{ $deliveries[0]->draft_purchase_order_id }}<br>
                                         <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->created_at }}<br>
                                         <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveries[0]->rfq_no }}<br>
@@ -72,7 +75,7 @@
                                                 <p>{{ $deliveries[0]->buyer->business->business_name }}</p><br>
                                             </div>
                                             <div class="flex-row mx-auto">
-                                                <img class="h-30 w-40" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
+                                                <img class="h-20 w-20" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
                                             </div>
                                         </div>
                                         <strong>{{__('portal.City')}}: </strong><span>{{ $deliveries[0]->buyer->business->city }}</span><br>
@@ -95,6 +98,9 @@
                                             {{__('portal.Description')}}
                                         </th>
                                         <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.UOM')}}
+                                        </th>
+                                        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Quantity')}}
                                         </th>
 
@@ -115,6 +121,9 @@
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                                 {{ $delivery->eOrderItems->description }}
+                                            </td>
+                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                                {{ $delivery->eOrderItems->unit_of_measurement }}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                                 {{ $delivery->quantity }}
@@ -191,11 +200,14 @@
                                 <div class="flex flex-wrap overflow-hidden bg-white p-4">
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                         <strong>{{__('portal.Delivery Note')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.N.')}}-{{ $deliveries[0]->delivery_note_id }}<br>
+                                        @if(isset($deliveries[0]->invoice))
+                                            <strong>{{__('portal.Invoice')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Inv.')}}-{{ $deliveries[0]->invoice->id }}<br>
+                                        @endif
                                         <strong>{{__('portal.Purchase Order')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.PO')}}-{{ $deliveries[0]->draft_purchase_order_id }}<br>
                                         <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->created_at }}<br>
-                                        <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveries[0]->rfq_no }}<br>
-                                        <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $deliveries[0]->qoute_no }}<br>
-                                        <strong>{{__('portal.Payment Terms')}} : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                        <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveries[0]->rfq_no }}<br>
+                                        <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $deliveries[0]->qoute_no }}<br>
+                                        <strong>{{__('portal.Payment Terms')}} : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                         @if($deliveries[0]->payment_term == 'Cash') {{__('portal.Cash')}}
                                         @elseif($deliveries[0]->payment_term == 'Credit') {{__('portal.Credit')}}
                                         @elseif($deliveries[0]->payment_term == 'Credit30days') {{__('portal.Credit (30 Days)')}}
@@ -220,7 +232,7 @@
                                                 <p>{{ $deliveries[0]->buyer->business->business_name }}</p><br>
                                             </div>
                                             <div class="flex-row mx-auto">
-                                                <img class="h-30 w-40" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
+                                                <img class="h-20 w-20" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
                                             </div>
                                         </div>
                                         <strong>{{__('portal.City')}}: </strong><span>{{ $deliveries[0]->buyer->business->city }}</span><br>
@@ -243,6 +255,9 @@
                                             {{__('portal.Description')}}
                                         </th>
                                         <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.UOM')}}
+                                        </th>
+                                        <th scope="col" class="px-2 py-2 border border-black bg-gray-50 text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Quantity')}}
                                         </th>
 
@@ -263,6 +278,9 @@
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                                 {{ $delivery->eOrderItems->description }}
+                                            </td>
+                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                                {{ $delivery->eOrderItems->unit_of_measurement }}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                                 {{ $delivery->quantity }}

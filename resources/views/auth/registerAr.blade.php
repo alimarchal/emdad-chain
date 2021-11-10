@@ -4,8 +4,8 @@
         </x-slot>
         <x-jet-validation-errors class="mb-4"/>
 
-        <a href="{{route('arabic.index')}}">
-            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block w-16 mx-auto float-left " />
+        <a href="{{route('arabic.index')}}" title="{{__('sidebar.Home')}}">
+            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block w-16 mx-auto float-left "/>
         </a>
 
         <a href="{{route('register', 'ar')}}" class="inline-flex items-center px-4 py-2 float-right bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="border-radius: 25px;">
@@ -179,11 +179,11 @@
                 </div>
 
                 <div class="w-full overflow-hidden lg:my-3 lg:px-3 lg:w-1/3 xl:my-3 xl:px-3 xl:w-1/3">
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('loginAr', 'ar') }}">
                         {{ __('register.Already registered?') }}
                     </a>
 
-                    <x-jet-button class="mr-4">
+                    <x-jet-button class="mr-4" style="border-radius: 25px;">
                         {{ __('register.Register') }}
                     </x-jet-button>
                 </div>

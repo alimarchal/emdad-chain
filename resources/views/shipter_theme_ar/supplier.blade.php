@@ -180,7 +180,7 @@
                     </div>
                     <div class="btns">
 {{--                        <div class="btn-style">--}}
-                            <a href="{{route('arabic.supplierPackage')}}" target="_blank" class="a_hover_class text-white">التفاصيل</a>
+                            <a href="{{route('arabic.supplierPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">التفاصيل</a>
 {{--                        </div>--}}
                     </div>
                 </div>
