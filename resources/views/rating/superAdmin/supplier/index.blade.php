@@ -55,7 +55,7 @@
                                                                 {{__('portal.Business Name')}}
                                                             </th>
                                                             <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                                {{__('portla.Delivery ID')}}
+                                                                {{__('portal.Delivery Note')}} #
                                                             </th>
                                                             <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                                 {{__('portal.Emdad rating')}}
@@ -81,8 +81,8 @@
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                 <span class="badge badge-info">
-                                                                    @php $rfqNo = \App\Models\Delivery::where('id', $supplierDeliveryComment[0]->delivery_id)->pluck('rfq_no')->first(); @endphp
-                                                                    <a href="{{route('delivery.show', encrypt($rfqNo))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.D')}}-{{ $supplierDeliveryComment[0]->delivery_id }} </a>
+                                                                    @php $delivery = \App\Models\Delivery::where('id', $supplierDeliveryComment[0]->delivery_id)->first(); @endphp
+                                                                    <a href="{{route('deliveryDetails', [ 'rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" class="text-blue-600 hover:underline">{{__('portal.D.N.')}}-{{ $delivery->delivery_note_id }} </a>
                                                                 </span>
                                                             </td>
                                                             @php
@@ -94,11 +94,11 @@
                                                                     }
                                                                 $count = count($deliveryComments);*/
                                                                 /* Retrieving Emdad Rating for Supplier */
-                                                                $deliveryCommentsForEmdadRating = \App\Models\DeliveryComment::where('delivery_id', $supplierDeliveryComments[$j][$j]->delivery_id)->where('comment_type', 8)->first();
+                                                                $deliveryCommentsForEmdadRating = \App\Models\DeliveryComment::where('delivery_id', $supplierDeliveryComments[$j][0]->delivery_id)->where('comment_type', 8)->first();
 
                                                                 /* Calculating Buyer Average Rating */
                                                                 $sum = 0;
-                                                                $deliveryComments = \App\Models\DeliveryComment::where('delivery_id', $supplierDeliveryComments[$j][$j]->delivery_id)->where('comment_type', 3)->get();
+                                                                $deliveryComments = \App\Models\DeliveryComment::where('delivery_id', $supplierDeliveryComments[$j][0]->delivery_id)->where('comment_type', 3)->get();
                                                                 $j = $loop->iteration;
                                                                 foreach ($deliveryComments as $deliveryComm)
                                                                     {
@@ -107,11 +107,11 @@
                                                                 $count = count($deliveryComments);
                                                             @endphp
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                @if(isset($deliveryCommentsForEmdadRating) ) {{number_format($deliveryCommentsForEmdadRating->rating,2,'.')}} @endif
+                                                                @if(isset($deliveryCommentsForEmdadRating) ) {{number_format($deliveryCommentsForEmdadRating->rating,2)}} @endif
                                                             </td>
 
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                @if(count($deliveryComments) > 0 ) {{number_format($sum/$count,2,'.')}} @endif
+                                                                @if(count($deliveryComments) > 0 ) {{number_format($sum/$count,2)}} @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -196,7 +196,7 @@
                                                             {{__('portal.Business Name')}}
                                                         </th>
                                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
-                                                            {{__('portla.Delivery ID')}}
+                                                            {{__('portal.Delivery Note')}} #
                                                         </th>
                                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-orange-500 uppercase tracking-wider">
                                                             {{__('portal.Emdad rating')}}
@@ -222,8 +222,8 @@
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                 <span class="badge badge-info">
-                                                                    @php $rfqNo = \App\Models\Delivery::where('id', $supplierDeliveryComment[0]->delivery_id)->pluck('rfq_no')->first(); @endphp
-                                                                    <a href="{{route('delivery.show', encrypt($rfqNo))}}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.D')}}-{{ $supplierDeliveryComment[0]->delivery_id }} </a>
+                                                                    @php $delivery = \App\Models\Delivery::where('id', $supplierDeliveryComment[0]->delivery_id)->first(); @endphp
+                                                                    <a href="{{route('deliveryDetails', [ 'rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" class="text-blue-600 hover:underline">{{__('portal.D.N.')}}-{{ $delivery->delivery_note_id }} </a>
                                                                 </span>
                                                             </td>
                                                             @php
@@ -235,11 +235,11 @@
                                                                     }
                                                                 $count = count($deliveryComments);*/
                                                                 /* Retrieving Emdad Rating for Supplier */
-                                                                $deliveryCommentsForEmdadRating = \App\Models\DeliveryComment::where('delivery_id', $supplierDeliveryComments[$j][$j]->delivery_id)->where('comment_type', 8)->first();
+                                                                $deliveryCommentsForEmdadRating = \App\Models\DeliveryComment::where('delivery_id', $supplierDeliveryComments[$j][0]->delivery_id)->where('comment_type', 8)->first();
 
                                                                 /* Calculating Buyer Average Rating */
                                                                 $sum = 0;
-                                                                $deliveryComments = \App\Models\DeliveryComment::where('delivery_id', $supplierDeliveryComments[$j][$j]->delivery_id)->where('comment_type', 3)->get();
+                                                                $deliveryComments = \App\Models\DeliveryComment::where('delivery_id', $supplierDeliveryComments[$j][0]->delivery_id)->where('comment_type', 3)->get();
                                                                 $j = $loop->iteration;
                                                                 foreach ($deliveryComments as $deliveryComm)
                                                                     {
@@ -248,11 +248,11 @@
                                                                 $count = count($deliveryComments);
                                                             @endphp
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                @if(isset($deliveryCommentsForEmdadRating) ) {{number_format($deliveryCommentsForEmdadRating->rating,2,'.')}} @endif
+                                                                @if(isset($deliveryCommentsForEmdadRating) ) {{number_format($deliveryCommentsForEmdadRating->rating,2)}} @endif
                                                             </td>
 
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                @if(count($deliveryComments) > 0 ) {{number_format($sum/$count,2,'.')}} @endif
+                                                                @if(count($deliveryComments) > 0 ) {{number_format($sum/$count,2)}} @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach

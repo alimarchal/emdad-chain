@@ -46,7 +46,9 @@
                                             }
                                     $count = count($deliveryComments);
                                 @endphp
-                                <div class="text-center"><span class="text-blue-600">{{__('portal.Average rating')}}: {{number_format($sum/$count,2)}} </span></div>
+                                @if($count > 0)
+                                    <div class="text-center"><span class="text-blue-600">{{__('portal.Average rating')}}: {{number_format($sum/$count,2)}} </span></div>
+                                @endif
                             @if ($deliveryComments->count())
                                     <div class="flex flex-col">
                                     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -182,7 +184,9 @@
                                         }
                                 $count = count($deliveryComments);
                             @endphp
-                            <div class="text-center"><span class="text-blue-600">{{__('portal.Average rating')}}: {{number_format($sum/$count,2)}} </span></div>
+                            @if($count > 0)
+                                <div class="text-center"><span class="text-blue-600">{{__('portal.Average rating')}}: {{number_format($sum/$count,2)}} </span></div>
+                            @endif
                             @if ($deliveryComments->count())
                                 <div class="flex flex-col">
                                     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

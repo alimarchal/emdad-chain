@@ -47,13 +47,14 @@
 
     <div>
         <h3>
-            Status:
             @if ($quote->qoute_status == 'Modified')
-                <span style="color: black; background-color: gray;">Modified.</span>
+                Status: <span style="color: black; background-color: gray;">Modified.</span>
             @elseif($quote->qoute_status == 'Qouted')
-                <span style="color: black; background-color: #e3a008">Quoted.</span>
+                Status: <span style="color: black; background-color: #e3a008">Quoted.</span>
             @elseif($quote->qoute_status == 'Rejected')
-                <span style="color: black; background-color: red">Rejected.</span>
+                Status: <span style="color: black; background-color: red">Rejected.</span>
+            @else
+                Status: <span style="color: black; background-color: green">Accepted.</span>
             @endif
         </h3>
     </div>

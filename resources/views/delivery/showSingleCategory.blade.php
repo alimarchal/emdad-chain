@@ -39,7 +39,10 @@
                             </div>
 
                             <div class="flex flex-wrap overflow-hidden bg-white p-4">
-                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-2/3">
+                                    <strong>{{__('portal.Supplier')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->supplier->business->business_name }}<br>
+                                    <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br><br>
                                     <strong>{{__('portal.Delivery Note')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.N.')}}-{{ $deliveries[0]->delivery_note_id }}<br>
                                     @if(isset($deliveries[0]->invoice))
                                     <strong>{{__('portal.Invoice')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Inv.')}}-{{ $deliveries[0]->invoice->id }}<br>
@@ -57,17 +60,19 @@
                                     @elseif($deliveries[0]->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
                                     @endif
                                 </div>
-                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                {{--<div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                     <strong class="text-xl">
-{{--                                        {{__('portal.Purchased From')}}: --}}
+--}}{{--                                        {{__('portal.Purchased From')}}: --}}{{--
                                     </strong><br>
                                     <p>{{ $deliveries[0]->supplier->business->business_name }}</p><br>
 
                                     <strong>{{__('portal.City')}}: </strong><span>{{ $deliveries[0]->supplier->business->city }}</span><br>
                                     <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
-                                </div>
+                                </div>--}}
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                                    <strong>{{__('portal.Buyer')}}: </strong><br>
+                                    <img class="h-40 w-40" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}"/><br>
+                                    <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->buyer->business->business_name }}<br>
+                                    {{--<strong>{{__('portal.Buyer')}}: </strong><br>
                                     <div class="flex">
                                         <div class="flex-row">
                                             <p>{{ $deliveries[0]->buyer->business->business_name }}</p><br>
@@ -75,11 +80,11 @@
                                         <div class="flex-row mx-auto">
                                             <img class="h-20 w-20" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
                                         </div>
-                                    </div>
-                                    <strong>{{__('portal.City')}}: </strong><span>{{ $deliveries[0]->buyer->business->city }}</span><br>
-                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
-                                    <strong>{{__('portal.Contact #')}}: </strong><span>{{ $deliveries[0]->otp_mobile_number }}</span><br>
-                                    <strong>{{__('portal.Delivery Address')}}: </strong><span>{{ $deliveries[0]->delivery_address }}</span><br>
+                                    </div>--}}
+                                    <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->otp_mobile_number }}</span><br>
+                                    <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $deliveries[0]->delivery_address }}</span><br>
                                 </div>
                             </div>
 
@@ -207,7 +212,10 @@
                             </div>
 
                             <div class="flex flex-wrap overflow-hidden bg-white p-4">
-                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-2/3">
+                                    <strong>{{__('portal.Supplier')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->supplier->business->business_name }}<br>
+                                    <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br><br>
                                     <strong>{{__('portal.Delivery Note')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.N.')}}-{{ $deliveries[0]->delivery_note_id }}<br>
                                     @if(isset($deliveries[0]->invoice))
                                         <strong>{{__('portal.Invoice')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Inv.')}}-{{ $deliveries[0]->invoice->id }}<br>
@@ -225,29 +233,30 @@
                                     @elseif($deliveries[0]->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
                                     @endif
                                 </div>
-                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                {{--<div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                     <strong class="text-xl">
-{{--                                        {{__('portal.Purchased From')}}: --}}
+--}}{{--                                        {{__('portal.Purchased From')}}: --}}{{--
                                     </strong><br>
                                     <p>{{ $deliveries[0]->supplier->business->business_name }}</p><br>
 
                                     <strong>{{__('portal.City')}}: </strong><span>{{ $deliveries[0]->supplier->business->city }}</span><br>
                                     <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
-                                </div>
+                                </div>--}}
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                                    <strong>{{__('portal.Buyer')}}: </strong><br>
-                                    <div class="flex">
+                                    <img class="h-40 w-40" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" /><br>
+                                    <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->buyer->business->business_name }}<br>
+                                    {{--<div class="flex">
                                         <div class="flex-row">
                                             <p>{{ $deliveries[0]->buyer->business->business_name }}</p><br>
                                         </div>
                                         <div class="flex-row mx-auto">
                                             <img class="h-20 w-20" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
                                         </div>
-                                    </div>
-                                    <strong>{{__('portal.City')}}: </strong><span>{{ $deliveries[0]->buyer->business->city }}</span><br>
-                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
-                                    <strong>{{__('portal.Contact #')}}: </strong><span>{{ $deliveries[0]->otp_mobile_number }}</span><br>
-                                    <strong>{{__('portal.Delivery Address')}}: </strong><span>{{ $deliveries[0]->delivery_address }}</span><br>
+                                    </div>--}}
+                                    <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->otp_mobile_number }}</span><br>
+                                    <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->delivery_address }}</span><br>
                                 </div>
                             </div>
 

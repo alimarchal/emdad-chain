@@ -117,7 +117,7 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 <a href="{{ route('singleCategoryRFQItemByID', $rfp->id) }}"
-                                                   class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                   class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
                                                     {{__('portal.Respond')}}
                                                 </a>
                                             </td>
@@ -180,7 +180,7 @@
             </div>
         @endif
         <div class="mt-5">
-            <a href="{{ route('QoutationsBuyerReceived') }}"
+            <a href="{{ route('QoutationsBuyerReceived') }}" style="background-color: #145EA8"
                class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                 {{__('portal.Back')}}
             </a>
@@ -305,7 +305,7 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 <a href="{{ route('singleCategoryRFQItemByID', $rfp->id) }}"
-                                                   class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                   class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
                                                     {{__('portal.Respond')}}
                                                 </a>
                                             </td>
@@ -368,7 +368,7 @@
             </div>
         @endif
         <div class="mt-5">
-            <a href="{{ route('QoutationsBuyerReceived') }}"
+            <a href="{{ route('QoutationsBuyerReceived') }}" style="background-color: #145EA8"
                class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                 {{__('portal.Back')}}
             </a>
