@@ -66,8 +66,8 @@
             <span style="color: #145ea8;"> {{ $record->name }} , {{ $parent->name }} </span>
         <br>
         <strong>Date: </strong>{{ $deliveryNote->purchase_order->created_at }}<br>
-        <strong>Requisition #: </strong>RFQ-{{ $deliveryNote->purchase_order->rfq_no }}<br>
         <strong>Quote #: </strong>Q-{{ $deliveryNote->purchase_order->qoute_no }}<br>
+        <strong>Requisition #: </strong>RFQ-{{ $deliveryNote->purchase_order->rfq_no }}<br>
         <strong>Payment Terms: </strong>{{ $deliveryNote->purchase_order->payment_term }}<br>
     </div>
 

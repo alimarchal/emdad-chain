@@ -683,10 +683,10 @@ Route::get('tree', function () {
     return view('test.combotree',compact('parentCategories'));
 });
 
-/*
+
 Route::get('/testSms', function () {
-    $x = \App\Models\User::send_otp('6633','923008169924');
+    $x = \App\Models\User::send_otp('6633','581382822');
     dd($x);
 });
-*/
+
 //        User::find(5)->notify(new UserRegistration());

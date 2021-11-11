@@ -543,7 +543,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $msg = "Your delivery is here. Please share the OTP code: " . $otp . " with the driver after unloading the delivery. Thank you for using EMDAD Platform.";
 //        $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=966" . $mobile_no . "&sender=Emdad-Aid&unicode=e&randparams=1";
 
-        $url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=" .  $mobile_no . "&Message=" . urlencode($msg);
+        $url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=966" .  $mobile_no . "&Message=" . urlencode($msg);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
