@@ -559,10 +559,6 @@
                                                class="inline-flex items-center px-4 mr-2 py-2 mb-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                                                 {{__('portal.Back')}}
                                             </a>
-                                      {{--      <a href="{{ route('rejectRFQ', $eOrderItems->e_order_id) }}"  id="reject"
-                                               class="inline-flex items-center px-4 mr-2 py-2 mb-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-red disabled:opacity-25 transition ease-in-out duration-150">
-                                                Reject
-                                            </a>--}}
 
                                         </td>
 

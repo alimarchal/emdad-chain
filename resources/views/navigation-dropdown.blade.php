@@ -292,11 +292,20 @@
                                 @foreach(Auth::user()->unreadNotifications as $notification)
                                     <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-white hover:bg-indigo-600 -mx-2">
                                         <p class="text-sm mx-2">
-                                        <span class="font-bold" href="#">{{$notification->data['quotation']}}</span>
+                                        <span class="font-bold" href="#">{{$notification->data['notification_data']}}</span>
                                         </p>
                                     </a>
                                 @endforeach
 
+                            @elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == "Buyer")
+
+                                @foreach(Auth::user()->unreadNotifications as $notification)
+                                    <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-white hover:bg-indigo-600 -mx-2">
+                                        <p class="text-sm mx-2">
+                                            <span class="font-bold" href="#">{{$notification->data['notification_data']}}</span>
+                                        </p>
+                                    </a>
+                                @endforeach
 
                             @endif
 

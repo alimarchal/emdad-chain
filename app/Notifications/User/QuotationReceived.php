@@ -2,13 +2,12 @@
 
 namespace App\Notifications\User;
 
-use App\Models\Category;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class QuotationCategory extends Notification
+class QuotationReceived extends Notification
 {
     use Queueable;
 
@@ -17,12 +16,9 @@ class QuotationCategory extends Notification
      *
      * @return void
      */
-
-    private $item_code;
-
-    public function __construct($item_code)
+    public function __construct()
     {
-        $this->item_code = $item_code;
+        //
     }
 
     /**
@@ -59,7 +55,7 @@ class QuotationCategory extends Notification
     public function toArray($notifiable)
     {
         return [
-            'notification_data' => 'New requisition ' . Category::find($this->item_code)->name . ' received',
+            'notification_data' => 'You have received new quotation...',
         ];
     }
 }

@@ -12,6 +12,7 @@ use App\Models\Qoute;
 use App\Models\QouteMessage;
 use App\Models\User;
 use App\Notifications\QuotationSent;
+use App\Notifications\User\QuotationReceived;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
@@ -30,6 +31,7 @@ class QouteController extends Controller
 
     public function store(Request $request)
     {
+
         $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
         Validator::make($request->all(), [
             'expiry_date' => 'required|date|after_or_equal:'.$min5days,
@@ -55,6 +57,13 @@ class QouteController extends Controller
         /* Setting RFQ Type */
         $request->merge(['rfq_type' => 1]);
 
+
+
+        if(!empty($buyer_id))
+        {
+            $buyer_id->notify(new QuotationReceived());
+        }
+
         $quote = Qoute::create($request->all());
         // sending mail for confirmation
         User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
@@ -69,8 +78,8 @@ class QouteController extends Controller
         $categoryName = Category::where('id', $quote->orderItem->item_code)->first();
         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
-        User::send_sms('+966581382822', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
-        User::send_sms('+966593388833', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
+        User::send_sms(env('SMS_NO_ONE'), 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
+        User::send_sms(env('SMS_NO_TWO'), 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
 
         /* Notifying business@emdad-chain.com for Purchase order created */
         $userQuoted =  User::find(auth()->user()->id);

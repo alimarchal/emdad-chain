@@ -78,8 +78,8 @@ class EOrdersController extends Controller
 
 
                         /* Sending message to business email ID */
-                        User::send_sms('+966581382822', 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
-                        User::send_sms('+966593388833', 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
                     }
                     foreach ($eCartItems as $item) {
                         $item->delete();
@@ -148,8 +148,8 @@ class EOrdersController extends Controller
                         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
                         /* Sending message to business email ID */
-                        User::send_sms('+966581382822', 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
-                        User::send_sms('+966593388833', 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
                     }
                     foreach ($eCartItems as $item) {
                         $item->delete();
@@ -217,8 +217,8 @@ class EOrdersController extends Controller
                     $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
                     /* Sending message to business email ID */
-                    User::send_sms('+966581382822', 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
-                    User::send_sms('+966593388833', 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                    User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                    User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
                 }
                 foreach ($eCartItems as $item) {
                     $item->delete();
@@ -307,8 +307,8 @@ class EOrdersController extends Controller
                         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
                         /* Sending message to business email ID */
-                        User::send_sms('+966581382822', 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
-                        User::send_sms('+966593388833', 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
                     }
                     foreach ($eCartItems as $item) {
                         $item->delete();
@@ -381,8 +381,8 @@ class EOrdersController extends Controller
                         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
                         /* Sending message to business email ID */
-                        User::send_sms('+966581382822', 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
-                        User::send_sms('+966593388833', 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
 
                     }
                     foreach ($eCartItems as $item) {
@@ -405,6 +405,9 @@ class EOrdersController extends Controller
                 return redirect()->route('QoutationsBuyerReceived');
             }
         } elseif ($business_package->package_id == 3 || $business_package->package_id == 4) {
+
+
+
             DB::transaction(function () use ($request) {
                 $request->merge(['status' => 'Open']);
                 $request->merge(['rfq_type' => 0]);
@@ -441,7 +444,10 @@ class EOrdersController extends Controller
                         if (!empty($coll->business)) {
                             {
                                 $get_user = User::where('id', $coll->business->user_id)->first();
-                                $get_user->notify(new QuotationCategory($eOrderItem->item_code));
+                                if(!empty($get_user))
+                                {
+                                    $get_user->notify(new QuotationCategory($eOrderItem->item_code));
+                                }
                             }
                         }
                     }
@@ -450,8 +456,8 @@ class EOrdersController extends Controller
                     $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
                     /* Sending message to business email ID */
-                    User::send_sms('+966581382822', 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
-                    User::send_sms('+966593388833', 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                    User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                    User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
                 }
                 foreach ($eCartItems as $item) {
                     $item->delete();

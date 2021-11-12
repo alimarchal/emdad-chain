@@ -26,7 +26,7 @@ class MobileVerification extends Component
         $randomNumber = rand(1001,9999);
         $warehouse->mobile_verification_code = $randomNumber;
         $warehouse->save();
-//        \App\Models\User::send_sms($mobile_no,'Your sms code is: ' . $randomNumber);
+        \App\Models\User::send_sms($mobile_no,'Your sms code is: ' . $randomNumber);
     }
 
     public function verify_sms()
