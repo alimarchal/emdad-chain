@@ -35,13 +35,8 @@
                                     <span class="text-blue-600"> {{ $record->name }} , {{ $parent->name }} </span>
                                     <br>
                                 <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveryNote->purchase_order->created_at }}<br>
-<<<<<<< HEAD
-                                <strong>{{__('portal.Quote')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $deliveryNote->purchase_order->qoute_no }}<br>
-                                <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveryNote->purchase_order->rfq_no }}<br>
-=======
                                 <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $deliveryNote->purchase_order->qoute_no }}<br>
                                 <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveryNote->purchase_order->rfq_item_no }}<br>
->>>>>>> umair
                                 <strong>{{__('portal.Payment Terms')}} : &nbsp;&nbsp;&nbsp;</strong>
                                     @if($deliveryNote->purchase_order->payment_term == 'Cash') {{__('portal.Cash')}}
                                     @elseif($deliveryNote->purchase_order->payment_term == 'Credit') {{__('portal.Credit')}}
