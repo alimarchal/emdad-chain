@@ -45,15 +45,16 @@
                         <div class="px-4 py-5 sm:p-6 bg-white shadow ">
                             <div class="flex flex-wrap overflow-hidden bg-gray-300 p-4">
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <img class="h-20 w-20 rounded-full object-cover" src="{{ Storage::url($QouteItem->buyer_business->business_photo_url) }}" alt="{{ $QouteItem->buyer_business->business_name }}"/>
-                                    <h1 class="text-center text-2xl">{{ $QouteItem->buyer_business->business_name }}</h1>
+{{--                                    <img class="h-20 w-20 rounded-full object-cover" src="{{ Storage::url($QouteItem->buyer_business->business_photo_url) }}" alt="{{ $QouteItem->buyer_business->business_name }}"/>--}}
+{{--                                    <h1 class="text-center text-2xl">{{ $QouteItem->buyer_business->business_name }}</h1>--}}
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                    <img class="h-20 w-30 object-cover mx-auto" src="{{ Storage::url($QouteItem->supplier_business->business_photo_url) }}" style="border-radius: 9px;"/>
                                     <h1 class="text-center text-3xl">{{__('portal.Quotation')}}</h1>
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <img class="h-20 w-20 rounded-full object-cover" src="{{ Storage::url($QouteItem->supplier_business->business_photo_url) }}" alt="{{ $QouteItem->supplier_business->business_name }}"/>
-                                    <h1 class="text-center text-2xl">{{ $QouteItem->supplier_business->business_name }}</h1>
+{{--                                    <img class="h-20 w-20 rounded-full object-cover" src="{{ Storage::url($QouteItem->supplier_business->business_photo_url) }}" alt="{{ $QouteItem->supplier_business->business_name }}"/>--}}
+{{--                                    <h1 class="text-center text-2xl">{{ $QouteItem->supplier_business->business_name }}</h1>--}}
                                 </div>
                             </div>
 
@@ -72,31 +73,16 @@
                             </div>
 
                             <div class="flex flex-wrap overflow-hidden bg-white p-4">
-                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <strong>{{__('portal.Requested by')}}: </strong><br>
-                                    <p>{{ $QouteItem->buyer_business->business_name }}</p><br>
-                                    <strong>{{__('portal.City')}}: </strong><span>{{ $QouteItem->buyer_business->city }}</span><br>
-                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $QouteItem->buyer_business->vat_reg_certificate_number }}</span><br>
-                                </div>
-                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <strong>{{__('portal.Supplier')}}: </strong><br>
-                                    <p>{{ $QouteItem->supplier_business->business_name }}</p><br>
+                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-2/3">
+                                    <strong>{{__('portal.Supplier')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $QouteItem->supplier_business->business_name }}<br>
+                                    <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $QouteItem->supplier_business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $QouteItem->supplier_business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.Email')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $QouteItem->supplier_business->business_email }}</span><br><br>
 
-                                    <strong>{{__('portal.City')}}: </strong><span>{{ $QouteItem->supplier_business->city }}</span><br>
-                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $QouteItem->supplier_business->vat_reg_certificate_number }}</span><br>
-                                </div>
-                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                                    <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}
-                                    -{{ $QouteItem->id }}<br>
-                                    <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-                                    @php
-                                        $record = \App\Models\Category::where('id',$QouteItem->orderItem->item_code)->first();
-                                        $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                    @endphp
-                                    <span style="color: #145ea8;"> {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif </span>
-                                    <br>
-                                    <strong>{{__('portal.Payment Term')}}:
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                    <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $QouteItem->id }}<br>
+                                    <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $QouteItem->orderItem->id }}<br>
+                                    <strong>{{__('portal.Shipment Time')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> {{ $QouteItem->shipping_time_in_days }}<br>
+                                    <strong>{{__('portal.Payment Term')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                     @if($QouteItem->orderItem->payment_mode == 'Cash') {{__('portal.Cash')}}
                                     @elseif($QouteItem->orderItem->payment_mode == 'Credit') {{__('portal.Credit')}}
                                     @elseif($QouteItem->orderItem->payment_mode == 'Credit30days') {{__('portal.Credit (30 Days)')}}
@@ -105,19 +91,48 @@
                                     @elseif($QouteItem->orderItem->payment_mode == 'Credit120days') {{__('portal.Credit (120 Days)')}}
                                     @endif
                                 </div>
+
+                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
+                                    <img src="{{ Storage::url($QouteItem->buyer_business->business_photo_url) }}" alt="{{ $QouteItem->buyer_business->business_name }}" style="height: 95px;"/>
+                                    <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $QouteItem->buyer_business->business_name }}<br>
+                                    <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $QouteItem->buyer_business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $QouteItem->buyer_business->vat_reg_certificate_number }}</span><br>
+                                    @php
+                                        $warehouse = \App\Models\BusinessWarehouse::where('id', $QouteItem->warehouse_id)->first()->only('mobile', 'address');
+                                    @endphp
+                                    <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $warehouse['mobile'] }}</span><br>
+                                    <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $warehouse['address'] }}</span><br>
+                                </div>
                             </div>
 
-                            <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                            {{--<div class="flex flex-wrap overflow-hidden bg-white p-4">
+                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
+                                    <strong class="text-xl">{{__('portal.Category Name')}}: </strong>
+                                    @php
+                                        $record = \App\Models\Category::where('id',$QouteItem->orderItem->item_code)->first();
+                                        $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                    @endphp
+                                    <span class="text-xl text-blue-600">{{ $record->name }}@if(isset($parent)), {{ $parent->name }} @endif </span>
+                                </div>
+                            </div>--}}
+
+                            {{--<div class="flex flex-wrap overflow-hidden bg-white p-4">
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
                                     <strong class="text-xl">{{__('portal.Item Description')}}: </strong> <span class="text-xl">{{ strip_tags($QouteItem->orderItem->description) }}</span><br>
                                 </div>
-                            </div>
+                            </div>--}}
 
                             <table class="min-w-full divide-y divide-black">
                                 <thead>
                                 <tr>
                                     <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         #
+                                    </th>
+                                    <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        {{__('portal.Category Name')}}
+                                    </th>
+                                    <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        {{__('portal.Description')}}
                                     </th>
                                     <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Note')}}
@@ -138,6 +153,16 @@
                                 <tr>
                                     <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                         1
+                                    </td>
+                                    <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        @php
+                                            $record = \App\Models\Category::where('id',$QouteItem->orderItem->item_code)->first();
+                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                        @endphp
+                                        {{ $record->name }}@if(isset($parent)), {{ $parent->name }} @endif
+                                    </td>
+                                    <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        {{ strip_tags($QouteItem->orderItem->description) }}
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                         @if(isset($QouteItem->note_for_customer)) {{ strip_tags($QouteItem->note_for_customer) }} @else N/A @endif
@@ -277,13 +302,18 @@
                                 <input type="hidden" name="vat" value="{{ $QouteItem->VAT }}">
                                 <input type="hidden" name="total_cost" value="{{ $QouteItem->total_cost }}">
                                 <input type="hidden" name="payment_term" value="{{ $QouteItem->orderItem->payment_mode }}">
+                                @php
+                                        $orderItemID =  \App\Models\EOrderItems::where('id', $QouteItem->e_order_items_id)->first();
+                                        $warehouseAddress = \App\Models\BusinessWarehouse::where('id', $orderItemID->warehouse_id)->first();
+                                @endphp
+                                <input type="hidden" name="delivery_address" value="{{ $warehouseAddress->address }}">
 
 {{--                                <x-jet-label for="warehouse" class="my-2" value="{{ __('portal.Warehouse delivery address') }}" class="text-black"/>--}}
 
-                                @php
+                                {{--@php
                                     $orderItemID =  \App\Models\EOrderItems::where('id', $QouteItem->e_order_items_id)->first();
                                     $warehouseAddress = \App\Models\BusinessWarehouse::where('id', $orderItemID->warehouse_id)->first();
-                                @endphp
+                                @endphp--}}
                                 {{--<input type="text" name="delivery_address" class="form-input rounded-md shadow-sm border p-2 w-full" readonly value="{{$warehouseAddress->address}}">
                                 <br>
                                 <br>--}}
@@ -383,15 +413,16 @@
                         <div class="px-4 py-5 sm:p-6 bg-white shadow ">
                             <div class="flex flex-wrap overflow-hidden bg-gray-300 p-4">
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <img class="h-20 w-20 rounded-full object-cover" src="{{ $QouteItem->buyer_business->business_photo_url }}" alt="{{ $QouteItem->buyer_business->business_name }}"/>
-                                    <h1 class="text-center text-2xl">{{ $QouteItem->buyer_business->business_name }}</h1>
+{{--                                    <img class="h-20 w-20 rounded-full object-cover" src="{{ $QouteItem->buyer_business->business_photo_url }}" alt="{{ $QouteItem->buyer_business->business_name }}"/>--}}
+{{--                                    <h1 class="text-center text-2xl">{{ $QouteItem->buyer_business->business_name }}</h1>--}}
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
+                                    <img class="h-20 w-30 object-cover mx-auto" src="{{ Storage::url($QouteItem->supplier_business->business_photo_url) }}" style="border-radius: 9px;"/>
                                     <h1 class="text-center text-3xl">{{__('portal.Quotation')}}</h1>
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <img class="h-20 w-20 rounded-full object-cover" src="{{ $QouteItem->supplier_business->business_photo_url }}" alt="{{ $QouteItem->supplier_business->business_name }}"/>
-                                    <h1 class="text-center text-2xl">{{ $QouteItem->supplier_business->business_name }}</h1>
+{{--                                    <img class="h-20 w-20 rounded-full object-cover" src="{{ $QouteItem->supplier_business->business_photo_url }}" alt="{{ $QouteItem->supplier_business->business_name }}"/>--}}
+{{--                                    <h1 class="text-center text-2xl">{{ $QouteItem->supplier_business->business_name }}</h1>--}}
                                 </div>
                             </div>
 
@@ -410,28 +441,15 @@
                             </div>
 
                             <div class="flex flex-wrap overflow-hidden bg-white p-4">
-                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <strong>{{__('portal.Requested by')}}: </strong><br>
-                                    <p>{{ $QouteItem->buyer_business->business_name }}</p><br>
-                                    <strong>{{__('portal.City')}}: </strong><span>{{ $QouteItem->buyer_business->city }}</span><br>
-                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $QouteItem->buyer_business->vat_reg_certificate_number }}</span><br>
-                                </div>
-                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <strong>{{__('portal.Supplier')}}: </strong><br>
-                                    <p>{{ $QouteItem->supplier_business->business_name }}</p><br>
+                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-2/3">
+                                    <strong>{{__('portal.Supplier')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $QouteItem->supplier_business->business_name }}<br>
+                                    <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $QouteItem->supplier_business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $QouteItem->supplier_business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.Email')}}: &nbsp;&nbsp;&nbsp;</strong><span>{{ $QouteItem->supplier_business->business_email }}</span><br><br>
 
-                                    <strong>{{__('portal.City')}}: </strong><span>{{ $QouteItem->supplier_business->city }}</span><br>
-                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $QouteItem->supplier_business->vat_reg_certificate_number }}</span><br>
-                                </div>
-                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                     <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $QouteItem->id }}<br>
-                                    <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-                                    @php
-                                        $record = \App\Models\Category::where('id',$QouteItem->orderItem->item_code)->first();
-                                        $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-                                    @endphp
-                                    <span style="color: #145ea8;"> {{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif </span>
-                                    <br>
+                                    <strong>{{__('portal.Requisition')}} #: &nbsp;</strong>{{__('portal.RFQ')}}-{{ $QouteItem->orderItem->id }}<br>
+                                    <strong>{{__('portal.Shipment Time')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> {{ $QouteItem->shipping_time_in_days }}<br>
                                     <strong>{{__('portal.Payment Term')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                     @if($QouteItem->orderItem->payment_mode == 'Cash') {{__('portal.Cash')}}
                                     @elseif($QouteItem->orderItem->payment_mode == 'Credit') {{__('portal.Credit')}}
@@ -441,13 +459,36 @@
                                     @elseif($QouteItem->orderItem->payment_mode == 'Credit120days') {{__('portal.Credit (120 Days)')}}
                                     @endif
                                 </div>
+
+                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
+                                    <img src="{{ Storage::url($QouteItem->buyer_business->business_photo_url) }}" alt="{{ $QouteItem->buyer_business->business_name }}" style="height: 95px;"/>
+                                    <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $QouteItem->buyer_business->business_name }}<br>
+                                    <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $QouteItem->buyer_business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $QouteItem->buyer_business->vat_reg_certificate_number }}</span><br>
+                                    @php
+                                        $warehouse = \App\Models\BusinessWarehouse::where('id', $QouteItem->warehouse_id)->first()->only('mobile', 'address');
+                                    @endphp
+                                    <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $warehouse['mobile'] }}</span><br>
+                                    <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $warehouse['address'] }}</span><br>
+                                </div>
                             </div>
 
-                            <div class="flex flex-wrap overflow-hidden bg-white p-4">
+                            {{--<div class="flex flex-wrap overflow-hidden bg-white p-4">
+                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
+                                    <strong class="text-xl">{{__('portal.Category Name')}}: </strong>
+                                    @php
+                                        $record = \App\Models\Category::where('id',$QouteItem->orderItem->item_code)->first();
+                                        $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                    @endphp
+                                    <span class="text-xl text-blue-600">{{ $record->name_ar }}@if(isset($parent)), {{ $parent->name_ar }} @endif </span>
+                                </div>
+                            </div>--}}
+
+                            {{--<div class="flex flex-wrap overflow-hidden bg-white p-4">
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
                                     <strong class="text-xl">{{__('portal.Item Description')}}: </strong> <span class="text-xl">{{ strip_tags($QouteItem->orderItem->description) }}</span><br>
                                 </div>
-                            </div>
+                            </div>--}}
 
                             <table class="min-w-full divide-y divide-black">
                                 <thead>
@@ -457,6 +498,12 @@
                                     </th>
                                     <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Note')}}
+                                    </th>
+                                    <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        {{__('portal.Category Name')}}
+                                    </th>
+                                    <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        {{__('portal.Description')}}
                                     </th>
                                     <th scope="col" class="px-2 py-2 border border-black text-right text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                         {{__('portal.Unit Price')}}
@@ -474,6 +521,16 @@
                                 <tr>
                                     <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                         1
+                                    </td>
+                                    <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        @php
+                                            $record = \App\Models\Category::where('id',$QouteItem->orderItem->item_code)->first();
+                                            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                        @endphp
+                                        {{ $record->name_ar }}@if(isset($parent)), {{ $parent->name_ar }} @endif
+                                    </td>
+                                    <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        {{ strip_tags($QouteItem->orderItem->description) }}
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                         @if(isset($QouteItem->note_for_customer)) {{ strip_tags($QouteItem->note_for_customer) }} @else N/A @endif
@@ -614,13 +671,18 @@
                                 <input type="hidden" name="vat" value="{{ $QouteItem->VAT }}">
                                 <input type="hidden" name="total_cost" value="{{ $QouteItem->total_cost }}">
                                 <input type="hidden" name="payment_term" value="{{ $QouteItem->orderItem->payment_mode }}">
-
-{{--                                <x-jet-label for="warehouse" class="my-2" value="{{ __('portal.Warehouse delivery address') }}" class="text-black"/>--}}
-
                                 @php
                                     $orderItemID =  \App\Models\EOrderItems::where('id', $QouteItem->e_order_items_id)->first();
                                     $warehouseAddress = \App\Models\BusinessWarehouse::where('id', $orderItemID->warehouse_id)->first();
                                 @endphp
+                                <input type="hidden" name="delivery_address" value="{{ $warehouseAddress->address }}">
+
+{{--                                <x-jet-label for="warehouse" class="my-2" value="{{ __('portal.Warehouse delivery address') }}" class="text-black"/>--}}
+
+                                {{--@php
+                                    $orderItemID =  \App\Models\EOrderItems::where('id', $QouteItem->e_order_items_id)->first();
+                                    $warehouseAddress = \App\Models\BusinessWarehouse::where('id', $orderItemID->warehouse_id)->first();
+                                @endphp--}}
                                 {{--<input type="text" name="delivery_address" class="form-input rounded-md shadow-sm border p-2 w-full" readonly value="{{$warehouseAddress->address}}">
                                 <br>
                                 <br>--}}

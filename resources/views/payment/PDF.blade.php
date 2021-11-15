@@ -89,8 +89,8 @@
     <div class="center" style="width: 40%;float: right">
 
         <strong>Purchase Order #: </strong> PO-{{ $invoice->purchase_order->id }}<br>
-        <strong>Requisition #: </strong>RFQ-{{ $invoice->purchase_order->rfq_no }}<br>
         <strong>Quote #: </strong>Q-{{ $invoice->purchase_order->qoute_no }}<br>
+        <strong>Requisition #: </strong>RFQ-{{ $invoice->purchase_order->rfq_item_no }}<br>
         <strong>Payment Terms: </strong>
         @if($invoice->purchase_order->payment_term == 'Cash') Cash
         @elseif($invoice->purchase_order->payment_term == 'Credit') Credit
@@ -203,6 +203,27 @@
 <br>
 <br>
 
+<div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+    <div style="text-align: left;color: #145EA8">{{__('portal.General note')}}:</div>
+</div>
+<div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+    <div style="text-align: left;">
+        <li style="color: #145EA8">{{__('portal.Emdad is a neutral Platform.')}}</li>
+    </div>
+</div>
+<div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+    <div style="text-align: left;">
+        <li style="color: #145EA8">{{__('portal.Legality of the source of this payment is buyer\'s responsibility.')}}</li>
+    </div>
+</div>
+<div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+    <div style="text-align: left;">
+        <li style="color: #145EA8">{{__('portal.Total amount of VAT, according to its category, is collectable at the supplier\'s end.')}}</li>
+    </div>
+</div>
+<br>
+<br>
+
 @if((auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin'])) && $invoice->invoice_status == 3)
 <div class="header">
 
@@ -232,7 +253,7 @@
     <div class="center" style="width: 16.67%"></div>
 
     <div class="center" style="width: 66.66%">
-        <div style="text-align: center;">Thank you for using Emdad platform as your business partner.</div><br><br>
+        <div style="text-align: center;">Thank you for using Emdad platform as your digital procurement solution</div><br><br>
     </div>
 
     <div class="center" style="width: 16.67%"></div>

@@ -55,7 +55,7 @@
     <div class="center" style="width: 50%;float: left;">
         <h3><u>Requisition Information</u></h3><br>
         <strong>Buyer Name: </strong> @if($quotes[0]->company_name_check == 1) {{$quotes[0]->business->business_name}} @else N/A @endif<br>
-        <strong>Requisition #: </strong> RFQ-{{$quotes[0]->e_order_id}}<br>
+        <strong>Requisition #: </strong> RFQ-{{$quotes[0]->e_order_items_id}}<br>
         <strong>Category Name: </strong>
         @php
             $record = \App\Models\Category::where('id',$quotes[0]->orderItem->item_code)->first();

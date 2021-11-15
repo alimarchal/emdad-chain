@@ -95,8 +95,8 @@
         @endphp
         <span style="color: #145ea8;">{{ $record->name }}, {{ $parent->name }}</span>
         <br>
-        <strong>Requisition #: </strong>RFQ-{{ $invoices[0]->purchase_order->rfq_no }}<br>
-        <strong>Quote #: </strong>Q-{{ $invoices[0]->purchase_order->qoute_no }}<br>
+        <strong>Quotation #: </strong>Q-{{ $invoices[0]->purchase_order->qoute_no }}<br>
+        <strong>Requisition #: </strong>RFQ-{{ $invoices[0]->purchase_order->rfq_item_no }}<br>
         <strong>Payment Terms: </strong>
         @if($invoices[0]->purchase_order->payment_term == 'Cash') Cash
         @elseif($invoices[0]->purchase_order->payment_term == 'Credit') Credit
@@ -200,6 +200,26 @@
 
 <br><br><br><br><br><br><br><br>
 
+<div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+    <div class="mt-3 text-blue-600">{{__('portal.General note')}}:</div>
+</div>
+<div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+    <div class="text-blue-600">
+        <li>{{__('portal.Emdad is a neutral Platform.')}}</li>
+    </div>
+</div>
+<div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+    <div class="text-blue-600">
+        <li>{{__('portal.Legality of the source of this payment is buyer\'s responsibility.')}}</li>
+    </div>
+</div>
+<div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+    <div class="text-blue-600">
+        <li>{{__('portal.Total amount of VAT, according to its category, is collectable at the supplier\'s end.')}}</li>
+    </div>
+</div>
+<br>
+
 @if((auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin'])) && $invoice->invoice_status == 3)
     <div class="header">
 
@@ -229,7 +249,7 @@
     <div class="center" style="width: 16.67%"></div>
 
     <div class="center" style="width: 66.66%">
-        <div style="text-align: center;">Thank you for using Emdad platform as your business partner.</div><br><br>
+        <div style="text-align: center;">Thank you for using Emdad platform as your digital procurement solution</div><br><br>
     </div>
 
     <div class="center" style="width: 16.67%"></div>

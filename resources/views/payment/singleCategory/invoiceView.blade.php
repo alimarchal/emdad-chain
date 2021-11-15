@@ -67,8 +67,8 @@
                                         <span class="text-blue-600">{{ $record->name }} , {{ $parent->name }}</span>
                                         {{--                                {{ $invoices[0]->purchase_order->item_name }}--}}
                                         <br>
-                                        <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $invoices[0]->purchase_order->rfq_no }}<br>
-                                        <strong>{{__('portal.Quote')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $invoices[0]->purchase_order->qoute_no }}<br>
+                                        <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $invoices[0]->purchase_order->qoute_no }}<br>
+                                        <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $invoices[0]->purchase_order->rfq_item_no }}<br>
                                         <strong>{{__('portal.Payment Terms')}} #: &nbsp;&nbsp;&nbsp;</strong>
                                         @if($invoices[0]->purchase_order->payment_term == 'Cash') {{__('portal.Cash')}}
                                         @elseif($invoices[0]->purchase_order->payment_term == 'Credit') {{__('portal.Credit')}}
@@ -151,6 +151,25 @@
                                         <hr>
                                         <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($invoices[0]->total_cost, 2) }} {{__('portal.SAR')}}<br>
                                         <hr>
+                                    </div>
+                                </div>
+
+                                <div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+                                    <div class="mt-3 text-blue-600">{{__('portal.General note')}}:</div>
+                                </div>
+                                <div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+                                    <div class="text-blue-600">
+                                        <li>{{__('portal.Emdad is a neutral Platform.')}}</li>
+                                    </div>
+                                </div>
+                                <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+                                    <div class="text-blue-600">
+                                        <li>{{__('portal.Legality of the source of this payment is buyer\'s responsibility.')}}</li>
+                                    </div>
+                                </div>
+                                <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+                                    <div class="text-blue-600">
+                                        <li>{{__('portal.Total amount of VAT, according to its category, is collectable at the supplier\'s end.')}}</li>
                                     </div>
                                 </div>
 
@@ -244,8 +263,8 @@
                                         @endphp
                                         <span class="text-blue-600">{{ $record->name_ar }} , {{ $parent->name_ar }}</span>
                                         <br>
-                                        <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $invoices[0]->purchase_order->rfq_no }}<br>
-                                        <strong>{{__('portal.Quote')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $invoices[0]->purchase_order->qoute_no }}<br>
+                                        <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $invoices[0]->purchase_order->qoute_no }}<br>
+                                        <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $invoices[0]->purchase_order->rfq_item_no }}<br>
                                         <strong>{{__('portal.Payment Terms')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                         @if($invoices[0]->purchase_order->payment_term == 'Cash') {{__('portal.Cash')}}
                                         @elseif($invoices[0]->purchase_order->payment_term == 'Credit') {{__('portal.Credit')}}
@@ -328,6 +347,25 @@
                                         <hr>
                                         <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($invoices[0]->total_cost, 2) }} {{__('portal.SAR')}}<br>
                                         <hr>
+                                    </div>
+                                </div>
+
+                                <div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+                                    <div class="mt-3 text-blue-600">{{__('portal.General note')}}:</div>
+                                </div>
+                                <div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+                                    <div class="text-blue-600">
+                                        <li>{{__('portal.Emdad is a neutral Platform.')}}</li>
+                                    </div>
+                                </div>
+                                <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+                                    <div class="text-blue-600">
+                                        <li>{{__('portal.Legality of the source of this payment is buyer\'s responsibility.')}}</li>
+                                    </div>
+                                </div>
+                                <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+                                    <div class="text-blue-600">
+                                        <li>{{__('portal.Total amount of VAT, according to its category, is collectable at the supplier\'s end.')}}</li>
                                     </div>
                                 </div>
 

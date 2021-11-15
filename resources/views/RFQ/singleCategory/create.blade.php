@@ -399,7 +399,9 @@
                                         {{$item->brand}}
                                     </td>
 
-                                    <td> {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}</td>
+                                    <td>
+                                        {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
+                                    </td>
                                     <td>
                                         {{$item->remarks}}
                                     </td>
@@ -460,7 +462,7 @@
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" min="0" autocomplete="quantity" required
+                                           name="quantity" min="1" autocomplete="quantity" required
                                            placeholder="{{__('portal.Qty')}}">
                                 </td>
                                 <td>
@@ -864,7 +866,9 @@
                                         {{$item->brand}}
                                     </td>
 
-                                    <td> {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}</td>
+                                    <td>
+                                        {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
+                                    </td>
                                     <td>
                                         {{$item->remarks}}
                                     </td>
@@ -925,7 +929,7 @@
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" min="0" autocomplete="quantity" required
+                                           name="quantity" min="1" autocomplete="quantity" required
                                            placeholder="{{__('portal.Qty')}}">
                                 </td>
                                 <td>
@@ -1425,7 +1429,9 @@
                                         {{$item->brand}}
                                     </td>
 
-                                    <td> {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}</td>
+                                    <td>
+                                        {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
+                                    </td>
                                     <td>
                                         {{$item->remarks}}
                                     </td>
@@ -1486,7 +1492,7 @@
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" min="0" autocomplete="quantity" required
+                                           name="quantity" min="1" autocomplete="quantity" required
                                            placeholder="{{__('portal.Qty')}}">
                                 </td>
                                 <td>
@@ -1883,7 +1889,9 @@
                                         {{$item->brand}}
                                     </td>
 
-                                    <td> {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}</td>
+                                    <td>
+                                        {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
+                                    </td>
                                     <td>
                                         {{$item->remarks}}
                                     </td>
@@ -1944,7 +1952,7 @@
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" min="0" autocomplete="quantity" required
+                                           name="quantity" min="1" autocomplete="quantity" required
                                            placeholder="{{__('portal.Qty')}}">
                                 </td>
                                 <td>

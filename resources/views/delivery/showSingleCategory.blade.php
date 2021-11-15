@@ -29,7 +29,7 @@
 {{--                                    <h1 class="text-center text-2xl">{{ $deliveries[0]->buyer->business->business_name }}</h1>--}}
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <img class="h-20 w-20 rounded-full object-cover mx-auto" src="{{ Storage::url($deliveries[0]->supplier->business->business_photo_url) }}" alt="{{ $deliveries[0]->supplier->business->business_name }}" />
+                                    <img class="h-20 w-30 object-cover mx-auto" src="{{ Storage::url($deliveries[0]->supplier->business->business_photo_url) }}" alt="{{ $deliveries[0]->supplier->business->business_name }}" style="border-radius: 9px;"/>
                                     <h1 class="text-center text-3xl">{{__('portal.Delivery Note')}}</h1>
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
@@ -42,15 +42,17 @@
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-2/3">
                                     <strong>{{__('portal.Supplier')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->supplier->business->business_name }}<br>
                                     <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->city }}</span><br>
-                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br><br>
+                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.Email')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->business_email }}</span><br><br>
+
                                     <strong>{{__('portal.Delivery Note')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.N.')}}-{{ $deliveries[0]->delivery_note_id }}<br>
                                     @if(isset($deliveries[0]->invoice))
                                     <strong>{{__('portal.Invoice')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Inv.')}}-{{ $deliveries[0]->invoice->id }}<br>
                                     @endif
                                     <strong>{{__('portal.Purchase Order')}} #: &nbsp;&nbsp;&nbsp;</strong>{{__('portal.PO')}}-{{ $deliveries[0]->draft_purchase_order_id }}<br>
                                     <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->created_at }}<br>
-                                    <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveries[0]->rfq_no }}<br>
                                     <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $deliveries[0]->qoute_no }}<br>
+                                    <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveries[0]->rfq_item_no }}<br>
                                     <strong>{{__('portal.Payment Terms')}} : &nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                     @if($deliveries[0]->payment_term == 'Cash') {{__('portal.Cash')}}
                                     @elseif($deliveries[0]->payment_term == 'Credit') {{__('portal.Credit')}}
@@ -60,44 +62,16 @@
                                     @elseif($deliveries[0]->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
                                     @endif
                                 </div>
-                                {{--<div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <strong class="text-xl">
---}}{{--                                        {{__('portal.Purchased From')}}: --}}{{--
-                                    </strong><br>
-                                    <p>{{ $deliveries[0]->supplier->business->business_name }}</p><br>
 
-                                    <strong>{{__('portal.City')}}: </strong><span>{{ $deliveries[0]->supplier->business->city }}</span><br>
-                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
-                                </div>--}}
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                                    <img class="h-40 w-40" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}"/><br>
+                                    <img src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" style="height: 115px;"/><br>
                                     <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->buyer->business->business_name }}<br>
-                                    {{--<strong>{{__('portal.Buyer')}}: </strong><br>
-                                    <div class="flex">
-                                        <div class="flex-row">
-                                            <p>{{ $deliveries[0]->buyer->business->business_name }}</p><br>
-                                        </div>
-                                        <div class="flex-row mx-auto">
-                                            <img class="h-20 w-20" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
-                                        </div>
-                                    </div>--}}
                                     <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->city }}</span><br>
                                     <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
                                     <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->otp_mobile_number }}</span><br>
                                     <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $deliveries[0]->delivery_address }}</span><br>
                                 </div>
                             </div>
-
-                            {{--<div class="flex flex-wrap overflow-hidden bg-white p-4">
-                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
-                                    <strong class="text-xl">{{__('portal.Category Name')}}: </strong>
-                                    @php
-                                        $record = \App\Models\Category::where('id',$deliveries[0]->item_code)->first();
-                                        $parent = \App\Models\Category::where('id',$record->parent_id)->first();
-                                    @endphp
-                                    <span class="text-xl">{{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif</span>
-                                </div>
-                            </div>--}}
 
                             <table class="min-w-full divide-y divide-black ">
                                 <thead>
@@ -154,6 +128,25 @@
                                 </div>
                             @endif--}}
 
+                            <div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+                                <div class="mt-3 text-blue-600">{{__('portal.General note')}}:</div>
+                            </div>
+                            <div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+                                <div class="text-blue-600">
+                                    <li>{{__('portal.Emdad is a neutral Platform.')}}</li>
+                                </div>
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+                                <div class="text-blue-600">
+                                    <li>{{__('portal.Quantity, quality and legality of the contents of this delivery are the supplier\'s responsibility.')}}</li>
+                                </div>
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+                                <div class="text-blue-600">
+                                    <li>{{__('portal.Upon receiving the delivery, the buyer acknowledges that the quantity is correct and quality is acceptable.')}}</li>
+                                </div>
+                            </div>
+
                             <div class="flex justify-between px-2 py-2 mt-2 h-15">
                                 <div></div>
                                 <div class="mt-3">{{__('portal.Thank you for using Emdad platform for your business.')}}</div>
@@ -202,7 +195,7 @@
 {{--                                    <h1 class="text-center text-2xl">{{ $deliveries[0]->buyer->business->business_name }}</h1>--}}
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <img class="h-20 w-20 rounded-full object-cover mx-auto" src="{{ Storage::url($deliveries[0]->supplier->business->business_photo_url) }}" alt="{{ $deliveries[0]->supplier->business->business_name }}" />
+                                    <img class="h-20 w-30 rounded-full object-cover mx-auto" src="{{ Storage::url($deliveries[0]->supplier->business->business_photo_url) }}" alt="{{ $deliveries[0]->supplier->business->business_name }}" style="border-radius: 9px;"/>
                                     <h1 class="text-center text-3xl">{{__('portal.Delivery Note')}}</h1>
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
@@ -215,15 +208,17 @@
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-2/3">
                                     <strong>{{__('portal.Supplier')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->supplier->business->business_name }}<br>
                                     <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->city }}</span><br>
-                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br><br>
+                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.Email')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->business_email }}</span><br><br>
+
                                     <strong>{{__('portal.Delivery Note')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.N.')}}-{{ $deliveries[0]->delivery_note_id }}<br>
                                     @if(isset($deliveries[0]->invoice))
                                         <strong>{{__('portal.Invoice')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Inv.')}}-{{ $deliveries[0]->invoice->id }}<br>
                                     @endif
                                     <strong>{{__('portal.Purchase Order')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.PO')}}-{{ $deliveries[0]->draft_purchase_order_id }}<br>
                                     <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->created_at }}<br>
-                                    <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveries[0]->rfq_no }}<br>
                                     <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $deliveries[0]->qoute_no }}<br>
+                                    <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveries[0]->rfq_item_no }}<br>
                                     <strong>{{__('portal.Payment Terms')}} : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                     @if($deliveries[0]->payment_term == 'Cash') {{__('portal.Cash')}}
                                     @elseif($deliveries[0]->payment_term == 'Credit') {{__('portal.Credit')}}
@@ -233,17 +228,8 @@
                                     @elseif($deliveries[0]->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
                                     @endif
                                 </div>
-                                {{--<div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                    <strong class="text-xl">
---}}{{--                                        {{__('portal.Purchased From')}}: --}}{{--
-                                    </strong><br>
-                                    <p>{{ $deliveries[0]->supplier->business->business_name }}</p><br>
-
-                                    <strong>{{__('portal.City')}}: </strong><span>{{ $deliveries[0]->supplier->business->city }}</span><br>
-                                    <strong>{{__('portal.VAT Number')}}: </strong><span>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
-                                </div>--}}
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
-                                    <img class="h-40 w-40" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" /><br>
+                                    <img src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" style="height: 115px;"/><br>
                                     <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->buyer->business->business_name }}<br>
                                     {{--<div class="flex">
                                         <div class="flex-row">
@@ -259,17 +245,6 @@
                                     <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->delivery_address }}</span><br>
                                 </div>
                             </div>
-
-                            {{--<div class="flex flex-wrap overflow-hidden bg-white p-4">
-                                <div class="w-full overflow-hidden lg:w-1/3 xl:w-screen">
-                                    <strong class="text-xl">{{__('portal.Category Name')}}: </strong>
-                                    @php
-                                        $record = \App\Models\Category::where('id',$deliveries[0]->item_code)->first();
-                                        $parent = \App\Models\Category::where('id',$record->parent_id)->first();
-                                    @endphp
-                                    <span class="text-xl">{{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif</span>
-                                </div>
-                            </div>--}}
 
                             <table class="min-w-full divide-y divide-black ">
                                 <thead>
@@ -324,6 +299,25 @@
                                     <img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-9@8x.png')}}" alt="{{__('portal.P.O. APPROVED')}}">
                                 </div>
                             @endif--}}
+
+                            <div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+                                <div class="mt-3 text-blue-600">{{__('portal.General note')}}:</div>
+                            </div>
+                            <div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+                                <div class="text-blue-600">
+                                    <li>{{__('portal.Emdad is a neutral Platform.')}}</li>
+                                </div>
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+                                <div class="text-blue-600">
+                                    <li>{{__('portal.Quantity, quality and legality of the contents of this delivery are the supplier\'s responsibility.')}}</li>
+                                </div>
+                            </div>
+                            <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+                                <div class="text-blue-600">
+                                    <li>{{__('portal.Upon receiving the delivery, the buyer acknowledges that the quantity is correct and quality is acceptable.')}}</li>
+                                </div>
+                            </div>
 
                             <div class="flex justify-between px-2 py-2 mt-2 h-15">
                                 <div></div>
