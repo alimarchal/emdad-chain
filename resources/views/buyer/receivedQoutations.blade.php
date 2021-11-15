@@ -196,7 +196,9 @@
                                         <tr>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{-- Showing EOrder Number(ID) for single category --}}
-                                                {{__('portal.RFQ')}}-{{ $placedRFQ->id }}
+{{--                                                {{__('portal.RFQ')}}-{{ $placedRFQ->id }}--}}
+                                                {{-- Now Showing EOrderItems Number(ID) for single category same as multi categories  --}}
+                                                {{__('portal.RFQ')}}-{{ $placedRFQ->OrderItems[0]->id }}
                                             </td>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @php
@@ -501,8 +503,10 @@
                                     @else
                                         <tr>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{-- Showing EOrder Number for single category --}}
-                                                {{__('portal.RFQ')}}-{{ $placedRFQ->id }}
+                                                {{-- Showing EOrder Number(ID) for single category --}}
+{{--                                                {{__('portal.RFQ')}}-{{ $placedRFQ->id }}--}}
+                                                {{-- Now Showing EOrderItems Number(ID) for single category same as multi categories  --}}
+                                                {{__('portal.RFQ')}}-{{ $placedRFQ->OrderItems[0]->id }}
                                             </td>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @php

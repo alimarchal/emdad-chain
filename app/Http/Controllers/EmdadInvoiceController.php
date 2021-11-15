@@ -41,7 +41,7 @@ class EmdadInvoiceController extends Controller
             $multiCategoryCollection = collect($multiCategory);
             $singleCategoryCollection = collect($singleCategory);
             $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
-            $emdadInvoices = $multiCategoryCollection->merge($singleCategoryInvoices);
+            $emdadInvoices = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
 
             return view('invoice.supplier_emdad_invoices', compact('emdadInvoices'))->with('invoice');
         }

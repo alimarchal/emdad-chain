@@ -35,7 +35,7 @@ class BankPaymentController extends Controller
             $multiCategoryCollection = collect($multiCategory);
             $singleCategoryCollection = collect($singleCategory);
             $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
-            $collection = $multiCategoryCollection->merge($singleCategoryInvoices);
+            $collection = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
         }
         if (auth()->user()->registration_type == 'Supplier' || auth()->user()->hasRole('Supplier Payment Admin')) {
 //            $collection = Invoice::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_status', 0)->get();
@@ -57,7 +57,7 @@ class BankPaymentController extends Controller
             $multiCategoryCollection = collect($multiCategory);
             $singleCategoryCollection = collect($singleCategory);
             $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
-            $collection = $multiCategoryCollection->merge($singleCategoryInvoices);
+            $collection = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
 
         }
         if (auth()->user()->hasRole('SuperAdmin|Finance Officer 1')) {

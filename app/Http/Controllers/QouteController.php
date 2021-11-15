@@ -732,7 +732,7 @@ class QouteController extends Controller
     public function quotationPDF($quote_supplier_business_id, $e_order_id)
     {
 
-        $quote = Qoute::with('messages')->where(['supplier_business_id' => $quote_supplier_business_id])->where( 'e_order_id' , $e_order_id)->first();
+        $quote = Qoute::with('orderItem','buyer_business','supplier_business','user','business','RFQ','messages')->where(['supplier_business_id' => $quote_supplier_business_id])->where( 'e_order_id' , $e_order_id)->first();
 
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('buyer.quotationPDF', compact('quote'));
         return $pdf->download('Quotation.pdf');
@@ -778,7 +778,7 @@ class QouteController extends Controller
 
     public function singleCategoryRFQItemByID(Qoute $quote)
     {
-        $quotes = Qoute::where(['supplier_business_id' => $quote->supplier_business_id])->where( 'e_order_id' , $quote->e_order_id)->get();
+        $quotes = Qoute::with('orderItem','buyer_business','supplier_business','user','business','RFQ','messages')->where(['supplier_business_id' => $quote->supplier_business_id])->where( 'e_order_id' , $quote->e_order_id)->get();
 
         return view('buyer.singleCategory.respond', compact('quotes'));
     }
@@ -998,7 +998,7 @@ class QouteController extends Controller
      */
     public function singleCategoryQuotationPDF($quote_supplier_business_id,$e_order_id)
     {
-        $quotes = Qoute::where(['supplier_business_id' => decrypt($quote_supplier_business_id)])->where( 'e_order_id' , decrypt($e_order_id))->get();
+        $quotes = Qoute::with('orderItem','buyer_business','supplier_business','user','business','RFQ','messages')->where(['supplier_business_id' => decrypt($quote_supplier_business_id)])->where( 'e_order_id' , decrypt($e_order_id))->get();
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('buyer.singleCategory.quotationPDF', compact('quotes'));
         return $pdf->download('Quotation.pdf');
     }

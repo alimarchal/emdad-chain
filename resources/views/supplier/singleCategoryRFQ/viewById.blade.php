@@ -135,7 +135,7 @@
                             <div class="my-5 pl-5 ">
                                 <strong>{{__('portal.Buyer Name')}}:</strong> @if($eOrderItems[0]->company_name_check == 1) {{$eOrderItems[0]->business->business_name}} @else {{__('portal.N/A')}} @endif
                                 <br>
-                                <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-{{$eOrderItems[0]->e_order_id}}
+                                <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-{{$eOrderItems[0]->id}}
                                 <br>
 {{--                                <strong>{{__('portal.Category Name')}}: </strong> {{ $eOrderItems[0]->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems[0]->item_code)->first()->parent_id))->first()->name }}--}}
 {{--                                <br>--}}
@@ -721,7 +721,7 @@
                             <div class="my-5 pl-5 ">
                                 <strong>{{__('portal.Buyer Name')}}:</strong> @if($eOrderItems[0]->company_name_check == 1) {{$eOrderItems[0]->business->business_name}} @else {{__('portal.N/A')}} @endif
                                 <br>
-                                <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-{{$eOrderItems[0]->e_order_id}}
+                                <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-{{$eOrderItems[0]->id}}
                                 <br>
 {{--                                <strong>{{__('portal.Category Name')}}: </strong>--}}
 {{--                                {{ \App\Models\Category::where('id', $eOrderItems[0]->item_code)->first()->name_ar }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems[0]->item_code)->first()->parent_id))->first()->name_ar }}--}}

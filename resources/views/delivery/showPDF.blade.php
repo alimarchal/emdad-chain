@@ -63,15 +63,17 @@
     <div class="center1">
         <strong>Supplier: </strong>{{ $deliveries[0]->supplier->business->business_name }}<br>
         <strong>City: </strong>{{ $deliveries[0]->supplier->business->city }}<br>
-        <strong>VAT Number: </strong>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}<br><br>
+        <strong>VAT Number: </strong>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}<br>
+        <strong>Email: </strong>{{ $deliveries[0]->supplier->business->business_email }}<br><br>
+
         <strong>Delivery Note: </strong>DN-{{ $deliveries[0]->delivery_note_id }}<br>
         @if(isset($deliveries[0]->invoice))
             <strong>Invoice #: </strong>Inv-{{ $deliveries[0]->invoice->id }}<br>
         @endif
         <strong>Purchase Order #: </strong>PO-{{ $deliveries[0]->draft_purchase_order_id }}<br>
         <strong>Date: </strong>{{ $deliveries[0]->created_at }}<br>
-        <strong>Requisition #: </strong>RFQ-{{ $deliveries[0]->rfq_no }}<br>
         <strong>Quotation #: </strong>Q-{{ $deliveries[0]->qoute_no }}<br>
+        <strong>Requisition #: </strong>RFQ-{{ $deliveries[0]->rfq_item_no }}<br>
         <strong>Payment Terms : </strong>
         @if($deliveries[0]->payment_term == 'Cash') {{__('portal.Cash')}}
         @elseif($deliveries[0]->payment_term == 'Credit') {{__('portal.Credit')}}
@@ -112,7 +114,7 @@
 <br>
 <br>
 
-<table class="min-w-full divide-y divide-black">
+<table class="divide-y divide-black" style="width: 100%">
     <thead>
 
     <tr>
@@ -142,7 +144,26 @@
 </table>
 
 <br>
-<br>
+
+<div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+    <div style="text-align: left;color: #145EA8">{{__('portal.General note')}}:</div>
+</div>
+<div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
+    <div style="text-align: left;">
+        <li style="color: #145EA8">{{__('portal.Emdad is a neutral Platform.')}}</li>
+    </div>
+</div>
+<div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+    <div style="text-align: left;">
+        <li style="color: #145EA8">{{__('portal.Quantity, quality and legality of the contents of this delivery are the supplier\'s responsibility.')}}</li>
+    </div>
+</div>
+<div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
+    <div style="text-align: left;">
+        <li style="color: #145EA8">{{__('portal.Upon receiving the delivery, the buyer acknowledges that the quantity is correct and quality is acceptable.')}}</li>
+    </div>
+</div>
+
 <br>
 
 <div class="flex justify-between px-2 py-2 mt-2 h-15">
