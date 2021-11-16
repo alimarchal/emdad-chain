@@ -12,6 +12,7 @@ class Sendsms extends Component
     public $wrong_sms  = false;
     public $mobile_verify_check  = false;
     public $sms_code = '';
+    public $mobile_number = '';
 
     public function render()
     {
@@ -27,6 +28,12 @@ class Sendsms extends Component
     public function send_sms()
     {
         $user = \App\Models\User::find(auth()->user())->first();
+
+        if ($user->mobile != $this->mobile_number && $this->mobile_number != null)
+        {
+            $user->update(['mobile' => $this->mobile_number]);
+        }
+
         $mobile_no = $user->mobile;
         $randomNumber = rand(1001,9999);
         $user->mobile_verify_code = $randomNumber;

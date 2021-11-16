@@ -73,7 +73,15 @@
         <strong>Date: </strong>{{ $draftPurchaseOrder->created_at }}<br>
         <strong>Quotation #: </strong>Q-{{ $draftPurchaseOrder->qoute_no }}<br>
         <strong>Requisition #: </strong>RFQ-{{ $draftPurchaseOrder->eOrderItem->id }}<br>
-        <strong>Payment Terms: </strong>{{ $draftPurchaseOrder->payment_term }}<br>
+        <strong>Payment Terms: </strong>
+        @if($draftPurchaseOrder->payment_term == 'Cash') Cash
+        @elseif($draftPurchaseOrder->payment_term == 'Credit') Credit
+        @elseif($draftPurchaseOrder->payment_term == 'Credit30days') Credit (30 Days)
+        @elseif($draftPurchaseOrder->payment_term == 'Credit60days') Credit (60 Days)
+        @elseif($draftPurchaseOrder->payment_term == 'Credit90days') Credit (90 Days)
+        @elseif($draftPurchaseOrder->payment_term == 'Credit120days') Credit (120 Days)
+        @endif
+        <br>
     </div>
 
 {{--    <div class="center">--}}

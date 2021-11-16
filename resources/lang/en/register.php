@@ -36,5 +36,10 @@ return [
     'Already registered?' => 'Already registered?',
     'Register' => 'Register',
     'Choose Date' => 'Choose Date',
+    'Update Number' => 'Update Number',
+    'We have send you SMS code please type and press verify.' => 'We have send you SMS code please type and press verify.',
+    'Your SMS Code is Wrong. Please check and try again.' => 'Your SMS Code is Wrong. Please check and try again.',
+    'Update and Send Code' => 'Update and Send Code',
+    'Please verify your mobile number to proceed' => 'Please verify your mobile number to proceed',
 
 ];
