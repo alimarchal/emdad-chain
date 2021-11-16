@@ -12,6 +12,7 @@ use App\Models\Qoute;
 use App\Models\QouteMessage;
 use App\Models\User;
 use App\Notifications\QuotationSent;
+use App\Notifications\User\ModificationNeeded;
 use App\Notifications\User\QuotationReceived;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
@@ -31,7 +32,6 @@ class QouteController extends Controller
 
     public function store(Request $request)
     {
-
         $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
         Validator::make($request->all(), [
             'expiry_date' => 'required|date|after_or_equal:'.$min5days,
@@ -216,6 +216,14 @@ class QouteController extends Controller
 
     public function update(Request $request, Qoute $qoute)
     {
+
+
+
+        $myDateTime = Carbon::createFromFormat('m/d/Y', $request->shipping_time_in_days)->format('Y-m-d');
+
+        $request->merge(['shipping_time_in_days'=>$myDateTime]);
+
+
         Validator::make($request->all(), [
             'shipping_time_in_days' => 'required',
         ],[
@@ -237,6 +245,14 @@ class QouteController extends Controller
         $qoute->update($request->all());
         $quote = $qoute;
         User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
+
+        $buyer_id = User::where('business_id', $request->business_id)->first();
+        if(!empty($buyer_id))
+        {
+            $buyer_id->notify(new QuotationReceived());
+        }
+
+
         if (isset($request->single_rfq))
         {
             return redirect()->route('singleCategoryQuotedModifiedRFQ');
@@ -312,10 +328,20 @@ class QouteController extends Controller
             }
         }
 
+        $buyer_id = User::where('business_id', $request->business_id)->first();
+        if(!empty($buyer_id))
+        {
+            $buyer_id->notify(new QuotationReceived());
+        }
+
         session()->flash('message', __('portal.You have updated the quote.'));
         $quote = $qoute;
         User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
-
+        $buyer_id = User::where('business_id', $request->business_id)->first();
+        if(!empty($buyer_id))
+        {
+            $buyer_id->notify(new QuotationReceived());
+        }
         return redirect()->route('singleCategoryQuotedModifiedRFQ');
     }
 
@@ -609,6 +635,7 @@ class QouteController extends Controller
 
     public function updateModificationNeeded(Qoute $qoute, Request $request)
     {
+
         Validator::make($request->all(), [
             'message' => ['required'],
         ], [
@@ -632,6 +659,11 @@ class QouteController extends Controller
         $buyer_id = 0;
         // inform supplier user
         User::find($qoute->supplier_user_id)->notify(new \App\Notifications\QuoteAgain($qoute));
+        $supplier_id = User::find($qoute->supplier_user_id);
+        if(!empty($supplier_id))
+        {
+            $supplier_id->notify(new ModificationNeeded());
+        }
 
         if (auth()->user()->rtl == 0)
         {

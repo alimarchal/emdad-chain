@@ -292,6 +292,8 @@ class EOrdersController extends Controller
                         $eOrderItem->save();
 
 
+
+
                         // search for item code from business_categories table
                         $collection = BusinessCategory::where('category_number', $eOrderItem->item_code)->where('business_id', '!=', $item->business_id)->get();
                         foreach ($collection as $coll) {
@@ -440,7 +442,9 @@ class EOrdersController extends Controller
 
                     // search for item code from business_categories table
                     $collection = BusinessCategory::where('category_number', $eOrderItem->item_code)->where('business_id', '!=', $item->business_id)->get();
+
                     foreach ($collection as $coll) {
+
                         if (!empty($coll->business)) {
                             {
                                 $get_user = User::where('id', $coll->business->user_id)->first();
