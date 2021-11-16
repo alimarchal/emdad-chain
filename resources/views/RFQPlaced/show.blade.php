@@ -100,9 +100,9 @@
                                             $parentCategory = \App\Models\Category::where('id',$category->parent_id)->first();
                                         @endphp
                                         @if(auth()->user()->rtl == 0)
-                                            {{ $rfp->item_name }} @if(isset($parentCategory->name)) , {{ $parentCategory->name }} @endif
+                                            {{ $rfp->item_name }}@if(isset($parentCategory->name)), {{ $parentCategory->name }} @endif
                                         @else
-                                            {{ $category->name_ar }} @if(isset($parentCategory->name_ar)) , {{ $parentCategory->name_ar }} @endif
+                                            {{ $category->name_ar }}@if(isset($parentCategory->name_ar)), {{ $parentCategory->name_ar }} @endif
                                         @endif
                                     </td>
 
@@ -129,9 +129,9 @@
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
                                         @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}
-                                        @elseif($rfp->delivery_period =='With in 30 Days') {{__('portal.30 Days')}}30
-                                        @elseif($rfp->delivery_period =='With in 60 Days') {{__('portal.60 Days')}}60
-                                        @elseif($rfp->delivery_period =='With in 90 Days') {{__('portal.90 Days')}}90
+                                        @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
+                                        @elseif($rfp->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
+                                        @elseif($rfp->delivery_period =='Within 90 Days') {{__('portal.90 Days')}}
                                         @elseif($rfp->delivery_period =='Standing Order - 2 per year') {{__('portal.Standing Order - 2 times / year')}}
                                         @elseif($rfp->delivery_period =='Standing Order - 3 per year') {{__('portal.Standing Order - 3 times / year')}}
                                         @elseif($rfp->delivery_period =='Standing Order - 4 per year') {{__('portal.Standing Order - 4 times / year')}}

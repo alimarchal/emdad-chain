@@ -79,9 +79,12 @@ class BankPaymentController extends Controller
 
         $validator = $request->validate([
             'amount_date' => 'required',
-            'file_path_1' => 'required|mimes:jpg,bmp,png,jpeg,JPEG,JPG',
+            'file_path_1' => 'required|mimes:jpg,bmp,png,jpeg,JPEG,JPG,pdf',
+        ],[
+            'amount_date.required' => 'Please choose a deposit date',
+            'file_path_1.required' => 'Receipt (Proof) is required',
+            'file_path_1.mimes' => 'Receipt (Proof) must be of type jpg,bmp,png,jpeg,JPEG,JPG,pdf',
         ]);
-
 
         $time = strtotime($request->amount_date);
         $newformat = date('Y-m-d',$time);
@@ -262,14 +265,18 @@ class BankPaymentController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'amount_date' => 'required',
-            'file_path_1' => 'required|mimes: jpeg.jpg,png,',
-        ]);
+            'file_path_1' => 'required|mimes: jpeg.jpg,png,pdf',
+        ],[
+            'amount_date.required' => 'Please choose a deposit date',
+            'file_path_1.required' => 'Receipt (Proof) is required',
+            'file_path_1.mimes' => 'Receipt (Proof) must be of type jpg,bmp,png,jpeg,JPEG,JPG,pdf',
+        ])->validate();
 
-        if ($validator->fails())
-        {
-            session()->flash('error', 'All Fields are required');
-            return redirect()->back();
-        }
+//        if ($validator->fails())
+//        {
+//            session()->flash('error', 'All Fields are required');
+//            return redirect()->back();
+//        }
 
         $time = strtotime($request->amount_date);
         $newformat = date('Y-m-d',$time);

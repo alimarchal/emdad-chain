@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="http://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
-    <link href="http://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <style>
-        body { font-family: DejaVu Sans, sans-serif; }
-        table, td, th {
-            border: 1px solid black;
+        table,
+        td,
+        th {
+            border: 1px solid bredlarck;
+            border-collapse: collapse;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
         .header {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -28,7 +28,9 @@
             float: left;
         }
 
-
+        div {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
     </style>
 </head>
@@ -37,65 +39,70 @@
 
 
 <div class="header">
-    <div class="center">
+    <div class="center"></div>
 
+    <div class="center">
+        @php
+            $supplierBusiness = \App\Models\Business::where('id', $invoice->supplier_business_id)->first();
+            $buyerBusiness = \App\Models\Business::where('id', $invoice->buyer_business_id)->first();
+        @endphp
+        @php $logo_first = asset(Storage::url($supplierBusiness->business_photo_url)); @endphp
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem;border-radius: 50%;;margin-left: 75px;" />
+        <h3 style="text-align: center; margin:0;">Invoice</h3>
     </div>
 
     <div class="center">
-        @php $logo_second = asset(Storage::url($deliveries[0]->supplier->business->business_photo_url)); @endphp
-        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;border-radius: 50%;;margin-left: 75px;" />
-        <h2 style="text-align: center; margin:0px;">Delivery Note</h2>
+        {{--@php
+            $supplierBusiness = \App\Models\Business::where('id', $invoice->supplier_business_id)->first();
+            $buyerBusiness = \App\Models\Business::where('id', $invoice->buyer_business_id)->first();
+        @endphp
+        @php $logo_first = asset(Storage::url($supplierBusiness->business_photo_url)); @endphp
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem; height: 5rem; border-radius: 50%;"/>--}}
+        {{--        <img src="{{(isset($supplierBusiness->business_photo_url)?Storage::url($supplierBusiness->business_photo_url):'#')}}" alt="{{$supplierBusiness->business_name}}" style="height: 80px;width: 200px;"/>--}}
     </div>
 
-    <div class="center">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    </div>
-
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <div class="center1">
-        <strong>Supplier: </strong>{{ $deliveries[0]->supplier->business->business_name }}<br>
-        <strong>City: </strong>{{ $deliveries[0]->supplier->business->city }}<br>
-        <strong>VAT Number: </strong>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}<br>
-        <strong>Email: </strong>{{ $deliveries[0]->supplier->business->business_email }}<br><br>
+        <strong>Supplier Business Name: </strong> {{ $supplierBusiness->business_name }}<br>
+        <strong>Email: </strong> {{ $supplierBusiness->business_email }}<br>
+        <strong>Phone: </strong> {{ $supplierBusiness->phone }}<br>
+        <strong>VAT Number: </strong> {{ $supplierBusiness->vat_reg_certificate_number }}<br>
+        <strong>Address: </strong> {{ $supplierBusiness->address }}<br><br>
 
-        <strong>Delivery Note: </strong>DN-{{ $deliveries[0]->delivery_note_id }}<br>
-        @if(isset($deliveries[0]->invoice))
-            <strong>Invoice #: </strong>Inv-{{ $deliveries[0]->invoice->id }}<br>
+        <strong>Invoice #: </strong> Inv-{{ $invoice->id }}<br>
+        <strong>Date: </strong> {{ $invoice->created_at }}<br>
+        <strong>Purchase Order #: </strong> PO-{{ $invoice->purchase_order->id }}<br>
+        <strong>Quote #: </strong>Q-{{ $invoice->purchase_order->qoute_no }}<br>
+        <strong>Requisition #: </strong>RFQ-{{ $invoice->purchase_order->rfq_item_no }}<br>
+        <strong>Payment Terms: </strong>
+        @if($invoice->purchase_order->payment_term == 'Cash') Cash
+        @elseif($invoice->purchase_order->payment_term == 'Credit') Credit
+        @elseif($invoice->purchase_order->payment_term == 'Credit30days') Credit (30 Days)
+        @elseif($invoice->purchase_order->payment_term == 'Credit60days') Credit (60 Days)
+        @elseif($invoice->purchase_order->payment_term == 'Credit90days') Credit (90 Days)
+        @elseif($invoice->purchase_order->payment_term == 'Credit120days') Credit (120 Days)
         @endif
-        <strong>Purchase Order #: </strong>PO-{{ $deliveries[0]->draft_purchase_order_id }}<br>
-        <strong>Date: </strong>{{ $deliveries[0]->created_at }}<br>
-        <strong>Quotation #: </strong>Q-{{ $deliveries[0]->qoute_no }}<br>
-        <strong>Requisition #: </strong>RFQ-{{ $deliveries[0]->rfq_item_no }}<br>
-        <strong>Payment Terms : </strong>
-        @if($deliveries[0]->payment_term == 'Cash') {{__('portal.Cash')}}
-        @elseif($deliveries[0]->payment_term == 'Credit') {{__('portal.Credit')}}
-        @elseif($deliveries[0]->payment_term == 'Credit30days') {{__('portal.Credit (30 Days)')}}
-        @elseif($deliveries[0]->payment_term == 'Credit60days') {{__('portal.Credit (60 Days)')}}
-        @elseif($deliveries[0]->payment_term == 'Credit90days') {{__('portal.Credit (90 Days)')}}
-        @elseif($deliveries[0]->payment_term == 'Credit120days') {{__('portal.Credit (120 Days)')}}
-        @endif
+
         <br>
     </div>
 
-
-
     <div style="width: 40%;float: right;">
-        @php $logo_first = asset(Storage::url($deliveries[0]->buyer->business->business_photo_url)); @endphp
-        <strong></strong><img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 150px;height: 80px;border-radius: 25px;"/><br>
-        <strong>Buyer: </strong>{{ $deliveries[0]->buyer->business->business_name }}<br>
-        <strong>City: </strong>{{ $deliveries[0]->buyer->business->city }}<br>
-        <strong>VAT Number: </strong>{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}<br>
-        <strong>Contact # </strong>{{ $deliveries[0]->otp_mobile_number }}<br>
-        <strong>Delivery Address: </strong>{{ $deliveries[0]->delivery_address }}<br>
+        @php $buyer_logo = asset(Storage::url($buyerBusiness->business_photo_url)); @endphp
+        <img src="{{ $buyer_logo }}" alt="{{ $buyer_logo }}" style="width: 150px;height: 80px;border-radius: 25px;"/><br><br><br>
+        <strong>Buyer Business Name: </strong> {{ $buyerBusiness->business_name }}<br>
+        <strong>Email: </strong> {{ $buyerBusiness->business_email }}<br>
+        <strong>Phone: </strong> {{ $buyerBusiness->phone }}<br>
+        <strong>VAT Number: </strong> {{ $buyerBusiness->vat_reg_certificate_number }}<br>
+        <strong>Address: </strong> {{ $buyerBusiness->address }}<br>
+
     </div>
+
 </div>
 
 <br>
@@ -110,70 +117,158 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
 
-<table class="divide-y divide-black" style="width: 100%">
+<table class="min-w-full divide-y divide-black " style="margin-top: 4%;">
     <thead>
-
     <tr>
-        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">#</th>
-        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">CATEGORY NAME</th>
-        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">DESCRIPTION</th>
-        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">UOM</th>
-        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">QUANTITY</th>
+        <th style="background-color: #FCE5CD">
+            #
+        </th>
+        <th style="background-color: #FCE5CD">
+            Category Name
+        </th>
+        <th style="background-color: #FCE5CD">
+            Description
+        </th>
+        <th style="background-color: #FCE5CD">
+            UOM
+        </th>
+        <th style="background-color: #FCE5CD">
+            Quantity
+        </th>
+        <th style="background-color: #FCE5CD">
+            UNIT PRICE
+        </th>
+        <th style="background-color: #FCE5CD">
+            TOTAL
+        </th>
     </tr>
-
     </thead>
     <tbody class="bg-white divide-y divide-black border-1 border-black">
-    @foreach($deliveries as $delivery)
-        <tr>
-            <td  style="text-align: center">{{$loop->iteration}}</td>
+    <tr>
+        <td style="text-align: center;">
+            1
+        </td>
+        <td style="text-align: center;">
             @php
-                $record = \App\Models\Category::where('id',$deliveries[0]->item_code)->first();
-                $parent = \App\Models\Category::where('id',$record->parent_id)->first();
+                $record = \App\Models\Category::where('id',$invoice->purchase_order->item_code)->first();
+                $parent= \App\Models\Category::where('id',$record->parent_id)->first();
             @endphp
-            <td  style="text-align: center">{{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif</td>
-            <td  style="text-align: center">{{ $delivery->eOrderItems->description }}</td>
-            <td  style="text-align: center">{{ $delivery->eOrderItems->unit_of_measurement }}</td>
-            <td  style="text-align: center">{{ $delivery->quantity }}</td>
-        </tr>
-    @endforeach
+            {{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif
+        </td>
+
+        <td style="text-align: center;">
+            {{ $invoice->eOrderItem->description }}
+        </td>
+        <td style="text-align: center;">
+            {{ $invoice->purchase_order->uom }}
+        </td>
+        <td style="text-align: center;">
+            {{ $invoice->purchase_order->quantity }}
+        </td>
+        <td style="text-align: center;">
+            {{ $invoice->purchase_order->unit_price }} SAR
+        </td>
+        <td style="text-align: center;">
+            {{ number_format(($invoice->purchase_order->quantity * $invoice->purchase_order->unit_price), 2) }}  SAR
+        </td>
+    </tr>
     </tbody>
 </table>
 
+
+<br>
+<br>
+
+<div class="header">
+
+    <div style="width: 66.66%;float: left;"></div>
+
+    <div style="width: 33.33%;float: right">
+        <strong>Sub-total: </strong> {{ number_format(($invoice->purchase_order->quantity * $invoice->purchase_order->unit_price), 2) }} SAR<br>
+        @php $subtotal = $invoice->purchase_order->quantity * $invoice->purchase_order->unit_price; $subtotal += $invoice->purchase_order->shipment_cost; @endphp
+        <strong>VAT {{ number_format($invoice->vat) }}%: </strong>{{ number_format($subtotal * ($invoice->vat/100), 2) }} SAR<br>
+        <strong>Shipment cost: </strong> {{ $invoice->purchase_order->shipment_cost }} SAR<br>
+        <hr>
+        <strong>Total: </strong> {{ number_format($invoice->total_cost, 2) }} SAR<br>
+        <hr>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 
 <div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
-    <div style="text-align: left;color: #145EA8">{{__('portal.General note')}}:</div>
+    <div style="text-align: left;color: #145EA8;font-size: small">{{__('portal.General note')}}:</div>
 </div>
 <div class="w-full overflow-hidden mt-2 lg:w-1/2 xl:w-2/3">
     <div style="text-align: left;">
-        <li style="color: #145EA8">{{__('portal.Emdad is a neutral Platform.')}}</li>
+        <li style="color: #145EA8;font-size: small">{{__('portal.Emdad is a neutral Platform.')}}</li>
     </div>
 </div>
 <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
     <div style="text-align: left;">
-        <li style="color: #145EA8">{{__('portal.Quantity, quality and legality of the contents of this delivery are the supplier\'s responsibility.')}}</li>
+        <li style="color: #145EA8;font-size: small">{{__('portal.Legality of the source of this payment is buyer\'s responsibility.')}}</li>
     </div>
 </div>
 <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
     <div style="text-align: left;">
-        <li style="color: #145EA8">{{__('portal.Upon receiving the delivery, the buyer acknowledges that the quantity is correct and quality is acceptable.')}}</li>
+        <li style="color: #145EA8;font-size: small">{{__('portal.Total amount of VAT, according to its category, is collectable at the supplier\'s end.')}}</li>
     </div>
+</div>
+<br>
+<br>
+
+@if((auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin'])) && $invoice->invoice_status == 3)
+    <div class="header">
+
+        <div style="width: 66.66%;float: left;">
+            @php $paid = asset('images/stamps/Artboard-6@8x.png'); @endphp
+            <img src="{{$paid}}" width="100" >
+        </div>
+
+        <div style="width: 33.33%;float: right"></div>
+
+    </div>
+@endif
+
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="header">
+
+    <div class="center" style="width: 100%">
+        <div style="text-align: center;">Thank you for using Emdad platform as your digital procurement solution</div><br><br>
+    </div>
+
 </div>
 
 <br>
+<br>
 
-<div class="flex justify-between px-2 py-2 mt-2 h-15">
-    <div style="text-align: center; margin: auto;">
-        <p style="text-align: center; ">Thank you for using Emdad platform as your digital procurement solution </p>
-    <!--<img src="{{ url(Storage::url('logo-full.png')) }}" />-->
+<div class="header">
+
+    <div class="center" style="width: 33.33%"></div>
+
+    <div class="center" style="width: 33.33%"></div>
+
+    <div class="center" style="width: 33.33%; float: right">
+        <div style="margin-top: 2px;">Copied to Emdad records</div>
         @php $img = asset('logo-full.png'); @endphp
-
-        <img src="@php echo $img @endphp" width="100" >
-
+        <img src="{{$img}}" width="40" style="float: right">
     </div>
 
 </div>
