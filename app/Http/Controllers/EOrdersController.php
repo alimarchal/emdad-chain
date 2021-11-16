@@ -265,7 +265,6 @@ class EOrdersController extends Controller
                     $eOrders = EOrders::create($request->all());
 
                     $eCartItems = ECart::findMany($request->item_number);
-//                    dd(request()->all());
                     foreach ($eCartItems as $item) {
                         $eOrderItem = new EOrderItems;
                         $eOrderItem->e_order_id = $eOrders->id;

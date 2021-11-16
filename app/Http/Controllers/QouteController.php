@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Notifications\QuotationSent;
 use App\Notifications\User\ModificationNeeded;
 use App\Notifications\User\QuotationReceived;
+use App\Notifications\User\QuotationRejected;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
@@ -635,7 +636,6 @@ class QouteController extends Controller
 
     public function updateModificationNeeded(Qoute $qoute, Request $request)
     {
-
         Validator::make($request->all(), [
             'message' => ['required'],
         ], [
@@ -685,10 +685,15 @@ class QouteController extends Controller
             'qoute_status_updated' => $qoute_status,
             'status' => 'expired',
         ]);
-
+        
         $quote = $qoute;
         User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteRejected($quote));
 
+        $supplier_business_id = User::where('business_id', $qoute->supplier_business_id)->first();
+        if(!empty($supplier_business_id))
+        {
+            $supplier_business_id->notify(new QuotationRejected());
+        }
         if (auth()->user()->rtl == 0)
         {
             session()->flash('message', 'Quote status changed to ' . $qoute_status);
@@ -905,6 +910,7 @@ class QouteController extends Controller
 
     public function singleCategoryRFQUpdateStatusRejected(Qoute $quotes)
     {
+
         $quote_status = 'Rejected';
 
         $relatedQuotes = Qoute::where(['supplier_user_id' => $quotes->supplier_user_id, 'e_order_id' => $quotes->e_order_id])->get();
@@ -919,6 +925,12 @@ class QouteController extends Controller
         }
 
         User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteRejected($quotes));
+
+        $supper_id = User::where('business_id', $quotes->supplier_business_id)->first();
+        if(!empty($supper_id))
+        {
+            $supper_id->notify(new QuotationRejected());
+        }
 
         if (auth()->user()->rtl == 0)
         {
