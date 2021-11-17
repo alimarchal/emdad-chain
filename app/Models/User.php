@@ -106,8 +106,23 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $appends = [
-        'profile_photo_url',
+        'profile_photo_url', 'business_photo_url'
     ];
+
+    public function getBusinessPhotoUrlAttribute()
+    {
+        $get_business_id = $this->business_id;
+        if (!empty($get_business_id)) {
+            $bus = Business::find($get_business_id);
+            if (!empty($bus)) {
+                return $bus->business_photo_url;
+            }
+        } else {
+            return null;
+        }
+
+
+    }
 
     public static function waitingTime()
     {
@@ -408,8 +423,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
 
-
-
     public function business_name_get()
     {
         return $this->hasOne(Business::class);
@@ -524,10 +537,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public static function send_sms($mobile_no, $msg)
     {
         $mobile_no = trim($mobile_no);
-        $mobile_no = str_replace("+","",$mobile_no);
-        $url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=966" .  $mobile_no . "&Message=" . urlencode($msg);
-
-
+        $mobile_no = str_replace("+", "", $mobile_no);
+        $url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=966" . $mobile_no . "&Message=" . urlencode($msg);
 
 
         $ch = curl_init();
@@ -544,8 +555,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $mobile_no = trim($mobile_no);
         $msg = "Your delivery is here. Please share the OTP code: " . $otp . " with the driver after unloading the delivery. Thank you for using EMDAD Platform.";
-        $mobile_no = str_replace("+","",$mobile_no);
-        $url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=966" .  $mobile_no . "&Message=" . urlencode($msg);
+        $mobile_no = str_replace("+", "", $mobile_no);
+        $url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=966" . $mobile_no . "&Message=" . urlencode($msg);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
