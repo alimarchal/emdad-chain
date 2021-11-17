@@ -12,6 +12,7 @@ use App\Models\Qoute;
 use App\Models\QouteMessage;
 use App\Models\User;
 use App\Notifications\QuotationSent;
+use App\Notifications\User\AcceptedQuotation;
 use App\Notifications\User\ModificationNeeded;
 use App\Notifications\User\QuotationReceived;
 use App\Notifications\User\QuotationRejected;
@@ -685,7 +686,7 @@ class QouteController extends Controller
             'qoute_status_updated' => $qoute_status,
             'status' => 'expired',
         ]);
-        
+
         $quote = $qoute;
         User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteRejected($quote));
 
@@ -759,6 +760,11 @@ class QouteController extends Controller
                 ]);
             }
             // $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteAccepted($qoute));
+            $supplier_business_id = User::where('business_id', $request->supplier_business_id)->first();
+            if(!empty($supplier_business_id))
+            {
+                $supplier_business_id->notify(new AcceptedQuotation());
+            }
             DB::commit();
             /* Transaction successful. */
         } catch (\Exception $e) {
@@ -947,7 +953,6 @@ class QouteController extends Controller
     public function singleCategoryQuoteAccepted(Request $request)
     {
         $warehouse = \App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->first();
-
         if ($warehouse->mobile != $request->otp_mobile_number)
         {
             $warehouse->update([
@@ -1031,6 +1036,12 @@ class QouteController extends Controller
                         'dpo' => $dpo,
                     ]);
                 }
+            }
+
+            $supplier_business_id = User::where('business_id', $request->supplier_business_id)->first();
+            if(!empty($supplier_business_id))
+            {
+                $supplier_business_id->notify(new AcceptedQuotation());
             }
             DB::commit();
             /* Transaction successful. */

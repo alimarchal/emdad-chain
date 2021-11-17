@@ -106,7 +106,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $appends = [
-        'profile_photo_url', 'business_photo_url'
+        'profile_photo_url', 'business_photo_url', 'business_name'
     ];
 
     public function getBusinessPhotoUrlAttribute()
@@ -120,8 +120,20 @@ class User extends Authenticatable implements MustVerifyEmail
         } else {
             return null;
         }
+    }
 
 
+    public function getBusinessNameAttribute()
+    {
+        $get_business_id = $this->business_id;
+        if (!empty($get_business_id)) {
+            $bus = Business::find($get_business_id);
+            if (!empty($bus)) {
+                return $bus->business_name;
+            }
+        } else {
+            return null;
+        }
     }
 
     public static function waitingTime()

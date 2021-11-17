@@ -666,15 +666,7 @@
                                     @endphp
                                     <input type="hidden" name="delivery_address" value="{{ $warehouseAddress->address }}">
 
-{{--                                    <x-jet-label for="warehouse" class="my-2" value="{{ __('portal.Warehouse delivery address') }}" class="text-black"  />--}}
 
-                                    {{--@php
-                                        $orderItemID =  \App\Models\EOrderItems::where('id', $quotes[0]->e_order_items_id)->first();
-                                        $warehouseAddress = \App\Models\BusinessWarehouse::where('id', $orderItemID->warehouse_id)->first();
-                                    @endphp--}}
-                                    {{--<input type="text" name="delivery_address" class="form-input rounded-md shadow-sm border p-2 w-full" readonly value="{{$warehouseAddress->address}}">
-                                    <br>
-                                    <br>--}}
                                     <x-jet-label for="otp_mobile_number" value="{{ __('portal.OTP FOR Receiving Delivery Mobile Number (We will send One Time Password when you receive delivery)') }}" class="text-center text-black font-bold text-red-600"  />
                                     <div class="flex mt-3" style="justify-content: center">
                                         <div class="flex-row">
