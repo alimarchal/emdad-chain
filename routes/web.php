@@ -294,6 +294,7 @@ Route::get('/rfq-with-no-quotations', [PlacedRFQController::class, 'RFQsWithNoQu
 Route::post('/change-company-check', [ECartController::class, 'companyCheck'])->name('companyCheck');
 #########################################################################
 Route::middleware(['auth:sanctum'])->get('/RFQPlacedItems/{EOrderItems}', [PlacedRFQController::class, 'RFQItems'])->name('RFQItemsByID');
+Route::middleware(['auth:sanctum'])->get('/RFQPlacedItems/pdf/{e_order_id}', [PlacedRFQController::class, 'PDF'])->name('RFQItemsPDF');
 Route::middleware(['auth:sanctum'])->get('/viewRFQs', [PlacedRFQController::class, 'viewRFQs'])->name('viewRFQs');
 Route::middleware(['auth:sanctum'])->get('/viewRFQs/{eOrderItems}', [PlacedRFQController::class, 'viewRFQsID'])->name('viewRFQsID');
 Route::middleware(['auth:sanctum'])->get('/rejectRFQ/{eOrderID}', [PlacedRFQController::class, 'rejectRFQ'])->name('rejectRFQ');
