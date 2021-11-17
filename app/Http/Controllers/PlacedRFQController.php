@@ -33,10 +33,22 @@ class PlacedRFQController extends Controller
         return view('RFQPlaced.index', compact('PlacedRFQ'));
     }
 
-    public function RFQItems(Request $request, $EOrderItems)
+    public function RFQItems($EOrderItems)
     {
-        $collection = EOrderItems::where('e_order_id', $EOrderItems)->get();
+        $collection = EOrderItems::with('business', 'warehouse')->where('e_order_id', $EOrderItems)->get();
         return view('RFQPlaced.show', compact('collection'));
+    }
+
+    /**
+     * Generating PDF file for RFQ History.
+     *
+     */
+    public function PDF($eOrderID)
+    {
+        $collection = EOrderItems::where('e_order_id', decrypt($eOrderID))->get();
+
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('RFQPlaced.PDF', compact('collection'));
+        return $pdf->download('RFQ.pdf');
     }
 
     public function viewRFQs()
