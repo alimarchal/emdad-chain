@@ -55,7 +55,7 @@ class AcceptedQuotation extends Notification
     public function toArray($notifiable)
     {
         return [
-            'notification_data' => 'Congratulation quotation has been accepted.',
+            'notification_data' => 'Congratulation DPO Accepted and PO generated.',
         ];
     }
 }
