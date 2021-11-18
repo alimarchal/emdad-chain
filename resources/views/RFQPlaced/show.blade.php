@@ -144,17 +144,16 @@
                                             {{__('portal.Size')}}
                                         </th>
                                         <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                            {{__('portal.Remarks')}}
-                                        </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.Delivery Period')}}
                                         </th>
                                         <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                            {{__('portal.Unit Price')}}
+                                            {{__('portal.Last Unit Price')}}
                                         </th>
-
                                         <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                            {{__('portal.Quantity')}}
+                                            {{__('portal.Qty')}}
+                                        </th>
+                                        <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                            {{__('portal.Remarks')}}
                                         </th>
                                         <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.Attachments')}}
@@ -165,7 +164,7 @@
                                     @foreach ($collection as $rfp)
                                     <tr>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                            1
+                                            {{ $loop->iteration }}
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                             @php
@@ -187,9 +186,6 @@
                                             {{ $rfp->size }}
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                            @if(isset($rfp->remarks)){{ $rfp->remarks }} @else {{__('portal.N/A')}} @endif
-                                        </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                             @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}
                                             @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
                                             @elseif($rfp->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
@@ -207,6 +203,9 @@
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                             {{ $rfp->quantity }}
+                                        </td>
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                            @if(isset($rfp->remarks)){{ $rfp->remarks }} @else {{__('portal.N/A')}} @endif
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                             @if ($rfp->file_path)
@@ -230,7 +229,7 @@
                                     <div class="mt-3">{{__('portal.Thank you for using Emdad platform for your business.')}}</div>
                                     <div></div>
                                 </div>
-                                <div class="flex justify-end px-2 py-2 h-15">
+                                <div class="flex justify-end px-2 py-2 h-15 mt-3">
                                     <div class="mt-2">{{__('portal.Copied to Emdad records')}}</div>
                                     <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" style="margin-left: auto; margin-right: auto;"/></div>
                                 </div>
