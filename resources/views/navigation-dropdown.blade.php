@@ -1,8 +1,16 @@
 @include('_layouts.header')
 
+<style>
+    @media (max-width: 639px) {
+        .nav_body {
+            overflow-y: scroll;
+        }
+    }
+</style>
+
 @if (auth()->user()->rtl == 0)
 
-    <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+    <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 nav_body">
         <!-- Primary Navigation Menu -->
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,7 +20,10 @@
                     <div class="flex-shrink-0 flex items-center lg:hidden">
                         <a href="{{ route('dashboard') }}">
                             <!-- <x-jet-application-mark class="block h-9 w-auto"/> -->
-                            <img src="{{ url('logo.png') }}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto"/>
+                            @php
+                                $business = \App\Models\Business::where('id', auth()->user()->business_id)->first();
+                            @endphp
+                            <img src="{{ asset(Storage::url($business->business_photo_url)) }}" class="block h-9 w-auto"/>
                         </a>
                     </div>
 
@@ -275,24 +286,24 @@
                              class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl overflow-hidden z-10"
                              style="width: 25rem; display: none;">
                             @if(auth()->user()->usertype == "SuperAdmin" || auth()->user()->usertype == "superadmin")
-                            @foreach(Auth::user()->unreadNotifications as $notification)
-                                <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-white hover:bg-indigo-600 -mx-2">
-                                    <img class="h-8 w-8 rounded-full object-cover mx-1"
-                                         src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80"
-                                         alt="avatar">
-                                    <p class="text-sm mx-2">
+                                @foreach(Auth::user()->unreadNotifications as $notification)
+                                    <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-white hover:bg-indigo-600 -mx-2">
+                                        <img class="h-8 w-8 rounded-full object-cover mx-1"
+                                             src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80"
+                                             alt="avatar">
+                                        <p class="text-sm mx-2">
                                         <span class="font-bold"
                                               href="#">{{$notification->data['user_name']}}</span> {{$notification->data['registration_type']}}
-                                        is registered {{$notification->created_at->diffForHumans()}}.
-                                    </p>
-                                </a>
-                            @endforeach
+                                            is registered {{$notification->created_at->diffForHumans()}}.
+                                        </p>
+                                    </a>
+                                @endforeach
                             @elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == "Supplier")
 
                                 @foreach(Auth::user()->unreadNotifications as $notification)
                                     <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-white hover:bg-indigo-600 -mx-2">
                                         <p class="text-sm mx-2">
-                                        <span class="font-bold" href="#">{{$notification->data['notification_data']}}</span>
+                                            <span class="font-bold" href="#">@if(isset($notification->data['notification_data'])) {{$notification->data['notification_data']}} @endif</span>
                                         </p>
                                     </a>
                                 @endforeach
@@ -302,7 +313,7 @@
                                 @foreach(Auth::user()->unreadNotifications as $notification)
                                     <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-white hover:bg-indigo-600 -mx-2">
                                         <p class="text-sm mx-2">
-                                            <span class="font-bold" href="#">{{$notification->data['notification_data']}}</span>
+                                            <span class="font-bold" href="#">@if(isset($notification->data['notification_data'])) {{$notification->data['notification_data']}} @endif</span>
                                         </p>
                                     </a>
                                 @endforeach
@@ -792,7 +803,7 @@
     </nav>
 @elseif (auth()->user()->rtl == 1 )
 
-    <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+    <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 nav_body">
         <!-- Primary Navigation Menu -->
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -802,7 +813,10 @@
                     <div class="flex-shrink-0 flex items-center lg:hidden">
                         <a href="{{ route('dashboard') }}">
                             <!-- <x-jet-application-mark class="block h-9 w-auto"/> -->
-                            <img src="{{ url('logo.png') }}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto"/>
+                            @php
+                                $business = \App\Models\Business::where('id', auth()->user()->business_id)->first();
+                            @endphp
+                            <img src="{{ asset(Storage::url($business->business_photo_url)) }}" class="block h-9 w-auto"/>
                         </a>
                     </div>
 
@@ -1038,19 +1052,19 @@
                     @if(request()->routeIs('invoicePayment.stepOne'))
                         <a href="{{route('languageChangeForPayment', ['lang' => 'en', 'rtl_value' => 0])}}"
                            class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md font-sans text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="cursor: pointer;"><img alt="" src="{{url('us.png')}}"
-                                                                                         style="margin-left: 10px;">English</a>
+                                                                                                                                                                                                                                                                                                                                                                                               style="margin-left: 10px;">English</a>
                     @elseif(request()->routeIs('businessPackage.stepOne'))
                         <a href="{{route('languageChangeForPackagePayment', ['lang' => 'en', 'rtl_value' => 0])}}"
                            class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md font-sans text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="cursor: pointer;"><img alt="" src="{{url('us.png')}}"
-                                                                                         style="margin-left: 10px;">English</a>
+                                                                                                                                                                                                                                                                                                                                                                                               style="margin-left: 10px;">English</a>
                     @elseif(request()->routeIs('adminIreEdit'))
                         <a href="{{route('languageChangeForIREEdit', ['lang' => 'en', 'rtl_value' => 0])}}"
                            class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md font-sans text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="cursor: pointer;"><img alt="" src="{{url('us.png')}}"
-                                                                                         style="margin-left: 10px;">English</a>
+                                                                                                                                                                                                                                                                                                                                                                                               style="margin-left: 10px;">English</a>
                     @elseif(request()->routeIs('adminPercentageEdit'))
                         <a href="{{route('languageChangeForCommissionPercentage', ['lang' => 'en', 'rtl_value' => 0])}}"
                            class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md font-sans text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="cursor: pointer;"><img alt="" src="{{url('us.png')}}"
-                                                                                         style="margin-left: 10px;">English</a>
+                                                                                                                                                                                                                                                                                                                                                                                               style="margin-left: 10px;">English</a>
                     @elseif(request()->routeIs('adminDownloadEdit'))
                         <a href="{{route('languageChangeForDownloadableFiles', ['lang' => 'en', 'rtl_value' => 0])}}"
                            class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md font-sans text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="cursor: pointer;"><img alt="" src="{{url('us.png')}}"
@@ -1058,7 +1072,7 @@
                     @else
                         <a href="{{route('languageChange', ['lang' => 'en', 'rtl_value' => 0])}}"
                            class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md font-sans text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="cursor: pointer;"><img alt="" src="{{url('us.png')}}"
-                                                                                         style="margin-left: 10px;">English</a>
+                                                                                                                                                                                                                                                                                                                                                                                                style="margin-left: 10px;">English</a>
                     @endif
                     {{--                    @endcannot--}}
                     <div x-data="{ notificationOpen: false }" class="relative">

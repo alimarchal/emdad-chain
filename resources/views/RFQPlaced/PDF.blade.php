@@ -41,7 +41,7 @@
 
     <div class="center">
         @php $logo_second = asset(Storage::url($collection[0]->business->business_photo_url)); @endphp
-        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;border-radius: 50%;;margin-left: 75px;" />
+        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 85px;height: 65px;border-radius: 50%;margin-left: 75px;" />
         <h3 style="text-align: center; margin:0px;">Requisition</h3>
     </div>
 
@@ -99,17 +99,17 @@
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">BRAND</th>
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">UOM</th>
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">Size</th>
-        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">REMARKS</th>
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">Delivery Period</th>
-        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">UNIT PRICE</th>
-        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">QUANTITY</th>
+        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">LAST UP</th>
+        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">QTY</th>
+        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">REMARKS</th>
     </tr>
 
     </thead>
     <tbody class="bg-white divide-y divide-black border-1 border-black">
     @foreach ($collection as $rfp)
         <tr>
-            <td  style="text-align: center">1</td>
+            <td  style="text-align: center">{{$loop->iteration}}</td>
             @php
                 $category = \App\Models\Category::where('id',$rfp->category->id)->first();
                 $parentCategory = \App\Models\Category::where('id',$category->parent_id)->first();
@@ -119,7 +119,6 @@
             <td  style="text-align: center">@if(isset($rfp->brand)) {{ $rfp->brand }} @else N/A @endif</td>
             <td  style="text-align: center">{{ $rfp->unit_of_measurement }}</td>
             <td  style="text-align: center">@if(isset($rfp->size)) {{ $rfp->size }} @else N/A @endif </td>
-            <td  style="text-align: center">@if(isset($rfp->remarks)){{ $rfp->remarks }} @else {{__('portal.N/A')}} @endif</td>
             <td  style="text-align: center">
                 @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}
                 @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
@@ -135,19 +134,39 @@
             </td>
             <td  style="text-align: center">{{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}}</td>
             <td  style="text-align: center">{{ $rfp->quantity }}</td>
+            <td  style="text-align: center">@if(isset($rfp->remarks)){{ $rfp->remarks }} @else {{__('portal.N/A')}} @endif</td>
         </tr>
     @endforeach
     </tbody>
 </table>
 
+<br>
 
-<div class="flex justify-between px-2 py-2 mt-2 h-15">
-    <div style="text-align: center; margin: auto;">
-        <p style="text-align: center; ">Thank you for using Emdad platform as your digital procurement solution</p>
-        @php $img = asset('logo-full.png'); @endphp
+<div class="header">
 
-        <img src="@php echo $img @endphp" width="50">
+    <div class="center" style="width: 16.67%"></div>
 
+    <div class="center" style="width: 66.66%">
+        <div style="text-align: center;">Thank you for using Emdad platform as your business partner.</div><br><br>
+    </div>
+
+    <div class="center" style="width: 16.67%"></div>
+
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="header">
+
+    <div class="flex" style="width: 100%;">
+        <div class="flex-row" style="margin-top: 10px;float: right; margin-right: 8%;">Copied to Emdad records</div>
+        <div class="flex-row" style="margin-left: 93%;">
+            @php $img = asset('logo-full.png'); @endphp
+            <img src="{{$img}}" style="height: 2.5rem; width: auto; margin-left: auto; margin-right: auto;">
+        </div>
     </div>
 
 </div>
