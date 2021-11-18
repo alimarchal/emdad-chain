@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class WebsiteEnglishController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('shipter_theme.home');
@@ -41,6 +36,11 @@ class WebsiteEnglishController extends Controller
     public function survey()
     {
         return view('shipter_theme.survey.index');
+    }
+
+    public function suppliers()
+    {
+        return view('shipter_theme.supplier');
     }
 
     public function buyerSurvey()

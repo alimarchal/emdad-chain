@@ -1,9 +1,19 @@
+@section('headerScripts')
+    <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">
+
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+@endsection
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))
@@ -14,65 +24,92 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$shipments->count()) seems empty @endif
-        </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Shipments')}} </h2>
 
-        <!-- This example requires Tailwind CSS v2.0+ -->
-
-
-        @if ($shipments->count())
+        @if (count($shipments))
             @php $total = 0; @endphp
             <div class="flex flex-col bg-white rounded ">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-
-                            <table class="min-w-full divide-y divide-gray-200">
+                            <table class="min-w-full divide-y divide-gray-200" id="shipment-table">
                                 <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        #
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Delivery ID
-                                    </th>
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            #
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Shipment ID')}}
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Supplier Business Name
-                                    </th>
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Supplier Business Name')}}
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Status
-                                    </th>
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Status')}}
+                                        </th>
 
-                                </tr>
+                                        <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="width: 120px;background-color: #FCE5CD;">
+                                            {{__('portal.View')}}
+                                        </th>
+
+                                    </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($shipments as $shipment)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $loop->iteration }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $shipment->delivery_id }}
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            {{__('portal.SHPN')}}-{{ $shipment->id }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @php $supplierBusiness = \App\Models\Business::where('id', $shipment->supplier_business_id)->first();  @endphp
                                             {{ $supplierBusiness->business_name }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            @php
+                                                /* Adding below code only for buyer view because of a shipment may have more than one buyer deliveries so if one buyer deliveries are delivered and other buyer's not we must change status to delivered to one buyer */
+                                            $shipmentsNotHavingStatusZero = []; $totalShipmentItemsCount = count($shipment->shipmentItems);
+                                            foreach ($shipment->shipmentItems as $shipmentItems)
+                                            {
+                                                if ($shipmentItems->status != 0)
+                                                {
+                                                    $shipmentsNotHavingStatusZero[] = $shipmentItems;
+                                                }
+                                            }
+                                            @endphp
                                             @if($shipment->status == 1 )
-                                                <span class="bg-green-500 text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    Delivered
+                                                <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Received')}}
+                                                </span>
+                                            @elseif($totalShipmentItemsCount == count($shipmentsNotHavingStatusZero) )
+                                                <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Received')}}
                                                 </span>
                                             @else
-                                                <span class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1">
-                                                    Not Delivered yet
+                                                <span class="text-orange-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Not received')}}
                                                 </span>
                                             @endif
+                                        </td>
+
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-center">
+                                            <a href="{{route('shipment.show',$shipment->id)}}" >
+                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                    </path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                    </path>
+                                                </svg>
+                                                <span class="inline"></span>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -82,63 +119,64 @@
                     </div>
                 </div>
             </div>
+
         @endif
-        <div class="mt-5">
-            <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                Back
-            </a>
-        </div>
-
-
-
-
 
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#shipment-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+        });
+
+    </script>
 @else
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))
             <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                <strong class="mr-1">{{ session('message') }}</strong>
+                <strong class="mr-3">{{ session('message') }}</strong>
                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                     <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">Items List @if (!$shipments->count()) seems empty @endif
-        </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Shipments')}} </h2>
 
-        <!-- This example requires Tailwind CSS v2.0+ -->
-
-
-        @if ($shipments->count())
+        @if (count($shipments))
             @php $total = 0; @endphp
             <div class="flex flex-col bg-white rounded ">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-
-                            <table class="min-w-full divide-y divide-gray-200">
+                            <table class="min-w-full divide-y divide-gray-200" id="shipment-table">
                                 <thead class="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         #
                                     </th>
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
-                                        Driver Name
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Shipment ID')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
-                                        نوع العربة
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Supplier Business Name')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
-                                        Delivery Id
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Status')}}
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="width: 120px;background-color: #FCE5CD;">
+                                        {{__('portal.View')}}
                                     </th>
 
                                 </tr>
@@ -146,22 +184,55 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($shipments as $shipment)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $loop->iteration }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            @php $driverName = \App\Models\User::where('id', $shipment->driver_id)->first();  @endphp
-                                            {{ $driverName->name }}
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            {{__('portal.SHPN')}}-{{ $shipment->id }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            @php $vehicleName = \App\Models\Vehicle::where('id', $shipment->vehicle_type)->first();  @endphp
-                                            {{ $vehicleName->type }}
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            @php $supplierBusiness = \App\Models\Business::where('id', $shipment->supplier_business_id)->first();  @endphp
+                                            {{ $supplierBusiness->business_name }}
                                         </td>
 
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $shipment->delivery_id }}
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            @php $shipmentsNotHavingStatusZero = []; $totalShipmentItemsCount = count($shipment->shipmentItems);
+                                            foreach ($shipment->shipmentItems as $shipmentItems)
+                                            {
+                                                if ($shipmentItems->status != 0)
+                                                {
+                                                    $shipmentsNotHavingStatusZero[] = $shipmentItems;
+                                                }
+                                            }
+                                            @endphp
+                                            @if($shipment->status == 1 )
+                                                <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Received')}}
+                                                </span>
+                                            @elseif($totalShipmentItemsCount == count($shipmentsNotHavingStatusZero) )
+                                                <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Received')}}
+                                                </span>
+                                            @else
+                                                <span class="text-orange-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Not received')}}
+                                                </span>
+                                            @endif
+                                        </td>
+
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-center">
+                                            <a href="{{route('shipment.show',$shipment->id)}}" >
+                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                    </path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                    </path>
+                                                </svg>
+                                                <span class="inline"></span>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -171,16 +242,29 @@
                     </div>
                 </div>
             </div>
+
         @endif
-        <div class="mt-5">
-            <a href="{{route('shipment.index')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                عودة
-            </a>
-        </div>
-
-
-
-
 
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#shipment-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "language": {
+                    "sSearch": "بحث:",
+                    "oPaginate": {
+                        "sFirst":    	"أولا",
+                        "sPrevious": 	"السابق",
+                        "sNext":     	"التالي",
+                        "sLast":     	"الاخير"
+                    },
+                    "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ المدخلات",
+                },
+            } );
+        });
+    </script>
 @endif

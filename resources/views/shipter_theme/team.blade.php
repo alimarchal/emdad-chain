@@ -101,8 +101,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
@@ -139,7 +137,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
@@ -158,7 +155,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
@@ -177,7 +173,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
@@ -214,7 +209,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
@@ -233,8 +227,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">
@@ -271,6 +263,118 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="team-single">
+                    <div class="team-img">
+                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
+                        <div class="social-1st">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4>Ahmad</h4>
+                        <span>Sales Specialist</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="team-single">
+                    <div class="team-img">
+                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
+                        <div class="social-1st">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4>Noura</h4>
+                        <span>Supply Chain Specialist</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="team-single">
+                    <div class="team-img">
+                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
+                        <div class="social-1st">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4>Elham</h4>
+                        <span>Supply Chain Specialist</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="team-single">
+                    <div class="team-img">
+                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
+                        <div class="social-1st">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4>Adeel Cheema</h4>
+                        <span>Mobile App Developer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="team-single">
+                    <div class="team-img">
+                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
+                        <div class="social-1st">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4>Insha Murad</h4>
+                        <span>Mobile App Developer</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="team-single">
+                    <div class="team-img">
+                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
+                        <div class="social-1st">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h4>Ali Rizvi </h4>
+                        <span>Accounts & HR Officer</span>
+                    </div>
+
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>

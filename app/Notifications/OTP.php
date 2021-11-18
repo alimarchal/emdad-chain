@@ -42,7 +42,7 @@ class OTP extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.otp.password', ['otp' => $this->otp]);
+        return (new MailMessage)->subject('One Time Password (OTP) Received')->markdown('mail.otp.password', ['otp' => $this->otp]);
     }
 
     /**

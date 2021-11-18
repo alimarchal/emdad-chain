@@ -82,6 +82,7 @@ return [
              'model' => App\Models\Ire::class,
              'table' => 'ires',
          ],
+
     ],
 
     /*

@@ -16,44 +16,31 @@ use Illuminate\Support\Facades\Auth;
 
 class PurchaseRequestFormController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $rfq = PurchaseRequestForm::where('business_id', Auth::user()->business_id)->get();
         return view('RFQ.index', compact('rfq'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
-     */
     public function create()
     {
-//        $user = User::findOrFail(auth()->user()->id);
-//        $businessPackage = BusinessPackage::where('user_id', \auth()->id())->first();
-        $businessPackage = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+        $businessPackage = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
         if (isset($businessPackage))
         {
             $categories = explode(',', $businessPackage->categories);
             $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
         }
         else{
-//            $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
             session()->flash('error','No Business Package Found for you account! Contact Admin.');
             return redirect()->back();
         }
         $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-//        $eCart = ECart::where('user_id',auth()->user()->id)->where('business_id',auth()->user()->business_id)->get();
-        $eCart = ECart::where('business_id',auth()->user()->business_id)->get();
+        $eCart = ECart::where(['business_id' => auth()->user()->business_id,'rfq_type' => 1])->get();
 
         // Remaining RFQ count
         $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
-        $business_package = BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+        $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
+
         $latest_rfq = ECart::latest()->where('business_id', auth()->user()->business_id)->first();
         $package = Package::where('id', $business_package->package_id)->first();
         if ($business_package->package_id == 1 || $business_package->package_id == 2)
@@ -64,15 +51,16 @@ class PurchaseRequestFormController extends Controller
             $rfqCount = null;
         }
 
+        /* Below code added to redirect back if Requisition limit for day is reached Added because h-screen issue in App.css blade */
+        if ($rfqCount <= 0 && $business_package->package_id != 3 && $business_package->package_id != 4)
+        {
+            session()->flash('error', 'Your have reached daily requisition generate limit.');
+            return redirect()->route('rfqView');
+        }
+
         return view('RFQ.create', compact('parentCategories', 'childs','eCart','rfqCount','latest_rfq'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         if ($request->has('file_path_1')) {
@@ -82,7 +70,7 @@ class PurchaseRequestFormController extends Controller
         $request->merge(['item_code' => $request->item_name]);
         $request->merge(['item_name' => Category::find($request->item_name)->first()->name]);
         $rfq = PurchaseRequestForm::create($request->all());
-        session()->flash('message', 'Item added successfully.');
+        session()->flash('message', __('portal.Item added successfully.'));
 
 
         $user = User::findOrFail(auth()->user()->id);
@@ -91,48 +79,49 @@ class PurchaseRequestFormController extends Controller
         return redirect('RFQ/create',compact('parentCategories', 'childs', 'user'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\PurchaseRequestForm $purchaseRequestForm
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PurchaseRequestForm $purchaseRequestForm)
+    /* For Single Category RFQ*/
+    public function create_single_rfq()
     {
-        //
+        $businessPackage = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
+        if (isset($businessPackage))
+        {
+            $categories = explode(',', $businessPackage->categories);
+            $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
+        }
+        else{
+            session()->flash('error','No Business Package Found for you account! Contact Admin.');
+            return redirect()->back();
+        }
+        $eCart = ECart::where(['business_id' => auth()->user()->business_id , 'rfq_type' => 0])->get();
+
+        // Remaining RFQ count
+        $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
+        $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
+
+        $latest_rfq = ECart::latest()->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->first();
+        $package = Package::where('id', $business_package->package_id)->first();
+
+        if ($business_package->package_id == 1 || $business_package->package_id == 2)
+        {
+            $rfqCount = $package->rfq_per_day - $rfq;
+        }
+        else{
+            $rfqCount = null;
+        }
+
+        /* Below code added to redirect back if Requisition limit for day is reached Added because h-screen issue in App.css blade */
+        if ($rfqCount <= 0 && $business_package->package_id != 3 && $business_package->package_id != 4)
+        {
+            session()->flash('error', 'Your have reached daily requisition generate limit.');
+            return redirect()->route('rfqView');
+        }
+
+        return view('RFQ.singleCategory.create', compact('parentCategories','eCart','rfqCount','latest_rfq'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\PurchaseRequestForm $purchaseRequestForm
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PurchaseRequestForm $purchaseRequestForm)
+    public function view()
     {
-        //
+        return view('RFQ.view');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\PurchaseRequestForm $purchaseRequestForm
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PurchaseRequestForm $purchaseRequestForm)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\PurchaseRequestForm $purchaseRequestForm
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PurchaseRequestForm $purchaseRequestForm)
-    {
-        //
-    }
 }

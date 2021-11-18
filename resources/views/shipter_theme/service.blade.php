@@ -23,7 +23,7 @@ background-image: url('images/Our sevices (photo no.4).jpg');
     <!-- section-section start -->
     <div class="section-area section-style-2 section-style-3">
         <div class="container">
-            <div class="row">
+            {{--<div class="row">
                 <div class="col-lg-4 col-md-9 col-sm-12 col-d c-pd">
                     <div class="section-wrap">
                         <div class="section-item-2">
@@ -81,7 +81,7 @@ background-image: url('images/Our sevices (photo no.4).jpg');
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--}}
 
 
             <div class="row">
@@ -126,7 +126,7 @@ background-image: url('images/Our sevices (photo no.4).jpg');
                 </div>
 
                 <div class="col-lg-8 col-md-12 col-sm-12">
-                    <div class="tr-wrap" style="padding-top: 45px;">
+                    <div class="tr-wrap ml-2" style="padding-top: 45px;">
                         <div class="t-text">
                             <h2>Buyers</h2>
                         </div>

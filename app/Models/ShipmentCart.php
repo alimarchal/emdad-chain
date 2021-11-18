@@ -10,7 +10,7 @@ class ShipmentCart extends Model
     use HasFactory;
 
     protected $fillable = [
-        'driver_id', 'vehicle_type', 'supplier_business_id', 'delivery_id',
+        'driver_id', 'vehicle_id', 'supplier_business_id', 'buyer_business_id', 'rfq_no', 'delivery_id',
     ];
 
     public function delivery()
@@ -25,6 +25,6 @@ class ShipmentCart extends Model
 
     public function vehicle()
     {
-       return $this->belongsTo(Vehicle::class, 'vehicle_type', 'id');
+       return $this->belongsTo(Vehicle::class, 'vehicle_id', 'id');
     }
 }

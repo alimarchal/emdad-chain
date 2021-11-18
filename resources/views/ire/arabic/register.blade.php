@@ -50,7 +50,7 @@
 
                 <div class="my-0 px-2 w-full overflow-hidden pb-2 sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
                     <!-- Column Content -->
-                    <x-jet-label for="lastName" value="{{ __('العائلة') }}" />
+                    <x-jet-label for="lastName" value="{{ __('اسم العائلة') }}" />
                     <x-jet-input id="lastName" class="block mt-2 w-full" type="text" name="lastName" :value="old('lastName')" required autofocus autocomplete="lastName" />
                 </div>
 

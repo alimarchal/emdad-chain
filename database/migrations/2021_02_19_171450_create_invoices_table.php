@@ -15,20 +15,24 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->string('delivery_id')->nullable()->index();;
-            $table->string('rfq_no')->nullable()->index();;
-            $table->string('rfq_item_no')->nullable()->index();;
-            $table->string('qoute_no')->nullable()->index();;
-            $table->string('draft_purchase_order_id')->nullable()->index();;
-            $table->string('buyer_user_id')->nullable()->index();;
-            $table->string('buyer_business_id')->nullable()->index();;
-            $table->string('supplier_user_id')->nullable()->index();;
-            $table->string('supplier_business_id')->nullable()->index();;
-            $table->string('shipment_cost')->nullable()->index();;
-            $table->string('total_cost')->nullable()->index();;
-            $table->string('vat')->nullable()->index();;
-            $table->string('payment_method');
-            $table->string('ship_to_address');
+            $table->string('delivery_id')->nullable();
+            $table->string('rfq_no')->nullable();
+            $table->string('rfq_item_no')->nullable();
+            $table->string('qoute_no')->nullable();
+            $table->string('draft_purchase_order_id')->nullable();
+            $table->string('buyer_user_id')->nullable();
+            $table->string('buyer_business_id')->nullable();
+            $table->string('supplier_user_id')->nullable();
+            $table->string('supplier_business_id')->nullable();
+            $table->string('payment_method')->nullable();
+            $table->string('shipment_cost')->nullable();
+            $table->string('vat')->nullable();
+            $table->string('total_cost')->nullable();
+            $table->string('invoice_status')->nullable();
+            $table->string('invoice_type')->nullable();
+            $table->integer('rfq_type'); /* 0 for single category RFQ, 1 for multi categories */
+            $table->string('invoice_cash_online')->nullable();
+            $table->string('ship_to_address')->nullable();
             $table->timestamps();
         });
     }

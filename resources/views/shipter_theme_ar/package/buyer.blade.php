@@ -62,22 +62,22 @@
                                             @if($package->package_type == 'Basic')
                                                 <h2 class="text-sm tracking-widest title-font mb-1 font-medium">عادي</h2>
                                                 <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
-                                                <h1 class="text-4xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">مجاني</h1>
+                                                <h1 class="text-3xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">مجاني</h1>
                                                 <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">اشترك</a>
                                             @elseif($package->package_type == 'Silver')
                                                 <h2 class="text-sm tracking-widest title-font mb-1 font-medium">فضي</h2>
                                                 <span class="bg-blue-600 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl">شائع</span>
                                                 <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
-                                                <h1 class="text-4xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                                    <span>{{$package->charges}} SAR</span>
+                                                <h1 class="text-3xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
+                                                    <span>{{$package->charges}}ريال</span>
                                                     <span class="text-lg ml-1 font-normal text-gray-500">/السنة</span>
                                                 </h1>
                                                 <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">اشترك</a>
                                             @elseif($package->package_type == 'Gold')
                                                 <h2 class="text-sm tracking-widest title-font mb-1 font-medium">ذهبي</h2>
                                                 <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
-                                                <h1 class="text-4xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                                    <span>{{$package->charges}} SAR</span>
+                                                <h1 class="text-3xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
+                                                    <span>{{$package->charges}}ريال</span>
                                                     <span class="text-lg ml-1 font-normal text-gray-500">/السنة</span>
                                                 </h1>
                                                 <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">اشترك</a>
@@ -85,10 +85,10 @@
                                                 <h2 class="text-sm tracking-widest title-font mb-1 font-medium">بلاتيني</h2>
                                                 <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
                                                 <h1 class="text-4xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                                    <span class="font-bold text-2xl">مجاني</span>
-                                                    <span class="text-lg ml-1 font-normal text-gray-500">(إذا بلغ المشتري حد خمسة ملايين ريال سعودي)</span>
+                                                    <span class="text-3xl">مجاني</span>
+{{--                                                    <span class="text-lg ml-1 font-normal text-gray-500">(إذا بلغ المشتري حد خمسة ملايين ريال سعودي)</span>--}}
                                                 </h1>
-                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded" style="justify-content: center">اشترك</a>
+                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-700 border-0 py-3 px-4 w-full focus:outline-none hover:bg-gray-900 rounded" style="justify-content: center;font-size: 9px;">(إذا بلغ المشتري حد خمسة ملايين ريال سعودي)</a>
                                             @endif
                                         </div>
                                     </div>
@@ -194,13 +194,13 @@
                                             <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">غير محدود</td>
                                         @endforeach
                                     </tr>
-                                    <tr>
+                                    {{--<tr>
                                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right"></td>
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">رمز خصم</td>
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">رمز خصم</td>
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">رمز خصم</td>
-                                    </tr>
+                                    </tr>--}}
                                     </tbody>
                                 </table>
                             </div>

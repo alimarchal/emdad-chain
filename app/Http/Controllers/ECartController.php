@@ -9,38 +9,17 @@ use Illuminate\Http\Request;
 
 class ECartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
 //        $user = User::findOrFail(auth()->user()->id);
 //        $user = User::findOrFail(auth()->user()->id);
         $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
         $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-//        $eCart = ECart::where('user_id', auth()->user()->id)->where('business_id', auth()->user()->business_id)->get();
-        $eCart = ECart::where('business_id', auth()->user()->business_id)->get();
+//        $eCart = ECart::where('business_id', auth()->user()->business_id)->get();
+        $eCart = ECart::where(['business_id' => auth()->user()->business_id,  'rfq_type' => 1])->get();
         return view('RFQ.index', compact('parentCategories', 'childs', 'eCart'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         if ($request->has('file_path_1')) {
@@ -50,55 +29,16 @@ class ECartController extends Controller
         $request->merge(['item_code' => $request->item_name]);
         $request->merge(['status' => 'pending']);
         $request->merge(['item_name' => Category::where('id', $request->item_code)->first()->name]);
+        $request->merge(['rfq_type' => 1]);
         ECart::create($request->all());
-        session()->flash('message', 'RFQ successfully created.');
+        session()->flash('message', __('portal.RFQ successfully created.'));
 
         return redirect('RFQ/create');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ECart  $eCart
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ECart $eCart)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ECart  $eCart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ECart $eCart)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ECart  $eCart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ECart $eCart)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ECart  $eCart
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(ECart $RFQCart)
     {
-        session()->flash('message', 'Item successfully deleted.');
+        session()->flash('message', __('portal.Item successfully deleted.'));
         $RFQCart->delete();
         return back();
     }
@@ -117,4 +57,41 @@ class ECartController extends Controller
 
         return response()->json( ['status' => 1]);
     }
+
+    /* For Single Category RFQ */
+
+    public function single_cart_index()
+    {
+        $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+        $eCart = ECart::where(['business_id' => auth()->user()->business_id,  'rfq_type' => 0])->get();
+        return view('RFQ.singleCategory.cart', compact('parentCategories',  'eCart'));
+    }
+
+    public function single_cart_store_rfq(Request $request)
+    {
+        if ($request->has('file_path_1')) {
+            $path = $request->file('file_path_1')->store('', 'public');
+            $request->merge(['file_path' => $path]);
+        }
+        $request->merge(['item_code' => $request->item_name]);
+        $request->merge(['status' => 'pending']);
+        $request->merge(['item_name' => Category::where('id', $request->item_code)->first()->name]);
+        $request->merge(['rfq_type' => 0]);
+        $ecart = ECart::create($request->all());
+//        $message = "New RFQ has been created by User ID: " . $ecart->user_id;
+//        User::send_sms('+966552840506',$message);
+//        User::send_sms('+966555390920',$message);
+//        User::send_sms('+966593388833',$message);
+        session()->flash('message', __('portal.RFQ successfully created.'));
+
+        return redirect()->route('create_single_rfq');
+    }
+
+    public function single_cart_destroy($id)
+    {
+        ECart::where('id', $id)->delete();
+        session()->flash('message', __('portal.Item successfully deleted.'));
+        return back();
+    }
+
 }

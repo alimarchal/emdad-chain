@@ -4,22 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Business;
 use App\Models\User;
+use App\Models\UserLog;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use phpDocumentor\Reflection\Utils;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         if (auth()->user()->hasRole('SuperAdmin')) {
@@ -27,69 +24,59 @@ class UserController extends Controller
             $users = User::where('id', '!=', Auth::user()->id)->get();
             $business = Business::orderBy('created_at', 'desc');
             return view('users.index', compact('users', 'business'));
-        }
-        elseif(auth()->user()->usertype == "CEO") {
+
+        } elseif (auth()->user()->usertype == "CEO") {
             //Checking users & driver count for related packages
-            $userCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', '!=','Supplier Driver'], ['id', '!=', \auth()->id()]])->count();
-            $driverCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', 'Supplier Driver'],['id', '!=', \auth()->id()]])->count();
+            $userCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', '!=', 'Supplier Driver'], ['id', '!=', \auth()->id()]])->count();
+            $driverCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', 'Supplier Driver'], ['id', '!=', \auth()->id()]])->count();
             $users = User::where('business_id', auth()->user()->business_id)->where('id', '!=', Auth::user()->id)->get();
+
             return view('users.index', compact('users', 'userCount', 'driverCount'));
-        }
-        else {
+        } else {
             abort(404);
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
+
         if (auth()->user()->hasRole('SuperAdmin')) {
 
-            $roles  = Role::all();
+            $roles = Role::where('id', '=', 1)->orWhere('id', '>=', 19)->get();
 //            $permissions  = Permission::all();
             return view('users.create', compact('roles'));
-        }
-        elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Buyer')
-        {
+        } elseif (auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Buyer') {
             //Checking users count for related packages
             $userCount = User::where([['business_id', \auth()->user()->business_id], ['id', '!=', \auth()->id()]])->count();
-            if (\auth()->user()->business_package->package_id == 1 && $userCount == 2 )
-            {
-                session()->flash('message', 'Add Users limit reached');
+            if (\auth()->user()->business_package->package_id == 1 && $userCount == 2) {
+                session()->flash('error', __('portal.Add Users limit reached.'));
+
                 return redirect()->back();
-            }
-            elseif (\auth()->user()->business_package->package_id == 2 && $userCount == 5 )
-            {
-                session()->flash('message', 'Add Users limit reached');
+            } elseif (\auth()->user()->business_package->package_id == 2 && $userCount == 5) {
+                session()->flash('error', __('portal.Add Users limit reached.'));
                 return redirect()->back();
-            }
-            elseif (\auth()->user()->business_package->package_id == 3 || \auth()->user()->business_package->package_id == 4 && $userCount == 100 )
-            {
-                session()->flash('message', 'Add Users limit reached');
+            } elseif (\auth()->user()->business_package->package_id == 3 && $userCount == 100) {
+                session()->flash('error', __('portal.Add Users limit reached.'));
+                return redirect()->back();
+            } elseif (\auth()->user()->business_package->package_id == 4 && $userCount == 100) {
+                session()->flash('error', __('portal.Add Users limit reached.'));
                 return redirect()->back();
             }
 
-            $roles  = Role::where('id' , '>', 10)->where('id', '<', 18)->get();
+            $roles = Role::where('id', '>', 10)->where('id', '<', 18)->get();
             return view('users.create', compact('roles', 'userCount'));
-        }
-        elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Supplier')
-        {
+        } elseif (auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Supplier') {
             //Checking users & driver count for related packages
-            $userCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', '!=','Supplier Driver'], ['id', '!=', \auth()->id()]])->count();
-            $driverCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', 'Supplier Driver'],['id', '!=', \auth()->id()]])->count();
+            $userCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', '!=', 'Supplier Driver'], ['id', '!=', \auth()->id()]])->count();
+            $driverCount = User::where([['business_id', \auth()->user()->business_id], ['usertype', 'Supplier Driver'], ['id', '!=', \auth()->id()]])->count();
 //            dd($driverCount);
-            if (\auth()->user()->business_package->package_id == 5 && $userCount == 2 && $driverCount == 2 )
-            {
-                session()->flash('message', 'Add Users and Driver limit reached');
+            if (\auth()->user()->business_package->package_id == 5 && $userCount == 2 && $driverCount == 2) {
+                session()->flash('error', __('portal.Add Users and Driver limit reached.'));
+
                 return redirect()->back();
-            }
-            elseif (\auth()->user()->business_package->package_id == 6 && $userCount == 10 && $driverCount == 20 )
-            {
-                session()->flash('message', 'Add Users and Driver limit reached');
+            } elseif (\auth()->user()->business_package->package_id == 6 && $userCount == 10 && $driverCount == 20) {
+                session()->flash('error', __('portal.Add Users and Driver limit reached.'));
+
                 return redirect()->back();
             }
 //            elseif (\auth()->user()->business_package->package_id == 7  && $userCount == 100 )
@@ -98,114 +85,69 @@ class UserController extends Controller
 //                return redirect()->back();
 //            }
             //Checking users count for free package
-            elseif (\auth()->user()->business_package->package_id == 5 && $userCount != 2 && $driverCount == 2 )
-            {
-                $roles  = Role::where('id' , '>=', 5)->where('id', '<', 10 )->get();
-                return view('users.create', compact('roles','userCount','driverCount'));
-            }
-            //Checking drivers count for free package
-            elseif (\auth()->user()->business_package->package_id == 5 && $userCount == 2 && $driverCount != 2 )
-            {
-                $roles  = Role::where('id', '=', 10 )->get();
-                return view('users.create', compact('roles','userCount','driverCount'));
-            }
-
-            //Checking users count for gold package
-            elseif (\auth()->user()->business_package->package_id == 6 && $userCount != 10 && $driverCount == 20 )
-            {
-                $roles  = Role::where('id' , '>=', 5)->where('id', '<', 10 )->get();
-                return view('users.create', compact('roles','userCount','driverCount'));
-            }
-            //Checking drivers count for gold package
-            elseif (\auth()->user()->business_package->package_id == 6 && $userCount == 10 && $driverCount != 20 )
-            {
-                $roles  = Role::where('id', '=', 10 )->get();
-                return view('users.create', compact('roles','userCount','driverCount'));
-            }
-            //Checking users count for platinum package
-            elseif (\auth()->user()->business_package->package_id == 7 && $userCount != 100)
-            {
-                $roles  = Role::where('id' , '>=', 5)->where('id', '<=', 10 )->get();
-                return view('users.create', compact('roles','userCount','driverCount'));
-            }
-            //Checking users count for platinum package
-            elseif (\auth()->user()->business_package->package_id == 7 && $userCount == 100)
-            {
-                $roles  = Role::where('id', '=', 10 )->get();
-                return view('users.create', compact('roles','userCount','driverCount'));
+            elseif (\auth()->user()->business_package->package_id == 5 && $userCount != 2 && $driverCount == 2) {
+                $roles = Role::where('id', '>=', 5)->where('id', '<', 10)->get();
+                return view('users.create', compact('roles', 'userCount', 'driverCount'));
+            } //Checking drivers count for free package
+            elseif (\auth()->user()->business_package->package_id == 5 && $userCount == 2 && $driverCount != 2) {
+                $roles = Role::where('id', '=', 10)->get();
+                return view('users.create', compact('roles', 'userCount', 'driverCount'));
+            } //Checking users count for gold package
+            elseif (\auth()->user()->business_package->package_id == 6 && $userCount != 10 && $driverCount == 20) {
+                $roles = Role::where('id', '>=', 5)->where('id', '<', 10)->get();
+                return view('users.create', compact('roles', 'userCount', 'driverCount'));
+            } //Checking drivers count for gold package
+            elseif (\auth()->user()->business_package->package_id == 6 && $userCount == 10 && $driverCount != 20) {
+                $roles = Role::where('id', '=', 10)->get();
+                return view('users.create', compact('roles', 'userCount', 'driverCount'));
+            } //Checking users count for platinum package
+            elseif (\auth()->user()->business_package->package_id == 7 && $userCount != 100) {
+                $roles = Role::where('id', '>=', 5)->where('id', '<=', 10)->get();
+                return view('users.create', compact('roles', 'userCount', 'driverCount'));
+            } //Checking users count for platinum package
+            elseif (\auth()->user()->business_package->package_id == 7 && $userCount == 100) {
+                $roles = Role::where('id', '=', 10)->get();
+                return view('users.create', compact('roles', 'userCount', 'driverCount'));
             }
 
-            $roles  = Role::where('id' , '>=', 5)->where('id', '<=', 10 )->get();
-            return view('users.create', compact('roles','userCount','driverCount'));
+            $roles = Role::where('id', '>=', 5)->where('id', '<=', 10)->get();
+            return view('users.create', compact('roles', 'userCount', 'driverCount'));
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
-//        dd($request->all());
         if (!Gate::allows('create user')) {
             return abort(401);
         }
-//        $user = User::create($request->all());
-//        $data = array();
-        $role  = Role::where('id' , $request->input('role'))->first();
+        $role = Role::where('id', $request->input('role'))->first();
 
-        if($request->role == 1 || auth()->user()->hasRole('SuperAdmin'))
-        {
-            if ($role->id >= 19 && $role->id <= 29)
-            {
-                /* For Users who don't need Email verification */
-                $validated = validator::make($request->all(),[
-                    'email' => 'required|email|unique:users',
-                ]);
+        /* If Authenticated User is not SuperAdmin */
+        if ($request->role == 1 || auth()->user()->hasRole('SuperAdmin')) {
 
-                if ($validated->fails()) {
-                    session()->flash('message', 'Email already exits');
-                    return redirect()->back()->withInput();
-                }
-
-                $data = [
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => $request->password,
-                    'designation' => $request->designation,
-                    'email_verified_at' => Carbon::now(),
-                    'usertype' => ($role->name == "SuperAdmin"?strtolower($role->name):$role->name),
-                    'status' => 3,
-                ];
+            $validated = validator::make($request->all(), [
+                'email' => 'required|email|unique:users',
+            ]);
+            if ($validated->fails()) {
+                session()->flash('message', 'Email already exits');
+                return redirect()->back()->withInput();
             }
-            else
-            {
-                $validated = validator::make($request->all(),[
-                    'email' => 'required|email|unique:users',
-                ]);
 
-                if ($validated->fails()) {
-                    session()->flash('message', 'Email already exits');
-                    return redirect()->back()->withInput();
-                }
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'designation' => $request->designation,
+                'business_id' => auth()->user()->business_id,
+                'email_verified_at' => Carbon::now(),
+                'usertype' => ($role->name == "SuperAdmin" ? strtolower($role->name) : $role->name),
+                'status' => 3,
+            ];
 
-                /* For Users who need Email verification */
-                $data = [
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => $request->password,
-                    'designation' => $request->designation,
-                    'business_id' => auth()->user()->business_id,
-                    'usertype' => ($role->name == "SuperAdmin"?strtolower($role->name):$role->name),
-                    'status' => 3,
-                ];
-            }
-        }
-        else{
-            $validated = validator::make($request->all(),[
+        } /* else if Authenticated User is not SuperAdmin */
+        else {
+            $validated = validator::make($request->all(), [
                 'email' => 'required|email|unique:users',
             ]);
 
@@ -214,65 +156,50 @@ class UserController extends Controller
                 return redirect()->back()->withInput();
             }
 
-            if (\auth()->user()->hasRole('Buyer'))
-            {
+            if (\auth()->user()->hasRole('CEO') && \auth()->user()->registration_type == 'Buyer') {
                 $data = [
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => $request->password,
                     'designation' => $request->designation,
+                    'registration_type' => $request->registration_type,
                     'email_verified_at' => Carbon::now(),
                     'business_id' => auth()->user()->business_id,
                     'usertype' => $role->name,
-                    'status' => 1,
+                    'status' => 3,              /* Changed from 1 to 3 (3 => verified) */
                     'added_by' => 1,           /* 1 for buyer*/
                     'added_by_userId' => \auth()->id(),
                 ];
-            }
-            else if (\auth()->user()->hasRole('Supplier')){
+            } else if (\auth()->user()->hasRole('CEO') && \auth()->user()->registration_type == 'Supplier') {
                 $data = [
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => $request->password,
+                    'registration_type' => $request->registration_type,
                     'designation' => $request->designation,
                     'email_verified_at' => Carbon::now(),
                     'business_id' => auth()->user()->business_id,
                     'usertype' => $role->name,
-                    'status' => 1,
+                    'status' => 3,              /* Changed from 1 to 3 (3 => verified) */
                     'added_by' => 2,           /* 2 for supplier*/
                     'added_by_userId' => \auth()->id(),
                 ];
             }
-            else{
-                $data = [
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'password' => $request->password,
-                    'designation' => $request->designation,
-                    'email_verified_at' => Carbon::now(),
-                    'business_id' => auth()->user()->business_id,
-                    'usertype' => $role->name,
-                    'status' => 1,
-                ];
-            }
         }
+
 
         $user = User::create($data);
         $password = $request->password;
+
         $user->notify(new \App\Notifications\UserCreate($password));
         $role = $request->input('role') ? $request->input('role') : [];
+
         $user->assignRole($role);
 
-        session()->flash('message', 'User added been successfully.');
+        session()->flash('message', __('portal.User added been successfully.'));
         return redirect()->route('users.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $user = User::findOrFail($id);
@@ -281,30 +208,22 @@ class UserController extends Controller
         return view('users.show', compact('user', 'business'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $user)
     {
         if (auth()->user()->hasRole('SuperAdmin')) {
 
-            $roles  = Role::get()->pluck('name', 'name');
+            $roles = Role::get()->pluck('name', 'name');
             $permissions = Permission::get()->pluck('name', 'name');
 //            $permissions  = Permission::all();
-            return view('users.edit', compact('user', 'roles','permissions'));
-        }
-        elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Buyer') {
-            $roles  = Role::where('id' , '>', 10)->where('id', '<', 18)->get()->pluck('name', 'name');
-            $permissions = Permission::where('id' , '>=', 41)->where('id' , '<=', 65)->get()->pluck('name', 'name');
-            return view('users.edit', compact('user', 'roles','permissions'));
-        }
-        elseif(auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Supplier') {
-            $roles  = Role::where('id' , '>=', 5)->where('id', '<=', 10 )->get()->pluck('name', 'name');
-            $permissions = Permission::where('id' , '>=', 8)->where('id' , '<=', 40)->get()->pluck('name', 'name');
-            return view('users.edit', compact('user', 'roles','permissions'));
+            return view('users.edit', compact('user', 'roles', 'permissions'));
+        } elseif (auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Buyer') {
+            $roles = Role::where('id', '>', 10)->where('id', '<', 18)->get()->pluck('name', 'name');
+            $permissions = Permission::where('id', '>=', 41)->where('id', '<=', 65)->get()->pluck('name', 'name');
+            return view('users.edit', compact('user', 'roles', 'permissions'));
+        } elseif (auth()->user()->usertype == "CEO" && auth()->user()->registration_type == 'Supplier') {
+            $roles = Role::where('id', '>=', 5)->where('id', '<=', 10)->get()->pluck('name', 'name');
+            $permissions = Permission::where('id', '>=', 8)->where('id', '<=', 40)->get()->pluck('name', 'name');
+            return view('users.edit', compact('user', 'roles', 'permissions'));
         }
 //        $user = User::findOrFail($id);
 //        $roles  = Role::all();
@@ -315,13 +234,6 @@ class UserController extends Controller
 //        return view('users.edit', compact('user', 'roles','permissions'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user)
     {
         if (!Gate::allows('edit user')) {
@@ -333,26 +245,21 @@ class UserController extends Controller
         $user->syncRoles($roles);
         $user->syncPermissions($permissions);
 
-        session()->flash('message', 'User successfully updated.');
+        session()->flash('message', __('portal.User successfully updated.'));
         return redirect()->route('users.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(User $user)
     {
 
-        if (isset($user->usertype) && $user->usertype == 'Supplier Driver' && $user->driver_status == 0)
-        {
+        if (isset($user->usertype) && $user->usertype == 'Supplier Driver' && $user->driver_status == 0) {
             session()->flash('error', 'Driver cannot be deleted because he has a shipment assigned');
             return redirect()->back();
         }
+
         $user->delete();
-        session()->flash('message', 'Profile successfully deleted.');
+
+        session()->flash('message', __('portal.Profile successfully deleted.'));
         return redirect()->route('users.index');
     }
 
@@ -396,7 +303,9 @@ class UserController extends Controller
         ]);
         $role = $role->find($input['role']);
         $user->assignRole($role);
-        session()->flash('message', 'User has been successfully created.');
+
+        session()->flash('message', __('portal.User has been successfully created.'));
+
         //        if (isset($input['permission'])) {
         //            foreach ($input['permission'] as $permission) {
         //                $user->givePermissionTo($permission);
@@ -412,7 +321,7 @@ class UserController extends Controller
 
     public function storeSupplier(Request $request)
     {
-        $validated = validator::make($request->all(),[
+        $validated = validator::make($request->all(), [
             'gender' => 'required',
             'name' => 'required',
             'middle_initial' => 'required',
@@ -429,7 +338,7 @@ class UserController extends Controller
         }
 
         $date = strtotime($request->nid_exp_date);
-        $nid_exp_date = date('Y-m-d',$date);
+        $nid_exp_date = date('Y-m-d', $date);
 
         $data = [
             'gender' => $request->gender,
@@ -453,7 +362,7 @@ class UserController extends Controller
         $user->notify(new \App\Notifications\UserCreate($password));
         $user->assignRole('CEO');
 
-        session()->flash('message', 'Supplier added successfully.');
+        session()->flash('message', __('portal.Supplier added successfully.'));
         return redirect()->route('businessSuppliers');
     }
 
@@ -464,7 +373,7 @@ class UserController extends Controller
 
     public function storeBuyer(Request $request)
     {
-        $validated = validator::make($request->all(),[
+        $validated = validator::make($request->all(), [
             'gender' => 'required',
             'name' => 'required',
             'middle_initial' => 'required',
@@ -481,7 +390,7 @@ class UserController extends Controller
         }
 
         $date = strtotime($request->nid_exp_date);
-        $nid_exp_date = date('Y-m-d',$date);
+        $nid_exp_date = date('Y-m-d', $date);
 
         $data = [
             'gender' => $request->gender,
@@ -505,8 +414,49 @@ class UserController extends Controller
         $user->notify(new \App\Notifications\UserCreate($password));
         $user->assignRole('CEO');
 
-        session()->flash('message', 'Buyer added successfully.');
+        session()->flash('message', __('portal.Buyer added successfully.'));
         return redirect()->route('businessBuyers');
+    }
+
+    // Adding User National Id Card Photo
+    public function nationalIdCardPhoto(Request $request, $user_id)
+    {
+        $user = User::where('id', $user_id)->first();
+
+        if (!$user) {
+            session()->flash('error', __('portal.User not found!'));
+            return redirect()->back();
+        }
+
+        $validated = validator::make($request->all(), [
+            'nid_photo' => 'required',
+        ]);
+
+        if ($validated->fails()) {
+            session()->flash('error', __('portal.Photo is required!'));
+            return redirect()->back()->withErrors($validated->errors());
+        }
+
+        $photo = $request->file('nid_photo')->store('', 'public');
+
+        $user->update(['nid_photo' => $photo]);
+        $user->save();
+
+        session()->flash('message', __('portal.Photo added successfully.'));
+
+        return redirect()->back();
+    }
+
+    // User log details
+    public function user_log()
+    {
+        if (\auth()->user()->hasRole('SuperAdmin')) {
+            $users = UserLog::with('user')->get();
+
+            return view('userLog.index', compact('users'));
+        }
+
+        return redirect()->back();
     }
 
     // public function roleGet()

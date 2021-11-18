@@ -33,6 +33,8 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
+            \App\Http\Middleware\Language::class,
+            \App\Http\Middleware\SetLang::class,
             \Laravel\Jetstream\Http\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
@@ -65,11 +67,13 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
+
         'ire' => \App\Http\Middleware\Ire::class,
         'ireAuthentication' => \App\Http\Middleware\IREAuthentication::class,
         'ireEmailVerify' => \App\Http\Middleware\IREemailVerification::class,
         'ireRegisterDetails' => \App\Http\Middleware\IreRegisterDetails::class,
         'packageCheck' => \App\Http\Middleware\PackageCheck::class,
         'categoryCheck' => \App\Http\Middleware\CategoryCheck::class,
+
     ];
 }

@@ -47,9 +47,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_approved',
         'profile_approval_id',
         'mobile',
+        'mobile_verify_code',
+        'mobile_verify',
         'usertype',
         'nid_num',
         'nid_exp_date',
+        'company_name',
         'nid_photo',
         'status',
         'is_active',
@@ -57,6 +60,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'driver_status',
         'added_by',
         'added_by_userId',
+        'logistic_solution',
+        'packaging_solution',
+        'storage_solution',
+        'local_cargo',
+        'international_cargo',
+        'logistics_business_id',
         'rtl',
     ];
 
@@ -97,8 +106,35 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $appends = [
-        'profile_photo_url',
+        'profile_photo_url', 'business_photo_url', 'business_name'
     ];
+
+    public function getBusinessPhotoUrlAttribute()
+    {
+        $get_business_id = $this->business_id;
+        if (!empty($get_business_id)) {
+            $bus = Business::find($get_business_id);
+            if (!empty($bus)) {
+                return $bus->business_photo_url;
+            }
+        } else {
+            return null;
+        }
+    }
+
+
+    public function getBusinessNameAttribute()
+    {
+        $get_business_id = $this->business_id;
+        if (!empty($get_business_id)) {
+            $bus = Business::find($get_business_id);
+            if (!empty($bus)) {
+                return $bus->business_name;
+            }
+        } else {
+            return null;
+        }
+    }
 
     public static function waitingTime()
     {
@@ -398,6 +434,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Vehicle::class);
     }
 
+
     public function business_name_get()
     {
         return $this->hasOne(Business::class);
@@ -512,7 +549,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public static function send_sms($mobile_no, $msg)
     {
         $mobile_no = trim($mobile_no);
-        $url = "http://www.mobily1.net/api/sendsms.php?username=" . env('SMS_API_USERNAME') . "&password=" . env('SMS_API_PASSWORD') . "&message=" . urlencode($msg) . "&numbers=" . $mobile_no . "&sender=Emdad-Aid&unicode=e&randparams=1";
+        $mobile_no = str_replace("+", "", $mobile_no);
+        $url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=966" . $mobile_no . "&Message=" . urlencode($msg);
+
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -523,4 +562,23 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         curl_close($ch);
     }
+
+    public static function send_otp($otp, $mobile_no)
+    {
+        $mobile_no = trim($mobile_no);
+        $msg = "Your delivery is here. Please share the OTP code: " . $otp . " with the driver after unloading the delivery. Thank you for using EMDAD Platform.";
+        $mobile_no = str_replace("+", "", $mobile_no);
+        $url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=966" . $mobile_no . "&Message=" . urlencode($msg);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'error:' . curl_error($ch);
+        }
+        curl_close($ch);
+        return $ch;
+    }
+
 }

@@ -47,8 +47,10 @@ class CreateDraftPurchaseOrdersTable extends Migration
             $table->string('po_status')->nullable();
             $table->date('po_date')->nullable();
             $table->string('remarks')->nullable();
+            $table->string('file')->nullable();
             $table->string('approval_details')->nullable();
             $table->string('status')->nullable();
+            $table->integer('rfq_type'); /* 0 for single category RFQ, 1 for multi categories */
             $table->timestamps();
         });
     }

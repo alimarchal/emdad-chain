@@ -1,4 +1,4 @@
-<nav class="nav_mobile_menu">
+<nav class="nav_mobile_menu" style="width: 115%;">
     <ul>
         <li class="{{(request()->routeIs('english.index')?'active':'')}}"><a href="{{route('english.index')}}">Home</a></li>
         <li class="{{(request()->routeIs('english.about')?'active':'')}}"><a href="{{route('english.about')}}">About Emdad</a></li>
@@ -14,5 +14,6 @@
         </li>
         <li><a href="javascript:void(0)">Training Center</a></li>
         <li><a href="javascript:void(0)">How it works</a></li>
+        <li class="{{(request()->routeIs('english.suppliers')?'active':'')}}"><a href="{{route('english.suppliers')}}">Suppliers</a></li>
     </ul>
 </nav>

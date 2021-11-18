@@ -1,9 +1,19 @@
+@section('headerScripts')
+    <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">
+
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
+@endsection
 @if (auth()->user()->rtl == 0)
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))
@@ -14,13 +24,12 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-2">Items List @if (!$collection->count()) seems empty @endif
-        </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Quotations List')}} @if (!$collection->count()) {{__('portal.seems empty')}} @endif </h2>
 
         <!-- Remaining Quotation count for Basic and Silver Business Packages -->
         @php
             $quotations = \App\Models\Qoute::where('supplier_business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
-            $business_package = \App\Models\BusinessPackage::where('business_id', auth()->user()->business_id)->first();
+            $business_package = \App\Models\BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
 
             $package = \App\Models\Package::where('id', $business_package->package_id)->first();
             if ($package->id != 7)
@@ -32,30 +41,70 @@
 
         @if($business_package->package_id == 5 || $business_package->package_id == 6 )
             <div class="flex flex-wrap" style="justify-content: flex-start">
-                <h1 class="text-1xl mt-0 pb-0 text-center"> New Quotation(s) response remaining for the day: </h1>
+                <h1 class="text-1xl mt-0 pb-0 text-center"> {{__('portal.New RFQ(s) response remaining for the day')}}: </h1>
                 <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$count}} </h1>
             </div>
         @endif
         <hr>
 
-        <!-- This example requires Tailwind CSS v2.0+ -->
-        <!-- component -->
         <div class="bg-white">
             <nav class="flex flex-col sm:flex-row">
-                <a href="{{ route('viewRFQs') }}" class="py-4 px-6 block hover:text-blue-500 focus:outline-none {{ request()->routeIs('viewRFQs') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    New
+                <a href="{{ route('viewRFQs') }}" class="py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none {{ request()->routeIs('viewRFQs') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                    @php
+                        $business_cate = \App\Models\BusinessCategory::where('business_id', auth()->user()->business_id)->get();
+                        if ($business_cate->isNotEmpty()) {
+                            foreach ($business_cate as $item) {
+                                $business_categories[] = (int)$item->category_number;
+                            }
+                        }
+                        sort($business_categories);
+                            // Counting NEW RFQs for multiple categories for supplier
+                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->get();
+                            $noMultiCategoryQuotationPresent = array();
+                            foreach ($multiEOrderItems as $multiEOrderItem)
+                                {
+                                    $quotes = \App\Models\Qoute::where(['e_order_items_id' => $multiEOrderItem->id, 'supplier_business_id' => auth()->user()->business_id])->first();
+                                        if (!($quotes))
+                                            {
+                                                $noMultiCategoryQuotationPresent[] = $multiEOrderItem->id;
+                                            }
+                                }
+                    @endphp
+                    {{__('portal.New RFQs')}} <span class="text-red-400">({{count($noMultiCategoryQuotationPresent)}})</span>
                 </a>
-                <a href="{{ route('QoutedRFQQouted') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQQouted') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
-                    Qouted
+                <a href="{{ route('QoutedRFQQouted') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQQouted') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
+                    @php
+                        $quotedCount = \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1])
+                                        ->where('qoute_status' , '!=' ,'ModificationNeeded')
+                                        ->where('qoute_status' , '!=' ,'RFQPendingConfirmation')
+                                        ->count();
+                    @endphp
+                    {{__('portal.Quoted')}} <span class="text-red-400">({{$quotedCount}})</span>
                 </a>
-                <a href="{{ route('QoutedRFQRejected') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQRejected') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    Rejected
+                <a href="{{ route('QoutedRFQModificationNeeded') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQModificationNeeded') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                    @php $modificationCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status_updated', 'ModificationNeeded')->count(); @endphp
+                    {{__('portal.Modification needed')}} <span class="text-red-400">({{$modificationCount}})</span>
                 </a>
-                <a href="{{ route('QoutedRFQModificationNeeded') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQModificationNeeded') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    Modification needed
+                <a href="{{ route('QoutedRFQPendingConfirmation') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQPendingConfirmation') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                    @php $pendingCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status', 'RFQPendingConfirmation')->count(); @endphp
+                    {{__('portal.Pending Confirmation')}} <span class="text-red-400">({{$pendingCount}})</span>
                 </a>
-                <a href="{{ route('QoutedRFQPendingConfirmation') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQPendingConfirmation') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    Pending Confirmation
+                <a href="{{ route('QoutedRFQQoutedExpired') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQQoutedExpired') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                    @php
+                        $data= \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1, 'request_status' => 1])
+                            ->where(function ($query){
+                                $query->where(['qoute_status' => 'Qouted'])->orWhere(['qoute_status' => 'accepted']);
+                            })->get();
+                        $expired = array();
+                        foreach($data as $da)
+                            {
+                                if($da->qoute_status_updated != 'Rejected')
+                                {
+                                    $expired[] = $da;
+                                }
+                            }
+                    @endphp
+                    {{__('portal.Expired')}} <span class="text-red-400">({{count($expired)}})</span>
                 </a>
             </nav>
         </div>
@@ -65,146 +114,154 @@
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
 
-                            <table class="min-w-full divide-y divide-gray-200">
+                            <table class="min-w-full divide-y divide-gray-200" id="quotation-table">
                                 <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        ID
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
-                                            </path>
-                                        </svg>
-                                    </th>
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Sr #')}}
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Category Name
-                                    </th>
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Category Name')}}
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Company Name
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Quantity
-                                    </th>
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Company Name')}}
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Quantity')}}
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Requested On
-                                    </th>
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Requested On')}}
+                                        </th>
 
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 tracking-wider">
-                                        Action
-                                    </th>
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
+                                            </svg>
+                                        </th>
 
-                                </tr>
+                                        <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Action')}}
+                                        </th>
+                                    </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($collection as $rfp)
-                                    @php
-                                        $getQoutes = $rfp->qoutes;
-                                        $user_id = auth()->user()->id;
-                                        $qoute = $getQoutes->where('supplier_user_id',$user_id);
-                                    @endphp
-                                    @if ($qoute->isEmpty())
-                                        @if(isset($quotationCount) && $quotationCount != 0 && $quotationCount != null)
-                                            <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $rfp->id }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    @if ($rfp->file_path)
-                                                        <a href="{{ Storage::url($rfp->file_path) }}">
-                                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
-                                                                </path>
-                                                            </svg>
+                                    @foreach ($collection as $rfp)
+                                        @php
+                                            $getQoutes = $rfp->qoutes;
+                                            $user_id = auth()->user()->id;
+                                            $qoute = $getQoutes->where('supplier_user_id',$user_id);
+                                        @endphp
+                                        @if ($qoute->isEmpty())
+                                            @if(isset($quotationCount) && $quotationCount > 0)
+                                                <tr>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        {{ $loop->iteration }}
+                                                    </td>
+
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        {{ $rfp->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$rfp->item_code)->first()->parent_id))->first()->name }}
+                                                    </td>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        @if($rfp->company_name_check == 1) {{ $rfp->business->business_name }} @else {{__('portal.N/A')}} @endif
+        {{--                                            {{ $rfp->business }}--}}
+                                                    </td>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        {{ $rfp->quantity }}
+                                                    </td>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        {{ $rfp->created_at->format('d-m-Y') }} <br>
+                                                    </td>
+
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        @if ($rfp->file_path)
+                                                            <a href="{{ Storage::url($rfp->file_path) }}">
+                                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
+                                                                    </path>
+                                                                </svg>
+                                                            </a>
+                                                        @else
+                                                            {{__('portal.N/A')}}
+                                                        @endif
+                                                    </td>
+
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        <a href="{{ url('viewRFQs/'.$rfp->id) }}" class=" px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                            {{__('portal.Response')}}
                                                         </a>
-                                                    @else
-                                                        #N/A
-                                                    @endif
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $rfp->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$rfp->item_code)->first()->parent_id))->first()->name }}
-                                                </td>
+                                                    </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    @if($rfp->company_name_check == 1) {{ $rfp->business->business_name }} @endif
-    {{--                                            {{ $rfp->business }}--}}
-                                                </td>
+                                                </tr>
+                                            @elseif(is_null($quotationCount))
+                                                <tr>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        {{ $loop->iteration }}
+                                                    </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $rfp->quantity }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $rfp->created_at->format('d-m-Y') }} <br>
-                                                </td>
-
-
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    <a href="{{ url('viewRFQs/'.$rfp->id) }}" class=" px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                        Response
-                                                    </a>
-                                                </td>
-
-                                            </tr>
-                                        @elseif($quotationCount == null)
-                                            <tr>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $rfp->id }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    @if ($rfp->file_path)
-                                                        <a href="{{ Storage::url($rfp->file_path) }}">
-                                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
-                                                                </path>
-                                                            </svg>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        {{ $rfp->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$rfp->item_code)->first()->parent_id))->first()->name }}
+                                                    </td>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        @if($rfp->company_name_check == 1) {{ $rfp->business->business_name }} @else {{__('portal.N/A')}} @endif
+                                                        {{--                                            {{ $rfp->business }}--}}
+                                                    </td>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        {{ $rfp->quantity }}
+                                                    </td>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        {{ $rfp->created_at->format('d-m-Y') }} <br>
+                                                    </td>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        @if ($rfp->file_path)
+                                                            <a href="{{ Storage::url($rfp->file_path) }}">
+                                                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
+                                                                </svg>
+                                                            </a>
+                                                        @else
+                                                            {{__('portal.N/A')}}
+                                                        @endif
+                                                    </td>
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                        <a href="{{ url('viewRFQs/'.$rfp->id) }}" class=" px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                            {{__('portal.Response')}}
                                                         </a>
-                                                    @else
-                                                        #N/A
-                                                    @endif
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $rfp->item_name }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$rfp->item_code)->first()->parent_id))->first()->name }}
-                                                </td>
+                                                    </td>
 
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    @if($rfp->company_name_check == 1) {{ $rfp->business->business_name }} @endif
-                                                    {{--                                            {{ $rfp->business }}--}}
-                                                </td>
-
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $rfp->quantity }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ $rfp->created_at->format('d-m-Y') }} <br>
-                                                </td>
-
-
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    <a href="{{ url('viewRFQs/'.$rfp->id) }}" class=" px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                        Response
-                                                    </a>
-                                                </td>
-
-                                            </tr>
-                                        @else
-                                            <div class="py-12">
-                                                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                                                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                                                        <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
-                                                            <div class="text-black text-2xl" style="text-align: center">
-                                                                Your have reached daily generate quotation limit.
+                                                </tr>
+                                            @else
+                                                {{--<div class="py-12">
+                                                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                                                            <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                                                                <div class="text-black text-2xl" style="text-align: center">
+                                                                    {{__('portal.Your have reached daily generate quotation limit.')}}
+                                                                </div>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                </div>--}}
+                                            @endif
+                                        @endif
+
+                                    @endforeach
+                                    {{-- Commented else part because if display's meassage as long as loop goes on --}}
+                                    @if(isset($quotationCount) && $quotationCount == 0)
+                                        <div class="py-12">
+                                            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                                                    <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                                                        <div class="text-black text-2xl" style="text-align: center">
+                                                            {{__('portal.Your have reached daily generate quotation limit.')}}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endif
+                                        </div>
                                     @endif
-
-                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -212,24 +269,22 @@
                 </div>
             </div>
         @endif
-        <div class="mt-5">
-            <a href="{{ route('dashboard') }}"
-               class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                Back
-            </a>
-        </div>
-
-
-
-
-
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#quotation-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+        });
+    </script>
 @else
     <x-app-layout>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('User List') }}
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('User List') }} </h2>
         </x-slot>
 
         @if (session()->has('message'))
@@ -240,27 +295,87 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-2">Items List @if (!$collection->count()) seems empty @endif
-        </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Quotations List')}} @if (!$collection->count()) {{__('portal.seems empty')}} @endif </h2>
 
-        <!-- This example requires Tailwind CSS v2.0+ -->
-        <!-- component -->
+        <!-- Remaining Quotation count for Basic and Silver Business Packages -->
+        @php
+            $quotations = \App\Models\Qoute::where('supplier_business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
+            $business_package = \App\Models\BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
+
+            $package = \App\Models\Package::where('id', $business_package->package_id)->first();
+            if ($package->id != 7)
+            {
+                $count = $package->quotations - $quotations;
+            }
+        @endphp
+
+
+        @if($business_package->package_id == 5 || $business_package->package_id == 6 )
+            <div class="flex flex-wrap" style="justify-content: flex-start">
+                <h1 class="text-1xl mt-0 pb-0 text-center"> {{__('portal.New RFQ(s) response remaining for the day')}}: </h1>
+                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$count}} </h1>
+            </div>
+        @endif
+        <hr>
+
         <div class="bg-white">
             <nav class="flex flex-col sm:flex-row">
-                <a href="{{ route('viewRFQs') }}" class="py-4 px-6 block hover:text-blue-500 focus:outline-none {{ request()->routeIs('viewRFQs') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    New
+                <a href="{{ route('viewRFQs') }}" class="py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none {{ request()->routeIs('viewRFQs') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                    @php
+                        $business_cate = \App\Models\BusinessCategory::where('business_id', auth()->user()->business_id)->get();
+                        if ($business_cate->isNotEmpty()) {
+                            foreach ($business_cate as $item) {
+                                $business_categories[] = (int)$item->category_number;
+                            }
+                        }
+                        sort($business_categories);
+                            // Counting NEW RFQs for multiple categories for supplier
+                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->get();
+                            $noMultiCategoryQuotationPresent = array();
+                            foreach ($multiEOrderItems as $multiEOrderItem)
+                                {
+                                    $quotes = \App\Models\Qoute::where(['e_order_items_id' => $multiEOrderItem->id, 'supplier_business_id' => auth()->user()->business_id])->first();
+                                        if (!($quotes))
+                                            {
+                                                $noMultiCategoryQuotationPresent[] = $multiEOrderItem->id;
+                                            }
+                                }
+                    @endphp
+                    {{__('portal.New RFQs')}} <span class="text-red-400">({{count($noMultiCategoryQuotationPresent)}})</span>
                 </a>
-                <a href="{{ route('QoutedRFQQouted') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQQouted') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
-                    Qouted
+                <a href="{{ route('QoutedRFQQouted') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQQouted') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
+                    @php
+                        $quotedCount = \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1])
+                                        ->where('qoute_status' , '!=' ,'ModificationNeeded')
+                                        ->where('qoute_status' , '!=' ,'RFQPendingConfirmation')
+                                        ->count();
+                    @endphp
+                    {{__('portal.Quoted')}} <span class="text-red-400">({{$quotedCount}})</span>
                 </a>
-                <a href="{{ route('QoutedRFQRejected') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQRejected') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    Rejected
+                <a href="{{ route('QoutedRFQModificationNeeded') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQModificationNeeded') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                    @php $modificationCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status_updated', 'ModificationNeeded')->count(); @endphp
+                    {{__('portal.Modification needed')}} <span class="text-red-400">({{$modificationCount}})</span>
                 </a>
-                <a href="{{ route('QoutedRFQModificationNeeded') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQModificationNeeded') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    Modification needed
+                <a href="{{ route('QoutedRFQPendingConfirmation') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQPendingConfirmation') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                    @php $pendingCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status', 'RFQPendingConfirmation')->count(); @endphp
+                    {{__('portal.Pending Confirmation')}} <span class="text-red-400">({{$pendingCount}})</span>
                 </a>
-                <a href="{{ route('QoutedRFQPendingConfirmation') }}" class=" py-4 px-6 block hover:text-blue-500 focus:outline-none  {{ request()->routeIs('QoutedRFQPendingConfirmation') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
-                    Pending Confirmation
+                <a href="{{ route('QoutedRFQQoutedExpired') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQQoutedExpired') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                    @php
+                        $data= \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1, 'request_status' => 1])
+                            ->where(function ($query){
+                                $query->where(['qoute_status' => 'Qouted'])->orWhere(['qoute_status' => 'accepted']);
+                            })->get();
+                        $expired = array();
+                        foreach($data as $da)
+                            {
+                                if($da->qoute_status_updated != 'Rejected')
+                                {
+                                    $expired[] = $da;
+                                }
+                            }
+                    @endphp
+                    {{__('portal.Expired')}} <span class="text-red-400">({{count($expired)}})</span>
                 </a>
             </nav>
         </div>
@@ -270,38 +385,37 @@
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
 
-                            <table class="min-w-full divide-y divide-gray-200">
+                            <table class="min-w-full divide-y divide-gray-200" id="quotation-table">
                                 <thead class="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
-                                        ID
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Sr #')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
+
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Category Name')}}
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Company Name')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Quantity')}}
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Requested On')}}
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
-                                            </path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
                                         </svg>
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
-                                        Product Name
+                                    <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Action')}}
                                     </th>
-
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
-                                        Company Name
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
-                                        العدد
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
-                                        Requested On
-                                    </th>
-
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 tracking-wider">
-                                        نشاط
-                                    </th>
-
                                 </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -312,49 +426,115 @@
                                         $qoute = $getQoutes->where('supplier_user_id',$user_id);
                                     @endphp
                                     @if ($qoute->isEmpty())
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $rfp->id }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                @if ($rfp->file_path)
-                                                    <a href="{{ Storage::url($rfp->file_path) }}">
-                                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
-                                                            </path>
-                                                        </svg>
+                                        @if(isset($quotationCount) && $quotationCount > 0)
+                                            <tr>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ $loop->iteration }}
+                                                </td>
+
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ \App\Models\Category::where('id', $rfp->item_code)->first()->name_ar }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$rfp->item_code)->first()->parent_id))->first()->name_ar }}
+                                                </td>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    @if($rfp->company_name_check == 1) {{ $rfp->business->business_name }} @else {{__('portal.N/A')}} @endif
+                                                    {{--                                            {{ $rfp->business }}--}}
+                                                </td>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ $rfp->quantity }}
+                                                </td>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ $rfp->created_at->format('d-m-Y') }} <br>
+                                                </td>
+
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    @if ($rfp->file_path)
+                                                        <a href="{{ Storage::url($rfp->file_path) }}">
+                                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
+                                                                </path>
+                                                            </svg>
+                                                        </a>
+                                                    @else
+                                                        {{__('portal.N/A')}}
+                                                    @endif
+                                                </td>
+
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    <a href="{{ url('viewRFQs/'.$rfp->id) }}" class="px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="padding-top: 6px; padding-bottom: 5px;">
+                                                        {{__('portal.Response')}}
                                                     </a>
-                                                @else
-                                                    #N/A
-                                                @endif
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $rfp->item_name }}
-                                            </td>
+                                                </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{--                                        {{ $rfp->business->business_name }}--}}
-                                                {{--                                        {{ $rfp->business }}--}}
-                                            </td>
+                                            </tr>
+                                        @elseif(is_null($quotationCount))
+                                            <tr>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ $loop->iteration }}
+                                                </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $rfp->quantity }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                {{ $rfp->created_at->format('d-m-Y') }} <br>
-                                            </td>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ \App\Models\Category::where('id', $rfp->item_code)->first()->name_ar }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$rfp->item_code)->first()->parent_id))->first()->name_ar }}
+                                                </td>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    @if($rfp->company_name_check == 1) {{ $rfp->business->business_name }} @else {{__('portal.N/A')}} @endif
+                                                    {{--                                            {{ $rfp->business }}--}}
+                                                </td>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ $rfp->quantity }}
+                                                </td>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    {{ $rfp->created_at->format('d-m-Y') }} <br>
+                                                </td>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    @if ($rfp->file_path)
+                                                        <a href="{{ Storage::url($rfp->file_path) }}">
+                                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
+                                                            </svg>
+                                                        </a>
+                                                    @else
+                                                        {{__('portal.N/A')}}
+                                                    @endif
+                                                </td>
+                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                    <a href="{{ url('viewRFQs/'.$rfp->id) }}" class="px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="padding-top: 6px; padding-bottom: 5px;">
+                                                        {{__('portal.Response')}}
+                                                    </a>
+                                                </td>
 
-
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <a href="{{ url('viewRFQs/'.$rfp->id) }}" class=" px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                                    Response
-                                                </a>
-                                            </td>
-
-                                        </tr>
+                                            </tr>
+                                        @else
+                                            {{--<div class="py-12">
+                                                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                                                        <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                                                            <div class="text-black text-2xl" style="text-align: center">
+                                                                {{__('portal.Your have reached daily generate quotation limit.')}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>--}}
+                                        @endif
                                     @endif
 
                                 @endforeach
+
+                                {{-- Commented else part because if display's meassage as long as loop goes on --}}
+                                @if(isset($quotationCount) && $quotationCount == 0)
+                                    <div class="py-12">
+                                        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                                                <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+                                                    <div class="text-black text-2xl" style="text-align: center">
+                                                        {{__('portal.Your have reached daily generate quotation limit.')}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+
                                 </tbody>
                             </table>
                         </div>
@@ -362,16 +542,26 @@
                 </div>
             </div>
         @endif
-        <div class="mt-5">
-            <a href="{{ route('dashboard') }}"
-               class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                عودة
-            </a>
-        </div>
-
-
-
-
-
     </x-app-layout>
+
+    <script>
+        $(document).ready(function() {
+            $('#quotation-table').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    // 'copy', 'csv', 'excel', 'pdf', 'print'
+                ],
+                "language": {
+                    "sSearch": "بحث:",
+                    "oPaginate": {
+                        "sFirst":    	"أولا",
+                        "sPrevious": 	"السابق",
+                        "sNext":     	"التالي",
+                        "sLast":     	"الاخير"
+                    },
+                    "info": "عرض _PAGE_ ل _PAGES_ من _MAX_ المدخلات",
+                },
+            } );
+        });
+    </script>
 @endif

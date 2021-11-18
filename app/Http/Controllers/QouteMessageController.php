@@ -8,81 +8,11 @@ use Illuminate\Http\Request;
 
 class QouteMessageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        /* Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message */
         $message = QouteMessage::create($request->all());
         session()->flash('message', 'Message successfully send.');
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\QouteMessage  $qouteMessage
-     * @return \Illuminate\Http\Response
-     */
-    public function show(QouteMessage $qouteMessage)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\QouteMessage  $qouteMessage
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(QouteMessage $qouteMessage)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\QouteMessage  $qouteMessage
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, QouteMessage $qouteMessage)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\QouteMessage  $qouteMessage
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(QouteMessage $qouteMessage)
-    {
-        //
     }
 }

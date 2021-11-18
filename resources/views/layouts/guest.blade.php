@@ -46,16 +46,37 @@
             .ui-draggable, .ui-droppable {
                 background-position: top;
             }
+
+            #datepicker {
+                width: 100%;
+                padding: 10px;
+                cursor: default;
+                /*text-transform: uppercase;*/
+                font-size: 13px;
+                background: #FFFFFF;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+                border: solid 1px #d2d6dc;
+                box-shadow: none;
+            }
         </style>
 
         <link rel="stylesheet" href="https://www.jqueryscript.net/demo/jQuery-International-Telephone-Input-With-Flags-Dial-Codes/build/css/intlTelInput.css">
 
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
             $( function() {
-                $( "#datepicker" ).datepicker();
+                $( "#datepicker" ).datepicker({
+                    dateFormat: 'mm/dd/yy',
+                    changeMonth: true,
+                    changeYear: true,
+                    minDate: 0,
+                    clear: true,
+                });
             } );
         </script>
         @livewireStyles

@@ -34,6 +34,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
@@ -42,7 +44,7 @@
     @if (auth()->user()->rtl == 1)
 
         <!-- Template Main CSS File -->
-        <link href="Presento/assets/css/style.css" rel="stylesheet">
+        <link href="{{asset('Presento/assets/css/style.css')}}" rel="stylesheet">
         <style>
             nav, #side-bar, #main, .inner-page {
                 direction: rtl;
@@ -71,7 +73,7 @@
         {{--                </div>--}}
         {{--            </header>--}}
 
-        <div x-data="{ sidebarOpen: false }" class="flex  @if(!request()->routeIs('RFQ.create'))h-screen @endif bg-gray-200 font-roboto" id="side-bar">
+        <div x-data="{ sidebarOpen: false }" class="flex  @if(!request()->routeIs('RFQ.create') && !request()->routeIs('create_single_rfq'))h-screen @endif bg-gray-200 font-roboto" id="side-bar">
             @include('_layouts.sidebar')
 
             <div class="flex-1 flex flex-col overflow-hidden">
@@ -83,7 +85,7 @@
                 {{--                </div>--}}
                 {{--            </div>--}}
                 <main class="flex-1 overflow-x-hidden  bg-gray-200">
-                    <div class="container mx-auto px-6 pb-8">
+                    <div class="container mx-auto @if(request()->routeIs('supplier_payment')) px-8 @else px-6 @endif pb-8">
                         {{ $slot }}
                         @yield('body')
                     </div>
@@ -100,7 +102,7 @@
 
     @livewireScripts
 
-
+    @yield('footerScripts')
 </body>
 
 </html>

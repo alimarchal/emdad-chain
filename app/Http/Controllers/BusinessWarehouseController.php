@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class BusinessWarehouseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         if ($request->has('status')) {
@@ -33,16 +28,11 @@ class BusinessWarehouseController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $business = Business::where('user_id', auth()->id())->get();
         if ($business->isEmpty()) {
-            session()->flash('message', 'Please enter business information first.');
+            session()->flash('message', __('portal.Please enter business information first.'));
             return redirect()->route('business.create');
         }
         else {
@@ -57,12 +47,6 @@ class BusinessWarehouseController extends Controller
         return view('businessWarehouse.showAllWareHouse', compact('business'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -72,7 +56,7 @@ class BusinessWarehouseController extends Controller
             'designation' => 'required',
             'warehouse_email' => 'required',
             'landline' => 'required',
-            'mobile' => 'required',
+            'mobile' => 'required|numeric',
             'country' => 'required',
             'address' => 'required',
             'city' => 'required',
@@ -90,40 +74,21 @@ class BusinessWarehouseController extends Controller
         $merge_time = $request->working_time . " - " . $request->working_time_1;
         $request->merge(['working_time' => $merge_time]);
         $bw = BusinessWarehouse::create($request->all());
-        session()->flash('message', 'Business warehouse information successfully saved.');
+
+        session()->flash('message', __('portal.Business warehouse information successfully saved.'));
         return redirect()->route('purchaseOrderInfo.create');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\BusinessWarehouse $businessWarehouse
-     * @return \Illuminate\Http\Response
-     */
     public function show(BusinessWarehouse $businessWarehouse)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param \App\Models\BusinessWarehouse $businessWarehouse
-     * @return \Illuminate\Http\Response
-     */
     public function edit(BusinessWarehouse $businessWarehouse)
     {
-//        dd($businessWarehouse);
         return view('businessWarehouse.edit', compact('businessWarehouse'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\BusinessWarehouse $businessWarehouse
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, BusinessWarehouse $businessWarehouse)
     {
 
@@ -133,7 +98,7 @@ class BusinessWarehouseController extends Controller
             'designation' => 'required',
             'warehouse_email' => 'required',
             'landline' => 'required',
-            'mobile' => 'required',
+            'mobile' => 'required|numeric',
             'country' => 'required',
             'address' => 'required',
             'warehouse_type' => 'required',
@@ -145,18 +110,34 @@ class BusinessWarehouseController extends Controller
             'working_time' => 'required',
         ]);
         $businessWarehouse->update($request->all());
-        session()->flash('message', 'Warehouse information successfully updated.');
+
+        session()->flash('message', __('portal.Warehouse information successfully updated.'));
         return redirect()->route('businessWarehouse.edit', $businessWarehouse->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Models\BusinessWarehouse $businessWarehouse
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(BusinessWarehouse $businessWarehouse)
     {
         //
+    }
+
+    /* Updating Buyer's warehouse number when he changes in responding to a quotation (OTP number) */
+    public function updateNumber(Request $request)
+    {
+        $warehouse = BusinessWarehouse::where('business_id', auth()->user()->business_id)->first();
+        if ($warehouse->mobile_verified == 0 && $warehouse->mobile_verification_code != null)
+        {
+            BusinessWarehouse::where('business_id', auth()->user()->business_id)->update([
+                'mobile' => $request->number,
+                'mobile_verification_code' => null,
+            ]);
+            return response()->json(['data' => 'success']);
+        }
+
+        if ($warehouse->mobile_verified == 0)
+        {
+            BusinessWarehouse::where('business_id', auth()->user()->business_id)->update([
+                'mobile' => $request->number,
+            ]);
+        }
     }
 }

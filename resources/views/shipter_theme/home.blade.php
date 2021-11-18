@@ -58,11 +58,13 @@
                     <div class="row">
                         <div class="col-xl-12 slide-caption">
                             {{--                            <h2><span>We Provide the Best Solution</span> <span>For Your Transport.</span></h2>--}}
+
+                            <h3 class="text-white emdad_description">Emdad, is an online (B2B) platform, established by an ambitious and technical expert team, to transform the purchasing, selling, supplying,
+                                and warehousing processes into one intelligent and unified platform. It offers the lowest costs, yet the best technical and logistical standards.
+                                Emdad aims to make the local supply chain operations in the Kingdom of Saudi Arabia smarter, more advanced and sustainable, according to the Vision 2030.</h3>
                             <div>
-                                <div class="btn-style" style="padding-bottom: 180px;padding-left: 450px;"><a href="{{route('register')}}">Join us</a></div>
+{{--                                <div class="btn-style join_us"><a href="{{route('register')}}" class="join_us_font_size">Join us</a></div>--}}
                             </div>
-                            <h3 class="text-white">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
-                                , selling, supplying and warehousing processes. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
                         </div>
                     </div>
                 </div>
@@ -72,11 +74,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12 slide-caption">
+                            <h3 class="text-white emdad_description">Emdad, is an online (B2B) platform, established by an ambitious and technical expert team, to transform the purchasing, selling, supplying,
+                                and warehousing processes into one intelligent and unified platform. It offers the lowest costs, yet the best technical and logistical standards.
+                                Emdad aims to make the local supply chain operations in the Kingdom of Saudi Arabia smarter, more advanced and sustainable, according to the Vision 2030.</h3>
                             <div>
-                                <div class="btn-style" style="padding-bottom: 180px;padding-left: 450px;"><a href="{{route('register')}}">Join us</a></div>
+{{--                                <div class="btn-style join_us"><a href="{{route('register')}}" class="join_us_font_size">Join us</a></div>--}}
                             </div>
-                            <h3 class="text-white">Emdad platform is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing
-                                , selling, supplying and warehousing processes. Emdad provides the lowest costs yet the best technical and logistical standards.</h3>
                         </div>
                     </div>
                 </div>
@@ -171,7 +174,7 @@
                             <i class="fi flaticon-travel"></i>
                         </div>
                         <h2>What is Emdad Platform?</h2>
-                        <p>Is an online platform established with high level of experience and knowledge to help both the supplier and buyer with the purchasing, selling, supplying and warehousing process.</p>
+                        <p>Is an online platform established with high level of experience and knowledge to help buyer with the purchasing, selling, supplying and warehousing process.</p>
                         <p>Emdad can provide the lowest costs yet the best technical and logistical standards.</p>
                         <span><strong>Our Vision:</strong> To become the largest, reliable online platform specialized in supply chains, to gain the biggest
                             number of suppliers and the largest logistical fleet while assuring the best international quality standards.</span>
@@ -328,6 +331,32 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="service-item">
+                        <div class="service-single">
+                            <div class="service-img">
+                                <img src="{{url('Shipter/assets/images/service/Photo no.8.jpg')}}" style="width: 350px; height: 236px;" alt="">
+                            </div>
+                            <div class="service-content service-content4">
+                                <h3>
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                         width="64" height="64"
+                                         viewBox="0 0 172 172"
+                                         style=" fill:#000000;
+                                        position: absolute;
+                                        left: -95px;
+                                        top: -10px;
+                                        block-size: 45px;">
+                                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path>
+                                            <g fill="#eb8e23"><path d="M67.1875,1.34375c-5.24063,0 -9.675,3.35938 -11.42187,8.0625h-23.51562c-1.74687,0 -3.3599,1.20833 -3.8974,2.9552l-12.4953,42.7323h-10.4823c-1.20937,0 -2.28333,0.5375 -2.9552,1.34375c-0.67187,0.80625 -1.21042,2.01615 -1.07605,3.22553l11.9599,95.67395c1.075,8.73438 8.60052,15.31927 17.3349,15.31927h110.58905c8.73438,0 16.2599,-6.5849 17.3349,-15.31927l11.9599,-95.67395c0.26875,-1.20938 -0.13595,-2.2849 -0.9422,-3.22553c-0.80625,-0.80625 -1.8802,-1.34375 -2.9552,-1.34375h-10.4823l-12.62915,-42.7323c-0.40312,-1.74687 -2.01667,-2.9552 -3.76355,-2.9552h-23.51562c-1.6125,-4.70312 -6.18125,-8.0625 -11.42187,-8.0625zM67.1875,9.40625h37.625c2.28437,0 4.03125,1.74688 4.03125,4.03125c0,2.28437 -1.74688,4.03125 -4.03125,4.03125h-37.625c-2.28437,0 -4.03125,-1.74688 -4.03125,-4.03125c0,-2.28437 1.74688,-4.03125 4.03125,-4.03125zM35.2052,17.46875h20.56042c1.6125,4.70313 6.18125,8.0625 11.42188,8.0625h37.625c5.24063,0 9.675,-3.35937 11.42188,-8.0625h20.56042l11.0177,37.625h-123.625zM9.94427,63.15625h152.11145l-11.42187,91.24115c-0.5375,4.70313 -4.56927,8.19635 -9.2724,8.19635h-110.7229c-4.70312,0 -8.7349,-3.49323 -9.2724,-8.19635zM72.5625,81.96875c-2.28437,0 -4.03125,1.74688 -4.03125,4.03125v53.75c0,2.28438 1.74688,4.03125 4.03125,4.03125c2.28437,0 4.03125,-1.74687 4.03125,-4.03125v-53.75c0,-2.28437 -1.74688,-4.03125 -4.03125,-4.03125zM99.4375,81.96875c-2.28437,0 -4.03125,1.74688 -4.03125,4.03125v53.75c0,2.28438 1.74688,4.03125 4.03125,4.03125c2.28437,0 4.03125,-1.74687 4.03125,-4.03125v-53.75c0,-2.28437 -1.74688,-4.03125 -4.03125,-4.03125zM39.36243,82.08685c-0.2614,-0.02257 -0.5291,-0.01785 -0.79785,0.01575c-2.15,0.26875 -3.76198,2.28543 -3.49323,4.43543l6.5849,53.75c0.26875,2.01563 2.01563,3.49323 4.03125,3.49323h0.53803c2.15,-0.26875 3.76197,-2.28542 3.49322,-4.43542l-6.71875,-53.75c-0.23516,-1.88125 -1.80776,-3.35098 -3.63757,-3.50897zM132.77142,82.08685c-1.82981,0.158 -3.40242,1.62772 -3.63757,3.50897l-6.71875,53.75c-0.40312,2.15 1.20938,4.16667 3.35938,4.43542h0.53803c2.01563,0 3.7625,-1.4776 4.03125,-3.49323l6.71875,-53.75c0.26875,-2.15 -1.34323,-4.16668 -3.49322,-4.43543c-0.26875,-0.03359 -0.53645,-0.03832 -0.79785,-0.01575z"></path></g></g></svg>
+                                    Training and Support</h3>
+                                <p>.</p>
+                                <a href="{{route('english.service')}}">See More...</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -417,9 +446,6 @@
                 <span>We Give You The Best</span>
                 <h2>Buyer Subscription Plan</h2>
             </div>
-            <div class="btns">
-                <div class="btn-style"><a href="{{route('english.buyerPackage')}}" target="_blank">Details</a></div>
-            </div>
             <div class="row" style="padding-top: 20px;">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="row">
@@ -435,7 +461,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}" style="border-radius: 25px;">Order Now</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -453,7 +479,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}" style="border-radius: 25px;">Order Now</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -471,7 +497,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}" style="border-radius: 25px;">Order Now</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -489,7 +515,7 @@
                                     </div>
                                     <div class="pricing-footer">
                                         <div class="btns">
-                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}">Order Now</a></div>
+                                            <div class="btn-style btn-style-4"><a href="{{route('register')}}" style="border-radius: 25px;">Order Now</a></div>
                                         </div>
                                     </div>
                                 </div>
@@ -498,7 +524,12 @@
                     </div>
                 </div>
             </div>
-            <div class="section-title text-center">
+            <div class="btns">
+{{--                <div class="btn-style">--}}
+                    <a href="{{route('english.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">Details</a>
+{{--                </div>--}}
+            </div>
+            {{--<div class="section-title text-center">
                 <span>We Give You The Best</span>
                 <h2>Supplier Subscription Plan</h2>
             </div>
@@ -564,7 +595,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </div>
     <!-- pice-area end -->
@@ -689,6 +720,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="btns text-center">
+                <div class="btn-style"><a href="{{route('english.team')}}" style="border-radius: 25px;">More</a></div>
             </div>
         </div>
     </div>

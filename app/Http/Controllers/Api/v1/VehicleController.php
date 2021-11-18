@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\ShipmentItem;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,22 @@ class VehicleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('supplier_business_id')) {
+
+            $collection = Vehicle::where('supplier_business_id', $request->supplier_business_id)->get();
+            $vehicle = [];
+            foreach ($collection as $col) {
+                $get_vehicle_id = $col->id;
+                $shipment_item_vehicle_status = ShipmentItem::where('vehicle_id', $get_vehicle_id)->where('status',0)->first();
+                $itm = collect($col);
+                $vehicle[] = $itm->merge([
+                    'ShipmentInfo' => $shipment_item_vehicle_status,
+                ]);
+            }
+            return $vehicle;
+        }
         return Vehicle::paginate(10);
     }
 
@@ -45,9 +60,9 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-         $vehicle = Vehicle::find($id);
+        $vehicle = Vehicle::find($id);
         if (empty($vehicle)) {
             return response()->json(['message' => 'Not Found!'], 404);
         } else {

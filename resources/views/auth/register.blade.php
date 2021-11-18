@@ -1,117 +1,129 @@
-<style>
-    #datepicker {
-        width: 100%;
-        padding: 10px;
-        cursor: default;
-        /*text-transform: uppercase;*/
-        font-size: 13px;
-        background: #FFFFFF;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
-        border: solid 1px #d2d6dc;
-        box-shadow: none;
-    }
-</style>
-
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <!-- <x-jet-authentication-card-logo /> -->
-
-            <img src="{{url('registration_step/E-1.png')}}" alt="User Registration" class="block w-auto my-2 m-auto" style="margin:auto;" />
-            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block h-20 w-auto m-auto" style="margin:auto;" />
         </x-slot>
-
         <x-jet-validation-errors class="mb-4"/>
 
-        <x-jet-button>
-            <a href="{{route('registerAr')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
-        </x-jet-button>
+        <a href="{{route('registerAr', 'ar')}}" class="inline-flex items-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="border-radius: 25px;">
+            <img alt="" src="{{url('sa.png')}}" style="margin-right: 9px;margin-top:-4px;">
+            العربية
+        </a>
 
-        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+        <a href="{{route('english.index')}}">
+            <img src="{{url('logo.png')}}" alt="EMDAD CHAIN LOGO" class="block w-16 mx-auto float-right " title="{{__('sidebar.Home')}}"/>
+        </a>
+        <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="mt-5">
             @csrf
-            <p class="text-center font-bold text-2xl">Step # 1: Registration</p>
-            {{--            <livewire:reference />--}}
-            <div class="mt-2">
-                <x-jet-label for="referred_no" value="{{ __('Reference (If any)') }}" class="mb-2"/>
-                <x-jet-input id="referred_no" class="block mt-1 w-full" type="text" name="referred_no" :value="old('referred_no')" autofocus/>
 
-                <x-jet-label for="referred_no_response_found" id="referred_no_response" value="" class="mb-2" style="color: green"/>
-                <x-jet-label for="referred_no_response_not_found" id="referred_no_response_not_found" value="" class="mb-2 text-danger" style="color: red"/>
-            </div>
+            <img src="{{url('registration_step/E-1.png')}}" alt="User Registration" class="block w-auto m-auto" style="margin:auto;"/>
+            <p class="text-center font-bold text-2xl mt-4">{{__('register.Step # 1: Registration')}}</p>
 
-            <div class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-1 lg:-mx-3 xl:-mx-2">
+            <div class="flex flex-wrap overflow-hidden lg:-mx-3 xl:-mx-3">
 
-                <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <x-jet-label for="gender" value="{{ __('Title') }}" class="mb-2"/>
+                  <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
+                    <x-jet-label for="referred_no" value="{{ __('register.Reference (If any)') }}" class="mb-2"/>
+                    <x-jet-input id="referred_no" class="block mt-1 w-full" type="text" name="referred_no" :value="old('referred_no')" autofocus/>
 
-                    <select name="gender" id="gender" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name">
-                        <option value="">Select</option>
-                        <option value="Male">Mr.</option>
-                        <option value="Female">Ms.</option>
-                        <option value="Female">Mrs.</option>
+                    <x-jet-label for="referred_no_response_found" id="referred_no_response" value="" class="mb-2" style="color: green"/>
+                    <x-jet-label for="referred_no_response_not_found" id="referred_no_response_not_found" value="" class="mb-2 text-danger" style="color: red"/>
+
+                </div>
+
+                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/2">
+                    <label class="block font-medium text-sm text-gray-700 mb-2" for="service">
+                        Register as <span class="text-red-500">*</span>
+                    </label>
+
+                    <select name="service" id="service" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name">
+                        <option value="">{{__('register.Select')}}</option>
+                        <option {{old('service') == 1 ? 'selected' : ''}} value="1">{{__('register.CEO (Buyer)')}}</option>
+                        <option {{old('service') == 2 ? 'selected' : ''}} value="2">{{__('register.CEO (Supplier)')}}</option>
+{{--                        <option {{old('service') == 3 ? 'selected' : ''}} value="3">{{__('register.Logistics Solution')}}</option>--}}
                     </select>
                 </div>
 
-                <div class="my-0 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <!-- Column Content -->
-                    <x-jet-label for="name" value="{{ __('First Name') }}"/>
+
+
+
+            </div>
+
+
+            <div class="flex flex-wrap  lg:-mx-2 xl:-mx-2">
+
+
+
+                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                    <label class="block font-medium text-sm text-gray-700 mb-2" for="gender">
+                        Title <span class="text-red-500">*</span>
+                    </label>
+
+                    <select name="gender" id="gender" class="form-select mb-2 rounded-md shadow-sm block w-full" required autofocus autocomplete="name">
+                        <option value="">{{ __('register.Select') }}</option>
+                        <option value="Male">{{ __('register.Mr.') }}</option>
+                        <option value="Female">{{ __('register.Ms.') }}</option>
+                        <option value="Female">{{ __('register.Mrs.') }}</option>
+                    </select>
+                </div>
+
+                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                    <label class="block font-medium text-sm text-gray-700" for="name">
+                        Name <span class="text-red-500">*</span>
+                    </label>
                     <x-jet-input id="name" class="block mt-2 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name"/>
                 </div>
 
-                <div class="my-0 px-2 w-full overflow-hidden pb-2 sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <!-- Column Content -->
-                    <x-jet-label for="middle_initial" value="{{ __('Middle Initial') }}"/>
-                    <x-jet-input id="middle_initial" class="block mt-2 w-full" type="text" maxlength="3" name="middle_initial" :value="old('middle_initial')" required autofocus autocomplete="middle_initial"/>
+
+                <div class="w-full overflow-hidden lg:my-1 lg:px-1 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3">
+                    <label class="block font-medium text-sm text-gray-700" for="family_name">
+                       Family Name <span class="text-red-500">*</span>
+                    </label>
+                    <x-jet-input id="family_name" class="block mt-2 w-full" type="text" name="family_name" :value="old('family_name')" required autocomplete="family_name"/>
                 </div>
 
-                <div class="my-0  px-2 w-full overflow-hidden  pb-2 sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <!-- Column Content -->
-                    <x-jet-label for="family_name" value="{{ __('Family Name') }}"/>
-                    <x-jet-input id="family_name" class="block  mt-2 w-full" type="text" name="family_name" :value="old('family_name')" required autofocus autocomplete="family_name"/>
+
+
+            </div>
+
+            <div class="flex flex-wrap  lg:-mx-2 xl:-mx-2">
+
+                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
+
+                    <label class="block font-medium text-sm text-gray-700" for="company_name">
+                        Company Name <span class="text-red-500">*</span>
+                    </label>
+                    <x-jet-input id="company_name" class="block my-2 w-full" type="text" name="company_name" :value="old('company_name')" required autocomplete="company_name"/>
+                </div>
+
+                <div class="w-full lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
+
+                    <label class="block font-medium text-sm text-gray-700 mb-2" for="mobile-number">
+                        Mobile Number <span class="text-red-500">*</span>
+                    </label>
+                    <input type="tel" id="mobile-number" style="padding-top: 12px;padding-bottom: 12px;" name="mobile" placeholder="e.g. +966 059 338 8833" class="form-input rounded-md shadow-sm block my-2 w-full">
+
+                </div>
+
+
+
+                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
+                    <label class="block font-medium text-sm text-gray-700" for="email">
+                        Email <span class="text-red-500">*</span>
+                    </label>
+                    <x-jet-input id="email" class="block my-2  w-full" type="email" name="email" :value="old('email')" required/>
                 </div>
 
             </div>
 
-            <div class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-1 lg:-mx-3 xl:-mx-2">
 
-                <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <x-jet-label for="nid_num" value="{{ __('National ID Number') }}"/>
-                    <x-jet-input id="nid_num" class="block mt-1 w-full" type="text" pattern="\d*" maxlength="10" name="nid_num" :value="old('nid_num')" required/>
-                </div>
+            <div class="flex flex-wrap overflow-hidden lg:-mx-2 xl:-mx-2">
 
-                <div class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 md:my-1 md:px-1 md:w-full lg:my-3 lg:px-3 lg:w-1/2 xl:my-2 xl:px-2 xl:w-1/2">
-                    <!-- Column Content -->
-                    <x-jet-label for="nid_exp_date" value="{{ __('National ID Expiry Date') }}"/>
-                    <input type="text" id="datepicker" class="block mt-1 w-full" name="nid_exp_date" placeholder="Choose Date (mm/dd/yy)" readonly>
-                </div>
-
-            </div>
-
-
-            <div class="mt-2">
-                <x-jet-label for="id_photo" value="{{ __('National ID Photo') }}" class="mb-2"/>
-                <input type="file" id="nid_photo" name="nid_photo" class="form-input rounded-md shadow-sm block mt-1 w-full" required>
-            </div>
-
-            <div class="mt-2">
-                <x-jet-label for="mobile" value="{{ __('Mobile Number') }}" class="mb-2"/>
-                <input type="tel" id="mobile-number" name="mobile" placeholder="e.g. +966 059 338 8833" class="form-input rounded-md shadow-sm block mt-1 w-full">
-            </div>
-
-
-            <div class="mt-2">
-                <x-jet-label for="email" value="{{ __('Email') }}"/>
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required/>
-            </div>
-
-            <div class="mt-4">
-                <div class="mx-auto max-w-lg">
-                    <div class="py-2" x-data="{ show: true }">
-                        <x-jet-label for="password" value="{{ __('Password') }}"/>
+                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
+                    <div x-data="{ show: true }">
+                        <label class="block font-medium text-sm text-gray-700" for="password">
+                            Password <span class="text-red-500">*</span>
+                        </label>
                         <div class="relative">
-                            <input name="password" id="password" required autocomplete="new-password" :type="show ? 'password' : 'text'" class="form-input rounded-md shadow-sm block mt-1 w-full">
+                            <input name="password" id="password" required autocomplete="new-password" :type="show ? 'password' : 'text'" class="form-input rounded-md shadow-sm block my-2 w-full">
                             <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mr-2">
                                 <svg class="h-6 text-gray-700" fill="none" @click="show = !show" :class="{'hidden': !show, 'block':show }" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 576 512">
                                     <path fill="currentColor"
@@ -125,16 +137,15 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="mt-4">
-                <div class="mx-auto max-w-lg">
-                    <div class="py-2" x-data="{ show: true }">
-
-                        <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}"/>
-                        <div class="py-2" x-data="{ show: true }">
+                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
+                    <div x-data="{ show: true }">
+                        <label class="block font-medium text-sm text-gray-700" for="password_confirmation">
+                            Confirm Password <span class="text-red-500">*</span>
+                        </label>
+                        <div x-data="{ show: true }">
                             <div class="relative">
-                                <input id="password_confirmation" name="password_confirmation" required autocomplete="new-password" :type="show ? 'password' : 'text'" class="form-input rounded-md shadow-sm block mt-1 w-full">
+                                <input id="password_confirmation" name="password_confirmation" required autocomplete="new-password" :type="show ? 'password' : 'text'" class="form-input rounded-md shadow-sm block my-2 w-full">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mr-2">
                                     <svg class="h-6 text-gray-700" fill="none" @click="show = !show" :class="{'hidden': !show, 'block':show }" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 576 512">
                                         <path fill="currentColor"
@@ -149,39 +160,67 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="block mt-4">
-                        <label for="policy_procedure" class="flex items-center">
-                            <input id="policy_procedure" type="checkbox" class="form-checkbox" name="policy_procedure" required>
-                            <span class="ml-2 text-sm text-gray-600">I agree</span> <a href="{{route('policyProcedure.eula')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('Policy and Procedures') }}</u></a>
-                        </label>
-                    </div>
-
-                    <div class="flex items-center justify-end mt-4">
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                            {{ __('Already registered?') }}
-                        </a>
-
-                        <x-jet-button class="ml-4">
-                            {{ __('Register') }}
-                        </x-jet-button>
-                    </div>
+                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
                 </div>
             </div>
+
+            <div class="flex flex-wrap overflow-hidden">
+
+                <div class="w-full overflow-hidden">
+                    <label for="policy_procedure" class="flex items-center">
+                        <input id="policy_procedure" type="checkbox" class="form-checkbox my-2" name="policy_procedure" required>
+                        <span class="ml-2 text-sm text-gray-600">{{ __('register.I agree')}}</span> <a href="{{route('policyProcedure.eula')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('register.Policy and Procedures') }}</u></a>
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="flex flex-wrap overflow-hidden lg:-mx-3 xl:-mx-3">
+
+                <div class="w-full overflow-hidden lg:my-3 lg:px-3 lg:w-1/3 xl:my-3 xl:px-3 xl:w-1/3">
+                    <!-- Column Content -->
+                </div>
+
+                <div class="w-full overflow-hidden lg:my-3 lg:px-3 lg:w-1/3 xl:my-3 xl:px-3 xl:w-1/3">
+                    <!-- Column Content -->
+                </div>
+
+                <div class="w-full overflow-hidden lg:my-3 lg:px-3 lg:w-1/3 xl:my-3 xl:px-3 xl:w-1/3">
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                        {{ __('register.Already registered?') }}
+                    </a>
+
+                    <x-jet-button class="ml-4" style="border-radius: 25px;">
+                        {{ __('register.Register') }}
+                    </x-jet-button>
+                </div>
+
+            </div>
+
+
+
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
 
 <script>
-    $(function () {
-        $("#datepicker").datepicker({
-            dateFormat: 'mm/dd/yy',
-            changeMonth: true,
-            changeYear: true,
-            yearRange: '-100y:c+nn',
-            // maxDate: '-1d'
-            clear: true,
-        });
+    // $(function () {
+    //     $("#datepicker").datepicker({
+    //         dateFormat: 'mm/dd/yy',
+    //         changeMonth: true,
+    //         changeYear: true,
+    //         yearRange: '-100y:c+nn',
+    //         // maxDate: '-1d'
+    //         clear: true,
+    //     });
+    // });
+
+    $(document).ready(function() {
+        $('.intl-tel-input input').css('height', '40px');
+        $('.selected-flag').css('padding-top', '12px');
+        $('.selected-flag').css('padding-bottom', '12px');
     });
 
     $('#referred_no').on('keyup', function () {

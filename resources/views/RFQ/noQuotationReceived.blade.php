@@ -12,9 +12,7 @@
 @endsection
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('RFQs with no quotations list') }}
-        </h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('RFQs with no quotations list') }} </h2>
     </x-slot>
 
     <div class="py-12">
@@ -28,18 +26,6 @@
                         </button>
                     </div>
                 @endif
-                <script>
-                    $(document).ready(function() {
-                        $('#alermessage').delay(2000).hide(0);
-                        $('#roles-table').DataTable( {
-                            dom: 'Bfrtip',
-                            buttons: [
-                                'copy', 'csv', 'excel', 'pdf', 'print'
-                            ]
-                        } );
-                    });
-
-                </script>
                 <div class="py-3">
                     <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
                         <a href="{{ route('showAllCategory') }}"
@@ -48,9 +34,9 @@
                         </a>
                     </div>
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <h2 class="text-2xl font-bold text-center">List of RFQs with no quotations</h2>
+                        <h2 class="text-2xl font-bold text-center">List of Requisitions with no quotations</h2>
                         <x-jet-validation-errors class="mb-4" />
-                        <!-- This example requires Tailwind CSS v2.0+ -->
+
                         <div class="flex flex-col">
                             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -62,11 +48,17 @@
                                                     #
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                    Item name
+                                                    Cat name
                                                 </th>
 
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
-                                                    Item code
+                                                    Cat code
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                    Requisition No.
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                    Cat S/M
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                     Business Name
@@ -80,6 +72,9 @@
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
                                                     Payment Mode
                                                 </th>
+                                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="text-align:center;">
+                                                    Created At
+                                                </th>
                                             </tr>
                                             </thead>
 
@@ -89,10 +84,15 @@
                                                     <td class="px-6 py-4 whitespace-nowrap text-center">
                                                         <div class="text-sm text-gray-900">{{$loop->iteration}} </div>
                                                     </td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                    <td class="px-6 py-4 whitespace-nowrap">
                                                         <div class="ml-4">
                                                             <div class="text-sm font-medium text-gray-900">
-                                                                {{$rfq->item_name}}
+                                                                @php
+                                                                    $record = \App\Models\Category::where('id',$rfq->item_code)->first();
+                                                                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                                                                @endphp
+
+                                                                {{ $rfq->item_name}} @if(isset($parent)), {{ $parent->name}} @endif
                                                             </div>
                                                         </div>
                                                     </td>
@@ -100,6 +100,24 @@
                                                         <div class="ml-4">
                                                             <div class="text-sm font-medium text-gray-900">
                                                                 {{$rfq->item_code}}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                                        <div class="ml-4">
+                                                            <div class="text-sm font-medium text-gray-900">
+                                                                <a href="{{route('activeRFQView', $rfq->id)}}" class="text-decoration-underline text-blue-600 hover:underline">{{__('portal.RFQ')}}-{{$rfq->id}}</a>
+{{--                                                                {{__('portal.RFQ')}}-{{$rfq->id}}--}}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                                        <div class="ml-4">
+                                                            <div class="text-sm font-medium text-gray-900">
+                                                                @if($rfq->rfq_type == 1) {{__('portal.Multiple Categories')}}
+                                                                @elseif($rfq->rfq_type == 0) {{__('portal.Single Category')}}
+                                                                @else {{$rfq->rfq_type}}
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </td>
@@ -131,6 +149,13 @@
                                                             </div>
                                                         </div>
                                                     </td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                                        <div class="ml-3">
+                                                            <div class="text-sm font-medium text-gray-900">
+                                                                {{\Carbon\Carbon::parse($rfq->created_at)->format('Y-m-d')}}
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
 
                                             @endforeach
@@ -154,3 +179,16 @@
 
 
 </x-app-layout>
+
+<script>
+    $(document).ready(function() {
+        $('#alermessage').delay(2000).hide(0);
+        $('#roles-table').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    });
+
+</script>

@@ -42,7 +42,7 @@ class AdminDownloadController extends Controller
             'file' => $file
         ]);
 
-        session()->flash('message', 'Added successfully');
+        session()->flash('message', __('portal.Added successfully!'));
         return redirect()->route('adminDownload');
     }
 
@@ -75,7 +75,7 @@ class AdminDownloadController extends Controller
             ]);
         }
 
-        session()->flash('message', 'Successfully Updated');
+        session()->flash('message', __('portal.Successfully Updated!'));
         return redirect()->route('adminDownload');
     }
 
@@ -83,7 +83,7 @@ class AdminDownloadController extends Controller
     {
         DownloadableFile::where('id', decrypt($id))->delete();
 
-        session()->flash('message', 'Successfully Delete');
+        session()->flash('message', __('portal.Successfully Delete.'));
         return redirect()->route('adminDownload');
     }
 

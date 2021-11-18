@@ -40,7 +40,7 @@ class PreparingDelivery extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->markdown('mail.delivery.preparing');
+        return (new MailMessage)->subject('Your delivery is preparing')->markdown('mail.delivery.preparing');
     }
 
     /**

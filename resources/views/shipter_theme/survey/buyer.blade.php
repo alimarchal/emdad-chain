@@ -1014,7 +1014,7 @@
                     @endif
                 @endforeach
                 <input type="hidden" name="language" value="en">
-                <button type="submit" class="btn btn-primary ml-2">Submit</button>
+                <button type="submit" class="btn btn-primary ml-2" style="border-radius: 25px;">Submit</button>
             </div>
 
         </form>

@@ -1016,7 +1016,7 @@
                     @endif
                 @endforeach
                 <input type="hidden" name="language" value="en">
-                <button type="submit" class="btn btn-primary ml-2">إرسال</button>
+                <button type="submit" class="btn btn-primary ml-2 rounded-pill">إرسال</button>
             </div>
 
         </form>

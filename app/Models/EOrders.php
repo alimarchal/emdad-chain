@@ -9,7 +9,7 @@ class EOrders extends Model
 {
     use HasFactory;
 
-    protected $fillable  = ['business_id', 'user_id', 'status'];
+    protected $fillable  = ['business_id', 'user_id', 'rfq_type', 'discard', 'status'];
 
     public function OrderItems()
     {
@@ -19,5 +19,10 @@ class EOrders extends Model
     public function userName()
     {
         return $this->hasMany(User::class,'id','user_id');
+    }
+
+    public function quotes()
+    {
+        return $this->hasMany(Qoute::class,'e_order_id');
     }
 }

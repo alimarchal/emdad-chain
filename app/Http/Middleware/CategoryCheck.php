@@ -19,12 +19,13 @@ class CategoryCheck
     {
         if (Auth::user()->hasRole('SuperAdmin') || Auth::user()->hasRole('Sales Specialist')
             || Auth::user()->hasRole('Legal Approval Officer 1') || Auth::user()->hasRole('Finance Officer 1')
-            || Auth::user()->hasRole('SC Supervisor') || Auth::user()->hasRole('IT Admin'))
+            || Auth::user()->hasRole('SC Supervisor')|| Auth::user()->hasRole('SC Specialist') || Auth::user()->hasRole('IT Admin'))
         {
             return $next($request);
         }
         else if (isset(Auth::user()->business_package) && is_null(Auth::user()->business_package->categories))
         {
+            session()->flash('error', 'Select Category to proceed to the registration');
             return redirect()->route('parentCategories');
         }
 

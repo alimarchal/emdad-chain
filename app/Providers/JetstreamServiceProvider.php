@@ -27,6 +27,15 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         $this->configurePermissions();
 
+//        $this->app->singleton(
+//            \Laravel\Fortify\Contracts\LoginResponse::class,
+//            \App\Http\Responses\LoginResponse::class
+//        );
+//        $this->app->singleton(
+//            \Laravel\Fortify\Contracts\TwoFactorLoginResponse::class,
+//            \App\Http\Responses\LoginResponse::class
+//        );
+
         Jetstream::deleteUsersUsing(DeleteUser::class);
     }
 

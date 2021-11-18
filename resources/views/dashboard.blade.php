@@ -17,7 +17,7 @@
     @endif
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }} - Welcome {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
+            {{ __('dashboard.Dashboard') }} - Welcome {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
 
             <span class="float-right text-red-900 font-bold">{{(isset(Auth::user()->status) == 1)?'Under process':'InComplete'}}</span>
             <span class=" float-right text-black-600 font-bold">Account Status:&nbsp;&nbsp;</span>
@@ -36,12 +36,10 @@
 
                     <div class="mx-5">
                         <h4 class="text-2xl font-semibold text-gray-700"><a href="{{route('users.index')}}">{{number_format(\App\Models\User::all()->count())}}</a></h4>
-                        <div class="text-gray-500">Total User</div>
+                        <div class="text-gray-500">{{ __('dashboard.Total User')}}</div>
                     </div>
                 </div>
             </div>
-
-
 
             <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
                 <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
@@ -51,7 +49,7 @@
 
                     <div class="mx-5">
                         <h4 class="text-2xl font-semibold text-gray-700">{{\App\Models\Business::all()->count()}}</h4>
-                        <div class="text-gray-500">Total Business</div>
+                        <div class="text-gray-500">{{ __('dashboard.Total Business')}}</div>
                     </div>
                 </div>
             </div>
@@ -64,7 +62,7 @@
 
                     <div class="mx-5">
                         <h4 class="text-2xl font-semibold text-gray-700">{{\App\Models\BusinessCategory::where('business_id',auth()->user()->business_id)->count() }}  </h4>
-                        <div class="text-gray-500">Received RFQ</div>
+                        <div class="text-gray-500">{{ __('dashboard.Received RFQ')}}</div>
                     </div>
                 </div>
             </div>
@@ -72,11 +70,233 @@
     </div>
 @endrole
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
+    @if(Auth::user()->status == 3 && (Auth::user()->registration_type == "Buyer" || auth()->user()->can('Buyer View Quotations') || auth()->user()->can('Buyer View Quotations') || auth()->user()->can('Buyer DPO Approval') || auth()->user()->can('Buyer View Purchase Orders')) && auth()->user()->business->status == 3)
+
+        <div class="mt-4">
+            <div class="flex flex-wrap -mx-6">
+
+                <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
+                    <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+                        <div class="p-3 rounded-full bg-opacity-75">
+                            <img src="{{url('requisitions.jpeg')}}" style="height: 40px;width:40px;">
+                        </div>
+
+                        <div class="mx-5">
+                            <h4 class="text-2xl font-semibold text-gray-700">{{number_format(\App\Models\EOrders::where(['business_id' => auth()->user()->business_id])->count())}}</h4>
+                            <div class="text-gray-500">{{ __('dashboard.Total RFQs')}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
+                    <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+                        <div class="p-3 rounded-full bg-opacity-75">
+                            <img src="{{url('quotations.jpeg')}}" style="height: 40px;width:40px;">
+                        </div>
+
+                        <div class="mx-5">
+                            <h4 class="text-2xl font-semibold text-gray-700">{{number_format(\App\Models\Qoute::where(['business_id' => auth()->user()->business_id])->count())}}</h4>
+                            <div class="text-gray-500">{{ __('dashboard.Total Quotation(s)')}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
+                    <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+                        <div class="p-3 rounded-full bg-opacity-75">
+                            <img src="{{url('purchaseOrders.jpeg')}}" style="height: 40px;width:40px;">
+                        </div>
+
+                        <div class="mx-5">
+                            @php
+                                $draftPurchaseOrders = \App\Models\DraftPurchaseOrder::where(['business_id' => auth()->user()->business_id])
+                                                                                                        ->where('status', '!=', 'pending')
+                                                                                                        ->get();
+                                    $multiCategory = array();
+                                    $singleCategory = array();
+                                    foreach ($draftPurchaseOrders as $draftPurchaseOrder)
+                                    {
+                                        if ($draftPurchaseOrder['rfq_type'] == 1)
+                                        {
+                                            $multiCategory[] = $draftPurchaseOrder;
+                                        }
+                                        if ($draftPurchaseOrder['rfq_type'] == 0)
+                                        {
+                                            $singleCategory[] = $draftPurchaseOrder;
+                                        }
+                                    }
+                                    $multiCategoryCollection = collect($multiCategory);
+                                    $singleCategoryCollection = collect($singleCategory);
+                                    $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+                                    $dpos = $multiCategoryCollection->merge($singleCategoryInvoices);
+                            @endphp
+                            <h4 class="text-2xl font-semibold text-gray-700">{{count($dpos) }}
+                            </h4>
+                            <div class="text-gray-500">{{ __('dashboard.Total Purchase Order(s)') }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full mt-6 px-6 pt-3 sm:w-1/2 xl:w-1/3 xl:mt-0">
+                    <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+                        <div class="p-3 rounded-full bg-opacity-75">
+                            @if(auth()->user()->rtl == 0)
+                                <img src="{{url('shipmentDelivered.jpeg')}}" style="height: 40px;width:40px;">
+                            @else
+                                <img src="{{url('shipmentDelivered.jpeg')}}" style="height: 40px;width:40px;">
+                            @endif
+                        </div>
+
+                        <div class="mx-5">
+                            <h4 class="text-2xl font-semibold text-gray-700">{{\App\Models\Shipment::where(['buyer_business_id' => auth()->user()->business_id , 'status' => 1])->count() }}
+                            </h4>
+                            <div class="text-gray-500">{{ __('dashboard.Total Shipments Delivered') }}</div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </div>
+
+    @elseif(Auth::user()->status == 3 && Auth::user()->registration_type == "Supplier" && auth()->user()->business->status == 3)
+
+            <div class="mt-4">
+                <div class="flex flex-wrap -mx-6">
+
+                    <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
+                        <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+                            <div class="p-3 rounded-full bg-opacity-75">
+                                <img src="{{url('quotations.jpeg')}}" style="height: 40px;width:40px;">
+                            </div>
+
+                            <div class="mx-5">
+                                @php
+                                    $totalQuotes = \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id])
+                                                                                                            ->get();
+                                        $multiCategory = array();
+                                        $singleCategory = array();
+                                        foreach ($totalQuotes as $quote)
+                                        {
+                                            if ($quote['rfq_type'] == 1)
+                                            {
+                                                $multiCategory[] = $quote;
+                                            }
+                                            if ($quote['rfq_type'] == 0)
+                                            {
+                                                $singleCategory[] = $quote;
+                                            }
+                                        }
+                                        $multiCategoryCollection = collect($multiCategory);
+                                        $singleCategoryCollection = collect($singleCategory);
+                                        $singleCategoryInvoices = $singleCategoryCollection->unique('e_order_id');
+                                        $totalQuotes = $multiCategoryCollection->merge($singleCategoryInvoices);
+                                @endphp
+                                <h4 class="text-2xl font-semibold text-gray-700">{{count($totalQuotes)}}</h4>
+                                <div class="text-gray-500">{{ __('dashboard.Total Quotation(s)')}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
+                        <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+                            <div class="p-3 rounded-full bg-opacity-75">
+                                <img src="{{url('canceledQuotations.png')}}" style="height: 40px;width:40px;">
+                            </div>
+
+                            <div class="mx-5">
+                                @php
+                                    $quotes = \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id])->where('qoute_status_updated' , 'Rejected')->get();
+
+                                    $multiCategory = array();
+                                    $singleCategory = array();
+                                    foreach ($quotes as $quote)
+                                    {
+                                        if ($quote['rfq_type'] == 1)
+                                        {
+                                            $multiCategory[] = $quote;
+                                        }
+                                        if ($quote['rfq_type'] == 0)
+                                        {
+                                            $singleCategory[] = $quote;
+                                        }
+                                    }
+                                    $multiCategoryCollection = collect($multiCategory);
+                                    $singleCategoryCollection = collect($singleCategory);
+                                    $singleCategoryInvoices = $singleCategoryCollection->unique('e_order_id');
+                                    $rejectedQuotes = $multiCategoryCollection->merge($singleCategoryInvoices);
+                                @endphp
+                                <h4 class="text-2xl font-semibold text-gray-700">{{ count($rejectedQuotes) }}
+                                </h4>
+                                <div class="text-gray-500">{{ __('dashboard.Quotation(s) Rejected') }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
+                        <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+                            <div class="p-3 rounded-full bg-opacity-75">
+                                <img src="{{url('purchaseOrders.jpeg')}}" style="height: 40px;width:40px;">
+                            </div>
+
+                            <div class="mx-5">
+                                @php
+                                    $purchaseOrders = \App\Models\DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id])
+                                                                                                            ->where('status', '!=', 'pending')
+                                                                                                            ->where('status', '!=', 'cancel')
+                                                                                                            ->get();
+                                        $multiCategory = array();
+                                        $singleCategory = array();
+                                        foreach ($purchaseOrders as $purchaseOrder)
+                                        {
+                                            if ($purchaseOrder['rfq_type'] == 1)
+                                            {
+                                                $multiCategory[] = $purchaseOrder;
+                                            }
+                                            if ($purchaseOrder['rfq_type'] == 0)
+                                            {
+                                                $singleCategory[] = $purchaseOrder;
+                                            }
+                                        }
+                                        $multiCategoryCollection = collect($multiCategory);
+                                        $singleCategoryCollection = collect($singleCategory);
+                                        $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+                                        $pos = $multiCategoryCollection->merge($singleCategoryInvoices);
+                                @endphp
+                                <h4 class="text-2xl font-semibold text-gray-700">{{number_format(count($pos))}}</h4>
+                                <div class="text-gray-500">{{ __('dashboard.Total Purchase Order(s)')}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full mt-6 px-6 pt-3 sm:w-1/2 xl:w-1/3 xl:mt-0">
+                        <div class="flex items-center px-5 py-6 shadow-sm rounded-md bg-white">
+                            <div class="p-3 rounded-full bg-opacity-75">
+                                @if(auth()->user()->rtl == 0)
+                                    <img src="{{url('shipmentDelivered.jpeg')}}" style="height: 40px;width:40px;">
+                                @else
+                                    <img src="{{url('shipmentDelivered.jpeg')}}" style="height: 40px;width:40px;">
+                                @endif
+                            </div>
+
+                            <div class="mx-5">
+                                <h4 class="text-2xl font-semibold text-gray-700">{{\App\Models\Shipment::where(['supplier_business_id' => auth()->user()->business_id , 'status' => 1])->count() }}
+                                </h4>
+                                <div class="text-gray-500">{{ __('dashboard.Total Shipments Delivered') }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+    @else
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    <x-jet-welcome />
+                </div>
+            </div>
+        </div>
+    @endif
+
 </x-app-layout>

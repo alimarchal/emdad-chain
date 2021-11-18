@@ -9,11 +9,21 @@ class Qoute extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'qoute_no', 'dpo', 'supplier_business_id', 'supplier_user_id', 'qoute_status_updated', 'qoute_updated_user_id',  'qoute_updated_user_id', 'e_order_items_id', 'e_order_id', 'business_id', 'warehouse_id', 'business_id_buyer', 'quote_quantity', 'quote_price_per_quantity', 'sample_information', 'sample_unit', 'sample_security_charges', 'sample_charges_per_unit', 'shipping_time_in_days','shipment_cost','VAT','total_cost', 'note_for_customer', 'status', 'qoute_status'];
+    protected $fillable = ['user_id', 'qoute_no', 'dpo', 'supplier_business_id', 'supplier_user_id', 'qoute_status_updated', 'qoute_updated_user_id',  'qoute_updated_user_id', 'e_order_items_id', 'e_order_id', 'business_id', 'warehouse_id', 'business_id_buyer', 'quote_quantity', 'quote_price_per_quantity', 'sample_information', 'sample_unit', 'sample_security_charges', 'sample_charges_per_unit', 'shipping_time_in_days','shipment_cost','VAT','total_cost', 'note_for_customer', 'expiry_date', 'request_status', 'rfq_type', 'status', 'qoute_status'];
 
     public function orderItem()
     {
         return $this->belongsTo(EOrderItems::class, 'e_order_items_id', 'id');
+    }
+
+    public function buyer_business()
+    {
+        return $this->belongsTo(Business::class, 'business_id', 'id');
+    }
+
+    public function supplier_business()
+    {
+        return $this->belongsTo(Business::class, 'supplier_business_id', 'id');
     }
 
     public function user()

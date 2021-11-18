@@ -28,8 +28,8 @@
     <section class="breadcrumbs">
         <div class="container" style="margin-top: 40px;" >
             <div class="btns mx-auto" align="center">
-                <a class="btn-style survey col-lg-3 col-md-3" href="{{route('english.buyerSurvey')}}">Survey for Buyer</a> &nbsp;
-                <a class="btn-style survey col-lg-3 col-md-6" href="{{route('english.supplierSurvey')}}">Survey for Supplier</a>
+                <a class="btn-style survey col-lg-3 col-md-3" href="{{route('english.buyerSurvey')}}" style="border-radius: 25px;">Survey for Buyer</a> &nbsp;
+                <a class="btn-style survey col-lg-3 col-md-6" href="{{route('english.supplierSurvey')}}" style="border-radius: 25px;">Survey for Supplier</a>
             </div>
         </div>
     </section><!-- End Buttons --><br>

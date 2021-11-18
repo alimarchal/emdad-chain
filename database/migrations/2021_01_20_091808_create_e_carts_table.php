@@ -38,6 +38,7 @@ class CreateECartsTable extends Migration
             $table->string('approver_two')->nullable();
             $table->string('payment_mode')->nullable();
             $table->string('required_sample')->nullable();
+            $table->integer('rfq_type');  /* 0 for single category RFQ, 1 for multi categories */
             $table->string('status')->nullable();
             $table->timestamps();
         });
