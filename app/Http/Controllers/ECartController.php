@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\ECart;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ECartController extends Controller
 {
@@ -26,12 +28,20 @@ class ECartController extends Controller
             $path = $request->file('file_path_1')->store('', 'public');
             $request->merge(['file_path' => $path]);
         }
+
+        Validator::make($request->all(), [
+            'delivery_period' => 'required',
+        ],[
+            'delivery_period.required' => __('portal.Please select a Delivery Period.')
+        ])->validate();
+
+        $request->merge(['delivery_period' => Carbon::parse($request->delivery_period)->format('Y-m-d')]);
         $request->merge(['item_code' => $request->item_name]);
         $request->merge(['status' => 'pending']);
         $request->merge(['item_name' => Category::where('id', $request->item_code)->first()->name]);
         $request->merge(['rfq_type' => 1]);
         ECart::create($request->all());
-        session()->flash('message', __('portal.RFQ successfully created.'));
+        session()->flash('message', __('portal.Requisition successfully added to cart.'));
 
         return redirect('RFQ/create');
     }
@@ -69,20 +79,23 @@ class ECartController extends Controller
 
     public function single_cart_store_rfq(Request $request)
     {
+        Validator::make($request->all(), [
+            'delivery_period' => 'required',
+        ],[
+            'delivery_period.required' => __('portal.Please select a Delivery Period.')
+        ])->validate();
+
         if ($request->has('file_path_1')) {
             $path = $request->file('file_path_1')->store('', 'public');
             $request->merge(['file_path' => $path]);
         }
+        $request->merge(['delivery_period' => Carbon::parse($request->delivery_period)->format('Y-m-d')]);
         $request->merge(['item_code' => $request->item_name]);
         $request->merge(['status' => 'pending']);
         $request->merge(['item_name' => Category::where('id', $request->item_code)->first()->name]);
         $request->merge(['rfq_type' => 0]);
-        $ecart = ECart::create($request->all());
-//        $message = "New RFQ has been created by User ID: " . $ecart->user_id;
-//        User::send_sms('+966552840506',$message);
-//        User::send_sms('+966555390920',$message);
-//        User::send_sms('+966593388833',$message);
-        session()->flash('message', __('portal.RFQ successfully created.'));
+        ECart::create($request->all());
+        session()->flash('message', __('portal.Requisition successfully added to cart.'));
 
         return redirect()->route('create_single_rfq');
     }

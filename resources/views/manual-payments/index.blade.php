@@ -49,7 +49,8 @@
                                     </th>
                                     @if(auth()->user()->registration_type == 'Buyer')
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                            @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Claim')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Confirm')}} @endif {{__('portal.Manual Payment')}}
+{{--                                            @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Claim')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Confirm')}} @endif {{__('portal.Manual Payment')}}--}}
+                                             {{__('portal.Payment')}}
                                         </th>
                                     @endif
                                            {{--     @if(auth()->user()->registration_type == 'Supplier')
@@ -204,7 +205,8 @@
                                     </th>
                                     @if(auth()->user()->registration_type == 'Buyer')
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                            @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Claim')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Confirm')}} @endif {{__('portal.Manual Payment')}}
+{{--                                            @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Claim')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Confirm')}} @endif {{__('portal.Manual Payment')}}--}}
+                                            {{__('portal.Payment')}}
                                         </th>
                                     @endif
                                     {{--     @if(auth()->user()->registration_type == 'Supplier')

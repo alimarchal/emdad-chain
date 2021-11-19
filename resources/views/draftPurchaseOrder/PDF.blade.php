@@ -171,8 +171,8 @@
     <div style="width: 33.33%;float: right">
         <strong>Sub-total: </strong> {{ number_format($draftPurchaseOrder->sub_total, 2) }} SAR<br>
         @php $subtotal = $draftPurchaseOrder->sub_total; $subtotal += $draftPurchaseOrder->shipment_cost; @endphp
-        <strong>VAT {{ number_format($draftPurchaseOrder->vat) }}%: </strong>{{ number_format($subtotal * ($draftPurchaseOrder->vat/100), 2) }} SAR<br>
         <strong>Shipment cost: </strong> {{ number_format($draftPurchaseOrder->shipment_cost, 2) }} SAR<br>
+        <strong>VAT {{ number_format($draftPurchaseOrder->vat) }}%: </strong>{{ number_format($subtotal * ($draftPurchaseOrder->vat/100), 2) }} SAR<br>
         <hr>
         <strong>Total: </strong> {{ number_format($draftPurchaseOrder->total_cost, 2) }} SAR<br>
         <hr>

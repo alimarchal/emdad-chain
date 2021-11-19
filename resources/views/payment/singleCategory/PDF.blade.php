@@ -74,6 +74,9 @@
         <strong>VAT Number: </strong> {{ $supplierBusiness->vat_reg_certificate_number }}<br>
         <strong>Address: </strong> {{ $supplierBusiness->address }}<br><br>
 
+        @if(isset($invoices[0]->deliveryNote->id))
+            <strong>Delivery Note #: </strong>DN-{{ $invoices[0]->deliveryNote->id }}<br>
+        @endif
         <strong>Invoice #: </strong> Inv-{{ $invoices[0]->id }}<br>
         <strong>Date: </strong> {{ $invoices[0]->created_at }}<br>
         <strong>Purchase Order #: </strong> PO-{{ $invoices[0]->purchase_order->id }}<br>
@@ -192,8 +195,8 @@
             }
         @endphp
         <strong>Sub-total: </strong> {{ number_format(($subtotal), 2) }} SAR<br>
-        <strong>VAT {{ number_format($invoices[0]->vat) }}%: </strong>{{ number_format(($subtotal + $invoices[0]->purchase_order->shipment_cost) * ($invoices[0]->vat/100), 2) }} SAR<br>
         <strong>Shipment cost: </strong> {{ $invoices[0]->purchase_order->shipment_cost }} SAR<br>
+        <strong>VAT {{ number_format($invoices[0]->vat) }}%: </strong>{{ number_format(($subtotal + $invoices[0]->purchase_order->shipment_cost) * ($invoices[0]->vat/100), 2) }} SAR<br>
         <hr>
         <strong>Total: </strong> {{ number_format($invoices[0]->total_cost, 2) }} SAR<br>
         <hr>

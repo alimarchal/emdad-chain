@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Invoice extends Model
 {
@@ -31,5 +32,10 @@ class Invoice extends Model
     public function bankPayment()
     {
         return $this->hasOne(BankPayment::class, 'invoice_id');
+    }
+
+    public function deliveryNote(): HasOne
+    {
+        return $this->hasOne(DeliveryNote::class, 'draft_purchase_order_id','draft_purchase_order_id');
     }
 }

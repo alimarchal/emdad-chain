@@ -177,7 +177,7 @@
                                             {{ strip_tags($rfp->description) }}
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                            @if(isset($rfp->brand)) {{ $rfp->brand }} @endif
+                                            @if(isset($rfp->brand)) {{ $rfp->brand }} @else {{__('portal.N/A')}} @endif
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                             {{ $rfp->unit_of_measurement }}
@@ -196,6 +196,7 @@
                                             @elseif($rfp->delivery_period =='Standing Order - 6 per year') {{__('portal.Standing Order - 6 times / year')}}
                                             @elseif($rfp->delivery_period =='Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}
                                             @elseif($rfp->delivery_period =='Standing Order Open') {{__('portal.Standing Order - Open')}}
+                                            @else {{$rfp->delivery_period}}
                                             @endif
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">

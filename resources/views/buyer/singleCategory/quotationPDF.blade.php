@@ -209,8 +209,8 @@
                     }
             @endphp
             <strong>Sub-total: </strong> {{ number_format($subtotal, 2) }} SAR<br>
-            <strong>VAT: {{ number_format($quotes[0]->VAT) }}%: </strong>{{ number_format(($subtotal + $quotes[0]->shipment_cost) * ($quotes[0]->VAT/100), 2) }} SAR<br>
             <strong>Shipment cost: </strong> {{ number_format($quotes[0]->shipment_cost, 2) }} SAR<br>
+            <strong>VAT: {{ number_format($quotes[0]->VAT) }}%: </strong>{{ number_format(($subtotal + $quotes[0]->shipment_cost) * ($quotes[0]->VAT/100), 2) }} SAR<br>
             <hr>
             <strong>Total: </strong> {{ number_format($quotes[0]->total_cost) }} SAR<br>
             <hr>

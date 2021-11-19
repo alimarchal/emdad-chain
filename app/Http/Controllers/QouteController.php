@@ -39,12 +39,14 @@ class QouteController extends Controller
             'expiry_date' => 'required|date|after_or_equal:'.$min5days,
             'shipping_time_in_days' => 'required',
         ],[
-            'expiry_date.required' => 'Quotation valid upto date is required.',
-            'shipping_time_in_days.required' => 'Shipping Time is required.'
+            'expiry_date.required' => __('portal.Quotation valid upto date is required.'),
+            'shipping_time_in_days.required' => __('portal.Shipping Time is required.')
         ])->validate();
 
-        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d h:i:s');
+        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d');
+        $shippingTime = Carbon::parse($request->shipping_time_in_days)->format('Y-m-d');
         $request->merge(['expiry_date' => $expiryDate]);
+        $request->merge(['shipping_time_in_days' => $shippingTime]);
 
         $buyer_id = User::where('business_id', $request->business_id)->first();
         $request->merge(['user_id' => $buyer_id->id]);
@@ -58,8 +60,6 @@ class QouteController extends Controller
 
         /* Setting RFQ Type */
         $request->merge(['rfq_type' => 1]);
-
-
 
         if(!empty($buyer_id))
         {
@@ -101,12 +101,14 @@ class QouteController extends Controller
             'expiry_date' => 'required|date|after_or_equal:'.$min5days,
             'shipping_time_in_days' => 'required'
         ],[
-            'expiry_date.required' => 'Quotation valid upto date is required.',
-            'shipping_time_in_days.required' => 'Shipping Time is required.'
+            'expiry_date.required' => __('portal.Quotation valid upto date is required.'),
+            'shipping_time_in_days.required' => __('portal.Shipping Time is required.')
         ])->validate();
 
-        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d h:i:s');
+        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d');
+        $shippingTime = Carbon::parse($request->shipping_time_in_days)->format('Y-m-d');
         $request->merge(['expiry_date' => $expiryDate]);
+        $request->merge(['shipping_time_in_days' => $shippingTime]);
 
         $buyer_id = User::where('business_id', $request->business_id)->first();
         $request->merge(['user_id' => $buyer_id->id]);
@@ -218,20 +220,18 @@ class QouteController extends Controller
 
     public function update(Request $request, Qoute $qoute)
     {
-
-
-
-        $myDateTime = Carbon::createFromFormat('m/d/Y', $request->shipping_time_in_days)->format('Y-m-d');
-
-        $request->merge(['shipping_time_in_days'=>$myDateTime]);
-
-
         Validator::make($request->all(), [
+            'expiry_date' => 'required',
             'shipping_time_in_days' => 'required',
         ],[
-            'shipping_time_in_days.required' => 'Shipping Time is required.'
+            'expiry_date.required' => __('portal.Quotation valid upto date is required.'),
+            'shipping_time_in_days.required' => __('portal.Shipping Time is required.')
         ])->validate();
 
+        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d');
+        $shippingTime = Carbon::parse($request->shipping_time_in_days)->format('Y-m-d');
+        $request->merge(['expiry_date'=> $expiryDate]);
+        $request->merge(['shipping_time_in_days'=> $shippingTime]);
         $request->merge(['user_id' => auth()->user()->id]);
         $request->merge(['qoute_status' => 'Modified']);
         $request->merge(['status' => 'pending']);
@@ -267,11 +267,17 @@ class QouteController extends Controller
     public function singleRFQQuotationUpdate(Request $request, Qoute $qoute)
     {
         Validator::make($request->all(), [
+            'expiry_date' => 'required',
             'shipping_time_in_days' => 'required',
         ],[
-            'shipping_time_in_days.required' => 'Shipping Time is required.'
+            'expiry_date.required' => __('portal.Quotation valid upto date is required.'),
+            'shipping_time_in_days.required' => __('portal.Shipping Time is required.')
         ])->validate();
 
+        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d');
+        $shippingTime = Carbon::parse($request->shipping_time_in_days)->format('Y-m-d');
+        $request->merge(['expiry_date' => $expiryDate]);
+        $request->merge(['shipping_time_in_days'=> $shippingTime]);
         $request->merge(['qoute_status' => 'Modified']);
         $request->merge(['qoute_status_updated' => 'Modified']);
 
@@ -417,7 +423,7 @@ class QouteController extends Controller
             'expiry_date' => 'required|date|after_or_equal:'.$min5days
         ])->validate();
 
-        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d h:i:s');
+        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d');
         Qoute::where(['id' => $request->quoteID, 'supplier_business_id' => auth()->user()->business_id])->update([
             'expiry_date' => $expiryDate,
             'request_status' => 0
@@ -470,7 +476,7 @@ class QouteController extends Controller
             'expiry_date' => 'required|date|after_or_equal:'.$min5days
         ])->validate();
 
-        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d h:i:s');
+        $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d');
         Qoute::where(['e_order_id' => $request->quoteEOrderID, 'supplier_business_id' => auth()->user()->business_id])->update([
             'expiry_date' => $expiryDate,
             'request_status' => 0

@@ -401,7 +401,7 @@ class PaymentController extends Controller
     // View function for Invoice details by ID (Payment history)
     public function invoiceView($id)
     {
-       $invoice = Invoice::with('purchase_order','eOrderItem')->where('id', $id)->first();
+       $invoice = Invoice::with('purchase_order','eOrderItem', 'deliveryNote')->where('id', $id)->first();
 
        return view('payment.invoiceView', compact('invoice'));
 
@@ -463,7 +463,7 @@ class PaymentController extends Controller
      */
     public function generatePDF($invoiceID)
     {
-        $invoice = Invoice::where('id', decrypt($invoiceID))->first();
+        $invoice = Invoice::with('purchase_order','deliveryNote','eOrderItem')->where('id', decrypt($invoiceID))->first();
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('payment.PDF', compact('invoice'));
         return $pdf->download('Invoice.pdf');
     }
@@ -771,7 +771,7 @@ class PaymentController extends Controller
      */
     public function singleCategoryGeneratePDF($invoiceRfqNo)
     {
-        $invoices = Invoice::where('rfq_no' , decrypt($invoiceRfqNo))->get();
+        $invoices = Invoice::with('eOrderItem','deliveryNote','eOrderItem')->where('rfq_no' , decrypt($invoiceRfqNo))->get();
 
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('payment.singleCategory.PDF', compact('invoices'));
         return $pdf->download('Invoice.pdf');

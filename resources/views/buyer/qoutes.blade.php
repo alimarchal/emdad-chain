@@ -148,7 +148,7 @@
                                                         $categoryName = \App\Models\Category::where('id', $rfp->orderItem->item_code)->first();
                                                         $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name')->first();
                                                     @endphp
-                                                    {{ $categoryName->name }} @if(isset($parentName)), {{$parentName}} @endif
+                                                    {{ $categoryName->name }}@if(isset($parentName)), {{$parentName}} @endif
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -238,7 +238,7 @@
                                                         $categoryName = \App\Models\Category::where('id', $rfp->orderItem->item_code)->first();
                                                         $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name')->first();
                                                     @endphp
-                                                    {{ $categoryName->name }} @if(isset($parentName)), {{$parentName}} @endif
+                                                    {{ $categoryName->name }}@if(isset($parentName)), {{$parentName}} @endif
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -327,7 +327,7 @@
                                                         $categoryName = \App\Models\Category::where('id', $rfp->orderItem->item_code)->first();
                                                         $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name')->first();
                                                     @endphp
-                                                    {{ $categoryName->name }} @if(isset($parentName)), {{$parentName}} @endif
+                                                    {{ $categoryName->name }}@if(isset($parentName)), {{$parentName}} @endif
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -569,7 +569,7 @@
                                                         $categoryName = \App\Models\Category::where('id', $rfp->orderItem->item_code)->first();
                                                         $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name_ar')->first();
                                                     @endphp
-                                                    {{ $categoryName->name_ar }} @if(isset($parentName)), {{$parentName}} @endif
+                                                    {{ $categoryName->name_ar }}@if(isset($parentName)), {{$parentName}} @endif
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -659,7 +659,7 @@
                                                         $categoryName = \App\Models\Category::where('id', $rfp->orderItem->item_code)->first();
                                                         $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name_ar')->first();
                                                     @endphp
-                                                    {{ $categoryName->name_ar }} @if(isset($parentName)), {{$parentName}} @endif
+                                                    {{ $categoryName->name_ar }}@if(isset($parentName)), {{$parentName}} @endif
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -748,7 +748,7 @@
                                                         $categoryName = \App\Models\Category::where('id', $rfp->orderItem->item_code)->first();
                                                         $parentName = \App\Models\Category::where('id', $categoryName->parent_id)->pluck('name_ar')->first();
                                                     @endphp
-                                                    {{ $categoryName->name_ar }} @if(isset($parentName)), {{$parentName}} @endif
+                                                    {{ $categoryName->name_ar }}@if(isset($parentName)), {{$parentName}} @endif
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">

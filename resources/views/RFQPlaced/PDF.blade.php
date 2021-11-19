@@ -130,6 +130,7 @@
                 @elseif($rfp->delivery_period =='Standing Order - 6 per year') {{__('portal.Standing Order - 6 times / year')}}
                 @elseif($rfp->delivery_period =='Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}
                 @elseif($rfp->delivery_period =='Standing Order Open') {{__('portal.Standing Order - Open')}}
+                @else {{ $rfp->delivery_period }}
                 @endif
             </td>
             <td  style="text-align: center">{{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}}</td>

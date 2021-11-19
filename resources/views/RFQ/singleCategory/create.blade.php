@@ -4,6 +4,24 @@
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script src="{{ url('select2/src/select2totree.js') }}"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        #datepicker {
+            width: 100%;
+            padding: 10px;
+            cursor: default;
+            /*text-transform: uppercase;*/
+            font-size: 13px;
+            background: #FFFFFF;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            border: solid 1px #d2d6dc;
+            box-shadow: none;
+        }
+    </style>
 @endsection
 
 @if (auth()->user()->rtl == 0)
@@ -79,7 +97,14 @@
         {{-- getting latest record from database to be filled in fields  --}}
         @if(isset($rfqCount) && $rfqCount != 0 && !is_null($rfqCount))
 
-
+            @foreach ($errors->get('delivery_period') as $error)
+                <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                    <strong class="mr-1">{{ $error }}</strong>
+                    <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                        <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                    </button>
+                </div>
+            @endforeach
             <div class="flex flex-col bg-white rounded">
                 <div class="p-4"
                      style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
@@ -148,8 +173,8 @@
                                                     </option>
                                                 @else
                                                     <option value="">{{__('portal.Select')}}</option>
-                                                    <option value="0">{{__('portal.No')}}</option>
-                                                    <option value="1">{{__('portal.Yes')}}</option>
+                                                    <option {{old('company_name_check') == 0 ? 'selected' : '' }}  value="0">{{__('portal.No')}}</option>
+                                                    <option {{old('company_name_check') == 1 ? 'selected' : '' }} value="1">{{__('portal.Yes')}}</option>
                                                 @endif
                                             </select>
                                         </div>
@@ -178,7 +203,7 @@
                                                     </option>
                                                 @else
                                                     <option value="">{{__('portal.None')}}</option>
-                                                    <option value="Cash">{{__('portal.Cash')}}</option>
+                                                    <option {{old('payment_mode') == 'Cash' ? 'selected' : '' }}  value="Cash">{{__('portal.Cash')}}</option>
 
                                                     @php
                                                         $package = \App\Models\BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
@@ -186,14 +211,10 @@
 
                                                     @if($package->package_id != 1)
                                                         {{--                                                        <option value="Credit">{{__('portal.Credit')}}</option>--}}
-                                                        <option
-                                                            value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
-                                                        <option
-                                                            value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
-                                                        <option
-                                                            value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
-                                                        <option
-                                                            value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit30days' ? 'selected' : '' }}  value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit60days' ? 'selected' : '' }}  value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit90days' ? 'selected' : '' }}  value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit120days' ? 'selected' : '' }}  value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>
                                                     @endif
                                                 @endif
 
@@ -221,8 +242,8 @@
                                                     </option>
                                                 @else
                                                     <option value="">{{__('portal.None')}}</option>
-                                                    <option value="Yes">{{__('portal.Yes')}}</option>
-                                                    <option value="No">{{__('portal.No')}}</option>
+                                                    <option {{old('required_sample') == 'Yes' ? 'selected' : '' }} value="Yes">{{__('portal.Yes')}}</option>
+                                                    <option {{old('required_sample') == 'No' ? 'selected' : '' }} value="No">{{__('portal.No')}}</option>
                                                 @endif
                                             </select>
                                         </div>
@@ -246,8 +267,7 @@
                                                 <select name="item_name"
                                                         class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                         readonly>
-                                                    <option
-                                                        value="{{$latest_rfq->item_code}}">{{$latest_rfq->item_name . ' - ' . $parent->name }}</option>
+                                                    <option value="{{$latest_rfq->item_code}}">{{$latest_rfq->item_name . ' - ' . $parent->name }}</option>
                                                 </select>
                                             @else
                                                 @include('category.rfp')
@@ -281,8 +301,7 @@
                                                 @else
                                                     <option value="">{{__('portal.Select Warehouse Location')}}</option>
                                                     @foreach(\App\Models\BusinessWarehouse::where('business_id',auth()->user()->business_id)->get() as $warehouse)
-                                                        <option
-                                                            value="{{$warehouse->id}}">{{$warehouse->address }}</option>
+                                                        <option {{old('warehouse_id') == $warehouse->id ? 'selected' : '' }} value="{{$warehouse->id}}">{{$warehouse->address }}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -290,14 +309,19 @@
                                         <br>
                                         {{__('portal.Delivery Period')}}: @include('misc.required')
                                         <div class="relative inline-flex">
-                                            <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
+                                            {{--<svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
                                                  style="width: 8px; height: 8px;"
                                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                                 <path
                                                     d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
                                                     fill="#000000" fill-rule="nonzero"/>
-                                            </svg>
-                                            <select
+                                            </svg>--}}
+                                            @if(isset($latest_rfq))
+                                                <input type="text" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" name="delivery_period" value="{{$latest_rfq->delivery_period}}" readonly>
+                                            @else
+                                                <input type="text" id="datepicker" class="form-input rounded-md shadow-sm block w-full" name="delivery_period" value="{{old('delivery_period')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+                                            @endif
+                                            {{--<select
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 name="delivery_period" id="delivery_period" required>
                                                 @if(isset($latest_rfq))
@@ -320,7 +344,7 @@
                                                     <option value="Within 30 Days">{{__('portal.30 Days')}}</option>
                                                     <option value="Within 60 Days">{{__('portal.60 Days')}}</option>
                                                     <option value="Within 90 Days">{{__('portal.90 Days')}}</option>
-                                                    {{--<option
+                                                    --}}{{--<option
                                                         value="Standing Order - 2 per year">{{__('portal.Standing Order - 2 times / year')}}</option>
                                                     <option
                                                         value="Standing Order - 3 per year">{{__('portal.Standing Order - 3 times / year')}}</option>
@@ -331,10 +355,10 @@
                                                     <option
                                                         value="Standing Order - 12 per year">{{__('portal.Standing Order - 12 times / year')}}</option>
                                                     <option
-                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>--}}
+                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>--}}{{--
                                                 @endif
 
-                                            </select>
+                                            </select>--}}
                                         </div>
                                         <br>
                                     </div>
@@ -435,7 +459,7 @@
                                 <td>
                                 <textarea name="description" id="description"
                                           class="w-full description rounded-md shadow-sm" maxlength="254"
-                                          placeholder="{{__('portal.Enter Description..')}}" required></textarea>
+                                          placeholder="{{__('portal.Enter Description..')}}" required>{{old('description')}}</textarea>
                                     <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
                                     <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                                 </td>
@@ -454,7 +478,7 @@
                                             style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
                                             @foreach (\App\Models\UnitMeasurement::all() as $item)
-                                                <option value="{{$item->uom_en}}">{{$item->uom_en}}</option>
+                                                <option {{old('unit_of_measurement') == $item->uom_en ? 'selected' : '' }} value="{{$item->uom_en}}">{{$item->uom_en}}</option>
                                             @endforeach
 
                                         </select>
@@ -462,26 +486,26 @@
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" min="1" autocomplete="quantity" required
+                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
                                            placeholder="{{__('portal.Qty')}}">
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text"
-                                           name="size"
+                                           name="size" value="{{old('size')}}"
                                            min="0" placeholder="{{__('portal.Size')}}">
                                 </td>
                                 <td><input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                           name="brand" min="0" autocomplete="brand"
+                                           name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
                                            placeholder="{{__('portal.Brand')}}"></td>
 
                                 <td>
                                     <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
-                                           name="last_price" min="0" autocomplete="last_price"
+                                           name="last_price" value="{{old('last_price')}}" min="0" autocomplete="last_price"
                                            placeholder="{{__('portal.Price')}}">
                                 </td>
 
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="remarks" name="remarks"
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="remarks" name="remarks" value="{{old('remarks')}}"
                                            type="text" autocomplete="remarks" placeholder="{{__('portal.Remarks')}}">
                                 </td>
 
@@ -560,6 +584,14 @@
 
                 @endforeach
             @endif
+            @foreach ($errors->get('delivery_period') as $error)
+                <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                    <strong class="mr-1">{{ $error }}</strong>
+                    <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                        <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                    </button>
+                </div>
+            @endforeach
             <br>
 
             <div class="flex flex-col bg-white rounded">
@@ -629,8 +661,8 @@
                                                     </option>
                                                 @else
                                                     <option value="">{{__('portal.Select')}}</option>
-                                                    <option value="0">{{__('portal.No')}}</option>
-                                                    <option value="1">{{__('portal.Yes')}}</option>
+                                                    <option {{old('company_name_check') == 0 ? 'selected' : '' }} value="0">{{__('portal.No')}}</option>
+                                                    <option {{old('company_name_check') == 1 ? 'selected' : '' }} value="1">{{__('portal.Yes')}}</option>
                                                 @endif
                                             </select>
                                         </div>
@@ -660,7 +692,7 @@
                                                     </option>
                                                 @else
                                                     <option value="">{{__('portal.None')}}</option>
-                                                    <option value="Cash">{{__('portal.Cash')}}</option>
+                                                    <option {{old('payment_mode') == 'Cash' ? 'selected' : ''}} value="Cash">{{__('portal.Cash')}}</option>
 
                                                     @php
                                                         $package = \App\Models\BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
@@ -668,14 +700,10 @@
 
                                                     @if($package->package_id != 1)
                                                         {{--                                                        <option value="Credit">{{__('portal.Credit')}}</option>--}}
-                                                        <option
-                                                            value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
-                                                        <option
-                                                            value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
-                                                        <option
-                                                            value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
-                                                        <option
-                                                            value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit30days' ? 'selected' : ''}} value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit60days' ? 'selected' : ''}} value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit90days' ? 'selected' : ''}} value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit120days' ? 'selected' : ''}} value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>
                                                     @endif
                                                 @endif
 
@@ -703,8 +731,8 @@
                                                     </option>
                                                 @else
                                                     <option value="">{{__('portal.None')}}</option>
-                                                    <option value="Yes">{{__('portal.Yes')}}</option>
-                                                    <option value="No">{{__('portal.No')}}</option>
+                                                    <option {{old('required_sample') == 'Yes' ? 'selected' : ''}} value="Yes">{{__('portal.Yes')}}</option>
+                                                    <option {{old('required_sample') == 'No' ? 'selected' : ''}} value="No">{{__('portal.No')}}</option>
                                                 @endif
                                             </select>
                                         </div>
@@ -764,8 +792,7 @@
                                                 @else
                                                     <option value="">{{__('portal.Select Warehouse Location')}}</option>
                                                     @foreach(\App\Models\BusinessWarehouse::where('business_id',auth()->user()->business_id)->get() as $warehouse)
-                                                        <option
-                                                            value="{{$warehouse->id}}">{{$warehouse->address }}</option>
+                                                        <option {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}} value="{{$warehouse->id}}">{{$warehouse->address }}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -773,14 +800,19 @@
                                         <br>
                                         {{__('portal.Delivery Period')}}: @include('misc.required')
                                         <div class="relative inline-flex">
-                                            <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
+                                            {{--<svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
                                                  style="width: 8px; height: 8px;"
                                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                                 <path
                                                     d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
                                                     fill="#000000" fill-rule="nonzero"/>
-                                            </svg>
-                                            <select
+                                            </svg>--}}
+                                            @if(isset($latest_rfq))
+                                                <input type="text" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" name="delivery_period" value="{{$latest_rfq->delivery_period}}" readonly>
+                                            @else
+                                                <input type="text" id="datepicker" class="form-input rounded-md shadow-sm block w-full" name="delivery_period" value="{{old('delivery_period')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+                                            @endif
+                                            {{--<select
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 name="delivery_period" id="delivery_period" required>
                                                 @if(isset($latest_rfq))
@@ -803,7 +835,7 @@
                                                     <option value="Within 30 Days">{{__('portal.30 Days')}}</option>
                                                     <option value="Within 60 Days">{{__('portal.60 Days')}}</option>
                                                     <option value="Within 90 Days">{{__('portal.90 Days')}}</option>
-                                                    {{--<option
+                                                    --}}{{--<option
                                                         value="Standing Order - 2 per year">{{__('portal.Standing Order - 2 times / year')}}</option>
                                                     <option
                                                         value="Standing Order - 3 per year">{{__('portal.Standing Order - 3 times / year')}}</option>
@@ -814,10 +846,10 @@
                                                     <option
                                                         value="Standing Order - 12 per year">{{__('portal.Standing Order - 12 times / year')}}</option>
                                                     <option
-                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>--}}
+                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>--}}{{--
                                                 @endif
 
-                                            </select>
+                                            </select>--}}
                                         </div>
                                         <br>
                                     </div>
@@ -902,7 +934,7 @@
                                 <td>
                                 <textarea name="description" id="description"
                                           class="w-full description rounded-md shadow-sm" maxlength="254"
-                                          placeholder="{{__('portal.Enter Description..')}}" required></textarea>
+                                          placeholder="{{__('portal.Enter Description..')}}" required>{{old('description')}}</textarea>
                                     <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
                                     <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                                 </td>
@@ -921,7 +953,7 @@
                                             style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
                                             @foreach (\App\Models\UnitMeasurement::all() as $item)
-                                                <option value="{{$item->uom_en}}">{{$item->uom_en}}</option>
+                                                <option {{old('unit_of_measurement') == $item->uom_en ? 'selected' : ''}} value="{{$item->uom_en}}">{{$item->uom_en}}</option>
                                             @endforeach
 
                                         </select>
@@ -929,28 +961,28 @@
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" min="1" autocomplete="quantity" required
+                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
                                            placeholder="{{__('portal.Qty')}}">
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text"
-                                           name="size"
+                                           name="size" value="{{old('size')}}"
                                            min="0" placeholder="{{__('portal.Size')}}">
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                           name="brand" min="0" autocomplete="brand"
+                                           name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
                                            placeholder="{{__('portal.Brand')}}">
                                 </td>
 
                                 <td>
                                     <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
-                                           name="last_price" min="0" autocomplete="last_price"
+                                           name="last_price" value="{{old('last_price')}}" min="0" autocomplete="last_price"
                                            placeholder="{{__('portal.Price')}}">
                                 </td>
 
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="remarks" name="remarks"
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="remarks" name="remarks" value="{{old('remarks')}}"
                                            type="text" autocomplete="remarks" placeholder="{{__('portal.Remarks')}}">
                                 </td>
 
@@ -1108,7 +1140,14 @@
             @endif
 
             <br>
-
+            @foreach ($errors->get('delivery_period') as $error)
+                <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                    <strong class="mr-3">{{ $error }}</strong>
+                    <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                        <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                    </button>
+                </div>
+            @endforeach
             <div class="flex flex-col bg-white rounded">
                 <div class="p-4"
                      style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
@@ -1177,8 +1216,8 @@
                                                     </option>
                                                 @else
                                                     <option value="">{{__('portal.Select')}}</option>
-                                                    <option value="0">{{__('portal.No')}}</option>
-                                                    <option value="1">{{__('portal.Yes')}}</option>
+                                                    <option {{old('company_name_check') == 0 ? 'selected' : ''}} value="0">{{__('portal.No')}}</option>
+                                                    <option {{old('company_name_check') == 1 ? 'selected' : ''}} value="1">{{__('portal.Yes')}}</option>
                                                 @endif
                                             </select>
                                         </div>
@@ -1208,7 +1247,7 @@
                                                     </option>
                                                 @else
                                                     <option value="">{{__('portal.None')}}</option>
-                                                    <option value="Cash">{{__('portal.Cash')}}</option>
+                                                    <option {{old('payment_mode') == 'Cash' ? 'selected' : ''}} value="Cash">{{__('portal.Cash')}}</option>
 
                                                     @php
                                                         $package = \App\Models\BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
@@ -1216,14 +1255,10 @@
 
                                                     @if($package->package_id != 1)
                                                         {{--                                                        <option value="Credit">{{__('portal.Credit')}}</option>--}}
-                                                        <option
-                                                            value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
-                                                        <option
-                                                            value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
-                                                        <option
-                                                            value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
-                                                        <option
-                                                            value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit30days' ? 'selected' : ''}} value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit60days' ? 'selected' : ''}} value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit90days' ? 'selected' : ''}} value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit120days' ? 'selected' : ''}} value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>
                                                     @endif
                                                 @endif
 
@@ -1251,8 +1286,8 @@
                                                     </option>
                                                 @else
                                                     <option value="">{{__('portal.None')}}</option>
-                                                    <option value="Yes">{{__('portal.Yes')}}</option>
-                                                    <option value="No">{{__('portal.No')}}</option>
+                                                    <option {{old('required_sample') == 'Yes' ? 'selected' : ''}} value="Yes">{{__('portal.Yes')}}</option>
+                                                    <option {{old('required_sample') == 'No' ? 'selected' : ''}} value="No">{{__('portal.No')}}</option>
                                                 @endif
                                             </select>
                                         </div>
@@ -1276,8 +1311,7 @@
                                                 <select name="item_name"
                                                         class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                         readonly>
-                                                    <option
-                                                        value="{{$latest_rfq->item_code}}">{{$record->name_ar . ' - ' . $parent->name_ar }}</option>
+                                                    <option value="{{$latest_rfq->item_code}}">{{$record->name_ar . ' - ' . $parent->name_ar }}</option>
                                                 </select>
                                             @else
                                                 @include('category.rfp')
@@ -1311,8 +1345,7 @@
                                                 @else
                                                     <option value="">{{__('portal.Select Warehouse Location')}}</option>
                                                     @foreach(\App\Models\BusinessWarehouse::where('business_id',auth()->user()->business_id)->get() as $warehouse)
-                                                        <option
-                                                            value="{{$warehouse->id}}">{{$warehouse->address }}</option>
+                                                        <option {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}} value="{{$warehouse->id}}">{{$warehouse->address }}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -1320,51 +1353,11 @@
                                         <br>
                                         {{__('portal.Delivery Period')}}: @include('misc.required')
                                         <div class="relative inline-flex">
-                                            <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
-                                                 style="width: 8px; height: 8px;"
-                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
-                                                <path
-                                                    d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                                    fill="#000000" fill-rule="nonzero"/>
-                                            </svg>
-                                            <select
-                                                class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
-                                                name="delivery_period" id="delivery_period" required>
-                                                @if(isset($latest_rfq))
-                                                    <option value="{{$latest_rfq->delivery_period}}">
-                                                        @if($latest_rfq->delivery_period == 'Immediately') {{__('portal.Immediately')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Within 30 Days') {{__('portal.30 Days')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Within 60 Days') {{__('portal.60 Days')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Within 90 Days') {{__('portal.90 Days')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 2 per year') {{__('portal.Standing Order - 2 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 3 per year') {{__('portal.Standing Order - 3 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 4 per year') {{__('portal.Standing Order - 4 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 6 per year') {{__('portal.Standing Order - 6 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}
-                                                        @elseif($latest_rfq->delivery_period == 'Standing Order Open') {{__('portal.Standing Order - Open')}}
-                                                        @endif
-                                                    </option>
-                                                @else
-                                                    <option value="">{{__('portal.Select Delivery Period')}}</option>
-                                                    <option value="Immediately">{{__('portal.Immediately')}}</option>
-                                                    <option value="Within 30 Days">{{__('portal.30 Days')}}</option>
-                                                    <option value="Within 60 Days">{{__('portal.60 Days')}}</option>
-                                                    <option value="Within 90 Days">{{__('portal.90 Days')}}</option>
-                                                    {{--<option
-                                                        value="Standing Order - 2 per year">{{__('portal.Standing Order - 2 times / year')}}</option>
-                                                    <option
-                                                        value="Standing Order - 3 per year">{{__('portal.Standing Order - 3 times / year')}}</option>
-                                                    <option
-                                                        value="Standing Order - 4 per year">{{__('portal.Standing Order - 4 times / year')}}</option>
-                                                    <option
-                                                        value="Standing Order - 6 per year">{{__('portal.Standing Order - 6 times / year')}}</option>
-                                                    <option
-                                                        value="Standing Order - 12 per year">{{__('portal.Standing Order - 12 times / year')}}</option>
-                                                    <option
-                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>--}}
-                                                @endif
-
-                                            </select>
+                                            @if(isset($latest_rfq))
+                                                <input type="text" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" name="delivery_period" value="{{$latest_rfq->delivery_period}}" readonly>
+                                            @else
+                                                <input type="text" id="datepicker" class="form-input rounded-md shadow-sm block w-full" name="delivery_period" value="{{old('delivery_period')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+                                            @endif
                                         </div>
                                         <br>
                                     </div>
@@ -1465,7 +1458,7 @@
                                 <td>
                                 <textarea name="description" id="description"
                                           class="w-full description rounded-md shadow-sm" maxlength="254"
-                                          placeholder="{{__('portal.Enter Description..')}}" required></textarea>
+                                          placeholder="{{__('portal.Enter Description..')}}" required>{{old('description')}}</textarea>
                                     <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
                                     <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                                 </td>
@@ -1484,7 +1477,7 @@
                                             style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
                                             @foreach (\App\Models\UnitMeasurement::all() as $item)
-                                                <option value="{{$item->uom_en}}">{{$item->uom_ar}}</option>
+                                                <option {{old('unit_of_measurement') == $item->uom_en ? 'selected' : ''}} value="{{$item->uom_en}}">{{$item->uom_ar}}</option>
                                             @endforeach
 
                                         </select>
@@ -1492,26 +1485,26 @@
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" min="1" autocomplete="quantity" required
+                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
                                            placeholder="{{__('portal.Qty')}}">
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text"
-                                           name="size"
+                                           name="size" value="{{old('size')}}"
                                            min="0" placeholder="{{__('portal.Size')}}">
                                 </td>
                                 <td><input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                           name="brand" min="0" autocomplete="brand"
+                                           name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
                                            placeholder="{{__('portal.Brand')}}"></td>
 
                                 <td>
                                     <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
-                                           name="last_price" min="0" autocomplete="last_price"
+                                           name="last_price" value="{{old('last_price')}}" min="0" autocomplete="last_price"
                                            placeholder="{{__('portal.Price')}}">
                                 </td>
 
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="remarks" name="remarks"
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="remarks" name="remarks" value="{{old('remarks')}}"
                                            type="text" autocomplete="remarks" placeholder="{{__('portal.Remarks')}}">
                                 </td>
 
@@ -1583,7 +1576,14 @@
                 @endforeach
             @endif
             <br>
-
+            @foreach ($errors->get('delivery_period') as $error)
+                <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                    <strong class="mr-3">{{ $error }}</strong>
+                    <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                        <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                    </button>
+                </div>
+            @endforeach
             <div class="flex flex-col bg-white rounded">
                 <div class="p-4"
                      style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
@@ -1651,8 +1651,8 @@
                                                     </option>
                                                 @else
                                                     <option value="">{{__('portal.Select')}}</option>
-                                                    <option value="0">{{__('portal.No')}}</option>
-                                                    <option value="1">{{__('portal.Yes')}}</option>
+                                                    <option {{old('company_name_check') == 0 ? 'selected' : ''}} value="0">{{__('portal.No')}}</option>
+                                                    <option {{old('company_name_check') == 1 ? 'selected' : ''}} value="1">{{__('portal.Yes')}}</option>
                                                 @endif
                                             </select>
                                         </div>
@@ -1683,7 +1683,7 @@
                                                     </option>
                                                 @else
                                                     <option value="">{{__('portal.None')}}</option>
-                                                    <option value="Cash">{{__('portal.Cash')}}</option>
+                                                    <option {{old('payment_mode') == 'Cash' ? 'selected' : ''}} value="Cash">{{__('portal.Cash')}}</option>
 
                                                     @php
                                                         $package = \App\Models\BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
@@ -1691,14 +1691,10 @@
 
                                                     @if($package->package_id != 1)
                                                         {{--                                                        <option value="Credit">{{__('portal.Credit')}}</option>--}}
-                                                        <option
-                                                            value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
-                                                        <option
-                                                            value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
-                                                        <option
-                                                            value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
-                                                        <option
-                                                            value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit30days' ? 'selected' : ''}} value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit60days' ? 'selected' : ''}} value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit90days' ? 'selected' : ''}} value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit120days' ? 'selected' : ''}} value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>
                                                     @endif
                                                 @endif
 
@@ -1726,8 +1722,8 @@
                                                     </option>
                                                 @else
                                                     <option value="">{{__('portal.None')}}</option>
-                                                    <option value="Yes">{{__('portal.Yes')}}</option>
-                                                    <option value="No">{{__('portal.No')}}</option>
+                                                    <option {{old('required_sample') == 'Yes' ? 'selected' : ''}} value="Yes">{{__('portal.Yes')}}</option>
+                                                    <option {{old('required_sample') == 'No' ? 'selected' : ''}} value="No">{{__('portal.No')}}</option>
                                                 @endif
                                             </select>
                                         </div>
@@ -1751,8 +1747,7 @@
                                                 <select name="item_name"
                                                         class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                         readonly>
-                                                    <option
-                                                        value="{{$latest_rfq->item_code}}">{{$record->name_ar . ' - ' . $parent->name_ar }}</option>
+                                                    <option value="{{$latest_rfq->item_code}}">{{$record->name_ar . ' - ' . $parent->name_ar }}</option>
                                                 </select>
                                             @else
                                                 @include('category.rfp')
@@ -1787,8 +1782,7 @@
                                                 @else
                                                     <option value="">{{__('portal.Select Warehouse Location')}}</option>
                                                     @foreach(\App\Models\BusinessWarehouse::where('business_id',auth()->user()->business_id)->get() as $warehouse)
-                                                        <option
-                                                            value="{{$warehouse->id}}">{{$warehouse->address }}</option>
+                                                        <option {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}} value="{{$warehouse->id}}">{{$warehouse->address }}</option>
                                                     @endforeach
                                                 @endif
                                             </select>
@@ -1796,14 +1790,19 @@
                                         <br>
                                         {{__('portal.Delivery Period')}}: @include('misc.required')
                                         <div class="relative inline-flex">
-                                            <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
+                                            {{--<svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
                                                  style="width: 8px; height: 8px;"
                                                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232">
                                                 <path
                                                     d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
                                                     fill="#000000" fill-rule="nonzero"/>
-                                            </svg>
-                                            <select
+                                            </svg>--}}
+                                            @if(isset($latest_rfq))
+                                                <input type="text" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" name="delivery_period" value="{{$latest_rfq->delivery_period}}" readonly>
+                                            @else
+                                                <input type="text" id="datepicker" class="form-input rounded-md shadow-sm block w-full" name="delivery_period" value="{{old('delivery_period')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+                                            @endif
+                                            {{--<select
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 name="delivery_period" id="delivery_period" required>
                                                 @if(isset($latest_rfq))
@@ -1826,7 +1825,7 @@
                                                     <option value="Within 30 Days">{{__('portal.30 Days')}}</option>
                                                     <option value="Within 60 Days">{{__('portal.60 Days')}}</option>
                                                     <option value="Within 90 Days">{{__('portal.90 Days')}}</option>
-                                                    {{--<option
+                                                    --}}{{--<option
                                                         value="Standing Order - 2 per year">{{__('portal.Standing Order - 2 times / year')}}</option>
                                                     <option
                                                         value="Standing Order - 3 per year">{{__('portal.Standing Order - 3 times / year')}}</option>
@@ -1837,10 +1836,10 @@
                                                     <option
                                                         value="Standing Order - 12 per year">{{__('portal.Standing Order - 12 times / year')}}</option>
                                                     <option
-                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>--}}
+                                                        value="Standing Order Open">{{__('portal.Standing Order - Open')}}</option>--}}{{--
                                                 @endif
 
-                                            </select>
+                                            </select>--}}
                                         </div>
                                         <br>
                                     </div>
@@ -1925,7 +1924,7 @@
                                 <td>
                                 <textarea name="description" id="description"
                                           class="w-full description rounded-md shadow-sm" maxlength="254"
-                                          placeholder="{{__('portal.Enter Description..')}}" required></textarea>
+                                          placeholder="{{__('portal.Enter Description..')}}" required>{{old('description')}}</textarea>
                                     <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
                                     <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                                 </td>
@@ -1944,7 +1943,7 @@
                                             style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
                                             @foreach (\App\Models\UnitMeasurement::all() as $item)
-                                                <option value="{{$item->uom_en}}">{{$item->uom_ar}}</option>
+                                                <option {{old('unit_of_measurement') == $item->uom_en ? 'selected' : ''}} value="{{$item->uom_en}}">{{$item->uom_ar}}</option>
                                             @endforeach
 
                                         </select>
@@ -1952,28 +1951,28 @@
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" min="1" autocomplete="quantity" required
+                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
                                            placeholder="{{__('portal.Qty')}}">
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text"
-                                           name="size"
+                                           name="size" value="{{old('size')}}"
                                            min="0" placeholder="{{__('portal.Size')}}">
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                           name="brand" min="0" autocomplete="brand"
+                                           name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
                                            placeholder="{{__('portal.Brand')}}">
                                 </td>
 
                                 <td>
                                     <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
-                                           name="last_price" min="0" autocomplete="last_price"
+                                           name="last_price" value="{{old('last_price')}}" min="0" autocomplete="last_price"
                                            placeholder="{{__('portal.Price')}}">
                                 </td>
 
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="remarks" name="remarks"
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="remarks" name="remarks" value="{{old('remarks')}}"
                                            type="text" autocomplete="remarks" placeholder="{{__('portal.Remarks')}}">
                                 </td>
 
@@ -2062,5 +2061,16 @@
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
     });
+
+    $( function() {
+        $( "#datepicker" ).datepicker({
+            dateFormat: 'mm/dd/yy',
+            changeMonth: true,
+            changeYear: true,
+            minDate: 0,
+            maxDate: +90,
+            clear: true,
+        }).attr('readonly', 'readonly');
+    } );
 
 </script>

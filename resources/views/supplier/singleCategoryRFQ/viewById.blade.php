@@ -167,8 +167,10 @@
                                     @if ($eOrderItems[0]->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}} @endif
                                     @if ($eOrderItems[0]->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}} @endif
                                     @if ($eOrderItems[0]->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}} @endif
-                                    @if ($eOrderItems[0]->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}} @endif
-{{--                                    {{ $eOrderItems[0]->delivery_period }}--}}
+                                    @if ($eOrderItems[0]->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}}
+                                    @else
+                                        {{ $eOrderItems[0]->delivery_period }}
+                                    @endif
                                 <br>
                                 <strong>{{__('portal.Delivery Address')}}: </strong> {{ $eOrderItems[0]->warehouse->address }}
                                 <br>
@@ -753,7 +755,10 @@
                                 @if ($eOrderItems[0]->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}} @endif
                                 @if ($eOrderItems[0]->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}} @endif
                                 @if ($eOrderItems[0]->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}} @endif
-                                @if ($eOrderItems[0]->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}} @endif
+                                @if ($eOrderItems[0]->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}}
+                                @else
+                                    {{ $eOrderItems[0]->delivery_period }}
+                                @endif
                                 <br>
                                 <strong>{{__('portal.Delivery Address')}}: </strong> {{ $eOrderItems[0]->warehouse->address }}
                                 <br>
@@ -1298,7 +1303,7 @@
             dateFormat: 'mm/dd/yy',
             changeMonth: true,
             changeYear: true,
-            minDate: +5,
+            minDate: +0,
             maxDate: +90,
             clear: true,
         }).attr('readonly', 'readonly');

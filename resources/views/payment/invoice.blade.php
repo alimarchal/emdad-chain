@@ -64,7 +64,7 @@
 
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     @if (auth()->user()->registration_type == 'Buyer')
-                                                        {{__('portal.Claim manual payment')}}
+                                                        {{__('portal.Payment')}}
                                                     @elseif(auth()->user()->registration_type == 'Supplier')
                                                         {{__('portal.Payment Status')}}
                                                     @endif
@@ -95,7 +95,7 @@
                                                             $record = \App\Models\Category::where('id',$dn->purchase_order->item_code)->first();
                                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                         @endphp
-                                                        {{ $record->name }} , {{ $parent->name }}
+                                                        {{ $record->name }}, @if(isset($parent)){{ $parent->name }} @endif
                                                         {{--                                                           {{ $dn->purchase_order->item_name }}--}}
                                                         {{-- <a href="{{ route('po.show', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dn->item_name }}</a> --}}
                                                     </td>
@@ -312,7 +312,7 @@
 
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     @if (auth()->user()->registration_type == 'Buyer')
-                                                        {{__('portal.Claim manual payment')}}
+                                                        {{__('portal.Payment')}}
                                                     @elseif(auth()->user()->registration_type == 'Supplier')
                                                         {{__('portal.Payment Status')}}
                                                     @endif
@@ -344,7 +344,7 @@
                                                             $record = \App\Models\Category::where('id',$dn->purchase_order->item_code)->first();
                                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                         @endphp
-                                                        {{ $record->name_ar }} , {{ $parent->name_ar }}
+                                                        {{ $record->name_ar }}, @if(isset($parent)){{ $parent->name_ar }} @endif
                                                         {{--                                                           {{ $dn->purchase_order->item_name }}--}}
                                                         {{-- <a href="{{ route('po.show', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dn->item_name }}</a> --}}
                                                     </td>

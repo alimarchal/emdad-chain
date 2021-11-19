@@ -197,7 +197,7 @@
                                                 $parent= \App\Models\Category::where('id',$catg->parent_id)->first();
                                             @endphp
                                             @if ($catg != '')
-                                                {{$loop->iteration . ': ' . $catg->name . ' , ' . $parent->name }} <br>
+                                                {{$loop->iteration . ': ' . $catg->name . ', ' . $parent->name }} <br>
                                             @else
                                                 {{ "There is no category yet !" }}
                                             @endif
@@ -441,7 +441,7 @@
                                                 $parent= \App\Models\Category::where('id',$catg->parent_id)->first();
                                             @endphp
                                             @if ($catg != '')
-                                                {{$loop->iteration . ': ' . $catg->name_ar . ' , ' . $parent->name_ar }} <br>
+                                                {{$loop->iteration . ': ' . $catg->name_ar . ', ' . $parent->name_ar }} <br>
                                             @else
                                                 {{ "There is no category yet !" }}
                                             @endif

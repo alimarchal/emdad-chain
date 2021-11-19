@@ -170,8 +170,8 @@
         <div style="width: 33.33%;float: right">
             <strong>Sub-total: </strong> {{ number_format($quote->quote_quantity * $quote->quote_price_per_quantity, 2) }} SAR<br>
             @php $subtotal = $quote->quote_quantity * $quote->quote_price_per_quantity; $subtotal += $quote->shipment_cost; @endphp
-            <strong>VAT {{ number_format($quote->VAT) }}%: </strong>{{ number_format($subtotal * ($quote->VAT/100), 2) }} SAR<br>
             <strong>Shipment cost: </strong> {{ number_format($quote->shipment_cost, 2) }} SAR<br>
+            <strong>VAT {{ number_format($quote->VAT) }}%: </strong>{{ number_format($subtotal * ($quote->VAT/100), 2) }} SAR<br>
             <hr>
             <strong>Total: </strong> {{$quote->total_cost }} SAR<br>
             <hr>

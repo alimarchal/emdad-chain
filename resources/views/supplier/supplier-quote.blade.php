@@ -194,7 +194,9 @@
                                             @if ($eOrderItems->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}} @endif
                                             @if ($eOrderItems->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}} @endif
                                             @if ($eOrderItems->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}} @endif
-                                            @if ($eOrderItems->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}} @endif
+                                            @if ($eOrderItems->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}}
+                                            @else {{$eOrderItems->delivery_period}}
+                                            @endif
                                         <br>
                                         <strong>{{__('portal.Delivery Address')}}: </strong> {{ $eOrderItems->warehouse->address }}
                                         <br>
@@ -365,7 +367,8 @@
                                                    name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0.01" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
                                         </td>
                                         <td>
-                                            <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="shipping_time_in_days" value="{{\Carbon\Carbon::createFromFormat('Y-m-d', $collection->shipping_time_in_days)->format('m/d/Y')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+{{--                                            <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="shipping_time_in_days" value="{{\Carbon\Carbon::createFromFormat('Y-m-d', $collection->shipping_time_in_days)->format('m/d/Y')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>--}}
+                                            <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="shipping_time_in_days" value="{{$collection->shipping_time_in_days}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
 {{--                                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" value="{{ $collection->shipping_time_in_days }}" name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">--}}
                                         </td>
 
@@ -761,8 +764,9 @@
                                         @if ($eOrderItems->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}} @endif
                                         @if ($eOrderItems->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}} @endif
                                         @if ($eOrderItems->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}} @endif
-                                        @if ($eOrderItems->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}} @endif
-                                        {{--                                    {{ $eOrderItems->delivery_period }}--}}
+                                        @if ($eOrderItems->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}}
+                                        @else {{$eOrderItems->delivery_period}}
+                                        @endif
                                         <br>
                                         <strong>{{__('portal.Delivery Address')}}: </strong> {{ $eOrderItems->warehouse->address }}
                                         <br>
@@ -1111,7 +1115,7 @@
             dateFormat: 'mm/dd/yy',
             changeMonth: true,
             changeYear: true,
-            minDate: +5,
+            minDate: +0,
             maxDate: +90,
             clear: true,
         }).attr('readonly', 'readonly');

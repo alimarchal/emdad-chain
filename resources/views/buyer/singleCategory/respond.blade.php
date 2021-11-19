@@ -201,8 +201,8 @@
                                         @endphp
                                         <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($subtotal, 2) }} {{__('portal.SAR')}}<br>
                                         @php $subtotal += $quotes[0]->shipment_cost; @endphp
-                                        <strong>{{__('portal.VAT')}} {{ $quotes[0]->VAT }}%: @if($quotes[0]->VAT > 9) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @else &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @endif </strong>{{ number_format($subtotal * ($quotes[0]->VAT/100), 2) }} {{__('portal.SAR')}} <br>
                                         <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($quotes[0]->shipment_cost) }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.VAT')}} {{ $quotes[0]->VAT }}%: @if($quotes[0]->VAT > 9) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @else &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @endif </strong>{{ number_format($subtotal * ($quotes[0]->VAT/100), 2) }} {{__('portal.SAR')}} <br>
                                         <hr>
                                         <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($quotes[0]->total_cost, 2) }} {{__('portal.SAR')}} <br>
                                         <hr>
@@ -564,8 +564,8 @@
                                         @endphp
                                         <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($subtotal, 2) }} {{__('portal.SAR')}}<br>
                                         @php $subtotal += $quotes[0]->shipment_cost; @endphp
-                                        <strong>{{__('portal.VAT')}} {{ $quotes[0]->VAT }}%: @if($quotes[0]->VAT > 9) &nbsp; @else &nbsp;&nbsp; @endif </strong>{{ number_format($subtotal * ($quotes[0]->VAT/100), 2) }} {{__('portal.SAR')}} <br>
                                         <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($quotes[0]->shipment_cost) }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.VAT')}} {{ $quotes[0]->VAT }}%: @if($quotes[0]->VAT > 9) &nbsp; @else &nbsp;&nbsp; @endif </strong>{{ number_format($subtotal * ($quotes[0]->VAT/100), 2) }} {{__('portal.SAR')}} <br>
                                         <hr>
                                         <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($quotes[0]->total_cost, 2) }} {{__('portal.SAR')}} <br>
                                         <hr>

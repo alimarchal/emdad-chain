@@ -190,11 +190,10 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}
                                     <br>
                                     @php $subtotal = $QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity; $subtotal += $QouteItem->shipment_cost; @endphp
-                                    <strong>{{__('portal.VAT')}} {{ $QouteItem->VAT }}%: @if($QouteItem->VAT > 9) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @else &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @endif </strong>{{ number_format(($subtotal * ($QouteItem->VAT/100)) , 2) }} {{__('portal.SAR')}} <br>
                                     <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->shipment_cost) }} {{__('portal.SAR')}}<br>
+                                    <strong>{{__('portal.VAT')}} {{ $QouteItem->VAT }}%: @if($QouteItem->VAT > 9) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @else &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @endif </strong>{{ number_format(($subtotal * ($QouteItem->VAT/100)) , 2) }} {{__('portal.SAR')}} <br>
                                     <hr>
-                                    <strong>{{__('portal.Total')}}:
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->total_cost, 2) }} {{__('portal.SAR')}}
+                                    <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->total_cost, 2) }} {{__('portal.SAR')}}
                                     <br>
                                     <hr>
                                 </div>
@@ -558,12 +557,10 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}
                                     <br>
                                     @php $subtotal = $QouteItem->quote_quantity * $QouteItem->quote_price_per_quantity; $subtotal += $QouteItem->shipment_cost; @endphp
+                                    <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->shipment_cost) }} {{__('portal.SAR')}}<br>
                                     <strong>{{__('portal.VAT')}} {{ $QouteItem->VAT }}%: @if($QouteItem->VAT > 9) &nbsp; @else &nbsp;&nbsp; @endif </strong>{{ number_format(($subtotal * ($QouteItem->VAT/100)) , 2) }} {{__('portal.SAR')}} <br>
-                                    <strong>{{__('portal.Shipment cost')}}:
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->shipment_cost) }} {{__('portal.SAR')}}<br>
                                     <hr>
-                                    <strong>{{__('portal.Total')}}:
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->total_cost, 2) }} {{__('portal.SAR')}}
+                                    <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($QouteItem->total_cost, 2) }} {{__('portal.SAR')}}
                                     <br>
                                     <hr>
                                 </div>
