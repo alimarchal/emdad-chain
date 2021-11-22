@@ -741,14 +741,14 @@
                                   @else fill="#788b9c" @endif d="M13.997,14.67H5.92c-0.444,0-0.808,0.361-0.808,0.808c0,0.447,0.363,0.808,0.808,0.808h8.077c0.445,0,0.808-0.361,0.808-0.808C14.805,15.032,14.442,14.67,13.997,14.67z"></path>
                         </svg>
                         <span
-                            class="mx-3 font-extrabold">@if(auth()->user()->registration_type == "Supplier") {{ __('sidebar.Purchase Order') }} @elseif(auth()->user()->registration_type == "Buyer") {{ __('sidebar.Purchase Order') }} @endif</span>
+                            class="mx-3 font-extrabold">@if(auth()->user()->registration_type == "Supplier") {{ __('sidebar.Purchase Orders') }} @elseif(auth()->user()->registration_type == "Buyer") {{ __('sidebar.Purchase Orders') }} @endif</span>
                         <span x-show="open == false">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 1em;" @else style="margin-left: 1em;" @endif  viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 1em;" @else style="margin-left: 0.7em;" @endif  viewBox="0 0 20 20" fill="currentColor">
                           <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
                         </svg>
                     </span>
                         <span x-show="open == true">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 1em;" @else style="margin-left: 1em;" @endif viewBox="0 0 20 20"
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-12 w-4 h-4" @if(auth()->user()->registration_type == "Supplier") style="margin-left: 1em;" @else style="margin-left: 0.8em;" @endif viewBox="0 0 20 20"
                              fill="currentColor">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                         </svg>
@@ -1413,8 +1413,26 @@
 
             {{-- Buyer Shipments link --}}
             @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Buyer" && Auth::user()->status == 3)
+                <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments') || request()->routeIs('ongoingShipment') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{ route('shipment.index') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                         class="w-6 h-6"
+                         viewBox="0 0 172 172"
+                         style=" fill:#000000;">
+                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                           font-weight="none" font-size="none" text-anchor="none"
+                           style="mix-blend-mode: normal">
+                            <path d="M0,172v-172h172v172z" fill="none"></path>
+                            <g fill="currentColor">
+                                <path
+                                    d="M24.72553,59.66303c-2.28438,0 -4.03125,1.74688 -4.03125,4.03125v80.625c0,2.28438 1.74687,4.03125 4.03125,4.03125h10.21197c0,0.5375 -0.13385,0.9401 -0.13385,1.4776c0,3.225 0.94115,6.3151 2.55365,8.86823h-13.1698c-2.28438,0 -4.03125,1.74687 -4.03125,4.03125c0,2.28438 1.74687,4.03125 4.03125,4.03125h113.41302c0.40312,0 0.94063,-0.13333 1.34375,-0.2677c8.6,-0.67187 15.45313,-7.92865 15.45313,-16.66302c0,-0.5375 0.00052,-0.9401 -0.13385,-1.4776h10.34583c2.28438,0 4.03125,-1.74687 4.03125,-4.03125v-47.03125v-0.27032v-0.5354c0,-0.13437 0.00052,-0.13595 -0.13385,-0.27032c0,-0.13437 -0.13385,-0.26718 -0.13385,-0.40155l-8.46667,-21.09845c-3.62813,-9.1375 -12.3625,-14.91457 -22.17187,-15.04895h-13.4375c-2.28437,0 -4.03125,1.74688 -4.03125,4.03125v76.59375h-54.82605c-1.075,-1.6125 -2.41665,-2.95625 -3.89478,-4.03125h50.79218c2.28438,0 4.03125,-1.74687 4.03125,-4.03125v-68.53125c0,-2.28437 -1.74687,-4.03125 -4.03125,-4.03125zM28.75678,67.59167h79.4151v47.03125h-79.4151zM128.46197,67.59167h5.375v22.84375c0,1.88125 1.21042,3.49165 3.09167,3.89478l23.78333,5.91302v39.91095h-9.13593c-3.09062,-4.43437 -8.06355,-7.25677 -13.84167,-7.25677c-3.35937,0 -6.5849,1.07447 -9.2724,2.82135zM141.89948,68.12708c4.8375,1.20937 8.7349,4.70313 10.61615,9.40625l5.50885,13.84167l-16.125,-4.03125zM28.89063,136.12292h12.89947c-1.47812,1.075 -2.8224,2.41875 -3.8974,4.03125h-9.00208zM51.60053,140.68958c3.225,0 6.17968,1.74792 7.79218,4.43542c0.13437,0.67188 0.40522,1.20833 0.80835,1.61145c0.26875,0.94063 0.5354,2.0172 0.5354,2.95782c0,4.43437 -3.225,8.06198 -7.39062,8.86823h-3.35937c-4.16563,-0.80625 -7.39062,-4.43385 -7.39062,-8.86823c0,-4.97188 4.03282,-9.0047 9.0047,-9.0047zM137.46667,140.68958c4.97188,0 9.00208,4.03282 9.00208,9.0047c0.26875,4.70313 -3.3599,8.46458 -7.92865,9.00208c-0.26875,-0.13438 -0.53645,-0.13385 -0.93958,-0.13385h-1.74792c-4.16563,-0.80625 -7.39063,-4.43385 -7.39063,-8.86823c0,-4.97188 4.03282,-9.0047 9.0047,-9.0047zM68.26355,148.21667h52.67395c0,0.5375 -0.13385,0.9401 -0.13385,1.4776c0,3.225 0.94115,6.3151 2.55365,8.86823h-57.51355c1.6125,-2.55312 2.55365,-5.64323 2.55365,-8.86823c0,-0.5375 0.00052,-0.9401 -0.13385,-1.4776zM6.71875,158.66223c-1.04141,0 -2.08229,0.3711 -2.82135,1.11017c-0.80625,0.67188 -1.2099,1.74635 -1.2099,2.82135c0,1.075 0.40365,2.14948 1.2099,2.82135c0.80625,0.80625 1.74635,1.2099 2.82135,1.2099c1.075,0 2.14948,-0.40365 2.82135,-1.2099c0.80625,-0.80625 1.2099,-1.74635 1.2099,-2.82135c0,-1.075 -0.40365,-2.14948 -1.2099,-2.82135c-0.73906,-0.73906 -1.77994,-1.11017 -2.82135,-1.11017z"></path>
+                            </g>
+                        </g>
+                    </svg>
+                    <span class="mx-3">{{ __('portal.Deliveries') }}</span>
+                </a>
 
-                <div x-data="{ open: false } ">
+                {{--<div x-data="{ open: false } ">
                     <a @click="open = true"
                        class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments') || request()->routeIs('ongoingShipment') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                        href="javascript:void(0);">
@@ -1450,8 +1468,8 @@
                         x-show.transition.in="open"
                         x-show.transition.out="open"
                         @click.away="open = false"
-                        {{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
-                        {{--                        @if(request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments')|| request()->routeIs('ongoingShipment'))  x-data="{ open: true } " @endif--}}
+                        --}}{{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}{{--
+                        --}}{{--                        @if(request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments')|| request()->routeIs('ongoingShipment'))  x-data="{ open: true } " @endif--}}{{--
                     >
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('ongoingShipment') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -1476,7 +1494,7 @@
                         </li>
 
                     </ul>
-                </div>
+                </div>--}}
             @endif
 
             {{-- Warehouse link --}}
@@ -2493,7 +2511,25 @@
             {{-- Buyer Shipments link --}}
             @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == "Buyer" && Auth::user()->status == 3)
 
-                <div x-data="{ open: false } ">
+                <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments') || request()->routeIs('ongoingShipment') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{ route('shipment.index') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                         class="w-6 h-6"
+                         viewBox="0 0 172 172"
+                         style=" fill:#000000;transform: scaleX(-1);">
+                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none"
+                           font-weight="none" font-size="none" text-anchor="none"
+                           style="mix-blend-mode: normal">
+                            <path d="M0,172v-172h172v172z" fill="none"></path>
+                            <g fill="currentColor">
+                                <path
+                                    d="M24.72553,59.66303c-2.28438,0 -4.03125,1.74688 -4.03125,4.03125v80.625c0,2.28438 1.74687,4.03125 4.03125,4.03125h10.21197c0,0.5375 -0.13385,0.9401 -0.13385,1.4776c0,3.225 0.94115,6.3151 2.55365,8.86823h-13.1698c-2.28438,0 -4.03125,1.74687 -4.03125,4.03125c0,2.28438 1.74687,4.03125 4.03125,4.03125h113.41302c0.40312,0 0.94063,-0.13333 1.34375,-0.2677c8.6,-0.67187 15.45313,-7.92865 15.45313,-16.66302c0,-0.5375 0.00052,-0.9401 -0.13385,-1.4776h10.34583c2.28438,0 4.03125,-1.74687 4.03125,-4.03125v-47.03125v-0.27032v-0.5354c0,-0.13437 0.00052,-0.13595 -0.13385,-0.27032c0,-0.13437 -0.13385,-0.26718 -0.13385,-0.40155l-8.46667,-21.09845c-3.62813,-9.1375 -12.3625,-14.91457 -22.17187,-15.04895h-13.4375c-2.28437,0 -4.03125,1.74688 -4.03125,4.03125v76.59375h-54.82605c-1.075,-1.6125 -2.41665,-2.95625 -3.89478,-4.03125h50.79218c2.28438,0 4.03125,-1.74687 4.03125,-4.03125v-68.53125c0,-2.28437 -1.74687,-4.03125 -4.03125,-4.03125zM28.75678,67.59167h79.4151v47.03125h-79.4151zM128.46197,67.59167h5.375v22.84375c0,1.88125 1.21042,3.49165 3.09167,3.89478l23.78333,5.91302v39.91095h-9.13593c-3.09062,-4.43437 -8.06355,-7.25677 -13.84167,-7.25677c-3.35937,0 -6.5849,1.07447 -9.2724,2.82135zM141.89948,68.12708c4.8375,1.20937 8.7349,4.70313 10.61615,9.40625l5.50885,13.84167l-16.125,-4.03125zM28.89063,136.12292h12.89947c-1.47812,1.075 -2.8224,2.41875 -3.8974,4.03125h-9.00208zM51.60053,140.68958c3.225,0 6.17968,1.74792 7.79218,4.43542c0.13437,0.67188 0.40522,1.20833 0.80835,1.61145c0.26875,0.94063 0.5354,2.0172 0.5354,2.95782c0,4.43437 -3.225,8.06198 -7.39062,8.86823h-3.35937c-4.16563,-0.80625 -7.39062,-4.43385 -7.39062,-8.86823c0,-4.97188 4.03282,-9.0047 9.0047,-9.0047zM137.46667,140.68958c4.97188,0 9.00208,4.03282 9.00208,9.0047c0.26875,4.70313 -3.3599,8.46458 -7.92865,9.00208c-0.26875,-0.13438 -0.53645,-0.13385 -0.93958,-0.13385h-1.74792c-4.16563,-0.80625 -7.39063,-4.43385 -7.39063,-8.86823c0,-4.97188 4.03282,-9.0047 9.0047,-9.0047zM68.26355,148.21667h52.67395c0,0.5375 -0.13385,0.9401 -0.13385,1.4776c0,3.225 0.94115,6.3151 2.55365,8.86823h-57.51355c1.6125,-2.55312 2.55365,-5.64323 2.55365,-8.86823c0,-0.5375 0.00052,-0.9401 -0.13385,-1.4776zM6.71875,158.66223c-1.04141,0 -2.08229,0.3711 -2.82135,1.11017c-0.80625,0.67188 -1.2099,1.74635 -1.2099,2.82135c0,1.075 0.40365,2.14948 1.2099,2.82135c0.80625,0.80625 1.74635,1.2099 2.82135,1.2099c1.075,0 2.14948,-0.40365 2.82135,-1.2099c0.80625,-0.80625 1.2099,-1.74635 1.2099,-2.82135c0,-1.075 -0.40365,-2.14948 -1.2099,-2.82135c-0.73906,-0.73906 -1.77994,-1.11017 -2.82135,-1.11017z"></path>
+                            </g>
+                        </g>
+                    </svg>
+                    <span class="mx-3">{{ __('portal.Deliveries') }}</span>
+                </a>
+                {{--<div x-data="{ open: false } ">
                     <a @click="open = true"
                        class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments') || request()->routeIs('ongoingShipment') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                        href="javascript:void(0);">
@@ -2530,8 +2566,8 @@
                         x-show.transition.in="open"
                         x-show.transition.out="open"
                         @click.away="open = false"
-                        {{--                        x-show.transition.in.duration.50ms.out.duration.100ms="open"--}}
-                        {{--                        @if(request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments')|| request()->routeIs('ongoingShipment'))  x-data="{ open: true } " @endif--}}
+                                                x-show.transition.in.duration.50ms.out.duration.100ms="open"
+                                                @if(request()->routeIs('shipment.index') || request()->routeIs('deliveredShipments')|| request()->routeIs('ongoingShipment'))  x-data="{ open: true } " @endif
                     >
                         <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('ongoingShipment') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -2556,7 +2592,7 @@
                         </li>
 
                     </ul>
-                </div>
+                </div>--}}
             @endif
 
             {{-- Warehouse link --}}

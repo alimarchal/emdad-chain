@@ -498,7 +498,8 @@ class DraftPurchaseOrderController extends Controller
     public function generatePDF(DraftPurchaseOrder $draftPurchaseOrder)
     {
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'));
-        return $pdf->download('PO.pdf');
+        $POName = 'PO-'.$draftPurchaseOrder->id.'.pdf';
+        return $pdf->download($POName);
     }
 
     /* DPO for Single Category Quotations */
@@ -886,7 +887,8 @@ class DraftPurchaseOrderController extends Controller
     {
         $draftPurchaseOrders = DraftPurchaseOrder::with('buyer_business')->where(['rfq_no' => $rfqNo])->get();
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('draftPurchaseOrder.singleCategory.PDF', compact('draftPurchaseOrders'));
-        return $pdf->download('POs.pdf');
+        $POName = 'PO-'.$draftPurchaseOrders[0]->id.'.pdf';
+        return $pdf->download($POName);
     }
 
 }

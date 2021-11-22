@@ -236,14 +236,25 @@
     @endif
 </div>
 
-<div class="flex justify-between px-2 py-2 mt-2 h-15">
-    <div style="text-align: center; margin: auto;">
-        <p style="text-align: center; ">Thank you for using Emdad platform as your digital procurement solution</p>
-    <!--<img src="{{ url(Storage::url('logo-full.png')) }}" />-->
-        @php $img = asset('logo-full.png'); @endphp
+<div class="header">
 
-        <img src="{{$img}}" width="100" >
+    <div class="center" style="width: 100%">
+        <div style="text-align: center;">Thank you for using Emdad platform as your digital procurement solution</div><br><br>
+    </div>
 
+</div>
+
+<br>
+<br>
+
+<div class="header">
+
+    <div class="flex" style="width: 100%;">
+        <div class="flex-row" style="margin-top: 10px;float: right; margin-right: 8%;">Copied to Emdad records</div>
+        <div class="flex-row" style="margin-left: 93%;">
+            @php $img = asset('logo-full.png'); @endphp
+            <img src="{{$img}}" style="height: 2.5rem; width: auto; margin-left: auto; margin-right: auto;">
+        </div>
     </div>
 
 </div>

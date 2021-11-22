@@ -267,14 +267,12 @@
 
 <div class="header">
 
-    <div class="center" style="width: 33.33%"></div>
-
-    <div class="center" style="width: 33.33%"></div>
-
-    <div class="center" style="width: 33.33%; float: right">
-        <div style="margin-top: 2px;">Copied to Emdad records</div>
-        @php $img = asset('logo-full.png'); @endphp
-        <img src="{{$img}}" width="40" style="float: right">
+    <div class="flex" style="width: 100%;">
+        <div class="flex-row" style="margin-top: 10px;float: right; margin-right: 8%;">Copied to Emdad records</div>
+        <div class="flex-row" style="margin-left: 93%;">
+            @php $img = asset('logo-full.png'); @endphp
+            <img src="{{$img}}" style="height: 2.5rem; width: auto; margin-left: auto; margin-right: auto;">
+        </div>
     </div>
 
 </div>

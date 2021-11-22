@@ -35,6 +35,7 @@ return [
     'Multi categories' => 'الفئات المتعددة',
     'Single category' => 'الفئة الفردية',
     'Purchase Order' => 'أمر شراء',
+    'Purchase Orders' => 'طلبات الشراء',
     'Delivery' => 'التوصيل',
     'Create Delivery Note' => 'إنشاء مذكرة توصيل',
     'DN history' => 'سجل مذكرات التوصيل',

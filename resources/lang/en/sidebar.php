@@ -32,6 +32,7 @@ return [
     'Multi categories' => 'Multi categories',
     'Single category' => 'Single category',
     'Purchase Order' => 'Purchase Order',
+    'Purchase Orders' => 'Purchase Orders',
     'Delivery' => 'Delivery',
     'Create Delivery Note' => 'Create Delivery Note',
     'DN history' => 'DN history',

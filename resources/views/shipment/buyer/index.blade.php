@@ -25,7 +25,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Shipment List')}}</h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.List of deliveries')}}</h2>
 
         <div class="flex flex-col bg-white rounded ">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -39,14 +39,22 @@
                                     #
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                    {{__('portal.Shipment #')}}
+                                    {{__('portal.D.N.')}} #
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                    {{__('portal.Date')}}
+                                    {{__('portal.Category Name')}}
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    {{__('portal.Type')}}
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="width: 120px;background-color: #FCE5CD;">
+                                    {{__('portal.Delivery date')}}
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="width: 120px;background-color: #FCE5CD;">
                                     {{__('portal.Status')}}
                                 </th>
 
@@ -56,58 +64,74 @@
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ($shipments as $shipment)
+                            @foreach ($deliveries as $delivery)
                                 <tr>
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 30px;">
                                         {{$loop->iteration}}
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 130px;">
-                                        <a href="{{route('shipment.show',$shipment->id)}}" class="hover:underline text-blue-600"> {{__('portal.SHPN')}}-{{$shipment->id}}</a>
+                                        {{__('portal.D.N.')}}-{{$delivery->delivery_note_id}}
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 140px;">
-                                        {{$shipment->created_at->format('d-m-Y')}}
+                                        @php
+                                            $record = \App\Models\Category::where('id', $delivery->item_code)->first();
+                                            $parent= \App\Models\Category::where('id', $record->parent_id)->first();
+                                        @endphp
+                                        {{ $record->name }}@if(isset($parent)), {{ $parent->name }} @endif
+                                    </td>
+
+                                    <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 140px;">
+                                        @if($delivery->rfq_type == 0) {{__('portal.Single Category')}}
+                                        @elseif($delivery->rfq_type == 1) {{__('portal.Multiple Categories')}}
+                                        @endif
+                                    </td>
+
+                                    <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 140px;">
+                                        {{$delivery->created_at->format('d-m-Y')}}
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 170px;">
-                                        @php
-                                            /* Adding below code only for buyer view because of a shipment may have more than one buyer deliveries so if one buyer deliveries are delivered and other buyer's not we must change status to delivered to one buyer */
-                                            $shipmentsNotHavingStatusZero = []; $totalShipmentItemsCount = count($shipment->shipmentItems);
-                                            foreach ($shipment->shipmentItems as $shipmentItems)
-                                            {
-                                                if ($shipmentItems->status != 0)
-                                                {
-                                                    $shipmentsNotHavingStatusZero[] = $shipmentItems;
-                                                }
-                                            }
-                                        @endphp
-                                        @if($shipment->status == 1)
+                                        @if($delivery->status == 1 )
                                             <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
-                                                {{__('portal.Received')}}
-                                            </span>
-                                        @elseif($totalShipmentItemsCount == count($shipmentsNotHavingStatusZero))
-                                            <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
-                                                {{__('portal.Received')}}
-                                            </span>
-                                        @elseif($shipment->status == 0)
+                                                    {{__('portal.Received')}}
+                                                </span>
+                                        @elseif($delivery->status == 5 || $delivery->status == 6 )
+                                            <span class="text-yellow-400 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Returned')}}
+                                                </span>
+                                        @else
                                             <span class="text-orange-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
-                                                {{__('portal.Not received')}}
-                                            </span>
+                                                    {{__('portal.Not received')}}
+                                                </span>
                                         @endif
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap text-center">
-                                        <a href="{{route('shipment.show',$shipment->id)}}" >
-                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                </path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                </path>
-                                            </svg>
-                                            <span class="inline"></span>
-                                        </a>
+                                        @if($delivery->rfq_type == 0)
+                                            <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" >
+                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                    </path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                    </path>
+                                                </svg>
+                                                <span class="inline"></span>
+                                            </a>
+                                        @elseif($delivery->rfq_type == 1)
+                                            <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" >
+                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                    </path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                    </path>
+                                                </svg>
+                                                <span class="inline"></span>
+                                            </a>
+                                        @endif
                                     </td>
 
                                 </tr>
@@ -146,7 +170,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Shipment List')}}</h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.List of deliveries')}}</h2>
 
         <div class="flex flex-col bg-white rounded ">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -160,14 +184,22 @@
                                     #
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                    {{__('portal.Shipment #')}}
+                                    {{__('portal.D.N.')}} #
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                    {{__('portal.Date')}}
+                                    {{__('portal.Category Name')}}
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    {{__('portal.Type')}}
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="width: 120px;background-color: #FCE5CD;">
+                                    {{__('portal.Delivery date')}}
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="width: 120px;background-color: #FCE5CD;">
                                     {{__('portal.Status')}}
                                 </th>
 
@@ -177,59 +209,74 @@
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach ($shipments as $shipment)
+                            @foreach ($deliveries as $delivery)
                                 <tr>
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 30px;">
-                                        {{$loop->iteration}}
+                                        <span class="font-sans">{{$loop->iteration}}</span>
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 130px;">
-                                        <a href="{{route('shipment.show',$shipment->id)}}" class="hover:underline text-blue-600">{{__('portal.SHPN')}}-{{$shipment->id}}</a>
-
+                                        {{__('portal.D.N.')}}-<span class="font-sans">{{$delivery->delivery_note_id}}</span>
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 140px;">
-                                        {{$shipment->created_at->format('d-m-Y')}}
+                                        @php
+                                            $record = \App\Models\Category::where('id', $delivery->item_code)->first();
+                                            $parent= \App\Models\Category::where('id', $record->parent_id)->first();
+                                        @endphp
+                                        {{ $record->name_ar }}@if(isset($parent)), {{ $parent->name_ar }} @endif
+                                    </td>
+
+                                    <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 140px;">
+                                        @if($delivery->rfq_type == 0) {{__('portal.Single Category')}}
+                                        @elseif($delivery->rfq_type == 1) {{__('portal.Multiple Categories')}}
+                                        @endif
+                                    </td>
+
+                                    <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 140px;">
+                                        <span class="font-sans">{{$delivery->created_at->format('d-m-Y')}}</span>
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 170px;">
-                                        @php
-                                            /* Adding below code only for buyer view because of a shipment may have more than one buyer deliveries so if one buyer deliveries are delivered and other buyer's not we must change status to delivered to one buyer */
-                                            $shipmentsNotHavingStatusZero = []; $totalShipmentItemsCount = count($shipment->shipmentItems);
-                                            foreach ($shipment->shipmentItems as $shipmentItems)
-                                            {
-                                                if ($shipmentItems->status != 0)
-                                                {
-                                                    $shipmentsNotHavingStatusZero[] = $shipmentItems;
-                                                }
-                                            }
-                                        @endphp
-                                        @if($shipment->status == 1)
+                                        @if($delivery->status == 1 )
                                             <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
-                                                {{__('portal.Received')}}
-                                            </span>
-                                        @elseif($totalShipmentItemsCount == count($shipmentsNotHavingStatusZero))
-                                            <span class="text-green-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
-                                                {{__('portal.Received')}}
-                                            </span>
-                                        @elseif($shipment->status == 0)
+                                                    {{__('portal.Received')}}
+                                                </span>
+                                        @elseif($delivery->status == 5 || $delivery->status == 6 )
+                                            <span class="text-yellow-400 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
+                                                    {{__('portal.Returned')}}
+                                                </span>
+                                        @else
                                             <span class="text-orange-600 font-bold uppercase text-xs px-4 py-2 mr-1 mb-1">
-                                                {{__('portal.Not received')}}
-                                            </span>
+                                                    {{__('portal.Not received')}}
+                                                </span>
                                         @endif
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap text-center">
-                                        <a href="{{route('shipment.show',$shipment->id)}}" >
-                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                </path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                </path>
-                                            </svg>
-                                            <span class="inline"></span>
-                                        </a>
+                                        @if($delivery->rfq_type == 0)
+                                            <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" >
+                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                    </path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                    </path>
+                                                </svg>
+                                                <span class="inline"></span>
+                                            </a>
+                                        @elseif($delivery->rfq_type == 1)
+                                            <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" >
+                                                <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                    </path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                    </path>
+                                                </svg>
+                                                <span class="inline"></span>
+                                            </a>
+                                        @endif
                                     </td>
 
                                 </tr>

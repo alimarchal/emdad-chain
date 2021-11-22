@@ -20,7 +20,7 @@ class ShipmentController extends Controller
         elseif (auth()->user()->registration_type == 'Buyer')
         {
 //            $shipments = Shipment::where('buyer_business_id', auth()->user()->business_id)->get();
-            $collections = Shipment::all();
+            /*$collections = Shipment::all();
 
             $shipments = array();
 
@@ -37,7 +37,29 @@ class ShipmentController extends Controller
                 }
             }
             $shipments = array_unique($shipments);
-            return view('shipment.buyer.index', compact('shipments'));
+            return view('shipment.buyer.index', compact('shipments'));*/
+
+            $collections = Delivery::where('business_id', auth()->user()->business_id)->get();
+            $multiCategory = array();
+            $singleCategory = array();
+            foreach ($collections as $collect)
+            {
+                if ($collect['rfq_type'] == 1)
+                {
+                    $multiCategory[] = $collect;
+                }
+                if ($collect['rfq_type'] == 0)
+                {
+                    $singleCategory[] = $collect;
+                }
+            }
+            $multiCategoryCollection = collect($multiCategory);
+            $singleCategoryCollection = collect($singleCategory);
+
+            $singleCategoryDeliveries = $singleCategoryCollection->unique('rfq_no');
+            $deliveries = $multiCategoryCollection->merge($singleCategoryDeliveries)->sortByDesc('created_at');
+
+            return view('shipment.buyer.index', compact('deliveries'));
         }
 
         return redirect()->back();
@@ -91,7 +113,7 @@ class ShipmentController extends Controller
 
     }
 
-    /* Delivered delivery of Buyers */
+    /* Delivered delivery of Buyers. it is changed to one view*/
     public function delivered()
     {
 //        $shipments = Shipment::where(['buyer_business_id' => auth()->user()->business_id, 'status' => 1])->get();
@@ -114,7 +136,7 @@ class ShipmentController extends Controller
         return view('shipment.buyer.delivered', compact('shipments'));
     }
 
-    /* on going deliveries of Buyers */
+    /* on going deliveries of Buyers. it is changed to one view*/
     public function ongoingShipment()
     {
 //        $shipments = Shipment::with('shipmentItems')->where(['buyer_business_id' => auth()->user()->business_id, 'status' => 0])->get();
