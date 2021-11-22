@@ -143,13 +143,13 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-{{--                                                @if($rfp->expiry_date >= \Carbon\Carbon::now()) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }} @else <span class="text-red-600"> {{ __('portal.Expired') }} </span> @endif--}}
+{{--                                                @if($rfp->expiry_date >= \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s')) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }} @else <span class="text-red-600"> {{ __('portal.Expired') }} </span> @endif--}}
                                                 @if($rfp->dpo != null)
-                                                    @if(isset($po) && $po->status == 'pending' && $rfp->expiry_date < \Carbon\Carbon::now()) <span class="text-red-600"> {{ __('portal.Expired') }} </span>
+                                                    @if(isset($po) && $po->status == 'pending' && $rfp->expiry_date < \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s')) <span class="text-red-600"> {{ __('portal.Expired') }} </span>
                                                     @else {{__('portal.N/A')}}
                                                     @endif
                                                 @elseif($rfp->status == 'completed' || $rfp->status == 'expired') {{__('portal.N/A')}}
-                                                @elseif($rfp->expiry_date >= \Carbon\Carbon::now()) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }}
+                                                @elseif($rfp->expiry_date >= \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s')) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }}
                                                 @else <span class="text-red-600"> {{ __('portal.Expired') }} </span>
                                                 @endif
                                             </td>
@@ -338,11 +338,11 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if($rfp->dpo != null)
-                                                    @if(isset($po) && $po->status == 'pending' && $rfp->expiry_date < \Carbon\Carbon::now()) <span class="text-red-600"> {{ __('portal.Expired') }} </span>
+                                                    @if(isset($po) && $po->status == 'pending' && $rfp->expiry_date < \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s')) <span class="text-red-600"> {{ __('portal.Expired') }} </span>
                                                     @else {{__('portal.N/A')}}
                                                     @endif
                                                 @elseif($rfp->status == 'completed' || $rfp->status == 'expired') {{__('portal.N/A')}}
-                                                @elseif($rfp->expiry_date >= \Carbon\Carbon::now()) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }}
+                                                @elseif($rfp->expiry_date >= \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s')) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }}
                                                 @else <span class="text-red-600"> {{ __('portal.Expired') }} </span>
                                                 @endif
                                             </td>

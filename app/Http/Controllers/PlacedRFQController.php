@@ -78,10 +78,11 @@ class PlacedRFQController extends Controller
             }
 
             sort($business_categories);
-            $collection = EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', Carbon::now())->whereIn('item_code', $business_categories)->get();
+            $now = Carbon::parse(Carbon::now())->format('Y-m-d H:i:s');
+            $collection = EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', $now)->whereIn('item_code', $business_categories)->get();
 
             // Remaining Quotations count
-            $quotations = Qoute::where('supplier_business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
+            $quotations = Qoute::where('supplier_business_id', auth()->user()->business_id)->whereDate('created_at', Carbon::today())->count();
             $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
             $package = Package::where('id', $business_package->package_id)->first();
             if ($business_package->package_id == 5 || $business_package->package_id == 6) {

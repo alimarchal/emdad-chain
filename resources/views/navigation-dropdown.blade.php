@@ -129,8 +129,9 @@
                             }
                             sort($business_categories);
                             // Counting NEW RFQs for multiple categories for supplier
-                            /*$rfqCount = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->count();*/
-                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->get();
+                            $now = \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s');
+                            /*$rfqCount = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', $now)->whereIn('item_code', $business_categories)->count();*/
+                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', $now)->whereIn('item_code', $business_categories)->get();
                             $noMultiCategoryQuotationPresent = array();
                             foreach ($multiEOrderItems as $multiEOrderItem)
                                 {
@@ -144,7 +145,7 @@
                             // Counting NEW RFQs for single category for supplier
                             $eOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 0])
                                                                             ->where('bypass', 0)
-                                                                            ->whereDate('quotation_time', '>=', \Carbon\Carbon::now())
+                                                                            ->whereDate('quotation_time', '>=', $now)
                                                                             ->whereIn('item_code', $business_categories)
                                                                             ->get();
                             $eOrders = array();
@@ -936,8 +937,9 @@
                             }
                             sort($business_categories);
                             // Counting NEW RFQs for multiple categories for supplier
-                            /*$rfqCount = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->count();*/
-                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->get();
+                            $now = \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s');
+                            /*$rfqCount = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', $now)->whereIn('item_code', $business_categories)->count();*/
+                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', $now)->whereIn('item_code', $business_categories)->get();
                             $noMultiCategoryQuotationPresent = array();
                             foreach ($multiEOrderItems as $multiEOrderItem)
                                 {
@@ -951,7 +953,7 @@
                             // Counting NEW RFQs for single category for supplier
                             $eOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 0])
                                                                             ->where('bypass', 0)
-                                                                            ->whereDate('quotation_time', '>=', \Carbon\Carbon::now())
+                                                                            ->whereDate('quotation_time', '>=', $now)
                                                                             ->whereIn('item_code', $business_categories)
                                                                             ->get();
                             $eOrders = array();

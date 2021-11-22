@@ -85,9 +85,10 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @php
                                     $eOrders =array();
+                                    $now = \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s');
                                     $eOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 0])
                                                                             ->where('bypass', 0)
-                                                                            ->whereDate('quotation_time', '>=', \Carbon\Carbon::now())
+                                                                            ->whereDate('quotation_time', '>=', $now)
                                                                             ->whereIn('item_code', $business_categories)
                                                                             ->get();
 
@@ -293,9 +294,10 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @php
                                     $eOrders =array();
+                                    $now = \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s');
                                     $eOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 0])
                                                                             ->where('bypass', 0)
-                                                                            ->whereDate('quotation_time', '>=', \Carbon\Carbon::now())
+                                                                            ->whereDate('quotation_time', '>=', $now)
                                                                             ->whereIn('item_code', $business_categories)
                                                                             ->get();
 

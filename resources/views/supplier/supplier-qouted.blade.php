@@ -63,7 +63,8 @@
                         }
                         sort($business_categories);
                             // Counting NEW RFQs for multiple categories for supplier
-                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->get();
+                            $now = \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s');
+                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', $now)->whereIn('item_code', $business_categories)->get();
                             $noMultiCategoryQuotationPresent = array();
                             foreach ($multiEOrderItems as $multiEOrderItem)
                                 {
@@ -213,11 +214,11 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if($rfp->dpo != null)
-                                                    @if(isset($po) && $po->status == 'pending' && $rfp->expiry_date < \Carbon\Carbon::now()) <span class="text-red-600"> {{ __('portal.Expired') }} </span>
+                                                    @if(isset($po) && $po->status == 'pending' && $rfp->expiry_date < \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s')) <span class="text-red-600"> {{ __('portal.Expired') }} </span>
                                                     @else {{__('portal.N/A')}}
                                                     @endif
                                                 @elseif($rfp->status == 'completed' || $rfp->status == 'expired') {{__('portal.N/A')}}
-                                                @elseif($rfp->expiry_date >= \Carbon\Carbon::now()) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }}
+                                                @elseif($rfp->expiry_date >= \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s')) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }}
                                                 @else <span class="text-red-600"> {{ __('portal.Expired') }} </span>
                                                 @endif
                                             </td>
@@ -344,7 +345,8 @@
                         }
                         sort($business_categories);
                             // Counting NEW RFQs for multiple categories for supplier
-                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', \Carbon\Carbon::now())->whereIn('item_code', $business_categories)->get();
+                            $now = \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s');
+                            $multiEOrderItems = \App\Models\EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', $now)->whereIn('item_code', $business_categories)->get();
                             $noMultiCategoryQuotationPresent = array();
                             foreach ($multiEOrderItems as $multiEOrderItem)
                                 {
@@ -487,11 +489,11 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if($rfp->dpo != null)
-                                                    @if(isset($po) && $po->status == 'pending' && $rfp->expiry_date < \Carbon\Carbon::now()) <span class="text-red-600"> {{ __('portal.Expired') }} </span>
+                                                    @if(isset($po) && $po->status == 'pending' && $rfp->expiry_date < \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s')) <span class="text-red-600"> {{ __('portal.Expired') }} </span>
                                                     @else {{__('portal.N/A')}}
                                                     @endif
                                                 @elseif($rfp->status == 'completed' || $rfp->status == 'expired') {{__('portal.N/A')}}
-                                                @elseif($rfp->expiry_date >= \Carbon\Carbon::now()) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }}
+                                                @elseif($rfp->expiry_date >= \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s')) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }}
                                                 @else <span class="text-red-600"> {{ __('portal.Expired') }} </span>
                                                 @endif
                                             </td>
