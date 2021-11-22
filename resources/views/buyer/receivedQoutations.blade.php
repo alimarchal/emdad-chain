@@ -104,10 +104,12 @@
 
                                                 @php
                                                     $created = $rfp->quotation_time;
-                                                    $time = \Carbon\Carbon::parse($created)->format('Y-m-d');
-                                                    $now = \Carbon\Carbon::now();
+                                                    $time = \Carbon\Carbon::parse($created)->format('Y-m-d H:i:s');
+                                                    $now = \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s');
+
+                                                    /*$now = \Carbon\Carbon::now();
                                                     $diffInHrs = $now->diffInHours($created);
-                                                    $diffInMins = $now->diffInMinutes($created);
+                                                    $diffInMins = $now->diffInMinutes($created);*/
                                                     // checking previous dpo if any
                                                     $dpo = \App\Models\DraftPurchaseOrder::where('rfq_item_no', $rfp->id)->where('po_status' , 'pending')->where('status' , 'pending')->first();
                                                 @endphp
@@ -130,32 +132,12 @@
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if(isset($dpo))
                                                         <span class="text-green-500">{{__('portal.DPO generated')}}</span>
-                                                    @elseif($rfp->bypass == 1 && $rfp->quotation_time > \Carbon\Carbon::now() && $rfp->status == 'pending')
-                                                        @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
-                                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
-                                                               class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-gray active:bg-yellow-500 transition ease-in-out duration-150">
-                                                                {{__('portal.See Quotes')}}
-                                                            </a>
-                                                        @endif
-                                                    @elseif($rfp->bypass == 1 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
-                                                        @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
-                                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
-                                                               class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-gray active:bg-yellow-500 transition ease-in-out duration-150">
-                                                                {{__('portal.See Quotes')}}
-                                                            </a>
-                                                        @endif
-                                                    @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
-                                                        {{-- Moved Reset and discard button under action column --}}
-                                                        {{__('portal.N/A')}}
-                                                    @elseif($rfp->bypass == 0 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
-                                                        @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
-                                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
-                                                               class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-gray active:bg-yellow-500 transition ease-in-out duration-150">
-                                                                {{__('portal.See Quotes')}}
-                                                            </a>
-                                                        @endif
+                                                    @elseif($rfp->quotation_time >= $now && $rfp->bypass == 1)
+                                                        {{__('portal.Overrode')}}
                                                     @elseif($rfp->status == 'accepted')
                                                         <span class="text-green-500">{{__('portal.Completed')}}</span>
+                                                    @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < $now && $rfp->status == 'pending')
+                                                        {{__('portal.N/A')}}
                                                     @else
                                                         {{ $rfp->qoutes->count() }}
                                                     @endif
@@ -163,7 +145,9 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    @if($rfp->qoutes->count() > 0 && $rfp->quotation_time >= \Carbon\Carbon::now() && $rfp->bypass == 0)
+                                                    @if(isset($dpo))
+                                                        {{__('portal.N/A')}}
+                                                    @elseif($rfp->qoutes->count() > 0 && $rfp->quotation_time >= $now && $rfp->bypass == 0)
                                                         {{--                                                @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))--}}
                                                         @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                             <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 1]) }}"
@@ -171,10 +155,21 @@
                                                                 {{__('portal.Override')}}
                                                             </a>
                                                         @endif
-                                                    @elseif($rfp->quotation_time >= \Carbon\Carbon::now() && $rfp->bypass == 1)
-                                                        {{__('portal.Overrode')}}
-                                                    @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
-                                                        {{-- Moved Reset and discard button under action column --}}
+                                                    @elseif($rfp->bypass == 1 && $rfp->quotation_time > $now && $rfp->status == 'pending')
+                                                        @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
+                                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
+                                                               class="inline-flex items-center justify-center px-2 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-gray active:bg-yellow-500 transition ease-in-out duration-150">
+                                                                {{__('portal.See Quotes')}}
+                                                            </a>
+                                                        @endif
+                                                    @elseif($rfp->bypass == 1 && $rfp->quotation_time < $now && $rfp->status == 'pending')
+                                                        @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
+                                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
+                                                               class="inline-flex items-center justify-center px-2 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-gray active:bg-yellow-500 transition ease-in-out duration-150">
+                                                                {{__('portal.See Quotes')}}
+                                                            </a>
+                                                        @endif
+                                                    @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < $now && $rfp->status == 'pending')
                                                         @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                             <a href="{{ route('resetQuotationTime', ['EOrderItemID' => $rfp->id]) }}" title="{{__('portal.No quotation is received yet, activate the requisition again?')}}"
                                                                class="inline-flex items-center justify-center px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to reset this requisition?')}}'>
@@ -183,6 +178,13 @@
                                                             <a href="{{ route('discardQuotation', ['EOrderID' => $placedRFQ->id]) }}" title="{{__('portal.Discard the requisition.')}}"
                                                                class="inline-flex items-center justify-center mt-2 px-4 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
                                                                 {{__('portal.Discard')}}
+                                                            </a>
+                                                        @endif
+                                                    @elseif($rfp->bypass == 0 && $rfp->quotation_time < $now && $rfp->status == 'pending')
+                                                        @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
+                                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
+                                                               class="inline-flex items-center justify-center px-2 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-gray active:bg-yellow-500 transition ease-in-out duration-150">
+                                                                {{__('portal.See Quotes')}}
                                                             </a>
                                                         @endif
                                                     @else
@@ -215,10 +217,12 @@
                                             </td>
                                             @php
                                                 $created = $placedRFQ->OrderItems[0]->quotation_time;
-                                                $time = \Carbon\Carbon::parse($created)->format('Y-m-d');
-                                                $now = \Carbon\Carbon::now();
+                                                $time = \Carbon\Carbon::parse($created)->format('Y-m-d H:i:s');
+                                                $now = \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s');
+
+                                                /*$now = \Carbon\Carbon::now()
                                                 $diffInHrs = $now->diffInHours($created);
-                                                $diffInMins = $now->diffInMinutes($created);
+                                                $diffInMins = $now->diffInMinutes($created);*/
                                                 // checking previous dpo if any
                                                 $dpo = \App\Models\DraftPurchaseOrder::where('rfq_item_no', $placedRFQ->OrderItems[0]->id)->where('po_status' , 'pending')->where('status' , 'pending')->first();
                                             @endphp
@@ -240,42 +244,12 @@
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if(isset($dpo))
                                                     <span class="text-green-500">{{__('portal.DPO generated')}}</span>
-                                                @elseif($placedRFQ->OrderItems[0]->bypass == 1 && $placedRFQ->OrderItems[0]->quotation_time > \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->status == 'pending')
-                                                    @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
-                                                        <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 0]) }}"
-                                                           class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-gray active:bg-yellow-500 transition ease-in-out duration-150">
-                                                            {{__('portal.See Quotes')}}
-                                                        </a>
-                                                    @endif
-                                                @elseif($placedRFQ->OrderItems[0]->bypass == 1 && $placedRFQ->OrderItems[0]->quotation_time < \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->status == 'pending')
-                                                    @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
-                                                        <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 0]) }}"
-                                                           class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-gray active:bg-yellow-500 transition ease-in-out duration-150">
-                                                            {{__('portal.See Quotes')}}
-                                                        </a>
-                                                    @endif
-                                                @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->qoutes->count() == 0 && $placedRFQ->OrderItems[0]->quotation_time < \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->status == 'pending')
-                                                    {{-- Moved Reset and Discard buttons under action column --}}
-                                                    {{__('portal.N/A')}}
-                                                    {{--@if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
-                                                        <a href="{{ route('resetSingleCategoryQuotationTime', ['eOrderID' => $placedRFQ->id]) }}" title="{{__('portal.No quotation is received yet, activate the requisition again?')}}"
-                                                           class="inline-flex items-center justify-center px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to reset this requisition?')}}'>
-                                                            {{__('portal.Reset')}}
-                                                        </a>
-                                                        <a href="{{ route('discardSingleCategoryQuotation', ['eOrderID' => $placedRFQ->id]) }}" title="{{__('portal.Discard the requisition.')}}"
-                                                           class="inline-flex mt-1 items-center justify-center px-4 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
-                                                            {{__('portal.Discard')}}
-                                                        </a>
-                                                    @endif--}}
-                                                @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->quotation_time < \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->status == 'pending')
-                                                    @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
-                                                        <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 0]) }}"
-                                                           class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-gray active:bg-yellow-500 transition ease-in-out duration-150">
-                                                            {{__('portal.See Quotes')}}
-                                                        </a>
-                                                    @endif
+                                                @elseif($placedRFQ->OrderItems[0]->quotation_time >= $now && $placedRFQ->OrderItems[0]->bypass == 1)
+                                                    {{__('portal.Overrode')}}
                                                 @elseif($placedRFQ->OrderItems[0]->status == 'accepted')
                                                     <span class="text-green-500">{{__('portal.Completed')}}</span>
+                                                @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->qoutes->count() == 0 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')
+                                                    {{__('portal.N/A')}}
                                                 @else
                                                     @php
                                                         /* Counting Total quotations for Single Category RFQ */
@@ -288,16 +262,30 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                @if($placedRFQ->OrderItems[0]->qoutes->count() > 0 && $placedRFQ->OrderItems[0]->quotation_time >= \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->bypass == 0)
+                                                @if(isset($dpo))
+                                                    {{__('portal.N/A')}}
+                                                @elseif($placedRFQ->OrderItems[0]->qoutes->count() > 0 && $placedRFQ->OrderItems[0]->quotation_time >= $now && $placedRFQ->OrderItems[0]->bypass == 0)
                                                     @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                         <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 1]) }}"
                                                            class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Once overrode you cannot receive quotations for this requisition')}}'>
                                                             {{__('portal.Override')}}
                                                         </a>
                                                     @endif
-                                                @elseif($placedRFQ->OrderItems[0]->quotation_time >= \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->bypass == 1)
-                                                    {{__('portal.Overrode')}}
-                                                @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->qoutes->count() == 0 && $placedRFQ->OrderItems[0]->quotation_time < \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->status == 'pending')
+                                                @elseif($placedRFQ->OrderItems[0]->bypass == 1 && $placedRFQ->OrderItems[0]->quotation_time > $now && $placedRFQ->OrderItems[0]->status == 'pending')
+                                                    @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
+                                                        <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 0]) }}"
+                                                           class="inline-flex items-center justify-center px-2 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-gray active:bg-yellow-500 transition ease-in-out duration-150">
+                                                            {{__('portal.See Quotes')}}
+                                                        </a>
+                                                    @endif
+                                                @elseif($placedRFQ->OrderItems[0]->bypass == 1 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')
+                                                    @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
+                                                        <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 0]) }}"
+                                                           class="inline-flex items-center justify-center px-2 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-gray active:bg-yellow-500 transition ease-in-out duration-150">
+                                                            {{__('portal.See Quotes')}}
+                                                        </a>
+                                                    @endif
+                                                @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->qoutes->count() == 0 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')
                                                     @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                         <a href="{{ route('resetSingleCategoryQuotationTime', ['eOrderID' => $placedRFQ->id]) }}" title="{{__('portal.No quotation is received yet, activate the requisition again?')}}"
                                                            class="inline-flex items-center justify-center px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to reset this requisition?')}}'>
@@ -306,6 +294,13 @@
                                                         <a href="{{ route('discardSingleCategoryQuotation', ['eOrderID' => $placedRFQ->id]) }}" title="{{__('portal.Discard the requisition.')}}"
                                                            class="inline-flex mt-1 items-center justify-center px-4 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
                                                             {{__('portal.Discard')}}
+                                                        </a>
+                                                    @endif
+                                                @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')
+                                                    @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
+                                                        <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 0]) }}"
+                                                           class="inline-flex items-center justify-center px-2 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-500 focus:shadow-outline-gray active:bg-yellow-500 transition ease-in-out duration-150">
+                                                            {{__('portal.See Quotes')}}
                                                         </a>
                                                     @endif
                                                 @else
@@ -403,10 +398,12 @@
 
                                                 @php
                                                     $created = $rfp->quotation_time;
-                                                    $time = \Carbon\Carbon::parse($created)->format('Y-m-d');
-                                                    $now = \Carbon\Carbon::now();
+                                                    $time = \Carbon\Carbon::parse($created)->format('Y-m-d H:i:s');
+                                                    $now = \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s');
+
+                                                    /*$now = \Carbon\Carbon::now()
                                                     $diffInHrs = $now->diffInHours($created);
-                                                    $diffInMins = $now->diffInMinutes($created);
+                                                    $diffInMins = $now->diffInMinutes($created);*/
                                                     // checking previous dpo if any
                                                     $dpo = \App\Models\DraftPurchaseOrder::where('rfq_item_no', $rfp->id)->where('po_status' , 'pending')->where('status' , 'pending')->first();
                                                 @endphp
@@ -429,42 +426,12 @@
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if(isset($dpo))
                                                         <span class="text-green-500">{{__('portal.DPO generated')}}</span>
-                                                    @elseif($rfp->bypass == 1 && $rfp->quotation_time > \Carbon\Carbon::now() && $rfp->status == 'pending')
-                                                        @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
-                                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
-                                                               class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
-                                                                {{__('portal.See Quotes')}}
-                                                            </a>
-                                                        @endif
-                                                    @elseif($rfp->bypass == 1 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
-                                                        @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
-                                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
-                                                               class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
-                                                                {{__('portal.See Quotes')}}
-                                                            </a>
-                                                        @endif
-                                                    @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
-                                                        {{-- Moved reset and discard buttons under action column --}}
-                                                        {{__('portal.N/A')}}
-                                                        {{--@if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
-                                                            <a href="{{ route('resetQuotationTime', ['EOrderItemID' => $rfp->id]) }}" title="{{__('portal.No quotation is received yet, activate the requisition again?')}}"
-                                                               class="inline-flex items-center justify-center px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to reset this requisition?')}}'>
-                                                                {{__('portal.Reset')}}
-                                                            </a>
-                                                            <a href="{{ route('discardQuotation', ['EOrderID' => $placedRFQ->id]) }}" title="{{__('portal.Discard the requisition.')}}"
-                                                               class="inline-flex items-center justify-center mt-2 px-4 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
-                                                                {{__('portal.Discard')}}
-                                                            </a>
-                                                        @endif--}}
-                                                    @elseif($rfp->bypass == 0 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
-                                                        @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
-                                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
-                                                               class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
-                                                                {{__('portal.See Quotes')}}
-                                                            </a>
-                                                        @endif
+                                                    @elseif($rfp->quotation_time >= $now && $rfp->bypass == 1)
+                                                        {{__('portal.Overrode')}}
                                                     @elseif($rfp->status == 'accepted')
                                                         <span class="text-green-500">{{__('portal.Completed')}}</span>
+                                                    @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < $now && $rfp->status == 'pending')
+                                                        {{__('portal.N/A')}}
                                                     @else
                                                         {{ $rfp->qoutes->count() }}
                                                     @endif
@@ -472,7 +439,9 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    @if($rfp->qoutes->count() > 0 && $rfp->quotation_time >= \Carbon\Carbon::now() && $rfp->bypass == 0)
+                                                    @if(isset($dpo))
+                                                        {{__('portal.N/A')}}
+                                                    @elseif($rfp->qoutes->count() > 0 && $rfp->quotation_time >= $now && $rfp->bypass == 0)
                                                         {{--                                                @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))--}}
                                                         @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                             <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 1]) }}"
@@ -480,9 +449,21 @@
                                                                 {{__('portal.Override')}}
                                                             </a>
                                                         @endif
-                                                    @elseif($rfp->quotation_time >= \Carbon\Carbon::now() && $rfp->bypass == 1)
-                                                        {{__('portal.Overrode')}}
-                                                    @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < \Carbon\Carbon::now() && $rfp->status == 'pending')
+                                                    @elseif($rfp->bypass == 1 && $rfp->quotation_time > $now && $rfp->status == 'pending')
+                                                        @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
+                                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
+                                                               class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
+                                                                {{__('portal.See Quotes')}}
+                                                            </a>
+                                                        @endif
+                                                    @elseif($rfp->bypass == 1 && $rfp->quotation_time < $now && $rfp->status == 'pending')
+                                                        @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
+                                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
+                                                               class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
+                                                                {{__('portal.See Quotes')}}
+                                                            </a>
+                                                        @endif
+                                                    @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < $now && $rfp->status == 'pending')
                                                         @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                             <a href="{{ route('resetQuotationTime', ['EOrderItemID' => $rfp->id]) }}" title="{{__('portal.No quotation is received yet, activate the requisition again?')}}"
                                                                class="inline-flex items-center justify-center px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to reset this requisition?')}}'>
@@ -491,6 +472,13 @@
                                                             <a href="{{ route('discardQuotation', ['EOrderID' => $placedRFQ->id]) }}" title="{{__('portal.Discard the requisition.')}}"
                                                                class="inline-flex items-center justify-center mt-2 px-4 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
                                                                 {{__('portal.Discard')}}
+                                                            </a>
+                                                        @endif
+                                                    @elseif($rfp->bypass == 0 && $rfp->quotation_time < $now && $rfp->status == 'pending')
+                                                        @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
+                                                            <a href="{{ route('QoutationsBuyerReceivedQoutes', ['EOrderID' => $placedRFQ->id, 'EOrderItemID' => $rfp->id, 'bypass_id' => 0]) }}"
+                                                               class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
+                                                                {{__('portal.See Quotes')}}
                                                             </a>
                                                         @endif
                                                     @else
@@ -523,10 +511,12 @@
                                             </td>
                                             @php
                                                 $created = $placedRFQ->OrderItems[0]->quotation_time;
-                                                $time = \Carbon\Carbon::parse($created)->format('Y-m-d');
-                                                $now = \Carbon\Carbon::now();
+                                                $time = \Carbon\Carbon::parse($created)->format('Y-m-d H:i:s');
+                                                $now = \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s');
+
+                                                /*$now = \Carbon\Carbon::now()
                                                 $diffInHrs = $now->diffInHours($created);
-                                                $diffInMins = $now->diffInMinutes($created);
+                                                $diffInMins = $now->diffInMinutes($created);*/
                                                 // checking previous dpo if any
                                                 $dpo = \App\Models\DraftPurchaseOrder::where('rfq_item_no', $placedRFQ->OrderItems[0]->id)->where('po_status' , 'pending')->where('status' , 'pending')->first();
                                             @endphp
@@ -548,42 +538,12 @@
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if(isset($dpo))
                                                     <span class="text-green-500">{{__('portal.DPO generated')}}</span>
-                                                @elseif($placedRFQ->OrderItems[0]->bypass == 1 && $placedRFQ->OrderItems[0]->quotation_time > \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->status == 'pending')
-                                                    @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
-                                                        <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 0]) }}"
-                                                           class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
-                                                            {{__('portal.See Quotes')}}
-                                                        </a>
-                                                    @endif
-                                                @elseif($placedRFQ->OrderItems[0]->bypass == 1 && $placedRFQ->OrderItems[0]->quotation_time < \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->status == 'pending')
-                                                    @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
-                                                        <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 0]) }}"
-                                                           class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
-                                                            {{__('portal.See Quotes')}}
-                                                        </a>
-                                                    @endif
-                                                @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->qoutes->count() == 0 && $placedRFQ->OrderItems[0]->quotation_time < \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->status == 'pending')
-                                                    {{-- Moved reset and discard buttons under action column --}}
-                                                    {{__('portal.N/A')}}
-                                                    {{--@if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
-                                                        <a href="{{ route('resetSingleCategoryQuotationTime', ['eOrderID' => $placedRFQ->id]) }}" title="{{__('portal.No quotation is received yet, activate the requisition again?')}}"
-                                                           class="inline-flex items-center justify-center px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to reset this requisition?')}}'>
-                                                            {{__('portal.Reset')}}
-                                                        </a>
-                                                        <a href="{{ route('discardSingleCategoryQuotation', ['eOrderID' => $placedRFQ->id]) }}" title="{{__('portal.Discard the requisition.')}}"
-                                                           class="inline-flex mt-1 items-center justify-center px-4 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
-                                                            {{__('portal.Discard')}}
-                                                        </a>
-                                                    @endif--}}
-                                                @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->quotation_time < \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->status == 'pending')
-                                                    @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
-                                                        <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 0]) }}"
-                                                           class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
-                                                            {{__('portal.See Quotes')}}
-                                                        </a>
-                                                    @endif
+                                                @elseif($placedRFQ->OrderItems[0]->quotation_time >= $now && $placedRFQ->OrderItems[0]->bypass == 1)
+                                                    {{__('portal.Overrode')}}
                                                 @elseif($placedRFQ->OrderItems[0]->status == 'accepted')
                                                     <span class="text-green-500">{{__('portal.Completed')}}</span>
+                                                @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->qoutes->count() == 0 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')
+                                                    {{__('portal.N/A')}}
                                                 @else
                                                     @php
                                                         /* Counting Total quotations for Single Category RFQ */
@@ -596,16 +556,30 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                @if($placedRFQ->OrderItems[0]->qoutes->count() > 0 && $placedRFQ->OrderItems[0]->quotation_time >= \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->bypass == 0)
+                                                @if(isset($dpo))
+                                                    {{__('portal.N/A')}}
+                                                @elseif($placedRFQ->OrderItems[0]->qoutes->count() > 0 && $placedRFQ->OrderItems[0]->quotation_time >= $now && $placedRFQ->OrderItems[0]->bypass == 0)
                                                     @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                         <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 1]) }}"
                                                            class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Once overrode you cannot receive quotations for this requisition')}}'>
                                                             {{__('portal.Override')}}
                                                         </a>
                                                     @endif
-                                                @elseif($placedRFQ->OrderItems[0]->quotation_time >= \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->bypass == 1)
-                                                    {{__('portal.Overrode')}}
-                                                @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->qoutes->count() == 0 && $placedRFQ->OrderItems[0]->quotation_time < \Carbon\Carbon::now() && $placedRFQ->OrderItems[0]->status == 'pending')
+                                                @elseif($placedRFQ->OrderItems[0]->bypass == 1 && $placedRFQ->OrderItems[0]->quotation_time > $now && $placedRFQ->OrderItems[0]->status == 'pending')
+                                                    @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
+                                                        <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 0]) }}"
+                                                           class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
+                                                            {{__('portal.See Quotes')}}
+                                                        </a>
+                                                    @endif
+                                                @elseif($placedRFQ->OrderItems[0]->bypass == 1 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')
+                                                    @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))
+                                                        <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 0]) }}"
+                                                           class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
+                                                            {{__('portal.See Quotes')}}
+                                                        </a>
+                                                    @endif
+                                                @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->qoutes->count() == 0 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')
                                                     @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                         <a href="{{ route('resetSingleCategoryQuotationTime', ['eOrderID' => $placedRFQ->id]) }}" title="{{__('portal.No quotation is received yet, activate the requisition again?')}}"
                                                            class="inline-flex items-center justify-center px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to reset this requisition?')}}'>
@@ -614,6 +588,13 @@
                                                         <a href="{{ route('discardSingleCategoryQuotation', ['eOrderID' => $placedRFQ->id]) }}" title="{{__('portal.Discard the requisition.')}}"
                                                            class="inline-flex mt-1 items-center justify-center px-4 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
                                                             {{__('portal.Discard')}}
+                                                        </a>
+                                                    @endif
+                                                @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')
+                                                    @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
+                                                        <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 0]) }}"
+                                                           class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
+                                                            {{__('portal.See Quotes')}}
                                                         </a>
                                                     @endif
                                                 @else
