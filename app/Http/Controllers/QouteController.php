@@ -766,11 +766,6 @@ class QouteController extends Controller
                 ]);
             }
             // $user = User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteAccepted($qoute));
-            $supplier_business_id = User::where('business_id', $request->supplier_business_id)->first();
-            if(!empty($supplier_business_id))
-            {
-                $supplier_business_id->notify(new AcceptedQuotation());
-            }
             DB::commit();
             /* Transaction successful. */
         } catch (\Exception $e) {

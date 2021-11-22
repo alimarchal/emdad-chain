@@ -18,6 +18,7 @@ use App\Notifications\DpoApproved;
 use App\Notifications\PurchaseOrderGenerated;
 use App\Notifications\QuoteAccepted;
 use App\Notifications\SingleCategoryPurchaseOrderGenerated;
+use App\Notifications\User\AcceptedQuotation;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
@@ -113,6 +114,7 @@ class DraftPurchaseOrderController extends Controller
 
     public function approved(Request $request, DraftPurchaseOrder $draftPurchaseOrder)
     {
+
         try {
             DB::beginTransaction();
 
@@ -187,7 +189,6 @@ class DraftPurchaseOrderController extends Controller
                     if ($user->ireNoReferencee->type == 0)       /* 0 for Non-Employee*/ {
                         $commission = CommissionPercentage::where(['commission_type' => 0], ['ire_type', 0])->first();
                         if (isset($commission)) {
-//                    $totalSalesAmount = 0;
                             $total = $totalEmdadCharges * $commission->amount;                          //total charges
                             $ireCommission = IreCommission::where('user_id', $user->user_id)->first();
                             $sales_amount = $ireCommission->sales_amount;
@@ -246,7 +247,6 @@ class DraftPurchaseOrderController extends Controller
                     elseif ($user->ireNoReferencee->type == 1)  /* 1 for Employee*/ {
                         $commission = CommissionPercentage::where(['commission_type' => 0], ['ire_type', 1])->first();
                         if (isset($commission)) {
-//                    $totalSalesAmount = 0;
                             $total = $totalEmdadCharges * $commission->amount;                          //total charges
                             $ireCommission = IreCommission::where('user_id', $user->user_id)->first();
                             $sales_amount = $ireCommission->sales_amount;
@@ -305,6 +305,18 @@ class DraftPurchaseOrderController extends Controller
             }
 
             $affected = DB::table('qoutes')->where('e_order_items_id', $draftPurchaseOrder->rfq_item_no)->where('id', '<>', $draftPurchaseOrder->qoute_no)->update(['qoute_status' => 'Rejected', 'qoute_status_updated' => 'Rejected', 'status' => 'expired']);
+            $supplier_business_id = User::where('business_id', $request->supplier_business_id)->first();
+            if(!empty($supplier_business_id))
+            {
+                $supplier_business_id->notify(new AcceptedQuotation());
+            }
+
+            $supplier_business_id = User::where('business_id', $draftPurchaseOrder->supplier_business_id)->first();
+            if(!empty($supplier_business_id))
+            {
+                $supplier_business_id->notify(new AcceptedQuotation());
+            }
+
             DB::commit();
             /* Transaction successful. */
         } catch (\Exception $e) {
