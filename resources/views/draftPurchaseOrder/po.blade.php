@@ -101,7 +101,7 @@
                                                             $record = \App\Models\Category::where('id',$dpo->item_code)->first();
                                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                         @endphp
-                                                        {{ $record->name }} , {{ $parent->name }}
+                                                        {{ $record->name }}@if(isset($parent)), {{ $parent->name }} @endif
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -317,18 +317,18 @@
                                             <tbody class="bg-white divide-y divide-gray-200">
                                             @foreach ($dpos as $dpo)
                                                 <tr>
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black" style=" font-family: sans-serif;">
                                                         {{ $loop->iteration }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if($dpo->rfq_type == 1)
                                                             <a href="{{ route('po.show', $dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                                {{__('portal.PO')}}-{{ $dpo->id }}
+                                                                {{__('portal.PO')}}-<span style=" font-family: sans-serif;">{{ $dpo->id }}</span>
                                                             </a>
                                                         @elseif($dpo->rfq_type == 0)
                                                             <a href="{{ route('singleCategoryPOByID', $dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                                {{__('portal.PO')}}-{{ $dpo->id }}
+                                                                {{__('portal.PO')}}-<span style=" font-family: sans-serif;">{{ $dpo->id }}</span>
                                                             </a>
                                                         @endif
                                                     </td>
@@ -338,14 +338,14 @@
                                                             $record = \App\Models\Category::where('id',$dpo->item_code)->first();
                                                             $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                         @endphp
-                                                        {{ $record->name_ar }} , {{ $parent->name_ar }}
+                                                        {{ $record->name_ar }}@if(isset($parent)), {{ $parent->name_ar }} @endif
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if($dpo->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dpo->rfq_type == 0) {{__('portal.Single Category')}} @endif
                                                     </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black" style=" font-family: sans-serif;">
                                                         {{ $dpo->po_date }}
                                                     </td>
 

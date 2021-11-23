@@ -44,6 +44,16 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @include('users.sessionMessage')
 
+                @if ($errors->any())
+                    <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <div class="text-center text-red-600 mr-5">
                     <span class="text-center text-red-600 mr-5">{{__('portal.Payment to be paid to Emdad')}}</span>
                 </div>
@@ -109,6 +119,16 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @include('users.sessionMessage')
+
+                @if ($errors->any())
+                    <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 <div class="text-center text-red-600 mr-5">
                     <span class="text-center text-red-600 mr-5">{{__('portal.Payment to be paid to Emdad')}}</span>

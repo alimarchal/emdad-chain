@@ -60,6 +60,8 @@ class RatingController extends Controller
     {
         $validated = \Validator::make($request->all(),[
             'rating' => 'required',
+        ],[
+            'rating.required' => __('portal.Rating is required')
         ]);
 
         if ($validated->fails()) {
@@ -115,6 +117,8 @@ class RatingController extends Controller
     {
         $validated = \Validator::make($request->all(),[
             'rating' => 'required',
+        ],[
+            'rating.required' => __('portal.Rating is required')
         ]);
 
         if ($validated->fails()) {
@@ -356,9 +360,9 @@ class RatingController extends Controller
             'emdad_rating' => 'required',
         ],
             [
-                'supplier_rating.required' => 'Supplier rating is required',
-                'driver_rating.required' => 'Driver rating is required',
-                'emdad_rating.required' => 'Emdad rating is required',
+                'supplier_rating.required' => __('portal.Supplier rating is required'),
+                'driver_rating.required' => __('portal.Driver rating is required'),
+                'emdad_rating.required' => __('portal.Emdad rating is required'),
             ]
         );
 
@@ -370,17 +374,17 @@ class RatingController extends Controller
         {
             if ($request->supplier_rating < 4 && $request->supplier_comment_content == null)
             {
-                session()->flash('error', 'Enter comments for rating under 4');
+                session()->flash('error', __('portal.Enter comments for rating under 4'));
                 return redirect()->back()->withInput();
             }
             if ($request->driver_rating < 4 && $request->driver_comment_content == null)
             {
-                session()->flash('error', 'Enter comments for rating under 4');
+                session()->flash('error', __('portal.Enter comments for rating under 4'));
                 return redirect()->back()->withInput();
             }
             if ($request->emdad_rating < 4 && $request->emdad_comment_content == null)
             {
-                session()->flash('error', 'Enter comments for rating under 4');
+                session()->flash('error', __('portal.Enter comments for rating under 4'));
                 return redirect()->back()->withInput();
             }
         }
@@ -414,7 +418,7 @@ class RatingController extends Controller
             'buyer_rating' => 1
         ]);
 
-        session()->flash('message', 'Rated Delivery Successfully!!');
+        session()->flash('message', __('portal.Delivery Rated Successfully!!'));
         return redirect()->route('deliveriesListToRate');
     }
 
@@ -492,8 +496,8 @@ class RatingController extends Controller
             'emdad_rating' => 'required',
         ],
             [
-                'buyer_rating.required' => 'Supplier rating is required',
-                'emdad_rating.required' => 'Emdad rating is required',
+                'buyer_rating.required' => __('portal.Supplier rating is required'),
+                'emdad_rating.required' => __('portal.Emdad rating is required'),
             ]
         );
 

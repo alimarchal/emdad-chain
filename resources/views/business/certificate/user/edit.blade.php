@@ -10,6 +10,18 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @include('users.sessionMessage')
+                @if ($errors->any())
+                    <div class="mb-3 block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li class="ml-4">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                            <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
                         <form action="{{ route('certificateView') }}" method="post" class="form bg-white p-6 mb-4" enctype="multipart/form-data">
@@ -85,6 +97,18 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @include('users.sessionMessage')
+                @if ($errors->any())
+                    <div class="mb-3 block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li class="mr-4">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                            <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
                         <form action="{{ route('certificateView') }}" method="post" class="form bg-white p-6 mb-4" enctype="multipart/form-data">

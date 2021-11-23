@@ -82,7 +82,7 @@
                         </div>
 
                         <div class="mx-5">
-                            <h4 class="text-2xl font-semibold text-gray-700">{{number_format(\App\Models\EOrders::where(['business_id' => auth()->user()->business_id])->count())}}</h4>
+                            <h4 class="text-2xl font-semibold text-gray-700" @if(auth()->user()->rtl == 1) style=" font-family: sans-serif;" @endif> {{number_format(\App\Models\EOrders::where(['business_id' => auth()->user()->business_id])->count())}}</h4>
                             <div class="text-gray-500">{{ __('dashboard.Total RFQs')}}</div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                         </div>
 
                         <div class="mx-5">
-                            <h4 class="text-2xl font-semibold text-gray-700">{{number_format(\App\Models\Qoute::where(['business_id' => auth()->user()->business_id])->count())}}</h4>
+                            <h4 class="text-2xl font-semibold text-gray-700" @if(auth()->user()->rtl == 1) style=" font-family: sans-serif;" @endif>{{number_format(\App\Models\Qoute::where(['business_id' => auth()->user()->business_id])->count())}}</h4>
                             <div class="text-gray-500">{{ __('dashboard.Total Quotation(s)')}}</div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                                     $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
                                     $dpos = $multiCategoryCollection->merge($singleCategoryInvoices);
                             @endphp
-                            <h4 class="text-2xl font-semibold text-gray-700">{{count($dpos) }}
+                            <h4 class="text-2xl font-semibold text-gray-700" @if(auth()->user()->rtl == 1) style=" font-family: sans-serif;" @endif>{{count($dpos) }}
                             </h4>
                             <div class="text-gray-500">{{ __('dashboard.Total Purchase Order(s)') }}</div>
                         </div>
@@ -148,7 +148,7 @@
                         </div>
 
                         <div class="mx-5">
-                            <h4 class="text-2xl font-semibold text-gray-700">{{\App\Models\Shipment::where(['buyer_business_id' => auth()->user()->business_id , 'status' => 1])->count() }}
+                            <h4 class="text-2xl font-semibold text-gray-700" @if(auth()->user()->rtl == 1) style=" font-family: sans-serif;" @endif>{{\App\Models\Shipment::where(['buyer_business_id' => auth()->user()->business_id , 'status' => 1])->count() }}
                             </h4>
                             <div class="text-gray-500">{{ __('dashboard.Total Shipments Delivered') }}</div>
                         </div>
@@ -191,7 +191,7 @@
                                         $singleCategoryInvoices = $singleCategoryCollection->unique('e_order_id');
                                         $totalQuotes = $multiCategoryCollection->merge($singleCategoryInvoices);
                                 @endphp
-                                <h4 class="text-2xl font-semibold text-gray-700">{{count($totalQuotes)}}</h4>
+                                <h4 class="text-2xl font-semibold text-gray-700" @if(auth()->user()->rtl == 1) style=" font-family: sans-serif;" @endif>{{count($totalQuotes)}}</h4>
                                 <div class="text-gray-500">{{ __('dashboard.Total Quotation(s)')}}</div>
                             </div>
                         </div>
@@ -225,7 +225,7 @@
                                     $singleCategoryInvoices = $singleCategoryCollection->unique('e_order_id');
                                     $rejectedQuotes = $multiCategoryCollection->merge($singleCategoryInvoices);
                                 @endphp
-                                <h4 class="text-2xl font-semibold text-gray-700">{{ count($rejectedQuotes) }}
+                                <h4 class="text-2xl font-semibold text-gray-700" @if(auth()->user()->rtl == 1) style=" font-family: sans-serif;" @endif>{{ count($rejectedQuotes) }}
                                 </h4>
                                 <div class="text-gray-500">{{ __('dashboard.Quotation(s) Rejected') }}</div>
                             </div>
@@ -262,7 +262,7 @@
                                         $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
                                         $pos = $multiCategoryCollection->merge($singleCategoryInvoices);
                                 @endphp
-                                <h4 class="text-2xl font-semibold text-gray-700">{{number_format(count($pos))}}</h4>
+                                <h4 class="text-2xl font-semibold text-gray-700" @if(auth()->user()->rtl == 1) style=" font-family: sans-serif;" @endif>{{number_format(count($pos))}}</h4>
                                 <div class="text-gray-500">{{ __('dashboard.Total Purchase Order(s)')}}</div>
                             </div>
                         </div>
@@ -279,7 +279,7 @@
                             </div>
 
                             <div class="mx-5">
-                                <h4 class="text-2xl font-semibold text-gray-700">{{\App\Models\Shipment::where(['supplier_business_id' => auth()->user()->business_id , 'status' => 1])->count() }}
+                                <h4 class="text-2xl font-semibold text-gray-700" @if(auth()->user()->rtl == 1) style=" font-family: sans-serif;" @endif>{{\App\Models\Shipment::where(['supplier_business_id' => auth()->user()->business_id , 'status' => 1])->count() }}
                                 </h4>
                                 <div class="text-gray-500">{{ __('dashboard.Total Shipments Delivered') }}</div>
                             </div>

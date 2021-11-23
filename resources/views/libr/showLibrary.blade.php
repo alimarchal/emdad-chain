@@ -34,7 +34,7 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight"> Library List</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{__('portal.Library List')}}</h2>
     </x-slot>
 
     <div class="py-12">
@@ -51,7 +51,7 @@
 
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <h2 class="text-2xl font-bold text-center mt-4">
-                        Library List
+                        {{__('portal.Library List')}}
                     </h2>
 
 
@@ -64,10 +64,10 @@
                             {{$lib->title}}<br>
                             @if(!empty($lib->attachment_url))
                             <a href="{{Storage::url($lib->attachment_url)}}" class="hover:underline text-blue-900">
-                                Download attachment
+                                {{__('portal.Download attachment')}}
                             </a>
                             @else
-                                No attachment available for download
+                                {{__('portal.No attachment available for download')}}
                             @endif
                         </div>
                     </div>

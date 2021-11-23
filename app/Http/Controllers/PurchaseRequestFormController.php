@@ -31,7 +31,7 @@ class PurchaseRequestFormController extends Controller
             $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
         }
         else{
-            session()->flash('error','No Business Package Found for you account! Contact Admin.');
+            session()->flash('error', __('portal.No Business Package Found for you account! Contact Admin.'));
             return redirect()->back();
         }
         $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
@@ -54,7 +54,7 @@ class PurchaseRequestFormController extends Controller
         /* Below code added to redirect back if Requisition limit for day is reached Added because h-screen issue in App.css blade */
         if ($rfqCount <= 0 && $business_package->package_id != 3 && $business_package->package_id != 4)
         {
-            session()->flash('error', 'Your have reached daily requisition generate limit.');
+            session()->flash('error', __('portal.Your have reached daily requisition generate limit.'));
             return redirect()->route('rfqView');
         }
 
@@ -89,7 +89,7 @@ class PurchaseRequestFormController extends Controller
             $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
         }
         else{
-            session()->flash('error','No Business Package Found for you account! Contact Admin.');
+            session()->flash('error', __('portal.No Business Package Found for you account! Contact Admin.'));
             return redirect()->back();
         }
         $eCart = ECart::where(['business_id' => auth()->user()->business_id , 'rfq_type' => 0])->get();
@@ -112,7 +112,7 @@ class PurchaseRequestFormController extends Controller
         /* Below code added to redirect back if Requisition limit for day is reached Added because h-screen issue in App.css blade */
         if ($rfqCount <= 0 && $business_package->package_id != 3 && $business_package->package_id != 4)
         {
-            session()->flash('error', 'Your have reached daily requisition generate limit.');
+            session()->flash('error', __('portal.Your have reached daily requisition generate limit.'));
             return redirect()->route('rfqView');
         }
 

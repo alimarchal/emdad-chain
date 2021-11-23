@@ -392,16 +392,16 @@
 
                                 <div class="flex flex-wrap overflow-hidden bg-white p-4">
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-2/3">
-                                        <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->buyer_business->business_name }}<br>
-                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrder->buyer_business->city }}</span> <br>
-                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrder->buyer_business->vat_reg_certificate_number }}</span><br>
-                                        <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrder->otp_mobile_number }}</span><br>
-                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrder->delivery_address }}</span><br><br>
+                                        <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->buyer_business->business_name }}</span><br>
+                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->buyer_business->city }}</span> <br>
+                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->buyer_business->vat_reg_certificate_number }}</span><br>
+                                        <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->otp_mobile_number }}</span><br>
+                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->delivery_address }}</span><br><br>
 
-                                        <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.DPO')}}-{{ $draftPurchaseOrder->id }}<br>
-                                        <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
-                                        <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $draftPurchaseOrder->qoute_no }}<br>
-                                        <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $draftPurchaseOrder->eOrderItem->id }}<br>
+                                        <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.DPO')}}-<span style="font-family: sans-serif;">{{ $draftPurchaseOrder->id }}</span><br>
+                                        <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->created_at }}</span><br>
+                                        <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-<span style="font-family: sans-serif;">{{ $draftPurchaseOrder->qoute_no }}</span><br>
+                                        <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-<span style="font-family: sans-serif;">{{ $draftPurchaseOrder->eOrderItem->id }}</span><br>
                                         <strong>{{__('portal.Payment Terms')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                         @if($draftPurchaseOrder->payment_term == 'Cash') {{__('portal.Cash')}}
                                         @elseif($draftPurchaseOrder->payment_term == 'Credit') {{__('portal.Credit')}}
@@ -416,10 +416,10 @@
 
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                         <img src="{{ Storage::url($draftPurchaseOrder->supplier_business->business_photo_url) }}" alt="{{ $draftPurchaseOrder->supplier_business->business_name }}" style="height: 95px;border-radius: 9px;"/><br><br>
-                                        <strong>{{__('portal.Supplier')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->supplier_business->business_name }}<br>
-                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> <span>{{ $draftPurchaseOrder->supplier_business->city }}</span> <br>
-                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrder->supplier_business->vat_reg_certificate_number }}</span> <br>
-                                        <strong>{{__('portal.Email')}}: &nbsp;</strong><span>{{ $draftPurchaseOrder->supplier_business->business_email }}</span> <br>
+                                        <strong>{{__('portal.Supplier')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->supplier_business->business_name }}</span> <br>
+                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> <span style="font-family: sans-serif;">{{ $draftPurchaseOrder->supplier_business->city }}</span> <br>
+                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->supplier_business->vat_reg_certificate_number }}</span> <br>
+                                        <strong>{{__('portal.Email')}}: &nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->supplier_business->business_email }}</span> <br>
                                     </div>
                                 </div>
 
@@ -460,7 +460,7 @@
                                     </thead>
                                     <tbody class="bg-white divide-y divide-black border-1 border-black">
                                     <tr>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black" style="font-family: sans-serif;">
                                             1
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
@@ -470,26 +470,27 @@
                                             @endphp
                                             {{ $record->name_ar }}@if(isset($parent)), {{ $parent->name_ar }} @endif
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black" style="font-family: sans-serif;">
                                             {{ strip_tags($draftPurchaseOrder->eOrderItem->description) }}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black" style="font-family: sans-serif;">
                                             {{ $draftPurchaseOrder->brand }}
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
-                                            {{ $draftPurchaseOrder->uom }}
+                                            @php $UOM = \App\Models\UnitMeasurement::where('uom_en', $draftPurchaseOrder->uom)->pluck('uom_ar')->first(); @endphp
+                                            {{ $UOM }}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black" style="font-family: sans-serif;">
                                             @if(isset($draftPurchaseOrder->remarks)) {{ strip_tags($draftPurchaseOrder->remarks) }} @else {{__('portal.N/A')}} @endif
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
-                                            {{ $draftPurchaseOrder->unit_price }} {{__('portal.SAR')}}
+                                            <span style="font-family: sans-serif;">{{ $draftPurchaseOrder->unit_price }}</span> {{__('portal.SAR')}}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black" style="font-family: sans-serif;">
                                             {{ $draftPurchaseOrder->quantity }}
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black  border border-black">
-                                            {{ number_format($draftPurchaseOrder->sub_total, 2) }} {{__('portal.SAR')}}
+                                            <span style="font-family: sans-serif;">{{ number_format($draftPurchaseOrder->sub_total, 2) }}</span> {{__('portal.SAR')}}
                                         </td>
                                     </tr>
                                     </tbody>
@@ -501,20 +502,20 @@
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->sub_total, 2) }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ number_format($draftPurchaseOrder->sub_total, 2) }}</span> {{__('portal.SAR')}}<br>
                                         @php $subtotal = $draftPurchaseOrder->sub_total; $subtotal += $draftPurchaseOrder->shipment_cost; @endphp
-                                        <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($draftPurchaseOrder->shipment_cost, 2) }} {{__('portal.SAR')}}<br>
-                                        <strong>{{__('portal.VAT')}} {{ number_format($draftPurchaseOrder->vat) }}%: @if($draftPurchaseOrder->vat > 9)  @else &nbsp;&nbsp; @endif </strong>{{ number_format($subtotal * ($draftPurchaseOrder->vat/100), 2) }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ number_format($draftPurchaseOrder->shipment_cost, 2) }}</span> {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.VAT')}} <span style="font-family: sans-serif;">{{ number_format($draftPurchaseOrder->vat) }}</span>%: @if($draftPurchaseOrder->vat > 9)  @else &nbsp;&nbsp; @endif </strong><span style="font-family: sans-serif;">{{ number_format($subtotal * ($draftPurchaseOrder->vat/100), 2) }}</span> {{__('portal.SAR')}}<br>
                                         <hr>
-                                        <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format(($draftPurchaseOrder->total_cost),2) }}  {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ number_format(($draftPurchaseOrder->total_cost),2) }}</span>  {{__('portal.SAR')}}<br>
                                         <hr>
                                     </div>
                                 </div>
 
                                 <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
-                                        <strong>{{__('portal.Mobile Number for OTP')}}: </strong> {{ $draftPurchaseOrder->otp_mobile_number }} <br>
-                                        <strong>{{__('portal.Delivery Address')}}: </strong> {{ strip_tags($draftPurchaseOrder->delivery_address) }} <br>
+                                        <strong>{{__('portal.Mobile Number for OTP')}}: </strong> <span style="font-family: sans-serif;">{{ $draftPurchaseOrder->otp_mobile_number }}</span> <br>
+                                        <strong>{{__('portal.Delivery Address')}}: </strong> <span style="font-family: sans-serif;">{{ strip_tags($draftPurchaseOrder->delivery_address) }}</span> <br>
                                         <strong class="text-red-900">{{__('portal.Note')}}: </strong> <span class="text-red-700">
                                             {{__('portal.We acknowledge that')}} {{$draftPurchaseOrder->buyer_business->business_name }}
                                                         {{__('portal.agrees to deal with')}} {{$draftPurchaseOrder->supplier_business->business_name}}. <br>

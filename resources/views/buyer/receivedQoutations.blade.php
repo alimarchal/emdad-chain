@@ -378,7 +378,7 @@
                                     @if($placedRFQ->rfq_type == 1)
                                         @foreach ($placedRFQ->OrderItems->sortBy('created_at') as $rfp)
                                             <tr>
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style=" font-family: sans-serif;">
                                                     {{-- Showing EOrderItems Number for multi categories --}}
                                                     {{__('portal.RFQ')}}-{{ $rfp->id }}
                                                 </td>
@@ -392,7 +392,7 @@
                                                 <td class="px-7 py-4 text-center whitespace-nowrap">
                                                     {{__('portal.Multiple Categories')}}
                                                 </td>
-                                                <td class="px-7 py-4 text-center whitespace-nowrap">
+                                                <td class="px-7 py-4 text-center whitespace-nowrap" style=" font-family: sans-serif;">
                                                     {{ $rfp->created_at->format('d-m-Y') }}
                                                 </td>
 
@@ -413,6 +413,7 @@
                                                     @else
                                                     class="px-6 py-4 text-center whitespace-nowrap"  data-countdown="{{$time}}" title="{{__('portal.Maximum time allotted to receive quotations.')}}"
                                                     @endif
+                                                    style=" font-family: sans-serif;"
                                                 >
                                                     @if($rfp->status == 'accepted')
                                                         {{__('portal.N/A')}}
@@ -431,16 +432,16 @@
                                                     @elseif($rfp->status == 'accepted')
                                                         <span class="text-green-500">{{__('portal.Completed')}}</span>
                                                     @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < $now && $rfp->status == 'pending')
-                                                        {{__('portal.N/A')}}
+                                                        <span style=" font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                                     @else
-                                                        {{ $rfp->qoutes->count() }}
+                                                        <span style=" font-family: sans-serif;">{{ $rfp->qoutes->count() }}</span>
                                                     @endif
 
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if(isset($dpo))
-                                                        {{__('portal.N/A')}}
+                                                        <span style=" font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                                     @elseif($rfp->qoutes->count() > 0 && $rfp->quotation_time >= $now && $rfp->bypass == 0)
                                                         {{--                                                @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))--}}
                                                         @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
@@ -482,7 +483,7 @@
                                                             </a>
                                                         @endif
                                                     @else
-                                                        {{__('portal.N/A')}}
+                                                        <span style=" font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                                     @endif
                                                 </td>
 
@@ -490,7 +491,7 @@
                                         @endforeach
                                     @else
                                         <tr>
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style=" font-family: sans-serif;">
                                                 {{-- Showing EOrder Number(ID) for single category --}}
 {{--                                                {{__('portal.RFQ')}}-{{ $placedRFQ->id }}--}}
                                                 {{-- Now Showing EOrderItems Number(ID) for single category same as multi categories  --}}
@@ -506,7 +507,7 @@
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ __('portal.Single Category') }} <br>
                                             </td>
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style=" font-family: sans-serif;">
                                                 {{ $placedRFQ->created_at->format('d-m-Y') }} <br>
                                             </td>
                                             @php
@@ -526,6 +527,7 @@
                                                 @else
                                                 class="px-6 py-4 text-center whitespace-nowrap"  data-countdown="{{$time}}" title="{{__('portal.Maximum time allotted to receive quotations.')}}"
                                                 @endif
+                                                style=" font-family: sans-serif;"
                                             >
                                                 @if($placedRFQ->OrderItems[0]->status == 'accepted')
                                                     {{__('portal.N/A')}}
@@ -543,21 +545,21 @@
                                                 @elseif($placedRFQ->OrderItems[0]->status == 'accepted')
                                                     <span class="text-green-500">{{__('portal.Completed')}}</span>
                                                 @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->qoutes->count() == 0 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')
-                                                    {{__('portal.N/A')}}
+                                                    <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                                 @else
                                                     @php
                                                         /* Counting Total quotations for Single Category RFQ */
                                                             $quotationCount = array();
                                                             $quotationCount = \App\Models\Qoute::where('e_order_id', $placedRFQ->id)->get();
                                                     @endphp
-                                                    {{count($quotationCount->unique('supplier_user_id'))}}
+                                                    <span style="font-family: sans-serif;">{{count($quotationCount->unique('supplier_user_id'))}}</span>
                                                 @endif
 
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if(isset($dpo))
-                                                    {{__('portal.N/A')}}
+                                                    <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                                 @elseif($placedRFQ->OrderItems[0]->qoutes->count() > 0 && $placedRFQ->OrderItems[0]->quotation_time >= $now && $placedRFQ->OrderItems[0]->bypass == 0)
                                                     @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                         <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 1]) }}"
@@ -598,7 +600,7 @@
                                                         </a>
                                                     @endif
                                                 @else
-                                                    {{__('portal.N/A')}}
+                                                    <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                                 @endif
                                             </td>
 

@@ -421,6 +421,10 @@ class QouteController extends Controller
         $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
         Validator::make($request->all(), [
             'expiry_date' => 'required|date|after_or_equal:'.$min5days
+        ],[
+            'expiry_date.required' => __('portal.The expiry date field is required'),
+            'expiry_date.date' => __('portal.The expiry date field must be date'),
+            'expiry_date.after_or_equal' => __('portal.The expiry date field must be greater than 4 days from now'),
         ])->validate();
 
         $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d');
@@ -474,6 +478,10 @@ class QouteController extends Controller
         $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
         Validator::make($request->all(), [
             'expiry_date' => 'required|date|after_or_equal:'.$min5days
+        ],[
+            'expiry_date.required' => __('portal.The expiry date field is required'),
+            'expiry_date.date' => __('portal.The expiry date field must be date'),
+            'expiry_date.after_or_equal' => __('portal.The expiry date field must be greater than 4 days from now'),
         ])->validate();
 
         $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d');
@@ -646,7 +654,7 @@ class QouteController extends Controller
         Validator::make($request->all(), [
             'message' => ['required'],
         ], [
-            'message.required' => 'Please provide modification reason(s)',
+            'message.required' => __('portal.Please provide modification reason(s)'),
         ])->validate();
         /* Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message */
         /* Copied this form QouteMessageController because merging Send message and Quote Again Button  */
@@ -875,7 +883,7 @@ class QouteController extends Controller
         Validator::make($request->all(), [
             'message' => ['required'],
         ], [
-            'message.required' => 'Please provide modification reason(s)',
+            'message.required' => __('portal.Please provide modification reason(s)'),
         ])->validate();
 
         /* Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message */

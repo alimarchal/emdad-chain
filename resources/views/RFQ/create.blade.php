@@ -1442,7 +1442,7 @@
                                 $user_business_details=auth()->user()->business;
                             @endphp
                             <div class="my-5 pl-5 ">
-                                <h1 class="font-extrabold color-1f3864 text-xl ">{{$user_business_details->business_name}}</h1>
+                                <h1 class="font-medium color-1f3864 text-xl" style="font-family: sans-serif;">{{$user_business_details->business_name}}</h1>
                             </div>
                         </div>
 
@@ -1450,7 +1450,8 @@
                             <div class="ml-auto date" style="width:150px; float: left">
                                 <br>
                                 <span class="color-1f3864 font-bold">{{__('portal.Date')}}:
-                            {{\Carbon\Carbon::today()->format('Y-m-d')}}</span><br>
+                                   <span style="font-family: sans-serif;">{{\Carbon\Carbon::today()->format('Y-m-d')}}</span>
+                                </span><br>
                                 <hr>
                             </div>
                         </div>
@@ -1606,7 +1607,7 @@
                                                     d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
                                                     fill="#000000" fill-rule="nonzero"/>
                                             </svg>
-                                            <select
+                                            <select style="font-family: sans-serif;"
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 required name="warehouse_id" id="warehouse_id">
                                                 <option value="">{{__('portal.Select Warehouse Location')}}</option>
@@ -1735,24 +1736,26 @@
                                         {{ $record->name_ar}} @if(isset($parent)), {{ $parent->name_ar}} @endif
 
                                     </td>
-                                    <td>
+                                    <td style="font-family: sans-serif;">
                                         {{strip_tags($item->description)}}
                                     </td>
-                                    <td> @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}}</td>
                                     <td>
+                                        @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}}
+                                    </td>
+                                    <td style="font-family: sans-serif;">
                                         {{$item->quantity}}
                                     </td>
-                                    <td>
+                                    <td style="font-family: sans-serif;">
                                         {{$item->size}}
                                     </td>
-                                    <td>
+                                    <td style="font-family: sans-serif;">
                                         {{$item->brand}}
                                     </td>
 
-                                    <td>
+                                    <td style="font-family: sans-serif;">
                                         {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
                                     </td>
-                                    <td>
+                                    <td style="font-family: sans-serif;">
                                         {{$item->remarks}}
                                     </td>
                                     <td class="">
@@ -1768,7 +1771,7 @@
                                                 </svg>
                                             </a>
                                         @else
-                                            {{__('portal.N/A')}}
+                                            <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                         @endif
                                     </td>
 
@@ -1952,7 +1955,7 @@
                                 $user_business_details=auth()->user()->business;
                             @endphp
                             <div class="my-5 pl-5 ">
-                                <h1 class="font-extrabold color-1f3864 text-xl ">{{$user_business_details->business_name}}</h1>
+                                <h1 class="font-medium color-1f3864 text-xl" style="font-family: sans-serif;">{{$user_business_details->business_name}}</h1>
                                 {{-- <span>Location :
                                 <span class="font-bold">{{$user_business_details->city}}</span></span> <br>
                                 <span>Emdad Id : <span class="font-bold">{{Auth::user()->business_id}}</span></span> --}}
@@ -1962,8 +1965,9 @@
                         <div class="flex-1 ">
                             <div class="ml-auto date" style="width:150px; float: left">
                                 <br>
-                                <span
-                                    class="color-1f3864 font-bold">{{__('portal.Date')}}: {{\Carbon\Carbon::today()->format('Y-m-d')}}</span><br>
+                                <span class="color-1f3864 font-bold">{{__('portal.Date')}}:
+                                    <span style="font-family: sans-serif;">{{\Carbon\Carbon::today()->format('Y-m-d')}}</span>
+                                </span><br>
                                 <hr>
                             </div>
                         </div>
@@ -2120,7 +2124,7 @@
                                                     d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
                                                     fill="#000000" fill-rule="nonzero"/>
                                             </svg>
-                                            <select
+                                            <select style="font-family: sans-serif;"
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 required name="warehouse_id" id="warehouse_id">
                                                 <option value="">{{__('portal.Select Warehouse Location')}}</option>
@@ -2231,24 +2235,26 @@
                                         {{ $record->name_ar}} @if(isset($parent)), {{ $parent->name_ar}} @endif
 
                                     </td>
-                                    <td>
+                                    <td style="font-family: sans-serif;">
                                         {{strip_tags($item->description)}}
                                     </td>
-                                    <td> @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}}</td>
                                     <td>
+                                        @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}}
+                                    </td>
+                                    <td style="font-family: sans-serif;">
                                         {{$item->quantity}}
                                     </td>
-                                    <td>
+                                    <td style="font-family: sans-serif;">
                                         {{$item->size}}
                                     </td>
-                                    <td>
+                                    <td style="font-family: sans-serif;">
                                         {{$item->brand}}
                                     </td>
 
-                                    <td>
+                                    <td style="font-family: sans-serif;">
                                         {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
                                     </td>
-                                    <td>
+                                    <td style="font-family: sans-serif;">
                                         {{$item->remarks}}
                                     </td>
                                     <td class="">
@@ -2264,7 +2270,7 @@
                                                 </svg>
                                             </a>
                                         @else
-                                            {{__('portal.N/A')}}
+                                            <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                         @endif
                                     </td>
 

@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\UserLog;
 use App\Notifications\BusinessRejected;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BusinessController extends Controller
 {
@@ -445,21 +446,49 @@ class BusinessController extends Controller
     {
         if ($request->has('vat_reg_certificate_path_1') || $request->has('chamber_reg_path_1') || $request->has('business_photo_url_1') || $request->has('nid_photo_1')) {
             if ($request->has('vat_reg_certificate_path_1')) {
+
+                Validator::make($request->all(), [
+                    'vat_reg_certificate_path_1' => 'required|mimes:jpeg,png,jpg',
+                ], [
+                    'vat_reg_certificate_path_1.mimes' => __('portal.VAT certificate must be an image (jpeg, jpg, png) type'),
+                ])->validate();
+
                 $path = $request->file('vat_reg_certificate_path_1')->store('', 'public');
                 $request->merge(['vat_reg_certificate_path' => $path]);
             }
 
             if ($request->has('chamber_reg_path_1')) {
+
+                Validator::make($request->all(), [
+                    'chamber_reg_path_1' => 'required|mimes:jpeg,png,jpg',
+                ], [
+                    'chamber_reg_path_1.mimes' => __('portal.Commercial Registration certificate must be an image (jpeg, jpg, png) type'),
+                ])->validate();
+
                 $pathVat = $request->file('chamber_reg_path_1')->store('', 'public');
                 $request->merge(['chamber_reg_path' => $pathVat]);
             }
 
             if ($request->has('business_photo_url_1')) {
+
+                Validator::make($request->all(), [
+                    'business_photo_url_1' => 'required|mimes:jpeg,png,jpg',
+                ], [
+                    'business_photo_url_1.mimes' => __('portal.Business Logo must be an image (jpeg, jpg, png) type'),
+                ])->validate();
+
                 $pathLogo = $request->file('business_photo_url_1')->store('', 'public');
                 $request->merge(['business_photo_url' => $pathLogo]);
             }
 
             if ($request->has('nid_photo_1')) {
+
+                Validator::make($request->all(), [
+                    'nid_photo_1' => 'required|mimes:jpeg,png,jpg',
+                ], [
+                    'nid_photo_1.mimes' => __('portal.National ID Card Photo must be an image (jpeg, jpg, png) type'),
+                ])->validate();
+
                 $pathLogo = $request->file('nid_photo_1')->store('', 'public');
                 $request->merge(['nid_photo' => $pathLogo]);
             }

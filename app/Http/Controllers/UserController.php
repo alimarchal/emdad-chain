@@ -130,7 +130,7 @@ class UserController extends Controller
                 'email' => 'required|email|unique:users',
             ]);
             if ($validated->fails()) {
-                session()->flash('message', 'Email already exits');
+                session()->flash('message', __('portal.Email already exits'));
                 return redirect()->back()->withInput();
             }
 
@@ -152,7 +152,7 @@ class UserController extends Controller
             ]);
 
             if ($validated->fails()) {
-                session()->flash('message', 'Email already exits');
+                session()->flash('message', __('portal.Email already exits'));
                 return redirect()->back()->withInput();
             }
 
@@ -253,7 +253,7 @@ class UserController extends Controller
     {
 
         if (isset($user->usertype) && $user->usertype == 'Supplier Driver' && $user->driver_status == 0) {
-            session()->flash('error', 'Driver cannot be deleted because he has a shipment assigned');
+            session()->flash('error', __('portal.Driver cannot be deleted because he has a shipment assigned.'));
             return redirect()->back();
         }
 
@@ -331,6 +331,21 @@ class UserController extends Controller
             'mobile' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:6',
+        ],[
+            'gender.required' => __('portal.Gender is required'),
+            'name.required' => __('portal.Name is required'),
+            'middle_initial.required' => __('portal.Middle Initial is required'),
+            'family_name.required' => __('portal.Family Name is required'),
+            'nid_num.required' => __('portal.National ID Number is required'),
+            'nid_exp_date.required' => __('portal.National ID Expiry Date is required'),
+            'nid_exp_date.date' => __('portal.National ID Expiry Date must be date'),
+            'mobile.required' => __('portal.Mobile Number is required'),
+            'email.required' => __('portal.Email is required'),
+            'email.email' => __('portal.Email address is not valid'),
+            'email.unique:users' => __('portal.Email is already taken'),
+            'password.required' => __('portal.Password is required'),
+            'password.confirmed' => __('portal.Password did not matched with confirm password'),
+            'password.min:6' => __('portal.Password should be min of 6 characters'),
         ]);
 
         if ($validated->fails()) {
@@ -383,6 +398,21 @@ class UserController extends Controller
             'mobile' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed|min:6',
+        ],[
+            'gender.required' => __('portal.Gender is required'),
+            'name.required' => __('portal.Name is required'),
+            'middle_initial.required' => __('portal.Middle Initial is required'),
+            'family_name.required' => __('portal.Family Name is required'),
+            'nid_num.required' => __('portal.National ID Number is required'),
+            'nid_exp_date.required' => __('portal.National ID Expiry Date is required'),
+            'nid_exp_date.date' => __('portal.National ID Expiry Date must be date'),
+            'mobile.required' => __('portal.Mobile Number is required'),
+            'email.required' => __('portal.Email is required'),
+            'email.email' => __('portal.Email address is not valid'),
+            'email.unique:users' => __('portal.Email is already taken'),
+            'password.required' => __('portal.Password is required'),
+            'password.confirmed' => __('portal.Password did not matched with confirm password'),
+            'password.min:6' => __('portal.Password should be min of 6 characters'),
         ]);
 
         if ($validated->fails()) {

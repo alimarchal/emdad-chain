@@ -74,7 +74,6 @@ class DraftPurchaseOrderController extends Controller
 
     public function show(DraftPurchaseOrder $draftPurchaseOrder)
     {
-
         return view('draftPurchaseOrder.show', compact('draftPurchaseOrder'));
     }
 
@@ -87,10 +86,10 @@ class DraftPurchaseOrderController extends Controller
     public function uploadDPOFile(Request $request)
     {
         Validator::make($request->all(), [
-            'file_path_1' => 'required|mimes:jpeg,png,jpg,svg,pdf,',
+            'file_path_1' => 'required|mimes:jpeg,png,jpg,pdf,',
         ], [
-            'file_path_1.required' => 'Please choose a file',
-            'file_path_1.mimes' => 'File must be an image or a PDF',
+            'file_path_1.required' => __('portal.Please choose a file'),
+            'file_path_1.mimes' => __('portal.File must be an image (jpeg, jpg, png) type or must be PDF type'),
         ])->validate();
 
         $dpo = DraftPurchaseOrder::where('id', decrypt($request->dpo_id))->first();
@@ -108,7 +107,7 @@ class DraftPurchaseOrderController extends Controller
 
         $dpo->update([ 'file' => $request->file ]);
 
-        session()->flash('message', 'File uploaded successfully');
+        session()->flash('message', __('portal.File uploaded successfully'));
         return redirect()->back();
     }
 
@@ -527,10 +526,10 @@ class DraftPurchaseOrderController extends Controller
     public function uploadSingleCategoryDPOFile(Request $request): RedirectResponse
     {
         Validator::make($request->all(), [
-            'file_path_1' => 'required|mimes:jpeg,png,jpg,svg,pdf,',
+            'file_path_1' => 'required|mimes:jpeg,png,jpg,pdf,',
         ], [
-            'file_path_1.required' => 'Please choose a file',
-            'file_path_1.mimes' => 'File must be an image or a PDF',
+            'file_path_1.required' => __('portal.Please choose a file'),
+            'file_path_1.mimes' => __('portal.File must be an image (jpeg, jpg, png) type or must be PDF type'),
         ])->validate();
         $dpos = DraftPurchaseOrder::where('rfq_no', decrypt($request->dpo_rfq_no))->get();
 
@@ -550,7 +549,7 @@ class DraftPurchaseOrderController extends Controller
             $dpo->update([ 'file' => $request->file ]);
         }
 
-        session()->flash('message', 'File uploaded successfully');
+        session()->flash('message', __('portal.File uploaded successfully'));
         return redirect()->back();
     }
 

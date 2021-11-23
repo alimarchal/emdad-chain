@@ -13,7 +13,11 @@
                     @php
                         $business = \App\Models\Business::where('id', auth()->user()->business_id)->first();
                     @endphp
-                    <img src="{{ asset(Storage::url($business->business_photo_url)) }}" class="block h-9 w-auto" style="border-radius: 9px;"/>
+                    @if(isset($business->business_photo_url))
+                        <img src="{{ asset(Storage::url($business->business_photo_url)) }}" class="block h-9 w-auto" style="border-radius: 9px;"/>
+                    @else
+                        <img src="{{ url('logo.png') }}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto" style="border-radius: 9px;"/>
+                    @endif
                 </a>
                 <a href="{{ route('dashboard') }}"
                    @if(auth()->user()->hasRole('SuperAdmin')) title="SuperAdmin {{__('sidebar.Virtual office')}}"
@@ -1702,7 +1706,12 @@
                     @php
                         $business = \App\Models\Business::where('id', auth()->user()->business_id)->first();
                     @endphp
-                    <img src="{{ asset(Storage::url($business->business_photo_url)) }}" class="block h-9 w-auto" style="border-radius: 9px;"/>
+                    @if(isset($business->business_photo_url))
+                        <img src="{{ asset(Storage::url($business->business_photo_url)) }}" class="block h-9 w-auto" style="border-radius: 9px;"/>
+                    @else
+                        <img src="{{ url('logo.png') }}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto" style="border-radius: 9px;"/>
+                    @endif
+
                 </a>
                 <a href="{{ route('dashboard') }}"
                    @if(auth()->user()->hasRole('SuperAdmin'))  title=" {{__('sidebar.Super Admin Virtual office')}}"

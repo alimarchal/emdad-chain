@@ -81,9 +81,9 @@ class BankPaymentController extends Controller
             'amount_date' => 'required',
             'file_path_1' => 'required|mimes:jpg,bmp,png,jpeg,JPEG,JPG,pdf',
         ],[
-            'amount_date.required' => 'Please choose a deposit date',
-            'file_path_1.required' => 'Receipt (Proof) is required',
-            'file_path_1.mimes' => 'Receipt (Proof) must be of type jpg,bmp,png,jpeg,JPEG,JPG,pdf',
+            'amount_date.required' => __('portal.Please choose a deposit date'),
+            'file_path_1.required' => __('portal.Receipt (Proof) is required'),
+            'file_path_1.mimes' => __('portal.Receipt (Proof) must be of type jpg,bmp,png,jpeg,JPEG,JPG,pdf'),
         ]);
 
         $time = strtotime($request->amount_date);
@@ -129,6 +129,14 @@ class BankPaymentController extends Controller
 
     public function update_payment(Request $request)
     {
+        $request->validate([
+            'amount_date' => 'required',
+            'file_path_1' => 'required|mimes:jpg,bmp,png,jpeg,JPEG,JPG,pdf',
+        ],[
+            'amount_date.required' => __('portal.Please choose a deposit date'),
+            'file_path_1.required' => __('portal.Receipt (Proof) is required'),
+            'file_path_1.mimes' => __('portal.Receipt (Proof) must be of type jpg,bmp,png,jpeg,JPEG,JPG,pdf'),
+        ]);
 
         $path = null;
         if ($request->has('file_path_1')) {
@@ -146,6 +154,7 @@ class BankPaymentController extends Controller
         $Invoice = Invoice::where('id', $request->invoice_id)->first();
         $Invoice->invoice_status = 1;
         $Invoice->save();
+        session()->flash('message', __('portal.You have successfully updated payment details.'));
 //        return redirect()->route('bank-payments.index');
         return redirect()->route('invoices');
     }
@@ -263,20 +272,14 @@ class BankPaymentController extends Controller
 
     public function singleCategoryStore(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+        \Validator::make($request->all(), [
             'amount_date' => 'required',
             'file_path_1' => 'required|mimes: jpeg.jpg,png,pdf',
         ],[
-            'amount_date.required' => 'Please choose a deposit date',
-            'file_path_1.required' => 'Receipt (Proof) is required',
-            'file_path_1.mimes' => 'Receipt (Proof) must be of type jpg,bmp,png,jpeg,JPEG,JPG,pdf',
+            'amount_date.required' => __('portal.Please choose a deposit date'),
+            'file_path_1.required' => __('portal.Receipt (Proof) is required'),
+            'file_path_1.mimes' => __('portal.Receipt (Proof) must be of type jpg,bmp,png,jpeg,JPEG,JPG,pdf'),
         ])->validate();
-
-//        if ($validator->fails())
-//        {
-//            session()->flash('error', 'All Fields are required');
-//            return redirect()->back();
-//        }
 
         $time = strtotime($request->amount_date);
         $newformat = date('Y-m-d',$time);
@@ -451,16 +454,14 @@ class BankPaymentController extends Controller
     // Update function for Buyer
     public function singleUpdatePayment(Request $request, $rfq_no)
     {
-        $validator = \Validator::make($request->all(), [
+        \Validator::make($request->all(), [
             'amount_date' => 'required',
-            'file_path_1' => 'required|mimes: jpeg.jpg,png,',
-        ]);
-
-        if ($validator->fails())
-        {
-            session()->flash('error', __('portal.All Fields are required.'));
-            return redirect()->back();
-        }
+            'file_path_1' => 'required|mimes: jpeg.jpg,png,pdf',
+        ],[
+            'amount_date.required' => __('portal.Please choose a deposit date'),
+            'file_path_1.required' => __('portal.Receipt (Proof) is required'),
+            'file_path_1.mimes' => __('portal.Receipt (Proof) must be of type jpg,bmp,png,jpeg,JPEG,JPG,pdf'),
+        ])->validate();
 
         $bankPayments = BankPayment::where('rfq_no', $rfq_no)->get();
 

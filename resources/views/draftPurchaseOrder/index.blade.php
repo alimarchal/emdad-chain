@@ -287,18 +287,18 @@
                                             <tbody class="bg-white divide-y divide-gray-200">
                                             @foreach ($dpos as $dpo)
                                                 <tr>
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black" style=" font-family: sans-serif;">
                                                         {{ $loop->iteration }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if($dpo->rfq_type == 1)
                                                             <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                                {{__('portal.DPO')}}-{{ $dpo->id }}
+                                                                {{__('portal.DPO')}}-<span style="font-family: sans-serif;">{{ $dpo->id }}</span>
                                                             </a>
                                                         @elseif($dpo->rfq_type == 0)
                                                             <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                                {{__('portal.DPO')}}-{{ $dpo->id }}
+                                                                {{__('portal.DPO')}}-<span style="font-family: sans-serif;">{{ $dpo->id }}</span>
                                                             </a>
                                                         @endif
                                                     </td>
@@ -315,11 +315,11 @@
                                                         @if($dpo->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dpo->rfq_type == 0) {{__('portal.Single Category')}}@endif
                                                     </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black" style=" font-family: sans-serif;">
                                                         {{ $dpo->po_date }}
                                                     </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black" style=" font-family: sans-serif;">
                                                         {{ \Carbon\Carbon::parse($dpo->quote->expiry_date)->format('Y-m-d') }}
                                                     </td>
 
@@ -337,12 +337,12 @@
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if($dpo->quote->expiry_date >= \Carbon\Carbon::now())
-                                                            {{__('portal.N/A')}}
+                                                            <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                                         @else
                                                             @if($dpo->quote->request_status == 0)
                                                                 @if($dpo->rfq_type == 1)
                                                                     @if($dpo->status == 'cancel')
-                                                                        {{__('portal.N/A')}}
+                                                                        <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                                                     @else
                                                                         <a href="{{route('DPOExpiredStatusUpdate', $dpo->qoute_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
                                                                             {{__('portal.Request to extend expiry date')}}
@@ -350,7 +350,7 @@
                                                                     @endif
                                                                 @elseif($dpo->rfq_type == 0)
                                                                     @if($dpo->status == 'cancel')
-                                                                        {{__('portal.N/A')}}
+                                                                        <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                                                     @else
                                                                         <a href="{{route('DPOExpiredStatusUpdateSingleCategory', $dpo->rfq_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
                                                                             {{__('portal.Request to extend expiry date')}}
@@ -358,7 +358,7 @@
                                                                     @endif
                                                                 @endif
                                                             @else
-                                                                {{__('portal.N/A')}}
+                                                                <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                                             @endif
                                                         @endif
                                                     </td>
@@ -433,7 +433,7 @@
         });
 
         function request() {
-            if(!confirm('Are you sure to request for extension?')){
+            if(!confirm('هل أنت متأكد من طلب التمديد؟')){
                 event.preventDefault();
             }
         }

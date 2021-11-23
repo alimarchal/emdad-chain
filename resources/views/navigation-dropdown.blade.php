@@ -23,7 +23,11 @@
                             @php
                                 $business = \App\Models\Business::where('id', auth()->user()->business_id)->first();
                             @endphp
-                            <img src="{{ asset(Storage::url($business->business_photo_url)) }}" class="block h-9 w-auto"/>
+                            @if(isset($business->business_photo_url))
+                                <img src="{{ asset(Storage::url($business->business_photo_url)) }}" class="block h-9 w-auto"/>
+                            @else
+                                <img src="{{ url('logo.png') }}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto"/>
+                            @endif
                         </a>
                     </div>
 
@@ -817,7 +821,11 @@
                             @php
                                 $business = \App\Models\Business::where('id', auth()->user()->business_id)->first();
                             @endphp
-                            <img src="{{ asset(Storage::url($business->business_photo_url)) }}" class="block h-9 w-auto"/>
+                            @if(isset($business->business_photo_url))
+                                <img src="{{ asset(Storage::url($business->business_photo_url)) }}" class="block h-9 w-auto"/>
+                            @else
+                                <img src="{{ url('logo.png') }}" alt="EMDAD CHAIN LOGO" class="block h-9 w-auto"/>
+                            @endif
                         </a>
                     </div>
 
