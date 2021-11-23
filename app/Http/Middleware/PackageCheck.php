@@ -25,6 +25,13 @@ class PackageCheck
         }
         else if (is_null(Auth::user()->business_package))
         {
+
+            if (Auth::user()->mobile_verify == 0)
+            {
+                session()->flash('error', 'You have not verified your mobile number.');
+                return redirect()->route('dashboard');
+            }
+
             session()->flash('error', 'You do not have any package selected yet, please select a package to proceed to the registration');
             return redirect()->route('packages.index');
         }

@@ -42,6 +42,7 @@ class POInfoController extends Controller
             'order_info_1.*' => 'required|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,xlsx,doc,xls',
         ]);
 
+
         /* Commented code is  */
         /*$files = $request->file('order_info_1');
         $order_info = [];*/

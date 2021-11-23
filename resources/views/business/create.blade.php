@@ -85,20 +85,11 @@
                                 <x-jet-input id="nid_num" class="block mt-1  w-1/3" type="text" pattern="\d*" maxlength="10" name="nid_num" :value="old('nid_num')" required/>
                                 <input type="text" id="datepicker" data-provide="datepicker" class="block mt-1 w-1/3" name="nid_exp_date" value="{{old('nid_exp_date')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" readonly>
 
-                                {{--                                <select name="num_of_warehouse" id="num_of_warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>--}}
-{{--                                    <option value="">None</option>--}}
-{{--                                    @for ($count = 1; $count <= 100; $count++)--}}
-{{--                                        <option value="{{ $count }}">{{ $count }}</option>--}}
-{{--                                    @endfor--}}
-{{--                                </select>--}}
                             </div>
 
 
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="business_type">{{__('portal.Select the Sub-Categories')}} @include('misc.required')</x-jet-label>
-                            </div>
-                            <div class="flex mt-3 ">
-                                <input type="text" id="justAnInputBox1"  placeholder="Select" autocomplete="off" style="width: 100%" />
                             </div>
                             <div class="flex mt-3 ">
                                 @include('category.category.index')
@@ -213,38 +204,7 @@
             </div>
         </div>
 
-    @section('footerScripts')
-        <!-- Combo Tree -->
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-            <script src="{{url('combo_tree_two/comboTreePlugin.js')}}" type="text/javascript"></script>
 
-            <script type="text/javascript">
-
-
-                var SampleJSONData2 = [
-                    @include('test.get_category', ['categories' => $parentCategories])
-                ];
-
-
-                var comboTree1, comboTree2;
-
-                jQuery(document).ready(function ($) {
-
-                    comboTree3 = $('#justAnInputBox1').comboTree({
-                        source: SampleJSONData2,
-                        isMultiple: true,
-                        cascadeSelect: true,
-                        collapse: true
-                    });
-
-                    comboTree3.setSource(SampleJSONData2);
-
-
-                });
-
-
-            </script>
-        @endsection
     </x-app-layout>
 
 @else
@@ -389,38 +349,6 @@
                 </div>
             </div>
         </div>
-    @section('footerScripts')
-        <!-- Combo Tree -->
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-            <script src="{{url('combo_tree_two/comboTreePlugin.js')}}" type="text/javascript"></script>
-
-            <script type="text/javascript">
-
-
-                var SampleJSONData2 = [
-                    @include('test.get_category', ['categories' => $parentCategories])
-                ];
-
-
-                var comboTree1, comboTree2;
-
-                jQuery(document).ready(function ($) {
-
-                    comboTree3 = $('#justAnInputBox1').comboTree({
-                        source: SampleJSONData2,
-                        isMultiple: true,
-                        cascadeSelect: true,
-                        collapse: true
-                    });
-
-                    comboTree3.setSource(SampleJSONData2);
-
-
-                });
-
-
-            </script>
-        @endsection
     </x-app-layout>
 @endif
 
