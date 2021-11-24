@@ -324,7 +324,7 @@ class UserController extends Controller
         $validated = validator::make($request->all(), [
             'gender' => 'required',
             'name' => 'required',
-            'middle_initial' => 'required',
+//            'middle_initial' => 'required',
             'family_name' => 'required',
             'nid_num' => 'required',
             'nid_exp_date' => 'required|date',
@@ -334,7 +334,7 @@ class UserController extends Controller
         ],[
             'gender.required' => __('portal.Gender is required'),
             'name.required' => __('portal.Name is required'),
-            'middle_initial.required' => __('portal.Middle Initial is required'),
+//            'middle_initial.required' => __('portal.Middle Initial is required'),
             'family_name.required' => __('portal.Family Name is required'),
             'nid_num.required' => __('portal.National ID Number is required'),
             'nid_exp_date.required' => __('portal.National ID Expiry Date is required'),
@@ -358,7 +358,7 @@ class UserController extends Controller
         $data = [
             'gender' => $request->gender,
             'name' => $request->name,
-            'middle_initial' => $request->middle_initial,
+//            'middle_initial' => $request->middle_initial,
             'family_name' => $request->family_name,
             'nid_num' => $request->nid_num,
             'nid_exp_date' => $nid_exp_date,
@@ -391,7 +391,7 @@ class UserController extends Controller
         $validated = validator::make($request->all(), [
             'gender' => 'required',
             'name' => 'required',
-            'middle_initial' => 'required',
+//            'middle_initial' => 'required',
             'family_name' => 'required',
             'nid_num' => 'required',
             'nid_exp_date' => 'required|date',
@@ -401,7 +401,7 @@ class UserController extends Controller
         ],[
             'gender.required' => __('portal.Gender is required'),
             'name.required' => __('portal.Name is required'),
-            'middle_initial.required' => __('portal.Middle Initial is required'),
+//            'middle_initial.required' => __('portal.Middle Initial is required'),
             'family_name.required' => __('portal.Family Name is required'),
             'nid_num.required' => __('portal.National ID Number is required'),
             'nid_exp_date.required' => __('portal.National ID Expiry Date is required'),
@@ -425,7 +425,7 @@ class UserController extends Controller
         $data = [
             'gender' => $request->gender,
             'name' => $request->name,
-            'middle_initial' => $request->middle_initial,
+//            'middle_initial' => $request->middle_initial,
             'family_name' => $request->family_name,
             'nid_num' => $request->nid_num,
             'nid_exp_date' => $nid_exp_date,

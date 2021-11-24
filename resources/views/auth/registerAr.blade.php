@@ -86,12 +86,13 @@
                     <x-jet-input id="company_name" class="block my-2 w-full" type="text" name="company_name" :value="old('company_name')" required autocomplete="company_name"/>
                 </div>
 
-                <div class="w-full lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3" style="direction: ltr;">
+                <div class="w-full lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
 
-                    <label class="block font-medium text-sm text-gray-700 mb-2" for="mobile-number"  style="direction: rtl;">
+                    {{--<label class="block font-medium text-sm text-gray-700 mb-2" for="mobile-number"  style="direction: rtl;">
                         {{ __('register.Mobile Number') }} <span class="text-red-500">*</span>
                     </label>
-                    <input type="tel" id="mobile-number" style="padding-top: 12px;padding-bottom: 12px; " name="mobile" placeholder="e.g. +966 059 338 8833" class="form-input rounded-md shadow-sm block my-2 w-full">
+                    <input type="tel" id="mobile-number" style="padding-top: 12px;padding-bottom: 12px; " name="mobile" placeholder="e.g. +966 059 338 8833" class="form-input rounded-md shadow-sm block my-2 w-full">--}}
+                    @include('auth.mobile_input_field')
 
                 </div>
 

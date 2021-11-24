@@ -28,11 +28,11 @@ class PackageCheck
 
             if (Auth::user()->mobile_verify == 0)
             {
-                session()->flash('error', 'You have not verified your mobile number.');
+                session()->flash('error', __('portal.Please verify your mobile number inorder to proceed'));
                 return redirect()->route('dashboard');
             }
 
-            session()->flash('error', 'You do not have any package selected yet, please select a package to proceed to the registration');
+            session()->flash('error', __('portal.You do not have any package selected yet, please select a package to proceed to the registration.'));
             return redirect()->route('packages.index');
         }
 

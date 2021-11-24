@@ -96,10 +96,11 @@
 
                 <div class="w-full lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
 
-                    <label class="block font-medium text-sm text-gray-700 mb-2" for="mobile-number">
+                    {{--<label class="block font-medium text-sm text-gray-700 mb-2" for="mobile-number">
                         Mobile Number <span class="text-red-500">*</span>
                     </label>
-                    <input type="tel" id="mobile-number" style="padding-top: 12px;padding-bottom: 12px;" name="mobile" placeholder="e.g. +966 059 338 8833" class="form-input rounded-md shadow-sm block my-2 w-full">
+                    <input type="tel" id="mobile-number" style="padding-top: 12px;padding-bottom: 12px;" name="mobile" placeholder="e.g. +966 059 338 8833" class="form-input rounded-md shadow-sm block my-2 w-full">--}}
+                    @include('auth.mobile_input_field')
 
                 </div>
 

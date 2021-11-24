@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use http\Client\Curl\User;
+use App\Models\User;
 use Livewire\Component;
 
 class Sendsms extends Component
@@ -13,6 +13,10 @@ class Sendsms extends Component
     public $mobile_verify_check  = false;
     public $sms_code = '';
     public $mobile_number = '';
+
+    protected $rules = [
+        'mobile_number' => 'required|regex:([5][0-9]{8})',
+    ];
 
     public function render()
     {
@@ -27,10 +31,11 @@ class Sendsms extends Component
 
     public function send_sms()
     {
-        $user = \App\Models\User::find(auth()->user())->first();
+        $user = User::find(auth()->user())->first();
 
         if ($user->mobile != $this->mobile_number && $this->mobile_number != null)
         {
+            $this->validate();
             $user->update(['mobile' => $this->mobile_number]);
         }
 
@@ -38,13 +43,13 @@ class Sendsms extends Component
         $randomNumber = rand(1001,9999);
         $user->mobile_verify_code = $randomNumber;
         $user->save();
-        \App\Models\User::send_sms($mobile_no,'Your sms code is: ' . $randomNumber);
+        User::send_sms($mobile_no,'Your sms code is: ' . $randomNumber);
         $this->sendSms = true;
     }
 
     public function verify_sms()
     {
-        $user = \App\Models\User::find(auth()->user())->first();
+        $user = User::find(auth()->user())->first();
         $mobile_verify_code = $user->mobile_verify_code;
         if ($mobile_verify_code == $this->sms_code)
         {

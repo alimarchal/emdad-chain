@@ -71,11 +71,6 @@
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-2">
-                                        <x-jet-label for="middle_initial" value="{{ __('register.Middle Initial') }}" />
-                                        <x-jet-input id="middle_initial" class="block mt-1 w-full" type="text" maxlength="3" name="middle_initial" :value="old('middle_initial')" required autofocus autocomplete="middle_initial" />
-                                    </div>
-
-                                    <div class="col-span-6 sm:col-span-2">
                                         <x-jet-label for="family_name" value="{{ __('register.Family Name') }}" />
                                         <x-jet-input id="family_name" class="block  mt-1 w-full" type="text" name="family_name" :value="old('family_name')" required autofocus autocomplete="family_name" />
                                     </div>
@@ -99,6 +94,8 @@
                                         <x-jet-label for="email" value="{{ __('register.Email') }}" />
                                         <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
                                     </div>
+
+                                    <div class="col-span-6 sm:col-span-2"> </div>
 
                                     <div class="col-span-6 sm:col-span-2">
                                         <div class="py-2" x-data="{ show: true }">
@@ -199,10 +196,10 @@
                                         <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name" type="text" name="name" value="{{old('name')}}" required>
                                     </div>
 
-                                    <div class="col-span-6 sm:col-span-2">
-                                        <x-jet-label for="middle_initial" value="{{ __('register.Middle Initial') }}" />
-                                        <x-jet-input id="middle_initial" class="block mt-1 w-full" type="text" maxlength="3" name="middle_initial" :value="old('middle_initial')" required autofocus autocomplete="middle_initial" />
-                                    </div>
+{{--                                    <div class="col-span-6 sm:col-span-2">--}}
+{{--                                        <x-jet-label for="middle_initial" value="{{ __('register.Middle Initial') }}" />--}}
+{{--                                        <x-jet-input id="middle_initial" class="block mt-1 w-full" type="text" maxlength="3" name="middle_initial" :value="old('middle_initial')" required autofocus autocomplete="middle_initial" />--}}
+{{--                                    </div>--}}
 
                                     <div class="col-span-6 sm:col-span-2">
                                         <x-jet-label for="family_name" value="{{ __('register.Family Name') }}" />
@@ -228,6 +225,8 @@
                                         <x-jet-label for="email" value="{{ __('register.Email') }}" />
                                         <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
                                     </div>
+
+                                    <div class="col-span-6 sm:col-span-2"> </div>
 
                                     <div class="col-span-6 sm:col-span-2">
                                         <div class="py-2" x-data="{ show: true }">

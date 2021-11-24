@@ -10,23 +10,24 @@
                     {{__('portal.Thank you for signing up! Your email address has been verified.')}}
                 <livewire:sendsms />
 
-
-                @php
-                    $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
-                    if ($isBusinessDataExist) {
-                        $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
-                        $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
-                    }
-                @endphp
+                @if(auth()->user()->mobile_verify == 1)
+                    @php
+                        $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
+                        if ($isBusinessDataExist) {
+                            $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
+                            $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
+                        }
+                    @endphp
                     <br>{{__('portal.Now you need to fill up the')}}
-                    @if(is_null($isBusinessDataExist))
-                        {{__('portal.business')}}
-                    @elseif(is_null($isBusinessWarehouseDataExist))
-                        {{__('portal.warehouse')}}
-                    @elseif(is_null($isBusinessPOIExist))
-                        {{__('portal.P.O. Info')}}
-                    @endif
-                    {{__('portal.registration form before adding any user/s.')}}
+                        @if(is_null($isBusinessDataExist))
+                            {{__('portal.business')}}
+                        @elseif(is_null($isBusinessWarehouseDataExist))
+                            {{__('portal.warehouse')}}
+                        @elseif(is_null($isBusinessPOIExist))
+                            {{__('portal.P.O. Info')}}
+                        @endif
+                        {{__('portal.registration form before adding any user/s.')}}
+                @endif
                 {{--@else
                     <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto mb-4 m-auto"/>
                     نشكرك لتسجيلك معنا

@@ -30,7 +30,7 @@ class CreateNewUser implements CreatesNewUsers
             'name' => ['required', 'string', 'max:55'],
             'company_name' => ['required', 'string', 'max:191'],
 //            'nid_exp_date' => ['required', 'date'],
-            'mobile' => ['required', 'string', 'max:20'],
+            'mobile' => ['required', 'digits:9'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
         ])->validate();
