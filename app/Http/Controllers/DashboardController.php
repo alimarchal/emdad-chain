@@ -34,6 +34,7 @@ class DashboardController extends Controller
         // $business_categories = implode(",", $business_categories);
         $pending_orders = EOrderItems::where('status', 'pending')->whereIn('item_code', $business_categories)->get();
 
+
         return view('dashboard', compact($pending_orders));
     }
 

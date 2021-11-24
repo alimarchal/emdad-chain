@@ -31,7 +31,7 @@ class Sendsms extends Component
 
     public function send_sms()
     {
-        $user = User::find(auth()->user())->first();
+        $user = User::find(auth()->user()->id);
 
         if ($user->mobile != $this->mobile_number && $this->mobile_number != null)
         {
@@ -43,13 +43,13 @@ class Sendsms extends Component
         $randomNumber = rand(1001,9999);
         $user->mobile_verify_code = $randomNumber;
         $user->save();
-        User::send_sms($mobile_no,'Your sms code is: ' . $randomNumber);
+        User::send_sms($mobile_no,config('app.url') . ' %0a Your sms code is: ' . $randomNumber);
         $this->sendSms = true;
     }
 
     public function verify_sms()
     {
-        $user = User::find(auth()->user())->first();
+        $user = User::find(auth()->user()->id);
         $mobile_verify_code = $user->mobile_verify_code;
         if ($mobile_verify_code == $this->sms_code)
         {

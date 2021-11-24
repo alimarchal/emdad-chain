@@ -10,14 +10,10 @@
                     <a href="tel:{{auth()->user()->mobile}}" class="text-red-500 underline mt-3 ml-6">
                         {{auth()->user()->mobile}}
                     </a>
-    {{--            @endif--}}
-    {{--            @if(!$sendSms)--}}
-    {{--                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/4 xl:w-1/4">--}}
                         <button wire:click="send_sms" style="border-radius: 25px;height: fit-content"
                             class="inline-flex items-center px-4 py-2 mt-4 ml-2 sm:ml-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150">
                             {{__('portal.Send Code')}}
                         </button>
-    {{--                </div>--}}
                 </div>
             @else
                 <p style="font-size: 16px; padding: 8px;color: green">{{__('register.We have send you SMS code please type and press verify.')}}</p>
