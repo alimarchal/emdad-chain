@@ -344,7 +344,7 @@ class PaymentController extends Controller
         if (auth()->user()->registration_type == "Supplier" || auth()->user()->hasRole('Supplier Payment Admin'))
         {
             /*$proformaInvoices = Invoice::with('purchase_order')->where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->get();*/
-            $collection = Invoice::with('purchase_order')->where(['supplier_business_id' => auth()->user()->business_id])->orderByDesc('created_at')->get();
+            $collection = Invoice::with('purchase_order')->where(['supplier_business_id' => auth()->user()->business_id])->get();
 
             $multiCategory = array();
             $singleCategory = array();
@@ -369,7 +369,7 @@ class PaymentController extends Controller
         elseif(auth()->user()->registration_type == "Buyer" || auth()->user()->hasRole('Buyer Payment Admin'))
         {
             /*$proformaInvoices = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->get();*/
-            $collection = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id])->orderByDesc('created_at')->get();
+            $collection = Invoice::with('purchase_order')->where(['buyer_business_id' => auth()->user()->business_id])->get();
 
             $multiCategory = array();
             $singleCategory = array();
