@@ -933,5 +933,5 @@ return [
     'Download attachment' => 'Download attachment',
     'No attachment available for download' => 'No attachment available for download',
     'e.g.' => 'e.g.',
-
+    'Invoice paid on' => 'Invoice paid on',
 ];

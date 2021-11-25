@@ -326,16 +326,16 @@
                                             <tbody class="bg-white divide-y divide-gray-200">
                                             @foreach ($proformaInvoices as $dn)
                                                 <tr>
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black" style="font-family: sans-serif">
                                                         {{ $loop->iteration }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.Inv.')}}-{{ $dn->id }}
+                                                        {{__('portal.Inv.')}}-<span style="font-family: sans-serif">{{ $dn->id }}</span>
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.PO')}}-{{ $dn->purchase_order->id }}
+                                                        {{__('portal.PO')}}-<span style="font-family: sans-serif">{{ $dn->purchase_order->id }}</span>
                                                     </td>
 
 
@@ -349,7 +349,7 @@
                                                         {{-- <a href="{{ route('po.show', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $dn->item_name }}</a> --}}
                                                     </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black" style="font-family: sans-serif">
                                                         {{ Carbon\Carbon::parse($dn->purchase_order->po_date)->format('d-m-Y') }}
                                                     </td>
 
@@ -379,7 +379,7 @@
                                                                 <span class="text-red-600"> {{__('portal.Payment rejected')}} </span>
                                                             @endif
                                                         @else
-                                                            {{__('portal.N/A')}}
+                                                            <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
                                                         @endif
 
                                                     </td>

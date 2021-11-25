@@ -78,7 +78,7 @@
             <strong>Delivery Note #: </strong>DN-{{ $invoices[0]->deliveryNote->id }}<br>
         @endif
         <strong>Invoice #: </strong> Inv-{{ $invoices[0]->id }}<br>
-        <strong>Date: </strong> {{ $invoices[0]->created_at }}<br>
+        <strong>Invoice Date: </strong> {{ $invoices[0]->created_at }}<br>
         <strong>Purchase Order #: </strong> PO-{{ $invoices[0]->purchase_order->id }}<br>
         <strong>Quotation #: </strong>Q-{{ $invoices[0]->purchase_order->qoute_no }}<br>
         <strong>Requisition #: </strong>RFQ-{{ $invoices[0]->purchase_order->rfq_item_no }}<br>
@@ -230,10 +230,10 @@
 </div>
 <br>
 
-@if((auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin'])) && $invoice->invoice_status == 3)
+@if((auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin'])) && $invoices[0]->invoice_status == 3)
     <div class="header">
 
-        <div style="width: 66.66%;float: left;">
+        <div style="width: 15%;float: left;">
             @php $paid = asset('images/stamps/Artboard-6@8x.png'); @endphp
             <img src="{{$paid}}" width="100" >
             <br>
@@ -242,7 +242,9 @@
             <br>
         </div>
 
-        <div style="width: 33.33%;float: right"></div>
+        <div style="width: 85%;float: left">
+            <strong>Invoice paid on: &nbsp;</strong> {{$invoices[0]->BankPayment->created_at}}
+        </div>
 
     </div>
     <br>

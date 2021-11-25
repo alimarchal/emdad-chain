@@ -401,7 +401,7 @@ class PaymentController extends Controller
     // View function for Invoice details by ID (Payment history)
     public function invoiceView($id)
     {
-       $invoice = Invoice::with('purchase_order','eOrderItem', 'deliveryNote')->where('id', $id)->first();
+       $invoice = Invoice::with('purchase_order','eOrderItem', 'deliveryNote', 'bankPayment')->where('id', $id)->first();
 
        return view('payment.invoiceView', compact('invoice'));
 

@@ -16,7 +16,7 @@
         <form method="POST" action="{{ route('register') }}"  style="direction: rtl" enctype="multipart/form-data" class="mt-5">
             @csrf
 
-            <img src="{{url('registration_step/E-1.png')}}" alt="User Registration" class="block w-auto m-auto" style="margin:auto;"/>
+            <img src="{{url('registration_step/1.png')}}" alt="User Registration" class="block w-auto m-auto" style="margin:auto;"/>
             <p class="text-center font-bold text-2xl mt-4">{{__('register.Step # 1: Registration')}}</p>
 
             <div class="flex flex-wrap overflow-hidden lg:-mx-3 xl:-mx-3">

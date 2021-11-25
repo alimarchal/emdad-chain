@@ -932,5 +932,5 @@ return [
     'Download attachment' => 'تحميل المرفقات',
     'No attachment available for download' => 'ما من مرفقات متاحة للتحميل',
     'e.g.' => 'مثلاً',
-
+    'Invoice paid on' => 'تم سداد الفاتورة من خلال',
 ];

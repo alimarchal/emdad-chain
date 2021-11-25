@@ -77,7 +77,7 @@ class BankPaymentController extends Controller
     public function store(Request $request)
     {
 
-        $validator = $request->validate([
+        $request->validate([
             'amount_date' => 'required',
             'file_path_1' => 'required|mimes:jpg,bmp,png,jpeg,JPEG,JPG,pdf',
         ],[
