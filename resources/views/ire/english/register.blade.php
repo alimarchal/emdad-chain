@@ -11,9 +11,9 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <x-jet-button>
-            <a href="{{route('ireRegisterArabic')}}" class="get-started-btn scrollto"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
-        </x-jet-button>
+{{--        <x-jet-button>--}}
+            <a href="{{route('ireRegisterArabic')}}" class="inline-flex items-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="border-radius: 25px;"><img alt="" src="{{url('sa.png')}}" style="margin-right: 2px;margin-top:-4px;">العربية</a>
+{{--        </x-jet-button>--}}
 
         <form method="POST" action="{{route('ireRegister')}}">
             @csrf
@@ -113,7 +113,7 @@
                             {{ __('ire/register.Already registered?') }}
                         </a>
 
-                        <x-jet-button class="ml-4">
+                        <x-jet-button class="ml-4" style="border-radius: 25px;">
                             {{ __('ire/register.Register') }}
                         </x-jet-button>
                     </div>

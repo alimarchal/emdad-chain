@@ -144,20 +144,20 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach($business as $biz)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center">
+                                        <td class="px-6 py-4 whitespace-nowrap text-center" style="font-family: sans-serif">
                                             {{$loop->iteration}}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500" style="font-family: sans-serif">
                                             {{$biz->business->business_name}}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500" style="font-family: sans-serif">
                                             {{$biz->name}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
 {{--                                            {{$biz->designation}}--}}
                                             @if($biz->designation == 'CEO') {{__('portal.CEO')}} @else {{$biz->designation}} @endif
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500" style="font-family: sans-serif">
                                             {{$biz->landline}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-center text-sm font-medium">

@@ -17,7 +17,7 @@ class BankPaymentController extends Controller
         $collection = null;
         if (auth()->user()->registration_type == 'Buyer' || auth()->user()->hasRole('Buyer Payment Admin')) {
 //            $collection = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_status', 0)->get();
-            $unPaidInvoices = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'invoice_status' => 0])->orderByDesc('created_at')->get();
+            $unPaidInvoices = Invoice::where(['buyer_business_id' => auth()->user()->business_id, 'invoice_status' => 0])->get();
 
             $multiCategory = array();
             $singleCategory = array();
@@ -39,7 +39,7 @@ class BankPaymentController extends Controller
         }
         if (auth()->user()->registration_type == 'Supplier' || auth()->user()->hasRole('Supplier Payment Admin')) {
 //            $collection = Invoice::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('invoice_status', 0)->get();
-            $unPaidInvoices = Invoice::where(['supplier_business_id' => auth()->user()->business_id, 'invoice_status' => 0])->orderByDesc('created_at')->get();
+            $unPaidInvoices = Invoice::where(['supplier_business_id' => auth()->user()->business_id, 'invoice_status' => 0])->get();
 
             $multiCategory = array();
             $singleCategory = array();

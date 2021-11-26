@@ -208,28 +208,27 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($PlacedRFQ as $item)
                                 <tr>
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                    <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                         {{$loop->iteration}}
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
                                         @if ($item->business_id)
                                             <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                {{__('portal.RFQ')}}-{{$item->OrderItems[0]->id}}
+                                                {{__('portal.RFQ')}}-<span style="font-family: sans-serif">{{$item->OrderItems[0]->id}}</span>
                                             </a>
                                         @else
                                             <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
-                                                {{ $item->business_id }}-{{__('portal.RFQ')}}-{{$item->OrderItems[0]->id}}
+                                                {{ $item->business_id }}-{{__('portal.RFQ')}}-<span style="font-family: sans-serif">{{$item->OrderItems[0]->id}}</span>
                                             </a>
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                    <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                         {{$item->created_at->format('d-m-Y')}}
-
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                    <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                         {{--                                        {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}--}}
                                         @if(isset($item->userName))
                                             {{str_replace('["', ' ', ' ' .str_replace('"]', ' ', $item->userName->pluck('name')))}}
@@ -246,7 +245,7 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                    <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                         {{$item->status}}
                                     </td>
 

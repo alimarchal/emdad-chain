@@ -43,7 +43,7 @@ class BusinessWarehouseController extends Controller
 
     public function businessWarehouseShow(Request $request, $id)
     {
-        $business = BusinessWarehouse::where('business_id', $id)->get();
+        $business = BusinessWarehouse::where('business_id', $id)->orderByDesc('created_at')->get();
         return view('businessWarehouse.showAllWareHouse', compact('business'));
     }
 

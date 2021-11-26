@@ -31,7 +31,7 @@ class PaymentController extends Controller
     {
 //        $collection = DeliveryNote::where(['supplier_business_id' => auth()->user()->business->id, 'rfq_type' => 1])->get();
 
-        $generateInvoices = DeliveryNote::where(['supplier_business_id' => auth()->user()->business_id])->orderByDesc('created_at')->get();
+        $generateInvoices = DeliveryNote::where(['supplier_business_id' => auth()->user()->business_id])->get();
 
         $multiCategory = array();
         $singleCategory = array();
@@ -390,6 +390,8 @@ class PaymentController extends Controller
             $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
             /* Merging Single and Multi category Invoices  */
             $proformaInvoices = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
+
+            return view('payment.invoiceBuyer', compact('proformaInvoices'));
         }
         else{
             $proformaInvoices = Invoice::with('purchase_order')->where(['rfq_type' => 1])->get();

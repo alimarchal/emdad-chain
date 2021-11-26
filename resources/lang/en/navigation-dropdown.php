@@ -48,4 +48,5 @@ return [
     'Info' => 'Info',
     'Requisitions(s) with no Quotations' => 'Requisitions(s) with no Quotations',
     'Number of Requisitions which received no quotations' => 'Number of Requisitions which received no quotations',
+    'Main Navigation' => 'Main Navigation',
 ];

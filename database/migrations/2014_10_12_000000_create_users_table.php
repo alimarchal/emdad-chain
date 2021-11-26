@@ -38,7 +38,7 @@ class CreateUsersTable extends Migration
             $table->boolean('is_active')->default(0);
             $table->string('usertype')->nullable();
             $table->string('driver_status')->default(1);
-            $table->integer('added_by')->default(0);
+            $table->integer('added_by')->default(0);            /* 1 for Buyer and 2 for Supplier */
             $table->bigInteger('added_by_userId')->nullable();
             $table->boolean('logistic_solution')->nullable();
             $table->boolean('packaging_solution')->nullable();

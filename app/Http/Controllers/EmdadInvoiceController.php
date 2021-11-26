@@ -23,7 +23,7 @@ class EmdadInvoiceController extends Controller
         {
 //            $emdadInvoices = EmdadInvoice::where([['supplier_business_id', auth()->user()->business_id],['send_status', 1]])->where('rfq_type', '=', 1)->get();
 
-            $collection = EmdadInvoice::where([['supplier_business_id', auth()->user()->business_id],['send_status', 1]])->orderByDesc('created_at')->get();
+            $collection = EmdadInvoice::where([['supplier_business_id', auth()->user()->business_id],['send_status', 1]])->get();
 
             $multiCategory = array();
             $singleCategory = array();

@@ -174,14 +174,14 @@
                                     <div class="col-span-6 sm:col-span-2">
                                         <label class="block font-medium text-sm text-gray-700" for="buyer_business_name">
                                             {{__('portal.Buyer Name')}}
-                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" name="buyer_business_name" readonly value="{{$buyer->name}}">
+                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" name="buyer_business_name" readonly value="{{$buyer->name}}" style="font-family: sans-serif">
                                         </label>
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-2">
                                         <label class="block font-medium text-sm text-gray-700" for="buyer_business_name">
                                             {{__('portal.Buyer Business Name')}}
-                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" name="buyer_business_name" readonly value="{{$buyer->business->business_name}}">
+                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" name="buyer_business_name" readonly value="{{$buyer->business->business_name}}" style="font-family: sans-serif">
                                         </label>
                                     </div>
 
@@ -189,17 +189,17 @@
                                         <label class="block font-medium text-sm text-gray-700" for="buyer_rating">{{__('portal.Rate')}}</label>
                                         <select name="buyer_rating" id="buyer_rating" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
                                             <option disabled selected value="">{{__('portal.Select')}}</option>
-                                            <option @if (old('buyer_rating') == "1") {{ 'selected' }} @endif value="1">1</option>
-                                            <option @if (old('buyer_rating') == "2") {{ 'selected' }} @endif value="2">2</option>
-                                            <option @if (old('buyer_rating') == "3") {{ 'selected' }} @endif value="3">3</option>
-                                            <option @if (old('buyer_rating') == "4") {{ 'selected' }} @endif value="4">4</option>
-                                            <option @if (old('buyer_rating') == "5") {{ 'selected' }} @endif value="5">5</option>
+                                            <option @if (old('buyer_rating') == "1") {{ 'selected' }} @endif value="1" style="font-family: sans-serif">1</option>
+                                            <option @if (old('buyer_rating') == "2") {{ 'selected' }} @endif value="2" style="font-family: sans-serif">2</option>
+                                            <option @if (old('buyer_rating') == "3") {{ 'selected' }} @endif value="3" style="font-family: sans-serif">3</option>
+                                            <option @if (old('buyer_rating') == "4") {{ 'selected' }} @endif value="4" style="font-family: sans-serif">4</option>
+                                            <option @if (old('buyer_rating') == "5") {{ 'selected' }} @endif value="5" style="font-family: sans-serif">5</option>
                                         </select>
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-2">
                                         <label class="block font-medium text-sm text-gray-700" for="buyer_comment_content">{{__('portal.Comments')}}</label>
-                                        <textarea name="buyer_comment_content" id="buyer_comment_content" class="w-full" style="border: 2px solid #d6d8db; border-radius: 8px;" maxlength="254" cols="50" placeholder="{{__('portal.Any Comments')}}...">{{old('buyer_comment_content')}}</textarea>
+                                        <textarea name="buyer_comment_content" id="buyer_comment_content" class="w-full" style="border: 2px solid #d6d8db; border-radius: 8px;font-family: sans-serif" maxlength="254" cols="50" placeholder="{{__('portal.Any Comments')}}...">{{old('buyer_comment_content')}}</textarea>
                                     </div>
 
                                 </div>
@@ -220,11 +220,11 @@
                                         </label>
                                         <select name="emdad_rating" id="emdad_rating" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
                                             <option disabled selected value="">{{__('portal.Select')}}</option>
-                                            <option @if (old('emdad_rating') == "1") {{ 'selected' }} @endif  value="1">1</option>
-                                            <option @if (old('emdad_rating') == "2") {{ 'selected' }} @endif  value="2">2</option>
-                                            <option @if (old('emdad_rating') == "3") {{ 'selected' }} @endif  value="3">3</option>
-                                            <option @if (old('emdad_rating') == "4") {{ 'selected' }} @endif  value="4">4</option>
-                                            <option @if (old('emdad_rating') == "5") {{ 'selected' }} @endif  value="5">5</option>
+                                            <option @if (old('emdad_rating') == "1") {{ 'selected' }} @endif  value="1" style="font-family: sans-serif">1</option>
+                                            <option @if (old('emdad_rating') == "2") {{ 'selected' }} @endif  value="2" style="font-family: sans-serif">2</option>
+                                            <option @if (old('emdad_rating') == "3") {{ 'selected' }} @endif  value="3" style="font-family: sans-serif">3</option>
+                                            <option @if (old('emdad_rating') == "4") {{ 'selected' }} @endif  value="4" style="font-family: sans-serif">4</option>
+                                            <option @if (old('emdad_rating') == "5") {{ 'selected' }} @endif  value="5" style="font-family: sans-serif">5</option>
                                         </select>
                                     </div>
 
@@ -232,7 +232,7 @@
                                         <label class="block font-medium text-sm text-gray-700" for="emdad_comment_content">
                                             {{__('portal.Comments')}}
                                         </label>
-                                        <textarea name="emdad_comment_content" id="emdad_comment_content" class="w-full" style="border: 2px solid #d6d8db; border-radius: 8px;" maxlength="254" cols="50" placeholder="{{__('portal.Any Comments')}}...">{{old('emdad_comment_content')}}</textarea>
+                                        <textarea name="emdad_comment_content" id="emdad_comment_content" class="w-full" style="border: 2px solid #d6d8db; border-radius: 8px;font-family: sans-serif" maxlength="254" cols="50" placeholder="{{__('portal.Any Comments')}}...">{{old('emdad_comment_content')}}</textarea>
                                     </div>
 
                                 </div>

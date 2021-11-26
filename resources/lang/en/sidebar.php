@@ -44,6 +44,7 @@ return [
     'Manual Payments' => 'Manual Payments',
     'Payments to supplier' => 'Payments to supplier',
     'Emdad Invoices' => 'Emdad Invoices',
+    'Invoices' => 'Invoices',
     'Current Shipments' => 'Current Shipments',
     'Delivered Shipments' => 'Delivered Shipments',
     'Shipments Histroy' => 'Shipments Histroy',

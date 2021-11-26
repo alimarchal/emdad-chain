@@ -124,7 +124,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->size }}
+                                            @if(isset($rfp->size)) {{ $rfp->size }} @else {{__('portal.N/A')}} @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $rfp->quantity }}
@@ -134,7 +134,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->brand }}
+                                            @if(isset($rfp->brand)) {{ $rfp->brand }} @else {{__('portal.N/A')}} @endif
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -146,7 +146,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->remarks }}
+                                            @if(isset($rfp->remarks)) {{ $rfp->remarks }} @else {{__('portal.N/A')}} @endif
                                         </td>
 
                                         <td class="px-3 py-3 text-center whitespace-nowrap">
@@ -166,7 +166,7 @@
                                                     </svg>
                                                 </a>
                                             @else
-                                            {{__('portal.N/A')}}
+                                                {{__('portal.N/A')}}
                                             @endif
                                         </td>
 
@@ -338,7 +338,7 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($eCart as $rfp)
                                     <tr>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                             {{ $loop->iteration }}
                                         </td>
 
@@ -348,24 +348,24 @@
                                                 $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                             @endphp
 
-                                            {{ $record->name_ar}} , {{ $parent->name_ar}}
+                                            {{ $record->name_ar}}@if(isset($parent->name_ar)), {{ $parent->name_ar}} @endif
                                         </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                             {{ strip_tags($rfp->description) }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $rfp->unit_of_measurement); @endphp {{$UOM->uom_ar}}
                                         </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                             {{ $rfp->size }}
                                         </td>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                             {{ $rfp->quantity }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}} <br>
+                                            <span style="font-family: sans-serif">{{ number_format($rfp->last_price, 2) }}</span> {{__('portal.SAR')}} <br>
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -373,17 +373,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}
-                                            @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
-                                            @elseif($rfp->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
-                                            @elseif($rfp->delivery_period =='Within 90 Days') {{__('portal.90 Days')}}
-                                            @elseif($rfp->delivery_period =='Standing Order - 2 per year') {{__('portal.Standing Order - 2 times / year')}}
-                                            @elseif($rfp->delivery_period =='Standing Order - 3 per year') {{__('portal.Standing Order - 3 times / year')}}
-                                            @elseif($rfp->delivery_period =='Standing Order - 4 per year') {{__('portal.Standing Order - 4 times / year')}}
-                                            @elseif($rfp->delivery_period =='Standing Order - 6 per year') {{__('portal.Standing Order - 6 times / year')}}
-                                            @elseif($rfp->delivery_period =='Standing Order - 12 per year') {{__('portal.Standing Order - 12 times / year')}}
-                                            @elseif($rfp->delivery_period =='Standing Order Open') {{__('portal.Standing Order - Open')}}
-                                            @endif
+                                            <span style="font-family: sans-serif">{{$rfp->delivery_period}}</span>
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -403,7 +393,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->remarks }}
+                                            @if(isset($rfp->remarks)) <span style="font-family: sans-serif">{{ $rfp->remarks }}</span> @else {{__('portal.N/A')}} @endif
                                         </td>
 
                                         <td class="px-2 py-3 text-center whitespace-nowrap">
@@ -425,7 +415,7 @@
                                                     </svg>
                                                 </a>
                                             @else
-                                            {{__('portal.N/A')}}
+                                                <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
                                             @endif
                                         </td>
 

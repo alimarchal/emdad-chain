@@ -19,7 +19,7 @@ class VehicleController extends Controller
             //Checking vehicles count for related packages
             $vehiclesCount = Vehicle::where([['supplier_business_id', \auth()->user()->business_id]])->count();
 
-            $vehicles = Vehicle::where('supplier_business_id', auth()->user()->business_id)->get();
+            $vehicles = Vehicle::where('supplier_business_id', auth()->user()->business_id)->orderByDesc('created_at')->get();
         }
 
         return view('vehicle.index', compact('vehicles', 'vehiclesCount'));

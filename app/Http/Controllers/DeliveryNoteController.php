@@ -19,7 +19,7 @@ class DeliveryNoteController extends Controller
     public function index()
     {
 //        $dpos = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('status','approved')->get();
-        $draftPurchaseOrders = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id, 'status' => 'approved'])->orderByDesc('created_at')->get();;
+        $draftPurchaseOrders = DraftPurchaseOrder::where(['supplier_business_id' => auth()->user()->business_id, 'status' => 'approved'])->get();;
 
         $multiCategory = array();
         $singleCategory = array();
@@ -78,7 +78,7 @@ class DeliveryNoteController extends Controller
     {
 //        $collection = DeliveryNote::where(['supplier_business_id' => auth()->user()->business->id, 'rfq_type' => 1])->get();
 
-        $deliveryNotes = DeliveryNote::where(['supplier_business_id' => auth()->user()->business->id])->orderByDesc('created_at')->get();
+        $deliveryNotes = DeliveryNote::where(['supplier_business_id' => auth()->user()->business->id])->get();
 
         $multiCategory = array();
         $singleCategory = array();

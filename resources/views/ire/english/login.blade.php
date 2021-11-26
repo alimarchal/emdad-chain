@@ -19,6 +19,10 @@
             </div>
         @endif
 
+        <div class="float-right mb-2">
+            <a href="{{route('ireLoginArabic')}}" class="inline-flex items-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="border-radius: 25px;"><img alt="" src="{{url('sa.png')}}" style="margin-right: 7px;margin-top:-4px;">العربية</a>
+        </div>
+
         <form method="POST" action="{{route('ireLogin')}}">
             @csrf
 
@@ -58,7 +62,7 @@
                     </a>
                 @endif
 
-                <x-jet-button class="ml-4">
+                <x-jet-button class="ml-4" style="border-radius: 25px;">
                     {{ __('ire/login.Login') }}
                 </x-jet-button>
             </div>

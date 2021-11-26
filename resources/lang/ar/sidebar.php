@@ -47,6 +47,7 @@ return [
     'Manual Payments' => 'الدفع الذاتي',
     'Payments to supplier' => 'الدفعات للمورّد',
     'Emdad Invoices' => 'فواتير إمداد',
+    'Invoices' => 'الفواتير',
     'Current Shipments' => 'الشحنات الحالية',
     'Delivered Shipments' => 'الشحنات المستلمة',
     'Shipments Histroy' => 'سجل الشحنات',

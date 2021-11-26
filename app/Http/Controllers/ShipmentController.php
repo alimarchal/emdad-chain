@@ -14,7 +14,7 @@ class ShipmentController extends Controller
     {
         if (auth()->user()->registration_type == 'Supplier')
         {
-            $shipments = Shipment::where('supplier_business_id', auth()->user()->business_id)->get();
+            $shipments = Shipment::where('supplier_business_id', auth()->user()->business_id)->orderByDesc('created_at')->get();
             return view('shipment.index', compact('shipments'));
         }
         elseif (auth()->user()->registration_type == 'Buyer')

@@ -289,7 +289,7 @@ class RatingController extends Controller
     public function buyerDeliveryIndex()
     {
         $collection = Delivery::where('business_id', auth()->user()->business_id)->get();
-        $deliveries = $collection->unique('rfq_no');
+        $deliveries = $collection->unique('rfq_no')->sortByDesc('created_at');
 
         return view('rating.buyer.deliveries.index', compact('deliveries'));
     }
@@ -302,7 +302,7 @@ class RatingController extends Controller
     public function buyerDeliveryViewByID($id)
     {
         $comment_type = [1,5,7];
-        $deliveryComments = DeliveryComment::with('user')->where('delivery_id', decrypt($id))->whereIn('comment_type', $comment_type)->get();
+        $deliveryComments = DeliveryComment::with('user')->where('delivery_id', decrypt($id))->whereIn('comment_type', $comment_type)->orderByDesc('created_at')->get();
 
         return view('rating.buyer.deliveries.viewByID', compact('deliveryComments'));
     }
@@ -312,7 +312,7 @@ class RatingController extends Controller
 //        $collections = DeliveryComment::where('comment_type', 2)->orWhere('comment_type', 3)->orWhere('comment_type', 4)->get();
 //        $deliveryComments = $collections->unique('delivery_id');
         $collections = Delivery::where('buyer_rating', 1)->get();
-        $deliveries = $collections->unique('rfq_no');
+        $deliveries = $collections->unique('rfq_no')->sortByDesc('created_at');
 
         return view('rating.buyer.deliveries.rated', compact('deliveries'));
     }
@@ -331,7 +331,7 @@ class RatingController extends Controller
     public function buyerUnRatedDeliveries()
     {
         $collection = Delivery::where(['status' => 1, 'buyer_rating' => 0])->get();
-        $deliveries = $collection->unique('rfq_no');
+        $deliveries = $collection->unique('rfq_no')->sortByDesc('created_at');
 
         return view('rating.buyer.deliveries.unrated', compact('deliveries'));
     }
@@ -339,7 +339,7 @@ class RatingController extends Controller
     public function deliveriesListToRate()
     {
         $collections = Delivery::where('status',1)->where('buyer_rating', 0)->get();
-        $deliveries = $collections->unique('rfq_no');
+        $deliveries = $collections->unique('rfq_no')->sortByDesc('created_at');
 
         return view('rating.buyer.deliveries.list', compact('deliveries'));
     }
@@ -429,7 +429,7 @@ class RatingController extends Controller
     public function supplierDeliveryIndex()
     {
         $collection = Delivery::where('supplier_business_id', auth()->user()->business_id)->get();
-        $deliveries = $collection->unique('rfq_no');
+        $deliveries = $collection->unique('rfq_no')->sortByDesc('created_at');
 
         return view('rating.supplier.deliveries.index', compact('deliveries'));
     }
@@ -442,7 +442,7 @@ class RatingController extends Controller
     public function supplierDeliveryViewByID($id)
     {
         $comment_type = [2,3,8];
-        $deliveryComments = DeliveryComment::with('user')->where('delivery_id', decrypt($id))->whereIn('comment_type', $comment_type)->get();
+        $deliveryComments = DeliveryComment::with('user')->where('delivery_id', decrypt($id))->whereIn('comment_type', $comment_type)->orderByDesc('created_at')->get();
 
         return view('rating.supplier.deliveries.viewByID', compact('deliveryComments'));
     }
@@ -450,7 +450,7 @@ class RatingController extends Controller
     public function supplierRatedToDeliveries()
     {
         $collections = Delivery::where('supplier_rating', 1)->get();
-        $deliveries = $collections->unique('rfq_no');
+        $deliveries = $collections->unique('rfq_no')->sortByDesc('created_at');
 
         return view('rating.supplier.deliveries.rated', compact('deliveries'));
     }
@@ -469,7 +469,7 @@ class RatingController extends Controller
     public function supplierUnRatedDeliveries()
     {
         $collection = Delivery::where(['status' => 1, 'supplier_rating' => 0])->get();
-        $deliveries = $collection->unique('rfq_no');
+        $deliveries = $collection->unique('rfq_no')->sortByDesc('created_at');
 
         return view('rating.supplier.deliveries.unrated', compact('deliveries'));
     }
@@ -477,7 +477,7 @@ class RatingController extends Controller
     public function supplierDeliveriesListToRate()
     {
         $collections = Delivery::where('status',1)->where('supplier_rating', 0)->get();
-        $deliveries = $collections->unique('rfq_no');
+        $deliveries = $collections->unique('rfq_no')->sortByDesc('created_at');
 
         return view('rating.supplier.deliveries.list', compact('deliveries'));
     }

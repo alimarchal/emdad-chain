@@ -216,14 +216,14 @@
                                     <div class="col-span-6 sm:col-span-2">
                                         <label class="block font-medium text-sm text-gray-700" for="supplier_business_name">
                                             {{__('portal.Supplier name')}}
-                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" name="supplier_business_name" readonly value="{{$supplier->name}}">
+                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" name="supplier_business_name" readonly value="{{$supplier->name}}" style="font-family: sans-serif">
                                         </label>
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-2">
                                         <label class="block font-medium text-sm text-gray-700" for="supplier_business_name">
                                             {{__('portal.Supplier business name')}}
-                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" name="supplier_business_name" readonly value="{{$supplier->business->business_name}}">
+                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" name="supplier_business_name" readonly value="{{$supplier->business->business_name}}" style="font-family: sans-serif">
                                         </label>
                                     </div>
 
@@ -231,17 +231,17 @@
                                         <label class="block font-medium text-sm text-gray-700" for="supplier_rating">{{__('portal.Rate')}}</label>
                                         <select name="supplier_rating" id="supplier_rating" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
                                             <option disabled selected value="">{{__('portal.Select')}}</option>
-                                            <option @if (old('supplier_rating') == "1") {{ 'selected' }} @endif value="1">1</option>
-                                            <option @if (old('supplier_rating') == "2") {{ 'selected' }} @endif value="2">2</option>
-                                            <option @if (old('supplier_rating') == "3") {{ 'selected' }} @endif value="3">3</option>
-                                            <option @if (old('supplier_rating') == "4") {{ 'selected' }} @endif value="4">4</option>
-                                            <option @if (old('supplier_rating') == "5") {{ 'selected' }} @endif value="5">5</option>
+                                            <option @if (old('supplier_rating') == "1") {{ 'selected' }} @endif value="1" style="font-family: sans-serif">1</option>
+                                            <option @if (old('supplier_rating') == "2") {{ 'selected' }} @endif value="2" style="font-family: sans-serif">2</option>
+                                            <option @if (old('supplier_rating') == "3") {{ 'selected' }} @endif value="3" style="font-family: sans-serif">3</option>
+                                            <option @if (old('supplier_rating') == "4") {{ 'selected' }} @endif value="4" style="font-family: sans-serif">4</option>
+                                            <option @if (old('supplier_rating') == "5") {{ 'selected' }} @endif value="5" style="font-family: sans-serif">5</option>
                                         </select>
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-2">
                                         <label class="block font-medium text-sm text-gray-700" for="supplier_comment_content">{{__('portal.Comments')}}</label>
-                                        <textarea name="supplier_comment_content" id="supplier_comment_content" class="w-full" style="border: 2px solid #d6d8db; border-radius: 8px;" maxlength="254" cols="50" placeholder="{{__('portal.Any Comments')}}...">{{old('supplier_comment_content')}}</textarea>
+                                        <textarea name="supplier_comment_content" id="supplier_comment_content" class="w-full" style="border: 2px solid #d6d8db; border-radius: 8px;font-family: sans-serif" maxlength="254" cols="50" placeholder="{{__('portal.Any Comments')}}...">{{old('supplier_comment_content')}}</textarea>
                                     </div>
 
                                 </div>
@@ -252,14 +252,14 @@
                                     <div class="col-span-6 sm:col-span-2">
                                         <label class="block font-medium text-sm text-gray-700" for="driver_business_name">
                                             {{__('portal.Driver name')}}
-                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" name="driver_business_name" readonly value="{{$driver->name}}">
+                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" name="driver_business_name" readonly value="{{$driver->name}}" style="font-family: sans-serif">
                                         </label>
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-2">
                                         <label class="block font-medium text-sm text-gray-700" for="driver_business_name">
                                             {{__('portal.Driver business name')}}
-                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" name="driver_business_name" readonly value="{{$driver->business->business_name}}">
+                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" name="driver_business_name" readonly value="{{$driver->business->business_name}}" style="font-family: sans-serif">
                                         </label>
                                     </div>
 
@@ -267,11 +267,11 @@
                                         <label class="block font-medium text-sm text-gray-700" for="driver_rating">{{__('portal.Rate')}}</label>
                                         <select name="driver_rating" id="driver_rating" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
                                             <option disabled selected value="">{{__('portal.Select')}}</option>
-                                            <option @if (old('driver_rating') == "1") {{ 'selected' }} @endif value="1">1</option>
-                                            <option @if (old('driver_rating') == "2") {{ 'selected' }} @endif value="2">2</option>
-                                            <option @if (old('driver_rating') == "3") {{ 'selected' }} @endif value="3">3</option>
-                                            <option @if (old('driver_rating') == "4") {{ 'selected' }} @endif value="4">4</option>
-                                            <option @if (old('driver_rating') == "5") {{ 'selected' }} @endif value="5">5</option>
+                                            <option @if (old('driver_rating') == "1") {{ 'selected' }} @endif value="1" style="font-family: sans-serif">1</option>
+                                            <option @if (old('driver_rating') == "2") {{ 'selected' }} @endif value="2" style="font-family: sans-serif">2</option>
+                                            <option @if (old('driver_rating') == "3") {{ 'selected' }} @endif value="3" style="font-family: sans-serif">3</option>
+                                            <option @if (old('driver_rating') == "4") {{ 'selected' }} @endif value="4" style="font-family: sans-serif">4</option>
+                                            <option @if (old('driver_rating') == "5") {{ 'selected' }} @endif value="5" style="font-family: sans-serif">5</option>
                                         </select>
                                     </div>
 
@@ -279,7 +279,7 @@
                                         <label class="block font-medium text-sm text-gray-700" for="driver_comment_content">
                                             {{__('portal.Comments')}}
                                         </label>
-                                        <textarea name="driver_comment_content" id="driver_comment_content" class="w-full" style="border: 2px solid #d6d8db; border-radius: 8px;" maxlength="254" cols="50" placeholder="{{__('portal.Any Comments')}}...">{{old('driver_comment_content')}}</textarea>
+                                        <textarea name="driver_comment_content" id="driver_comment_content" class="w-full" style="border: 2px solid #d6d8db; border-radius: 8px;font-family: sans-serif" maxlength="254" cols="50" placeholder="{{__('portal.Any Comments')}}...">{{old('driver_comment_content')}}</textarea>
                                     </div>
 
                                 </div>
@@ -300,11 +300,11 @@
                                         </label>
                                         <select name="emdad_rating" id="emdad_rating" class="form-input rounded-md shadow-sm mt-1 block w-full" required>
                                             <option disabled selected value="">{{__('portal.Select')}}</option>
-                                            <option @if (old('emdad_rating') == "1") {{ 'selected' }} @endif  value="1">1</option>
-                                            <option @if (old('emdad_rating') == "2") {{ 'selected' }} @endif  value="2">2</option>
-                                            <option @if (old('emdad_rating') == "3") {{ 'selected' }} @endif  value="3">3</option>
-                                            <option @if (old('emdad_rating') == "4") {{ 'selected' }} @endif  value="4">4</option>
-                                            <option @if (old('emdad_rating') == "5") {{ 'selected' }} @endif  value="5">5</option>
+                                            <option @if (old('emdad_rating') == "1") {{ 'selected' }} @endif  value="1" style="font-family: sans-serif">1</option>
+                                            <option @if (old('emdad_rating') == "2") {{ 'selected' }} @endif  value="2" style="font-family: sans-serif">2</option>
+                                            <option @if (old('emdad_rating') == "3") {{ 'selected' }} @endif  value="3" style="font-family: sans-serif">3</option>
+                                            <option @if (old('emdad_rating') == "4") {{ 'selected' }} @endif  value="4" style="font-family: sans-serif">4</option>
+                                            <option @if (old('emdad_rating') == "5") {{ 'selected' }} @endif  value="5" style="font-family: sans-serif">5</option>
                                         </select>
                                     </div>
 
@@ -312,7 +312,7 @@
                                         <label class="block font-medium text-sm text-gray-700" for="emdad_comment_content">
                                             {{__('portal.Comments')}}
                                         </label>
-                                        <textarea name="emdad_comment_content" id="emdad_comment_content" class="w-full" style="border: 2px solid #d6d8db; border-radius: 8px;" maxlength="254" cols="50" placeholder="{{__('portal.Any Comments')}}...">{{old('emdad_comment_content')}}</textarea>
+                                        <textarea name="emdad_comment_content" id="emdad_comment_content" class="w-full" style="border: 2px solid #d6d8db; border-radius: 8px;font-family: sans-serif" maxlength="254" cols="50" placeholder="{{__('portal.Any Comments')}}...">{{old('emdad_comment_content')}}</textarea>
                                     </div>
 
                                 </div>

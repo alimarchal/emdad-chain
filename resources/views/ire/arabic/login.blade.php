@@ -13,6 +13,10 @@
             </div>
         @endif
 
+        <div>
+            <a href="{{route('ireLogin')}}" class="inline-flex items-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" style="border-radius: 25px;"><img alt="" src="{{url('us.png')}}" style="margin-right: 8px;margin-top: -4px;">English</a>
+        </div>
+
         <form method="POST" action="{{ route('ireLogin') }}" style="direction: rtl">
             @csrf
 
@@ -41,7 +45,7 @@
                 @endif
 
                 &nbsp;
-                <x-jet-button class="ml-4">
+                <x-jet-button class="ml-4" style="border-radius: 25px;">
                     {{ __('الدخول') }}
                 </x-jet-button>
             </div>

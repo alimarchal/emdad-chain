@@ -152,12 +152,12 @@
                                                     <tbody class="bg-white divide-y divide-gray-200">
                                                         @foreach ($deliveries as $delivery)
                                                             <tr>
-                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500" style="font-family: sans-serif">
                                                                     <span class="badge badge-info">{{ $loop->iteration }}</span>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     <span class="badge badge-info">
-                                                                        <a href="{{route('deliveryDetails', [ 'rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" class="text-blue-600 hover:underline">{{__('portal.D.N.')}}-{{ $delivery->delivery_note_id }} </a>
+                                                                        <a href="{{route('deliveryDetails', [ 'rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" class="text-blue-600 hover:underline">{{__('portal.D.N.')}}-<span style="font-family: sans-serif">{{ $delivery->delivery_note_id }}</span> </a>
                                                                     </span>
                                                                 </td>
                                                             </tr>

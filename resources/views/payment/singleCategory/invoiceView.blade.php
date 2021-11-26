@@ -154,7 +154,7 @@
                                         @endphp
                                         <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($subtotal, 2) }} {{__('portal.SAR')}}<br>
                                         <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $invoices[0]->purchase_order->shipment_cost }} {{__('portal.SAR')}}<br>
-                                        <strong>{{__('portal.VAT')}} {{ number_format($invoices[0]->vat) }}%: @if($invoices[0]->vat > 9) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @else &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @endif</strong>{{ number_format(($subtotal + $invoices[0]->purchase_order->shipment_cost) * ($invoices[0]->vat/100), 2) }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.VAT')}} {{ number_format($invoices[0]->vat) }}%: @if($invoices[0]->vat > 9) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @else &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @endif</strong>{{ number_format(($subtotal + $invoices[0]->purchase_order->shipment_cost) * ($invoices[0]->vat/100), 2) }} {{__('portal.SAR')}}<br>
                                         <hr>
                                         <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($invoices[0]->total_cost, 2) }} {{__('portal.SAR')}}<br>
                                         <hr>
@@ -179,6 +179,34 @@
                                         <li>{{__('portal.Total amount of VAT, according to its category, is collectable at the supplier\'s end.')}}</li>
                                     </div>
                                 </div>
+
+                                @if (auth()->user()->registration_type == 'Buyer')
+                                    @if($invoices[0]->invoice_status == '0' || $invoices[0]->invoice_status == '2')
+                                        @if($invoices[0]->invoice_status == '0')
+
+                                            <div class="flex mt-4 mb-4">
+                                                <div class="flex flex-wrap">
+                                                    <a href=" {{ route('singleCategoryBankPaymentCreate', $invoices[0]->rfq_no) }}" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                        {{__('portal.Manual Payment')}}
+                                                    </a>
+                                                </div>
+                                                <div class="flex flex-wrap ml-4">
+                                                    <form action="{{route('invoicePayment.stepOne')}}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="invoice_id" value="{{$invoices[0]->id}}">
+                                                        <button class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">{{__('portal.Online Payment')}}</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endif
+
+                                    @if($invoices[0]->invoice_status == '2')
+                                        <a href=" {{ route('singleCategoryBankPaymentEdit', $invoices[0]->id) }}" class="inline-flex items-center justify-center px-4 py-2 mt-4 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                            {{__('portal.Proceed')}}
+                                        </a>
+                                    @endif
+                                @endif
 
                                 @if((auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin'])) && $invoices[0]->invoice_status == 3)
                                     <div class="flex mt-4 mb-4">
@@ -386,6 +414,34 @@
                                         <li>{{__('portal.Total amount of VAT, according to its category, is collectable at the supplier\'s end.')}}</li>
                                     </div>
                                 </div>
+
+                                @if (auth()->user()->registration_type == 'Buyer')
+                                    @if($invoices[0]->invoice_status == '0' || $invoices[0]->invoice_status == '2')
+                                        @if($invoices[0]->invoice_status == '0')
+
+                                            <div class="flex mt-4 mb-4">
+                                                <div class="flex flex-wrap">
+                                                    <a href=" {{ route('singleCategoryBankPaymentCreate', $invoices[0]->rfq_no) }}" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                        {{__('portal.Manual Payment')}}
+                                                    </a>
+                                                </div>
+                                                <div class="flex flex-wrap mr-4">
+                                                    <form action="{{route('invoicePayment.stepOne')}}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="invoice_id" value="{{$invoices[0]->id}}">
+                                                        <button class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">{{__('portal.Online Payment')}}</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endif
+
+                                    @if($invoices[0]->invoice_status == '2')
+                                        <a href=" {{ route('singleCategoryBankPaymentEdit', $invoices[0]->id) }}" class="inline-flex items-center justify-center px-4 py-2 mt-4 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                            {{__('portal.Proceed')}}
+                                        </a>
+                                    @endif
+                                @endif
 
                                 @if((auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin'])) && $invoices[0]->invoice_status == 3)
                                     <div class="flex mt-4 mb-4">

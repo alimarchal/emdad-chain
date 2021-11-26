@@ -414,14 +414,14 @@ class BusinessController extends Controller
 
     public function suppliers()
     {
-        $suppliers = User::with('business')->where(['added_by_userId' => \auth()->id(), 'added_by' => 1])->get();
+        $suppliers = User::with('business')->where(['added_by_userId' => \auth()->id(), 'added_by' => 1])->where('usertype', '=', 'CEO')->orderByDesc('created_at')->get();
 
         return view('business.supplier', compact('suppliers'));
     }
 
     public function buyers()
     {
-        $buyers = User::with('business')->where(['added_by_userId' => \auth()->id(), 'added_by' => 2])->get();
+        $buyers = User::with('business')->where(['added_by_userId' => \auth()->id(), 'added_by' => 2])->where('usertype', '=', 'CEO')->orderByDesc('created_at')->get();
 
         return view('business.buyer', compact('buyers'));
     }

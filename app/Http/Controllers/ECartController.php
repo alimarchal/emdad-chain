@@ -18,7 +18,7 @@ class ECartController extends Controller
         $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
         $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
 //        $eCart = ECart::where('business_id', auth()->user()->business_id)->get();
-        $eCart = ECart::where(['business_id' => auth()->user()->business_id,  'rfq_type' => 1])->get();
+        $eCart = ECart::where(['business_id' => auth()->user()->business_id,  'rfq_type' => 1])->orderByDesc('created_at')->get();
         return view('RFQ.index', compact('parentCategories', 'childs', 'eCart'));
     }
 
@@ -73,7 +73,7 @@ class ECartController extends Controller
     public function single_cart_index()
     {
         $parentCategories = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-        $eCart = ECart::where(['business_id' => auth()->user()->business_id,  'rfq_type' => 0])->get();
+        $eCart = ECart::where(['business_id' => auth()->user()->business_id,  'rfq_type' => 0])->orderByDesc('created_at')->get();
         return view('RFQ.singleCategory.cart', compact('parentCategories',  'eCart'));
     }
 

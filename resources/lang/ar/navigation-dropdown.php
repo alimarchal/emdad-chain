@@ -48,4 +48,5 @@ return [
     'Info' => 'معلومات',
     'Requisitions(s) with no Quotations' => 'الطلبات من دون عروض',
     'Number of Requisitions which received no quotations' => 'عدد الطلبات التي لم تتلقى عرضاً',
+    'Main Navigation' => 'Main Navigation',
 ];

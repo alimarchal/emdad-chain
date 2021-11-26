@@ -35,7 +35,7 @@ class PurchaseRequestFormController extends Controller
             return redirect()->back();
         }
         $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-        $eCart = ECart::where(['business_id' => auth()->user()->business_id,'rfq_type' => 1])->get();
+        $eCart = ECart::where(['business_id' => auth()->user()->business_id,'rfq_type' => 1])->orderByDesc('created_at')->get();
 
         // Remaining RFQ count
         $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
@@ -92,7 +92,7 @@ class PurchaseRequestFormController extends Controller
             session()->flash('error', __('portal.No Business Package Found for you account! Contact Admin.'));
             return redirect()->back();
         }
-        $eCart = ECart::where(['business_id' => auth()->user()->business_id , 'rfq_type' => 0])->get();
+        $eCart = ECart::where(['business_id' => auth()->user()->business_id , 'rfq_type' => 0])->orderByDesc('created_at')->get();
 
         // Remaining RFQ count
         $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();

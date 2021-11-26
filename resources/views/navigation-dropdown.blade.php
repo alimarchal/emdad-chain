@@ -1012,7 +1012,7 @@
                             <a href="{{route('RFQCart.index')}}"
                                title="{{__('navigation-dropdown.Multiple Categories Cart items')}}">
                                 <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline"
-                                      @else class="text-red-600 hover:underline" @endif>
+                                      @else class="text-red-600 hover:underline" @endif style="font-family: sans-serif">
                                     ({{$multipleCategoryCount}})
                                 </span>
                             </a> &nbsp; |
@@ -1024,7 +1024,7 @@
                             <a href="{{route('single_cart_index')}}"
                                title="{{__('navigation-dropdown.Single Category Cart items')}}">
                                 <span @if($count > 0) class="text-green-600 hover:underline"
-                                      @else class="text-red-600 hover:underline" @endif>
+                                      @else class="text-red-600 hover:underline" @endif style="font-family: sans-serif">
                                     ({{$count}})
                                 </span>
                             </a> &nbsp; |
@@ -1047,7 +1047,7 @@
                         <path fill="none"
                               d="M13.972,12.386c-1.022,0-1.855,0.834-1.855,1.856s0.833,1.853,1.855,1.853s1.854-0.83,1.854-1.853S14.994,12.386,13.972,12.386z M13.972,15.116c-0.484,0-0.878-0.393-0.878-0.874c0-0.484,0.394-0.878,0.878-0.878c0.482,0,0.875,0.394,0.875,0.878C14.847,14.724,14.454,15.116,13.972,15.116z"></path>
                         {{ __('navigation-dropdown.Quotations')}}: &nbsp;<a href="{{route('QoutationsBuyerReceived')}}"><span
-                                    style="padding-left: 7px;"
+                                    style="padding-left: 7px;font-family: sans-serif"
                                     @if($quotationCount > 0) class="text-green-600 hover:underline"
                                     @else class="text-red-600 hover:underline" @endif>{{$quotationCount}}</span></a></span>
 
@@ -1196,7 +1196,7 @@
                                 <div class="border-t border-gray-100"></div>
                                 <x-jet-dropdown-link href="{{ route('business.create') }}">
                                     @if(isset(auth()->user()->business->business_name))
-                                        {{ auth()->user()->business->business_name . ' ' . __('navigation-dropdown.Info') }}
+                                        <span style="font-family: sans-serif">{{ auth()->user()->business->business_name }}</span> {{__('navigation-dropdown.Info')}}
                                     @else
                                         {{ __('navigation-dropdown.Business') }}
                                     @endif
@@ -1385,7 +1385,7 @@
                                 <a href="{{route('RFQCart.index')}}"
                                    title="{{__('navigation-dropdown.Multiple Categories Cart items')}}">
                                     <span @if($multipleCategoryCount > 0) class="text-green-600 hover:underline"
-                                          @else class="text-red-600 hover:underline" @endif>
+                                          @else class="text-red-600 hover:underline" @endif style="font-family: sans-serif">
                                         ({{$multipleCategoryCount}})
                                     </span>
                                 </a> &nbsp; |
@@ -1394,12 +1394,12 @@
 
                         @if($count > 0)
                             <img src="{{asset('cart2.png')}}"
-                                 style="transform: scaleX(-1) ;margin-right: 10px;margin-bottom: 4px;width: 32px; height: 29px;">
+                                 style="transform: scaleX(-1) ;margin-right: 10px;margin-bottom: 10px;width: 32px; height: 29px;">
                             &nbsp;
                             <a href="{{route('single_cart_index')}}"
                                title="{{__('navigation-dropdown.Single Category Cart items')}}">
                                 <span @if($count > 0) class="text-green-600 hover:underline"
-                                      @else class="text-red-600 hover:underline" @endif>
+                                      @else class="text-red-600 hover:underline" @endif style="font-family: sans-serif">
                                     ({{$count}})
                                 </span>
                             </a> &nbsp; |
@@ -1410,7 +1410,7 @@
                     <a @if($quotationCount > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out"
                        @endif href="{{ route('QoutationsBuyerReceived') }}">
-                        {{ __('navigation-dropdown.Quotations')}}: &nbsp; {{ $quotationCount }}
+                        {{ __('navigation-dropdown.Quotations')}}: &nbsp; <span style="font-family: sans-serif">{{ $quotationCount }}</span>
                     </a>
                     {{--<a @if($multiPlacedRFQ > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out" @endif href="{{ route('QoutationsBuyerReceived') }}">
@@ -1432,9 +1432,9 @@
                              alt="{{ Auth::user()->name }}"/>
                     </div>
 
-                    <div class="ml-3">
-                        <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                    <div class="mr-3">
+                        <div class="font-medium text-base text-gray-800"><span style="font-family: sans-serif">{{ Auth::user()->name }}</span></div>
+                        <div class="font-medium text-sm text-gray-500"><span style="font-family: sans-serif">{{ Auth::user()->email }}</span></div>
                     </div>
                 </div>
 
@@ -1462,7 +1462,7 @@
                         <div class="border-t border-gray-100"></div>
                         <x-jet-dropdown-link href="{{ route('business.create') }}">
                             @if(isset(auth()->user()->business->business_name))
-                                {{ auth()->user()->business->business_name . ' ' . __('navigation-dropdown.Info') }}
+                                <span style="font-family: sans-serif">{{ auth()->user()->business->business_name }}</span> {{__('navigation-dropdown.Info')}}
                             @else
                                 {{ __('navigation-dropdown.Business') }}
                             @endif

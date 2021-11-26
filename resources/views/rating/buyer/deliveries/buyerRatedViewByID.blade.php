@@ -96,7 +96,7 @@
                                                                     <span class="badge badge-info">@if($loop->iteration == 1) {{ $user->business->business_name }} @elseif($loop->iteration == 2) {{$driver->business->business_name}} @else {{__('portal.Emdad Supply Chain')}} @endif</span>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                    <span class="badge badge-info">{{ $deliveryComment->comment_content }}</span>
+                                                                    <span class="badge badge-info">@if(isset($deliveryComment->comment_content)) {{ $deliveryComment->comment_content }} @else {{__('portal.N/A')}} @endif</span>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     <span class="badge badge-info">{{ number_format($deliveryComment->rating,2) }}</span>
@@ -197,7 +197,7 @@
                                                     <tbody class="bg-white divide-y divide-gray-200">
                                                         @foreach ($deliveryComments as $deliveryComment)
                                                             <tr>
-                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500" style="font-family: sans-serif">
                                                                     <span class="badge badge-info">{{ $loop->iteration }}</span>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
@@ -210,7 +210,7 @@
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     @php $delivery = \App\Models\Delivery::where('id',$deliveryComment->delivery_id)->first(); @endphp
-                                                                    <a href="{{route('deliveryDetails', [ 'rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.D.N.')}}-{{ $delivery->delivery_note_id }} </a>
+                                                                    <a href="{{route('deliveryDetails', [ 'rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" class="text-blue-600 hover:underline" target="_blank" rel="noreferrer">{{__('portal.D.N.')}}-<span style="font-family: sans-serif">{{ $delivery->delivery_note_id }}</span> </a>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                     @php
@@ -219,15 +219,15 @@
                                                                         $shipmentItem = \App\Models\ShipmentItem::where('delivery_id', $delivery->id)->first();
                                                                         $driver = \App\Models\User::with('business')->where('id', $shipmentItem->driver_id)->first();
                                                                     @endphp
-                                                                    <span class="badge badge-info">@if($loop->iteration == 1) {{ $user->name }} @elseif($loop->iteration == 2) {{$driver->name}} @else {{__('portal.Emdad')}} @endif</span>
+                                                                    <span class="badge badge-info">@if($loop->iteration == 1) <span style="font-family: sans-serif">{{ $user->name }}</span> @elseif($loop->iteration == 2) <span style="font-family: sans-serif">{{$driver->name}}</span> @else {{__('portal.Emdad')}} @endif</span>
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                    <span class="badge badge-info">@if($loop->iteration == 1) {{ $user->business->business_name }} @elseif($loop->iteration == 2) {{$driver->business->business_name}} @else {{__('portal.Emdad Supply Chain')}} @endif</span>
+                                                                    <span class="badge badge-info">@if($loop->iteration == 1) <span style="font-family: sans-serif">{{ $user->business->business_name }}</span> @elseif($loop->iteration == 2) <span style="font-family: sans-serif">{{$driver->business->business_name}}</span> @else {{__('portal.Emdad Supply Chain')}} @endif</span>
                                                                 </td>
-                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                    <span class="badge badge-info">{{ $deliveryComment->comment_content }}</span>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500" style="font-family: sans-serif">
+                                                                    <span class="badge badge-info"> @if(isset($deliveryComment->comment_content)) {{ $deliveryComment->comment_content }} @else {{__('portal.N/A')}} @endif </span>
                                                                 </td>
-                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500" style="font-family: sans-serif">
                                                                     <span class="badge badge-info">{{ number_format($deliveryComment->rating,2) }}</span>
                                                                 </td>
                                                             </tr>

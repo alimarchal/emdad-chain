@@ -185,26 +185,26 @@
                                                     <tbody class="bg-white divide-y divide-gray-200">
                                                     @foreach ($buyers as $buyer)
                                                         <tr>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500" style="font-family: sans-serif">
                                                                 <span class="badge badge-info">{{ $loop->iteration }}</span>
                                                             </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
+                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500" style="font-family: sans-serif">
                                                                 <span class="badge badge-info">{{ $buyer->name }}</span>
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100  text-green-800">
+                                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100  text-green-800" style="font-family: sans-serif">
                                                                     {{$buyer->email }}
                                                                 </span>
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
-                                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100  text-green-800">
+                                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100  text-green-800" style="font-family: sans-serif">
                                                                     {{$buyer->mobile }}
                                                                 </span>
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-500">
                                                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full @if(isset($buyer->business_id)) bg-green-100  text-green-800 @else bg-red-100  text-red-800 @endif">
                                                                     @if(isset($buyer->business_id))
-                                                                        {{$buyer->business->business_name }}
+                                                                        <span style="font-family: sans-serif">{{$buyer->business->business_name }}</span>
                                                                     @else
                                                                         {{__('portal.Not business yet registered')}}
                                                                     @endif

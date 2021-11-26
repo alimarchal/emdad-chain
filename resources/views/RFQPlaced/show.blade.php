@@ -80,10 +80,10 @@
                                             <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $collection[0]->business->city }}</span><br>
                                             <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $collection[0]->business->vat_reg_certificate_number }}</span><br>
                                         @else
-                                            <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $collection[0]->business->business_name }}<br>
-                                            <strong>{{__('portal.Email')}}: &nbsp;&nbsp;</strong>{{ $collection[0]->business->business_email }}<br>
-                                            <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $collection[0]->business->city }}</span><br>
-                                            <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $collection[0]->business->vat_reg_certificate_number }}</span><br>
+                                            <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->business->business_name }}</span> <br>
+                                            <strong>{{__('portal.Email')}}: &nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->business->business_email }}</span> <br>
+                                            <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->business->city }}</span><br>
+                                            <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->business->vat_reg_certificate_number }}</span><br>
                                         @endif
                                     </div>
 
@@ -105,8 +105,8 @@
                                             <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $collection[0]->warehouse->address }}</span> <br>
                                         @else
                                             <strong>{{__('portal.Requisition Type')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> @if($collection[0]->rfq_type == 1) {{__('portal.Multiple Categories')}} @else {{__('portal.Single Category')}} @endif <br>
-                                            <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $collection[0]->created_at }}<br>
-                                            <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;</strong><span>{{__('portal.RFQ')}}-{{ $collection[0]->id }}</span><br>
+                                            <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->created_at }}</span> <br>
+                                            <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;</strong><span>{{__('portal.RFQ')}}-<span style="font-family: sans-serif">{{ $collection[0]->id }}</span></span><br>
                                             <strong>{{__('portal.Payment Terms')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                             @if($collection[0]->payment_mode == 'Cash') {{__('portal.Cash')}}
                                             @elseif($collection[0]->payment_mode == 'Credit') {{__('portal.Credit')}}
@@ -116,8 +116,8 @@
                                             @elseif($collection[0]->payment_mode == 'Credit120days') {{__('portal.Credit (120 Days)')}}
                                             @endif
                                             <br>
-                                            <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $collection[0]->warehouse->mobile }}</span> <br>
-                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $collection[0]->warehouse->address }}</span> <br>
+                                            <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->warehouse->mobile }}</span> <br>
+                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->warehouse->address }}</span> <br>
                                         @endif
                                     </div>
                                 </div>
@@ -125,37 +125,37 @@
                                 <table class="min-w-full divide-y divide-black">
                                     <thead>
                                     <tr>
-                                        <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             #
                                         </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.Category Name')}}
                                         </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.Description')}}
                                         </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.Brand')}}
                                         </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.UOM')}}
                                         </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.Size')}}
                                         </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.Delivery Period')}}
                                         </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.Last Unit Price')}}
                                         </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.Qty')}}
                                         </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.Remarks')}}
                                         </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-left text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.Attachments')}}
                                         </th>
                                     </tr>
@@ -171,21 +171,30 @@
                                                 $category = \App\Models\Category::where('id',$rfp->category->id)->first();
                                                 $parentCategory = \App\Models\Category::where('id',$category->parent_id)->first();
                                             @endphp
-                                            {{ $rfp->item_name }}@if(isset($parentCategory->name)), {{ $parentCategory->name }} @endif
+                                            @if(auth()->user()->rtl == 0)
+                                                {{ $rfp->item_name }}@if(isset($parentCategory->name)), {{ $parentCategory->name }} @endif
+                                            @else
+                                                {{ $category->name_ar }}@if(isset($parentCategory->name_ar)), {{ $parentCategory->name_ar }} @endif
+                                            @endif
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                             {{ strip_tags($rfp->description) }}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                             @if(isset($rfp->brand)) {{ $rfp->brand }} @else {{__('portal.N/A')}} @endif
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                            {{ $rfp->unit_of_measurement }}
+                                            @php $UOM = \App\Models\UnitMeasurement::where('uom_en', $rfp->unit_of_measurement)->pluck('uom_ar')->first(); @endphp
+                                            @if(auth()->user()->rtl == 0)
+                                                {{$rfp->unit_of_measurement}}
+                                            @else
+                                                {{ $UOM }}
+                                            @endif
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                            {{ $rfp->size }}
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
+                                            @if(isset($rfp->size)) {{ $rfp->size }} @else {{__('portal.N/A')}} @endif
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                             @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}
                                             @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
                                             @elseif($rfp->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
@@ -200,15 +209,15 @@
                                             @endif
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                            {{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}}
+                                            <span style="font-family: sans-serif">{{ number_format($rfp->last_price, 2) }}</span> {{__('portal.SAR')}}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                             {{ $rfp->quantity }}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                             @if(isset($rfp->remarks)){{ $rfp->remarks }} @else {{__('portal.N/A')}} @endif
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                             @if ($rfp->file_path)
                                                 <a href="{{ Storage::url($rfp->file_path) }}">
                                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

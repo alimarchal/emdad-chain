@@ -206,19 +206,19 @@
 
                             <div class="flex flex-wrap overflow-hidden bg-white p-4">
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-2/3">
-                                    <strong>{{__('portal.Supplier')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->supplier->business->business_name }}<br>
-                                    <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->city }}</span><br>
-                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
-                                    <strong>{{__('portal.Email')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->supplier->business->business_email }}</span><br><br>
+                                    <strong>{{__('portal.Supplier')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->supplier->business->business_name }}</span> <br>
+                                    <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->supplier->business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->supplier->business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.Email')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->supplier->business->business_email }}</span><br><br>
 
-                                    <strong>{{__('portal.Delivery Note')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.N.')}}-{{ $deliveries[0]->delivery_note_id }}<br>
+                                    <strong>{{__('portal.Delivery Note')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.D.N.')}}-<span style="font-family: sans-serif">{{ $deliveries[0]->delivery_note_id }}</span> <br>
                                     @if(isset($deliveries[0]->invoice))
-                                        <strong>{{__('portal.Invoice')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Inv.')}}-{{ $deliveries[0]->invoice->id }}<br>
+                                        <strong>{{__('portal.Invoice')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Inv.')}}-<span style="font-family: sans-serif">{{ $deliveries[0]->invoice->id }}</span> <br>
                                     @endif
-                                    <strong>{{__('portal.Purchase Order')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.PO')}}-{{ $deliveries[0]->draft_purchase_order_id }}<br>
-                                    <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->created_at }}<br>
-                                    <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $deliveries[0]->qoute_no }}<br>
-                                    <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $deliveries[0]->rfq_item_no }}<br>
+                                    <strong>{{__('portal.Purchase Order')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.PO')}}-<span style="font-family: sans-serif">{{ $deliveries[0]->draft_purchase_order_id }}</span> <br>
+                                    <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->created_at }}</span> <br>
+                                    <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-<span style="font-family: sans-serif">{{ $deliveries[0]->qoute_no }}</span> <br>
+                                    <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-<span style="font-family: sans-serif">{{ $deliveries[0]->rfq_item_no }}</span> <br>
                                     <strong>{{__('portal.Payment Terms')}} : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                     @if($deliveries[0]->payment_term == 'Cash') {{__('portal.Cash')}}
                                     @elseif($deliveries[0]->payment_term == 'Credit') {{__('portal.Credit')}}
@@ -230,7 +230,7 @@
                                 </div>
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                     <img src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" style="height: 115px;"/><br>
-                                    <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->buyer->business->business_name }}<br>
+                                    <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->buyer->business->business_name }}</span> <br>
                                     {{--<div class="flex">
                                         <div class="flex-row">
                                             <p>{{ $deliveries[0]->buyer->business->business_name }}</p><br>
@@ -239,10 +239,10 @@
                                             <img class="h-20 w-20" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
                                         </div>
                                     </div>--}}
-                                    <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->city }}</span><br>
-                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
-                                    <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->otp_mobile_number }}</span><br>
-                                    <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->delivery_address }}</span><br>
+                                    <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->buyer->business->city }}</span><br>
+                                    <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
+                                    <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->otp_mobile_number }}</span><br>
+                                    <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->delivery_address }}</span><br>
                                 </div>
                             </div>
 
@@ -270,7 +270,7 @@
                                 <tbody class="bg-white divide-y divide-black border-1 border-black">
                                 @foreach($deliveries as $delivery)
                                     <tr>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                             {{$loop->iteration}}
                                         </td>
                                         @php
@@ -280,13 +280,14 @@
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                             <span>{{ $record->name_ar }} @if(isset($parent)) , {{ $parent->name_ar }} @endif</span>
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                             {{ $delivery->eOrderItems->description }}
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                            {{ $delivery->eOrderItems->unit_of_measurement }}
+                                            @php $UOM = \App\Models\UnitMeasurement::where('uom_en', $delivery->eOrderItems->unit_of_measurement)->pluck('uom_ar')->first(); @endphp
+                                            {{ $UOM }}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                             {{ $delivery->quantity }}
                                         </td>
                                     </tr>

@@ -172,6 +172,34 @@
                                     </div>
                                 </div>
 
+                                @if (auth()->user()->registration_type == 'Buyer')
+                                    @if($invoice->invoice_status == '0' || $invoice->invoice_status == '2')
+                                        @if($invoice->invoice_status == '0')
+
+                                            <div class="flex mt-4 mb-4">
+                                                <div class="flex flex-wrap">
+                                                    <a href=" {{ route('bank-payments.create', $invoice->id) }}" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                        {{__('portal.Manual Payment')}}
+                                                    </a>
+                                                </div>
+                                                <div class="flex flex-wrap ml-4">
+                                                    <form action="{{route('invoicePayment.stepOne')}}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
+                                                        <button class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">{{__('portal.Online Payment')}}</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endif
+
+                                    @if($invoice->invoice_status == '2')
+                                        <a href=" {{ route('bank-payments.edit', $invoice->id) }}" class="inline-flex items-center justify-center px-4 py-2 mt-4 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                            {{__('portal.Proceed')}}
+                                        </a>
+                                    @endif
+                                @endif
+
                                 @if((auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin'])) && $invoice->invoice_status == 3)
                                     <div class="flex mt-4 mb-4">
                                         <div class="flex flex-wrap"><img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-6@8x.png')}}" alt="{{__('portal.Paid')}}"></div>
@@ -372,10 +400,38 @@
                                     </div>
                                 </div>
 
+                                @if (auth()->user()->registration_type == 'Buyer')
+                                    @if($invoice->invoice_status == '0' || $invoice->invoice_status == '2')
+                                        @if($invoice->invoice_status == '0')
+
+                                            <div class="flex mt-4 mb-4">
+                                                <div class="flex flex-wrap">
+                                                    <a href=" {{ route('bank-payments.create', $invoice->id) }}" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                        {{__('portal.Manual Payment')}}
+                                                    </a>
+                                                </div>
+                                                <div class="flex flex-wrap mr-4">
+                                                    <form action="{{route('invoicePayment.stepOne')}}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="invoice_id" value="{{$invoice->id}}">
+                                                        <button class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">{{__('portal.Online Payment')}}</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endif
+
+                                    @if($invoice->invoice_status == '2')
+                                        <a href=" {{ route('bank-payments.edit', $invoice->id) }}" class="inline-flex items-center justify-center px-4 py-2 mt-4 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                            {{__('portal.Proceed')}}
+                                        </a>
+                                    @endif
+                                @endif
+
                                 @if((auth()->user()->registration_type == "Buyer" || auth()->user()->hasAnyRole(['Buyer Payment Admin', 'Buyer Purchaser', 'Buyer Purchase Admin'])) && $invoice->invoice_status == 3)
                                     <div class="flex mt-4 mb-4">
                                         <div class="flex flex-wrap"><img class="px-3 py-3 h-20" src="{{url('images/stamps/Artboard-6@8x.png')}}" alt="{{__('portal.Paid')}}"></div>
-                                        <div class="flex flex-wrap justify-content-center mt-6"><strong>{{__('portal.Invoice paid on')}}: &nbsp;</strong> {{$invoice->BankPayment->created_at}}</div>
+                                        <div class="flex flex-wrap justify-content-center mt-6"><strong>{{__('portal.Invoice paid on')}}: &nbsp;</strong> <span style="font-family: sans-serif;">{{$invoice->BankPayment->created_at}}</span></div>
                                     </div>
                                 @endif
 
