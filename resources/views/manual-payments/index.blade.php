@@ -29,26 +29,26 @@
                         <table class="min-w-full divide-y divide-gray-200" id="manual-payments">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-center text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         #
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                        {{__('portal.Invoice Number')}}
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-center text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Invoice')}} #
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-center text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Invoice Date')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-center text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Supplier Business name')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Buyer Business name')}} @endif
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-center text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Requisition Type')}}
                                     </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-center text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Status')}}
                                     </th>
                                     @if(auth()->user()->registration_type == 'Buyer')
-                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-center font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-center text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
 {{--                                            @if(auth()->user()->registration_type == 'Buyer') {{__('portal.Claim')}} @elseif(auth()->user()->registration_type == 'Supplier') {{__('portal.Confirm')}} @endif {{__('portal.Manual Payment')}}--}}
                                              {{__('portal.Payment')}}
                                         </th>
@@ -101,7 +101,7 @@
                                             @if(isset($businessName->business_name)) {{$businessName->business_name}} @else {{__('portal.N/A')}} @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                            @if($item->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($item->rfq_type == 0) {{__('portal.Single Category')}} @endif
+                                            @if($item->rfq_type == 1) {{__('portal.Multiple')}} @elseif($item->rfq_type == 0) {{__('portal.Single')}} @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if (auth()->user()->registration_type == 'Buyer')
@@ -189,7 +189,7 @@
                                         #
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                        {{__('portal.Invoice Number')}}
+                                        {{__('portal.Invoice')}} #
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Invoice Date')}}
@@ -257,7 +257,7 @@
                                             @if(isset($businessName->business_name)) {{$businessName->business_name}} @else {{__('portal.N/A')}} @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
-                                            @if($item->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($item->rfq_type == 0) {{__('portal.Single Category')}} @endif
+                                            @if($item->rfq_type == 1) {{__('portal.Multiple')}} @elseif($item->rfq_type == 0) {{__('portal.Single')}} @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if (auth()->user()->registration_type == 'Buyer')

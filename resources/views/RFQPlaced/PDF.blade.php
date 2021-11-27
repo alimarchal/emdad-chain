@@ -94,12 +94,12 @@
 
     <tr>
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">#</th>
-        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">Category Name</th>
-        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">Description</th>
+        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">CATEGORY NAME</th>
+        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">DESCRIPTION</th>
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">BRAND</th>
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">UOM</th>
-        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">Size</th>
-        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">Delivery Period</th>
+        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">SIZE</th>
+        <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">DELIVERY PERIOD</th>
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">LAST UP</th>
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">QTY</th>
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">REMARKS</th>

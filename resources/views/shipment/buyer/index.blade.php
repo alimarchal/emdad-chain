@@ -35,30 +35,30 @@
                         <table class="min-w-full divide-y divide-gray-200" id="shipment-table">
                             <thead class="bg-gray-50">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                <th scope="col" class="px-6 py-3 text-center text-sm uppercase text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                     #
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                <th scope="col" class="px-6 py-3 text-center text-sm uppercase text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                     {{__('portal.D.N.')}} #
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                <th scope="col" class="px-6 py-3 text-center text-sm uppercase text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                     {{__('portal.Category Name')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                    {{__('portal.Type')}}
+                                <th scope="col" class="px-6 py-3 text-center text-sm uppercase text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    {{__('portal.Requisition Type')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="width: 120px;background-color: #FCE5CD;">
+                                <th scope="col" class="px-6 py-3 text-center text-sm uppercase text-gray-500 tracking-wider" style="width: 120px;background-color: #FCE5CD;">
                                     {{__('portal.Delivery date')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="width: 120px;background-color: #FCE5CD;">
+                                <th scope="col" class="px-6 py-3 text-center text-sm uppercase text-gray-500 tracking-wider" style="width: 120px;background-color: #FCE5CD;">
                                     {{__('portal.Status')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="width: 120px;background-color: #FCE5CD;">
+                                <th scope="col" class="px-6 py-3 text-center text-sm uppercase text-gray-500 tracking-wider" style="width: 120px;background-color: #FCE5CD;">
                                     {{__('portal.View')}}
                                 </th>
                             </tr>
@@ -83,8 +83,8 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 140px;">
-                                        @if($delivery->rfq_type == 0) {{__('portal.Single Category')}}
-                                        @elseif($delivery->rfq_type == 1) {{__('portal.Multiple Categories')}}
+                                        @if($delivery->rfq_type == 0) {{__('portal.Single')}}
+                                        @elseif($delivery->rfq_type == 1) {{__('portal.Multiple')}}
                                         @endif
                                     </td>
 
@@ -192,7 +192,7 @@
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                    {{__('portal.Type')}}
+                                    {{__('portal.Requisition Type')}}
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="width: 120px;background-color: #FCE5CD;">
@@ -229,7 +229,7 @@
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 140px;">
                                         @if($delivery->rfq_type == 0) {{__('portal.Single Category')}}
-                                        @elseif($delivery->rfq_type == 1) {{__('portal.Multiple Categories')}}
+                                        @elseif($delivery->rfq_type == 1) {{__('portal.Multiple')}}
                                         @endif
                                     </td>
 

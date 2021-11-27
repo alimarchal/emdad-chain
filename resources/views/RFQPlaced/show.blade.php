@@ -104,7 +104,7 @@
                                             <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $collection[0]->warehouse->mobile }}</span> <br>
                                             <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $collection[0]->warehouse->address }}</span> <br>
                                         @else
-                                            <strong>{{__('portal.Requisition Type')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> @if($collection[0]->rfq_type == 1) {{__('portal.Multiple Categories')}} @else {{__('portal.Single Category')}} @endif <br>
+                                            <strong>{{__('portal.Requisition Type')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> @if($collection[0]->rfq_type == 1) {{__('portal.Multiple Categories')}} @else {{__('portal.Single Category')}} @endif <br>
                                             <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->created_at }}</span> <br>
                                             <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;</strong><span>{{__('portal.RFQ')}}-<span style="font-family: sans-serif">{{ $collection[0]->id }}</span></span><br>
                                             <strong>{{__('portal.Payment Terms')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>

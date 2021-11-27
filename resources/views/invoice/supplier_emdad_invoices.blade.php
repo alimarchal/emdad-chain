@@ -33,27 +33,27 @@
                         <table class="min-w-full divide-y divide-gray-200" id="emdad-invoices">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs uppercase text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Emdad Invoice')}} #
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs uppercase text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{auth()->user()->business->business_name}} {{__('portal.Invoice')}} #
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs uppercase text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Requisition Type')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs uppercase text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Amount w/o VAT')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs uppercase text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Emdad invoice amount (1.5 %)')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs uppercase text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.View')}}
                                     </th>
 
@@ -69,7 +69,7 @@
                                             {{__('portal.Inv.')}}-{{ $emdadInvoice->invoice->id }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            @if($emdadInvoice->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($emdadInvoice->rfq_type == 0) {{__('portal.Single Category')}} @endif
+                                            @if($emdadInvoice->rfq_type == 1) {{__('portal.Multiple')}} @elseif($emdadInvoice->rfq_type == 0) {{__('portal.Single')}} @endif
                                         </td>
                                         @if($emdadInvoice->rfq_type == 1)
                                             {{-- calculating total cost without VAT--}}
@@ -176,27 +176,27 @@
                         <table class="min-w-full divide-y divide-gray-200" id="emdad-invoices">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Emdad Invoice')}} #
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{auth()->user()->business->business_name}} {{__('portal.Invoice')}} #
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Requisition Type')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Amount w/o VAT')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Emdad invoice amount (1.5 %)')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.View')}}
                                     </th>
 
@@ -213,7 +213,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            @if($emdadInvoice->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($emdadInvoice->rfq_type == 0) {{__('portal.Single Category')}} @endif
+                                            @if($emdadInvoice->rfq_type == 1) {{__('portal.Multiple')}} @elseif($emdadInvoice->rfq_type == 0) {{__('portal.Single')}} @endif
                                         </td>
 
                                         @if($emdadInvoice->rfq_type == 1)

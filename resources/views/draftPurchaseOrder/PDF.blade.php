@@ -131,14 +131,14 @@
 
     <tr>
         <th style="text-align: center;background-color: #FCE5CD">#</th>
-        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">Category Name</th>
-        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">Description</th>
-        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">Brand</th>
+        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">CATEGORY NAME</th>
+        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">DESCRIPTION</th>
+        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">BRAND</th>
         <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">UOM</th>
-        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">Remarks</th>
-        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">Unit Price</th>
-        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">Quantity</th>
-        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">Amount</th>
+        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">REMARKS</th>
+        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">UNIT PRICE</th>
+        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">QUANTITY</th>
+        <th style="text-align: center;font-weight: normal;background-color: #FCE5CD">AMOUNT</th>
     </tr>
 
     </thead>

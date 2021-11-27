@@ -120,28 +120,28 @@
             #
         </th>
         <th scope="col" style="text-align: center; background-color: #FCE5CD">
-            Category Name
+            CATEGORY NAME
         </th>
         <th scope="col" style="text-align: center; background-color: #FCE5CD">
-            Brand
+            BRAND
         </th>
         <th scope="col" style="text-align: center; background-color: #FCE5CD">
-            Description
+            DESCRIPTION
         </th>
         <th scope="col" style="text-align: center; background-color: #FCE5CD">
             UOM
         </th>
         <th scope="col" style="text-align: center; background-color: #FCE5CD">
-            Remarks
+            REMARKS
         </th>
         <th scope="col" style="text-align: center; background-color: #FCE5CD">
-            Unit Price
+            UNIT PRICE
         </th>
         <th scope="col" style="text-align: center; background-color: #FCE5CD">
-            Quantity
+            QUANTITY
         </th>
         <th scope="col" style="text-align: center; background-color: #FCE5CD">
-            Amount
+            AMOUNT
         </th>
     </tr>
     </thead>

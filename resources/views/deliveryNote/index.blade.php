@@ -45,7 +45,7 @@
                                                         #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                                        {{__('portal.P.O Number')}}
+                                                        {{__('portal.PO')}} #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Category Name')}}
@@ -123,7 +123,7 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            @if($dpo->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dpo->rfq_type == 0) {{__('portal.Single Category')}}  @endif
+                                                            @if($dpo->rfq_type == 1) {{__('portal.Multiple')}} @elseif($dpo->rfq_type == 0) {{__('portal.Single')}}  @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -262,7 +262,7 @@
                                                     #
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                                    {{__('portal.P.O Number')}}
+                                                    {{__('portal.PO')}} #
                                                 </th>
                                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                     {{__('portal.Category Name')}}
@@ -340,7 +340,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        @if($dpo->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dpo->rfq_type == 0) {{__('portal.Single Category')}}  @endif
+                                                        @if($dpo->rfq_type == 1) {{__('portal.Multiple')}} @elseif($dpo->rfq_type == 0) {{__('portal.Single')}}  @endif
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">

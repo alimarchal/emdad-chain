@@ -36,32 +36,32 @@
                         <table class="min-w-full divide-y divide-gray-200" id="requisition-table">
                             <thead class="bg-gray-50">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center uppercase text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
                                     #
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center uppercase text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Requisition No.')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center uppercase text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Date')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center uppercase text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Requested by')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center uppercase text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Requisition Type')}}
                                 </th>
 
 
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center uppercase text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Status')}}
                                 </th>
 
 
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" width="120" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center uppercase text-xs text-gray-500 tracking-wider" width="120" style="background-color: #FCE5CD">
                                     {{__('portal.View')}}
                                 </th>
 
@@ -76,11 +76,11 @@
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
                                         @if ($item->business_id)
-                                            <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
+                                            <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">
                                                 {{__('portal.RFQ')}}-{{$item->OrderItems[0]->id}}
                                             </a>
                                         @else
-                                            <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
+                                            <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">
                                                 {{ $item->business_id }}-{{__('portal.RFQ')}}-{{$item->OrderItems[0]->id}}
                                             </a>
                                         @endif
@@ -102,9 +102,9 @@
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
                                         @if($item->rfq_type == 0)
-                                            {{__('portal.Single Category')}}
+                                            {{__('portal.Single')}}
                                         @elseif($item->rfq_type == 1)
-                                            {{__('portal.Multiple Categories')}}
+                                            {{__('portal.Multiple')}}
                                         @endif
                                     </td>
 
@@ -174,32 +174,32 @@
                         <table class="min-w-full divide-y divide-gray-200" id="requisition-table">
                             <thead class="bg-gray-50">
                             <tr>
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
                                     #
                                 </th>
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Requisition No.')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Date')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Requested by')}}
                                 </th>
 
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Requisition Type')}}
                                 </th>
 
 
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
                                     {{__('portal.Status')}}
                                 </th>
 
 
-                                <th scope="col" class="px-6 py-3 text-center font-medium text-gray-500 tracking-wider" width="120" style="background-color: #FCE5CD">
+                                <th scope="col" class="px-6 py-3 text-center text-xs text-gray-500 tracking-wider" width="120" style="background-color: #FCE5CD">
                                     {{__('portal.View')}}
                                 </th>
 
@@ -214,11 +214,11 @@
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
                                         @if ($item->business_id)
-                                            <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
+                                            <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">
                                                 {{__('portal.RFQ')}}-<span style="font-family: sans-serif">{{$item->OrderItems[0]->id}}</span>
                                             </a>
                                         @else
-                                            <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-900 text-blue-900">
+                                            <a href="{{route('RFQItemsByID',$item->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">
                                                 {{ $item->business_id }}-{{__('portal.RFQ')}}-<span style="font-family: sans-serif">{{$item->OrderItems[0]->id}}</span>
                                             </a>
                                         @endif
@@ -239,9 +239,9 @@
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
                                         @if($item->rfq_type == 0)
-                                            {{__('portal.Single Category')}}
+                                            {{__('portal.Single')}}
                                         @elseif($item->rfq_type == 1)
-                                            {{__('portal.Multiple Categories')}}
+                                            {{__('portal.Multiple')}}
                                         @endif
                                     </td>
 

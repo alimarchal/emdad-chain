@@ -46,7 +46,7 @@
                                                         #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
-                                                        {{__('portal.DPO Number')}}
+                                                        {{__('portal.DPO')}} #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.Category Name')}}
@@ -61,7 +61,7 @@
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
-                                                        {{__('portal.Valid upto')}}
+                                                        {{__('portal.Quotation validity')}}
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
@@ -87,11 +87,11 @@
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                             @if($dpo->rfq_type == 1)
-                                                                <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-500 hover:underline text-blue-500">
                                                                     {{__('portal.DPO')}}-{{ $dpo->id }}
                                                                 </a>
                                                             @elseif($dpo->rfq_type == 0)
-                                                                <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                                <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-500 hover:underline text-blue-500">
                                                                     {{__('portal.DPO')}}-{{ $dpo->id }}
                                                                 </a>
                                                             @endif
@@ -106,7 +106,7 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            @if($dpo->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dpo->rfq_type == 0) {{__('portal.Single Category')}}@endif
+                                                            @if($dpo->rfq_type == 1) {{__('portal.Multiple')}} @elseif($dpo->rfq_type == 0) {{__('portal.Single')}}@endif
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -123,7 +123,7 @@
                                                             @elseif($dpo->status == 'cancel')
                                                                 <span class="text-red-700">{{__('portal.canceled')}}</span>
                                                             @elseif($dpo->quote->expiry_date < \Carbon\Carbon::now() && $dpo->quote->request_status == 1)
-                                                                <span class="text-yellow-400">{{__('portal.You have asked for extension in expiry date for this DPO.')}}</span>
+                                                                <span class="text-yellow-400" title="{{__('portal.You have asked for extension in expiry date for this DPO.')}}">{{__('portal.Extension requested.')}}</span>
                                                             @else
                                                                 <span class="text-red-700">{{__('portal.Expired')}}</span>
                                                             @endif
@@ -138,16 +138,16 @@
                                                                         @if($dpo->status == 'cancel')
                                                                             {{__('portal.N/A')}}
                                                                         @else
-                                                                            <a href="{{route('DPOExpiredStatusUpdate', $dpo->qoute_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
-                                                                                {{__('portal.Request to extend expiry date')}}
+                                                                            <a href="{{route('DPOExpiredStatusUpdate', $dpo->qoute_no)}}" onclick="request()" title="{{__('portal.Request to extend the expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
+                                                                                {{__('portal.Request to extend')}}
                                                                             </a>
                                                                         @endif
                                                                     @elseif($dpo->rfq_type == 0)
                                                                         @if($dpo->status == 'cancel')
                                                                             {{__('portal.N/A')}}
                                                                         @else
-                                                                            <a href="{{route('DPOExpiredStatusUpdateSingleCategory', $dpo->rfq_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
-                                                                                {{__('portal.Request to extend expiry date')}}
+                                                                            <a href="{{route('DPOExpiredStatusUpdateSingleCategory', $dpo->rfq_no)}}" onclick="request()" title="{{__('portal.Request to extend the expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
+                                                                                {{__('portal.Request to extend')}}
                                                                             </a>
                                                                         @endif
                                                                     @endif
@@ -252,7 +252,7 @@
                                                         #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                                        {{__('portal.DPO Number')}}
+                                                        {{__('portal.DPO')}} #
                                                     </th>
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Category Name')}}
@@ -267,7 +267,7 @@
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
-                                                        {{__('portal.Valid upto')}}
+                                                        {{__('portal.Quotation validity')}}
                                                     </th>
 
                                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
@@ -293,11 +293,11 @@
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if($dpo->rfq_type == 1)
-                                                            <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                            <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-500 hover:underline text-blue-500">
                                                                 {{__('portal.DPO')}}-<span style="font-family: sans-serif;">{{ $dpo->id }}</span>
                                                             </a>
                                                         @elseif($dpo->rfq_type == 0)
-                                                            <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
+                                                            <a href="{{ route('singleCategoryDPOShow',$dpo->rfq_no) }}" class="hover:text-blue-500 hover:underline text-blue-500">
                                                                 {{__('portal.DPO')}}-<span style="font-family: sans-serif;">{{ $dpo->id }}</span>
                                                             </a>
                                                         @endif
@@ -312,7 +312,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        @if($dpo->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dpo->rfq_type == 0) {{__('portal.Single Category')}}@endif
+                                                        @if($dpo->rfq_type == 1) {{__('portal.Multiple')}} @elseif($dpo->rfq_type == 0) {{__('portal.Single')}}@endif
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black" style=" font-family: sans-serif;">
@@ -329,7 +329,7 @@
                                                         @elseif($dpo->status == 'cancel')
                                                             <span class="text-red-700">{{__('portal.canceled')}}</span>
                                                         @elseif($dpo->quote->expiry_date < \Carbon\Carbon::now() && $dpo->quote->request_status == 1)
-                                                            <span class="text-yellow-400">{{__('portal.You have asked for extension in expiry date for this DPO.')}}</span>
+                                                            <span class="text-yellow-400" title="{{__('portal.You have asked for extension in expiry date for this DPO.')}}">{{__('portal.Extension requested.')}}</span>
                                                         @else
                                                             <span class="text-red-700">{{__('portal.Expired')}}</span>
                                                         @endif
@@ -344,16 +344,16 @@
                                                                     @if($dpo->status == 'cancel')
                                                                         <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                                                     @else
-                                                                        <a href="{{route('DPOExpiredStatusUpdate', $dpo->qoute_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
-                                                                            {{__('portal.Request to extend expiry date')}}
+                                                                        <a href="{{route('DPOExpiredStatusUpdate', $dpo->qoute_no)}}" onclick="request()" title="{{__('portal.Request to extend the expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
+                                                                            {{__('portal.Request to extend')}}
                                                                         </a>
                                                                     @endif
                                                                 @elseif($dpo->rfq_type == 0)
                                                                     @if($dpo->status == 'cancel')
                                                                         <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
                                                                     @else
-                                                                        <a href="{{route('DPOExpiredStatusUpdateSingleCategory', $dpo->rfq_no)}}" onclick="request()" title="{{__('portal.Extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
-                                                                            {{__('portal.Request to extend expiry date')}}
+                                                                        <a href="{{route('DPOExpiredStatusUpdateSingleCategory', $dpo->rfq_no)}}" onclick="request()" title="{{__('portal.Request to extend the expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white focus:outline-none focus:border-yellow-700 focus:shadow-outline-gray active:bg-yellow-400 transition ease-in-out duration-150">
+                                                                            {{__('portal.Request to extend')}}
                                                                         </a>
                                                                     @endif
                                                                 @endif

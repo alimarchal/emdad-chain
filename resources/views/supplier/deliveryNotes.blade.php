@@ -101,7 +101,7 @@
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                            @if($dn->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dn->rfq_type == 0) {{__('portal.Single Category')}} @endif
+                                                            @if($dn->rfq_type == 1) {{__('portal.Multiple')}} @elseif($dn->rfq_type == 0) {{__('portal.Single')}} @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -269,7 +269,7 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        @if($dn->rfq_type == 1) {{__('portal.Multiple Categories')}} @elseif($dn->rfq_type == 0) {{__('portal.Single Category')}} @endif
+                                                        @if($dn->rfq_type == 1) {{__('portal.Multiple')}} @elseif($dn->rfq_type == 0) {{__('portal.Single')}} @endif
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">

@@ -37,31 +37,31 @@
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs uppercase text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Requisition')}}&nbsp;#
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs uppercase text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Category Name')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs uppercase text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Requisition Type')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs uppercase text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Date')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs uppercase text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Time left')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs uppercase text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Quotations/Status')}}
                                     </th>
 
-                                    <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
+                                    <th scope="col" class="px-6 py-3 text-center text-xs uppercase text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
                                         {{__('portal.Action')}}
                                     </th>
                                 </tr>
@@ -73,7 +73,7 @@
                                             <tr>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{-- Showing EOrderItems Number(ID) for multi categories --}}
-                                                    {{__('portal.RFQ')}}-{{ $rfp->id }}
+                                                    <a href="{{route('RFQItemsByID', $rfp->orders->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">{{__('portal.RFQ')}}-{{ $rfp->id }}</a>
                                                 </td>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @php
@@ -83,7 +83,7 @@
                                                     {{ $record->name }}@if(isset($parent)), {{$parent->name}} @endif
                                                 </td>
                                                 <td class="px-7 py-4 text-center whitespace-nowrap">
-                                                    {{__('portal.Multiple Categories')}}
+                                                    {{__('portal.Multiple')}}
                                                 </td>
                                                 <td class="px-7 py-4 text-center whitespace-nowrap">
                                                     {{ $rfp->created_at->format('d-m-Y') }}
@@ -200,7 +200,7 @@
                                                 {{-- Showing EOrder Number(ID) for single category --}}
 {{--                                                {{__('portal.RFQ')}}-{{ $placedRFQ->id }}--}}
                                                 {{-- Now Showing EOrderItems Number(ID) for single category same as multi categories  --}}
-                                                {{__('portal.RFQ')}}-{{ $placedRFQ->OrderItems[0]->id }}
+                                                <a href="{{route('RFQItemsByID', $placedRFQ->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">{{__('portal.RFQ')}}-{{ $placedRFQ->OrderItems[0]->id }}</a>
                                             </td>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @php
@@ -210,7 +210,7 @@
                                                 {{ $record->name }}@if(isset($parent)), {{$parent->name}} @endif
                                             </td>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{ __('portal.Single Category') }} <br>
+                                                {{ __('portal.Single') }} <br>
                                             </td>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 {{ $placedRFQ->created_at->format('d-m-Y') }} <br>
@@ -380,7 +380,7 @@
                                             <tr>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap" style=" font-family: sans-serif;">
                                                     {{-- Showing EOrderItems Number for multi categories --}}
-                                                    {{__('portal.RFQ')}}-{{ $rfp->id }}
+                                                    <a href="{{route('RFQItemsByID', $rfp->orders->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">{{__('portal.RFQ')}}-{{ $rfp->id }}</a>
                                                 </td>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @php
@@ -390,7 +390,7 @@
                                                     {{ $record->name_ar }}@if(isset($parent)), {{$parent->name_ar}} @endif
                                                 </td>
                                                 <td class="px-7 py-4 text-center whitespace-nowrap">
-                                                    {{__('portal.Multiple Categories')}}
+                                                    {{__('portal.Multiple')}}
                                                 </td>
                                                 <td class="px-7 py-4 text-center whitespace-nowrap" style=" font-family: sans-serif;">
                                                     {{ $rfp->created_at->format('d-m-Y') }}
@@ -495,7 +495,7 @@
                                                 {{-- Showing EOrder Number(ID) for single category --}}
 {{--                                                {{__('portal.RFQ')}}-{{ $placedRFQ->id }}--}}
                                                 {{-- Now Showing EOrderItems Number(ID) for single category same as multi categories  --}}
-                                                {{__('portal.RFQ')}}-{{ $placedRFQ->OrderItems[0]->id }}
+                                                <a href="{{route('RFQItemsByID', $placedRFQ->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">{{__('portal.RFQ')}}-{{ $placedRFQ->OrderItems[0]->id }}</a>
                                             </td>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @php
@@ -505,7 +505,7 @@
                                                 {{ $record->name_ar }}@if(isset($parent)), {{$parent->name_ar}} @endif
                                             </td>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{ __('portal.Single Category') }} <br>
+                                                {{ __('portal.Single') }} <br>
                                             </td>
                                             <td class="px-6 py-4 text-center whitespace-nowrap" style=" font-family: sans-serif;">
                                                 {{ $placedRFQ->created_at->format('d-m-Y') }} <br>
