@@ -231,11 +231,11 @@
 
                                                 {{--@if(auth()->user()->business_package->package_id != 1)--}}
                                                 @if($package->package_id != 1)
-                                                    {{--<option value="Credit" @if (isset($latest_rfq))
+                                                    <option value="Credit" @if (isset($latest_rfq))
                                                         {{$latest_rfq->payment_mode =='Credit' ? 'selected' : ''}} @endif>
                                                         {{__('portal.Credit')}}
-                                                    </option>--}}
-                                                    <option value="Credit30days"
+                                                    </option>
+                                                    {{--<option value="Credit30days"
                                                     @if (isset($latest_rfq)) {{$latest_rfq->payment_mode == 'Credit30days' ? 'selected' : ''}}
                                                     @else {{old('payment_mode') == 'Credit30days' ? 'selected' : ''}}
                                                     @endif>
@@ -258,7 +258,7 @@
                                                     @else {{old('payment_mode') == 'Credit120days' ? 'selected' : ''}}
                                                     @endif>
                                                         {{__('portal.Credit (120 Days)')}}
-                                                    </option>
+                                                    </option>--}}
                                                 @endif
                                             </select>
                                         </div>
@@ -327,7 +327,7 @@
                                             </select>
                                         </div>
                                         <br>
-                                        {{__('portal.Delivery Period')}}: @include('misc.required')
+                                        {{__('portal.Delivery date')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
                                                  style="width: 8px; height: 8px;"
@@ -418,12 +418,11 @@
                             <tr>
                                 <th style="width:15%;">{{__('portal.Category')}} @include('misc.required')</th>
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
-                                <th style="width:7%"
-                                    title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required') </th>
-                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
-                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
+                                <th style="width:7%" title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required') </th>
+                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
                                 <th style="width:15%;">{{__('portal.Remarks')}}</th>
                                 <th style="width:7%;">
                                     <svg style="margin: auto;" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4"
@@ -454,26 +453,13 @@
                                         {{ $record->name}} @if(isset($parent)), {{ $parent->name}} @endif
 
                                     </td>
-                                    <td>
-                                        {{strip_tags($item->description)}}
-                                    </td>
-                                    <td>{{$item->unit_of_measurement}}</td>
-                                    <td>
-                                        {{$item->quantity}}
-                                    </td>
-                                    <td>
-                                        {{$item->size}}
-                                    </td>
-                                    <td>
-                                        {{$item->brand}}
-                                    </td>
-
-                                    <td>
-                                        {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
-                                    </td>
-                                    <td>
-                                        {{$item->remarks}}
-                                    </td>
+                                    <td> {{strip_tags($item->description)}} </td>
+                                    <td> {{$item->brand}} </td>
+                                    <td> {{$item->unit_of_measurement}} </td>
+                                    <td> {{$item->size}} </td>
+                                    <td> {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}} </td>
+                                    <td> {{$item->quantity}} </td>
+                                    <td> {{$item->remarks}} </td>
                                     <td class="">
                                         @if ($item->file_path)
                                             <a href="{{ Storage::url($rfp->file_path) }}">
@@ -507,6 +493,11 @@
                                     <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                                 </td>
                                 <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
+                                           name="brand" min="0" autocomplete="brand" value="{{old('brand')}}"
+                                           placeholder="{{__('portal.Brand')}}">
+                                </td>
+                                <td>
                                     <div class="relative inline-flex">
                                         <svg class="w-2 h-2 absolute top-0 right-1.5 mt-4 pointer-events-none"
                                              style="width: 8px; height:8px;"
@@ -528,19 +519,9 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
-                                           placeholder="{{__('portal.Qty')}}">
-                                </td>
-                                <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text"
                                            name="size" value="{{old('size')}}"
                                            min="0" placeholder="{{__('portal.Size')}}">
-                                </td>
-                                <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                           name="brand" min="0" autocomplete="brand" value="{{old('brand')}}"
-                                           placeholder="{{__('portal.Brand')}}">
                                 </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
@@ -548,14 +529,17 @@
                                            placeholder="{{__('portal.Price')}}">
                                 </td>
                                 <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
+                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
+                                           placeholder="{{__('portal.Qty')}}">
+                                </td>
+                                <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="remarks" name="remarks" value="{{old('remarks')}}"
                                            type="text" autocomplete="remarks" placeholder="{{__('portal.Remarks')}}">
                                 </td>
                                 <td>
-                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;"
-                                                                              src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
-                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1"
-                                           autocomplete="name" style="display:none;">
+                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;" src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
+                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1" autocomplete="name" style="display:none;">
                                 </td>
                             </tr>
 
@@ -565,8 +549,7 @@
 
 
                         <div class="text-center my-4">
-                            <button type="submit"
-                                    class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <button type="submit" class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
                                 <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20"
                                      style="margin-left: 5px;">
@@ -575,8 +558,7 @@
                                 </svg>
                             </button>
 
-                            <a href="{{route('RFQCart.index')}}"
-                               class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <a href="{{route('RFQCart.index')}}" class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.Requisitions Cart')}}
                                 <img src="{{asset('cart.png')}}" style="margin-left: 10px;margin-bottom: 2px;">
 
@@ -744,11 +726,11 @@
 
                                                 {{--@if(auth()->user()->business_package->package_id != 1)--}}
                                                 @if($package->package_id != 1)
-                                                    {{--<option value="Credit" @if (isset($latest_rfq))
+                                                    <option value="Credit" @if (isset($latest_rfq))
                                                         {{$latest_rfq->payment_mode =='Credit' ? 'selected' : ''}} @endif>
                                                         {{__('portal.Credit')}}
-                                                    </option>--}}
-                                                    <option value="Credit30days"
+                                                    </option>
+                                                    {{--<option value="Credit30days"
                                                     @if (isset($latest_rfq)) {{$latest_rfq->payment_mode == 'Credit30days' ? 'selected' : ''}}
                                                     @else {{old('payment_mode') == 'Credit30days' ? 'selected' : ''}}
                                                     @endif>
@@ -771,7 +753,7 @@
                                                     @else {{old('payment_mode') == 'Credit120days' ? 'selected' : ''}}
                                                     @endif>
                                                         {{__('portal.Credit (120 Days)')}}
-                                                    </option>
+                                                    </option>--}}
                                                 @endif
                                             </select>
                                         </div>
@@ -841,7 +823,7 @@
                                             </select>
                                         </div>
                                         <br>
-                                        {{__('portal.Delivery Period')}}: @include('misc.required')
+                                        {{__('portal.Delivery date')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="delivery_period" value="{{old('delivery_period')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
                                             {{--<select
@@ -906,12 +888,11 @@
 
                                 <th style="width:15%;">{{__('portal.Category')}} @include('misc.required')</th>
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
-                                <th style="width:7%"
-                                    title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required') </th>
-                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
-                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
+                                <th style="width:7%" title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required') </th>
+                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
                                 <th style="width:15%;">{{__('portal.Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
@@ -927,28 +908,14 @@
                                         @endphp
 
                                         {{ $record->name}} @if(isset($parent)), {{ $parent->name}} @endif
-
                                     </td>
-                                    <td>
-                                        {{strip_tags($item->description)}}
-                                    </td>
-                                    <td>{{$item->unit_of_measurement}}</td>
-                                    <td>
-                                        {{$item->quantity}}
-                                    </td>
-                                    <td>
-                                        {{$item->size}}
-                                    </td>
-                                    <td>
-                                        {{$item->brand}}
-                                    </td>
-
-                                    <td>
-                                        {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
-                                    </td>
-                                    <td>
-                                        {{$item->remarks}}
-                                    </td>
+                                    <td> {{strip_tags($item->description)}} </td>
+                                    <td> {{$item->brand}} </td>
+                                    <td> {{$item->unit_of_measurement}} </td>
+                                    <td> {{$item->size}} </td>
+                                    <td> {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}} </td>
+                                    <td> {{$item->quantity}} </td>
+                                    <td> {{$item->remarks}} </td>
                                     <td class="">
                                         @if ($item->file_path)
                                             <a href="{{ Storage::url($rfp->file_path) }}">
@@ -985,6 +952,11 @@
                                     <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                                 </td>
                                 <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
+                                           name="brand" min="0" autocomplete="brand" value="{{old('brand')}}"
+                                           placeholder="{{__('portal.Brand')}}">
+                                </td>
+                                <td>
                                     <div class="relative inline-flex">
                                         <svg class="w-2 h-2 absolute top-0 right-1.5 mt-4 pointer-events-none"
                                              style="width: 8px; height: 8px;"
@@ -1006,25 +978,20 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number" value="{{old('quantity')}}"
-                                           name="quantity" min="1" autocomplete="quantity" required
-                                           placeholder="{{__('portal.Qty')}}">
-                                </td>
-                                <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text"
                                            name="size" value="{{old('size')}}"
                                            min="0" placeholder="{{__('portal.Size')}}">
                                 </td>
-                                <td><input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                           name="brand" min="0" autocomplete="brand" value="{{old('brand')}}"
-                                           placeholder="{{__('portal.Brand')}}"></td>
-
                                 <td>
                                     <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
                                            name="last_price" min="0" autocomplete="last_price" value="{{old('last_price')}}"
                                            placeholder="{{__('portal.Price')}}">
                                 </td>
-
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number" value="{{old('quantity')}}"
+                                           name="quantity" min="1" autocomplete="quantity" required
+                                           placeholder="{{__('portal.Qty')}}">
+                                </td>
                                 <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="remarks" name="remarks" value="{{old('remarks')}}"
                                            type="text" autocomplete="remarks" placeholder="{{__('portal.Remarks')}}">
@@ -1032,10 +999,8 @@
 
                                 <td>
 
-                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;"
-                                                                              src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
-                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1"
-                                           autocomplete="name" style="display:none;">
+                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;" src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
+                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1" autocomplete="name" style="display:none;">
                                 </td>
                             </tr>
 
@@ -1043,8 +1008,7 @@
                             </tbody>
                         </table>
                         <div class="text-center my-4">
-                            <button type="submit"
-                                    class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <button type="submit" class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
                                 <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20"
                                      style="margin-left: 5px;">
@@ -1054,8 +1018,7 @@
                             </button>
 
 
-                            <a href="{{route('RFQCart.index')}}"
-                               class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <a href="{{route('RFQCart.index')}}" class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.Requisitions Cart')}}
                                 <img src="{{asset('cart.png')}}" style="margin-left: 10px;margin-bottom: 2px;">
                             </a>
@@ -1266,7 +1229,7 @@
 
                                             <th scope="col"
                                                 class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider">
-                                                {{__('portal.Delivery Period')}}
+                                                {{__('portal.Delivery date')}}
                                             </th>
 
                                             <th scope="col"
@@ -1528,11 +1491,11 @@
 
                                                 {{--@if(auth()->user()->business_package->package_id != 1)--}}
                                                 @if($package->package_id != 1)
-                                                    {{--<option value="Credit" @if (isset($latest_rfq))
+                                                    <option value="Credit" @if (isset($latest_rfq))
                                                         {{$latest_rfq->payment_mode =='Credit' ? 'selected' : ''}} @endif>
                                                         {{__('portal.Credit')}}
-                                                    </option>--}}
-                                                    <option value="Credit30days"
+                                                    </option>
+                                                    {{--<option value="Credit30days"
                                                     @if (isset($latest_rfq)) {{$latest_rfq->payment_mode == 'Credit30days' ? 'selected' : ''}}
                                                     @else {{old('payment_mode') == 'Credit30days' ? 'selected' : ''}}
                                                     @endif>
@@ -1555,7 +1518,7 @@
                                                     @else {{old('payment_mode') == 'Credit120days' ? 'selected' : ''}}
                                                     @endif>
                                                         {{__('portal.Credit (120 Days)')}}
-                                                    </option>
+                                                    </option>--}}
                                                 @endif
                                             </select>
                                         </div>
@@ -1624,7 +1587,7 @@
                                             </select>
                                         </div>
                                         <br>
-                                        {{__('portal.Delivery Period')}}: @include('misc.required')
+                                        {{__('portal.Delivery date')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
                                                  style="width: 8px; height: 8px;"
@@ -1713,12 +1676,11 @@
 
                                 <th style="width:15%;">{{__('portal.Category')}} @include('misc.required')</th>
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
-                                <th style="width:8%"
-                                    title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required') </th>
-                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
-                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
+                                <th style="width:8%" title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required') </th>
+                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
                                 <th style="width:15%;">{{__('portal.Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
@@ -1736,28 +1698,13 @@
                                         {{ $record->name_ar}} @if(isset($parent)), {{ $parent->name_ar}} @endif
 
                                     </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{strip_tags($item->description)}}
-                                    </td>
-                                    <td>
-                                        @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->quantity}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->size}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->brand}}
-                                    </td>
-
-                                    <td style="font-family: sans-serif;">
-                                        {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->remarks}}
-                                    </td>
+                                    <td style="font-family: sans-serif;"> {{strip_tags($item->description)}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->brand}} </td>
+                                    <td> @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->size}} </td>
+                                    <td style="font-family: sans-serif;"> {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->quantity}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->remarks}} </td>
                                     <td class="">
                                         @if ($item->file_path)
                                             <a href="{{ Storage::url($rfp->file_path) }}">
@@ -1794,6 +1741,11 @@
                                     <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                                 </td>
                                 <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
+                                           name="brand" min="0" autocomplete="brand" value="{{old('brand')}}"
+                                           placeholder="{{__('portal.Brand')}}">
+                                </td>
+                                <td>
                                     <div class="relative inline-flex">
                                         <svg class="w-2 h-2 absolute top-0 right-1.5 mt-4 pointer-events-none"
                                              style="width: 8px; height:8px;"
@@ -1815,23 +1767,19 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
-                                           placeholder="{{__('portal.Qty')}}">
-                                </td>
-                                <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text"
                                            name="size" value="{{old('size')}}"
                                            min="0" placeholder="{{__('portal.Size')}}">
                                 </td>
-                                <td><input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                           name="brand" min="0" autocomplete="brand" value="{{old('brand')}}"
-                                           placeholder="{{__('portal.Brand')}}"></td>
-
                                 <td>
                                     <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
                                            name="last_price" min="0" autocomplete="last_price" value="{{old('last_price')}}"
                                            placeholder="{{__('portal.Price')}}">
+                                </td>
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
+                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
+                                           placeholder="{{__('portal.Qty')}}">
                                 </td>
 
                                 <td>
@@ -1841,10 +1789,8 @@
 
                                 <td>
 
-                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;"
-                                                                              src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
-                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1"
-                                           autocomplete="name" style="display:none;">
+                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;" src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
+                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1" autocomplete="name" style="display:none;">
                                 </td>
                             </tr>
 
@@ -1852,8 +1798,7 @@
                             </tbody>
                         </table>
                         <div class="text-center my-4">
-                            <button type="submit"
-                                    class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <button type="submit" class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
                                 <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20"
                                      style="margin-right: 5px;">
@@ -1862,11 +1807,9 @@
                                 </svg>
                             </button>
 
-                            <a href="{{route('RFQCart.index')}}"
-                               class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <a href="{{route('RFQCart.index')}}" class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.Requisitions Cart')}}
-                                <img src="{{asset('cart.png')}}"
-                                     style="margin-right: 10px;margin-bottom: 2px;transform: scaleX(-1)">
+                                <img src="{{asset('cart.png')}}" style="margin-right: 10px;margin-bottom: 2px;transform: scaleX(-1)">
                                 {{--<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                      xmlns="http://www.w3.org/2000/svg"
                                      style="margin-right: 10px; transform: scaleX(-1)">
@@ -2043,11 +1986,11 @@
 
                                                 {{--@if(auth()->user()->business_package->package_id != 1)--}}
                                                 @if($package->package_id != 1)
-                                                    {{--<option value="Credit" @if (isset($latest_rfq))
+                                                    <option value="Credit" @if (isset($latest_rfq))
                                                         {{$latest_rfq->payment_mode =='Credit' ? 'selected' : ''}} @endif>
                                                         {{__('portal.Credit')}}
-                                                    </option>--}}
-                                                    <option value="Credit30days"
+                                                    </option>
+                                                    {{--<option value="Credit30days"
                                                     @if (isset($latest_rfq)) {{$latest_rfq->payment_mode == 'Credit30days' ? 'selected' : ''}}
                                                     @else {{old('payment_mode') == 'Credit30days' ? 'selected' : ''}}
                                                     @endif>
@@ -2070,7 +2013,7 @@
                                                     @else {{old('payment_mode') == 'Credit120days' ? 'selected' : ''}}
                                                     @endif>
                                                         {{__('portal.Credit (120 Days)')}}
-                                                    </option>
+                                                    </option>--}}
                                                 @endif
                                             </select>
                                         </div>
@@ -2140,7 +2083,7 @@
                                             </select>
                                         </div>
                                         <br>
-                                        {{__('portal.Delivery Period')}}: @include('misc.required')
+                                        {{__('portal.Delivery date')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
                                                  style="width: 8px; height: 8px;"
@@ -2212,12 +2155,11 @@
 
                                 <th style="width:15%;">{{__('portal.Category')}} @include('misc.required')</th>
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
-                                <th style="width:8%"
-                                    title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required') </th>
-                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
-                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
+                                <th style="width:8%" title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required') </th>
+                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required') </th>
                                 <th style="width:15%;">{{__('portal.Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
@@ -2235,28 +2177,13 @@
                                         {{ $record->name_ar}} @if(isset($parent)), {{ $parent->name_ar}} @endif
 
                                     </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{strip_tags($item->description)}}
-                                    </td>
-                                    <td>
-                                        @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->quantity}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->size}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->brand}}
-                                    </td>
-
-                                    <td style="font-family: sans-serif;">
-                                        {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->remarks}}
-                                    </td>
+                                    <td style="font-family: sans-serif;"> {{strip_tags($item->description)}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->brand}} </td>
+                                    <td> @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->size}} </td>
+                                    <td style="font-family: sans-serif;"> {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->quantity}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->remarks}} </td>
                                     <td class="">
                                         @if ($item->file_path)
                                             <a href="{{ Storage::url($rfp->file_path) }}">
@@ -2293,6 +2220,11 @@
                                     <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                                 </td>
                                 <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
+                                           name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
+                                           placeholder="{{__('portal.Brand')}}">
+                                </td>
+                                <td>
                                     <div class="relative inline-flex">
                                         <svg class="w-2 h-2 absolute top-0 right-1.5 mt-4 pointer-events-none"
                                              style="width: 8px; height: 8px;"
@@ -2314,23 +2246,20 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
-                                           placeholder="{{__('portal.Qty')}}">
-                                </td>
-                                <td>
                                     <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text"
                                            name="size" value="{{old('size')}}"
                                            min="0" placeholder="{{__('portal.Size')}}">
                                 </td>
-                                <td><input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                           name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
-                                           placeholder="{{__('portal.Brand')}}"></td>
 
                                 <td>
                                     <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
                                            name="last_price" value="{{old('last_price')}}" min="0" autocomplete="last_price"
                                            placeholder="{{__('portal.Price')}}">
+                                </td>
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
+                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
+                                           placeholder="{{__('portal.Qty')}}">
                                 </td>
 
                                 <td>
@@ -2340,10 +2269,8 @@
 
                                 <td>
 
-                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;"
-                                                                              src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
-                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1"
-                                           autocomplete="name" style="display:none;">
+                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;" src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
+                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1" autocomplete="name" style="display:none;">
                                 </td>
                             </tr>
 
@@ -2351,8 +2278,7 @@
                             </tbody>
                         </table>
                         <div class="text-center my-4">
-                            <button type="submit"
-                                    class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <button type="submit" class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
                                 <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20"
                                      style="margin-right: 5px;">
@@ -2362,8 +2288,7 @@
                             </button>
 
 
-                            <a href="{{route('RFQCart.index')}}"
-                               class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <a href="{{route('RFQCart.index')}}" class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.Requisitions Cart')}}
                                 <img src="{{asset('cart.png')}}"
                                      style="margin-right: 10px;margin-bottom: 2px;transform: scaleX(-1)">

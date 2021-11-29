@@ -71,7 +71,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 130px;">
-                                        {{__('portal.D.N.')}}-{{$delivery->delivery_note_id}}
+                                        <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" class="text-blue-600 hover:text-blue-500 hover:underline">{{__('portal.D.N.')}}-{{$delivery->delivery_note_id}}</a>
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 140px;">

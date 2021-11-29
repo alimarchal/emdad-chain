@@ -78,12 +78,32 @@
                                             <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $collection[0]->business->business_name }}<br>
                                             <strong>{{__('portal.Email')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $collection[0]->business->business_email }}<br>
                                             <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $collection[0]->business->city }}</span><br>
-                                            <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $collection[0]->business->vat_reg_certificate_number }}</span><br>
+                                            <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $collection[0]->business->vat_reg_certificate_number }}</span><br><br>
+                                            @if($collection[0]->rfq_type == 0)
+                                            <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;</strong>
+                                                <span class="text-blue-600">
+                                                    @php
+                                                        $category = \App\Models\Category::where('id',$collection[0]->category->id)->first();
+                                                        $parentCategory = \App\Models\Category::where('id',$category->parent_id)->first();
+                                                    @endphp
+                                                    {{ $category->name }}@if(isset($parentCategory->name)), {{ $parentCategory->name }} @endif
+                                                </span><br>
+                                            @endif
                                         @else
                                             <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->business->business_name }}</span> <br>
                                             <strong>{{__('portal.Email')}}: &nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->business->business_email }}</span> <br>
                                             <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->business->city }}</span><br>
-                                            <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->business->vat_reg_certificate_number }}</span><br>
+                                            <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->business->vat_reg_certificate_number }}</span><br><br>
+                                            @if($collection[0]->rfq_type == 0)
+                                                <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                                <span class="text-blue-600">
+                                                    @php
+                                                        $category = \App\Models\Category::where('id',$collection[0]->category->id)->first();
+                                                        $parentCategory = \App\Models\Category::where('id',$category->parent_id)->first();
+                                                    @endphp
+                                                    {{ $category->name_ar }}@if(isset($parentCategory->name_ar)), {{ $parentCategory->name_ar }} @endif
+                                                </span><br>
+                                            @endif
                                         @endif
                                     </div>
 
@@ -128,9 +148,11 @@
                                         <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             #
                                         </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                            {{__('portal.Category Name')}}
-                                        </th>
+                                        @if($collection[0]->rfq_type == 1)
+                                            <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                                {{__('portal.Category Name')}}
+                                            </th>
+                                        @endif
                                         <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.Description')}}
                                         </th>
@@ -156,7 +178,10 @@
                                             {{__('portal.Remarks')}}
                                         </th>
                                         <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
-                                            {{__('portal.Attachments')}}
+                                            <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
+                                                </path>
+                                            </svg>
                                         </th>
                                     </tr>
                                     </thead>
@@ -166,17 +191,19 @@
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                             {{ $loop->iteration }}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                            @php
-                                                $category = \App\Models\Category::where('id',$rfp->category->id)->first();
-                                                $parentCategory = \App\Models\Category::where('id',$category->parent_id)->first();
-                                            @endphp
-                                            @if(auth()->user()->rtl == 0)
-                                                {{ $rfp->item_name }}@if(isset($parentCategory->name)), {{ $parentCategory->name }} @endif
-                                            @else
-                                                {{ $category->name_ar }}@if(isset($parentCategory->name_ar)), {{ $parentCategory->name_ar }} @endif
-                                            @endif
-                                        </td>
+                                        @if($collection[0]->rfq_type == 1)
+                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                                @php
+                                                    $category = \App\Models\Category::where('id',$rfp->category->id)->first();
+                                                    $parentCategory = \App\Models\Category::where('id',$category->parent_id)->first();
+                                                @endphp
+                                                @if(auth()->user()->rtl == 0)
+                                                    {{ $rfp->item_name }}@if(isset($parentCategory->name)), {{ $parentCategory->name }} @endif
+                                                @else
+                                                    {{ $category->name_ar }}@if(isset($parentCategory->name_ar)), {{ $parentCategory->name_ar }} @endif
+                                                @endif
+                                            </td>
+                                        @endif
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                             {{ strip_tags($rfp->description) }}
                                         </td>

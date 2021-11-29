@@ -210,11 +210,11 @@
                                                     @endphp
 
                                                     @if($package->package_id != 1)
-                                                        {{--                                                        <option value="Credit">{{__('portal.Credit')}}</option>--}}
-                                                        <option {{old('payment_mode') == 'Credit30days' ? 'selected' : '' }}  value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
+                                                        <option value="Credit">{{__('portal.Credit')}}</option>
+                                                        {{--<option {{old('payment_mode') == 'Credit30days' ? 'selected' : '' }}  value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
                                                         <option {{old('payment_mode') == 'Credit60days' ? 'selected' : '' }}  value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
                                                         <option {{old('payment_mode') == 'Credit90days' ? 'selected' : '' }}  value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
-                                                        <option {{old('payment_mode') == 'Credit120days' ? 'selected' : '' }}  value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit120days' ? 'selected' : '' }}  value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>--}}
                                                     @endif
                                                 @endif
 
@@ -307,7 +307,7 @@
                                             </select>
                                         </div>
                                         <br>
-                                        {{__('portal.Delivery Period')}}: @include('misc.required')
+                                        {{__('portal.Delivery date')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             {{--<svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
                                                  style="width: 8px; height: 8px;"
@@ -392,12 +392,11 @@
 
                                 <th style="width:3%;">#</th>
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
-                                <th style="width:7%"
-                                    title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required')</th>
-                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
-                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
+                                <th style="width:7%" title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required')</th>
+                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
                                 <th style="width:15%;">{{__('portal.Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
@@ -406,29 +405,14 @@
 
                             @foreach($eCart as $item)
                                 <tr>
-                                    <td>
-                                        {{$loop->iteration}}
-                                    </td>
-                                    <td>
-                                        {{strip_tags($item->description)}}
-                                    </td>
+                                    <td> {{$loop->iteration}} </td>
+                                    <td> {{strip_tags($item->description)}} </td>
+                                    <td> {{$item->brand}} </td>
                                     <td>{{$item->unit_of_measurement}}</td>
-                                    <td>
-                                        {{$item->quantity}}
-                                    </td>
-                                    <td>
-                                        {{$item->size}}
-                                    </td>
-                                    <td>
-                                        {{$item->brand}}
-                                    </td>
-
-                                    <td>
-                                        {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
-                                    </td>
-                                    <td>
-                                        {{$item->remarks}}
-                                    </td>
+                                    <td> {{$item->size}} </td>
+                                    <td> {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}} </td>
+                                    <td> {{$item->quantity}} </td>
+                                    <td> {{$item->remarks}} </td>
                                     <td class="">
                                         @if ($item->file_path)
                                             <a href="{{ Storage::url($rfp->file_path) }}">
@@ -456,13 +440,19 @@
 
                                     </div>
                                 </td>
+
                                 <td>
-                                <textarea name="description" id="description"
-                                          class="w-full description rounded-md shadow-sm" maxlength="254"
+                                <textarea name="description" id="description" class="w-full description rounded-md shadow-sm" maxlength="254"
                                           placeholder="{{__('portal.Enter Description..')}}" required>{{old('description')}}</textarea>
                                     <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
                                     <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                                 </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text" name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
+                                           placeholder="{{__('portal.Brand')}}">
+                                </td>
+
                                 <td>
                                     <div class="relative inline-flex">
                                         <svg class="w-2 h-2 absolute top-0 right-1.5 mt-4 pointer-events-none"
@@ -472,8 +462,7 @@
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
                                                 fill="#000000" fill-rule="nonzero"/>
                                         </svg>
-                                        <select
-                                            class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom js-example-basic-single"
+                                        <select class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom js-example-basic-single"
                                             required name="unit_of_measurement" id="unit_of_measurement"
                                             style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
@@ -484,24 +473,20 @@
                                         </select>
                                     </div>
                                 </td>
-                                <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
-                                           placeholder="{{__('portal.Qty')}}">
-                                </td>
-                                <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text"
-                                           name="size" value="{{old('size')}}"
-                                           min="0" placeholder="{{__('portal.Size')}}">
-                                </td>
-                                <td><input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                           name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
-                                           placeholder="{{__('portal.Brand')}}"></td>
 
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
-                                           name="last_price" value="{{old('last_price')}}" min="0" autocomplete="last_price"
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text" name="size" value="{{old('size')}}"
+                                           min="0" placeholder="{{__('portal.Size')}}">
+                                </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number" name="last_price" value="{{old('last_price')}}" min="0" autocomplete="last_price"
                                            placeholder="{{__('portal.Price')}}">
+                                </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number" name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
+                                           placeholder="{{__('portal.Qty')}}">
                                 </td>
 
                                 <td>
@@ -510,11 +495,8 @@
                                 </td>
 
                                 <td>
-
-                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;"
-                                                                              src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
-                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1"
-                                           autocomplete="name" style="display:none;">
+                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;" src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
+                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1" autocomplete="name" style="display:none;">
                                 </td>
                             </tr>
 
@@ -522,21 +504,16 @@
                             </tbody>
                         </table>
                         <div class="text-center my-4">
-                            <button type="submit" style="height: 42px;"
-                                    class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <button type="submit" style="height: 42px;" class="inline-flex items-center add-more  px-4 mr-2 py-3 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
-                                <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20"
-                                     style="margin-left: 5px;">
-                                    <path
-                                        d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
+                                <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20" style="margin-left: 5px;">
+                                    <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
                                 </svg>
                             </button>
 
-                            <a href="{{route('single_cart_index')}}"
-                               class="inline-flex items-center add-more mt-2 px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <a href="{{route('single_cart_index')}}" class="inline-flex items-center add-more mt-2 px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.Requisitions Cart')}}
-                                <img src="{{url('singleCategroyCart.png')}}"
-                                     style="height: 24px;width: 30px; margin-left: 10px;">
+                                <img src="{{url('singleCategroyCart.png')}}" style="height: 24px;width: 30px; margin-left: 10px;">
                                 {{--<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="margin-left: 10px;">
                                     <path fill="none" d="M17.72,5.011H8.026c-0.271,0-0.49,0.219-0.49,0.489c0,0.271,0.219,0.489,0.49,0.489h8.962l-1.979,4.773H6.763L4.935,5.343C4.926,5.316,4.897,5.309,4.884,5.286c-0.011-0.024,0-0.051-0.017-0.074C4.833,5.166,4.025,4.081,2.33,3.908C2.068,3.883,1.822,4.075,1.795,4.344C1.767,4.612,1.962,4.853,2.231,4.88c1.143,0.118,1.703,0.738,1.808,0.866l1.91,5.661c0.066,0.199,0.252,0.333,0.463,0.333h8.924c0.116,0,0.22-0.053,0.308-0.128c0.027-0.023,0.042-0.048,0.063-0.076c0.026-0.034,0.063-0.058,0.08-0.099l2.384-5.75c0.062-0.151,0.046-0.323-0.045-0.458C18.036,5.092,17.883,5.011,17.72,5.011z"></path>
                                     <path fill="none" d="M8.251,12.386c-1.023,0-1.856,0.834-1.856,1.856s0.833,1.853,1.856,1.853c1.021,0,1.853-0.83,1.853-1.853S9.273,12.386,8.251,12.386z M8.251,15.116c-0.484,0-0.877-0.393-0.877-0.874c0-0.484,0.394-0.878,0.877-0.878c0.482,0,0.875,0.394,0.875,0.878C9.126,14.724,8.733,15.116,8.251,15.116z"></path>
@@ -699,11 +676,11 @@
                                                     @endphp
 
                                                     @if($package->package_id != 1)
-                                                        {{--                                                        <option value="Credit">{{__('portal.Credit')}}</option>--}}
-                                                        <option {{old('payment_mode') == 'Credit30days' ? 'selected' : ''}} value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
+                                                        <option value="Credit">{{__('portal.Credit')}}</option>
+                                                        {{--<option {{old('payment_mode') == 'Credit30days' ? 'selected' : ''}} value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
                                                         <option {{old('payment_mode') == 'Credit60days' ? 'selected' : ''}} value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
                                                         <option {{old('payment_mode') == 'Credit90days' ? 'selected' : ''}} value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
-                                                        <option {{old('payment_mode') == 'Credit120days' ? 'selected' : ''}} value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit120days' ? 'selected' : ''}} value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>--}}
                                                     @endif
                                                 @endif
 
@@ -798,7 +775,7 @@
                                             </select>
                                         </div>
                                         <br>
-                                        {{__('portal.Delivery Period')}}: @include('misc.required')
+                                        {{__('portal.Delivery date')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             {{--<svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
                                                  style="width: 8px; height: 8px;"
@@ -866,12 +843,11 @@
 
                                 <th style="width:3%;">#</th>
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
-                                <th style="width:7%"
-                                    title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required')</th>
-                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
-                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
+                                <th style="width:7%" title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required')</th>
+                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
                                 <th style="width:15%;"> {{__('portal.Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
@@ -880,30 +856,14 @@
 
                             @foreach($eCart as $item)
                                 <tr>
-                                    <td>
-                                        {{$loop->iteration}}
-
-                                    </td>
-                                    <td>
-                                        {{strip_tags($item->description)}}
-                                    </td>
+                                    <td> {{$loop->iteration}} </td>
+                                    <td> {{strip_tags($item->description)}} </td>
+                                    <td> {{$item->brand}} </td>
                                     <td>{{$item->unit_of_measurement}}</td>
-                                    <td>
-                                        {{$item->quantity}}
-                                    </td>
-                                    <td>
-                                        {{$item->size}}
-                                    </td>
-                                    <td>
-                                        {{$item->brand}}
-                                    </td>
-
-                                    <td>
-                                        {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
-                                    </td>
-                                    <td>
-                                        {{$item->remarks}}
-                                    </td>
+                                    <td> {{$item->size}} </td>
+                                    <td> {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}} </td>
+                                    <td> {{$item->quantity}} </td>
+                                    <td> {{$item->remarks}} </td>
                                     <td class="">
                                         @if ($item->file_path)
                                             <a href="{{ Storage::url($rfp->file_path) }}">
@@ -931,13 +891,19 @@
 
                                     </div>
                                 </td>
+
                                 <td>
-                                <textarea name="description" id="description"
-                                          class="w-full description rounded-md shadow-sm" maxlength="254"
+                                <textarea name="description" id="description" class="w-full description rounded-md shadow-sm" maxlength="254"
                                           placeholder="{{__('portal.Enter Description..')}}" required>{{old('description')}}</textarea>
                                     <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
                                     <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                                 </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text" name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
+                                           placeholder="{{__('portal.Brand')}}">
+                                </td>
+
                                 <td>
                                     <div class="relative inline-flex">
                                         <svg class="w-2 h-2 absolute top-0 right-1.5 mt-4 pointer-events-none"
@@ -947,8 +913,7 @@
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
                                                 fill="#000000" fill-rule="nonzero"/>
                                         </svg>
-                                        <select
-                                            class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom js-example-basic-single"
+                                        <select class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom js-example-basic-single"
                                             required name="unit_of_measurement" id="unit_of_measurement"
                                             style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
@@ -959,26 +924,20 @@
                                         </select>
                                     </div>
                                 </td>
+
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
-                                           placeholder="{{__('portal.Qty')}}">
-                                </td>
-                                <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text"
-                                           name="size" value="{{old('size')}}"
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text" name="size" value="{{old('size')}}"
                                            min="0" placeholder="{{__('portal.Size')}}">
-                                </td>
-                                <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                           name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
-                                           placeholder="{{__('portal.Brand')}}">
                                 </td>
 
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
-                                           name="last_price" value="{{old('last_price')}}" min="0" autocomplete="last_price"
+                                    <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number" name="last_price" value="{{old('last_price')}}" min="0" autocomplete="last_price"
                                            placeholder="{{__('portal.Price')}}">
+                                </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number" name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
+                                           placeholder="{{__('portal.Qty')}}">
                                 </td>
 
                                 <td>
@@ -987,11 +946,8 @@
                                 </td>
 
                                 <td>
-
-                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;"
-                                                                              src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
-                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1"
-                                           autocomplete="name" style="display:none;">
+                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;" src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
+                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1" autocomplete="name" style="display:none;">
                                 </td>
                             </tr>
 
@@ -999,22 +955,17 @@
                             </tbody>
                         </table>
                         <div class="text-center my-4">
-                            <button type="submit" style="height: 42px;"
-                                    class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <button type="submit" style="height: 42px;" class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
-                                <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20"
-                                     style="margin-left: 5px;">
-                                    <path
-                                        d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
+                                <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20" style="margin-left: 5px;">
+                                    <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
                                 </svg>
                             </button>
 
 
-                            <a href="{{route('single_cart_index')}}"
-                               class="inline-flex items-center add-more mt-2 px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <a href="{{route('single_cart_index')}}" class="inline-flex items-center add-more mt-2 px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.Requisitions Cart')}}
-                                <img src="{{url('singleCategroyCart.png')}}"
-                                     style="height: 24px;width: 30px;margin-left: 10px;">
+                                <img src="{{url('singleCategroyCart.png')}}" style="height: 24px;width: 30px;margin-left: 10px;">
                             </a>
                         </div>
 
@@ -1254,11 +1205,11 @@
                                                     @endphp
 
                                                     @if($package->package_id != 1)
-                                                        {{--                                                        <option value="Credit">{{__('portal.Credit')}}</option>--}}
-                                                        <option {{old('payment_mode') == 'Credit30days' ? 'selected' : ''}} value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
+                                                        <option value="Credit">{{__('portal.Credit')}}</option>
+                                                        {{--<option {{old('payment_mode') == 'Credit30days' ? 'selected' : ''}} value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
                                                         <option {{old('payment_mode') == 'Credit60days' ? 'selected' : ''}} value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
                                                         <option {{old('payment_mode') == 'Credit90days' ? 'selected' : ''}} value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
-                                                        <option {{old('payment_mode') == 'Credit120days' ? 'selected' : ''}} value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit120days' ? 'selected' : ''}} value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>--}}
                                                     @endif
                                                 @endif
 
@@ -1351,7 +1302,7 @@
                                             </select>
                                         </div>
                                         <br>
-                                        {{__('portal.Delivery Period')}}: @include('misc.required')
+                                        {{__('portal.Delivery date')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             @if(isset($latest_rfq))
                                                 <input type="text" style="font-family: sans-serif;" class="font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none" name="delivery_period" value="{{$latest_rfq->delivery_period}}" readonly>
@@ -1391,12 +1342,11 @@
 
                                 <th style="width:3%;">#</th>
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
-                                <th style="width:7%"
-                                    title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required')</th>
-                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
-                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
+                                <th style="width:7%" title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required')</th>
+                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
                                 <th style="width:15%;">{{__('portal.Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
@@ -1405,31 +1355,14 @@
 
                             @foreach($eCart as $item)
                                 <tr>
-                                    <td style="font-family: sans-serif;">
-                                        {{$loop->iteration}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{strip_tags($item->description)}}
-                                    </td>
-                                    <td>
-                                        @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->quantity}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->size}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->brand}}
-                                    </td>
-
-                                    <td style="font-family: sans-serif;">
-                                        {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->remarks}}
-                                    </td>
+                                    <td style="font-family: sans-serif;"> {{$loop->iteration}} </td>
+                                    <td style="font-family: sans-serif;"> {{strip_tags($item->description)}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->brand}} </td>
+                                    <td> @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->size}} </td>
+                                    <td style="font-family: sans-serif;"> {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->quantity}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->remarks}} </td>
                                     <td class="">
                                         @if ($item->file_path)
                                             <a href="{{ Storage::url($rfp->file_path) }}">
@@ -1457,13 +1390,19 @@
 
                                     </div>
                                 </td>
+
                                 <td>
-                                <textarea name="description" id="description"
-                                          class="w-full description rounded-md shadow-sm" maxlength="254"
+                                <textarea name="description" id="description" class="w-full description rounded-md shadow-sm" maxlength="254"
                                           placeholder="{{__('portal.Enter Description..')}}" required>{{old('description')}}</textarea>
                                     <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
                                     <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                                 </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text" name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
+                                           placeholder="{{__('portal.Brand')}}">
+                                </td>
+
                                 <td>
                                     <div class="relative inline-flex">
                                         <svg class="w-2 h-2 absolute top-0 right-1.5 mt-4 pointer-events-none"
@@ -1473,8 +1412,7 @@
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
                                                 fill="#000000" fill-rule="nonzero"/>
                                         </svg>
-                                        <select
-                                            class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom js-example-basic-single"
+                                        <select class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom js-example-basic-single"
                                             required name="unit_of_measurement" id="unit_of_measurement"
                                             style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
@@ -1485,24 +1423,20 @@
                                         </select>
                                     </div>
                                 </td>
-                                <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
-                                           placeholder="{{__('portal.Qty')}}">
-                                </td>
-                                <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text"
-                                           name="size" value="{{old('size')}}"
-                                           min="0" placeholder="{{__('portal.Size')}}">
-                                </td>
-                                <td><input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                           name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
-                                           placeholder="{{__('portal.Brand')}}"></td>
 
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
-                                           name="last_price" value="{{old('last_price')}}" min="0" autocomplete="last_price"
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text" name="size" value="{{old('size')}}"
+                                           min="0" placeholder="{{__('portal.Size')}}">
+                                </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"  name="last_price" value="{{old('last_price')}}" min="0" autocomplete="last_price"
                                            placeholder="{{__('portal.Price')}}">
+                                </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number" name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
+                                           placeholder="{{__('portal.Qty')}}">
                                 </td>
 
                                 <td>
@@ -1511,11 +1445,8 @@
                                 </td>
 
                                 <td>
-
-                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;"
-                                                                              src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
-                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1"
-                                           autocomplete="name" style="display:none;">
+                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;" src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
+                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1" autocomplete="name" style="display:none;">
                                 </td>
                             </tr>
 
@@ -1523,21 +1454,16 @@
                             </tbody>
                         </table>
                         <div class="text-center my-4">
-                            <button type="submit" style="height: 42px;"
-                                    class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <button type="submit" style="height: 42px;" class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
-                                <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20"
-                                     style="margin-right: 5px;">
-                                    <path
-                                        d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
+                                <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20" style="margin-right: 5px;">
+                                    <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
                                 </svg>
                             </button>
 
-                            <a href="{{route('single_cart_index')}}"
-                               class="inline-flex items-center add-more mt-2 px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <a href="{{route('single_cart_index')}}" class="inline-flex items-center add-more mt-2 px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.Requisitions Cart')}}
-                                <img src="{{url('singleCategroyCart.png')}}"
-                                     style="height: 24px;width: 30px; margin-right: 10px;transform: scaleX(-1)">
+                                <img src="{{url('singleCategroyCart.png')}}" style="height: 24px;width: 30px; margin-right: 10px;transform: scaleX(-1)">
                             </a>
                         </div>
 
@@ -1693,11 +1619,11 @@
                                                     @endphp
 
                                                     @if($package->package_id != 1)
-                                                        {{--                                                        <option value="Credit">{{__('portal.Credit')}}</option>--}}
-                                                        <option {{old('payment_mode') == 'Credit30days' ? 'selected' : ''}} value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
+                                                        <option value="Credit">{{__('portal.Credit')}}</option>
+                                                        {{--<option {{old('payment_mode') == 'Credit30days' ? 'selected' : ''}} value="Credit30days">{{__('portal.Credit (30 Days)')}}</option>
                                                         <option {{old('payment_mode') == 'Credit60days' ? 'selected' : ''}} value="Credit60days">{{__('portal.Credit (60 Days)')}}</option>
                                                         <option {{old('payment_mode') == 'Credit90days' ? 'selected' : ''}} value="Credit90days">{{__('portal.Credit (90 Days)')}}</option>
-                                                        <option {{old('payment_mode') == 'Credit120days' ? 'selected' : ''}} value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>
+                                                        <option {{old('payment_mode') == 'Credit120days' ? 'selected' : ''}} value="Credit120days">{{__('portal.Credit (120 Days)')}}</option>--}}
                                                     @endif
                                                 @endif
 
@@ -1791,7 +1717,7 @@
                                             </select>
                                         </div>
                                         <br>
-                                        {{__('portal.Delivery Period')}}: @include('misc.required')
+                                        {{__('portal.Delivery date')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             {{--<svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
                                                  style="width: 8px; height: 8px;"
@@ -1859,12 +1785,11 @@
 
                                 <th style="width:3%;">#</th>
                                 <th style="width:20%;">{{__('portal.Item Description')}} @include('misc.required')</th>
-                                <th style="width:7%"
-                                    title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required')</th>
-                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
-                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:10%;">{{__('portal.Brand')}}</th>
+                                <th style="width:7%" title="{{__('portal.Unit of Measurement')}}">{{__('portal.UOM')}} @include('misc.required')</th>
+                                <th style="width:10%;">{{__('portal.Size')}}</th>
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
+                                <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
                                 <th style="width:15%;"> {{__('portal.Remarks')}}</th>
                                 <th style="width:7%;">{{__('portal.Attachments')}}</th>
                             </tr>
@@ -1873,32 +1798,14 @@
 
                             @foreach($eCart as $item)
                                 <tr>
-                                    <td style="font-family: sans-serif;">
-                                        {{$loop->iteration}}
-
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{strip_tags($item->description)}}
-                                    </td>
-                                    <td>
-                                        @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->quantity}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->size}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->brand}}
-                                    </td>
-
-                                    <td style="font-family: sans-serif;">
-                                        {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}}
-                                    </td>
-                                    <td style="font-family: sans-serif;">
-                                        {{$item->remarks}}
-                                    </td>
+                                    <td style="font-family: sans-serif;"> {{$loop->iteration}} </td>
+                                    <td style="font-family: sans-serif;"> {{strip_tags($item->description)}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->brand}} </td>
+                                    <td> @php $UOM = \App\Models\UnitMeasurement::firstWhere('uom_en', $item->unit_of_measurement); @endphp {{$UOM->uom_ar}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->size}} </td>
+                                    <td style="font-family: sans-serif;"> {{ number_format($item->last_price, 2) }} {{__('portal.SAR')}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->quantity}} </td>
+                                    <td style="font-family: sans-serif;"> {{$item->remarks}} </td>
                                     <td class="">
                                         @if ($item->file_path)
                                             <a href="{{ Storage::url($rfp->file_path) }}">
@@ -1926,13 +1833,19 @@
 
                                     </div>
                                 </td>
+
                                 <td>
-                                <textarea name="description" id="description"
-                                          class="w-full description rounded-md shadow-sm" maxlength="254"
-                                          placeholder="{{__('portal.Enter Description..')}}" required>{{old('description')}}</textarea>
-                                    <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
-                                    <input type="hidden" value="{{ auth()->id() }}" name="user_id">
+                                    <textarea name="description" id="description" class="w-full description rounded-md shadow-sm" maxlength="254"
+                                              placeholder="{{__('portal.Enter Description..')}}" required>{{old('description')}}</textarea>
+                                        <input type="hidden" value="{{ auth()->user()->business_id }}" name="business_id">
+                                        <input type="hidden" value="{{ auth()->id() }}" name="user_id">
                                 </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text" name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
+                                           placeholder="{{__('portal.Brand')}}">
+                                </td>
+
                                 <td>
                                     <div class="relative inline-flex">
                                         <svg class="w-2 h-2 absolute top-0 right-1.5 mt-4 pointer-events-none"
@@ -1942,8 +1855,7 @@
                                                 d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
                                                 fill="#000000" fill-rule="nonzero"/>
                                         </svg>
-                                        <select
-                                            class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom js-example-basic-single"
+                                        <select class="form-input rounded-md shadow-sm  w-full  pl-5 pr-3  appearance-none uom js-example-basic-single"
                                             required name="unit_of_measurement" id="unit_of_measurement"
                                             style="max-height:35px;">
                                             <option value="">{{__('portal.None')}}</option>
@@ -1954,26 +1866,20 @@
                                         </select>
                                     </div>
                                 </td>
+
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
-                                           name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
-                                           placeholder="{{__('portal.Qty')}}">
-                                </td>
-                                <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text"
-                                           name="size" value="{{old('size')}}"
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="size" type="text" name="size" value="{{old('size')}}"
                                            min="0" placeholder="{{__('portal.Size')}}">
-                                </td>
-                                <td>
-                                    <input class="form-input rounded-md shadow-sm  w-full" id="brand" type="text"
-                                           name="brand" value="{{old('brand')}}" min="0" autocomplete="brand"
-                                           placeholder="{{__('portal.Brand')}}">
                                 </td>
 
                                 <td>
-                                    <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number"
-                                           name="last_price" value="{{old('last_price')}}" min="0" autocomplete="last_price"
+                                    <input class="form-input rounded-md shadow-sm w-full" id="last_price" type="number" name="last_price" value="{{old('last_price')}}" min="0" autocomplete="last_price"
                                            placeholder="{{__('portal.Price')}}">
+                                </td>
+
+                                <td>
+                                    <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number" name="quantity" value="{{old('quantity')}}" min="1" autocomplete="quantity" required
+                                           placeholder="{{__('portal.Qty')}}">
                                 </td>
 
                                 <td>
@@ -1983,10 +1889,8 @@
 
                                 <td>
 
-                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;"
-                                                                              src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
-                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1"
-                                           autocomplete="name" style="display:none;">
+                                    <label for="file" class="file-label"><img class="mx-auto" style="width:25px;" src="https://img.icons8.com/pastel-glyph/64/000000/upload-document--v1.png"/></label>
+                                    <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1" autocomplete="name" style="display:none;">
                                 </td>
                             </tr>
 
@@ -1994,22 +1898,17 @@
                             </tbody>
                         </table>
                         <div class="text-center my-4">
-                            <button type="submit" style="height: 42px;"
-                                    class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <button type="submit" style="height: 42px;" class="inline-flex items-center add-more  px-4 mr-2 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.ADD ITEM')}}
-                                <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20"
-                                     style="margin-right: 5px;">
-                                    <path
-                                        d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
+                                <svg class="svg-icon w-5 h-4" stroke="currentColor" viewBox="0 0 20 20" style="margin-right: 5px;">
+                                    <path d="M14.613,10c0,0.23-0.188,0.419-0.419,0.419H10.42v3.774c0,0.23-0.189,0.42-0.42,0.42s-0.419-0.189-0.419-0.42v-3.774H5.806c-0.23,0-0.419-0.189-0.419-0.419s0.189-0.419,0.419-0.419h3.775V5.806c0-0.23,0.189-0.419,0.419-0.419s0.42,0.189,0.42,0.419v3.775h3.774C14.425,9.581,14.613,9.77,14.613,10 M17.969,10c0,4.401-3.567,7.969-7.969,7.969c-4.402,0-7.969-3.567-7.969-7.969c0-4.402,3.567-7.969,7.969-7.969C14.401,2.031,17.969,5.598,17.969,10 M17.13,10c0-3.932-3.198-7.13-7.13-7.13S2.87,6.068,2.87,10c0,3.933,3.198,7.13,7.13,7.13S17.13,13.933,17.13,10"></path>
                                 </svg>
                             </button>
 
 
-                            <a href="{{route('single_cart_index')}}"
-                               class="inline-flex items-center add-more mt-2 px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
+                            <a href="{{route('single_cart_index')}}" class="inline-flex items-center add-more mt-2 px-4 mr-2 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 hover:text-white active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 text-center">
                                 {{__('portal.Requisitions Cart')}}
-                                <img src="{{url('singleCategroyCart.png')}}"
-                                     style="height: 24px;width: 30px; margin-right: 10px;transform: scaleX(-1)">
+                                <img src="{{url('singleCategroyCart.png')}}" style="height: 24px;width: 30px; margin-right: 10px;transform: scaleX(-1)">
                             </a>
                         </div>
 

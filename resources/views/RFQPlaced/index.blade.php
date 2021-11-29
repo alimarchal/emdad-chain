@@ -109,7 +109,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap">
-                                        {{$item->status}}
+                                        @if($item->status == 'Open') {{__('portal.Open')}} @else <span style="font-family: sans-serif">{{$item->status}}</span> @endif
                                     </td>
 
 
@@ -245,8 +245,8 @@
                                         @endif
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
-                                        @if($item->status == 'Open') {{__('portal.Open')}} @else {{$item->status}} @endif
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        @if($item->status == 'Open') {{__('portal.Open')}} @else <span style="font-family: sans-serif">{{$item->status}}</span> @endif
                                     </td>
 
 

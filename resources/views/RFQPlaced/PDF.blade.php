@@ -58,7 +58,17 @@
         <strong>Buyer: </strong>{{ $collection[0]->business->business_name }}<br>
         <strong>Email: </strong>{{ $collection[0]->business->business_email }}<br>
         <strong>City: </strong>{{ $collection[0]->business->city }}<br>
-        <strong>VAT Number: </strong> {{ $collection[0]->business->vat_reg_certificate_number }}<br>
+        <strong>VAT Number: </strong> {{ $collection[0]->business->vat_reg_certificate_number }}<br><br>
+        @if($collection[0]->rfq_type == 0)
+            <strong>{{__('portal.Category Name')}}: </strong>
+            <span style="color: royalblue">
+            @php
+                $category = \App\Models\Category::where('id',$collection[0]->category->id)->first();
+                $parentCategory = \App\Models\Category::where('id',$category->parent_id)->first();
+            @endphp
+                {{ $category->name }}@if(isset($parentCategory->name)), {{ $parentCategory->name }} @endif
+            </span><br>
+        @endif
     </div>
 
     <div style="width: 40%;float: right;">
@@ -94,7 +104,9 @@
 
     <tr>
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">#</th>
+        @if($collection[0]->rfq_type == 1)
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">CATEGORY NAME</th>
+        @endif
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">DESCRIPTION</th>
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">BRAND</th>
         <th style="text-align: center;background-color: #FCE5CD;font-weight: normal">UOM</th>
@@ -114,7 +126,9 @@
                 $category = \App\Models\Category::where('id',$rfp->category->id)->first();
                 $parentCategory = \App\Models\Category::where('id',$category->parent_id)->first();
             @endphp
+            @if($collection[0]->rfq_type == 1)
             <td  style="text-align: center"> {{ $rfp->item_name }}@if(isset($parentCategory->name)), {{ $parentCategory->name }} @endif </td>
+            @endif
             <td  style="text-align: center">{{ strip_tags($rfp->description) }}</td>
             <td  style="text-align: center">@if(isset($rfp->brand)) {{ $rfp->brand }} @else N/A @endif</td>
             <td  style="text-align: center">{{ $rfp->unit_of_measurement }}</td>
