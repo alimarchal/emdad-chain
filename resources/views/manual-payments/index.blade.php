@@ -219,22 +219,22 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($collection as $item)
                                     <tr>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center" style="font-family: sans-serif">
                                             {{ $loop->iteration }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if (auth()->user()->registration_type == 'Buyer')
                                                 @if($item->rfq_type == 1)
-                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-{{$item->id}}</a>
+                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-<span style="font-family: sans-serif">{{$item->id}}</span> </a>
                                                 @elseif($item->rfq_type == 0)
-                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-{{$item->id}}</a>
+                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-<span style="font-family: sans-serif">{{$item->id}}</span> </a>
                                                 @endif
                                             @elseif(auth()->user()->registration_type == 'Supplier')
                                                 {{--                                        <a href="{{ route('invoice.show',$item->invoice_id) }}" class="text-blue-600 hover:underline" target="_blank">{{$item->invoice_id}}</a>--}}
                                                 @if($item->rfq_type == 1)
-                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-{{$item->id}}</a>
+                                                    <a href="{{ route('invoice.show',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-<span style="font-family: sans-serif">{{$item->id}}</span> </a>
                                                 @elseif($item->rfq_type == 0)
-                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-{{$item->id}}</a>
+                                                    <a href="{{ route('singleCategoryInvoiceShow',$item->id) }}" class="text-blue-600 hover:underline" target="_blank">{{__('portal.Inv.')}}-<span style="font-family: sans-serif">{{$item->id}}</span> </a>
                                                 @endif
                                             @endif
                                         </td>
@@ -245,9 +245,9 @@
                                                 {{--@php $invoiceDate = \App\Models\Invoice::where('id', $item->invoice_id)->first(); @endphp--}}
                                                 @php $invoiceDate = \App\Models\Invoice::where('id', $item->id)->first(); @endphp
                                             @endif
-                                            {{\Carbon\Carbon::parse($item->created_at)->format('d-M-Y')}}
+                                            <span style="font-family: sans-serif">{{\Carbon\Carbon::parse($item->created_at)->format('d-M-Y')}}</span>
                                         </td>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center" style="font-family: sans-serif">
                                             @if(auth()->user()->registration_type == 'Buyer')
                                                 @php $businessName = \App\Models\Business::where('id', $item->supplier_business_id)->first(); @endphp
                                             @elseif(auth()->user()->registration_type == 'Supplier')

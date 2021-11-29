@@ -95,7 +95,7 @@
                             {{--                        @php $proformaPresent = \App\Models\ProformaInvoice::where('draft_purchase_order_id',$draftPurchaseOrder->id)->first(); @endphp--}}
                             @php $proforma = \App\Models\Invoice::where('draft_purchase_order_id',$draftPurchaseOrder->id)->where('invoice_type', 1)->first();@endphp
                             @if (isset($proforma) && $proforma->invoice_status == 3)
-                                <h2 class="text-2xl text-center font-bold">Prepare Delivery Note</h2>
+                                <h2 class="text-2xl text-center font-bold">{{__('portal.Prepare Delivery Note')}}</h2>
                                 <form action="{{ route('deliveryNote.store') }}" method="post">
                                     @csrf
                                     <div class="grid grid-cols-12 gap-6">
@@ -248,7 +248,7 @@
 
                         <div class="flex flex-wrap overflow-hidden bg-white p-4">
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-2/3">
-                                <strong>{{__('portal.Purchase Order')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.PO')}}-{{ $draftPurchaseOrder->id }}<br>
+                                <strong>{{__('portal.Purchase Order')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.PO')}}-<span style="font-family: sans-serif">{{ $draftPurchaseOrder->id }}</span> <br>
                                 <strong>{{__('portal.Category Name')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                 @php
                                     $record = \App\Models\Category::where('id',$draftPurchaseOrder->item_code)->first();
@@ -256,9 +256,9 @@
                                 @endphp
                                 {{ $record->name_ar }} , {{ $parent->name_ar }}
                                 <br>
-                                <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
-                                <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $draftPurchaseOrder->qoute_no }}<br>
-                                <strong>{{__('portal.Requisition')}} #: &nbsp;</strong>{{__('portal.RFQ')}}-{{ $draftPurchaseOrder->rfq_item_no }}<br>
+                                <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $draftPurchaseOrder->created_at }}</span> <br>
+                                <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-<span style="font-family: sans-serif">{{ $draftPurchaseOrder->qoute_no }}</span> <br>
+                                <strong>{{__('portal.Requisition')}} #: &nbsp;</strong>{{__('portal.RFQ')}}-<span style="font-family: sans-serif">{{ $draftPurchaseOrder->rfq_item_no }}</span> <br>
                                 <strong>{{__('portal.Payment Terms')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                     @if($draftPurchaseOrder->payment_term == 'Cash') {{__('portal.Cash')}}
                                     @elseif($draftPurchaseOrder->payment_term == 'Credit') {{__('portal.Credit')}}
@@ -299,16 +299,17 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-black border-1 border-black">
                                 <tr>
-                                    <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
+                                    <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black" style="font-family: sans-serif">
                                         1
                                     </td>
-                                    <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
+                                    <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black" style="font-family: sans-serif">
                                         {{ strip_tags($draftPurchaseOrder->eOrderItem->description) }}
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
-                                        {{ $draftPurchaseOrder->uom }}
+                                        @php $UOM = \App\Models\UnitMeasurement::where('uom_en', $draftPurchaseOrder->uom)->pluck('uom_ar')->first() @endphp
+                                        {{ $UOM }}
                                     </td>
-                                    <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
+                                    <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black" style="font-family: sans-serif">
                                         {{ $draftPurchaseOrder->quantity }}
                                     </td>
                                 </tr>
@@ -323,7 +324,7 @@
                             {{--                        @php $proformaPresent = \App\Models\ProformaInvoice::where('draft_purchase_order_id',$draftPurchaseOrder->id)->first(); @endphp--}}
                             @php $proforma = \App\Models\Invoice::where('draft_purchase_order_id',$draftPurchaseOrder->id)->where('invoice_type', 1)->first();@endphp
                             @if (isset($proforma) && $proforma->invoice_status == 3)
-                                <h2 class="text-2xl text-center font-bold">Prepare Delivery Note</h2>
+                                <h2 class="text-2xl text-center font-bold">{{__('portal.Prepare Delivery Note')}}</h2>
                                 <form action="{{ route('deliveryNote.store') }}" method="post">
                                     @csrf
                                     <div class="grid grid-cols-12 gap-6">
@@ -333,11 +334,11 @@
                                                 {{__('portal.Delivery Address')}}
                                             </label>
                                             @php $delivery = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse_id)->first(); @endphp
-                                            <textarea class="form-textarea w-full" disabled>{{$delivery->address}}</textarea>
+                                            <textarea class="form-textarea w-full" style="font-family: sans-serif" disabled>{{$delivery->address}}</textarea>
                                             <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
                                                 {{__('portal.City')}}
                                             </label>
-                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" value="{{ $delivery->city }}" disabled="disabled">
+                                            <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" style="font-family: sans-serif" value="{{ $delivery->city }}" disabled="disabled">
                                             <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
                                                 {{__('portal.Warranty')}}
                                             </label>
@@ -346,7 +347,7 @@
                                             <label class="block font-medium text-sm text-gray-700 mt-4" for="delivery_address">
                                                 {{__('portal.Terms and Conditions')}}
                                             </label>
-                                            <textarea name="terms_and_conditions" id="terms_and_conditions" class="form-textarea w-full"></textarea>
+                                            <textarea name="terms_and_conditions" id="terms_and_conditions" class="form-textarea w-full" style="font-family: sans-serif"></textarea>
                                             <input type="hidden" value="{{ auth()->user()->id }}" name="update_user_id">
                                             <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
                                             <input type="hidden" value="{{ $draftPurchaseOrder->user_id }}" name="user_id">
@@ -395,23 +396,23 @@
                                             {{__('portal.Delivery Address')}}
                                         </label>
                                         @php $delivery = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse_id)->first(); @endphp
-                                        <textarea class="form-textarea w-full" disabled>{{$delivery->address}}</textarea>
+                                        <textarea class="form-textarea w-full" disabled style="font-family: sans-serif">{{$delivery->address}}</textarea>
 
                                         <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
                                             {{__('portal.City')}}
                                         </label>
-                                        <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" value="{{ $delivery->city }}" disabled="disabled">
+                                        <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" style="font-family: sans-serif" value="{{ $delivery->city }}" disabled="disabled">
 
 
                                         <label class="block font-medium text-sm text-gray-700 mt-4" for="city">
                                             {{__('portal.Warranty')}}
                                         </label>
-                                        <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" type="text" name="warranty">
+                                        <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="city" style="font-family: sans-serif" type="text" name="warranty">
 
                                         <label class="block font-medium text-sm text-gray-700 mt-4" for="delivery_address">
                                             {{__('portal.Terms and Conditions')}}
                                         </label>
-                                        <textarea name="terms_and_conditions" id="terms_and_conditions" class="form-textarea w-full"></textarea>
+                                        <textarea name="terms_and_conditions" id="terms_and_conditions" style="font-family: sans-serif" class="form-textarea w-full"></textarea>
                                         <input type="hidden" value="{{ auth()->user()->id }}" name="update_user_id">
                                         <input type="hidden" value="{{ $draftPurchaseOrder->id }}" name="draft_purchase_order_id">
                                         <input type="hidden" value="{{ $draftPurchaseOrder->user_id }}" name="user_id">

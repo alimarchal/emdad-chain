@@ -181,7 +181,7 @@
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                        {{auth()->user()->business->business_name}} {{__('portal.Invoice')}} #
+                                        <span style="font-family: sans-serif">{{auth()->user()->business->business_name}}</span> {{__('portal.Invoice')}} #
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
@@ -205,11 +205,11 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($emdadInvoices as $emdadInvoice)
                                     <tr>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                             {{__('portal.EmdInv')}}-{{ $emdadInvoice->id }}
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{__('portal.Inv.')}}-{{ $emdadInvoice->invoice->id }}
+                                            {{__('portal.Inv.')}}-<span style="font-family: sans-serif">{{ $emdadInvoice->invoice->id }}</span>
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -239,16 +239,16 @@
                                         @endif
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             @if($emdadInvoice->rfq_type == 1)
-                                                {{ number_format($totalCost,2) }} {{__('portal.SAR')}}
+                                                <span style="font-family: sans-serif">{{ number_format($totalCost,2) }}</span> {{__('portal.SAR')}}
                                             @elseif($emdadInvoice->rfq_type == 0)
-                                                {{ number_format($totalAmount,2)}} {{__('portal.SAR')}}
+                                                <span style="font-family: sans-serif">{{ number_format($totalAmount,2)}}</span> {{__('portal.SAR')}}
                                             @endif
                                         </td>
                                         <td class="px-7 py-4 text-center whitespace-nowrap">
                                             @if($emdadInvoice->rfq_type == 1)
-                                                {{ number_format($totalEmdadCharges,2) }} {{__('portal.SAR')}}
+                                                <span style="font-family: sans-serif">{{ number_format($totalEmdadCharges,2) }}</span> {{__('portal.SAR')}}
                                             @elseif($emdadInvoice->rfq_type == 0)
-                                                {{ number_format($totalSingleCategoryEmdadCharges,2) }} {{__('portal.SAR')}}
+                                                <span style="font-family: sans-serif">{{ number_format($totalSingleCategoryEmdadCharges,2) }}</span> {{__('portal.SAR')}}
                                             @endif
                                         </td>
 

@@ -296,12 +296,12 @@
                                             <tbody class="bg-white divide-y divide-gray-200">
                                             @foreach ($dpos as $dpo)
                                                 <tr>
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black" style="font-family: sans-serif">
                                                         {{ $loop->iteration }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.PO')}}-{{ $dpo->id }}
+                                                        {{__('portal.PO')}}-<span style="font-family: sans-serif">{{ $dpo->id }}</span>
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -325,7 +325,7 @@
 
                                                     </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black" style="font-family: sans-serif">
                                                         {{ $dpo->po_date }}
                                                     </td>
 

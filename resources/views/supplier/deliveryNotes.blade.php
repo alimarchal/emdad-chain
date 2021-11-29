@@ -236,16 +236,16 @@
                                             <tbody class="bg-white divide-y divide-gray-200">
                                             @foreach ($collection as $dn)
                                                 <tr>
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black" style="font-family: sans-serif">
                                                         {{ $loop->iteration }}
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.D.N.')}}-{{ $dn->id }}
+                                                        {{__('portal.D.N.')}}-<span style="font-family: sans-serif">{{ $dn->id }}</span>
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
-                                                        {{__('portal.PO')}}-{{ $dn->purchase_order->id }}
+                                                        {{__('portal.PO')}}-<span style="font-family: sans-serif">{{ $dn->purchase_order->id }}</span>
                                                     </td>
 
                                                     <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
@@ -255,7 +255,7 @@
                                                                 $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                             @endphp
                                                             <a href="{{ route('viewNote', $dn->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                                {{ $record->name_ar }} , {{ $parent->name_ar }}
+                                                                {{ $record->name_ar }}@if(isset($parent)), {{ $parent->name_ar }} @endif
                                                             </a>
                                                         @else
                                                             @php
@@ -263,7 +263,7 @@
                                                                 $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                                             @endphp
                                                             <a href="{{ route('singleCategoryViewNote', $dn->rfq_no) }}" class="hover:text-blue-900 hover:underline text-blue-900">
-                                                                {{ $record->name_ar }} , {{ $parent->name_ar }}
+                                                                {{ $record->name_ar }}@if(isset($parent)), {{ $parent->name_ar }} @endif
                                                             </a>
                                                         @endif
                                                     </td>
@@ -272,7 +272,7 @@
                                                         @if($dn->rfq_type == 1) {{__('portal.Multiple')}} @elseif($dn->rfq_type == 0) {{__('portal.Single')}} @endif
                                                     </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black" style="font-family: sans-serif">
                                                         {{ Carbon\Carbon::parse($dn->purchase_order->po_date)->format('d-m-Y') }}
                                                     </td>
 

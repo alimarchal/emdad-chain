@@ -40,7 +40,7 @@
                                     #
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center uppercase text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
-                                    {{__('portal.Requisition No.')}}
+                                    {{__('portal.Requisition')}} #
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center uppercase text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
@@ -178,7 +178,7 @@
                                     #
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
-                                    {{__('portal.Requisition No.')}}
+                                    {{__('portal.Requisition')}} #
                                 </th>
 
                                 <th scope="col" class="px-6 py-3 text-center text-xs text-gray-500 tracking-wider" style="background-color: #FCE5CD">
@@ -246,7 +246,7 @@
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
-                                        {{$item->status}}
+                                        @if($item->status == 'Open') {{__('portal.Open')}} @else {{$item->status}} @endif
                                     </td>
 
 

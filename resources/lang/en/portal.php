@@ -38,6 +38,7 @@ return [
     'Single Category' => 'Single Category',
     'Multiple' => 'Multiple',
     'Single' => 'Single',
+    'Open' => 'Open',
     'New Requisition' => 'Make New Requisition',
     'Requisition Cart' => 'Requisition Cart',
     'Requisitions History' => 'Requisitions History',

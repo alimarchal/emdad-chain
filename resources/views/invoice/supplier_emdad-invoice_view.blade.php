@@ -150,7 +150,7 @@
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                        <h1 class="text-center text-2xl">{{__('portal.Emdad Invoice for invoice')}} # &nbsp; <strong>{{__('portal.Inv.')}}-{{ $emdadInvoice->invoice->id }}</strong></h1>
+                                        <h1 class="text-center text-2xl">{{__('portal.Emdad Invoice for invoice')}} # &nbsp; <strong>{{__('portal.Inv.')}}-<span style="font-family: sans-serif">{{ $emdadInvoice->invoice->id }}</span></strong></h1>
                                     </div>
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                                     </div>
@@ -180,7 +180,7 @@
                                     @php $dpo = \App\Models\DraftPurchaseOrder::where('id', $emdadInvoice->invoice->purchase_order->id)->first(); @endphp
                                     <tbody class="bg-white divide-y divide-black border-1 border-black">
                                     <tr>
-                                        <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
+                                        <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black" style="font-family: sans-serif">
                                             1
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
@@ -188,7 +188,7 @@
                                                 $record = \App\Models\Category::where('id',$dpo->item_code)->first();
                                                 $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                             @endphp
-                                            {{ $record->name_ar }} @if(isset($parent->name)) , {{ $parent->name_ar }} @endif
+                                            {{ $record->name_ar }}@if(isset($parent->name)), {{ $parent->name_ar }} @endif
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
                                             @if($dpo->payment_term == 'Cash') {{__('portal.Cash')}}
@@ -206,10 +206,10 @@
                                             $totalEmdadCharges = $totalCost * (1.5 / 100);
                                         @endphp
                                         <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
-                                            {{ number_format($totalCost,2) }} {{__('portal.SAR')}}
+                                            <span style="font-family: sans-serif">{{ number_format($totalCost,2) }}</span> {{__('portal.SAR')}}
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
-                                            {{ number_format($totalEmdadCharges,2) }} {{__('portal.SAR')}}
+                                            <span style="font-family: sans-serif">{{ number_format($totalEmdadCharges,2) }}</span> {{__('portal.SAR')}}
                                         </td>
                                     </tr>
                                     </tbody>
