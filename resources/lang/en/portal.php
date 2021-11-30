@@ -42,6 +42,7 @@ return [
     'New Requisition' => 'Make New Requisition',
     'Requisition Cart' => 'Requisition Cart',
     'Requisitions History' => 'Requisitions History',
+    'Previous Requisitions' => 'Previous Requisitions',
     'DPO(s)' => 'Draft Purchase Orders',
     'PO(s)' => 'Purchase Orders',
     'Generate invoice' => 'Generate invoice',

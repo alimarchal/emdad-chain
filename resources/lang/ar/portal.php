@@ -42,6 +42,7 @@ return [
     'New Requisition' => 'إنشاء طلب جديد',
     'Requisition Cart' => 'سلة الطلبات',
     'Requisitions History' => 'سجل الطلبات',
+    'Previous Requisitions' => 'الطلبات السابقة',
     'DPO(s)' => 'مسودة أوامر الشراء',
     'PO(s)' => 'أوامر الشراء',
     'Generate invoice' => 'إنشاء فاتورة',

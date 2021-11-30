@@ -26,7 +26,33 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-0 text-center m-5">{{__('portal.Requisitions History')}}</h2>
+
+        <div class="mt-4">
+
+            <div class="flex flex-wrap overflow-hidden lg:-mx-2 xl:-mx-1" style="justify-content: left;">
+
+                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3" style="justify-content: left;">
+                    <div class="items-center text-center px-2 py-2">
+
+                        <div class="mx-5">
+                            <div class="text-gray-500">
+                                <label>
+                                    <select name="category_selection" class="form-select shadow-sm block w-full category_selection" required>
+                                        <option value="">{{__('portal.Select')}}</option>
+                                        <option value="1">{{__('portal.Multiple Categories')}}</option>
+                                        <option value="0">{{__('portal.Single Category')}}</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-bold py-0 text-center">{{__('portal.Previous Requisitions')}}</h2>
 
         <div class="flex flex-col bg-white rounded ">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -164,7 +190,33 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-0 text-center m-5">{{__('portal.Requisitions History')}}</h2>
+
+        <div class="mt-4">
+
+            <div class="flex flex-wrap overflow-hidden lg:-mx-2 xl:-mx-1" style="justify-content: right;">
+
+                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3" style="justify-content: right;">
+                    <div class="items-center text-center px-2 py-2">
+
+                        <div class="mx-5">
+                            <div class="text-gray-500">
+                                <label>
+                                    <select name="category_selection" class="form-select shadow-sm block w-full category_selection" required>
+                                        <option value="">{{__('portal.Select')}}</option>
+                                        <option value="1">{{__('portal.Multiple Categories')}}</option>
+                                        <option value="0">{{__('portal.Single Category')}}</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-bold py-0 text-center">{{__('portal.Previous Requisitions')}}</h2>
 
         <div class="flex flex-col bg-white rounded ">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -293,3 +345,19 @@
         });
     </script>
 @endif
+
+
+<script>
+    $('.category_selection').change(function () {
+
+        if ($(this).val() == 0 )
+        {
+            window.location.href = "{{route("create_single_rfq")}}";
+        }
+        if ( $(this).val() == 1 )
+        {
+            window.location.href = "{{route("RFQ.create")}}";
+        }
+
+    });
+</script>

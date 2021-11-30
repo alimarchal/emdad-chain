@@ -455,7 +455,7 @@
             {{-- RFQs link for Buyer --}}
             @if((auth()->user()->can('Buyer Create New RFQ') || auth()->user()->hasRole('CEO')) && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
-                <div x-data="{ open: false } ">
+                {{--<div x-data="{ open: false } ">
                     <a @click="open = true"
                        class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('rfqView') || request()->routeIs('RFQ.create')|| request()->routeIs('RFQCart.index')|| request()->routeIs('PlacedRFQ.index')|| request()->routeIs('create_single_rfq')|| request()->routeIs('single_cart_index')|| request()->routeIs('single_category_rfq_index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                        href="javascript:void(0);">
@@ -504,16 +504,16 @@
                         </li>
 
                     </ul>
-                </div>
+                </div>--}}
 
-                {{--<a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('rfqView') || request()->routeIs('RFQ.create')|| request()->routeIs('RFQCart.index')|| request()->routeIs('PlacedRFQ.index')|| request()->routeIs('create_single_rfq')|| request()->routeIs('single_cart_index')|| request()->routeIs('single_category_rfq_index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                   href="{{ route('rfqView') }}">
+                <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('rfqView') || request()->routeIs('RFQ.create')|| request()->routeIs('RFQCart.index')|| request()->routeIs('PlacedRFQ.index')|| request()->routeIs('create_single_rfq')|| request()->routeIs('single_cart_index')|| request()->routeIs('single_category_rfq_index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{ route('PlacedRFQ.index') }}">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
-                        --}}{{--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>--}}{{--
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                     </svg>
                     <span class="mx-3">{{ __('sidebar.RFQs') }}</span>
-                </a>--}}
+                </a>
             @endif
 
             @if((auth()->user()->can('PoBuyer') || auth()->user()->hasRole('CEO')) && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3 && auth()->user()->business->status == 3)
@@ -1920,7 +1920,7 @@
             {{-- RFQs link for Buyer --}}
             @if((auth()->user()->can('Buyer Create New RFQ') || auth()->user()->hasRole('CEO')) && auth()->user()->registration_type == 'Buyer' && Auth::user()->status == 3 && auth()->user()->business->status == 3)
 
-                <div x-data="{ open: false } ">
+                {{--<div x-data="{ open: false } ">
                     <a @click="open = true"
                        class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('rfqView') || request()->routeIs('RFQ.create')|| request()->routeIs('RFQCart.index')|| request()->routeIs('PlacedRFQ.index')|| request()->routeIs('create_single_rfq')|| request()->routeIs('single_cart_index')|| request()->routeIs('single_category_rfq_index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                        href="javascript:void(0);">
@@ -1969,7 +1969,16 @@
                         </li>
 
                     </ul>
-                </div>
+                </div>--}}
+
+                <a class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('rfqView') || request()->routeIs('RFQ.create')|| request()->routeIs('RFQCart.index')|| request()->routeIs('PlacedRFQ.index')|| request()->routeIs('create_single_rfq')|| request()->routeIs('single_cart_index')|| request()->routeIs('single_category_rfq_index') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                   href="{{ route('PlacedRFQ.index') }}">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                    </svg>
+                    <span class="mx-3">{{ __('sidebar.RFQs') }}</span>
+                </a>
 
             @endif
 

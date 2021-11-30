@@ -149,7 +149,7 @@
             </td>
             <td  style="text-align: center">{{ number_format($rfp->last_price, 2) }} {{__('portal.SAR')}}</td>
             <td  style="text-align: center">{{ $rfp->quantity }}</td>
-            <td  style="text-align: center">@if(isset($rfp->remarks)){{ $rfp->remarks }} @else {{__('portal.N/A')}} @endif</td>
+            <td  style="text-align: center;word-wrap: break-word">@if(isset($rfp->remarks)){{ $rfp->remarks }} @else {{__('portal.N/A')}} @endif</td>
         </tr>
     @endforeach
     </tbody>

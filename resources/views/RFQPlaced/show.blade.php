@@ -174,7 +174,7 @@
                                         <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
                                             {{__('portal.Qty')}}
                                         </th>
-                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
+                                        <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Remarks')}}
                                         </th>
                                         <th scope="col" class="px-2 py-2 border border-black text-xs font-medium text-black uppercase tracking-wider" style="background-color: #FCE5CD">
@@ -241,7 +241,7 @@
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                             {{ $rfp->quantity }}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
+                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif;word-break: break-word">
                                             @if(isset($rfp->remarks)){{ $rfp->remarks }} @else {{__('portal.N/A')}} @endif
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
