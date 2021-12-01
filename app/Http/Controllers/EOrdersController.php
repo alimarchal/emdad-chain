@@ -206,11 +206,12 @@ class EOrdersController extends Controller
                         if (!empty($coll->business)) {
                             {
                                 $get_user = User::where('id', $coll->business->user_id)->first();
-                                $get_user->notify(new QuotationCategory($eOrderItem->item_code));
+                                if (!empty($get_user)) {
+                                    $get_user->notify(new QuotationCategory($eOrderItem->item_code));
+                                }
                             }
                         }
                     }
-
 
 
                     $categoryName = Category::where('id', $eOrderItem->item_code)->first();
@@ -291,16 +292,13 @@ class EOrdersController extends Controller
                         $eOrderItem->save();
 
 
-
-
                         // search for item code from business_categories table
                         $collection = BusinessCategory::where('category_number', $eOrderItem->item_code)->where('business_id', '!=', $item->business_id)->get();
                         foreach ($collection as $coll) {
                             if (!empty($coll->business)) {
                                 {
                                     $get_user = User::where('id', $coll->business->user_id)->first();
-                                    if(!empty($get_user))
-                                    {
+                                    if (!empty($get_user)) {
                                         $get_user->notify(new QuotationCategory($eOrderItem->item_code));
                                     }
                                 }
@@ -411,7 +409,6 @@ class EOrdersController extends Controller
         } elseif ($business_package->package_id == 3 || $business_package->package_id == 4) {
 
 
-
             DB::transaction(function () use ($request) {
                 $request->merge(['status' => 'Open']);
                 $request->merge(['rfq_type' => 0]);
@@ -450,8 +447,7 @@ class EOrdersController extends Controller
                         if (!empty($coll->business)) {
                             {
                                 $get_user = User::where('id', $coll->business->user_id)->first();
-                                if(!empty($get_user))
-                                {
+                                if (!empty($get_user)) {
                                     $get_user->notify(new QuotationCategory($eOrderItem->item_code));
                                 }
                             }
