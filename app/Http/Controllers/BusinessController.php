@@ -138,7 +138,6 @@ class BusinessController extends Controller
     public function create()
     {
         $business = Business::where('user_id', auth()->user()->id)->first();
-        //        dd($business);
         if ($business === null) {
             $businessPackage = BusinessPackage::where('user_id', \auth()->id())->first();
             $categories = explode(',', $businessPackage->categories);

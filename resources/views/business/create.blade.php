@@ -228,14 +228,24 @@
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_name">{{__('portal.Business Name')}} @include('misc.required')</label>
                                 <input type="hidden" name="business_type" value="{{ auth()->user()->registration_type }}">
                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                 <x-jet-label for="nid_num" class="block font-medium text-sm text-gray-700 w-1/3"  value="{{ __('register.National ID Number') }}"/>
+                               <x-jet-label for="nid_exp_date" class="block font-medium text-sm text-gray-700 w-1/3"  value="{{ __('register.National ID Expiry Date') }}"/>
+
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2" value="{{old('business_name')}}" required></x-jet-input>
+
+                                   <x-jet-input id="nid_num" class="block mt-1  w-1/3" type="text" pattern="\d*" maxlength="10" name="nid_num" :value="old('nid_num')" required/>
+                                <input type="text" id="datepicker" data-provide="datepicker" class="block mt-1 w-1/3" name="nid_exp_date" value="{{old('nid_exp_date')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" readonly>
+
                             </div>
 
 
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="business_type">{{__('portal.Select the Sub-Categories')}} @include('misc.required')</x-jet-label>
+                            </div>
+                            <div class="flex mt-3 ">
+                                @include('category.category.index')
                             </div>
                             <div class="flex mt-3 ">
                                 <input type="text" id="justAnInputBox1" name="list" placeholder="Select" autocomplete="off"/>
