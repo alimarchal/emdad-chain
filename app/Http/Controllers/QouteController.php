@@ -36,9 +36,9 @@ class QouteController extends Controller
     {
         $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
         Validator::make($request->all(), [
-            'expiry_date' => 'required|date|after_or_equal:'.$min5days,
+            'expiry_date' => 'required|date|after_or_equal:' . $min5days,
             'shipping_time_in_days' => 'required',
-        ],[
+        ], [
             'expiry_date.required' => __('portal.Quotation valid upto date is required.'),
             'shipping_time_in_days.required' => __('portal.Shipping Time is required.')
         ])->validate();
@@ -61,8 +61,7 @@ class QouteController extends Controller
         /* Setting RFQ Type */
         $request->merge(['rfq_type' => 1]);
 
-        if(!empty($buyer_id))
-        {
+        if (!empty($buyer_id)) {
             $buyer_id->notify(new QuotationReceived());
         }
 
@@ -80,11 +79,11 @@ class QouteController extends Controller
         $categoryName = Category::where('id', $quote->orderItem->item_code)->first();
         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
-        User::send_sms(env('SMS_NO_ONE'), 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
-        User::send_sms(env('SMS_NO_TWO'), 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
+        User::send_sms(env('SMS_NO_ONE'), 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id);
+        User::send_sms(env('SMS_NO_TWO'), 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id);
 
         /* Notifying business@emdad-chain.com for Purchase order created */
-        $userQuoted =  User::find(auth()->user()->id);
+        $userQuoted = User::find(auth()->user()->id);
         Notification::route('mail', 'business@emdad-chain.com')
             ->notify(new QuotationSent($userQuoted, $quote));
 
@@ -98,9 +97,9 @@ class QouteController extends Controller
     {
         $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
         Validator::make($request->all(), [
-            'expiry_date' => 'required|date|after_or_equal:'.$min5days,
+            'expiry_date' => 'required|date|after_or_equal:' . $min5days,
             'shipping_time_in_days' => 'required'
-        ],[
+        ], [
             'expiry_date.required' => __('portal.Quotation valid upto date is required.'),
             'shipping_time_in_days.required' => __('portal.Shipping Time is required.')
         ])->validate();
@@ -116,8 +115,7 @@ class QouteController extends Controller
         $request->merge(['status' => 'pending']);
 
         $total_amount = 0;
-        for ($i = 0; $i < count($request->quote_quantity); $i++)
-        {
+        for ($i = 0; $i < count($request->quote_quantity); $i++) {
             $total_amount += $request->quote_quantity[$i] * $request->quote_price_per_quantity[$i];
         }
 
@@ -130,10 +128,8 @@ class QouteController extends Controller
         /* Setting RFQ Type */
         $request->merge(['rfq_type' => 0]);
 
-        if (isset($request->sample_information))
-        {
-            for ($i=0 ; $i < count($request->e_order_items_id); $i++)
-            {
+        if (isset($request->sample_information)) {
+            for ($i = 0; $i < count($request->e_order_items_id); $i++) {
                 $data = [
                     'user_id' => $request->user_id,
                     'supplier_business_id' => $request->supplier_business_id,
@@ -161,11 +157,8 @@ class QouteController extends Controller
 
                 $quote = Qoute::create($data);
             }
-        }
-        else
-        {
-            for ($i=0 ; $i < count($request->e_order_items_id); $i++)
-            {
+        } else {
+            for ($i = 0; $i < count($request->e_order_items_id); $i++) {
                 $data = [
                     'user_id' => $request->user_id,
                     'supplier_business_id' => $request->supplier_business_id,
@@ -205,11 +198,11 @@ class QouteController extends Controller
         $categoryName = Category::where('id', $quote->orderItem->item_code)->first();
         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
-        User::send_sms('+966581382822', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
-        User::send_sms('+966593388833', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id );
+        User::send_sms('+966581382822', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id);
+        User::send_sms('+966593388833', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id);
 
         /* Notifying business@emdad-chain.com for Purchase order created */
-        $userQuoted =  User::find(auth()->user()->id);
+        $userQuoted = User::find(auth()->user()->id);
         Notification::route('mail', 'business@emdad-chain.com')
             ->notify(new QuotationSent($userQuoted, $quote));
 
@@ -223,15 +216,15 @@ class QouteController extends Controller
         Validator::make($request->all(), [
             'expiry_date' => 'required',
             'shipping_time_in_days' => 'required',
-        ],[
+        ], [
             'expiry_date.required' => __('portal.Quotation valid upto date is required.'),
             'shipping_time_in_days.required' => __('portal.Shipping Time is required.')
         ])->validate();
 
         $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d');
         $shippingTime = Carbon::parse($request->shipping_time_in_days)->format('Y-m-d');
-        $request->merge(['expiry_date'=> $expiryDate]);
-        $request->merge(['shipping_time_in_days'=> $shippingTime]);
+        $request->merge(['expiry_date' => $expiryDate]);
+        $request->merge(['shipping_time_in_days' => $shippingTime]);
         $request->merge(['user_id' => auth()->user()->id]);
         $request->merge(['qoute_status' => 'Modified']);
         $request->merge(['status' => 'pending']);
@@ -249,14 +242,12 @@ class QouteController extends Controller
         User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
 
         $buyer_id = User::where('business_id', $request->business_id)->first();
-        if(!empty($buyer_id))
-        {
+        if (!empty($buyer_id)) {
             $buyer_id->notify(new QuotationReceived());
         }
 
 
-        if (isset($request->single_rfq))
-        {
+        if (isset($request->single_rfq)) {
             return redirect()->route('singleCategoryQuotedModifiedRFQ');
         }
 //        return redirect()->route('viewRFQs');
@@ -269,7 +260,7 @@ class QouteController extends Controller
         Validator::make($request->all(), [
             'expiry_date' => 'required',
             'shipping_time_in_days' => 'required',
-        ],[
+        ], [
             'expiry_date.required' => __('portal.Quotation valid upto date is required.'),
             'shipping_time_in_days.required' => __('portal.Shipping Time is required.')
         ])->validate();
@@ -277,13 +268,12 @@ class QouteController extends Controller
         $expiryDate = Carbon::parse($request->expiry_date)->format('Y-m-d');
         $shippingTime = Carbon::parse($request->shipping_time_in_days)->format('Y-m-d');
         $request->merge(['expiry_date' => $expiryDate]);
-        $request->merge(['shipping_time_in_days'=> $shippingTime]);
+        $request->merge(['shipping_time_in_days' => $shippingTime]);
         $request->merge(['qoute_status' => 'Modified']);
         $request->merge(['qoute_status_updated' => 'Modified']);
 
         $total_amount = 0;
-        for ($i = 0; $i < count($request->quote_quantity); $i++)
-        {
+        for ($i = 0; $i < count($request->quote_quantity); $i++) {
             $total_amount += $request->quote_quantity[$i] * $request->quote_price_per_quantity[$i];
         }
 
@@ -293,10 +283,8 @@ class QouteController extends Controller
 
         $request->merge(['total_cost' => $sum]);
 
-        if (isset($request->sample_information))
-        {
-            for ($i=0 ; $i < count($request->e_order_items_id); $i++)
-            {
+        if (isset($request->sample_information)) {
+            for ($i = 0; $i < count($request->e_order_items_id); $i++) {
                 $data = [
                     'quote_quantity' => $request->quote_quantity[$i],
                     'quote_price_per_quantity' => $request->quote_price_per_quantity[$i],
@@ -315,11 +303,8 @@ class QouteController extends Controller
 
                 Qoute::where(['e_order_items_id' => $request->e_order_items_id[$i], 'supplier_business_id' => auth()->user()->business_id])->update($data);
             }
-        }
-        else
-        {
-            for ($i=0 ; $i < count($request->e_order_items_id); $i++)
-            {
+        } else {
+            for ($i = 0; $i < count($request->e_order_items_id); $i++) {
                 $data = [
                     'quote_quantity' => $request->quote_quantity[$i],
                     'quote_price_per_quantity' => $request->quote_price_per_quantity[$i],
@@ -337,8 +322,7 @@ class QouteController extends Controller
         }
 
         $buyer_id = User::where('business_id', $request->business_id)->first();
-        if(!empty($buyer_id))
-        {
+        if (!empty($buyer_id)) {
             $buyer_id->notify(new QuotationReceived());
         }
 
@@ -346,8 +330,7 @@ class QouteController extends Controller
         $quote = $qoute;
         User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteSend($quote));
         $buyer_id = User::where('business_id', $request->business_id)->first();
-        if(!empty($buyer_id))
-        {
+        if (!empty($buyer_id)) {
             $buyer_id->notify(new QuotationReceived());
         }
         return redirect()->route('singleCategoryQuotedModifiedRFQ');
@@ -361,11 +344,11 @@ class QouteController extends Controller
                             ->where(function ($query){
                                 $query->where(['qoute_status' => 'Qouted'])->where(['qoute_status_updated' => null])->orWhere(['qoute_status' => 'accepted']);
                             })->get();*/
-        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1])
-                            ->where('qoute_status' , '!=' ,'ModificationNeeded')
-                            ->where('qoute_status' , '!=' ,'RFQPendingConfirmation')
-                            ->orderByDesc('created_at')
-                            ->get();
+        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])
+            ->where('qoute_status', '!=', 'ModificationNeeded')
+            ->where('qoute_status', '!=', 'RFQPendingConfirmation')
+            ->orderByDesc('created_at')
+            ->get();
 
         return view('supplier.supplier-qouted', compact('collection'));
     }
@@ -379,28 +362,28 @@ class QouteController extends Controller
 
     public function QoutedRFQRejected()
     {
-        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id ,'rfq_type' => 1])->where('qoute_status_updated', 'Rejected')->get();
+        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('qoute_status_updated', 'Rejected')->get();
         return view('supplier.supplier-qouted-Rejected', compact('collection'));
     }
 
     public function QoutedRFQModificationNeeded()
     {
-        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id,'rfq_type' => 1])->where('qoute_status_updated', 'ModificationNeeded')->get();
+        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('qoute_status_updated', 'ModificationNeeded')->get();
         return view('supplier.supplier-qouted-ModificationNeeded', compact('collection'));
     }
 
     public function QoutedRFQQoutedRFQPendingConfirmation()
     {
-        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id ,'rfq_type' => 1])->where('qoute_status', 'RFQPendingConfirmation')->get();
+        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('qoute_status', 'RFQPendingConfirmation')->get();
         return view('supplier.supplier-qouted-PendingConfirmation', compact('collection'));
     }
 
     public function QoutedRFQQoutedExpired()
     {
-        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1, 'request_status' => 1])
-                            ->where(function ($query){
-                                $query->where(['qoute_status' => 'Qouted'])->orWhere(['qoute_status' => 'accepted']);
-                            })->get();
+        $collection = Qoute::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 1, 'request_status' => 1])
+            ->where(function ($query) {
+                $query->where(['qoute_status' => 'Qouted'])->orWhere(['qoute_status' => 'accepted']);
+            })->get();
         return view('supplier.supplier-qouted-expired', compact('collection'));
     }
 
@@ -420,8 +403,8 @@ class QouteController extends Controller
     {
         $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
         Validator::make($request->all(), [
-            'expiry_date' => 'required|date|after_or_equal:'.$min5days
-        ],[
+            'expiry_date' => 'required|date|after_or_equal:' . $min5days
+        ], [
             'expiry_date.required' => __('portal.The expiry date field is required'),
             'expiry_date.date' => __('portal.The expiry date field must be date'),
             'expiry_date.after_or_equal' => __('portal.The expiry date field must be greater than 4 days from now'),
@@ -448,8 +431,7 @@ class QouteController extends Controller
         ]);
 
         $dpo = DraftPurchaseOrder::where('qoute_no', decrypt($quoteID))->first();
-        if (isset($dpo))
-        {
+        if (isset($dpo)) {
             DraftPurchaseOrder::where('qoute_no', decrypt($quoteID))->update([
                 'po_status' => 'cancel',
                 'status' => 'cancel'
@@ -477,8 +459,8 @@ class QouteController extends Controller
     {
         $min5days = Carbon::now()->addDays(5)->format('Y-m-d');
         Validator::make($request->all(), [
-            'expiry_date' => 'required|date|after_or_equal:'.$min5days
-        ],[
+            'expiry_date' => 'required|date|after_or_equal:' . $min5days
+        ], [
             'expiry_date.required' => __('portal.The expiry date field is required'),
             'expiry_date.date' => __('portal.The expiry date field must be date'),
             'expiry_date.after_or_equal' => __('portal.The expiry date field must be greater than 4 days from now'),
@@ -505,8 +487,7 @@ class QouteController extends Controller
         ]);
 
         $dpo = DraftPurchaseOrder::where('rfq_no', decrypt($quoteEOrderID))->first();
-        if (isset($dpo))
-        {
+        if (isset($dpo)) {
             DraftPurchaseOrder::where('rfq_no', decrypt($quoteEOrderID))->update([
                 'po_status' => 'cancel',
                 'status' => 'cancel'
@@ -521,11 +502,11 @@ class QouteController extends Controller
 
     public function singleCategoryQuotedRFQQuoted()
     {
-        $quoted = Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 0])
-                        ->where('qoute_status' , '!=' ,'ModificationNeeded')
-                        ->where('qoute_status' , '!=' ,'RFQPendingConfirmation')
-                        ->orderByDesc('created_at')
-                        ->get();
+        $quoted = Qoute::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 0])
+            ->where('qoute_status', '!=', 'ModificationNeeded')
+            ->where('qoute_status', '!=', 'RFQPendingConfirmation')
+            ->orderByDesc('created_at')
+            ->get();
 
         $collection = $quoted->unique('e_order_id');
 
@@ -534,7 +515,7 @@ class QouteController extends Controller
 
     public function singleCategoryQuotedModifiedRFQ()
     {
-        $modified = Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 0])->where(['qoute_status' => 'Modified'])->get();
+        $modified = Qoute::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 0])->where(['qoute_status' => 'Modified'])->get();
         $collection = $modified->unique('e_order_id');
 
         return view('supplier.singleCategoryRFQ.supplier-modified-quoted-quotes', compact('collection'));
@@ -542,7 +523,7 @@ class QouteController extends Controller
 
     public function singleCategoryQuotedRFQRejected()
     {
-        $rejected = Qoute::where(['supplier_business_id' => auth()->user()->business_id ,'rfq_type' => 0])->where('qoute_status_updated', 'Rejected')->get();
+        $rejected = Qoute::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 0])->where('qoute_status_updated', 'Rejected')->get();
         $collection = $rejected->unique('e_order_id');
 
         return view('supplier.singleCategoryRFQ.supplier-qouted-Rejected', compact('collection'));
@@ -550,14 +531,14 @@ class QouteController extends Controller
 
     public function singleCategoryQuotedRFQModificationNeeded()
     {
-        $modificationQuotes = Qoute::where(['supplier_business_id' => auth()->user()->business_id ,'rfq_type' => 0])->where('qoute_status_updated', 'ModificationNeeded')->get();
+        $modificationQuotes = Qoute::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 0])->where('qoute_status_updated', 'ModificationNeeded')->get();
         $collection = $modificationQuotes->unique('e_order_id');
         return view('supplier.singleCategoryRFQ.supplier-qouted-ModificationNeeded', compact('collection'));
     }
 
     public function singleCategoryQuotedRFQPendingConfirmation()
     {
-        $pending = Qoute::where(['supplier_business_id' => auth()->user()->business_id ,'rfq_type' => 0])->where('qoute_status', 'RFQPendingConfirmation')->get();
+        $pending = Qoute::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 0])->where('qoute_status', 'RFQPendingConfirmation')->get();
         $collection = $pending->unique('e_order_id');
 
         return view('supplier.singleCategoryRFQ.supplier-qouted-PendingConfirmation', compact('collection'));
@@ -565,11 +546,11 @@ class QouteController extends Controller
 
     public function singleCategoryRFQExpired()
     {
-        $expired = Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 0, 'request_status' => 1])
-                            ->where(function ($query){
-                                $query->where(['qoute_status' => 'Qouted'])->orWhere(['qoute_status' => 'accepted']);
-                            })
-                            ->get();
+        $expired = Qoute::where(['supplier_business_id' => auth()->user()->business_id, 'rfq_type' => 0, 'request_status' => 1])
+            ->where(function ($query) {
+                $query->where(['qoute_status' => 'Qouted'])->orWhere(['qoute_status' => 'accepted']);
+            })
+            ->get();
 
         $collection = $expired->unique('e_order_id');
 
@@ -583,7 +564,6 @@ class QouteController extends Controller
         if (auth()->user()->hasRole('SuperAdmin')) {
             $PlacedRFQ = EOrders::orderBy('created_at', 'desc')->get();
         } else {
-//            $PlacedRFQ = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->where('discard',0)->orderBy('created_at', 'desc')->get();
             $PlacedRFQ = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'discard' => 0])->orderBy('created_at', 'desc')->paginate(10);
         }
 
@@ -603,7 +583,6 @@ class QouteController extends Controller
     public function discardQuotation($EOrderID)
     {
         EOrders::where('id', $EOrderID)->update(['discard' => 1]);
-
         session()->flash('message', __('portal.Quotation Discarded Successfully!'));
         return redirect()->route('QoutationsBuyerReceived');
     }
@@ -617,8 +596,7 @@ class QouteController extends Controller
     public function QoutationsBuyerReceivedQoutes($EOrderID, $EOrderItemID, $bypass_id)
     {
         $collection = EOrderItems::with('qoutes')->where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
-        if($bypass_id == 1)
-        {
+        if ($bypass_id == 1) {
             $collection->update([
                 'bypass' => 1
             ]);
@@ -626,19 +604,19 @@ class QouteController extends Controller
         return view('buyer.qoutes', compact('collection', 'EOrderID', 'EOrderItemID', 'bypass_id'));
     }
 
-    public function QoutationsBuyerReceivedRejected($EOrderID, $EOrderItemID,$bypass_id)
+    public function QoutationsBuyerReceivedRejected($EOrderID, $EOrderItemID, $bypass_id)
     {
         $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
         return view('buyer.qoutedRejected', compact('collection', 'EOrderID', 'EOrderItemID', 'bypass_id'));
     }
 
-    public function QoutationsBuyerReceivedModificationNeeded($EOrderID, $EOrderItemID,$bypass_id)
+    public function QoutationsBuyerReceivedModificationNeeded($EOrderID, $EOrderItemID, $bypass_id)
     {
         $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
         return view('buyer.qoutationsBuyerReceivedModificationNeeded', compact('collection', 'EOrderID', 'EOrderItemID', 'bypass_id'));
     }
 
-    public function QoutationsBuyerReceivedAccepted($EOrderID, $EOrderItemID,$bypass_id)
+    public function QoutationsBuyerReceivedAccepted($EOrderID, $EOrderItemID, $bypass_id)
     {
         $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'desc')->first();
         return view('buyer.QoutationsBuyerReceivedAccepted', compact('collection', 'EOrderID', 'EOrderItemID', 'bypass_id'));
@@ -658,8 +636,7 @@ class QouteController extends Controller
         ])->validate();
         /* Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message */
         /* Copied this form QouteMessageController because merging Send message and Quote Again Button  */
-        if ($request->message != null)
-        {
+        if ($request->message != null) {
             QouteMessage::create($request->all());
         }
 
@@ -675,16 +652,13 @@ class QouteController extends Controller
         // inform supplier user
         User::find($qoute->supplier_user_id)->notify(new \App\Notifications\QuoteAgain($qoute));
         $supplier_id = User::find($qoute->supplier_user_id);
-        if(!empty($supplier_id))
-        {
+        if (!empty($supplier_id)) {
             $supplier_id->notify(new ModificationNeeded());
         }
 
-        if (auth()->user()->rtl == 0)
-        {
+        if (auth()->user()->rtl == 0) {
             session()->flash('message', 'Quote status changed to ' . $qoute_status);
-        }
-        else{
+        } else {
             session()->flash('message', 'التعديل المطلوب' . 'تم تغيير حالة العرض إلى ');
         }
 
@@ -705,15 +679,12 @@ class QouteController extends Controller
         User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteRejected($quote));
 
         $supplier_business_id = User::where('business_id', $qoute->supplier_business_id)->first();
-        if(!empty($supplier_business_id))
-        {
+        if (!empty($supplier_business_id)) {
             $supplier_business_id->notify(new QuotationRejected());
         }
-        if (auth()->user()->rtl == 0)
-        {
+        if (auth()->user()->rtl == 0) {
             session()->flash('message', 'Quote status changed to ' . $qoute_status);
-        }
-        else{
+        } else {
             session()->flash('message', 'مرفوض' . 'تم تغيير حالة العرض إلى ');
         }
 
@@ -724,8 +695,7 @@ class QouteController extends Controller
     {
         $warehouse = \App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->first();
 
-        if ($warehouse->mobile != $request->otp_mobile_number)
-        {
+        if ($warehouse->mobile != $request->otp_mobile_number) {
             $warehouse->update([
                 'mobile' => $request->otp_mobile_number,
                 'mobile_verified' => 0,
@@ -744,10 +714,9 @@ class QouteController extends Controller
         try {
             DB::beginTransaction();
             $dpo = null;
-            $dpoCheck = DraftPurchaseOrder::where('qoute_no',$request->qoute_no)->first();
+            $dpoCheck = DraftPurchaseOrder::where('qoute_no', $request->qoute_no)->first();
 
-            if (isset($dpoCheck))
-            {
+            if (isset($dpoCheck)) {
                 $qoute_status = 'accepted';
                 $qoute->update([
                     'qoute_status' => $qoute_status,
@@ -759,9 +728,7 @@ class QouteController extends Controller
                     'status' => $qoute_status,
                 ]);
                 $dpo = $dpoCheck;
-            }
-            else
-            {
+            } else {
                 $dpo = null;
                 $dpo = DraftPurchaseOrder::create($request->all());
                 $qoute_status = 'accepted';
@@ -793,9 +760,9 @@ class QouteController extends Controller
     public function quotationPDF($quote_supplier_business_id, $e_order_id)
     {
 
-        $quote = Qoute::with('orderItem','buyer_business','supplier_business','user','business','RFQ','messages')->where(['supplier_business_id' => $quote_supplier_business_id])->where( 'e_order_id' , $e_order_id)->first();
+        $quote = Qoute::with('orderItem', 'buyer_business', 'supplier_business', 'user', 'business', 'RFQ', 'messages')->where(['supplier_business_id' => $quote_supplier_business_id])->where('e_order_id', $e_order_id)->first();
 
-        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('buyer.quotationPDF', compact('quote'));
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('buyer.quotationPDF', compact('quote'));
         return $pdf->download('Quotation.pdf');
     }
 
@@ -803,7 +770,7 @@ class QouteController extends Controller
 
     public function singleCategoryBuyerRFQs()
     {
-        $placedRFQs = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->where('discard',0)->orderBy('id', 'DESC')->get();
+        $placedRFQs = EOrders::with('OrderItems')->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->where('discard', 0)->orderBy('id', 'DESC')->get();
 
         return view('buyer.singleCategory.index', compact('placedRFQs'));
     }
@@ -832,14 +799,14 @@ class QouteController extends Controller
 
     public function singleCategoryRFQItems($rfq_id)
     {
-        $RFQItems = EOrderItems::with('qoutes','category')->where(['e_order_id' => $rfq_id])->get();
+        $RFQItems = EOrderItems::with('qoutes', 'category')->where(['e_order_id' => $rfq_id])->get();
 
         return view('buyer.singleCategory.rfq', compact('RFQItems'));
     }
 
     public function singleCategoryRFQItemByID(Qoute $quote)
     {
-        $quotes = Qoute::with('orderItem','buyer_business','supplier_business','user','business','RFQ','messages')->where(['supplier_business_id' => $quote->supplier_business_id])->where( 'e_order_id' , $quote->e_order_id)->get();
+        $quotes = Qoute::with('orderItem', 'buyer_business', 'supplier_business', 'user', 'business', 'RFQ', 'messages')->where(['supplier_business_id' => $quote->supplier_business_id])->where('e_order_id', $quote->e_order_id)->get();
 
         return view('buyer.singleCategory.respond', compact('quotes'));
     }
@@ -849,20 +816,18 @@ class QouteController extends Controller
         $quotes = Qoute::with('orderItem')->where('e_order_id', $eOrderID)->orderBy('created_at', 'DESC')->get();
         $collection = $quotes->unique('supplier_user_id');
 
-        if($bypass_id == 1)
-        {
-            foreach ($collection as $collect)
-            {
+        if ($bypass_id == 1) {
+            foreach ($collection as $collect) {
                 EOrderItems::where('e_order_id', $collect->e_order_id)->update([
-                'bypass' => 1
-                 ]);
+                    'bypass' => 1
+                ]);
             }
         }
-        return view('buyer.singleCategory.quotation', compact('collection',  'eOrderID', 'bypass_id'));
+        return view('buyer.singleCategory.quotation', compact('collection', 'eOrderID', 'bypass_id'));
     }
 
 //    public function singleCategoryRFQQuotationsBuyerRejected($EOrderItemID,$bypass_id)
-    public function singleCategoryRFQQuotationsBuyerRejected($eOrderID,$bypass_id)
+    public function singleCategoryRFQQuotationsBuyerRejected($eOrderID, $bypass_id)
     {
 //        $collection = EOrderItems::where('id', $EOrderItemID)->orderBy('created_at', 'DESC')->first();
         $quotes = Qoute::where('e_order_id', $eOrderID)->orderBy('created_at', 'DESC')->get();
@@ -871,11 +836,11 @@ class QouteController extends Controller
         return view('buyer.singleCategory.rejectedQuotation', compact('collection', 'eOrderID', 'bypass_id'));
     }
 
-    public function singleCategoryRFQQuotationsModificationNeeded($eOrderID,$bypass_id)
+    public function singleCategoryRFQQuotationsModificationNeeded($eOrderID, $bypass_id)
     {
         $quotes = Qoute::where('e_order_id', $eOrderID)->orderBy('created_at', 'DESC')->get();
         $collection = $quotes->unique('supplier_user_id');
-        return view('buyer.singleCategory.modifiedQuotation', compact('collection',  'eOrderID', 'bypass_id'));
+        return view('buyer.singleCategory.modifiedQuotation', compact('collection', 'eOrderID', 'bypass_id'));
     }
 
     public function singleCategoryRFQUpdateStatusModificationNeeded(Qoute $quotes, Request $request)
@@ -888,8 +853,7 @@ class QouteController extends Controller
 
         /* Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message */
         /* Copied this form QouteMessageController because merging Send message and Quote Again Button  */
-        if ($request->message != null)
-        {
+        if ($request->message != null) {
             QouteMessage::create($request->all());
         }
 
@@ -897,8 +861,7 @@ class QouteController extends Controller
 
         $relatedQuotes = Qoute::where(['supplier_user_id' => $quotes->supplier_user_id, 'e_order_id' => $quotes->e_order_id])->get();
 
-        foreach ($relatedQuotes as $quote)
-        {
+        foreach ($relatedQuotes as $quote) {
             Qoute::where('id', $quote->id)->update([
                 'qoute_status' => $quote_status,
                 'qoute_updated_user_id' => auth()->user()->id,
@@ -911,11 +874,9 @@ class QouteController extends Controller
         // inform supplier user
         User::find($quotes->supplier_user_id)->notify(new \App\Notifications\QuoteAgain($quotes));
 
-        if (auth()->user()->rtl == 0)
-        {
+        if (auth()->user()->rtl == 0) {
             session()->flash('message', 'Quote status changed to ' . $quote_status);
-        }
-        else{
+        } else {
             session()->flash('message', 'التعديل المطلوب' . 'تم تغيير حالة العرض إلى ');
         }
 
@@ -930,8 +891,7 @@ class QouteController extends Controller
 
         $relatedQuotes = Qoute::where(['supplier_user_id' => $quotes->supplier_user_id, 'e_order_id' => $quotes->e_order_id])->get();
 
-        foreach ($relatedQuotes as $quote)
-        {
+        foreach ($relatedQuotes as $quote) {
             Qoute::where('id', $quote->id)->update([
                 'qoute_updated_user_id' => auth()->user()->id,
                 'qoute_status_updated' => $quote_status,
@@ -942,16 +902,13 @@ class QouteController extends Controller
         User::find(auth()->user()->id)->notify(new \App\Notifications\QuoteRejected($quotes));
 
         $supper_id = User::where('business_id', $quotes->supplier_business_id)->first();
-        if(!empty($supper_id))
-        {
+        if (!empty($supper_id)) {
             $supper_id->notify(new QuotationRejected());
         }
 
-        if (auth()->user()->rtl == 0)
-        {
+        if (auth()->user()->rtl == 0) {
             session()->flash('message', 'Quote status changed to ' . $quote_status);
-        }
-        else{
+        } else {
             session()->flash('message', 'مرفوض' . 'تم تغيير حالة العرض إلى ');
         }
 
@@ -962,8 +919,7 @@ class QouteController extends Controller
     public function singleCategoryQuoteAccepted(Request $request)
     {
         $warehouse = \App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->first();
-        if ($warehouse->mobile != $request->otp_mobile_number)
-        {
+        if ($warehouse->mobile != $request->otp_mobile_number) {
             $warehouse->update([
                 'mobile' => $request->otp_mobile_number,
                 'mobile_verified' => 0,
@@ -981,30 +937,24 @@ class QouteController extends Controller
 
         try {
             DB::beginTransaction();
-            $dpoCheck = DraftPurchaseOrder::where('qoute_no',$request->qoute_no)->first();
+            $dpoCheck = DraftPurchaseOrder::where('qoute_no', $request->qoute_no)->first();
 
-            if (isset($dpoCheck))
-            {
-                foreach ($quotes as $quote)
-                {
-                    Qoute::where('id',$quote->id)->update([
+            if (isset($dpoCheck)) {
+                foreach ($quotes as $quote) {
+                    Qoute::where('id', $quote->id)->update([
                         'qoute_status' => $qoute_status,
                         'qoute_status_updated' => $qoute_status,
                         'status' => 'completed',
                     ]);
                 }
-                foreach ($quotes as $quote)
-                {
-                    DraftPurchaseOrder::where('qoute_no',$quote->id)->update([
+                foreach ($quotes as $quote) {
+                    DraftPurchaseOrder::where('qoute_no', $quote->id)->update([
                         'po_status' => $qoute_status,
                         'status' => $qoute_status,
                     ]);
                 }
-            }
-            else
-            {
-                for ($i =0; $i<count($quotes); $i++)
-                {
+            } else {
+                for ($i = 0; $i < count($quotes); $i++) {
                     $data = [
                         'user_id' => $request->user_id,
                         'business_id' => $request->business_id,
@@ -1048,8 +998,7 @@ class QouteController extends Controller
             }
 
             $supplier_business_id = User::where('business_id', $request->supplier_business_id)->first();
-            if(!empty($supplier_business_id))
-            {
+            if (!empty($supplier_business_id)) {
                 $supplier_business_id->notify(new AcceptedQuotation());
             }
             DB::commit();
@@ -1069,10 +1018,10 @@ class QouteController extends Controller
      * Generating PDF file for Single Category Quotation buyer received.
      *
      */
-    public function singleCategoryQuotationPDF($quote_supplier_business_id,$e_order_id)
+    public function singleCategoryQuotationPDF($quote_supplier_business_id, $e_order_id)
     {
-        $quotes = Qoute::with('orderItem','buyer_business','supplier_business','user','business','RFQ','messages')->where(['supplier_business_id' => decrypt($quote_supplier_business_id)])->where( 'e_order_id' , decrypt($e_order_id))->get();
-        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('buyer.singleCategory.quotationPDF', compact('quotes'));
+        $quotes = Qoute::with('orderItem', 'buyer_business', 'supplier_business', 'user', 'business', 'RFQ', 'messages')->where(['supplier_business_id' => decrypt($quote_supplier_business_id)])->where('e_order_id', decrypt($e_order_id))->get();
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('buyer.singleCategory.quotationPDF', compact('quotes'));
         return $pdf->download('Quotation.pdf');
     }
 
@@ -1093,15 +1042,14 @@ class QouteController extends Controller
         $total_vat = ($total_cost * ($request->VAT / 100));
         $sum = ($total_cost + $total_vat);
 
-        return response()->json(['data'=> $sum]);
+        return response()->json(['data' => $sum]);
     }
 
     // Calculating totalCost for Single Category RFQ Type at the time of Supplier RFQ response
     public function singleTotalCost(Request $request)
     {
         $total_amount = 0;
-        for ($i = 0; $i < count($request->quantities); $i++)
-        {
+        for ($i = 0; $i < count($request->quantities); $i++) {
             $total_amount += $request->quantities[$i] * $request->prices[$i];
         }
 
@@ -1109,6 +1057,6 @@ class QouteController extends Controller
         $total_vat = ($total_cost * ($request->VAT / 100));
         $sum = ($total_cost + $total_vat);
 
-        return response()->json(['data'=> $sum]);
+        return response()->json(['data' => $sum]);
     }
 }

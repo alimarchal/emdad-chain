@@ -21,6 +21,23 @@ use Illuminate\Support\Facades\Notification;
 
 class EOrdersController extends Controller
 {
+
+    public function cancelRequisition(Request $request)
+    {
+        DB::transaction(function () use ($request) {
+            $EOrders = EOrders::where('id', $request->EOrderID)->first();
+            $EOrders->update(['discard' => 1, 'status' => 'Cancelled']);
+            $eOrderItems = EOrderItems::where('e_order_id', $request->EOrderID)->get();
+            foreach ($eOrderItems as $item) {
+                $item->status = 'cancelled';
+                $item->save();
+            }
+        });
+
+        session()->flash('message', __('Requisition has been cancelled'));
+        return redirect()->route('QoutationsBuyerReceived');
+    }
+
     public function store(Request $request)
     {
 

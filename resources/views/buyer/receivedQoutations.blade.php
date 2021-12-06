@@ -89,19 +89,6 @@
                                                     {{ $rfp->created_at->format('d-m-Y') }}
                                                 </td>
 
-                                                {{--<td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $rfp->unit_of_measurement }}
-                                                </td>
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $rfp->size }}
-                                                </td>
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $rfp->quantity }}
-                                                </td>
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ number_format($rfp->last_price, 2) }} <br>
-                                                </td>--}}
-
                                                 @php
                                                     $created = $rfp->quotation_time;
                                                     $time = \Carbon\Carbon::parse($created)->format('Y-m-d H:i:s');
@@ -179,6 +166,20 @@
                                                                class="inline-flex items-center justify-center mt-2 px-4 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
                                                                 {{__('portal.Discard')}}
                                                             </a>
+
+
+
+                                                        <br>
+
+                                                            <form action="{{route('cancelRequisition')}}" method="post">
+                                                                @csrf
+                                                                <input type="hidden" value="{{$placedRFQ->id}}" name="EOrderID">
+                                                                <button type="submit" title="{{__('portal.Cancel')}}"
+                                                                   class="inline-flex items-center justify-center mt-2 px-4  py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
+                                                                    {{__('portal.Cancel')}}
+                                                                </button>
+                                                            </form>
+
                                                         @endif
                                                     @elseif($rfp->bypass == 0 && $rfp->quotation_time < $now && $rfp->status == 'pending')
                                                         @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
@@ -295,6 +296,21 @@
                                                            class="inline-flex mt-1 items-center justify-center px-4 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
                                                             {{__('portal.Discard')}}
                                                         </a>
+
+
+
+
+                                                        <br>
+
+                                                        <form action="{{route('cancelRequisition')}}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" value="{{$placedRFQ->id}}" name="EOrderID">
+                                                            <button type="submit" title="{{__('portal.Cancel')}}"
+                                                                    class="inline-flex items-center justify-center mt-2 px-4  py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
+                                                                {{__('portal.Cancel')}}
+                                                            </button>
+                                                        </form>
+
                                                     @endif
                                                 @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')
                                                     @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
