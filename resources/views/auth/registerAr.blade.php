@@ -163,7 +163,7 @@
                 <div class="w-full overflow-hidden">
                     <label for="policy_procedure" class="flex items-center">
                         <input id="policy_procedure" type="checkbox" class="form-checkbox my-2" name="policy_procedure" required>
-                        <span class="ml-2 text-sm text-gray-600">{{ __('register.I agree')}}</span> <a href="{{route('policyProcedure.eula')}}" target="_blank" class="ml-2 text-sm text-red-600"><u>{{ __('register.Policy and Procedures') }}</u></a>
+                        <span class="mr-2 text-sm text-gray-600">{{ __('register.I agree')}}</span> <a href="{{route('policyProcedure.eula')}}" target="_blank" class="mr-2 text-sm text-red-600"><u>{{ __('register.Policy and Procedures') }}</u></a>
                     </label>
                 </div>
 

@@ -30,11 +30,11 @@
         <div class="mt-4">
 
             <div class="flex flex-wrap overflow-hidden lg:-mx-2 xl:-mx-1" style="justify-content: left;">
+                <span class="text-xl mt-0 sm:mt-5 font-weight-light py-0 text-left">{{__('portal.New Requisition')}}</span>
+                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/6 xl:my-1 xl:px-1 xl:w-1/6" style="justify-content: left;">
+                    <div class="items-center text-center px-0 py-2">
 
-                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3" style="justify-content: left;">
-                    <div class="items-center text-center px-2 py-2">
-
-                        <div class="mx-5">
+                        <div class="mx-0">
                             <div class="text-gray-500">
                                 <label>
                                     <select name="category_selection" class="form-select shadow-sm block w-full category_selection" required>
@@ -54,7 +54,7 @@
 
         <h2 class="text-2xl font-bold py-0 text-center">{{__('portal.Previous Requisitions')}}</h2>
 
-        <div class="flex flex-col bg-white rounded ">
+        <div class="flex flex-col bg-white rounded mt-3">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -194,11 +194,11 @@
         <div class="mt-4">
 
             <div class="flex flex-wrap overflow-hidden lg:-mx-2 xl:-mx-1" style="justify-content: right;">
-
-                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:my-1 xl:px-1 xl:w-1/3" style="justify-content: right;">
+                <span class="text-xl mt-0 sm:mt-5 font-weight-light py-0 text-right">{{__('portal.New Requisition')}}</span>
+                <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/6 xl:my-1 xl:px-1 xl:w-1/6" style="justify-content: right;">
                     <div class="items-center text-center px-2 py-2">
 
-                        <div class="mx-5">
+                        <div class="mx-0">
                             <div class="text-gray-500">
                                 <label>
                                     <select name="category_selection" class="form-select shadow-sm block w-full category_selection" required>
@@ -218,7 +218,7 @@
 
         <h2 class="text-2xl font-bold py-0 text-center">{{__('portal.Previous Requisitions')}}</h2>
 
-        <div class="flex flex-col bg-white rounded ">
+        <div class="flex flex-col bg-white rounded mt-3">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
