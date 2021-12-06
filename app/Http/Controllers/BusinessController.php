@@ -9,6 +9,7 @@ use App\Models\BusinessPackage;
 use App\Models\BusinessUpdateCertificate;
 use App\Models\Category;
 use App\Models\IreCommission;
+use App\Models\PackageManualPayment;
 use App\Models\User;
 use App\Models\UserLog;
 use App\Notifications\BusinessRejected;
@@ -209,6 +210,12 @@ class BusinessController extends Controller
         $user->nid_exp_date = $nid_exp_date;
         $user->nid_num = $request->nid_num;
         $user->save();
+
+        $manualPackage = PackageManualPayment::where(['user_id' => \auth()->id(), 'upgrade' => 0])->first();   /* updating only the latest one */
+        if (isset($manualPackage))
+        {
+            $manualPackage->update(['business_id' => \auth()->user()->business_id]);
+        }
 
         $businessPackage = BusinessPackage::where('user_id', $business->user_id)->first();
         $businessPackage->business_id = $business->id;

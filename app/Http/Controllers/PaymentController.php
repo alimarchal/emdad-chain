@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BankPayment;
+use App\Models\BusinessPackage;
 use App\Models\CommissionPercentage;
 use App\Models\DeliveryNote;
 use App\Models\DraftPurchaseOrder;
@@ -11,6 +12,8 @@ use App\Models\Invoice;
 use App\Models\Ire;
 use App\Models\IreCommission;
 use App\Models\IreIndirectCommission;
+use App\Models\Package;
+use App\Models\PackageManualPayment;
 use App\Models\Payment;
 use App\Models\ProformaInvoice;
 use App\Models\Qoute;
@@ -421,6 +424,95 @@ class PaymentController extends Controller
         $payments = BankPayment::where(['rfq_type' => 1])->orderByDesc('created_at')->get();
 
         return view('payment.emdad.payment', compact('payments'));
+    }
+
+    /* Package Manual Payments Emdad received (For Emdad) */
+    public function packageManualPayments()
+    {
+        $payments = PackageManualPayment::with('user', 'package')->orderByDesc('created_at')->get();
+
+        return view('payment.packageManualPayments', compact('payments'));
+    }
+
+    /* Package Manual Payments Emdad received View By ID (For Emdad) */
+    public function packageManualPaymentView($id)
+    {
+        $payment = PackageManualPayment::with('user', 'package')->where('id', $id)->first();
+
+        return view('payment.packageManualPaymentShow', compact('payment'));
+    }
+
+    /* Package Manual Payments Emdad received update By ID (For Emdad) */
+    public function updatePackageManualPayment($id, Request $request)
+    {
+        $packageManualPayment = PackageManualPayment::where('id', $id)->first();
+        $packageManualPayment->update(['status' => $request->status]);
+
+        if ($request->status == 1)
+        {
+            $businessPackage = BusinessPackage::where(['business_id' => $packageManualPayment->business_id, 'status' => 1])->first();
+
+            if (isset($businessPackage))
+            {
+                BusinessPackage::create([
+                    'manual_payment_id' => $packageManualPayment->id,
+                    'business_type' => $packageManualPayment->business_type,
+                    'business_id' => $packageManualPayment->business_id,
+                    'package_id' => $packageManualPayment->package_id,
+                    'user_id' => $packageManualPayment->user_id,
+                    'categories' => $businessPackage->categories,
+                    'subscription_start_date' => Carbon::now(),
+                    'subscription_end_date' => Carbon::now()->addYear(),
+                ]);
+                $businessPackage->update(['status' => 0]);
+                PackageManualPayment::where('id', $id)->update(['upgrade' => 1]);
+
+                session()->flash('message', __('portal.Updated successfully.'));
+                return redirect()->route('packageManualPayments');
+            }
+            else{
+                BusinessPackage::create([
+                    'manual_payment_id' => $packageManualPayment->id,
+                    'business_type' => $packageManualPayment->business_type,
+                    'package_id' => $packageManualPayment->package_id,
+                    'user_id' => $packageManualPayment->user_id,
+                    'subscription_start_date' => Carbon::now(),
+                    'subscription_end_date' => Carbon::now()->addYear(),
+                ]);
+            }
+
+            $package = Package::where('id', $packageManualPayment->package_id)->first();
+            if ($package->user_type == 1)       /* 1 for buyer */
+            {
+                $reference = IreCommission::with('ireNoReferencee')->where(['user_id' => auth()->id()], ['type' => 1])->first();      /* type 1 for Buyer */
+                if (isset($reference)) {
+                    $commission = CommissionPercentage::where(['commission_type' => 2], ['package_type' => $package->id])->where('ire_type', $reference->ireNoReferencee->type)->first();
+                    if (isset($commission)) {
+                        $payment = round($package->charges * $commission->amount, 2);
+                        IreCommission::where('id', $reference->id)->update([
+                            'payment' => $payment
+                        ]);
+                    }
+                }
+            }
+            if ($package->user_type == 2)       /* 2 for supplier */
+            {
+                $reference = IreCommission::where(['user_id' => auth()->id()], ['type' => 2])->first();      /* type 2 for Supplier */
+                if (isset($reference)) {
+                    $commission = CommissionPercentage::where(['commission_type' => 1], ['package_type' => $package->id])->where('ire_type', $reference->ireNoReferencee->type)->first();
+                    if (isset($commission)) {
+                        $payment = round($package->charges * $commission->amount, 2);
+                        IreCommission::where('id', $reference->id)->update([
+                            'payment' => $payment
+                        ]);
+                    }
+
+                }
+            }
+        }
+
+        session()->flash('message', __('portal.Updated successfully.'));
+        return redirect()->route('packageManualPayments');
     }
 
     /* Manual Payments Emdad has sent to Supplier (For Emdad) */

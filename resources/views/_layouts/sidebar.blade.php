@@ -910,7 +910,7 @@
             @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('Finance Officer 1'))
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
-                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment') || request()->routeIs('emdadInvoices') || request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment') || request()->routeIs('emdadInvoices') || request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex') || request()->routeIs('packageManualPayments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                        href="javascript:void(0);">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path fill="none"
@@ -939,6 +939,13 @@
                     >
                         {{-- Multi Categories Routes --}}
                         <div x-data="{ open: false } ">
+                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('packageManualPayments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
+                                </svg>
+                                <a href="{{ route('packageManualPayments') }}"><span class="mx-3 ">{{__('sidebar.Package Payments')}}</span></a>
+                            </li>
                             <a @click="open = true"
                                class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment')|| request()->routeIs('emdadInvoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                                href="javascript:void(0);">
@@ -2323,7 +2330,7 @@
             @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('Finance Officer 1'))
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
-                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment') || request()->routeIs('emdadInvoices') || request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                       class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment') || request()->routeIs('emdadInvoices') || request()->routeIs('singleCategoryPayments') || request()->routeIs('singleCategorySupplierPayment') || request()->routeIs('singleCategoryEmdadInvoicesIndex') || request()->routeIs('packageManualPayments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                        href="javascript:void(0);">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path fill="none"
@@ -2353,6 +2360,13 @@
                     >
                         {{-- Multi Categories Routes --}}
                         <div x-data="{ open: false } ">
+                            <li class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('packageManualPayments') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
+                                </svg>
+                                <a href="{{ route('packageManualPayments') }}"><span class="mx-3 hover:text-white {{ request()->routeIs('packageManualPayments') ? 'text-white' : 'text-gray-500' }}">{{__('sidebar.Package Payments')}}</span></a>
+                            </li>
                             <a @click="open = true"
                                class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('emdad_payments') || request()->routeIs('supplier_payment')|| request()->routeIs('emdadInvoices') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
                                href="javascript:void(0);">

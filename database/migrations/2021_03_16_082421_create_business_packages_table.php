@@ -16,6 +16,7 @@ class CreateBusinessPackagesTable extends Migration
         Schema::create('business_packages', function (Blueprint $table) {
             $table->id();
             $table->string('invoice_id')->default(0);
+            $table->integer('manual_payment_id')->nullable();
             $table->integer('business_type');
             $table->integer('business_id')->nullable();
             $table->integer('package_id');

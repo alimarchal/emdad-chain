@@ -57,5 +57,6 @@ return [
     'Delivery Note' => 'Delivery Note',
     'Add Driver' => 'Add Driver',
     'Received Shipments' => 'Received Shipments',
+    'Package Payments' => 'Package Payments',
 
 ];

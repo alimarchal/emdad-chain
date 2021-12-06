@@ -437,7 +437,7 @@ class BusinessPackageController extends Controller
                 $package = Package::where('id', $package_id)->first();
 
                 /* Updating Business Package's status to 0 for keeping a record for User's previous package record */
-                BusinessPackage::where('user_id', auth()->id())->update(['status' => 0]);
+                BusinessPackage::where('business_id', auth()->user()->business_id)->update(['status' => 0]);
 
                 if (auth()->user()->registration_type == 'Buyer') {
                     BusinessPackage::create([

@@ -486,6 +486,9 @@ Route::middleware(['auth:sanctum'])->get('generate-proforma-invoice/{id}', [Paym
 Route::middleware(['auth:sanctum'])->get('create-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoice'])->name('generateProforma');
 Route::middleware(['auth:sanctum'])->get('invoices-history', [PaymentController::class, 'invoices'])->name('invoices');
 Route::middleware(['auth:sanctum'])->get('emdad-invoices-history', [PaymentController::class, 'payments'])->name('emdad_payments');
+Route::middleware(['auth:sanctum'])->get('package-manual-payments', [PaymentController::class, 'packageManualPayments'])->name('packageManualPayments');
+Route::middleware(['auth:sanctum'])->get('package-manual-payment-{id}', [PaymentController::class, 'packageManualPaymentView'])->name('packageManualPaymentView');
+Route::middleware(['auth:sanctum'])->post('update-package-manual-payment-{id}', [PaymentController::class, 'updatePackageManualPayment'])->name('updatePackageManualPayment');
 Route::middleware(['auth:sanctum'])->get('supplier-manual-payments', [PaymentController::class, 'supplier_payment'])->name('supplier_payment');
 Route::middleware(['auth:sanctum'])->get('manual-payments', [PaymentController::class, 'supplier_payment_received'])->name('supplier_payment_received');
 Route::middleware(['auth:sanctum'])->get('invoice-details/{id}', [PaymentController::class, 'invoiceView'])->name('invoiceView');
@@ -589,6 +592,12 @@ Route::get('/process-payment-status', [\App\Http\Controllers\MakePaymentControll
 
 Route::middleware(['auth:sanctum'])->get('subscription-update/{id}', [PackageController::class, 'update'])->name('subscriptionUpdate');
 Route::middleware(['auth:sanctum'])->get('subscription-pdf', [PackageController::class, 'pdf'])->name('subscriptionPDF');
+Route::middleware(['auth:sanctum'])->get('payment-type/{id}', [PackageController::class, 'view'])->name('packagePaymentType');
+Route::middleware(['auth:sanctum'])->get('payment-response/{id}', [PackageController::class, 'paymentView'])->name('paymentResponseView');
+Route::middleware(['auth:sanctum'])->get('upgrade-package-manual-payment-{id}', [PackageController::class, 'manualPaymentUpgradingView'])->name('manualPaymentUpgradingView');
+Route::middleware(['auth:sanctum'])->get('manual-payment-type/{id}', [PackageController::class, 'manualPaymentView'])->name('manualPackagePaymentView');
+Route::middleware(['auth:sanctum'])->post('store-manual-payment', [PackageController::class, 'storeManualPayment'])->name('storeManualPayment');
+Route::middleware(['auth:sanctum'])->post('update-manual-payment', [PackageController::class, 'updateManualPayment'])->name('updateManualPayment');
 Route::middleware(['auth:sanctum'])->resource('packages', PackageController::class);
 Route::middleware(['auth:sanctum'])->get('business-packages/status', [\App\Http\Controllers\BusinessPackageController::class, 'businessPackagePaymentStatus'])->name('businessPackage.paymentStatus');
 Route::middleware(['auth:sanctum'])->post('business-packages/step-one', [\App\Http\Controllers\BusinessPackageController::class, 'getCheckOutId'])->name('businessPackage.stepOne');

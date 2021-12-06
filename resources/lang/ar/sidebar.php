@@ -60,5 +60,6 @@ return [
     'Delivery Note' => 'مذكرة توصيل',
     'Add Driver' => 'إضافة سائق',
     'Received Shipments' => 'الشحنات المستلمة',
+    'Package Payments' => 'مدفوعات الباقة',
 
 ];

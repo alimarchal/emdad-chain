@@ -16,8 +16,7 @@
 
                         <div class="flex flex-wrap overflow-hidden bg-white p-4">
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
-                                <strong>{{__('portal.Current Package')}}:
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $businessPackage->package->package_type }}<br>
+                                <strong>{{__('portal.Current Package')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $businessPackage->package->package_type }}<br>
                             </div>
                             <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                             </div>
@@ -57,6 +56,8 @@
                                 @endif
                                 <br>
                                 <hr>
+                                <br>
+                                <strong class="text-red-600">* {{__('portal.Note')}}: {{__('portal.VAT included')}}</strong>
                             </div>
                             {{--<div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                             </div>--}}
@@ -67,21 +68,21 @@
                         <div class="flex flex-wrap overflow-hidden p-4 mt-4" style="justify-content: flex-end;">
                             <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
                                 <div class="text-gray-500" style="text-align: end">
-                                    <form action="{{route('businessPackage.stepOne')}}" method="POST">
+                                    {{--<form action="{{route('businessPackage.stepOne')}}" method="POST">
                                         @csrf
 
                                         <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
-{{--                                        <input type="hidden" name="business_package_id" value="{{encrypt($businessPackage->id)}}">--}}
-                                        {{--@if($businessPackage->package->id != 1 && $businessPackage->package->id != 5)
+--}}{{--                                        <input type="hidden" name="business_package_id" value="{{encrypt($businessPackage->id)}}">--}}{{--
+                                        --}}{{--@if($businessPackage->package->id != 1 && $businessPackage->package->id != 5)
                                             <input type="hidden" name="amountToPay" value="{{encrypt($amountToPay)}}">
                                         @else
                                             <input type="hidden" name="amountToPay" value="{{encrypt($package->charges)}}">
-                                        @endif--}}
-                                        <button class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border
-                                                   border-transparent rounded-md font-semibold text-xs text-white uppercase
-                                                   tracking-widest hover:bg-red-500  focus:outline-none focus:border-green-700
-                                                   focus:shadow-outline-red active:bg-green-600 transition ease-in-out duration-150" style="justify-content: center">{{__('portal.Upgrade')}}</button>
-                                    </form>
+                                        @endif--}}{{--
+                                        <button class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:outline-none focus:border-green-700 focus:shadow-outline-red active:bg-green-600 transition ease-in-out duration-150" style="justify-content: center">
+                                            {{__('portal.Upgrade')}}
+                                        </button>
+                                    </form>--}}
+                                    <a href="{{route('packagePaymentType', encrypt($package->id))}}" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:outline-none focus:border-green-700 focus:shadow-outline-red active:bg-green-600 transition ease-in-out duration-150" style="justify-content: center; cursor: pointer">{{__('portal.Upgrade')}}</a>
                                 </div>
                             </div>
                         </div>
@@ -150,17 +151,19 @@
                                             $amountToPay = $package->charges - $balance;
                                         }
                                 @endphp
-                                <strong>{{__('portal.Current days used')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{$usedDays}}<br>
-                                <strong>{{__('portal.Current amount used')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($currentAmountUsed, 2)}} {{__('portal.SAR')}}<br>
-                                <strong>{{__('portal.Balance of the subscription amount')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($balance, 2) }} {{__('portal.SAR')}}<br>
-                                <strong>{{__('portal.New Package Charges')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($package->charges, 2) }} {{__('portal.SAR')}}<br>
+                                <strong>{{__('portal.Current days used')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{$usedDays}}</span> <br>
+                                <strong>{{__('portal.Current amount used')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ number_format($currentAmountUsed, 2)}}</span>  {{__('portal.SAR')}}<br>
+                                <strong>{{__('portal.Balance of the subscription amount')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ number_format($balance, 2) }}</span>  {{__('portal.SAR')}}<br>
+                                <strong>{{__('portal.New Package Charges')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ number_format($package->charges, 2) }}</span>  {{__('portal.SAR')}}<br>
                                 <hr>
                                 <strong>{{__('portal.Amount to be paid')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-                                @if($businessPackage->package->id != 1) {{ number_format($amountToPay, 2) }} {{__('portal.SAR')}}
-                                @else {{number_format($package->charges, 2)}} {{__('portal.SAR')}}
+                                @if($businessPackage->package->id != 1) <span style="font-family: sans-serif">{{ number_format($amountToPay, 2) }}</span>  {{__('portal.SAR')}}
+                                @else <span style="font-family: sans-serif">{{number_format($package->charges, 2)}}</span>  {{__('portal.SAR')}}
                                 @endif
                                 <br>
                                 <hr>
+                                <br>
+                                <strong class="text-red-600">* {{__('portal.Note')}}: {{__('portal.VAT included')}}</strong>
                             </div>
                             {{--<div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3">
                             </div>--}}
@@ -171,16 +174,16 @@
                         <div class="flex flex-wrap overflow-hidden p-4 mt-4" style="justify-content: flex-end;">
                             <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
                                 <div class="text-gray-500" style="text-align: end">
-                                    <form action="{{route('businessPackage.stepOne')}}" method="POST">
+                                    {{--<form action="{{route('businessPackage.stepOne')}}" method="POST">
                                         @csrf
                                         <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
-{{--                                        <input type="hidden" name="business_package_id" value="{{$businessPackage->id}}">--}}
-{{--                                        <input type="hidden" name="amountToPay" value="{{$amountToPay}}">--}}
-                                        <button class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border
-                                                   border-transparent rounded-md font-semibold text-xs text-white uppercase
-                                                   tracking-widest hover:bg-red-500  focus:outline-none focus:border-green-700
-                                                   focus:shadow-outline-red active:bg-green-600 transition ease-in-out duration-150" style="justify-content: center">{{__('portal.Upgrade')}}</button>
-                                    </form>
+--}}{{--                                        <input type="hidden" name="business_package_id" value="{{$businessPackage->id}}">--}}{{--
+--}}{{--                                        <input type="hidden" name="amountToPay" value="{{$amountToPay}}">--}}{{--
+                                        <button class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:outline-none focus:border-green-700 focus:shadow-outline-red active:bg-green-600 transition ease-in-out duration-150" style="justify-content: center">
+                                            {{__('portal.Upgrade')}}
+                                        </button>
+                                    </form>--}}
+                                    <a href="{{route('packagePaymentType', encrypt($package->id))}}" class="inline-flex items-center justify-center px-4 py-2 bg-green-600 hover:text-white border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:outline-none focus:border-green-700 focus:shadow-outline-red active:bg-green-600 transition ease-in-out duration-150" style="justify-content: center; cursor: pointer">{{__('portal.Upgrade')}}</a>
                                 </div>
                             </div>
                         </div>
