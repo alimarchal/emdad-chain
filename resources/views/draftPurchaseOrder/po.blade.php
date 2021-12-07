@@ -42,34 +42,34 @@
                                         <table id="po-table" class="min-w-full divide-y divide-gray-200">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         #
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.PO')}} #
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Category')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Requisition Type')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.P.O Date')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.P.O Status')}}
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Payment')}}
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Payment Status')}}
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor"
                                                              viewBox="0 0 24 24"
                                                              xmlns="http://www.w3.org/2000/svg">
@@ -79,7 +79,7 @@
                                                             </path>
                                                         </svg>
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.View')}}
                                                     </th>
                                                 </tr>
@@ -289,34 +289,34 @@
                                         <table id="po-table" class="min-w-full divide-y divide-gray-200">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         #
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.PO')}} #
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Category')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Requisition Type')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.P.O Date')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.P.O Status')}}
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Payment')}}
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.Payment Status')}}
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor"
                                                              viewBox="0 0 24 24"
                                                              xmlns="http://www.w3.org/2000/svg">
@@ -326,7 +326,7 @@
                                                             </path>
                                                         </svg>
                                                     </th>
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.View')}}
                                                     </th>
                                                 </tr>

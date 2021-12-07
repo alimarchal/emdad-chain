@@ -1509,9 +1509,30 @@
                 </div>--}}
             @endif
 
-            {{-- Warehouse link --}}
-            {{--           @if(auth()->user()->hasRole('CEO') && Auth::user()->status == 3)--}}
-            @if(auth()->user()->hasRole('CEO') && Auth::user()->registration_type != null)
+            {{-- Warehouse link Buyer --}}
+            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->registration_type != null)
+                <hr class="mt-4">
+                <div x-data="{ open: false } ">
+                    @php
+                        $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
+                        if ($isBusinessDataExist) {
+                            $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
+                            $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
+                        }
+                    @endphp
+                    <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                       @if (isset($isBusinessWarehouseDataExist)) href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}"> @else  href="{{ route('businessWarehouse.create') }}"> @endif
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>
+                        </svg>
+                        <span class="mx-3">{{ __('sidebar.Warehouse') }}</span>
+                    </a>
+                </div>
+            @endif
+
+            {{-- Warehouse link Supplier --}}
+            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && Auth::user()->registration_type != null)
                 <hr class="mt-4">
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
@@ -1521,9 +1542,6 @@
                             <path
                                 d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>
                         </svg>
-                        {{--                    <svg class="svg-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 20 20">--}}
-                        {{--                        <path d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>--}}
-                        {{--                    </svg>--}}
                         <span class="mx-3 font-extrabold">{{ __('sidebar.Warehouse') }}</span>
                         <span x-show="open == false">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" style="margin-left: 3.0em;" viewBox="0 0 20 20" fill="currentColor">
@@ -1560,14 +1578,10 @@
                             </svg>
                             @if (isset($isBusinessWarehouseDataExist))
                                 <a href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
-                                {{--                            @if (isset($isBusinessWarehouseDataExist))--}}
-                                {{--                                &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-                                {{--                            @endif--}}
+{{--                                @if (isset($isBusinessWarehouseDataExist)) &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline"> @endif--}}
                             @else
                                 <a href="{{ route('businessWarehouse.create') }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
-                                {{--                            @if (isset($isBusinessWarehouseDataExist))--}}
-                                {{--                                &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline">--}}
-                                {{--                            @endif--}}
+{{--                                @if (isset($isBusinessWarehouseDataExist)) &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline"> @endif--}}
                             @endif
                         </li>
 
@@ -2638,8 +2652,30 @@
                 </div>--}}
             @endif
 
-            {{-- Warehouse link --}}
-            @if(auth()->user()->hasRole('CEO') && Auth::user()->registration_type != null)
+            {{-- Warehouse link Buyer --}}
+            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->registration_type != null)
+                <hr class="mt-4">
+                <div x-data="{ open: false } ">
+                    @php
+                        $isBusinessDataExist = \App\Models\Business::where('user_id', Auth::user()->id)->first();
+                        if ($isBusinessDataExist) {
+                            $isBusinessWarehouseDataExist = \App\Models\BusinessWarehouse::where('business_id', $isBusinessDataExist->id)->first();
+                            $isBusinessPOIExist = \App\Models\POInfo::where('business_id', $isBusinessDataExist->id)->first();
+                        }
+                    @endphp
+                    <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+                       @if (isset($isBusinessWarehouseDataExist)) href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}"> @else  href="{{ route('businessWarehouse.create') }}"> @endif
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>
+                        </svg>
+                        <span class="mx-3">{{ __('sidebar.Warehouse') }}</span>
+                    </a>
+                </div>
+            @endif
+
+            {{-- Warehouse link Supplier --}}
+            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && Auth::user()->registration_type != null)
                 <hr class="mt-4">
                 <div x-data="{ open: false } ">
                     <a @click="open = true"

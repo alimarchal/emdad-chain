@@ -184,7 +184,7 @@
                 $subtotal += $quote->quote_quantity * $quote->quote_price_per_quantity;
             }
     @endphp
-    <strong>VAT: {{ number_format($quotes[0]->VAT) }}%: </strong>{{ number_format(($subtotal + $quotes[0]->shipment_cost) * ($quotes[0]->VAT/100), 2) }} SAR<br>
+    <span class="font-style"> <strong>VAT: {{ number_format($quotes[0]->VAT) }}%: </strong>{{ number_format(($subtotal + $quotes[0]->shipment_cost) * ($quotes[0]->VAT/100), 2) }} SAR </span> <br>
     <span class="font-style"> <strong>Total Cost: </strong> {{ $quotes[0]->total_cost }} SAR<br> </span>
 
 <br>

@@ -34,6 +34,7 @@ class CreateEOrderItemsTable extends Migration
             #final authority
             $table->string('payment_mode')->nullable();
             $table->string('required_sample')->nullable();
+            $table->tinyInteger('discard')->default(0);
             $table->string('status')->nullable();
             $table->bigInteger('bypass')->default(0);
             $table->dateTime('quotation_time')->nullable();

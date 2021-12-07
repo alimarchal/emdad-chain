@@ -350,7 +350,7 @@ Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/{QouteItem}',
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderItems}', [QouteController::class, 'QoutationsBuyerReceivedRFQItemsByID'])->name('QoutationsBuyerReceivedRFQItemsByID');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/qoutes/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedQoutes'])->name('QoutationsBuyerReceivedQoutes');
 Route::middleware(['auth:sanctum'])->get('/QuotationResetTime/{EOrderItemID}/', [QouteController::class, 'resetQuotationTime'])->name('resetQuotationTime');
-Route::middleware(['auth:sanctum'])->get('/QuotationDiscard/{EOrderID}/', [QouteController::class, 'discardQuotation'])->name('discardQuotation');
+Route::middleware(['auth:sanctum'])->get('/QuotationDiscard/{EOrderItemID}/', [QouteController::class, 'discardQuotation'])->name('discardQuotation');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/rejected/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedRejected'])->name('QoutationsBuyerReceivedRejected');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/modification/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedModificationNeeded'])->name('QoutationsBuyerReceivedModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/accepted/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedAccepted'])->name('QoutationsBuyerReceivedAccepted');

@@ -64,25 +64,25 @@
                                             @if($package->package_type == 'Basic')
                                                 <h2 class="text-sm tracking-widest title-font mb-1 font-medium">{{$package->package_type}}</h2>
                                                 <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
-                                                <h1 class="text-3xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{{$package->charges}}</h1>
+                                                <h1 class="text-2xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">{{$package->charges}}</h1>
 
-                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">Subscribe</a>
+                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">Subscribe</a>
 
                                             @elseif($package->package_type == 'Silver')
                                                 <h2 class="text-sm tracking-widest title-font mb-1 font-medium">{{$package->package_type}}</h2>
                                                 <span class="bg-blue-600 text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl">POPULAR</span>
                                                 <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
-                                                <h1 class="text-3xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                                    <span>{{$package->charges}} SAR</span>
+                                                <h1 class="text-2xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
+                                                    <span>{{$package->charges}} SR</span>
                                                     <span class="text-lg ml-1 font-normal text-gray-500">/year</span>
                                                 </h1>
-                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">Subscribe</a>
+                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">Subscribe</a>
 
                                             @elseif($package->package_type == 'Gold')
                                                 <h2 class="text-sm tracking-widest title-font mb-1 font-medium">{{$package->package_type}}</h2>
                                                 <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
-                                                <h1 class="text-3xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                                    <span>{{$package->charges}} SAR</span>
+                                                <h1 class="text-2xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
+                                                    <span>{{$package->charges}} SR</span>
                                                     <span class="text-lg ml-1 font-normal text-gray-500">/year</span>
                                                 </h1>
                                                 <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">Subscribe</a>
@@ -112,11 +112,11 @@
                                     <tr>
                                         <td class="px-4 py-3">Subscription For 1 year</td>
                                         @foreach($packages as $package)
-                                            <td class="px-4 py-3 text-center">{{$package->charges}}</td>
+                                            <td class="px-4 py-3 text-center">{{$package->charges}} @if($package->id == 6 || $package->id == 7) SR @endif</td>
                                         @endforeach
                                     </tr>
                                     <tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">Registeration</td>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3">Registration</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->registeration}}</td>
                                         @endforeach

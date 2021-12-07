@@ -349,7 +349,7 @@ return [
     'IBAN No' => 'رقم الآيبان',
     'ID No' => 'رقم الهوية الوطنية',
     'VAT Number' => 'الرقم الضريبي',
-    'VAT included' => 'VAT included',
+    'VAT included' => 'شامل ضريبة القيمة المضافة',
     'Contact #' => 'رقم الاتصال',
     'Upload National ID Photo' => 'إرفاق صورة الهوية الوطنية',
     'Click to Upload' => 'إضغط للتحميل',

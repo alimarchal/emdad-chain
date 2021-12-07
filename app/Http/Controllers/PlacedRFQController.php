@@ -26,7 +26,7 @@ class PlacedRFQController extends Controller
         if (\auth()->user()->hasRole('SuperAdmin')) {
             $PlacedRFQ = EOrders::all();
         } else {
-            $PlacedRFQ = EOrders::with('userName')->where(['business_id' => auth()->user()->business_id])
+            $PlacedRFQ = EOrders::with('userName', 'OrderItems')->where(['business_id' => auth()->user()->business_id])
                 ->whereIn('rfq_type', [0, 1])->orderBy('created_at', 'desc')->get();
 
         }
@@ -79,7 +79,7 @@ class PlacedRFQController extends Controller
 
             sort($business_categories);
             $now = Carbon::parse(Carbon::now())->format('Y-m-d H:i:s');
-            $collection = EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->whereDate('quotation_time', '>=', $now)->whereIn('item_code', $business_categories)->get();
+            $collection = EOrderItems::where(['status' => 'pending', 'rfq_type' => 1])->where('bypass', 0)->where('discard', 0)->whereDate('quotation_time', '>=', $now)->whereIn('item_code', $business_categories)->get();
 
             // Remaining Quotations count
             $quotations = Qoute::where('supplier_business_id', auth()->user()->business_id)->whereDate('created_at', Carbon::today())->count();

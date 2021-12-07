@@ -516,7 +516,7 @@ return [
     'Purchased' => 'Purchased',
     'Subscribe' => 'Subscribe',
     'POPULAR' => 'Most Popular',
-    'SAR' => 'SAR',
+    'SAR' => 'SR',
     'year' => 'year',
     'Free' => 'Free',
     'Only upgradable from Gold Package.' => 'Only upgradable from Gold Package.',

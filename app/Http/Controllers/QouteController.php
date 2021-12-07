@@ -580,9 +580,9 @@ class QouteController extends Controller
     }
 
     /* Discarding expired Multi category RFQs */
-    public function discardQuotation($EOrderID)
+    public function discardQuotation($EOrderItemID)
     {
-        EOrders::where('id', $EOrderID)->update(['discard' => 1]);
+        EOrderItems::where('id', $EOrderItemID)->update(['discard' => 1]);
         session()->flash('message', __('portal.Quotation Discarded Successfully!'));
         return redirect()->route('QoutationsBuyerReceived');
     }
