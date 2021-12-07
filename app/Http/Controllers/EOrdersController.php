@@ -24,6 +24,8 @@ class EOrdersController extends Controller
 
     public function cancelRequisition(Request $request)
     {
+
+
         DB::transaction(function () use ($request) {
             $EOrders = EOrders::where('id', $request->EOrderID)->first();
             $EOrders->update(['discard' => 1, 'status' => 'Cancelled']);
@@ -35,7 +37,7 @@ class EOrdersController extends Controller
         });
 
         session()->flash('message', __('Requisition has been cancelled'));
-        return redirect()->route('QoutationsBuyerReceived');
+        return redirect()->route('PlacedRFQ.index');
     }
 
     public function store(Request $request)
