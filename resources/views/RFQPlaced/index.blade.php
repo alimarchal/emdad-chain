@@ -108,7 +108,7 @@
                                 <th scope="col"
                                     class="px-6 py-3 text-center uppercase text-sm text-gray-500 tracking-wider"
                                     width="120" style="background-color: #FCE5CD">
-                                    {{__('portal.View')}}
+                                    {{__('portal.Action')}}
                                 </th>
 
                             </tr>
@@ -164,7 +164,7 @@
 
 
                                     <td class="px-6 py-4 text-center text-center whitespace-nowrap">
-                                        <a href="{{route('RFQItemsByID',$item->id)}}">
+                                        {{--<a href="{{route('RFQItemsByID',$item->id)}}">
                                             <svg class="w-6 h-6 inline" fill="none" stroke="orange" viewBox="0 0 24 24"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -174,14 +174,19 @@
                                                       d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
                                                 </path>
                                             </svg>
-                                        </a>
+                                        </a>--}}
 
-
-                                        @if($item->status == "Open")
+                                        @php
+                                            $eOrderItems = \App\Models\EOrderItems::where('e_order_id', $item->id)->get()->pluck('e_order_id');
+                                            $po = \App\Models\DraftPurchaseOrder::whereIn('rfq_no', $eOrderItems)->where('status', '=', 'approved')->first();
+                                        @endphp
+                                        @if(isset($po) || !is_null($po) )
+                                            <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                        @else
                                             <form action="{{route('cancelRequisition')}}" method="post">
                                                 @csrf
                                                 <input type="hidden" value="{{$item->id}}" name="EOrderID">
-                                                <button type="submit" title="{{__('portal.Cancel')}}"
+                                                <button type="submit" title="{{__('portal.To cancel the whole requisition')}}"
                                                         class="inline-flex items-center justify-center mt-2 px-4  py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm"
                                                         data-confirm='{{__('portal.Are you sure to discard this requisition?')}}'>
                                                     {{__('portal.Cancel')}}
@@ -304,7 +309,7 @@
 
                                 <th scope="col" class="px-6 py-3 text-center text-sm text-gray-500 tracking-wider"
                                     width="120" style="background-color: #FCE5CD">
-                                    {{__('portal.View')}}
+                                    {{__('portal.Action')}}
                                 </th>
 
                             </tr>
@@ -360,17 +365,23 @@
 
 
                                     <td class="px-6 py-4 text-center text-center whitespace-nowrap">
-                                        <a href="{{route('RFQItemsByID',$item->id)}}">
-                                            <svg class="w-6 h-6 inline" fill="none" stroke="orange" viewBox="0 0 24 24"
-                                                 xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-                                                </path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                </path>
-                                            </svg>
-                                        </a>
+                                        @php
+                                            $eOrderItems = \App\Models\EOrderItems::where('e_order_id', $item->id)->get()->pluck('e_order_id');
+                                            $po = \App\Models\DraftPurchaseOrder::whereIn('rfq_no', $eOrderItems)->where('status', '=', 'approved')->first();
+                                        @endphp
+                                        @if(isset($po) || !is_null($po) )
+                                            <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                        @else
+                                            <form action="{{route('cancelRequisition')}}" method="post">
+                                                @csrf
+                                                <input type="hidden" value="{{$item->id}}" name="EOrderID">
+                                                <button type="submit" title="{{__('portal.To cancel the whole requisition')}}"
+                                                        class="inline-flex items-center justify-center mt-2 px-4  py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm"
+                                                        data-confirm='{{__('portal.Are you sure to discard this requisition?')}}'>
+                                                    {{__('portal.Cancel')}}
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

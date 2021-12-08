@@ -18,14 +18,6 @@
         </h2>
     </x-slot>
 
-    @if (session()->has('message'))
-        <div class="block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-            <strong class="mr-1">{{ session('message') }}</strong>
-            <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
-                <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
-            </button>
-        </div>
-    @endif
     @if (!$collection->count()) <h2 class="text-2xl font-bold py-0 text-center m-5">{{__('portal.Items List')}}{{__('portal.seems empty')}} @endif </h2>
 
     @if ($collection->count())
@@ -37,7 +29,11 @@
                     <div class="max-w-7xl mx-auto sm:px-2 lg:2x-8">
                         @if (session()->has('message'))
                             <div class="mb-3 block text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
-                                <strong class="mr-1">{{ session('message') }}</strong>
+                                @if(auth()->user()->rtl == 0)
+                                    <strong class="mr-1">{{ session('message') }}</strong>
+                                @else
+                                    <strong class="mr-3">{{ session('message') }}</strong>
+                                @endif
                                 <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
                                     <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
                                 </button>
@@ -56,11 +52,19 @@
                             </div>
                         @endif
                         <div class="bg-white overflow-hidden shadow-xl ">
-                            <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
-                                <a href="{{route('RFQItemsPDF', encrypt($collection[0]->e_order_id))}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
-                                    {{__('portal.Create PDF')}}
-                                </a>
-                            </div>
+                                @if(auth()->user()->rtl == 0)
+                                    <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
+                                        <a href="{{route('RFQItemsPDF', encrypt($collection[0]->e_order_id))}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                            {{__('portal.Create PDF')}}
+                                        </a>
+                                    </div>
+                                @else
+                                    <div class="mt-5" style=" margin-right: 30px; margin-bottom: 10px ">
+                                        <a href="{{route('RFQItemsPDF', encrypt($collection[0]->e_order_id))}}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 border border-transparent hover:text-white rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                            {{__('portal.Create PDF')}}
+                                        </a>
+                                    </div>
+                                @endif
                             <div class="px-4 py-5 sm:p-6 bg-white shadow ">
                                 <div class="flex flex-wrap overflow-hidden bg-gray-300 p-4">
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3"> </div>
@@ -267,6 +271,19 @@
                                     <div></div>
                                 </div>
                                 <div class="flex justify-end px-2 py-2 h-15 mt-3">
+                                    <div class="mt-2">
+                                        @if($collection[0]->rfq_type == 1)
+                                            <a href="{{route('deleteAndInsertCart', encrypt($collection[0]->e_order_id))}}" data-confirm = '{{__('portal.Current requisition cart items will be discarded')}}' class="confirm inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                {{__('portal.Copy to cart')}}
+                                            </a>
+                                        @elseif($collection[0]->rfq_type == 0)
+                                            <a href="{{route('deleteAndInsertCartSingleCategory', encrypt($collection[0]->e_order_id))}}" data-confirm = '{{__('portal.Current requisition cart items will be discarded')}}' class="confirm inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                {{__('portal.Copy to cart')}}
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="flex justify-end px-2 py-2 h-15 mt-3">
                                     <div class="mt-2">{{__('portal.Copied to Emdad records')}}</div>
                                     <div><img src="{{ url('logo-full.png') }}" alt="EMDAD CHAIN LOGO" class="block h-10 w-auto" style="margin-left: auto; margin-right: auto;"/></div>
                                 </div>
@@ -297,6 +314,10 @@
             } );
         });
 
+        $('.confirm').on('click', function (e) {
+            return confirm($(this).data('confirm'));
+        });
+
     </script>
 @else
     <script>
@@ -318,5 +339,10 @@
                 },
             } );
         });
+
+        $('.confirm').on('click', function (e) {
+            return confirm($(this).data('confirm'));
+        });
+
     </script>
 @endif

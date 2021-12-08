@@ -822,6 +822,8 @@ return [
     'EmdInv' => 'EmdInv',
     'Verify' => 'Verify',
     'Send Code' => 'Send Code',
+    'Copy to cart' => 'Copy to cart',
+    'Current requisition cart items will be discarded' => 'Current requisition cart items will be discarded',
 
     /* Alerts (messages) */
     'You have reached daily rfq limit' => 'You have reached daily requisitions limit',
@@ -878,6 +880,9 @@ return [
     'Item added successfully.' => 'Item added successfully.',
     'Please select a Delivery Period.' => 'Please select a Delivery Period.',
     'Requisition successfully added to cart.' => 'Requisition successfully added to cart.',
+    'Requisition successfully copied to cart.' => 'Requisition successfully copied to cart.',
+    'Cancel single item' => 'Cancel single item',
+    'To cancel the whole requisition' => 'To cancel the whole requisition',
     'Quotation valid upto date is required.' => 'Quotation valid upto date is required.',
     'Shipping Time is required.' => 'Shipping Time is required.',
     'RFQ successfully created.' => 'Requisition successfully created.',

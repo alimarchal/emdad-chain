@@ -169,10 +169,10 @@
                     {{ $invoice->purchase_order->quantity }}
                 </td>
                 <td style="text-align: center;">
-                    {{ $invoice->purchase_order->unit_price }} SAR
+                    {{ $invoice->purchase_order->unit_price }} SR
                 </td>
                 <td style="text-align: center;">
-                    {{ number_format(($invoice->purchase_order->quantity * $invoice->purchase_order->unit_price), 2) }}  SAR
+                    {{ number_format(($invoice->purchase_order->quantity * $invoice->purchase_order->unit_price), 2) }}  SR
                 </td>
             </tr>
         @endforeach
@@ -194,11 +194,11 @@
                 $subtotal += $invoice->purchase_order->quantity * $invoice->purchase_order->unit_price;
             }
         @endphp
-        <strong>Sub-total: </strong> {{ number_format(($subtotal), 2) }} SAR<br>
-        <strong>Shipment cost: </strong> {{ $invoices[0]->purchase_order->shipment_cost }} SAR<br>
-        <strong>VAT {{ number_format($invoices[0]->vat) }}%: </strong>{{ number_format(($subtotal + $invoices[0]->purchase_order->shipment_cost) * ($invoices[0]->vat/100), 2) }} SAR<br>
+        <strong>Sub-total: </strong> {{ number_format(($subtotal), 2) }} SR<br>
+        <strong>Shipment cost: </strong> {{ $invoices[0]->purchase_order->shipment_cost }} SR<br>
+        <strong>VAT {{ number_format($invoices[0]->vat) }}%: </strong>{{ number_format(($subtotal + $invoices[0]->purchase_order->shipment_cost) * ($invoices[0]->vat/100), 2) }} SR<br>
         <hr>
-        <strong>Total: </strong> {{ number_format($invoices[0]->total_cost, 2) }} SAR<br>
+        <strong>Total: </strong> {{ number_format($invoices[0]->total_cost, 2) }} SR<br>
         <hr>
         {{--<br>
         <br>

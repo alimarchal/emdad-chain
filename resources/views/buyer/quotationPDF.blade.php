@@ -153,9 +153,9 @@
             </td>
             <td  style="text-align: center"> {{strip_tags($quote->orderItem->description)}} </td>
             <td  style="text-align: center"> @if(isset($quote->note_for_customer)) {{ $quote->note_for_customer }} @else N/A @endif </td>
-            <td  style="text-align: center">{{ $quote->quote_price_per_quantity }} SAR</td>
+            <td  style="text-align: center">{{ $quote->quote_price_per_quantity }} SR</td>
             <td  style="text-align: center">{{ $quote->quote_quantity }}</td>
-            <td  style="text-align: center">{{ number_format($quote->quote_price_per_quantity * $quote->quote_quantity,2) }} SAR</td>
+            <td  style="text-align: center">{{ number_format($quote->quote_price_per_quantity * $quote->quote_quantity,2) }} SR</td>
         </tr>
         </tbody>
     </table>
@@ -168,12 +168,12 @@
         <div style="width: 66.66%;float: left;"></div>
 
         <div style="width: 33.33%;float: right">
-            <strong>Sub-total: </strong> {{ number_format($quote->quote_quantity * $quote->quote_price_per_quantity, 2) }} SAR<br>
+            <strong>Sub-total: </strong> {{ number_format($quote->quote_quantity * $quote->quote_price_per_quantity, 2) }} SR<br>
             @php $subtotal = $quote->quote_quantity * $quote->quote_price_per_quantity; $subtotal += $quote->shipment_cost; @endphp
-            <strong>Shipment cost: </strong> {{ number_format($quote->shipment_cost, 2) }} SAR<br>
-            <strong>VAT {{ number_format($quote->VAT) }}%: </strong>{{ number_format($subtotal * ($quote->VAT/100), 2) }} SAR<br>
+            <strong>Shipment cost: </strong> {{ number_format($quote->shipment_cost, 2) }} SR<br>
+            <strong>VAT {{ number_format($quote->VAT) }}%: </strong>{{ number_format($subtotal * ($quote->VAT/100), 2) }} SR<br>
             <hr>
-            <strong>Total: </strong> {{$quote->total_cost }} SAR<br>
+            <strong>Total: </strong> {{$quote->total_cost }} SR<br>
             <hr>
             <br>
             <br>

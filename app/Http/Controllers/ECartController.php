@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\ECart;
+use App\Models\EOrders;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -48,6 +49,40 @@ class ECartController extends Controller
         session()->flash('message', __('portal.Item successfully deleted.'));
         $RFQCart->delete();
         return back();
+    }
+
+    /* Copying previous Multiple RFQ to multiple cart */
+    public function deleteAndInsert($eOrderID)
+    {
+        ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 1])->delete();
+        $eOrderID = EOrders::where('id', decrypt($eOrderID))->first();
+        foreach ($eOrderID->OrderItems as $item)
+        {
+            $data = [
+                'business_id' => $item->business_id,
+                'user_id' => $item->user_id,
+                'company_name_check' => $item->company_name_check,
+                'item_code' => $item->item_code,
+                'item_name' => $item->item_name,
+                'description' => $item->description,
+                'unit_of_measurement' => $item->unit_of_measurement,
+                'size' => $item->size,
+                'quantity' => $item->quantity,
+                'brand' => $item->brand,
+                'last_price' => $item->last_price,
+                'remarks' => $item->remarks,
+                'delivery_period' => $item->delivery_period,
+                'file_path' => $item->file_path,
+                'payment_mode' => $item->payment_mode,
+                'required_sample' => $item->required_sample,
+                'warehouse_id' => $item->warehouse_id,
+                'rfq_type' => $item->rfq_type,
+                'status' => 'pending',
+            ];
+            ECart::create($data);
+        }
+        session()->flash('message', __('portal.Requisition successfully copied to cart.'));
+        return redirect()->back();
     }
 
     // used for change company name check
@@ -102,6 +137,40 @@ class ECartController extends Controller
         ECart::where('id', $id)->delete();
         session()->flash('message', __('portal.Item successfully deleted.'));
         return back();
+    }
+
+    /* Copying previous Single RFQ to single cart */
+    public function singleDeleteAndInsert($eOrderID)
+    {
+        ECart::where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->delete();
+        $eOrderID = EOrders::where('id', decrypt($eOrderID))->first();
+        foreach ($eOrderID->OrderItems as $item)
+        {
+            $data = [
+                'business_id' => $item->business_id,
+                'user_id' => $item->user_id,
+                'company_name_check' => $item->company_name_check,
+                'item_code' => $item->item_code,
+                'item_name' => $item->item_name,
+                'description' => $item->description,
+                'unit_of_measurement' => $item->unit_of_measurement,
+                'size' => $item->size,
+                'quantity' => $item->quantity,
+                'brand' => $item->brand,
+                'last_price' => $item->last_price,
+                'remarks' => $item->remarks,
+                'delivery_period' => $item->delivery_period,
+                'file_path' => $item->file_path,
+                'payment_mode' => $item->payment_mode,
+                'required_sample' => $item->required_sample,
+                'warehouse_id' => $item->warehouse_id,
+                'rfq_type' => $item->rfq_type,
+                'status' => 'pending',
+            ];
+            ECart::create($data);
+        }
+        session()->flash('message', __('portal.Requisition successfully copied to cart.'));
+        return redirect()->back();
     }
 
 }

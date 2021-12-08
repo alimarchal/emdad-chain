@@ -65,7 +65,7 @@
         <h3><u>Requisition Information</u></h3><br>
         <strong>Buyer Name: </strong> @if($eOrderItem->company_name_check == 1) {{$eOrderItem->business->business_name}} @else N/A @endif<br>
         <strong>Requisition #: </strong> RFQ-{{$eOrderItem->id}}<br>
-        <strong>Remarks: </strong> {{$eOrderItem->remarks}} SAR<br>
+        <strong>Remarks: </strong> {{$eOrderItem->remarks}} SR<br>
         <strong>Payment Mode: </strong>
         @if($eOrderItem->payment_mode == 'Cash') Cash
         @elseif($eOrderItem->payment_mode == 'Credit') Credit
@@ -186,7 +186,7 @@
     <strong>Quantity: </strong> {{ $quote->quote_quantity }}<br>
 </div>
 <div class="center" style="width: 33.33%;">
-    <strong>Price Per Unit: </strong> {{ $quote->quote_price_per_quantity }} SAR<br>
+    <strong>Price Per Unit: </strong> {{ $quote->quote_price_per_quantity }} SR<br>
     <br>
 </div>
 <div class="center" style="width: 33.33%;">
@@ -199,12 +199,12 @@
     <strong>Note: </strong> @if(isset($quote->note_for_customer)) {{ $quote->note_for_customer }} @else N/A @endif <br>
 </div>
 <div class="center" style="width: 33.33%;">
-    <strong>Shipment Cost: </strong> {{ $quote->shipment_cost }} SAR<br>
+    <strong>Shipment Cost: </strong> {{ $quote->shipment_cost }} SR<br>
     <br>
 </div>
 <div class="center" style="width: 33.33%;">
     @php $subtotal = $quote->quote_quantity * $quote->quote_price_per_quantity; $subtotal += $quote->shipment_cost; @endphp
-    <strong>VAT {{ number_format($quote->VAT) }}%: </strong>{{ number_format($subtotal * ($quote->VAT/100), 2) }} SAR<br>
+    <strong>VAT {{ number_format($quote->VAT) }}%: </strong>{{ number_format($subtotal * ($quote->VAT/100), 2) }} SR<br>
     <br>
 </div>
 
@@ -215,7 +215,7 @@
 <br>
 <br>
 <div class="center" style="width: 33.33%;">
-    <strong>Total Cost: </strong> {{ $quote->total_cost }} SAR<br>
+    <strong>Total Cost: </strong> {{ $quote->total_cost }} SR<br>
     <br>
 </div>
 

@@ -163,9 +163,9 @@
                                                                class="inline-flex items-center justify-center px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to reset this requisition?')}}'>
                                                                 {{__('portal.Reset')}}
                                                             </a>
-                                                            <a href="{{ route('discardQuotation', ['EOrderItemID' => $rfp->id]) }}" title="{{__('portal.Discard the requisition.')}}"
+                                                            <a href="{{ route('discardQuotation', ['EOrderItemID' => $rfp->id]) }}" title="{{__('portal.Cancel single item')}}"
                                                                class="inline-flex items-center justify-center mt-2 px-4 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
-                                                                {{__('portal.Discard')}}
+                                                                {{__('portal.Cancel')}}
                                                             </a>
                                                         @endif
                                                     @elseif($rfp->bypass == 0 && $rfp->quotation_time < $now && $rfp->status == 'pending')
@@ -280,9 +280,9 @@
                                                            class="inline-flex items-center justify-center px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to reset this requisition?')}}'>
                                                             {{__('portal.Reset')}}
                                                         </a>
-                                                        <a href="{{ route('discardSingleCategoryQuotation', ['eOrderID' => $placedRFQ->id]) }}" title="{{__('portal.Discard the requisition.')}}"
+                                                        <a href="{{ route('discardSingleCategoryQuotation', ['eOrderID' => $placedRFQ->id]) }}" title="{{__('portal.Cancel single item')}}"
                                                            class="inline-flex mt-1 items-center justify-center px-4 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
-                                                            {{__('portal.Discard')}}
+                                                            {{__('portal.Cancel')}}
                                                         </a>
                                                     @endif
                                                 @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')
@@ -460,9 +460,9 @@
                                                                class="inline-flex items-center justify-center px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to reset this requisition?')}}'>
                                                                 {{__('portal.Reset')}}
                                                             </a>
-                                                            <a href="{{ route('discardQuotation', ['EOrderItemID' => $rfp->id]) }}" title="{{__('portal.Discard the requisition.')}}"
+                                                            <a href="{{ route('discardQuotation', ['EOrderItemID' => $rfp->id]) }}" title="{{__('portal.Cancel single item')}}"
                                                                class="inline-flex items-center justify-center mt-2 px-4 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
-                                                                {{__('portal.Discard')}}
+                                                                {{__('portal.Cancel')}}
                                                             </a>
                                                         @endif
                                                     @elseif($rfp->bypass == 0 && $rfp->quotation_time < $now && $rfp->status == 'pending')
@@ -578,9 +578,9 @@
                                                            class="inline-flex items-center justify-center px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to reset this requisition?')}}'>
                                                             {{__('portal.Reset')}}
                                                         </a>
-                                                        <a href="{{ route('discardSingleCategoryQuotation', ['eOrderID' => $placedRFQ->id]) }}" title="{{__('portal.Discard the requisition.')}}"
+                                                        <a href="{{ route('discardSingleCategoryQuotation', ['eOrderID' => $placedRFQ->id]) }}" title="{{__('portal.Cancel')}}"
                                                            class="inline-flex mt-1 items-center justify-center px-4 py-1 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150 confirm" data-confirm = '{{__('portal.Are you sure to discard this requisition?')}}'>
-                                                            {{__('portal.Discard')}}
+                                                            {{__('portal.Cancel')}}
                                                         </a>
                                                     @endif
                                                 @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')

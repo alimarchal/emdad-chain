@@ -179,13 +179,13 @@
                {{ $quote->orderItem->unit_of_measurement }}
             </td>
             <td style="text-align: center;">
-               {{ $quote->quote_price_per_quantity }} SAR
+               {{ $quote->quote_price_per_quantity }} SR
             </td>
             <td style="text-align: center;">
                {{ $quote->quote_quantity }}
             </td>
             <td style="text-align: center;">
-                {{ number_format($quote->quote_price_per_quantity * $quote->quote_quantity,2) }} SAR
+                {{ number_format($quote->quote_price_per_quantity * $quote->quote_quantity,2) }} SR
             </td>
 
         </tr>
@@ -208,11 +208,11 @@
                         $subtotal += $quote->quote_quantity * $quote->quote_price_per_quantity;
                     }
             @endphp
-            <strong>Sub-total: </strong> {{ number_format($subtotal, 2) }} SAR<br>
-            <strong>Shipment cost: </strong> {{ number_format($quotes[0]->shipment_cost, 2) }} SAR<br>
-            <strong>VAT: {{ number_format($quotes[0]->VAT) }}%: </strong>{{ number_format(($subtotal + $quotes[0]->shipment_cost) * ($quotes[0]->VAT/100), 2) }} SAR<br>
+            <strong>Sub-total: </strong> {{ number_format($subtotal, 2) }} SR<br>
+            <strong>Shipment cost: </strong> {{ number_format($quotes[0]->shipment_cost, 2) }} SR<br>
+            <strong>VAT: {{ number_format($quotes[0]->VAT) }}%: </strong>{{ number_format(($subtotal + $quotes[0]->shipment_cost) * ($quotes[0]->VAT/100), 2) }} SR<br>
             <hr>
-            <strong>Total: </strong> {{ number_format($quotes[0]->total_cost) }} SAR<br>
+            <strong>Total: </strong> {{ number_format($quotes[0]->total_cost) }} SR<br>
             <hr>
             <br>
             <br>

@@ -155,9 +155,9 @@
         <td  style="text-align: center">@if(isset($draftPurchaseOrder->brand)){{ strip_tags($draftPurchaseOrder->brand) }} @else N/A @endif</td>
         <td  style="text-align: center">{{ $draftPurchaseOrder->uom }}</td>
         <td  style="text-align: center">@if(isset($draftPurchaseOrder->remarks)){{ $draftPurchaseOrder->remarks }} @else N/A @endif</td>
-        <td  style="text-align: center">{{ $draftPurchaseOrder->unit_price }} SAR</td>
+        <td  style="text-align: center">{{ $draftPurchaseOrder->unit_price }} SR</td>
         <td  style="text-align: center">{{ $draftPurchaseOrder->quantity }}</td>
-        <td  style="text-align: center">{{ number_format($draftPurchaseOrder->sub_total) }} SAR</td>
+        <td  style="text-align: center">{{ number_format($draftPurchaseOrder->sub_total) }} SR</td>
     </tr>
     </tbody>
 </table>
@@ -169,12 +169,12 @@
     <div style="width: 66.66%;float: left;"></div>
 
     <div style="width: 33.33%;float: right">
-        <strong>Sub-total: </strong> {{ number_format($draftPurchaseOrder->sub_total, 2) }} SAR<br>
+        <strong>Sub-total: </strong> {{ number_format($draftPurchaseOrder->sub_total, 2) }} SR<br>
         @php $subtotal = $draftPurchaseOrder->sub_total; $subtotal += $draftPurchaseOrder->shipment_cost; @endphp
-        <strong>Shipment cost: </strong> {{ number_format($draftPurchaseOrder->shipment_cost, 2) }} SAR<br>
-        <strong>VAT {{ number_format($draftPurchaseOrder->vat) }}%: </strong>{{ number_format($subtotal * ($draftPurchaseOrder->vat/100), 2) }} SAR<br>
+        <strong>Shipment cost: </strong> {{ number_format($draftPurchaseOrder->shipment_cost, 2) }} SR<br>
+        <strong>VAT {{ number_format($draftPurchaseOrder->vat) }}%: </strong>{{ number_format($subtotal * ($draftPurchaseOrder->vat/100), 2) }} SR<br>
         <hr>
-        <strong>Total: </strong> {{ number_format($draftPurchaseOrder->total_cost, 2) }} SAR<br>
+        <strong>Total: </strong> {{ number_format($draftPurchaseOrder->total_cost, 2) }} SR<br>
         <hr>
         <br>
         <br>

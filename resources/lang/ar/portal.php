@@ -4,7 +4,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Portal English Language Words
+    | Portal Arabic Language Words
     |--------------------------------------------------------------------------
     |
     */
@@ -822,6 +822,8 @@ return [
     'EmdInv' => 'EmdInv',
     'Verify' => 'تفعيل',
     'Send Code' => 'أرسل الرمز',
+    'Copy to cart' => 'النسخ إلى السلة',
+    'Current requisition cart items will be discarded' => 'سيتم إلغاء المنتجات الحالية في سلة الطلبات',
 
     /* Alerts (messages) */
     'You have reached daily rfq limit' => 'لقد تجاوزت الحد المسموح به من الطلبات اليومية',
@@ -878,6 +880,9 @@ return [
     'Item added successfully.' => 'تم إضافة المنتج بنجاح.',
     'Please select a Delivery Period.' => 'يرجى اختيار فترة التوصيل.',
     'Requisition successfully added to cart.' => 'تم إضافة الطلب إلى السلة بنجاح.',
+    'Requisition successfully copied to cart.' => 'تم نسخ الطلب للسلة بنجاح.',
+    'Cancel single item' => 'إلغاء منتج.',
+    'To cancel the whole requisition' => 'إلغاء جميع الطلب.',
     'Quotation valid upto date is required.' => 'مطلوب عرض سعر صالح حتى التاريخ الحالي.',
     'Shipping Time is required.' => 'وقت الشحن مطلوب.',
     'RFQ successfully created.' => 'تم إنشاء الطلب بنجاح.',

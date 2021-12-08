@@ -104,10 +104,10 @@
                     $totalCost = ($quote->quote_quantity * $quote->quote_price_per_quantity) + $quote->shipment_cost;
                     $totalEmdadCharges = $totalCost * (1.5 / 100);
                 @endphp
-                {{ number_format($totalCost,2) }} SAR
+                {{ number_format($totalCost,2) }} SR
             </td>
             <td style="text-align: center;">
-                {{ number_format($totalEmdadCharges,2) }} SAR
+                {{ number_format($totalEmdadCharges,2) }} SR
             </td>
         </tr>
     @endforeach
