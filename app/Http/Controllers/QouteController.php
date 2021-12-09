@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Notifications\QuotationSent;
 use App\Notifications\User\AcceptedQuotation;
 use App\Notifications\User\ModificationNeeded;
+use App\Notifications\User\QuotationDiscard;
 use App\Notifications\User\QuotationReceived;
 use App\Notifications\User\QuotationRejected;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -596,7 +597,16 @@ class QouteController extends Controller
     /* Discarding expired Multi category RFQs */
     public function discardQuotation($EOrderItemID)
     {
+
         EOrderItems::where('id', $EOrderItemID)->update(['discard' => 1]);
+        $item = EOrderItems::where('id', $EOrderItemID)->first();
+        if (!empty($item)) {
+            $get_quote_suppliers_list = Qoute::where('e_order_items_id', $item->id)->first();
+            if (!empty($get_quote_suppliers_list)) {
+                $supplier_id = $item->supplier_user_id;
+                $supplierUser = User::find($supplier_id);
+            }
+        }
         session()->flash('message', __('portal.Quotation Discarded Successfully!'));
         return redirect()->route('QoutationsBuyerReceived');
     }

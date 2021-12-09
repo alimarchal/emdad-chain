@@ -9,25 +9,41 @@ use App\Models\ECart;
 use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Item;
+use App\Models\Qoute;
+use App\Models\Quatation;
 use App\Models\SmsMessages;
 use App\Models\User;
 use App\Notifications\RFQBusinessEmail;
 use App\Notifications\RFQCreatedByUser;
 use App\Notifications\User\QuotationCategory;
+use App\Notifications\User\QuotationDiscard;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
+use League\CommonMark\Extension\SmartPunct\Quote;
 
 class EOrdersController extends Controller
 {
 
     public function cancelRequisition(Request $request)
     {
-
+        $EOrders = EOrders::where('id', $request->EOrderID)->first();
 
         DB::transaction(function () use ($request) {
             $EOrders = EOrders::where('id', $request->EOrderID)->first();
+            //get list
+            $get_quote_suppliers_list = Qoute::where('e_order_id', $EOrders->id)->get();
+            // send notifications
+            if ($get_quote_suppliers_list->isNotEmpty()) {
+                foreach ($get_quote_suppliers_list as $item) {
+                    $supplier_id = $item->supplier_user_id;
+                    $supplierUser = User::find($supplier_id);
+                    $supplierUser->notify(new QuotationDiscard());
+                }
+
+            }
+
             $EOrders->update(['discard' => 1, 'status' => 'Cancelled']);
             $eOrderItems = EOrderItems::where('e_order_id', $request->EOrderID)->get();
             foreach ($eOrderItems as $item) {
