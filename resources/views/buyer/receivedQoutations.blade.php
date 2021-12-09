@@ -38,7 +38,8 @@
                                 <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-center text-sm uppercase text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
-                                        {{__('portal.Requisition')}}&nbsp;#
+{{--                                        {{__('portal.Requisition')}}&nbsp;#--}}
+                                        {{__('portal.View')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-sm uppercase text-gray-500 tracking-wider"  style="background-color: #FCE5CD;">
@@ -74,7 +75,18 @@
                                             <tr>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     {{-- Showing EOrderItems Number(ID) for multi categories --}}
-                                                    <a href="{{route('RFQItemsByID', $rfp->orders->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">{{__('portal.RFQ')}}-{{ $rfp->id }}</a>
+{{--                                                    <a href="{{route('RFQItemsByID', $rfp->orders->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">{{__('portal.RFQ')}}-{{ $rfp->id }}</a>--}}
+                                                    <a href="{{route('RFQItemsByID', $rfp->orders->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">
+                                                        <svg class="w-6 h-6 inline" fill="none" stroke="orange" viewBox="0 0 24 24"
+                                                             xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                            </path>
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                            </path>
+                                                        </svg>
+                                                    </a>
                                                 </td>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @php
@@ -189,7 +201,18 @@
                                                 {{-- Showing EOrder Number(ID) for single category --}}
 {{--                                                {{__('portal.RFQ')}}-{{ $placedRFQ->id }}--}}
                                                 {{-- Now Showing EOrderItems Number(ID) for single category same as multi categories  --}}
-                                                <a href="{{route('RFQItemsByID', $placedRFQ->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">{{__('portal.RFQ')}}-{{ $placedRFQ->OrderItems[0]->id }}</a>
+{{--                                                <a href="{{route('RFQItemsByID', $placedRFQ->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">{{__('portal.RFQ')}}-{{ $placedRFQ->OrderItems[0]->id }}</a>--}}
+                                                <a href="{{route('RFQItemsByID', $placedRFQ->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">
+                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange" viewBox="0 0 24 24"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                        </path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
                                             </td>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @php
@@ -334,7 +357,8 @@
                                 <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
-                                        {{__('portal.Requisition')}} #
+{{--                                        {{__('portal.Requisition')}} #--}}
+                                        {{__('portal.View')}}
                                     </th>
 
                                     <th scope="col" class="px-6 py-3 text-center text-sm font-medium text-gray-500 tracking-wider" style="background-color: #FCE5CD;">
@@ -370,7 +394,18 @@
                                             <tr>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap" style=" font-family: sans-serif;">
                                                     {{-- Showing EOrderItems Number for multi categories --}}
-                                                    <a href="{{route('RFQItemsByID', $rfp->orders->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">{{__('portal.RFQ')}}-{{ $rfp->id }}</a>
+{{--                                                    <a href="{{route('RFQItemsByID', $rfp->orders->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">{{__('portal.RFQ')}}-{{ $rfp->id }}</a>--}}
+                                                    <a href="{{route('RFQItemsByID', $rfp->orders->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">
+                                                        <svg class="w-6 h-6 inline" fill="none" stroke="orange" viewBox="0 0 24 24"
+                                                             xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                            </path>
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                            </path>
+                                                        </svg>
+                                                    </a>
                                                 </td>
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @php
@@ -486,7 +521,18 @@
                                                 {{-- Showing EOrder Number(ID) for single category --}}
 {{--                                                {{__('portal.RFQ')}}-{{ $placedRFQ->id }}--}}
                                                 {{-- Now Showing EOrderItems Number(ID) for single category same as multi categories  --}}
-                                                <a href="{{route('RFQItemsByID', $placedRFQ->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">{{__('portal.RFQ')}}-{{ $placedRFQ->OrderItems[0]->id }}</a>
+{{--                                                <a href="{{route('RFQItemsByID', $placedRFQ->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">{{__('portal.RFQ')}}-{{ $placedRFQ->OrderItems[0]->id }}</a>--}}
+                                                <a href="{{route('RFQItemsByID', $placedRFQ->id)}}" class="hover:underline hover:text-blue-500 text-blue-500">
+                                                    <svg class="w-6 h-6 inline" fill="none" stroke="orange" viewBox="0 0 24 24"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                                                        </path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
                                             </td>
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @php
@@ -613,12 +659,21 @@
     $('.confirm').on('click', function (e) {
         return confirm($(this).data('confirm'));
     });
+    @if (auth()->user()->rtl == 0)
     $('[data-countdown]').each(function() {
         var $this = $(this), finalDate = $(this).data('countdown');
         $this.countdown(finalDate, function(event) {
             $this.html(event.strftime('%D day(s) %H:%M:%S'));
         });
     });
+    @else
+    $('[data-countdown]').each(function() {
+        var $this = $(this), finalDate = $(this).data('countdown');
+        $this.countdown(finalDate, function(event) {
+            $this.html(event.strftime('%D يوماً %H:%M:%S'));
+        });
+    });
+    @endif
     $(document).ready(function() {
         $('#quotation-table').DataTable( {
             dom: 'Bfrtip',

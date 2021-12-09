@@ -1,5 +1,5 @@
 <nav class="flex flex-col sm:flex-row">
-    <a href="{{ route('singleCategoryRFQs') }}" class="py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none {{ request()->routeIs('singleCategoryRFQs') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+    <a href="{{ route('singleCategoryRFQs') }}" class="py-4 px-6 block hover:text-blue-500 font-bold focus:outline-none {{ request()->routeIs('singleCategoryRFQs') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
         @php
             $business_cate = \App\Models\BusinessCategory::where('business_id', auth()->user()->business_id)->get();
             if ($business_cate->isNotEmpty()) {
@@ -37,9 +37,9 @@
                         }
                 }
         @endphp
-        {{__('portal.New RFQs')}} <span class="text-red-400">({{count(array_unique($quotesNotPresent))}})</span>
+        {{__('portal.New RFQs')}} <span class="text-red-400" style="font-family: sans-serif">({{count(array_unique($quotesNotPresent))}})</span>
     </a>
-    <a href="{{ route('singleCategoryQuotedRFQQuoted') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('singleCategoryQuotedRFQQuoted') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
+    <a href="{{ route('singleCategoryQuotedRFQQuoted') }}" class=" py-4 px-6 block hover:text-blue-500 font-bold focus:outline-none  {{ request()->routeIs('singleCategoryQuotedRFQQuoted') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
         @php
             $quoted = \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 0])
                                         ->where('qoute_status' , '!=' ,'ModificationNeeded')
@@ -48,25 +48,25 @@
 
         $collection = $quoted->unique('e_order_id');
         @endphp
-        {{__('portal.Quoted')}} <span class="text-red-400">({{count($collection)}})</span>
+        {{__('portal.Quoted')}} <span class="text-red-400" style="font-family: sans-serif">({{count($collection)}})</span>
     </a>
-    {{--<a href="{{ route('singleCategoryQuotedModifiedRFQ') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('singleCategoryQuotedModifiedRFQ') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
+    {{--<a href="{{ route('singleCategoryQuotedModifiedRFQ') }}" class=" py-4 px-6 block hover:text-blue-500 font-bold focus:outline-none  {{ request()->routeIs('singleCategoryQuotedModifiedRFQ') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
         @php $modifiedQuotedCount = \App\Models\Qoute::where(['supplier_user_id'=> auth()->user()->id, 'rfq_type' => 0])->where(['qoute_status' => 'Modified'])->get(); @endphp
-        {{__('portal.Modified')}} <span class="text-red-400">({{count($modifiedQuotedCount->unique('e_order_id'))}})</span>
+        {{__('portal.Modified')}} <span class="text-red-400 style="font-family: sans-serif"">({{count($modifiedQuotedCount->unique('e_order_id'))}})</span>
     </a>
-    <a href="{{ route('singleCategoryQuotedRFQRejected') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('singleCategoryQuotedRFQRejected') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+    <a href="{{ route('singleCategoryQuotedRFQRejected') }}" class=" py-4 px-6 block hover:text-blue-500 font-bold focus:outline-none  {{ request()->routeIs('singleCategoryQuotedRFQRejected') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
         @php $rejectedCount = \App\Models\Qoute::where(['supplier_user_id'=> auth()->user()->id, 'rfq_type' => 0])->where('qoute_status_updated', 'Rejected')->get(); @endphp
-        {{__('portal.Rejected')}} <span class="text-red-400">({{count($rejectedCount->unique('e_order_id'))}})</span>
+        {{__('portal.Rejected')}} <span class="text-red-400 style="font-family: sans-serif"">({{count($rejectedCount->unique('e_order_id'))}})</span>
     </a>--}}
-    <a href="{{ route('singleCategoryQuotedRFQModificationNeeded') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('singleCategoryQuotedRFQModificationNeeded') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+    <a href="{{ route('singleCategoryQuotedRFQModificationNeeded') }}" class=" py-4 px-6 block hover:text-blue-500 font-bold focus:outline-none  {{ request()->routeIs('singleCategoryQuotedRFQModificationNeeded') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
         @php $modificationCount = \App\Models\Qoute::where(['supplier_business_id'=> auth()->user()->business_id, 'rfq_type' => 0])->where('qoute_status_updated', 'ModificationNeeded')->get(); @endphp
-        {{__('portal.Modification needed')}} <span class="text-red-400">({{count($modificationCount->unique('e_order_id'))}})</span>
+        {{__('portal.Modification needed')}} <span class="text-red-400" style="font-family: sans-serif">({{count($modificationCount->unique('e_order_id'))}})</span>
     </a>
-    <a href="{{ route('singleCategoryQuotedRFQPendingConfirmation') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('singleCategoryQuotedRFQPendingConfirmation') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+    <a href="{{ route('singleCategoryQuotedRFQPendingConfirmation') }}" class=" py-4 px-6 block hover:text-blue-500 font-bold focus:outline-none  {{ request()->routeIs('singleCategoryQuotedRFQPendingConfirmation') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
         @php $pendingCount = \App\Models\Qoute::where(['supplier_business_id'=> auth()->user()->business_id, 'rfq_type' => 0])->where('qoute_status', 'RFQPendingConfirmation')->get(); @endphp
-        {{__('portal.Pending Confirmation')}} <span class="text-red-400">({{count($pendingCount->unique('e_order_id'))}})</span>
+        {{__('portal.Pending Confirmation')}} <span class="text-red-400" style="font-family: sans-serif">({{count($pendingCount->unique('e_order_id'))}})</span>
     </a>
-    <a href="{{ route('singleCategoryRFQExpired') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('singleCategoryRFQExpired') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+    <a href="{{ route('singleCategoryRFQExpired') }}" class=" py-4 px-6 block hover:text-blue-500 font-bold focus:outline-none  {{ request()->routeIs('singleCategoryRFQExpired') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
         @php
 
             $col = \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 0, 'request_status' => 1])
@@ -85,6 +85,6 @@
                 }
             }
          @endphp
-        {{__('portal.Expired')}} <span class="text-red-400">({{count($expired)}})</span>
+        {{__('portal.Expired')}} <span class="text-red-400" style="font-family: sans-serif">({{count($expired)}})</span>
     </a>
 </nav>

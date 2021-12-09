@@ -82,7 +82,7 @@ class ECartController extends Controller
             ECart::create($data);
         }
         session()->flash('message', __('portal.Requisition successfully copied to cart.'));
-        return redirect()->back();
+        return redirect()->route('RFQCart.index');
     }
 
     // used for change company name check
@@ -170,7 +170,7 @@ class ECartController extends Controller
             ECart::create($data);
         }
         session()->flash('message', __('portal.Requisition successfully copied to cart.'));
-        return redirect()->back();
+        return redirect()->route('single_cart_index');
     }
 
 }

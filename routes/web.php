@@ -333,6 +333,7 @@ Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Rejected', [QouteController
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/ModificationNeeded', [QouteController::class, 'QoutedRFQModificationNeeded'])->name('QoutedRFQModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/PendingConfirmation', [QouteController::class, 'QoutedRFQQoutedRFQPendingConfirmation'])->name('QoutedRFQPendingConfirmation');
 Route::middleware(['auth:sanctum'])->get('/QoutedRFQ/Expired', [QouteController::class, 'QoutedRFQQoutedExpired'])->name('QoutedRFQQoutedExpired');
+Route::middleware(['auth:sanctum'])->get('/QoutedRFQQoutedView/{quoteID}', [QouteController::class, 'QoutedRFQQoutedViewByID'])->name('QoutedRFQQoutedViewByID');
 
 ######################## Single Category RFQ routes For Supplier ############################################
 Route::middleware(['auth:sanctum'])->get('/single/category/quoted-RFQs', [QouteController::class, 'singleCategoryQuotedRFQQuoted'])->name('singleCategoryQuotedRFQQuoted');
@@ -341,6 +342,7 @@ Route::middleware(['auth:sanctum'])->get('/single/category/rejected-RFQs', [Qout
 Route::middleware(['auth:sanctum'])->get('/single/category/modification/needed/RFQs', [QouteController::class, 'singleCategoryQuotedRFQModificationNeeded'])->name('singleCategoryQuotedRFQModificationNeeded');
 Route::middleware(['auth:sanctum'])->get('/single/category/pending/confirmation/RFQs', [QouteController::class, 'singleCategoryQuotedRFQPendingConfirmation'])->name('singleCategoryQuotedRFQPendingConfirmation');
 Route::middleware(['auth:sanctum'])->get('/single/category/expired/RFQs', [QouteController::class, 'singleCategoryRFQExpired'])->name('singleCategoryRFQExpired');
+Route::middleware(['auth:sanctum'])->get('/single/category/quoted/view/{eOrderID}', [QouteController::class, 'singleCategoryRFQQuotedViewByID'])->name('singleCategoryRFQQuotedViewByID');
 
 /* Generating PDF file for Single Category Quotation Supplier quoted */
 Route::middleware(['auth:sanctum'])->get('/generate-single-category-quotation-pdf/{quoteID}/{eOrderItemID}', [PlacedRFQController::class, 'singleCategoryQuotedQuotationPDF'])->name('PDFForSingleCategoryQuotation');

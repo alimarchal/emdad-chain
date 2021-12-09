@@ -991,12 +991,12 @@
                         @endphp
                         <span
                             title="{{__('navigation-dropdown.Number of New Requisitions(s) received against multiple categories')}}">{{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp;<a
-                                href="{{route('viewRFQs')}}"><span style="padding-left: 7px;"
+                                href="{{route('viewRFQs')}}"><span style="padding-left: 7px;font-family: sans-serif"
                                                                    @if(count($noMultiCategoryQuotationPresent) > 0) class="text-green-600 hover:underline"
                                                                    @else class="text-red-600 hover:underline" @endif>{{count($noMultiCategoryQuotationPresent)}}</span></a></span>
                         <span
                             title="{{__('navigation-dropdown.Number of New Requisitions(s) received against single category')}}">{{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp;<a
-                                href="{{route('singleCategoryRFQs')}}"><span style="padding-left: 7px;"
+                                href="{{route('singleCategoryRFQs')}}"><span style="padding-left: 7px;font-family: sans-serif"
                                                                              @if(count($eOrders) > 0 && count($quotesNotPresent)> 0) class="text-green-600 hover:underline"
                                                                              @else class="text-red-600 hover:underline" @endif>@if(count($eOrders) > 0 && count($quotesNotPresent)> 0) {{count(array_unique($quotesNotPresent))}} @else
                                         0 @endif</span></a></span>
@@ -1360,15 +1360,12 @@
                     <a @if(count($noMultiCategoryQuotationPresent) > 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out"
                        @endif href="{{ route('viewRFQs') }}">
-                        {{ __('navigation-dropdown.Multiple Categories RFQ')}}:
-                        &nbsp; {{ count($noMultiCategoryQuotationPresent) }}
+                        {{ __('navigation-dropdown.Multiple Categories RFQ')}}: &nbsp; <span style="font-family: sans-serif">{{ count($noMultiCategoryQuotationPresent) }}</span>
                     </a>
                     <a @if(count($eOrders) > 0 && count($quotesNotPresent)> 0) class="block pl-3 pr-4 py-2 border-l-4 border-green-400 text-base font-medium text-green-700 bg-green-50 focus:outline-none focus:text-green-800 focus:bg-green-100 focus:border-green-700 transition duration-150 ease-in-out"
                        @else class="block pl-3 pr-4 py-2 border-l-4 border-red-400 text-base font-medium text-red-700 bg-red-50 focus:outline-none focus:text-red-800 focus:bg-red-100 focus:border-red-700 transition duration-150 ease-in-out"
                        @endif href="{{ route('singleCategoryRFQs') }}">
-                        {{ __('navigation-dropdown.Single Category RFQ')}}:
-                        &nbsp; @if(count($eOrders) > 0 && count($quotesNotPresent)> 0) {{count(array_unique($quotesNotPresent))}} @else
-                            0 @endif
+                        {{ __('navigation-dropdown.Single Category RFQ')}}: &nbsp; @if(count($eOrders) > 0 && count($quotesNotPresent)> 0) <span style="font-family: sans-serif">{{count(array_unique($quotesNotPresent))}} </span> @else <span style="font-family: sans-serif"> 0 </span> @endif
                     </a>
                 @endif
 

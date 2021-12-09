@@ -387,6 +387,13 @@ class QouteController extends Controller
         return view('supplier.supplier-qouted-expired', compact('collection'));
     }
 
+    public function QoutedRFQQoutedViewByID($quoteID)
+    {
+        $quote = Qoute::with('orderItem')->where(['id' => decrypt($quoteID), 'supplier_business_id' => auth()->user()->business_id])->first();
+
+        return view('supplier.supplier-quoted-view', compact('quote'));
+    }
+
     /* Function for buyer MULTI CATEGORIES (buyer requests for quotation expiry date extension) */
     public function quotationExpiredStatusUpdate($quoteID): RedirectResponse
     {
@@ -555,6 +562,13 @@ class QouteController extends Controller
         $collection = $expired->unique('e_order_id');
 
         return view('supplier.singleCategoryRFQ.supplier-qouted-expired', compact('collection'));
+    }
+
+    public function singleCategoryRFQQuotedViewByID($eOrderID)
+    {
+        $quotes = Qoute::with('orderItem')->where(['e_order_id' => decrypt($eOrderID), 'supplier_business_id' => auth()->user()->business_id])->get();
+
+        return view('supplier.singleCategoryRFQ.supplier-quoted-view', compact('quotes'));
     }
 
     ##########################################################################################
