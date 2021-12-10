@@ -134,7 +134,7 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     @foreach ($collection as $rfp)
                                         <tr>
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $loop->iteration }}
                                             </td>
 
@@ -146,7 +146,7 @@
                                                 {{ $record->name_ar }} @if(isset($parent->name)) , {{ $parent->name_ar }} @endif
                                             </td>
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $rfp->shipping_time_in_days }}
                                             </td>
 

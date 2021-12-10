@@ -177,12 +177,12 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     @foreach ($collection as $quote)
                                         <tr>
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $loop->iteration }}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{ __('portal.Q') }}-{{ $quote->id  }}
+                                                {{ __('portal.Q') }}-<span style="font-family: sans-serif">{{ $quote->id  }}</span>
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -193,16 +193,16 @@
                                                 {{ $record->name_ar }} @if(isset($parent->name)) , {{ $parent->name_ar }} @endif
                                             </td>
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $quote->shipping_time_in_days }}
                                             </td>
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $quote->VAT }}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{ $quote->total_cost }} {{__('portal.SAR')}}
+                                                <span style="font-family: sans-serif">{{ $quote->total_cost }}</span> {{__('portal.SAR')}}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">

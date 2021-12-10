@@ -39,6 +39,7 @@ return [
     'Multiple' => 'Multiple',
     'Single' => 'Single',
     'Open' => 'Open',
+    'Close' => 'Close',
     'New Requisition' => 'Make New Requisition',
     'Requisition Cart' => 'Requisition Cart',
     'Requisitions History' => 'Requisitions History',

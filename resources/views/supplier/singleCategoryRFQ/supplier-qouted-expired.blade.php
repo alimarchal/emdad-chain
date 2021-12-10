@@ -270,12 +270,12 @@
                                 @foreach ($collection as $rfp)
                                     @if($rfp->qoute_status_updated != 'Rejected')
                                     <tr>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                             {{ $loop->iteration }}
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{__('portal.Q')}}-{{$rfp->id}}
+                                            {{__('portal.Q')}}-<span style="font-family: sans-serif">{{$rfp->id}}</span>
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -287,10 +287,10 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{__('portal.RFQ')}}-{{ $rfp->orderItem->id }}
+                                            {{__('portal.RFQ')}}-<span style="font-family: sans-serif">{{ $rfp->orderItem->id }}</span>
                                         </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                             {{ $rfp->shipping_time_in_days }}
                                         </td>
 

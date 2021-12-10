@@ -146,7 +146,9 @@
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if(isset($dpo))
-                                                        {{__('portal.N/A')}}
+                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                            {{__('portal.N/A')}}
+                                                        </a>
                                                     @elseif($rfp->qoutes->count() > 0 && $rfp->quotation_time >= $now && $rfp->bypass == 0)
                                                         {{--                                                @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))--}}
                                                         @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
@@ -188,7 +190,9 @@
                                                             </a>
                                                         @endif
                                                     @else
-                                                        {{__('portal.N/A')}}
+                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                            {{__('portal.N/A')}}
+                                                        </a>
                                                     @endif
                                                 </td>
 
@@ -275,7 +279,9 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if(isset($dpo))
-                                                    {{__('portal.N/A')}}
+                                                    <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                        {{__('portal.N/A')}}
+                                                    </a>
                                                 @elseif($placedRFQ->OrderItems[0]->qoutes->count() > 0 && $placedRFQ->OrderItems[0]->quotation_time >= $now && $placedRFQ->OrderItems[0]->bypass == 0)
                                                     @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                         <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 1]) }}"
@@ -316,7 +322,9 @@
                                                         </a>
                                                     @endif
                                                 @else
-                                                    {{__('portal.N/A')}}
+                                                    <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                        {{__('portal.N/A')}}
+                                                    </a>
                                                 @endif
                                             </td>
 
@@ -466,7 +474,9 @@
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if(isset($dpo))
-                                                        <span style=" font-family: sans-serif;">{{__('portal.N/A')}}</span>
+                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="font-family: sans-serif;">
+                                                            {{__('portal.N/A')}}
+                                                        </a>
                                                     @elseif($rfp->qoutes->count() > 0 && $rfp->quotation_time >= $now && $rfp->bypass == 0)
                                                         {{--                                                @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))--}}
                                                         @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
@@ -508,7 +518,9 @@
                                                             </a>
                                                         @endif
                                                     @else
-                                                        <span style=" font-family: sans-serif;">{{__('portal.N/A')}}</span>
+                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="font-family: sans-serif;">
+                                                            {{__('portal.N/A')}}
+                                                        </a>
                                                     @endif
                                                 </td>
 
@@ -596,7 +608,9 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if(isset($dpo))
-                                                    <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
+                                                    <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="font-family: sans-serif;">
+                                                        {{__('portal.N/A')}}
+                                                    </a>
                                                 @elseif($placedRFQ->OrderItems[0]->qoutes->count() > 0 && $placedRFQ->OrderItems[0]->quotation_time >= $now && $placedRFQ->OrderItems[0]->bypass == 0)
                                                     @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                         <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 1]) }}"
@@ -637,7 +651,9 @@
                                                         </a>
                                                     @endif
                                                 @else
-                                                    <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
+                                                    <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="font-family: sans-serif;">
+                                                        {{__('portal.N/A')}}
+                                                    </a>
                                                 @endif
                                             </td>
 

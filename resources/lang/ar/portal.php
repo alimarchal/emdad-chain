@@ -39,6 +39,7 @@ return [
     'Multiple' => 'متعددة',
     'Single' => 'فردية',
     'Open' => 'فتح',
+    'Close' => 'Close',
     'New Requisition' => 'إنشاء طلب جديد',
     'Requisition Cart' => 'سلة الطلبات',
     'Requisitions History' => 'سجل الطلبات',

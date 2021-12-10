@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>الرئيسية</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -62,14 +62,14 @@
                                         <div class="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative bg-white overflow-hidden" style="border: 2px solid #c3c3c3">
 
                                             @if($package->package_type == 'Basic')
-                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">عادي</h2>
+                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">الأساسية</h2>
                                                 <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
                                                 <h1 class="text-2xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">مجاني</h1>
 
                                                 <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">اشترك</a>
 
                                             @elseif($package->package_type == 'Silver')
-                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">فضي</h2>
+                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">الفضية</h2>
                                                 <span class="bg-blue-600 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl">شائع</span>
                                                 <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
                                                 <h1 class="text-2xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
@@ -79,7 +79,7 @@
                                                 <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">اشترك</a>
 
                                             @elseif($package->package_type == 'Gold')
-                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">ذهبي</h2>
+                                                <h2 class="text-sm tracking-widest title-font mb-1 font-medium">الذهبية</h2>
                                                 <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
                                                 <h1 class="text-2xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
                                                     <span>{{$package->charges}}ريال</span>
@@ -104,9 +104,9 @@
                                         <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500">المهام</th>
                                         @foreach($packages as $package)
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500">
-                                                @if($package->id == 5) عادي
-                                                @elseif($package->id == 6)فضي
-                                                @elseif($package->id == 7)ذهبي
+                                                @if($package->id == 5) الأساسية
+                                                @elseif($package->id == 6)الفضية
+                                                @elseif($package->id == 7)الذهبية
                                                 @endif
                                             </th>
                                         @endforeach

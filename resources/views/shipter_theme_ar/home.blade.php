@@ -406,7 +406,7 @@
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
                                 <div class="pricing-header" style="border-color: #023989; border-style: groove; border-width: thin;">
-                                    <h3 style="color: white;">عادي</h3>
+                                    <h3 style="color: white;">الأساسية</h3>
                                     <span style="color: black;">EB-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
@@ -424,7 +424,7 @@
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
                                 <div class="pricing-header1" style="border-color: #023989; border-style: groove; border-width: thin;">
-                                    <h3 style="color: white;">فضي</h3>
+                                    <h3 style="color: white;">الفضية</h3>
                                     <span style="color: black;">EB-0000567373</span>
                                 </div>
                                 <div class="pricing-table">
@@ -442,7 +442,7 @@
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                             <div class="price-item">
                                 <div class="pricing-header2" style="border-color: #023989; border-style: groove; border-width: thin;">
-                                    <h3 style="color: white;">ذهبي</h3>
+                                    <h3 style="color: white;">الذهبية</h3>
                                     <span style="color: black;">EB-0000567373</span>
                                 </div>
                                 <div class="pricing-table">

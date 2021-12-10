@@ -187,7 +187,7 @@
 
         <div class="bg-white">
             <nav class="flex flex-col sm:flex-row">
-                <a href="{{ route('viewRFQs') }}" class="py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none {{ request()->routeIs('viewRFQs') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                <a href="{{ route('viewRFQs') }}" class="py-4 px-6 block hover:text-blue-500 font-bold focus:outline-none {{ request()->routeIs('viewRFQs') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
                     @php
                         $business_cate = \App\Models\BusinessCategory::where('business_id', auth()->user()->business_id)->get();
                         if ($business_cate->isNotEmpty()) {
@@ -209,26 +209,26 @@
                                             }
                                 }
                     @endphp
-                    {{__('portal.New RFQs')}} <span class="text-red-400">({{count($noMultiCategoryQuotationPresent)}})</span>
+                    {{__('portal.New RFQs')}} <span class="text-red-400" style="font-family: sans-serif">({{count($noMultiCategoryQuotationPresent)}})</span>
                 </a>
-                <a href="{{ route('QoutedRFQQouted') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQQouted') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
+                <a href="{{ route('QoutedRFQQouted') }}" class=" py-4 px-6 block hover:text-blue-500 font-bold focus:outline-none  {{ request()->routeIs('QoutedRFQQouted') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }} ">
                     @php
                         $quotedCount = \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1])
                                         ->where('qoute_status' , '!=' ,'ModificationNeeded')
                                         ->where('qoute_status' , '!=' ,'RFQPendingConfirmation')
                                         ->count();
                     @endphp
-                    {{__('portal.Quoted')}} <span class="text-red-400">({{$quotedCount}})</span>
+                    {{__('portal.Quoted')}} <span class="text-red-400" style="font-family: sans-serif">({{$quotedCount}})</span>
                 </a>
-                <a href="{{ route('QoutedRFQModificationNeeded') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQModificationNeeded') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                <a href="{{ route('QoutedRFQModificationNeeded') }}" class=" py-4 px-6 block hover:text-blue-500 font-bold focus:outline-none  {{ request()->routeIs('QoutedRFQModificationNeeded') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
                     @php $modificationCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status_updated', 'ModificationNeeded')->count(); @endphp
-                    {{__('portal.Modification needed')}} <span class="text-red-400">({{$modificationCount}})</span>
+                    {{__('portal.Modification needed')}} <span class="text-red-400" style="font-family: sans-serif">({{$modificationCount}})</span>
                 </a>
-                <a href="{{ route('QoutedRFQPendingConfirmation') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQPendingConfirmation') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                <a href="{{ route('QoutedRFQPendingConfirmation') }}" class=" py-4 px-6 block hover:text-blue-500 font-bold focus:outline-none  {{ request()->routeIs('QoutedRFQPendingConfirmation') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
                     @php $pendingCount = \App\Models\Qoute::where(['supplier_user_id' => auth()->user()->id, 'rfq_type' => 1])->where('qoute_status', 'RFQPendingConfirmation')->count(); @endphp
-                    {{__('portal.Pending Confirmation')}} <span class="text-red-400">({{$pendingCount}})</span>
+                    {{__('portal.Pending Confirmation')}} <span class="text-red-400" style="font-family: sans-serif">({{$pendingCount}})</span>
                 </a>
-                <a href="{{ route('QoutedRFQQoutedExpired') }}" class=" py-4 px-6 block hover:text-blue-500 font-extrabold focus:outline-none  {{ request()->routeIs('QoutedRFQQoutedExpired') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
+                <a href="{{ route('QoutedRFQQoutedExpired') }}" class=" py-4 px-6 block hover:text-blue-500 font-bold focus:outline-none  {{ request()->routeIs('QoutedRFQQoutedExpired') ? 'text-blue-500 border-b-2 font-medium border-blue-500' : 'text-gray-500' }}">
                     @php
                         $data= \App\Models\Qoute::where(['supplier_business_id' => auth()->user()->business_id , 'rfq_type' => 1, 'request_status' => 1])
                             ->where(function ($query){
@@ -243,7 +243,7 @@
                                 }
                             }
                     @endphp
-                    {{__('portal.Expired')}} <span class="text-red-400">({{count($expired)}})</span>
+                    {{__('portal.Expired')}} <span class="text-red-400" style="font-family: sans-serif">({{count($expired)}})</span>
                 </a>
             </nav>
         </div>
@@ -278,7 +278,7 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     @foreach ($collection as $rfp)
                                         <tr>
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $loop->iteration }}
                                             </td>
 
@@ -286,21 +286,20 @@
                                                 {{ \App\Models\Category::where('id', $rfp->orderItem->item_code)->first()->name_ar }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$rfp->orderItem->item_code)->first()->parent_id))->first()->name_ar }}
                                             </td>
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $rfp->quote_quantity }}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                <span style="font-family: sans-serif">{{ $rfp->quote_price_per_quantity }}</span> {{__('portal.SAR')}}
                                             </td>
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $rfp->shipping_time_in_days }}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if($rfp->qoute_status == 'pending') {{__('portal.pending')}} @else {{ $rfp->qoute_status }} @endif
-                                                {{--                                                {{ $rfp->qoute_status }}--}}
                                             </td>
                                         </tr>
                                     @endforeach

@@ -39,92 +39,148 @@
 
 
 <div class="header">
-    <div class="center"></div>
-
-    <div>
-        <h3 style="text-align: center">Quotation</h3>
+    <div class="center">
     </div>
 
-    <div>
-        <h3>
+    <div class="center">
+        @php $logo_second = asset(Storage::url($quote->supplier_business->business_photo_url)); @endphp
+        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;border-radius: 50%;;margin-left: 75px;" />
+        <h3 style="text-align: center; margin:0px;">Quotation</h3>
+    </div>
+
+    <div class="center">
+    </div>
+
+    <br><br>
+    <br><br>
+    <br><br>
+
+{{--    <div style="width: 100%; text-align: center">
+        <h3 style="text-align: center; margin: 0px;">
             @if ($quote->qoute_status == 'Modified')
-                Status: <span style="color: black; background-color: gray;">Modified.</span>
+                Status: <span style="background-color: gray">You have asked for a modification for this quotation.</span>
             @elseif($quote->qoute_status == 'Qouted')
-                Status: <span style="color: black; background-color: #e3a008">Quoted.</span>
+                Status: <span style="background-color: #e3a008">Waiting for response.</span>
             @elseif($quote->qoute_status == 'Rejected')
-                Status: <span style="color: black; background-color: red">Rejected.</span>
-            @else
-                Status: <span style="color: black; background-color: green">Accepted.</span>
+                Status: <span style="background-color: red">You have rejected this quotation.</span>
             @endif
         </h3>
-    </div>
+    </div>--}}
 
-    <br>
 
-    <div class="center" style="width: 33.33%;float: left;">
-        <h3><u>Requisition Information</u></h3><br>
-        <strong>Buyer Name: </strong> @if($eOrderItem->company_name_check == 1) {{$eOrderItem->business->business_name}} @else N/A @endif<br>
-        <strong>Requisition #: </strong> RFQ-{{$eOrderItem->id}}<br>
-        <strong>Remarks: </strong> {{$eOrderItem->remarks}} SR<br>
-        <strong>Payment Mode: </strong>
-        @if($eOrderItem->payment_mode == 'Cash') Cash
-        @elseif($eOrderItem->payment_mode == 'Credit') Credit
-        @elseif($eOrderItem->payment_mode == 'Credit30days') Credit (30 Days)
-        @elseif($eOrderItem->payment_mode == 'Credit60days') Credit (60 Days)
-        @elseif($eOrderItem->payment_mode == 'Credit90days') Credit (90 Days)
-        @elseif($eOrderItem->payment_mode == 'Credit120days') Credit (120 Days)
-        @endif <br>
-    </div>
 
-    <div class="center" style="width: 33.33%;float: left;">
-        <h3><u>Item Information</u></h3><br>
-        <strong>Category Name: </strong>
-        @php
-            $record = \App\Models\Category::where('id',$eOrderItem->item_code)->first();
-            $parent= \App\Models\Category::where('id',$record->parent_id)->first();
-        @endphp
-        {{ $record->name }} @if(isset($parent)), {{$parent->name}} @endif<br>
-        <strong>Brand: </strong> @if(isset($eOrderItem->brand)) {{ $eOrderItem->brand }} @else N/A @endif <br>
-        <strong>Quantity: </strong> {{ $eOrderItem->quantity }}<br>
-        <strong>Unit of Measurement: </strong> {{ $eOrderItem->unit_of_measurement }}<br>
-        <strong>Size: </strong> {{ $eOrderItem->size }}<br>
-        <strong>Description: </strong> {{ $eOrderItem->description }}<br>
-    </div>
+{{--    <br>--}}
+{{--    <br>--}}
+    <div class="center1">
+        <strong>Supplier: </strong>{{ $quote->supplier_business->business_name }}<br>
+        <strong>City: </strong>{{ $quote->supplier_business->city }}<br>
+        <strong>VAT Number: </strong>{{ $quote->supplier_business->vat_reg_certificate_number }}<br>
+        <strong>Email: </strong>{{ $quote->supplier_business->business_email }}<br><br>
 
-    <div class="center" style="width: 33.33%;float: right;">
-        <h3><u>Shipping Information</u></h3><br>
-        <strong>Delivery Period: </strong>
-        @if ($eOrderItem->delivery_period =='Immediately') Immediately @endif
-        @if ($eOrderItem->delivery_period =='Within 30 Days') 30 Days @endif
-        @if ($eOrderItem->delivery_period =='Within 60 Days') 60 Days @endif
-        @if ($eOrderItem->delivery_period =='Within 90 Days') 90 Days @endif
-        @if ($eOrderItem->delivery_period =='Standing Order - 2 per year' ) Standing Order - 2 times / year @endif
-        @if ($eOrderItem->delivery_period =='Standing Order - 3 per year' ) Standing Order - 3 times / year @endif
-        @if ($eOrderItem->delivery_period =='Standing Order - 4 per year' ) Standing Order - 4 times / year @endif
-        @if ($eOrderItem->delivery_period =='Standing Order - 6 per year' ) Standing Order - 6 times / year @endif
-        @if ($eOrderItem->delivery_period =='Standing Order - 12 per year' ) Standing Order - 12 times / year @endif
-        @if ($eOrderItem->delivery_period =='Standing Order Open' ) Standing Order - Open @endif
+        <strong>Quotation #: </strong> Q-{{ $quote->id }}<br>
+        <strong>Requisition #: </strong> RFQ-{{ $quote->orderItem->id }}<br>
+        <strong>Shipping Time: </strong> {{ $quote->shipping_time_in_days }}<br>
+        <strong>Payment Term: </strong>
+        @if($quote->orderItem->payment_mode == 'Cash') Cash
+        @elseif($quote->orderItem->payment_mode == 'Credit') Credit
+        @elseif($quote->orderItem->payment_mode == 'Credit30days') Credit (30 Days)
+        @elseif($quote->orderItem->payment_mode == 'Credit60days') Credit (60 Days)
+        @elseif($quote->orderItem->payment_mode == 'Credit90days') Credit (90 Days)
+        @elseif($quote->orderItem->payment_mode == 'Credit120days') Credit (120 Days)
+        @endif
         <br>
-        @php $warehouse = \App\Models\BusinessWarehouse::where('id', $eOrderItem->warehouse_id)->first(); @endphp
-        <strong>Delivery Address:</strong> {{ $warehouse->address }} <br>
-        <strong>Required Sample: </strong>
-        @if($eOrderItem->required_sample == 'Yes') Yes @endif
-        @if($eOrderItem->required_sample == 'No') No @endif <br>
+    </div>
+
+    <div style="width: 40%;float: right;">
+        @php $logo_first = asset(Storage::url($quote->buyer_business->business_photo_url)); @endphp
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 150px;height: 80px;border-radius: 25px;"/><br>
+        <strong>Buyer: </strong>@if($quote->orderItem->company_name_check == 1) {{ $quote->buyer_business->business_name }} @else N/A @endif<br>
+        <strong>City: </strong>{{ $quote->buyer_business->city }}<br>
+        <strong>VAT Number: </strong> {{ $quote->buyer_business->vat_reg_certificate_number }}<br>
+        @php
+            $warehouse = \App\Models\BusinessWarehouse::where('id', $quote->warehouse_id)->first()->only('mobile', 'address');
+        @endphp
+        <strong>Contact #: </strong> {{ $warehouse['mobile'] }}<br>
+        <strong>Delivery Address: </strong> {{ $warehouse['address'] }}<br>
+    </div>
+
+    <div class="center"></div>
+
+    <br><br><br><br><br><br><br><br><br><br><br>
+
+    {{--<div style="width: 100%; text-align: left">
+        <strong>Item Description: </strong><br>
+        <p>{{ strip_tags($quote->orderItem->description) }}</p>
+    </div>--}}
+
+    <table class="divide-y divide-black" style="width: 100%">
+        <thead>
+
+        <tr>
+            <th style="text-align: center;font-weight: normal; background-color: #FCE5CD">#</th>
+            <th style="text-align: center;font-weight: normal; background-color: #FCE5CD">CATEGORY NAME</th>
+            <th style="text-align: center;font-weight: normal; background-color: #FCE5CD">DESCRIPTION</th>
+            <th style="text-align: center;font-weight: normal; background-color: #FCE5CD">NOTE</th>
+            <th style="text-align: center;font-weight: normal; background-color: #FCE5CD">UOM</th>
+            <th style="text-align: center;font-weight: normal; background-color: #FCE5CD">UNIT PRICE</th>
+            <th style="text-align: center;font-weight: normal; background-color: #FCE5CD">QUANTITY</th>
+            <th style="text-align: center;font-weight: normal; background-color: #FCE5CD">AMOUNT</th>
+        </tr>
+
+        </thead>
+        <tbody class="bg-white divide-y divide-black border-1 border-black">
+
+        <tr>
+            <td  style="text-align: center">1</td>
+            <td  style="text-align: center">
+                @php
+                    $record = \App\Models\Category::where('id',$quote->orderItem->item_code)->first();
+                    $parent= \App\Models\Category::where('id',$record->parent_id)->first();
+                @endphp
+                {{ $record->name }}@if(isset($parent)), {{$parent->name}} @endif
+            </td>
+            <td  style="text-align: center"> {{strip_tags($quote->orderItem->description)}} </td>
+            <td  style="text-align: center"> @if(isset($quote->note_for_customer)) {{ $quote->note_for_customer }} @else N/A @endif </td>
+            <td  style="text-align: center"> {{ $quote->orderItem->unit_of_measurement }} </td>
+            <td  style="text-align: center">{{ $quote->quote_price_per_quantity }} SR</td>
+            <td  style="text-align: center">{{ $quote->quote_quantity }}</td>
+            <td  style="text-align: center">{{ number_format($quote->quote_price_per_quantity * $quote->quote_quantity,2) }} SR</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <br>
+
+    <div class="header">
+
+        <div style="width: 66.66%;float: left;"></div>
+
+        <div style="width: 33.33%;float: right">
+            <strong>Sub-total: </strong> {{ number_format($quote->quote_quantity * $quote->quote_price_per_quantity, 2) }} SR<br>
+            @php $subtotal = $quote->quote_quantity * $quote->quote_price_per_quantity; $subtotal += $quote->shipment_cost; @endphp
+            <strong>Shipment cost: </strong> {{ number_format($quote->shipment_cost, 2) }} SR<br>
+            <strong>VAT {{ number_format($quote->VAT) }}%: </strong>{{ number_format($subtotal * ($quote->VAT/100), 2) }} SR<br>
+            <hr>
+            <strong>Total: </strong> {{$quote->total_cost }} SR<br>
+            <hr>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+
     </div>
 
     <br><br>
-
-    <br>
-    <br>
-    <br><br>
     <br>
     <br><br>
     <br>
     <br>
 
-    {{-- Retrieving Supplier Messages using e_order_items_id --}}
-    @php
-        $messages = \App\Models\QouteMessage::where('qoute_id', $eOrderItem->id )->get();
+    {{-- Retrieving eOrderItemsID in qoute_id while Storing Supplier message and Retrieving QuoteID in qoute_id while storing Buyer message --}}
+   {{-- @php
+        $messages = \App\Models\QouteMessage::where('qoute_id', $quote->e_order_items_id)->where('user_id', '!=', auth()->id())->get();
     @endphp
     @if(count($messages) > 0 && $messages->isNotEmpty())
         <hr>
@@ -137,7 +193,7 @@
 
                 <span style="color: gray">
                     <span style="color: #6c66f2; text-align: left;">
-                        Message you send
+                        {{__('portal.Message from')}} {{$business->business_name}}
                     </span>
                     : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
                 </span>
@@ -147,95 +203,15 @@
         <br>
         <hr>
     @endif
-    <br>
-    <br>
-    <br><br>
-    <br>
-    <br>
-    {{-- Retrieving Buyer Messages using quote ID --}}
-    @php
-        $messages = \App\Models\QouteMessage::where('qoute_id', $quote->id )->get();
-    @endphp
-    @if(isset($messages) && $messages->isNotEmpty())
-        <hr>
-        <div style="border-style: solid;">
-            @foreach ($messages as $msg)
-                @php
-                    $user = \App\Models\User::where('id', $msg->user_id)->first();
-                    $business = \App\Models\Business::where('id', $user->business_id)->first();
-                @endphp
 
-                <span style="color: gray">
-                    <span style="color: #6c66f2; text-align: left;">
-                        Message from @if($quote->company_name_check == 1) {{$business->business_name}} @else Buyer @endif
-                    </span>
-                    : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
-                </span>
-                <br> <br>
+    @if($quote->messages->isNotEmpty())
+        <div style="border-style: solid;">
+            @foreach ($quote->messages as $msg)
+                <span style="color: gray"> <span style="color: #6c66f2;">Message you send</span>  : {{ strip_tags(str_replace('&nbsp;', ' ',  $msg->message)) }} </span> <br> <br>
             @endforeach
         </div>
         <hr>
-    @endif
-
-</div>
-
-<div>
-    <h3 style="text-align: center">You Quoted</h3>
-</div>
-<div class="center" style="width: 33.33%;">
-    <strong>Quantity: </strong> {{ $quote->quote_quantity }}<br>
-</div>
-<div class="center" style="width: 33.33%;">
-    <strong>Price Per Unit: </strong> {{ $quote->quote_price_per_quantity }} SR<br>
-    <br>
-</div>
-<div class="center" style="width: 33.33%;">
-    <strong>Shipping Time(In Days): </strong> {{ $quote->shipping_time_in_days }}<br>
-    <br>
-</div>
-
-<br><br><br><br>
-<div class="center" style="width: 33.33%;">
-    <strong>Note: </strong> @if(isset($quote->note_for_customer)) {{ $quote->note_for_customer }} @else N/A @endif <br>
-</div>
-<div class="center" style="width: 33.33%;">
-    <strong>Shipment Cost: </strong> {{ $quote->shipment_cost }} SR<br>
-    <br>
-</div>
-<div class="center" style="width: 33.33%;">
-    @php $subtotal = $quote->quote_quantity * $quote->quote_price_per_quantity; $subtotal += $quote->shipment_cost; @endphp
-    <strong>VAT {{ number_format($quote->VAT) }}%: </strong>{{ number_format($subtotal * ($quote->VAT/100), 2) }} SR<br>
-    <br>
-</div>
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<div class="center" style="width: 33.33%;">
-    <strong>Total Cost: </strong> {{ $quote->total_cost }} SR<br>
-    <br>
-</div>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<div class="header">
-
-    <div class="center" style="width: 16.67%"></div>
-
-    <div class="center" style="width: 66.66%">
-        <div style="text-align: center;">Thank you for using Emdad platform as your business partner.</div><br><br>
-    </div>
-
-    <div class="center" style="width: 16.67%"></div>
+    @endif--}}
 
 </div>
 
@@ -243,16 +219,23 @@
 <br>
 
 <div class="header">
-
-    <div class="center" style="width: 33.33%"></div>
-
-    <div class="center" style="width: 33.33%"></div>
-
-    <div class="center" style="width: 33.33%; float: right">
-        <div>
-            @php $img = asset('logo-full.png'); @endphp
-            <img src="{{$img}}" style="height: 10px; width: auto; margin-left: auto; margin-right: auto;" >
+    <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
+        <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
+            <strong>Warehouse delivery address: </strong> {{ $warehouse['address'] }}<br>
+            <strong>Mobile #: </strong> {{ $warehouse['mobile'] }}
         </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+<div class="flex justify-between px-2 py-2 mt-2 h-15">
+    <div style="text-align: center; margin: auto;">
+        <p style="text-align: center; ">Thank you for using Emdad platform as your business partner </p>
+        @php $img = asset('logo-full.png'); @endphp
+        <img src="{{$img}}" width="100" >
+
     </div>
 
 </div>

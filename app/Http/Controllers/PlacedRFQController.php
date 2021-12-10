@@ -110,7 +110,7 @@ class PlacedRFQController extends Controller
     public function quotedQuotationPDF($eOrderItemID)
     {
         $eOrderItem = EOrderItems::firstWhere('id', decrypt($eOrderItemID));
-        $quote = Qoute::with('business')->where('e_order_items_id', decrypt($eOrderItemID))->where('supplier_user_id', auth()->id())->first();
+        $quote = Qoute::with('business', 'orderItem')->where('e_order_items_id', decrypt($eOrderItemID))->where('supplier_user_id', auth()->id())->first();
 
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('supplier.quotationPDF', compact('quote','eOrderItem'));
         return $pdf->download('Quotation.pdf');
@@ -123,7 +123,7 @@ class PlacedRFQController extends Controller
     public function singleCategoryQuotedQuotationPDF($quoteID, $eOrderItemID)
     {
         $eOrderItem = EOrderItems::where('id', decrypt($eOrderItemID))->first();
-        $quotes = Qoute::where(['e_order_id' => decrypt($quoteID), 'supplier_business_id' => auth()->user()->business_id])->get();
+        $quotes = Qoute::with('orderItem')->where(['e_order_id' => decrypt($quoteID), 'supplier_business_id' => auth()->user()->business_id])->get();
 
         $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('supplier.singleCategoryRFQ.quotationPDF', compact('quotes','eOrderItem'));
         return $pdf->download('Quotation.pdf');
