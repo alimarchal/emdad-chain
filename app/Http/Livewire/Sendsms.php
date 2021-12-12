@@ -43,7 +43,11 @@ class Sendsms extends Component
         $randomNumber = rand(1001,9999);
         $user->mobile_verify_code = $randomNumber;
         $user->save();
-        User::send_sms($mobile_no,config('app.url') . ' %0a Your sms code is: ' . $randomNumber);
+
+        $message = ' %0a New user ' . $user->name .' has registered as ' . $user->registration_type . '%0a Company name: ' . $user->company_name . '%0a Mobile:'. $user->mobile;
+        User::send_sms(env('SMS_NO_ONE'),config('app.url') . $message);
+        User::send_sms(env('SMS_NO_TWO'),config('app.url') . $message);
+        User::send_sms($mobile_no,config('app.url') . ' %0aYour sms code is: ' . $randomNumber);
         $this->sendSms = true;
     }
 

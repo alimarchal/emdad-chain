@@ -16,7 +16,7 @@
                         </button>
                 </div>
             @else
-                <p style="font-size: 16px; padding: 8px;color: green">{{__('register.We have send you SMS code please type and press verify.')}}</p>
+                <p style="font-size: 16px; padding: 8px;color: green">{{__('register.We have sent you an SMS code please type and press verify.')}}</p>
             @endif
             @if($sendSms || !is_null(auth()->user()->mobile_verify_code))
                 <div class="overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:w-1/3">
@@ -52,7 +52,7 @@
     {{--            </div>--}}
             </div>
         @else
-            <p style="font-size: 16px; padding: 8px;color: green">{{__('register.We have send you SMS code please type and press verify.')}}</p>
+            <p style="font-size: 16px; padding: 8px;color: green">{{__('register.We have sent you an SMS code please type and press verify.')}}</p>
         @endif
             @if($sendSms || !is_null(auth()->user()->mobile_verify_code))
                 <div class="overflow-hidden lg:my-2 lg:px-2 lg:w-1/3 xl:w-1/3">

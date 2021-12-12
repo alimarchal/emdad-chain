@@ -63,7 +63,7 @@
                     <div class="text-2xl text-center font-bold">
                         {{__('portal.business')}}: {{ Auth::user()->business->business_name }}<br>
                     </div>
-                    <p class="m-2 font-bold">{{__('portal.Welcome')}} {{ config('app.name', 'Laravel') }} {{__('portal.as our prospective alliance')}}</p>
+                    <p class="m-2 font-bold">{{__('portal.Welcome')}} to {{ config('app.name', 'Laravel') }} platform {{__('portal.as our prospective alliance')}}</p>
                     <p class="font-bold m-2 text-justify">{{__('portal.Thank you for choosing us to share our experience and expertise in supply chain management platform.')}}</p>
                     <p class="text-blue-900 font-bold m-2 text-justify">{{__('portal.At the moment your application is under review. You will receive a reply from us within 10 working days.')}}</p>
                     <p class="m-2">{{__('portal.Hopefully, soon we will be sharing with you the power of our platform which could')}}:</p>

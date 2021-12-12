@@ -22,7 +22,7 @@ return [
     'Welcome' => 'Welcome',
     'Account Status' => 'Account Status',
     'as our prospective alliance' => 'as our prospective partner',
-    'Thank you for choosing us to share our experience and expertise in supply chain management platform.' => 'Thank you for choosing us to share our experience and expertise in supply chain management platform.',
+    'Thank you for choosing Emdad Chain platform to share our experience and expertise in supply chain management platform.' => 'Thank you for choosing Emdad Chain platform to share our experience and expertise in supply chain management platform.',
     'At the moment your application is under review. You will receive a reply from us within 10 working days.' => 'At the moment your application is under review. You will receive a reply from us within 10 working days.',
     'Hopefully, soon we will be sharing with you the power of our platform which could' => 'Hopefully, soon we will be sharing with you the power of our platform which could',
     'Save you a huge amount depending on the size of your purchases.' => 'Save you a huge amount depending on the size of your purchases.',
