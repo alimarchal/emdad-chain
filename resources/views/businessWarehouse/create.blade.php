@@ -1,5 +1,8 @@
 @section('headerScripts')
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
+    <link
+        href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+        rel="stylesheet"  type='text/css'>
     <script src="{{url('js/mapInput.js')}}"></script>
 @endsection
 @if (auth()->user()->rtl == 0)
@@ -32,9 +35,15 @@
                             @csrf
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">{{__('portal.Step # 3: Business Warehouse')}} </h3>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="name">{{__('portal.Name')}} @include('misc.required')</x-jet-label>
-                                <x-jet-label class="w-1/2" for="designation">{{__('portal.Designation')}} @include('misc.required')</x-jet-label>
-                                <x-jet-label class="w-1/2" for="warehouse_email">{{__('portal.Warehouse Email')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-2/3" for="name">{{__('portal.Warehouse Name')}} @include('misc.required')</x-jet-label>
+                            </div>
+                            <div class="flex space-x-5 mt-3">
+                                <x-jet-input id="warehouse_name" type="text" name="warehouse_name" class="border p-2 w-1/2" value="{{old('warehouse_name')}}" required></x-jet-input>
+                            </div>
+                            <div class="flex space-x-5 mt-3">
+                                <x-jet-label class="w-1/2" for="name">{{__('portal.Responsible person')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="designation" style="padding-left: 29px;">{{__('portal.Designation')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="warehouse_email" style="padding-left: 12px;">{{__('portal.Warehouse Email')}} @include('misc.required')</x-jet-label>
                                 <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                                 <input type="hidden" name="business_id" value="{{auth()->user()->business_id}}">
                             </div>
@@ -46,7 +55,7 @@
                                         <option {{(old('name') == $user->name ? 'selected' : '')}} value="{{$user->name}}">{{$user->name}}</option>
                                     @endforeach
                                 </select>
-
+                                <i class="fa fa-user-plus mt-2" title="{{__('portal.Add User')}}" ></i>
                                 <select id="designation" name="designation" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                     <option value="">{{__('portal.Select')}}</option>
                                     <option {{(old('designation') == 'CEO' ? 'selected' : '')}} value="CEO">{{__('portal.CEO')}}</option>
@@ -59,14 +68,14 @@
                                 <x-jet-input id="warehouse_email" type="email" name="warehouse_email" class="border p-2 w-1/2" value="{{old('warehouse_email')}}" required></x-jet-input>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="landline">{{__('portal.Landline')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="landline">{{__('portal.Landline')}}</x-jet-label>
                                 <x-jet-label class="w-1/2" for="mobile">{{__('portal.Mobile')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="country">{{__('portal.Country')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="city">{{__('portal.City')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="address">{{__('portal.Address')}} @include('misc.required')</x-jet-label>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="chamber_reg_number" type="text" name="landline" class="border p-2 w-1/2" value="{{old('landline')}}" required></x-jet-input>
+                                <x-jet-input id="chamber_reg_number" type="text" name="landline" class="border p-2 w-1/2" value="{{old('landline')}}"></x-jet-input>
                                 <x-jet-input id="mobile" type="number"
                                              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                              name="mobile" class="border p-2 w-1/2" maxlength="9" value="{{old('mobile')}}" required></x-jet-input>
@@ -76,7 +85,12 @@
                                         <option {{(old('country') == $country ? 'selected' : '')}} value="{{$country}}">{{$country}}</option>
                                     @endforeach
                                 </select>
-                                <x-jet-input id="city" type="text" name="city" class="border p-2 w-1/2" value="{{old('city')}}" required></x-jet-input>
+                                <select name="city" id="city" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
+                                    <option value="">{{__('portal.Select')}}</option>
+                                    @foreach (\App\Models\City::all() as $city)
+                                        <option {{(old('city') ==  $city->name_en ? 'selected' : '')}} value="{{ $city->name_en }}">{{ $city->name_en . ' - ' . $city->name_ar }}</option>
+                                    @endforeach
+                                </select>
                                 <x-jet-input id="address" type="text" name="address" class="border p-2 w-1/2" value="{{old('address')}}" required></x-jet-input>
                             </div>
 
@@ -104,7 +118,7 @@
                                 </select>
                             </div>
                             <br>
-                            <p>{{__('portal.Please use the map marker for your warehouse location.')}}</p>
+                            <p class="text-blue-700">{{__('portal.Please use the map marker for your warehouse location.')}}</p>
                             <br>
                             <div id="map" style="width:100%;height:400px; ">
                                 <div style="width: 100%; height: 100%" id="address-map"></div>
@@ -226,14 +240,20 @@
                 @include('users.sessionMessage')
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
-                        <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
+                        <img src="{{url('registration_step/2.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
                         <form action="{{route('businessWarehouse.store')}}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                             @csrf
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">{{__('portal.Step # 3: Business Warehouse')}} </h3>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="name">{{__('portal.Name')}} @include('misc.required')</x-jet-label>
-                                <x-jet-label class="w-1/2" for="designation">{{__('portal.Designation')}} @include('misc.required')</x-jet-label>
-                                <x-jet-label class="w-1/2" for="warehouse_email">{{__('portal.Warehouse Email')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-2/3" for="name">{{__('portal.Warehouse Name')}} @include('misc.required')</x-jet-label>
+                            </div>
+                            <div class="flex space-x-5 mt-3">
+                                <x-jet-input id="warehouse_name" type="text" name="warehouse_name" class="border p-2 w-1/2" value="{{old('warehouse_name')}}" required></x-jet-input>
+                            </div>
+                            <div class="flex space-x-5 mt-3">
+                                <x-jet-label class="w-1/2" for="name">{{__('portal.Responsible person')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="designation" style="padding-right: 44px;">{{__('portal.Designation')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="warehouse_email" style="padding-right: 19px;">{{__('portal.Warehouse Email')}} @include('misc.required')</x-jet-label>
                                 <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                                 <input type="hidden" name="business_id" value="{{auth()->user()->business_id}}">
                             </div>
@@ -245,7 +265,7 @@
                                         <option {{(old('name') == $user->name ? 'selected' : '')}} value="{{$user->name}}">{{$user->name}}</option>
                                     @endforeach
                                 </select>
-
+                                <i class="fa fa-user-plus mt-2" title="{{__('portal.Add User')}}" style="padding-right: 11px;"></i>
                                 <select id="designation" name="designation" class="form-input rounded-md shadow-sm border p-2 w-1/2" style="margin-right: 5px;" required>
                                     <option value="">{{__('portal.Select')}}</option>
                                     <option {{(old('designation') == 'CEO' ? 'selected' : '')}} value="CEO">{{__('portal.CEO')}}</option>
@@ -258,14 +278,14 @@
                                 <x-jet-input id="warehouse_email" type="email" name="warehouse_email" class="border p-2 w-1/2" value="{{old('warehouse_email')}}" required></x-jet-input>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="landline">{{__('portal.Landline')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="landline">{{__('portal.Landline')}}</x-jet-label>
                                 <x-jet-label class="w-1/2" for="mobile">{{__('portal.Mobile')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="country">{{__('portal.Country')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="city">{{__('portal.City')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="address">{{__('portal.Address')}} @include('misc.required')</x-jet-label>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="chamber_reg_number" type="text" name="landline" class="border p-2 w-1/2" value="{{old('landline')}}" required></x-jet-input>
+                                <x-jet-input id="chamber_reg_number" type="text" name="landline" class="border p-2 w-1/2" value="{{old('landline')}}"></x-jet-input>
                                 <x-jet-input id="mobile" type="number"
                                              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                              name="mobile" class="border p-2 w-1/2" value="{{old('mobile')}}" maxlength="9"  style="margin-right: 5px;" required></x-jet-input>
@@ -275,7 +295,13 @@
                                         <option {{(old('country') == $country ? 'selected' : '')}} value="{{$country}}">{{$country}}</option>
                                     @endforeach
                                 </select>
-                                <x-jet-input id="city" type="text" name="city" class="border p-2 w-1/2" value="{{old('city')}}" required></x-jet-input>
+{{--                                <x-jet-input id="city" type="text" name="city" class="border p-2 w-1/2" value="{{old('city')}}" required></x-jet-input>--}}
+                                <select name="city" id="city" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
+                                    <option value="">{{__('portal.Select')}}</option>
+                                    @foreach (\App\Models\City::all() as $city)
+                                        <option {{(old('city') ==  $city->name_en ? 'selected' : '')}} value="{{ $city->name_en }}">{{ $city->name_ar }}</option>
+                                    @endforeach
+                                </select>
                                 <x-jet-input id="address" type="text" name="address" class="border p-2 w-1/2" value="{{old('address')}}" required></x-jet-input>
                             </div>
 
@@ -303,7 +329,7 @@
                                 </select>
                             </div>
                             <br>
-                            <p>{{__('portal.Please use the map marker for your warehouse location.')}}</p>
+                            <p class="text-blue-700">{{__('portal.Please use the map marker for your warehouse location.')}}</p>
                             <br>
                             <div id="map" style="width:100%;height:400px; ">
                                 <div style="width: 100%; height: 100%" id="address-map"></div>

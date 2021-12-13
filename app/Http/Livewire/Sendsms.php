@@ -43,7 +43,7 @@ class Sendsms extends Component
         $randomNumber = rand(1001,9999);
         $user->mobile_verify_code = $randomNumber;
         $user->save();
-        User::send_sms($mobile_no,config('app.url') . ' %0a Your sms code is: ' . $randomNumber);
+        User::send_sms($mobile_no,'Thank you for registering on Emdad digital platform.' . ' %0aYour one time verification code is: ' . $randomNumber);
         $this->sendSms = true;
     }
 
@@ -56,6 +56,7 @@ class Sendsms extends Component
             $user->mobile_verify = 1;
             $user->save();
             $this->mobile_verify_check = true;
+            $this->redirect('packages');
         }
         else {
             $this->wrong_sms = true;

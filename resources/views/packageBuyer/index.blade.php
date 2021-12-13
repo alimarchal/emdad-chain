@@ -38,7 +38,7 @@
                                         <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
                                             <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
-                                            <button class="flex items-center mt-6 text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
+                                            <button class="flex items-center mt-6 text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center" onclick="basicConfirmation()">{{__('portal.Subscribe')}}</button>
                                         </form>
                                     @endif
                                 @elseif($package->package_type == 'Silver')
@@ -72,7 +72,7 @@
                                             <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
                                             <button class="flex items-center mt-6 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>--}}
-                                        <a href="{{route('packagePaymentType', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer">{{__('portal.Subscribe')}}</a>
+                                        <a href="{{route('packagePaymentType', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer" onclick="silverConfirmation()">{{__('portal.Subscribe')}}</a>
                                     @endif
                                 @elseif($package->package_type == 'Gold')
                                     <h2 class="text-sm tracking-widest title-font mb-1 font-medium">@if($package->package_type == 'Gold') {{__('portal.Gold')}} @else {{$package->package_type}} @endif</h2>
@@ -105,7 +105,7 @@
                                             <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
                                             <button class="flex items-center mt-6 text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>--}}
-                                        <a href="{{route('packagePaymentType', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer">{{__('portal.Subscribe')}}</a>
+                                        <a href="{{route('packagePaymentType', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer" onclick="goldConfirmation()">{{__('portal.Subscribe')}}</a>
                                     @endif
                                 @elseif($package->package_type == 'Platinum')
                                     <h2 class="text-sm tracking-widest title-font mb-1 font-medium">@if($package->package_type == 'Platinum') {{__('portal.Platinum')}} @else {{$package->package_type}} @endif</h2>
@@ -125,7 +125,7 @@
                                         <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
                                             <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
-                                            <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" disabled style="justify-content: center">{{__('portal.Subscribe')}}</button>
+{{--                                            <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" disabled style="justify-content: center">{{__('portal.Subscribe')}}</button>--}}
                                         </form>
                                     @endif
                                 @endif
@@ -282,6 +282,24 @@
         </section>
 
     </x-app-layout>
+
+    <script>
+        function basicConfirmation() {
+            if(!confirm('Are you sure?\nYou have selected the basic package.\nYou would only be able to change your package after the business approval.')){
+                event.preventDefault();
+            }
+        }
+        function silverConfirmation() {
+            if(!confirm('Are you sure?\nYou have selected the silver package.\nYou would only be able to change your package after the business approval.')){
+                event.preventDefault();
+            }
+        }
+        function goldConfirmation() {
+            if(!confirm('Are you sure?\nYou have selected the gold package.\nYou would only be able to change your package after the business approval.')){
+                event.preventDefault();
+            }
+        }
+    </script>
 @else
     <x-app-layout>
         <section class="text-gray-600 body-font overflow-hidden">
@@ -323,7 +341,7 @@
                                             @csrf
                                             <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
                                             <span class="text-lg ml-1 font-normal text-gray-500"></span>
-                                            <button class="flex items-center mt-4 text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
+                                            <button class="flex items-center mt-4 text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center" onclick="basicConfirmation()">{{__('portal.Subscribe')}}</button>
                                         </form>
                                     @endif
                                 @elseif($package->package_type == 'Silver')
@@ -360,7 +378,7 @@
                                             <span class="text-lg ml-1 font-normal text-gray-500"></span>
                                             <button class="flex items-center mt-4 text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>--}}
-                                        <a href="{{route('packagePaymentType', encrypt($package->id))}}" class="flex items-center mt-auto text-white hover:text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer">{{__('portal.Subscribe')}}</a>
+                                        <a href="{{route('packagePaymentType', encrypt($package->id))}}" class="flex items-center mt-auto text-white hover:text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer" onclick="silverConfirmation()">{{__('portal.Subscribe')}}</a>
                                     @endif
                                 @elseif($package->package_type == 'Gold')
                                     <h2 class="text-sm tracking-widest title-font mb-1 font-medium">@if($package->package_type == 'Gold') {{__('portal.Gold')}} @else {{$package->package_type}} @endif</h2>
@@ -394,7 +412,7 @@
                                             <span class="text-lg ml-1 font-normal text-gray-500"></span>
                                             <button class="flex items-center mt-4 text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">{{__('portal.Subscribe')}}</button>
                                         </form>--}}
-                                        <a href="{{route('packagePaymentType', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full hover:text-white focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer">{{__('portal.Subscribe')}}</a>
+                                        <a href="{{route('packagePaymentType', encrypt($package->id))}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full hover:text-white focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center; cursor: pointer" onclick="goldConfirmation()">{{__('portal.Subscribe')}}</a>
                                     @endif
                                 @elseif($package->package_type == 'Platinum')
                                     <h2 class="text-sm tracking-widest title-font mb-1 font-medium">@if($package->package_type == 'Platinum') {{__('portal.Platinum')}} @else {{$package->package_type}} @endif</h2>
@@ -414,7 +432,7 @@
                                         <form action="{{route('business-packages.store')}}" method="POST" style="padding-top: 36px;">
                                             @csrf
                                             <input type="hidden" name="package_id" value="{{encrypt($package->id)}}">
-                                            <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" disabled style="justify-content: center">{{__('portal.Subscribe')}}</button>
+{{--                                            <button class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" disabled style="justify-content: center">{{__('portal.Subscribe')}}</button>--}}
                                         </form>
                                     @endif
                                 @endif
@@ -571,6 +589,24 @@
         </section>
 
     </x-app-layout>
+
+    <script>
+        function basicConfirmation() {
+            if(!confirm('Are you sure?\nYou have selected the basic package.\nYou would only be able to change your package after the business approval.')){
+                event.preventDefault();
+            }
+        }
+        function silverConfirmation() {
+            if(!confirm('Are you sure?\nYou have selected the silver package.\nYou would only be able to change your package after the business approval.')){
+                event.preventDefault();
+            }
+        }
+        function goldConfirmation() {
+            if(!confirm('Are you sure?\nYou have selected the gold package.\nYou would only be able to change your package after the business approval.')){
+                event.preventDefault();
+            }
+        }
+    </script>
 @endif
 {{--<script>
     function language(rtl_value) {

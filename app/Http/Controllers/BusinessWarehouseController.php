@@ -53,6 +53,7 @@ class BusinessWarehouseController extends Controller
             'user_id' => 'required',
             'business_id' => 'required',
             'name' => 'required',
+            'warehouse_name' => 'required',
             'designation' => 'required',
             'warehouse_email' => 'required',
             'landline' => 'required',
@@ -73,7 +74,7 @@ class BusinessWarehouseController extends Controller
 
         $merge_time = $request->working_time . " - " . $request->working_time_1;
         $request->merge(['working_time' => $merge_time]);
-        $bw = BusinessWarehouse::create($request->all());
+        BusinessWarehouse::create($request->all());
 
         session()->flash('message', __('portal.Business warehouse information successfully saved.'));
         return redirect()->route('purchaseOrderInfo.create');
@@ -95,6 +96,7 @@ class BusinessWarehouseController extends Controller
         $request->validate([
             'user_id' => 'required',
             'name' => 'required',
+            'warehouse_name' => 'required',
             'designation' => 'required',
             'warehouse_email' => 'required',
             'landline' => 'required',
