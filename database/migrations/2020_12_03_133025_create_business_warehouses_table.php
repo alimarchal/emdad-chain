@@ -18,6 +18,7 @@ class CreateBusinessWarehousesTable extends Migration
             $table->foreignId('business_id')->nullable()->index();
             $table->foreignId('user_id')->nullable()->index();
             $table->string('designation')->nullable();
+            $table->string('warehouse_name');
             $table->string('name')->nullable();
             $table->string('warehouse_email')->nullable();
             $table->string('landline')->nullable();

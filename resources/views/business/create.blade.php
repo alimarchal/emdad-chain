@@ -153,7 +153,7 @@
 
 
                             <br>
-                            <p>{{__('portal.Please use the map marker for your office location.')}}</p>
+                            <p class="text-blue-700">{{__('portal.Please use the map marker for your office location.')}}</p>
                             <br>
                             <div id="map" style="width:100%;height:400px; ">
                                 <div style="width: 100%; height: 100%" id="address-map"></div>
@@ -219,7 +219,7 @@
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                     <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
-                        <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto mb-4 m-auto"/>
+                        <img src="{{url('registration_step/2.png')}}" alt="User Registration" class="block w-auto mb-4 m-auto"/>
                         <form action="{{ url('business') }}" method="post" class="form bg-white p-6  mb-4" enctype="multipart/form-data">
                             <x-jet-validation-errors class="mb-4"/>
                             @csrf
@@ -263,9 +263,9 @@
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-input id="chamber_reg_number" type="text" name="chamber_reg_number" class="border p-2 w-1/2" value="{{old('chamber_reg_number')}}"></x-jet-input>
-                                <x-jet-input id="chamber_reg_path_1" type="file" name="chamber_reg_path_1" class="border p-2 w-1/2" style="margin-right: 5px;" required></x-jet-input>
+                                <x-jet-input id="chamber_reg_path_1" type="file" name="chamber_reg_path_1" class="border p-2 w-1/2" style="margin-right: 5px;font-family: sans-serif" required></x-jet-input>
                                 <x-jet-input id="vat_reg_certificate_number" type="text" name="vat_reg_certificate_number" class="border p-2 w-1/2" value="{{old('vat_reg_certificate_number')}}" required></x-jet-input>
-                                <x-jet-input id="vat_reg_certificate_path_1" type="file" name="vat_reg_certificate_path_1" class="border p-2 w-1/2" required></x-jet-input>
+                                <x-jet-input id="vat_reg_certificate_path_1" type="file" name="vat_reg_certificate_path_1" class="border p-2 w-1/2" style="font-family: sans-serif" required></x-jet-input>
                             </div>
                             <div class="flex space-x-5 mt-3">
 
@@ -310,7 +310,7 @@
 
 
                             <br>
-                            <p>{{__('portal.Please use the map marker for your office location.')}}</p>
+                            <p class="text-blue-700">{{__('portal.Please use the map marker for your office location.')}}</p>
                             <br>
                             <div id="map" style="width:100%;height:400px; ">
                                 <div style="width: 100%; height: 100%" id="address-map"></div>
@@ -330,7 +330,7 @@
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_photo_url_1">{{__('portal.Company logo')}} @include('misc.required')</label>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="business_photo_url" type="file" name="business_photo_url_1" class="border p-2 w-1/2" required></x-jet-input>
+                                <x-jet-input id="business_photo_url" type="file" name="business_photo_url_1" class="border p-2 w-1/2" style="font-family: sans-serif" required></x-jet-input>
                             </div>
 
                             <br>

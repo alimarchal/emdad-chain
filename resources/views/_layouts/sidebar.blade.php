@@ -1510,7 +1510,7 @@
             @endif
 
             {{-- Warehouse link Buyer --}}
-            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->registration_type != null)
+            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && auth()->user()->business_id != null && Auth::user()->registration_type != null)
                 <hr class="mt-4">
                 <div x-data="{ open: false } ">
                     @php
@@ -1532,7 +1532,7 @@
             @endif
 
             {{-- Warehouse link Supplier --}}
-            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && Auth::user()->registration_type != null)
+            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->business_id != null && Auth::user()->registration_type != null)
                 <hr class="mt-4">
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
@@ -2653,7 +2653,7 @@
             @endif
 
             {{-- Warehouse link Buyer --}}
-            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && Auth::user()->registration_type != null)
+            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer' && auth()->user()->business_id != null && Auth::user()->registration_type != null)
                 <hr class="mt-4">
                 <div x-data="{ open: false } ">
                     @php
@@ -2675,7 +2675,7 @@
             @endif
 
             {{-- Warehouse link Supplier --}}
-            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && Auth::user()->registration_type != null)
+            @if(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier' && auth()->user()->business_id != null && Auth::user()->registration_type != null)
                 <hr class="mt-4">
                 <div x-data="{ open: false } ">
                     <a @click="open = true"
