@@ -85,7 +85,7 @@
         @endif
         <br>
         <strong>Contact #: </strong>{{ $collection[0]->warehouse->mobile }}<br>
-        <strong>Delivery Address #: </strong>{{ $collection[0]->warehouse->address }}<br>
+        <strong>Delivery Address #: </strong>{{ $collection[0]->warehouse->warehouse_name }}<br>
     </div>
 </div>
 

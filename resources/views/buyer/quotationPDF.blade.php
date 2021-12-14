@@ -111,10 +111,10 @@
         <strong>City: </strong>{{ $quote->buyer_business->city }}<br>
         <strong>VAT Number: </strong> {{ $quote->buyer_business->vat_reg_certificate_number }}<br>
         @php
-            $warehouse = \App\Models\BusinessWarehouse::where('id', $quote->warehouse_id)->first()->only('mobile', 'address');
+            $warehouse = \App\Models\BusinessWarehouse::where('id', $quote->warehouse_id)->first()->only('mobile', 'warehouse_name');
         @endphp
         <strong>Contact #: </strong> {{ $warehouse['mobile'] }}<br>
-        <strong>Delivery Address: </strong> {{ $warehouse['address'] }}<br>
+        <strong>Delivery Address: </strong> {{ $warehouse['warehouse_name'] }}<br>
     </div>
 
     <div class="center"></div>
@@ -232,7 +232,7 @@
 <div class="header">
     <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
-            <strong>Warehouse delivery address: </strong> {{ $warehouse['address'] }}<br>
+            <strong>Warehouse delivery address: </strong> {{ $warehouse['warehouse_name'] }}<br>
             <strong>Mobile #: </strong> {{ $warehouse['mobile'] }}
         </div>
     </div>

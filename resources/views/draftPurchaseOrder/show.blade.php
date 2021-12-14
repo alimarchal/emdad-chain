@@ -64,7 +64,8 @@
                                         <strong>{{__('portal.City')}}:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrder->buyer_business->city }}</span> <br>
                                         <strong>{{__('portal.VAT Number')}}:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrder->buyer_business->vat_reg_certificate_number }}</span> <br>
                                         <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrder->otp_mobile_number }}</span> <br>
-                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrder->delivery_address }}</span> <br><br>
+                                        @php $warehouse = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse_id)->first()->only('warehouse_name'); @endphp
+                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $warehouse['warehouse_name'] }}</span> <br><br>
 
                                         <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.DPO')}}-{{ $draftPurchaseOrder->id }}<br>
                                         <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrder->created_at }}<br>
@@ -181,7 +182,7 @@
                                 <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
                                         <strong>{{__('portal.Mobile Number for OTP')}}: </strong> {{ $draftPurchaseOrder->otp_mobile_number }} <br>
-                                        <strong>{{__('portal.Delivery Address')}}: </strong> {{ strip_tags($draftPurchaseOrder->delivery_address) }} <br>
+                                        <strong>{{__('portal.Delivery Address')}}: </strong> {{ $warehouse['warehouse_name'] }} <br>
                                         <strong class="text-red-900">{{__('portal.Note')}}: </strong> <span class="text-red-700">
                                 {{__('portal.We acknowledge that')}} {{$draftPurchaseOrder->buyer_business->business_name }}
                                             {{__('portal.agrees to deal with')}} {{$draftPurchaseOrder->supplier_business->business_name}}. <br>
@@ -396,7 +397,8 @@
                                         <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->buyer_business->city }}</span> <br>
                                         <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->buyer_business->vat_reg_certificate_number }}</span><br>
                                         <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->otp_mobile_number }}</span><br>
-                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->delivery_address }}</span><br><br>
+                                        @php $warehouse = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrder->warehouse_id)->first()->only('warehouse_name'); @endphp
+                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $warehouse['warehouse_name'] }}</span><br><br>
 
                                         <strong>{{__('portal.D.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.DPO')}}-<span style="font-family: sans-serif;">{{ $draftPurchaseOrder->id }}</span><br>
                                         <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif;">{{ $draftPurchaseOrder->created_at }}</span><br>
@@ -515,7 +517,7 @@
                                 <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
                                         <strong>{{__('portal.Mobile Number for OTP')}}: </strong> <span style="font-family: sans-serif;">{{ $draftPurchaseOrder->otp_mobile_number }}</span> <br>
-                                        <strong>{{__('portal.Delivery Address')}}: </strong> <span style="font-family: sans-serif;">{{ strip_tags($draftPurchaseOrder->delivery_address) }}</span> <br>
+                                        <strong>{{__('portal.Delivery Address')}}: </strong> <span style="font-family: sans-serif;">{{ $warehouse['warehouse_name'] }}</span> <br>
                                         <strong class="text-red-900">{{__('portal.Note')}}: </strong> <span class="text-red-700">
                                             {{__('portal.We acknowledge that')}} {{$draftPurchaseOrder->buyer_business->business_name }}
                                                         {{__('portal.agrees to deal with')}} {{$draftPurchaseOrder->supplier_business->business_name}}. <br>

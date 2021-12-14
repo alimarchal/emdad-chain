@@ -6,13 +6,13 @@
 
         <div class="py-12">
             <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
-                <a href="{{ route('business.index') }}" style="background-color: #145EA8"
-                   class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                <a href="{{ route('business.index') }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                     {{__('portal.Back')}}
                 </a>
             </div>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @include('users.sessionMessage')
+                <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Warehouse/s')}}</h2>
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -23,16 +23,16 @@
                                             {{__('portal.Sr. No')}}
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                            {{__('portal.Business Name')}}
+                                            {{__('portal.Warehouse Name')}}
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                            {{__('portal.Responsible person')}}
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Designation')}}
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                            {{__('portal.Warehouse Focal Person')}}
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                            {{__('portal.Landline')}}
+                                            {{__('portal.Mobile Number')}}
                                         </th>
                                         <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                             {{__('portal.Actions')}}
@@ -46,7 +46,7 @@
                                                 {{$loop->iteration}}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
-                                                {{$biz->business->business_name}}
+                                                {{$biz->warehouse_name}}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
                                                 {{$biz->name}}
@@ -55,7 +55,7 @@
                                                 {{$biz->designation}}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
-                                                {{$biz->landline}}
+                                                {{$biz->mobile}}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-center text-center text-sm font-medium">
                                                 <a  href="{{route('businessWarehouse.edit',$biz->id)}}" class="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800">
@@ -115,6 +115,7 @@
             </div>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @include('users.sessionMessage')
+                <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Warehouse/s')}}</h2>
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -125,16 +126,16 @@
                                         {{__('portal.Sr. No')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                        {{__('portal.Business Name')}}
+                                        {{__('portal.Warehouse Name')}}
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                        {{__('portal.Responsible person')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Designation')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                        {{__('portal.Warehouse Focal Person')}}
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
-                                        {{__('portal.Landline')}}
+                                        {{__('portal.Mobile Number')}}
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                         {{__('portal.Actions')}}
@@ -148,17 +149,16 @@
                                             {{$loop->iteration}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500" style="font-family: sans-serif">
-                                            {{$biz->business->business_name}}
+                                            {{$biz->warehouse_name}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500" style="font-family: sans-serif">
                                             {{$biz->name}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
-{{--                                            {{$biz->designation}}--}}
                                             @if($biz->designation == 'CEO') {{__('portal.CEO')}} @else {{$biz->designation}} @endif
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500" style="font-family: sans-serif">
-                                            {{$biz->landline}}
+                                            {{$biz->mobile}}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center text-center text-sm font-medium">
                                             <a  href="{{route('businessWarehouse.edit',$biz->id)}}" class="h-10 px-5 m-2 text-green-100 transition-colors duration-150 bg-green-700 rounded-lg focus:shadow-outline hover:bg-green-800 hover:text-white">

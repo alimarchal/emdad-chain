@@ -88,7 +88,12 @@
         <strong>City: </strong>{{ $deliveries[0]->buyer->business->city }}<br>
         <strong>VAT Number: </strong>{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}<br>
         <strong>Contact # </strong>{{ $deliveries[0]->otp_mobile_number }}<br>
-        <strong>Delivery Address: </strong>{{ $deliveries[0]->delivery_address }}<br>
+        @php $warehouse = \App\Models\BusinessWarehouse::where('id', $deliveries[0]->eOrderItems->warehouse->id)->first()->only('warehouse_name'); @endphp
+        @if(auth()->user()->registration_type == 'Supplier')
+            <strong>Delivery Address: </strong>{{ $deliveries[0]->delivery_address }}<br>
+        @else
+            <strong>Delivery Address: </strong>{{ $warehouse['warehouse_name'] }}<br>
+        @endif
     </div>
 </div>
 

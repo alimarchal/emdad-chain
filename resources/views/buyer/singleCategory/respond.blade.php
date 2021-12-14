@@ -103,10 +103,10 @@
                                         <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $quotes[0]->buyer_business->city }}</span><br>
                                         <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $quotes[0]->buyer_business->vat_reg_certificate_number }}</span><br>
                                         @php
-                                            $warehouse = \App\Models\BusinessWarehouse::where('id', $quotes[0]->warehouse_id)->first()->only('mobile', 'address');
+                                            $warehouse = \App\Models\BusinessWarehouse::where('id', $quotes[0]->warehouse_id)->first()->only('mobile', 'warehouse_name');
                                         @endphp
                                         <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $warehouse['mobile'] }}</span><br>
-                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $warehouse['address'] }}</span><br>
+                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $warehouse['warehouse_name'] }}</span><br>
                                     </div>
                                 </div>
 
@@ -466,10 +466,10 @@
                                         <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $quotes[0]->buyer_business->city }}</span><br>
                                         <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;</strong><span>{{ $quotes[0]->buyer_business->vat_reg_certificate_number }}</span><br>
                                         @php
-                                            $warehouse = \App\Models\BusinessWarehouse::where('id', $quotes[0]->warehouse_id)->first()->only('mobile', 'address');
+                                            $warehouse = \App\Models\BusinessWarehouse::where('id', $quotes[0]->warehouse_id)->first()->only('mobile', 'warehouse_name');
                                         @endphp
                                         <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $warehouse['mobile'] }}</span><br>
-                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $warehouse['address'] }}</span><br>
+                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $warehouse['warehouse_name'] }}</span><br>
                                     </div>
                                 </div>
 

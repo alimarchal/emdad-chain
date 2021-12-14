@@ -69,7 +69,12 @@
         <strong>City: </strong>{{ $draftPurchaseOrders[0]->buyer_business->city }}<br>
         <strong>VAT Number: </strong> {{ $draftPurchaseOrders[0]->buyer_business->vat_reg_certificate_number }}<br>
         <strong>Contact #: </strong> {{ $draftPurchaseOrders[0]->otp_mobile_number }}<br>
-        <strong>Delivery Address: </strong> {{ $draftPurchaseOrders[0]->delivery_address }}<br><br>
+        @php $warehouse = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrders[0]->warehouse_id)->first()->only('warehouse_name'); @endphp
+        @if(auth()->user()->registration_type == 'Supplier')
+            <strong>Delivery Address: </strong> {{ $draftPurchaseOrders[0]->delivery_address }}<br><br>
+        @else
+            <strong>Delivery Address: </strong>{{ $warehouse['warehouse_name'] }}<br><br>
+        @endif
 
         <strong>P.O. #: </strong>PO-{{ $draftPurchaseOrders[0]->id }}<br>
         <strong>Date: </strong>{{ $draftPurchaseOrders[0]->created_at }}<br>
@@ -222,7 +227,11 @@
     <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
             <strong>Mobile Number (for one time password): </strong> {{ strip_tags($draftPurchaseOrders[0]->otp_mobile_number) }} <br>
-            <strong>Delivery Address: </strong> {{ strip_tags($draftPurchaseOrders[0]->delivery_address) }} <br>
+            @if(auth()->user()->registration_type == 'Supplier')
+                <strong>Delivery Address: </strong> {{ strip_tags($draftPurchaseOrders[0]->delivery_address) }} <br>
+            @else
+                <strong>Delivery Address: </strong> {{ $warehouse['warehouse_name'] }} <br>
+            @endif
         </div>
     </div>
 </div>

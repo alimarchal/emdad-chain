@@ -1,8 +1,6 @@
 @section('headerScripts')
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
-    <link
-        href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
-        rel="stylesheet"  type='text/css'>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
     <script src="{{url('js/mapInput.js')}}"></script>
 @endsection
 @if (auth()->user()->rtl == 0)

@@ -41,7 +41,7 @@ class BusinessWarehouseController extends Controller
 
     }
 
-    public function businessWarehouseShow(Request $request, $id)
+    public function businessWarehouseShow($id)
     {
         $business = BusinessWarehouse::where('business_id', $id)->orderByDesc('created_at')->get();
         return view('businessWarehouse.showAllWareHouse', compact('business'));
@@ -49,28 +49,58 @@ class BusinessWarehouseController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'business_id' => 'required',
-            'name' => 'required',
-            'warehouse_name' => 'required',
-            'designation' => 'required',
-            'warehouse_email' => 'required',
-            'landline' => 'required',
-            'mobile' => 'required|numeric',
-            'country' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'longitude' => 'required',
-            'latitude' => 'required',
-            'warehouse_type' => 'required',
-            'cold_storage' => 'required',
-            'gate_type' => 'required',
-            'fork_lift' => 'required',
-            'total_warehouse_manpower' => 'required',
-            'working_time' => 'required',
-            'working_time_1' => 'required',
-        ]);
+        if (auth()->user()->registration_type == 'Supplier')
+        {
+            $request->validate([
+                'user_id' => 'required',
+                'business_id' => 'required',
+                'name' => 'required',
+                'warehouse_name' => 'required',
+                'designation' => 'required',
+                'warehouse_email' => 'required',
+                'landline' => 'required',
+                'mobile' => 'required|numeric',
+                'country' => 'required',
+                'address' => 'required',
+                'city' => 'required',
+                'longitude' => 'required',
+                'latitude' => 'required',
+                'warehouse_type' => 'required',
+                'cold_storage' => 'required',
+                'gate_type' => 'required',
+                'fork_lift' => 'required',
+                'total_warehouse_manpower' => 'required',
+                'number_of_delivery_vehicles' => 'required',
+                'number_of_drivers' => 'required',
+                'working_time' => 'required',
+                'working_time_1' => 'required',
+            ]);
+        }
+        else
+        {
+            $request->validate([
+                'user_id' => 'required',
+                'business_id' => 'required',
+                'name' => 'required',
+                'warehouse_name' => 'required',
+                'designation' => 'required',
+                'warehouse_email' => 'required',
+                'landline' => 'required',
+                'mobile' => 'required|numeric',
+                'country' => 'required',
+                'address' => 'required',
+                'city' => 'required',
+                'longitude' => 'required',
+                'latitude' => 'required',
+                'warehouse_type' => 'required',
+                'cold_storage' => 'required',
+                'gate_type' => 'required',
+                'fork_lift' => 'required',
+                'total_warehouse_manpower' => 'required',
+                'working_time' => 'required',
+                'working_time_1' => 'required',
+            ]);
+        }
 
         $merge_time = $request->working_time . " - " . $request->working_time_1;
         $request->merge(['working_time' => $merge_time]);
@@ -92,29 +122,53 @@ class BusinessWarehouseController extends Controller
 
     public function update(Request $request, BusinessWarehouse $businessWarehouse)
     {
-
-        $request->validate([
-            'user_id' => 'required',
-            'name' => 'required',
-            'warehouse_name' => 'required',
-            'designation' => 'required',
-            'warehouse_email' => 'required',
-            'landline' => 'required',
-            'mobile' => 'required|numeric',
-            'country' => 'required',
-            'address' => 'required',
-            'warehouse_type' => 'required',
-            'cold_storage' => 'required',
-            'gate_type' => 'required',
-            'fork_lift' => 'required',
-            'total_warehouse_manpower' => 'required',
-            'number_of_drivers' => 'required',
-            'working_time' => 'required',
-        ]);
+        if (auth()->user()->registration_type == 'Supplier')
+        {
+            $request->validate([
+                'user_id' => 'required',
+                'name' => 'required',
+                'warehouse_name' => 'required',
+                'designation' => 'required',
+                'warehouse_email' => 'required',
+                'landline' => 'required',
+                'mobile' => 'required|numeric',
+                'country' => 'required',
+                'address' => 'required',
+                'warehouse_type' => 'required',
+                'cold_storage' => 'required',
+                'gate_type' => 'required',
+                'fork_lift' => 'required',
+                'total_warehouse_manpower' => 'required',
+                'number_of_drivers' => 'required',
+                'working_time' => 'required',
+            ]);
+        }
+        else
+        {
+            $request->validate([
+                'user_id' => 'required',
+                'name' => 'required',
+                'warehouse_name' => 'required',
+                'designation' => 'required',
+                'warehouse_email' => 'required',
+                'landline' => 'required',
+                'mobile' => 'required|numeric',
+                'country' => 'required',
+                'address' => 'required',
+                'warehouse_type' => 'required',
+                'cold_storage' => 'required',
+                'gate_type' => 'required',
+                'fork_lift' => 'required',
+                'total_warehouse_manpower' => 'required',
+                'working_time' => 'required',
+            ]);
+        }
+        $merge_time = $request->working_time . " - " . $request->working_time_1;
+        $request->merge(['working_time' => $merge_time]);
         $businessWarehouse->update($request->all());
 
         session()->flash('message', __('portal.Warehouse information successfully updated.'));
-        return redirect()->route('businessWarehouse.edit', $businessWarehouse->id);
+        return redirect()->route('businessWarehouseShow', $businessWarehouse->id);
     }
 
     public function destroy(BusinessWarehouse $businessWarehouse)

@@ -70,7 +70,12 @@
                                         <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->city }}</span><br>
                                         <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
                                         <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->otp_mobile_number }}</span><br>
-                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->delivery_address }}</span><br>
+                                        @php $warehouse = \App\Models\BusinessWarehouse::where('id', $deliveries[0]->eOrderItems->warehouse->id)->first()->only('warehouse_name'); @endphp
+                                        @if(auth()->user()->registration_type == 'Supplier')
+                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->delivery_address }}</span><br>
+                                        @else
+                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span>{{ $warehouse['warehouse_name'] }}</span><br>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -244,7 +249,12 @@
                                         <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->buyer->business->city }}</span><br>
                                         <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
                                         <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->otp_mobile_number }}</span><br>
-                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->delivery_address }}</span><br>
+                                        @php $warehouse = \App\Models\BusinessWarehouse::where('id', $deliveries[0]->eOrderItems->warehouse->id)->first()->only('warehouse_name'); @endphp
+                                        @if(auth()->user()->registration_type == 'Supplier')
+                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->delivery_address }}</span><br>
+                                        @else
+                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $warehouse['warehouse_name'] }}</span><br>
+                                        @endif
                                     </div>
                                 </div>
 

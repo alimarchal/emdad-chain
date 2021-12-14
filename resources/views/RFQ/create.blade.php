@@ -301,7 +301,7 @@
                                         <hr style="border-top: 1px solid gray;width: 25%;">
                                     </div>
                                     <div class="my-5 pl-5 ">
-                                        {{__('portal.Warehouse Location')}}: @include('misc.required')
+                                        {{__('portal.Warehouse Name')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
                                                  style="width: 8px; height: 8px;"
@@ -313,14 +313,13 @@
                                             <select
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 required name="warehouse_id" id="warehouse_id">
-                                                <option value="">{{__('portal.Select Warehouse Location')}}</option>
-                                                @foreach(\App\Models\BusinessWarehouse::where('business_id',
-                                                auth()->user()->business_id)->get() as $warehouse)
+                                                <option value="">{{__('portal.Select')}}</option>
+                                                @foreach(\App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->get() as $warehouse)
                                                     <option value="{{$warehouse->id}}"
                                                     @if (isset($latest_rfq)) {{$latest_rfq->warehouse_id == $warehouse->id ? 'selected' : ''}}
                                                     @else {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}}
                                                     @endif>
-                                                        {{$warehouse->address }}
+                                                        {{$warehouse->warehouse_name }}
                                                     </option>
                                                 @endforeach
 
@@ -798,7 +797,7 @@
                                         <hr style="border-top: 1px solid gray;width: 25%;">
                                     </div>
                                     <div class="my-5 pl-5 ">
-                                        {{__('portal.Warehouse Location')}}: @include('misc.required')
+                                        {{__('portal.Warehouse Name')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
                                                  style="width: 8px; height: 8px;"
@@ -810,13 +809,13 @@
                                             <select
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 required name="warehouse_id" id="warehouse_id">
-                                                <option value="">{{__('portal.Select Warehouse Location')}}</option>
+                                                <option value="">{{__('portal.Select')}}</option>
                                                 @foreach(\App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->get() as $warehouse)
                                                     <option value="{{$warehouse->id}}"
                                                     @if (isset($latest_rfq)) {{$latest_rfq->warehouse_id == $warehouse->id ? 'selected' : ''}}
                                                     @else {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}}
                                                     @endif>
-                                                        {{$warehouse->address }}
+                                                        {{$warehouse->warehouse_name }}
                                                     </option>
                                                 @endforeach
 
@@ -1561,7 +1560,7 @@
                                         <hr style="border-top: 1px solid gray;width: 25%;">
                                     </div>
                                     <div class="my-5 pl-5 ">
-                                        {{__('portal.Warehouse Location')}}: @include('misc.required')
+                                        {{__('portal.Warehouse Name')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
                                                  style="width: 8px; height: 8px;"
@@ -1573,14 +1572,14 @@
                                             <select style="font-family: sans-serif;"
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 required name="warehouse_id" id="warehouse_id">
-                                                <option value="">{{__('portal.Select Warehouse Location')}}</option>
+                                                <option value="">{{__('portal.Select')}}</option>
                                                 @foreach(\App\Models\BusinessWarehouse::where('business_id',
                                                 auth()->user()->business_id)->get() as $warehouse)
                                                     <option value="{{$warehouse->id}}"
                                                     @if (isset($latest_rfq)) {{$latest_rfq->warehouse_id == $warehouse->id ? 'selected' : ''}}
                                                     @else {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}}
                                                     @endif>
-                                                        {{$warehouse->address }}
+                                                        {{$warehouse->warehouse_name }}
                                                     </option>
                                                 @endforeach
 
@@ -2058,7 +2057,7 @@
                                         <hr style="border-top: 1px solid gray;width: 25%;">
                                     </div>
                                     <div class="my-5 pl-5 ">
-                                        {{__('portal.Warehouse Location')}}: @include('misc.required')
+                                        {{__('portal.Warehouse Name')}}: @include('misc.required')
                                         <div class="relative inline-flex">
                                             <svg class="w-2 h-2 absolute top-0 right-0 mt-4 pointer-events-none"
                                                  style="width: 8px; height: 8px;"
@@ -2070,13 +2069,13 @@
                                             <select style="font-family: sans-serif;"
                                                 class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
                                                 required name="warehouse_id" id="warehouse_id">
-                                                <option value="">{{__('portal.Select Warehouse Location')}}</option>
+                                                <option value="">{{__('portal.Select')}}</option>
                                                 @foreach(\App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->get() as $warehouse)
                                                     <option value="{{$warehouse->id}}"
                                                     @if (isset($latest_rfq)) {{$latest_rfq->warehouse_id == $warehouse->id ? 'selected' : ''}}
                                                     @else {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}}
                                                     @endif>
-                                                        {{$warehouse->address }}
+                                                        {{$warehouse->warehouse_name }}
                                                     </option>
                                                 @endforeach
 
