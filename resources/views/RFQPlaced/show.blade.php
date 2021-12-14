@@ -113,10 +113,10 @@
 
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                         @if(auth()->user()->rtl == 0)
-                                            <strong>{{__('portal.Requisition Type')}}: &nbsp;&nbsp;</strong> @if($collection[0]->rfq_type == 1) {{__('portal.Multiple Categories')}} @else {{__('portal.Single Category')}} @endif <br>
-                                            <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $collection[0]->created_at }}<br>
-                                            <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{__('portal.RFQ')}}-{{ $collection[0]->id }}</span><br>
-                                            <strong>{{__('portal.Payment Terms')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong>
+                                            <strong>{{__('portal.Requisition Type')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> @if($collection[0]->rfq_type == 1) {{__('portal.Multiple Categories')}} @else {{__('portal.Single Category')}} @endif <br>
+                                            <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $collection[0]->created_at }}<br>
+                                            <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{__('portal.RFQ')}}-{{ $collection[0]->id }}</span><br>
+                                            <strong>{{__('portal.Payment Terms')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                             @if($collection[0]->payment_mode == 'Cash') {{__('portal.Cash')}}
                                             @elseif($collection[0]->payment_mode == 'Credit') {{__('portal.Credit')}}
                                             @elseif($collection[0]->payment_mode == 'Credit30days') {{__('portal.Credit (30 Days)')}}
@@ -125,8 +125,8 @@
                                             @elseif($collection[0]->payment_mode == 'Credit120days') {{__('portal.Credit (120 Days)')}}
                                             @endif
                                             <br>
-                                            <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $collection[0]->warehouse->mobile }}</span> <br>
-                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $collection[0]->warehouse->address }}</span> <br>
+                                            <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $collection[0]->warehouse->mobile }}</span> <br>
+                                            <strong>{{__('portal.Warehouse for delivery')}}: &nbsp;&nbsp;</strong><span>{{ $collection[0]->warehouse->warehouse_name }}</span> <br>
                                         @else
                                             <strong>{{__('portal.Requisition Type')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> @if($collection[0]->rfq_type == 1) {{__('portal.Multiple Categories')}} @else {{__('portal.Single Category')}} @endif <br>
                                             <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->created_at }}</span> <br>
@@ -141,7 +141,7 @@
                                             @endif
                                             <br>
                                             <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->warehouse->mobile }}</span> <br>
-                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->warehouse->address }}</span> <br>
+                                            <strong>{{__('portal.Warehouse for delivery')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->warehouse->warehouse_name }}</span> <br>
                                         @endif
                                     </div>
                                 </div>

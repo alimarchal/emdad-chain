@@ -646,6 +646,7 @@ class QouteController extends Controller
         return view('buyer.QoutationsBuyerReceivedAccepted', compact('collection', 'EOrderID', 'EOrderItemID', 'bypass_id'));
     }
 
+    /* Multiple category quotation quoted view by ID */
     public function QoutationsBuyerReceivedQouteID(Qoute $QouteItem)
     {
         return view('buyer.qoutesrespond', compact('QouteItem'));
@@ -828,6 +829,7 @@ class QouteController extends Controller
         return view('buyer.singleCategory.rfq', compact('RFQItems'));
     }
 
+    /* Single category quotation quoted view by ID */
     public function singleCategoryRFQItemByID(Qoute $quote)
     {
         $quotes = Qoute::with('orderItem', 'buyer_business', 'supplier_business', 'user', 'business', 'RFQ', 'messages')->where(['supplier_business_id' => $quote->supplier_business_id])->where('e_order_id', $quote->e_order_id)->get();

@@ -1,5 +1,6 @@
 @section('headerScripts')
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
     <script src="{{url('js/mapInput.js')}}"></script>
 @endsection
 
@@ -12,6 +13,18 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @include('users.sessionMessage')
+                @if ($errors->any())
+                    <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                            <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
                         <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
@@ -26,14 +39,28 @@
                                 <x-jet-input id="warehouse_name" type="text" name="warehouse_name" class="border p-2 w-1/2" value="{{$businessWarehouse->warehouse_name}}" required></x-jet-input>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="designation">{{__('portal.Designation')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="name">{{__('portal.Responsible person')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="designation" style="padding-left: 29px;">{{__('portal.Designation')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="warehouse_email">{{__('portal.Warehouse Email')}} @include('misc.required')</x-jet-label>
                                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="designation" type="text" name="designation" class="border p-2 w-1/2" value="{{$businessWarehouse->designation}}"></x-jet-input>
-                                <x-jet-input id="name" name="name" class="border p-2 w-1/2"  value="{{$businessWarehouse->name}}"></x-jet-input>
+                                <select id="name" name="name" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
+                                    <option value="">{{__('portal.Select')}}</option>
+                                    @foreach(\App\Models\User::where('business_id',auth()->user()->business_id)->get() as $user)
+                                        <option {{($businessWarehouse->name == $user->name ? 'selected' : '')}} value="{{$user->name}}">{{$user->name}}</option>
+                                    @endforeach
+                                </select>
+                                <i class="fa fa-user-plus mt-2" title="{{__('portal.Add User')}}" ></i>
+                                <select id="designation" name="designation" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
+                                    <option value="">{{__('portal.Select')}}</option>
+                                    <option {{($businessWarehouse->designation == 'CEO' ? 'selected' : '')}} value="CEO">{{__('portal.CEO')}}</option>
+                                    @foreach(\App\Models\User::where('business_id',auth()->user()->business_id)->get() as $user)
+                                        @if($user->id != auth()->user()->id)
+                                            <option {{($businessWarehouse->designation == $user->designation ? 'selected' : '')}} value="{{$user->designation}}">{{$user->designation}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                                 <x-jet-input id="warehouse_email" type="email" name="warehouse_email" class="border p-2 w-1/2" value="{{$businessWarehouse->warehouse_email}}"></x-jet-input>
                             </div>
                             <div class="flex space-x-5 mt-3">
@@ -111,11 +138,15 @@
                             </div>
                             <div class="flex space-x-5 mt-3">
 
+                                @if(auth()->user()->registration_type == 'Supplier')
                                 <x-jet-label class="w-1/2" for="number_of_delivery_vehicles">{{__('portal.Number of Delivery Vehicles')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="number_of_drivers">{{__('portal.Number of Drivers')}} @include('misc.required')</x-jet-label>
-                                <x-jet-label class="w-1/2" for="working_time">{{__('portal.Working Time')}} @include('misc.required')</x-jet-label>
+                                @endif
+                                <x-jet-label class="w-1/4" for="working_time">{{__('portal.From (Delivery Receiving Time)')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/4" for="working_time">{{__('portal.To (Delivery Receiving Time)')}} @include('misc.required')</x-jet-label>
                             </div>
                             <div class="flex space-x-5 mt-3">
+                                @if(auth()->user()->registration_type == 'Supplier')
                                 <select name="number_of_delivery_vehicles" id="number_of_delivery_vehicles" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                     <option value="">{{__('portal.Select')}}</option>
                                     @for($count = 1; $count <= 100; $count++)
@@ -128,7 +159,25 @@
                                         <option value="{{$count}}" {{($businessWarehouse->number_of_drivers == $count)?'selected':''}}>{{$count}}</option>
                                     @endfor
                                 </select>
-                                <x-jet-input id="working_time" type="text" name="working_time" value="{{$businessWarehouse->working_time}}" class="border p-2 w-1/2"></x-jet-input>
+                                @endif
+                                @php $working_time = explode('-',$businessWarehouse->working_time);
+                                        $working_time_1 = $working_time[0];
+                                        $working_time_2 = $working_time[1];
+                                @endphp
+                                <select name="working_time" id="working_time" class="form-select rounded-md shadow-sm border p-2 w-1/4" required>
+                                    <option value="">{{__('portal.Select')}}</option>
+                                    @for($count = 0; $count <= 23; $count++)
+                                        <option {{(trim($working_time_1) == $count.":00" ? 'selected' : '')}} value="{{$count}}:00">{{$count}}:00</option>
+                                    @endfor
+                                </select>
+
+                                <select name="working_time_1" id="working_time_1" class="form-select rounded-md shadow-sm border p-2 w-1/4" required>
+                                    <option value="">{{__('portal.Select')}}</option>
+                                    @for($count = 0; $count <= 23; $count++)
+                                        <option {{(trim($working_time_2) == $count.":00" ? 'selected' : '')}} value="{{$count}}:00">{{$count}}:00</option>
+                                    @endfor
+                                </select>
+{{--                                <x-jet-input id="working_time" type="text" name="working_time" value="{{$businessWarehouse->working_time}}" class="border p-2 w-1/2"></x-jet-input>--}}
                             </div>
                             <div class="control-group after-add-more">
 
@@ -172,6 +221,18 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @include('users.sessionMessage')
+                @if ($errors->any())
+                    <div class="block text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                            <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <div class="px-4 py-0 bg-white sm:p-6 rounded-sm">
                         <img src="{{url('registration_step/2.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
@@ -186,14 +247,28 @@
                                 <x-jet-input id="warehouse_name" type="text" name="warehouse_name" class="border p-2 w-1/2" value="{{$businessWarehouse->warehouse_name}}" required></x-jet-input>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="designation">{{__('portal.Designation')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="name">{{__('portal.Responsible person')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="designation" style="padding-right: 44px;">{{__('portal.Designation')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="warehouse_email">{{__('portal.Warehouse Email')}} @include('misc.required')</x-jet-label>
                                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="designation" type="text" name="designation" class="border p-2 w-1/2" value="{{$businessWarehouse->designation}}"></x-jet-input>
-                                <x-jet-input id="name" name="name" class="border p-2 w-1/2"  value="{{$businessWarehouse->name}}" style="margin-right: 5px;"></x-jet-input>
+                                <select id="name" name="name" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
+                                    <option value="">{{__('portal.Select')}}</option>
+                                    @foreach(\App\Models\User::where('business_id',auth()->user()->business_id)->get() as $user)
+                                        <option {{($businessWarehouse->name == $user->name ? 'selected' : '')}} value="{{$user->name}}">{{$user->name}}</option>
+                                    @endforeach
+                                </select>
+                                <i class="fa fa-user-plus mt-2" title="{{__('portal.Add User')}}" style="padding-right: 11px;"></i>
+                                <select id="designation" name="designation" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
+                                    <option value="">{{__('portal.Select')}}</option>
+                                    <option {{($businessWarehouse->designation == 'CEO' ? 'selected' : '')}} value="CEO">{{__('portal.CEO')}}</option>
+                                    @foreach(\App\Models\User::where('business_id',auth()->user()->business_id)->get() as $user)
+                                        @if($user->id != auth()->user()->id)
+                                            <option {{($businessWarehouse->designation == $user->designation ? 'selected' : '')}} value="{{$user->designation}}">{{$user->designation}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                                 <x-jet-input id="warehouse_email" type="email" name="warehouse_email" class="border p-2 w-1/2" value="{{$businessWarehouse->warehouse_email}}"></x-jet-input>
                             </div>
                             <div class="flex space-x-5 mt-3">
@@ -271,11 +346,15 @@
                             </div>
                             <div class="flex space-x-5 mt-3">
 
+                                @if(auth()->user()->registration_type == 'Supplier')
                                 <x-jet-label class="w-1/2" for="number_of_delivery_vehicles">{{__('portal.Number of Delivery Vehicles')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="number_of_drivers">{{__('portal.Number of Drivers')}} @include('misc.required')</x-jet-label>
-                                <x-jet-label class="w-1/2" for="working_time">{{__('portal.Working Time')}} @include('misc.required')</x-jet-label>
+                                @endif
+                                <x-jet-label class="w-1/4" for="working_time">{{__('portal.From (Delivery Receiving Time)')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/4 px-2" for="working_time">{{__('portal.To (Delivery Receiving Time)')}} @include('misc.required')</x-jet-label>
                             </div>
                             <div class="flex space-x-5 mt-3">
+                                @if(auth()->user()->registration_type == 'Supplier')
                                 <select name="number_of_delivery_vehicles" id="number_of_delivery_vehicles" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                     <option value="">{{__('portal.Select')}}</option>
                                     @for($count = 1; $count <= 100; $count++)
@@ -288,7 +367,24 @@
                                         <option value="{{$count}}" {{($businessWarehouse->number_of_drivers == $count)?'selected':''}}>{{$count}}</option>
                                     @endfor
                                 </select>
-                                <x-jet-input id="working_time" type="text" name="working_time" value="{{$businessWarehouse->working_time}}" class="border p-2 w-1/2"></x-jet-input>
+                                @endif
+                                @php $working_time = explode('-',$businessWarehouse->working_time);
+                                    $working_time_1 = $working_time[0];
+                                    $working_time_2 = $working_time[1];
+                                @endphp
+                                <select name="working_time" id="working_time" class="form-select mb-2 rounded-md shadow-sm block w-1/4" required>
+                                    <option value="">{{__('portal.Select')}}</option>
+                                    @for($count = 0; $count <= 23; $count++)
+                                        <option {{(trim($working_time_1) == $count.":00" ? 'selected' : '')}} value="{{$count}}:00">{{$count}}:00</option>
+                                    @endfor
+                                </select>
+
+                                <select name="working_time_1" id="working_time_1" class="form-select mb-2 rounded-md shadow-sm block w-1/4" style="margin-right: 6px;" required>
+                                    <option value="">{{__('portal.Select')}}</option>
+                                    @for($count = 0; $count <= 23; $count++)
+                                        <option {{(trim($working_time_2) == $count.":00" ? 'selected' : '')}} value="{{$count}}:00">{{$count}}:00</option>
+                                    @endfor
+                                </select>
                             </div>
                             <div class="control-group after-add-more">
 

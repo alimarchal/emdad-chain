@@ -68,7 +68,12 @@
                                         <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrders[0]->buyer_business->city }}</span><br>
                                         <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrders[0]->buyer_business->vat_reg_certificate_number }}</span><br>
                                         <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrders[0]->otp_mobile_number }}</span><br>
-                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrders[0]->delivery_address }}</span><br><br>
+                                        @php $warehouse = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrders[0]->warehouse_id)->first()->only('warehouse_name'); @endphp
+                                        @if(auth()->user()->registration_type == 'Supplier')
+                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $draftPurchaseOrders[0]->delivery_address }}</span><br><br>
+                                        @else
+                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $warehouse['warehouse_name'] }}</span> <br><br>
+                                        @endif
 
                                         <strong>{{__('portal.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.PO')}}-{{ $draftPurchaseOrders[0]->id }}<br>
                                         <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $draftPurchaseOrders[0]->created_at }}<br>
@@ -202,7 +207,11 @@
                                 <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
                                         <strong>{{__('portal.Mobile Number for OTP')}}: </strong> {{ $draftPurchaseOrders[0]->otp_mobile_number }} <br>
-                                        <strong>{{__('portal.Delivery Address')}}: </strong> {{ strip_tags($draftPurchaseOrders[0]->delivery_address) }} <br>
+                                        @if(auth()->user()->registration_type == 'Supplier')
+                                            <strong>{{__('portal.Delivery Address')}}: </strong> {{ strip_tags($draftPurchaseOrders[0]->delivery_address) }} <br>
+                                        @else
+                                            <strong>{{__('portal.Delivery Address')}}: </strong> {{ $warehouse['warehouse_name'] }} <br>
+                                        @endif
                                     </div>
                                     <div class="w-full overflow-hidden mt-3 lg:w-1/2 xl:w-1/2">
                                         <form action="{{route('uploadSingleCategoryDPOFile')}}" method="post" id="upload-image-form" enctype="multipart/form-data">
@@ -341,7 +350,12 @@
                                         <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style=" font-family: sans-serif;">{{ $draftPurchaseOrders[0]->buyer_business->city }}</span><br>
                                         <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style=" font-family: sans-serif;">{{ $draftPurchaseOrders[0]->buyer_business->vat_reg_certificate_number }}</span><br>
                                         <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style=" font-family: sans-serif;">{{ $draftPurchaseOrders[0]->otp_mobile_number }}</span><br>
-                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style=" font-family: sans-serif;">{{ $draftPurchaseOrders[0]->delivery_address }}</span><br><br>
+                                        @php $warehouse = \App\Models\BusinessWarehouse::where('id', $draftPurchaseOrders[0]->warehouse_id)->first()->only('warehouse_name'); @endphp
+                                        @if(auth()->user()->registration_type == 'Supplier')
+                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style=" font-family: sans-serif;">{{ $draftPurchaseOrders[0]->delivery_address }}</span><br><br>
+                                        @else
+                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style=" font-family: sans-serif;">{{ $warehouse['warehouse_name'] }}</span><br><br>
+                                        @endif
 
                                         <strong>{{__('portal.P.O.')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.PO')}}-<span style=" font-family: sans-serif;">{{ $draftPurchaseOrders[0]->id }}</span> <br>
                                         <strong>{{__('portal.Date')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style=" font-family: sans-serif;">{{ $draftPurchaseOrders[0]->created_at }}</span> <br>
@@ -476,7 +490,11 @@
                                 <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
                                     <div class="w-full overflow-hidden lg:w-1/2 xl:w-2/3">
                                         <strong>{{__('portal.Mobile Number for OTP')}}: </strong> <span style=" font-family: sans-serif;">{{ $draftPurchaseOrders[0]->otp_mobile_number }}</span> <br>
-                                        <strong>{{__('portal.Delivery Address')}}: </strong> <span style=" font-family: sans-serif;">{{ strip_tags($draftPurchaseOrders[0]->delivery_address) }}</span> <br>
+                                        @if(auth()->user()->registration_type == 'Supplier')
+                                            <strong>{{__('portal.Delivery Address')}}: </strong> <span style=" font-family: sans-serif;">{{ strip_tags($draftPurchaseOrders[0]->delivery_address) }}</span> <br>
+                                        @else
+                                            <strong>{{__('portal.Delivery Address')}}: </strong> <span style=" font-family: sans-serif;">{{ $warehouse['warehouse_name'] }}</span> <br>
+                                        @endif
                                     </div>
                                     <div class="w-full overflow-hidden mt-3 lg:w-1/2 xl:w-1/2">
                                         <form action="{{route('uploadSingleCategoryDPOFile')}}" method="post" id="upload-image-form" enctype="multipart/form-data">
