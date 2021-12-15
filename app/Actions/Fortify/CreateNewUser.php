@@ -93,7 +93,7 @@ class CreateNewUser implements CreatesNewUsers
             }
          */
 
-        $user->notify(new UserRegistration());
+//        $user->notify(new UserRegistration());
 
         if ($input['referred_no'] == null || $input['referred_no'] == ' ') {
             if ($input['service'] == 3) {

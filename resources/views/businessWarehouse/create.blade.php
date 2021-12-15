@@ -77,18 +77,21 @@
                                 <x-jet-input id="mobile" type="number"
                                              oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                              name="mobile" class="border p-2 w-1/2" maxlength="9" value="{{old('mobile')}}" required></x-jet-input>
-                                <select name="country" id="country" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
-                                    <option value="">{{__('portal.Select')}}</option>
-                                    @foreach(\App\Models\User::countries() as $country)
-                                        <option {{(old('country') == $country ? 'selected' : '')}} value="{{$country}}">{{$country}}</option>
-                                    @endforeach
-                                </select>
-                                <select name="city" id="city" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
-                                    <option value="">{{__('portal.Select')}}</option>
-                                    @foreach (\App\Models\City::all() as $city)
-                                        <option {{(old('city') ==  $city->name_en ? 'selected' : '')}} value="{{ $city->name_en }}">{{ $city->name_en . ' - ' . $city->name_ar }}</option>
-                                    @endforeach
-                                </select>
+
+                                <livewire:business-warehouse-country />
+
+{{--                                <select name="country" id="country" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>--}}
+{{--                                    <option value="">{{__('portal.Select')}}</option>--}}
+{{--                                    @foreach(\App\Models\User::countries() as $country)--}}
+{{--                                        <option {{(old('country') == $country ? 'selected' : '')}} value="{{$country}}">{{$country}}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                                <select name="city" id="city" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>--}}
+{{--                                    <option value="">{{__('portal.Select')}}</option>--}}
+{{--                                    @foreach (\App\Models\City::all() as $city)--}}
+{{--                                        <option {{(old('city') ==  $city->name_en ? 'selected' : '')}} value="{{ $city->name_en }}">{{ $city->name_en . ' - ' . $city->name_ar }}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
                                 <x-jet-input id="address" type="text" name="address" class="border p-2 w-1/2" value="{{old('address')}}" required></x-jet-input>
                             </div>
 

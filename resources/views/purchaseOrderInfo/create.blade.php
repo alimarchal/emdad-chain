@@ -33,8 +33,8 @@
                             </label>
                         </div>
                         <div class="flex space-x-5 mt-3">
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="no_of_monthly_orders" type="number" name="no_of_monthly_orders" value="{{old('no_of_monthly_orders')}}" required>
-                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="volume" type="text" name="volume" value="{{old('volume')}}" required>
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="no_of_monthly_orders" type="number" name="no_of_monthly_orders" value="{{old('no_of_monthly_orders')}}">
+                            <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="volume" type="text" name="volume" value="{{old('volume')}}" >
                             <select name="type" id="type" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                 <option value="">{{__('portal.Select')}}</option>
                                 <option {{(old('type') == 'Credit' ? 'selected' : '')}} value="Credit">{{__('portal.Credit')}}</option>
@@ -48,7 +48,12 @@
                         <div class="control-group after-add-more">
 
                         </div>
-                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
+                        <button  type="submit" class="inline-flex items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
+                            Skip and Submit
+                        </button>
+
+
+                        <button type="submit" style="margin-right: 10px;" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
                             {{__('portal.Submit for Approval')}}
                         </button>
 
@@ -109,7 +114,7 @@
                                 </label>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="no_of_monthly_orders" type="number" name="no_of_monthly_orders" value="{{old('no_of_monthly_orders')}}" required>
+                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="no_of_monthly_orders" type="number" name="no_of_monthly_orders" value="{{old('no_of_monthly_orders')}}" >
                                 <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="volume" type="text" name="volume" value="{{old('volume')}}" style="margin-right: 5px;" required>
                                 <select name="type" id="type" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                     <option value="">{{__('portal.Select')}}</option>

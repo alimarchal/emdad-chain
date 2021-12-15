@@ -34,8 +34,6 @@ class POInfoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'no_of_monthly_orders' => 'required',
-            'volume' => 'required',
             'type' => 'required',
             'user_id' => 'required',
             'business_id' => 'required',

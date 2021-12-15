@@ -8,13 +8,20 @@ use Livewire\Component;
 class Country extends Component
 {
 
-    public $country = null;
+    public $country = 'Saudi Arabia';
+
 
     public function render()
     {
-        $list = City::where('name_en', 'a')->get();
-        if($this->country =="Saudi Arabia")
-            $list = City::alL()->sortBy('name_en');
-        return view('livewire.country', compact('list'));
+//        $list = null;
+//        if ($this->country == "Saudi Arabia")
+//            $list = City::alL()->sortBy('name_en');
+        return view('livewire.country');
     }
+
+
+//    public function updated()
+//    {
+//        dd('updating');
+//    }
 }
