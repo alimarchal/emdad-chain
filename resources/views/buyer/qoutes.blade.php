@@ -152,7 +152,7 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_quantity }}
+                                                    {{ number_format($rfp->quote_quantity) }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -168,7 +168,7 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->total_cost }} {{__('portal.SAR')}}
+                                                    {{ number_format($rfp->total_cost, 2) }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -242,7 +242,7 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_quantity }}
+                                                    {{ number_format($rfp->quote_quantity) }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -258,7 +258,7 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->total_cost }} {{__('portal.SAR')}}
+                                                    {{ number_format($rfp->total_cost, 2) }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -331,7 +331,7 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_quantity }}
+                                                    {{ number_format($rfp->quote_quantity) }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -347,7 +347,7 @@
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->total_cost }} {{__('portal.SAR')}}
+                                                    {{ number_format($rfp->total_cost, 2) }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
@@ -560,7 +560,7 @@
                                     @else
                                         @foreach ($collection->qoutes->where('qoute_status', 'Qouted')->sortBy('total_cost')->take(2) as $rfp)
                                             <tr>
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $loop->iteration }}
                                                 </td>
 
@@ -572,46 +572,46 @@
                                                     {{ $categoryName->name_ar }}@if(isset($parentName)), {{$parentName}} @endif
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_quantity }}
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
+                                                    {{ number_format($rfp->quote_quantity) }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                    <span style="font-family: sans-serif">{{ $rfp->quote_price_per_quantity }}</span> {{__('portal.SAR')}}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $rfp->orderItem->size }}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $rfp->shipping_time_in_days }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->total_cost }} {{__('portal.SAR')}}
+                                                    <span style="font-family: sans-serif">{{ number_format($rfp->total_cost, 2) }}</span> {{__('portal.SAR')}}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ strip_tags($rfp->note_for_customer) }}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $rfp->created_at->format('d-m-Y') }}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('d-m-Y') }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
                                                     @if($rfp->qoute_status_updated == 'Rejected')
-                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent hover:text-white rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                             {{__('portal.Rejected')}}
                                                         </a>
                                                     @else
                                                         @if($rfp->expiry_date < \Carbon\Carbon::now() && $rfp->request_status == 1)
-                                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-600 transition ease-in-out duration-150">
+                                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent hover:text-white rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-600 transition ease-in-out duration-150">
                                                                 {{__('portal.You have asked for extension in expiry date for this quotation.')}}
                                                             </a>
                                                         @elseif($rfp->expiry_date >= \Carbon\Carbon::now())
@@ -619,7 +619,7 @@
                                                             @php $requestStatus = $collection->qoutes->where('qoute_status', 'Qouted')->where('qoute_status_updated', '!=', 'Rejected')->sortBy('total_cost')->take(5)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
                                                             @if(!$present)
                                                                 <a href="{{ route('QoutationsBuyerReceivedQouteID', $rfp->id) }}"
-                                                                   class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                                   class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md hover:text-white font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
                                                                     {{__('portal.Respond')}}
                                                                 </a>
                                                             @endif
@@ -628,7 +628,7 @@
                                                             @if($present)
                                                                 {{--  Show Nothing if extension request is send against any quotation --}}
                                                             @else
-                                                                <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 hover:text-white border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                                     {{__('portal.Quotation Expired')}}
                                                                 </a>
                                                             @endif
@@ -650,7 +650,7 @@
                                     @else
                                         @foreach ($collection->qoutes->where('qoute_status', 'Qouted')->sortBy('total_cost')->take(3) as $rfp)
                                             <tr>
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $loop->iteration }}
                                                 </td>
 
@@ -662,46 +662,46 @@
                                                     {{ $categoryName->name_ar }}@if(isset($parentName)), {{$parentName}} @endif
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_quantity }}
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
+                                                    {{ number_format($rfp->quote_quantity) }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                    <span style="font-family: sans-serif">{{ $rfp->quote_price_per_quantity }}</span> {{__('portal.SAR')}}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $rfp->orderItem->size }}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $rfp->shipping_time_in_days }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->total_cost }} {{__('portal.SAR')}}
+                                                    <span style="font-family: sans-serif">{{ number_format($rfp->total_cost, 2) }}</span> {{__('portal.SAR')}}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ strip_tags($rfp->note_for_customer) }}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $rfp->created_at->format('d-m-Y') }}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('d-m-Y') }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
                                                     @if($rfp->qoute_status_updated == 'Rejected')
-                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md hover:text-white font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                             {{__('portal.Rejected')}}
                                                         </a>
                                                     @else
                                                         @if($rfp->expiry_date < \Carbon\Carbon::now() && $rfp->request_status == 1)
-                                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-600 transition ease-in-out duration-150">
+                                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md hover:text-white font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-600 transition ease-in-out duration-150">
                                                                 {{__('portal.You have asked for extension in expiry date for this quotation.')}}
                                                             </a>
                                                         @elseif($rfp->expiry_date >= \Carbon\Carbon::now())
@@ -709,7 +709,7 @@
                                                             @php $requestStatus = $collection->qoutes->where('qoute_status', 'Qouted')->where('qoute_status_updated', '!=', 'Rejected')->sortBy('total_cost')->take(5)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
                                                             @if(!$present)
                                                                 <a href="{{ route('QoutationsBuyerReceivedQouteID', $rfp->id) }}"
-                                                                   class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                                   class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent hover:text-white rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
                                                                     {{__('portal.Respond')}}
                                                                 </a>
                                                             @endif
@@ -718,7 +718,7 @@
                                                             @if($present)
                                                                 {{--  Show Nothing if extension request is send against any quotation --}}
                                                             @else
-                                                                <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 hover:text-white border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                                     {{__('portal.Quotation Expired')}}
                                                                 </a>
                                                             @endif
@@ -739,7 +739,7 @@
                                     @else
                                         @foreach ($collection->qoutes->where('qoute_status', 'Qouted')->sortBy('total_cost')->take(5) as $rfp)
                                             <tr>
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $loop->iteration }}
                                                 </td>
 
@@ -751,46 +751,46 @@
                                                     {{ $categoryName->name_ar }}@if(isset($parentName)), {{$parentName}} @endif
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_quantity }}
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
+                                                    {{ number_format($rfp->quote_quantity) }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                    <span style="font-family: sans-serif">{{ $rfp->quote_price_per_quantity }}</span> {{__('portal.SAR')}}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $rfp->orderItem->size }}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $rfp->shipping_time_in_days }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
-                                                    {{ $rfp->total_cost }} {{__('portal.SAR')}}
+                                                    <span style="font-family: sans-serif">{{ number_format($rfp->total_cost, 2) }}</span> {{__('portal.SAR')}}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ strip_tags($rfp->note_for_customer) }}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $rfp->created_at->format('d-m-Y') }}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('d-m-Y') }}
                                                 </td>
 
                                                 <td class="px-6 text-center py-4 whitespace-nowrap">
                                                     @if($rfp->qoute_status_updated == 'Rejected')
-                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent hover:text-white rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                             {{__('portal.Rejected')}}
                                                         </a>
                                                     @else
                                                         @if($rfp->expiry_date < \Carbon\Carbon::now() && $rfp->request_status == 1)
-                                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-600 transition ease-in-out duration-150">
+                                                            <a class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent hover:text-white rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-600 transition ease-in-out duration-150">
                                                                 {{__('portal.You have asked for extension in expiry date for this quotation.')}}
                                                             </a>
                                                         @elseif($rfp->expiry_date >= \Carbon\Carbon::now())
@@ -798,7 +798,7 @@
                                                             @php $requestStatus = $collection->qoutes->where('qoute_status', 'Qouted')->where('qoute_status_updated', '!=', 'Rejected')->sortBy('total_cost')->take(5)->pluck('id'); $present = \App\Models\Qoute::whereIn('id', $requestStatus)->where('request_status', 1)->first(); @endphp
                                                             @if(!$present)
                                                                 <a href="{{ route('QoutationsBuyerReceivedQouteID', $rfp->id) }}"
-                                                                   class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
+                                                                   class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent hover:text-white rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green active:bg-green-600 transition ease-in-out duration-150">
                                                                     {{__('portal.Respond')}}
                                                                 </a>
                                                             @endif
@@ -807,7 +807,7 @@
                                                             @if($present)
                                                                 {{--  Show Nothing if extension request is send against any quotation --}}
                                                             @else
-                                                                <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
+                                                                <a href="{{ route('QuotationExpiredStatusUpdate', $rfp->id) }}" onclick="request()" title="{{__('portal.Request to extend quotation expiry date')}}" class="inline-flex items-center justify-center px-4 py-2 bg-red-600 hover:text-white border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                                     {{__('portal.Quotation Expired')}}
                                                                 </a>
                                                             @endif

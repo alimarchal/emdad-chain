@@ -99,14 +99,14 @@
                                     </div>--}}
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                         <img src="{{ Storage::url($quotes[0]->buyer_business->business_photo_url) }}" alt="{{ $quotes[0]->buyer_business->business_name }}" style="height: 95px;"/>
-                                        <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $quotes[0]->buyer_business->business_name }}<br>
-                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $quotes[0]->buyer_business->city }}</span><br>
-                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $quotes[0]->buyer_business->vat_reg_certificate_number }}</span><br>
+                                        <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $quotes[0]->buyer_business->business_name }}<br>
+                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $quotes[0]->buyer_business->city }}</span><br>
+                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $quotes[0]->buyer_business->vat_reg_certificate_number }}</span><br>
                                         @php
                                             $warehouse = \App\Models\BusinessWarehouse::where('id', $quotes[0]->warehouse_id)->first()->only('mobile', 'warehouse_name');
                                         @endphp
-                                        <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $warehouse['mobile'] }}</span><br>
-                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $warehouse['warehouse_name'] }}</span><br>
+                                        <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $warehouse['mobile'] }}</span><br>
+                                        <strong>{{__('portal.Warehouse for delivery')}}: &nbsp;&nbsp;</strong><span>{{ $warehouse['warehouse_name'] }}</span><br>
                                     </div>
                                 </div>
 
@@ -173,10 +173,10 @@
                                                  {{ $quote->orderItem->unit_of_measurement }}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                                {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                {{ number_format($quote->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                                {{ $quote->quote_quantity }}
+                                                {{ number_format($quote->quote_quantity) }}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
                                                 {{ number_format($quote->quote_quantity * $quote->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}
@@ -201,7 +201,7 @@
                                         @endphp
                                         <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($subtotal, 2) }} {{__('portal.SAR')}}<br>
                                         @php $subtotal += $quotes[0]->shipment_cost; @endphp
-                                        <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($quotes[0]->shipment_cost) }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($quotes[0]->shipment_cost, 2) }} {{__('portal.SAR')}}<br>
                                         <strong>{{__('portal.VAT')}} {{ $quotes[0]->VAT }}%: @if($quotes[0]->VAT > 9) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @else &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @endif </strong>{{ number_format($subtotal * ($quotes[0]->VAT/100), 2) }} {{__('portal.SAR')}} <br>
                                         <hr>
                                         <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($quotes[0]->total_cost, 2) }} {{__('portal.SAR')}} <br>
@@ -436,14 +436,14 @@
 
                                 <div class="flex flex-wrap overflow-hidden bg-white p-4">
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-2/3">
-                                        <strong>{{__('portal.Supplier')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $quotes[0]->supplier_business->business_name }}<br>
-                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $quotes[0]->supplier_business->city }}</span><br>
-                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $quotes[0]->supplier_business->vat_reg_certificate_number }}</span><br>
-                                        <strong>{{__('portal.Email')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $quotes[0]->supplier_business->business_email }}</span><br><br>
+                                        <strong>{{__('portal.Supplier')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $quotes[0]->supplier_business->business_name }}</span><br>
+                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $quotes[0]->supplier_business->city }}</span><br>
+                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $quotes[0]->supplier_business->vat_reg_certificate_number }}</span><br>
+                                        <strong>{{__('portal.Email')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $quotes[0]->supplier_business->business_email }}</span><br><br>
 
-                                        <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-{{ $quotes[0]->id }}<br>
-                                        <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-{{ $quotes[0]->orderItem->id }}<br>
-                                        <strong>{{__('portal.Shipment Time')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> {{ $quotes[0]->shipping_time_in_days }}<br>
+                                        <strong>{{__('portal.Quotation')}} #: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.Q')}}-<span style="font-family: sans-serif">{{ $quotes[0]->id }}</span><br>
+                                        <strong>{{__('portal.Requisition')}} #: &nbsp;&nbsp;&nbsp;&nbsp;</strong>{{__('portal.RFQ')}}-<span style="font-family: sans-serif">{{ $quotes[0]->orderItem->id }}</span><br>
+                                        <strong>{{__('portal.Shipment Time')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> <span style="font-family: sans-serif">{{ $quotes[0]->shipping_time_in_days }}</span><br>
                                         <strong>{{__('portal.Payment Term')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>
                                         @if($quotes[0]->orderItem->payment_mode == 'Cash') {{__('portal.Cash')}}
                                         @elseif($quotes[0]->orderItem->payment_mode == 'Credit') {{__('portal.Credit')}}
@@ -462,14 +462,14 @@
                                     </div>--}}
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                         <img src="{{ Storage::url($quotes[0]->buyer_business->business_photo_url) }}" alt="{{ $quotes[0]->buyer_business->business_name }}" style="height: 95px;"/>
-                                        <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $quotes[0]->buyer_business->business_name }}<br>
-                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $quotes[0]->buyer_business->city }}</span><br>
-                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;</strong><span>{{ $quotes[0]->buyer_business->vat_reg_certificate_number }}</span><br>
+                                        <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $quotes[0]->buyer_business->business_name }}</span><br>
+                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $quotes[0]->buyer_business->city }}</span><br>
+                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $quotes[0]->buyer_business->vat_reg_certificate_number }}</span><br>
                                         @php
                                             $warehouse = \App\Models\BusinessWarehouse::where('id', $quotes[0]->warehouse_id)->first()->only('mobile', 'warehouse_name');
                                         @endphp
-                                        <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $warehouse['mobile'] }}</span><br>
-                                        <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;</strong><span>{{ $warehouse['warehouse_name'] }}</span><br>
+                                        <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $warehouse['mobile'] }}</span><br>
+                                        <strong>{{__('portal.Warehouse for delivery')}}: &nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $warehouse['warehouse_name'] }}</span><br>
                                     </div>
                                 </div>
 
@@ -516,7 +516,7 @@
                                     <tbody class="bg-white divide-y divide-black border-1 border-black">
                                     @foreach($quotes as $quote)
                                         <tr>
-                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                                 {{$loop->iteration}}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
@@ -526,23 +526,24 @@
                                                 @endphp
                                                 {{ $record->name_ar }}@if(isset($parent)), {{ $parent->name_ar }} @endif
                                             </td>
-                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                                 {{ $quote->orderItem->description }}
                                             </td>
-                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                                 @if(isset($quote->note_for_customer)) {{ strip_tags($quote->note_for_customer) }} @else N/A @endif
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                                {{ $quote->orderItem->unit_of_measurement }}
+                                                @php $UOM = \App\Models\UnitMeasurement::where('uom_en', $quote->orderItem->unit_of_measurement)->pluck('uom_ar')->first(); @endphp
+                                                {{ $UOM }}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                                {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                <span style="font-family: sans-serif">{{ number_format($quote->quote_price_per_quantity, 2) }}</span> {{__('portal.SAR')}}
+                                            </td>
+                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
+                                                {{ number_format($quote->quote_quantity) }}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                                {{ $quote->quote_quantity }}
-                                            </td>
-                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                                {{ number_format($quote->quote_quantity * $quote->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}
+                                                <span style="font-family: sans-serif">{{ number_format($quote->quote_quantity * $quote->quote_price_per_quantity, 2) }}</span> {{__('portal.SAR')}}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -562,12 +563,12 @@
                                                     $subtotal += $quote->quote_quantity * $quote->quote_price_per_quantity;
                                                 }
                                         @endphp
-                                        <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($subtotal, 2) }} {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.Sub-total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ number_format($subtotal, 2) }}</span> {{__('portal.SAR')}}<br>
                                         @php $subtotal += $quotes[0]->shipment_cost; @endphp
-                                        <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($quotes[0]->shipment_cost) }} {{__('portal.SAR')}}<br>
-                                        <strong>{{__('portal.VAT')}} {{ $quotes[0]->VAT }}%: @if($quotes[0]->VAT > 9) &nbsp; @else &nbsp;&nbsp; @endif </strong>{{ number_format($subtotal * ($quotes[0]->VAT/100), 2) }} {{__('portal.SAR')}} <br>
+                                        <strong>{{__('portal.Shipment cost')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ number_format($quotes[0]->shipment_cost, 2) }}</span> {{__('portal.SAR')}}<br>
+                                        <strong>{{__('portal.VAT')}} <span style="font-family: sans-serif">{{ $quotes[0]->VAT }}</span>%: @if($quotes[0]->VAT > 9) &nbsp; @else &nbsp;&nbsp; @endif </strong><span style="font-family: sans-serif">{{ number_format($subtotal * ($quotes[0]->VAT/100), 2) }}</span> {{__('portal.SAR')}} <br>
                                         <hr>
-                                        <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ number_format($quotes[0]->total_cost, 2) }} {{__('portal.SAR')}} <br>
+                                        <strong>{{__('portal.Total')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ number_format($quotes[0]->total_cost, 2) }}</span> {{__('portal.SAR')}} <br>
                                         <hr>
                                     </div>
                                 </div>
@@ -611,9 +612,9 @@
                                 <form action="{{ route('singleCategoryRFQUpdateStatusModificationNeeded', $quotes[0]) }}" class="rounded shadow-md" method="post">
                                     @csrf
                                     @php $business = \App\Models\Business::where('user_id', $quotes[0]->supplier_user_id)->first(); @endphp
-                                    <h1 class="text-center text-2xl mt-4">{{__('portal.Message to')}} <span class="text-blue-600">{{$business->business_name}}</span>
+                                    <h1 class="text-center text-2xl mt-4">{{__('portal.Message to')}} <span class="text-blue-600" style="font-family: sans-serif">{{$business->business_name}}</span>
                                         <span style="font-size: 20px;">({{__('portal.supplier')}})</span></h1>
-                                    <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Message')}}..." required></textarea>
+                                    <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none; font-family: sans-serif" maxlength="254" placeholder="{{__('portal.Enter Message')}}..." required></textarea>
                                     <x-jet-input-error for="message" class="mt-2" />
                                     <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                     <input type="hidden" name="qoute_id" value="{{ $quotes[0]->id }}">
@@ -670,7 +671,7 @@
                                     <x-jet-label for="otp_mobile_number" value="{{ __('portal.OTP FOR Receiving Delivery Mobile Number (We will send One Time Password when you receive delivery)') }}" class="text-center text-black font-bold text-red-600"  />
                                     <div class="flex mt-3" style="justify-content: center">
                                         <div class="flex-row">
-                                            <input type="number" id="otp_mobile_number" name="otp_mobile_number" class="form-input rounded-md shadow-sm border p-2 w-full"
+                                            <input type="number" id="otp_mobile_number" name="otp_mobile_number" class="form-input rounded-md shadow-sm border p-2 w-full" style="font-family: sans-serif"
                                                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                    maxlength="9"
                                                    value="{{$warehouseAddress->mobile}}">
@@ -692,7 +693,7 @@
 {{--                                    <input type="text" class="form-input rounded-md shadow-sm border p-2 w-full" name="address" value="{{$warehouseAddress->address}}" readonly>--}}
 
                                     <x-jet-label for="Remarks" value="{{ __('portal.Remarks') }}" class="text-black text-2xl"/>
-                                    <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Remarks')}}.."></textarea>
+                                    <textarea name="remarks" id="remarks" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none;font-family: sans-serif" maxlength="254" placeholder="{{__('portal.Enter Remarks')}}.."></textarea>
 
                                     <div class="mt-5 d-flex">
                                         <div style="display: inline">

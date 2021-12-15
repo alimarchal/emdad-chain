@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Business;
+use App\Models\BusinessWarehouse;
 use App\Models\User;
 use App\Models\UserLog;
 use Carbon\Carbon;
@@ -254,6 +255,14 @@ class UserController extends Controller
 
         if (isset($user->usertype) && $user->usertype == 'Supplier Driver' && $user->driver_status == 0) {
             session()->flash('error', __('portal.Driver cannot be deleted because he has a shipment assigned.'));
+            return redirect()->back();
+        }
+
+        /* Checking whether the user has any warehouse assigned */
+        $warehouseResponsiblePerson = BusinessWarehouse::where('name', $user->name)->first();
+        if (isset($warehouseResponsiblePerson))
+        {
+            session()->flash('error', __('portal.User cannot be deleted because a warehouse is assigned to him.'));
             return redirect()->back();
         }
 

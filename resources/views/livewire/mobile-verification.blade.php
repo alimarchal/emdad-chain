@@ -19,7 +19,7 @@
             </div>
 
             <div class="w-full overflow-hidden lg:my-2 lg:px-2 lg:w-1/4 xl:w-1/4">
-                <input class="form-input rounded-md shadow-sm mt-1 mb-1 block w-full" id="name" type="number" wire:model="sms_code" required>
+                <input class="form-input rounded-md shadow-sm mt-1 mb-1 block w-full" id="name" type="number" wire:model="sms_code" required @if(auth()->user()->rtl == 1) style="font-family: sans-serif" @endif>
                 @if($wrong_sms)
                     <p class="text-red-600" style="font-size: 16px; padding: 8px;">{{__('portal.Wrong code entered. Try again.')}}</p>
                 @endif
