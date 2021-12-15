@@ -267,7 +267,7 @@
                                 @if(isset($modified) )
                                     @foreach ($collection->where('qoute_status', 'Modified') as $rfp)
                                         <tr>
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $loop->iteration }}
                                             </td>
 
@@ -279,27 +279,27 @@
                                                 {{ $categoryName->name_ar }} @if(isset($parentName)), {{$parentName}} @endif
                                             </td>
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $rfp->quote_quantity }}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                <span style="font-family: sans-serif">{{ $rfp->quote_price_per_quantity }}</span> {{__('portal.SAR')}}
                                             </td>
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $rfp->shipping_time_in_days }}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{ $rfp->total_cost }} {{__('portal.SAR')}}
+                                                <span style="font-family: sans-serif">{{ $rfp->total_cost }}</span> {{__('portal.SAR')}}
                                             </td>
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ strip_tags($rfp->note_for_customer) }}
                                             </td>
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $rfp->created_at->format('d-m-Y') }}
                                             </td>
 
@@ -315,7 +315,7 @@
                                 @elseif(isset($modification))
                                     @foreach ($collection->where('qoute_status', 'ModificationNeeded') as $rfp)
                                         <tr>
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $loop->iteration }}
                                             </td>
 
@@ -327,27 +327,27 @@
                                                 {{ $categoryName->name_ar }} @if(isset($parentName)), {{$parentName}} @endif
                                             </td>
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $rfp->quote_quantity }}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{ $rfp->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                <span style="font-family: sans-serif">{{ $rfp->quote_price_per_quantity }}</span> {{__('portal.SAR')}}
                                             </td>
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $rfp->shipping_time_in_days }}
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                {{ $rfp->total_cost }} {{__('portal.SAR')}}
+                                                <span style="font-family: sans-serif">{{ $rfp->total_cost }}</span> {{__('portal.SAR')}}
                                             </td>
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ strip_tags($rfp->note_for_customer) }}
                                             </td>
 
-                                            <td class="px-6 py-4 text-center whitespace-nowrap">
+                                            <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                 {{ $rfp->created_at->format('d-m-Y') }}
                                             </td>
 

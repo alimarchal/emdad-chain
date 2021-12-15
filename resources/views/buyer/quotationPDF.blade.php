@@ -114,7 +114,7 @@
             $warehouse = \App\Models\BusinessWarehouse::where('id', $quote->warehouse_id)->first()->only('mobile', 'warehouse_name');
         @endphp
         <strong>Contact #: </strong> {{ $warehouse['mobile'] }}<br>
-        <strong>Delivery Address: </strong> {{ $warehouse['warehouse_name'] }}<br>
+        <strong>Warehouse for delivery: </strong> {{ $warehouse['warehouse_name'] }}<br>
     </div>
 
     <div class="center"></div>
@@ -153,8 +153,8 @@
             </td>
             <td  style="text-align: center"> {{strip_tags($quote->orderItem->description)}} </td>
             <td  style="text-align: center"> @if(isset($quote->note_for_customer)) {{ $quote->note_for_customer }} @else N/A @endif </td>
-            <td  style="text-align: center">{{ $quote->quote_price_per_quantity }} SR</td>
-            <td  style="text-align: center">{{ $quote->quote_quantity }}</td>
+            <td  style="text-align: center">{{ number_format($quote->quote_price_per_quantity, 2) }} SR</td>
+            <td  style="text-align: center">{{ number_format($quote->quote_quantity) }}</td>
             <td  style="text-align: center">{{ number_format($quote->quote_price_per_quantity * $quote->quote_quantity,2) }} SR</td>
         </tr>
         </tbody>
@@ -232,7 +232,7 @@
 <div class="header">
     <div class="flex flex-wrap overflow-hidden  p-4 mt-4">
         <div class="w-full overflow-hidden lg:w-1/2 xl:w-1/2">
-            <strong>Warehouse delivery address: </strong> {{ $warehouse['warehouse_name'] }}<br>
+            <strong>Warehouse for delivery: </strong> {{ $warehouse['warehouse_name'] }}<br>
             <strong>Mobile #: </strong> {{ $warehouse['mobile'] }}
         </div>
     </div>

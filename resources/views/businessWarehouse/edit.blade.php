@@ -1,6 +1,6 @@
 @section('headerScripts')
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
     <script src="{{url('js/mapInput.js')}}"></script>
 @endsection
 
@@ -51,7 +51,7 @@
                                         <option {{($businessWarehouse->name == $user->name ? 'selected' : '')}} value="{{$user->name}}">{{$user->name}}</option>
                                     @endforeach
                                 </select>
-                                <i class="fa fa-user-plus mt-2" title="{{__('portal.Add User')}}" ></i>
+                                <a href="{{route('users.create')}}" class="text-yellow-400 hover:text-blue-600"><i class="fa fa-user-plus mt-2" title="{{__('portal.Add User')}}"></i></a>
                                 <select id="designation" name="designation" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                     <option value="">{{__('portal.Select')}}</option>
                                     <option {{($businessWarehouse->designation == 'CEO' ? 'selected' : '')}} value="CEO">{{__('portal.CEO')}}</option>
@@ -259,7 +259,7 @@
                                         <option {{($businessWarehouse->name == $user->name ? 'selected' : '')}} value="{{$user->name}}">{{$user->name}}</option>
                                     @endforeach
                                 </select>
-                                <i class="fa fa-user-plus mt-2" title="{{__('portal.Add User')}}" style="padding-right: 11px;"></i>
+                                <a href="{{route('users.create')}}" class="hover:text-blue-600"><i class="fa fa-user-plus mt-2" title="{{__('portal.Add User')}}" style="padding-right: 11px;"></i></a>
                                 <select id="designation" name="designation" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
                                     <option value="">{{__('portal.Select')}}</option>
                                     <option {{($businessWarehouse->designation == 'CEO' ? 'selected' : '')}} value="CEO">{{__('portal.CEO')}}</option>

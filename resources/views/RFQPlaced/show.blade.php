@@ -141,7 +141,7 @@
                                             @endif
                                             <br>
                                             <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->warehouse->mobile }}</span> <br>
-                                            <strong>{{__('portal.Warehouse for delivery')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $collection[0]->warehouse->warehouse_name }}</span> <br>
+                                            <strong>{{__('portal.Warehouse for delivery')}}: </strong><span style="font-family: sans-serif">{{ $collection[0]->warehouse->warehouse_name }}</span> <br>
                                         @endif
                                     </div>
                                 </div>
@@ -243,7 +243,7 @@
                                             <span style="font-family: sans-serif">{{ number_format($rfp->last_price, 2) }}</span> {{__('portal.SAR')}}
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
-                                            {{ $rfp->quantity }}
+                                            {{ number_format($rfp->quantity) }}
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif;word-break: break-word">
                                             @if(isset($rfp->remarks)){{ $rfp->remarks }} @else {{__('portal.N/A')}} @endif

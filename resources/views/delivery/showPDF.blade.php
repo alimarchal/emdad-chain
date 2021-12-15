@@ -92,7 +92,7 @@
         @if(auth()->user()->registration_type == 'Supplier')
             <strong>Delivery Address: </strong>{{ $deliveries[0]->delivery_address }}<br>
         @else
-            <strong>Delivery Address: </strong>{{ $warehouse['warehouse_name'] }}<br>
+            <strong>Warehouse for delivery: </strong>{{ $warehouse['warehouse_name'] }}<br>
         @endif
     </div>
 </div>
@@ -136,7 +136,7 @@
             <td  style="text-align: center">{{ $record->name }} @if(isset($parent)) , {{ $parent->name }} @endif</td>
             <td  style="text-align: center">{{ $delivery->eOrderItems->description }}</td>
             <td  style="text-align: center">{{ $delivery->eOrderItems->unit_of_measurement }}</td>
-            <td  style="text-align: center">{{ $delivery->quantity }}</td>
+            <td  style="text-align: center">{{ number_format($delivery->quantity) }}</td>
         </tr>
     @endforeach
     </tbody>

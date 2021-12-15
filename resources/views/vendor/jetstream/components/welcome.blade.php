@@ -45,13 +45,13 @@
 
                 @if (auth()->user()->rtl == 0)
 
-                {{__('portal.Welcome')}} {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
+                {{__('portal.Welcome')}} {{ auth()->user()->gender == "Male" ? __('portal.Mr.') . ' ' .Auth::user()->name: __('portal.Mrs.'). ' ' .Auth::user()->name}}
 
                     <span class="float-right text-red-900 font-bold">{{(isset(Auth::user()->status) == 1)?'Under process':'Incomplete'}}</span>
                     <span class=" float-right text-black-600 font-bold">{{__('portal.Account Status')}}:&nbsp;&nbsp;</span>
                     <img src="{{url('registration_step/E-3.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
                 @else
-                    {{__('portal.Welcome')}} {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
+                    {{__('portal.Welcome')}} {{ auth()->user()->gender == "Male" ? __('portal.Mr.') . ' ' .Auth::user()->name: __('portal.Mrs.'). ' ' .Auth::user()->name}}
 
                     <span class="float-left text-red-900 font-bold">{{(isset(Auth::user()->status) == 1)?'قيد الإنشاء':'غير مكتمل'}}</span>
                     <span class=" float-left text-black-600 font-bold">{{__('portal.Account Status')}}:&nbsp;&nbsp;</span>
@@ -94,13 +94,13 @@
         @elseif(Auth::user()->status == 1 && Auth::user()->registration_type == "Supplier")
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 @if (auth()->user()->rtl == 0)
-                    {{__('portal.Welcome')}} {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
+                    {{__('portal.Welcome')}} {{ auth()->user()->gender == "Male" ? __('portal.Mr.') . ' ' .Auth::user()->name: __('portal.Mrs.'). ' ' .Auth::user()->name}}
 
                     <span class="float-right text-red-900 font-bold">{{(isset(Auth::user()->status) == 1)?'Under process':'Incomplete'}}</span>
                     <span class=" float-right text-black-600 font-bold">{{__('portal.Account Status')}}:&nbsp;&nbsp;</span>
                     <img src="{{url('registration_step/E-3.png')}}" alt="User Registration" class="block w-auto my-2 m-auto"/>
                 @else
-                    {{__('portal.Welcome')}} {{ auth()->user()->gender == "Male" ?'Mr. ' . Auth::user()->name: 'Mrs.'. Auth::user()->name}}
+                    {{__('portal.Welcome')}} {{ auth()->user()->gender == "Male" ? __('portal.Mr.') . ' ' .Auth::user()->name: __('portal.Mrs.'). ' ' .Auth::user()->name}}
 
                     <span class="float-left text-red-900 font-bold">{{(isset(Auth::user()->status) == 1)?'قيد الإنشاء':'غير مكتمل'}}</span>
                     <span class=" float-left text-black-600 font-bold">{{__('portal.Account Status')}}:&nbsp;&nbsp;</span>

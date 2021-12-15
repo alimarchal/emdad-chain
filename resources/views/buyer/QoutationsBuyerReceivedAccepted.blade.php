@@ -103,7 +103,7 @@
             </div>
         @endif
         <div class="mt-5">
-            <a href="{{ route('QoutationsBuyerReceived') }}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+            <a href="{{ route('QoutationsBuyerReceived') }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                 {{__('portal.Back')}}
             </a>
         </div>
@@ -172,28 +172,28 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach ($collection->qoutes->where('qoute_status', 'Accepted') as $rfp)
                                     <tr>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                             {{ $loop->iteration }}
                                         </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->quote_quantity }}
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
+                                            {{ number_format($rfp->quote_quantity, 2) }}
                                         </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            {{ $rfp->quote_price_per_quantity }}
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
+                                            {{ number_format($rfp->quote_price_per_quantity, 2) }}
                                         </td>
 
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                             {{ $rfp->shipping_time_in_days }}
                                         </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                             {{ strip_tags($rfp->note_for_customer) }}
                                         </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                             {{ $rfp->created_at->format('d-m-Y') }}
                                         </td>
 
@@ -213,7 +213,7 @@
             </div>
         @endif
         <div class="mt-5">
-            <a href="{{ route('QoutationsBuyerReceived') }}" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+            <a href="{{ route('QoutationsBuyerReceived') }}" style="background-color: #145EA8" class="inline-flex items-center justify-center px-4 py-2 bg-orange-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                 {{__('portal.Back')}}
             </a>
         </div>

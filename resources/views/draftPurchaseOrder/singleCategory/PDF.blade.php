@@ -73,7 +73,7 @@
         @if(auth()->user()->registration_type == 'Supplier')
             <strong>Delivery Address: </strong> {{ $draftPurchaseOrders[0]->delivery_address }}<br><br>
         @else
-            <strong>Delivery Address: </strong>{{ $warehouse['warehouse_name'] }}<br><br>
+            <strong>Warehouse for delivery: </strong>{{ $warehouse['warehouse_name'] }}<br><br>
         @endif
 
         <strong>P.O. #: </strong>PO-{{ $draftPurchaseOrders[0]->id }}<br>
@@ -230,7 +230,7 @@
             @if(auth()->user()->registration_type == 'Supplier')
                 <strong>Delivery Address: </strong> {{ strip_tags($draftPurchaseOrders[0]->delivery_address) }} <br>
             @else
-                <strong>Delivery Address: </strong> {{ $warehouse['warehouse_name'] }} <br>
+                <strong>Warehouse for delivery: </strong> {{ $warehouse['warehouse_name'] }} <br>
             @endif
         </div>
     </div>

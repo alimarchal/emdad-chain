@@ -88,7 +88,7 @@
                                         {{ $deliveryNote->purchase_order->uom }}
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
-                                        {{ $deliveryNote->purchase_order->quantity }}
+                                        {{ number_format($deliveryNote->purchase_order->quantity) }}
                                     </td>
                                 </tr>
 
@@ -226,7 +226,7 @@
                                         {{ $UOM }}
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black" style="font-family: sans-serif">
-                                        {{ $deliveryNote->purchase_order->quantity }}
+                                        {{ number_format($deliveryNote->purchase_order->quantity) }}
                                     </td>
                                 </tr>
                             </tbody>

@@ -66,15 +66,15 @@
 
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                         <img src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" style="height: 115px;border-radius: 25px;"/><br>
-                                        <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->buyer->business->business_name }}<br>
-                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->city }}</span><br>
-                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
-                                        <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->otp_mobile_number }}</span><br>
+                                        <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>{{ $deliveries[0]->buyer->business->business_name }}<br>
+                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->city }}</span><br>
+                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
+                                        <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->otp_mobile_number }}</span><br>
                                         @php $warehouse = \App\Models\BusinessWarehouse::where('id', $deliveries[0]->eOrderItems->warehouse->id)->first()->only('warehouse_name'); @endphp
                                         @if(auth()->user()->registration_type == 'Supplier')
-                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->delivery_address }}</span><br>
+                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>{{ $deliveries[0]->delivery_address }}</span><br>
                                         @else
-                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span>{{ $warehouse['warehouse_name'] }}</span><br>
+                                            <strong>{{__('portal.Warehouse for delivery')}}: &nbsp;&nbsp;&nbsp;</strong><span>{{ $warehouse['warehouse_name'] }}</span><br>
                                         @endif
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                                                 {{ $delivery->eOrderItems->unit_of_measurement }}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
-                                                {{ $delivery->quantity }}
+                                                {{ number_format($delivery->quantity) }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -237,7 +237,7 @@
 
                                     <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 ">
                                         <img src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" style="height: 115px;border-radius: 25px;"/><br>
-                                        <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> <span style="font-family: sans-serif">{{ $deliveries[0]->buyer->business->business_name }}</span> <br>
+                                        <strong>{{__('portal.Buyer')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> <span style="font-family: sans-serif">{{ $deliveries[0]->buyer->business->business_name }}</span> <br>
                                         {{--<div class="flex">
                                             <div class="flex-row">
                                                 <p>{{ $deliveries[0]->buyer->business->business_name }}</p><br>
@@ -246,14 +246,14 @@
                                                 <img class="h-20 w-20" src="{{ Storage::url($deliveries[0]->buyer->business->business_photo_url) }}" alt="{{ $deliveries[0]->buyer->business->business_name }}" />
                                             </div>
                                         </div>--}}
-                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->buyer->business->city }}</span><br>
-                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
-                                        <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->otp_mobile_number }}</span><br>
+                                        <strong>{{__('portal.City')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->buyer->business->city }}</span><br>
+                                        <strong>{{__('portal.VAT Number')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->buyer->business->vat_reg_certificate_number }}</span><br>
+                                        <strong>{{__('portal.Contact #')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->otp_mobile_number }}</span><br>
                                         @php $warehouse = \App\Models\BusinessWarehouse::where('id', $deliveries[0]->eOrderItems->warehouse->id)->first()->only('warehouse_name'); @endphp
                                         @if(auth()->user()->registration_type == 'Supplier')
-                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->delivery_address }}</span><br>
+                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $deliveries[0]->delivery_address }}</span><br>
                                         @else
-                                            <strong>{{__('portal.Delivery Address')}}: &nbsp;&nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $warehouse['warehouse_name'] }}</span><br>
+                                            <strong>{{__('portal.Warehouse for delivery')}}: &nbsp;&nbsp;</strong><span style="font-family: sans-serif">{{ $warehouse['warehouse_name'] }}</span><br>
                                         @endif
                                     </div>
                                 </div>
@@ -300,7 +300,7 @@
                                                 {{ $UOM }}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black"style="font-family: sans-serif">
-                                                {{ $delivery->quantity }}
+                                                {{ number_format($delivery->quantity) }}
                                             </td>
                                         </tr>
                                     @endforeach

@@ -58,7 +58,6 @@ class BusinessWarehouseController extends Controller
                 'warehouse_name' => 'required',
                 'designation' => 'required',
                 'warehouse_email' => 'required',
-                'landline' => 'required',
                 'mobile' => 'required|numeric',
                 'country' => 'required',
                 'address' => 'required',
@@ -85,7 +84,6 @@ class BusinessWarehouseController extends Controller
                 'warehouse_name' => 'required',
                 'designation' => 'required',
                 'warehouse_email' => 'required',
-                'landline' => 'required',
                 'mobile' => 'required|numeric',
                 'country' => 'required',
                 'address' => 'required',
@@ -107,6 +105,10 @@ class BusinessWarehouseController extends Controller
         BusinessWarehouse::create($request->all());
 
         session()->flash('message', __('portal.Business warehouse information successfully saved.'));
+        if (auth()->user()->business->status == 3)
+        {
+            return redirect()->route('businessWarehouseShow', auth()->user()->business_id);
+        }
         return redirect()->route('purchaseOrderInfo.create');
     }
 
@@ -130,7 +132,6 @@ class BusinessWarehouseController extends Controller
                 'warehouse_name' => 'required',
                 'designation' => 'required',
                 'warehouse_email' => 'required',
-                'landline' => 'required',
                 'mobile' => 'required|numeric',
                 'country' => 'required',
                 'address' => 'required',
@@ -151,7 +152,6 @@ class BusinessWarehouseController extends Controller
                 'warehouse_name' => 'required',
                 'designation' => 'required',
                 'warehouse_email' => 'required',
-                'landline' => 'required',
                 'mobile' => 'required|numeric',
                 'country' => 'required',
                 'address' => 'required',

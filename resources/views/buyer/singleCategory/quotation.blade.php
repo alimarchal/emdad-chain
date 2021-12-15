@@ -111,11 +111,11 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_quantity }}
+                                                    {{ number_format($quote->quote_quantity) }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                    {{ number_format($quote->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -127,7 +127,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->total_cost }} {{__('portal.SAR')}}
+                                                    {{ number_format($quote->total_cost,2) }} {{__('portal.SAR')}}s
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -210,11 +210,11 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_quantity }}
+                                                    {{ number_format($quote->quote_quantity) }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                    {{ number_format($quote->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -226,7 +226,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->total_cost }} {{__('portal.SAR')}}
+                                                    {{ number_format($quote->total_cost, 2) }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -309,11 +309,11 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_quantity }}
+                                                    {{ number_format($quote->quote_quantity) }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                    {{ number_format($quote->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -325,7 +325,7 @@
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->total_cost }} {{__('portal.SAR')}}
+                                                    {{ number_format($quote->total_cost, 2) }} {{__('portal.SAR')}}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -497,7 +497,7 @@
                                     @else
                                         @foreach ($collection->sortBy('total_cost')->take(2) as $quote)
                                             <tr>
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $loop->iteration }}
                                                 </td>
 
@@ -509,35 +509,35 @@
                                                     {{ $categoryName->name_ar }}@if(isset($parentName)), {{$parentName}} @endif
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_quantity }}
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
+                                                    {{ number_format($quote->quote_quantity) }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                    <span style="font-family: sans-serif">{{ number_format($quote->quote_price_per_quantity, 2) }}</span> {{__('portal.SAR')}}
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $quote->orderItem->size }}
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $quote->shipping_time_in_days }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->total_cost }} {{__('portal.SAR')}}
+                                                    <span style="font-family: sans-serif">{{ number_format($quote->total_cost, 2) }}</span> {{__('portal.SAR')}}
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ strip_tags($quote->note_for_customer) }}
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $quote->created_at->format('d-m-Y') }}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ \Carbon\Carbon::parse($quote->expiry_date)->format('d-m-Y') }}
                                                 </td>
 
@@ -596,7 +596,7 @@
                                     @else
                                         @foreach ($collection->sortBy('total_cost')->take(3) as $quote)
                                             <tr>
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $loop->iteration }}
                                                 </td>
 
@@ -608,35 +608,35 @@
                                                     {{ $categoryName->name_ar }}@if(isset($parentName)), {{$parentName}} @endif
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_quantity }}
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
+                                                    {{ number_format($quote->quote_quantity) }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                    <span style="font-family: sans-serif">{{ number_format($quote->quote_price_per_quantity, 2) }}</span> {{__('portal.SAR')}}
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $quote->orderItem->size }}
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $quote->shipping_time_in_days }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->total_cost }} {{__('portal.SAR')}}
+                                                    <span style="font-family: sans-serif">{{ number_format($quote->total_cost, 2) }}</span> {{__('portal.SAR')}}
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ strip_tags($quote->note_for_customer) }}
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $quote->created_at->format('d-m-Y') }}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ \Carbon\Carbon::parse($quote->expiry_date)->format('d-m-Y') }}
                                                 </td>
 
@@ -695,7 +695,7 @@
                                     @else
                                         @foreach ($collection->sortBy('total_cost')->take(5) as $quote)
                                             <tr>
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $loop->iteration }}
                                                 </td>
 
@@ -707,35 +707,35 @@
                                                     {{ $categoryName->name_ar }}@if(isset($parentName)), {{$parentName}} @endif
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_quantity }}
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
+                                                    {{ number_format($quote->quote_quantity) }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
+                                                    <span style="font-family: sans-serif">{{ number_format($quote->quote_price_per_quantity, 2) }}</span> {{__('portal.SAR')}}
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $quote->orderItem->size }}
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $quote->shipping_time_in_days }}
                                                 </td>
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                    {{ $quote->total_cost }} {{__('portal.SAR')}}
+                                                    <span style="font-family: sans-serif">{{ number_format($quote->total_cost, 2) }}</span> {{__('portal.SAR')}}
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ strip_tags($quote->note_for_customer) }}
                                                 </td>
 
-                                                <td class="px-6 py-4 text-center whitespace-nowrap">
+                                                <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ $quote->created_at->format('d-m-Y') }}
                                                 </td>
 
-                                                <td class="px-6 text-center py-4 whitespace-nowrap">
+                                                <td class="px-6 text-center py-4 whitespace-nowrap" style="font-family: sans-serif">
                                                     {{ \Carbon\Carbon::parse($quote->expiry_date)->format('d-m-Y') }}
                                                 </td>
 
