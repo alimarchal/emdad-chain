@@ -168,7 +168,7 @@ class BusinessWarehouseController extends Controller
         $businessWarehouse->update($request->all());
 
         session()->flash('message', __('portal.Warehouse information successfully updated.'));
-        return redirect()->route('businessWarehouseShow', $businessWarehouse->id);
+        return redirect()->route('businessWarehouseShow', auth()->user()->business_id);
     }
 
     public function destroy(BusinessWarehouse $businessWarehouse)
