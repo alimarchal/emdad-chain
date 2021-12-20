@@ -72,8 +72,9 @@
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">{{__('portal.Step # 2: Business Information')}}</h3>
                             <div class="flex space-x-5 mt-3">
                                 <label class="block font-medium text-sm text-gray-700 w-1/3" for="business_name">{{__('portal.Business Name')}} @include('misc.required')</label>
-                                <x-jet-label for="nid_num" class="block font-medium text-sm text-gray-700 w-1/3"  value="{{ __('register.National ID Number') }}"/>
-                               <x-jet-label for="nid_exp_date" class="block font-medium text-sm text-gray-700 w-1/3"  value="{{ __('register.National ID Expiry Date') }}"/>
+                                <label for="nid_num" class="block font-medium text-sm text-gray-700 w-1/3" >{{ __('register.National ID Number') }} @include('misc.required')</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/3">{{__('portal.National ID Card Photo')}} @include('misc.required')</label>
+                                <label for="nid_exp_date" class="block font-medium text-sm text-gray-700 w-1/3">{{ __('register.National ID Expiry Date') }} @include('misc.required')</label>
 
 
 {{--                                <label class="block font-medium text-sm text-gray-700 w-1/2" for="num_of_warehouse">Select the numbers of Warehouses @include('misc.required')</label>--}}
@@ -83,6 +84,7 @@
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/3" value="{{auth()->user()->company_name}}" required></x-jet-input>
                                 <x-jet-input id="nid_num" class="block mt-1  w-1/3" type="text" pattern="\d*" maxlength="10" name="nid_num" :value="old('nid_num')" required/>
+                                <x-jet-input id="nid_photo" type="file" name="nid_photo_1" class="form-input rounded-md shadow-sm block mt-1  w-1/3" required></x-jet-input>
                                 <input type="text" id="datepicker" data-provide="datepicker" class="block mt-1 w-1/3" name="nid_exp_date" value="{{old('nid_exp_date')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" readonly>
 
                             </div>
@@ -121,7 +123,7 @@
                                 <x-jet-input id="business_email" type="email" name="business_email" class="border p-2 w-1/2" value="{{old('business_email')}}"></x-jet-input>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="phone">{{__('portal.Landline')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="phone">{{__('portal.Landline')}}</x-jet-label>
                                 <x-jet-label class="w-1/2" for="mobile">{{__('portal.Mobile')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="country">{{__('portal.Country')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="city">{{__('portal.City')}} @include('misc.required')</x-jet-label>
@@ -228,15 +230,17 @@
                                 <label class="block font-medium text-sm text-gray-700 w-1/2" for="business_name">{{__('portal.Business Name')}} @include('misc.required')</label>
                                 <input type="hidden" name="business_type" value="{{ auth()->user()->registration_type }}">
                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-                                 <x-jet-label for="nid_num" class="block font-medium text-sm text-gray-700 w-1/3"  value="{{ __('register.National ID Number') }}"/>
-                               <x-jet-label for="nid_exp_date" class="block font-medium text-sm text-gray-700 w-1/3"  value="{{ __('register.National ID Expiry Date') }}"/>
+                                <label for="nid_num" class="block font-medium text-sm text-gray-700 w-1/3" >{{ __('register.National ID Number') }} @include('misc.required')</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/3">{{__('portal.National ID Card Photo')}} @include('misc.required')</label>
+{{--                                <x-jet-label for="nid_num" class="block font-medium text-sm text-gray-700 w-1/3"  value="{{ __('register.National ID Number') }}"/>--}}
+                                <label for="nid_exp_date" class="block font-medium text-sm text-gray-700 w-1/4">{{ __('register.National ID Expiry Date') }} @include('misc.required')</label>
 
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2" value="{{old('business_name')}}" required></x-jet-input>
-
-                                   <x-jet-input id="nid_num" class="block mt-1  w-1/3" type="text" pattern="\d*" maxlength="10" name="nid_num" :value="old('nid_num')" required/>
-                                <input type="text" id="datepicker" data-provide="datepicker" class="block mt-1 w-1/3" name="nid_exp_date" value="{{old('nid_exp_date')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" readonly>
+                                <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2 ml-3" style="font-family: sans-serif" value="{{auth()->user()->company_name}}" required></x-jet-input>
+                                <x-jet-input id="nid_num" class="block mt-1  w-1/3" type="text" pattern="\d*" maxlength="10" name="nid_num" :value="old('nid_num')" required/>
+                                <x-jet-input id="nid_photo" type="file" name="nid_photo_1" class="form-input rounded-md shadow-sm block mt-1  w-1/3" style="font-family: sans-serif" required></x-jet-input>
+                                <input type="text" id="datepicker" data-provide="datepicker" class="block mt-1 w-1/4" name="nid_exp_date" value="{{old('nid_exp_date')}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" readonly>
 
                             </div>
 
@@ -278,7 +282,7 @@
                                 <x-jet-input id="business_email" type="email" name="business_email" class="border p-2 w-1/2" style="margin-right: 8px;" value="{{old('business_email')}}"></x-jet-input>
                             </div>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="phone">{{__('portal.Landline')}} @include('misc.required')</x-jet-label>
+                                <x-jet-label class="w-1/2" for="phone">{{__('portal.Landline')}} </x-jet-label>
                                 <x-jet-label class="w-1/2" for="mobile">{{__('portal.Mobile')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="country">{{__('portal.Country')}} @include('misc.required')</x-jet-label>
                                 <x-jet-label class="w-1/2" for="city">{{__('portal.City')}} @include('misc.required')</x-jet-label>

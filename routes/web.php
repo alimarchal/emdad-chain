@@ -104,6 +104,7 @@ Route::middleware(['auth:sanctum'])->resource('/businessFinanceDetail', \App\Htt
 Route::middleware(['auth:sanctum'])->get('/businessWarehouse/number-update', [BusinessWarehouseController::class, 'updateNumber'])->name('warehouseNumberUpdate');
 Route::middleware(['auth:sanctum'])->resource('/businessWarehouse', BusinessWarehouseController::class);
 Route::middleware(['auth:sanctum'])->get('/businessWarehouse/{id}/show', [BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
+Route::middleware(['auth:sanctum'])->get('/purchaseOrderInfo/store', [POInfoController::class, 'storeWithOutPOInfo'])->name('storeWithOutPOInfo');
 Route::middleware(['auth:sanctum'])->resource('/purchaseOrderInfo', POInfoController::class);
 
 ####################Admin IREs Controller###################

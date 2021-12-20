@@ -1,6 +1,6 @@
 <div class="flex space-x-5 mt-3">
 
-    <x-jet-input id="phone" type="tel" name="phone" class="border p-2 w-1/2" value="{{old('phone')}}" required></x-jet-input>
+    <x-jet-input id="phone" type="tel" name="phone" class="border p-2 w-1/2" value="{{old('phone')}}"></x-jet-input>
     <x-jet-input id="mobile" type="number" name="mobile" class="border p-2 w-1/2" value="{{old('mobile')}}" style="margin-right: 5px;" required></x-jet-input>
     @if(auth()->user()->rtl == 0)
         <select name="country" id="country" wire:model="country" class="form-select select2 rounded-md shadow-sm border p-2 w-1/2" required>

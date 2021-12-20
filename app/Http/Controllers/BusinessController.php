@@ -150,11 +150,11 @@ class BusinessController extends Controller
 
     public function store(Request $request)
     {
-
         $request->validate([
             'user_id' => 'required',
             'business_name' => 'required',
             'nid_num' => 'required',
+            'nid_photo_1' => 'required',
             'nid_exp_date' => 'required',
             'business_photo_url_1' => 'required|mimes:jpeg,jpg,png',
             'category' => 'required',
@@ -167,7 +167,6 @@ class BusinessController extends Controller
             'city' => 'required',
             'address' => 'required',
             'business_email' => 'required',
-            'phone' => 'required',
             'mobile' => 'required',
             'iban' => 'required',
             'longitude' => 'required',
@@ -192,6 +191,11 @@ class BusinessController extends Controller
         }
 
         $business = Business::create($request->all());
+        if ($request->has('nid_photo_1'))
+        {
+            $path = $request->file('nid_photo_1')->store('', 'public');
+            User::where('id', \auth()->id())->update(['nid_photo' => $path]);
+        }
         foreach ($request->category as $category) {
             BusinessCategory::create([
                 'business_id' => $business->id,

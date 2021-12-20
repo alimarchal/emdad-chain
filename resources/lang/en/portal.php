@@ -903,6 +903,7 @@ return [
     'Category updated successfully.' => 'Category updated successfully.',
     'Category successfully deleted.' => 'Category successfully deleted.',
     'Please enter warehouse information first.' => 'Please enter warehouse information first.',
+    'Please enter number of monthly orders.' => 'Please enter number of monthly orders.',
     'P.O.Info information successfully saved.' => 'P.O.Info information successfully saved.',
     'Shipment Placed Successfully!' => 'Shipment Placed Successfully!',
     'Add Vehicles limit reached.' => 'Add Vehicles limit reached.',

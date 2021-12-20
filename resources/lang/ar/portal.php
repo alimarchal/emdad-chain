@@ -903,6 +903,7 @@ return [
     'Category updated successfully' => 'تم تحديث الفئة بنجاح.',
     'Category successfully deleted.' => 'تم حذف الفئة بنجاح.',
     'Please enter warehouse information first.' => 'تم حفظ معلومات أمر الشراء بنجاح.',
+    'Please enter number of monthly orders.' => 'Please enter number of monthly orders.',
     'P.O.Info information successfully saved.' => 'تم حفظ معلومات أمر الشراء بنجاح.',
     'Shipment Placed Successfully!' => 'تم إرسال الشحنة بنجاح!',
     'Add Vehicles limit reached.' => 'لقت تجاوزت العدد المتاح من العربات المضافة',

@@ -35,7 +35,7 @@
                         <div class="flex space-x-5 mt-3">
                             <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="no_of_monthly_orders" type="number" name="no_of_monthly_orders" value="{{old('no_of_monthly_orders')}}">
                             <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="volume" type="text" name="volume" value="{{old('volume')}}" >
-                            <select name="type" id="type" class="form-input rounded-md shadow-sm border p-2 w-1/2" required>
+                            <select name="type" id="type" class="form-input rounded-md shadow-sm border p-2 w-1/2">
                                 <option value="">{{__('portal.Select')}}</option>
                                 <option {{(old('type') == 'Credit' ? 'selected' : '')}} value="Credit">{{__('portal.Credit')}}</option>
                                 <option {{(old('type') == 'Cash' ? 'selected' : '')}} value="Cash">{{__('portal.Cash')}}</option>
@@ -48,14 +48,22 @@
                         <div class="control-group after-add-more">
 
                         </div>
-                        <button  type="submit" class="inline-flex items-center px-4 py-2 bg-red-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
-                            Skip and Submit
-                        </button>
+                        @if(auth()->user()->status == null && auth()->user()->business->status == null)
+                            <a href="{{route('storeWithOutPOInfo')}}" class="inline-flex items-center px-4 py-2 bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
+                                {{__('portal.Skip and submit for approval')}}
+                            </a>
 
 
-                        <button type="submit" style="margin-right: 10px;" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
-                            {{__('portal.Submit for Approval')}}
-                        </button>
+                            <button type="submit" style="margin-right: 10px;" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
+                                {{__('portal.Submit for Approval')}}
+                            </button>
+                        @else
+                            <input type="hidden" name="update" value="1">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
+                                {{__('portal.Update')}}
+                            </button>
+                        @endif
+
 
                         <div class="flex space-x-2 mt-4">
                             <div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-sm px-3 bg-pink-200 text-pink-800 rounded-full">{{__('portal.Please review all your information is correct after submission you will not able to edit any information.')}}</div>
@@ -122,16 +130,26 @@
                                     <option {{(old('type') == 'Cash' ? 'selected' : '')}} value="Cash">{{__('portal.Cash')}}</option>
                                 </select>
 {{--                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="order_info" type="file" name="order_info_1[]" multiple>--}}
-                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="order_info" type="file" name="order_info_1">
+                                <input class="form-input rounded-md shadow-sm border p-2 w-1/2" id="order_info" type="file" style="font-family: sans-serif;" name="order_info_1">
                                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                                 <input type="hidden" name="business_id" value="{{Auth::user()->business->id}}">
                             </div>
                             <div class="control-group after-add-more">
 
                             </div>
-                            <button type="submit" class="inline-flex float-left items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
-                                {{__('portal.Submit for Approval')}}
-                            </button>
+                            @if(auth()->user()->status == null && auth()->user()->business->status == null)
+                                <a href="{{route('storeWithOutPOInfo')}}" class="inline-flex items-center float-left mr-2 ml-4 px-4 py-2 bg-blue-700 border hover:text-white border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
+                                    {{__('portal.Skip and submit for approval')}}
+                                </a>
+                                <button type="submit" class="inline-flex float-left items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
+                                    {{__('portal.Submit for Approval')}}
+                                </button>
+                            @else
+                                <input type="hidden" name="update" value="1">
+                                <button type="submit" class="inline-flex items-center float-left ml-4 px-4 py-2 bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 float-right mt-4 mb-4">
+                                    {{__('portal.Update')}}
+                                </button>
+                            @endif
 
                             <div class="flex space-x-2 mt-4">
                                 <div style="padding-top: 0.1em; padding-bottom: 0.1rem" class="text-sm px-3 bg-pink-200 text-pink-800 rounded-full">{{__('portal.Please review all your information is correct after submission you will not able to edit any information.')}}</div>

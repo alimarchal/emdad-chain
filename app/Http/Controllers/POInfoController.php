@@ -8,6 +8,7 @@ use App\Models\Business;
 use App\Models\BusinessWarehouse;
 use App\Models\POInfo;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -33,32 +34,71 @@ class POInfoController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'type' => 'required',
-            'user_id' => 'required',
-            'business_id' => 'required',
-            'order_info_1.*' => 'required|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,xlsx,doc,xls',
-        ]);
+        /* Storing purchase after skipping while business registration */
+        if ($request->has('update'))
+        {
+            $request->validate([
+                'type' => 'required',
+                'no_of_monthly_orders' => 'required',
+                'volume' => 'required',
+                'order_info_1' => 'mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,xlsx,doc,xls',
+            ],[
+                'no_of_monthly_orders.required' => __('portal.Please enter number of monthly orders.')
+            ]);
 
+            if ($request->has('order_info_1'))
+            {
+                $path = $request->file('order_info_1')->store('', 'public');
+                $request->merge(['order_info' => $path]);
+            }
 
-        /* Commented code is  */
-        /*$files = $request->file('order_info_1');
-        $order_info = [];*/
-        if ($request->has('order_info_1')) {
-            /*foreach ($files as $file) {
-                $path = $file->store('', 'public');
-                $order_info[] = $path;
-            }*/
-
-            $path = $request->file('order_info_1')->store('', 'public');
-            $request->merge(['order_info' => $path]);
+            POInfo::create($request->all());
+            session()->flash('message', __('portal.P.O.Info information successfully saved.'));
+            return redirect()->route('dashboard');
         }
+        else
+        {
+            $request->validate([
+                'type' => 'required',
+                'user_id' => 'required',
+                'business_id' => 'required',
+                'order_info_1.*' => 'required|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,xlsx,doc,xls',
+            ]);
 
-        /*$order_info = implode(', ', $order_info);
-        $request->merge(['order_info' => $order_info]);*/
-        $POInfo = POInfo::create($request->all());
-        session()->flash('message', __('portal.P.O.Info information successfully saved.'));
-        $business = Business::find($POInfo->business_id);
+
+            /* Commented code is  */
+            /*$files = $request->file('order_info_1');
+            $order_info = [];*/
+            if ($request->has('order_info_1')) {
+                /*foreach ($files as $file) {
+                    $path = $file->store('', 'public');
+                    $order_info[] = $path;
+                }*/
+
+                $path = $request->file('order_info_1')->store('', 'public');
+                $request->merge(['order_info' => $path]);
+            }
+
+            /*$order_info = implode(', ', $order_info);
+            $request->merge(['order_info' => $order_info]);*/
+            $POInfo = POInfo::create($request->all());
+            session()->flash('message', __('portal.P.O.Info information successfully saved.'));
+            $business = Business::find($POInfo->business_id);
+            $business->update(['status' => '1']);
+            $user = User::find(auth()->user()->id);
+            $user->update(['status' => 1]);
+            if ($user->registration_type == "Contracts") {
+                Mail::to($user)->send(new Contracts($business, $user));
+            } else {
+                Mail::to($user)->send(new Orders($business, $user));
+            }
+        }
+        return redirect()->route('dashboard');
+    }
+
+    public function storeWithOutPOInfo()
+    {
+        $business = Business::find(auth()->user()->business_id);
         $business->update(['status' => '1']);
         $user = User::find(auth()->user()->id);
         $user->update(['status' => 1]);
