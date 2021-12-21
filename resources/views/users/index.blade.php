@@ -146,8 +146,14 @@
                                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                                     <div class="flex items-center">
                                                                         <div class="flex-shrink-0 h-10 w-10">
-                                                                            <img class="h-3xl w-24 rounded-full" src="{{ empty($user->profile_photo_path) ? Storage::url('images.png') : Storage::url($user->profile_photo_path) }}" alt="{{__('portal.Profile Picture')}}">
+                                                                            @if(isset($user->profile_photo_path))
+                                                                                <img class="h-3xl w-24 rounded-full" src="{{ empty($user->profile_photo_path) ? Storage::url('images.png') : Storage::url($user->profile_photo_path) }}" alt="{{__('portal.Profile Picture')}}">
                                                                             <!-- https://images.unsplash.com/photo-1584824486539-53bb4646bdbc?&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60 -->
+                                                                            @else
+                                                                                <svg class="svg-icon" viewBox="0 0 20 20">
+                                                                                    <path d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"></path>
+                                                                                </svg>
+                                                                            @endif
                                                                         </div>
                                                                         <div class="ml-4">
                                                                             <div class="text-sm font-medium text-gray-900">
@@ -200,12 +206,12 @@
                                                                 </td>
                                                                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
 
-                                                                    <a href="{{ route('users.show', $user->id) }}" class="text-indigo-600 inline-block hover:text-indigo-900" title="VIEW">
+                                                                    {{--<a href="{{ route('users.show', $user->id) }}" class="text-indigo-600 inline-block hover:text-indigo-900" title="VIEW">
                                                                         <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="blue">
                                                                             <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
                                                                             <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
                                                                         </svg>
-                                                                    </a>
+                                                                    </a>--}}
                                                                     <a href="{{ route('users.edit', $user->id) }}" class="text-indigo-600 inline-block hover:text-indigo-900" title="EDIT">
                                                                         <svg width="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
@@ -413,14 +419,20 @@
                                                             <td class="px-6 py-4 whitespace-nowrap">
                                                                 <div class="flex items-center">
                                                                     <div class="flex-shrink-0 h-10 w-10">
-                                                                        <img class="h-3xl w-24 rounded-full" src="{{ empty($user->profile_photo_path) ? Storage::url('images.png') : Storage::url($user->profile_photo_path) }}" alt="{{__('portal.Profile Picture')}}">
-                                                                        <!-- https://images.unsplash.com/photo-1584824486539-53bb4646bdbc?&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60 -->
+                                                                        @if(isset($user->profile_photo_path))
+                                                                            <img class="h-3xl w-24 rounded-full" src="{{ empty($user->profile_photo_path) ? Storage::url('images.png') : Storage::url($user->profile_photo_path) }}" alt="{{__('portal.Profile Picture')}}">
+                                                                            <!-- https://images.unsplash.com/photo-1584824486539-53bb4646bdbc?&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60 -->
+                                                                        @else
+                                                                            <svg class="svg-icon" viewBox="0 0 20 20">
+                                                                                <path d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"></path>
+                                                                            </svg>
+                                                                        @endif
                                                                     </div>
                                                                     <div class="ml-4">
-                                                                        <div class="text-sm font-medium text-gray-900">
+                                                                        <div class="text-sm font-medium text-gray-900" style="font-family: sans-serif">
                                                                             {{ $user->name }}
                                                                         </div>
-                                                                        <div class="text-sm text-gray-500">
+                                                                        <div class="text-sm text-gray-500" style="font-family: sans-serif">
                                                                             {{ $user->email }}
                                                                         </div>
                                                                     </div>
@@ -428,11 +440,11 @@
                                                             </td>
 
 
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" style="font-family: sans-serif">
                                                                 {{$user->created_at}}
                                                             </td>
 
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" style="font-family: sans-serif">
                                                                 @if(empty($user->business_id))
                                                                     {{__('portal.NULL')}}
                                                                 @else
@@ -445,7 +457,7 @@
 
                                                             </td>
 
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" style="font-family: sans-serif">
                                                                 @foreach($user->roles()->pluck('name') as $role)
                                                                     @if(auth()->user()->registration_type == 'Buyer')
                                                                         <span class="badge badge-info">{{ str_replace('Buyer','',$role) }}</span>
@@ -456,7 +468,7 @@
                                                                     @endif
                                                                 @endforeach
                                                             </td>
-                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" style="font-family: sans-serif">
                                                                 @if(!empty($user->getAllPermissions()))
                                                                     @foreach($user->getAllPermissions() as $v)
                                                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100  text-green-800">
@@ -467,12 +479,12 @@
                                                             </td>
                                                             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
 
-                                                                <a href="{{ route('users.show', $user->id) }}" class="text-indigo-600 inline-block hover:text-indigo-900" title="VIEW">
+                                                                {{--<a href="{{ route('users.show', $user->id) }}" class="text-indigo-600 inline-block hover:text-indigo-900" title="VIEW">
                                                                     <svg width="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="blue">
                                                                         <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
                                                                         <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
                                                                     </svg>
-                                                                </a>
+                                                                </a>--}}
                                                                 <a href="{{ route('users.edit', $user->id) }}" class="text-indigo-600 inline-block hover:text-indigo-900" title="EDIT">
                                                                     <svg width="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>

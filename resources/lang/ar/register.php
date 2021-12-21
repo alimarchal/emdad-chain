@@ -9,13 +9,13 @@ return [
     |
     */
 
-    'Step # 1: Registration' => 'الخطوة الأولى: التسجيل',
+    'Step # 1: Registration' => 'الخطوة الأولى: تسجيل المستخدم',
     'Reference (If any)' => 'المرجع (ان وجد)',
-    'Register as' => 'التسجيل بصفتك',
+    'Register as' => 'سجل بصفتك',
     'CEO' => 'رئيس تنفيذي',
     'CEO (Supplier)' => 'الرئيس التنفيذي (المورّد)',
     'CEO (Buyer)' => 'الرئيس التنفيذي (المشتري)',
-    'Logistics Solution' => 'مقدم حلول لوجستية ',
+    'Logistics Solution' => 'مقدم الحلول اللوجستية',
     'Title' => 'اللقب',
     'Select' => 'اختر',
     'Company Name' => 'اسم الشركة',

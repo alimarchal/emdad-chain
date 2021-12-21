@@ -9,7 +9,7 @@ return [
     |
     */
 
-    'Step # 1: Registration' => 'Step # 1: Registration',
+    'Step # 1: Registration' => 'Step # 1: User Registration',
     'Reference (If any)' => 'Reference (If any)',
     'Register as' => 'Register as',
     'CEO' => 'CEO',

@@ -152,7 +152,7 @@
                                         <label class="block font-medium text-sm text-gray-700" for="name">
                                             {{__('portal.Name')}}
                                         </label>
-                                        <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name" type="text" name="name" value="{{$user->name}}" required>
+                                        <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="name" type="text" style="font-family: sans-serif" name="name" value="{{$user->name}}" required>
                                     </div>
 
                                     <!-- Email -->
@@ -160,7 +160,7 @@
                                         <label class="block font-medium text-sm text-gray-700" for="email">
                                             {{__('portal.Email')}}
                                         </label>
-                                        <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="email" type="email" name="email" value="{{$user->email}}" required>
+                                        <input class="form-input rounded-md shadow-sm mt-1 block w-full" id="email" type="email" style="font-family: sans-serif" name="email" value="{{$user->email}}" required>
                                     </div>
 
                                     <!-- Password -->

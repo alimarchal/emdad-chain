@@ -1,6 +1,37 @@
 @section('headerScripts')
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
     <script src="{{url('js/mapInput.js')}}"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        #datepicker {
+            padding: 10px;
+            cursor: default;
+            /*text-transform: uppercase;*/
+            font-size: 13px;
+            background: #FFFFFF;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            border: solid 1px #d2d6dc;
+            box-shadow: none;
+        }
+    </style>
+
+    <script>
+
+        $(document).ready(function() {
+            var $j = jQuery.noConflict();
+            $( "#datepicker" ).datepicker({
+                dateFormat: 'mm/dd/yy',
+                changeMonth: true,
+                changeYear: true,
+                minDate: 0,
+                clear: true,
+            });
+        });
+    </script>
 @endsection
 
 @if (auth()->user()->rtl == 0)
@@ -19,20 +50,17 @@
                             @method('PUT')
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">{{__('portal.Edit Business Information')}}</h3>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="business_name">{{__('portal.Business Name')}}</x-jet-label>
-                                {{--                            <x-jet-label class="w-1/2" for="num_of_warehouse">Number of Warehouse</x-jet-label>--}}
-                                {{-- Commented below line because Only SuperAdmin can update business details and to prevent user_id column to be replaced by SuperAdmin ID --}}
-{{--                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">--}}
+                                <label class="block font-medium text-sm text-gray-700 w-1/3" for="business_name">{{__('portal.Business Name')}} @include('misc.required')</label>
+                                <label for="nid_num" class="block font-medium text-sm text-gray-700 w-1/3" >{{ __('register.National ID Number') }} @include('misc.required')</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/3">{{__('portal.National ID Card Photo')}} @include('misc.required')</label>
+                                <label for="nid_exp_date" class="block font-medium text-sm text-gray-700 w-1/3">{{ __('register.National ID Expiry Date') }} @include('misc.required')</label>
                             </div>
 
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2" value="{{ $business->business_name }}"></x-jet-input>
-                                {{--                            <select name="num_of_warehouse" id="num_of_warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{ $business->num_of_warehouse }}">--}}
-                                {{--                                <option value="">None</option>--}}
-                                {{--                                @for ($count = 1; $count <= 100; $count++)--}}
-                                {{--                                    <option value="{{ $count }}" {{ $business->num_of_warehouse == $count ? 'selected' : '' }}>{{ $count }}</option>--}}
-                                {{--                                @endfor--}}
-                                {{--                            </select>--}}
+                                <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/3" value="{{$business->business_name}}" required></x-jet-input>
+                                <x-jet-input id="nid_num" class="block mt-1  w-1/3" type="text" pattern="\d*" maxlength="10" name="nid_num" :value="$business->user->nid_num" required/>
+                                <x-jet-input id="nid_photo" type="file" name="nid_photo_1" class="form-input rounded-md shadow-sm block mt-1  w-1/3" required></x-jet-input>
+                                <input type="text" id="datepicker" data-provide="datepicker" class="block mt-1 w-1/3" name="nid_exp_date" value="{{$business->user->nid_exp_date}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" readonly>
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="business_type">{{__('portal.Category (Select If you want to change)')}}</x-jet-label>
@@ -158,20 +186,17 @@
                             @method('PUT')
                             <h3 class="text-2xl text-gray-900 font-semibold text-center">{{__('portal.Edit Business Information')}}</h3>
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="business_name">{{__('portal.Business Name')}}</x-jet-label>
-                                {{--                            <x-jet-label class="w-1/2" for="num_of_warehouse">Number of Warehouse</x-jet-label>--}}
-                                {{-- Commented below line because Only SuperAdmin can update business details and to prevent user_id column to be replaced by SuperAdmin ID --}}
-{{--                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">--}}
+                                <label class="block font-medium text-sm text-gray-700 w-1/3" for="business_name">{{__('portal.Business Name')}} @include('misc.required')</label>
+                                <label for="nid_num" class="block font-medium text-sm text-gray-700 w-1/3" >{{ __('register.National ID Number') }} @include('misc.required')</label>
+                                <label class="block font-medium text-sm text-gray-700 w-1/3">{{__('portal.National ID Card Photo')}} @include('misc.required')</label>
+                                <label for="nid_exp_date" class="block font-medium text-sm text-gray-700 w-1/3">{{ __('register.National ID Expiry Date') }} @include('misc.required')</label>
                             </div>
 
                             <div class="flex space-x-5 mt-3">
-                                <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/2" value="{{ $business->business_name }}"></x-jet-input>
-                                {{--                            <select name="num_of_warehouse" id="num_of_warehouse" class="form-input rounded-md shadow-sm border p-2 w-1/2" value="{{ $business->num_of_warehouse }}">--}}
-                                {{--                                <option value="">None</option>--}}
-                                {{--                                @for ($count = 1; $count <= 100; $count++)--}}
-                                {{--                                    <option value="{{ $count }}" {{ $business->num_of_warehouse == $count ? 'selected' : '' }}>{{ $count }}</option>--}}
-                                {{--                                @endfor--}}
-                                {{--                            </select>--}}
+                                <x-jet-input id="business_name" type="text" name="business_name" class="border p-2 w-1/3" value="{{$business->business_name}}" required></x-jet-input>
+                                <x-jet-input id="nid_num" class="block mt-1  w-1/3" type="text" pattern="\d*" maxlength="10" name="nid_num" :value="$business->user->nid_num" required/>
+                                <x-jet-input id="nid_photo" type="file" name="nid_photo_1" style="font-family: sans-serif" class="form-input rounded-md shadow-sm block mt-1  w-1/3" required></x-jet-input>
+                                <input type="text" id="datepicker" data-provide="datepicker" class="block mt-1 w-1/3" name="nid_exp_date" value="{{$business->user->nid_exp_date}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" readonly>
                             </div>
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="business_type">{{__('portal.Category (Select If you want to change)')}}</x-jet-label>

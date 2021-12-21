@@ -95,7 +95,7 @@
                                 </div>
 
                                 <div class="w-full overflow-hidden lg:w-1/3 xl:w-1/3 h-12 text-lg text-black">
-                                    <p><strong>{{__('portal.Type')}}:</strong> @if($purchaseOrderInfo->type == 'Credit') {{__('portal.Credit')}} @elseif($purchaseOrderInfo->type == 'Cash') {{__('portal.Cash')}} @endif </p>
+                                    <p><strong>{{__('portal.Type')}}:</strong> @if($purchaseOrderInfo->type == 'Credit') {{__('portal.Credit')}} @elseif($purchaseOrderInfo->type == 'Cash') {{__('portal.Cash')}} @elseif($purchaseOrderInfo->type == 'Credit/Cash') {{__('portal.Credit')}}/{{__('portal.Cash')}} @endif </p>
                                 </div>
 
                                 <div class="w-full  lg:w-1/3 xl:w-1/2 h-auto text-lg text-black">

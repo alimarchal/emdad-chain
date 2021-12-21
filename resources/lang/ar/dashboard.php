@@ -11,9 +11,9 @@ return [
 
     'Dashboard' => 'لوحة القيادة',
     'Total RFQs' => 'مجموع الطلبات المرسلة',
-    'Total Quotation(s)' => 'العروض المستلمة',
-    'Total Purchase Order(s)' => 'اوامر الشراء',
-    'Total Shipments Delivered' => 'الشحنات المستلمة',
+    'Total Quotation(s)' => 'مجموع العروض المستلمة',
+    'Total Purchase Order(s)' => 'مجموع أوامر الشراء',
+    'Total Shipments Delivered' => 'مجموع الشحنات الموردة',
     'Total User' => 'مجموع المستخدمين',
     'Total Business' => 'مجموع الأنشطة التجارية',
     'Received RFQ' => 'الطلبات المستلمة',

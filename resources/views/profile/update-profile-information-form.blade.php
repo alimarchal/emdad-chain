@@ -62,7 +62,11 @@
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="email" value="{{ __('portal.Email') }}" />
-            <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
+            @if(auth()->user()->usertype != 'CEO')
+                <x-jet-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="state.email" />
+            @else
+                <x-jet-input class="mt-1 block w-full" disabled value="{{auth()->user()->email}}"/>
+            @endif
             <x-jet-input-error for="email" class="mt-2" />
         </div>
     </x-slot>

@@ -23,13 +23,12 @@
                     @endphp
                     <br>{{__('portal.Now you need to fill up the')}}
                         @if(is_null($isBusinessDataExist))
-                            {{__('portal.business')}}
+                            {{__('portal.business')}} {{__('portal.registration form before adding any user/s.')}}
                         @elseif(is_null($isBusinessWarehouseDataExist))
-                            {{__('portal.warehouse')}}
+                            {{__('portal.warehouse')}} {{__('portal.registration form.')}}
                         @elseif(is_null($isBusinessPOIExist))
-                            {{__('portal.P.O. Info')}}
+                            {{__('portal.P.O. Info')}} {{__('portal.registration form.')}}
                         @endif
-                        {{__('portal.registration form before adding any user/s.')}}
                 @endif
                 {{--@else
                     <img src="{{url('registration_step/E-2.png')}}" alt="User Registration" class="block w-auto mb-4 m-auto"/>

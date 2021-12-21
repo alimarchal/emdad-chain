@@ -275,6 +275,10 @@ class BusinessController extends Controller
                     $request->merge(['business_photo_url' => $path]);
                 }
                 $business->update($array);
+                if ($request->has('nid_photo_1')) {
+                    $path = $request->file('nid_photo_1')->store('', 'public');
+                    User::where(['business_id' => $business->id, 'usertype' => 'CEO'])->update(['nid_photo' => $path]);
+                }
 
                 session()->flash('message', __('portal.Business information successfully updated.'));
                 return redirect()->route('business.show', $business->id);
@@ -296,6 +300,10 @@ class BusinessController extends Controller
                     $request->merge(['business_photo_url' => $path]);
                 }
                 $business->update($request->all());
+                if ($request->has('nid_photo_1')) {
+                    $path = $request->file('nid_photo_1')->store('', 'public');
+                    User::where(['business_id' => $business->id, 'usertype' => 'CEO'])->update(['nid_photo' => $path]);
+                }
 
                 $business_category = BusinessCategory::where('business_id', $business->id)->get();
                 foreach ($business_category as $biz) {
