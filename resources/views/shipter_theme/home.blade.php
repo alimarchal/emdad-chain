@@ -439,7 +439,7 @@
     {{--        </div>--}}
     {{--    </div>--}}
     <!-- counter-area end -->
-    <!-- pice-area start -->
+    <!-- price-area start -->
     <div class="pricing-area pricing-area-2">
         <div class="container">
             <div class="section-title text-center">
@@ -449,7 +449,7 @@
             <div class="row" style="padding-top: 20px;">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="row">
-                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
+                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6 mb-3">
                             <div class="price-item">
                                 <div class="pricing-header" style="border-color: #023989; border-style: groove; border-width: thin;">
                                     <h3>Basic</h3>
@@ -466,8 +466,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="btns text-center">
+                                <a href="{{route('english.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">Details</a>
+                            </div>
                         </div>
-                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
+                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6 mb-3">
                             <div class="price-item">
                                 <div class="pricing-header1" style="border-color: #023989; border-style: groove; border-width: thin;">
                                     <h3 style="color: white;">Silver</h3>
@@ -484,8 +487,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="btns text-center">
+                                <a href="{{route('english.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">Details</a>
+                            </div>
                         </div>
-                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
+                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6 mb-3">
                             <div class="price-item">
                                 <div class="pricing-header2" style="border-color: #023989; border-style: groove; border-width: thin;">
                                     <h3 style="color: white;">Gold</h3>
@@ -502,8 +508,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="btns text-center">
+                                <a href="{{route('english.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">Details</a>
+                            </div>
                         </div>
-                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
+                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6 mb-3">
                             <div class="price-item">
                                 <div class="pricing-header3" style="border-color: #023989; border-style: groove; border-width: thin;">
                                     <h3 style="color: white;">Platinum</h3>
@@ -520,15 +529,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="btns text-center">
+                                <a href="{{route('english.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">Details</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="btns">
+{{--            <div class="btns">--}}
 {{--                <div class="btn-style">--}}
-                    <a href="{{route('english.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">Details</a>
+{{--                    <a href="{{route('english.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">Details</a>--}}
 {{--                </div>--}}
-            </div>
+{{--            </div>--}}
             {{--<div class="section-title text-center">
                 <span>We Give You The Best</span>
                 <h2>Supplier Subscription Plan</h2>
@@ -598,7 +610,7 @@
             </div>--}}
         </div>
     </div>
-    <!-- pice-area end -->
+    <!-- price-area end -->
 
     <div class="section-area section-style-2">
         <div class="container mt-5 mb-5">

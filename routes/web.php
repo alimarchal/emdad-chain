@@ -36,7 +36,9 @@ use App\Http\Controllers\ShipmentItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\WebsiteArabicController;
+use App\Http\Controllers\WebsiteEnglishController;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\LibraryController;
 
@@ -154,19 +156,19 @@ Route::post('e-buyer', [EBuyerSurveyAnswerController::class, 'store'])->name('eB
 ####################END######################
 
 
-####################  Shipter Website Template   ###################
+####################  Shipper Website Template   ###################
 ####################     WebsiteEnglish          ###################
-Route::get('/english', [\App\Http\Controllers\WebsiteEnglishController::class, 'index'])->name('english.index');
-Route::get('/en-about', [\App\Http\Controllers\WebsiteEnglishController::class, 'about'])->name('english.about');
-Route::get('/en-service', [\App\Http\Controllers\WebsiteEnglishController::class, 'service'])->name('english.service');
-Route::get('/en-team', [\App\Http\Controllers\WebsiteEnglishController::class, 'team'])->name('english.team');
-Route::get('/en-contact', [\App\Http\Controllers\WebsiteEnglishController::class, 'contact'])->name('english.contact');
-Route::get('/en-survey', [\App\Http\Controllers\WebsiteEnglishController::class, 'survey'])->name('english.survey');
-Route::get('/en-suppliers', [\App\Http\Controllers\WebsiteEnglishController::class, 'suppliers'])->name('english.suppliers');
-Route::get('/en-buyer-survey', [\App\Http\Controllers\WebsiteEnglishController::class, 'buyerSurvey'])->name('english.buyerSurvey');
-Route::get('/en-supplier-survey', [\App\Http\Controllers\WebsiteEnglishController::class, 'supplierSurvey'])->name('english.supplierSurvey');
-Route::get('/en-buyer-package', [\App\Http\Controllers\WebsiteEnglishController::class, 'buyerPackage'])->name('english.buyerPackage');
-Route::get('/en-supplier-package', [\App\Http\Controllers\WebsiteEnglishController::class, 'supplierPackage'])->name('english.supplierPackage');
+Route::get('/english', [WebsiteEnglishController::class, 'index'])->name('english.index');
+Route::get('/en-about', [WebsiteEnglishController::class, 'about'])->name('english.about');
+Route::get('/en-service', [WebsiteEnglishController::class, 'service'])->name('english.service');
+Route::get('/en-team', [WebsiteEnglishController::class, 'team'])->name('english.team');
+Route::get('/en-contact', [WebsiteEnglishController::class, 'contact'])->name('english.contact');
+Route::get('/en-survey', [WebsiteEnglishController::class, 'survey'])->name('english.survey');
+Route::get('/en-suppliers', [WebsiteEnglishController::class, 'suppliers'])->name('english.suppliers');
+Route::get('/en-buyer-survey', [WebsiteEnglishController::class, 'buyerSurvey'])->name('english.buyerSurvey');
+Route::get('/en-supplier-survey', [WebsiteEnglishController::class, 'supplierSurvey'])->name('english.supplierSurvey');
+Route::get('/en-buyer-package', [WebsiteEnglishController::class, 'buyerPackage'])->name('english.buyerPackage');
+Route::get('/en-supplier-package', [WebsiteEnglishController::class, 'supplierPackage'])->name('english.supplierPackage');
 
 ####################     WebsiteArabic          ###################
 Route::get('/', [WebsiteArabicController::class, 'index'])->name('arabic.index');
@@ -701,7 +703,7 @@ Route::get('tree', function () {
 
 
 Route::get('/testSms', function () {
-    $x = \App\Models\User::send_otp('6633','581382822');
+    $x = User::send_otp('6633','581382822');
     dd($x);
 });
 

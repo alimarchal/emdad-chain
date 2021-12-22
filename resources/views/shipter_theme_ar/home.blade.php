@@ -401,10 +401,10 @@
                 </h2>
             </div>
             <div class="row" style="padding-top: 20px;">
-                <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-3">
                     <div class="row">
-                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
-                            <div class="price-item">
+                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6 mb-3">
+                            <div class="price-item" style="height: 81%">
                                 <div class="pricing-header" style="border-color: #023989; border-style: groove; border-width: thin;">
                                     <h3 style="color: white;">الأساسية</h3>
                                     <span style="color: black;">EB-0000567373</span>
@@ -413,16 +413,19 @@
                                     <div class="price-sub-header">
                                         <h4>مجاني</h4>
                                     </div>
-                                    <div class="pricing-footer">
+                                    <div class="pricing-footer" style="margin-top: 17%">
                                         <div class="btns">
                                             <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}" class="rounded-pill">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="btns text-center">
+                                <a href="{{route('arabic.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">التفاصيل</a>
+                            </div>
                         </div>
-                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
-                            <div class="price-item">
+                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6 mb-3">
+                            <div class="price-item" style="height: 81%">
                                 <div class="pricing-header1" style="border-color: #023989; border-style: groove; border-width: thin;">
                                     <h3 style="color: white;">الفضية</h3>
                                     <span style="color: black;">EB-0000567373</span>
@@ -431,16 +434,19 @@
                                     <div class="price-sub-header">
                                         <h4>5000 ريال</h4>
                                     </div>
-                                    <div class="pricing-footer">
+                                    <div class="pricing-footer" style="margin-top: 17%">
                                         <div class="btns">
                                             <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}" class="rounded-pill">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="btns text-center">
+                                <a href="{{route('arabic.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">التفاصيل</a>
+                            </div>
                         </div>
-                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
-                            <div class="price-item">
+                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6 mb-3">
+                            <div class="price-item" style="height: 81%">
                                 <div class="pricing-header2" style="border-color: #023989; border-style: groove; border-width: thin;">
                                     <h3 style="color: white;">الذهبية</h3>
                                     <span style="color: black;">EB-0000567373</span>
@@ -449,15 +455,18 @@
                                     <div class="price-sub-header">
                                         <h4>15000 ريال</h4>
                                     </div>
-                                    <div class="pricing-footer">
+                                    <div class="pricing-footer" style="margin-top: 17%">
                                         <div class="btns">
                                             <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}" class="rounded-pill">أطلب الآن</a></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="btns text-center">
+                                <a href="{{route('arabic.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">التفاصيل</a>
+                            </div>
                         </div>
-                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
+                        <div class="col-lg-3 col-l2 col-md-6 col-sm-6 mb-3">
                             <div class="price-item">
                                 <div class="pricing-header3" style="border-color: #023989; border-style: groove; border-width: thin;">
                                     <h3 style="color: white;">بلاتيني</h3>
@@ -475,15 +484,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="btns text-center">
+                                <a href="{{route('arabic.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">التفاصيل</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="btns">
+{{--            <div class="btns">--}}
 {{--                <div class="btn-style">--}}
-                    <a href="{{route('arabic.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">التفاصيل</a>
+{{--                    <a href="{{route('arabic.buyerPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">التفاصيل</a>--}}
 {{--                </div>--}}
-            </div>
+{{--            </div>--}}
             {{--<div class="section-title text-center">
                 <span>
                     نقدم لكم الأفضل
