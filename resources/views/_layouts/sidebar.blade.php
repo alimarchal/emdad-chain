@@ -21,11 +21,11 @@
                 </a>
                 <a href="{{ route('dashboard') }}"
                    @if(auth()->user()->hasRole('SuperAdmin')) title="SuperAdmin {{__('sidebar.Virtual office')}}"
-                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer') title="{{auth()->user()->registration_type}} {{__('sidebar.Virtual office')}}"
-                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier') title="{{auth()->user()->registration_type}} {{__('sidebar.Virtual office')}}"
+                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Buyer') title="{{__('sidebar.Virtual office')}} for {{auth()->user()->registration_type}}"
+                   @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier') title="{{__('sidebar.Virtual office')}} for {{auth()->user()->registration_type}}"
                    @else
                    @php $roleName = auth()->user()->roles()->pluck('name'); @endphp
-                   title="{{$roleName[0]}} Virtual office"
+                   title="{{__('sidebar.Virtual office')}} for {{$roleName[0]}}"
                     @endif
                 >
                 <span class="text-white text-2xl mx-2 font-semibold">
@@ -1741,7 +1741,7 @@
                    @elseif(auth()->user()->hasRole('CEO') && auth()->user()->registration_type == 'Supplier') title="{{__('sidebar.Supplier Virtual office')}}"
                    @else
                    @php $roleName = auth()->user()->roles()->pluck('name'); @endphp
-                   title="{{$roleName[0]}} {{ __('sidebar.Virtual office') }}"
+                   title="{{ __('sidebar.Virtual office') }} {{$roleName[0]}}"
                     @endif
                 >
                 <span class="text-white text-2xl mx-2 font-semibold">

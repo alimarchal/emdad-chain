@@ -10,10 +10,10 @@ return [
     */
 
     'Dashboard' => 'Dashboard',
-    'Total RFQs' => 'Total Requisitions',
-    'Total Quotation(s)' => 'Total Quotation(s)',
-    'Total Purchase Order(s)' => 'Total Purchase Order(s)',
-    'Total Shipments Delivered' => 'Total Shipments Delivered',
+    'Total RFQs' => 'All Requisitions',
+    'Total Quotation(s)' => 'All Received Quotations',
+    'Total Purchase Order(s)' => 'All Purchase Orders',
+    'Total Shipments Delivered' => 'All Delivered Shipments',
     'Total User' => 'Total User',
     'Total Business' => 'Total Business',
     'Received RFQ' => 'Received Requisition(s)',

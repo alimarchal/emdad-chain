@@ -15,7 +15,7 @@ return [
     'CEO' => 'CEO',
     'CEO (Supplier)' => 'CEO (Supplier)',
     'CEO (Buyer)' => 'CEO (Buyer)',
-    'Logistics Solution' => 'Logistics Solution Provider',
+    'Logistics Solution' => 'Logistic Solution Provider',
     'Title' => 'Title',
     'Select' => 'Select',
     'Company Name' => 'Company Name',
