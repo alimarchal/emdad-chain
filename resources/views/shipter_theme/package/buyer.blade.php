@@ -55,7 +55,7 @@
                     <section class="text-gray-600 body-font overflow-hidden">
                         <div class="container px-5 py-15 mx-auto">
                             <div class="flex flex-wrap -m-4">
-                                @php $packages = \App\Models\Package::all()->take(4); @endphp
+                                @php $packages = \App\Models\Package::all()->take(4)->except(2); @endphp
                                 @foreach($packages as $package)
                                     <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
                                         <div class="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative bg-white overflow-hidden" style="border: 2px solid #c3c3c3">
@@ -90,7 +90,7 @@
 {{--                                                    <span class="text-lg ml-1 font-normal text-gray-500">(Purchases above SR 5 million/month)</span>--}}
                                                 </h1>
 {{--                                                <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-gray-700 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-900 rounded" style="justify-content: center">Subscribe</a>--}}
-                                                <a class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-3 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center;font-size: 11px;">(Purchases above SR 5 million/month)</a>
+                                                <a class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-4 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center;font-size: 7px;">If the monthly purchases value exceeded 5 millions SR</a>
                                             @endif
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@
                                 <table class="table-auto bg-white overflow-hidden w-full text-left whitespace-no-wrap">
                                     <thead>
                                     <tr>
-                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500 rounded-tl rounded-bl">Features/Package</th>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500 rounded-tl rounded-bl">Features</th>
                                         @foreach($packages as $package)
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500">
                                                 {{$package->package_type}}</th>
@@ -118,30 +118,30 @@
                                         @foreach($packages as $package)
                                             <td class="px-4 py-3 text-center">{{$package->charges}} @if($package->id == 2 || $package->id == 3 ) SR @endif </td>
                                         @endforeach
-                                    <tr>
+                                    {{--<tr>
                                         <td class="border-t-2 border-gray-200 px-4 py-3">Registration</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->registeration}}</td>
                                         @endforeach
-                                    </tr>
+                                    </tr>--}}
                                     <tr>
                                         <td class="border-t-2 border-gray-200 px-4 py-3">Main Categories</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->category}}</td>
                                         @endforeach
                                     </tr>
-                                    <tr>
+                                    {{--<tr>
                                         <td class="border-t-2 border-gray-200 px-4 py-3">Sub Categories</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->sub_category}}</td>
                                         @endforeach
-                                    </tr>
-                                    <tr>
+                                    </tr>--}}
+                                    {{--<tr>
                                         <td class="border-t-2 border-gray-200 px-4 py-3">No. of available RFQs per Day</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->rfq_per_day}}</td>
                                         @endforeach
-                                    </tr>
+                                    </tr>--}}
                                     <tr>
                                         <td class="border-t-2 border-gray-200 px-4 py-3">No. Quotes. Per 1 RFQ</td>
                                         @foreach($packages as $package)
@@ -166,12 +166,12 @@
                                         @endforeach
                                     </tr>
 
-                                    <tr>
+                                    {{--<tr>
                                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Sub Admin</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->sub_admin_count}}</td>
                                         @endforeach
-                                    </tr>
+                                    </tr>--}}
                                     <tr>
                                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Users</td>
                                         @foreach($packages as $package)
@@ -184,13 +184,13 @@
                                             <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->payment_type}} </td>
                                         @endforeach
                                     </tr>
-                                    <tr>
+                                    {{--<tr>
                                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Trainings</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->training}}</td>
                                         @endforeach
                                     </tr>
-                                    {{--<tr>
+                                    <tr>
                                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3"></td>
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
@@ -199,6 +199,9 @@
                                     </tr>--}}
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="bg-blue-700 text-start mt-3">
+                                <a href="{{route('english.index')}}" target="_blank" class="flex items-center mt-auto text-white bg-gray-500 border-0 py-0 px-4 w-full focus:outline-none hover:bg-gray-600 rounded" style="width: 70px;text-align: center; float: right">Back</a>
                             </div>
                             <br>
                             <span>@include('misc.required') <strong>Note:</strong> Minimum 1 quotation received, in case of Branded item</span>

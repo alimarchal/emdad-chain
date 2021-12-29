@@ -66,4 +66,9 @@ class WebsiteArabicController extends Controller
     {
         return view('shipter_theme_ar.package.supplier');
     }
+
+    public function faq()
+    {
+        return view('shipter_theme_ar.FAQ');
+    }
 }

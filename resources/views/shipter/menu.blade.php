@@ -15,5 +15,6 @@
 {{--        <li><a href="javascript:void(0)">Training Center</a></li>--}}
 {{--        <li><a href="javascript:void(0)">How it works</a></li>--}}
         <li class="{{(request()->routeIs('english.suppliers')?'active':'')}}"><a href="{{route('english.suppliers')}}">Suppliers</a></li>
+        <li class="{{(request()->routeIs('english.faq')?'active':'')}}"><a href="{{route('english.faq')}}">FAQ</a></li>
     </ul>
 </nav>

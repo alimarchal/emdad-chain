@@ -3,7 +3,7 @@
 @section('custom_header_image')
     background-image: url('images/Our sevices (photo no.4).jpg');
 @endsection
-@section('title','مميزات إمداد')
+@section('title','الموردون')
 @section('custom-header')
     <style>
         .header-area.header-style-2 .slicknav_btn {
@@ -21,8 +21,8 @@
     style="font-family: arabicFont;"
 @endsection
 @section('inside-body')
-@section('breadcumb-title','مميزات إمداد')
-@section('breadcumb-text','مميزات إمداد')
+@section('breadcumb-title','الموردون')
+@section('breadcumb-text','الموردون')
 @section('main')
 
     @include('shipterAr.breadcumb-area')
@@ -35,8 +35,8 @@
                     <div class="section-wrap">
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi">
-                                    <img src="{{url('images/15.png')}}" style="width: 40px; height: 40px;" alt="">
+                                <i class="fi" style="background-color: #505050; border-color: #c7e0f9">
+                                    <img src="{{url('Shipter/assets/images/service/logistics_department.png')}}" style="width: 64px; height: 67px;" alt="">
                                 </i>
                             </div>
                             <div class="section-content">
@@ -48,7 +48,7 @@
                         </div>
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi">
+                                <i class="fi" style="background-color: #505050; border-color: #c7e0f9">
                                     <img src="{{url('images/16.png')}}" style="width: 40px; height: 40px;" alt="">
                                 </i>
                             </div>
@@ -65,8 +65,8 @@
                         </div>
                         <div class="section-item-2">
                             <div class="section-icon">
-                                <i class="fi">
-                                    <img src="{{url('images/20.png')}}" style="width: 40px; height: 40px;" alt="">
+                                <i class="fi" style="background-color: #505050; border-color: #c7e0f9">
+                                    <img src="{{url('Shipter/assets/images/service/Payments.png')}}" style="width: 64px; height: 67px;" alt="">
                                 </i>
                             </div>
                             <div class="section-content">
@@ -117,15 +117,21 @@
                             باقات الاشتراكات (للمورد)
 
                         </h2>
+                        <div class="btns">
+                            <div class="btn-style btn-style-4"><a href="{{route('registerAr', 'ar')}}" class="rounded-pill">اشتراك</a></div>
+                        </div>
+                        <div class="btns">
+                            <a href="{{route('arabic.supplierPackage')}}" target="_blank" class="a_hover_class mb-3 text-white" style="width: 120px;text-align: center">التفاصيل</a>
+                        </div>
                     </div>
-                    <div class="row" style="padding-top: 20px;">
+                    {{--<div class="row" style="padding-top: 20px;">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="row">
                                 <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                                     <div class="price-item">
                                         <div class="pricing-header" style="border-color: #023989; border-style: groove; border-width: thin;">
                                             <h3 style="color: white;">الأساسية</h3>
-                                            <span style="color: black;">ES-0000567373</span>
+                                            <span style="color: black;font-family: sans-serif;">ES-0000567373</span>
                                         </div>
                                         <div class="pricing-table">
                                             <div class="price-sub-header">
@@ -137,13 +143,16 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="btns">
+                                            <a href="{{route('arabic.supplierPackage')}}" target="_blank" class="a_hover_class mb-3 text-white" style="width: 120px;text-align: center">التفاصيل</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-l2 col-md-6 col-sm-6">
+                                --}}{{--<div class="col-lg-3 col-l2 col-md-6 col-sm-6">
                                     <div class="price-item">
                                         <div class="pricing-header1" style="border-color: #023989; border-style: groove; border-width: thin;">
                                             <h3 style="color: white;">الفضية</h3>
-                                            <span style="color: black;">ES-0000567373</span>
+                                            <span style="color: black;font-family: sans-serif;">ES-0000567373</span>
                                         </div>
                                         <div class="pricing-table">
                                             <div class="price-sub-header">
@@ -161,7 +170,7 @@
                                     <div class="price-item">
                                         <div class="pricing-header2" style="border-color: #023989; border-style: groove; border-width: thin;">
                                             <h3 style="color: white;">الذهبية</h3>
-                                            <span style="color: black;">ES-0000567373</span>
+                                            <span style="color: black;font-family: sans-serif;">ES-0000567373</span>
                                         </div>
                                         <div class="pricing-table">
                                             <div class="price-sub-header">
@@ -174,15 +183,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>--}}{{--
                             </div>
                         </div>
-                    </div>
-                    <div class="btns">
+                    </div>--}}
+{{--                    <div class="btns">--}}
 {{--                        <div class="btn-style">--}}
-                            <a href="{{route('arabic.supplierPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">التفاصيل</a>
+{{--                            <a href="{{route('arabic.supplierPackage')}}" target="_blank" class="a_hover_class text-white" style="width: 120px;text-align: center">التفاصيل</a>--}}
 {{--                        </div>--}}
-                    </div>
+{{--                    </div>--}}
                 </div>
             </div>
             <!-- price-area end -->
@@ -213,7 +222,7 @@
                             </div>
                             <div class="service-content">
                                 <h3>
-                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                    {{--<svg xmlns="http://www.w3.org/2000/svg"
                                          viewBox="0 0 172 172"
                                          style=" fill:#000000;
                                         position: absolute;
@@ -233,7 +242,8 @@
                                                 </g>
                                             </g>
                                         </g>
-                                    </svg>
+                                    </svg>--}}
+                                    <img src="{{url('Shipter/assets/images/service/logistics_department.png')}}" style="width: 72px; height: 67px; left: -80px; top: -25px; position: absolute" alt="">
                                     القسم اللوجستي
                                 </h3>
                                 <p>تحكم أكبر بإدارة المخزون. تتبع دقيق للطلبات.</p>
@@ -287,7 +297,7 @@
                             </div>
                             <div class="service-content service-content6">
                                 <h3>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                    {{--<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                                          width="50" height="50"
                                          viewBox="0 0 172 172"
                                          style=" fill:#000000;
@@ -307,7 +317,8 @@
                                                 <path d="" fill="none"></path>
                                             </g>
                                         </g>
-                                    </svg>
+                                    </svg>--}}
+                                    <img src="{{url('Shipter/assets/images/service/Payments.png')}}" style="width: 72px; height: 67px; left: -80px; top: -21px; position: absolute" alt="">
                                     المالية
                                 </h3>
                                 <p>منع الاختلاسات المالية.</p>
@@ -357,7 +368,7 @@
                             </div>
                             <div class="service-content service-content4">
                                 <h3>
-                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                    {{--<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                                          width="64" height="64"
                                          viewBox="0 0 172 172"
                                          style=" fill:#000000;
@@ -373,7 +384,8 @@
                                                     d="M67.1875,1.34375c-5.24063,0 -9.675,3.35938 -11.42187,8.0625h-23.51562c-1.74687,0 -3.3599,1.20833 -3.8974,2.9552l-12.4953,42.7323h-10.4823c-1.20937,0 -2.28333,0.5375 -2.9552,1.34375c-0.67187,0.80625 -1.21042,2.01615 -1.07605,3.22553l11.9599,95.67395c1.075,8.73438 8.60052,15.31927 17.3349,15.31927h110.58905c8.73438,0 16.2599,-6.5849 17.3349,-15.31927l11.9599,-95.67395c0.26875,-1.20938 -0.13595,-2.2849 -0.9422,-3.22553c-0.80625,-0.80625 -1.8802,-1.34375 -2.9552,-1.34375h-10.4823l-12.62915,-42.7323c-0.40312,-1.74687 -2.01667,-2.9552 -3.76355,-2.9552h-23.51562c-1.6125,-4.70312 -6.18125,-8.0625 -11.42187,-8.0625zM67.1875,9.40625h37.625c2.28437,0 4.03125,1.74688 4.03125,4.03125c0,2.28437 -1.74688,4.03125 -4.03125,4.03125h-37.625c-2.28437,0 -4.03125,-1.74688 -4.03125,-4.03125c0,-2.28437 1.74688,-4.03125 4.03125,-4.03125zM35.2052,17.46875h20.56042c1.6125,4.70313 6.18125,8.0625 11.42188,8.0625h37.625c5.24063,0 9.675,-3.35937 11.42188,-8.0625h20.56042l11.0177,37.625h-123.625zM9.94427,63.15625h152.11145l-11.42187,91.24115c-0.5375,4.70313 -4.56927,8.19635 -9.2724,8.19635h-110.7229c-4.70312,0 -8.7349,-3.49323 -9.2724,-8.19635zM72.5625,81.96875c-2.28437,0 -4.03125,1.74688 -4.03125,4.03125v53.75c0,2.28438 1.74688,4.03125 4.03125,4.03125c2.28437,0 4.03125,-1.74687 4.03125,-4.03125v-53.75c0,-2.28437 -1.74688,-4.03125 -4.03125,-4.03125zM99.4375,81.96875c-2.28437,0 -4.03125,1.74688 -4.03125,4.03125v53.75c0,2.28438 1.74688,4.03125 4.03125,4.03125c2.28437,0 4.03125,-1.74687 4.03125,-4.03125v-53.75c0,-2.28437 -1.74688,-4.03125 -4.03125,-4.03125zM39.36243,82.08685c-0.2614,-0.02257 -0.5291,-0.01785 -0.79785,0.01575c-2.15,0.26875 -3.76198,2.28543 -3.49323,4.43543l6.5849,53.75c0.26875,2.01563 2.01563,3.49323 4.03125,3.49323h0.53803c2.15,-0.26875 3.76197,-2.28542 3.49322,-4.43542l-6.71875,-53.75c-0.23516,-1.88125 -1.80776,-3.35098 -3.63757,-3.50897zM132.77142,82.08685c-1.82981,0.158 -3.40242,1.62772 -3.63757,3.50897l-6.71875,53.75c-0.40312,2.15 1.20938,4.16667 3.35938,4.43542h0.53803c2.01563,0 3.7625,-1.4776 4.03125,-3.49323l6.71875,-53.75c0.26875,-2.15 -1.34323,-4.16668 -3.49322,-4.43543c-0.26875,-0.03359 -0.53645,-0.03832 -0.79785,-0.01575z"></path>
                                             </g>
                                         </g>
-                                    </svg>
+                                    </svg>--}}
+                                    <img src="{{url('Shipter/assets/images/service/purchase_department.png')}}" style="width: 72px; height: 59px; left: -78px; top: -26px; position: absolute" alt="">
                                     المشتريات
                                 </h3>
                                 <p>إمكانية اعتماد أوامر الشراء إلكترونيا.</p>
@@ -383,7 +395,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                {{--<div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
@@ -409,7 +421,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--}}
             </div>
         </div>
     </div>

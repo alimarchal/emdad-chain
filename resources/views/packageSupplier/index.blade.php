@@ -28,7 +28,7 @@
                                 @if($package->package_type == 'Basic')
                                     <h2 class="text-sm tracking-widest title-font mb-1 font-medium">@if($package->package_type == 'Basic') {{__('portal.Basic')}} @else {{$package->package_type}} @endif</h2>
                                     <span class="text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
-                                    <h1 class="text-2xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">@if($package->charges == 'Free') {{__('portal.Free')}} @else {{$package->charges}} @endif</h1>
+                                    <h1 class="text-2xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">@if($package->charges == 'Free') {{__('portal.Charges free')}} @else {{$package->charges}} @endif</h1>
 
                                     @if(isset($businessPackage) && $businessPackage->package_id == 5)
                                         <span class="text-lg ml-1 font-normal text-gray-500">{{__('portal.Emdad-ID')}}: {{auth()->user()->business_id}}</span>
@@ -127,7 +127,7 @@
                     <table class="table-auto bg-white overflow-hidden w-full text-left whitespace-no-wrap">
                         <thead class="text-lg">
                         <tr>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-lg text-center bg-gray-500 rounded-tl rounded-bl">{{__('portal.Functions')}}</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-lg text-center bg-gray-500 rounded-tl rounded-bl">{{__('portal.Features')}}</th>
                             @foreach($packages as $package)
                                 <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-lg text-center bg-gray-500">
                                     @if($package->package_type == 'Basic') {{__('portal.Basic')}}
@@ -151,7 +151,7 @@
                                 </td>
                             @endforeach
                         </tr>
-                        <tr>
+                        {{--<tr>
                             <td class="border-t-2 border-gray-200 px-4 py-3">{{__('portal.Registration')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">
@@ -160,7 +160,7 @@
                                     @endif
                                 </td>
                             @endforeach
-                        </tr>
+                        </tr>--}}
                         <tr>
                             <td class="border-t-2 border-gray-200 px-4 py-3">{{__('portal.Main Categories')}}</td>
                             @foreach($packages as $package)
@@ -227,7 +227,7 @@
                                 </td>
                             @endforeach
                         </tr>
-                        <tr>
+                        {{--<tr>
                             <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{__('portal.Trainings')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">
@@ -237,7 +237,7 @@
                                 </td>
                             @endforeach
                         </tr>
-                        {{--<tr>
+                        <tr>
                             <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">{{__('portal.You can use a discount code if found')}}</td>
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{__('portal.Discount Code')}}</td>
@@ -266,17 +266,17 @@
 
     <script>
         function basicConfirmation() {
-            if(!confirm('Are you sure?\nYou have selected the basic package.\nYou would only be able to change your package after the business approval.')){
+            if(!confirm('Are you sure?\nYou have selected the basic package.\nYou will not be able to change your package until verification.')){
                 event.preventDefault();
             }
         }
         function silverConfirmation() {
-            if(!confirm('Are you sure?\nYou have selected the silver package.\nYou would only be able to change your package after the business approval.')){
+            if(!confirm('Are you sure?\nYou have selected the silver package.\nYou will not be able to change your package until verification.')){
                 event.preventDefault();
             }
         }
         function goldConfirmation() {
-            if(!confirm('Are you sure?\nYou have selected the gold package.\nYou would only be able to change your package after the business approval.')){
+            if(!confirm('Are you sure?\nYou have selected the gold package.\nYou will not be able to change your package until verification.')){
                 event.preventDefault();
             }
         }
@@ -311,7 +311,7 @@
                                 @if($package->package_type == 'Basic')
                                     <h2 class="text-sm tracking-widest title-font mb-1 font-medium">@if($package->package_type == 'Basic') {{__('portal.Basic')}} @else {{$package->package_type}} @endif</h2>
                                     <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
-                                    <h1 class="text-2xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">@if($package->charges == 'Free') {{__('portal.Free')}} @else {{$package->charges}} @endif</h1>
+                                    <h1 class="text-2xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">@if($package->charges == 'Free') {{__('portal.Charges free')}} @else {{$package->charges}} @endif</h1>
 
                                     @if(isset($businessPackage) && $businessPackage->package_id == 5)
                                         <span class="text-lg ml-1 font-normal text-gray-500">{{__('portal.Emdad-ID')}}: {{auth()->user()->business_id}}</span>
@@ -410,7 +410,7 @@
                     <table class="table-auto bg-white overflow-hidden w-full text-left whitespace-no-wrap">
                         <thead class="text-lg">
                         <tr>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-lg text-center bg-gray-500">{{__('portal.Functions')}}</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-lg text-center bg-gray-500">{{__('portal.Features')}}</th>
                             @foreach($packages as $package)
                                 <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-lg text-center bg-gray-500">
                                     @if($package->package_type == 'Basic') {{__('portal.Basic')}}
@@ -434,7 +434,7 @@
                                 </td>
                             @endforeach
                         </tr>
-                        <tr>
+                        {{--<tr>
                             <td class="border-t-2 border-gray-200 px-4 py-3 text-right">{{__('portal.Registration')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">
@@ -443,7 +443,7 @@
                                     @endif
                                 </td>
                             @endforeach
-                        </tr>
+                        </tr>--}}
                         <tr>
                             <td class="border-t-2 border-gray-200 px-4 py-3 text-right">{{__('portal.Main Categories')}}</td>
                             @foreach($packages as $package)
@@ -510,7 +510,7 @@
                                 </td>
                             @endforeach
                         </tr>
-                        <tr>
+                        {{--<tr>
                             <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">{{__('portal.Trainings')}}</td>
                             @foreach($packages as $package)
                                 <td class="border-t-2 text-center border-gray-200 px-4 py-3">
@@ -520,7 +520,7 @@
                                 </td>
                             @endforeach
                         </tr>
-                        {{--<tr>
+                        <tr>
                             <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">{{__('portal.You can use a discount code if found')}}</td>
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{__('portal.Discount Code')}}</td>
@@ -549,17 +549,17 @@
 
     <script>
         function basicConfirmation() {
-            if(!confirm('Are you sure?\nYou have selected the basic package.\nYou would only be able to change your package after the business approval.')){
+            if(!confirm('هل أنت متأكد؟\nلقد قمت باختيار باقة الاشتراك الأساسية.\nلن تتمكن من تغيير باقة الاشتراك الخاصة بك إلا بعد التحقق.')){
                 event.preventDefault();
             }
         }
         function silverConfirmation() {
-            if(!confirm('Are you sure?\nYou have selected the silver package.\nYou would only be able to change your package after the business approval.')){
+            if(!confirm('هل أنت متأكد؟\nلقد قمت باختيار باقة الاشتراك الفضية.\nلن تتمكن من تغيير باقة الاشتراك الخاصة بك إلا بعد التحقق.')){
                 event.preventDefault();
             }
         }
         function goldConfirmation() {
-            if(!confirm('Are you sure?\nYou have selected the gold package.\nYou would only be able to change your package after the business approval.')){
+            if(!confirm('هل أنت متأكد؟\nلقد قمت باختيار باقة الاشتراك الذهبية.\nلن تتمكن من تغيير باقة الاشتراك الخاصة بك إلا بعد التحقق.')){
                 event.preventDefault();
             }
         }

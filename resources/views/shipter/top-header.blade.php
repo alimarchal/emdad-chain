@@ -9,7 +9,7 @@
                 &nbsp;العربية
             </a>
         </li>
-        <li style="margin-top: 10px;">You can register now with Emdad for free.</li>
+        <li style="margin-top: 10px;">You can register now with Emdad digital platform.</li>
     </ul>
 </div>
 <div class="col-md-6 col-sm-12 col-12 col-lg-6">

@@ -55,7 +55,7 @@
                     <section class="text-gray-600 body-font overflow-hidden">
                         <div class="container px-5 py-15 mx-auto">
                             <div class="flex flex-wrap -m-4">
-                                @php $packages = \App\Models\Package::all()->skip(4)->take(3);  @endphp
+                                @php $packages = \App\Models\Package::all()->skip(4)->take(1);  @endphp
 
                                 @foreach($packages as $package)
                                     <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
@@ -101,7 +101,7 @@
                                 <table class="table-auto bg-white overflow-hidden w-full text-left whitespace-no-wrap">
                                     <thead>
                                     <tr>
-                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500 rounded-tl rounded-bl">Features/Package</th>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500 rounded-tl rounded-bl">Features</th>
                                         @foreach($packages as $package)
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500">
                                                 {{$package->package_type}}</th>
@@ -115,12 +115,12 @@
                                             <td class="px-4 py-3 text-center">{{$package->charges}} @if($package->id == 6 || $package->id == 7) SR @endif</td>
                                         @endforeach
                                     </tr>
-                                    <tr>
+                                    {{--<tr>
                                         <td class="border-t-2 border-gray-200 px-4 py-3">Registration</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->registeration}}</td>
                                         @endforeach
-                                    </tr>
+                                    </tr>--}}
                                     <tr>
                                         <td class="border-t-2 border-gray-200 px-4 py-3">Main Categories</td>
                                         @foreach($packages as $package)
@@ -172,13 +172,13 @@
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->driver}}</td>
                                         @endforeach
                                     </tr>
-                                    <tr>
+                                    {{--<tr>
                                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Trainings</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->training}}</td>
                                         @endforeach
                                     </tr>
-                                    {{--<tr>
+                                    <tr>
                                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">You can use a discount code if found</td>
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
@@ -186,6 +186,9 @@
                                     </tr>--}}
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="bg-blue-700 text-start mt-3">
+                                <a href="{{route('english.index')}}" target="_blank" class="flex items-center mt-auto text-white bg-gray-500 border-0 py-0 px-4 w-full focus:outline-none hover:bg-gray-600 rounded" style="width: 70px;text-align: center; float: right">Back</a>
                             </div>
                         </div>
                     </section>

@@ -68,10 +68,11 @@
             <div class="footer-bottom-content">
                 <div class="row">
                     <div class="col-12">
-                        &copy; حقوق الطبع والنشر {{date('Y')}} - <strong><span>
-                                شركة منصة الإمداد التقنية
+{{--                        &copy; جميع حقوق الطبع والنشر محفوظة لصالح {{date('Y')}} - <strong><span>--}}
+                        &copy; جميع حقوق الطبع والنشر محفوظة لصالح - <strong><span>
+                                شركة منصة الإمداد التقنية.
 
-                            </span></strong> ۔ جميع الحقوق محفوظة ۔ مدعوم من  <strong><span>ویب سوفت </span></strong>
+                            </span></strong> ۔ الداعم الفني  <strong><span>ويب سوفت </span></strong>
                             @include('shipter.counter')
                     </div>
                 </div>

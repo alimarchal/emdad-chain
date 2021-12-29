@@ -44,7 +44,7 @@
                     </div>
                     <div class="team-content">
                         <h4>عبد العزيز السناني</h4>
-                        <span>مؤسس ورئيس مجلس الإدارة </span>
+                        <span>الرئيس التنفيذي</span>
                     </div>
                 </div>
             </div>
@@ -115,78 +115,6 @@
                         </div>
                     </div>
                     <div class="team-content">
-                        <h4>آلاء الحمزي</h4>
-                        <span>مشرف مبيعات</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="team-single">
-                    <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
-                        <div class="social-1st">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="team-content">
-                        <h4>روان الشهراني</h4>
-                        <span>أخصائية تسويق أول</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="team-single">
-                    <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
-                        <div class="social-1st">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="team-content">
-                        <h4>أمجاد الشهري</h4>
-                        <span>أخصائية سلاسل إمداد</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="team-single">
-                    <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
-                        <div class="social-1st">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="team-content">
-                        <h4>مريم الحاجي</h4>
-                        <span>مصممة جرافيك</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="team-single">
-                    <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
-                        <div class="social-1st">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="team-content">
                         <h4>غادة النجيدي</h4>
                         <span>مساعدة المدير التنفيذي</span>
                     </div>
@@ -207,24 +135,6 @@
                     <div class="team-content">
                         <h4>مستحسن ريزفي</h4>
                         <span>مدير مكتب (باكستان)</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="team-single">
-                    <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
-                        <div class="social-1st">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="team-content">
-                        <h4>شهد الشهراني</h4>
-                        <span>أخصائية مبيعات</span>
                     </div>
                 </div>
             </div>
@@ -264,62 +174,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="team-single">
-                    <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/male.jpeg')}}" alt="">
-                        <div class="social-1st">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="team-content">
-                        <h4>أحمد</h4>
-                        <span>أخصائي مبيعات</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="team-single">
-                    <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
-                        <div class="social-1st">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="team-content">
-                        <h4>نورة</h4>
-                        <span>أخصائية سلاسل إمداد</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="team-single">
-                    <div class="team-img">
-                        <img src="{{url('Shipter/assets/images/team/female.jpeg')}}" alt="">
-                        <div class="social-1st">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="team-content">
-                        <h4>إلهام</h4>
-                        <span>أخصائية سلاسل إمداد</span>
-                    </div>
-                </div>
-            </div>
-
-
             <div class="col-lg-3 col-md-6 col-12">
                 <div class="team-single">
                     <div class="team-img">

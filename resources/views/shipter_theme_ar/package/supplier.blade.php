@@ -55,7 +55,7 @@
                     <section class="text-gray-600 body-font overflow-hidden" style="direction: rtl">
                         <div class="container px-5 py-15 mx-auto">
                             <div class="flex flex-wrap -m-4">
-                                @php $packages = \App\Models\Package::all()->skip(4)->take(3);  @endphp
+                                @php $packages = \App\Models\Package::all()->skip(4)->take(1);  @endphp
 
                                 @foreach($packages as $package)
                                     <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
@@ -64,7 +64,7 @@
                                             @if($package->package_type == 'Basic')
                                                 <h2 class="text-sm tracking-widest title-font mb-1 font-medium">الأساسية</h2>
                                                 <span class="text-white px-3 py-1 tracking-widest text-xs absolute left-0 top-0 rounded-bl"><img src="{{asset('logo.png')}}" style="width: 50px; height: 40px;"></span>
-                                                <h1 class="text-2xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">مجاني</h1>
+                                                <h1 class="text-2xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">بلا رسوم</h1>
 
                                                 <a href="{{route('register')}}" class="flex items-center mt-auto text-white bg-yellow-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-yellow-500 rounded" style="justify-content: center">اشترك</a>
 
@@ -101,7 +101,7 @@
                                 <table class="table-auto bg-white overflow-hidden w-full text-left whitespace-no-wrap">
                                     <thead>
                                     <tr>
-                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500">المهام</th>
+                                        <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500">المميزات</th>
                                         @foreach($packages as $package)
                                             <th class="px-4 py-3 title-font tracking-wider font-medium text-white text-sm text-center bg-gray-500">
                                                 @if($package->id == 5) الأساسية
@@ -119,14 +119,14 @@
                                             <td class="px-4 py-3 text-center">@if($package->id == 5) مجاني @else {{$package->charges}} ريال @endif</td>
                                         @endforeach
                                     </tr>
-                                    <tr>
+                                    {{--<tr>
                                         <td class="border-t-2 border-gray-200 px-4 py-3 text-right">التسجيل</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">مجاني</td>
                                         @endforeach
-                                    </tr>
+                                    </tr>--}}
                                     <tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">الفئات الرئيسية</td>
+                                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">الفئات الرئيسية المتاحة</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">
                                                  {{$package->category}}
@@ -153,7 +153,7 @@
                                     </tr>
 
                                     <tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">اضافة مدير فرعي</td>
+                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">إضافة مستخدم رئيسي تابع</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->sub_admin_count}}</td>
                                         @endforeach
@@ -176,12 +176,12 @@
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">@if($package->id == 7) غير محدود  @else {{$package->driver}}@endif</td>
                                         @endforeach
                                     </tr>
-                                    <tr>
+                                    {{--<tr>
                                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">الدعم والتدريب</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">غير محدود</td>
                                         @endforeach
-                                    </tr>
+                                    </tr>--}}
                                     {{--<tr>
                                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">يمكنك استخدام رمز الخصم إن وجد </td>
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
@@ -190,6 +190,9 @@
                                     </tr>--}}
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="bg-blue-700 text-start mt-3">
+                                <a href="{{route('arabic.index')}}" target="_blank" class="flex items-center mt-auto text-white bg-gray-500 border-0 py-0 px-4 w-full focus:outline-none hover:bg-gray-600 rounded" style="width: 70px;text-align: center; float: left">العودة</a>
                             </div>
                         </div>
                     </section>

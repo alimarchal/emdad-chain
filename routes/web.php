@@ -169,6 +169,7 @@ Route::get('/en-buyer-survey', [WebsiteEnglishController::class, 'buyerSurvey'])
 Route::get('/en-supplier-survey', [WebsiteEnglishController::class, 'supplierSurvey'])->name('english.supplierSurvey');
 Route::get('/en-buyer-package', [WebsiteEnglishController::class, 'buyerPackage'])->name('english.buyerPackage');
 Route::get('/en-supplier-package', [WebsiteEnglishController::class, 'supplierPackage'])->name('english.supplierPackage');
+Route::get('/en-faq', [WebsiteEnglishController::class, 'faq'])->name('english.faq');
 
 ####################     WebsiteArabic          ###################
 Route::get('/', [WebsiteArabicController::class, 'index'])->name('arabic.index');
@@ -182,6 +183,7 @@ Route::get('/ar-buyer-survey', [WebsiteArabicController::class, 'buyerSurvey'])-
 Route::get('/ar-supplier-survey', [WebsiteArabicController::class, 'supplierSurvey'])->name('arabic.supplierSurvey');
 Route::get('/ar-buyer-package', [WebsiteArabicController::class, 'buyerPackage'])->name('arabic.buyerPackage');
 Route::get('/ar-supplier-package', [WebsiteArabicController::class, 'supplierPackage'])->name('arabic.supplierPackage');
+Route::get('/ar-faq', [WebsiteArabicController::class, 'faq'])->name('arabic.faq');
 
 ####################  END   ###################
 ####################  Website    ######################################
@@ -217,7 +219,7 @@ Route::resource('contact', ContactController::class);
 
 ####################  Website AR    ###################
 Route::get('/en', function () {
-    return view('welcome');
+    return view('shipter_theme.home');
 })->name('ar');
 Route::get('/register/{lang}', function ($lang) {
     App::setlocale($lang);

@@ -15,5 +15,6 @@
 {{--        <li><a href="javascript:void(0)">مركز التدريب</a></li>--}}
 {{--        <li><a href="javascript:void(0)">كيف تعمل</a></li>--}}
         <li class="{{(request()->routeIs('arabic.suppliers')?'active':'')}}"><a href="{{route('arabic.suppliers')}}">الموردون</a></li>
+        <li class="{{(request()->routeIs('arabic.faq')?'active':'')}}"><a href="{{route('arabic.faq')}}" style="font-family: sans-serif">FAQ</a></li>
     </ul>
 </nav>

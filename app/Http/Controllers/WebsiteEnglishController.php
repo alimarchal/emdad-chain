@@ -63,6 +63,11 @@ class WebsiteEnglishController extends Controller
         return view('shipter_theme.package.supplier');
     }
 
+    public function faq()
+    {
+        return view('shipter_theme.FAQ');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

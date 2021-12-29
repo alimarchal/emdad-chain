@@ -15,12 +15,12 @@ class PackageController extends Controller
     {
         if (auth()->user()->registration_type == 'Buyer' )
         {
-            $packages = Package::where('user_type', 1)->get();
+            $packages = Package::where('user_type', 1)->get()->except(2);
             return view('packageBuyer.index', compact('packages'));
         }
         elseif(auth()->user()->registration_type == 'Supplier')
         {
-            $packages = Package::where('user_type', 2)->get();
+            $packages = Package::where('user_type', 2)->get()->only(5);
             return view('packageSupplier.index', compact('packages'));
         }
         else
