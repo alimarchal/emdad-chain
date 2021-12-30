@@ -219,7 +219,7 @@ Route::resource('contact', ContactController::class);
 
 ####################  Website AR    ###################
 Route::get('/en', function () {
-    return view('shipter_theme.home');
+    return redirect()->route('arabic.index');
 })->name('ar');
 Route::get('/register/{lang}', function ($lang) {
     App::setlocale($lang);

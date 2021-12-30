@@ -211,11 +211,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/Photo no.8.jpg')}}" style="width: 350px; height: 236px;" alt="">
+                                <img src="{{url('Shipter/assets/images/service/Photo no.8.jpg')}}" style="width: 540px; height: 236px;" alt="">
                             </div>
                             <div class="service-content service-content4">
                                 <h3 style="margin-left: -15px;">
@@ -238,11 +238,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/Photo no.4.jpg')}}" style="width: 350px; height: 236px;" alt="">
+                                <img src="{{url('Shipter/assets/images/service/Photo no.4.jpg')}}" style="width: 540px; height: 236px;" alt="">
                             </div>
                             <div class="service-content">
                                 <h3>
@@ -266,7 +266,7 @@
                         </div>
                     </div>
                 </div>
-                {{--<div class="col-lg-4 col-md-6 col-sm-12">
+                {{--<div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
@@ -292,11 +292,11 @@
                         </div>
                     </div>
                 </div>--}}
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/Photo no.6.jpg')}}" style="width: 350px; height: 236px;" alt="">
+                                <img src="{{url('Shipter/assets/images/service/Photo no.6.jpg')}}" style="width: 540px; height: 236px;" alt="">
                             </div>
                             <div class="service-content service-content6">
                                 <h3>
@@ -320,7 +320,7 @@
                         </div>
                     </div>
                 </div>
-                {{--<div class="col-lg-4 col-md-6 col-sm-12">
+                {{--<div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
@@ -345,11 +345,11 @@
                         </div>
                     </div>
                 </div>--}}
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/Photo no.8.jpg')}}" style="width: 350px; height: 236px;" alt="">
+                                <img src="{{url('Shipter/assets/images/service/Photo no.8.jpg')}}" style="width: 540px; height: 236px;" alt="">
                             </div>
                             <div class="service-content service-content4">
                                 <h3>
@@ -463,7 +463,7 @@
             </div>
             <div class="row" style="padding-top: 20px;">
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="row">
+                    <div class="row" style="justify-content: center">
                         <div class="col-lg-3 col-l2 col-md-6 col-sm-6 mb-3">
                             <div class="price-item" style="height: 391px">
                                 <div class="pricing-header" style="border-color: #023989; border-style: groove; border-width: thin;">

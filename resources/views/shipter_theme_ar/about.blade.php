@@ -61,8 +61,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                            <i class="fi">
-                                <img src="{{url('images/11.png')}}" style=" width: 40px">
+                            <i class="fi" style="background-color: #505050; border-color: #c7e0f9">
+                                <img src="{{url('Shipter/assets/images/about-page/safe_payments.png')}}" style="height: 55px; width: 60px">
                             </i>
                         </div>
                         <div class="section-content" style="padding-top: 50px;">
@@ -73,8 +73,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                            <i class="fi">
-                                <img src="{{url('images/12.png')}}" style="width: 40px">
+                            <i class="fi" style="background-color: #505050; border-color: #c7e0f9">
+                                <img src="{{url('Shipter/assets/images/about-page/fast_process.png')}}" style="height: 55px; width: 60px">
                             </i>
                         </div>
                         <div class="section-content" style="padding-top: 50px;">
@@ -85,8 +85,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                            <i class="fi">
-                                <img src="{{url('images/13.png')}}" style=" width: 40px">
+                            <i class="fi" style="background-color: #505050; border-color: #c7e0f9">
+                                <img src="{{url('Shipter/assets/images/about-page/lowest_costs.png')}}" style="height: 55px; width: 65px">
                             </i>
                         </div>
                         <div class="section-content" style="padding-top: 50px;">
@@ -98,8 +98,8 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-d">
                     <div class="section-item-2">
                         <div class="section-icon">
-                            <i class="fi">
-                                <img src="{{url('images/14.png')}}" style=" width: 40px">
+                            <i class="fi" style="background-color: #505050; border-color: #c7e0f9">
+                                <img src="{{url('Shipter/assets/images/about-page/logistical_obstacles.png')}}" style="height: 55px; width: 60px">
                             </i>
                         </div>
                         <div class="section-content" style="padding-top: 50px;">

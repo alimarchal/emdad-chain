@@ -1,4 +1,4 @@
-<div class="col-md-6 col-sm-12 col-12 col-lg-6">
+<div class="col-md-6 col-sm-12 col-12 col-lg-7">
     <ul class="d-flex account_login-area">
         <li>
             {{--<a href="{{route('english.index')}}" class="btn btn-warning" style="background: #eb8e23;border-color: white;width: 100px;font-family: sans-serif;color: whitesmoke;">
@@ -10,8 +10,7 @@
                 &nbsp;English
             </a>
         </li>
-{{--        <li style="margin-top: 10px;">--}}
-        <li>
+        <li style="margin-top: 10px;">
             باستطاعتك الآن تسجيل منشأتك في منصة إمداد الرقميةً
         </li>
     </ul>
@@ -30,7 +29,7 @@
         </div>
     </div>
 </div>--}}
-<div class="col-md-6 col-sm-12 col-12 col-lg-6">
+<div class="col-md-6 col-sm-12 col-12 col-lg-5">
     <div class="row">
         <div class="col-lg-9 col-md-6">
             <div class="flex" style="text-align: end">

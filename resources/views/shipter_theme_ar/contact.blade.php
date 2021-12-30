@@ -43,11 +43,11 @@
                             </div>
                             <div class="phone">
                                 <h3>الهاتف</h3>
-                                <span style="direction: ltr;">+9200 12057</span>
+                                <span style="direction: ltr;font-family: sans-serif;">+9200 12057</span>
                             </div>
                             <div class="email">
                                 <h3>البريد الإلكتروني:</h3>
-                                <span>info@emdad-chain.com</span>
+                                <span style="font-family: sans-serif;">info@emdad-chain.com</span>
                             </div>
                         </div>
                     </div>

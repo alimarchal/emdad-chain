@@ -161,11 +161,11 @@ background-image: url('images/Our sevices (photo no.4).jpg');
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/Photo no.8.jpg')}}" style="width: 350px; height: 236px;" alt="">
+                                <img src="{{url('Shipter/assets/images/service/Photo no.8.jpg')}}" style="width: 540px; height: 236px;" alt="">
                             </div>
                             <div class="service-content service-content4">
                                 <h3 style="margin-left: -15px">
@@ -189,11 +189,11 @@ background-image: url('images/Our sevices (photo no.4).jpg');
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/Photo no.4.jpg')}}" style="width: 350px; height: 236px;" alt="">
+                                <img src="{{url('Shipter/assets/images/service/Photo no.4.jpg')}}" style="width: 540px; height: 236px;" alt="">
                             </div>
                             <div class="service-content">
                                 <h3>
@@ -217,11 +217,11 @@ background-image: url('images/Our sevices (photo no.4).jpg');
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/Photo no.6.jpg')}}" style="width: 350px; height: 236px;" alt="">
+                                <img src="{{url('Shipter/assets/images/service/Photo no.6.jpg')}}" style="width: 540px; height: 236px;" alt="">
                             </div>
                             {{--<div class="service-content service-content6">
                                 <h3>
@@ -252,11 +252,11 @@ background-image: url('images/Our sevices (photo no.4).jpg');
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="service-item">
                         <div class="service-single">
                             <div class="service-img">
-                                <img src="{{url('Shipter/assets/images/service/Photo no.8.jpg')}}" style="width: 350px; height: 236px;" alt="">
+                                <img src="{{url('Shipter/assets/images/service/Photo no.8.jpg')}}" style="width: 540px; height: 236px;" alt="">
                             </div>
                             <div class="service-content service-content4">
                                 <h3>

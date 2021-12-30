@@ -34,7 +34,7 @@
                             </div>
                             <div class="phone">
                                 <h3>Phone</h3>
-                                <span>+966 53 416 8874</span>
+                                <span>+9200 12057</span>
                             </div>
                             <div class="email">
                                 <h3>Email</h3>

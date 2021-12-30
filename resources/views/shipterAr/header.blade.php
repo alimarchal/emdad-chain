@@ -67,7 +67,7 @@
         <div class="header-top">
             <div class="container" style="direction: rtl">
                 <div class="row">
-                    <div class="col-md-6 col-sm-12 col-12 col-lg-6">
+                    <div class="col-md-6 col-sm-12 col-12 col-lg-7">
                         <ul class="d-flex account_login-area">
                             {{--<li>باستطاعتك الآن التسجيل في منصة إمداد مجاناً
                                 <a href="{{route('english.index')}}" class="btn btn-warning" style="background: #eb8e23;border-color: white;"><img alt="" src="{{url('us.png')}}" style="font-family: 'Raleway', sans-serif;margin-right: 2px;margin-top: 4px;">&nbsp;English</a>
@@ -78,13 +78,12 @@
                                     &nbsp;English
                                 </a>
                             </li>
-{{--                            <li style="margin-top: 10px;">--}}
-                            <li>
+                            <li style="margin-top: 10px;">
                                 باستطاعتك الآن تسجيل منشأتك في منصة إمداد الرقميةً
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-12 col-lg-6">
+                    <div class="col-md-6 col-sm-12 col-12 col-lg-5">
                         <div class="row">
                             <div class="col-lg-9 col-md-6">
                                 <div class="flex" style="text-align: end">
