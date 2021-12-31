@@ -118,30 +118,12 @@
                                         @foreach($packages as $package)
                                             <td class="px-4 py-3 text-center">{{$package->charges}} @if($package->id == 2 || $package->id == 3 ) SR @endif </td>
                                         @endforeach
-                                    {{--<tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">Registration</td>
-                                        @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->registeration}}</td>
-                                        @endforeach
-                                    </tr>--}}
                                     <tr>
                                         <td class="border-t-2 border-gray-200 px-4 py-3">Main Categories</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->category}}</td>
                                         @endforeach
                                     </tr>
-                                    {{--<tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">Sub Categories</td>
-                                        @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->sub_category}}</td>
-                                        @endforeach
-                                    </tr>--}}
-                                    {{--<tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3">No. of available RFQs per Day</td>
-                                        @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->rfq_per_day}}</td>
-                                        @endforeach
-                                    </tr>--}}
                                     <tr>
                                         <td class="border-t-2 border-gray-200 px-4 py-3">No. Quotes. Per 1 RFQ</td>
                                         @foreach($packages as $package)
@@ -165,13 +147,6 @@
                                             <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->super_admin_count}}</td>
                                         @endforeach
                                     </tr>
-
-                                    {{--<tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Sub Admin</td>
-                                        @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->sub_admin_count}}</td>
-                                        @endforeach
-                                    </tr>--}}
                                     <tr>
                                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Users</td>
                                         @foreach($packages as $package)
@@ -184,24 +159,11 @@
                                             <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->payment_type}} </td>
                                         @endforeach
                                     </tr>
-                                    {{--<tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3">Trainings</td>
-                                        @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->training}}</td>
-                                        @endforeach
-                                    </tr>
-                                    <tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3"></td>
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">Discount Code</td>
-                                    </tr>--}}
                                     </tbody>
                                 </table>
                             </div>
                             <div class="bg-blue-700 text-start mt-3">
-                                <a href="{{route('english.index')}}" target="_blank" class="flex items-center mt-auto text-white bg-gray-500 border-0 py-0 px-4 w-full focus:outline-none hover:bg-gray-600 rounded" style="width: 70px;text-align: center; float: right">Back</a>
+                                <a href="{{route('english.index')}}" class="flex items-center mt-auto text-white bg-gray-500 border-0 py-0 px-4 w-full focus:outline-none hover:bg-gray-600 rounded" style="width: 70px;text-align: center; float: right">Back</a>
                             </div>
                             <br>
                             <span>@include('misc.required') <strong>Note:</strong> Minimum 1 quotation received, in case of Branded item</span>

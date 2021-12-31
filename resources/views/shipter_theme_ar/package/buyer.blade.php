@@ -122,30 +122,12 @@
                                             <td class="px-4 py-3 text-center">@if($package->id == 1) مجاني @elseif($package->id == 4) إذا كانت قيمة المشتريات الشهرية أعلى من ٥ ملايين ريال سعودي @else {{$package->charges}} ريال @endif</td>
                                         @endforeach
                                     </tr>
-                                    {{--<tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">التسجيل</td>
-                                        @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3"> مجاني</td>
-                                        @endforeach
-                                    </tr>--}}
                                     <tr>
                                         <td class="border-t-2 border-gray-200 px-4 py-3 text-right">الفئات الرئيسية المتاحة</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->category}}</td>
                                         @endforeach
                                     </tr>
-                                    {{--<tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">الفئات الفرعية</td>
-                                        @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">{{$package->sub_category}}</td>
-                                        @endforeach
-                                    </tr>--}}
-                                    {{--<tr>
-                                        <td class="border-t-2 border-gray-200 px-4 py-3 text-right">عدد الطلبات اليومية المتاحة</td>
-                                        @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">@if($package->id == 3 || $package->id == 4) غير محدود @else {{$package->rfq_per_day}} @endif</td>
-                                        @endforeach
-                                    </tr>--}}
                                     <tr>
                                         <td class="border-t-2 border-gray-200 px-4 py-3 text-right">عدد عروض الأسعار لكل طلب</td>
                                         @foreach($packages as $package)
@@ -169,15 +151,8 @@
                                             <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->super_admin_count}}</td>
                                         @endforeach
                                     </tr>
-
-                                    {{--<tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">إضافة مستخدم رئيسي تابع</td>
-                                        @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->sub_admin_count}}</td>
-                                        @endforeach
-                                    </tr>--}}
                                     <tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">أنظمة الدفع</td>
+                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">المستخدمون المتاحة إضافتهم</td>
                                         @foreach($packages as $package)
                                             <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">{{$package->users}}</td>
                                         @endforeach
@@ -185,27 +160,14 @@
                                     <tr>
                                         <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">نظام المدفوعات</td>
                                         @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">@if($package->payment_type == 'Cash') نظام الدفع المقدم  @else نظامي الدفع ( المقدم و الآجل ) @endif</td>
+                                            <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">@if($package->payment_type == 'Cash') دفع مقدم  @else دفع مقدم وآجل @endif</td>
                                         @endforeach
                                     </tr>
-                                    {{--<tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right">الدعم التدريب</td>
-                                        @foreach($packages as $package)
-                                            <td class="border-t-2 text-center border-b-2 border-gray-200 px-4 py-3">غير محدود</td>
-                                        @endforeach
-                                    </tr>--}}
-                                    {{--<tr>
-                                        <td class="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-right"></td>
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3"></td>
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">رمز خصم</td>
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">رمز خصم</td>
-                                            <td class="border-t-2 text-center border-gray-200 px-4 py-3">رمز خصم</td>
-                                    </tr>--}}
                                     </tbody>
                                 </table>
                             </div>
                             <div class="bg-blue-700 text-start mt-3">
-                                <a href="{{route('arabic.index')}}" target="_blank" class="flex items-center mt-auto text-white bg-gray-500 border-0 py-0 px-4 w-full focus:outline-none hover:bg-gray-600 rounded" style="width: 70px;text-align: center; float: left">العودة</a>
+                                <a href="{{route('arabic.index')}}" class="flex items-center mt-auto text-white bg-gray-500 border-0 py-0 px-4 w-full focus:outline-none hover:bg-gray-600 rounded" style="width: 70px;text-align: center; float: left">العودة</a>
                             </div>
                             <br>
                             <span>@include('misc.required') <strong>تنبيه :</strong> يتم استلام عرض واحد فقط في حال تم تحديد العلامة تجارية المطلوبة ( Brand ) </span>

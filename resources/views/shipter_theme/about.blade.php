@@ -25,7 +25,7 @@
                             <i class="fi flaticon-travel"></i>
                         </div>
                         <h2>What is Emdad Platform?</h2>
-                        <p>It is a digital platform built with high expertise to serve the buyer in purchasing management, at the lowest costs and the best digital and logistical standards.</p>
+                        <p>It is a digital platform built with high expertise to serve small medium and large companies in procurement management, with the lowest costs and the best digital and logistical standards.</p>
                         <span><strong>Our Vision:</strong> To become the largest, reliable digital platform to serve the small, medium and large companies,
                             and to gain the biggest number of suppliers and the largest logistical fleet while assuring the best international quality standards..</span>
                         <span><strong>Our Goal:</strong> To remove all of the logistical obstacles and upgrade the quality level of procurement management for all of Emdad's partners, and we will!</span>
