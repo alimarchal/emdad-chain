@@ -40,7 +40,7 @@
     <script>
 
         $(document).ready(function() {
-            var $j = jQuery.noConflict();
+            // var $j = jQuery.noConflict();
             $( "#datepicker" ).datepicker({
                 dateFormat: 'mm/dd/yy',
                 changeMonth: true,
@@ -90,12 +90,14 @@
                             </div>
 
 
+                            @if(auth()->user()->registration_type == 'Supplier')
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="business_type">{{__('portal.Select the Sub-Categories')}} @include('misc.required')</x-jet-label>
                             </div>
                             <div class="flex mt-3 ">
                                 @include('category.category.index')
                             </div>
+                            @endif
 
 
                             <div class="flex space-x-5 mt-3">
@@ -245,16 +247,18 @@
                             </div>
 
 
+                            @if(auth()->user()->registration_type == 'Supplier')
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="business_type">{{__('portal.Select the Sub-Categories')}} @include('misc.required')</x-jet-label>
                             </div>
                             <div class="flex mt-3 ">
                                 @include('category.category.index')
                             </div>
-                            <div class="flex mt-3 ">
+                            @endif
+                            {{--<div class="flex mt-3 ">
                                 <input type="text" id="justAnInputBox1" name="list" placeholder="Select" autocomplete="off"/>
-{{--                                @include('category.category.index')--}}
-                            </div>
+                                @include('category.category.index')
+                            </div>--}}
 
 
                             <div class="flex space-x-5 mt-3">

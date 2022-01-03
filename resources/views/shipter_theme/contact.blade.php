@@ -89,7 +89,7 @@
                     <div class="col col-xs-12">
                         <div class="contact-map">
 {{--                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d927764.3550487261!2d46.26206159131756!3d24.724150391445495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sRiyadh%2011564%2C%20Saudi%20Arabia!5e0!3m2!1sen!2s!4v1617639278154!5m2!1sen!2s" allowfullscreen></iframe>--}}
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3622.6660168379744!2d46.66617147624493!3d24.77263780652448!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2ee2d3da825d23%3A0x9f763b1e7978766c!2zNzMyOSDZiNin2K_ZiiDYrdio2KfZhtiMIEFsIEdoYWRpciwgUml5YWRoIDEzMzExwqA0NzUzLCBTYXVkaSBBcmFiaWE!5e0!3m2!1sen!2s!4v1640957190186!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3622.6244961532757!2d46.66324921498377!3d24.774060754816325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2ee3c7bface453%3A0x23b89f968fc7b78b!2sEmdad%20Supply%20Chain%20Platform!5e0!3m2!1sen!2s!4v1641185946955!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                         </div>
                     </div>
                 </div>

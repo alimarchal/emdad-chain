@@ -150,76 +150,127 @@ class BusinessController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'business_name' => 'required',
-            'nid_num' => 'required',
-            'nid_photo_1' => 'required',
-            'nid_exp_date' => 'required',
-            'business_photo_url_1' => 'required|mimes:jpeg,jpg,png',
-            'category' => 'required',
-            'business_type' => 'required',
-            'chamber_reg_number' => 'required',
-            'chamber_reg_path_1' => 'required|mimes:jpeg,jpg,png',
-            'vat_reg_certificate_number' => 'required',
-            'vat_reg_certificate_path_1' => 'required|mimes:jpeg,jpg,png',
-            'country' => 'required',
-            'city' => 'required',
-            'address' => 'required',
-            'business_email' => 'required',
-            'mobile' => 'required',
-            'iban' => 'required',
-            'longitude' => 'required',
-            'latitude' => 'required',
-            'bank_name' => 'required',
-            'policy_procedure' => 'required',
-//            'address' => 'required',
-        ]);
-        $comma_separated = implode(",", $request->category);
-        $request->merge(['category_number' => $comma_separated]);
-        if ($request->has('chamber_reg_path_1')) {
-            $path = $request->file('chamber_reg_path_1')->store('', 'public');
-            $request->merge(['chamber_reg_path' => $path]);
-        }
-        if ($request->has('vat_reg_certificate_path_1')) {
-            $path = $request->file('vat_reg_certificate_path_1')->store('', 'public');
-            $request->merge(['vat_reg_certificate_path' => $path]);
-        }
-        if ($request->has('business_photo_url_1')) {
-            $path = $request->file('business_photo_url_1')->store('', 'public');
-            $request->merge(['business_photo_url' => $path]);
-        }
-
-        $business = Business::create($request->all());
-        if ($request->has('nid_photo_1'))
+        if (\auth()->user()->registration_type == 'Buyer')
         {
-            $path = $request->file('nid_photo_1')->store('', 'public');
-            User::where('id', \auth()->id())->update(['nid_photo' => $path]);
-        }
-        foreach ($request->category as $category) {
-            BusinessCategory::create([
-                'business_id' => $business->id,
-                'category_number' => $category,
+            $request->validate([
+                'user_id' => 'required',
+                'business_name' => 'required',
+                'nid_num' => 'required',
+                'nid_photo_1' => 'required',
+                'nid_exp_date' => 'required',
+                'business_photo_url_1' => 'required|mimes:jpeg,jpg,png',
+                'business_type' => 'required',
+                'chamber_reg_number' => 'required',
+                'chamber_reg_path_1' => 'required|mimes:jpeg,jpg,png',
+                'vat_reg_certificate_number' => 'required',
+                'vat_reg_certificate_path_1' => 'required|mimes:jpeg,jpg,png',
+                'country' => 'required',
+                'city' => 'required',
+                'address' => 'required',
+                'business_email' => 'required',
+                'mobile' => 'required',
+                'iban' => 'required',
+                'longitude' => 'required',
+                'latitude' => 'required',
+                'bank_name' => 'required',
+                'policy_procedure' => 'required',
+//            'address' => 'required',
             ]);
-        }
 
+            if ($request->has('chamber_reg_path_1')) {
+                $path = $request->file('chamber_reg_path_1')->store('', 'public');
+                $request->merge(['chamber_reg_path' => $path]);
+            }
+            if ($request->has('vat_reg_certificate_path_1')) {
+                $path = $request->file('vat_reg_certificate_path_1')->store('', 'public');
+                $request->merge(['vat_reg_certificate_path' => $path]);
+            }
+            if ($request->has('business_photo_url_1')) {
+                $path = $request->file('business_photo_url_1')->store('', 'public');
+                $request->merge(['business_photo_url' => $path]);
+            }
+
+            $business = Business::create($request->all());
+            if ($request->has('nid_photo_1'))
+            {
+                $path = $request->file('nid_photo_1')->store('', 'public');
+                User::where('id', \auth()->id())->update(['nid_photo' => $path]);
+            }
+
+            /* updating only the latest one */
+
+        }
+        else
+        {
+            $request->validate([
+                'user_id' => 'required',
+                'business_name' => 'required',
+                'nid_num' => 'required',
+                'nid_photo_1' => 'required',
+                'nid_exp_date' => 'required',
+                'business_photo_url_1' => 'required|mimes:jpeg,jpg,png',
+                'category' => 'required',
+                'business_type' => 'required',
+                'chamber_reg_number' => 'required',
+                'chamber_reg_path_1' => 'required|mimes:jpeg,jpg,png',
+                'vat_reg_certificate_number' => 'required',
+                'vat_reg_certificate_path_1' => 'required|mimes:jpeg,jpg,png',
+                'country' => 'required',
+                'city' => 'required',
+                'address' => 'required',
+                'business_email' => 'required',
+                'mobile' => 'required',
+                'iban' => 'required',
+                'longitude' => 'required',
+                'latitude' => 'required',
+                'bank_name' => 'required',
+                'policy_procedure' => 'required',
+            ]);
+            $comma_separated = implode(",", $request->category);
+            $request->merge(['category_number' => $comma_separated]);
+            if ($request->has('chamber_reg_path_1')) {
+                $path = $request->file('chamber_reg_path_1')->store('', 'public');
+                $request->merge(['chamber_reg_path' => $path]);
+            }
+            if ($request->has('vat_reg_certificate_path_1')) {
+                $path = $request->file('vat_reg_certificate_path_1')->store('', 'public');
+                $request->merge(['vat_reg_certificate_path' => $path]);
+            }
+            if ($request->has('business_photo_url_1')) {
+                $path = $request->file('business_photo_url_1')->store('', 'public');
+                $request->merge(['business_photo_url' => $path]);
+            }
+
+            $business = Business::create($request->all());
+            if ($request->has('nid_photo_1'))
+            {
+                $path = $request->file('nid_photo_1')->store('', 'public');
+                User::where('id', \auth()->id())->update(['nid_photo' => $path]);
+            }
+            foreach ($request->category as $category) {
+                BusinessCategory::create([
+                    'business_id' => $business->id,
+                    'category_number' => $category,
+                ]);
+            }
+
+            /* updating only the latest one */
+
+        }
         $time = strtotime($request->nid_exp_date);
         $newformat = date('Y-m-d', $time);
         $nid_exp_date = $newformat;
-
         $user = User::find($business->user_id);
         $user->business_id = $business->id;
         $user->company_name = $business->business_name;
         $user->nid_exp_date = $nid_exp_date;
         $user->nid_num = $request->nid_num;
         $user->save();
-
-        $manualPackage = PackageManualPayment::where(['user_id' => \auth()->id(), 'upgrade' => 0])->first();   /* updating only the latest one */
+        $manualPackage = PackageManualPayment::where(['user_id' => \auth()->id(), 'upgrade' => 0])->first();
         if (isset($manualPackage))
         {
             $manualPackage->update(['business_id' => \auth()->user()->business_id]);
         }
-
         $businessPackage = BusinessPackage::where('user_id', $business->user_id)->first();
         $businessPackage->business_id = $business->id;
         $businessPackage->save();

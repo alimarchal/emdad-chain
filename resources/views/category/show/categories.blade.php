@@ -56,7 +56,7 @@
                     @endif
                     <form action="{{route('updatePackageCategories')}}" method="post">
                         @csrf
-                        <input type="hidden" name="business_id" value="{{$businessPackage->id}}">
+                        <input type="hidden" name="business_package_id" value="{{$businessPackage->id}}">
                         <div class="grid grid-cols-12 gap-6">
 
                             <div class="col-span-12">

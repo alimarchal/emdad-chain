@@ -174,13 +174,12 @@ class BusinessPackageController extends Controller
     {
         $categories = implode(',', $request->category_id);
 
-        $businessPackage = BusinessPackage::where('id', $request->business_id)->first();
+        $businessPackage = BusinessPackage::where('id', $request->business_package_id)->first();
         $businessPackage->update([
             'categories' => $categories,
         ]);
         return redirect()->route('business.create');
     }
-
 
     public function getPaymentStatus($id, $resourcePath, $gateway)
     {

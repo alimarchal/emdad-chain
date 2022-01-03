@@ -33,7 +33,7 @@ class MobileVerification extends Component
     {
         $warehouse = \App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->first();
         $mobile_verify_code = $warehouse->mobile_verification_code;
-        if ($mobile_verify_code == $this->sms_code)
+        if ($mobile_verify_code == $this->sms_code && $warehouse->mobile_verification_code != null)
         {
             $warehouse->mobile_verified = 1;
             $warehouse->save();
