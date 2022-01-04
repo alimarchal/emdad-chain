@@ -33,7 +33,7 @@
     </style>
 </head>
 
-<body>
+<body style="font-family:Arial">
 
 
 <div class="header">

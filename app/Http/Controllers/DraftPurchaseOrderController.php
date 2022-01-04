@@ -496,7 +496,7 @@ class DraftPurchaseOrderController extends Controller
      */
     public function generatePDF(DraftPurchaseOrder $draftPurchaseOrder)
     {
-        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'));
+        $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'));
         $POName = 'PO-'.$draftPurchaseOrder->id.'.pdf';
         return $pdf->download($POName);
     }
