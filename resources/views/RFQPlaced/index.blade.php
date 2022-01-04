@@ -179,13 +179,16 @@
                                         </a>--}}
 
                                         @php
+                                            $eOrder = \App\Models\EOrders::where(['id' => $item->id, 'status' => 'cancelled'])->first();
                                             $eOrderItems = \App\Models\EOrderItems::where('e_order_id', $item->id)->get()->pluck('e_order_id');
-                                            $po = \App\Models\DraftPurchaseOrder::whereIn('rfq_no', $eOrderItems)->where('status', '=', 'approved')->first();
+                                            $po = \App\Models\DraftPurchaseOrder::whereIn('rfq_no', $eOrderItems)->where('status', '!=', 'pending')->first();
                                         @endphp
                                         @if(isset($po) || !is_null($po) )
                                             <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                        @elseif(isset($eOrder))
+                                            <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
                                         @else
-                                            <form action="{{route('cancelRequisition')}}" method="post">
+                                            <form action="{{route('cancelRequisition')}}" method="post" class="confirm" data-confirm = 'Are you sure you want to cancel this requisition?'>
                                                 @csrf
                                                 <input type="hidden" value="{{$item->id}}" name="EOrderID">
                                                 <button type="submit" title="{{__('portal.To cancel the whole requisition')}}"
@@ -370,13 +373,16 @@
 
                                     <td class="px-6 py-4 text-center text-center whitespace-nowrap">
                                         @php
+                                            $eOrder = \App\Models\EOrders::where(['id' => $item->id, 'status' => 'cancelled'])->first();
                                             $eOrderItems = \App\Models\EOrderItems::where('e_order_id', $item->id)->get()->pluck('e_order_id');
-                                            $po = \App\Models\DraftPurchaseOrder::whereIn('rfq_no', $eOrderItems)->where('status', '=', 'approved')->first();
+                                            $po = \App\Models\DraftPurchaseOrder::whereIn('rfq_no', $eOrderItems)->where('status', '!=', 'pending')->first();
                                         @endphp
                                         @if(isset($po) || !is_null($po) )
                                             <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                        @elseif(isset($eOrder))
+                                            <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
                                         @else
-                                            <form action="{{route('cancelRequisition')}}" method="post">
+                                            <form action="{{route('cancelRequisition')}}" method="post" class="confirm" data-confirm = 'Are you sure you want to cancel this requisition?'>
                                                 @csrf
                                                 <input type="hidden" value="{{$item->id}}" name="EOrderID">
                                                 <button type="submit" title="{{__('portal.To cancel the whole requisition')}}"
@@ -431,5 +437,9 @@
             window.location.href = "{{route("RFQ.create")}}";
         }
 
+    });
+
+    $('.confirm').on('click', function (e) {
+        return confirm($(this).data('confirm'));
     });
 </script>

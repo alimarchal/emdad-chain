@@ -436,6 +436,7 @@ return [
     'Please review all your information is correct after submission you will not able to edit any information.' => 'الرجاء التأكد من صحة جميع المعلومات فلا مجال للتصحيح بعد التسليم.',
     'Purchase Order Information of' => 'معلومات الشراء لـ',
     'Quotations List' => 'مركز العروض',
+    'DPO Center' => 'DPO Center',
     'Requisition Item' => 'بند الطلب',
     'Time left' => 'الوقت المتبقي',
     'Quotations' => 'العروض',

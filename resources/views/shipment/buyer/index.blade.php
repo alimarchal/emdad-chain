@@ -215,8 +215,8 @@
                                         <span class="font-sans">{{$loop->iteration}}</span>
                                     </td>
 
-                                    <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 130px;">
-                                        {{__('portal.D.N.')}}-<span class="font-sans">{{$delivery->delivery_note_id}}</span>
+                                    <td class="px-6 py-4 text-center whitespace-nowrap font-sans" style="width: 130px;">
+                                        <a href="{{route('deliveryDetails', ['rfq_no' => encrypt($delivery->rfq_no), 'deliveryID' => encrypt($delivery->id), 'rfq_type' => $delivery->rfq_type])}}" class="text-blue-600 hover:text-blue-500 hover:underline">{{__('portal.D.N.')}}-{{$delivery->delivery_note_id}}</a>
                                     </td>
 
                                     <td class="px-6 py-4 text-center whitespace-nowrap" style="width: 140px;">

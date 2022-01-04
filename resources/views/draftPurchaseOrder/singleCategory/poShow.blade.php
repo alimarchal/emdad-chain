@@ -213,6 +213,7 @@
                                             <strong>{{__('portal.Warehouse for delivery')}}: </strong> {{ $warehouse['warehouse_name'] }} <br>
                                         @endif
                                     </div>
+                                    @if(auth()->user()->registration_type == 'Buyer')
                                     <div class="w-full overflow-hidden mt-3 lg:w-1/2 xl:w-1/2">
                                         <form action="{{route('uploadSingleCategoryDPOFile')}}" method="post" id="upload-image-form" enctype="multipart/form-data">
                                             @csrf
@@ -247,6 +248,7 @@
                                             </div>
                                         </form>
                                     </div>
+                                    @endif
                                 </div>
 
                                 <div class="flex justify-between mt-4 mb-4">
@@ -496,6 +498,7 @@
                                             <strong>{{__('portal.Warehouse for delivery')}}: </strong> <span style=" font-family: sans-serif;">{{ $warehouse['warehouse_name'] }}</span> <br>
                                         @endif
                                     </div>
+                                    @if(auth()->user()->registration_type == 'Buyer')
                                     <div class="w-full overflow-hidden mt-3 lg:w-1/2 xl:w-1/2">
                                         <form action="{{route('uploadSingleCategoryDPOFile')}}" method="post" id="upload-image-form" enctype="multipart/form-data">
                                             @csrf
@@ -530,6 +533,7 @@
                                             </div>
                                         </form>
                                     </div>
+                                    @endif
                                 </div>
 
                                 <div class="flex justify-between mt-4 mb-4">

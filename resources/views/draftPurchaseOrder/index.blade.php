@@ -26,6 +26,7 @@
                         </button>
                     </div>
                 @endif
+                <h2 class="text-2xl font-bold py-2 text-center" style="margin-top: -30px;">{{__('portal.DPO Center')}}</h2>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     {{--                    <div class="mt-5" style=" margin-left: 30px; margin-bottom: 10px ">
                                             <a href="{{route('generatePDF')}}"
@@ -72,9 +73,9 @@
                                                         {{__('portal.Action')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
+                                                    {{--<th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider"  style="background-color: #FCE5CD;">
                                                         {{__('portal.View')}}
-                                                    </th>
+                                                    </th>--}}
 
                                                 </tr>
                                             </thead>
@@ -157,7 +158,7 @@
                                                             @endif
                                                         </td>
 
-                                                        <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                        {{--<td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                             @if($dpo->rfq_type == 1)
                                                                 <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-600 hover:underline text-blue-600">
                                                                     <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -179,7 +180,7 @@
                                                                     </svg>
                                                                 </a>
                                                             @endif
-                                                        </td>
+                                                        </td>--}}
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -238,6 +239,7 @@
                         </button>
                     </div>
                 @endif
+                <h2 class="text-2xl font-bold py-2 text-center" style="margin-top: -30px;">{{__('portal.DPO Center')}}</h2>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                     @if ($dpos->count())
@@ -278,9 +280,9 @@
                                                         {{__('portal.Action')}}
                                                     </th>
 
-                                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
+                                                    {{--<th scope="col" class="px-6 py-3 bg-gray-50 text-center text-sm font-medium text-gray-500 uppercase tracking-wider" style="background-color: #FCE5CD;">
                                                         {{__('portal.View')}}
-                                                    </th>
+                                                    </th>--}}
 
                                                 </tr>
                                             </thead>
@@ -363,7 +365,7 @@
                                                         @endif
                                                     </td>
 
-                                                    <td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
+                                                    {{--<td class="px-6 py-4 text-center whitespace-nowrap text-sm text-black">
                                                         @if($dpo->rfq_type == 1)
                                                             <a href="{{ route('dpo.show',$dpo->id) }}" class="hover:text-blue-600 hover:underline text-blue-600">
                                                                 <svg class="w-6 h-6 inline" fill="none" stroke="orange"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -385,7 +387,7 @@
                                                                 </svg>
                                                             </a>
                                                         @endif
-                                                    </td>
+                                                    </td>--}}
                                                 </tr>
                                             @endforeach
                                             </tbody>
