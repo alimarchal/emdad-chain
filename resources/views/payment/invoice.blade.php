@@ -130,7 +130,7 @@
                                                                 <span class="text-red-600"> {{__('portal.Payment rejected')}} </span>
                                                             @endif
                                                         @else
-                                                            {{__('portal.N/A')}}
+                                                            <span class="text-center">--</span>
                                                         @endif
 
                                                     </td>
@@ -379,7 +379,7 @@
                                                                 <span class="text-red-600"> {{__('portal.Payment rejected')}} </span>
                                                             @endif
                                                         @else
-                                                            <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                                            <span class="text-center">--</span>
                                                         @endif
 
                                                     </td>

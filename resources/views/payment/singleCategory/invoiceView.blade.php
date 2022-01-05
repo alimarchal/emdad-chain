@@ -118,7 +118,7 @@
                                                 @endphp
                                                 {{ $record->name }}@if(isset($parent->name)), {{ $parent->name }} @endif
                                             </td>
-                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                            <td class="px-2 py-2 text-sm text-black border border-black">
                                                 {{ $invoice->eOrderItem->description }}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">

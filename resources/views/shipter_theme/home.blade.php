@@ -95,6 +95,18 @@
         </div>
     </section>
     <!-- end of hero slider -->
+
+    <!-- start of emdad video link -->
+    <div class="pricing-area pricing-area-2" style="align-items: center">
+        <div class="col-l2">
+            <div class="section-title text-center">
+                <h2>Our Identity</h2>
+            </div>
+        </div>
+        <iframe width="703" height="400" src="https://www.youtube.com/embed/QDqsK5-VO1Y"></iframe>
+    </div>
+    <!-- end of emdad video link -->
+
     <!-- service-area start-->
     <div class="service-area">
         <div class="container">

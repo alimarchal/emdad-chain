@@ -243,7 +243,7 @@
                     @if(request()->routeIs('invoicePayment.stepOne'))
                         <a href="{{route('languageChangeForPayment', ['lang' => 'ar', 'rtl_value' => 1])}}"
                            class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
-                                alt="" src="{{url('sa.png')}}" style="margin-right: 8px;" id="lan">العربية (قريبا)</a>
+                                alt="" src="{{url('sa.png')}}" style="margin-right: 8px;" id="lan">العربية</a>
                     @elseif(request()->routeIs('businessPackage.stepOne'))
                         <a href="{{route('languageChangeForPackagePayment', ['lang' => 'ar', 'rtl_value' => 1])}}"
                            class="inline-flex items-center px-4 py-3 bg-yellow-400 border border-transparent rounded-md text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150"><img
