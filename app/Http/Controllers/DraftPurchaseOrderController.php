@@ -19,13 +19,18 @@ use App\Notifications\PurchaseOrderGenerated;
 use App\Notifications\QuoteAccepted;
 use App\Notifications\SingleCategoryPurchaseOrderGenerated;
 use App\Notifications\User\AcceptedQuotation;
-use Barryvdh\DomPDF\Facade as PDF;
+//use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\Snappy;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
+use PDF;
+
+
 
 class DraftPurchaseOrderController extends Controller
 {
@@ -496,9 +501,12 @@ class DraftPurchaseOrderController extends Controller
      */
     public function generatePDF(DraftPurchaseOrder $draftPurchaseOrder)
     {
-        $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'));
-        $POName = 'PO-'.$draftPurchaseOrder->id.'.pdf';
-        return $pdf->download($POName);
+        $pdf = App::make('snappy.pdf.wrapper');
+        $pdf->loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'));
+        return $pdf->inline();
+//        $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'));
+//        $POName = 'PO-'.$draftPurchaseOrder->id.'.pdf';
+//        return $pdf->download($POName);
     }
 
     /* DPO for Single Category Quotations */

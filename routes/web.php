@@ -41,6 +41,8 @@ use App\Models\Category;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\LibraryController;
+use Barryvdh\Snappy;
+
 
 
 /*
@@ -705,8 +707,11 @@ Route::get('tree', function () {
 
 
 Route::get('/testSms', function () {
-    $x = User::send_otp('6633','581382822');
-    dd($x);
+    $pdf = App::make('snappy.pdf.wrapper');
+    $pdf->loadHTML('<h1>Test</h1>');
+    return $pdf->inline();
+//    $x = User::send_otp('6633','581382822');
+//    dd($x);
 });
 
 //        User::find(5)->notify(new UserRegistration());
