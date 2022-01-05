@@ -184,9 +184,9 @@
                                             $po = \App\Models\DraftPurchaseOrder::whereIn('rfq_no', $eOrderItems)->where('status', '!=', 'pending')->first();
                                         @endphp
                                         @if(isset($po) || !is_null($po) )
-                                            <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                            --
                                         @elseif(isset($eOrder))
-                                            <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                            --
                                         @else
                                             <form action="{{route('cancelRequisition')}}" method="post" class="confirm" data-confirm = 'Are you sure you want to cancel this requisition?'>
                                                 @csrf
@@ -378,9 +378,9 @@
                                             $po = \App\Models\DraftPurchaseOrder::whereIn('rfq_no', $eOrderItems)->where('status', '!=', 'pending')->first();
                                         @endphp
                                         @if(isset($po) || !is_null($po) )
-                                            <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                            --
                                         @elseif(isset($eOrder))
-                                            <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                            --
                                         @else
                                             <form action="{{route('cancelRequisition')}}" method="post" class="confirm" data-confirm = 'Are you sure you want to cancel this requisition?'>
                                                 @csrf

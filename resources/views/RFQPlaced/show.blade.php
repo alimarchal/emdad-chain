@@ -208,10 +208,10 @@
                                                 @endif
                                             </td>
                                         @endif
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
+                                        <td class="px-2 py-2 text-sm text-black border border-black" style="font-family: sans-serif">
                                             {{ strip_tags($rfp->description) }}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
+                                        <td class="px-2 py-2 text-sm text-black border border-black" style="font-family: sans-serif">
                                             @if(isset($rfp->brand)) {{ $rfp->brand }} @else {{__('portal.N/A')}} @endif
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
@@ -245,7 +245,7 @@
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">
                                             {{ number_format($rfp->quantity) }}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif;word-break: break-word">
+                                        <td class="px-2 py-2 text-sm text-black border border-black" style="font-family: sans-serif;word-break: break-word">
                                             @if(isset($rfp->remarks)){{ $rfp->remarks }} @else {{__('portal.N/A')}} @endif
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black" style="font-family: sans-serif">

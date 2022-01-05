@@ -119,13 +119,13 @@
                                                 @endphp
                                                 {{ $record->name }}@if(isset($parent)), {{ $parent->name }} @endif
                                             </td>
-                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black">
+                                            <td class="px-2 py-2 text-sm text-center text-black border border-black">
                                                 {{ $draftPurchaseOrder->eOrderItem->description }}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black">
                                                 {{ $draftPurchaseOrder->uom }}
                                             </td>
-                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black">
+                                            <td class="px-2 py-2 text-sm text-center text-black border border-black">
                                                 @if(isset($draftPurchaseOrder->remarks)){{ $draftPurchaseOrder->remarks }} @else {{__('portal.N/A')}} @endif
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black">
@@ -311,14 +311,14 @@
                                                 @endphp
                                                 {{ $record->name_ar }}@if(isset($parent)), {{ $parent->name_ar }}  @endif
                                             </td>
-                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black" style="font-family: sans-serif">
+                                            <td class="px-2 py-2 text-sm text-center text-black border border-black" style="font-family: sans-serif">
                                                 {{ $draftPurchaseOrder->eOrderItem->description }}
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black">
                                                 @php $UOM = \App\Models\UnitMeasurement::where('uom_en', $draftPurchaseOrder->uom)->pluck('uom_ar')->first(); @endphp
                                                 {{ $UOM }}
                                             </td>
-                                            <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black" style="font-family: sans-serif">
+                                            <td class="px-2 py-2 text-sm text-center text-black border border-black" style="font-family: sans-serif">
                                                 @if(isset($draftPurchaseOrder->remarks)){{ $draftPurchaseOrder->remarks }} @else {{__('portal.N/A')}} @endif
                                             </td>
                                             <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black" style="font-family: sans-serif">

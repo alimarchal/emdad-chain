@@ -143,7 +143,7 @@
                                                 <a href="{{route('quotationExpiredStatusRejectResponseSingleCategory', encrypt($rfp->e_order_id))}}" onclick="request()" title="{{__('portal.Reject request to extend quotation expiry date')}}" class="inline-flex mt-2 items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                     {{__('portal.Reject')}}
                                                 </a>
-                                            @else {{__('portal.N/A')}}
+                                            @else <span class="text-center">--</span>
                                             @endif
                                         </td>
 
@@ -318,7 +318,7 @@
                                                 <a href="{{route('quotationExpiredStatusRejectResponseSingleCategory', encrypt($rfp->e_order_id))}}" onclick="request()" title="{{__('portal.Reject request to extend quotation expiry date')}}" class="inline-flex mt-2 items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                     {{__('portal.Reject')}}
                                                 </a>
-                                            @else {{__('portal.N/A')}}
+                                            @else <span class="text-center">--</span>
                                             @endif
                                         </td>
 

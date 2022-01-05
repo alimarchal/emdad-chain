@@ -215,9 +215,9 @@
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if($rfp->dpo != null)
                                                     @if(isset($po) && $po->status == 'pending' && $rfp->expiry_date < \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s')) <span class="text-red-600"> {{ __('portal.Expired') }} </span>
-                                                    @else {{__('portal.N/A')}}
+                                                    @else <span class="text-center">--</span>
                                                     @endif
-                                                @elseif($rfp->status == 'completed' || $rfp->status == 'expired') {{__('portal.N/A')}}
+                                                @elseif($rfp->status == 'completed' || $rfp->status == 'expired') <span class="text-center">--</span>
                                                 @elseif($rfp->expiry_date >= \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s')) {{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }}
                                                 @else <span class="text-red-600"> {{ __('portal.Expired') }} </span>
                                                 @endif
@@ -245,7 +245,7 @@
                                                     <a href="{{route('quotationExpiredStatusRejectResponse', encrypt($rfp->id))}}" onclick="request()" title="{{__('portal.Reject request to extend quotation expiry date')}}" class="inline-flex mt-2 items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                         {{__('portal.Reject')}}
                                                     </a>
-                                                @else {{__('portal.N/A')}}
+                                                @else <span class="text-center">--</span>
                                                 @endif
                                             </td>
 
@@ -490,9 +490,9 @@
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if($rfp->dpo != null)
                                                     @if(isset($po) && $po->status == 'pending' && $rfp->expiry_date < \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s')) <span class="text-red-600"> {{ __('portal.Expired') }} </span>
-                                                    @else <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                                    @else <span class="text-center">--</span>
                                                     @endif
-                                                @elseif($rfp->status == 'completed' || $rfp->status == 'expired') <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                                @elseif($rfp->status == 'completed' || $rfp->status == 'expired') <span class="text-center">--</span>
                                                 @elseif($rfp->expiry_date >= \Carbon\Carbon::parse(\Carbon\Carbon::now())->format('Y-m-d H:i:s')) <span style="font-family: sans-serif">{{ \Carbon\Carbon::parse($rfp->expiry_date)->format('Y-m-d') }}</span>
                                                 @else <span class="text-red-600"> {{ __('portal.Expired') }} </span>
                                                 @endif
@@ -512,7 +512,7 @@
                                                     <a href="{{route('quotationExpiredStatusRejectResponse', encrypt($rfp->id))}}" onclick="request()" title="{{__('portal.Reject request to extend quotation expiry date')}}" class="inline-flex mt-2 items-center justify-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 hover:text-white focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-600 transition ease-in-out duration-150">
                                                         {{__('portal.Reject')}}
                                                     </a>
-                                                @else <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                                @else <span class="text-center">--</span>
                                                 @endif
                                             </td>
 

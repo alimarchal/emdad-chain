@@ -117,7 +117,7 @@
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black">
                                             {{ $record->name }}@if(isset($parent)), {{ $parent->name }} @endif
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black">
+                                        <td class="px-2 py-2 text-sm text-center text-black border border-black">
                                             {{ $invoice->eOrderItem->description }}
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black">
@@ -344,7 +344,7 @@
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black">
                                             {{ $record->name_ar }}@if(isset($parent)), {{ $parent->name_ar }} @endif
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black" style="font-family: sans-serif">
+                                        <td class="px-2 py-2 text-sm text-center text-black border border-black" style="font-family: sans-serif">
                                             {{ $invoice->eOrderItem->description }}
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm text-center text-black border border-black">

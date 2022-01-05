@@ -197,7 +197,7 @@
                                                                 </svg>
                                                             </a>
                                                         @else
-                                                                {{__('portal.N/A')}}
+                                                            <span class="text-center">--</span>
                                                         @endif
 
                                                         <br>
@@ -434,7 +434,7 @@
                                                                 </svg>
                                                             </a>
                                                         @else
-                                                            <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                                            <span class="text-center">--</span>
                                                         @endif
 
                                                         <br>

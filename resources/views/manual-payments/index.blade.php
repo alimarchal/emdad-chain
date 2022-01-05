@@ -98,7 +98,7 @@
                                                 @php $businessName = \App\Models\Business::where('id', $item->buyer_business_id)->first(); @endphp
                                             @endif
 
-                                            @if(isset($businessName->business_name)) {{$businessName->business_name}} @else {{__('portal.N/A')}} @endif
+                                            @if(isset($businessName->business_name)) {{$businessName->business_name}} @else <span class="text-center">--</span> @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if($item->rfq_type == 1) {{__('portal.Multiple')}} @elseif($item->rfq_type == 0) {{__('portal.Single')}} @endif
@@ -254,7 +254,7 @@
                                                 @php $businessName = \App\Models\Business::where('id', $item->buyer_business_id)->first(); @endphp
                                             @endif
 
-                                            @if(isset($businessName->business_name)) {{$businessName->business_name}} @else {{__('portal.N/A')}} @endif
+                                            @if(isset($businessName->business_name)) {{$businessName->business_name}} @else <span class="text-center">--</span> @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap text-black text-center">
                                             @if($item->rfq_type == 1) {{__('portal.Multiple')}} @elseif($item->rfq_type == 0) {{__('portal.Single')}} @endif

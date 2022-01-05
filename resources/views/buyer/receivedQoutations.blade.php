@@ -121,7 +121,8 @@
                                                     @endif
                                                 >
                                                     @if($rfp->status == 'accepted')
-                                                        {{__('portal.N/A')}}
+{{--                                                        {{__('portal.N/A')}}--}}
+                                                        <div class="text-center"><span class="text-center">--</span></div>
                                                     @else
                                                         {{--                                                {{ $diffInHrs }} hours @if($diffInHrs == 0) and {{ $diffInMins }} minutes @endif --}}
                                                         {{--                                                <br>--}}
@@ -137,7 +138,8 @@
                                                     @elseif($rfp->status == 'accepted')
                                                         <span class="text-green-500">{{__('portal.Completed')}}</span>
                                                     @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < $now && $rfp->status == 'pending')
-                                                        {{__('portal.N/A')}}
+{{--                                                        {{__('portal.N/A')}}--}}
+                                                        <div class="text-center"><span class="text-center">--</span></div>
                                                     @else
                                                         {{ $rfp->qoutes->count() }}
                                                     @endif
@@ -146,9 +148,10 @@
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if(isset($dpo))
-                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                                                            {{__('portal.N/A')}}
-                                                        </a>
+{{--                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">--}}
+{{--                                                            {{__('portal.N/A')}}--}}
+                                                            <div class="text-center"><span class="text-center">--</span></div>
+{{--                                                        </a>--}}
                                                     @elseif($rfp->qoutes->count() > 0 && $rfp->quotation_time >= $now && $rfp->bypass == 0)
                                                         {{--                                                @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))--}}
                                                         @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
@@ -190,9 +193,10 @@
                                                             </a>
                                                         @endif
                                                     @else
-                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                                                            {{__('portal.N/A')}}
-                                                        </a>
+{{--                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">--}}
+{{--                                                            {{__('portal.N/A')}}--}}
+                                                            <div class="text-center"><span class="text-center">--</span></div>
+{{--                                                        </a>--}}
                                                     @endif
                                                 </td>
 
@@ -250,7 +254,8 @@
                                                 @endif
                                             >
                                                 @if($placedRFQ->OrderItems[0]->status == 'accepted')
-                                                    {{__('portal.N/A')}}
+{{--                                                    {{__('portal.N/A')}}--}}
+                                                    <div class="text-center"><span class="text-center">--</span></div>
                                                 @else
                                                     {{--                                            <br>--}}
                                                     <div class="text-center"><span class="text-center">--</span></div>
@@ -265,7 +270,8 @@
                                                 @elseif($placedRFQ->OrderItems[0]->status == 'accepted')
                                                     <span class="text-green-500">{{__('portal.Completed')}}</span>
                                                 @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->qoutes->count() == 0 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')
-                                                    {{__('portal.N/A')}}
+{{--                                                    {{__('portal.N/A')}}--}}
+                                                    <div class="text-center"><span class="text-center">--</span></div>
                                                 @else
                                                     @php
                                                         /* Counting Total quotations for Single Category RFQ */
@@ -279,9 +285,10 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if(isset($dpo))
-                                                    <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                                                        {{__('portal.N/A')}}
-                                                    </a>
+{{--                                                    <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">--}}
+{{--                                                        {{__('portal.N/A')}}--}}
+                                                        <div class="text-center"><span class="text-center">--</span></div>
+{{--                                                    </a>--}}
                                                 @elseif($placedRFQ->OrderItems[0]->qoutes->count() > 0 && $placedRFQ->OrderItems[0]->quotation_time >= $now && $placedRFQ->OrderItems[0]->bypass == 0)
                                                     @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                         <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 1]) }}"
@@ -322,9 +329,10 @@
                                                         </a>
                                                     @endif
                                                 @else
-                                                    <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
-                                                        {{__('portal.N/A')}}
-                                                    </a>
+{{--                                                    <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">--}}
+{{--                                                        {{__('portal.N/A')}}--}}
+                                                        <div class="text-center"><span class="text-center">--</span></div>
+{{--                                                    </a>--}}
                                                 @endif
                                             </td>
 
@@ -449,7 +457,8 @@
                                                     style=" font-family: sans-serif;"
                                                 >
                                                     @if($rfp->status == 'accepted')
-                                                        {{__('portal.N/A')}}
+{{--                                                        {{__('portal.N/A')}}--}}
+                                                        <div class="text-center"><span class="text-center">--</span></div>
                                                     @else
                                                         {{--                                                {{ $diffInHrs }} hours @if($diffInHrs == 0) and {{ $diffInMins }} minutes @endif --}}
                                                         {{--                                                <br>--}}
@@ -465,7 +474,8 @@
                                                     @elseif($rfp->status == 'accepted')
                                                         <span class="text-green-500">{{__('portal.Completed')}}</span>
                                                     @elseif($rfp->bypass == 0 && $rfp->qoutes->count() == 0 && $rfp->quotation_time < $now && $rfp->status == 'pending')
-                                                        <span style=" font-family: sans-serif;">{{__('portal.N/A')}}</span>
+{{--                                                        <span style=" font-family: sans-serif;">{{__('portal.N/A')}}</span>--}}
+                                                        <div class="text-center"><span class="text-center">--</span></div>
                                                     @else
                                                         <span style=" font-family: sans-serif;">{{ $rfp->qoutes->count() }}</span>
                                                     @endif
@@ -474,9 +484,10 @@
 
                                                 <td class="px-6 py-4 text-center whitespace-nowrap">
                                                     @if(isset($dpo))
-                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="font-family: sans-serif;">
+                                                        {{--<a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="font-family: sans-serif;">
                                                             {{__('portal.N/A')}}
-                                                        </a>
+                                                        </a>--}}
+                                                        <div class="text-center"><span class="text-center">--</span></div>
                                                     @elseif($rfp->qoutes->count() > 0 && $rfp->quotation_time >= $now && $rfp->bypass == 0)
                                                         {{--                                                @if(auth()->user()->can('Buyer Quotation Response') || auth()->user()->hasRole('CEO'))--}}
                                                         @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
@@ -518,9 +529,10 @@
                                                             </a>
                                                         @endif
                                                     @else
-                                                        <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="font-family: sans-serif;">
+                                                        {{--<a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="font-family: sans-serif;">
                                                             {{__('portal.N/A')}}
-                                                        </a>
+                                                        </a>--}}
+                                                        <div class="text-center"><span class="text-center">--</span></div>
                                                     @endif
                                                 </td>
 
@@ -579,7 +591,8 @@
                                                 style=" font-family: sans-serif;"
                                             >
                                                 @if($placedRFQ->OrderItems[0]->status == 'accepted')
-                                                    {{__('portal.N/A')}}
+{{--                                                    {{__('portal.N/A')}}--}}
+                                                    <div class="text-center"><span class="text-center">--</span></div>
                                                 @else
                                                     {{--                                            <br>--}}
                                                     <div class="text-center"><span class="text-center">--</span></div>
@@ -594,7 +607,8 @@
                                                 @elseif($placedRFQ->OrderItems[0]->status == 'accepted')
                                                     <span class="text-green-500">{{__('portal.Completed')}}</span>
                                                 @elseif($placedRFQ->OrderItems[0]->bypass == 0 && $placedRFQ->OrderItems[0]->qoutes->count() == 0 && $placedRFQ->OrderItems[0]->quotation_time < $now && $placedRFQ->OrderItems[0]->status == 'pending')
-                                                    <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
+{{--                                                    <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>--}}
+                                                    <div class="text-center"><span class="text-center">--</span></div>
                                                 @else
                                                     @php
                                                         /* Counting Total quotations for Single Category RFQ */
@@ -608,9 +622,10 @@
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
                                                 @if(isset($dpo))
-                                                    <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="font-family: sans-serif;">
+                                                    {{--<a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="font-family: sans-serif;">
                                                         {{__('portal.N/A')}}
-                                                    </a>
+                                                    </a>--}}
+                                                    <div class="text-center"><span class="text-center">--</span></div>
                                                 @elseif($placedRFQ->OrderItems[0]->qoutes->count() > 0 && $placedRFQ->OrderItems[0]->quotation_time >= $now && $placedRFQ->OrderItems[0]->bypass == 0)
                                                     @if(auth()->user()->can('Buyer View Quotations') || auth()->user()->hasRole('CEO'))
                                                         <a href="{{ route('singleCategoryRFQQuotationsBuyerReceived', ['eOrderID' => $placedRFQ->id, 'bypass_id' => 1]) }}"
@@ -651,9 +666,10 @@
                                                         </a>
                                                     @endif
                                                 @else
-                                                    <a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="font-family: sans-serif;">
+                                                    {{--<a class="inline-flex items-center justify-center px-4 py-2 bg-gray-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150" style="font-family: sans-serif;">
                                                         {{__('portal.N/A')}}
-                                                    </a>
+                                                    </a>--}}
+                                                    <div class="text-center"><span class="text-center">--</span></div>
                                                 @endif
                                             </td>
 

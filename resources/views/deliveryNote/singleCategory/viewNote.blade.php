@@ -86,7 +86,7 @@
                                         <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
                                             {{$loop->iteration}}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
+                                        <td class="px-2 py-2 text-center text-sm text-black border border-black">
                                             {{ $deliveryNote->purchase_order->eOrderItem->description }}
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
@@ -227,7 +227,7 @@
                                     <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black" style="font-family: sans-serif">
                                         {{$loop->iteration}}
                                     </td>
-                                    <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black" style="font-family: sans-serif">
+                                    <td class="px-2 py-2 text-center text-sm text-black border border-black" style="font-family: sans-serif">
                                         {{ $deliveryNote->purchase_order->eOrderItem->description }}
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap text-center text-sm text-black border border-black">
