@@ -899,6 +899,7 @@ return [
     'Please select a Delivery Period.' => 'Please select a Delivery Period.',
     'Requisition successfully added to cart.' => 'Requisition successfully added to cart.',
     'Requisition successfully copied to cart.' => 'Requisition successfully copied to cart.',
+    'Item updated successfully.' => 'Item updated successfully.',
     'Cancel single item' => 'Cancel single item',
     'To cancel the whole requisition' => 'To cancel the whole requisition',
     'Quotation valid upto date is required.' => 'Quotation valid upto date is required.',

@@ -11,8 +11,10 @@ use App\Models\Package;
 use App\Models\POInfo;
 use App\Models\PurchaseRequestForm;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Storage;
 
 class PurchaseRequestFormController extends Controller
 {
@@ -123,6 +125,18 @@ class PurchaseRequestFormController extends Controller
     public function view()
     {
         return view('RFQ.view');
+    }
+
+    public function deleteCartItem(Request $request): RedirectResponse
+    {
+        $eCart = ECart::findOrFail(decrypt($request->id));
+        if(!is_null($eCart->file_path)) {
+            $attachment = str_replace('/storage', '', $eCart->file_path);
+            Storage::delete('/public/'. $attachment);
+        }
+        $eCart->delete();
+        session()->flash('message', __('portal.Item successfully deleted.'));
+        return back();
     }
 
 }

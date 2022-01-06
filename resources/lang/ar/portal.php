@@ -899,6 +899,7 @@ return [
     'Please select a Delivery Period.' => 'يرجى اختيار فترة التوصيل.',
     'Requisition successfully added to cart.' => 'تم إضافة الطلب إلى السلة بنجاح.',
     'Requisition successfully copied to cart.' => 'تم نسخ الطلب للسلة بنجاح.',
+    'Item updated successfully.' => 'Item updated successfully.',
     'Cancel single item' => 'إلغاء منتج.',
     'To cancel the whole requisition' => 'لإلغاء جميع الطلب.',
     'Quotation valid upto date is required.' => 'مطلوب عرض سعر صالح حتى التاريخ الحالي.',

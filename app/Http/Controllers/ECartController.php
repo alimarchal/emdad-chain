@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BusinessPackage;
 use App\Models\Category;
 use App\Models\ECart;
 use App\Models\EOrders;
@@ -9,6 +10,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Storage;
 
 class ECartController extends Controller
 {
@@ -41,6 +43,55 @@ class ECartController extends Controller
         ECart::create($request->all());
         session()->flash('message', __('portal.Requisition successfully added to cart.'));
 
+        return redirect('RFQ/create');
+    }
+
+    public function edit(Request $request)
+    {
+        $businessPackage = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
+        if (isset($businessPackage))
+        {
+            $categories = explode(',', $businessPackage->categories);
+            $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
+        }
+        $eCartItem = ECart::where('id', decrypt($request->id))->first();
+
+        return view('RFQ.eCartEdit', compact('eCartItem', 'parentCategories'));
+    }
+
+    public function update(Request $request)
+    {
+        $eCart = ECart::findOrFail($request->id);
+        if ($request->has('file_path_1')) {
+            if(!is_null($eCart->file_path)) {
+                $attachment = str_replace('/storage', '', $eCart->file_path);
+                Storage::delete('/public/'. $attachment);
+            }
+            $path = $request->file('file_path_1')->store('', 'public');
+            $request->merge(['file_path' => $path]);
+        }
+
+        Validator::make($request->all(), [
+            'delivery_period' => 'required',
+        ],[
+            'delivery_period.required' => __('portal.Please select a Delivery Period.')
+        ])->validate();
+
+        $request->merge(['delivery_period' => Carbon::parse($request->delivery_period)->format('Y-m-d')]);
+        $request->merge(['status' => 'pending']);
+        if (!is_null($request->item_name))
+        {
+            $request->merge(['item_code' => $request->item_name]);
+            $request->merge(['item_name' => Category::where('id', $request->item_code)->first()->name]);
+        }
+        else{
+            $request->merge(['item_code' => $eCart->item_code]);
+            $request->merge(['item_name' => $eCart->item_name]);
+        }
+        $request->merge(['rfq_type' => 1]);
+        $eCart->update($request->all());
+
+        session()->flash('message', __('portal.Item updated successfully.'));
         return redirect('RFQ/create');
     }
 

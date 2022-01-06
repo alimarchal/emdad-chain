@@ -276,6 +276,7 @@ Route::middleware(['auth:sanctum'])->resource('category', CategoryController::cl
 ####################END###############################
 #################### RFP Purchase Request Form ##########################
 Route::middleware(['auth:sanctum'])->get('rfq-view', [PurchaseRequestFormController::class, 'view'])->name('rfqView');
+Route::middleware(['auth:sanctum'])->get('rfq-cart-item-delete/{id}', [PurchaseRequestFormController::class, 'deleteCartItem'])->name('deleteCartItem');
 Route::middleware(['auth:sanctum'])->resource('RFQ', PurchaseRequestFormController::class);
 
 // For Single Category RFQ
@@ -283,6 +284,8 @@ Route::middleware(['auth:sanctum'])->get('create-single-category-rfq', [Purchase
 Route::middleware(['auth:sanctum'])->post('create-single-category-rfq', [PurchaseRequestFormController::class, 'store_single_rfq']);
 Route::middleware(['auth:sanctum'])->get('new-cart/{eOrderID}', [ECartController::class, 'deleteAndInsert'])->name('deleteAndInsertCart');
 Route::middleware(['auth:sanctum'])->get('new-cart-single-category/{eOrderID}', [ECartController::class, 'singleDeleteAndInsert'])->name('deleteAndInsertCartSingleCategory');
+Route::middleware(['auth:sanctum'])->get('edit-cart-item/{id}', [ECartController::class, 'edit'])->name('eCartItemEdit');
+Route::middleware(['auth:sanctum'])->post('edit-cart-item/{id}', [ECartController::class, 'update']);
 Route::middleware(['auth:sanctum'])->resource('RFQCart', ECartController::class);
 
 // For Single Category RFQ
