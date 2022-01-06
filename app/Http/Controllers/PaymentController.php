@@ -871,8 +871,12 @@ class PaymentController extends Controller
     {
         $invoices = Invoice::with('eOrderItem','deliveryNote','eOrderItem')->where('rfq_no' , decrypt($invoiceRfqNo))->get();
 
-        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('payment.singleCategory.PDF', compact('invoices'));
+        $pdf = App::make('snappy.pdf.wrapper');
+        $pdf->loadView('payment.singleCategory.PDF', compact('invoices'));
         return $pdf->download('Invoice.pdf');
+
+//        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('payment.singleCategory.PDF', compact('invoices'));
+//        return $pdf->download('Invoice.pdf');
     }
 
 }

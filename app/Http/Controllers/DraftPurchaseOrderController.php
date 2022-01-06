@@ -893,9 +893,15 @@ class DraftPurchaseOrderController extends Controller
     public function singleCategoryGeneratePDF($rfqNo)
     {
         $draftPurchaseOrders = DraftPurchaseOrder::with('buyer_business')->where(['rfq_no' => $rfqNo])->get();
-        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('draftPurchaseOrder.singleCategory.PDF', compact('draftPurchaseOrders'));
+
+        $pdf = App::make('snappy.pdf.wrapper');
+        $pdf->loadView('draftPurchaseOrder.singleCategory.PDF', compact('draftPurchaseOrders'));
         $POName = 'PO-'.$draftPurchaseOrders[0]->id.'.pdf';
         return $pdf->download($POName);
+
+//        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('draftPurchaseOrder.singleCategory.PDF', compact('draftPurchaseOrders'));
+
+//        return $pdf->download($POName);
     }
 
 }
