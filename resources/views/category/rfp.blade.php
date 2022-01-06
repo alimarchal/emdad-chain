@@ -1,4 +1,4 @@
-<select class="sel_1 w-full inline" name="item_name" required style="width: 100%;">
+<select class="sel_1 w-full inline" name="item_name" @if(Route::currentRouteName() != 'eCartItemEdit') required @endif style="width: 100%;">
     <option value="">{{__('portal.Select Category')}}</option>
 </select>
 <script>

@@ -124,7 +124,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            @if(isset($rfp->size)) {{ $rfp->size }} @else {{__('portal.N/A')}} @endif
+                                            @if(isset($rfp->size)) {{ $rfp->size }} @else -- @endif
                                         </td>
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $rfp->quantity }}
@@ -134,7 +134,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            @if(isset($rfp->brand)) {{ $rfp->brand }} @else {{__('portal.N/A')}} @endif
+                                            @if(isset($rfp->brand)) {{ $rfp->brand }} @else -- @endif
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
@@ -146,7 +146,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            @if(isset($rfp->remarks)) {{ $rfp->remarks }} @else {{__('portal.N/A')}} @endif
+                                            @if(isset($rfp->remarks)) {{ $rfp->remarks }} @else -- @endif
                                         </td>
 
                                         <td class="px-3 py-3 text-center whitespace-nowrap">
@@ -166,7 +166,7 @@
                                                     </svg>
                                                 </a>
                                             @else
-                                                {{__('portal.N/A')}}
+                                                <span class="text-center">--</span>
                                             @endif
                                         </td>
 
@@ -368,7 +368,7 @@
                                             <span style="font-family: sans-serif">{{ number_format($rfp->last_price, 2) }}</span> {{__('portal.SAR')}} <br>
                                         </td>
 
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap" style="font-family: sans-serif">
                                             {{ $rfp->brand }}
                                         </td>
 
@@ -393,7 +393,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            @if(isset($rfp->remarks)) <span style="font-family: sans-serif">{{ $rfp->remarks }}</span> @else {{__('portal.N/A')}} @endif
+                                            @if(isset($rfp->remarks)) <span style="font-family: sans-serif">{{ $rfp->remarks }}</span> @else -- @endif
                                         </td>
 
                                         <td class="px-2 py-3 text-center whitespace-nowrap">
@@ -415,7 +415,7 @@
                                                     </svg>
                                                 </a>
                                             @else
-                                                <span style="font-family: sans-serif">{{__('portal.N/A')}}</span>
+                                                <span class="text-center">--</span>
                                             @endif
                                         </td>
 

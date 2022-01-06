@@ -97,6 +97,14 @@
         {{-- getting latest record from database to be filled in fields  --}}
         @if(isset($rfqCount) && $rfqCount != 0 && !is_null($rfqCount))
 
+            @if (session()->has('message'))
+                <div class="block mt-2 text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                    <strong class="mr-3">{{ session('message') }}</strong>
+                    <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                        <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                    </button>
+                </div>
+            @endif
             @foreach ($errors->get('delivery_period') as $error)
                 <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
                     <strong class="mr-1">{{ $error }}</strong>
@@ -398,7 +406,8 @@
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
                                 <th style="width:15%;">{{__('portal.Remarks')}}</th>
-                                <th style="width:7%;">{{__('portal.Attachments')}}</th>
+                                <th style="width:3%;">{{__('portal.Attachments')}}</th>
+                                <th style="width:8%;">{{__('portal.Action')}}</th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -415,7 +424,7 @@
                                     <td> {{$item->remarks}} </td>
                                     <td class="">
                                         @if ($item->file_path)
-                                            <a href="{{ Storage::url($rfp->file_path) }}">
+                                            <a href="{{ Storage::url($item->file_path) }}">
                                                 <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor"
                                                      viewBox="0 0 24 24"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -426,8 +435,26 @@
                                                 </svg>
                                             </a>
                                         @else
-                                            {{__('portal.N/A')}}
+                                            <span class="text-center">--</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('deleteCartItem', encrypt($item->id)) }}" class="confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}' title="{{__('portal.DELETE')}}">
+                                            <svg class="w-6 h-6 mx-auto mt-1 mb-2" viewBox="0 0 20 20" stroke="currentColor" style="color: #ff0000 !important;">
+                                                <path fill="none" d="M7.083,8.25H5.917v7h1.167V8.25z M18.75,3h-5.834V1.25c0-0.323-0.262-0.583-0.582-0.583H7.667
+                                                c-0.322,0-0.583,0.261-0.583,0.583V3H1.25C0.928,3,0.667,3.261,0.667,3.583c0,0.323,0.261,0.583,0.583,0.583h1.167v14
+                                                c0,0.644,0.522,1.166,1.167,1.166h12.833c0.645,0,1.168-0.522,1.168-1.166v-14h1.166c0.322,0,0.584-0.261,0.584-0.583
+                                                C19.334,3.261,19.072,3,18.75,3z M8.25,1.833h3.5V3h-3.5V1.833z M16.416,17.584c0,0.322-0.262,0.583-0.582,0.583H4.167
+                                                c-0.322,0-0.583-0.261-0.583-0.583V4.167h12.833V17.584z M14.084,8.25h-1.168v7h1.168V8.25z M10.583,7.083H9.417v8.167h1.167V7.083
+                                                z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                        {{--<a href="javascript:void(0)">
+                                            <svg class="w-6 h-6 mx-auto mt-1 mb-2" viewBox="0 0 20 20" stroke="currentColor" style="color: royalblue">
+                                            <path fill="none" d="M19.404,6.65l-5.998-5.996c-0.292-0.292-0.765-0.292-1.056,0l-2.22,2.22l-8.311,8.313l-0.003,0.001v0.003l-0.161,0.161c-0.114,0.112-0.187,0.258-0.21,0.417l-1.059,7.051c-0.035,0.233,0.044,0.47,0.21,0.639c0.143,0.14,0.333,0.219,0.528,0.219c0.038,0,0.073-0.003,0.111-0.009l7.054-1.055c0.158-0.025,0.306-0.098,0.417-0.211l8.478-8.476l2.22-2.22C19.695,7.414,19.695,6.941,19.404,6.65z M8.341,16.656l-0.989-0.99l7.258-7.258l0.989,0.99L8.341,16.656z M2.332,15.919l0.411-2.748l4.143,4.143l-2.748,0.41L2.332,15.919z M13.554,7.351L6.296,14.61l-0.849-0.848l7.259-7.258l0.423,0.424L13.554,7.351zM10.658,4.457l0.992,0.99l-7.259,7.258L3.4,11.715L10.658,4.457z M16.656,8.342l-1.517-1.517V6.823h-0.003l-0.951-0.951l-2.471-2.471l1.164-1.164l4.942,4.94L16.656,8.342z"></path>
+                                        </svg>
+                                        </a>--}}
                                     </td>
 
                                 </tr>
@@ -543,8 +570,6 @@
                             {{__('portal.Place RFQ')}}
                         </button>
                     </form>
-
-
                 </div>
                 @endif
             </div>
@@ -560,6 +585,14 @@
                     @endphp
 
                 @endforeach
+            @endif
+            @if (session()->has('message'))
+                <div class="block mt-2 text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                    <strong class="mr-3">{{ session('message') }}</strong>
+                    <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                        <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                    </button>
+                </div>
             @endif
             @foreach ($errors->get('delivery_period') as $error)
                 <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
@@ -849,7 +882,8 @@
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
                                 <th style="width:15%;"> {{__('portal.Remarks')}}</th>
-                                <th style="width:7%;">{{__('portal.Attachments')}}</th>
+                                <th style="width:3%;">{{__('portal.Attachments')}}</th>
+                                <th style="width:8%;">{{__('portal.Action')}}</th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -866,7 +900,7 @@
                                     <td> {{$item->remarks}} </td>
                                     <td class="">
                                         @if ($item->file_path)
-                                            <a href="{{ Storage::url($rfp->file_path) }}">
+                                            <a href="{{ Storage::url($item->file_path) }}">
                                                 <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor"
                                                      viewBox="0 0 24 24"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -877,8 +911,26 @@
                                                 </svg>
                                             </a>
                                         @else
-                                            {{__('portal.N/A')}}
+                                            <span class="text-center">--</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('deleteCartItem', encrypt($item->id)) }}" class="confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}' title="{{__('portal.DELETE')}}">
+                                            <svg class="w-6 h-6 mx-auto mt-1 mb-2" viewBox="0 0 20 20" stroke="currentColor" style="color: #ff0000 !important;">
+                                                <path fill="none" d="M7.083,8.25H5.917v7h1.167V8.25z M18.75,3h-5.834V1.25c0-0.323-0.262-0.583-0.582-0.583H7.667
+                                                c-0.322,0-0.583,0.261-0.583,0.583V3H1.25C0.928,3,0.667,3.261,0.667,3.583c0,0.323,0.261,0.583,0.583,0.583h1.167v14
+                                                c0,0.644,0.522,1.166,1.167,1.166h12.833c0.645,0,1.168-0.522,1.168-1.166v-14h1.166c0.322,0,0.584-0.261,0.584-0.583
+                                                C19.334,3.261,19.072,3,18.75,3z M8.25,1.833h3.5V3h-3.5V1.833z M16.416,17.584c0,0.322-0.262,0.583-0.582,0.583H4.167
+                                                c-0.322,0-0.583-0.261-0.583-0.583V4.167h12.833V17.584z M14.084,8.25h-1.168v7h1.168V8.25z M10.583,7.083H9.417v8.167h1.167V7.083
+                                                z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                        {{--<a href="javascript:void(0)">
+                                            <svg class="w-6 h-6 mx-auto mt-1 mb-2" viewBox="0 0 20 20" stroke="currentColor" style="color: royalblue">
+                                            <path fill="none" d="M19.404,6.65l-5.998-5.996c-0.292-0.292-0.765-0.292-1.056,0l-2.22,2.22l-8.311,8.313l-0.003,0.001v0.003l-0.161,0.161c-0.114,0.112-0.187,0.258-0.21,0.417l-1.059,7.051c-0.035,0.233,0.044,0.47,0.21,0.639c0.143,0.14,0.333,0.219,0.528,0.219c0.038,0,0.073-0.003,0.111-0.009l7.054-1.055c0.158-0.025,0.306-0.098,0.417-0.211l8.478-8.476l2.22-2.22C19.695,7.414,19.695,6.941,19.404,6.65z M8.341,16.656l-0.989-0.99l7.258-7.258l0.989,0.99L8.341,16.656z M2.332,15.919l0.411-2.748l4.143,4.143l-2.748,0.41L2.332,15.919z M13.554,7.351L6.296,14.61l-0.849-0.848l7.259-7.258l0.423,0.424L13.554,7.351zM10.658,4.457l0.992,0.99l-7.259,7.258L3.4,11.715L10.658,4.457z M16.656,8.342l-1.517-1.517V6.823h-0.003l-0.951-0.951l-2.471-2.471l1.164-1.164l4.942,4.94L16.656,8.342z"></path>
+                                        </svg>
+                                        </a>--}}
                                     </td>
 
                                 </tr>
@@ -950,7 +1002,6 @@
                                     <input class="shadow-sm block w-full" id="file" type="file" name="file_path_1" autocomplete="name" style="display:none;">
                                 </td>
                             </tr>
-
 
                             </tbody>
                         </table>
@@ -1091,6 +1142,14 @@
             @endif
 
             <br>
+            @if (session()->has('message'))
+                <div class="block mt-2 text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                    <strong class="mr-3">{{ session('message') }}</strong>
+                    <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                        <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                    </button>
+                </div>
+            @endif
             @foreach ($errors->get('delivery_period') as $error)
                 <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
                     <strong class="mr-3">{{ $error }}</strong>
@@ -1331,7 +1390,7 @@
                             <div class="flex flex-wrap pl-5 " style="justify-content: center">
                                 <h1 class="text-1xl mt-0 pb-0 text-center"> {{__('portal.Requisition(s) remaining for the day')}}
                                     : </h1>
-                                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500"> &nbsp; {{$count}} </h1>
+                                <h1 class="text-1xl mt-0 pb-0 text-center text-red-500 font-sans"> &nbsp; {{$count}} </h1>
                             </div>
                         @endif
 
@@ -1348,7 +1407,8 @@
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
                                 <th style="width:15%;">{{__('portal.Remarks')}}</th>
-                                <th style="width:7%;">{{__('portal.Attachments')}}</th>
+                                <th style="width:3%;">{{__('portal.Attachments')}}</th>
+                                <th style="width:8%;">{{__('portal.Action')}}</th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -1365,7 +1425,7 @@
                                     <td style="font-family: sans-serif;"> {{$item->remarks}} </td>
                                     <td class="">
                                         @if ($item->file_path)
-                                            <a href="{{ Storage::url($rfp->file_path) }}">
+                                            <a href="{{ Storage::url($item->file_path) }}">
                                                 <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor"
                                                      viewBox="0 0 24 24"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -1376,8 +1436,26 @@
                                                 </svg>
                                             </a>
                                         @else
-                                            <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
+                                            <span class="text-center">--</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('deleteCartItem', encrypt($item->id)) }}" class="confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}' title="{{__('portal.DELETE')}}">
+                                            <svg class="w-6 h-6 mx-auto mt-1 mb-2" viewBox="0 0 20 20" stroke="currentColor" style="color: #ff0000 !important;">
+                                                <path fill="none" d="M7.083,8.25H5.917v7h1.167V8.25z M18.75,3h-5.834V1.25c0-0.323-0.262-0.583-0.582-0.583H7.667
+                                                c-0.322,0-0.583,0.261-0.583,0.583V3H1.25C0.928,3,0.667,3.261,0.667,3.583c0,0.323,0.261,0.583,0.583,0.583h1.167v14
+                                                c0,0.644,0.522,1.166,1.167,1.166h12.833c0.645,0,1.168-0.522,1.168-1.166v-14h1.166c0.322,0,0.584-0.261,0.584-0.583
+                                                C19.334,3.261,19.072,3,18.75,3z M8.25,1.833h3.5V3h-3.5V1.833z M16.416,17.584c0,0.322-0.262,0.583-0.582,0.583H4.167
+                                                c-0.322,0-0.583-0.261-0.583-0.583V4.167h12.833V17.584z M14.084,8.25h-1.168v7h1.168V8.25z M10.583,7.083H9.417v8.167h1.167V7.083
+                                                z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                        {{--<a href="javascript:void(0)">
+                                            <svg class="w-6 h-6 mx-auto mt-1 mb-2" viewBox="0 0 20 20" stroke="currentColor" style="color: royalblue">
+                                            <path fill="none" d="M19.404,6.65l-5.998-5.996c-0.292-0.292-0.765-0.292-1.056,0l-2.22,2.22l-8.311,8.313l-0.003,0.001v0.003l-0.161,0.161c-0.114,0.112-0.187,0.258-0.21,0.417l-1.059,7.051c-0.035,0.233,0.044,0.47,0.21,0.639c0.143,0.14,0.333,0.219,0.528,0.219c0.038,0,0.073-0.003,0.111-0.009l7.054-1.055c0.158-0.025,0.306-0.098,0.417-0.211l8.478-8.476l2.22-2.22C19.695,7.414,19.695,6.941,19.404,6.65z M8.341,16.656l-0.989-0.99l7.258-7.258l0.989,0.99L8.341,16.656z M2.332,15.919l0.411-2.748l4.143,4.143l-2.748,0.41L2.332,15.919z M13.554,7.351L6.296,14.61l-0.849-0.848l7.259-7.258l0.423,0.424L13.554,7.351zM10.658,4.457l0.992,0.99l-7.259,7.258L3.4,11.715L10.658,4.457z M16.656,8.342l-1.517-1.517V6.823h-0.003l-0.951-0.951l-2.471-2.471l1.164-1.164l4.942,4.94L16.656,8.342z"></path>
+                                        </svg>
+                                        </a>--}}
                                     </td>
 
                                 </tr>
@@ -1504,6 +1582,14 @@
                 @endforeach
             @endif
             <br>
+            @if (session()->has('message'))
+                <div class="block mt-2 text-sm text-green-600 bg-green-200 border border-green-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
+                    <strong class="mr-3">{{ session('message') }}</strong>
+                    <button type="button" data-dismiss="alert" aria-label="Close" onclick="this.parentElement.remove();">
+                        <span class="absolute top-0 bottom-0 right-0 text-2xl px-3 py-1 hover:text-red-900" aria-hidden="true">×</span>
+                    </button>
+                </div>
+            @endif
             @foreach ($errors->get('delivery_period') as $error)
                 <div class="block mt-2 text-sm text-red-600 bg-red-200 border border-red-400 h-12 flex items-center p-4 rounded-sm relative" role="alert">
                     <strong class="mr-3">{{ $error }}</strong>
@@ -1791,7 +1877,8 @@
                                 <th style="width:7%;" title="{{__('portal.UP')}}">{{__('portal.Last Unit Price')}}</th>
                                 <th style="width:7%;">{{__('portal.Quantity')}} @include('misc.required')</th>
                                 <th style="width:15%;"> {{__('portal.Remarks')}}</th>
-                                <th style="width:7%;">{{__('portal.Attachments')}}</th>
+                                <th style="width:3%;">{{__('portal.Attachments')}}</th>
+                                <th style="width:8%;">{{__('portal.Action')}}</th>
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
@@ -1808,7 +1895,7 @@
                                     <td style="font-family: sans-serif;"> {{$item->remarks}} </td>
                                     <td class="">
                                         @if ($item->file_path)
-                                            <a href="{{ Storage::url($rfp->file_path) }}">
+                                            <a href="{{ Storage::url($item->file_path) }}">
                                                 <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor"
                                                      viewBox="0 0 24 24"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -1819,8 +1906,26 @@
                                                 </svg>
                                             </a>
                                         @else
-                                            <span style="font-family: sans-serif;">{{__('portal.N/A')}}</span>
+                                            <span class="text-center">--</span>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('deleteCartItem', encrypt($item->id)) }}" class="confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}' title="{{__('portal.DELETE')}}">
+                                            <svg class="w-6 h-6 mx-auto mt-1 mb-2" viewBox="0 0 20 20" stroke="currentColor" style="color: #ff0000 !important;">
+                                                <path fill="none" d="M7.083,8.25H5.917v7h1.167V8.25z M18.75,3h-5.834V1.25c0-0.323-0.262-0.583-0.582-0.583H7.667
+                                                c-0.322,0-0.583,0.261-0.583,0.583V3H1.25C0.928,3,0.667,3.261,0.667,3.583c0,0.323,0.261,0.583,0.583,0.583h1.167v14
+                                                c0,0.644,0.522,1.166,1.167,1.166h12.833c0.645,0,1.168-0.522,1.168-1.166v-14h1.166c0.322,0,0.584-0.261,0.584-0.583
+                                                C19.334,3.261,19.072,3,18.75,3z M8.25,1.833h3.5V3h-3.5V1.833z M16.416,17.584c0,0.322-0.262,0.583-0.582,0.583H4.167
+                                                c-0.322,0-0.583-0.261-0.583-0.583V4.167h12.833V17.584z M14.084,8.25h-1.168v7h1.168V8.25z M10.583,7.083H9.417v8.167h1.167V7.083
+                                                z">
+                                                </path>
+                                            </svg>
+                                        </a>
+                                        {{--<a href="javascript:void(0)">
+                                            <svg class="w-6 h-6 mx-auto mt-1 mb-2" viewBox="0 0 20 20" stroke="currentColor" style="color: royalblue">
+                                            <path fill="none" d="M19.404,6.65l-5.998-5.996c-0.292-0.292-0.765-0.292-1.056,0l-2.22,2.22l-8.311,8.313l-0.003,0.001v0.003l-0.161,0.161c-0.114,0.112-0.187,0.258-0.21,0.417l-1.059,7.051c-0.035,0.233,0.044,0.47,0.21,0.639c0.143,0.14,0.333,0.219,0.528,0.219c0.038,0,0.073-0.003,0.111-0.009l7.054-1.055c0.158-0.025,0.306-0.098,0.417-0.211l8.478-8.476l2.22-2.22C19.695,7.414,19.695,6.941,19.404,6.65z M8.341,16.656l-0.989-0.99l7.258-7.258l0.989,0.99L8.341,16.656z M2.332,15.919l0.411-2.748l4.143,4.143l-2.748,0.41L2.332,15.919z M13.554,7.351L6.296,14.61l-0.849-0.848l7.259-7.258l0.423,0.424L13.554,7.351zM10.658,4.457l0.992,0.99l-7.259,7.258L3.4,11.715L10.658,4.457z M16.656,8.342l-1.517-1.517V6.823h-0.003l-0.951-0.951l-2.471-2.471l1.164-1.164l4.942,4.94L16.656,8.342z"></path>
+                                        </svg>
+                                        </a>--}}
                                     </td>
 
                                 </tr>
