@@ -7,6 +7,7 @@ use App\Models\Invoice;
 use App\Models\Qoute;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class EmdadInvoiceController extends Controller
 {
@@ -150,7 +151,10 @@ class EmdadInvoiceController extends Controller
     {
         $emdadInvoices = EmdadInvoice::where('rfq_no' , decrypt($emdadInvoiceRFQNo))->get();
 
-        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.singleCategory.emdadInvoicePDF', compact('emdadInvoices'))->setOptions(['defaultFont' => 'sans-serif']);
-        return $pdf->download('Invoice.pdf');
+        $pdf = App::make('snappy.pdf.wrapper');
+        $pdf->loadView('invoice.singleCategory.emdadInvoicePDF', compact('emdadInvoices'));
+        return $pdf->download('Delivery Note.pdf');
+//        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('invoice.singleCategory.emdadInvoicePDF', compact('emdadInvoices'))->setOptions(['defaultFont' => 'sans-serif']);
+//        return $pdf->download('Invoice.pdf');
     }
 }

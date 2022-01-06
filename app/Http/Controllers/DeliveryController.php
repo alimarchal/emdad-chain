@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Delivery;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class DeliveryController extends Controller
 {
@@ -35,13 +36,21 @@ class DeliveryController extends Controller
         if ($rfq_type == 0) {
             $deliveries = Delivery::with('eOrderItems', 'invoice', 'buyer', 'supplier')->where('rfq_no', $rfq_no)->get();
 
-            $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('delivery.showPDF', compact('deliveries'));
+
+            $pdf = App::make('snappy.pdf.wrapper');
+            $pdf->loadView('delivery.showPDF', compact('deliveries'));
             return $pdf->download('Delivery Note.pdf');
+//            $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('delivery.showPDF', compact('deliveries'));
+//            return $pdf->download('Delivery Note.pdf');
         } elseif ($rfq_type == 1) {
             $deliveries = Delivery::with('eOrderItems', 'invoice', 'buyer', 'supplier')->where('id', $deliveryID)->get();
 
-            $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('delivery.showPDF', compact('deliveries'));
+            $pdf = App::make('snappy.pdf.wrapper');
+            $pdf->loadView('delivery.showPDF', compact('deliveries'));
             return $pdf->download('Delivery Note.pdf');
+
+//            $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('delivery.showPDF', compact('deliveries'));
+//            return $pdf->download('Delivery Note.pdf');
         }
     }
 }

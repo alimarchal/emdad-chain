@@ -22,6 +22,7 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class PaymentController extends Controller
 {
@@ -558,8 +559,11 @@ class PaymentController extends Controller
     public function generatePDF($invoiceID)
     {
         $invoice = Invoice::with('purchase_order','deliveryNote','eOrderItem')->where('id', decrypt($invoiceID))->first();
-        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('payment.PDF', compact('invoice'));
-        return $pdf->download('Invoice.pdf');
+        $pdf = App::make('snappy.pdf.wrapper');
+        $pdf->loadView('payment.PDF', compact('invoice'));
+        return $pdf->inline();
+//        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('payment.PDF', compact('invoice'));
+//        return $pdf->download('Invoice.pdf');
     }
 
     ######################################################### Single Category Quotations functions ############################################################

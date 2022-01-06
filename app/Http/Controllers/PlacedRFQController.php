@@ -11,6 +11,7 @@ use App\Models\Qoute;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 class PlacedRFQController extends Controller
@@ -47,8 +48,12 @@ class PlacedRFQController extends Controller
     {
         $collection = EOrderItems::where('e_order_id', decrypt($eOrderID))->get();
 
-        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('RFQPlaced.PDF', compact('collection'));
-        return $pdf->download('RFQ.pdf');
+        $pdf = App::make('snappy.pdf.wrapper');
+        $pdf->loadView('RFQPlaced.PDF', compact('collection'));
+        return $pdf->inline();
+//        dd('reached');
+//        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('RFQPlaced.PDF', compact('collection'));
+//        return $pdf->download('RFQ.pdf');
     }
 
     public function viewRFQs()
@@ -112,8 +117,14 @@ class PlacedRFQController extends Controller
         $eOrderItem = EOrderItems::firstWhere('id', decrypt($eOrderItemID));
         $quote = Qoute::with('business', 'orderItem')->where('e_order_items_id', decrypt($eOrderItemID))->where('supplier_user_id', auth()->id())->first();
 
-        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('supplier.quotationPDF', compact('quote','eOrderItem'));
-        return $pdf->download('Quotation.pdf');
+
+        $pdf = App::make('snappy.pdf.wrapper');
+        $pdf->loadView('supplier.quotationPDF', compact('quote','eOrderItem'));
+        return $pdf->download('Delivery Note.pdf');
+
+//
+//        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('supplier.quotationPDF', compact('quote','eOrderItem'));
+//        return $pdf->download('Quotation.pdf');
     }
 
     /**

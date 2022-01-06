@@ -8,6 +8,7 @@ use App\Models\DraftPurchaseOrder;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class DeliveryNoteController extends Controller
 {
@@ -113,8 +114,11 @@ class DeliveryNoteController extends Controller
      */
     public function generatePDF(DeliveryNote $deliveryNote)
     {
-        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('deliveryNote.PDF', compact('deliveryNote'));
+        $pdf = App::make('snappy.pdf.wrapper');
+        $pdf->loadView('deliveryNote.PDF', compact('deliveryNote'));
         return $pdf->download('Delivery Note.pdf');
+//        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('deliveryNote.PDF', compact('deliveryNote'));
+//        return $pdf->download('Delivery Note.pdf');
     }
 
     public function view()
