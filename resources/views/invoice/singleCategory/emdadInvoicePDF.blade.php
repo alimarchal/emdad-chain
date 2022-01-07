@@ -9,7 +9,7 @@
         table,
         td,
         th {
-            border: 1px solid bredlarck;
+            border: 1px solid black;
             border-collapse: collapse;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -28,9 +28,20 @@
             float: left;
         }
 
-        div {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        @php
+      $url = config('app.url');
+      $url = $url . '/Presento/assets/arabicfont/arabic_regular.ttf';
+  @endphp
+@font-face {
+            font-family: arabicFont;
+            src: url({{$url}});
         }
+
+
+        div {
+            font-family: arabicFont;
+        }
+
 
     </style>
 </head>
@@ -41,7 +52,7 @@
 <div class="header">
     <div class="center"></div>
 
-    <div class="center">
+    <div style="margin-left: auto;margin-right: auto;display: block;">
         <h3 style="text-align: center; margin:0;">Emdad Invoice for invoice # Inv-{{ $emdadInvoices[0]->invoice->id }} </h3>
     </div>
 

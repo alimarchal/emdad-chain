@@ -5,7 +5,7 @@
     <link href="http://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
     <style>
-        body { font-family: DejaVu Sans, sans-serif; }
+
         table, td, th {
             border: 1px solid black;
         }
@@ -27,7 +27,19 @@
             width: 50%;
             float: left;
         }
+        @php
+            $url = config('app.url');
+            $url = $url . '/Presento/assets/arabicfont/arabic_regular.ttf';
+        @endphp
+@font-face {
+            font-family: arabicFont;
+            src: url({{$url}});
+        }
 
+
+        div {
+            font-family: arabicFont;
+        }
 
 
     </style>
@@ -43,10 +55,10 @@
 {{--        <h5 style="text-align: center; margin:0px;">{{ $draftPurchaseOrder->buyer_business->business_name }}</h5>--}}
     </div>
 
-    <div class="center">
+    <div style="margin: auto;">
         @php $logo_second = asset(Storage::url($draftPurchaseOrder->buyer_business->business_photo_url)); @endphp
-        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;height: 89px;border-radius: 50%;;margin-left: 75px;" />
-        <h3 style="text-align: center; margin:0px;">Purchase Order</h3>
+        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;height: 89px;border-radius: 50%; margin-left: auto;margin-right: auto;display: block;" />
+        <h3 style="text-align: center;">Purchase Order</h3>
     </div>
 
     <div class="center">

@@ -9,7 +9,7 @@
         table,
         td,
         th {
-            border: 1px solid bredlarck;
+            border: 1px solid black;
             border-collapse: collapse;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -28,8 +28,18 @@
             float: left;
         }
 
+        @php
+    $url = config('app.url');
+    $url = $url . '/Presento/assets/arabicfont/arabic_regular.ttf';
+@endphp
+@font-face {
+            font-family: arabicFont;
+            src: url({{$url}});
+        }
+
+
         div {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: arabicFont;
         }
 
     </style>
@@ -41,13 +51,13 @@
 <div class="header">
     <div class="center"></div>
 
-    <div class="center">
+    <div style="margin: auto;">
         @php
             $supplierBusiness = \App\Models\Business::where('id', $invoice->supplier_business_id)->first();
             $buyerBusiness = \App\Models\Business::where('id', $invoice->buyer_business_id)->first();
         @endphp
         @php $logo_first = asset(Storage::url($supplierBusiness->business_photo_url)); @endphp
-        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem;border-radius: 50%;;margin-left: 75px;" />
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem;border-radius: 50%;margin-left: auto;margin-right: auto;display: block;" />
         <h3 style="text-align: center; margin:0;">Invoice</h3>
     </div>
 
@@ -119,7 +129,13 @@
 <br>
 <br>
 <br>
+<br>    <br>
 <br>
+<br>
+<br>
+<br>
+
+
 
 <table class="min-w-full divide-y divide-black " style="margin-top: 4%;">
     <thead>

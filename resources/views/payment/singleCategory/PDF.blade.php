@@ -6,10 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
+
+
+        @php
+            $url = config('app.url');
+            $url = $url . '/Presento/assets/arabicfont/arabic_regular.ttf';
+        @endphp
+        @font-face {
+            font-family: arabicFont;
+            src: url({{$url}});
+        }
+
         table,
-        td,
-        th {
-            border: 1px solid bredlarck;
+        td, th {
+            border: 1px solid black;
             border-collapse: collapse;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -29,8 +39,10 @@
         }
 
         div {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: arabicFont;
         }
+
+
 
     </style>
 </head>
@@ -39,26 +51,17 @@
 
 
 <div class="header">
-    <div class="center"></div>
 
-    <div class="center">
+    <div style="margin: auto;">
         @php
             $supplierBusiness = \App\Models\Business::where('id', $invoices[0]->supplier_business_id)->first();
             $buyerBusiness = \App\Models\Business::where('id', $invoices[0]->buyer_business_id)->first();
         @endphp
         @php $logo_first = asset(Storage::url($supplierBusiness->business_photo_url)); @endphp
-        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem;border-radius: 50%;;margin-left: 75px;" />
+        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem;border-radius: 50%;margin-left: auto;margin-right: auto;display: block;" />
         <h3 style="text-align: center; margin:0;">Invoice</h3>
     </div>
 
-    <div class="center">
-        {{--@php
-            $supplierBusiness = \App\Models\Business::where('id', $invoices[0]->supplier_business_id)->first();
-            $buyerBusiness = \App\Models\Business::where('id', $invoices[0]->buyer_business_id)->first();
-        @endphp
-        @php $logo_first = asset(Storage::url($supplierBusiness->business_photo_url)); @endphp
-        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem; height: 5rem; border-radius: 50%;"/>--}}
-    </div>
 
     <br>
     <br>
@@ -72,7 +75,7 @@
         <strong>Email: </strong> {{ $supplierBusiness->business_email }}<br>
         <strong>Phone: </strong> {{ $supplierBusiness->phone }}<br>
         <strong>VAT Number: </strong> {{ $supplierBusiness->vat_reg_certificate_number }}<br>
-        <strong>Address: </strong> {{ $supplierBusiness->address }}<br><br>
+        <strong>Address: </strong> <span style="font-family: arabicFont;">{{ $supplierBusiness->address }}</span><br><br>
 
         @if(isset($invoices[0]->deliveryNote->id))
             <strong>Delivery Note #: </strong>DN-{{ $invoices[0]->deliveryNote->id }}<br>

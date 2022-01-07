@@ -29,8 +29,18 @@
             float: left;
         }
 
+        @php
+    $url = config('app.url');
+    $url = $url . '/Presento/assets/arabicfont/arabic_regular.ttf';
+@endphp
+@font-face {
+            font-family: arabicFont;
+            src: url({{$url}});
+        }
+
+
         div {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: arabicFont;
         }
 
     </style>
@@ -40,13 +50,11 @@
 
 
 <div class="header">
-    <div class="center"></div>
 
-    <div class="center">
-        <h3 style="text-align: center; margin:0;">Delivery note</h3>
+    <div style="margin: auto;">
+        <h3 style="text-align: center;margin-left: auto;margin-right: auto;display: block;">Delivery note</h3>
     </div>
 
-    <div class="center"></div>
 
     <br>
     <br>
