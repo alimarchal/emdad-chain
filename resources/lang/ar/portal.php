@@ -141,7 +141,7 @@ return [
     'seems empty' => 'المحتوى يبدو فارغاً',
     'Action' => 'الاجراءات',
     'Place RFQ' => 'إرسال الطلب',
-    'N/A' => 'N/A',
+    'N/A' => '--',
     'Requisition No.' => 'رقم طلب عرض السعر',
     'Requested by' => 'طلِب من قِبل',
     'Requisition Type' => 'نوع الطلب',

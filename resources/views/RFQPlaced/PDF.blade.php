@@ -47,7 +47,7 @@
     </style>
 </head>
 
-<body>
+<body style="font-family: arabicFont;">
 
 
 <div class="header">
@@ -142,9 +142,9 @@
             <td  style="text-align: center"> {{ $rfp->item_name }}@if(isset($parentCategory->name)), {{ $parentCategory->name }} @endif </td>
             @endif
             <td  style="text-align: center">{{ strip_tags($rfp->description) }}</td>
-            <td  style="text-align: center">@if(isset($rfp->brand)) {{ $rfp->brand }} @else N/A @endif</td>
+            <td  style="text-align: center">@if(isset($rfp->brand)) {{ $rfp->brand }} @else -- @endif</td>
             <td  style="text-align: center">{{ $rfp->unit_of_measurement }}</td>
-            <td  style="text-align: center">@if(isset($rfp->size)) {{ $rfp->size }} @else N/A @endif </td>
+            <td  style="text-align: center">@if(isset($rfp->size)) {{ $rfp->size }} @else -- @endif </td>
             <td  style="text-align: center">
                 @if($rfp->delivery_period =='Immediately') {{__('portal.Immediately')}}
                 @elseif($rfp->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
@@ -161,7 +161,7 @@
             </td>
             <td  style="text-align: center">{{ number_format($rfp->last_price, 2) }} SR</td>
             <td  style="text-align: center">{{ $rfp->quantity }}</td>
-            <td  style="text-align: center;word-wrap: break-word">@if(isset($rfp->remarks)){{ $rfp->remarks }} @else N/A @endif</td>
+            <td  style="text-align: center;word-wrap: break-word">@if(isset($rfp->remarks)){{ $rfp->remarks }} @else -- @endif</td>
         </tr>
     @endforeach
     </tbody>

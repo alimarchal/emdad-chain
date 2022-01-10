@@ -45,7 +45,7 @@
     </style>
 </head>
 
-<body style="font-family:Arial">
+<body style="font-family:arabicFont">
 
 
 <div class="header">

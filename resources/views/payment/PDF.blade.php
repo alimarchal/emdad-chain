@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
-        table,
-        td,
-        th {
+        table, td, th {
             border: 1px solid black;
+        }
+
+        table {
+            width: 100%;
             border-collapse: collapse;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .header {
@@ -49,7 +50,6 @@
 
 
 <div class="header">
-    <div class="center"></div>
 
     <div style="margin: auto;">
         @php
@@ -61,18 +61,8 @@
         <h3 style="text-align: center; margin:0;">Invoice</h3>
     </div>
 
-    <div class="center">
-        {{--@php
-            $supplierBusiness = \App\Models\Business::where('id', $invoice->supplier_business_id)->first();
-            $buyerBusiness = \App\Models\Business::where('id', $invoice->buyer_business_id)->first();
-        @endphp
-        @php $logo_first = asset(Storage::url($supplierBusiness->business_photo_url)); @endphp
-        <img src="{{ $logo_first }}" alt="{{ $logo_first }}" style="width: 5rem; height: 5rem; border-radius: 50%;"/>--}}
-{{--        <img src="{{(isset($supplierBusiness->business_photo_url)?Storage::url($supplierBusiness->business_photo_url):'#')}}" alt="{{$supplierBusiness->business_name}}" style="height: 80px;width: 200px;"/>--}}
-    </div>
 
-    <br>
-    <br>
+
     <br>
     <br>
     <br>
@@ -135,7 +125,8 @@
 <br>
 <br>
 
-
+<br>
+<br><br>
 
 <table class="min-w-full divide-y divide-black " style="margin-top: 4%;">
     <thead>

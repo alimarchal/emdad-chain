@@ -8,7 +8,7 @@ use App\Models\EOrderItems;
 use App\Models\EOrders;
 use App\Models\Package;
 use App\Models\Qoute;
-use Barryvdh\DomPDF\Facade as PDF;
+//use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -50,7 +50,7 @@ class PlacedRFQController extends Controller
 
         $pdf = App::make('snappy.pdf.wrapper');
         $pdf->loadView('RFQPlaced.PDF', compact('collection'));
-        return $pdf->inline();
+        return $pdf->download('RFQ-' . decrypt($eOrderID) . '.pdf');
 //        dd('reached');
 //        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('RFQPlaced.PDF', compact('collection'));
 //        return $pdf->download('RFQ.pdf');
@@ -119,8 +119,8 @@ class PlacedRFQController extends Controller
 
 
         $pdf = App::make('snappy.pdf.wrapper');
-        $pdf->loadView('supplier.quotationPDF', compact('quote','eOrderItem'));
-        return $pdf->download('Delivery Note.pdf');
+        $pdf->loadView('supplier.quotationPDF', compact('quote', 'eOrderItem'));
+        return $pdf->download('Quotation-' . $quote->id . '.pdf');
 
 //
 //        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('supplier.quotationPDF', compact('quote','eOrderItem'));
@@ -136,8 +136,11 @@ class PlacedRFQController extends Controller
         $eOrderItem = EOrderItems::where('id', decrypt($eOrderItemID))->first();
         $quotes = Qoute::with('orderItem')->where(['e_order_id' => decrypt($quoteID), 'supplier_business_id' => auth()->user()->business_id])->get();
 
-        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('supplier.singleCategoryRFQ.quotationPDF', compact('quotes','eOrderItem'));
-        return $pdf->download('Quotation.pdf');
+
+
+        $pdf = App::make('snappy.pdf.wrapper');
+        $pdf->loadView('supplier.singleCategoryRFQ.quotationPDF', compact('quotes', 'eOrderItem'));
+        return $pdf->download('Single Quotation.pdf');
     }
 
     /* Supplier rejecting RFQ */

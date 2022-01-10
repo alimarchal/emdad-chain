@@ -220,8 +220,8 @@
 
                                                 <option value="Cash"
                                                 @if (isset($latest_rfq)) {{$latest_rfq->payment_mode == 'Cash' ? 'selected' : ''}}
-                                                @else {{old('payment_mode') == 'Cash' ? 'selected' : ''}}
-                                                @endif>
+                                                    @else {{old('payment_mode') == 'Cash' ? 'selected' : ''}}
+                                                    @endif>
                                                     {{__('portal.Cash')}}
                                                 </option>
 
@@ -279,14 +279,14 @@
                                                 <option value="">{{__('portal.None')}}</option>
                                                 <option value="Yes"
                                                 @if (isset($latest_rfq)) {{$latest_rfq->required_sample == 'Yes' ? 'selected' : ''}}
-                                                @else {{old('required_sample') == 'Yes' ? 'selected' : ''}}
-                                                @endif>
+                                                    @else {{old('required_sample') == 'Yes' ? 'selected' : ''}}
+                                                    @endif>
                                                     {{__('portal.Yes')}}
                                                 </option>
                                                 <option value="No"
                                                 @if (isset($latest_rfq)) {{$latest_rfq->required_sample == 'No' ? 'selected' : ''}}
-                                                @else {{old('required_sample') == 'No' ? 'selected' : ''}}
-                                                @endif>
+                                                    @else {{old('required_sample') == 'No' ? 'selected' : ''}}
+                                                    @endif>
                                                     {{__('portal.No')}}
                                                 </option>
 
@@ -318,8 +318,8 @@
                                                 @foreach(\App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->get() as $warehouse)
                                                     <option value="{{$warehouse->id}}"
                                                     @if (isset($latest_rfq)) {{$latest_rfq->warehouse_id == $warehouse->id ? 'selected' : ''}}
-                                                    @else {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}}
-                                                    @endif>
+                                                        @else {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}}
+                                                        @endif>
                                                         {{$warehouse->warehouse_name }}
                                                     </option>
                                                 @endforeach
@@ -725,8 +725,8 @@
 
                                                 <option value="Cash"
                                                 @if (isset($latest_rfq)) {{$latest_rfq->payment_mode == 'Cash' ? 'selected' : ''}}
-                                                @else {{old('payment_mode') == 'Cash' ? 'selected' : ''}}
-                                                @endif>{{__('portal.Cash')}}
+                                                    @else {{old('payment_mode') == 'Cash' ? 'selected' : ''}}
+                                                    @endif>{{__('portal.Cash')}}
                                                 </option>
 
                                                 @php
@@ -783,14 +783,14 @@
                                                 <option value="">{{__('portal.None')}}</option>
                                                 <option value="Yes"
                                                 @if (isset($latest_rfq)) {{$latest_rfq->required_sample == 'Yes' ? 'selected' : ''}}
-                                                @else {{old('required_sample') == 'Yes' ? 'selected' : ''}}
-                                                @endif>
+                                                    @else {{old('required_sample') == 'Yes' ? 'selected' : ''}}
+                                                    @endif>
                                                     {{__('portal.Yes')}}
                                                 </option>
                                                 <option value="No"
                                                 @if (isset($latest_rfq)) {{$latest_rfq->required_sample == 'No' ? 'selected' : ''}}
-                                                @else {{old('required_sample') == 'No' ? 'selected' : ''}}
-                                                @endif>
+                                                    @else {{old('required_sample') == 'No' ? 'selected' : ''}}
+                                                    @endif>
                                                     {{__('portal.No')}}
                                                 </option>
 
@@ -824,8 +824,8 @@
                                                 @foreach(\App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->get() as $warehouse)
                                                     <option value="{{$warehouse->id}}"
                                                     @if (isset($latest_rfq)) {{$latest_rfq->warehouse_id == $warehouse->id ? 'selected' : ''}}
-                                                    @else {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}}
-                                                    @endif>
+                                                        @else {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}}
+                                                        @endif>
                                                         {{$warehouse->warehouse_name }}
                                                     </option>
                                                 @endforeach
@@ -858,30 +858,30 @@
                                                     {{$latest_rfq->delivery_period =='Within 90 Days' ? 'selected' : ''}}
                                                     @endif>{{__('portal.90 Days')}}
                                                 </option>--}}
-                                                {{--<option value="Standing Order - 2 per year" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
-                                                    @endif>{{__('portal.Standing Order - 2 times / year')}}
-                                                </option>
-                                                <option value="Standing Order - 3 per year" @if (isset($latest_rfq))
-                                                    {{$latest_rfq->delivery_period =='Standing Order - 3 per year' ? 'selected' : ''}}
-                                                    @endif>{{__('portal.Standing Order - 3 times / year')}}
-                                                </option>
-                                                <option value="Standing Order - 4 per year" @if(isset($latest_rfq))
-                                                    {{$latest_rfq->delivery_period =='Standing Order - 4 per year' ? 'selected' : ''}}
-                                                    @endif>{{__('portal.Standing Order - 4 times / year')}}
-                                                </option>
-                                                <option value="Standing Order - 6 per year" @if(isset($latest_rfq))
-                                                    {{$latest_rfq->delivery_period =='Standing Order - 6 per year' ? 'selected' : ''}}
-                                                    @endif>{{__('portal.Standing Order - 6 times / year')}}
-                                                </option>
-                                                <option value="Standing Order - 12 per year" @if(isset($latest_rfq))
-                                                    {{$latest_rfq->delivery_period =='Standing Order - 12 per year' ? 'selected' : ''}}
-                                                    @endif>{{__('portal.Standing Order - 12 times / year')}}
-                                                </option>
-                                                <option value="Standing Order Open" @if(isset($latest_rfq))
-                                                    {{$latest_rfq->delivery_period =='Standing Order Open' ? 'selected' : ''}}
-                                                    @endif>{{__('portal.Standing Order - Open')}}
-                                                </option>--}}
+                                            {{--<option value="Standing Order - 2 per year" @if (isset($latest_rfq))
+                                                {{$latest_rfq->delivery_period =='Standing Order - 2 per year' ? 'selected' : ''}}
+                                                @endif>{{__('portal.Standing Order - 2 times / year')}}
+                                            </option>
+                                            <option value="Standing Order - 3 per year" @if (isset($latest_rfq))
+                                                {{$latest_rfq->delivery_period =='Standing Order - 3 per year' ? 'selected' : ''}}
+                                                @endif>{{__('portal.Standing Order - 3 times / year')}}
+                                            </option>
+                                            <option value="Standing Order - 4 per year" @if(isset($latest_rfq))
+                                                {{$latest_rfq->delivery_period =='Standing Order - 4 per year' ? 'selected' : ''}}
+                                                @endif>{{__('portal.Standing Order - 4 times / year')}}
+                                            </option>
+                                            <option value="Standing Order - 6 per year" @if(isset($latest_rfq))
+                                                {{$latest_rfq->delivery_period =='Standing Order - 6 per year' ? 'selected' : ''}}
+                                                @endif>{{__('portal.Standing Order - 6 times / year')}}
+                                            </option>
+                                            <option value="Standing Order - 12 per year" @if(isset($latest_rfq))
+                                                {{$latest_rfq->delivery_period =='Standing Order - 12 per year' ? 'selected' : ''}}
+                                                @endif>{{__('portal.Standing Order - 12 times / year')}}
+                                            </option>
+                                            <option value="Standing Order Open" @if(isset($latest_rfq))
+                                                {{$latest_rfq->delivery_period =='Standing Order Open' ? 'selected' : ''}}
+                                                @endif>{{__('portal.Standing Order - Open')}}
+                                            </option>--}}
 
                                             {{--</select>--}}
                                         </div>
@@ -953,14 +953,14 @@
                                         </a>
                                         <a href="{{ route('deleteCartItem', encrypt($item->id)) }}" class="confirm" data-confirm = '{{__('portal.Are you sure you want to delete?')}}' title="{{__('portal.DELETE')}}">
                                             <svg class="w-6 h-5 mx-auto mt-1 mb-2" viewBox="0 0 20 20" stroke="currentColor" style="color: #ff0000 !important;">
-                                            <path fill="none" d="M7.083,8.25H5.917v7h1.167V8.25z M18.75,3h-5.834V1.25c0-0.323-0.262-0.583-0.582-0.583H7.667
+                                                <path fill="none" d="M7.083,8.25H5.917v7h1.167V8.25z M18.75,3h-5.834V1.25c0-0.323-0.262-0.583-0.582-0.583H7.667
                                                 c-0.322,0-0.583,0.261-0.583,0.583V3H1.25C0.928,3,0.667,3.261,0.667,3.583c0,0.323,0.261,0.583,0.583,0.583h1.167v14
                                                 c0,0.644,0.522,1.166,1.167,1.166h12.833c0.645,0,1.168-0.522,1.168-1.166v-14h1.166c0.322,0,0.584-0.261,0.584-0.583
                                                 C19.334,3.261,19.072,3,18.75,3z M8.25,1.833h3.5V3h-3.5V1.833z M16.416,17.584c0,0.322-0.262,0.583-0.582,0.583H4.167
                                                 c-0.322,0-0.583-0.261-0.583-0.583V4.167h12.833V17.584z M14.084,8.25h-1.168v7h1.168V8.25z M10.583,7.083H9.417v8.167h1.167V7.083
                                                 z">
-                                            </path>
-                                        </svg>
+                                                </path>
+                                            </svg>
                                         </a>
                                     </td>
                                 </tr>
@@ -1509,8 +1509,8 @@
 
                                                 <option value="Cash"
                                                 @if (isset($latest_rfq)) {{$latest_rfq->payment_mode == 'Cash' ? 'selected' : ''}}
-                                                @else {{old('payment_mode') == 'Cash' ? 'selected' : ''}}
-                                                @endif>
+                                                    @else {{old('payment_mode') == 'Cash' ? 'selected' : ''}}
+                                                    @endif>
                                                     {{__('portal.Cash')}}
                                                 </option>
 
@@ -1568,14 +1568,14 @@
                                                 <option value="">{{__('portal.None')}}</option>
                                                 <option value="Yes"
                                                 @if (isset($latest_rfq)) {{$latest_rfq->required_sample == 'Yes' ? 'selected' : ''}}
-                                                @else {{old('required_sample') == 'Yes' ? 'selected' : ''}}
-                                                @endif>
+                                                    @else {{old('required_sample') == 'Yes' ? 'selected' : ''}}
+                                                    @endif>
                                                     {{__('portal.Yes')}}
                                                 </option>
                                                 <option value="No"
                                                 @if (isset($latest_rfq)) {{$latest_rfq->required_sample == 'No' ? 'selected' : ''}}
-                                                @else {{old('required_sample') == 'No' ? 'selected' : ''}}
-                                                @endif>
+                                                    @else {{old('required_sample') == 'No' ? 'selected' : ''}}
+                                                    @endif>
                                                     {{__('portal.No')}}
                                                 </option>
 
@@ -1601,15 +1601,15 @@
                                                     fill="#000000" fill-rule="nonzero"/>
                                             </svg>
                                             <select style="font-family: sans-serif;"
-                                                class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
-                                                required name="warehouse_id" id="warehouse_id">
+                                                    class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
+                                                    required name="warehouse_id" id="warehouse_id">
                                                 <option value="">{{__('portal.Select')}}</option>
                                                 @foreach(\App\Models\BusinessWarehouse::where('business_id',
                                                 auth()->user()->business_id)->get() as $warehouse)
                                                     <option value="{{$warehouse->id}}"
                                                     @if (isset($latest_rfq)) {{$latest_rfq->warehouse_id == $warehouse->id ? 'selected' : ''}}
-                                                    @else {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}}
-                                                    @endif>
+                                                        @else {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}}
+                                                        @endif>
                                                         {{$warehouse->warehouse_name }}
                                                     </option>
                                                 @endforeach
@@ -1621,9 +1621,9 @@
                                         <div class="relative inline-flex">
                                             <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="delivery_period"
                                                    @if(isset($latest_rfq))
-                                                        value="{{ $latest_rfq->delivery_period }}"
+                                                   value="{{ $latest_rfq->delivery_period }}"
                                                    @else
-                                                        value="{{old('delivery_period')}}"
+                                                   value="{{old('delivery_period')}}"
                                                    @endif
                                                    placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
                                             {{--<select
@@ -2023,8 +2023,8 @@
 
                                                 <option value="Cash"
                                                 @if (isset($latest_rfq)) {{$latest_rfq->payment_mode == 'Cash' ? 'selected' : ''}}
-                                                @else {{old('payment_mode') == 'Cash' ? 'selected' : ''}}
-                                                @endif>{{__('portal.Cash')}}
+                                                    @else {{old('payment_mode') == 'Cash' ? 'selected' : ''}}
+                                                    @endif>{{__('portal.Cash')}}
                                                 </option>
 
                                                 @php
@@ -2081,14 +2081,14 @@
                                                 <option value="">{{__('portal.None')}}</option>
                                                 <option value="Yes"
                                                 @if (isset($latest_rfq)) {{$latest_rfq->required_sample == 'Yes' ? 'selected' : ''}}
-                                                @else {{old('required_sample') == 'Yes' ? 'selected' : ''}}
-                                                @endif>
+                                                    @else {{old('required_sample') == 'Yes' ? 'selected' : ''}}
+                                                    @endif>
                                                     {{__('portal.Yes')}}
                                                 </option>
                                                 <option value="No"
                                                 @if (isset($latest_rfq)) {{$latest_rfq->required_sample == 'No' ? 'selected' : ''}}
-                                                @else {{old('required_sample') == 'No' ? 'selected' : ''}}
-                                                @endif>
+                                                    @else {{old('required_sample') == 'No' ? 'selected' : ''}}
+                                                    @endif>
                                                     {{__('portal.No')}}
                                                 </option>
 
@@ -2116,14 +2116,14 @@
                                                     fill="#000000" fill-rule="nonzero"/>
                                             </svg>
                                             <select style="font-family: sans-serif;"
-                                                class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
-                                                required name="warehouse_id" id="warehouse_id">
+                                                    class=" font-bold h-10 pl-5 pr-3 bg-transparent hover:border-gray-400 focus:outline-none appearance-none"
+                                                    required name="warehouse_id" id="warehouse_id">
                                                 <option value="">{{__('portal.Select')}}</option>
                                                 @foreach(\App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->get() as $warehouse)
                                                     <option value="{{$warehouse->id}}"
                                                     @if (isset($latest_rfq)) {{$latest_rfq->warehouse_id == $warehouse->id ? 'selected' : ''}}
-                                                    @else {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}}
-                                                    @endif>
+                                                        @else {{old('warehouse_id') == $warehouse->id ? 'selected' : ''}}
+                                                        @endif>
                                                         {{$warehouse->warehouse_name }}
                                                     </option>
                                                 @endforeach
@@ -2135,9 +2135,9 @@
                                         <div class="relative inline-flex">
                                             <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full font-sans" name="delivery_period"
                                                    @if(isset($latest_rfq))
-                                                        value="{{ $latest_rfq->delivery_period }}"
+                                                   value="{{ $latest_rfq->delivery_period }}"
                                                    @else
-                                                        value="{{old('delivery_period')}}"
+                                                   value="{{old('delivery_period')}}"
                                                    @endif
                                                    placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
 
@@ -2479,3 +2479,4 @@
     } );
 
 </script>
+

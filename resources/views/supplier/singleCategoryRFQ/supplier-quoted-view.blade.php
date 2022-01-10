@@ -118,32 +118,32 @@
                                 <tbody class="bg-white divide-y divide-black border-1 border-black">
                                 @foreach($quotes as $quote)
                                     <tr>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2 text-sm text-black border border-black">
                                             {{$loop->iteration}}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2 text-sm text-black border border-black">
                                             @php
                                                 $record = \App\Models\Category::where('id',$quote->orderItem->item_code)->first();
                                                 $parent= \App\Models\Category::where('id',$record->parent_id)->first();
                                             @endphp
                                             {{ $record->name }}@if(isset($parent)), {{ $parent->name }} @endif
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2  text-sm text-black border border-black">
                                             {{ $quote->orderItem->description }}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2  text-sm text-black border border-black">
                                             @if(isset($quote->note_for_customer)) {{ strip_tags($quote->note_for_customer) }} @else N/A @endif
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2  text-sm text-black border border-black">
                                             {{ $quote->orderItem->unit_of_measurement }}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2  text-sm text-black border border-black">
                                             {{ $quote->quote_price_per_quantity }} {{__('portal.SAR')}}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2  text-sm text-black border border-black">
                                             {{ $quote->quote_quantity }}
                                         </td>
-                                        <td class="px-2 py-2 whitespace-nowrap text-sm text-black border border-black">
+                                        <td class="px-2 py-2  text-sm text-black border border-black">
                                             {{ number_format($quote->quote_quantity * $quote->quote_price_per_quantity, 2) }} {{__('portal.SAR')}}
                                         </td>
                                     </tr>

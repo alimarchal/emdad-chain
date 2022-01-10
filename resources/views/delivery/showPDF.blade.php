@@ -40,7 +40,7 @@
     </style>
 </head>
 
-<body>
+<body style="font-family: arabicFont;">
 
 
 <div class="header">
@@ -51,12 +51,6 @@
         <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;border-radius: 50%;margin-left: auto;margin-right: auto;display: block;" />
         <h2 style="text-align: center; margin:0px;">Delivery Note</h2>
     </div>
-
-
-
-    <br>
-    <br>
-    <br>
     <br>
     <br>
     <br>

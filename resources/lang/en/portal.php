@@ -141,7 +141,7 @@ return [
     'seems empty' => 'seems empty',
     'Action' => 'Action',
     'Place RFQ' => 'Place Requisition',
-    'N/A' => 'N/A',
+    'N/A' => '--',
     'Requisition No.' => 'Requisition No.',
     'Requested by' => 'Requested by',
     'Requisition Type' => 'Requisition Type',

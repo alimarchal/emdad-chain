@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
-        table,
-        td,
-        th {
-            border: 1px solid bredlarck;
+        table, td, th {
+            border: 1px solid black;
+        }
+
+        table {
+            width: 100%;
             border-collapse: collapse;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .header {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: arabicFont;
         }
 
         .center {
@@ -28,8 +29,18 @@
             float: left;
         }
 
+        @php
+            $url = config('app.url');
+            $url = $url . '/Presento/assets/arabicfont/arabic_regular.ttf';
+        @endphp
+            @font-face {
+                        font-family: arabicFont;
+                        src: url({{$url}});
+                    }
+
+
         div {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: arabicFont;
         }
 
     </style>
@@ -39,38 +50,19 @@
 
 
 <div class="header">
-    <div class="center">
-    </div>
 
-    <div class="center">
+
+    <div style="margin: auto;">
         @php $logo_second = asset(Storage::url($quote->supplier_business->business_photo_url)); @endphp
-        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;border-radius: 50%;;margin-left: 75px;" />
+        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;border-radius: 50%;margin-left: auto;margin-right: auto;display: block;" />
         <h3 style="text-align: center; margin:0px;">Quotation</h3>
     </div>
 
-    <div class="center">
-    </div>
-
-    <br><br>
-    <br><br>
-    <br><br>
-
-{{--    <div style="width: 100%; text-align: center">
-        <h3 style="text-align: center; margin: 0px;">
-            @if ($quote->qoute_status == 'Modified')
-                Status: <span style="background-color: gray">You have asked for a modification for this quotation.</span>
-            @elseif($quote->qoute_status == 'Qouted')
-                Status: <span style="background-color: #e3a008">Waiting for response.</span>
-            @elseif($quote->qoute_status == 'Rejected')
-                Status: <span style="background-color: red">You have rejected this quotation.</span>
-            @endif
-        </h3>
-    </div>--}}
 
 
+    <br><br><br>
 
-{{--    <br>--}}
-{{--    <br>--}}
+
     <div class="center1">
         <strong>Supplier: </strong>{{ $quote->supplier_business->business_name }}<br>
         <strong>City: </strong>{{ $quote->supplier_business->city }}<br>
@@ -104,14 +96,11 @@
         <strong>Delivery Address: </strong> {{ $warehouse['address'] }}<br>
     </div>
 
-    <div class="center"></div>
+
 
     <br><br><br><br><br><br><br><br><br><br><br>
 
-    {{--<div style="width: 100%; text-align: left">
-        <strong>Item Description: </strong><br>
-        <p>{{ strip_tags($quote->orderItem->description) }}</p>
-    </div>--}}
+
 
     <table class="divide-y divide-black" style="width: 100%">
         <thead>
@@ -172,8 +161,6 @@
 
     </div>
 
-    <br><br>
-    <br>
     <br><br>
     <br>
     <br>

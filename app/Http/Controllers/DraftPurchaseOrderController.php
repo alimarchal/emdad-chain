@@ -503,7 +503,7 @@ class DraftPurchaseOrderController extends Controller
     {
         $pdf = App::make('snappy.pdf.wrapper');
         $pdf->loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'));
-        return $pdf->inline();
+        return $pdf->download('PO-'.$draftPurchaseOrder->id.'.pdf');
 //        $pdf = PDF::loadView('draftPurchaseOrder.PDF', compact('draftPurchaseOrder'));
 //        $POName = 'PO-'.$draftPurchaseOrder->id.'.pdf';
 //        return $pdf->download($POName);

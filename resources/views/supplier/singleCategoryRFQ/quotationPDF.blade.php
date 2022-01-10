@@ -2,20 +2,17 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
-        table,
-        td,
-        th {
-            border: 1px solid bredlarck;
-            border-collapse: collapse;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        table, td, th {
+            border: 1px solid black;
         }
 
-        .header {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
         .center {
@@ -28,8 +25,18 @@
             float: left;
         }
 
+        @php
+$url = config('app.url');
+$url = $url . '/Presento/assets/arabicfont/arabic_regular.ttf';
+@endphp
+@font-face {
+            font-family: arabicFont;
+            src: url({{$url}});
+        }
+
+
         div {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: arabicFont;
         }
 
     </style>
@@ -37,24 +44,23 @@
     </style>
 </head>
 
-<body>
+<body style="font-family: arabicFont;">
 
 
 <div class="header">
     <div class="center"></div>
 
-    <div class="center">
+    <div style="margin: auto;">
         @php $logo_second = asset(Storage::url($quotes[0]->supplier_business->business_photo_url)); @endphp
-        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;border-radius: 50%;;margin-left: 75px;" />
+        <img src="{{ $logo_second }}" alt="{{ $logo_second }}" style="width: 5rem;border-radius: 50%;margin-left: auto;margin-right: auto;display: block;"" />
         <h3 style="text-align: center; margin:0px;">Quotation</h3>
     </div>
 
     <div class="center"></div>
 
-    <br><br><br><br><br><br>
+    <br><br>
 
-    <br>
-    <br>
+
     <div class="center1">
         <strong>Supplier: </strong>{{ $quotes[0]->supplier_business->business_name }}<br>
         <strong>City: </strong>{{ $quotes[0]->supplier_business->city }}<br>

@@ -561,7 +561,7 @@ class PaymentController extends Controller
         $invoice = Invoice::with('purchase_order','deliveryNote','eOrderItem')->where('id', decrypt($invoiceID))->first();
         $pdf = App::make('snappy.pdf.wrapper');
         $pdf->loadView('payment.PDF', compact('invoice'));
-        return $pdf->inline();
+        return $pdf->download('Invoice-' . decrypt($invoiceID) . '.pdf');
 //        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('payment.PDF', compact('invoice'));
 //        return $pdf->download('Invoice.pdf');
     }
