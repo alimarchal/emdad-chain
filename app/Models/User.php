@@ -26,6 +26,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
 //    protected $guard_name = "web";
 
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new \App\Notifications\Auth\VerifyEmail);
+    }
+
     protected static $logAttributes = ['*'];
 
     /**
