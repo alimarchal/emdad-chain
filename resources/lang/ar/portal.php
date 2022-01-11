@@ -834,6 +834,7 @@ return [
     'SHPN' => 'SHPN',
     'New RFQs' => 'الطلبات الجديدة',
     'New RFQ' => 'الطلبات الجديدة',
+    'Edit Requisition' => 'تعديل النظام',
     'Paid' => 'مدفوعة',
     'Email Verified' => 'البريد الإلكتروني مفعّل',
     'EmdInv' => 'EmdInv',

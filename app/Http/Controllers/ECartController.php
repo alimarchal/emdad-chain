@@ -183,6 +183,72 @@ class ECartController extends Controller
         return redirect()->route('create_single_rfq');
     }
 
+    public function single_category_edit(Request $request)
+    {
+        $businessPackage = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
+        if (isset($businessPackage))
+        {
+            $categories = explode(',', $businessPackage->categories);
+            $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
+        }
+        $eCartItem = ECart::where('id', decrypt($request->id))->first();
+
+        return view('RFQ.singleCategory.eCartEdit', compact('eCartItem', 'parentCategories'));
+    }
+
+    public function single_category_update(Request $request)
+    {
+        $eCart = ECart::findOrFail(decrypt($request->id));
+        if ($request->has('file_path_1')) {
+            if(!is_null($eCart->file_path)) {
+                $attachment = str_replace('/storage', '', $eCart->file_path);
+                Storage::delete('/public/'. $attachment);
+            }
+            $path = $request->file('file_path_1')->store('', 'public');
+            $request->merge(['file_path' => $path]);
+        }
+
+        Validator::make($request->all(), [
+            'delivery_period' => 'required',
+        ],[
+            'delivery_period.required' => __('portal.Please select a Delivery Period.')
+        ])->validate();
+
+        $request->merge(['delivery_period' => Carbon::parse($request->delivery_period)->format('Y-m-d')]);
+        $eCart->update($request->all());
+
+        $eCarts = ECart::where('id', '!=', $eCart->id)->where('rfq_type', '=',0)->count();
+        if ($eCarts > 1)
+        {
+            ECart::where('rfq_type', '=',0)->where('id', '!=', $eCart->id)->update([
+                'company_name_check' => $request->company_name_check,
+                'payment_mode' => $request->payment_mode,
+                'required_sample' => $request->required_sample,
+                'warehouse_id' => $request->warehouse_id,
+                'delivery_period' => $request->delivery_period,
+            ]);
+        }
+        elseif ($eCarts == 1)
+        {
+            $request->merge(['item_code' => $request->item_name]);
+            $request->merge(['item_name' => Category::where('id', $request->item_code)->first()->name]);
+//            $request->merge(['item_name' => Category::where('id', $request->item_code)->first()->name]);
+//            $request->merge(['item_code' => Category::where('id', $request->item_code)->first()->id]);
+            ECart::where('rfq_type', '=',0)->where('id', '!=', $eCart->id)->update([
+                'item_code' => $request->item_code,
+                'item_name' => $request->item_name,
+                'company_name_check' => $request->company_name_check,
+                'payment_mode' => $request->payment_mode,
+                'required_sample' => $request->required_sample,
+                'warehouse_id' => $request->warehouse_id,
+                'delivery_period' => $request->delivery_period,
+            ]);
+        }
+
+        session()->flash('message', __('portal.Item updated successfully.'));
+        return redirect()->route('create_single_rfq');
+    }
+
     public function single_cart_destroy($id)
     {
         ECart::where('id', $id)->delete();

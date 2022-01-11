@@ -286,6 +286,8 @@ Route::middleware(['auth:sanctum'])->get('new-cart/{eOrderID}', [ECartController
 Route::middleware(['auth:sanctum'])->get('new-cart-single-category/{eOrderID}', [ECartController::class, 'singleDeleteAndInsert'])->name('deleteAndInsertCartSingleCategory');
 Route::middleware(['auth:sanctum'])->get('edit-cart-item/{id}', [ECartController::class, 'edit'])->name('eCartItemEdit');
 Route::middleware(['auth:sanctum'])->post('edit-cart-item/{id}', [ECartController::class, 'update']);
+Route::middleware(['auth:sanctum'])->get('single-category-edit-cart-item/{id}', [ECartController::class, 'single_category_edit'])->name('singleCategoryECartItemEdit');
+Route::middleware(['auth:sanctum'])->post('single-category-edit-cart-item/{id}', [ECartController::class, 'single_category_update']);
 Route::middleware(['auth:sanctum'])->resource('RFQCart', ECartController::class);
 
 // For Single Category RFQ

@@ -834,6 +834,7 @@ return [
     'SHPN' => 'SHPN',
     'New RFQs' => 'New Requisitions',
     'New RFQ' => 'New Requisition',
+    'Edit Requisition' => 'Edit Requisition',
     'Paid' => 'Paid',
     'Email Verified' => 'Email Verified',
     'EmdInv' => 'EmdInv',
