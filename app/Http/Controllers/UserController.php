@@ -15,9 +15,19 @@ use Illuminate\Support\Facades\Validator;
 use phpDocumentor\Reflection\Utils;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Http;
 
 class UserController extends Controller
 {
+
+    public function send_mail()
+    {
+        // info('call from controller');
+        // \Artisan::call('queue:work --queue=email  --stop-when-empty');
+        $response = Http::get(config('app.url') . '/sendMail');
+        // info($response);
+    }
+
     public function index()
     {
         if (auth()->user()->hasRole('SuperAdmin')) {
