@@ -25,8 +25,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-//         $schedule->command('inspire')->hourly();
-         $schedule->command('queue:work --queue=email')->everyMinute()->withoutOverlapping(1);
+        //  $schedule->command(info('email called'))->everyMinute();
+        //  $schedule->command('emails:send')->evenInMaintenanceMode();
+        //  $schedule->command('queue:work --queue=email --stop-when-empty')->everyMinute();
+        $schedule->call('App\Http\Controllers\UserController@send_mail')->everyMinute();
+        //  $schedule->command(info('email send'))->everyMinute();
 
     }
 

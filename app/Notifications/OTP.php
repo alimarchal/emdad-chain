@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use phpDocumentor\Reflection\Types\Compound;
 
-class OTP extends Notification
+class OTP extends Notification implements ShouldQueue
 {
     use Queueable;
 
