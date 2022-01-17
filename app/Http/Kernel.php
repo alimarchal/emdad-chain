@@ -74,6 +74,8 @@ class Kernel extends HttpKernel
         'ireRegisterDetails' => \App\Http\Middleware\IreRegisterDetails::class,
         'packageCheck' => \App\Http\Middleware\PackageCheck::class,
         'categoryCheck' => \App\Http\Middleware\CategoryCheck::class,
+        'buyer' => \App\Http\Middleware\Buyer::class,
+        'supplier' => \App\Http\Middleware\Supplier::class,
 
     ];
 }

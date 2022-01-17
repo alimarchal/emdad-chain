@@ -26,41 +26,45 @@ class PurchaseRequestFormController extends Controller
 
     public function create()
     {
-        $businessPackage = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
-        if (isset($businessPackage))
+        if (\auth()->user()->registration_type == 'Buyer')
         {
-            $categories = explode(',', $businessPackage->categories);
-            $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
-        }
-        else{
-            session()->flash('error', __('portal.No Business Package Found for you account! Contact Admin.'));
-            return redirect()->back();
-        }
-        $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
-        $eCart = ECart::where(['business_id' => auth()->user()->business_id,'rfq_type' => 1])->orderByDesc('created_at')->get();
+            $businessPackage = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
+            if (isset($businessPackage))
+            {
+                $categories = explode(',', $businessPackage->categories);
+                $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
+            }
+            else{
+                session()->flash('error', __('portal.No Business Package Found for you account! Contact Admin.'));
+                return redirect()->back();
+            }
+            $childs = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();
+            $eCart = ECart::where(['business_id' => auth()->user()->business_id,'rfq_type' => 1])->orderByDesc('created_at')->get();
 
-        // Remaining RFQ count
-        $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
-        $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
+            // Remaining RFQ count
+            $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
+            $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
 
-        $latest_rfq = ECart::latest()->where('business_id', auth()->user()->business_id)->first();
-        $package = Package::where('id', $business_package->package_id)->first();
-        if ($business_package->package_id == 1 || $business_package->package_id == 2)
-        {
-            $rfqCount = $package->rfq_per_day - $rfq;
-        }
-        else{
-            $rfqCount = null;
-        }
+            $latest_rfq = ECart::latest()->where('business_id', auth()->user()->business_id)->first();
+            $package = Package::where('id', $business_package->package_id)->first();
+            if ($business_package->package_id == 1 || $business_package->package_id == 2)
+            {
+                $rfqCount = $package->rfq_per_day - $rfq;
+            }
+            else{
+                $rfqCount = null;
+            }
 
-        /* Below code added to redirect back if Requisition limit for day is reached Added because h-screen issue in App.css blade */
-        if ($rfqCount <= 0 && $business_package->package_id != 3 && $business_package->package_id != 4)
-        {
-            session()->flash('error', __('portal.Your have reached daily requisition generate limit.'));
-            return redirect()->route('rfqView');
-        }
+            /* Below code added to redirect back if Requisition limit for day is reached Added because h-screen issue in App.css blade */
+            if ($rfqCount <= 0 && $business_package->package_id != 3 && $business_package->package_id != 4)
+            {
+                session()->flash('error', __('portal.Your have reached daily requisition generate limit.'));
+                return redirect()->route('rfqView');
+            }
 
-        return view('RFQ.create', compact('parentCategories', 'childs','eCart','rfqCount','latest_rfq'));
+            return view('RFQ.create', compact('parentCategories', 'childs','eCart','rfqCount','latest_rfq'));
+        }
+        return abort('403');
     }
 
     public function store(Request $request)
@@ -84,41 +88,45 @@ class PurchaseRequestFormController extends Controller
     /* For Single Category RFQ*/
     public function create_single_rfq()
     {
-        $businessPackage = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
-        if (isset($businessPackage))
+        if (\auth()->user()->registration_type == 'Buyer')
         {
-            $categories = explode(',', $businessPackage->categories);
-            $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
-        }
-        else{
-            session()->flash('error', __('portal.No Business Package Found for you account! Contact Admin.'));
-            return redirect()->back();
-        }
-        $eCart = ECart::where(['business_id' => auth()->user()->business_id , 'rfq_type' => 0])->orderByDesc('created_at')->get();
+            $businessPackage = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
+            if (isset($businessPackage))
+            {
+                $categories = explode(',', $businessPackage->categories);
+                $parentCategories = Category::whereIn('id', $categories)->orderBy('name', 'asc')->get();
+            }
+            else{
+                session()->flash('error', __('portal.No Business Package Found for you account! Contact Admin.'));
+                return redirect()->back();
+            }
+            $eCart = ECart::where(['business_id' => auth()->user()->business_id , 'rfq_type' => 0])->orderByDesc('created_at')->get();
 
-        // Remaining RFQ count
-        $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
-        $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
+            // Remaining RFQ count
+            $rfq = EOrders::where('business_id', auth()->user()->business_id)->whereDate('created_at', \Carbon\Carbon::today())->count();
+            $business_package = BusinessPackage::where(['business_id' => auth()->user()->business_id, 'status' => 1])->first();
 
-        $latest_rfq = ECart::latest()->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->first();
-        $package = Package::where('id', $business_package->package_id)->first();
+            $latest_rfq = ECart::latest()->where(['business_id' => auth()->user()->business_id, 'rfq_type' => 0])->first();
+            $package = Package::where('id', $business_package->package_id)->first();
 
-        if ($business_package->package_id == 1 || $business_package->package_id == 2)
-        {
-            $rfqCount = $package->rfq_per_day - $rfq;
+            if ($business_package->package_id == 1 || $business_package->package_id == 2)
+            {
+                $rfqCount = $package->rfq_per_day - $rfq;
+            }
+            else{
+                $rfqCount = null;
+            }
+
+            /* Below code added to redirect back if Requisition limit for day is reached Added because h-screen issue in App.css blade */
+            if ($rfqCount <= 0 && $business_package->package_id != 3 && $business_package->package_id != 4)
+            {
+                session()->flash('error', __('portal.Your have reached daily requisition generate limit.'));
+                return redirect()->route('rfqView');
+            }
+
+            return view('RFQ.singleCategory.create', compact('parentCategories','eCart','rfqCount','latest_rfq'));
         }
-        else{
-            $rfqCount = null;
-        }
-
-        /* Below code added to redirect back if Requisition limit for day is reached Added because h-screen issue in App.css blade */
-        if ($rfqCount <= 0 && $business_package->package_id != 3 && $business_package->package_id != 4)
-        {
-            session()->flash('error', __('portal.Your have reached daily requisition generate limit.'));
-            return redirect()->route('rfqView');
-        }
-
-        return view('RFQ.singleCategory.create', compact('parentCategories','eCart','rfqCount','latest_rfq'));
+        return abort('403');
     }
 
     /* Below View is not in use because it has been added in RFQ history view*/

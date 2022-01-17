@@ -23,15 +23,18 @@ class PlacedRFQController extends Controller
 
     public function index()
     {
+        if (\auth()->user()->registration_type != 'Supplier')
+        {
+            if (\auth()->user()->hasRole('SuperAdmin')) {
+                $PlacedRFQ = EOrders::all();
+            } else {
+                $PlacedRFQ = EOrders::with('userName', 'OrderItems')->where(['business_id' => auth()->user()->business_id])
+                    ->whereIn('rfq_type', [0, 1])->orderBy('created_at', 'desc')->get();
 
-        if (\auth()->user()->hasRole('SuperAdmin')) {
-            $PlacedRFQ = EOrders::all();
-        } else {
-            $PlacedRFQ = EOrders::with('userName', 'OrderItems')->where(['business_id' => auth()->user()->business_id])
-                ->whereIn('rfq_type', [0, 1])->orderBy('created_at', 'desc')->get();
-
+            }
+            return view('RFQPlaced.index', compact('PlacedRFQ'));
         }
-        return view('RFQPlaced.index', compact('PlacedRFQ'));
+        return abort('403');
     }
 
     public function RFQItems($EOrderItems)
