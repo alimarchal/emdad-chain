@@ -63,38 +63,41 @@ class ShipmentController extends Controller
         }
 
         return redirect()->back();
-
     }
 
     public function create()
     {
-        $shipmentCarts = ShipmentCart::where('supplier_business_id', auth()->user()->business_id)->orderByDesc('created_at')->get();
-
-        /*$collection = Delivery::where(['supplier_business_id' =>  auth()->user()->business_id, 'shipment_status' => 0])->get();
-        $deliveries = $collection->unique('rfq_no');*/
-
-        $deliveries = Delivery::where(['supplier_business_id' =>  auth()->user()->business_id, 'shipment_status' => 0])->get();
-
-        $multiCategory = array();
-        $singleCategory = array();
-        foreach ($deliveries as $delivery)
+        if (auth()->user()->registration_type == 'Supplier')
         {
-            if ($delivery['rfq_type'] == 1)
+            $shipmentCarts = ShipmentCart::where('supplier_business_id', auth()->user()->business_id)->orderByDesc('created_at')->get();
+
+            /*$collection = Delivery::where(['supplier_business_id' =>  auth()->user()->business_id, 'shipment_status' => 0])->get();
+            $deliveries = $collection->unique('rfq_no');*/
+
+            $deliveries = Delivery::where(['supplier_business_id' =>  auth()->user()->business_id, 'shipment_status' => 0])->get();
+
+            $multiCategory = array();
+            $singleCategory = array();
+            foreach ($deliveries as $delivery)
             {
-                $multiCategory[] = $delivery;
+                if ($delivery['rfq_type'] == 1)
+                {
+                    $multiCategory[] = $delivery;
+                }
+                if ($delivery['rfq_type'] == 0)
+                {
+                    $singleCategory[] = $delivery;
+                }
             }
-            if ($delivery['rfq_type'] == 0)
-            {
-                $singleCategory[] = $delivery;
-            }
+            $multiCategoryCollection = collect($multiCategory);
+            $singleCategoryCollection = collect($singleCategory);
+
+            $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
+            $deliveries = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
+
+            return view('shipment.create', compact('shipmentCarts', 'deliveries'));
         }
-        $multiCategoryCollection = collect($multiCategory);
-        $singleCategoryCollection = collect($singleCategory);
-
-        $singleCategoryInvoices = $singleCategoryCollection->unique('rfq_no');
-        $deliveries = $multiCategoryCollection->merge($singleCategoryInvoices)->sortByDesc('created_at');
-
-        return view('shipment.create', compact('shipmentCarts', 'deliveries'));
+        return redirect()->back();
     }
 
     public function show(Shipment $shipment)

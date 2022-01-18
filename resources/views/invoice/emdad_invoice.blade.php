@@ -80,7 +80,9 @@
                                                                 </td>
                                                                 @php $supplierName = \App\Models\User::where('id', $emdadInvoice->invoice->supplier_user_id)->first(); @endphp
                                                                 <td class="px-6 py-4 whitespace-nowrap ml-10" style="text-align:center;">
-                                                                    <a href="{{ route('business.show', $supplierName->business->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $supplierName->business->business_name }}</a>
+                                                                    @if(isset($supplierName))
+                                                                        <a href="{{ route('business.show', $supplierName->business->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $supplierName->business->business_name }}</a>
+                                                                    @endif
                                                                 </td>
 
                                                                 <td class="px-6 py-4 whitespace-nowrap ml-10" style="text-align:center;">
@@ -231,7 +233,9 @@
                                                                 </td>
                                                                 @php $supplierName = \App\Models\User::where('id', $emdadInvoice->invoice->supplier_user_id)->first(); @endphp
                                                                 <td class="px-6 py-4 whitespace-nowrap ml-10" style="text-align:center;">
-                                                                    <a href="{{ route('business.show', $supplierName->business->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $supplierName->business->business_name }}</a>
+                                                                    @if(isset($supplierName))
+                                                                        <a href="{{ route('business.show', $supplierName->business->id) }}" class="hover:text-blue-900 hover:underline text-blue-900">{{ $supplierName->business->business_name }}</a>
+                                                                    @endif
                                                                 </td>
 
                                                                 <td class="px-6 py-4 whitespace-nowrap ml-10" style="text-align:center;">

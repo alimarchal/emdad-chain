@@ -29,6 +29,7 @@ use App\Http\Controllers\PlacedRFQController;
 use App\Http\Controllers\POInfoController;
 use App\Http\Controllers\PurchaseRequestFormController;
 use App\Http\Controllers\QouteController;
+use App\Http\Controllers\QouteMessageController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShipmentCartController;
@@ -147,9 +148,15 @@ Route::group([], function (){
     Route::get('/e-buyer/ur', function () {
         return view('eBuyerSurvey.ur.eBuyerSurvey');
     });
-    Route::post('e-buyer', [EBuyerSurveyAnswerController::class, 'store'])->name('eBuyerEn');*/
-    ####################END######################
-
+    #################### Old Survey Supplier ###################
+    Route::get('/e-supplier/en', function () {
+        return view('eBuyerSurvey.en.eSupplierSurvey');
+    });
+    Route::get('/e-supplier/ar', function () {
+        return view('eBuyerSurvey.ar.eSupplierSurvey');
+    });*/
+    #################### END ###############################
+    Route::post('e-buyer', [EBuyerSurveyAnswerController::class, 'store'])->name('eBuyerEn');
     ######## Old theme Route End ########
 
     Route::resource('contact', ContactController::class);
@@ -172,14 +179,6 @@ Route::group([], function (){
 //    })->name('sidebarAr');
 
     #################### End Website AR ###################
-    #################### Survey Supplier ###################
-    Route::get('/e-supplier/en', function () {
-        return view('eBuyerSurvey.en.eSupplierSurvey');
-    });
-    Route::get('/e-supplier/ar', function () {
-        return view('eBuyerSurvey.ar.eSupplierSurvey');
-    });
-    #################### END ###############################
     #################### Download Answers ###################
     Route::get('/download/answers', [EBuyerSurveyAnswerController::class, 'export'])->name('downloadAnswersExcel');
 
@@ -276,74 +275,161 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::get('active-rfq-details/{rfq_id}', [CategoryController::class, 'activeRFQView'])->name('activeRFQView');
     Route::resource('category', CategoryController::class);
     ####################END###############################
-    #################### RFP Purchase Request Form ##########################
-    Route::get('rfq-view', [PurchaseRequestFormController::class, 'view'])->name('rfqView');
-    Route::get('rfq-cart-item-delete/{id}', [PurchaseRequestFormController::class, 'deleteCartItem'])->name('deleteCartItem');
-    Route::resource('RFQ', PurchaseRequestFormController::class);
 
-    // For Single Category RFQ
-    Route::get('create-single-category-rfq', [PurchaseRequestFormController::class, 'create_single_rfq'])->name('create_single_rfq');
-    Route::post('create-single-category-rfq', [PurchaseRequestFormController::class, 'store_single_rfq']);
-    Route::get('new-cart/{eOrderID}', [ECartController::class, 'deleteAndInsert'])->name('deleteAndInsertCart');
-    Route::get('new-cart-single-category/{eOrderID}', [ECartController::class, 'singleDeleteAndInsert'])->name('deleteAndInsertCartSingleCategory');
-    Route::get('edit-cart-item/{id}', [ECartController::class, 'edit'])->name('eCartItemEdit');
-    Route::post('edit-cart-item/{id}', [ECartController::class, 'update']);
-    Route::get('single-category-edit-cart-item/{id}', [ECartController::class, 'single_category_edit'])->name('singleCategoryECartItemEdit');
-    Route::post('single-category-edit-cart-item/{id}', [ECartController::class, 'single_category_update']);
-    Route::resource('RFQCart', ECartController::class);
+    #################### Super Admin Routes ###########################
+    Route::middleware(['superAdmin'])->group(function (){
+        Route::get('/logviewer', function () {
+            return redirect('admin/logviewer');
+        })->name('log.viewer');
 
-    // For Single Category RFQ
-    Route::get('single-category-cart', [ECartController::class, 'single_cart_index'])->name('single_cart_index');
-    Route::post('store-single-category-cart-rfq', [ECartController::class, 'single_cart_store_rfq'])->name('single_cart_store_rfq');
-    Route::post('delete-single-category-rfq/{id}', [ECartController::class, 'single_cart_destroy'])->name('single_cart_destroy');
-    Route::resource('EOrders', EOrdersController::class);
+        /* Super admin rating routes starts */
+        Route::get('rating-view', [RatingController::class, 'view'])->name('ratingView');
+        Route::get('ratings-list', [RatingController::class, 'index'])->name('ratingListIndex');
+        Route::get('ratings-received/{id}', [RatingController::class, 'viewByID'])->name('ratingViewByID');
+        Route::get('emdad-ratings', [RatingController::class, 'emdadRated'])->name('emdadRated');
+        Route::get('emdad-rated/{id}', [RatingController::class, 'emdadRatedViewByID'])->name('emdadRatedViewByID');
+        Route::get('emdad-not-rated', [RatingController::class, 'emdadUnRated'])->name('emdadUnRated');
+        Route::get('rated-buyers', [RatingController::class, 'buyerRated'])->name('buyerRated');
+        Route::get('rated-suppliers', [RatingController::class, 'supplierRated'])->name('supplierRated');
+        Route::get('rate', [RatingController::class, 'buyerList'])->name('buyerList');
+        Route::get('rate-buyer/{id}/{deliveryID}', [RatingController::class, 'createBuyerRating'])->name('rateBuyer');
+        Route::post('save-buyer-rating', [RatingController::class, 'saveBuyerRating'])->name('storeBuyerRating');
+        Route::get('rate-supplier', [RatingController::class, 'supplierList'])->name('supplierList');
+        Route::get('rate-supplier/{id}/{deliveryID}', [RatingController::class, 'createSupplierRating'])->name('rateSupplier');
+        Route::post('save-supplier-rating', [RatingController::class, 'saveSupplierRating'])->name('storeSupplierRating');
+        /* Super admin rating routes ends */
 
-    // For Single Category RFQ
-    Route::post('store-single-category-rfq', [EOrdersController::class, 'single_category_store'])->name('single_category_store');
-    Route::resource('PlacedRFQ', PlacedRFQController::class);
+        ###################### For Emdad Route start ##########################
+        Route::get('emdad-supplier-manual-payment-show/{id}', [BankPaymentController::class, 'admin_supplier_payment_view'])->name('admin_supplier_payment_view');
+        Route::post('update-supplier-manual-payment/{id}', [BankPaymentController::class, 'update_supplier_payment_status'])->name('update_supplier_payment_status');
 
-    // For Single category RFQ
-    Route::get('placed-single-category-rfq', [PlacedRFQController::class, 'single_category_rfq_index'])->name('single_category_rfq_index');
-    Route::get('single-category-rfq/{id}', [PlacedRFQController::class, 'single_category_rfq_view'])->name('single_category_rfq_view');
+        ####################### Single Category Quotation Payment routes ####################################
+        Route::get('single-category-rfq-emdad-invoices-history', [PaymentController::class, 'singleCategoryPayments'])->name('singleCategoryPayments');
+        Route::get('single-category-rfq-bank-payment/{id}', [BankPaymentController::class, 'singleCategoryShow'])->name('singleCategoryShow');
+        Route::post('single-category-rfq-bank-payment-update/{rfq_no}', [BankPaymentController::class, 'singleCategoryUpdate'])->name('singleCategoryBankPaymentUpdate');
+        Route::get('single-category-rfq-emdad-supplier-manual-payment/{rfq_no}', [BankPaymentController::class, 'singleCategoryAdminSupplierPaymentView'])->name('singleCategoryAdminSupplierPaymentView');
+        Route::post('single-category-rfq-emdad-update-supplier-manual-payment/{rfqNo}', [BankPaymentController::class, 'singleCategoryUpdateSupplierPaymentStatus'])->name('singleCategoryUpdateSupplierPaymentStatus');
+        Route::get('single-category-rfq-emdad-supplier-manual-payments', [PaymentController::class, 'singleCategorySupplierPayment'])->name('singleCategorySupplierPayment');
 
-    Route::get('/rfq-with-no-quotations', [PlacedRFQController::class, 'RFQsWithNoQuotations'])->name('RFQsWithNoQuotations');
-    Route::post('/change-company-check', [ECartController::class, 'companyCheck'])->name('companyCheck');
-    #########################################################################
-    Route::get('/RFQPlacedItems/{EOrderItems}', [PlacedRFQController::class, 'RFQItems'])->name('RFQItemsByID');
-    Route::get('/RFQPlacedItems/pdf/{e_order_id}', [PlacedRFQController::class, 'PDF'])->name('RFQItemsPDF');
+        #################### Roles display and update ##########################
+        Route::resource('/role', RoleController::class);
+        //Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'show'])->name('roles');
+        #################### This is Permission Route ##########################
+        Route::resource('/permission', PermissionController::class);
+    });
+    #################### Super Admin Routes END #######################
+
+    #################### Buyer Routes Start ###########################
+    Route::middleware(['buyer'])->group(function (){
+        #################### RFQ Purchase Request Form ##########################
+        Route::get('rfq-view', [PurchaseRequestFormController::class, 'view'])->name('rfqView');
+        Route::get('rfq-cart-item-delete/{id}', [PurchaseRequestFormController::class, 'deleteCartItem'])->name('deleteCartItem');
+        Route::resource('RFQ', PurchaseRequestFormController::class);
+
+        // For Single Category RFQ
+        Route::get('placed-single-category-rfq', [PlacedRFQController::class, 'single_category_rfq_index'])->name('single_category_rfq_index');
+        Route::get('single-category-rfq/{id}', [PlacedRFQController::class, 'single_category_rfq_view'])->name('single_category_rfq_view');
+        Route::get('create-single-category-rfq', [PurchaseRequestFormController::class, 'create_single_rfq'])->name('create_single_rfq');
+        Route::post('create-single-category-rfq', [PurchaseRequestFormController::class, 'store_single_rfq']);
+        Route::get('new-cart/{eOrderID}', [ECartController::class, 'deleteAndInsert'])->name('deleteAndInsertCart');
+        Route::get('new-cart-single-category/{eOrderID}', [ECartController::class, 'singleDeleteAndInsert'])->name('deleteAndInsertCartSingleCategory');
+        Route::get('edit-cart-item/{id}', [ECartController::class, 'edit'])->name('eCartItemEdit');
+        Route::post('edit-cart-item/{id}', [ECartController::class, 'update']);
+        Route::get('single-category-edit-cart-item/{id}', [ECartController::class, 'single_category_edit'])->name('singleCategoryECartItemEdit');
+        Route::post('single-category-edit-cart-item/{id}', [ECartController::class, 'single_category_update']);
+        Route::resource('RFQCart', ECartController::class);
+
+        // For Single Category RFQ
+        Route::get('single-category-cart', [ECartController::class, 'single_cart_index'])->name('single_cart_index');
+        Route::post('store-single-category-cart-rfq', [ECartController::class, 'single_cart_store_rfq'])->name('single_cart_store_rfq');
+        Route::post('delete-single-category-rfq/{id}', [ECartController::class, 'single_cart_destroy'])->name('single_cart_destroy');
+        Route::resource('EOrders', EOrdersController::class);
+
+        // For Single Category RFQ
+        Route::post('store-single-category-rfq', [EOrdersController::class, 'single_category_store'])->name('single_category_store');
+        Route::resource('PlacedRFQ', PlacedRFQController::class);
+
+        Route::post('/change-company-check', [ECartController::class, 'companyCheck'])->name('companyCheck');
+
+        Route::get('/RFQPlacedItems/{EOrderItems}', [PlacedRFQController::class, 'RFQItems'])->name('RFQItemsByID');
+        Route::get('/RFQPlacedItems/pdf/{e_order_id}', [PlacedRFQController::class, 'PDF'])->name('RFQItemsPDF');
+
+        ############################################### Quotation Routes Multiple Categories ###############################################
+        Route::get('/QoutationsBuyerReceived', [QouteController::class, 'QoutationsBuyerReceived'])->name('QoutationsBuyerReceived');
+        Route::post('/CancelRequisition', [EOrdersController::class, 'cancelRequisition'])->name('cancelRequisition');
+        Route::get('/QoutationsBuyerReceived/{QouteItem}', [QouteController::class, 'QoutationsBuyerReceivedQouteID'])->name('QoutationsBuyerReceivedQouteID');
+        Route::get('/QoutationsBuyerReceived/RFQItems/{EOrderItems}', [QouteController::class, 'QoutationsBuyerReceivedRFQItemsByID'])->name('QoutationsBuyerReceivedRFQItemsByID');
+        Route::get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/qoutes/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedQoutes'])->name('QoutationsBuyerReceivedQoutes');
+        Route::get('/QuotationResetTime/{EOrderItemID}/', [QouteController::class, 'resetQuotationTime'])->name('resetQuotationTime');
+        Route::get('/QuotationDiscard/{EOrderItemID}/', [QouteController::class, 'discardQuotation'])->name('discardQuotation');
+        Route::get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/rejected/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedRejected'])->name('QoutationsBuyerReceivedRejected');
+        Route::get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/modification/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedModificationNeeded'])->name('QoutationsBuyerReceivedModificationNeeded');
+        Route::get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/accepted/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedAccepted'])->name('QoutationsBuyerReceivedAccepted');
+        Route::get('/Quotation/expired/status/{quoteID}', [QouteController::class, 'quotationExpiredStatusUpdate'])->name('QuotationExpiredStatusUpdate');
+        Route::get('/single/category/quotation/expired/status/{quoteEOrderID}/{supplierBusinessID}', [QouteController::class, 'quotationExpiredStatusUpdateSingleCategory'])->name('quotationExpiredStatusUpdateSingleCategory');
+
+        ################################## Single Category Quotations routes For Buyer ############################################
+        Route::get('/single/category/rfq', [QouteController::class, 'singleCategoryBuyerRFQs'])->name('singleCategoryBuyerRFQs');
+        Route::get('/single/category/rfq/items/{rfq_id}', [QouteController::class, 'singleCategoryRFQItems'])->name('singleCategoryRFQItems');
+        Route::get('/single/category/rfq/item/response/{quote}', [QouteController::class, 'singleCategoryRFQItemByID'])->name('singleCategoryRFQItemByID');
+        Route::get('/single/category/RFQ/quotations/{eOrderID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerReceived'])->name('singleCategoryRFQQuotationsBuyerReceived');
+        Route::get('/singleCategoryQuotationResetTime/{eOrderID}/', [QouteController::class, 'resetSingleCategoryQuotationTime'])->name('resetSingleCategoryQuotationTime');
+        Route::get('/singleCategoryQuotationDiscard/{eOrderID}/', [QouteController::class, 'discardSingleCategoryQuotation'])->name('discardSingleCategoryQuotation');
+        Route::get('/single/category/RFQ/rejected/quotations/{EOrderItemID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerRejected'])->name('singleCategoryRFQQuotationsBuyerRejected');
+        Route::get('/single/category/RFQ/modification/quotations/{eOrderID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsModificationNeeded'])->name('singleCategoryRFQQuotationsModificationNeeded');
+        Route::post('single-rfq-quote/{quotes}/ModificationNeeded', [QouteController::class, 'singleCategoryRFQUpdateStatusModificationNeeded'])->name('singleCategoryRFQUpdateStatusModificationNeeded');
+        Route::get('single-rfq-quote/{quotes}/Rejected', [QouteController::class, 'singleCategoryRFQUpdateStatusRejected'])->name('singleCategoryRFQUpdateStatusRejected');
+        Route::post('singleCategoryQuote/Accepted', [QouteController::class, 'singleCategoryQuoteAccepted'])->name('singleCategoryQuoteAccepted');
+
+        Route::post('qoute/{qoute}/ModificationNeeded', [QouteController::class, 'updateModificationNeeded'])->name('updateQoute');
+        Route::get('qoute/{qoute}/Rejected', [QouteController::class, 'updateRejected'])->name('updateRejected');
+        Route::post('qoute/{qoute}/Accepted', [QouteController::class, 'qouteAccepted'])->name('qouteAccepted');
+        Route::get('dpo/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'show'])->name('dpo.show');
+        Route::get('dpo', [DraftPurchaseOrderController::class, 'index'])->name('dpo.index');
+        Route::get('/Quotation/expired/status/DPO/{quoteID}', [DraftPurchaseOrderController::class, 'quotationExpiredStatusUpdate'])->name('DPOExpiredStatusUpdate');
+        Route::get('/Quotation/expired/status/reject/DPO/{quoteID}', [DraftPurchaseOrderController::class, 'quotationExpiredReject'])->name('DPOExpiredStatusReject');
+        Route::get('/single/category/DPO/quotation/expired/status/{quoteEOrderID}', [DraftPurchaseOrderController::class, 'quotationExpiredStatusUpdateSingleCategory'])->name('DPOExpiredStatusUpdateSingleCategory');
+        ##################################### Single Category DPO #######################################################
+        Route::get('single/category/dpo', [DraftPurchaseOrderController::class, 'singleCategoryDPOIndex'])->name('singleCategoryDPOIndex');
+        Route::post('single-category-dpo/file-upload', [DraftPurchaseOrderController::class, 'uploadSingleCategoryDPOFile'])->name('uploadSingleCategoryDPOFile');
+        Route::get('single/category/dpo-{eOrderID}', [DraftPurchaseOrderController::class, 'singleCategoryDPOShow'])->name('singleCategoryDPOShow');
+        Route::post('single/category/dpo/approved/{rfqNo}/{supplierBusinessID}', [DraftPurchaseOrderController::class, 'singleCategoryApproved'])->name('singleCategoryApproved');
+        Route::post('single/category/dpo/cancel/{rfqNo}/{supplierBusinessID}', [DraftPurchaseOrderController::class, 'singleCategoryCancel'])->name('singleCategoryCancel');
+        #################################################################################################################
+        Route::post('dpo/file-upload', [DraftPurchaseOrderController::class, 'uploadDPOFile'])->name('uploadDPOFile');
+        Route::post('dpo/{draftPurchaseOrder}/approved', [DraftPurchaseOrderController::class, 'approved'])->name('dpo.approved');
+        Route::post('cash/dpo/{draftPurchaseOrder}/approved', [DraftPurchaseOrderController::class, 'approved'])->name('cashDpo.approved');
+        Route::get('dpo/{draftPurchaseOrder}/rejected', [DraftPurchaseOrderController::class, 'rejected'])->name('dpo.rejected');
+        Route::get('dpo/{draftPurchaseOrder}/cancel', [DraftPurchaseOrderController::class, 'cancel'])->name('dpo.cancel');
+
+        /* Buyer rating routes starts */
+        Route::get('rating', [RatingController::class, 'buyerRatingView'])->name('buyerRatingView');
+        Route::get('deliveries-ratings', [RatingController::class, 'buyerDeliveryIndex'])->name('buyerDeliveryRatingListIndex');
+        Route::get('delivery-ratings/{id}', [RatingController::class, 'buyerDeliveryViewByID'])->name('buyerDeliveryRatingViewByID');
+        Route::get('buyer-rated', [RatingController::class, 'buyerRatedToDeliveries'])->name('buyerRatedToDeliveries');
+        Route::get('buyer-rated/{id}', [RatingController::class, 'buyerRatedViewByID'])->name('buyerRatedViewByID');
+        Route::get('buyer-not-rated', [RatingController::class, 'buyerUnRatedDeliveries'])->name('buyerUnRatedDeliveries');
+        Route::get('rate-deliveries', [RatingController::class, 'deliveriesListToRate'])->name('deliveriesListToRate');
+        Route::get('rate-delivery/{supplierID}/{driverID}/{deliveryID}', [RatingController::class, 'createDeliveryRating'])->name('rateDelivery');
+        Route::post('save-buyer-rated', [RatingController::class, 'saveBuyerRatedToDelivery'])->name('storeBuyerRatedToDelivery');
+        /* Buyer rating routes ends */
+
+        ####################### Single Category Quotation Payment routes ####################################
+        Route::get('single-category-rfq-proforma-invoices', [PaymentController::class, 'singleCategoryProformaInvoices'])->name('singleCategoryProformaInvoices');
+        Route::post('single-category-rfq-bank-payments/update/bank-payment/{rfq_no}', [BankPaymentController::class, 'singleUpdatePayment'])->name('singleCategoryBankPaymentBuyerUpdate');
+        #####################################################################################################
+
+        Route::get('proforma-invoices', [PaymentController::class, 'proforma_invoices'])->name('proforma_invoices');
+    });
+    #################### Buyer Routes END #############################
+
+    #################### Supplier Routes Start ########################
     Route::middleware(['supplier'])->group(function (){
         Route::get('/viewRFQs', [PlacedRFQController::class, 'viewRFQs'])->name('viewRFQs');
         Route::get('/viewRFQs/{eOrderItems}', [PlacedRFQController::class, 'viewRFQsID'])->name('viewRFQsID');
         Route::get('/single-category-RFQs', [PlacedRFQController::class, 'viewSingleCategoryRFQs'])->name('singleCategoryRFQs');
         Route::get('/quote-RFQs-for-single-category-{eOrder}', [PlacedRFQController::class, 'viewSingleCategoryRFQByID'])->name('viewSingleCategoryRFQByID');
         Route::get('/modification-needed-quote-RFQs-for-single-category-{quote}', [PlacedRFQController::class, 'viewModifiedSingleCategoryRFQByID'])->name('viewModifiedSingleCategoryRFQByID');
-    });
-    Route::get('/rejectRFQ/{eOrderID}', [PlacedRFQController::class, 'rejectRFQ'])->name('rejectRFQ');
-    Route::get('/RFQsQouted', [PlacedRFQController::class, 'RFQsQouted'])->name('RFQsQouted');
-    //Route::get('/view-RFQs-for-single-category-{eOrderID}', [PlacedRFQController::class, 'viewRFQsOfSingleCategory'])->name('viewRFQsOfSingleCategory');
-    //Route::get('/quote-RFQs-for-single-category-{eOrderItems}', [PlacedRFQController::class, 'viewSingleCategoryRFQByID'])->name('viewSingleCategoryRFQByID');
-
-    /* Generating PDF file for Multi Category Quotation Supplier quoted. */
-    Route::get('/generate-pdf/{eOrderItemID}', [PlacedRFQController::class, 'quotedQuotationPDF'])->name('PDFForQuotation');
-
-    #################### Roles display and update ##########################
-    Route::resource('/role', RoleController::class);
-    //Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'show'])->name('roles');
-    ############################################### This is Permission Route ####################
-    Route::resource('/permission', PermissionController::class);
-    ##################################################### END ##############################################
-    #################### This is Business information route to check status of business ####################
-    Route::get('business/Approval/Update/{id}', [BusinessController::class, 'businessApprovalUpdate'])->name('businessApprovalUpdate');
-    Route::get('business/Approval/Rejected/{id}', [BusinessController::class, 'businessApprovalRejected'])->name('businessApprovalRejected');
-    Route::post('single-quote-store', [QouteController::class, 'singleRFQQuotationStore'])->name('singleRFQQuotationStore');
-    Route::post('single-quote-update', [QouteController::class, 'singleRFQQuotationUpdate'])->name('singleRFQQuotationUpdate');
-    Route::resource('qoute', QouteController::class);
-    /* Calculating totalCost at the time of Supplier RFQ response */
-    Route::get('total-cost', [QouteController::class, 'totalCost'])->name('totalCost');
-    /* Calculating totalCost for single category RFQ Type at the time of Supplier RFQ response */
-    Route::get('single-total-cost', [QouteController::class, 'singleTotalCost'])->name('singleTotalCost');
-
-    Route::middleware(['supplier'])->group(function (){
 
         Route::get('/QoutedRFQ/Qouted', [QouteController::class, 'QoutedRFQQouted'])->name('QoutedRFQQouted');
         Route::get('/Quoted/Modified/RFQs', [QouteController::class, 'QuotedModifiedRFQ'])->name('QuotedModifiedRFQ');
@@ -353,7 +439,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
         Route::get('/QoutedRFQ/Expired', [QouteController::class, 'QoutedRFQQoutedExpired'])->name('QoutedRFQQoutedExpired');
         Route::get('/QoutedRFQQoutedView/{quoteID}', [QouteController::class, 'QoutedRFQQoutedViewByID'])->name('QoutedRFQQoutedViewByID');
 
-    ########################################## Single Category RFQ routes For Supplier ############################################
+        ########################################## Single Category RFQ routes For Supplier ############################################
         Route::get('/single/category/quoted-RFQs', [QouteController::class, 'singleCategoryQuotedRFQQuoted'])->name('singleCategoryQuotedRFQQuoted');
         Route::get('/single/category/quoted/modified/RFQs', [QouteController::class, 'singleCategoryQuotedModifiedRFQ'])->name('singleCategoryQuotedModifiedRFQ');
         Route::get('/single/category/rejected-RFQs', [QouteController::class, 'singleCategoryQuotedRFQRejected'])->name('singleCategoryQuotedRFQRejected');
@@ -362,130 +448,127 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
         Route::get('/single/category/expired/RFQs', [QouteController::class, 'singleCategoryRFQExpired'])->name('singleCategoryRFQExpired');
         Route::get('/single/category/quoted/view/{eOrderID}', [QouteController::class, 'singleCategoryRFQQuotedViewByID'])->name('singleCategoryRFQQuotedViewByID');
 
+        ############################################ Quotation Routes Multiple Categories ##############################################################
+        Route::post('/Quotation/expired/response/', [QouteController::class, 'quotationExpiredStatusResponse'])->name('QuotationExpiredStatusResponse');
+        Route::get('/Quotation/expired/reject/response/{quoteID}', [QouteController::class, 'quotationExpiredStatusRejectResponse'])->name('quotationExpiredStatusRejectResponse');
+        Route::post('/single/category/quotation/expired/response/', [QouteController::class, 'quotationExpiredStatusResponseSingleCategory'])->name('quotationExpiredStatusResponseSingleCategory');
+        Route::get('/single/category/quotation/expired/reject/response/{quoteEOrderID}', [QouteController::class, 'quotationExpiredStatusRejectResponseSingleCategory'])->name('quotationExpiredStatusRejectResponseSingleCategory');
+
+        Route::get('deliveries', [DeliveryNoteController::class, 'view'])->name('deliveryView');
+        Route::get('/deliveryNote/{draftPurchaseOrder}/view', [DeliveryNoteController::class, 'deliveryNoteView'])->name('deliveryNoteView');
+        Route::resource('deliveryNote', DeliveryNoteController::class);
+        Route::get('/single/category/delivery/notes', [DeliveryNoteController::class, 'singleCategoryIndex'])->name('singleCategoryIndex');
+        Route::get('/single/category/deliveryNote/{rfqNo}/view', [DeliveryNoteController::class, 'singleCategoryDeliveryNoteView'])->name('singleCategoryDeliveryNoteView');
+        Route::post('/single/category/deliveryNote/{rfqNo}/save', [DeliveryNoteController::class, 'singleCategoryStore'])->name('singleCategoryDeliveryNoteStore');
+        Route::get('/notes', [DeliveryNoteController::class, 'notes'])->name('notes');
+        Route::get('/notes/{deliveryNote}', [DeliveryNoteController::class, 'viewNote'])->name('viewNote');
+        Route::get('/single/category/notes', [DeliveryNoteController::class, 'singleCategoryNotes'])->name('singleCategoryNotes');
+        Route::get('/single/category/notes/{rfq_no}', [DeliveryNoteController::class, 'singleCategoryViewNote'])->name('singleCategoryViewNote');
+
+        ###################### Vehicle routes ####################################
+        Route::resource('vehicle', VehicleController::class);
+        #################### END ##################################################
+
+        ##################### Shipment routes ####################################
+        Route::resource('shipmentCart', ShipmentCartController::class);
+        Route::resource('shipmentItem', ShipmentItemController::class);
+        #################### END ##################################################
+
+        /* Supplier rating routes starts */
+        Route::get('ratings', [RatingController::class, 'supplierRatingView'])->name('supplierRatingView');
+        Route::get('deliveries-rating', [RatingController::class, 'supplierDeliveryIndex'])->name('supplierDeliveryRatingListIndex');
+        Route::get('delivery/ratings/{id}', [RatingController::class, 'supplierDeliveryViewByID'])->name('supplierDeliveryRatingViewByID');
+        Route::get('supplier-rated', [RatingController::class, 'supplierRatedToDeliveries'])->name('supplierRatedToDeliveries');
+        Route::get('supplier-rated/{id}', [RatingController::class, 'supplierRatedViewByID'])->name('supplierRatedViewByID');
+        Route::get('supplier-not-rated', [RatingController::class, 'supplierUnRatedDeliveries'])->name('supplierUnRatedDeliveries');
+        Route::get('deliveries-to-rate', [RatingController::class, 'supplierDeliveriesListToRate'])->name('supplierDeliveriesListToRate');
+        Route::get('rate-delivery-by-supplier/{buyerID}/{deliveryID}', [RatingController::class, 'createDeliveryRatingBySupplier'])->name('rateDeliveryBySupplier');
+        Route::post('save-supplier-rated', [RatingController::class, 'saveSupplierRatedToDelivery'])->name('storeSupplierRatedToDelivery');
+        /* Supplier rating routes ends */
+
+        Route::post('single-quote-store', [QouteController::class, 'singleRFQQuotationStore'])->name('singleRFQQuotationStore');
+        Route::post('single-quote-update', [QouteController::class, 'singleRFQQuotationUpdate'])->name('singleRFQQuotationUpdate');
+        /* Calculating totalCost at the time of Supplier RFQ response */
+        Route::get('total-cost', [QouteController::class, 'totalCost'])->name('totalCost');
+        /* Calculating totalCost for single category RFQ Type at the time of Supplier RFQ response */
+        Route::get('single-total-cost', [QouteController::class, 'singleTotalCost'])->name('singleTotalCost');
+
+        ########################################################## Payment routes #################################################################################
+        Route::get('payments', [PaymentController::class, 'view'])->name('paymentView');
+        Route::resource('payment', PaymentController::class);
+        Route::get('generate-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoiceView'])->name('generateProformaView');
+        Route::get('create-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoice'])->name('generateProforma');
+        Route::get('manual-payments', [PaymentController::class, 'supplier_payment_received'])->name('supplier_payment_received');
+        Route::get('supplier-manual-payment-show/{id}', [BankPaymentController::class, 'supplier_payment_view'])->name('supplier_payment_view');
+        Route::post('supplier-manual-payment-update/{id}', [BankPaymentController::class, 'update_bank_payment'])->name('update_bank_payment');
+
+        ####################### Single Category Quotation Payment routes ####################################
+        Route::get('single-category-rfq-manual-payments', [PaymentController::class, 'singleCategorySupplierPaymentsReceived'])->name('singleCategorySupplierPaymentsReceived');
+        Route::get('single-category-rfq-supplier-manual-payment/{id}', [BankPaymentController::class, 'singleCategorySupplierPaymentView'])->name('singleCategorySupplierPaymentView');
+        Route::post('single-category-rfq-supplier-manual-payment-update/{rfqNo}', [BankPaymentController::class, 'singleCategoryUpdateBankPayment'])->name('singleCategoryUpdateBankPayment');
+        #####################################################################################################
+
+        Route::get('generate-proforma-invoice', [PaymentController::class, 'generate_proforma_invoice'])->name('generate_proforma_invoices');
     });
+    #################### Supplier Routes END ##########################
+
+    // For Single category RFQ
+    Route::get('/rfq-with-no-quotations', [PlacedRFQController::class, 'RFQsWithNoQuotations'])->name('RFQsWithNoQuotations');
+    Route::get('/rejectRFQ/{eOrderID}', [PlacedRFQController::class, 'rejectRFQ'])->name('rejectRFQ');
+    Route::get('/RFQsQouted', [PlacedRFQController::class, 'RFQsQouted'])->name('RFQsQouted');
+    //Route::get('/view-RFQs-for-single-category-{eOrderID}', [PlacedRFQController::class, 'viewRFQsOfSingleCategory'])->name('viewRFQsOfSingleCategory');
+    //Route::get('/quote-RFQs-for-single-category-{eOrderItems}', [PlacedRFQController::class, 'viewSingleCategoryRFQByID'])->name('viewSingleCategoryRFQByID');
+
+    /* Generating PDF file for Multi Category Quotation Supplier quoted. */
+    Route::get('/generate-pdf/{eOrderItemID}', [PlacedRFQController::class, 'quotedQuotationPDF'])->name('PDFForQuotation');
+
+    #################### This is Business information route to check status of business ####################
+    Route::get('business/Approval/Update/{id}', [BusinessController::class, 'businessApprovalUpdate'])->name('businessApprovalUpdate');
+    Route::get('business/Approval/Rejected/{id}', [BusinessController::class, 'businessApprovalRejected'])->name('businessApprovalRejected');
+    Route::resource('qoute', QouteController::class);
 
     /* Generating PDF file for Single Category Quotation Supplier quoted */
     Route::get('/generate-single-category-quotation-pdf/{quoteID}/{eOrderItemID}', [PlacedRFQController::class, 'singleCategoryQuotedQuotationPDF'])->name('PDFForSingleCategoryQuotation');
     #############################################################################################################
 
-    Route::get('/QoutationsBuyerReceived', [QouteController::class, 'QoutationsBuyerReceived'])->name('QoutationsBuyerReceived');
-    Route::post('/CancelRequisition', [EOrdersController::class, 'cancelRequisition'])->name('cancelRequisition');
-    Route::get('/QoutationsBuyerReceived/{QouteItem}', [QouteController::class, 'QoutationsBuyerReceivedQouteID'])->name('QoutationsBuyerReceivedQouteID');
-    Route::get('/QoutationsBuyerReceived/RFQItems/{EOrderItems}', [QouteController::class, 'QoutationsBuyerReceivedRFQItemsByID'])->name('QoutationsBuyerReceivedRFQItemsByID');
-    Route::get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/qoutes/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedQoutes'])->name('QoutationsBuyerReceivedQoutes');
-    Route::get('/QuotationResetTime/{EOrderItemID}/', [QouteController::class, 'resetQuotationTime'])->name('resetQuotationTime');
-    Route::get('/QuotationDiscard/{EOrderItemID}/', [QouteController::class, 'discardQuotation'])->name('discardQuotation');
-    Route::get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/rejected/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedRejected'])->name('QoutationsBuyerReceivedRejected');
-    Route::get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/modification/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedModificationNeeded'])->name('QoutationsBuyerReceivedModificationNeeded');
-    Route::get('/QoutationsBuyerReceived/RFQItems/{EOrderID}/accepted/{EOrderItemID}/{bypass_id}', [QouteController::class, 'QoutationsBuyerReceivedAccepted'])->name('QoutationsBuyerReceivedAccepted');
-    Route::get('/Quotation/expired/status/{quoteID}', [QouteController::class, 'quotationExpiredStatusUpdate'])->name('QuotationExpiredStatusUpdate');
-    Route::post('/Quotation/expired/response/', [QouteController::class, 'quotationExpiredStatusResponse'])->name('QuotationExpiredStatusResponse');
-    Route::get('/Quotation/expired/reject/response/{quoteID}', [QouteController::class, 'quotationExpiredStatusRejectResponse'])->name('quotationExpiredStatusRejectResponse');
-    Route::get('/single/category/quotation/expired/status/{quoteEOrderID}/{supplierBusinessID}', [QouteController::class, 'quotationExpiredStatusUpdateSingleCategory'])->name('quotationExpiredStatusUpdateSingleCategory');
-    Route::post('/single/category/quotation/expired/response/', [QouteController::class, 'quotationExpiredStatusResponseSingleCategory'])->name('quotationExpiredStatusResponseSingleCategory');
-    Route::get('/single/category/quotation/expired/reject/response/{quoteEOrderID}', [QouteController::class, 'quotationExpiredStatusRejectResponseSingleCategory'])->name('quotationExpiredStatusRejectResponseSingleCategory');
-
     /* Generating PDF file for Multi Category Quotation buyer received */
     Route::get('generate-quotation-pdf/{quote_supplier_business_id}/{e_order_id}', [QouteController::class, 'quotationPDF'])->name('quotationPDF');
-
-    ################################## Single Category Quotations routes For Buyer ############################################
-    Route::get('/single/category/rfq', [QouteController::class, 'singleCategoryBuyerRFQs'])->name('singleCategoryBuyerRFQs');
-    Route::get('/single/category/rfq/items/{rfq_id}', [QouteController::class, 'singleCategoryRFQItems'])->name('singleCategoryRFQItems');
-    Route::get('/single/category/rfq/item/response/{quote}', [QouteController::class, 'singleCategoryRFQItemByID'])->name('singleCategoryRFQItemByID');
-    Route::get('/single/category/RFQ/quotations/{eOrderID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerReceived'])->name('singleCategoryRFQQuotationsBuyerReceived');
-    Route::get('/SingleCategoryQuotationResetTime/{eOrderID}/', [QouteController::class, 'resetSingleCategoryQuotationTime'])->name('resetSingleCategoryQuotationTime');
-    Route::get('/SingleCategoryQuotationDiscard/{eOrderID}/', [QouteController::class, 'discardSingleCategoryQuotation'])->name('discardSingleCategoryQuotation');
-    Route::get('/single/category/RFQ/rejected/quotations/{EOrderItemID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsBuyerRejected'])->name('singleCategoryRFQQuotationsBuyerRejected');
-    Route::get('/single/category/RFQ/modification/quotations/{eOrderID}/{bypass_id}', [QouteController::class, 'singleCategoryRFQQuotationsModificationNeeded'])->name('singleCategoryRFQQuotationsModificationNeeded');
-    Route::post('single-rfq-quote/{quotes}/ModificationNeeded', [QouteController::class, 'singleCategoryRFQUpdateStatusModificationNeeded'])->name('singleCategoryRFQUpdateStatusModificationNeeded');
-    Route::get('single-rfq-quote/{quotes}/Rejected', [QouteController::class, 'singleCategoryRFQUpdateStatusRejected'])->name('singleCategoryRFQUpdateStatusRejected');
-    Route::post('singleCategoryQuote/Accepted', [QouteController::class, 'singleCategoryQuoteAccepted'])->name('singleCategoryQuoteAccepted');
 
     /* Generating PDF file for Single Category Quotation buyer received */
     Route::get('single-rfq-quotation-pdf/{quote_supplier_business_id}/{e_order_id}', [QouteController::class, 'singleCategoryQuotationPDF'])->name('singleCategoryQuotationPDF');
     #################################################################################################################
 
-
-    Route::resource('QuotationMessage', \App\Http\Controllers\QouteMessageController::class);
-    Route::post('qoute/{qoute}/ModificationNeeded', [QouteController::class, 'updateModificationNeeded'])->name('updateQoute');
-    Route::get('qoute/{qoute}/Rejected', [QouteController::class, 'updateRejected'])->name('updateRejected');
-    Route::post('qoute/{qoute}/Accepted', [QouteController::class, 'qouteAccepted'])->name('qouteAccepted');
-    Route::get('/purchase-order', [DraftPurchaseOrderController::class, 'view'])->name('purchaseOrderView');
-    Route::get('dpo/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'show'])->name('dpo.show');
-    Route::get('dpo', [DraftPurchaseOrderController::class, 'index'])->name('dpo.index');
-    Route::get('/Quotation/expired/status/DPO/{quoteID}', [DraftPurchaseOrderController::class, 'quotationExpiredStatusUpdate'])->name('DPOExpiredStatusUpdate');
-    Route::get('/Quotation/expired/status/reject/DPO/{quoteID}', [DraftPurchaseOrderController::class, 'quotationExpiredReject'])->name('DPOExpiredStatusReject');
-    Route::get('/single/category/DPO/quotation/expired/status/{quoteEOrderID}', [DraftPurchaseOrderController::class, 'quotationExpiredStatusUpdateSingleCategory'])->name('DPOExpiredStatusUpdateSingleCategory');
-    ##################################### Single Category DPO #######################################################
-    Route::get('single/category/dpo', [DraftPurchaseOrderController::class, 'singleCategoryDPOIndex'])->name('singleCategoryDPOIndex');
-    Route::post('single-category-dpo/file-upload', [DraftPurchaseOrderController::class, 'uploadSingleCategoryDPOFile'])->name('uploadSingleCategoryDPOFile');
-    Route::get('single/category/dpo-{eOrderID}', [DraftPurchaseOrderController::class, 'singleCategoryDPOShow'])->name('singleCategoryDPOShow');
-    Route::post('single/category/dpo/approved/{rfqNo}/{supplierBusinessID}', [DraftPurchaseOrderController::class, 'singleCategoryApproved'])->name('singleCategoryApproved');
-    Route::post('single/category/dpo/cancel/{rfqNo}/{supplierBusinessID}', [DraftPurchaseOrderController::class, 'singleCategoryCancel'])->name('singleCategoryCancel');
-    #################################################################################################################
-    Route::post('dpo/file-upload', [DraftPurchaseOrderController::class, 'uploadDPOFile'])->name('uploadDPOFile');
-    Route::post('dpo/{draftPurchaseOrder}/approved', [DraftPurchaseOrderController::class, 'approved'])->name('dpo.approved');
-    Route::post('cash/dpo/{draftPurchaseOrder}/approved', [DraftPurchaseOrderController::class, 'approved'])->name('cashDpo.approved');
-    Route::get('dpo/{draftPurchaseOrder}/rejected', [DraftPurchaseOrderController::class, 'rejected'])->name('dpo.rejected');
-    Route::get('dpo/{draftPurchaseOrder}/cancel', [DraftPurchaseOrderController::class, 'cancel'])->name('dpo.cancel');
-
+    Route::resource('QuotationMessage', QouteMessageController::class);
 
     #################### PDF generate Routes ##########################
     Route::get('/generate-PO-pdf/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'generatePDF'])->name('generatePDF');
     Route::post('/single/category/generate/PO/pdf/{rfqNO}', [DraftPurchaseOrderController::class, 'singleCategoryGeneratePDF'])->name('singleCategoryGeneratePDF');
     #################### END ##########################################
 
-    #################### PDF generate Routes ##########################
-    Route::get('/logviewer', function () {
-        return redirect('admin/logviewer');
-    })->name('log.viewer');
-    #################### END ##########################################
+    #################################################### Delivery and Delivery Note ###################################################
 
-    #################### Delivery and Delivery Note ###################################################################################
-    Route::get('deliveries', [DeliveryNoteController::class, 'view'])->name('deliveryView');
     Route::get('delivery-details/{rfq_no}/{deliveryID}/{rfq_type}', [DeliveryController::class, 'show'])->name('deliveryDetails');
     Route::get('delivery-note-pdf/{deliveryID}/{rfq_no}/{rfq_type}/', [DeliveryController::class, 'pdf'])->name('deliveryNotePDF');
-    Route::get('/deliveryNote/{draftPurchaseOrder}/view', [DeliveryNoteController::class, 'deliveryNoteView'])->name('deliveryNoteView');
-    Route::resource('deliveryNote', DeliveryNoteController::class);
     Route::get('/generate-delivery-note-pdf/{deliveryNote}', [DeliveryNoteController::class, 'generatePDF'])->name('generateDeliveryNotePDF');
 
     ##################### Single Category RFQ Delivery and Delivery Note routes ####################################
-    Route::get('/single/category/delivery/notes', [DeliveryNoteController::class, 'singleCategoryIndex'])->name('singleCategoryIndex');
-    Route::get('/single/category/deliveryNote/{rfqNo}/view', [DeliveryNoteController::class, 'singleCategoryDeliveryNoteView'])->name('singleCategoryDeliveryNoteView');
-    Route::post('/single/category/deliveryNote/{rfqNo}/save', [DeliveryNoteController::class, 'singleCategoryStore'])->name('singleCategoryDeliveryNoteStore');
     Route::get('/generate-single-category-delivery-note-pdf/{deliveryNoteRfqNo}', [DeliveryNoteController::class, 'singleCategoryGeneratePDF'])->name('singleCategoryDeliveryNoteGeneratePDF');
     ################################### END ########################################################################
 
-    #################### END ###########################################################################################################
-
-    ############################################################# Draft purchase order routes ####################################
+    ############################################################# Purchase order routes ####################################
     Route::get('/po', [DraftPurchaseOrderController::class, 'po'])->name('po.po');
     Route::get('/po/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'poShow'])->name('po.show');
-    Route::get('/notes', [DeliveryNoteController::class, 'notes'])->name('notes');
-    Route::get('/notes/{deliveryNote}', [DeliveryNoteController::class, 'viewNote'])->name('viewNote');
 
-    ##################### Single Category RFQ PO routes ####################################
+    ############################################################# Single Category RFQ PO routes ####################################
     Route::get('/single/category/po', [DraftPurchaseOrderController::class, 'singleCategoryPO'])->name('singleCategoryPO');
     Route::get('/single/category/po/{rfqNo}', [DraftPurchaseOrderController::class, 'singleCategoryPOShow'])->name('singleCategoryPOByID');
-    Route::get('/single/category/notes', [DeliveryNoteController::class, 'singleCategoryNotes'])->name('singleCategoryNotes');
-    Route::get('/single/category/notes/{rfq_no}', [DeliveryNoteController::class, 'singleCategoryViewNote'])->name('singleCategoryViewNote');
-    ################################### END ################################################
-
-    ################################################################## END ##################################################
+    #################################################################### END ########################################################
 
     ##################### Shipment routes ####################################
     Route::resource('shipment', ShipmentController::class);
-    Route::resource('shipmentCart', ShipmentCartController::class);
-    Route::resource('shipmentItem', ShipmentItemController::class);
     Route::get('delivered-shipments', [ShipmentController::class, 'delivered'])->name('deliveredShipments');
     Route::get('ongoing-shipments', [ShipmentController::class, 'ongoingShipment'])->name('ongoingShipment');
     #################### END ##################################################
-
-
-    ###################### Vehicle routes ####################################
-    Route::resource('vehicle', VehicleController::class);
-    #################### END ##################################################
-
 
     ###################### Generate Invoice & Delivery ####################################
     Route::post('/invoice/generate', [InvoiceController::class, 'invoiceGenerate'])->name('invoice.generate');
@@ -505,24 +588,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     #################### END ##############################################################
 
     ########################################################## Payment routes #################################################################################
-    Route::get('payments', [PaymentController::class, 'view'])->name('paymentView');
-    Route::resource('payment', PaymentController::class);
-    Route::get('generate-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoiceView'])->name('generateProformaView');
-    Route::get('create-proforma-invoice/{id}', [PaymentController::class, 'generateProformaInvoice'])->name('generateProforma');
     Route::get('invoices-history', [PaymentController::class, 'invoices'])->name('invoices');
+    ###################### For Emdad Route start ##########################
     Route::get('emdad-invoices-history', [PaymentController::class, 'payments'])->name('emdad_payments');
     Route::get('package-manual-payments', [PaymentController::class, 'packageManualPayments'])->name('packageManualPayments');
     Route::get('package-manual-payment-{id}', [PaymentController::class, 'packageManualPaymentView'])->name('packageManualPaymentView');
     Route::post('update-package-manual-payment-{id}', [PaymentController::class, 'updatePackageManualPayment'])->name('updatePackageManualPayment');
     Route::get('supplier-manual-payments', [PaymentController::class, 'supplier_payment'])->name('supplier_payment');
-    Route::get('manual-payments', [PaymentController::class, 'supplier_payment_received'])->name('supplier_payment_received');
+    ###################### For Emdad Route end ##########################
+
     Route::get('invoice-details/{id}', [PaymentController::class, 'invoiceView'])->name('invoiceView');
-    Route::get('proforma-invoices', [PaymentController::class, 'proforma_invoices'])->name('proforma_invoices');
-    Route::get('generate-proforma-invoice', [PaymentController::class, 'generate_proforma_invoice'])->name('generate_proforma_invoices');
-    Route::get('emdad-supplier-manual-payment-show/{id}', [BankPaymentController::class, 'admin_supplier_payment_view'])->name('admin_supplier_payment_view');
-    Route::get('supplier-manual-payment-show/{id}', [BankPaymentController::class, 'supplier_payment_view'])->name('supplier_payment_view');
-    Route::post('supplier-manual-payment-update/{id}', [BankPaymentController::class, 'update_bank_payment'])->name('update_bank_payment');
-    Route::post('update-supplier-manual-payment/{id}', [BankPaymentController::class, 'update_supplier_payment_status'])->name('update_supplier_payment_status');
     Route::resource('bank-payments', BankPaymentController::class)->names('bank-payments');
     Route::get('bank-payments/{invoice}/create', [BankPaymentController::class, 'create'])->name('bank-payments.create');
     Route::get('bank-payments/{invoice}/edit', [BankPaymentController::class, 'edit'])->name('bank-payments.edit');
@@ -534,70 +609,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::get('single-category-rfq-payment', [PaymentController::class, 'singleCategoryIndex'])->name('singleCategoryPaymentIndex');
     Route::get('single-category-rfq-proforma-invoice', [PaymentController::class, 'singleCategoryGenerateProformaInvoiceView'])->name('singleCategoryGenerateProformaInvoiceView');
     Route::get('single-category-rfq-generate-proforma-invoice/{rfqNo}', [PaymentController::class, 'singleCategoryGenerateProformaInvoice'])->name('singleCategoryGenerateProformaInvoice');
-    Route::get('single-category-rfq-proforma-invoices', [PaymentController::class, 'singleCategoryProformaInvoices'])->name('singleCategoryProformaInvoices');
     Route::get('single-category-rfq-invoice-details/{rfq_no}', [PaymentController::class, 'singleCategoryInvoiceView'])->name('singleCategoryInvoiceView');
     Route::get('single-category-rfq-bank-payments/{rfq_no}/create', [BankPaymentController::class, 'singleCategoryCreate'])->name('singleCategoryBankPaymentCreate');
     Route::get('single-category-rfq-bank-payments/{id}/edit', [BankPaymentController::class, 'singleCategoryEdit'])->name('singleCategoryBankPaymentEdit');
     Route::post('single-category-rfq-bank-payment-store', [BankPaymentController::class, 'singleCategoryStore'])->name('singleCategoryStore');
-    Route::get('single-category-rfq-emdad-invoices-history', [PaymentController::class, 'singleCategoryPayments'])->name('singleCategoryPayments');
-    Route::get('single-category-rfq-bank-payment/{id}', [BankPaymentController::class, 'singleCategoryShow'])->name('singleCategoryShow');
-    Route::post('single-category-rfq-bank-payment-update/{rfq_no}', [BankPaymentController::class, 'singleCategoryUpdate'])->name('singleCategoryBankPaymentUpdate');
-    Route::post('single-category-rfq-bank-payments/update/bank-payment/{rfq_no}', [BankPaymentController::class, 'singleUpdatePayment'])->name('singleCategoryBankPaymentBuyerUpdate');
     Route::get('single-category-rfq-invoices-history', [PaymentController::class, 'singleCategoryInvoices'])->name('singleCategoryInvoices');
     Route::get('single-category-rfq-unpaid-bank-payments', [BankPaymentController::class, 'singleCategoryIndex'])->name('singleCategoryBankPaymentIndex');
-    Route::get('single-category-rfq-manual-payments', [PaymentController::class, 'singleCategorySupplierPaymentsReceived'])->name('singleCategorySupplierPaymentsReceived');
-    Route::get('single-category-rfq-emdad-supplier-manual-payments', [PaymentController::class, 'singleCategorySupplierPayment'])->name('singleCategorySupplierPayment');
-    Route::get('single-category-rfq-emdad-supplier-manual-payment/{rfq_no}', [BankPaymentController::class, 'singleCategoryAdminSupplierPaymentView'])->name('singleCategoryAdminSupplierPaymentView');
-    Route::post('single-category-rfq-emdad-update-supplier-manual-payment/{rfqNo}', [BankPaymentController::class, 'singleCategoryUpdateSupplierPaymentStatus'])->name('singleCategoryUpdateSupplierPaymentStatus');
-    Route::get('single-category-rfq-supplier-manual-payment/{id}', [BankPaymentController::class, 'singleCategorySupplierPaymentView'])->name('singleCategorySupplierPaymentView');
-    Route::post('single-category-rfq-supplier-manual-payment-update/{rfqNo}', [BankPaymentController::class, 'singleCategoryUpdateBankPayment'])->name('singleCategoryUpdateBankPayment');
     Route::get('/generate-single-category-invoice-pdf/{invoiceRfqNo}', [PaymentController::class, 'singleCategoryGeneratePDF'])->name('singleCategoryInvoiceGeneratePDF');
     ################################################################### END ############################################################################################
-
-    ################################################################# Rating routes ##########################################################################
-
-    /* Super admin rating routes starts */
-    Route::get('rating-view', [RatingController::class, 'view'])->name('ratingView');
-    Route::get('ratings-list', [RatingController::class, 'index'])->name('ratingListIndex');
-    Route::get('ratings-received/{id}', [RatingController::class, 'viewByID'])->name('ratingViewByID');
-    Route::get('emdad-ratings', [RatingController::class, 'emdadRated'])->name('emdadRated');
-    Route::get('emdad-rated/{id}', [RatingController::class, 'emdadRatedViewByID'])->name('emdadRatedViewByID');
-    Route::get('emdad-not-rated', [RatingController::class, 'emdadUnRated'])->name('emdadUnRated');
-    Route::get('rated-buyers', [RatingController::class, 'buyerRated'])->name('buyerRated');
-    Route::get('rated-suppliers', [RatingController::class, 'supplierRated'])->name('supplierRated');
-    Route::get('rate', [RatingController::class, 'buyerList'])->name('buyerList');
-    Route::get('rate-buyer/{id}/{deliveryID}', [RatingController::class, 'createBuyerRating'])->name('rateBuyer');
-    Route::post('save-buyer-rating', [RatingController::class, 'saveBuyerRating'])->name('storeBuyerRating');
-    Route::get('rate-supplier', [RatingController::class, 'supplierList'])->name('supplierList');
-    Route::get('rate-supplier/{id}/{deliveryID}', [RatingController::class, 'createSupplierRating'])->name('rateSupplier');
-    Route::post('save-supplier-rating', [RatingController::class, 'saveSupplierRating'])->name('storeSupplierRating');
-    /* Super admin rating routes ends */
-
-    /* Buyer rating routes starts */
-    Route::get('rating', [RatingController::class, 'buyerRatingView'])->name('buyerRatingView');
-    Route::get('deliveries-ratings', [RatingController::class, 'buyerDeliveryIndex'])->name('buyerDeliveryRatingListIndex');
-    Route::get('delivery-ratings/{id}', [RatingController::class, 'buyerDeliveryViewByID'])->name('buyerDeliveryRatingViewByID');
-    Route::get('buyer-rated', [RatingController::class, 'buyerRatedToDeliveries'])->name('buyerRatedToDeliveries');
-    Route::get('buyer-rated/{id}', [RatingController::class, 'buyerRatedViewByID'])->name('buyerRatedViewByID');
-    Route::get('buyer-not-rated', [RatingController::class, 'buyerUnRatedDeliveries'])->name('buyerUnRatedDeliveries');
-    Route::get('rate-deliveries', [RatingController::class, 'deliveriesListToRate'])->name('deliveriesListToRate');
-    Route::get('rate-delivery/{supplierID}/{driverID}/{deliveryID}', [RatingController::class, 'createDeliveryRating'])->name('rateDelivery');
-    Route::post('save-buyer-rated', [RatingController::class, 'saveBuyerRatedToDelivery'])->name('storeBuyerRatedToDelivery');
-    /* Buyer rating routes ends */
-
-    /* Supplier rating routes starts */
-    Route::get('ratings', [RatingController::class, 'supplierRatingView'])->name('supplierRatingView');
-    Route::get('deliveries-rating', [RatingController::class, 'supplierDeliveryIndex'])->name('supplierDeliveryRatingListIndex');
-    Route::get('delivery/ratings/{id}', [RatingController::class, 'supplierDeliveryViewByID'])->name('supplierDeliveryRatingViewByID');
-    Route::get('supplier-rated', [RatingController::class, 'supplierRatedToDeliveries'])->name('supplierRatedToDeliveries');
-    Route::get('supplier-rated/{id}', [RatingController::class, 'supplierRatedViewByID'])->name('supplierRatedViewByID');
-    Route::get('supplier-not-rated', [RatingController::class, 'supplierUnRatedDeliveries'])->name('supplierUnRatedDeliveries');
-    Route::get('deliveries-to-rate', [RatingController::class, 'supplierDeliveriesListToRate'])->name('supplierDeliveriesListToRate');
-    Route::get('rate-delivery-by-supplier/{buyerID}/{deliveryID}', [RatingController::class, 'createDeliveryRatingBySupplier'])->name('rateDeliveryBySupplier');
-    Route::post('save-supplier-rated', [RatingController::class, 'saveSupplierRatedToDelivery'])->name('storeSupplierRatedToDelivery');
-    /* Supplier rating routes ends */
-
-    ################################################################# END ####################################################################################
 
     ########################################## Subscription routes ####################################
     // Route::get('sub', function () {
@@ -679,9 +698,6 @@ Route::middleware(['ireAuthentication'])->group(function () {
     Route::post('ire-forgot-password', [IreLoginController::class, 'forgot_password']);
     Route::get('ar-ire-login', [IreLoginController::class, 'arabic_login_view'])->name('ireLoginArabic');
 });
-Route::get('/search', [IreLoginController::class, 'search_ire'])->name('search_ire');
-Route::post('ireLanguageChange', [IreController::class, 'languageChange'])->name('ireLanguageChange');
-
 Route::middleware(['ire'])->group(function () {
     Route::get('email-verify', [IreRegisterController::class, 'email_verify'])->name('ireEmailVerify');
     Route::post('resend-email-verify', [IreRegisterController::class, 'resend_email_verification'])->name('ireResendEmailVerification');
@@ -715,6 +731,9 @@ Route::middleware(['ire'])->group(function () {
         });
     });
 });
+
+Route::get('/search', [IreLoginController::class, 'search_ire'])->name('search_ire');
+Route::post('ireLanguageChange', [IreController::class, 'languageChange'])->name('ireLanguageChange');
 
 Route::get('tree', function () {
     $parentCategories = Category::where('parent_id', 0)->where('is_active',1)->orderBy('name', 'asc')->get();

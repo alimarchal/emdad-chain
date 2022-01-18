@@ -76,6 +76,7 @@ class Kernel extends HttpKernel
         'categoryCheck' => \App\Http\Middleware\CategoryCheck::class,
         'buyer' => \App\Http\Middleware\Buyer::class,
         'supplier' => \App\Http\Middleware\Supplier::class,
+        'superAdmin' => \App\Http\Middleware\SuperAdmin::class,
 
     ];
 }
