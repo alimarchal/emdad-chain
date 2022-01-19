@@ -80,8 +80,8 @@ class QouteController extends Controller
         $categoryName = Category::where('id', $quote->orderItem->item_code)->first();
         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
-        User::send_sms(env('SMS_NO_ONE'), 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id);
-        User::send_sms(env('SMS_NO_TWO'), 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id);
+        //User::send_sms(env('SMS_NO_ONE'), 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id);
+        //User::send_sms(env('SMS_NO_TWO'), 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id);
 
         /* Notifying business@emdad-chain.com for Purchase order created */
         $userQuoted = User::find(auth()->user()->id);
@@ -199,8 +199,8 @@ class QouteController extends Controller
         $categoryName = Category::where('id', $quote->orderItem->item_code)->first();
         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
-        User::send_sms('+966581382822', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id);
-        User::send_sms('+966593388833', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id);
+//        User::send_sms('+966581382822', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id);
+//        User::send_sms('+966593388833', 'Supplier responded to a requisition.' . ' By: ' . $from . ', ' . ' To: ' . $to . ', ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ', ' . 'Requisition #: ' . $quote->e_order_id);
 
         /* Notifying business@emdad-chain.com for Purchase order created */
         $userQuoted = User::find(auth()->user()->id);

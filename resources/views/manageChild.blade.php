@@ -2,7 +2,7 @@
     @foreach ($categories as $category)
 
         <li>
-            <a @if(auth()->user()->hasRole('SuperAdmin')) href="{{route('category.edit',$category->id)}}" @endif class="text-blue-900 hover:text-red-900 hover:underline">
+            <a @if(auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('SC Supervisor')) href="{{route('category.edit',$category->id)}}" @endif class="text-blue-900 hover:text-red-900 hover:underline">
                 @if (auth()->user()->rtl == 0)
                     @if($category->parent_id == 0)
                         <strong>

@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PlacedRFQController extends Controller
 {
@@ -105,15 +106,26 @@ class PlacedRFQController extends Controller
 
     public function viewRFQsID(EOrderItems $eOrderItems)
     {
-        $collection = Qoute::where('e_order_items_id', $eOrderItems->id)
-            ->where(['supplier_user_id' => \auth()->id(), 'supplier_business_id' => \auth()->user()->business_id])
-            ->first();
+
+//        DB::enableQueryLog();
+//        $collection = Qoute::where('e_order_items_id', $eOrderItems->id)
+//            ->where(['supplier_user_id' => \auth()->id(), 'supplier_business_id' => \auth()->user()->business_id])
+//            ->first();
+
+//        dd(DB::getQueryLog());
+
+
+        $user_id = auth()->user()->id;
+        $user_business_id = auth()->user()->business_id;
+        $collection = Qoute::where('e_order_items_id', $eOrderItems->id)->where('supplier_user_id', $user_id)->first();
+        return view('supplier.supplier-quote', compact('eOrderItems', 'collection', 'user_business_id'));
+
         /* If condition to prevent supplier viewing other suppliers' quotation */
-        if (isset($collection))
-        {
-            return view('supplier.supplier-quote', compact('eOrderItems', 'collection'));
-        }
-        return redirect()->back();
+//        if (isset($collection))
+//        {
+//            return view('supplier.supplier-quote', compact('eOrderItems', 'collection'));
+//        }
+//        return redirect()->back();
     }
 
     /**
