@@ -407,7 +407,18 @@ class PaymentController extends Controller
     // View function for Invoice details by ID (Payment history)
     public function invoiceView($id)
     {
-       $invoice = Invoice::with('purchase_order','eOrderItem', 'deliveryNote', 'bankPayment')->where('id', $id)->first();
+        if (auth()->user()->registration_type == 'Buyer')
+        {
+            $invoice = Invoice::with('purchase_order','eOrderItem', 'deliveryNote', 'bankPayment')
+                ->where(['id' => $id, 'buyer_business_id' => auth()->user()->business_id])
+                ->first();
+        }
+        if (auth()->user()->registration_type == 'Supplier')
+        {
+            $invoice = Invoice::with('purchase_order','eOrderItem', 'deliveryNote', 'bankPayment')
+                ->where(['id' => $id, 'supplier_business_id' => auth()->user()->business_id])
+                ->first();
+        }
 
        return view('payment.invoiceView', compact('invoice'));
 
@@ -830,7 +841,18 @@ class PaymentController extends Controller
     // View function for Invoice details by ID (Payment history)
     public function singleCategoryInvoiceView($rfq_no)
     {
-        $invoices = Invoice::with('purchase_order','eOrderItem')->where('rfq_no', $rfq_no)->get();
+        if (auth()->user()->registration_type == 'Buyer')
+        {
+            $invoices = Invoice::with('purchase_order','eOrderItem')
+                ->where(['rfq_no' => $rfq_no, 'buyer_business_id' => auth()->user()->business_id])
+                ->get();
+        }
+        if (auth()->user()->registration_type == 'Supplier')
+        {
+            $invoices = Invoice::with('purchase_order','eOrderItem')
+                ->where(['rfq_no' => $rfq_no, 'supplier_business_id' => auth()->user()->business_id])
+                ->get();
+        }
 
         return view('payment.singleCategory.invoiceView', compact('invoices'));
     }

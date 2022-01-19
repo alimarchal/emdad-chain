@@ -12,7 +12,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Cart')}} @if (!$shipmentCarts->count()) {{__('portal.seems empty')}} @endif </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Cart')}} @if (!$shipmentCarts->count()) {{__('portal.seems empty')}} @endif </h2>
 
         @if ($shipmentCarts->count())
             @php $total = 0; @endphp
@@ -115,7 +115,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Cart')}} @if (!$shipmentCarts->count()) {{__('portal.seems empty')}} @endif </h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Cart')}} @if (!$shipmentCarts->count()) {{__('portal.seems empty')}} @endif </h2>
 
         @if ($shipmentCarts->count())
             @php $total = 0; @endphp

@@ -1521,7 +1521,7 @@
                         }
                     @endphp
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                       @if (isset($isBusinessWarehouseDataExist)) href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}"> @else  href="{{ route('businessWarehouse.create') }}"> @endif
+                       @if (isset($isBusinessWarehouseDataExist)) href="{{ route('businessWarehouseShow') }}"> @else  href="{{ route('businessWarehouse.create') }}"> @endif
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>
@@ -1577,7 +1577,7 @@
                                     d="M11.611,10.049l-4.76-4.873c-0.303-0.31-0.297-0.804,0.012-1.105c0.309-0.304,0.803-0.293,1.105,0.012l5.306,5.433c0.304,0.31,0.296,0.805-0.012,1.105L7.83,15.928c-0.152,0.148-0.35,0.223-0.547,0.223c-0.203,0-0.406-0.08-0.559-0.236c-0.303-0.309-0.295-0.803,0.012-1.104L11.611,10.049z"></path>
                             </svg>
                             @if (isset($isBusinessWarehouseDataExist))
-                                <a href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
+                                <a href="{{ route('businessWarehouseShow') }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
 {{--                                @if (isset($isBusinessWarehouseDataExist)) &nbsp;<img src="{{ url('complete_check.jpg') }}" class="w-4 inline"> @endif--}}
                             @else
                                 <a href="{{ route('businessWarehouse.create') }}"><span class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
@@ -2664,7 +2664,7 @@
                         }
                     @endphp
                     <a @click="open = true" class="flex items-center mt-4 py-2 px-6 {{ request()->routeIs('businessWarehouse.create') || request()->routeIs('businessWarehouseShow') ? 'bg-gray-700 bg-opacity-25 text-gray-100' : 'text-gray-500' }} hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                       @if (isset($isBusinessWarehouseDataExist)) href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}"> @else  href="{{ route('businessWarehouse.create') }}"> @endif
+                       @if (isset($isBusinessWarehouseDataExist)) href="{{ route('businessWarehouseShow') }}"> @else  href="{{ route('businessWarehouse.create') }}"> @endif
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M18.121,9.88l-7.832-7.836c-0.155-0.158-0.428-0.155-0.584,0L1.842,9.913c-0.262,0.263-0.073,0.705,0.292,0.705h2.069v7.042c0,0.227,0.187,0.414,0.414,0.414h3.725c0.228,0,0.414-0.188,0.414-0.414v-3.313h2.483v3.313c0,0.227,0.187,0.414,0.413,0.414h3.726c0.229,0,0.414-0.188,0.414-0.414v-7.042h2.068h0.004C18.331,10.617,18.389,10.146,18.121,9.88 M14.963,17.245h-2.896v-3.313c0-0.229-0.186-0.415-0.414-0.415H8.342c-0.228,0-0.414,0.187-0.414,0.415v3.313H5.032v-6.628h9.931V17.245z M3.133,9.79l6.864-6.868l6.867,6.868H3.133z"></path>
@@ -2721,7 +2721,7 @@
                                     d="M8.388,10.049l4.76-4.873c0.303-0.31,0.297-0.804-0.012-1.105c-0.309-0.304-0.803-0.293-1.105,0.012L6.726,9.516c-0.303,0.31-0.296,0.805,0.012,1.105l5.433,5.307c0.152,0.148,0.35,0.223,0.547,0.223c0.203,0,0.406-0.08,0.559-0.236c0.303-0.309,0.295-0.803-0.012-1.104L8.388,10.049z"></path>
                             </svg>
                             @if (isset($isBusinessWarehouseDataExist))
-                                <a href="{{ route('businessWarehouseShow', $isBusinessWarehouseDataExist->business_id) }}" class="hover:text-white {{ request()->routeIs('businessWarehouseShow') ? 'text-white' : 'text-gray-500' }}"><span
+                                <a href="{{ route('businessWarehouseShow') }}" class="hover:text-white {{ request()->routeIs('businessWarehouseShow') ? 'text-white' : 'text-gray-500' }}"><span
                                         class="mx-3">{{ __('sidebar.Warehouse') }}</span></a>
                             @else
                                 <a href="{{ route('businessWarehouse.create') }}" class="hover:text-white {{ request()->routeIs('businessWarehouse.create') ? 'text-white' : 'text-gray-500' }}"><span

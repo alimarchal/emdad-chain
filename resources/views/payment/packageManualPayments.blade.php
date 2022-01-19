@@ -68,11 +68,15 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-black">
+                                                        @if(isset($payment->user->name))
                                                         {{ $payment->user->name }}
+                                                        @endif
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
+                                                        @if(isset($payment->user->email))
                                                         {{ $payment->user->email }}
+                                                        @endif
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
@@ -211,11 +215,15 @@
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-black" style="font-family: sans-serif">
+                                                        @if(isset($payment->user->name))
                                                         {{ $payment->user->name }}
+                                                        @endif
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-black" style="font-family: sans-serif">
+                                                        @if(isset($payment->user->email))
                                                         {{ $payment->user->email }}
+                                                        @endif
                                                     </td>
 
                                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">

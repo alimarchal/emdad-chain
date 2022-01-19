@@ -77,6 +77,9 @@ class Kernel extends HttpKernel
         'buyer' => \App\Http\Middleware\Buyer::class,
         'supplier' => \App\Http\Middleware\Supplier::class,
         'superAdmin' => \App\Http\Middleware\SuperAdmin::class,
+        'ITAdmin' => \App\Http\Middleware\ITAdmin::class,
+        'EmdadUsers' => \App\Http\Middleware\EmdadUsers::class,
+        'DriverCheck' => \App\Http\Middleware\DriverCheck::class,
 
     ];
 }

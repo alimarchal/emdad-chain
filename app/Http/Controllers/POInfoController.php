@@ -112,6 +112,7 @@ class POInfoController extends Controller
 
     public function show(POInfo $purchaseOrderInfo)
     {
+        $purchaseOrderInfo = $purchaseOrderInfo::firstWhere('business_id', auth()->user()->business_id);
         $business = Business::find($purchaseOrderInfo->business_id);
         return view('purchaseOrderInfo.show', compact('purchaseOrderInfo', 'business'));
     }

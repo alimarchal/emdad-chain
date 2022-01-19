@@ -72,8 +72,12 @@ class CategoryController extends Controller
 
     public function showAllCategories()
     {
-        $category = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();;
-        return view('category.show', compact('category'));
+        if (auth()->user()->registration_type != 'Supplier' && auth()->user()->registration_type != 'Buyer' )
+        {
+            $category = Category::where('parent_id', 0)->orderBy('name', 'asc')->get();;
+            return view('category.show', compact('category'));
+        }
+        return redirect()->back();
     }
 
     public function parentCategories()

@@ -15,7 +15,7 @@
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Draft Purchase Orders') }}</h2>
         </x-slot>
-        <div class="py-12">
+        <div class="py-0">
             <h2 class="text-2xl font-bold py-0 text-center m-5">{{__('portal.Purchase Orders Center')}}</h2>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @if (session()->has('message'))
@@ -267,7 +267,7 @@
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ __('Draft Purchase Orders') }}</h2>
         </x-slot>
-        <div class="py-12">
+        <div class="py-0">
             <h2 class="text-2xl font-bold py-0 text-center m-5">{{__('portal.Purchase Orders Center')}}</h2>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 @if (session()->has('message'))

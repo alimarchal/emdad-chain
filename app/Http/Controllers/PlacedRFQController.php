@@ -39,7 +39,7 @@ class PlacedRFQController extends Controller
 
     public function RFQItems($EOrderItems)
     {
-        $collection = EOrderItems::with('business', 'warehouse')->where('e_order_id', $EOrderItems)->get();
+        $collection = EOrderItems::with('business', 'warehouse')->where(['e_order_id' => $EOrderItems, 'business_id' => \auth()->user()->business_id])->get();
         return view('RFQPlaced.show', compact('collection'));
     }
 
@@ -105,10 +105,15 @@ class PlacedRFQController extends Controller
 
     public function viewRFQsID(EOrderItems $eOrderItems)
     {
-        $user_id = auth()->user()->id;
-        $user_business_id = auth()->user()->business_id;
-        $collection = Qoute::where('e_order_items_id', $eOrderItems->id)->where('supplier_user_id', $user_id)->first();
-        return view('supplier.supplier-quote', compact('eOrderItems', 'collection', 'user_business_id'));
+        $collection = Qoute::where('e_order_items_id', $eOrderItems->id)
+            ->where(['supplier_user_id' => \auth()->id(), 'supplier_business_id' => \auth()->user()->business_id])
+            ->first();
+        /* If condition to prevent supplier viewing other suppliers' quotation */
+        if (isset($collection))
+        {
+            return view('supplier.supplier-quote', compact('eOrderItems', 'collection'));
+        }
+        return redirect()->back();
     }
 
     /**
@@ -244,11 +249,14 @@ class PlacedRFQController extends Controller
     /* Same function as viewSingleCategoryRFQByID function but this is for modification we are passing Quote in this whereas in viewSingleCategoryRFQByID we are passing EOrder */
     public function viewModifiedSingleCategoryRFQByID(Qoute $quote)
     {
-        $user_business_id = auth()->user()->business_id;
         $eOrderItems = EOrderItems::where('e_order_id', $quote->e_order_id)->get();
         $collection = Qoute::where(['id' => $quote->id, 'supplier_business_id' => \auth()->user()->business_id])->first();
-
-        return view('supplier.singleCategoryRFQ.viewById', compact('quote', 'eOrderItems', 'collection', 'user_business_id'));
+        /* If condition to prevent supplier viewing other suppliers' quotation */
+        if (isset($collection))
+        {
+            return view('supplier.singleCategoryRFQ.viewById', compact('quote', 'eOrderItems', 'collection'));
+        }
+        return redirect()->back();
     }
 
     ###################################################################################################

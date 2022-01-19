@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminDownloadController;
 use App\Http\Controllers\AdminIreController;
 use App\Http\Controllers\BankPaymentController;
 use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\BusinessFinanceDetailController;
 use App\Http\Controllers\BusinessPackageController;
 use App\Http\Controllers\BusinessWarehouseController;
 use App\Http\Controllers\CategoryController;
@@ -202,21 +203,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::get('languageChangeForDownloadableFiles/{lang}/{rtl_value}', [DashboardController::class, 'languageChangeForDownloadableFiles'])->name('languageChangeForDownloadableFiles');
     Route::resource('users', UserController::class);
     Route::post('/registrationType', [UserController::class, 'registrationType']);
-    // User Log route for SuperAdmin
-    Route::get('/user-logs', [UserController::class, 'user_log'])->name('user_logs');
 
     // Adding National Id Card photo
     Route::post('national-id-card-image/{user_id}', [UserController::class, 'nationalIdCardPhoto'])->name('nationalIdCardPhoto');
-
-    ###################################################### Buyer and Supplier Add each other ##########################################
-    Route::get('add-supplier', [UserController::class, 'createSupplier'])->name('createSupplier');
-    Route::post('store-supplier', [UserController::class, 'storeSupplier'])->name('storeSupplier');
-    Route::get('add-buyer', [UserController::class, 'createBuyer'])->name('createBuyer');
-    Route::post('store-buyer', [UserController::class, 'storeBuyer'])->name('storeBuyer');
-
-    Route::get('/business-suppliers/', [BusinessController::class, 'suppliers'])->name('businessSuppliers');
-    Route::get('/business-buyers/', [BusinessController::class, 'buyers'])->name('businessBuyers');
-    ###################################################### Buyer and Supplier Adding each other ##########################################
 
     Route::middleware(['packageCheck', 'categoryCheck'])->group(function () {
         Route::resource('/business', BusinessController::class);
@@ -226,48 +215,24 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::get('/update-certificates/', [BusinessController::class, 'certificateView'])->name('certificateView');
     Route::post('/update-certificates/', [BusinessController::class, 'certificateUpdate']);
 
-    // Update business certificate route for Emdad users
-    Route::get('/certificates-update-requests/', [BusinessController::class, 'certificates'])->name('certificates');
-    Route::get('/certificates-show/{id}', [BusinessController::class, 'certificateShow'])->name('certificateShow');
-    Route::get('/certificates-status-update/{id}/{status}', [BusinessController::class, 'certificateStatusUpdate'])->name('certificateStatusUpdate');
-    Route::get('/business-certificates-update/{id}', [BusinessController::class, 'certificateBusinessStatusUpdate'])->name('certificateBusinessStatusUpdate');
+    Route::middleware(['EmdadUsers'])->group(function (){
+        // Update business certificate route for Emdad users
+        Route::get('/certificates-update-requests/', [BusinessController::class, 'certificates'])->name('certificates');
+        Route::get('/certificates-show/{id}', [BusinessController::class, 'certificateShow'])->name('certificateShow');
+        Route::get('/certificates-status-update/{id}/{status}', [BusinessController::class, 'certificateStatusUpdate'])->name('certificateStatusUpdate');
+        Route::middleware('ITAdmin')->get('/business-certificates-update/{id}', [BusinessController::class, 'certificateBusinessStatusUpdate'])->name('certificateBusinessStatusUpdate');
 
-    Route::get('/incomplete-business-registration/', [BusinessController::class, 'incomplete'])->name('incompleteBusiness');
-    Route::get('/business-status/', [BusinessController::class, 'accountStatus'])->name('accountStatus');
-    Route::get('/business-legal-finance-status/', [BusinessController::class, 'businessLegalFinanceStatus'])->name('businessLegalFinanceStatus');
+        Route::get('/incomplete-business-registration/', [BusinessController::class, 'incomplete'])->name('incompleteBusiness');
+        Route::get('/business-status/', [BusinessController::class, 'accountStatus'])->name('accountStatus');
+        Route::get('/business-legal-finance-status/', [BusinessController::class, 'businessLegalFinanceStatus'])->name('businessLegalFinanceStatus');
+    });
 
-    Route::resource('/businessFinanceDetail', \App\Http\Controllers\BusinessFinanceDetailController::class);
+    Route::resource('/businessFinanceDetail', BusinessFinanceDetailController::class);
     Route::get('/businessWarehouse/number-update', [BusinessWarehouseController::class, 'updateNumber'])->name('warehouseNumberUpdate');
     Route::resource('/businessWarehouse', BusinessWarehouseController::class);
-    Route::get('/businessWarehouse/{id}/show', [BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
+    Route::get('/businessWarehouse', [BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
     Route::get('/purchaseOrderInfo/store', [POInfoController::class, 'storeWithOutPOInfo'])->name('storeWithOutPOInfo');
     Route::resource('/purchaseOrderInfo', POInfoController::class);
-
-    ####################Admin IREs Controller###################
-    Route::get('/ires', [AdminIreController::class, 'index'])->name('adminIres');
-    Route::get('/ire-show', [AdminIreController::class, 'show'])->name('adminIreShow');
-    Route::post('/ire-edit', [AdminIreController::class, 'edit'])->name('adminIreEdit');
-    Route::post('/ire-update', [AdminIreController::class, 'update'])->name('adminIreUpdate');
-    ####################END#####################################
-
-
-    #####################Admin Downloads Controller###################
-    Route::get('/downloadable-files', [AdminDownloadController::class, 'index'])->name('adminDownload');
-    Route::get('/create-downloadable-file', [AdminDownloadController::class, 'create'])->name('adminDownloadCreate');
-    Route::post('/store-downloadable-file', [AdminDownloadController::class, 'store'])->name('adminDownloadStore');
-    Route::post('/edit-downloadable-file', [AdminDownloadController::class, 'edit'])->name('adminDownloadEdit');
-    Route::post('/update-downloadable-file', [AdminDownloadController::class, 'update'])->name('adminDownloadUpdate');
-    Route::get('/delete-downloadable-file/{id}', [AdminDownloadController::class, 'delete'])->name('adminDownloadDelete');
-    ####################END#####################################
-
-    ######################Admin Commission Controller###################
-    Route::get('/commission-percentages', [CommissionPercentageController::class, 'index'])->name('adminPercentage');
-    Route::get('/create-commission-percentage', [CommissionPercentageController::class, 'create'])->name('adminPercentageCreate');
-    Route::post('/store-commission-percentage', [CommissionPercentageController::class, 'store'])->name('adminPercentageStore');
-    Route::post('/edit-commission-percentage', [CommissionPercentageController::class, 'edit'])->name('adminPercentageEdit');
-    Route::post('/update-commission-percentage', [CommissionPercentageController::class, 'update'])->name('adminPercentageUpdate');
-    Route::get('/delete-commission-percentage/{id}', [CommissionPercentageController::class, 'delete'])->name('adminPercentageDelete');
-    ####################END#####################################
 
     Route::get('category/show', [CategoryController::class, 'showAllCategories'])->name('showAllCategory');
     Route::get('businesses-related-to-category/{category_id}', [CategoryController::class, 'categoryRelatedBusiness'])->name('categoryRelatedBusiness');
@@ -281,6 +246,33 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
         Route::get('/logviewer', function () {
             return redirect('admin/logviewer');
         })->name('log.viewer');
+        // User Log route for SuperAdmin
+        Route::get('/user-logs', [UserController::class, 'user_log'])->name('user_logs');
+
+        ##################### Download Controller ###################
+        Route::get('/downloadable-files', [AdminDownloadController::class, 'index'])->name('adminDownload');
+        Route::get('/create-downloadable-file', [AdminDownloadController::class, 'create'])->name('adminDownloadCreate');
+        Route::post('/store-downloadable-file', [AdminDownloadController::class, 'store'])->name('adminDownloadStore');
+        Route::post('/edit-downloadable-file', [AdminDownloadController::class, 'edit'])->name('adminDownloadEdit');
+        Route::post('/update-downloadable-file', [AdminDownloadController::class, 'update'])->name('adminDownloadUpdate');
+        Route::get('/delete-downloadable-file/{id}', [AdminDownloadController::class, 'delete'])->name('adminDownloadDelete');
+        ############################# END ###########################
+
+        ####################Admin IREs Controller###################
+        Route::get('/ires', [AdminIreController::class, 'index'])->name('adminIres');
+        Route::get('/ire-show', [AdminIreController::class, 'show'])->name('adminIreShow');
+        Route::post('/ire-edit', [AdminIreController::class, 'edit'])->name('adminIreEdit');
+        Route::post('/ire-update', [AdminIreController::class, 'update'])->name('adminIreUpdate');
+        ####################END#####################################
+
+        ##################### Commission Controller ##################
+        Route::get('/commission-percentages', [CommissionPercentageController::class, 'index'])->name('adminPercentage');
+        Route::get('/create-commission-percentage', [CommissionPercentageController::class, 'create'])->name('adminPercentageCreate');
+        Route::post('/store-commission-percentage', [CommissionPercentageController::class, 'store'])->name('adminPercentageStore');
+        Route::post('/edit-commission-percentage', [CommissionPercentageController::class, 'edit'])->name('adminPercentageEdit');
+        Route::post('/update-commission-percentage', [CommissionPercentageController::class, 'update'])->name('adminPercentageUpdate');
+        Route::get('/delete-commission-percentage/{id}', [CommissionPercentageController::class, 'delete'])->name('adminPercentageDelete');
+        ############################### END ################################
 
         /* Super admin rating routes starts */
         Route::get('rating-view', [RatingController::class, 'view'])->name('ratingView');
@@ -316,6 +308,14 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
         //Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'show'])->name('roles');
         #################### This is Permission Route ##########################
         Route::resource('/permission', PermissionController::class);
+
+        ###################################### For Emdad Route start ###################################################
+        Route::get('emdad-invoices-history', [PaymentController::class, 'payments'])->name('emdad_payments');
+        Route::get('package-manual-payments', [PaymentController::class, 'packageManualPayments'])->name('packageManualPayments');
+        Route::get('package-manual-payment-{id}', [PaymentController::class, 'packageManualPaymentView'])->name('packageManualPaymentView');
+        Route::post('update-package-manual-payment-{id}', [PaymentController::class, 'updatePackageManualPayment'])->name('updatePackageManualPayment');
+        Route::get('supplier-manual-payments', [PaymentController::class, 'supplier_payment'])->name('supplier_payment');
+        ##################################### For Emdad Route end ######################################################
     });
     #################### Super Admin Routes END #######################
 
@@ -420,6 +420,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
         #####################################################################################################
 
         Route::get('proforma-invoices', [PaymentController::class, 'proforma_invoices'])->name('proforma_invoices');
+
+        ###################################################### Buyer adding Supplier ##########################################
+        Route::get('add-supplier', [UserController::class, 'createSupplier'])->name('createSupplier');
+        Route::post('store-supplier', [UserController::class, 'storeSupplier'])->name('storeSupplier');
+        Route::get('/business-suppliers/', [BusinessController::class, 'suppliers'])->name('businessSuppliers');
     });
     #################### Buyer Routes END #############################
 
@@ -509,6 +514,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
         #####################################################################################################
 
         Route::get('generate-proforma-invoice', [PaymentController::class, 'generate_proforma_invoice'])->name('generate_proforma_invoices');
+
+        ###################################################### Supplier adding buyer ##########################################
+        Route::get('add-buyer', [UserController::class, 'createBuyer'])->name('createBuyer');
+        Route::post('store-buyer', [UserController::class, 'storeBuyer'])->name('storeBuyer');
+        Route::get('/business-buyers/', [BusinessController::class, 'buyers'])->name('businessBuyers');
     });
     #################### Supplier Routes END ##########################
 
@@ -522,9 +532,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     /* Generating PDF file for Multi Category Quotation Supplier quoted. */
     Route::get('/generate-pdf/{eOrderItemID}', [PlacedRFQController::class, 'quotedQuotationPDF'])->name('PDFForQuotation');
 
-    #################### This is Business information route to check status of business ####################
-    Route::get('business/Approval/Update/{id}', [BusinessController::class, 'businessApprovalUpdate'])->name('businessApprovalUpdate');
-    Route::get('business/Approval/Rejected/{id}', [BusinessController::class, 'businessApprovalRejected'])->name('businessApprovalRejected');
     Route::resource('qoute', QouteController::class);
 
     /* Generating PDF file for Single Category Quotation Supplier quoted */
@@ -555,22 +562,22 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::get('/generate-single-category-delivery-note-pdf/{deliveryNoteRfqNo}', [DeliveryNoteController::class, 'singleCategoryGeneratePDF'])->name('singleCategoryDeliveryNoteGeneratePDF');
     ################################### END ########################################################################
 
-    ############################################################# Purchase order routes ####################################
+    ######################################## Purchase order routes #################################################
     Route::get('/po', [DraftPurchaseOrderController::class, 'po'])->name('po.po');
     Route::get('/po/{draftPurchaseOrder}', [DraftPurchaseOrderController::class, 'poShow'])->name('po.show');
 
-    ############################################################# Single Category RFQ PO routes ####################################
+    ######################################## Single Category RFQ PO routes #########################################
     Route::get('/single/category/po', [DraftPurchaseOrderController::class, 'singleCategoryPO'])->name('singleCategoryPO');
     Route::get('/single/category/po/{rfqNo}', [DraftPurchaseOrderController::class, 'singleCategoryPOShow'])->name('singleCategoryPOByID');
-    #################################################################### END ########################################################
+    ##################################################### END ######################################################
 
-    ##################### Shipment routes ####################################
+    ######################################### Shipment routes ######################################################
     Route::resource('shipment', ShipmentController::class);
     Route::get('delivered-shipments', [ShipmentController::class, 'delivered'])->name('deliveredShipments');
     Route::get('ongoing-shipments', [ShipmentController::class, 'ongoingShipment'])->name('ongoingShipment');
-    #################### END ##################################################
+    ############################################### END ############################################################
 
-    ###################### Generate Invoice & Delivery ####################################
+    ###################################### Generate Invoice & Delivery #############################################
     Route::post('/invoice/generate', [InvoiceController::class, 'invoiceGenerate'])->name('invoice.generate');
     Route::get('/invoice/{invoice}', [InvoiceController::class, 'show'])->name('invoice.show');
     Route::get('/emdad-invoices/', [EmdadInvoiceController::class, 'index'])->name('emdadInvoices');
@@ -578,24 +585,17 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::get('/generate-emdad-invoice/{id}', [EmdadInvoiceController::class, 'generateInvoice'])->name('emdadGenerateInvoice');
     Route::get('/generate-emdad-invoice-pdf/{emdadInvoiceID}', [EmdadInvoiceController::class, 'generatePDF'])->name('generateEmdadInvoicePDF');
 
-    ########################## Single Category Invoice & Delivery Routes ####################
+    ########################################## Single Category Invoice & Delivery Routes ###########################
     Route::get('single/category/invoice/{invoiceID}', [InvoiceController::class, 'singleCategoryShow'])->name('singleCategoryInvoiceShow');
     Route::post('single/category/invoice/generate', [InvoiceController::class, 'singleCategoryInvoiceGenerate'])->name('singleCategoryInvoiceGenerate');
     Route::get('/single/category/emdad-invoices/', [EmdadInvoiceController::class, 'singleCategoryIndex'])->name('singleCategoryEmdadInvoicesIndex');
     Route::get('/single/category/emdad-invoice/{rfq_no}', [EmdadInvoiceController::class, 'singleCategoryView'])->name('singleCategoryView');
     Route::post('/single/category/generate-emdad-invoice', [EmdadInvoiceController::class, 'singleCategoryGenerateInvoice'])->name('singleCategoryGenerateInvoice');
     Route::get('/generate-single-category-emdad-invoice-pdf/{emdadInvoiceRFQNo}', [EmdadInvoiceController::class, 'singleCategoryGeneratePDF'])->name('singleCategoryEmadadInvoiceGeneratePDF');
-    #################### END ##############################################################
+    #################################################### END #######################################################
 
-    ########################################################## Payment routes #################################################################################
+    ############################################## Payment routes ##################################################
     Route::get('invoices-history', [PaymentController::class, 'invoices'])->name('invoices');
-    ###################### For Emdad Route start ##########################
-    Route::get('emdad-invoices-history', [PaymentController::class, 'payments'])->name('emdad_payments');
-    Route::get('package-manual-payments', [PaymentController::class, 'packageManualPayments'])->name('packageManualPayments');
-    Route::get('package-manual-payment-{id}', [PaymentController::class, 'packageManualPaymentView'])->name('packageManualPaymentView');
-    Route::post('update-package-manual-payment-{id}', [PaymentController::class, 'updatePackageManualPayment'])->name('updatePackageManualPayment');
-    Route::get('supplier-manual-payments', [PaymentController::class, 'supplier_payment'])->name('supplier_payment');
-    ###################### For Emdad Route end ##########################
 
     Route::get('invoice-details/{id}', [PaymentController::class, 'invoiceView'])->name('invoiceView');
     Route::resource('bank-payments', BankPaymentController::class)->names('bank-payments');
@@ -666,7 +666,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::post('invoice-payment/proceed_payment', [BusinessPackageController::class, 'proceed_payment'])->name('invoicePayment.proceed_payment');
     Route::get('invoice-payment/invoice_payment_status', [BusinessPackageController::class, 'invoice_payment_status'])->name('invoice_payment_status');
 
-############################################################## END ##########################################################################
+    ########################################################## END ####################################################
     //Route::middleware(['verified'])->group(function () {
     Route::group([],function () {
         Route::get('showLibrary', [LibraryController::class,'showLibrary'])->name('showLibrary');

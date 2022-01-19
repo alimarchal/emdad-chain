@@ -30,8 +30,6 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 use PDF;
 
-
-
 class DraftPurchaseOrderController extends Controller
 {
     public function __construct()
@@ -79,6 +77,7 @@ class DraftPurchaseOrderController extends Controller
 
     public function show(DraftPurchaseOrder $draftPurchaseOrder)
     {
+        $draftPurchaseOrder = DraftPurchaseOrder::firstWhere(['id' => $draftPurchaseOrder->id, 'business_id' => auth()->user()->business_id]);
         return view('draftPurchaseOrder.show', compact('draftPurchaseOrder'));
     }
 
@@ -470,6 +469,14 @@ class DraftPurchaseOrderController extends Controller
 
     public function poShow(DraftPurchaseOrder $draftPurchaseOrder)
     {
+        if (auth()->user()->registration_type == 'Buyer')
+        {
+            $draftPurchaseOrder = DraftPurchaseOrder::firstWhere(['id' => $draftPurchaseOrder->id, 'business_id' => auth()->user()->business_id]);
+        }
+        if (auth()->user()->registration_type == 'Supplier')
+        {
+            $draftPurchaseOrder = DraftPurchaseOrder::firstWhere(['id' => $draftPurchaseOrder->id, 'supplier_business_id' => auth()->user()->business_id]);
+        }
         return view('draftPurchaseOrder.poShow', compact('draftPurchaseOrder'));
     }
 
@@ -525,7 +532,7 @@ class DraftPurchaseOrderController extends Controller
 
     public function singleCategoryDPOShow($eOrderID)
     {
-        $draftPurchaseOrders = DraftPurchaseOrder::where('rfq_no', $eOrderID)->get();
+        $draftPurchaseOrders = DraftPurchaseOrder::where(['rfq_no' => $eOrderID, 'business_id' => auth()->user()->business_id])->get();
 
         return view('draftPurchaseOrder.singleCategory.show', compact('draftPurchaseOrders'));
     }
@@ -882,7 +889,15 @@ class DraftPurchaseOrderController extends Controller
 
     public function singleCategoryPOShow($rfqNo)
     {
-        $draftPurchaseOrders = DraftPurchaseOrder::where('rfq_no', $rfqNo)->get();
+        $draftPurchaseOrders = null;
+        if (auth()->user()->registration_type == 'Buyer')
+        {
+            $draftPurchaseOrders = DraftPurchaseOrder::where(['rfq_no' => $rfqNo, 'business_id' => auth()->user()->business_id])->get();
+        }
+        if (auth()->user()->registration_type == 'Supplier')
+        {
+            $draftPurchaseOrders = DraftPurchaseOrder::where(['rfq_no' => $rfqNo, 'supplier_business_id' => auth()->user()->business_id])->get();
+        }
         return view('draftPurchaseOrder.singleCategory.poShow', compact('draftPurchaseOrders'));
     }
 

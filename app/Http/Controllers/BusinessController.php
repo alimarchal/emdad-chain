@@ -281,7 +281,7 @@ class BusinessController extends Controller
 
     public function show(Business $business)
     {
-        $cats = explode(',', $business->category_number);
+        $business = $business::firstWhere('id', \auth()->user()->business_id);
         return view('business.show', compact('business'));
     }
 
@@ -483,14 +483,22 @@ class BusinessController extends Controller
 
     public function suppliers()
     {
-        $suppliers = User::with('business')->where(['added_by_userId' => \auth()->id(), 'added_by' => 1])->where('usertype', '=', 'CEO')->orderByDesc('created_at')->get();
+        $suppliers = User::with('business')
+            ->where(['added_by_userId' => \auth()->id(), 'added_by' => 1])
+            ->where('usertype', '=', 'CEO')
+            ->orderByDesc('created_at')
+            ->get();
 
         return view('business.supplier', compact('suppliers'));
     }
 
     public function buyers()
     {
-        $buyers = User::with('business')->where(['added_by_userId' => \auth()->id(), 'added_by' => 2])->where('usertype', '=', 'CEO')->orderByDesc('created_at')->get();
+        $buyers = User::with('business')
+            ->where(['added_by_userId' => \auth()->id(), 'added_by' => 2])
+            ->where('usertype', '=', 'CEO')
+            ->orderByDesc('created_at')
+            ->get();
 
         return view('business.buyer', compact('buyers'));
     }

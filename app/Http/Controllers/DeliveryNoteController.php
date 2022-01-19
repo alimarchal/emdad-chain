@@ -65,6 +65,12 @@ class DeliveryNoteController extends Controller
 
     public function deliveryNoteView(DraftPurchaseOrder $draftPurchaseOrder)
     {
+        /* Redirecting back to prevent supplier to see other suppliers' delivery note */
+        if ($draftPurchaseOrder->supplier_business_id != auth()->user()->business_id)
+        {
+            return redirect()->back();
+        }
+
 //        $deliveryNote = DeliveryNote::where('rfq_no', $draftPurchaseOrder->rfq_no)->first();
         $deliveryNote = DeliveryNote::with('DraftPurchaseOrder')->where('draft_purchase_order_id', $draftPurchaseOrder->id)->first();
 
@@ -105,6 +111,10 @@ class DeliveryNoteController extends Controller
 
     public function viewNote(DeliveryNote $deliveryNote)
     {
+        if ($deliveryNote->supplier_business_id != auth()->user()->business_id)
+        {
+            return redirect()->back();
+        }
         return view('deliveryNote.viewNote',compact('deliveryNote'));
     }
 
@@ -178,7 +188,9 @@ class DeliveryNoteController extends Controller
 
     public function singleCategoryDeliveryNoteView($rfqNo)
     {
-        $draftPurchaseOrders = DraftPurchaseOrder::with('eOrderItem')->where('rfq_no', $rfqNo)->get();
+        $draftPurchaseOrders = DraftPurchaseOrder::with('eOrderItem')
+            ->where(['rfq_no' => $rfqNo, 'supplier_business_id' => auth()->user()->business_id])
+            ->get();
 
         $deliveryNote = DeliveryNote::where('rfq_no', $draftPurchaseOrders[0]->rfq_no)->first();
         if (isset($deliveryNote))
@@ -199,7 +211,9 @@ class DeliveryNoteController extends Controller
 
     public function singleCategoryViewNote($rfq_no)
     {
-        $deliveryNotes = DeliveryNote::with('purchase_order')->where('rfq_no', $rfq_no)->get();
+        $deliveryNotes = DeliveryNote::with('purchase_order')
+            ->where(['rfq_no' => $rfq_no, 'supplier_business_id' => auth()->user()->business_id])
+            ->get();
 
         return view('deliveryNote.singleCategory.viewNote',compact('deliveryNotes'));
     }
