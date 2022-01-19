@@ -41,9 +41,9 @@ class BusinessWarehouseController extends Controller
 
     }
 
-    public function businessWarehouseShow($id)
+    public function businessWarehouseShow()
     {
-        $business = BusinessWarehouse::where('business_id', $id)->orderByDesc('created_at')->get();
+        $business = BusinessWarehouse::where('business_id', auth()->user()->business_id)->orderByDesc('created_at')->get();
         return view('businessWarehouse.showAllWareHouse', compact('business'));
     }
 
@@ -119,6 +119,7 @@ class BusinessWarehouseController extends Controller
 
     public function edit(BusinessWarehouse $businessWarehouse)
     {
+        $businessWarehouse = BusinessWarehouse::firstWhere(['id' => $businessWarehouse->id, 'business_id' => auth()->user()->business_id]);
         return view('businessWarehouse.edit', compact('businessWarehouse'));
     }
 
@@ -169,11 +170,6 @@ class BusinessWarehouseController extends Controller
 
         session()->flash('message', __('portal.Warehouse information successfully updated.'));
         return redirect()->route('businessWarehouseShow', auth()->user()->business_id);
-    }
-
-    public function destroy(BusinessWarehouse $businessWarehouse)
-    {
-        //
     }
 
     /* Updating Buyer's warehouse number when he changes in responding to a quotation (OTP number) */

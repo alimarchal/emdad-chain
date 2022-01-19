@@ -69,9 +69,13 @@ class BankPaymentController extends Controller
 
     public function create(Invoice $invoice)
     {
-        $delivery = Delivery::where('invoice_id', $invoice->id)->first();
-
-        return view('manual-payments.create', compact('invoice', 'delivery'));
+        if(auth()->user()->registration_type == 'Buyer')
+        {
+            $invoice = $invoice::firstWhere(['id' => $invoice->id, 'buyer_business_id' => auth()->user()->business_id]);
+            $delivery = Delivery::where('invoice_id', $invoice->id)->first();
+            return view('manual-payments.create', compact('invoice', 'delivery'));
+        }
+        return redirect()->back();
     }
 
     public function store(Request $request)
@@ -113,8 +117,12 @@ class BankPaymentController extends Controller
 //    public function edit(BankPayment $bankPayment)
     public function edit($id)
     {
-        $bankPayment = BankPayment::where('invoice_id', $id)->first();
-        return view('manual-payments.edit', compact('bankPayment'));
+        if(auth()->user()->registration_type == 'Buyer')
+        {
+            $bankPayment = BankPayment::where('invoice_id', $id)->first();
+            return view('manual-payments.edit', compact('bankPayment'));
+        }
+        return redirect()->back();
     }
 
     public function update(Request $request, BankPayment $bankPayment)
@@ -263,11 +271,14 @@ class BankPaymentController extends Controller
 
     public function singleCategoryCreate($rfq_no)
     {
-        $collections = Invoice::where('rfq_no', $rfq_no)->get();
-        $invoices = $collections->unique('rfq_no');
-        /* Checking Delivery isset in view */
-
-        return view('manual-payments.singleCategory.create', compact('invoices'));
+        if(auth()->user()->registration_type == 'Buyer')
+        {
+            $collections = Invoice::where(['rfq_no' => $rfq_no, 'buyer_business_id' => auth()->user()->business_id])->get();
+            $invoices = $collections->unique('rfq_no');
+            /* Checking Delivery isset in view */
+            return view('manual-payments.singleCategory.create', compact('invoices'));
+        }
+        return redirect()->back();
     }
 
     public function singleCategoryStore(Request $request)

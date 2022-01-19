@@ -90,10 +90,14 @@
                                                             @php
                                                                 // Calculating and Subtracting 1.5 % emdad charges that is applied to supplier payment
                                                                $dpo = \App\Models\DraftPurchaseOrder::where('id', $payment->draft_purchase_order_id)->first();
-                                                               $total_amount = ($dpo->quantity * $dpo->unit_price) + $dpo->shipment_cost;
-                                                               $emdadCharges = ($total_amount * (1.5 / 100));
-                                                               $total_vat = ($total_amount * ($dpo->vat / 100));
-                                                               $sum = ($total_amount + $total_vat) - $emdadCharges ;
+                                                               $sum = 0;
+                                                               if (isset($dpo))
+                                                                   {
+                                                                       $total_amount = ($dpo->quantity * $dpo->unit_price) + $dpo->shipment_cost;
+                                                                       $emdadCharges = ($total_amount * (1.5 / 100));
+                                                                       $total_vat = ($total_amount * ($dpo->vat / 100));
+                                                                       $sum = ($total_amount + $total_vat) - $emdadCharges ;
+                                                                   }
                                                             @endphp
                                                             {{ number_format($sum,2) }}
                                                         </td>
@@ -104,12 +108,16 @@
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
                                                             @php $buyerBusinessName = \App\Models\Business::where('id',$payment->buyer_business_id)->first(); @endphp
+                                                            @if(isset($buyerBusinessName->business_name))
                                                             {{$buyerBusinessName->business_name}}
+                                                            @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
                                                             @php $supplierBusinessName = \App\Models\Business::where('id',$payment->supplier_business_id)->first(); @endphp
+                                                            @if(isset($supplierBusinessName->business_name))
                                                             {{$supplierBusinessName->business_name}}
+                                                            @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
@@ -267,10 +275,14 @@
                                                             @php
                                                                 // Calculating and Subtracting 1.5 % emdad charges that is applied to supplier payment
                                                                $dpo = \App\Models\DraftPurchaseOrder::where('id', $payment->draft_purchase_order_id)->first();
-                                                               $total_amount = ($dpo->quantity * $dpo->unit_price) + $dpo->shipment_cost;
-                                                               $emdadCharges = ($total_amount * (1.5 / 100));
-                                                               $total_vat = ($total_amount * ($dpo->vat / 100));
-                                                               $sum = ($total_amount + $total_vat) - $emdadCharges ;
+                                                               $sum = 0;
+                                                               if (isset($dpo))
+                                                                   {
+                                                                       $total_amount = ($dpo->quantity * $dpo->unit_price) + $dpo->shipment_cost;
+                                                                       $emdadCharges = ($total_amount * (1.5 / 100));
+                                                                       $total_vat = ($total_amount * ($dpo->vat / 100));
+                                                                       $sum = ($total_amount + $total_vat) - $emdadCharges ;
+                                                                   }
                                                             @endphp
                                                             {{ number_format($sum,2,'.') }}
                                                         </td>
@@ -281,12 +293,16 @@
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
                                                             @php $buyerBusinessName = \App\Models\Business::where('id',$payment->buyer_business_id)->first(); @endphp
+                                                            @if(isset($buyerBusinessName->business_name))
                                                             {{$buyerBusinessName->business_name}}
+                                                            @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
                                                             @php $supplierBusinessName = \App\Models\Business::where('id',$payment->supplier_business_id)->first(); @endphp
+                                                            @if(isset($supplierBusinessName->business_name))
                                                             {{$supplierBusinessName->business_name}}
+                                                            @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">

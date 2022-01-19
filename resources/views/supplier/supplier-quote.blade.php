@@ -354,7 +354,7 @@
                                             <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
                                             <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
                                             <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
-                                            <input type="hidden" name="supplier_business_id" value="{{ $user_business_id }}">
+                                            <input type="hidden" name="supplier_business_id" value="{{ auth()->user()->business_id }}">
                                             <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
                                         </div>
                                         <td>
@@ -493,7 +493,7 @@
                                             <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
                                             <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
                                             <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
-                                            <input type="hidden" name="supplier_business_id" value="{{ $user_business_id }}">
+                                            <input type="hidden" name="supplier_business_id" value="{{ auth()->user()->business_id }}">
                                             <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
                                             <input type="hidden" name="warehouse_id" value="{{ $eOrderItems->warehouse->id }}">
                                         </div>
@@ -891,7 +891,7 @@
                                             <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
                                             <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
                                             <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
-                                            <input type="hidden" name="supplier_business_id" value="{{ $user_business_id }}">
+                                            <input type="hidden" name="supplier_business_id" value="{{ auth()->user()->business_id }}">
                                             <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
                                         </div>
                                         <td>
@@ -971,7 +971,7 @@
                                             <input type="hidden" name="e_order_items_id" value="{{ $eOrderItems->id }}">
                                             <input type="hidden" name="e_order_id" value="{{ $eOrderItems->e_order_id }}">
                                             <input type="hidden" name="business_id" value="{{ $eOrderItems->business_id }}">
-                                            <input type="hidden" name="supplier_business_id" value="{{ $user_business_id }}">
+                                            <input type="hidden" name="supplier_business_id" value="{{ auth()->user()->business_id }}">
                                             <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
                                             <input type="hidden" name="warehouse_id" value="{{ $eOrderItems->warehouse->id }}">
                                         </div>

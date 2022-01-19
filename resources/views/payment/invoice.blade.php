@@ -16,7 +16,7 @@
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('Proforma Invoices') }} </h2>
         </x-slot>
-        <div class="py-12">
+        <div class="py-0">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Invoices History')}}</h2>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -263,7 +263,7 @@
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('Proforma Invoices') }} </h2>
         </x-slot>
-        <div class="py-12">
+        <div class="py-0">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Invoices History')}}</h2>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">

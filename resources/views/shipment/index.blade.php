@@ -24,7 +24,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Shipment List')}}</h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Shipment List')}}</h2>
 
         <div class="flex flex-col bg-white rounded ">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -125,7 +125,7 @@
                 </button>
             </div>
         @endif
-        <h2 class="text-2xl font-bold py-2 text-center m-15">{{__('portal.Shipment List')}}</h2>
+        <h2 class="text-2xl font-bold py-2 text-center m-2">{{__('portal.Shipment List')}}</h2>
 
         <div class="flex flex-col bg-white rounded ">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

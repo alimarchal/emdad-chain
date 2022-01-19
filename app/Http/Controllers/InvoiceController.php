@@ -19,7 +19,9 @@ class InvoiceController extends Controller
 {
     public function show(Invoice $invoice)
     {
-        $draftPurchaseOrder = DraftPurchaseOrder::with('eOrderItem')->where('id',$invoice->draft_purchase_order_id)->first();
+        $draftPurchaseOrder = DraftPurchaseOrder::with('eOrderItem')
+            ->where(['id' => $invoice->draft_purchase_order_id, 'supplier_business_id' => auth()->user()->business_id])
+            ->first();
         $delivery = Delivery::where('id',$invoice->delivery_id)->first();
 
         return view('invoice.show', compact('draftPurchaseOrder','delivery','invoice'));
@@ -145,7 +147,7 @@ class InvoiceController extends Controller
     ############################################ Single Category Functions ##############################################
     public function singleCategoryShow($invoiceID)
     {
-        $invoice = Invoice::where('id', $invoiceID)->first();
+        $invoice = Invoice::where(['id' => $invoiceID, 'supplier_business_id' => auth()->user()->business_id])->first();
         $draftPurchaseOrders = DraftPurchaseOrder::where('rfq_no',$invoice->rfq_no)->get();
 
         return view('invoice.singleCategory.show', compact('draftPurchaseOrders','invoiceID', 'invoice'));

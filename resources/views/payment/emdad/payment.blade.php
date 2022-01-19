@@ -84,12 +84,16 @@
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
                                                             @php $buyerBusinessName = \App\Models\Business::where('id',$payment->buyer_business_id)->first(); @endphp
+                                                            @if(isset($buyerBusinessName->business_name))
                                                             {{$buyerBusinessName->business_name}}
+                                                            @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
                                                             @php $supplierBusinessName = \App\Models\Business::where('id',$payment->supplier_business_id)->first(); @endphp
+                                                            @if(isset($supplierBusinessName->business_name))
                                                             {{$supplierBusinessName->business_name}}
+                                                            @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
@@ -224,12 +228,16 @@
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
                                                             @php $buyerBusinessName = \App\Models\Business::where('id',$payment->buyer_business_id)->first(); @endphp
+                                                            @if(isset($buyerBusinessName->business_name))
                                                             {{$buyerBusinessName->business_name}}
+                                                            @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
                                                             @php $supplierBusinessName = \App\Models\Business::where('id',$payment->supplier_business_id)->first(); @endphp
+                                                            @if(isset($supplierBusinessName->business_name))
                                                             {{$supplierBusinessName->business_name}}
+                                                            @endif
                                                         </td>
 
                                                         <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-black">
