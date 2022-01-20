@@ -154,7 +154,7 @@
                                             </td>
 
                                             <td class="px-6 py-4 text-center whitespace-nowrap">
-                                                <a href="{{ route('viewRFQsID', $rfp->orderItem->id) }}" class=" px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                                <a href="{{ route('viewRFQsID', encrypt($rfp->orderItem->id)) }}" class=" px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                                                     {{__('portal.Response')}}
                                                 </a>
                                             </td>
@@ -328,7 +328,7 @@
                                         </td>
 
                                         <td class="px-6 py-4 text-center whitespace-nowrap">
-                                            <a href="{{ route('viewRFQsID', $rfp->orderItem->id) }}" class=" px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
+                                            <a href="{{ route('viewRFQsID', encrypt($rfp->orderItem->id)) }}" class=" px-4 py-1 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 hover:text-white focus:outline-none focus:border-gray-700 focus:shadow-outline-gray active:bg-gray-600 transition ease-in-out duration-150">
                                                 {{__('portal.Response')}}
                                             </a>
                                         </td>

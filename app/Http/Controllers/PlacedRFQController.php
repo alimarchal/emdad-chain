@@ -104,28 +104,14 @@ class PlacedRFQController extends Controller
         }
     }
 
-    public function viewRFQsID(EOrderItems $eOrderItems)
+    public function viewRFQsID($eOrderItemID)
     {
+        $eOrderItems = EOrderItems::firstWhere('id', decrypt($eOrderItemID));
+        $collection = Qoute::where('e_order_items_id', decrypt($eOrderItemID))
+            ->where('supplier_business_id', \auth()->user()->business_id)
+            ->first();
 
-//        DB::enableQueryLog();
-//        $collection = Qoute::where('e_order_items_id', $eOrderItems->id)
-//            ->where(['supplier_user_id' => \auth()->id(), 'supplier_business_id' => \auth()->user()->business_id])
-//            ->first();
-
-//        dd(DB::getQueryLog());
-
-
-        $user_id = auth()->user()->id;
-        $user_business_id = auth()->user()->business_id;
-        $collection = Qoute::where('e_order_items_id', $eOrderItems->id)->where('supplier_user_id', $user_id)->first();
-        return view('supplier.supplier-quote', compact('eOrderItems', 'collection', 'user_business_id'));
-
-        /* If condition to prevent supplier viewing other suppliers' quotation */
-//        if (isset($collection))
-//        {
-//            return view('supplier.supplier-quote', compact('eOrderItems', 'collection'));
-//        }
-//        return redirect()->back();
+        return view('supplier.supplier-quote', compact('eOrderItems', 'collection'));
     }
 
     /**
