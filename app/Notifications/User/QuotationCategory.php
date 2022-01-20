@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class QuotationCategory extends Notification implements ShouldQueue
+class QuotationCategory extends Notification
 {
     use Queueable;
 
@@ -19,10 +19,12 @@ class QuotationCategory extends Notification implements ShouldQueue
      */
 
     private $item_code;
+    private $rfq_type;
 
-    public function __construct($item_code)
+    public function __construct($item_code, $rfq_type)
     {
         $this->item_code = $item_code;
+        $this->rfq_type = $rfq_type;
     }
 
     /**
@@ -60,6 +62,8 @@ class QuotationCategory extends Notification implements ShouldQueue
     {
         return [
             'notification_data' => 'New requisition ' . Category::find($this->item_code)->name . ' received',
+            'url_route' => (($this->rfq_type == 1) ? route('viewRFQs') : route('singleCategoryRFQs')),
+            'quotation_type' => $this->rfq_type,
         ];
     }
 }

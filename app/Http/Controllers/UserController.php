@@ -28,6 +28,21 @@ class UserController extends Controller
         // info($response);
     }
 
+    /*
+     *  When you click on the notification, it links to the UserController@notificationShow method. T
+     *  here it finds the notification, marks it as read and then redirects the user to the intended page.
+     *  This page is stored inside the link-property of the notification data.
+     */
+    public function notificationShow($id)
+    {
+        $notification = auth()->user()->notifications()->where('id', $id)->first();
+
+        if ($notification) {
+            $notification->markAsRead();
+            return redirect($notification->data['url_route']);
+        }
+    }
+
     public function index()
     {
         if (auth()->user()->hasRole('SuperAdmin')) {

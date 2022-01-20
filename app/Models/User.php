@@ -557,8 +557,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $mobile_no = trim($mobile_no);
         $mobile_no = str_replace("+", "", $mobile_no);
-        $url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=966" . $mobile_no . "&Message=" . urlencode($msg);
-
+        //$url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=966" . $mobile_no . "&Message=" . urlencode($msg);
+        $url = "https://www.sms4ksa.com/api/sendsms.php?username=". env('SMS_API_USERNAME') ."&password=" . env('SMS_API_PASSWORD') ."&message=" . urlencode($msg) . "&numbers=966" . $mobile_no . "&sender=Emdad-Aid";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -575,7 +575,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $mobile_no = trim($mobile_no);
         $msg = "Your delivery is here. Please share the OTP code: " . $otp . " with the driver after unloading the delivery. Thank you for using EMDAD Platform.";
         $mobile_no = str_replace("+", "", $mobile_no);
-        $url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=966" . $mobile_no . "&Message=" . urlencode($msg);
+        // $url = "https://smsplustech.com/smsplus/api.php?username=966593388833&key=" . env('SMS_API_KEY') . "&sender=Emdad-Aid&RecepientNumber=966" . $mobile_no . "&Message=" . urlencode($msg);
+
+        $url = "https://www.sms4ksa.com/api/sendsms.php?username=". env('SMS_API_USERNAME') ."&password=" . env('SMS_API_PASSWORD') ."&message=" . urlencode($msg) . "&numbers=966" . $mobile_no . "&sender=Emdad-Aid";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

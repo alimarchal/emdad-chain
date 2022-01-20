@@ -431,6 +431,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     #################### Supplier Routes Start ########################
     Route::middleware(['supplier'])->group(function (){
         Route::get('/viewRFQs', [PlacedRFQController::class, 'viewRFQs'])->name('viewRFQs');
+        Route::get('/notificationShow/{id}', [UserController::class, 'notificationShow'])->name('notificationShow');
         Route::get('/viewRFQs/{eOrderItemID}', [PlacedRFQController::class, 'viewRFQsID'])->name('viewRFQsID');
         Route::get('/single-category-RFQs', [PlacedRFQController::class, 'viewSingleCategoryRFQs'])->name('singleCategoryRFQs');
         Route::get('/quote-RFQs-for-single-category-{eOrder}', [PlacedRFQController::class, 'viewSingleCategoryRFQByID'])->name('viewSingleCategoryRFQByID');
@@ -742,11 +743,8 @@ Route::get('tree', function () {
 
 
 // Route::get('/testSms', function () {
-//     $pdf = App::make('snappy.pdf.wrapper');
-//     $pdf->loadHTML('<h1>Test</h1>');
-    // return $pdf->inline();
-//    $x = User::send_otp('6633','581382822');
-//    dd($x);
+//     User::send_sms('552840506','Sending this via env file');
+//     dd('done');
 // });
 
 //        User::find(5)->notify(new UserRegistration());
