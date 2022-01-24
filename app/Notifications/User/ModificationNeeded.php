@@ -55,7 +55,8 @@ class ModificationNeeded extends Notification
     public function toArray($notifiable)
     {
         return [
-            'notification_data' => 'You quotation requires some modification.',
+            'notification_data' => 'You have received new quotation...',
+            'url_route' => route('QoutationsBuyerReceived'),
         ];
     }
 }

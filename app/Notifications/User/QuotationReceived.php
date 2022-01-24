@@ -56,6 +56,7 @@ class QuotationReceived extends Notification
     {
         return [
             'notification_data' => 'You have received new quotation...',
+            'url_route' => route('QoutationsBuyerReceived'),
         ];
     }
 }

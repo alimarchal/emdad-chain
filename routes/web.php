@@ -193,6 +193,7 @@ Route::group([], function (){
 
 #################### Category ##########################
 Route::middleware(['auth:sanctum', 'verified'])->group(function (){
+    Route::get('/notificationShow/{id}', [UserController::class, 'notificationShow'])->name('notificationShow');
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     //Route::post('languageChange', [DashboardController::class, 'languageChange'])->name('languageChange');
     Route::get('languageChange/{lang}/{rtl_value}', [DashboardController::class, 'languageChange'])->name('languageChange');
@@ -431,7 +432,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     #################### Supplier Routes Start ########################
     Route::middleware(['supplier'])->group(function (){
         Route::get('/viewRFQs', [PlacedRFQController::class, 'viewRFQs'])->name('viewRFQs');
-        Route::get('/notificationShow/{id}', [UserController::class, 'notificationShow'])->name('notificationShow');
+
         Route::get('/viewRFQs/{eOrderItemID}', [PlacedRFQController::class, 'viewRFQsID'])->name('viewRFQsID');
         Route::get('/single-category-RFQs', [PlacedRFQController::class, 'viewSingleCategoryRFQs'])->name('singleCategoryRFQs');
         Route::get('/quote-RFQs-for-single-category-{eOrder}', [PlacedRFQController::class, 'viewSingleCategoryRFQByID'])->name('viewSingleCategoryRFQByID');

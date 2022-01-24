@@ -56,6 +56,7 @@ class QuotationRejected extends Notification
     {
         return [
             'notification_data' => 'You quotation has been rejected.',
+            'url_route' => route('QoutedRFQRejected'),
         ];
     }
 }
