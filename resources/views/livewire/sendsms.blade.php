@@ -97,7 +97,7 @@
                 <input
                     oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "9" minlength="9" pattern="([5][0-9]{8})"
                     type = "tel" placeholder="e.g. 523456789" @if(auth()->user()->rtl == 1)  style="font-family: sans-serif" @endif
-                    class="form-input rounded-md shadow-sm mt-1 mb-1 block w-full" wire:model="mobile_number" id="mobile_number">
+                    class="form-input border border-gray-200 rounded-md shadow-sm mt-1 mb-1 block w-full" wire:model="mobile_number" id="mobile_number">
                 @error('mobile_number') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 <button class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150" type="submit">{{__('register.Update and Send Code')}}</button>
             </form>

@@ -34,6 +34,8 @@ class POInfoController extends Controller
 
     public function store(Request $request)
     {
+
+
         /* Storing purchase after skipping while business registration */
         if ($request->has('update'))
         {
@@ -53,6 +55,7 @@ class POInfoController extends Controller
             }
 
             POInfo::create($request->all());
+
             session()->flash('message', __('portal.P.O.Info information successfully saved.'));
             return redirect()->route('dashboard');
         }
@@ -65,28 +68,19 @@ class POInfoController extends Controller
                 'order_info_1.*' => 'required|mimes:jpeg,jpg,png,gif,csv,txt,pdf,docx,xlsx,doc,xls',
             ]);
 
-
-            /* Commented code is  */
-            /*$files = $request->file('order_info_1');
-            $order_info = [];*/
             if ($request->has('order_info_1')) {
-                /*foreach ($files as $file) {
-                    $path = $file->store('', 'public');
-                    $order_info[] = $path;
-                }*/
+
 
                 $path = $request->file('order_info_1')->store('', 'public');
                 $request->merge(['order_info' => $path]);
             }
 
-            /*$order_info = implode(', ', $order_info);
-            $request->merge(['order_info' => $order_info]);*/
             $POInfo = POInfo::create($request->all());
             session()->flash('message', __('portal.P.O.Info information successfully saved.'));
             $business = Business::find($POInfo->business_id);
-            $business->update(['status' => '1']);
+            $business->update(['status' => '3']);
             $user = User::find(auth()->user()->id);
-            $user->update(['status' => 1]);
+            $user->update(['status' => 3]);
             if ($user->registration_type == "Contracts") {
                 Mail::to($user)->send(new Contracts($business, $user));
             } else {
@@ -98,6 +92,7 @@ class POInfoController extends Controller
 
     public function storeWithOutPOInfo()
     {
+
         $business = Business::find(auth()->user()->business_id);
         $business->update(['status' => '1']);
         $user = User::find(auth()->user()->id);
