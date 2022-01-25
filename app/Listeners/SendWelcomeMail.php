@@ -43,17 +43,20 @@ class SendWelcomeMail
             $usr->notify(new SendWelcomeNotificationToAdmin($user_id));
         }
 
+
+
         if ($user_language == 0) {
             User::send_sms($event->user->mobile, SmsMessages::find(1)->english_message);
-            User::send_sms('+966581382822', $message);
-            User::send_sms('+966555390920', $message);
-            User::send_sms('+966593388833', $message);
+            User::send_sms('581382822', $message);
+            User::send_sms('555390920', $message);
+            User::send_sms('593388833', $message);
         } else if ($user_language == 1) {
-            User::send_sms('+966581382822', $message);
-            User::send_sms('+966555390920', $message);
-            User::send_sms('+966593388833', $message);
+            User::send_sms('581382822', $message);
+            User::send_sms('555390920', $message);
+            User::send_sms('593388833', $message);
             User::send_sms($event->user->mobile, SmsMessages::find(1)->arabic_message);
         }
+
 
         Notification::route('mail', 'business@emdad-chain.com')
             ->notify(new UserRegister($user_id));

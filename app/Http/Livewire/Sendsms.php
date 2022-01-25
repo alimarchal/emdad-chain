@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\SmsMessages;
 use App\Models\User;
 use Livewire\Component;
 
@@ -44,10 +45,23 @@ class Sendsms extends Component
         $user->mobile_verify_code = $randomNumber;
         $user->save();
 
-        $message = ' %0a New user ' . $user->name .' has registered as ' . $user->registration_type . '%0a Company name: ' . $user->company_name . '%0a Mobile:'. $user->mobile;
+
+        $message = SmsMessages::find(5)->english_message;
+        $message = str_replace("{user_name}",$user->name, $message);
+        $message = str_replace("{registration_type}",$user->registration_type, $message);
+        $message = str_replace("{company_name}",$user->company_name,$message);
+        $message = str_replace("{mobile}",$user->mobile,$message);
+
+        // $message = ' %0a New user ' . $user->name .' has registered as ' . $user->registration_type . '%0a Company name: ' . $user->company_name . '%0a Mobile: '. $user->mobile;
+
+
         User::send_sms(env('SMS_NO_ONE'),config('app.url') . $message);
         User::send_sms(env('SMS_NO_TWO'),config('app.url') . $message);
-        User::send_sms($mobile_no,'Thank you for registering on Emdad digital platform.' . ' %0aYour one time verification code is: ' . $randomNumber);
+
+
+        $message = SmsMessages::find(6)->english_message;
+        $message = str_replace("{otp}",$randomNumber, $message);
+        User::send_sms($mobile_no,$message);
         $this->sendSms = true;
     }
 
