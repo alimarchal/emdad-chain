@@ -111,8 +111,20 @@ class EOrdersController extends Controller
 
 
                         /* Sending message to business email ID */
-                        User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
-                        User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        $message = SmsMessages::find(7)->english_message;
+                        $message = str_replace("{category_name}", $categoryName->name, $message);
+                        $message = str_replace("{parent_name}", $parentName, $message);
+                        $message = str_replace("{brand}", $eOrderItem->brand, $message);
+                        $message = str_replace("{description}", $eOrderItem->description, $message);
+                        $message = str_replace("{unit_of_measurement}", $eOrderItem->unit_of_measurement, $message);
+                        $message = str_replace("{size}", $eOrderItem->size, $message);
+                        $message = str_replace("{qty}", $eOrderItem->quantity, $message);
+                        $message = str_replace("{last_price}", $eOrderItem->last_price, $message);
+                        $message = str_replace("{delivery_period}", $eOrderItem->delivery_period, $message);
+                        $message = str_replace("{payment_mode}", $eOrderItem->payment_mode, $message);
+                        $message = str_replace("{remarks}", $eOrderItem->remarks, $message);
+                        User::send_sms(env('SMS_NO_ONE'), $message);
+                        User::send_sms(env('SMS_NO_TWO'), $message);
                     }
                     foreach ($eCartItems as $item) {
                         $item->delete();
@@ -181,8 +193,22 @@ class EOrdersController extends Controller
                         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
                         /* Sending message to business email ID */
-                        User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
-                        User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        $message = SmsMessages::find(7)->english_message;
+                        $message = str_replace("{category_name}", $categoryName->name, $message);
+                        $message = str_replace("{parent_name}", $parentName, $message);
+                        $message = str_replace("{brand}", $eOrderItem->brand, $message);
+                        $message = str_replace("{description}", $eOrderItem->description, $message);
+                        $message = str_replace("{unit_of_measurement}", $eOrderItem->unit_of_measurement, $message);
+                        $message = str_replace("{size}", $eOrderItem->size, $message);
+                        $message = str_replace("{qty}", $eOrderItem->quantity, $message);
+                        $message = str_replace("{last_price}", $eOrderItem->last_price, $message);
+                        $message = str_replace("{delivery_period}", $eOrderItem->delivery_period, $message);
+                        $message = str_replace("{payment_mode}", $eOrderItem->payment_mode, $message);
+                        $message = str_replace("{remarks}", $eOrderItem->remarks, $message);
+                        User::send_sms(env('SMS_NO_ONE'), $message);
+                        User::send_sms(env('SMS_NO_TWO'), $message);
+                        //User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        //User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
                     }
                     foreach ($eCartItems as $item) {
                         $item->delete();
@@ -251,8 +277,22 @@ class EOrdersController extends Controller
                     $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
                     /* Sending message to business email ID */
-                    User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
-                    User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                    $message = SmsMessages::find(7)->english_message;
+                    $message = str_replace("{category_name}", $categoryName->name, $message);
+                    $message = str_replace("{parent_name}", $parentName, $message);
+                    $message = str_replace("{brand}", $eOrderItem->brand, $message);
+                    $message = str_replace("{description}", $eOrderItem->description, $message);
+                    $message = str_replace("{unit_of_measurement}", $eOrderItem->unit_of_measurement, $message);
+                    $message = str_replace("{size}", $eOrderItem->size, $message);
+                    $message = str_replace("{qty}", $eOrderItem->quantity, $message);
+                    $message = str_replace("{last_price}", $eOrderItem->last_price, $message);
+                    $message = str_replace("{delivery_period}", $eOrderItem->delivery_period, $message);
+                    $message = str_replace("{payment_mode}", $eOrderItem->payment_mode, $message);
+                    $message = str_replace("{remarks}", $eOrderItem->remarks, $message);
+                    User::send_sms(env('SMS_NO_ONE'), $message);
+                    User::send_sms(env('SMS_NO_TWO'), $message);
+                    //User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                    //User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
                 }
                 foreach ($eCartItems as $item) {
                     $item->delete();
@@ -342,8 +382,22 @@ class EOrdersController extends Controller
                         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
                         /* Sending message to business email ID */
-                        User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
-                        User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        $message = SmsMessages::find(7)->english_message;
+                        $message = str_replace("{category_name}", $categoryName->name, $message);
+                        $message = str_replace("{parent_name}", $parentName, $message);
+                        $message = str_replace("{brand}", $eOrderItem->brand, $message);
+                        $message = str_replace("{description}", $eOrderItem->description, $message);
+                        $message = str_replace("{unit_of_measurement}", $eOrderItem->unit_of_measurement, $message);
+                        $message = str_replace("{size}", $eOrderItem->size, $message);
+                        $message = str_replace("{qty}", $eOrderItem->quantity, $message);
+                        $message = str_replace("{last_price}", $eOrderItem->last_price, $message);
+                        $message = str_replace("{delivery_period}", $eOrderItem->delivery_period, $message);
+                        $message = str_replace("{payment_mode}", $eOrderItem->payment_mode, $message);
+                        $message = str_replace("{remarks}", $eOrderItem->remarks, $message);
+                        User::send_sms(env('SMS_NO_ONE'), $message);
+                        User::send_sms(env('SMS_NO_TWO'), $message);
+                        //User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        //User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
                     }
                     foreach ($eCartItems as $item) {
                         $item->delete();
@@ -416,8 +470,22 @@ class EOrdersController extends Controller
                         $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
                         /* Sending message to business email ID */
-                        User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
-                        User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                        $message = SmsMessages::find(7)->english_message;
+                        $message = str_replace("{category_name}", $categoryName->name, $message);
+                        $message = str_replace("{parent_name}", $parentName, $message);
+                        $message = str_replace("{brand}", $eOrderItem->brand, $message);
+                        $message = str_replace("{description}", $eOrderItem->description, $message);
+                        $message = str_replace("{unit_of_measurement}", $eOrderItem->unit_of_measurement, $message);
+                        $message = str_replace("{size}", $eOrderItem->size, $message);
+                        $message = str_replace("{qty}", $eOrderItem->quantity, $message);
+                        $message = str_replace("{last_price}", $eOrderItem->last_price, $message);
+                        $message = str_replace("{delivery_period}", $eOrderItem->delivery_period, $message);
+                        $message = str_replace("{payment_mode}", $eOrderItem->payment_mode, $message);
+                        $message = str_replace("{remarks}", $eOrderItem->remarks, $message);
+                        User::send_sms(env('SMS_NO_ONE'), $message);
+                        User::send_sms(env('SMS_NO_TWO'), $message);
+//                        User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+//                        User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
 
                     }
                     foreach ($eCartItems as $item) {
@@ -491,8 +559,22 @@ class EOrdersController extends Controller
                     $parentName = Category::where('id', $categoryName->parent_id)->pluck('name')->first();
 
                     /* Sending message to business email ID */
-                    User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
-                    User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                    $message = SmsMessages::find(7)->english_message;
+                    $message = str_replace("{category_name}", $categoryName->name, $message);
+                    $message = str_replace("{parent_name}", $parentName, $message);
+                    $message = str_replace("{brand}", $eOrderItem->brand, $message);
+                    $message = str_replace("{description}", $eOrderItem->description, $message);
+                    $message = str_replace("{unit_of_measurement}", $eOrderItem->unit_of_measurement, $message);
+                    $message = str_replace("{size}", $eOrderItem->size, $message);
+                    $message = str_replace("{qty}", $eOrderItem->quantity, $message);
+                    $message = str_replace("{last_price}", $eOrderItem->last_price, $message);
+                    $message = str_replace("{delivery_period}", $eOrderItem->delivery_period, $message);
+                    $message = str_replace("{payment_mode}", $eOrderItem->payment_mode, $message);
+                    $message = str_replace("{remarks}", $eOrderItem->remarks, $message);
+                    User::send_sms(env('SMS_NO_ONE'), $message);
+                    User::send_sms(env('SMS_NO_TWO'), $message);
+                    //User::send_sms(env('SMS_NO_ONE'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
+                    //User::send_sms(env('SMS_NO_TWO'), 'RFQ generated.' . ' ' . 'Cat: ' . $categoryName->name . '-' . $parentName . ' , ' . 'Brand: ' . $eOrderItem->brand . ' , ' . 'Desc: ' . $eOrderItem->description . ' , ' . 'UOM: ' . $eOrderItem->unit_of_measurement . ' , ' . 'Size:' . $eOrderItem->size . ' , ' . 'Qty: ' . $eOrderItem->quantity . ' , ' . 'LP: ' . $eOrderItem->last_price . ' SR' . ' , ' . 'DP: ' . $eOrderItem->delivery_period . ' , ' . 'PM: ' . $eOrderItem->payment_mode . ' , ' . 'Rem: ' . $eOrderItem->remarks);
                 }
                 foreach ($eCartItems as $item) {
                     $item->delete();
