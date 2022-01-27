@@ -41,7 +41,7 @@ class BusinessWarehouseController extends Controller
 
     }
 
-    public function businessWarehouseShow()
+    public function show()
     {
         $business = BusinessWarehouse::where('business_id', auth()->user()->business_id)->orderByDesc('created_at')->get();
         return view('businessWarehouse.showAllWareHouse', compact('business'));
@@ -49,6 +49,7 @@ class BusinessWarehouseController extends Controller
 
     public function store(Request $request)
     {
+        /* if condition used because of number_of_delivery_vehicles, number_of_drivers are added for supplier */
         if (auth()->user()->registration_type == 'Supplier')
         {
             $request->validate([
@@ -112,9 +113,10 @@ class BusinessWarehouseController extends Controller
         return redirect()->route('purchaseOrderInfo.create');
     }
 
-    public function show(BusinessWarehouse $businessWarehouse)
+    public function businessWarehouseShow($id)
     {
-        //
+        $business = BusinessWarehouse::where('business_id', $id)->get();
+        return view('businessWarehouse.showAllWareHouse', compact('business'));
     }
 
     public function edit(BusinessWarehouse $businessWarehouse)

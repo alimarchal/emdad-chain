@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Codebyray\ReviewRateable\Contracts\ReviewRateable;
 use Codebyray\ReviewRateable\Traits\ReviewRateable as ReviewRateableTrait;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
 class Business extends Model implements ReviewRateable
@@ -15,7 +17,6 @@ class Business extends Model implements ReviewRateable
 
     protected $fillable = ['user_id', 'business_name', 'business_photo_url', 'num_of_warehouse', 'category_number', 'business_type', 'chamber_reg_number', 'chamber_reg_path', 'vat_reg_certificate_number', 'vat_reg_certificate_path', 'country', 'city', 'address', 'website', 'business_email', 'phone', 'mobile', 'longitude', 'latitude', 'legal_status', 'finance_status', 'sc_supervisor_status', 'supplier_client', 'status', 'iban', 'bank_name'];
 
-
     protected $appends = ['business_photo_url_full'];
 
     public function getBusinessPhotoUrlFullAttribute()
@@ -23,14 +24,12 @@ class Business extends Model implements ReviewRateable
         return url(\Storage::url($this->business_photo_url));
     }
 
-
     public function users()
     {
         return $this->hasMany(User::class);
     }
 
-
-    public function categories(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function categories(): HasMany
     {
         return $this->hasMany(BusinessCategory::class)->withDefault();
     }
@@ -68,6 +67,11 @@ class Business extends Model implements ReviewRateable
     public function poinfo()
     {
         return $this->hasMany(POInfo::class);
+    }
+
+    public function businessPackage(): HasOne
+    {
+        return $this->hasOne(BusinessPackage::class, 'business_id','id');
     }
 
 }

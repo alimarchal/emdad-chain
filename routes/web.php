@@ -226,12 +226,32 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
         Route::get('/incomplete-business-registration/', [BusinessController::class, 'incomplete'])->name('incompleteBusiness');
         Route::get('/business-status/', [BusinessController::class, 'accountStatus'])->name('accountStatus');
         Route::get('/business-legal-finance-status/', [BusinessController::class, 'businessLegalFinanceStatus'])->name('businessLegalFinanceStatus');
+
+        ####################### Business show ####################################
+        Route::get('/business-show/{business}', [BusinessController::class, 'businessShow'])->name('business-show');
+
+        ####################### Single Category Quotation Payment routes ####################################
+        Route::get('single-category-rfq-emdad-invoices-history', [PaymentController::class, 'singleCategoryPayments'])->name('singleCategoryPayments');
+        Route::get('single-category-rfq-bank-payment/{id}', [BankPaymentController::class, 'singleCategoryShow'])->name('singleCategoryShow');
+        Route::post('single-category-rfq-bank-payment-update/{rfq_no}', [BankPaymentController::class, 'singleCategoryUpdate'])->name('singleCategoryBankPaymentUpdate');
+        Route::get('single-category-rfq-emdad-supplier-manual-payment/{rfq_no}', [BankPaymentController::class, 'singleCategoryAdminSupplierPaymentView'])->name('singleCategoryAdminSupplierPaymentView');
+        Route::post('single-category-rfq-emdad-update-supplier-manual-payment/{rfqNo}', [BankPaymentController::class, 'singleCategoryUpdateSupplierPaymentStatus'])->name('singleCategoryUpdateSupplierPaymentStatus');
+        Route::get('single-category-rfq-emdad-supplier-manual-payments', [PaymentController::class, 'singleCategorySupplierPayment'])->name('singleCategorySupplierPayment');
+
+        ###################################### For Emdad Route start ###################################################
+        Route::get('emdad-invoices-history', [PaymentController::class, 'payments'])->name('emdad_payments');
+        Route::get('package-manual-payments', [PaymentController::class, 'packageManualPayments'])->name('packageManualPayments');
+        Route::get('package-manual-payment-{id}', [PaymentController::class, 'packageManualPaymentView'])->name('packageManualPaymentView');
+        Route::post('update-package-manual-payment-{id}', [PaymentController::class, 'updatePackageManualPayment'])->name('updatePackageManualPayment');
+        Route::get('supplier-manual-payments', [PaymentController::class, 'supplier_payment'])->name('supplier_payment');
+        ##################################### For Emdad Route end ######################################################
     });
 
     Route::resource('/businessFinanceDetail', BusinessFinanceDetailController::class);
     Route::get('/businessWarehouse/number-update', [BusinessWarehouseController::class, 'updateNumber'])->name('warehouseNumberUpdate');
     Route::resource('/businessWarehouse', BusinessWarehouseController::class);
-    Route::get('/businessWarehouse', [BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouseShow');
+    Route::get('/businessWarehouse', [BusinessWarehouseController::class, 'show'])->name('businessWarehouseShow');
+    Route::get('/business/warehouse/{id}', [BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouse');
     Route::get('/purchaseOrderInfo/store', [POInfoController::class, 'storeWithOutPOInfo'])->name('storeWithOutPOInfo');
     Route::resource('/purchaseOrderInfo', POInfoController::class);
 
@@ -296,27 +316,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
         Route::get('emdad-supplier-manual-payment-show/{id}', [BankPaymentController::class, 'admin_supplier_payment_view'])->name('admin_supplier_payment_view');
         Route::post('update-supplier-manual-payment/{id}', [BankPaymentController::class, 'update_supplier_payment_status'])->name('update_supplier_payment_status');
 
-        ####################### Single Category Quotation Payment routes ####################################
-        Route::get('single-category-rfq-emdad-invoices-history', [PaymentController::class, 'singleCategoryPayments'])->name('singleCategoryPayments');
-        Route::get('single-category-rfq-bank-payment/{id}', [BankPaymentController::class, 'singleCategoryShow'])->name('singleCategoryShow');
-        Route::post('single-category-rfq-bank-payment-update/{rfq_no}', [BankPaymentController::class, 'singleCategoryUpdate'])->name('singleCategoryBankPaymentUpdate');
-        Route::get('single-category-rfq-emdad-supplier-manual-payment/{rfq_no}', [BankPaymentController::class, 'singleCategoryAdminSupplierPaymentView'])->name('singleCategoryAdminSupplierPaymentView');
-        Route::post('single-category-rfq-emdad-update-supplier-manual-payment/{rfqNo}', [BankPaymentController::class, 'singleCategoryUpdateSupplierPaymentStatus'])->name('singleCategoryUpdateSupplierPaymentStatus');
-        Route::get('single-category-rfq-emdad-supplier-manual-payments', [PaymentController::class, 'singleCategorySupplierPayment'])->name('singleCategorySupplierPayment');
-
         #################### Roles display and update ##########################
         Route::resource('/role', RoleController::class);
         //Route::get('/roles', [\App\Http\Controllers\RoleController::class, 'show'])->name('roles');
         #################### This is Permission Route ##########################
         Route::resource('/permission', PermissionController::class);
-
-        ###################################### For Emdad Route start ###################################################
-        Route::get('emdad-invoices-history', [PaymentController::class, 'payments'])->name('emdad_payments');
-        Route::get('package-manual-payments', [PaymentController::class, 'packageManualPayments'])->name('packageManualPayments');
-        Route::get('package-manual-payment-{id}', [PaymentController::class, 'packageManualPaymentView'])->name('packageManualPaymentView');
-        Route::post('update-package-manual-payment-{id}', [PaymentController::class, 'updatePackageManualPayment'])->name('updatePackageManualPayment');
-        Route::get('supplier-manual-payments', [PaymentController::class, 'supplier_payment'])->name('supplier_payment');
-        ##################################### For Emdad Route end ######################################################
     });
     #################### Super Admin Routes END #######################
 

@@ -70,16 +70,16 @@
                                             {{ $loop->iteration }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <a href="{{ route('business.show', $business->id) }}" class="hover:text-red-700 hover:underline text-black  md:text-blue-600">@if(isset($business->business_name)) {{ $business->business_name }} @else
+                                            <a href="{{ route('business-show', $business->id) }}" class="hover:text-red-700 hover:underline text-black  md:text-blue-600">@if(isset($business->business_name)) {{ $business->business_name }} @else
                                                     {{$business->name}} <br> {{$business->email}} @endif
                                             </a>
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                            <a href="{{url('businessWarehouse/'. $business->id .'/show')}}" class="hover:underline text-blue-900 ">@if(isset($business->warehouse)) {{ $business->warehouse->count() }} @endif</a>
+                                            <a href="{{route('businessWarehouse', $business->id)}}" class="hover:underline text-blue-900 ">@if(isset($business->warehouse)) {{ $business->warehouse->count() }} @endif</a>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900 text-center">
-                                            @if ($business->status == '3')
+                                            @if ($business->status == 3)
                                                 {{__('portal.Completed')}}
                                             @else
                                                 {{__('portal.Incomplete')}}
@@ -87,8 +87,8 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
                                             @if(isset($business->poinfo))
-                                                @foreach ($business->poinfo as $Puinfo)
-                                                    <a href="{{ route('purchaseOrderInfo.show', $Puinfo->id) }}" class="inline-flex items-center
+                                                @foreach ($business->poinfo as $poInfo)
+                                                    <a href="{{ route('purchaseOrderInfo.show', $poInfo->id) }}" class="inline-flex items-center
                                                      justify-center px-4 py-2 text-blue-700 hover:underline" name=" approved">
                                                         {{__('portal.PoInfo')}}
                                                     </a>
@@ -338,16 +338,16 @@
                                                 {{ $loop->iteration }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                                <a href="{{ route('business.show', $business->id) }}" class="hover:text-red-700 hover:underline text-black  md:text-blue-600">@if(isset($business->business_name)) {{ $business->business_name }} @else
+                                                <a href="{{ route('business-show', $business->id) }}" class="hover:text-red-700 hover:underline text-black  md:text-blue-600">@if(isset($business->business_name)) {{ $business->business_name }} @else
                                                         {{$business->name}} <br> {{$business->email}} @endif
                                                 </a>
                                             </td>
 
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
-                                                <a href="{{url('businessWarehouse/'. $business->id .'/show')}}" class="hover:underline text-blue-900 ">@if(isset($business->warehouse)) {{ $business->warehouse->count() }} @endif</a>
+                                                <a href="{{route('businessWarehouse', $business->id)}}" class="hover:underline text-blue-900 ">@if(isset($business->warehouse)) {{ $business->warehouse->count() }} @endif</a>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-red-900 text-center">
-                                                @if ($business->status == '3')
+                                                @if ($business->status == 3)
                                                     {{__('portal.Completed')}}
                                                 @else
                                                     {{__('portal.Incomplete')}}
@@ -355,8 +355,8 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-black text-center">
                                                 @if(isset($business->poinfo))
-                                                    @foreach ($business->poinfo as $Puinfo)
-                                                        <a href="{{ route('purchaseOrderInfo.show', $Puinfo->id) }}" class="inline-flex items-center
+                                                    @foreach ($business->poinfo as $poInfo)
+                                                        <a href="{{ route('purchaseOrderInfo.show', $poInfo->id) }}" class="inline-flex items-center
                                                          justify-center px-4 py-2 text-blue-700 hover:underline" name=" approved">
                                                             {{__('portal.PoInfo')}}
                                                         </a>

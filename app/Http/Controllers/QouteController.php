@@ -725,6 +725,12 @@ class QouteController extends Controller
 
     public function qouteAccepted(Request $request, Qoute $qoute)
     {
+        if (auth()->user()->status != 3 && auth()->user()->business->status != 3)
+        {
+            session()->flash('error', __('portal.Cannot accept the quotation because your business is not approved yet.'));
+            return redirect()->back();
+        }
+
         $warehouse = \App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->first();
 
         if ($warehouse->mobile != $request->otp_mobile_number) {
@@ -954,6 +960,12 @@ class QouteController extends Controller
 
     public function singleCategoryQuoteAccepted(Request $request)
     {
+        if (auth()->user()->status != 3 && auth()->user()->business->status != 3)
+        {
+            session()->flash('error', __('portal.Cannot accept the quotation because your account is not approved yet.'));
+            return redirect()->back();
+        }
+
         $warehouse = \App\Models\BusinessWarehouse::where('business_id', auth()->user()->business_id)->first();
         if ($warehouse->mobile != $request->otp_mobile_number) {
             $warehouse->update([

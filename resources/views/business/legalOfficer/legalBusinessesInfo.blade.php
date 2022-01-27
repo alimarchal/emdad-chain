@@ -63,7 +63,7 @@
                                                 {{ $loop->iteration }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                <a href="{{ route('business.show', $business->id) }}" class="hover:text-red-700 hover:underline text-black  md:text-blue-600">@if(isset($business->business_name)) {{ $business->business_name }} @else
+                                                <a href="{{ route('business-show', $business->id) }}" class="hover:text-red-700 hover:underline text-black  md:text-blue-600">@if(isset($business->business_name)) {{ $business->business_name }} @else
                                                         {{$business->name}} <br> {{$business->email}} @endif
                                                 </a>
                                             </td>
@@ -221,7 +221,7 @@
                                                 {{ $loop->iteration }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-black">
-                                                <a href="{{ route('business.show', $business->id) }}" class="hover:text-red-700 hover:underline text-black  md:text-blue-600">@if(isset($business->business_name)) {{ $business->business_name }} @else
+                                                <a href="{{ route('business-show', $business->id) }}" class="hover:text-red-700 hover:underline text-black  md:text-blue-600">@if(isset($business->business_name)) {{ $business->business_name }} @else
                                                         {{$business->name}} <br> {{$business->email}} @endif
                                                 </a>
                                             </td>
