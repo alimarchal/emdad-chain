@@ -62,18 +62,20 @@
                                 <x-jet-input id="nid_photo" type="file" name="nid_photo_1" class="form-input rounded-md shadow-sm block mt-1  w-1/3" required></x-jet-input>
                                 <input type="text" id="datepicker" data-provide="datepicker" class="block mt-1 w-1/3" name="nid_exp_date" value="{{$business->user->nid_exp_date}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" readonly>
                             </div>
-                            <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="business_type">{{__('portal.Category (Select If you want to change)')}}</x-jet-label>
-                                {{--<x-jet-label class="w-1/2" for="business_type">{{__('portal.Existing Category')}}:</x-jet-label>--}}
-                            </div>
-                            <div class="flex mt-3 mb-4">
-                                @include('category.category.index')
-                                {{-- <ol class="pl-3">
-                                    @foreach ($business->categories as $key)
-                                        <li>{{ $loop->iteration }} - {{ \App\Models\Category::find($key->category_number)->name }}</li>
-                                    @endforeach
-                                </ol> --}}
-                            </div>
+                            @if($business->user->registration_type == 'Supplier')
+                                <div class="flex space-x-5 mt-3">
+                                    <x-jet-label class="w-1/2" for="business_type">{{__('portal.Category (Select If you want to change)')}}</x-jet-label>
+                                    {{--<x-jet-label class="w-1/2" for="business_type">{{__('portal.Existing Category')}}:</x-jet-label>--}}
+                                </div>
+                                <div class="flex mt-3 mb-4">
+                                    @include('category.category.index')
+                                    {{-- <ol class="pl-3">
+                                        @foreach ($business->categories as $key)
+                                            <li>{{ $loop->iteration }} - {{ \App\Models\Category::find($key->category_number)->name }}</li>
+                                        @endforeach
+                                    </ol> --}}
+                                </div>
+                            @endif
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="chamber_reg_number">{{__('portal.Commercial Registration Number')}}</x-jet-label>
                                 <x-jet-label class="w-1/2" for="chamber_reg_path" title="File type: JPEG|PNG|PDF|DOCX => (Filesize: Max 10MB)">{{__('portal.Chamber Certificate/File')}}</x-jet-label>
@@ -198,18 +200,20 @@
                                 <x-jet-input id="nid_photo" type="file" name="nid_photo_1" style="font-family: sans-serif" class="form-input rounded-md shadow-sm block mt-1  w-1/3" required></x-jet-input>
                                 <input type="text" id="datepicker" data-provide="datepicker" class="block mt-1 w-1/3" name="nid_exp_date" value="{{$business->user->nid_exp_date}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" readonly>
                             </div>
-                            <div class="flex space-x-5 mt-3">
-                                <x-jet-label class="w-1/2" for="business_type">{{__('portal.Category (Select If you want to change)')}}</x-jet-label>
-                                {{--<x-jet-label class="w-1/2" for="business_type">{{__('portal.Existing Category')}}:</x-jet-label>--}}
-                            </div>
-                            <div class="flex mt-3 mb-4">
-                                @include('category.category.index')
-                                {{-- <ol class="pl-3">
-                                    @foreach ($business->categories as $key)
-                                        <li>{{ $loop->iteration }} - {{ \App\Models\Category::find($key->category_number)->name }}</li>
-                                    @endforeach
-                                </ol> --}}
-                            </div>
+                            @if($business->user->registration_type == 'Supplier')
+                                <div class="flex space-x-5 mt-3">
+                                    <x-jet-label class="w-1/2" for="business_type">{{__('portal.Category (Select If you want to change)')}}</x-jet-label>
+                                    {{--<x-jet-label class="w-1/2" for="business_type">{{__('portal.Existing Category')}}:</x-jet-label>--}}
+                                </div>
+                                <div class="flex mt-3 mb-4">
+                                    @include('category.category.index')
+                                    {{-- <ol class="pl-3">
+                                        @foreach ($business->categories as $key)
+                                            <li>{{ $loop->iteration }} - {{ \App\Models\Category::find($key->category_number)->name }}</li>
+                                        @endforeach
+                                    </ol> --}}
+                                </div>
+                            @endif
                             <div class="flex space-x-5 mt-3">
                                 <x-jet-label class="w-1/2" for="chamber_reg_number">{{__('portal.Commercial Registration Number')}}</x-jet-label>
                                 <x-jet-label class="w-1/2" for="chamber_reg_path" title="File type: JPEG|PNG|PDF|DOCX => (Filesize: Max 10MB)">{{__('portal.Chamber Certificate/File')}}</x-jet-label>

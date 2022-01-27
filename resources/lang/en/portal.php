@@ -928,6 +928,7 @@ return [
     'Verification code is sent to your mobile number.' => 'Verification code is sent to your mobile number.',
     'Wrong code entered. Try again.' => 'Wrong code entered. Try again.',
     'New Number for OTP is added so please verify you new number first to proceed' => 'New Number for OTP is added so please verify you new number first to proceed',
+    'Cannot accept the quotation because your business is not approved yet.' => 'Cannot accept the quotation because your business is not approved yet.',
     'Please choose a deposit date' => 'Please choose a deposit date',
     'Receipt (Proof) is required' => 'Receipt (Proof) is required',
     'Receipt (Proof) must be of type jpg,bmp,png,jpeg,JPEG,JPG,pdf' => 'Receipt (Proof) must be of type jpg,bmp,png,jpeg,JPEG,JPG,pdf',

@@ -34,8 +34,6 @@ class POInfoController extends Controller
 
     public function store(Request $request)
     {
-
-
         /* Storing purchase after skipping while business registration */
         if ($request->has('update'))
         {
@@ -78,9 +76,9 @@ class POInfoController extends Controller
             $POInfo = POInfo::create($request->all());
             session()->flash('message', __('portal.P.O.Info information successfully saved.'));
             $business = Business::find($POInfo->business_id);
-            $business->update(['status' => '3']);
+            $business->update(['status' => 1]);
             $user = User::find(auth()->user()->id);
-            $user->update(['status' => 3]);
+            $user->update(['status' => 1]);
             if ($user->registration_type == "Contracts") {
                 Mail::to($user)->send(new Contracts($business, $user));
             } else {
@@ -92,9 +90,8 @@ class POInfoController extends Controller
 
     public function storeWithOutPOInfo()
     {
-
         $business = Business::find(auth()->user()->business_id);
-        $business->update(['status' => '1']);
+        $business->update(['status' => 1]);
         $user = User::find(auth()->user()->id);
         $user->update(['status' => 1]);
         if ($user->registration_type == "Contracts") {

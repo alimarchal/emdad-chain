@@ -928,6 +928,7 @@ return [
     'Verification code is sent to your mobile number.' => 'تم إرسال رمز التفعيل إلى رقم الجوال',
     'Wrong code entered. Try again.' => 'تم إدخال رمز خاطئ، يرجى المحاولة مجدداً',
     'New Number for OTP is added so please verify you new number first to proceed' => 'تمت إضافة رقم جديد لكلمة السر المؤقتة، يرجى التحقق أولاً من الرقم الجديد للمتابعة',
+    'Cannot accept the quotation because your business is not approved yet.' => 'Cannot accept the quotation because your business is not approved yet.',
     'Please choose a deposit date' => 'يرجى اختيار تاريخ التحويل',
     'Receipt (Proof) is required' => 'الإيصال مطلوب',
     'Receipt (Proof) must be of type jpg,bmp,png,jpeg,JPEG,JPG,pdf' => 'يجب أن تكون صيغة الإيصال إحدى الصيغ التالية: jpg,bmp,png,jpeg,JPEG,JPG,pdf',

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Auth;
 use App\Models\Business;
 use App\Models\BusinessCategory;
 use App\Models\BusinessPackage;
@@ -12,6 +11,7 @@ use App\Models\IreCommission;
 use App\Models\PackageManualPayment;
 use App\Models\User;
 use App\Models\UserLog;
+use App\Notifications\BusinessApproved;
 use App\Notifications\BusinessRejected;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -21,28 +21,44 @@ class BusinessController extends Controller
     public function index(Request $request)
     {
         if (\auth()->user()->hasRole('SuperAdmin')) {
-            if ($request->has('status')) {
-                if ($request->status == 1) {
-                    $businesses = Business::where('status', 1)->paginate(10);
+            if ($request->has('status'))
+            {
+                if ($request->status == 1)
+                {
+                    $businesses = Business::where('status', 1)->orderByDesc('created_at')->paginate(10);
                     return view('business.index', compact('businesses'));
-                } elseif ($request->status == 3) {
-                    $businesses = Business::where('status', 3)->paginate(10);
+                }
+                if ($request->status == 3)
+                {
+                    $businesses = Business::where('status', 3)->orderByDesc('created_at')->paginate(10);
                     return view('business.index', compact('businesses'));
-                } elseif ($request->status == 4) {
-                    $businesses = Business::where('status', 4)->paginate(10);
+                }
+                if ($request->status == 4)
+                {
+                    $businesses = Business::where('status', 4)->orderByDesc('created_at')->paginate(10);
                     return view('business.index', compact('businesses'));
                 }
             }
 
-            $businesses = Business::paginate(10);
+            $businesses = Business::orderByDesc('created_at')->paginate(10);
             return view('business.index', compact('businesses'));
-        } elseif (\auth()->user()->hasRole('Sales Specialist')) {
+        }
+        elseif (\auth()->user()->hasRole('Sales Specialist')) {
             if ($request->has('status')) {
-                if ($request->status == 1) {
-                    $businesses = Business::where('status', 3)->orderBy('id', 'desc')->paginate(10);
+                if ($request->status == 1) /* 1 for complete businesses */ {
+                    $businesses = Business::where('status', 3)->orderByDesc('created_at')->paginate(10);
                     return view('business.saleSpecialist.incompleteMarketing', compact('businesses'));
-                } elseif ($request->status == 2) {
-                    $users = User::where('usertype', 'CEO')->where('business_id', null)->orderBy('id', 'desc')->paginate(10);
+                }
+                elseif ($request->status == 2) /* 2 for incomplete businesses */ {
+                    $users = User::where('usertype', 'CEO')
+                        ->where('business_id', null)
+                        /* for incomplete business registration is_active 0 and status is null. is_active is updated on business approval
+                         or when business is rejected and status is updated to 1 when user submit details for approval. */
+                        ->orWhere(function ($query){
+                            $query->where(['status' => null, 'is_active' => 0]);
+                        })
+                        ->orderByDesc('created_at')
+                        ->paginate(10);
 
                     // Check for Sales Specialist if they checked/saw incomplete businesses
                     $userBusinessCheck = UserLog::latest('login_at')->where(['user_id' => \auth()->id()])->first();
@@ -55,17 +71,19 @@ class BusinessController extends Controller
                 }
             }
 
-            $businesses = Business::where('status', 3)->orderBy('id', 'desc')->paginate(10);
+            $businesses = Business::where('status', 3)->orderByDesc('created_at')->paginate(10);
             return view('business.saleSpecialist.incompleteMarketing', compact('businesses'));
-        } elseif (\auth()->user()->hasRole('Legal Approval Officer 1') || \auth()->user()->hasRole('Finance Officer 1') || \auth()->user()->hasRole('SC Supervisor')) {
+        }
+        elseif (\auth()->user()->hasRole('Legal Approval Officer 1') || \auth()->user()->hasRole('Finance Officer 1') || \auth()->user()->hasRole('SC Supervisor')) {
             if ($request->has('status')) {
-                if ($request->status == 3) {
+                if ($request->status == 3) /* status 3 for completed businesses */ {
                     $status = $request->status;
-                    $businesses = Business::where('status', 3)->orderBy('id', 'desc')->paginate(10);
+                    $businesses = Business::where('status', 3)->orderByDesc( 'created_at')->paginate(10);
                     return view('business.legalOfficer.legalBusinessesInfo', compact('businesses', 'status'));
-                } elseif ($request->status == 1) {
+                }
+                elseif ($request->status == 1) /* status 1 for pending businesses */ {
                     $status = $request->status;
-                    $businesses = Business::where('status', 1)->orderBy('id', 'desc')->paginate(10);
+                    $businesses = Business::where('status', 1)->orderByDesc( 'created_at')->paginate(10);
 
                     // Check for Emdad users if they checked/saw pending businesses
                     $userBusinessCheck = UserLog::latest('login_at')->where(['user_id' => \auth()->id()])->first();
@@ -78,42 +96,64 @@ class BusinessController extends Controller
                 }
             }
 
-            $businesses = Business::where('status', 3)->orderBy('id', 'desc')->paginate(10);
+            $businesses = Business::where('status', 3)->orderByDesc( 'created_at')->paginate(10);
             return view('business.legalOfficer.legalBusinessesInfo', compact('businesses'));
-        } elseif (\auth()->user()->hasRole('SC Specialist')) {
+        }
+        elseif (\auth()->user()->hasRole('SC Specialist')) {
             if ($request->has('status')) {
-                if ($request->status == 3) {
+                if ($request->status == 3) /* 3 status for completed businesses */ {
                     $status = $request->status;
-                    $businesses = Business::where('status', 3)->orderBy('id', 'desc')->paginate(10);
+                    $businesses = Business::where('status', 3)->orderByDesc( 'created_at')->paginate(10);
 
                     return view('business.scSpecialist.info', compact('businesses', 'status'));
-                } elseif ($request->status == 1) {
+                }
+                elseif ($request->status == 1) /* 1 status for pending businesses */ {
                     $status = $request->status;
-                    $businesses = Business::where('status', 1)->orderBy('id', 'desc')->paginate(10);
+                    $businesses = Business::where('status', 1)->orderByDesc( 'created_at')->paginate(10);
 
                     return view('business.scSpecialist.info', compact('businesses', 'status'));
-                } elseif ($request->status == 2) {
-                    $users = User::where('usertype', 'CEO')->where('business_id', null)->orderBy('id', 'desc')->paginate(10);
+                }
+                elseif ($request->status == 2) /* 2 status for incomplete businesses */ {
+                    $users = User::where('usertype', 'CEO')
+                        ->where('business_id', null)
+                        /* for incomplete business registration is_active 0 and status is null. is_active is updated on business approval
+                         or when business is rejected and status is updated to 1 when user submit details for approval. */
+                        ->orWhere(function ($query){
+                            $query->where(['status' => null, 'is_active' => 0]);
+                        })
+                        ->orderByDesc( 'created_at')
+                        ->paginate(10);
 
                     return view('business.scSpecialist.info', compact('users'));
                 }
             }
 
-            $businesses = Business::where('status', 3)->orderBy('id', 'desc')->paginate(10);
+            $businesses = Business::where('status', 3)->orderByDesc( 'created_at')->paginate(10);
             return view('business.scSpecialist.info', compact('businesses'));
-        } elseif (\auth()->user()->hasRole('IT Admin')) {
+        }
+        elseif (\auth()->user()->hasRole('IT Admin')) {
             if ($request->has('status')) {
-                if ($request->status == 3) {
+                if ($request->status == 3) /* 3 status for completed businesses */ {
                     $status = $request->status;
-                    $businesses = Business::where('status', 3)->orderBy('id', 'desc')->paginate(10);
+                    $businesses = Business::where('status', 3)->orderByDesc( 'created_at')->paginate(10);
                     return view('business.itAdmin.business', compact('businesses', 'status'));
-                } elseif ($request->status == 2) {
-                    $users = User::where('usertype', 'CEO')->where('business_id', null)->orderBy('id', 'desc')->paginate(10);
+                }
+                elseif ($request->status == 2) /* 2 status for incomplete businesses */ {
+                    $users = User::where('usertype', 'CEO')
+                        ->where('business_id', null)
+                        /* for incomplete business registration is_active 0 and status is null. is_active is updated on business approval
+                         or when business is rejected and status is updated to 1 when user submit details for approval. */
+                        ->orWhere(function ($query){
+                            $query->where(['status' => null, 'is_active' => 0]);
+                        })
+                        ->orderByDesc( 'created_at')
+                        ->paginate(10);
 
                     return view('business.itAdmin.business', compact('users'));
-                } elseif ($request->status == 1) {
+                }
+                elseif ($request->status == 1) /* 1 status for pending businesses */ {
                     $status = $request->status;
-                    $businesses = Business::where('status', 1)->orderBy('id', 'desc')->paginate(10);
+                    $businesses = Business::where('status', 1)->orderByDesc( 'created_at')->paginate(10);
 
                     // Check for IT Admin if he checked/saw pending businesses
                     $userBusinessCheck = UserLog::latest('login_at')->where(['user_id' => \auth()->id()])->first();
@@ -127,9 +167,10 @@ class BusinessController extends Controller
                 }
             }
 
-            $businesses = Business::where('status', 3)->orderBy('id', 'desc')->paginate(10);
+            $businesses = Business::where('status', 3)->orderByDesc( 'created_at')->paginate(10);
             return view('business.itAdmin.business', compact('businesses'));
-        } else {
+        }
+        else {
             $businesses = Business::where('user_id', auth()->user()->id)->paginate(10);
             return view('business.index', compact('businesses'));
         }
@@ -281,7 +322,7 @@ class BusinessController extends Controller
 
     public function show(Business $business)
     {
-        $business = $business::firstWhere('id', \auth()->user()->business_id);
+        $business = $business::with('businessPackage')->firstWhere('id', \auth()->user()->business_id);
         return view('business.show', compact('business'));
     }
 
@@ -409,10 +450,9 @@ class BusinessController extends Controller
                     ]);
                 }
             }
-
-
-            $user->notify(new \App\Notifications\BusinessApproved());
-        } elseif ($request->status_id == 4) {
+            $user->notify(new BusinessApproved());
+        }
+        elseif ($request->status_id == 4) {
             $business->update([
                 'status' => 4,
             ]);
@@ -426,7 +466,8 @@ class BusinessController extends Controller
                 ]);
             }
             $user->notify(new BusinessRejected());
-        } else {
+        }
+        else {
             return redirect()->back()->with('message', __('portal.Something went wrong.'));
         }
 
@@ -646,4 +687,11 @@ class BusinessController extends Controller
     }
 
     /* Certificate update functions for Emdad Users end */
+
+    /* Business show function for Admins */
+    public function businessShow(Business $business)
+    {
+        $business = $business::with('businessPackage')->firstWhere('id', $business->id);
+        return view('business.admins.businessViewByID', compact('business'));
+    }
 }

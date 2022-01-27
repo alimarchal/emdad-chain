@@ -189,21 +189,42 @@
 
                                 <div class="w-full lg:w-1/3 xl:w-1/2 h-auto mt-2 text-lg text-black">
                                     <p><strong>{{__('portal.Category(s) selected')}}:</strong><br>
-                                        @php $cat = explode(',',$business->category_number); @endphp
+                                        @if(auth()->user()->registration_type == 'Supplier')
 
-                                        @foreach($cat as $c)
-                                            @php
-                                                $catg = \App\Models\Category::find($c);
-                                                $parent= \App\Models\Category::where('id',$catg->parent_id)->first();
-                                            @endphp
-                                            @if ($catg != '')
-                                                {{$loop->iteration . ': ' . $catg->name . ', ' . $parent->name }} <br>
-                                            @else
-                                                {{ "There is no category yet !" }}
-                                            @endif
-                                        @endforeach
+                                            @php $cat = explode(',',$business->category_number); @endphp
 
+                                            @foreach($cat as $c)
+                                                @php
+                                                    $catg = \App\Models\Category::find($c);
+                                                    $parent= \App\Models\Category::where('id',$catg->parent_id)->first();
+                                                @endphp
+                                                @if ($catg != '')
+                                                    {{$loop->iteration . ': ' . $catg->name . ', ' . $parent->name }} <br>
+                                                @else
+                                                    {{ "There is no category yet !" }}
+                                                @endif
+                                            @endforeach
 
+                                        @elseif(auth()->user()->registration_type == 'Buyer')
+
+                                            @php $cat = explode(',',$business->businessPackage->categories); @endphp
+
+                                            @foreach($cat as $c)
+                                                @php
+                                                    $category = \App\Models\Category::find($c);
+                                                    $children = \App\Models\Category::where('parent_id',$category->id)->get();
+                                                @endphp
+                                                @if ($category != '')
+                                                        {{$loop->iteration . ': ' . $category->name }}
+                                                    @if(count($children) > 0)
+                                                        @include('business.sub_categories', compact('children'))
+                                                    @endif
+                                                @else
+                                                    {{ "There is no category yet !" }}
+                                                @endif
+                                            @endforeach
+
+                                        @endif
                                     </p>
                                 </div>
 
@@ -433,19 +454,42 @@
 
                                 <div class="w-full lg:w-1/3 xl:w-1/2 h-auto mt-2 text-lg text-black">
                                     <p><strong>{{__('portal.Category(s) selected')}}:</strong><br>
-                                        @php $cat = explode(',',$business->category_number); @endphp
+                                        @if(auth()->user()->registration_type == 'Supplier')
 
-                                        @foreach($cat as $c)
-                                            @php
-                                                $catg = \App\Models\Category::find($c);
-                                                $parent= \App\Models\Category::where('id',$catg->parent_id)->first();
-                                            @endphp
-                                            @if ($catg != '')
-                                                {{$loop->iteration . ': ' . $catg->name_ar . ', ' . $parent->name_ar }} <br>
-                                            @else
-                                                {{ "There is no category yet !" }}
-                                            @endif
-                                        @endforeach
+                                            @php $cat = explode(',',$business->category_number); @endphp
+
+                                            @foreach($cat as $c)
+                                                @php
+                                                    $catg = \App\Models\Category::find($c);
+                                                    $parent= \App\Models\Category::where('id',$catg->parent_id)->first();
+                                                @endphp
+                                                @if ($catg != '')
+                                                    {{$loop->iteration . ': ' . $catg->name . ', ' . $parent->name }} <br>
+                                                @else
+                                                    {{ "There is no category yet !" }}
+                                                @endif
+                                            @endforeach
+
+                                        @elseif(auth()->user()->registration_type == 'Buyer')
+
+                                            @php $cat = explode(',',$business->businessPackage->categories); @endphp
+
+                                            @foreach($cat as $c)
+                                                @php
+                                                    $category = \App\Models\Category::find($c);
+                                                    $children = \App\Models\Category::where('parent_id',$category->id)->get();
+                                                @endphp
+                                                @if ($category != '')
+                                                     <span class="font-sans">{{$loop->iteration}}</span> : {{$category->name_ar }}
+                                                    @if(count($children) > 0)
+                                                        @include('business.sub_categories', compact('children'))
+                                                    @endif
+                                                @else
+                                                    {{ "There is no category yet !" }}
+                                                @endif
+                                            @endforeach
+
+                                        @endif
                                     </p>
                                 </div>
 
