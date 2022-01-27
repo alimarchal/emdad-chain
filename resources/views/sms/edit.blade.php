@@ -21,17 +21,17 @@
                                     <label class="block font-medium text-sm text-gray-700 mt-4" for="category">
                                         {{__('portal.Category')}}
                                     </label>
-                                    <input class="form-input rounded-md shadow-sm mt-1 block w-full" value="{{$smsMessages->category}}" id="category" type="text" name="category" required>
+                                    <input class="form-input rounded-md border border-gray-200  shadow-sm mt-1 block w-full" value="{{$smsMessages->category}}" id="category" type="text" name="category" required>
 
                                     <label class="block font-medium text-sm text-gray-700 mt-4" for="arabic_message">
                                         {{__('portal.Arabic Message')}}
                                     </label>
-                                    <textarea class="form-input rounded-md shadow-sm mt-1 block w-full" style="direction: rtl;" id="arabic_message" type="text" name="arabic_message" required>{{$smsMessages->arabic_message}}</textarea>
+                                    <textarea class="form-input rounded-md border border-gray-200  shadow-sm mt-1 block w-full" style="direction: rtl;" id="arabic_message" type="text" name="arabic_message" required>{{$smsMessages->arabic_message}}</textarea>
 
                                     <label class="block font-medium text-sm text-gray-700 mt-4" for="english_message">
                                         {{__('portal.English Message')}}
                                     </label>
-                                    <textarea class="form-input rounded-md shadow-sm mt-1 block w-full" id="english_message" type="text" name="english_message" required>{{$smsMessages->english_message}}</textarea>
+                                    <textarea class="form-input rounded-md border border-gray-200  shadow-sm mt-1 block w-full" id="english_message" type="text" name="english_message" required>{{$smsMessages->english_message}}</textarea>
 
                                 </div>
                             </div>
