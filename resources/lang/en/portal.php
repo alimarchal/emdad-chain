@@ -806,6 +806,7 @@ return [
     'Quotations/Status' => 'Quotations/Status',
     'Quotation valid upto' => 'Quotation valid upto',
     'Quotation validity' => 'Quotation validity',
+    'Payable Amount to Emdad.' => 'Payable Amount to Emdad.',
     'Minimum expiry date for quotation will be 5 days from the date of quotation quoted.' => 'Minimum expiry date for quotation will be 5 days from the date of quotation quoted.',
     'Quotation Expired' => 'Quotation Expired',
     'Request to extend quotation expiry date' => 'Request to extend quotation expiry date',

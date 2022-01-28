@@ -1087,10 +1087,12 @@ class QouteController extends Controller
         /* NEW Total Cost Calculating Formula */
         $total_amount = ($request->quote_quantity * $request->quote_price_per_quantity);
         $total_cost = $total_amount + $request->shipment_cost;
+        /* Saving Emdad 1.5 to a variable inorder to show to the supplier in quotation view */
+        $emdad_charges = sprintf('%0.2f',$total_cost * (1.5 / 100));
         $total_vat = ($total_cost * ($request->VAT / 100));
         $sum = ($total_cost + $total_vat);
 
-        return response()->json(['data' => $sum]);
+        return response()->json(['sum' => $sum, 'emdadCharges' => $emdad_charges]);
     }
 
     // Calculating totalCost for Single Category RFQ Type at the time of Supplier RFQ response
@@ -1102,9 +1104,11 @@ class QouteController extends Controller
         }
 
         $total_cost = $total_amount + $request->shipment_cost;
+        /* Saving Emdad 1.5 to a variable inorder to show to the supplier in quotation view */
+        $emdad_charges = sprintf('%0.2f',$total_cost * (1.5 / 100));
         $total_vat = ($total_cost * ($request->VAT / 100));
         $sum = ($total_cost + $total_vat);
 
-        return response()->json(['data' => $sum]);
+        return response()->json(['sum' => $sum, 'emdadCharges' => $emdad_charges]);
     }
 }

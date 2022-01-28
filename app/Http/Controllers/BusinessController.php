@@ -52,7 +52,7 @@ class BusinessController extends Controller
                 elseif ($request->status == 2) /* 2 for incomplete businesses */ {
                     $users = User::where('usertype', 'CEO')
                         ->where('business_id', null)
-                        /* for incomplete business registration is_active 0 and status is null. is_active is updated on business approval
+                        /* for incomplete business registration is_active is 0 and status is null. is_active is updated on business approval
                          or when business is rejected and status is updated to 1 when user submit details for approval. */
                         ->orWhere(function ($query){
                             $query->where(['status' => null, 'is_active' => 0]);
@@ -116,7 +116,7 @@ class BusinessController extends Controller
                 elseif ($request->status == 2) /* 2 status for incomplete businesses */ {
                     $users = User::where('usertype', 'CEO')
                         ->where('business_id', null)
-                        /* for incomplete business registration is_active 0 and status is null. is_active is updated on business approval
+                        /* for incomplete business registration is_active is 0 and status is null. is_active is updated on business approval
                          or when business is rejected and status is updated to 1 when user submit details for approval. */
                         ->orWhere(function ($query){
                             $query->where(['status' => null, 'is_active' => 0]);
@@ -141,7 +141,7 @@ class BusinessController extends Controller
                 elseif ($request->status == 2) /* 2 status for incomplete businesses */ {
                     $users = User::where('usertype', 'CEO')
                         ->where('business_id', null)
-                        /* for incomplete business registration is_active 0 and status is null. is_active is updated on business approval
+                        /* for incomplete business registration is_active is 0 and status is null. is_active is updated on business approval
                          or when business is rejected and status is updated to 1 when user submit details for approval. */
                         ->orWhere(function ($query){
                             $query->where(['status' => null, 'is_active' => 0]);
@@ -546,8 +546,19 @@ class BusinessController extends Controller
 
     public function incomplete()
     {
-        $incompleteBusiness = User::where('email_verified_at', null)->where('usertype', 'CEO')->where('business_id', null)->paginate(10);
-//        $incompleteBusiness = User::where(['usertype' => 'CEO','business_id' => null])->orWhere('email_verified_at', null)->paginate(10);
+//        $incompleteBusiness = User::where('email_verified_at', null)->where('usertype', 'CEO')->where('business_id', null)->paginate(10);
+        $incompleteBusiness = User::where('usertype', 'CEO')
+            ->where('business_id', null)
+            /* for incomplete business registration is_active is 0 and status is null. is_active is updated on business approval
+             or when business is rejected and status is updated to 1 when user submit details for approval. */
+            ->orWhere(function ($query){
+                $query->where(['status' => null, 'is_active' => 0]);
+            })
+            ->orWhere(function ($query){
+                $query->where(['email_verified_at' => null, 'is_active' => 0]);
+            })
+            ->orderByDesc('created_at')
+            ->paginate(10);
 
         return view('business.incomplete', compact('incompleteBusiness'));
     }

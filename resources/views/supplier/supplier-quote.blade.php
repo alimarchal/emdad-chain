@@ -401,6 +401,21 @@
                                     </tr>
 
                                     <tr class="mt-2">
+                                        <td colspan="2">
+                                            <label class="block font-medium text-sm text-gray-700" for="datepicker">
+                                                {{__('portal.Payable Amount to Emdad.')}}
+                                            </label>
+                                            @php
+                                                $total_amount = ($collection->quote_quantity * $collection->quote_price_per_quantity);
+                                                $total_cost = $total_amount + $collection->shipment_cost;
+                                                /* Saving Emdad 1.5 to a variable inorder to show to the supplier in quotation view */
+                                                $emdad_charges = $total_cost * (1.5 / 100);
+                                            @endphp
+                                            <input class="form-input rounded-md shadow-sm block w-full" id="emdad_charges" type="number" value="{{$emdad_charges}}" autocomplete="size" readonly placeholder="{{__('portal.Payable Amount to Emdad.')}}">
+                                        </td>
+                                    </tr>
+
+                                    <tr class="mt-2">
                                         <td colspan="12">
                                             <h1 class="text-xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
                                         </td>
@@ -527,7 +542,7 @@
 
                                     <tr class="mt-2">
                                         <td colspan="2">
-                                            <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
+                                            <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="{{__('portal.Total Cost')}}">
                                         </td>
                                         <td colspan="2" class="text-left">
                                             <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 active:bg-yellow-900 focus:outline-none focus:border-yellow-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
@@ -535,6 +550,15 @@
                                             </a>
                                         </td>
 
+                                    </tr>
+
+                                    <tr class="mt-2">
+                                        <td colspan="2">
+                                            <label class="block font-medium text-sm text-gray-700" for="datepicker">
+                                                {{__('portal.Payable Amount to Emdad.')}}
+                                            </label>
+                                            <input class="form-input rounded-md shadow-sm block w-full" id="emdad_charges" type="number" autocomplete="size" readonly placeholder="{{__('portal.Payable Amount to Emdad.')}}">
+                                        </td>
                                     </tr>
 
                                     <tr class="mt-2">
@@ -937,6 +961,21 @@
                                     </tr>
 
                                     <tr class="mt-2">
+                                        <td colspan="2">
+                                            <label class="block font-medium text-sm text-gray-700" for="datepicker">
+                                                {{__('portal.Payable Amount to Emdad.')}}
+                                            </label>
+                                            @php
+                                                $total_amount = ($collection->quote_quantity * $collection->quote_price_per_quantity);
+                                                $total_cost = $total_amount + $collection->shipment_cost;
+                                                /* Saving Emdad 1.5 to a variable inorder to show to the supplier in quotation view */
+                                                $emdad_charges = $total_cost * (1.5 / 100);
+                                            @endphp
+                                            <input class="form-input rounded-md shadow-sm block w-full" id="emdad_charges" type="number" autocomplete="size" value="{{$emdad_charges}}" readonly placeholder="{{__('portal.Payable Amount to Emdad.')}}">
+                                        </td>
+                                    </tr>
+
+                                    <tr class="mt-2">
                                         <td colspan="12">
                                             <h1 class="text-xl text-center font-bold mb-2 mt-2 text-red-700">{{__('portal.Minimum expiry date for quotation will be 5 days from the date of quotation quoted.')}}</h1>
                                         </td>
@@ -1005,7 +1044,7 @@
 
                                     <tr class="mt-2">
                                         <td colspan="2">
-                                            <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="Total Cost">
+                                            <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="{{__('portal.Total Cost')}}">
                                         </td>
                                         <td colspan="2" class="text-right">
                                             <a style="cursor: pointer" id="totalCost" onclick="calculateCost()" class="mr-2 px-4 py-1 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white active:bg-yellow-900 focus:outline-none focus:border-yellow-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
@@ -1013,6 +1052,15 @@
                                             </a>
                                         </td>
 
+                                    </tr>
+
+                                    <tr class="mt-2">
+                                        <td colspan="2">
+                                            <label class="block font-medium text-sm text-gray-700" for="datepicker">
+                                                {{__('portal.Payable Amount to Emdad.')}}
+                                            </label>
+                                            <input class="form-input rounded-md shadow-sm block w-full" id="emdad_charges" type="number" autocomplete="size" readonly placeholder="{{__('portal.Payable Amount to Emdad.')}}">
+                                        </td>
                                     </tr>
 
                                     <tr class="mt-2">
@@ -1087,8 +1135,9 @@
                 'shipment_cost':ship_cost,
             },
             success: function (response) {
-                console.log(response);
-                $('#total_cost').val(response.data);
+                // console.log(response);
+                $('#total_cost').val(response.sum);
+                $('#emdad_charges').val(response.emdadCharges);
             }
         });
 
@@ -1096,6 +1145,7 @@
     $(document).on('keydown', '.quantity, .price_per_unit, .VAT, .shipment_cost', function(){
 
         $('#total_cost').val('');
+        $('#emdad_charges').val('');
     });
 
     }

@@ -108,4 +108,12 @@ class POInfoController extends Controller
         $business = Business::find($purchaseOrderInfo->business_id);
         return view('purchaseOrderInfo.show', compact('purchaseOrderInfo', 'business'));
     }
+
+    /* Function for admins to view POs by ID */
+    public function viewByID($poID)
+    {
+        $purchaseOrderInfo = POInfo::firstWhere('id', $poID);
+        $business = Business::find($purchaseOrderInfo->business_id);
+        return view('purchaseOrderInfo.admins.viewByID', compact('purchaseOrderInfo', 'business'));
+    }
 }

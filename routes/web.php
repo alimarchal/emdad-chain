@@ -245,13 +245,21 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
         Route::post('update-package-manual-payment-{id}', [PaymentController::class, 'updatePackageManualPayment'])->name('updatePackageManualPayment');
         Route::get('supplier-manual-payments', [PaymentController::class, 'supplier_payment'])->name('supplier_payment');
         ##################################### For Emdad Route end ######################################################
+
+        ###################################### For Emdad Route To update business warehouses start ###################################################
+        Route::get('/business/warehouse/{id}', [BusinessWarehouseController::class, 'listOfBusinessWarehouses'])->name('businessWarehouse');
+        Route::get('/business/warehouse/edit/{id}', [BusinessWarehouseController::class, 'editBusinessWarehouse'])->name('editBusinessWarehouse');
+        ###################################### For Emdad Route To update business warehouses end ###################################################
+
+        ###################################### For Emdad Route To update Purchase Order start ###################################################
+        Route::get('/purchase-order-details/{id}', [POInfoController::class, 'viewByID'])->name('viewPOByID');
+        ###################################### For Emdad Route To update Purchase Order end ###################################################
     });
 
     Route::resource('/businessFinanceDetail', BusinessFinanceDetailController::class);
     Route::get('/businessWarehouse/number-update', [BusinessWarehouseController::class, 'updateNumber'])->name('warehouseNumberUpdate');
+    Route::get('/business-warehouses', [BusinessWarehouseController::class, 'show'])->name('businessWarehouseShow');
     Route::resource('/businessWarehouse', BusinessWarehouseController::class);
-    Route::get('/businessWarehouse', [BusinessWarehouseController::class, 'show'])->name('businessWarehouseShow');
-    Route::get('/business/warehouse/{id}', [BusinessWarehouseController::class, 'businessWarehouseShow'])->name('businessWarehouse');
     Route::get('/purchaseOrderInfo/store', [POInfoController::class, 'storeWithOutPOInfo'])->name('storeWithOutPOInfo');
     Route::resource('/purchaseOrderInfo', POInfoController::class);
 
@@ -592,7 +600,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::get('/generate-emdad-invoice-pdf/{emdadInvoiceID}', [EmdadInvoiceController::class, 'generatePDF'])->name('generateEmdadInvoicePDF');
 
     ########################################## Single Category Invoice & Delivery Routes ###########################
-    Route::get('single/category/invoice/{invoiceID}', [InvoiceController::class, 'singleCategoryShow'])->name('singleCategoryInvoiceShow');
+    Route::get('single/category/invoice/{bankPayment}', [InvoiceController::class, 'singleCategoryShow'])->name('singleCategoryInvoiceShow');
     Route::post('single/category/invoice/generate', [InvoiceController::class, 'singleCategoryInvoiceGenerate'])->name('singleCategoryInvoiceGenerate');
     Route::get('/single/category/emdad-invoices/', [EmdadInvoiceController::class, 'singleCategoryIndex'])->name('singleCategoryEmdadInvoicesIndex');
     Route::get('/single/category/emdad-invoice/{rfq_no}', [EmdadInvoiceController::class, 'singleCategoryView'])->name('singleCategoryView');

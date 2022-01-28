@@ -568,6 +568,10 @@
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="{{__('portal.Total Cost')}}">
+                                    </div> <br><br><br><br>
+                                    <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Payable Amount to Emdad.')}}</label>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="emdad_charges" type="number" autocomplete="size" readonly placeholder="{{__('portal.Payable Amount to Emdad.')}}">
                                     </div>
                                     {{--                                </div>--}}
                                 </td>
@@ -1156,6 +1160,10 @@
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly placeholder="{{__('portal.Total Cost')}}">
+                                    </div> <br><br><br><br>
+                                    <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Payable Amount to Emdad.')}}</label>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="emdad_charges" type="number" autocomplete="size" readonly placeholder="{{__('portal.Payable Amount to Emdad.')}}">
                                     </div>
                                     {{--                                </div>--}}
                                 </td>
@@ -1221,8 +1229,9 @@
                 'shipment_cost':ship_cost,
             },
             success: function (response) {
-                console.log(response);
-                $('#total_cost').val(response.data);
+                // console.log(response);
+                $('#total_cost').val(response.sum);
+                $('#emdad_charges').val(response.emdadCharges);
             }
         });
 
@@ -1230,6 +1239,7 @@
         $(document).on('keydown', '.quantity, .price_per_unit, .VAT, .shipment_cost', function(){
 
             $('#total_cost').val('');
+            $('#emdad_charges').val('');
         });
 
     }
@@ -1275,7 +1285,8 @@
                 'shipment_cost':ship_cost,
             },
             success: function (response) {
-                $('#total_cost').val(response.data);
+                $('#total_cost').val(response.sum);
+                $('#emdad_charges').val(response.emdadCharges);
             }
         });
 
@@ -1283,6 +1294,7 @@
         $(document).on('keydown', '.quantity, .price_per_unit, .VAT, .shipment_cost', function(){
 
             $('#total_cost').val('');
+            $('#emdad_charges').val('');
         });
 
     }

@@ -806,6 +806,7 @@ return [
     'Quotations/Status' => 'العروض / الحالة',
     'Quotation valid upto' => 'هذا العرض متاح حتى',
     'Quotation validity' => 'صلاحية عرض السعر',
+    'Payable Amount to Emdad.' => 'Payable Amount to Emdad.',
     'Minimum expiry date for quotation will be 5 days from the date of quotation quoted.' => 'الحد الأدنى لمهلة العرض هو 5 أيام ابتداءً من تاريخ إنشائه.',
     'Quotation Expired' => 'انتهت مهلة العرض',
     'Request to extend quotation expiry date' => 'طلب تمديد مهلة العرض',

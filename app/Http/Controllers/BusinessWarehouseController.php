@@ -113,12 +113,6 @@ class BusinessWarehouseController extends Controller
         return redirect()->route('purchaseOrderInfo.create');
     }
 
-    public function businessWarehouseShow($id)
-    {
-        $business = BusinessWarehouse::where('business_id', $id)->get();
-        return view('businessWarehouse.showAllWareHouse', compact('business'));
-    }
-
     public function edit(BusinessWarehouse $businessWarehouse)
     {
         $businessWarehouse = BusinessWarehouse::firstWhere(['id' => $businessWarehouse->id, 'business_id' => auth()->user()->business_id]);
@@ -127,7 +121,48 @@ class BusinessWarehouseController extends Controller
 
     public function update(Request $request, BusinessWarehouse $businessWarehouse)
     {
-        if (auth()->user()->registration_type == 'Supplier')
+        /* If condition added because user_id should not be updated while auth user is any of the admins */
+        if (auth()->user()->registration_type != 'Supplier' && auth()->user()->registration_type != 'Buyer')
+        {
+            /* registration_type defined in edit view */
+            if ($request->registration_type == 'Supplier')
+            {
+                $request->validate([
+                    'name' => 'required',
+                    'warehouse_name' => 'required',
+                    'designation' => 'required',
+                    'warehouse_email' => 'required',
+                    'mobile' => 'required|numeric',
+                    'country' => 'required',
+                    'address' => 'required',
+                    'warehouse_type' => 'required',
+                    'cold_storage' => 'required',
+                    'gate_type' => 'required',
+                    'fork_lift' => 'required',
+                    'total_warehouse_manpower' => 'required',
+                    'number_of_drivers' => 'required',
+                    'working_time' => 'required',
+                ]);
+            }
+            elseif($request->registration_type == 'Buyer'){
+                $request->validate([
+                    'name' => 'required',
+                    'warehouse_name' => 'required',
+                    'designation' => 'required',
+                    'warehouse_email' => 'required',
+                    'mobile' => 'required|numeric',
+                    'country' => 'required',
+                    'address' => 'required',
+                    'warehouse_type' => 'required',
+                    'cold_storage' => 'required',
+                    'gate_type' => 'required',
+                    'fork_lift' => 'required',
+                    'total_warehouse_manpower' => 'required',
+                    'working_time' => 'required',
+                ]);
+            }
+        }
+        elseif (auth()->user()->registration_type == 'Supplier')
         {
             $request->validate([
                 'user_id' => 'required',
@@ -171,7 +206,11 @@ class BusinessWarehouseController extends Controller
         $businessWarehouse->update($request->all());
 
         session()->flash('message', __('portal.Warehouse information successfully updated.'));
-        return redirect()->route('businessWarehouseShow', auth()->user()->business_id);
+        if (auth()->user()->registration_type == 'Supplier' && auth()->user()->registration_type == 'Buyer')
+        {
+            return redirect()->route('businessWarehouseShow', auth()->user()->business_id);
+        }
+        return redirect()->route('businessWarehouse', $businessWarehouse->business_id);
     }
 
     /* Updating Buyer's warehouse number when he changes in responding to a quotation (OTP number) */
@@ -194,4 +233,18 @@ class BusinessWarehouseController extends Controller
             ]);
         }
     }
+
+    /* Functions for admins Start */
+    public function listOfBusinessWarehouses($id)
+    {
+        $business = BusinessWarehouse::where('business_id', $id)->orderByDesc('created_at')->get();
+        return view('businessWarehouse.showAllWareHouse', compact('business'));
+    }
+
+    public function editBusinessWarehouse($id)
+    {
+        $businessWarehouse = BusinessWarehouse::with('user')->firstWhere(['id' => $id]);
+        return view('businessWarehouse.admins.editWarehouseByID', compact('businessWarehouse'));
+    }
+    /* Functions for admins ends */
 }
