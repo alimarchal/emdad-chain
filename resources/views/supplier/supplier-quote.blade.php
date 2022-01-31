@@ -185,16 +185,16 @@
                                     <div class="my-5 pl-5 ">
 
                                         <strong>{{__('portal.Delivery Period')}}: </strong>
-                                            @if ($eOrderItems->delivery_period =='Immediately') {{__('portal.Immediately')}} @endif
-                                            @if ($eOrderItems->delivery_period =='Within 30 Days') {{__('portal.30 Days')}} @endif
-                                            @if ($eOrderItems->delivery_period =='Within 60 Days') {{__('portal.60 Days')}} @endif
-                                            @if ($eOrderItems->delivery_period =='Within 90 Days') {{__('portal.90 Days')}} @endif
-                                            @if ($eOrderItems->delivery_period =='Standing Order - 2 per year' ) {{__('portal.Standing Order - 2 times / year')}} @endif
-                                            @if ($eOrderItems->delivery_period =='Standing Order - 3 per year' ) {{__('portal.Standing Order - 3 times / year')}} @endif
-                                            @if ($eOrderItems->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}} @endif
-                                            @if ($eOrderItems->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}} @endif
-                                            @if ($eOrderItems->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}} @endif
-                                            @if ($eOrderItems->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}}
+                                            @if ($eOrderItems->delivery_period =='Immediately') {{__('portal.Immediately')}}
+                                            @elseif ($eOrderItems->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
+                                            @elseif ($eOrderItems->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
+                                            @elseif ($eOrderItems->delivery_period =='Within 90 Days') {{__('portal.90 Days')}}
+                                            @elseif ($eOrderItems->delivery_period =='Standing Order - 2 per year' ) {{__('portal.Standing Order - 2 times / year')}}
+                                            @elseif ($eOrderItems->delivery_period =='Standing Order - 3 per year' ) {{__('portal.Standing Order - 3 times / year')}}
+                                            @elseif ($eOrderItems->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}}
+                                            @elseif ($eOrderItems->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}}
+                                            @elseif ($eOrderItems->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}}
+                                            @elseif ($eOrderItems->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}}
                                             @else {{$eOrderItems->delivery_period}}
                                             @endif
                                         <br>
@@ -702,10 +702,10 @@
                                     {{--                            <img src="{{ url('imp_img.jpg') }}" alt="logo" style="height: 80px;width: 200px;" />--}}
                                 </div>
                                 @php
-                                    $user_business_details=auth()->user()->business;
+                                    $user_business_details = auth()->user()->business;
                                 @endphp
                                 <div class="my-5 pl-5 ">
-                                    <h1 class="font-extrabold color-1f3864 text-xl ">{{$user_business_details->business_name}}</h1>
+                                    <h1 class="font-extrabold color-1f3864 text-xl font-sans">{{$user_business_details->business_name}}</h1>
                                     {{-- <span>Location :
                                     <span class="font-bold">{{$user_business_details->city}}</span></span> <br>
                                     <span>Emdad Id : <span class="font-bold">{{Auth::user()->business_id}}</span></span> --}}
@@ -716,7 +716,9 @@
                                 <div class="ml-auto date" style="width:150px; float: left">
                                     <br>
                                     <span class="color-1f3864 font-bold">{{__('portal.Date')}}:
-                                {{\Carbon\Carbon::today()->format('Y-m-d')}}</span><br>
+                                        <span class="font-sans">{{\Carbon\Carbon::today()->format('Y-m-d')}}</span>
+                                    </span>
+                                    <br>
                                     <hr>
                                 </div>
                             </div>
@@ -735,7 +737,7 @@
                                     <div class="my-5 pl-5 ">
                                         <strong>{{__('portal.Buyer Name')}}:</strong> @if($eOrderItems->company_name_check == 1) {{$eOrderItems->business->business_name}} @else {{__('portal.N/A')}} @endif
                                         <br>
-                                        <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-{{$eOrderItems->id}}
+                                        <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-<span class="font-sans">{{$eOrderItems->id}}</span>
                                         <br>
                                         <strong>{{__('portal.Remarks')}}: </strong>{{$eOrderItems->remarks}}
                                         <br>
@@ -761,7 +763,7 @@
 
                                         <strong>{{__('portal.Brand')}}: </strong> {{ $eOrderItems->brand }}
                                         <br>
-                                        <strong>{{__('portal.Quantity')}}: </strong> {{ $eOrderItems->quantity }}
+                                        <strong>{{__('portal.Quantity')}}: </strong> <span class="font-sans">{{ $eOrderItems->quantity }}</span>
                                         <br>
                                         <strong>{{__('portal.Unit of Measurement')}}: </strong> {{ $eOrderItems->unit_of_measurement }}
                                         <br>
@@ -779,16 +781,16 @@
                                     <div class="my-5 pl-5 ">
 
                                         <strong>{{__('portal.Delivery Period')}}: </strong>
-                                        @if ($eOrderItems->delivery_period =='Immediately') {{__('portal.Immediately')}} @endif
-                                        @if ($eOrderItems->delivery_period =='Within 30 Days') {{__('portal.30 Days')}} @endif
-                                        @if ($eOrderItems->delivery_period =='Within 60 Days') {{__('portal.60 Days')}} @endif
-                                        @if ($eOrderItems->delivery_period =='Within 90 Days') {{__('portal.90 Days')}} @endif
-                                        @if ($eOrderItems->delivery_period =='Standing Order - 2 per year' ) {{__('portal.Standing Order - 2 times / year')}} @endif
-                                        @if ($eOrderItems->delivery_period =='Standing Order - 3 per year' ) {{__('portal.Standing Order - 3 times / year')}} @endif
-                                        @if ($eOrderItems->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}} @endif
-                                        @if ($eOrderItems->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}} @endif
-                                        @if ($eOrderItems->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}} @endif
-                                        @if ($eOrderItems->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}}
+                                        @if ($eOrderItems->delivery_period =='Immediately') {{__('portal.Immediately')}}
+                                        @elseif ($eOrderItems->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
+                                        @elseif ($eOrderItems->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
+                                        @elseif ($eOrderItems->delivery_period =='Within 90 Days') {{__('portal.90 Days')}}
+                                        @elseif ($eOrderItems->delivery_period =='Standing Order - 2 per year' ) {{__('portal.Standing Order - 2 times / year')}}
+                                        @elseif ($eOrderItems->delivery_period =='Standing Order - 3 per year' ) {{__('portal.Standing Order - 3 times / year')}}
+                                        @elseif ($eOrderItems->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}}
+                                        @elseif ($eOrderItems->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}}
+                                        @elseif ($eOrderItems->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}}
+                                        @elseif ($eOrderItems->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}}
                                         @else {{$eOrderItems->delivery_period}}
                                         @endif
                                         <br>
@@ -826,22 +828,22 @@
 
                                 <tr>
                                     <td>
-                                        {{$collection->quote_quantity}}
+                                        <span class="font-sans">{{$collection->quote_quantity}}</span>
                                     </td>
                                     <td>
-                                        {{$collection->quote_price_per_quantity}} {{__('portal.SAR')}}
+                                        <span class="font-sans">{{$collection->quote_price_per_quantity}}</span> {{__('portal.SAR')}}
                                     </td>
                                     <td>
-                                        {{$collection->shipping_time_in_days}}
+                                        <span class="font-sans">{{$collection->shipping_time_in_days}}</span>
                                     </td>
                                     <td>
                                         {{$collection->note_for_customer}}
                                     </td>
                                     <td>
-                                        {{$collection->VAT}}%
+                                        <span class="font-sans">{{$collection->VAT}}</span>%
                                     </td>
                                     <td>
-                                        {{$collection->shipment_cost}} {{__('portal.SAR')}}
+                                        <span class="font-sans">{{$collection->shipment_cost}}</span> {{__('portal.SAR')}}
                                     </td>
                                 </tr>
                             @endif
@@ -892,16 +894,49 @@
                                             @endphp
 
                                             <span class="text-gray-600">
-                                        <span class="text-blue-700 text-left">
-                                            {{__('portal.Message from')}} @if($eOrderItems->company_name_check == 1) {{$business->business_name}} @else {{__('portal.Buyer')}} @endif
-                                        </span>
-                                        : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
-                                    </span>
+                                                <span class="text-blue-700 text-left">
+                                                    {{__('portal.Message from')}} @if($eOrderItems->company_name_check == 1) {{$business->business_name}} @else {{__('portal.Buyer')}} @endif
+                                                </span>
+                                                : {{strip_tags(str_replace('&nbsp;', ' ',  $msg->message))}}
+                                            </span>
                                             <br> <br>
                                         @endforeach
                                     </div>
                                     <br>
                                 @endif
+
+                                <hr>
+                                {{-- Inserting eOrderItemsID in qoute_id while Storing Supplier message and Inserting QuoteID in qoute_id while storing Buyer message --}}
+                                <form action="{{ route('QuotationMessage.store') }}" class="rounded shadow-md" method="post">
+                                    @csrf
+                                    @php $business = \App\Models\Business::where('user_id', $eOrderItems->user_id)->first(); @endphp
+                                    <h1 class="text-center text-2xl mt-4">{{__('portal.Message to')}}
+                                        <span class="text-blue-600">@if($eOrderItems->company_name_check == 1) {{$business->business_name}} @else {{__('portal.Buyer')}} @endif</span>
+                                        <span style="font-size: 20px;">({{__('portal.Buyer')}})</span></h1>
+                                    <textarea name="message" id="message" class="w-full" style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" placeholder="{{__('portal.Enter Message')}}..." required></textarea>
+                                    <x-jet-input-error for="message" class="mt-2" />
+                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" name="qoute_id" value="{{ $eOrderItems->id }}">
+                                    <input type="hidden" name="usertype" value="{{ auth()->user()->business->business_type }}">
+
+                                    <br>
+
+                                    <div class="justify-between p-2 m-2">
+                                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 active:bg-green-900 focus:outline-none focus:border-green-900 focus:shadow-outline-green disabled:opacity-25 transition ease-in-out duration-150">
+                                            {{__('portal.Send')}}
+                                        </button>
+                                        {{-- <a href="{{ route('updateQoute', $QouteItem->id) }}" style="margin-left: 70px;"
+                                            class="inline-flex items-center justify-center px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 focus:outline-none focus:border-yellow-700 focus:shadow-outline-yellow active:bg-yellow-800 transition ease-in-out duration-150">
+                                             Qoute Again
+                                         </a>
+
+                                         <a href="{{ route('updateRejected', $QouteItem->id) }}" style="margin-left: 70px;"
+                                            class="inline-flex items-center justify-center px-4 py-2 bg-red-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-800 transition ease-in-out duration-150">Reject
+                                             Request</a>--}}
+                                    </div>
+                                    <br>
+                                </form>
+
                                 <div class="text-center">
                                     <span class="text-2xl font-bold text-red-700">{{__('portal.Modification Needed')}}</span>
                                 </div>
@@ -919,16 +954,16 @@
                                             <input type="hidden" name="supplier_user_id" value="{{ auth()->user()->id }}">
                                         </div>
                                         <td>
-                                            <input class="form-input rounded-md shadow-sm  w-full" id="quantity" type="number"
+                                            <input class="form-input rounded-md shadow-sm font-sans w-full quantity" id="quantity" type="number"
                                                    name="quote_quantity" min="0" value="{{ $collection->quote_quantity }}" step="any" autocomplete="quantity" required  placeholder="{{__('portal.Qty')}}" readonly>
                                         </td>
 
                                         <td>
-                                            <input class="form-input rounded-md shadow-sm  w-full" id="price_per_unit" type="number"
+                                            <input class="form-input rounded-md shadow-sm font-sans w-full price_per_unit" id="price_per_unit" type="number"
                                                    name="quote_price_per_quantity" value="{{ $collection->quote_price_per_quantity }}" min="0.01" step="any" autocomplete="price_per_unit" required placeholder="{{__('portal.Price Per Unit')}}">
                                         </td>
                                         <td>
-                                            <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="shipping_time_in_days" value="{{$collection->shipping_time_in_days}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+                                            <input type="text" id="datepicker1" class="form-input rounded-md font-sans shadow-sm block w-full" name="shipping_time_in_days" value="{{$collection->shipping_time_in_days}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
 {{--                                            <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text" value="{{ $collection->shipping_time_in_days }}" name="shipping_time_in_days" min="0" autocomplete="size" required placeholder="{{__('portal.Shipment(Days)')}}">--}}
                                         </td>
 
@@ -937,11 +972,11 @@
                                         </td>
 
                                         <td>
-                                            <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15" value="{{$collection->VAT}}" autocomplete="size" required placeholder="{{__('portal.VAT')}}">
+                                            <input class="form-input rounded-md shadow-sm block font-sans w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15" value="{{$collection->VAT}}" autocomplete="size" required placeholder="{{__('portal.VAT')}}">
                                         </td>
 
                                         <td>
-                                            <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost" value="{{$collection->shipment_cost}}" min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Cost')}}">
+                                            <input class="form-input rounded-md shadow-sm block font-sans w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost" value="{{$collection->shipment_cost}}" min="0" step="any" autocomplete="size" required placeholder="{{__('portal.Shipment Cost')}}">
                                         </td>
 
                                     </tr>
@@ -949,7 +984,7 @@
                                     <tr class="mt-2">
                                         <td colspan="2" class="" >
 
-                                            <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly value="{{$collection->total_cost}}" placeholder="{{__('portal.Total Cost')}}">
+                                            <input class="form-input rounded-md shadow-sm font-sans block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly value="{{$collection->total_cost}}" placeholder="{{__('portal.Total Cost')}}">
 
                                         </td>
                                         <td colspan="2" class="text-right">
@@ -971,7 +1006,7 @@
                                                 /* Saving Emdad 1.5 to a variable inorder to show to the supplier in quotation view */
                                                 $emdad_charges = $total_cost * (1.5 / 100);
                                             @endphp
-                                            <input class="form-input rounded-md shadow-sm block w-full" id="emdad_charges" type="number" autocomplete="size" value="{{$emdad_charges}}" readonly placeholder="{{__('portal.Payable Amount to Emdad.')}}">
+                                            <input class="form-input rounded-md font-sans shadow-sm block w-full" id="emdad_charges" type="number" autocomplete="size" value="{{$emdad_charges}}" readonly placeholder="{{__('portal.Payable Amount to Emdad.')}}">
                                         </td>
                                     </tr>
 
@@ -985,7 +1020,7 @@
                                             <label class="block font-medium text-sm text-gray-700" for="datepicker">
                                                 {{__('portal.Quotation valid upto')}} @include('misc.required')
                                             </label>
-                                            <input type="text" id="datepicker" class="block mt-1 w-full" name="expiry_date" value="{{$collection->expiry_date}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)">
+                                            <input type="text" id="datepicker" class="block mt-1 font-sans w-full" name="expiry_date" value="{{$collection->expiry_date}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)">
                                         </td>
                                     </tr>
 

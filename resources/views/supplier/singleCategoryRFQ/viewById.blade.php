@@ -158,16 +158,16 @@
                             <div class="my-5 pl-5 ">
 
                                 <strong>{{__('portal.Delivery Period')}}: </strong>
-                                    @if ($eOrderItems[0]->delivery_period =='Immediately') {{__('portal.Immediately')}} @endif
-                                    @if ($eOrderItems[0]->delivery_period =='Within 30 Days') {{__('portal.30 Days')}} @endif
-                                    @if ($eOrderItems[0]->delivery_period =='Within 60 Days') {{__('portal.60 Days')}} @endif
-                                    @if ($eOrderItems[0]->delivery_period =='Within 90 Days') {{__('portal.90 Days')}} @endif
-                                    @if ($eOrderItems[0]->delivery_period =='Standing Order - 2 per year' ) {{__('portal.Standing Order - 2 times / year')}} @endif
-                                    @if ($eOrderItems[0]->delivery_period =='Standing Order - 3 per year' ) {{__('portal.Standing Order - 3 times / year')}} @endif
-                                    @if ($eOrderItems[0]->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}} @endif
-                                    @if ($eOrderItems[0]->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}} @endif
-                                    @if ($eOrderItems[0]->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}} @endif
-                                    @if ($eOrderItems[0]->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}}
+                                    @if ($eOrderItems[0]->delivery_period =='Immediately') {{__('portal.Immediately')}}
+                                    @elseif ($eOrderItems[0]->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
+                                    @elseif ($eOrderItems[0]->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
+                                    @elseif ($eOrderItems[0]->delivery_period =='Within 90 Days') {{__('portal.90 Days')}}
+                                    @elseif ($eOrderItems[0]->delivery_period =='Standing Order - 2 per year' ) {{__('portal.Standing Order - 2 times / year')}}
+                                    @elseif ($eOrderItems[0]->delivery_period =='Standing Order - 3 per year' ) {{__('portal.Standing Order - 3 times / year')}}
+                                    @elseif ($eOrderItems[0]->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}}
+                                    @elseif ($eOrderItems[0]->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}}
+                                    @elseif ($eOrderItems[0]->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}}
+                                    @elseif ($eOrderItems[0]->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}}
                                     @else
                                         {{ $eOrderItems[0]->delivery_period }}
                                     @endif
@@ -306,6 +306,17 @@
                         <form name="form" method="POST" action="{{ route('singleRFQQuotationUpdate') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
 
+                            {{-- Calculating total payable amount to emdad inorder to show to the supplier --}}
+                            @php
+                                $amount = 0;
+                                $quotes = \App\Models\Qoute::where(['e_order_id' => $eOrderItems[0]->e_order_id, 'supplier_business_id' => \auth()->user()->business_id])->get();
+                                foreach($quotes as $quotation){
+                                    $amount += $quotation->quote_quantity * $quotation->quote_price_per_quantity;
+                                }
+                                $total_cost = $amount + $quotes[0]->shipment_cost;
+                                $emdad_charges = sprintf('%0.2f',$total_cost * (1.5 / 100));
+                            @endphp
+
                             @foreach($eOrderItems as $eOrderItem)
                                 <tr>
                                     <div class="hidden_fields">
@@ -389,6 +400,10 @@
                                     <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
                                         <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size"  value="{{$collection->total_cost}}" readonly placeholder="{{__('portal.Total Cost')}}">
+                                    </div> <br><br><br><br>
+                                    <div class="w-full overflow-hidden float-right lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Payable Amount to Emdad.')}}</label>
+                                        <input class="form-input rounded-md shadow-sm block w-full" id="emdad_charges" type="number" value="{{$emdad_charges}}" autocomplete="size" readonly placeholder="{{__('portal.Payable Amount to Emdad.')}}">
                                     </div>
                                 </td>
                             </tr>
@@ -683,8 +698,7 @@
         @endforeach
 
         <div class="flex flex-col bg-white rounded">
-            <div class="p-4"
-                 style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
+            <div class="p-4" style="background-color: #F3F3F3; border-top:20px solid #E69138; border-bottom: 20px solid #FCE5CD;">
                 <div class="d-block text-center">
                     <span class="text-2xl font-bold color-7f7f7f">{{__('portal.Requisition')}}</span>
                 </div>
@@ -692,15 +706,14 @@
                 <div style=" min-height: 145px;" class="container-fluid px-4 flex bg-grey flex-wrap">
                     <div class="flex-1 py-5">
                         <div class="my-5 pl-5">
-                             <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo"
-                            style="height: 80px;width: 200px;" />
+                             <img src="{{ Storage::url(Auth::user()->business->business_photo_url) }}" alt="logo" style="height: 80px;width: 200px;" />
 {{--                            <img src="{{ url('imp_img.jpg') }}" alt="logo" style="height: 80px;width: 200px;" />--}}
                         </div>
                         @php
-                            $user_business_details=auth()->user()->business;
+                            $user_business_details = auth()->user()->business;
                         @endphp
                         <div class="my-5 pl-5 ">
-                            <h1 class="font-extrabold color-1f3864 text-xl ">{{$user_business_details->business_name}}</h1>
+                            <h1 class="font-extrabold color-1f3864 font-sans text-xl ">{{$user_business_details->business_name}}</h1>
                         </div>
                     </div>
 
@@ -708,7 +721,9 @@
                         <div class="ml-auto date" style="width:150px; float: left">
                             <br>
                             <span class="color-1f3864 font-bold">{{__('portal.Date')}}:
-                            {{\Carbon\Carbon::today()->format('Y-m-d')}}</span><br>
+                                <span class="font-sans">{{\Carbon\Carbon::today()->format('Y-m-d')}}</span>
+                            </span>
+                            <br>
                             <hr>
                         </div>
                     </div>
@@ -727,7 +742,7 @@
                             <div class="my-5 pl-5 ">
                                 <strong>{{__('portal.Buyer Name')}}:</strong> @if($eOrderItems[0]->company_name_check == 1) {{$eOrderItems[0]->business->business_name}} @else {{__('portal.N/A')}} @endif
                                 <br>
-                                <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-{{$eOrderItems[0]->id}}
+                                <strong>{{__('portal.Requisition')}} #:</strong> {{__('portal.RFQ')}}-<span class="font-sans">{{$eOrderItems[0]->id}}</span>
                                 <br>
 {{--                                <strong>{{__('portal.Category Name')}}: </strong>--}}
 {{--                                {{ \App\Models\Category::where('id', $eOrderItems[0]->item_code)->first()->name_ar }} / {{ \App\Models\Category::where('id',(\App\Models\Category::where('id',$eOrderItems[0]->item_code)->first()->parent_id))->first()->name_ar }}--}}
@@ -750,16 +765,16 @@
                             <div class="my-5 pl-5 ">
 
                                 <strong>{{__('portal.Delivery Period')}}: </strong>
-                                @if ($eOrderItems[0]->delivery_period =='Immediately') {{__('portal.Immediately')}} @endif
-                                @if ($eOrderItems[0]->delivery_period =='Within 30 Days') {{__('portal.30 Days')}} @endif
-                                @if ($eOrderItems[0]->delivery_period =='Within 60 Days') {{__('portal.60 Days')}} @endif
-                                @if ($eOrderItems[0]->delivery_period =='Within 90 Days') {{__('portal.90 Days')}} @endif
-                                @if ($eOrderItems[0]->delivery_period =='Standing Order - 2 per year' ) {{__('portal.Standing Order - 2 times / year')}} @endif
-                                @if ($eOrderItems[0]->delivery_period =='Standing Order - 3 per year' ) {{__('portal.Standing Order - 3 times / year')}} @endif
-                                @if ($eOrderItems[0]->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}} @endif
-                                @if ($eOrderItems[0]->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}} @endif
-                                @if ($eOrderItems[0]->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}} @endif
-                                @if ($eOrderItems[0]->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}}
+                                @if ($eOrderItems[0]->delivery_period =='Immediately') {{__('portal.Immediately')}}
+                                @elseif ($eOrderItems[0]->delivery_period =='Within 30 Days') {{__('portal.30 Days')}}
+                                @elseif ($eOrderItems[0]->delivery_period =='Within 60 Days') {{__('portal.60 Days')}}
+                                @elseif ($eOrderItems[0]->delivery_period =='Within 90 Days') {{__('portal.90 Days')}}
+                                @elseif ($eOrderItems[0]->delivery_period =='Standing Order - 2 per year' ) {{__('portal.Standing Order - 2 times / year')}}
+                                @elseif ($eOrderItems[0]->delivery_period =='Standing Order - 3 per year' ) {{__('portal.Standing Order - 3 times / year')}}
+                                @elseif ($eOrderItems[0]->delivery_period =='Standing Order - 4 per year' ) {{__('portal.Standing Order - 4 times / year')}}
+                                @elseif ($eOrderItems[0]->delivery_period =='Standing Order - 6 per year' ) {{__('portal.Standing Order - 6 times / year')}}
+                                @elseif ($eOrderItems[0]->delivery_period =='Standing Order - 12 per year' ) {{__('portal.Standing Order - 12 times / year')}}
+                                @elseif ($eOrderItems[0]->delivery_period =='Standing Order Open' ) {{__('portal.Standing Order - Open')}}
                                 @else
                                     {{ $eOrderItems[0]->delivery_period }}
                                 @endif
@@ -898,6 +913,17 @@
                         <form name="form" method="POST" action="{{ route('singleRFQQuotationUpdate') }}" enctype="multipart/form-data" class="rounded bg-white mt-4">
                             @csrf
 
+                            {{-- Calculating total payable amount to emdad inorder to show to the supplier --}}
+                            @php
+                                $amount = 0;
+                                $quotes = \App\Models\Qoute::where(['e_order_id' => $eOrderItems[0]->e_order_id, 'supplier_business_id' => \auth()->user()->business_id])->get();
+                                foreach($quotes as $quotation){
+                                    $amount += $quotation->quote_quantity * $quotation->quote_price_per_quantity;
+                                }
+                                $total_cost = $amount + $quotes[0]->shipment_cost;
+                                $emdad_charges = sprintf('%0.2f',$total_cost * (1.5 / 100));
+                            @endphp
+
                             @foreach($eOrderItems as $eOrderItem)
                                 <tr>
                                     <div class="hidden_fields">
@@ -908,7 +934,7 @@
                                         <input type="hidden" name="supplier_user_id" value="{{ auth()->id() }}">
                                     </div>
                                     <td>
-                                        {{$loop->iteration}}
+                                        <span class="font-sans">{{$loop->iteration}}</span>
                                     </td>
                                     <td>
                                         <textarea class="w-full note " style="border: 2px solid #BAB6B6FF; border-radius: 8px; resize: none" maxlength="254" rows="3" readonly>{{$eOrderItem->description}}</textarea>
@@ -920,16 +946,16 @@
                                         <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->size}}">
                                     </td>
                                     <td>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->unit_of_measurement}}">
+                                        <input class="form-input rounded-md shadow-sm block w-full font-sans" id="size" type="text"  min="0" autocomplete="size" required readonly value="{{$eOrderItem->unit_of_measurement}}">
                                     </td>
                                     <td>
-                                        <input class="form-input rounded-md shadow-sm  w-full quantity" id="quantity_id" type="number"
+                                        <input class="form-input rounded-md shadow-sm font-sans w-full quantity" id="quantity_id" type="number"
                                                name="quote_quantity[]" min="0" step="any" autocomplete="quantity" required readonly placeholder="{{__('portal.Qty')}}" value="{{$eOrderItem->quantity}}" >
                                     </td>
 
                                     <td>
                                         @php $quoteInfo = \App\Models\Qoute::where('e_order_items_id', $eOrderItem->id)->first(); @endphp
-                                        <input class="form-input rounded-md shadow-sm  w-full price_per_unit" id="price_per_unit_id" type="number"
+                                        <input class="form-input rounded-md shadow-sm font-sans w-full price_per_unit" id="price_per_unit_id" type="number"
                                                name="quote_price_per_quantity[]"  min="0.01" step="any" autocomplete="price_per_unit" value="{{$quoteInfo->quote_price_per_quantity}}" required>
                                     </td>
 
@@ -962,16 +988,16 @@
                                 <td colspan="12">
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Time')}}</label>
-                                        <input type="text" id="datepicker1" class="form-input rounded-md shadow-sm block w-full" name="shipping_time_in_days" value="{{$collection->shipping_time_in_days}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
+                                        <input type="text" id="datepicker1" class="form-input rounded-md font-sans shadow-sm block w-full" name="shipping_time_in_days" value="{{$collection->shipping_time_in_days}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)" required>
 {{--                                        <input class="form-input rounded-md shadow-sm block w-full" id="shipping_time_in_days" type="number" name="shipping_time_in_days"  min="0" step="any" autocomplete="size" required value="{{$collection->shipping_time_in_days}}" placeholder="{{__('portal.Shipment Time')}}" >--}}
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Shipment Cost')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost"  min="0" step="any" autocomplete="size" value="{{$collection->shipment_cost}}" required placeholder="{{__('portal.Shipment Cost')}}" >
+                                        <input class="form-input rounded-md shadow-sm font-sans block w-full shipment_cost" id="ship_cost" type="number" name="shipment_cost"  min="0" step="any" autocomplete="size" value="{{$collection->shipment_cost}}" required placeholder="{{__('portal.Shipment Cost')}}" >
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.VAT (in %)')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15"  autocomplete="size" required value="{{$collection->VAT}}" placeholder="{{__('portal.VAT')}} (%)">
+                                        <input class="form-input rounded-md shadow-sm block font-sans w-full VAT" id="VAT" type="number" name="VAT" min="0" max="15"  autocomplete="size" required value="{{$collection->VAT}}" placeholder="{{__('portal.VAT')}} (%)">
                                     </div> <br><br><br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <a style="cursor: pointer" id="totalCost" @if(count($eOrderItems) == 1) onclick="calculateCostForSingleItemInSingleCategory()" @else onclick="calculateCost()" @endif class="ml-2 px-4 py-2 bg-yellow-400 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-500 hover:text-white active:bg-yellow-900 focus:outline-none focus:border-yellow-900 focus:shadow-outline-gray disabled:opacity-25 transition ease-in-out duration-150 ">
@@ -980,7 +1006,11 @@
                                     </div> <br><br>
                                     <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
                                         <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Total Cost')}}</label>
-                                        <input class="form-input rounded-md shadow-sm block w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly value="{{$collection->total_cost}}" placeholder="{{__('portal.Total Cost')}}">
+                                        <input class="form-input rounded-md shadow-sm block font-sans w-full" id="total_cost" type="number" name="total_cost" autocomplete="size" readonly value="{{$collection->total_cost}}" placeholder="{{__('portal.Total Cost')}}">
+                                    </div> <br><br><br><br>
+                                    <div class="w-full overflow-hidden float-left lg:w-1/2 xl:my-1 xl:px-1 xl:w-1/4 p-2">
+                                        <label class="block font-medium text-sm text-gray-700 mb-1" for="size">{{__('portal.Payable Amount to Emdad.')}}</label>
+                                        <input class="form-input rounded-md shadow-sm block font-sans w-full" id="emdad_charges" type="number" value="{{$emdad_charges}}" autocomplete="size" readonly placeholder="{{__('portal.Payable Amount to Emdad.')}}">
                                     </div>
                                 </td>
                             </tr>
@@ -995,7 +1025,7 @@
                                     <label class="block font-medium text-sm text-gray-700" for="datepicker">
                                         {{__('portal.Quotation valid upto')}} @include('misc.required')
                                     </label>
-                                    <input type="text" id="datepicker" class="block mt-1 w-full" name="expiry_date" value="{{$collection->expiry_date}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)">
+                                    <input type="text" id="datepicker" class="block mt-1 font-sans w-full" name="expiry_date" value="{{$collection->expiry_date}}" placeholder="{{__('register.Choose Date')}} (mm/dd/yy)">
                                 </td>
                             </tr>
 
