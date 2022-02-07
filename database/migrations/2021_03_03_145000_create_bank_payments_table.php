@@ -16,17 +16,20 @@ class CreateBankPaymentsTable extends Migration
         Schema::create('bank_payments', function (Blueprint $table) {
             $table->id();
             $table->string('invoice_id', 30)->nullable();
-            $table->string('proforma_invoice_id', 30)->nullable();
+            $table->string('delivery_id', 30)->nullable();
+//            $table->string('proforma_invoice_id', 30)->nullable();
             $table->string('draft_purchase_order_id', 30)->nullable();
             $table->string('quote_no', 30)->nullable();
             $table->integer('rfq_no')->nullable();
             $table->string('bank_name', 30)->nullable();
             $table->string('amount_received', 30)->nullable();
             $table->string('amount_date', 30)->nullable();
+            $table->string('account_number', 30)->nullable();
             $table->string('verified_status', 30)->nullable();
             $table->string('verified_by', 30)->nullable();
             $table->string('supplier_business_id', 30)->nullable();
             $table->string('supplier_user_id', 30)->nullable();
+            $table->text('file_path')->nullable();
             $table->string('buyer_business_id', 30)->nullable();
             $table->string('buyer_user_id', 30)->nullable();
             $table->integer('supplier_payment_status')->default(0);
